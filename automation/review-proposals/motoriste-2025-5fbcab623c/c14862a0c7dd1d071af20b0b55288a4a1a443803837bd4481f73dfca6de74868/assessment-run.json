@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-35-55-799Z--9af437292335",
+  "evaluatedAt": "2026-10-02T05:35:55.799Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-5fbcab623c/9af437292335b179504a3fc497e467382713093e623d58e448995c2063f33a07.json",
+  "packageHash": "9af437292335b179504a3fc497e467382713093e623d58e448995c2063f33a07",
+  "assessmentContentHash": "b8b60dd85c4cb8e50c7416ca63eed786015ff03838d16bacc4a7b4e6e12a23de",
+  "assessmentFingerprint": "c14862a0c7dd1d071af20b0b55288a4a1a443803837bd4481f73dfca6de74868",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-5fbcab623c",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-5fbcab623c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Návrh zakazuje do některých kategorií vozidel montovat systémy, konstrukční části či samostatné technické celky bez příslušného schválení, což může omezit část úprav vozidel, které slib míří umožnit."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-5fbcab623c--source",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--print-step-212080"
+      ],
+      "explanationCz": "Vláda, jejíž součástí jsou Motoristé sobě, předložila Poslanecké sněmovně návrh změny zákona o podmínkách provozu vozidel na pozemních komunikacích. Návrh zakazuje montovat do vymezených kategorií vozidel některé systémy a součásti, pokud nemají požadované schválení; za porušení stanoví také postihy. Takové omezení může jít proti záměru umožnit lidem upravovat si auta podle vlastních potřeb, ale týká se jen části možných úprav. Jde zatím o předložený návrh, nikoli o schválenou změnu zákona.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z dodaného textu není zřejmé, jakých běžných úprav označovaných jako tuning se požadavek na schválení skutečně dotkne."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-5fbcab623c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Návrh nově zakazuje montáž některých neschválených systémů a součástí do vozidel, což může omezit úpravy aut a je tak v částečném rozporu se slibem."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-5fbcab623c--source",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--print-step-212080"
+      ],
+      "explanationCz": "Motoristé jako součást vlády předložili návrh novely zákona upravujícího podmínky provozu vozidel na pozemních komunikacích. Návrh zakazuje montovat do vozidel některé systémy a součásti, jejichž typ nebyl schválen podle příslušného evropského předpisu. Jde o návrh, nikoli o již přijatou změnu; toto omezení je však v částečném rozporu se slibem umožnit úpravy aut podle vkusu a potřeb jejich majitelů. Proto strana zatím směřuje proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Není doloženo, které konkrétní úpravy běžně označované jako tuning by podmínce schválení typu podléhaly."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_02a7203368b3dbac016abf42aaf0f487d1b8fb3f39a91d0690",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 74684,
+      "input_tokens_details": {
+        "cache_write_tokens": 71360,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1723,
+      "output_tokens_details": {
+        "reasoning_tokens": 1331
+      },
+      "total_tokens": 76407
+    },
+    "output": {
+      "promiseId": "motoriste-2025-5fbcab623c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Návrh zakazuje do některých kategorií vozidel montovat systémy, konstrukční části či samostatné technické celky bez příslušného schválení, což může omezit část úprav vozidel, které slib míří umožnit."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-5fbcab623c--source",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--print-step-212080"
+      ],
+      "explanationCz": "Vláda, jejíž součástí jsou Motoristé sobě, předložila Poslanecké sněmovně návrh změny zákona o podmínkách provozu vozidel na pozemních komunikacích. Návrh zakazuje montovat do vymezených kategorií vozidel některé systémy a součásti, pokud nemají požadované schválení; za porušení stanoví také postihy. Takové omezení může jít proti záměru umožnit lidem upravovat si auta podle vlastních potřeb, ale týká se jen části možných úprav. Jde zatím o předložený návrh, nikoli o schválenou změnu zákona.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z dodaného textu není zřejmé, jakých běžných úprav označovaných jako tuning se požadavek na schválení skutečně dotkne."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_05e4781687d449ea016abf42b4b06887d19172ca5fc3ac2d0a",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 74684,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 74681
+      },
+      "output_tokens": 1202,
+      "output_tokens_details": {
+        "reasoning_tokens": 836
+      },
+      "total_tokens": 75886
+    },
+    "output": {
+      "promiseId": "motoriste-2025-5fbcab623c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Návrh nově zakazuje montáž některých neschválených systémů a součástí do vozidel, což může omezit úpravy aut a je tak v částečném rozporu se slibem."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-5fbcab623c--source",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--print-step-212080"
+      ],
+      "explanationCz": "Motoristé jako součást vlády předložili návrh novely zákona upravujícího podmínky provozu vozidel na pozemních komunikacích. Návrh zakazuje montovat do vozidel některé systémy a součásti, jejichž typ nebyl schválen podle příslušného evropského předpisu. Jde o návrh, nikoli o již přijatou změnu; toto omezení je však v částečném rozporu se slibem umožnit úpravy aut podle vkusu a potřeb jejich majitelů. Proto strana zatím směřuje proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Není doloženo, které konkrétní úpravy běžně označované jako tuning by podmínce schválení typu podléhaly."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

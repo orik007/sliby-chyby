@@ -1,0 +1,486 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T09-28-18-331Z--038fd03b6799",
+  "evaluatedAt": "2026-11-05T09:28:18.331Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-eet-2/038fd03b67995ea8fd9494da7a61919fb706cf4a71f52f64f647e4f8b6480cf3.json",
+  "packageHash": "038fd03b67995ea8fd9494da7a61919fb706cf4a71f52f64f647e4f8b6480cf3",
+  "assessmentContentHash": "ccc763921d02509d27e541f095cfd4734554d586fdff209a0277066c5766a2c7",
+  "assessmentFingerprint": "67851bb866f15c26263fe1027ce995722825b5d1defaeda88a03b4c4a3e3ee48",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-eet-2",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment cites duplicate evidence IDs",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_06b706007cac60ad016aec4b4878b487d1a599632172df8cd6",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 57553,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 57550
+            },
+            "output_tokens": 9191,
+            "output_tokens_details": {
+              "reasoning_tokens": 6693
+            },
+            "total_tokens": 66744
+          },
+          "output": {
+            "promiseId": "ano-2025-eet-2",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-1",
+                "relevant": true,
+                "reasonCz": "Nová úprava evidence tržeb přímo zavádí systém, k němuž se slib vztahuje, a její pravidla upravují odesílání údajů při slabém či přerušeném připojení.",
+                "effectCz": "Jde o novou úpravu, takže předchozí znění zákona pro srovnání není. Údaje se mají zpravidla odeslat nejpozději při uskutečnění tržby; při překročení mezní doby odezvy je lze odeslat po pominutí příčiny, nejpozději do 48 hodin. Tato záložní lhůta umožňuje fungovat při výpadku připojení, mutta samotné pravidlo stále vyžaduje odesílání datové zprávy; z dodaných částí nelze ověřit pravidla pro tisk účtenek ani bezplatný software."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-2",
+                "relevant": true,
+                "reasonCz": "Změna zavádí daňovou slevu spojenou s evidencí tržeb a další finanční režim pro podnikatele, což přímo souvisí se slíbenými daňovými úlevami a benefity.",
+                "effectCz": "Předchozí znění uvedených ustanovení daňového zákona neobsahovalo novou slevu za evidenci tržeb ani přirážku, která poplatníka osvobozuje od povinnosti evidovat. Nově činí sleva nejvýše 5 000 Kč a lze ji uplatnit jen v prvním zdaňovacím období, kdy poplatník eviduje povinnou tržbu; její výše se dále odvíjí od uvedeného výpočtu. Podnikatel v prvním pásmu paušálního režimu s příjmy do 1 000 000 Kč může využít osvobození od evidence, ale přirážka činí 1 400 Kč za měsíc. Jde tedy o dílčí daňový benefit, současně však osvobození od evidence podmiňuje dodatečnou platbou; celkový daňový dopad z dodaného znění nelze vyčíslit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-3",
+                "relevant": true,
+                "reasonCz": "Změna pravidel DPH pro stravovací služby a nápoje přímo souvisí s vládou popsanými daňovými úpravami navázanými na EET a může představovat slíbené snížení daní pro podnikatele.",
+                "effectCz": "Předchozí znění přílohy č. 2 řadilo mezi služby se sníženou sazbou stravovací služby s výjimkou podávání nápojů jiných než pitná voda a vybrané nápoje; nové znění výjimku omezuje na alkoholické nápoje a upravuje také zařazení jejich podávání. Tím se rozšiřuje okruh stravovacích služeb zahrnujících nealkoholické nápoje v příloze se sníženou sazbou, což může být pro podnikatele daňově výhodnější. Přesnou změnu sazby ani předchozí znění doplněné přílohy č. 3 však balíček neuvádí, takže celkový rozsah úlevy nelze určit. Další dodané změny, například pravidla pro nedobytné pohledávky či odpočet u automobilů, se slibovaného EET benefitu přímo netýkají."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-4",
+                "relevant": true,
+                "reasonCz": "Změna zákona o Finanční správě může souviset se slibem bezplatného softwaru Finanční správy, ale její vlastní text i texty relevantních pozměňovacích návrhů nejsou v balíčku obsaženy, takže tuto vazbu nelze ověřit.",
+                "effectCz": "Směr ani rozsah změny nelze z balíčku určit: vlastní text této části je vynechán a nejsou dodány texty pozměňovacích návrhů, které ji mění. Nelze proto porovnat předchozí a nové znění ani zjistit, zda stanoví povinnost nebo oprávnění Finanční správy poskytovat software zdarma."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-5",
+                "relevant": true,
+                "reasonCz": "Změna rozšiřuje pravomoc Celní správy na kontrolu povinností podle zákona o evidenci tržeb, což přímo podporuje prosazování pravidel a omezení nekalé konkurence.",
+                "effectCz": "Dříve mohl orgán Celní správy provádět kontrolní nákup při ověřování povinností v šesti vyjmenovaných oblastech; nově přibývá také evidence tržeb. Možnost kontrolovat dodržování těchto povinností se tím rozšiřuje, což jde směrem k jejich účinnějšímu vymáhání. Změna dále nahrazuje výraz „doklady“ výrazem „prostředek“ v pravidle o krycích prostředcích; dodaný text neukazuje, že by tato úprava měnila samotnou povinnost evidovat tržby."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+                "relevant": true,
+                "reasonCz": "Vládou schválený plán výslovně uvádí EET 2.0, její zamýšlené daňové úpravy i příslib řešení bez stálého on-line připojení a bezplatného softwaru.",
+                "effectCz": "Usnesení vlády nezměnilo předchozí právní pravidlo; do plánu legislativních prací zařadilo návrh zákona a popsalo zamýšlené EET 2.0, včetně daňových úprav. V citované části zároveň opakuje řešení bez povinného tisku účtenky a neustálého on-line připojení i bezplatný software Finanční správy. Jde o plánovaný návrh, nikoli o uskutečnění těchto závazků."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+                "relevant": true,
+                "reasonCz": "Plán legislativních prací určuje harmonogram návrhu zákona o evidenci tržeb a výslovně popisuje jeho daňové úpravy pro podnikatele.",
+                "effectCz": "Usnesení nemění předchozí právní úpravu, ale plánuje předložení návrhu vládě v květnu 2026 a nabytí účinnosti v lednu 2027. Uvádí úlevy pro poplatníky vstupující do evidence i snížení DPH na nealkoholické nápoje podávané při stravovacích službách. Jde o legislativní plán, nikoli o uskutečněnou daňovou úlevu."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": false,
+            "citedEvidenceIds": [
+              "ano-2025-eet-2--source",
+              "psp-core-2025--law-change-43310-1",
+              "psp-core-2025--law-change-43310-2",
+              "psp-core-2025--law-change-43310-3",
+              "psp-core-2025--law-change-43310-4",
+              "psp-core-2025--law-change-43310-5",
+              "zvlady-resolutions--law-change-uv-2026-175-32",
+              "zvlady-resolutions--law-change-uv-2026-175-117",
+              "zvlady-resolutions--2026-175",
+              "psp-core-2025--print-step-211390",
+              "psp-core-2025--vote-88291",
+              "psp-core-2025--amendment-text-1537",
+              "psp-core-2025--vote-88291",
+              "psp-core-2025--vote-88297",
+              "psp-core-2025--amendment-text-1564",
+              "psp-core-2025--vote-88305",
+              "psp-core-2025--amendment-text-1474",
+              "psp-core-2025--vote-88356",
+              "psp-core-2025--vote-88456",
+              "psp-core-2025--senate-resolution-43310-6"
+            ],
+            "explanationCz": "Vláda předložila návrh zákona, který zavádí evidenci tržeb, umožňuje při překročení doby odezvy odeslat údaje nejpozději do 48 hodin a přináší omezenou slevu za evidenci; vláda také zařadila EET 2.0 do svého legislativního plánu. Poslanci ANO návrh podpořili při schvalování ve Sněmovně i při následném rozhodnutí po vrácení Senátem a schválili tak dílčí kroky k evidenci, daňovým benefitům a kontrolám. Některé změny DPH mohou snížit daň pro stravovací podniky, ale dodané části návrhu nepotvrzují, že zákon zajišťuje bezplatný software ani že odstraňuje povinný tisk účtenky. Proto je doložen posun, nikoli splnění celého slibu; chybějící znění částí zákona neumožňuje celý slib ověřit.",
+            "confidence": "medium",
+            "uncertainties": [
+              "V dodaných výňatcích návrhu nejsou ustanovení o povinném tisku účtenky ani o bezplatném softwaru Finanční správy; nelze proto potvrdit, zda schválený text tyto části slibu skutečně plní.",
+              "Text části měnící zákon o Finanční správě a texty pozměňovacích návrhů, které ji mění, nejsou k dispozici. Nelze určit, zda tato část stanoví poskytování softwaru zdarma.",
+              "ANO hlasovalo proti dvěma pozměňovacím návrhům upravujícím možnost pozdějšího odeslání údajů při provozu mimo provozovnu nebo při potížích s připojením. Později však podpořilo návrh zákona s vlastní možností odloženého odeslání; hlasování proti těmto návrhům je tedy protichůdným dílčím signálem, nikoli rozhodnutím proti celému slibu.",
+              "Dodaný text změn DPH neobsahuje přesné sazby ani předchozí znění přílohy č. 3, proto nelze určit přesnou výši případného snížení daně."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-eet-2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Část zavádí pravidla evidence tržeb, včetně způsobu a lhůt odesílání údajů, což se přímo týká slibu o trvalém připojení.",
+          "effectCz": "Jde o novou úpravu bez předchozího znění v dodaném kontextu: údaje se mají běžně odeslat nejpozději při uskutečnění tržby, ale při překročení nastavené doby odezvy lze odeslání odložit do pominutí příčiny, nejvýše na 48 hodin. Tím se připouští dočasný výpadek připojení, nikoli však obecně evidence bez elektronického odesílání; ustanovení zároveň neříkají, zda bude nutný tisk účtenky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Část zavádí daňovou slevu za evidenci tržeb i přirážku spojenou s osvobozením od evidenční povinnosti, takže přímo ovlivňuje slíbené snížení daní a finanční benefity.",
+          "effectCz": "Nová sleva za evidenci tržeb předtím v dodaném kontextu neexistovala; po změně může v prvním zdaňovacím období dosáhnout nejvýše 5 000 Kč a poskytuje tak omezený daňový benefit. Současně nová úprava stanoví přirážku 1 400 Kč za měsíc pro vymezené poplatníky, kteří se chtějí evidenci vyhnout, čímž jejich daňové zatížení zvyšuje; změna proto slibovanému snižování daní částečně pomáhá i odporuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro sníženou sazbu DPH u nápojů ve stravovacích službách může přinést daňovou úlevu podnikatelům i zákazníkům, což odpovídá daňové části slibu.",
+          "effectCz": "Před změnou byly ve stravovacích službách ze snížené sazby vyňaty nápoje jiné než pitná voda a vybrané nápoje; nová formulace vyjímá alkoholické nápoje a umožňuje sníženou sazbu u širší kategorie nealkoholických nápojů. Tím se rozšiřuje okruh nápojů, na které se může vztahovat nižší sazba, a daňové zatížení této kategorie se může snížit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": true,
+          "reasonCz": "Podklady uvádějí, že tato část souvisí se slibem pouze prostřednictvím pozměňovacích návrhů k návrhu EET, takže ji nelze posoudit jen podle názvu či nepublikovaného vlastního textu.",
+          "effectCz": "Vlastní znění této části není dodáno. Související návrh G3 by prodloužil lhůtu pro dodatečné odeslání údajů z 48 hodin na 5 pracovních dnů a pozastavil její běh při výpadku systému správce daně, tedy by zmírnil povinnost ve prospěch podnikatele; z dodaného textu ale nelze určit, jaký účinek má tato změna na ustanovení samotné části o Finanční správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": true,
+          "reasonCz": "Část výslovně rozšiřuje kontrolní nákup celní správy na prověřování evidence tržeb, čímž poskytuje nástroj pro její kontrolu a podporuje potírání nekalého jednání.",
+          "effectCz": "Před změnou mohl orgán celní správy provádět kontrolní nákup jen při prověřování jiných vyjmenovaných povinností; nově se mezi ně přidává evidence tržeb. Rozšiřuje se tak kontrolní pravomoc, což podporuje prosazování pravidel a férovější podmínky; nová povinnost sama nemění slíbené podmínky tisku účtenek ani připojení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+          "relevant": true,
+          "reasonCz": "Vládní usnesení zařazuje návrh zákona o evidenci tržeb do legislativního plánu a výslovně popisuje záměr zavést EET 2.0 i daňové úpravy pro podnikatele.",
+          "effectCz": "Jde o plánovací návrh, nikoli o předchozí či nově účinné pravidlo: vláda v něm stanovuje přípravu návrhu EET 2.0 a souvisejících daňových úlev. Samo usnesení žádnou daňovou povinnost ani benefit nemění, ale posouvá přípravu slibované legislativy."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací znovu uvádí návrh zákona o EET a jeho podnikatelské a daňové cíle, tedy konkrétní přípravu opatření souvisejících se slibem.",
+          "effectCz": "Jde o plánovací záznam, nikoli o změnu platného pravidla. Stanoví implementaci na květen 2026 a předložení vládě na leden 2027, takže dokládá přípravu návrhu, ale sám nesnižuje daně ani nezavádí slíbené technické řešení."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-eet-2--source",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--law-change-43310-3",
+        "psp-core-2025--law-change-43310-4",
+        "psp-core-2025--law-change-43310-5",
+        "zvlady-resolutions--law-change-uv-2026-175-32",
+        "zvlady-resolutions--law-change-uv-2026-175-117",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88291",
+        "psp-core-2025--amendment-text-1537",
+        "psp-core-2025--vote-88297",
+        "psp-core-2025--amendment-text-1564",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--senate-resolution-43310-6"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona o evidenci tržeb a poslanci ANO pro něj hlasovali; po vrácení Senátem Sněmovna na původním znění setrvala. Návrh připouští odložené odeslání při výpadku odezvy, rozšiřuje kontrolní pravomoci a zavádí slevu za evidenci až 5 000 Kč, ale současně ukládá některým podnikatelům přirážku 1 400 Kč měsíčně za osvobození od evidence. Daňová přirážka přímo odporuje slibu snižovat daně, ačkoli jiné části návrhu poskytují dílčí úlevy. Proto celkový rozhodný legislativní krok míří proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný výňatek neumožňuje ověřit, zda bude řešení skutečně fungovat bez povinného tisku účtenky ani zda podnikatelé dostanou zdarma software Finanční správy; tyto části slibu proto nelze považovat za doložené.",
+        "Poslanci ANO nepodpořili pozměňovací návrh umožňující u tržeb mimo provozovnu odeslání až do konce dne ani návrh prodlužující lhůtu při výpadku systému správce daně; šlo však o návrhy, nikoli o rozhodnutí, které by převážilo konečné hlasování o zákoně."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-eet-2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Stanoví povinnost evidence tržeb a její odesílání správci daně, tedy přímo mění podmínky slíbeného EET 2.0.",
+          "effectCz": "Jde o novou úpravu, takže předchozí znění této povinnosti v balíčku není. Návrh ukládá poslat údaje nejpozději při uskutečnění tržby; při překročení mezní doby odezvy připouští odeslání nejpozději do 48 hodin. Z hlediska slibu je běžná povinnost odesílat údaje při každé tržbě méně slučitelná s provozem bez průběžné online dostupnosti, zatímco lhůta při výpadku ji částečně zmírňuje. Z dodaných odstavců nelze určit, zda zákon zajišťuje i nepovinný tisk účtenek a bezplatný software."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Mění daňové povinnosti a zavádí slevu na dani za evidenci tržeb, což přímo souvisí se slíbenými daňovými úlevami a finančními benefity.",
+          "effectCz": "Dosavadní ustanovení o paušálním režimu a slevách neobsahovala přirážku ani slevu za evidenci tržeb. Nové ustanovení umožňuje poplatníkovi za splnění podmínek uplatnit slevu nejvýše 5 000 Kč, pouze v prvním období evidence; její výše může být i nižší nebo nulová. Současně zavádí přirážku 1 400 Kč za měsíc pro poplatníka, který se přihlásí k režimu zprošťujícímu povinnosti evidovat tržby. Změna tedy přidává omezený daňový benefit, ale současně vytváří dodatečnou platbu pro uvedenou skupinu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Mění sazební zařazení nápojů podávaných při stravovacích službách, a tím přímo přináší daňovou úlevu podnikatelům v této části slíbené podpory.",
+          "effectCz": "Dosavadní snížená sazba u stravovacích služeb se podle dodaného kontextu vztahovala na pitnou vodu a vybrané nápoje, zatímco jiné nápoje byly z této kategorie vyňaty. Nové znění vyjímá alkoholické nápoje a rozšiřuje tak okruh nealkoholických nápojů, na které se snížené sazební zařazení vztahuje; jde o daňové uvolnění pro tuto část stravovacích služeb. Konkrétní sazby v dodaných podkladech uvedeny nejsou a pro nově doplněné definice v příloze č. 3 chybí předchozí znění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": false,
+          "reasonCz": "Vlastní text této části není dodán a dostupné záznamy o konkrétních pozměňovacích návrzích se týkají ustanovení o evidenci tržeb či daních, nikoli doložené změny zákona o Finanční správě.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje oprávnění celní správy provádět kontrolní nákupy při prověřování povinností evidence tržeb, což souvisí s jejím vymáháním a potíráním nekalé konkurence.",
+          "effectCz": "Dosavadní výčet oblastí, při jejichž kontrole mohl orgán celní správy provádět kontrolní nákup, evidenci tržeb neobsahoval. Nově se do něj evidence tržeb doplňuje, čímž se rozšiřuje kontrolní oprávnění a posiluje možnost vymáhat tuto povinnost. Změna druhého dodaného ustanovení nahrazuje výraz „doklady“ výrazem „prostředek“ a upravuje na něj navazující zájmeno; z kontextu nelze dovodit samostatné zpřísnění či uvolnění povinnosti ze slibu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně počítá s návrhem zákona k EET 2.0 a v dodaném textu opakuje závazky týkající se účtenek, připojení a bezplatného softwaru.",
+          "effectCz": "Usnesení samo nemění pravidla pro podnikatele; jako plán navrhuje připravit zákon o evidenci tržeb a souvisejících změnách. Dodaný text uvádí cíl zavést EET 2.0 a opakuje, že systém nebude vyžadovat povinný tisk účtenky ani neustálé online připojení a že software bude zdarma. Jde o přípravný krok, nikoli o uskutečnění těchto závazků."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+          "relevant": true,
+          "reasonCz": "Plánuje předložení zákona o evidenci tržeb, tedy legislativního kroku přímo potřebného k zavedení slíbeného EET 2.0.",
+          "effectCz": "Usnesení samo pravidla nemění; v plánu stanoví předložení návrhu vládě v květnu 2026 a účinnost v lednu 2027. Jde o plánovaný krok k zavedení EET, nikoli o jeho uskutečnění; tabulka sama neuvádí podrobnosti o účtenkách, připojení ani softwaru."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-eet-2--source",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--law-change-43310-3",
+        "psp-core-2025--law-change-43310-5",
+        "zvlady-resolutions--law-change-uv-2026-175-32",
+        "zvlady-resolutions--law-change-uv-2026-175-117",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88291",
+        "psp-core-2025--amendment-text-1537",
+        "psp-core-2025--vote-88297",
+        "psp-core-2025--amendment-text-1564",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--senate-resolution-43310-6"
+      ],
+      "explanationCz": "Vláda nejprve zařadila zákon o EET 2.0 do svého legislativního plánu a poté jej předložila Poslanecké sněmovně; poslanci ANO návrh schválili a po vrácení Senátem na něm setrvali. Dodané znění ukládá posílat údaje o tržbě nejpozději při jejím uskutečnění, s možností pozdějšího odeslání při překročení doby odezvy, takže zachovává tlak na online spojení při běžném provozu. ANO zároveň nepodpořilo pozměňovací návrhy, které by umožnily souhrnné odeslání tržeb přijatých mimo provozovnu nebo prodloužily lhůtu při problémech s připojením. Návrh však zavádí slevu na evidenci tržeb až 5 000 Kč a rozšiřuje snížené sazební zařazení na další nealkoholické nápoje při stravovacích službách, takže v některých částech slib posouvá. Z dodaných částí nelze ověřit, zda schválený text také zajišťuje nepovinný tisk účtenek a bezplatný software.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný výňatek zákona o evidenci tržeb neumožňuje ověřit ustanovení o tisku účtenek ani o bezplatném softwaru; jejich nepřítomnost ve výňatku proto nelze považovat za důkaz, že je zákon neobsahuje.",
+        "Povinnost odeslat údaje při tržbě s možností odkladu do 48 hodin při překročení doby odezvy ukazuje na požadavek online spojení při běžné transakci, ale dodané znění neříká výslovně, zda tím vzniká nepřetržitá potřeba připojení ve smyslu slibu.",
+        "Balíček neobsahuje konečné vyhlášené znění zákona; hodnocení rozhodnutí vychází z doloženého hlasování Sněmovny po vrácení návrhu Senátem a z dodaného schváleného znění."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0a3802dba5c5280c016aec4ab3f81487d1863d2f97f137537e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 57553,
+      "input_tokens_details": {
+        "cache_write_tokens": 51203,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 11107,
+      "output_tokens_details": {
+        "reasoning_tokens": 9106
+      },
+      "total_tokens": 68660
+    },
+    "output": {
+      "promiseId": "ano-2025-eet-2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Část zavádí pravidla evidence tržeb, včetně způsobu a lhůt odesílání údajů, což se přímo týká slibu o trvalém připojení.",
+          "effectCz": "Jde o novou úpravu bez předchozího znění v dodaném kontextu: údaje se mají běžně odeslat nejpozději při uskutečnění tržby, ale při překročení nastavené doby odezvy lze odeslání odložit do pominutí příčiny, nejvýše na 48 hodin. Tím se připouští dočasný výpadek připojení, nikoli však obecně evidence bez elektronického odesílání; ustanovení zároveň neříkají, zda bude nutný tisk účtenky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Část zavádí daňovou slevu za evidenci tržeb i přirážku spojenou s osvobozením od evidenční povinnosti, takže přímo ovlivňuje slíbené snížení daní a finanční benefity.",
+          "effectCz": "Nová sleva za evidenci tržeb předtím v dodaném kontextu neexistovala; po změně může v prvním zdaňovacím období dosáhnout nejvýše 5 000 Kč a poskytuje tak omezený daňový benefit. Současně nová úprava stanoví přirážku 1 400 Kč za měsíc pro vymezené poplatníky, kteří se chtějí evidenci vyhnout, čímž jejich daňové zatížení zvyšuje; změna proto slibovanému snižování daní částečně pomáhá i odporuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro sníženou sazbu DPH u nápojů ve stravovacích službách může přinést daňovou úlevu podnikatelům i zákazníkům, což odpovídá daňové části slibu.",
+          "effectCz": "Před změnou byly ve stravovacích službách ze snížené sazby vyňaty nápoje jiné než pitná voda a vybrané nápoje; nová formulace vyjímá alkoholické nápoje a umožňuje sníženou sazbu u širší kategorie nealkoholických nápojů. Tím se rozšiřuje okruh nápojů, na které se může vztahovat nižší sazba, a daňové zatížení této kategorie se může snížit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": true,
+          "reasonCz": "Podklady uvádějí, že tato část souvisí se slibem pouze prostřednictvím pozměňovacích návrhů k návrhu EET, takže ji nelze posoudit jen podle názvu či nepublikovaného vlastního textu.",
+          "effectCz": "Vlastní znění této části není dodáno. Související návrh G3 by prodloužil lhůtu pro dodatečné odeslání údajů z 48 hodin na 5 pracovních dnů a pozastavil její běh při výpadku systému správce daně, tedy by zmírnil povinnost ve prospěch podnikatele; z dodaného textu ale nelze určit, jaký účinek má tato změna na ustanovení samotné části o Finanční správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": true,
+          "reasonCz": "Část výslovně rozšiřuje kontrolní nákup celní správy na prověřování evidence tržeb, čímž poskytuje nástroj pro její kontrolu a podporuje potírání nekalého jednání.",
+          "effectCz": "Před změnou mohl orgán celní správy provádět kontrolní nákup jen při prověřování jiných vyjmenovaných povinností; nově se mezi ně přidává evidence tržeb. Rozšiřuje se tak kontrolní pravomoc, což podporuje prosazování pravidel a férovější podmínky; nová povinnost sama nemění slíbené podmínky tisku účtenek ani připojení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+          "relevant": true,
+          "reasonCz": "Vládní usnesení zařazuje návrh zákona o evidenci tržeb do legislativního plánu a výslovně popisuje záměr zavést EET 2.0 i daňové úpravy pro podnikatele.",
+          "effectCz": "Jde o plánovací návrh, nikoli o předchozí či nově účinné pravidlo: vláda v něm stanovuje přípravu návrhu EET 2.0 a souvisejících daňových úlev. Samo usnesení žádnou daňovou povinnost ani benefit nemění, ale posouvá přípravu slibované legislativy."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací znovu uvádí návrh zákona o EET a jeho podnikatelské a daňové cíle, tedy konkrétní přípravu opatření souvisejících se slibem.",
+          "effectCz": "Jde o plánovací záznam, nikoli o změnu platného pravidla. Stanoví implementaci na květen 2026 a předložení vládě na leden 2027, takže dokládá přípravu návrhu, ale sám nesnižuje daně ani nezavádí slíbené technické řešení."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-eet-2--source",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--law-change-43310-3",
+        "psp-core-2025--law-change-43310-4",
+        "psp-core-2025--law-change-43310-5",
+        "zvlady-resolutions--law-change-uv-2026-175-32",
+        "zvlady-resolutions--law-change-uv-2026-175-117",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88291",
+        "psp-core-2025--amendment-text-1537",
+        "psp-core-2025--vote-88297",
+        "psp-core-2025--amendment-text-1564",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--senate-resolution-43310-6"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona o evidenci tržeb a poslanci ANO pro něj hlasovali; po vrácení Senátem Sněmovna na původním znění setrvala. Návrh připouští odložené odeslání při výpadku odezvy, rozšiřuje kontrolní pravomoci a zavádí slevu za evidenci až 5 000 Kč, ale současně ukládá některým podnikatelům přirážku 1 400 Kč měsíčně za osvobození od evidence. Daňová přirážka přímo odporuje slibu snižovat daně, ačkoli jiné části návrhu poskytují dílčí úlevy. Proto celkový rozhodný legislativní krok míří proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný výňatek neumožňuje ověřit, zda bude řešení skutečně fungovat bez povinného tisku účtenky ani zda podnikatelé dostanou zdarma software Finanční správy; tyto části slibu proto nelze považovat za doložené.",
+        "Poslanci ANO nepodpořili pozměňovací návrh umožňující u tržeb mimo provozovnu odeslání až do konce dne ani návrh prodlužující lhůtu při výpadku systému správce daně; šlo však o návrhy, nikoli o rozhodnutí, které by převážilo konečné hlasování o zákoně."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_034a7ddef2979082016aec4bb07c2087d19dd8bb8e3aea2c61",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 57553,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 57550
+      },
+      "output_tokens": 10241,
+      "output_tokens_details": {
+        "reasoning_tokens": 7847
+      },
+      "total_tokens": 67794
+    },
+    "output": {
+      "promiseId": "ano-2025-eet-2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Stanoví povinnost evidence tržeb a její odesílání správci daně, tedy přímo mění podmínky slíbeného EET 2.0.",
+          "effectCz": "Jde o novou úpravu, takže předchozí znění této povinnosti v balíčku není. Návrh ukládá poslat údaje nejpozději při uskutečnění tržby; při překročení mezní doby odezvy připouští odeslání nejpozději do 48 hodin. Z hlediska slibu je běžná povinnost odesílat údaje při každé tržbě méně slučitelná s provozem bez průběžné online dostupnosti, zatímco lhůta při výpadku ji částečně zmírňuje. Z dodaných odstavců nelze určit, zda zákon zajišťuje i nepovinný tisk účtenek a bezplatný software."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Mění daňové povinnosti a zavádí slevu na dani za evidenci tržeb, což přímo souvisí se slíbenými daňovými úlevami a finančními benefity.",
+          "effectCz": "Dosavadní ustanovení o paušálním režimu a slevách neobsahovala přirážku ani slevu za evidenci tržeb. Nové ustanovení umožňuje poplatníkovi za splnění podmínek uplatnit slevu nejvýše 5 000 Kč, pouze v prvním období evidence; její výše může být i nižší nebo nulová. Současně zavádí přirážku 1 400 Kč za měsíc pro poplatníka, který se přihlásí k režimu zprošťujícímu povinnosti evidovat tržby. Změna tedy přidává omezený daňový benefit, ale současně vytváří dodatečnou platbu pro uvedenou skupinu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Mění sazební zařazení nápojů podávaných při stravovacích službách, a tím přímo přináší daňovou úlevu podnikatelům v této části slíbené podpory.",
+          "effectCz": "Dosavadní snížená sazba u stravovacích služeb se podle dodaného kontextu vztahovala na pitnou vodu a vybrané nápoje, zatímco jiné nápoje byly z této kategorie vyňaty. Nové znění vyjímá alkoholické nápoje a rozšiřuje tak okruh nealkoholických nápojů, na které se snížené sazební zařazení vztahuje; jde o daňové uvolnění pro tuto část stravovacích služeb. Konkrétní sazby v dodaných podkladech uvedeny nejsou a pro nově doplněné definice v příloze č. 3 chybí předchozí znění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": false,
+          "reasonCz": "Vlastní text této části není dodán a dostupné záznamy o konkrétních pozměňovacích návrzích se týkají ustanovení o evidenci tržeb či daních, nikoli doložené změny zákona o Finanční správě.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje oprávnění celní správy provádět kontrolní nákupy při prověřování povinností evidence tržeb, což souvisí s jejím vymáháním a potíráním nekalé konkurence.",
+          "effectCz": "Dosavadní výčet oblastí, při jejichž kontrole mohl orgán celní správy provádět kontrolní nákup, evidenci tržeb neobsahoval. Nově se do něj evidence tržeb doplňuje, čímž se rozšiřuje kontrolní oprávnění a posiluje možnost vymáhat tuto povinnost. Změna druhého dodaného ustanovení nahrazuje výraz „doklady“ výrazem „prostředek“ a upravuje na něj navazující zájmeno; z kontextu nelze dovodit samostatné zpřísnění či uvolnění povinnosti ze slibu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně počítá s návrhem zákona k EET 2.0 a v dodaném textu opakuje závazky týkající se účtenek, připojení a bezplatného softwaru.",
+          "effectCz": "Usnesení samo nemění pravidla pro podnikatele; jako plán navrhuje připravit zákon o evidenci tržeb a souvisejících změnách. Dodaný text uvádí cíl zavést EET 2.0 a opakuje, že systém nebude vyžadovat povinný tisk účtenky ani neustálé online připojení a že software bude zdarma. Jde o přípravný krok, nikoli o uskutečnění těchto závazků."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+          "relevant": true,
+          "reasonCz": "Plánuje předložení zákona o evidenci tržeb, tedy legislativního kroku přímo potřebného k zavedení slíbeného EET 2.0.",
+          "effectCz": "Usnesení samo pravidla nemění; v plánu stanoví předložení návrhu vládě v květnu 2026 a účinnost v lednu 2027. Jde o plánovaný krok k zavedení EET, nikoli o jeho uskutečnění; tabulka sama neuvádí podrobnosti o účtenkách, připojení ani softwaru."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-eet-2--source",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--law-change-43310-3",
+        "psp-core-2025--law-change-43310-5",
+        "zvlady-resolutions--law-change-uv-2026-175-32",
+        "zvlady-resolutions--law-change-uv-2026-175-117",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88291",
+        "psp-core-2025--amendment-text-1537",
+        "psp-core-2025--vote-88297",
+        "psp-core-2025--amendment-text-1564",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--senate-resolution-43310-6"
+      ],
+      "explanationCz": "Vláda nejprve zařadila zákon o EET 2.0 do svého legislativního plánu a poté jej předložila Poslanecké sněmovně; poslanci ANO návrh schválili a po vrácení Senátem na něm setrvali. Dodané znění ukládá posílat údaje o tržbě nejpozději při jejím uskutečnění, s možností pozdějšího odeslání při překročení doby odezvy, takže zachovává tlak na online spojení při běžném provozu. ANO zároveň nepodpořilo pozměňovací návrhy, které by umožnily souhrnné odeslání tržeb přijatých mimo provozovnu nebo prodloužily lhůtu při problémech s připojením. Návrh však zavádí slevu na evidenci tržeb až 5 000 Kč a rozšiřuje snížené sazební zařazení na další nealkoholické nápoje při stravovacích službách, takže v některých částech slib posouvá. Z dodaných částí nelze ověřit, zda schválený text také zajišťuje nepovinný tisk účtenek a bezplatný software.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný výňatek zákona o evidenci tržeb neumožňuje ověřit ustanovení o tisku účtenek ani o bezplatném softwaru; jejich nepřítomnost ve výňatku proto nelze považovat za důkaz, že je zákon neobsahuje.",
+        "Povinnost odeslat údaje při tržbě s možností odkladu do 48 hodin při překročení doby odezvy ukazuje na požadavek online spojení při běžné transakci, ale dodané znění neříká výslovně, zda tím vzniká nepřetržitá potřeba připojení ve smyslu slibu.",
+        "Balíček neobsahuje konečné vyhlášené znění zákona; hodnocení rozhodnutí vychází z doloženého hlasování Sněmovny po vrácení návrhu Senátem a z dodaného schváleného znění."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "moving-against",
+    "selectedReview": "assessor-a"
+  }
+}

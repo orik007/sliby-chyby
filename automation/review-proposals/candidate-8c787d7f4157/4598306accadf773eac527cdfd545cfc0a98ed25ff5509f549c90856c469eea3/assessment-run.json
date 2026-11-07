@@ -1,0 +1,247 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T09-57-21-950Z--993070cef6b3",
+  "evaluatedAt": "2026-11-05T09:57:21.950Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-8c787d7f4157/993070cef6b35c0b61c0860bfa45c6ee1a9b86b6eb2d360f4051f5b9381f3c11.json",
+  "packageHash": "993070cef6b35c0b61c0860bfa45c6ee1a9b86b6eb2d360f4051f5b9381f3c11",
+  "assessmentContentHash": "15927566051a023a172013b158d040ad08f9d4901653cc4e6608292a76cda812",
+  "assessmentFingerprint": "4598306accadf773eac527cdfd545cfc0a98ed25ff5509f549c90856c469eea3",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-8c787d7f4157",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-8c787d7f4157",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Dodané části návrhu rozpočtu pouze odkazují na přílohy s výdaji podle kapitol, ale neuvádějí částky ani opatření vztahující se k restrukturalizaci nemocnic či zachování péče v menších nemocnicích.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-111",
+          "relevant": true,
+          "reasonCz": "Usnesení se věnuje přípravě transformace pražské páteřní sítě nemocnic, což představuje konkrétní část restrukturalizace nemocniční sítě slíbené SPD.",
+          "effectCz": "Usnesení nemění zákon, takže předchozí právní znění nelze porovnat; zřizuje funkci vládního zmocněnce a svěřuje mu koordinaci přípravy transformace pražské páteřní sítě nemocnic, včetně zpracování věcného záměru, investičního záměru a studie proveditelnosti. Jde o přípravný krok, který posouvá část restrukturalizace, ale sám neprovádí změnu sítě ani nezaručuje zachování péče v menších nemocnicích."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-8c787d7f4157--source",
+        "zvlady-resolutions--law-change-uv-2026-111",
+        "zvlady-resolutions--2026-111"
+      ],
+      "explanationCz": "Vláda, v níž je SPD zastoupena, přijala usnesení o transformaci pražské páteřní sítě nemocnic a zřídila pro ni vládního zmocněnce. Ten má koordinovat přípravu projektu a zajistit zpracování záměrů a studie proveditelnosti. Jde o přípravný krok k části slíbené restrukturalizace, nikoli o její dokončení. Podklady nedokládají důkladnou analýzu poptávky ani zachování péče v menších nemocnicích.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z podkladů není zřejmé, jak se připravovaná transformace pražských nemocnic promítne do péče v menších nemocnicích ani zda bude vycházet z analýzy poptávky po zdravotní péči."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-8c787d7f4157",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o státní rozpočet, jehož výdaje na lůžkovou péči mohou souviset se zachováním nemocniční péče, ale dodaný výňatek uvádí jen odkazy na rozpočtové přílohy.",
+          "effectCz": "Rozpočet na rok 2026 stanoví výdaje podle kapitol v přílohách č. 3 a 4; dodaný text jejich částky neobsahuje. Nelze proto určit, jak se mění financování lůžkové péče ani zda rozpočet podporuje zachování péče v menších nemocnicích."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-111",
+          "relevant": true,
+          "reasonCz": "Usnesení se týká transformace páteřní sítě nemocnic v Praze, tedy konkrétní části restrukturalizace nemocniční sítě slíbené SPD.",
+          "effectCz": "Usnesení vytváří funkci vládního zmocněnce a koordinaci přípravy transformace pražské páteřní sítě fakultních nemocnic a nového nemocničního komplexu. V dodaném textu není stanoveno zachování péče v menších nemocnicích ani přímá změna jejich nároků či omezení; podporuje tedy jen část slibu týkající se restrukturalizace."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-8c787d7f4157--source",
+        "psp-core-2025--law-change-43204-1",
+        "zvlady-resolutions--law-change-uv-2026-111",
+        "psp-core-2025--amendment-text-421",
+        "psp-core-2025--amendment-text-506",
+        "psp-core-2025--print-step-210761",
+        "zvlady-resolutions--2026-111",
+        "psp-core-2025--vote-86874",
+        "psp-core-2025--vote-86916",
+        "psp-core-2025--vote-86957"
+      ],
+      "explanationCz": "Vláda předložila návrh státního rozpočtu na rok 2026 a schválený rozpočet podpořili také poslanci SPD. Dodaný výňatek rozpočtu ale neukazuje konkrétní částky na lůžkovou péči, takže nelze posoudit dopad tohoto rozhodnutí na slib. Vláda zároveň zřídila zmocněnce pro přípravu transformace pražské sítě fakultních nemocnic, což posouvá část týkající se restrukturalizace. Poslanci SPD však nepodpořili dva návrhy na navýšení financování lůžkové péče, které předkladatelé spojovali se stabilitou nemocniční sítě a dostupností péče v regionech; proto je nejpravděpodobnější dosavadní posun proti slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný výňatek schváleného státního rozpočtu neobsahuje částky pro lůžkovou péči. Bez nich nelze určit dopad závěrečného hlasování pro rozpočet na zachování péče v menších nemocnicích; proto výsledek zůstává předběžný."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_009061d688f27ae2016aec52519c6c87d19ce540509819beac",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 20578,
+      "input_tokens_details": {
+        "cache_write_tokens": 14228,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 2719,
+      "output_tokens_details": {
+        "reasoning_tokens": 2066
+      },
+      "total_tokens": 23297
+    },
+    "output": {
+      "promiseId": "candidate-8c787d7f4157",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Dodané části návrhu rozpočtu pouze odkazují na přílohy s výdaji podle kapitol, ale neuvádějí částky ani opatření vztahující se k restrukturalizaci nemocnic či zachování péče v menších nemocnicích.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-111",
+          "relevant": true,
+          "reasonCz": "Usnesení se věnuje přípravě transformace pražské páteřní sítě nemocnic, což představuje konkrétní část restrukturalizace nemocniční sítě slíbené SPD.",
+          "effectCz": "Usnesení nemění zákon, takže předchozí právní znění nelze porovnat; zřizuje funkci vládního zmocněnce a svěřuje mu koordinaci přípravy transformace pražské páteřní sítě nemocnic, včetně zpracování věcného záměru, investičního záměru a studie proveditelnosti. Jde o přípravný krok, který posouvá část restrukturalizace, ale sám neprovádí změnu sítě ani nezaručuje zachování péče v menších nemocnicích."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-8c787d7f4157--source",
+        "zvlady-resolutions--law-change-uv-2026-111",
+        "zvlady-resolutions--2026-111"
+      ],
+      "explanationCz": "Vláda, v níž je SPD zastoupena, přijala usnesení o transformaci pražské páteřní sítě nemocnic a zřídila pro ni vládního zmocněnce. Ten má koordinovat přípravu projektu a zajistit zpracování záměrů a studie proveditelnosti. Jde o přípravný krok k části slíbené restrukturalizace, nikoli o její dokončení. Podklady nedokládají důkladnou analýzu poptávky ani zachování péče v menších nemocnicích.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z podkladů není zřejmé, jak se připravovaná transformace pražských nemocnic promítne do péče v menších nemocnicích ani zda bude vycházet z analýzy poptávky po zdravotní péči."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_07a6c48727fbe576016aec527a618487d18673b7debff08b3e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 20578,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 20575
+      },
+      "output_tokens": 3904,
+      "output_tokens_details": {
+        "reasoning_tokens": 3106
+      },
+      "total_tokens": 24482
+    },
+    "output": {
+      "promiseId": "candidate-8c787d7f4157",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o státní rozpočet, jehož výdaje na lůžkovou péči mohou souviset se zachováním nemocniční péče, ale dodaný výňatek uvádí jen odkazy na rozpočtové přílohy.",
+          "effectCz": "Rozpočet na rok 2026 stanoví výdaje podle kapitol v přílohách č. 3 a 4; dodaný text jejich částky neobsahuje. Nelze proto určit, jak se mění financování lůžkové péče ani zda rozpočet podporuje zachování péče v menších nemocnicích."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-111",
+          "relevant": true,
+          "reasonCz": "Usnesení se týká transformace páteřní sítě nemocnic v Praze, tedy konkrétní části restrukturalizace nemocniční sítě slíbené SPD.",
+          "effectCz": "Usnesení vytváří funkci vládního zmocněnce a koordinaci přípravy transformace pražské páteřní sítě fakultních nemocnic a nového nemocničního komplexu. V dodaném textu není stanoveno zachování péče v menších nemocnicích ani přímá změna jejich nároků či omezení; podporuje tedy jen část slibu týkající se restrukturalizace."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-8c787d7f4157--source",
+        "psp-core-2025--law-change-43204-1",
+        "zvlady-resolutions--law-change-uv-2026-111",
+        "psp-core-2025--amendment-text-421",
+        "psp-core-2025--amendment-text-506",
+        "psp-core-2025--print-step-210761",
+        "zvlady-resolutions--2026-111",
+        "psp-core-2025--vote-86874",
+        "psp-core-2025--vote-86916",
+        "psp-core-2025--vote-86957"
+      ],
+      "explanationCz": "Vláda předložila návrh státního rozpočtu na rok 2026 a schválený rozpočet podpořili také poslanci SPD. Dodaný výňatek rozpočtu ale neukazuje konkrétní částky na lůžkovou péči, takže nelze posoudit dopad tohoto rozhodnutí na slib. Vláda zároveň zřídila zmocněnce pro přípravu transformace pražské sítě fakultních nemocnic, což posouvá část týkající se restrukturalizace. Poslanci SPD však nepodpořili dva návrhy na navýšení financování lůžkové péče, které předkladatelé spojovali se stabilitou nemocniční sítě a dostupností péče v regionech; proto je nejpravděpodobnější dosavadní posun proti slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný výňatek schváleného státního rozpočtu neobsahuje částky pro lůžkovou péči. Bez nich nelze určit dopad závěrečného hlasování pro rozpočet na zachování péče v menších nemocnicích; proto výsledek zůstává předběžný."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_048dded79fc2fabc016aec52eea51487d197f70232f57c8fe3",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 20017,
+      "input_tokens_details": {
+        "cache_write_tokens": 15604,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 683,
+      "output_tokens_details": {
+        "reasoning_tokens": 391
+      },
+      "total_tokens": 20700
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "zvlady-resolutions--law-change-uv-2026-111",
+        "zvlady-resolutions--2026-111",
+        "psp-core-2025--amendment-text-506",
+        "psp-core-2025--vote-86916",
+        "psp-core-2025--law-change-43204-1"
+      ],
+      "explanationCz": "Druhé hodnocení lépe zohledňuje, že poslanci SPD nepodpořili také návrh na zvýšení peněz na lůžkovou péči o přibližně 363 milionů korun. Jeho zdůvodnění výslovně spojovalo peníze s plánovanou přeměnou akutních lůžek na následnou péči a se stabilizací nemocnic v regionech, tedy s částí slíbené restrukturalizace. Vláda se účastí SPD sice dříve zahájila přípravu proměny pražských nemocnic, ale pozdější nepodpora uvedeného návrhu představuje krok opačným směrem. Dopad schváleného rozpočtu nelze z dodaných částí určit a samotné zachování péče v menších nemocnicích doloženo není."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-b"
+  }
+}

@@ -1,0 +1,1854 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T16-17-03-603Z--f0beacf83dea",
+  "evaluatedAt": "2026-10-06T16:17:03.603Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-04fc9eed0f/f0beacf83dea1b5e8a40af5cb1870d8cad16fe9b7686af210b880b03286e88e4.json",
+  "packageHash": "f0beacf83dea1b5e8a40af5cb1870d8cad16fe9b7686af210b880b03286e88e4",
+  "assessmentContentHash": "f9ce8cbb864ebfee8691ad44890eb86f28a0e0d1f725701f8f49bc511c9368d1",
+  "assessmentFingerprint": "1133db9a3a39d9d631844d236f2ff0950e91d23ca185b24bfd58a48c7e87eb45",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-04fc9eed0f",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment omits the relevance verdict for law change psp-core-2025--law-change-43174-approved-20",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0e20a12b8fc7caeb016ac517a8d58487d19b787155905109b0",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 836738,
+            "input_tokens_details": {
+              "cache_write_tokens": 832768,
+              "cached_tokens": 3967
+            },
+            "output_tokens": 11412,
+            "output_tokens_details": {
+              "reasoning_tokens": 7138
+            },
+            "total_tokens": 848150
+          },
+          "output": {
+            "promiseId": "ano-2025-04fc9eed0f",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Návrh mění postupy stavebních úřadů a zavádí digitální podání i práci s územně plánovacími daty, což přímo souvisí s digitalizací a omezením agend.",
+                "effectCz": "Dříve bylo možné některá podání učinit elektronicky i v listinné podobě a informační systémy a územní plánování měly samostatně vymezené postupy; schválené znění u části podání vyžaduje digitální úkon, rozšiřuje využití informačních systémů a ukládá zveřejňovat plánovací dokumenty a data přes digitální nástroje. To může omezit papírování a část administrativních kroků, ale zákon nestanoví úsporu 5 % ani nedokládá její dosažení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-2",
+                "relevant": true,
+                "reasonCz": "Změna přesouvá působnost v územním plánování a stavebním řízení mezi ministerstvem a novým ústředním úřadem, tedy přímo mění organizaci provozu státu.",
+                "effectCz": "Před změnou zákon uváděl ministerstvo jako ústřední orgán a zahrnoval územní plánování a stavební řád do jeho působnosti; schválené znění přidává Úřad rozvoje území České republiky jako nový ústřední orgán a působnost ministerstva v těchto věcech odnímá. Jde o přeskupení odpovědností, nikoli o doložené zrušení výdajů či snížení nákladů, takže směr úspory z balíčku nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-4",
+                "relevant": false,
+                "reasonCz": "Změny památkové péče upravují ochranu a povolování záměrů, ale text neukazuje přímé snížení provozních nákladů státu, veřejných zakázek ani agend digitalizací.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": false,
+                "reasonCz": "Změny ochrany přírody převážně upravují ochranná pravidla a působnost úřadů, nikoli přímo úspory na provozu státu, zakázkách či digitalizaci agend.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Změna převádí povolování některých vodních záležitostí do řízení o stavebním záměru, a tím přímo slučuje administrativní postupy.",
+                "effectCz": "Dříve se pro nakládání s vodami a některé související souhlasy vedla samostatná řízení vodoprávních úřadů; schválené znění u záměru povolovaného podle stavebního zákona svěřuje část těchto rozhodnutí stavebnímu úřadu jako součást rozhodnutí o záměru. To omezuje počet oddělených povolovacích kroků, ale úsporu v korunách ani 5% cíl text neuvádí."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-29",
+                "relevant": true,
+                "reasonCz": "Změna soustřeďuje vyvlastňovací řízení do nových stavebních úřadů a přímo mění organizaci výkonu státní agendy.",
+                "effectCz": "Předtím vykonávaly vyvlastňování různé úřady podle druhu a místa věci, včetně obecních úřadů obcí s rozšířenou působností a zvláštních stavebních úřadů; schválené znění svěřuje běžnou příslušnost úřadům rozvoje území krajů a vybrané případy ústřednímu Úřadu rozvoje území České republiky. Jde o centralizaci agendy, ale text neprokazuje pokles personálních nebo provozních nákladů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": true,
+                "reasonCz": "Změna začleňuje některá povolení ochrany ovzduší do stavebního řízení, což může snížit počet samostatných administrativních kroků.",
+                "effectCz": "Dříve se pro vybrané stavební záměry vydávalo samostatné závazné stanovisko orgánu ochrany ovzduší; schválené znění nahrazuje toto stanovisko vyjádřením a posouzení začleňuje do rozhodnutí o povolení záměru. To zjednodušuje souběh povolovacích postupů, ale samo o sobě nedokládá úsporu 5 %."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-38",
+                "relevant": false,
+                "reasonCz": "Změna upravuje, kdo vydává prováděcí předpisy k atomovému zákonu, ale nesouvisí přímo s úsporami, zadáváním zakázek ani digitalizací agend.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": true,
+                "reasonCz": "Změna přesouvá posuzování požadavků na nakládání s odpady při stavebních záměrech do rozhodování stavebního úřadu, a slučuje tak část povolovacích úkonů.",
+                "effectCz": "Dříve vydával obecní úřad obce s rozšířenou působností závazná stanoviska či vyjádření k nakládání s odpady u některých stavebních činností; schválené znění svěřuje posouzení souladu s odpadovými pravidly stavebnímu úřadu v rozhodnutí o záměru. Počet oddělených správních kroků se tím může snížit, avšak žádná konkrétní úspora není stanovena."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-1",
+                "relevant": false,
+                "reasonCz": "Návrh upravuje pracovněprávní postavení státních zaměstnanců, ale neobsahuje konkrétní závazek snížit výdaje nebo agendy o 5 % ani přímé opatření k digitalizaci.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-2",
+                "relevant": false,
+                "reasonCz": "Ustanovení o organizaci kabinetů a náměstků členů vlády přímo nedokládají úsporu provozu, zakázek nebo agend slíbenou v programu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-3",
+                "relevant": false,
+                "reasonCz": "Tato část byla ze schváleného znění odstraněna a návrh informačního systému o státních zaměstnancích se nestal opatřením v textu, o němž se rozhodovalo.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-4",
+                "relevant": false,
+                "reasonCz": "Přechodná a společná ustanovení upravují pracovněprávní vztahy a přechod mezi režimy, ale nedokládají slíbené provozní úspory ani digitalizaci agend.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+                "relevant": false,
+                "reasonCz": "Tato schválená část vytváří působnost Úřadu vlády v personálních a organizačních otázkách, ale neobsahuje konkrétní snížení nákladů nebo rozsahu agend.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-7",
+                "relevant": false,
+                "reasonCz": "Úprava jmenování ředitele Úřadu pro civilní letectví se netýká přímo úspory na provozu státu, veřejných zakázek ani digitalizace agend.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-approved-18",
+                "relevant": false,
+                "reasonCz": "Zrušení jedné pravomoci prezidenta Nejvyššího kontrolního úřadu nesouvisí přímo s opatřením pro slíbené úspory či digitalizaci.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+                "relevant": false,
+                "reasonCz": "Změna správy informačního systému výzkumu a vývoje a příslušnosti orgánů neprokazuje snížení nákladů či agend slíbených v programu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-approved-53",
+                "relevant": false,
+                "reasonCz": "Změna platových a jazykových podmínek u Úřadu pro zastupování státu ve věcech majetkových nemá doloženou vazbu na slíbené úspory.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-approved-62",
+                "relevant": false,
+                "reasonCz": "Změna odkazu na Úřad vlády v zákoníku práce je dílčí technická změna bez doloženého vlivu na úsporu či digitalizaci agend.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-1",
+                "relevant": false,
+                "reasonCz": "Návrh mění dostupnost a organizaci podpory bydlení, nikoli slíbené snižování provozních výdajů, zakázek či agend státu digitalizací.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-approved-2",
+                "relevant": false,
+                "reasonCz": "Přidání podpory bydlení do působnosti Úřadu práce samo o sobě nedokládá úspory, na které se slib zaměřuje.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-6",
+                "relevant": true,
+                "reasonCz": "Návrh ruší ustanovení o digitální autentizaci při osobním prokazování totožnosti, tedy přímo zasahuje do digitálního nástroje zmíněného ve slibu.",
+                "effectCz": "Před změnou měl uživatel služby právo požadovat autentizaci před osobním úkonem a existoval elektronický formulář i aplikace pro tento postup; návrh odstavce 2 až 5 ruší. Tím se odstraňuje konkrétní možnost digitální autentizace a jde proti části slibu, která spoléhá na funkční digitalizaci."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43344-1",
+                "relevant": false,
+                "reasonCz": "Návrh stanoví postupy pro mimořádné situace na vnitřním trhu, ale text neukazuje přímou souvislost se slíbeným každoročním snižováním provozních nákladů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43356-2",
+                "relevant": false,
+                "reasonCz": "Změna zeměměřických autorizací a vedení jejich evidence nemá v předloženém textu přímou vazbu na slíbené provozní úspory či digitální omezování agend.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-1",
+                "relevant": false,
+                "reasonCz": "Návrh upravuje standardizaci a činnosti normalizačního orgánu, ale nepředkládá konkrétní úsporu na provozu státu ani zakázkách.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-3",
+                "relevant": false,
+                "reasonCz": "Změny kontrolní působnosti České obchodní inspekce nemají doloženou vazbu na cílové úspory či digitalizaci agend.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-5",
+                "relevant": false,
+                "reasonCz": "Změna správy puncovnictví a zkušebnictví drahých kovů neprokazuje úspory ani digitalizaci uvedenou ve slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-7",
+                "relevant": false,
+                "reasonCz": "Změna právní úpravy technických požadavků na výrobky upravuje normy a kontrolu shody, nikoli slíbené provozní úspory nebo zjednodušení agend digitalizací.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-10",
+                "relevant": false,
+                "reasonCz": "Odstranění Puncovního úřadu ze seznamu orgánů dozoru nesouvisí s konkrétními závazky úspory nebo digitalizace v programu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43395-1",
+                "relevant": false,
+                "reasonCz": "Přesun inspektorátů zeměměřictví pod ústřední úřad mění jejich organizační zařazení, ale text nedokládá úsporu ani omezení agend slíbené stranou.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43396-2",
+                "relevant": false,
+                "reasonCz": "Doplnění Ministerstva zdravotnictví a krajských hygienických stanic mezi uživatele hlášení samo o sobě nesplňuje ani nepopírá konkrétní závazek úspor.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-1",
+                "relevant": false,
+                "reasonCz": "Úprava obecních svazků a orgánů obcí je obecnou změnou místní samosprávy bez přímé vazby na slíbenou úsporu provozu státu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-5",
+                "relevant": false,
+                "reasonCz": "Změny odměňování krajských zastupitelů a souvisejících postupů nesměřují přímo k úspoře provozu státu, zakázek nebo agend.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-6",
+                "relevant": false,
+                "reasonCz": "Úprava pražských svazků obcí a odměňování zastupitelů neprokazuje závazek k provozním úsporám slíbeným celostátně.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43406-1",
+                "relevant": false,
+                "reasonCz": "Změna systému podpory výzkumu a vývoje se týká institucionálního uspořádání, ale neukazuje přímou úsporu či digitalizaci odpovídající slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-20",
+                "relevant": false,
+                "reasonCz": "Převod vymáhání některých peněžitých plnění finanční správě nemá v textu přímou vazbu na slíbené úspory státního provozu nebo digitalizaci agend.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43439-1",
+                "relevant": false,
+                "reasonCz": "Sloučení České plemenářské inspekce se Státní veterinární správou je změna v jiném odborném odvětví, bez doloženého spojení s konkrétním cílem slibu.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-04fc9eed0f--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-2",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-29",
+              "psp-core-2025--law-change-43174-33",
+              "psp-core-2025--law-change-43174-39",
+              "psp-core-2025--law-change-43293-6",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--print-step-211258",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15"
+            ],
+            "explanationCz": "Poslanci ANO předložili novelu stavebního zákona, kterou Sněmovna schválila a po odmítnutí Senátem na ní setrvala. Ta zavádí povinná digitální podání u části úkonů a slučuje některá povolení, například v oblasti vod a odpadů, se stavebním řízením; jde o konkrétní kroky k digitalizaci a omezení některých agend. Vláda zároveň navrhla zrušit možnost digitální autentizace při osobním prokazování totožnosti, což jde opačným směrem, ale šlo pouze o návrh. Podklady nedokládají dosažení každoroční úspory 5 %, proto je doložen jen dílčí posun.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Není doloženo, že digitální podání a sloučení některých povolení skutečně snížily výdaje, ani že stát každoročně ušetřil slíbených 5 %.",
+              "Vládní návrh na zrušení digitální autentizace odporuje části slibu o digitalizaci, ale v balíčku není doložena následná sněmovní volba o tomto návrhu."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": [
+      {
+        "error": "Assessment omits the relevance verdict for law change psp-core-2025--law-change-43174-approved-20",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_04e2d51f61dfdae0016ac51ad0a6c487d18a394b57604fb7f9",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 836738,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 836735
+            },
+            "output_tokens": 16475,
+            "output_tokens_details": {
+              "reasoning_tokens": 11456
+            },
+            "total_tokens": 853213
+          },
+          "output": {
+            "promiseId": "ano-2025-04fc9eed0f",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Mění stavební řízení a pravidla pro jeho digitalizaci, což může ovlivnit rozsah agend i provozní výdaje státu.",
+                "effectCz": "Dosud bylo možné některá podání učinit přes portál i listinně; schválené znění u vybraných podání vyžaduje digitální úkon a rozšiřuje jednotné strojově čitelné digitální údaje. Zároveň zavádí sledování stavu řízení a umožňuje sdružovat informační systémy, takže jde o konkrétní krok k digitalizaci a zjednodušení agend, nikoli však o doloženou úsporu 5 %. Nově také ukládá při převodu zaměstnanců mezi úřady zvláštní roční příplatek vypočtený z rozdílu jejich platů navýšeného o 10 %; předchozí úpravu tohoto nového nároku balíček neuvádí, ale jde o další výdaj na provoz státu, který může slíbené úspory ztížit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-2",
+                "relevant": true,
+                "reasonCz": "Zřizuje nový ústřední úřad a přesouvá na něj agendy i související rozpočtové prostředky, takže se přímo dotýká provozu státu.",
+                "effectCz": "Předchozí znění svěřovalo uvedené agendy zejména Ministerstvu pro místní rozvoj; nové znění zřizuje Úřad rozvoje území a převádí na něj působnost, majetek i související rozpočtové prostředky. Z balíčku nelze určit, zda tím celkové provozní výdaje klesnou, nebo vzrostou, protože neuvádí částky ani srovnání nákladů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-4",
+                "relevant": true,
+                "reasonCz": "U vybraných stavebních záměrů v památkových zónách nahrazuje samostatný úkon památkové péče posouzením v řízení stavebního úřadu, čímž může zmenšit počet oddělených agend.",
+                "effectCz": "Dříve vlastník některých nemovitostí v památkové zóně žádal o samostatné rozhodnutí či stanovisko orgánu památkové péče; nově u povolovaných záměrů podmínky ověřuje stavební úřad v řízení o záměru. Tím se zmenšuje počet samostatných procesních kroků, ale balíček nedokládá finanční úsporu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": true,
+                "reasonCz": "Přesouvá část posuzování ochrany přírody do řízení stavebního úřadu, a tím může omezit samostatné administrativní úkony.",
+                "effectCz": "Dříve se pro řadu stavebních záměrů vyžadovaly samostatné souhlasy orgánu ochrany přírody; nově některé souhlasy a výjimky posuzuje stavební úřad v rámci rozhodnutí o záměru. To snižuje počet oddělených úkonů, avšak znění neprokazuje úsporu peněz ani dosažení pětiprocentního cíle."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Převádí několik vodoprávních povolení a souhlasů souvisejících se stavebními záměry do řízení podle stavebního zákona, což může zmenšit počet samostatných řízení.",
+                "effectCz": "Před změnou se například povolení k nakládání s vodami a souhlas k činnostem ovlivňujícím vodní poměry vyřizovaly samostatně u vodoprávního úřadu; nové znění u souvisejících záměrů svěřuje rozhodnutí stavebnímu úřadu nebo začleňuje podmínky do jeho rozhodnutí. Administrativní kroky se tím mohou zmenšit, ale výslednou výši nákladů balíček neuvádí."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-29",
+                "relevant": true,
+                "reasonCz": "Mění, které úřady vedou vyvlastňovací řízení, a tím přímo upravuje organizaci státní správy a její provoz.",
+                "effectCz": "Předtím byly vyvlastňovacími úřady obecní a městské úřady a pro některé stavby také specializovaný stavební úřad; nové znění svěřuje řízení úřadům rozvoje území krajů a u vybraných záměrů ústřednímu Úřadu rozvoje území. Změna přesouvá agendu, ale bez údajů o nákladech nelze určit, zda je provoz levnější."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": true,
+                "reasonCz": "Nahrazuje samostatné úkony ochrany ovzduší u některých stavebních záměrů vyjádřením nebo posouzením v povolovacím řízení, čímž může omezit oddělené agendy.",
+                "effectCz": "Dříve se pro vybrané zdroje a silnice vydávalo samostatné závazné stanovisko; nové znění mění příslušné úkony na vyjádření a jejich posouzení propojuje s povolením záměru. Jde o zjednodušení procesního postupu, nikoli o doloženou rozpočtovou úsporu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-38",
+                "relevant": false,
+                "reasonCz": "Mění pouze to, který úřad vydává prováděcí pravidla k atomovému zákonu, a text nespojuje tuto změnu s úsporami ani digitalizací slíbenými hnutím ANO.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": true,
+                "reasonCz": "U stavebních záměrů svěřuje posouzení odpadových povinností stavebnímu úřadu místo samostatných stanovisek, a může tak zmenšit počet administrativních kroků.",
+                "effectCz": "Dříve obecní úřad obce s rozšířenou působností vydával ke změnám staveb a odstraňování staveb samostatná stanoviska či vyjádření k odpadům; nově splnění požadavků posuzuje stavební úřad v rozhodnutí o záměru. Počet samostatných úkonů se může snížit, ale znění neuvádí dosaženou úsporu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-1",
+                "relevant": true,
+                "reasonCz": "Zavádí nová pravidla pracovních poměrů a odměňování státních zaměstnanců, tedy oblasti, které přímo ovlivňují provozní náklady státu.",
+                "effectCz": "Nový zákon stanoví pravidla pracovních poměrů státních zaměstnanců a mimo jiné zavádí individuální vzdělávání v rozsahu 5 dnů ročně a zvláštní pravidla pro odstupné. Balíček neobsahuje odpovídající předchozí znění, s nímž by bylo možné porovnat celkový vliv na mzdové a provozní náklady."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-2",
+                "relevant": false,
+                "reasonCz": "Upravuje kabinetní a zastupovací uspořádání ministerstev, ale text nedokládá změnu nákladů, veřejných zakázek ani digitálních agend.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-3",
+                "relevant": false,
+                "reasonCz": "Navržená evidence personálních údajů byla v textu schváleném Sněmovnou vypuštěna, takže se nestala součástí rozhodnuté úpravy.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-4",
+                "relevant": true,
+                "reasonCz": "Přechodná pravidla nového systému státní služby zachovávají zaměstnancům některé dosavadní platové nároky, což může ovlivnit provozní výdaje státu.",
+                "effectCz": "Jde o nová přechodná ustanovení: převádějí dosavadní zaměstnance do nového režimu a zachovávají některé jejich dosavadní podmínky. Předchozí znění těchto nových ustanovení balíček nemá, takže jejich čistý dopad na náklady nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-7",
+                "relevant": false,
+                "reasonCz": "Mění pravidla pro jmenování a řízení v Ústavu pro civilní letectví, aniž by text spojoval změnu s úsporami nebo digitalizací slíbenými hnutím ANO.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-approved-18",
+                "relevant": false,
+                "reasonCz": "Ruší pravidlo o předkládání návrhů pro členy služební komise Nejvyššího kontrolního úřadu a nesouvisí s vymezeným cílem úspor.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+                "relevant": false,
+                "reasonCz": "Přesouvá působnost ve výzkumné politice a správě informačního systému, ale text ji nespojuje s úsporami na provozu státu ani s redukcí slíbených agend.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-approved-53",
+                "relevant": false,
+                "reasonCz": "Upravuje odměňování a jazykové požadavky zaměstnanců Úřadu pro zastupování státu ve věcech majetkových, bez doložené vazby na slíbené úspory.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-approved-62",
+                "relevant": false,
+                "reasonCz": "Mění pouze odkaz v zákoníku práce týkající se informačního systému o platech, nikoli závazek snižovat provozní výdaje nebo agendy.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-1",
+                "relevant": false,
+                "reasonCz": "Mění okruh osob, kterým se poskytuje poradenství v podpoře bydlení, nikoli slíbené úspory státu, zakázky nebo digitalizaci.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-approved-2",
+                "relevant": false,
+                "reasonCz": "Rozšiřuje působnost Úřadu práce o podporu bydlení, ale text nepropojuje tuto oblast se závazkem úspor uvedeným ve slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-6",
+                "relevant": false,
+                "reasonCz": "Ruší ustanovení o autentizaci při osobním prokazování totožnosti a mění související sankci, nikoli digitalizaci agend ve slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43344-1",
+                "relevant": false,
+                "reasonCz": "Upravuje postup při mimořádných situacích na vnitřním trhu a krizové zásobování, nikoli běžné úspory státu nebo slíbenou digitalizaci.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43356-2",
+                "relevant": false,
+                "reasonCz": "Mění správu zeměměřických inspektorátů a povinnosti autorizovaných zeměměřičů, ale text nespojuje změnu s úsporami slíbenými hnutím ANO.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-1",
+                "relevant": false,
+                "reasonCz": "Upravuje normalizační orgán a přístup k technickým normám, ale text nedokládá úspory na státním provozu, zakázkách ani redukci agend díky digitalizaci.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-3",
+                "relevant": false,
+                "reasonCz": "Mění rozdělení pravomocí České obchodní inspekce při kontrolách a nedokládá vazbu na slíbené úspory.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-5",
+                "relevant": false,
+                "reasonCz": "Přesouvá puncovní kontrolu na jinou instituci, ale text neuvádí úsporu ani souvislost s digitální redukcí agend.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-7",
+                "relevant": false,
+                "reasonCz": "Mění technické normy a jejich vydavatele, nikoli závazek uspořit prostředky na provozu státu nebo veřejných zakázkách.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-10",
+                "relevant": false,
+                "reasonCz": "Ruší zmínku o puncovním úřadu v pravidlech dozoru nad výrobky, bez doložené vazby na posuzovaný slib.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43395-1",
+                "relevant": false,
+                "reasonCz": "Mění působnost zeměměřických inspektorátů a vedení jejich evidence, ale text nespojuje změnu s cílem ročních úspor.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43396-2",
+                "relevant": false,
+                "reasonCz": "Rozšiřuje okruh úřadů využívajících jednotné měsíční hlášení zaměstnavatele, ale neukládá úspory v oblastech uvedených ve slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-1",
+                "relevant": false,
+                "reasonCz": "Upravuje rejstřík svazků obcí, jejich orgány a odměňování zastupitelů, nikoli výdaje státu nebo jeho digitální agendy.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-5",
+                "relevant": false,
+                "reasonCz": "Mění pravidla krajských zastupitelstev a odměňování jejich členů, bez materiální vazby na posuzované úspory.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-6",
+                "relevant": false,
+                "reasonCz": "Upravuje postavení městských částí a jejich dobrovolných svazků, ale text nespojuje změny s úsporami uvedenými ve slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43406-1",
+                "relevant": false,
+                "reasonCz": "Mění řízení podpory výzkumu a působnost výzkumných institucí, nikoli slíbené úspory na provozu státu či veřejných zakázkách.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-20",
+                "relevant": false,
+                "reasonCz": "Převádí vymáhání některých peněžitých plnění na finanční úřady, ale text neprokazuje souvislost s cílem úspor v konkrétních oblastech slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43439-1",
+                "relevant": false,
+                "reasonCz": "Převádí kontrolu chovu hospodářských zvířat na veterinární správu, bez doložené vazby na roční úspory nebo digitalizaci.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-04fc9eed0f--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-2",
+              "psp-core-2025--law-change-43174-4",
+              "psp-core-2025--law-change-43174-8",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-29",
+              "psp-core-2025--law-change-43174-33",
+              "psp-core-2025--law-change-43174-39",
+              "psp-core-2025--law-change-43183-1",
+              "psp-core-2025--law-change-43183-4",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--print-step-210647",
+              "psp-core-2025--vote-87958",
+              "psp-core-2025--vote-88449",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--senate-resolution-43183-7"
+            ],
+            "explanationCz": "Poslanci ANO předložili návrh na změnu stavebních pravidel a po odmítnutí návrhu Senátem Poslanecká sněmovna zákon znovu schválila. Změny zavádějí povinná digitální podání v některých případech a slučují část povolovacích úkonů, což může zjednodušit agendy. Tentýž zákon ale zavádí pro některé převáděné zaměstnance zvláštní příplatek vypočtený z platového rozdílu navýšeného o 10 %, což jde proti úsporám na provozu státu. Z podkladů nelze ověřit, že by se dosáhlo slibované pětiprocentní roční úspory.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Zákon stanoví některé digitální a zjednodušující postupy, ale podklady neuvádějí skutečné úspory, jejich výši ani to, zda se podaří ušetřit 5 % každý rok.",
+              "U nového zvláštního příplatku pro převáděné zaměstnance nejsou v podkladech údaje o počtu oprávněných osob ani o celkovém dopadu na výdaje; jeho čistý vliv na celkové úspory proto nelze vyčíslit."
+            ]
+          }
+        }
+      },
+      {
+        "error": "Assessment gives a law change more than one relevance verdict",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0bfc628b86b609bf016ac51cdb077087d199d0830000685bb5",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 836738,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 836735
+            },
+            "output_tokens": 15869,
+            "output_tokens_details": {
+              "reasoning_tokens": 11507
+            },
+            "total_tokens": 852607
+          },
+          "output": {
+            "promiseId": "ano-2025-04fc9eed0f",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Změny stavebního zákona spojují některá dříve oddělená povolovací řízení a zavádějí digitální podávání a zveřejňování dokumentů, což se přímo týká digitalizace a redukce agend.",
+                "effectCz": "Dříve se podání mohla činit také přes portál stavebníka a územní dokumentace se vedla elektronicky; schválené znění u některých podání vyžaduje digitální úkon a stanoví společný geoportál a jednotný standard. Změny zároveň slučují některé povolovací kroky a zkracují či omezují některé procesy, ale zakládají nové úřady a převádějí na ně zaměstnance i rozpočtové prostředky. Administrativní kroky se v části agend zjednodušují, avšak směr čistého dopadu na provozní náklady ani úsporu 5 % nelze z textu určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-2",
+                "relevant": true,
+                "reasonCz": "Změna přímo převádí úkoly stavební správy a územního plánování mezi státními úřady, a tedy se týká provozu státu.",
+                "effectCz": "Před změnou vykonávalo územní plánování a stavební řád v uvedeném rozsahu Ministerstvo pro místní rozvoj; text nově zařazuje Úřad rozvoje území mezi ústřední orgány a příslušné působnosti převádí na něj. Jde o přesun a nové uspořádání správy, nikoli o stanovení nižších nákladů; dopad na slibovanou úsporu nelze z balíčku určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-4",
+                "relevant": true,
+                "reasonCz": "Změna upravuje, kdo a jak posuzuje některé zásahy v památkových územích, a může tak omezit oddělené správní kroky.",
+                "effectCz": "Dříve vlastník u řady prací v památkové rezervaci, zóně nebo ochranném pásmu žádal o samostatné rozhodnutí či závazné stanovisko orgánu památkové péče. Nově u části záměrů povolovaných podle stavebního zákona posoudí podmínky stavební úřad v řízení o záměru; samostatný krok se tak v těchto případech nahrazuje společným řízením. To může zmenšit počet úkonů, ale zákon nevyčísluje provozní úsporu ani její vztah k cíli 5 %."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": true,
+                "reasonCz": "Změna přesouvá část posuzování ochrany přírody do řízení stavebních úřadů a přímo se tak týká slučování správních agend.",
+                "effectCz": "Dříve řadu souhlasů a posouzení v ochraně přírody vykonávaly samostatně orgány ochrany přírody. Schválené znění u vymezených záměrů svěřuje jejich posouzení stavebnímu úřadu jako součást povolení záměru, čímž odstraňuje některé samostatné úkony. Zároveň mění některé podmínky ochrany a rozdělení působnosti; úsporu nákladů ani její rozsah text nestanoví."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Změna převádí vybraná vodoprávní povolení a souhlasy do řízení o stavebním záměru, což se týká redukce povolovacích agend.",
+                "effectCz": "Dříve o povoleních k nakládání s vodami a souvisejících souhlasech rozhodovaly vodoprávní úřady samostatně. Nově v určených případech rozhoduje stavební úřad v rámci povolení záměru a některé samostatné souhlasy se nevydávají. Počet oddělených úkonů se v těchto případech snižuje, ale úspora rozpočtových prostředků není doložena."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-29",
+                "relevant": true,
+                "reasonCz": "Změna přeskupuje výkon vyvlastňovací agendy mezi stavebními úřady, tedy mění organizaci provozu státu.",
+                "effectCz": "Před změnou byly vyvlastňovacími úřady obecní úřady obcí s rozšířenou působností, magistráty a Dopravní a energetický stavební úřad. Nově tuto agendu vykonávají úřady rozvoje území krajů a u vymezených případů Úřad rozvoje území České republiky. Jde o přeskupení působnosti; znění neukládá snížení nákladů a jeho směr nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": true,
+                "reasonCz": "Změna začleňuje vybrané úkony ochrany ovzduší do stavebního povolení, takže se týká počtu samostatných správních kroků.",
+                "effectCz": "Dříve se pro některé záměry vydávalo samostatné závazné stanovisko k ochraně ovzduší. Nově se v těchto případech příslušné podmínky a kompenzační opatření uplatní v rozhodnutí o povolení záměru a samostatné stanovisko se nahrazuje vyjádřením nebo začleněným úkonem. Administrativní postup se v části případů slučuje, ale provozní úspora není vyčíslena."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-38",
+                "relevant": false,
+                "reasonCz": "Změna upravuje pravomoc vydávat technické předpisy v oblasti atomového zákona, ale z jejího textu nevyplývá vazba na úsporu nákladů, veřejné zakázky ani redukci agend digitalizací.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": true,
+                "reasonCz": "Změna začleňuje posuzování odpadového hospodářství do stavebního povolení, a může tak omezit oddělené správní úkony.",
+                "effectCz": "Dříve vydával obecní úřad obce s rozšířenou působností samostatná stanoviska a vyjádření k některým stavebním záměrům z hlediska odpadů. Nově posoudí stavební úřad splnění příslušných požadavků v rozhodnutí o záměru a samostatné postupy se v této části ruší. Počet oddělených úkonů se může snížit, avšak skutečná úspora ani její výše nejsou doloženy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+                "relevant": false,
+                "reasonCz": "Změna zřizuje příspěvkovou organizaci pro obranu a upravuje její fungování, ale neprokazuje úsporu výdajů ani omezení agend slibované stranou.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-1",
+                "relevant": true,
+                "reasonCz": "Nová pravidla pro pracovní poměry státních zaměstnanců a jejich odměňování mohou přímo ovlivnit provozní náklady státu.",
+                "effectCz": "Jde o nový zákon, takže předchozí znění tohoto zákona neexistuje. Upravuje pracovní poměry, náhrady a odměňování státních zaměstnanců, ale nestanoví jejich celkový náklad ani snížení výdajů o 5 %; směr dopadu na náklady nelze z balíčku určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-2",
+                "relevant": true,
+                "reasonCz": "Upravuje organizační uspořádání ministerstev a Úřadu vlády, tedy část provozu státní správy.",
+                "effectCz": "Jde o nová organizační ustanovení bez předchozího znění v tomto zákoně. Vymezují kabinety a postavení náměstků a dalších zaměstnanců, ale neobsahují číselný limit celkových výdajů ani závazek ke snížení nákladů. Dopad na slibovanou úsporu nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-3",
+                "relevant": true,
+                "reasonCz": "Navržený informační systém o pracovních místech, zkouškách a organizačních strukturách mohl digitalizovat správu státních zaměstnanců.",
+                "effectCz": "Navržené znění zavádělo centrální informační systém s evidencí pracovních míst a úřednických zkoušek. Ve znění schváleném Sněmovnou byla tato část odstraněna, takže příslušný digitální nástroj v konečném textu této novely není."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-4",
+                "relevant": true,
+                "reasonCz": "Přechodná a organizační pravidla pro zaměstnance ministerstev mohou ovlivnit náklady státu na personální provoz.",
+                "effectCz": "Jde o nová přechodná ustanovení bez předchozího znění tohoto zákona. Převádějí dosavadní zaměstnance a pracovněprávní vztahy do nového režimu, ale neurčují celkové výdaje ani jejich pokles; dopad na 5% cíl proto nelze vyčíslit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+                "relevant": true,
+                "reasonCz": "Schválená část nového zákona stanoví působnost Úřadu vlády při koordinaci personálních a organizačních procesů státní správy.",
+                "effectCz": "Jde o nově vložená ustanovení, takže předchozí znění v tomto zákoně není. Úřadu vlády svěřují koordinaci výběrových řízení, zkoušek a hodnocení zaměstnanců; jde o soustředění koordinačních úkolů, nikoli o doložené snížení výdajů nebo objemu práce."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43395-1",
+                "relevant": true,
+                "reasonCz": "Vládní návrh převádí zeměměřické inspektoráty pod Úřad a mění jejich organizační postavení, což se týká provozu státu.",
+                "effectCz": "Dříve byly zeměměřické a katastrální inspektoráty samostatnými správními úřady a účetními jednotkami. Návrh z nich činí vnitřní organizační jednotky Úřadu a převádí na něj zaměstnance, majetek a prostředky. Samostatná organizační struktura se zmenšuje, ale náklady se převádějí spolu s agendou a čistý dopad na výdaje nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-20",
+                "relevant": true,
+                "reasonCz": "Návrh svěřuje finančním úřadům vymáhání některých peněžitých plnění jiných veřejných institucí, což může měnit a slučovat správní agendy.",
+                "effectCz": "Jde o nové ustanovení, jehož předchozí znění neexistuje. Finanční úřad se stává obecným správcem pro vymáhání určených plnění sociálního zabezpečení a zdravotních pojišťoven; povoluje také splátky a prominutí úroku z prodlení. Návrh přesouvá vymezené úkony, ale neuvádí očekávané úspory ani jejich rozsah."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43439-1",
+                "relevant": true,
+                "reasonCz": "Poslanecký návrh slučuje Českou plemenářskou inspekci se Státní veterinární správou, což přímo mění strukturu státní správy.",
+                "effectCz": "Před změnou byla Česká plemenářská inspekce samostatným správním úřadem vykonávajícím kontrolu a projednávajícím přestupky. Návrh ji ruší a převádí její působnost, zaměstnance, majetek a probíhající řízení na Státní veterinární správu. Ubývá samostatný úřad, ale návrh nepředkládá výpočet čisté úspory."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-3",
+                "relevant": true,
+                "reasonCz": "Navržený informační systém o pracovních místech, zkouškách a organizačních strukturách mohl digitalizovat správu státních zaměstnanců.",
+                "effectCz": "Navržené znění zavádělo centrální informační systém s evidencí pracovních míst a úřednických zkoušek. Ve znění schváleném Sněmovnou byla tato část odstraněna, takže příslušný digitální nástroj v konečném textu této novely není."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": false,
+            "citedEvidenceIds": [
+              "ano-2025-04fc9eed0f--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-2",
+              "psp-core-2025--law-change-43174-4",
+              "psp-core-2025--law-change-43174-8",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-29",
+              "psp-core-2025--law-change-43174-33",
+              "psp-core-2025--law-change-43174-39",
+              "psp-core-2025--law-change-43183-1",
+              "psp-core-2025--law-change-43183-2",
+              "psp-core-2025--law-change-43183-3",
+              "psp-core-2025--law-change-43183-4",
+              "psp-core-2025--law-change-43183-approved-3",
+              "psp-core-2025--law-change-43395-1",
+              "psp-core-2025--law-change-43422-20",
+              "psp-core-2025--law-change-43439-1",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--print-step-210647",
+              "psp-core-2025--vote-87958",
+              "psp-core-2025--senate-resolution-43183-7",
+              "psp-core-2025--vote-88449",
+              "psp-core-2025--print-step-211959",
+              "psp-core-2025--print-step-212101",
+              "psp-core-2025--print-step-212206"
+            ],
+            "explanationCz": "Poslanci ANO předložili a následně podpořili novelu stavebního zákona, která slučuje část povolovacích úkonů a zavádí digitální podávání a zveřejňování dokumentů. Další návrhy vlády a poslanců mění organizaci některých úřadů nebo přesouvají jejich agendy, ale jejich dopad na výdaje není vyčíslen. To představuje možný dílčí posun v digitalizaci a zjednodušení agend, nikoli doložené splnění cíle. Balíček neprokazuje každoroční úsporu 5 % na provozu státu a veřejných zakázkách.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Předložené podklady neobsahují údaje o skutečných provozních výdajích, úsporách z veřejných zakázek ani výpočet každoroční pětiprocentní úspory.",
+              "ANО hlasovalo pro nová pravidla pracovních poměrů státních zaměstnanců, která mimo jiné zaručují, že se převedeným zaměstnancům nesníží platové zařazení; podklady ale nevyčíslují, zda a jak tato záruka ovlivní celkové výdaje.",
+              "Novela stavebního zákona převádí působnosti i rozpočtové prostředky na nové úřady; bez údajů o nákladech nelze určit, zda tato reorganizace sníží celkové provozní výdaje."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-04fc9eed0f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění povolování staveb a zavádí digitální podání a evidenci, takže může přispět k digitalizaci a omezení části administrativních úkonů.",
+          "effectCz": "Dříve zákon umožňoval podání přes portál stavebníka a digitální práci s některými dokumenty; schválený text rozšiřuje povinné digitální úkony a evidenci a spojuje část posuzování do jednoho povolení. To může snížit počet samostatných úkonů, ale současně vytváří a reorganizuje úřady a převádí na ně zaměstnance i rozpočtované prostředky; žádné snížení výdajů, natož o 5 % ročně, text nestanoví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Změna převádí působnost v územním plánování a stavebním řízení mezi ústředními orgány, a tím přímo mění organizaci provozu státu.",
+          "effectCz": "Dříve měl Ministerstvo pro místní rozvoj v působnosti územní plánování, stavební řád a vyvlastnění; změna zakládá Úřad rozvoje území České republiky a odebírá tyto oblasti působnosti ministerstvu. Jde o změnu organizace a rozdělení práce, nikoli o doložené snížení nákladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "Změna památkových souhlasů začleňuje některá posouzení do stavebního řízení, a může tak omezit samostatné administrativní kroky.",
+          "effectCz": "Dříve si vlastník u řady nemovitostí v památkových zónách a ochranných pásmech musel předem vyžádat samostatné rozhodnutí či stanovisko památkové péče; schválený text u části stavebních záměrů svěřuje posouzení stavebnímu úřadu v řízení o povolení. Počet samostatných kroků se tím snižuje, ale jejich věcné posouzení nezaniká a úspora peněz není vyčíslena."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": true,
+          "reasonCz": "Změna přímo převádí některá posouzení ochrany přírody do řízení o povolení záměru, což může zmenšit počet oddělených úředních postupů.",
+          "effectCz": "Dříve některé souhlasy a povolení ochrany přírody probíhaly samostatně; schválený text stanoví, že u vybraných záměrů podmínky posoudí stavební úřad v rámci povolovacího řízení. Samostatná administrativní fáze se tím omezuje, povinnosti ochrany přírody se však zcela neruší a finanční úsporu text nevyčísluje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Změna přesouvá povolení k nakládání s vodami pro stavební záměry do stavebního řízení, a může proto omezit souběžné povolovací postupy.",
+          "effectCz": "Dříve se povolení k nakládání s vodami, některé souhlasy a vyjádření vydávaly vodoprávním úřadem odděleně od povolení stavby; schválený text je u souvisejících záměrů začleňuje do rozhodnutí stavebního úřadu. Procesní počet samostatných kroků se snižuje, ale podmínky pro ochranu vod zůstávají a úspora nákladů není vyčíslena."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": true,
+          "reasonCz": "Změna soustřeďuje vyvlastňovací agendu do nových úřadů rozvoje území a tím mění organizaci provozu státu.",
+          "effectCz": "Dříve vykonávaly vyvlastňovací působnost obecní a městské úřady i Dopravní a energetický stavební úřad; schválený text ji svěřuje úřadům rozvoje území krajů a v určených případech ústřednímu Úřadu rozvoje území. Jde o centralizaci a přesun agendy, nikoli o prokázané snížení výdajů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Změna zapojuje některé otázky ochrany ovzduší do povolení záměru, což může omezit samostatná správní řízení.",
+          "effectCz": "Dříve se pro vybrané stacionární zdroje a komunikace vydávala samostatná závazná stanoviska; schválený text nahrazuje část těchto kroků vyjádřením a posouzením v rozhodnutí o povolení záměru. Administrativní postup se zjednodušuje, avšak zachovává posuzování a kompenzačních opatření a neslibuje konkrétní rozpočtovou úsporu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-38",
+          "relevant": false,
+          "reasonCz": "Změna atomového zákona se podle dodaného textu týká především označení ministerstva a nesouvisí s úsporami, veřejnými zakázkami ani omezováním agend digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": true,
+          "reasonCz": "Změna odpadových pravidel svěřuje posouzení některých stavebních požadavků stavebnímu úřadu v rámci povolení záměru, a může tak omezit oddělené úkony.",
+          "effectCz": "Dříve stavebník předkládal některé samostatné podklady či žádosti podle odpadového zákona; schválený text svěřuje stavebnímu úřadu posouzení požadavků při provedení záměru v jeho rozhodnutí. Jde o možnou úsporu administrativních kroků, ne o doložené snížení nákladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": false,
+          "reasonCz": "Tato doplněná část upravuje státní příspěvkovou organizaci pro obranu a nesměřuje k úspoře provozních výdajů, zakázek ani agend digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": true,
+          "reasonCz": "Nový zákon upravuje právní poměry státních zaměstnanců, tedy přímo jednu z oblastí provozu státu, kterou slib zmiňuje.",
+          "effectCz": "Nejde o novelizaci jednoho dřívějšího ustanovení, ale o návrh nového zákona, který nahrazuje dosavadní služební režim pracovním poměrem státních zaměstnanců a stanoví pravidla pro nábor, hodnocení a odměňování. Může měnit organizaci a náklady státní správy, avšak z dodaného textu nelze určit, zda je snižuje; úsporu 5 % nezakládá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-2",
+          "relevant": true,
+          "reasonCz": "Nová pravidla pro organizaci ministerstev a Úřadu vlády se přímo týkají provozu státu.",
+          "effectCz": "Jde o nová organizační ustanovení, která vymezují kabinety, náměstky a zastupování členů vlády; předchozí znění těchto částí v balíčku uvedeno není. Upravují organizaci, ale neurčují počet pracovníků ani rozpočtové úspory."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-3",
+          "relevant": true,
+          "reasonCz": "Navržená část měla vytvořit elektronický systém pro výběrová řízení, zkoušky a organizační údaje státních zaměstnanců, tedy prostředek digitalizace státní správy.",
+          "effectCz": "Navržená nová ustanovení zaváděla evidence pracovních míst, zkoušek a organizačních struktur, což by digitalizovalo správu personálních údajů; předchozí úpravu těchto evidencí balíček neuvádí. Tato část však byla ve schváleném textu vypuštěna, a její navržený účinek se proto neuskutečnil."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-4",
+          "relevant": true,
+          "reasonCz": "Přechodná a závěrečná ustanovení mění fungování státní služby a ruší dosavadní právní úpravu, což přímo zasahuje provoz státu.",
+          "effectCz": "Text ruší zákon o státní službě a upravuje převod dosavadních služebních vztahů a řízení do nového pracovněprávního režimu; samostatný předchozí text těchto přechodných ustanovení neexistoval. Jde o zásadní změnu provozního modelu, ale bez údajů o čistých nákladech nelze určit, zda je levnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+          "relevant": true,
+          "reasonCz": "Schválená část nově svěřuje Úřadu vlády koordinaci personálních a organizačních záležitostí státních úřadů.",
+          "effectCz": "Jde o nové ustanovení, které ukládá Úřadu vlády koordinovat organizaci, výběr, zkoušky a rozvoj státních zaměstnanců; předchozí wording této části zákona v balíčku není. Rozšiřuje koordinační úlohu státu, avšak neprokazuje snížení agend ani nákladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-7",
+          "relevant": true,
+          "reasonCz": "Tato část mění pravidla pracovního postavení vedoucího leteckého úřadu, což je dílčí změna organizace státní správy.",
+          "effectCz": "Dříve se na ředitele Úřadu pro civilní letectví vztahovalo postavení služebního orgánu podle zákona o státní službě; schválený text tuto větu vypouští a mění i ustanovení o výběru jeho ředitele. Mění personální pravidla, ale změna sama nedokládá úsporu nákladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-18",
+          "relevant": true,
+          "reasonCz": "Schválená část mění pravomoc vedení Nejvyššího kontrolního úřadu při jmenování členů služební komise, což je dílčí úprava provozu státní správy.",
+          "effectCz": "Dříve prezident úřadu předkládal vládě návrh na jmenování členů služební komise; schválená novela tuto pravomoc vypouští. Snižuje počet jedné personální procedury, ale její případný finanční dopad ani rozsah úspory text neuvádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+          "relevant": true,
+          "reasonCz": "Přesun správy informačního systému výzkumu z Úřadu vlády na jiné ministerstvo mění organizaci státních činností.",
+          "effectCz": "Dříve byl systém a jeho správní odpovědnost svěřen Radě pro výzkum, vývoj a inovace při Úřadu vlády; schválený text jej svěřuje Ministerstvu průmyslu a obchodu. Jde o převod působnosti, nikoli o doložené snížení výdajů nebo administrativní zátěže."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-53",
+          "relevant": true,
+          "reasonCz": "Změna výslovně upravuje plat ředitele státního majetkového úřadu, a může proto zasahovat do provozních výdajů státu.",
+          "effectCz": "Dříve měl generální ředitel plat jako náměstek nejvyššího státního zástupce; schválený text jej stanoví na 1,5násobek platu krajského státního zástupce do ukončení pátého roku praxe. Bez konkrétních částek a srovnatelných platových údajů nelze určit, zda se náklad snižuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-62",
+          "relevant": false,
+          "reasonCz": "Změna pouze doplňuje odkaz v zákoníku práce na Úřad vlády a neukládá úsporu ani digitalizaci agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Změna upravuje způsobilost osob pro poradenství v oblasti bydlení, nikoli úspory provozu státu, veřejných zakázek nebo digitalizaci agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-2",
+          "relevant": false,
+          "reasonCz": "Změna svěřuje Úřadu práce úkoly v oblasti podpory bydlení, ale dodaný text ji nespojuje s úsporami ani s digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": true,
+          "reasonCz": "Návrh ruší možnost využít elektronickou autentizaci místo osobního prokázání totožnosti, tedy konkrétní digitální nástroj, který mohl omezit návštěvy úřadů.",
+          "effectCz": "Dříve mohl uživatel služby požadovat elektronickou autentizaci před osobním úkonem a využít k tomu aplikaci; návrh ruší související ustanovení. Tím se tato možnost digitalizace zužuje, což může být v rozporu s prostředkem, na nějž slib spoléhá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43344-1",
+          "relevant": false,
+          "reasonCz": "Návrh řeší mimořádné situace na vnitřním trhu a krizově relevantní zboží, nikoli běžné úspory na provozu státu nebo digitalizaci agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43356-2",
+          "relevant": false,
+          "reasonCz": "Změna se týká zeměměřických a katastrálních orgánů a jejich profesních pravidel, nikoli slíbeného snižování provozních výdajů či agend digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-1",
+          "relevant": true,
+          "reasonCz": "Návrh zřizuje pravidla pro digitální standard stavby a bezplatný digitální přístup k technickým normám, což může podpořit digitalizaci stavební agendy.",
+          "effectCz": "Jde o nový zákon, takže pro jeho ustanovení není předchozí znění; návrh zavádí Českou agenturu pro standardizaci jako veřejnoprávní osobu, sponzorovaný přístup k normám a správu digitálního standardu stavby. Může podpořit jednotnější digitální postupy, ale nestanoví snížení výdajů ani úsporu 5 %."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-3",
+          "relevant": false,
+          "reasonCz": "Tato část mění kontrolní pravomoci České obchodní inspekce, aniž by text spojoval změnu s úsporou nebo digitalizací správních agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-5",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje puncovní kontrolu a obchodování s drahými kovy a nesměřuje k posuzovanému slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-7",
+          "relevant": false,
+          "reasonCz": "Změna technických požadavků na výrobky se netýká přímo úspor státu, veřejných zakázek ani snižování správních agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-10",
+          "relevant": false,
+          "reasonCz": "Změna dozoru nad obecnou bezpečností výrobků nemá v dodaném textu věcnou vazbu na slibované úspory či digitalizaci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje organizaci zeměměřických a katastrálních úřadů, ale jeho text nespojuje tuto změnu s úsporami nebo omezením agend slíbeným stranou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-2",
+          "relevant": false,
+          "reasonCz": "Změna pouze rozšiřuje seznam uživatelů jednotného měsíčního hlášení o zdravotnické orgány a netýká se daného slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-1",
+          "relevant": false,
+          "reasonCz": "Změna obecního zřízení upravuje především svazky obcí a odměny zastupitelů, nikoli konkrétní úspory provozu státu nebo digitalizaci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-5",
+          "relevant": false,
+          "reasonCz": "Změna krajského zřízení se týká sdílených pravomocí a odměn krajských zastupitelů, nikoli posuzovaného závazku státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": false,
+          "reasonCz": "Změna zákona o hlavním městě Praze upravuje městské části a svazky obcí, ale nedokládá úspory ani digitalizaci agend státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43406-1",
+          "relevant": false,
+          "reasonCz": "Návrh přeskupuje řízení a financování výzkumu a vývoje, ale jeho obsah není spojen s konkrétním závazkem úspory provozu, zakázek nebo agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-20",
+          "relevant": false,
+          "reasonCz": "Změna upravuje vymáhání peněžitých plnění v dělené správě, ale text nedokládá úsporu provozu ani zjednodušení slíbené digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43439-1",
+          "relevant": false,
+          "reasonCz": "Návrh převádí kontrolu plemenářských povinností mezi správními orgány, ale nesouvisí s konkrétním závazkem 5% úspor nebo digitalizace.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-04fc9eed0f--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--law-change-43174-8",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-29",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-39",
+        "psp-core-2025--law-change-43183-1",
+        "psp-core-2025--law-change-43183-2",
+        "psp-core-2025--law-change-43183-3",
+        "psp-core-2025--law-change-43183-4",
+        "psp-core-2025--law-change-43183-approved-3",
+        "psp-core-2025--law-change-43184-7",
+        "psp-core-2025--law-change-43184-approved-18",
+        "psp-core-2025--law-change-43184-approved-49",
+        "psp-core-2025--law-change-43184-approved-53",
+        "psp-core-2025--law-change-43293-6",
+        "psp-core-2025--law-change-43372-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-210647",
+        "psp-core-2025--vote-87958",
+        "psp-core-2025--vote-88449",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--print-step-211843"
+      ],
+      "explanationCz": "Poslanci ANO předložili a podpořili novelu stavebního zákona, která převádí část samostatných povolení do společného řízení a rozšiřuje digitální podání a evidenci. To může omezit některé správní úkony, a posouvá tedy část slibu. Zákon ale nestanoví ani nedokládá každoroční úsporu 5 % na provozu státu, zakázkách a agendách. Vláda také navrhla zrušit některé možnosti elektronického ověření totožnosti, což jde proti části slibu o digitalizaci.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný balíček neobsahuje údaje o skutečných rozpočtových úsporách ani ověření cíle 5 % ročně; legislativní zjednodušení proto samo o sobě nedokládá dosažení číselného cíle.",
+        "Nová a reorganizovaná úřední struktura může změnit provozní náklady oběma směry; text neuvádí jejich čistý dopad.",
+        "Vláda navrhla zrušit možnost, aby uživatel požadoval elektronickou autentizaci před osobním úkonem; jde o protichůdný návrh, nikoli o doloženou rozhodující změnu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-04fc9eed0f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění digitální zpracování územně plánovacích dokumentů a podání ve stavebních řízeních, což přímo souvisí s digitalizací a redukcí agend slíbenou hnutím ANO.",
+          "effectCz": "Před změnou se elektronicky a ve strojově čitelném formátu připravovaly územně plánovací dokumenty, ale jednotný standard se vztahoval jen na jejich vybrané části a žádosti bylo možné podávat přes portál i v listinné podobě. Schválený text požaduje jednotný digitální standard pro územně plánovací dokumenty a ukládá elektronické podání v některých případech; přidává také sledování stavu řízení na portálu. Jde o posun k důslednější digitalizaci, ale změna nestanoví úsporu 5 % ani nevyčísluje úsporu veřejných výdajů; účinnost části změn je navíc odložena."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": false,
+          "reasonCz": "Změna vymezuje působnost úřadu rozvoje území, ale její text nespojuje reorganizaci úřadů s úsporou výdajů, omezením agend ani slíbenou digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Změny pravidel památkové péče se týkají ochrany a povolování obnovy památek, nikoli slíbených úspor, veřejných zakázek nebo digitalizace agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Změna ochrany přírody a krajiny neupravuje úspory státu, veřejné zakázky ani digitalizaci způsobem, který by byl doloženě spojen se slibem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změny vodního zákona se týkají hlavně povolování vodních záměrů a ochrany vod, ne slíbených úspor či redukce agend díky digitalizaci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": false,
+          "reasonCz": "Změna určuje vyvlastňovací úřady a místní příslušnost, ale neobsahuje vazbu na slibované úspory nebo digitalizaci agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Změna zákona o ochraně ovzduší upravuje postup při povolování záměrů, ale nedokládá jejich spojení se slibovanou úsporou ani s digitalizací agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-38",
+          "relevant": false,
+          "reasonCz": "Změna atomového zákona se v předložené verzi týká svěřování pravomoci vydávat prováděcí předpisy, nikoli slibovaných úspor nebo digitalizace.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změna zákona o odpadech upravuje posuzování odpadů při stavebních záměrech, ale její dopad není v balíčku spojen se slibem úspor či digitalizace.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": false,
+          "reasonCz": "Část návrhu doplněná až ve schváleném textu upravuje státní příspěvkovou organizaci pro obranu a nemá doloženou vazbu na slibované úspory či digitalizaci agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje právní poměry státních zaměstnanců, ale neobsahuje konkrétní úsporu, cíl redukce agend ani opatření digitalizace slíbené hnutím ANO.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-2",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje organizační postavení kabinetu a náměstků členů vlády, avšak nespojuje změny s úsporami ani digitalizací agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-3",
+          "relevant": false,
+          "reasonCz": "Část o informačním systému státních zaměstnanců byla v textu schváleném Sněmovnou odstraněna, takže ji nelze považovat za schválenou cestu k digitalizaci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-4",
+          "relevant": false,
+          "reasonCz": "Společná a přechodná ustanovení zákona o státních zaměstnancích neobsahují konkrétní opatření naplňující slib úspor nebo digitalizace.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+          "relevant": false,
+          "reasonCz": "Schválená část upravuje působnost Úřadu vlády v personálních otázkách, ale nepředkládá doložené úspory ani digitalizaci agend slibovanou hnutím ANO.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-7",
+          "relevant": false,
+          "reasonCz": "Změna zákona o civilním letectví ruší jednu větu o postavení ředitele úřadu, bez doložené vazby na slibované úspory či digitalizaci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-18",
+          "relevant": false,
+          "reasonCz": "Změna zákona o Nejvyšším kontrolním úřadu se týká jmenování jeho členů a nesouvisí se slibovanými úsporami ani digitalizací agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+          "relevant": false,
+          "reasonCz": "Tato část mění odpovědnost za výzkumný informační systém a rozpočtovou kapitolu, ale její text nedokládá spojení se slibovanou úsporou státu či digitalizací agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-53",
+          "relevant": false,
+          "reasonCz": "Změny odměňování a jazykových požadavků zaměstnanců Úřadu pro zastupování státu ve věcech majetkových nemají doloženou vazbu na posuzovaný slib.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-62",
+          "relevant": false,
+          "reasonCz": "Změna zákoníku práce doplňuje Úřad vlády mezi uživatele platového informačního systému, ale nedokládá redukci agend ani úsporu provozu státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Vládní návrh mění přístup k poradenství v podpoře bydlení, ale v poskytnutém textu není propojen se slíbenými úsporami, zakázkami ani digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-2",
+          "relevant": false,
+          "reasonCz": "Doplnění podpory bydlení mezi působnosti Úřadu práce pouze vymezuje jeho agendu a neprokazuje úsporu ani redukci agend slíbenou hnutím ANO.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": false,
+          "reasonCz": "Návrh ruší některá pravidla digitální autentizace u veřejných služeb, ale nespojuje tuto změnu s úsporou 5 % ani s omezením provozních výdajů státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43344-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje postup státu při mimořádné situaci na vnitřním trhu, ale jeho předmět ani ustanovení nesměřují k úsporám na veřejných zakázkách slíbeným hnutím ANO.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43356-2",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje činnosti zeměměřičů a jejich evidenci, ale jeho text nedokládá přímou vazbu na provozní úspory nebo digitalizaci státní správy podle slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-1",
+          "relevant": false,
+          "reasonCz": "Návrh zavádí systém standardizace technických norem, ale nedokládá, že by tato oblast vedla ke slibovaným úsporám na provozu státu či redukci agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-3",
+          "relevant": false,
+          "reasonCz": "Úprava kontrolních pravomocí České obchodní inspekce není v textu spojena se slibovanými úsporami ani digitalizací agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-5",
+          "relevant": false,
+          "reasonCz": "Návrh mění správu puncovnictví a zkoušení drahých kovů, což není doloženě spojeno s posuzovaným slibem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-7",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje technické normy a jejich správu, ale neobsahuje doloženou úsporu ani vazbu na redukci veřejných agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-10",
+          "relevant": false,
+          "reasonCz": "Změna dozoru nad bezpečností výrobků neobsahuje opatření související se slíbenými úsporami, veřejnými zakázkami nebo digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": false,
+          "reasonCz": "Návrh převádí zeměměřické inspektoráty do vnitřního uspořádání úřadu, ale nepředkládá doloženou úsporu nebo digitalizační opatření související se slibem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-2",
+          "relevant": false,
+          "reasonCz": "Návrh doplňuje orgány ochrany veřejného zdraví mezi uživatele údajů zaměstnavatelů, aniž spojuje změnu se slibovanými úsporami.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění pravidla pro svazky obcí a odměňování jejich představitelů, ale nedokládá přímou vazbu na provozní úspory státu nebo digitalizaci agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-5",
+          "relevant": false,
+          "reasonCz": "Změny krajského zřízení upravují samosprávu a odměňování, nikoli slíbené úspory na provozu státu či veřejných zakázkách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": false,
+          "reasonCz": "Změna zákona o hlavním městě Praze řeší svazky obcí a odměny zastupitelů, bez doloženého vztahu ke slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43406-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje systém podpory výzkumu a jeho správu, ale text neuvádí souvislost se slibovanými úsporami na provozu státu nebo digitalizací agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-20",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje vymáhání určitých peněžitých plnění finanční správou, ale nedokládá úsporu na veřejných zakázkách ani souvislost se slíbenou digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43439-1",
+          "relevant": false,
+          "reasonCz": "Návrh převádí kontrolní činnost České plemenářské inspekce na Státní veterinární správu, ale balíček nedokládá, že tím vzniknou úspory související s posuzovaným slibem.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-04fc9eed0f--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci hnutí ANO předložili a následně podpořili novelu stavebního zákona, která rozšiřuje digitální zpracování územně plánovacích dokumentů a zavádí elektronické podání v některých případech. To představuje dílčí krok směrem k digitalizaci, kterou slib spojoval s úsporami a omezením agend. Návrh ale nestanoví každoroční úsporu 5 % ani nevyčísluje žádnou úsporu provozních výdajů. Proto nelze doložit splnění číselného cíle; prokázán je pouze dílčí posun v digitalizaci.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z předložené novely nelze zjistit, zda a v jaké výši se díky digitálním změnám skutečně sníží výdaje na provoz státu, veřejné zakázky nebo agendy; text neuvádí úsporu 5 % ani výpočet úspor."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_062013f2d025042e016ac51914b25487d198fc6a62143cd2ca",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 836738,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 836735
+      },
+      "output_tokens": 14366,
+      "output_tokens_details": {
+        "reasoning_tokens": 8279
+      },
+      "total_tokens": 851104
+    },
+    "output": {
+      "promiseId": "ano-2025-04fc9eed0f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění povolování staveb a zavádí digitální podání a evidenci, takže může přispět k digitalizaci a omezení části administrativních úkonů.",
+          "effectCz": "Dříve zákon umožňoval podání přes portál stavebníka a digitální práci s některými dokumenty; schválený text rozšiřuje povinné digitální úkony a evidenci a spojuje část posuzování do jednoho povolení. To může snížit počet samostatných úkonů, ale současně vytváří a reorganizuje úřady a převádí na ně zaměstnance i rozpočtované prostředky; žádné snížení výdajů, natož o 5 % ročně, text nestanoví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Změna převádí působnost v územním plánování a stavebním řízení mezi ústředními orgány, a tím přímo mění organizaci provozu státu.",
+          "effectCz": "Dříve měl Ministerstvo pro místní rozvoj v působnosti územní plánování, stavební řád a vyvlastnění; změna zakládá Úřad rozvoje území České republiky a odebírá tyto oblasti působnosti ministerstvu. Jde o změnu organizace a rozdělení práce, nikoli o doložené snížení nákladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "Změna památkových souhlasů začleňuje některá posouzení do stavebního řízení, a může tak omezit samostatné administrativní kroky.",
+          "effectCz": "Dříve si vlastník u řady nemovitostí v památkových zónách a ochranných pásmech musel předem vyžádat samostatné rozhodnutí či stanovisko památkové péče; schválený text u části stavebních záměrů svěřuje posouzení stavebnímu úřadu v řízení o povolení. Počet samostatných kroků se tím snižuje, ale jejich věcné posouzení nezaniká a úspora peněz není vyčíslena."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": true,
+          "reasonCz": "Změna přímo převádí některá posouzení ochrany přírody do řízení o povolení záměru, což může zmenšit počet oddělených úředních postupů.",
+          "effectCz": "Dříve některé souhlasy a povolení ochrany přírody probíhaly samostatně; schválený text stanoví, že u vybraných záměrů podmínky posoudí stavební úřad v rámci povolovacího řízení. Samostatná administrativní fáze se tím omezuje, povinnosti ochrany přírody se však zcela neruší a finanční úsporu text nevyčísluje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Změna přesouvá povolení k nakládání s vodami pro stavební záměry do stavebního řízení, a může proto omezit souběžné povolovací postupy.",
+          "effectCz": "Dříve se povolení k nakládání s vodami, některé souhlasy a vyjádření vydávaly vodoprávním úřadem odděleně od povolení stavby; schválený text je u souvisejících záměrů začleňuje do rozhodnutí stavebního úřadu. Procesní počet samostatných kroků se snižuje, ale podmínky pro ochranu vod zůstávají a úspora nákladů není vyčíslena."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": true,
+          "reasonCz": "Změna soustřeďuje vyvlastňovací agendu do nových úřadů rozvoje území a tím mění organizaci provozu státu.",
+          "effectCz": "Dříve vykonávaly vyvlastňovací působnost obecní a městské úřady i Dopravní a energetický stavební úřad; schválený text ji svěřuje úřadům rozvoje území krajů a v určených případech ústřednímu Úřadu rozvoje území. Jde o centralizaci a přesun agendy, nikoli o prokázané snížení výdajů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Změna zapojuje některé otázky ochrany ovzduší do povolení záměru, což může omezit samostatná správní řízení.",
+          "effectCz": "Dříve se pro vybrané stacionární zdroje a komunikace vydávala samostatná závazná stanoviska; schválený text nahrazuje část těchto kroků vyjádřením a posouzením v rozhodnutí o povolení záměru. Administrativní postup se zjednodušuje, avšak zachovává posuzování a kompenzačních opatření a neslibuje konkrétní rozpočtovou úsporu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-38",
+          "relevant": false,
+          "reasonCz": "Změna atomového zákona se podle dodaného textu týká především označení ministerstva a nesouvisí s úsporami, veřejnými zakázkami ani omezováním agend digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": true,
+          "reasonCz": "Změna odpadových pravidel svěřuje posouzení některých stavebních požadavků stavebnímu úřadu v rámci povolení záměru, a může tak omezit oddělené úkony.",
+          "effectCz": "Dříve stavebník předkládal některé samostatné podklady či žádosti podle odpadového zákona; schválený text svěřuje stavebnímu úřadu posouzení požadavků při provedení záměru v jeho rozhodnutí. Jde o možnou úsporu administrativních kroků, ne o doložené snížení nákladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": false,
+          "reasonCz": "Tato doplněná část upravuje státní příspěvkovou organizaci pro obranu a nesměřuje k úspoře provozních výdajů, zakázek ani agend digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": true,
+          "reasonCz": "Nový zákon upravuje právní poměry státních zaměstnanců, tedy přímo jednu z oblastí provozu státu, kterou slib zmiňuje.",
+          "effectCz": "Nejde o novelizaci jednoho dřívějšího ustanovení, ale o návrh nového zákona, který nahrazuje dosavadní služební režim pracovním poměrem státních zaměstnanců a stanoví pravidla pro nábor, hodnocení a odměňování. Může měnit organizaci a náklady státní správy, avšak z dodaného textu nelze určit, zda je snižuje; úsporu 5 % nezakládá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-2",
+          "relevant": true,
+          "reasonCz": "Nová pravidla pro organizaci ministerstev a Úřadu vlády se přímo týkají provozu státu.",
+          "effectCz": "Jde o nová organizační ustanovení, která vymezují kabinety, náměstky a zastupování členů vlády; předchozí znění těchto částí v balíčku uvedeno není. Upravují organizaci, ale neurčují počet pracovníků ani rozpočtové úspory."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-3",
+          "relevant": true,
+          "reasonCz": "Navržená část měla vytvořit elektronický systém pro výběrová řízení, zkoušky a organizační údaje státních zaměstnanců, tedy prostředek digitalizace státní správy.",
+          "effectCz": "Navržená nová ustanovení zaváděla evidence pracovních míst, zkoušek a organizačních struktur, což by digitalizovalo správu personálních údajů; předchozí úpravu těchto evidencí balíček neuvádí. Tato část však byla ve schváleném textu vypuštěna, a její navržený účinek se proto neuskutečnil."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-4",
+          "relevant": true,
+          "reasonCz": "Přechodná a závěrečná ustanovení mění fungování státní služby a ruší dosavadní právní úpravu, což přímo zasahuje provoz státu.",
+          "effectCz": "Text ruší zákon o státní službě a upravuje převod dosavadních služebních vztahů a řízení do nového pracovněprávního režimu; samostatný předchozí text těchto přechodných ustanovení neexistoval. Jde o zásadní změnu provozního modelu, ale bez údajů o čistých nákladech nelze určit, zda je levnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+          "relevant": true,
+          "reasonCz": "Schválená část nově svěřuje Úřadu vlády koordinaci personálních a organizačních záležitostí státních úřadů.",
+          "effectCz": "Jde o nové ustanovení, které ukládá Úřadu vlády koordinovat organizaci, výběr, zkoušky a rozvoj státních zaměstnanců; předchozí wording této části zákona v balíčku není. Rozšiřuje koordinační úlohu státu, avšak neprokazuje snížení agend ani nákladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-7",
+          "relevant": true,
+          "reasonCz": "Tato část mění pravidla pracovního postavení vedoucího leteckého úřadu, což je dílčí změna organizace státní správy.",
+          "effectCz": "Dříve se na ředitele Úřadu pro civilní letectví vztahovalo postavení služebního orgánu podle zákona o státní službě; schválený text tuto větu vypouští a mění i ustanovení o výběru jeho ředitele. Mění personální pravidla, ale změna sama nedokládá úsporu nákladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-18",
+          "relevant": true,
+          "reasonCz": "Schválená část mění pravomoc vedení Nejvyššího kontrolního úřadu při jmenování členů služební komise, což je dílčí úprava provozu státní správy.",
+          "effectCz": "Dříve prezident úřadu předkládal vládě návrh na jmenování členů služební komise; schválená novela tuto pravomoc vypouští. Snižuje počet jedné personální procedury, ale její případný finanční dopad ani rozsah úspory text neuvádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+          "relevant": true,
+          "reasonCz": "Přesun správy informačního systému výzkumu z Úřadu vlády na jiné ministerstvo mění organizaci státních činností.",
+          "effectCz": "Dříve byl systém a jeho správní odpovědnost svěřen Radě pro výzkum, vývoj a inovace při Úřadu vlády; schválený text jej svěřuje Ministerstvu průmyslu a obchodu. Jde o převod působnosti, nikoli o doložené snížení výdajů nebo administrativní zátěže."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-53",
+          "relevant": true,
+          "reasonCz": "Změna výslovně upravuje plat ředitele státního majetkového úřadu, a může proto zasahovat do provozních výdajů státu.",
+          "effectCz": "Dříve měl generální ředitel plat jako náměstek nejvyššího státního zástupce; schválený text jej stanoví na 1,5násobek platu krajského státního zástupce do ukončení pátého roku praxe. Bez konkrétních částek a srovnatelných platových údajů nelze určit, zda se náklad snižuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-62",
+          "relevant": false,
+          "reasonCz": "Změna pouze doplňuje odkaz v zákoníku práce na Úřad vlády a neukládá úsporu ani digitalizaci agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Změna upravuje způsobilost osob pro poradenství v oblasti bydlení, nikoli úspory provozu státu, veřejných zakázek nebo digitalizaci agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-2",
+          "relevant": false,
+          "reasonCz": "Změna svěřuje Úřadu práce úkoly v oblasti podpory bydlení, ale dodaný text ji nespojuje s úsporami ani s digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": true,
+          "reasonCz": "Návrh ruší možnost využít elektronickou autentizaci místo osobního prokázání totožnosti, tedy konkrétní digitální nástroj, který mohl omezit návštěvy úřadů.",
+          "effectCz": "Dříve mohl uživatel služby požadovat elektronickou autentizaci před osobním úkonem a využít k tomu aplikaci; návrh ruší související ustanovení. Tím se tato možnost digitalizace zužuje, což může být v rozporu s prostředkem, na nějž slib spoléhá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43344-1",
+          "relevant": false,
+          "reasonCz": "Návrh řeší mimořádné situace na vnitřním trhu a krizově relevantní zboží, nikoli běžné úspory na provozu státu nebo digitalizaci agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43356-2",
+          "relevant": false,
+          "reasonCz": "Změna se týká zeměměřických a katastrálních orgánů a jejich profesních pravidel, nikoli slíbeného snižování provozních výdajů či agend digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-1",
+          "relevant": true,
+          "reasonCz": "Návrh zřizuje pravidla pro digitální standard stavby a bezplatný digitální přístup k technickým normám, což může podpořit digitalizaci stavební agendy.",
+          "effectCz": "Jde o nový zákon, takže pro jeho ustanovení není předchozí znění; návrh zavádí Českou agenturu pro standardizaci jako veřejnoprávní osobu, sponzorovaný přístup k normám a správu digitálního standardu stavby. Může podpořit jednotnější digitální postupy, ale nestanoví snížení výdajů ani úsporu 5 %."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-3",
+          "relevant": false,
+          "reasonCz": "Tato část mění kontrolní pravomoci České obchodní inspekce, aniž by text spojoval změnu s úsporou nebo digitalizací správních agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-5",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje puncovní kontrolu a obchodování s drahými kovy a nesměřuje k posuzovanému slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-7",
+          "relevant": false,
+          "reasonCz": "Změna technických požadavků na výrobky se netýká přímo úspor státu, veřejných zakázek ani snižování správních agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-10",
+          "relevant": false,
+          "reasonCz": "Změna dozoru nad obecnou bezpečností výrobků nemá v dodaném textu věcnou vazbu na slibované úspory či digitalizaci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje organizaci zeměměřických a katastrálních úřadů, ale jeho text nespojuje tuto změnu s úsporami nebo omezením agend slíbeným stranou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-2",
+          "relevant": false,
+          "reasonCz": "Změna pouze rozšiřuje seznam uživatelů jednotného měsíčního hlášení o zdravotnické orgány a netýká se daného slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-1",
+          "relevant": false,
+          "reasonCz": "Změna obecního zřízení upravuje především svazky obcí a odměny zastupitelů, nikoli konkrétní úspory provozu státu nebo digitalizaci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-5",
+          "relevant": false,
+          "reasonCz": "Změna krajského zřízení se týká sdílených pravomocí a odměn krajských zastupitelů, nikoli posuzovaného závazku státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": false,
+          "reasonCz": "Změna zákona o hlavním městě Praze upravuje městské části a svazky obcí, ale nedokládá úspory ani digitalizaci agend státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43406-1",
+          "relevant": false,
+          "reasonCz": "Návrh přeskupuje řízení a financování výzkumu a vývoje, ale jeho obsah není spojen s konkrétním závazkem úspory provozu, zakázek nebo agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-20",
+          "relevant": false,
+          "reasonCz": "Změna upravuje vymáhání peněžitých plnění v dělené správě, ale text nedokládá úsporu provozu ani zjednodušení slíbené digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43439-1",
+          "relevant": false,
+          "reasonCz": "Návrh převádí kontrolu plemenářských povinností mezi správními orgány, ale nesouvisí s konkrétním závazkem 5% úspor nebo digitalizace.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-04fc9eed0f--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--law-change-43174-8",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-29",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-39",
+        "psp-core-2025--law-change-43183-1",
+        "psp-core-2025--law-change-43183-2",
+        "psp-core-2025--law-change-43183-3",
+        "psp-core-2025--law-change-43183-4",
+        "psp-core-2025--law-change-43183-approved-3",
+        "psp-core-2025--law-change-43184-7",
+        "psp-core-2025--law-change-43184-approved-18",
+        "psp-core-2025--law-change-43184-approved-49",
+        "psp-core-2025--law-change-43184-approved-53",
+        "psp-core-2025--law-change-43293-6",
+        "psp-core-2025--law-change-43372-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-210647",
+        "psp-core-2025--vote-87958",
+        "psp-core-2025--vote-88449",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--print-step-211843"
+      ],
+      "explanationCz": "Poslanci ANO předložili a podpořili novelu stavebního zákona, která převádí část samostatných povolení do společného řízení a rozšiřuje digitální podání a evidenci. To může omezit některé správní úkony, a posouvá tedy část slibu. Zákon ale nestanoví ani nedokládá každoroční úsporu 5 % na provozu státu, zakázkách a agendách. Vláda také navrhla zrušit některé možnosti elektronického ověření totožnosti, což jde proti části slibu o digitalizaci.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný balíček neobsahuje údaje o skutečných rozpočtových úsporách ani ověření cíle 5 % ročně; legislativní zjednodušení proto samo o sobě nedokládá dosažení číselného cíle.",
+        "Nová a reorganizovaná úřední struktura může změnit provozní náklady oběma směry; text neuvádí jejich čistý dopad.",
+        "Vláda navrhla zrušit možnost, aby uživatel požadoval elektronickou autentizaci před osobním úkonem; jde o protichůdný návrh, nikoli o doloženou rozhodující změnu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0d2eef29a39b015c016ac51e3ea7c487d193c10bc72e2d3fd3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 836738,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 836735
+      },
+      "output_tokens": 7884,
+      "output_tokens_details": {
+        "reasoning_tokens": 4274
+      },
+      "total_tokens": 844622
+    },
+    "output": {
+      "promiseId": "ano-2025-04fc9eed0f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění digitální zpracování územně plánovacích dokumentů a podání ve stavebních řízeních, což přímo souvisí s digitalizací a redukcí agend slíbenou hnutím ANO.",
+          "effectCz": "Před změnou se elektronicky a ve strojově čitelném formátu připravovaly územně plánovací dokumenty, ale jednotný standard se vztahoval jen na jejich vybrané části a žádosti bylo možné podávat přes portál i v listinné podobě. Schválený text požaduje jednotný digitální standard pro územně plánovací dokumenty a ukládá elektronické podání v některých případech; přidává také sledování stavu řízení na portálu. Jde o posun k důslednější digitalizaci, ale změna nestanoví úsporu 5 % ani nevyčísluje úsporu veřejných výdajů; účinnost části změn je navíc odložena."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": false,
+          "reasonCz": "Změna vymezuje působnost úřadu rozvoje území, ale její text nespojuje reorganizaci úřadů s úsporou výdajů, omezením agend ani slíbenou digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Změny pravidel památkové péče se týkají ochrany a povolování obnovy památek, nikoli slíbených úspor, veřejných zakázek nebo digitalizace agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Změna ochrany přírody a krajiny neupravuje úspory státu, veřejné zakázky ani digitalizaci způsobem, který by byl doloženě spojen se slibem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změny vodního zákona se týkají hlavně povolování vodních záměrů a ochrany vod, ne slíbených úspor či redukce agend díky digitalizaci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": false,
+          "reasonCz": "Změna určuje vyvlastňovací úřady a místní příslušnost, ale neobsahuje vazbu na slibované úspory nebo digitalizaci agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Změna zákona o ochraně ovzduší upravuje postup při povolování záměrů, ale nedokládá jejich spojení se slibovanou úsporou ani s digitalizací agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-38",
+          "relevant": false,
+          "reasonCz": "Změna atomového zákona se v předložené verzi týká svěřování pravomoci vydávat prováděcí předpisy, nikoli slibovaných úspor nebo digitalizace.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změna zákona o odpadech upravuje posuzování odpadů při stavebních záměrech, ale její dopad není v balíčku spojen se slibem úspor či digitalizace.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": false,
+          "reasonCz": "Část návrhu doplněná až ve schváleném textu upravuje státní příspěvkovou organizaci pro obranu a nemá doloženou vazbu na slibované úspory či digitalizaci agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje právní poměry státních zaměstnanců, ale neobsahuje konkrétní úsporu, cíl redukce agend ani opatření digitalizace slíbené hnutím ANO.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-2",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje organizační postavení kabinetu a náměstků členů vlády, avšak nespojuje změny s úsporami ani digitalizací agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-3",
+          "relevant": false,
+          "reasonCz": "Část o informačním systému státních zaměstnanců byla v textu schváleném Sněmovnou odstraněna, takže ji nelze považovat za schválenou cestu k digitalizaci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-4",
+          "relevant": false,
+          "reasonCz": "Společná a přechodná ustanovení zákona o státních zaměstnancích neobsahují konkrétní opatření naplňující slib úspor nebo digitalizace.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+          "relevant": false,
+          "reasonCz": "Schválená část upravuje působnost Úřadu vlády v personálních otázkách, ale nepředkládá doložené úspory ani digitalizaci agend slibovanou hnutím ANO.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-7",
+          "relevant": false,
+          "reasonCz": "Změna zákona o civilním letectví ruší jednu větu o postavení ředitele úřadu, bez doložené vazby na slibované úspory či digitalizaci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-18",
+          "relevant": false,
+          "reasonCz": "Změna zákona o Nejvyšším kontrolním úřadu se týká jmenování jeho členů a nesouvisí se slibovanými úsporami ani digitalizací agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+          "relevant": false,
+          "reasonCz": "Tato část mění odpovědnost za výzkumný informační systém a rozpočtovou kapitolu, ale její text nedokládá spojení se slibovanou úsporou státu či digitalizací agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-53",
+          "relevant": false,
+          "reasonCz": "Změny odměňování a jazykových požadavků zaměstnanců Úřadu pro zastupování státu ve věcech majetkových nemají doloženou vazbu na posuzovaný slib.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-62",
+          "relevant": false,
+          "reasonCz": "Změna zákoníku práce doplňuje Úřad vlády mezi uživatele platového informačního systému, ale nedokládá redukci agend ani úsporu provozu státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Vládní návrh mění přístup k poradenství v podpoře bydlení, ale v poskytnutém textu není propojen se slíbenými úsporami, zakázkami ani digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-2",
+          "relevant": false,
+          "reasonCz": "Doplnění podpory bydlení mezi působnosti Úřadu práce pouze vymezuje jeho agendu a neprokazuje úsporu ani redukci agend slíbenou hnutím ANO.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": false,
+          "reasonCz": "Návrh ruší některá pravidla digitální autentizace u veřejných služeb, ale nespojuje tuto změnu s úsporou 5 % ani s omezením provozních výdajů státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43344-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje postup státu při mimořádné situaci na vnitřním trhu, ale jeho předmět ani ustanovení nesměřují k úsporám na veřejných zakázkách slíbeným hnutím ANO.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43356-2",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje činnosti zeměměřičů a jejich evidenci, ale jeho text nedokládá přímou vazbu na provozní úspory nebo digitalizaci státní správy podle slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-1",
+          "relevant": false,
+          "reasonCz": "Návrh zavádí systém standardizace technických norem, ale nedokládá, že by tato oblast vedla ke slibovaným úsporám na provozu státu či redukci agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-3",
+          "relevant": false,
+          "reasonCz": "Úprava kontrolních pravomocí České obchodní inspekce není v textu spojena se slibovanými úsporami ani digitalizací agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-5",
+          "relevant": false,
+          "reasonCz": "Návrh mění správu puncovnictví a zkoušení drahých kovů, což není doloženě spojeno s posuzovaným slibem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-7",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje technické normy a jejich správu, ale neobsahuje doloženou úsporu ani vazbu na redukci veřejných agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-10",
+          "relevant": false,
+          "reasonCz": "Změna dozoru nad bezpečností výrobků neobsahuje opatření související se slíbenými úsporami, veřejnými zakázkami nebo digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": false,
+          "reasonCz": "Návrh převádí zeměměřické inspektoráty do vnitřního uspořádání úřadu, ale nepředkládá doloženou úsporu nebo digitalizační opatření související se slibem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-2",
+          "relevant": false,
+          "reasonCz": "Návrh doplňuje orgány ochrany veřejného zdraví mezi uživatele údajů zaměstnavatelů, aniž spojuje změnu se slibovanými úsporami.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění pravidla pro svazky obcí a odměňování jejich představitelů, ale nedokládá přímou vazbu na provozní úspory státu nebo digitalizaci agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-5",
+          "relevant": false,
+          "reasonCz": "Změny krajského zřízení upravují samosprávu a odměňování, nikoli slíbené úspory na provozu státu či veřejných zakázkách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": false,
+          "reasonCz": "Změna zákona o hlavním městě Praze řeší svazky obcí a odměny zastupitelů, bez doloženého vztahu ke slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43406-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje systém podpory výzkumu a jeho správu, ale text neuvádí souvislost se slibovanými úsporami na provozu státu nebo digitalizací agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-20",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje vymáhání určitých peněžitých plnění finanční správou, ale nedokládá úsporu na veřejných zakázkách ani souvislost se slíbenou digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43439-1",
+          "relevant": false,
+          "reasonCz": "Návrh převádí kontrolní činnost České plemenářské inspekce na Státní veterinární správu, ale balíček nedokládá, že tím vzniknou úspory související s posuzovaným slibem.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-04fc9eed0f--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci hnutí ANO předložili a následně podpořili novelu stavebního zákona, která rozšiřuje digitální zpracování územně plánovacích dokumentů a zavádí elektronické podání v některých případech. To představuje dílčí krok směrem k digitalizaci, kterou slib spojoval s úsporami a omezením agend. Návrh ale nestanoví každoroční úsporu 5 % ani nevyčísluje žádnou úsporu provozních výdajů. Proto nelze doložit splnění číselného cíle; prokázán je pouze dílčí posun v digitalizaci.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z předložené novely nelze zjistit, zda a v jaké výši se díky digitálním změnám skutečně sníží výdaje na provoz státu, veřejné zakázky nebo agendy; text neuvádí úsporu 5 % ani výpočet úspor."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "moving-towards",
+    "selectedReview": "assessor-a"
+  }
+}

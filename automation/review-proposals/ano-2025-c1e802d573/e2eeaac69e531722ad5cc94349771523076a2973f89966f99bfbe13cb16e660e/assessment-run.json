@@ -1,0 +1,688 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T09-24-15-814Z--eed8e05917fe",
+  "evaluatedAt": "2026-11-05T09:24:15.814Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-c1e802d573/eed8e05917fe48288d65049d41f24f051e9e75c59e8abdffc85f4c489f91c2ae.json",
+  "packageHash": "eed8e05917fe48288d65049d41f24f051e9e75c59e8abdffc85f4c489f91c2ae",
+  "assessmentContentHash": "dea239e5eee2a53b75aec41fb36105f0f8c793740cd4a2ae0c9e2a8bc012da60",
+  "assessmentFingerprint": "e2eeaac69e531722ad5cc94349771523076a2973f89966f99bfbe13cb16e660e",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-c1e802d573",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment invented evidence ID: psp-core-2025--amendment-1230",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_09f8c95e7370e0f1016aec49e432cc87d18949bcc8f4538e58",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 127517,
+            "input_tokens_details": {
+              "cache_write_tokens": 121167,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 7170,
+            "output_tokens_details": {
+              "reasoning_tokens": 4982
+            },
+            "total_tokens": 134687
+          },
+          "output": {
+            "promiseId": "ano-2025-c1e802d573",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-2",
+                "relevant": true,
+                "reasonCz": "Schválené znění přiděluje úřadu pravomoc vydávat rámcová povolení pro jaderná zařízení, což může usnadnit přípravu Temelína 3 a 4.",
+                "effectCz": "Dříve měl ministerský orgán obecné pravomoci popsané v § 32; schválené znění svěřuje úřadu stavební působnost pro vyhrazené a související stavby i vydávání rámcových povolení pro jaderná zařízení. Jde o změnu příslušného úřadu a postupu, nikoli o změnu samotného závazku stavbu zahájit; usnadnění postupu může přípravě pomoci."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": true,
+                "reasonCz": "Schválené znění doplňuje výslovnou možnost povolovat stavby pro energetickou bezpečnost i v nezastavitelném území, což se může týkat přípravy jaderných bloků.",
+                "effectCz": "Před změnou § 122 dovoloval v nezastavitelném území jen vyjmenované záměry a stavby musely odpovídat charakteru území a nesměly být výslovně vyloučeny územně plánovací dokumentací. Schválené znění přidává možnost povolit také stavby pro energetickou bezpečnost a považuje je za souladné s charakterem území; tato možnost je širší, a tedy usnadňuje povolování. Ostatní dodané změny územního plánování nejsou v předloženém textu výslovně spojeny s Temelínem."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": true,
+                "reasonCz": "Schválené znění se výslovně vztahuje na stavby pro energetickou bezpečnost a upravuje jejich povolování i možnost získat potřebné pozemky.",
+                "effectCz": "Schválené znění rozšiřuje možnost odejmout nebo omezit vlastnické právo pro stavby pro energetickou bezpečnost; oproti předchozímu znění je tato možnost širší, s uvedenou výjimkou pro některé stavby kategorie d). Dále dříve vyžadovala autorizace výrobny soulad s územně plánovací dokumentací, zatímco schválené znění stanoví výjimku pro výrobnu, která je stavbou pro energetickou bezpečnost; tato podmínka je tedy mírnější."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Schválené znění výslovně upravuje vodoprávní povolování a stanoviska pro vybrané stavby energetické bezpečnosti, které mohou být součástí přípravy jaderného projektu.",
+                "effectCz": "Dříve se při povolování záměrů obecně uplatňovala vodoprávní stanoviska a povolení podle vodního zákona. Schválené znění pro vyjmenované stavby energetické bezpečnosti výslovně požaduje závazné stanovisko s podmínkami a limity a určuje příslušné vodoprávní úřady; přidává tedy zvláštní procesní požadavky, ale dodaný kontext neumožňuje určit, zda jsou věcné limity přísnější než předchozí pravidla."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-28",
+                "relevant": true,
+                "reasonCz": "Změna je v balíčku vedena jako dotčená pozměňovacím návrhem, který upravuje podmínku autorizace energetické stavby; její text však není dodán.",
+                "effectCz": "Vlastní text této části ani její kontext nejsou v balíčku obsaženy. Pozměňovací návrh uvádí výjimku z požadavku souladu s územně plánovací dokumentací pro stavby energetické bezpečnosti; předchozí znění této konkrétní části ale chybí, takže směr změny zde nelze samostatně určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": true,
+                "reasonCz": "Schválené znění dovoluje přípravné práce pro energetické stavby ještě před jejich realizací a připouští jejich samostatné povolení.",
+                "effectCz": "Před změnou § 2e popisoval stavby pro energetickou bezpečnost jako veřejně prospěšné, ale neupravoval zde samostatnou kategorii přípravných prací. Nově vyjmenovává například úpravu pozemku, staveniště a přístupové cesty a umožňuje přípravné práce povolit samostatně; tím rozšiřuje možnosti zahájit přípravu před vlastní realizací stavby."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-2",
+                "relevant": true,
+                "reasonCz": "Schválené a vyhlášené znění zahrnuje výdaje na stavby pro energetickou bezpečnost do možnosti překročit výdajový rámec, což může podpořit financování Temelína.",
+                "effectCz": "Před změnou bylo možné nad rámec výdajového rámce zohlednit výdaje na obranu, nikoli v tomto ustanovení výdaje na uvedené stavby. Nově lze v letech 2026 až 2036 navýšit celkové výdaje také o financování energeticky bezpečnostních staveb; jde o větší rozpočtovou možnost, nikoli o přidělení konkrétní částky na Temelín."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-8",
+                "relevant": false,
+                "reasonCz": "Dodaná změna zachází s výdaji na nízkouhlíkovou výrobu v pravidle pro výpočet dluhu, ale balíček ji nespojuje konkrétně s Temelínem 3 a 4.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+                "relevant": false,
+                "reasonCz": "Změna upravuje financování nízkouhlíkové výrobny obecně, ale dodané znění ji nespojuje s konkrétním projektem Temelína 3 a 4.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-c1e802d573--source",
+              "psp-core-2025--law-change-43174-1-2",
+              "psp-core-2025--law-change-43174-1-4",
+              "psp-core-2025--law-change-43174-21",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-28",
+              "psp-core-2025--law-change-43174-32",
+              "psp-core-2025--law-change-43200-2",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--amendment-1230",
+              "psp-core-2025--amendment-text-1230",
+              "psp-core-2025--vote-88206",
+              "psp-core-2025--print-step-210731",
+              "psp-core-2025--amendment-826",
+              "psp-core-2025--amendment-text-826",
+              "psp-core-2025--vote-87429",
+              "psp-core-2025--vote-87430",
+              "psp-core-2025--vote-88105",
+              "psp-core-2025--vote-88416",
+              "psp-core-2025--senate-resolution-43200-6"
+            ],
+            "explanationCz": "Poslanci ANO předložili návrh, který mění povolování jaderných a energetických staveb, a vláda k němu zaujala souhlasné stanovisko. ANO také podpořilo změny umožňující přípravné práce pro energetické stavby a povolování těchto staveb v nezastavitelném území. Poslankyně ANO navrhla a klub podpořil i možnost financovat energetické stavby nad rámec výdajového rámce; po schválení návrhu ANO podpořilo jeho konečné přijetí. Tato opatření mohou přípravu a financování Temelína 3 a 4 usnadnit, ale sama nedokládají, že práce na blocích skutečně začaly.",
+            "confidence": "high",
+            "uncertainties": [
+              "Balíček dokládá změny v povolování, přípravných pracích a rozpočtových možnostech, nikoli konkrétní zahájení stavebních prací na Temelíně 3 a 4.",
+              "Část zákona o energetickém zákoně uvedená jako změna zákona o DPH nemá v balíčku vlastní text ani kontext; její účinek lze posoudit jen podle dodaného pozměňovacího návrhu."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": [
+      {
+        "error": "Assessment invented evidence ID: psp-core-2025--amendment-1230",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_003c0a077832ca7f016aec4a97119087d1a1ecc5ae90223373",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 127517,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 127514
+            },
+            "output_tokens": 7190,
+            "output_tokens_details": {
+              "reasoning_tokens": 4481
+            },
+            "total_tokens": 134707
+          },
+          "output": {
+            "promiseId": "ano-2025-c1e802d573",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-2",
+                "relevant": true,
+                "reasonCz": "Schválené znění svěřuje zvláštnímu úřadu také vydávání rámcových povolení pro jaderná zařízení, což se může týkat povolování Temelína.",
+                "effectCz": "Před změnou měl stavební úkoly podle § 32 vyjmenované ministerský úřad; schválené znění svěřuje úřadu působnost stavebního úřadu pro vyhrazené stavby a výslovně i vydávání rámcových povolení pro jaderná zařízení a související stavby. Rozšiřuje a přesouvá se tak pravomoc k povolování; samo ustanovení ale nezahajuje práce na Temelíně."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": true,
+                "reasonCz": "Schválené znění přidává pravidlo pro povolování staveb pro energetickou bezpečnost i v nezastavitelném území, což může usnadnit přípravu jaderných staveb.",
+                "effectCz": "Dřívější § 122 uváděl, jaké záměry lze v nezastavěném území povolovat, a výslovně mezi nimi stavby pro energetickou bezpečnost nevyjmenovával. Schválené znění nově umožňuje v nezastavitelném území povolovat takové stavby a považuje je za souladné s charakterem území; rozšiřuje tedy možnost jejich povolení. Změna se týká povolitelnosti, nikoli sama o sobě zahájení prací."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": true,
+                "reasonCz": "Schválená změna energetického zákona obsahuje pravidla pro stavby pro energetickou bezpečnost a jejich povolování.",
+                "effectCz": "U § 30a odst. 3 písm. c) dosavadní znění vyžadovalo soulad plánované výrobny elektřiny s územně plánovací dokumentací; schválené znění tuto podmínku pro výrobnu, která je stavbou pro energetickou bezpečnost, uvolňuje. Jde o looser podmínku pro povolení. U ustanovení o omezení či odnětí vlastnického práva schválené znění současně vypouští výjimku pro část staveb pro energetickou bezpečnost, kterou obsahuje dodaný předchozí text; rozšiřuje tím možnost využít tento postup. Jde o právní předpoklady, nikoli o důkaz zahájení prací."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Schválené znění upravuje vodoprávní úkony u staveb pro energetickou bezpečnost, tedy i část povolování, která může být potřebná pro jadernou stavbu.",
+                "effectCz": "Dodané předchozí znění § 104 neobsahovalo zvláštní odstavec pro energeticky bezpečnostní stavby; schválené znění nově vyžaduje pro některé takové záměry závazné vodoprávní stanovisko s podmínkami a limity. Nově také svěřuje krajským úřadům příslušné úkony u těchto staveb. Změna tedy stanoví zvláštní postup a podmínky; z dodaných textů nelze určit, zda je celkově přísnější, nebo volnější, ani zda urychlí práce na Temelíně."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-28",
+                "relevant": true,
+                "reasonCz": "Text přiloženého pozměňovacího návrhu se týká povolování energeticky bezpečnostních výroben; zákon o DPH sám v balíčku žádný relevantní odstavec nemá.",
+                "effectCz": "Vlastní text této části není v balíčku obsažen. Přiložený pozměňovací návrh mění podmínku souladu výrobny s územně plánovací dokumentací tak, že se tato podmínka neuplatní na výrobnu elektřiny označenou jako stavba pro energetickou bezpečnost; tím ji uvolňuje. Jde o návrh změny, nikoli samostatný důkaz, že práce na Temelíně začaly."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": true,
+                "reasonCz": "Schválené znění výslovně upravuje přípravné práce před realizací staveb pro energetickou bezpečnost a jejich samostatné povolování.",
+                "effectCz": "Předchozí § 2e pouze označoval stavby pro energetickou bezpečnost za veřejně prospěšné; schválené znění nově vymezuje přípravné práce, umožňuje jejich samostatné povolení a stanoví, že se v rozsahu již povolených prací nepřihlíží k nim při následném posuzování a povolování hlavní stavby. Rozšiřuje tak možnost zahájit přípravnou fázi dříve, ale samotné ustanovení neprokazuje, že se na Temelíně skutečně pracuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-2",
+                "relevant": true,
+                "reasonCz": "Schválené a vyhlášené znění umožňuje pro roky 2026–2036 zvýšit rozpočtové výdaje také o výdaje na stavby pro energetickou bezpečnost a pozměňovací návrh výslovně uvádí nový jaderný zdroj v Temelíně.",
+                "effectCz": "Před změnou umožňoval § 8 odst. 3 zvýšit výdaje nad rámec podle odstavce 2 jen o výdaje na obranu nad 2 % HDP. Vyhlášené znění přidává pro roky 2026–2036 také výdaje na vyjmenované infrastrukturní stavby včetně staveb pro energetickou bezpečnost; konkrétní pozměňovací návrh mezi nimi uvádí nový jaderný zdroj v Temelíně. Uvolňuje se tak rozpočtový limit pro financování této stavby, nikoli povinnost stavbu nebo práce skutečně zahájit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-8",
+                "relevant": false,
+                "reasonCz": "Dodané znění se týká výpočtu dluhu a výdajů na nízkouhlíkové výrobny, ale nepropojuje tuto obecnou úpravu s Temelínem 3 a 4 ani s konkrétním krokem slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+                "relevant": true,
+                "reasonCz": "Změna vytváří možnost financovat výstavbu nízkouhlíkové výrobny z mimorozpočtového účtu a výslovně zahrnuje náklady až do povolení provozu jaderného zařízení.",
+                "effectCz": "Dosavadní § 4 umožňoval poskytnout návratnou finanční výpomoc na výstavbu nízkouhlíkové výrobny ze státního rozpočtu. Nové znění umožňuje ministerstvu po předchozím souhlasu vlády poskytnout návratné a úročené prostředky z mimorozpočtového účtu a zahrnuje také spouštění a další nezbytné výdaje až do povolení provozu jaderného zařízení. Rozšiřuje a mění dostupný způsob financování, ale nevytváří nárok na prostředky ani samo nezahajuje práce na konkrétním bloku."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-c1e802d573--source",
+              "psp-core-2025--law-change-43174-1-2",
+              "psp-core-2025--law-change-43174-1-4",
+              "psp-core-2025--law-change-43174-21",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-28",
+              "psp-core-2025--law-change-43174-32",
+              "psp-core-2025--law-change-43200-2",
+              "psp-core-2025--law-change-43200-approved-9",
+              "psp-core-2025--amendment-text-1230",
+              "psp-core-2025--amendment-1230",
+              "psp-core-2025--vote-88206",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--print-step-210731",
+              "psp-core-2025--amendment-text-826",
+              "psp-core-2025--amendment-826",
+              "psp-core-2025--vote-87429",
+              "psp-core-2025--vote-87430",
+              "psp-core-2025--senate-resolution-43200-6",
+              "psp-core-2025--vote-88105",
+              "psp-core-2025--vote-88416"
+            ],
+            "explanationCz": "Poslanci ANO předložili a podpořili změny, které usnadňují povolování jaderných a dalších energeticky bezpečnostních staveb; později podpořili i zákon o stavebních a souvisejících pravidlech. Ten výslovně umožňuje samostatně povolovat přípravné práce před realizací energetických staveb. Vláda také předložila rozpočtovou změnu a poslankyně ANO navrhla, aby výdaje na strategické stavby včetně nového jaderného zdroje v Temelíně mohly překročit stanovený rozpočtový rámec; sněmovna tyto kroky schválila. Jde o právní a finanční předpoklady, ale dodané záznamy nepotvrzují, že práce na Temelíně 3 a 4 skutečně začaly.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Balíček dokládá schválení pravidel pro povolování, přípravné práce a financování, ale neobsahuje záznam o skutečném zahájení prací na Temelíně 3 a 4. Z těchto podkladů proto nelze potvrdit, že se slíbené práce již fyzicky rozběhly."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-c1e802d573",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Změna svěřuje novému úřadu působnost stavebního úřadu a vydávání rámcových povolení pro jaderná zařízení, což se může týkat povolování nových bloků.",
+          "effectCz": "Dříve měl podle dodaného znění § 32 obecné úkoly stavebního úřadu jiný orgán; nové znění výslovně svěřuje úřadu povolování jaderných zařízení a souvisejících staveb. Jde hlavně o změnu příslušného orgánu, nikoli o doložené zmírnění nebo zpřísnění podmínek výstavby; její vliv na rychlost řízení nelze z dodaného znění určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Schválená změna umožňuje povolovat stavby pro energetickou bezpečnost i v nezastavitelném území, což může usnadnit přípravu nových jaderných bloků.",
+          "effectCz": "Dřívější § 122 připouštěl v nezastavitelném území jen vyjmenované záměry a vyžadoval soulad s charakterem území; nové ustanovení výslovně dovoluje stavby pro energetickou bezpečnost a považuje je za souladné s jeho charakterem. Možnost takové stavby umístit se tím rozšiřuje a omezení se uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválené znění uvolňuje pro stavby energetické bezpečnosti podmínku souladu výrobny elektřiny s územně plánovací dokumentací.",
+          "effectCz": "Podle dodaného předchozího znění § 30a odst. 3 musela být výrobna elektřiny v souladu s územně plánovací dokumentací; nové znění z této podmínky vyjímá výrobnu, která je stavbou pro energetickou bezpečnost. Podmínka je tedy pro tuto kategorii volnější. Ostatní změny v dodaném výňatku nemají doložený vliv na zahájení prací v Temelíně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně upravuje vodoprávní povolování záměrů staveb pro energetickou bezpečnost, a proto se může týkat i jejich přípravy.",
+          "effectCz": "Dřívější § 104 odst. 3 už vyžadoval závazné stanovisko vodoprávního úřadu u stavebních záměrů, které mohou zasáhnout vodní zájmy; nové znění stanoví pro vybrané stavby energetické bezpečnosti stanovisko s podmínkami a limity. Jde o výslovnou zvláštní podmínku, ale protože obecné stanovisko bylo vyžadováno již předtím, nelze z dodaného znění určit, zda se celkové povolování zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": false,
+          "reasonCz": "Dodané znění této změny daně z přidané hodnoty neobsahuje žádné ustanovení vztahující se k Temelínu nebo k zahájení prací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Nově vymezuje přípravné práce pro stavby energetické bezpečnosti a umožňuje jejich samostatné povolení, což může být konkrétním předstupněm stavebních prací.",
+          "effectCz": "Dřívější dodané znění § 2e označovalo stavbu pro energetickou bezpečnost za veřejně prospěšnou, ale neobsahovalo uvedený režim přípravných prací. Nové odstavce tak výslovně umožňují povolit zvlášť například úpravu pozemku, staveniště či přístupové cesty; možnosti zahájit přípravu rozšiřují, přičemž podmínky posuzování vlivů na životní prostředí zůstávají upraveny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Konečné znění rozšiřuje možnost navýšit výdaje státního rozpočtu o financování energeticky bezpečnostních staveb a pozměňovací návrh ANO mezi nimi výslovně uvádí nový jaderný zdroj v Temelíně.",
+          "effectCz": "Před změnou umožňoval § 8 odst. 3 zvýšit výdaje pro roky 2026–2033 jen o výdaje na obranu nad stanovenou hranici; schválené a vyhlášené znění přidává pro roky 2026–2036 také výdaje na vyjmenovanou infrastrukturu včetně staveb pro energetickou bezpečnost. Tím se rozšiřuje prostor pro rozpočtové financování; návrh ANO výslovně spojuje tuto kategorii s novým jaderným zdrojem v Temelíně, samotné ustanovení však nezahajuje stavební práce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": false,
+          "reasonCz": "Dodané změny pravidel rozpočtové odpovědnosti se týkají započítávání výdajů na nízkouhlíkovou výrobu, ale žádný dodaný text je nespojuje s bloky Temelín 3 a 4.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": false,
+          "reasonCz": "Změna umožňuje financovat nízkouhlíkovou výrobnu, ale dodané znění neprokazuje, že jde o financování bloků Temelín 3 a 4.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-c1e802d573--source",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1230",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--amendment-text-826",
+        "psp-core-2025--amendment-826",
+        "psp-core-2025--vote-87429",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--senate-resolution-43200-6"
+      ],
+      "explanationCz": "Poslanci ANO spolu s dalšími předložili změny stavebního zákona a vláda s návrhem souhlasila; klub ANO pak podpořil jeho schválení i po zamítnutí Senátem. Změny vytvářejí zvláštní režim pro přípravu a povolování energetických staveb, ale samy nedokládají zahájení prací v Temelíně. Původní vládní návrh rozpočtových pravidel ještě financování těchto staveb výslovně nezahrnoval; poslankyně ANO Alena Schillerová následně navrhla možnost navýšit výdaje na strategickou infrastrukturu a výslovně uvedla nový jaderný zdroj v Temelíně, kterou klub ANO podpořil a ustanovení se dostalo do konečného znění. To představuje posun k naplnění slibu, nikoli důkaz, že práce již začaly.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný balíček neobsahuje podklady o tom, zda byly práce přímo v Temelíně 3 a 4 skutečně zahájeny; proto nelze potvrdit splnění slibu a důkazy o politických a legislativních krocích nestačí k posouzení skutečného stavu projektu.",
+        "U zvláštního vodoprávního stanoviska pro energetické stavby již před změnou existovala obecná povinnost získat stanovisko k záměrům dotýkajícím se vodních zájmů. Z dodaných ustanovení proto nelze určit, zda nová úprava povolování v praxi zrychlí, nebo přidá další překážky."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-c1e802d573",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně svěřuje úřadu pravomoc vydávat rámcové povolení pro jaderné zařízení, což se týká povolování Temelína 3 a 4.",
+          "effectCz": "Předchozí § 32 obsahoval obecné úkoly ministerstva a tuto pravomoc výslovně neuváděl; nové znění ji svěřuje úřadu. Jde o rozšíření pravomocí příslušného orgánu pro jaderné stavby, které může přípravu povolení usnadnit, samo však práce nezahajuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Schválená změna umožňuje povolovat stavby pro energetickou bezpečnost i v nezastavitelném území, což může usnadnit umístění jaderné stavby.",
+          "effectCz": "Předchozí § 122 vymezoval, jaké záměry lze v nezastavěném území povolovat, a stavby pro energetickou bezpečnost mezi nimi výslovně nebyly. Nový odstavec dovoluje povolovat tyto stavby i v nezastavitelném území a považuje je za souladné s charakterem území; možnost výstavby se tím rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválené znění energetického zákona obsahuje pravidla pro povolování a vyvlastnění u staveb pro energetickou bezpečnost, mezi které podle doloženého pozměňovacího návrhu patří i nový jaderný zdroj v Temelíně.",
+          "effectCz": "U § 3 odst. 2 předchozí znění již umožňovalo omezení či odnětí vlastnických práv pro vyjmenované energetické stavby; schválená úprava v dodaném úryvku tuto možnost zásadně nemění. U § 30a odst. 3 předchozí znění vyžadovalo soulad výrobny s územně plánovací dokumentací; schválený doplněk z této podmínky vyjímá stavby pro energetickou bezpečnost, čímž požadavek uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Změna vodního zákona výslovně upravuje vodoprávní postupy při povolování některých staveb pro energetickou bezpečnost.",
+          "effectCz": "Předchozí § 104 vyžadoval vodoprávní stanovisko při povolování stavebních záměrů, které mohou zasáhnout zájmy chráněné vodním zákonem. Nový odstavec stanoví zvláštní požadavek na závazné stanovisko s podmínkami a limity pro vybrané energetické stavby; předchozí obecná úprava už ale stanovisko vyžadovala, takže z dodaného znění nelze bezpečně určit, zda se povolení věcně zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": true,
+          "reasonCz": "Pozměňovací návrh přiřazený k této změně navrhuje výjimku z územně-plánovací podmínky pro výrobnu elektřiny označenou jako stavba pro energetickou bezpečnost, ale obsah změny a text návrhu se v balíčku věcně neshodují.",
+          "effectCz": "Dodaný text této změny neobsahuje žádnou vybranou novelizační větu ani předchozí znění dotčeného ustanovení. Přiřazený pozměňovací návrh navrhuje výjimku z požadavku, aby výrobna odpovídala územně plánovací dokumentaci, což by podmínku uvolnilo; z balíčku však nelze ověřit, že jde o změnu této části zákona."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválené znění zavádí přípravné práce pro stavby energetické bezpečnosti a výslovně umožňuje jejich samostatné povolení, což je přímý prostředek pro zahájení přípravy energetické stavby.",
+          "effectCz": "Předchozí § 2e definoval stavbu pro energetickou bezpečnost, ale neobsahoval zvláštní režim přípravných prací. Nově jsou tyto práce vymezeny a lze je povolovat samostatně; možnost zahájit přípravu se tím rozšiřuje, avšak text nedokládá, že práce v Temelíně skutečně začaly."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválené a vyhlášené znění umožňuje navýšit výdaje státního rozpočtu na stavby pro energetickou bezpečnost a pozměňovací návrh výslovně uvádí nový jaderný zdroj v Temelíně.",
+          "effectCz": "Předchozí § 8 odst. 3 dovoloval navýšení výdajů nad rámec pouze pro obranu a pro roky 2026 až 2033. Nové znění přidává pro roky 2026 až 2036 také výdaje na vyjmenovanou strategickou infrastrukturu a stavby pro energetickou bezpečnost, čímž rozšiřuje možnost tyto stavby financovat nad rámec běžného výdajového rámce; nestanoví však konkrétní částku pro Temelín."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": false,
+          "reasonCz": "Dodaný úryvek upravuje výpočet dluhu a výdajů na nízkouhlíkovou výrobnu, ale nepropojuje tuto změnu s Temelínem 3 a 4 ani s konkrétním krokem slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": true,
+          "reasonCz": "Změna umožňuje poskytovat peníze na výstavbu nízkouhlíkové výrobny z mimorozpočtového účtu a může tak rozšířit finanční cestu pro jadernou výstavbu.",
+          "effectCz": "Předchozí § 4 umožňoval návratnou finanční výpomoc ze státního rozpočtu z kapitoly ministerstva. Nově může ministerstvo se souhlasem vlády rozhodnout o návratném a úročeném financování z mimorozpočtového účtu a vláda stanoví jeho podmínky i výši; jde o rozšíření způsobu a rozhodovací volnosti při financování, nikoli o přidělení určité částky Temelínu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-c1e802d573--source",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-28",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1230",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--amendment-text-826",
+        "psp-core-2025--amendment-826",
+        "psp-core-2025--vote-87429",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh na změny stavebního zákona a vláda s ním vyslovila souhlas; Sněmovna pak prosadila jeho schválené znění i po zamítnutí Senátem. Změny vytvářejí možnost samostatně povolit přípravné práce pro stavby energetické bezpečnosti a usnadňují jejich povolování, ale nedokládají, že práce na Temelíně skutečně začaly. Vláda také předložila změnu rozpočtových pravidel a poslankyně ANO prosadila pozměňovací návrh, který umožňuje navýšit výdaje na strategické stavby; v jeho podkladech je výslovně uveden nový jaderný zdroj v Temelíně. Jde tedy o konkrétní kroky, které přípravu a financování mohou podpořit, nikoli o důkaz zahájení prací.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček nedokládá, zda už byly v Temelíně 3 a 4 zahájeny přípravné nebo stavební práce; doložené jsou především právní a rozpočtové kroky.",
+        "Pozměňovací návrh k tisku o stavebním zákoně je přiřazen ke změně označené jako novela zákona o dani z přidané hodnoty, přestože jeho citovaný text upravuje energetický zákon. Proto nelze bezpečně ověřit, že tento konkrétní paragraf patří k uvedené části změny.",
+        "Zvláštní vodoprávní stanovisko pro některé energetické stavby obsahuje podmínky a limity; dodané předchozí znění ale už požadovalo vodoprávní stanovisko, takže jeho skutečný vliv na povolování Temelína nelze z těchto podkladů určit."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0307e99301c6b72f016aec4a25348887d1b6d12f1fb9ce3bce",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 127517,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 127514
+      },
+      "output_tokens": 9798,
+      "output_tokens_details": {
+        "reasoning_tokens": 7604
+      },
+      "total_tokens": 137315
+    },
+    "output": {
+      "promiseId": "ano-2025-c1e802d573",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Změna svěřuje novému úřadu působnost stavebního úřadu a vydávání rámcových povolení pro jaderná zařízení, což se může týkat povolování nových bloků.",
+          "effectCz": "Dříve měl podle dodaného znění § 32 obecné úkoly stavebního úřadu jiný orgán; nové znění výslovně svěřuje úřadu povolování jaderných zařízení a souvisejících staveb. Jde hlavně o změnu příslušného orgánu, nikoli o doložené zmírnění nebo zpřísnění podmínek výstavby; její vliv na rychlost řízení nelze z dodaného znění určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Schválená změna umožňuje povolovat stavby pro energetickou bezpečnost i v nezastavitelném území, což může usnadnit přípravu nových jaderných bloků.",
+          "effectCz": "Dřívější § 122 připouštěl v nezastavitelném území jen vyjmenované záměry a vyžadoval soulad s charakterem území; nové ustanovení výslovně dovoluje stavby pro energetickou bezpečnost a považuje je za souladné s jeho charakterem. Možnost takové stavby umístit se tím rozšiřuje a omezení se uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválené znění uvolňuje pro stavby energetické bezpečnosti podmínku souladu výrobny elektřiny s územně plánovací dokumentací.",
+          "effectCz": "Podle dodaného předchozího znění § 30a odst. 3 musela být výrobna elektřiny v souladu s územně plánovací dokumentací; nové znění z této podmínky vyjímá výrobnu, která je stavbou pro energetickou bezpečnost. Podmínka je tedy pro tuto kategorii volnější. Ostatní změny v dodaném výňatku nemají doložený vliv na zahájení prací v Temelíně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně upravuje vodoprávní povolování záměrů staveb pro energetickou bezpečnost, a proto se může týkat i jejich přípravy.",
+          "effectCz": "Dřívější § 104 odst. 3 už vyžadoval závazné stanovisko vodoprávního úřadu u stavebních záměrů, které mohou zasáhnout vodní zájmy; nové znění stanoví pro vybrané stavby energetické bezpečnosti stanovisko s podmínkami a limity. Jde o výslovnou zvláštní podmínku, ale protože obecné stanovisko bylo vyžadováno již předtím, nelze z dodaného znění určit, zda se celkové povolování zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": false,
+          "reasonCz": "Dodané znění této změny daně z přidané hodnoty neobsahuje žádné ustanovení vztahující se k Temelínu nebo k zahájení prací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Nově vymezuje přípravné práce pro stavby energetické bezpečnosti a umožňuje jejich samostatné povolení, což může být konkrétním předstupněm stavebních prací.",
+          "effectCz": "Dřívější dodané znění § 2e označovalo stavbu pro energetickou bezpečnost za veřejně prospěšnou, ale neobsahovalo uvedený režim přípravných prací. Nové odstavce tak výslovně umožňují povolit zvlášť například úpravu pozemku, staveniště či přístupové cesty; možnosti zahájit přípravu rozšiřují, přičemž podmínky posuzování vlivů na životní prostředí zůstávají upraveny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Konečné znění rozšiřuje možnost navýšit výdaje státního rozpočtu o financování energeticky bezpečnostních staveb a pozměňovací návrh ANO mezi nimi výslovně uvádí nový jaderný zdroj v Temelíně.",
+          "effectCz": "Před změnou umožňoval § 8 odst. 3 zvýšit výdaje pro roky 2026–2033 jen o výdaje na obranu nad stanovenou hranici; schválené a vyhlášené znění přidává pro roky 2026–2036 také výdaje na vyjmenovanou infrastrukturu včetně staveb pro energetickou bezpečnost. Tím se rozšiřuje prostor pro rozpočtové financování; návrh ANO výslovně spojuje tuto kategorii s novým jaderným zdrojem v Temelíně, samotné ustanovení však nezahajuje stavební práce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": false,
+          "reasonCz": "Dodané změny pravidel rozpočtové odpovědnosti se týkají započítávání výdajů na nízkouhlíkovou výrobu, ale žádný dodaný text je nespojuje s bloky Temelín 3 a 4.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": false,
+          "reasonCz": "Změna umožňuje financovat nízkouhlíkovou výrobnu, ale dodané znění neprokazuje, že jde o financování bloků Temelín 3 a 4.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-c1e802d573--source",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1230",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--amendment-text-826",
+        "psp-core-2025--amendment-826",
+        "psp-core-2025--vote-87429",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--senate-resolution-43200-6"
+      ],
+      "explanationCz": "Poslanci ANO spolu s dalšími předložili změny stavebního zákona a vláda s návrhem souhlasila; klub ANO pak podpořil jeho schválení i po zamítnutí Senátem. Změny vytvářejí zvláštní režim pro přípravu a povolování energetických staveb, ale samy nedokládají zahájení prací v Temelíně. Původní vládní návrh rozpočtových pravidel ještě financování těchto staveb výslovně nezahrnoval; poslankyně ANO Alena Schillerová následně navrhla možnost navýšit výdaje na strategickou infrastrukturu a výslovně uvedla nový jaderný zdroj v Temelíně, kterou klub ANO podpořil a ustanovení se dostalo do konečného znění. To představuje posun k naplnění slibu, nikoli důkaz, že práce již začaly.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný balíček neobsahuje podklady o tom, zda byly práce přímo v Temelíně 3 a 4 skutečně zahájeny; proto nelze potvrdit splnění slibu a důkazy o politických a legislativních krocích nestačí k posouzení skutečného stavu projektu.",
+        "U zvláštního vodoprávního stanoviska pro energetické stavby již před změnou existovala obecná povinnost získat stanovisko k záměrům dotýkajícím se vodních zájmů. Z dodaných ustanovení proto nelze určit, zda nová úprava povolování v praxi zrychlí, nebo přidá další překážky."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0395349c880c8a33016aec4ad93e7887d199d1d2621d4085d9",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 127517,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 127514
+      },
+      "output_tokens": 8648,
+      "output_tokens_details": {
+        "reasoning_tokens": 6192
+      },
+      "total_tokens": 136165
+    },
+    "output": {
+      "promiseId": "ano-2025-c1e802d573",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně svěřuje úřadu pravomoc vydávat rámcové povolení pro jaderné zařízení, což se týká povolování Temelína 3 a 4.",
+          "effectCz": "Předchozí § 32 obsahoval obecné úkoly ministerstva a tuto pravomoc výslovně neuváděl; nové znění ji svěřuje úřadu. Jde o rozšíření pravomocí příslušného orgánu pro jaderné stavby, které může přípravu povolení usnadnit, samo však práce nezahajuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Schválená změna umožňuje povolovat stavby pro energetickou bezpečnost i v nezastavitelném území, což může usnadnit umístění jaderné stavby.",
+          "effectCz": "Předchozí § 122 vymezoval, jaké záměry lze v nezastavěném území povolovat, a stavby pro energetickou bezpečnost mezi nimi výslovně nebyly. Nový odstavec dovoluje povolovat tyto stavby i v nezastavitelném území a považuje je za souladné s charakterem území; možnost výstavby se tím rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválené znění energetického zákona obsahuje pravidla pro povolování a vyvlastnění u staveb pro energetickou bezpečnost, mezi které podle doloženého pozměňovacího návrhu patří i nový jaderný zdroj v Temelíně.",
+          "effectCz": "U § 3 odst. 2 předchozí znění již umožňovalo omezení či odnětí vlastnických práv pro vyjmenované energetické stavby; schválená úprava v dodaném úryvku tuto možnost zásadně nemění. U § 30a odst. 3 předchozí znění vyžadovalo soulad výrobny s územně plánovací dokumentací; schválený doplněk z této podmínky vyjímá stavby pro energetickou bezpečnost, čímž požadavek uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Změna vodního zákona výslovně upravuje vodoprávní postupy při povolování některých staveb pro energetickou bezpečnost.",
+          "effectCz": "Předchozí § 104 vyžadoval vodoprávní stanovisko při povolování stavebních záměrů, které mohou zasáhnout zájmy chráněné vodním zákonem. Nový odstavec stanoví zvláštní požadavek na závazné stanovisko s podmínkami a limity pro vybrané energetické stavby; předchozí obecná úprava už ale stanovisko vyžadovala, takže z dodaného znění nelze bezpečně určit, zda se povolení věcně zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": true,
+          "reasonCz": "Pozměňovací návrh přiřazený k této změně navrhuje výjimku z územně-plánovací podmínky pro výrobnu elektřiny označenou jako stavba pro energetickou bezpečnost, ale obsah změny a text návrhu se v balíčku věcně neshodují.",
+          "effectCz": "Dodaný text této změny neobsahuje žádnou vybranou novelizační větu ani předchozí znění dotčeného ustanovení. Přiřazený pozměňovací návrh navrhuje výjimku z požadavku, aby výrobna odpovídala územně plánovací dokumentaci, což by podmínku uvolnilo; z balíčku však nelze ověřit, že jde o změnu této části zákona."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválené znění zavádí přípravné práce pro stavby energetické bezpečnosti a výslovně umožňuje jejich samostatné povolení, což je přímý prostředek pro zahájení přípravy energetické stavby.",
+          "effectCz": "Předchozí § 2e definoval stavbu pro energetickou bezpečnost, ale neobsahoval zvláštní režim přípravných prací. Nově jsou tyto práce vymezeny a lze je povolovat samostatně; možnost zahájit přípravu se tím rozšiřuje, avšak text nedokládá, že práce v Temelíně skutečně začaly."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválené a vyhlášené znění umožňuje navýšit výdaje státního rozpočtu na stavby pro energetickou bezpečnost a pozměňovací návrh výslovně uvádí nový jaderný zdroj v Temelíně.",
+          "effectCz": "Předchozí § 8 odst. 3 dovoloval navýšení výdajů nad rámec pouze pro obranu a pro roky 2026 až 2033. Nové znění přidává pro roky 2026 až 2036 také výdaje na vyjmenovanou strategickou infrastrukturu a stavby pro energetickou bezpečnost, čímž rozšiřuje možnost tyto stavby financovat nad rámec běžného výdajového rámce; nestanoví však konkrétní částku pro Temelín."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": false,
+          "reasonCz": "Dodaný úryvek upravuje výpočet dluhu a výdajů na nízkouhlíkovou výrobnu, ale nepropojuje tuto změnu s Temelínem 3 a 4 ani s konkrétním krokem slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": true,
+          "reasonCz": "Změna umožňuje poskytovat peníze na výstavbu nízkouhlíkové výrobny z mimorozpočtového účtu a může tak rozšířit finanční cestu pro jadernou výstavbu.",
+          "effectCz": "Předchozí § 4 umožňoval návratnou finanční výpomoc ze státního rozpočtu z kapitoly ministerstva. Nově může ministerstvo se souhlasem vlády rozhodnout o návratném a úročeném financování z mimorozpočtového účtu a vláda stanoví jeho podmínky i výši; jde o rozšíření způsobu a rozhodovací volnosti při financování, nikoli o přidělení určité částky Temelínu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-c1e802d573--source",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-28",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1230",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--amendment-text-826",
+        "psp-core-2025--amendment-826",
+        "psp-core-2025--vote-87429",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh na změny stavebního zákona a vláda s ním vyslovila souhlas; Sněmovna pak prosadila jeho schválené znění i po zamítnutí Senátem. Změny vytvářejí možnost samostatně povolit přípravné práce pro stavby energetické bezpečnosti a usnadňují jejich povolování, ale nedokládají, že práce na Temelíně skutečně začaly. Vláda také předložila změnu rozpočtových pravidel a poslankyně ANO prosadila pozměňovací návrh, který umožňuje navýšit výdaje na strategické stavby; v jeho podkladech je výslovně uveden nový jaderný zdroj v Temelíně. Jde tedy o konkrétní kroky, které přípravu a financování mohou podpořit, nikoli o důkaz zahájení prací.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček nedokládá, zda už byly v Temelíně 3 a 4 zahájeny přípravné nebo stavební práce; doložené jsou především právní a rozpočtové kroky.",
+        "Pozměňovací návrh k tisku o stavebním zákoně je přiřazen ke změně označené jako novela zákona o dani z přidané hodnoty, přestože jeho citovaný text upravuje energetický zákon. Proto nelze bezpečně ověřit, že tento konkrétní paragraf patří k uvedené části změny.",
+        "Zvláštní vodoprávní stanovisko pro některé energetické stavby obsahuje podmínky a limity; dodané předchozí znění ale už požadovalo vodoprávní stanovisko, takže jeho skutečný vliv na povolování Temelína nelze z těchto podkladů určit."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "moving-towards",
+    "selectedReview": "assessor-b"
+  }
+}

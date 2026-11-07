@@ -1,0 +1,1181 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T09-51-55-167Z--00a1513460c8",
+  "evaluatedAt": "2026-11-05T09:51:55.167Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-59fa8f6418c3/00a1513460c8df2d3a5ef0e7ef171a7e9592d3d94347c76f752ac2dc45b7e164.json",
+  "packageHash": "00a1513460c8df2d3a5ef0e7ef171a7e9592d3d94347c76f752ac2dc45b7e164",
+  "assessmentContentHash": "fea1b5d668184d47068db05de5832d4dc35f136fb64f54db16ad5c24d5aaf313",
+  "assessmentFingerprint": "1f09e8c33162c81c6b5ffdaafa5e1a3a048a0a3924fc3cd40e3f04b848ad0ad0",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-59fa8f6418c3",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment omits the relevance verdict for law change psp-core-2025--law-change-43189-1",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0546951af76ea249016aec50061ccc87d1babdf55b5a0c4ec7",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 139667,
+            "input_tokens_details": {
+              "cache_write_tokens": 133317,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 9110,
+            "output_tokens_details": {
+              "reasoning_tokens": 4660
+            },
+            "total_tokens": 148777
+          },
+          "output": {
+            "promiseId": "candidate-59fa8f6418c3",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-3",
+                "relevant": true,
+                "reasonCz": "Ustanovení zavádějí jednotné digitální standardy a ukládání územně plánovacích dat do jednotné databáze v národním geoportálu, což je konkrétní díl sdílení a sjednocování dat.",
+                "effectCz": "Před změnou se v jednotném standardu zpracovávaly jen vybrané části územně plánovací dokumentace a podklady se do geoportálu vkládaly po jednotlivých pořizovatelích; schválené znění rozšiřuje jednotný standard na veškeré uvedené dokumenty a data a ukládá vést územně analytické podklady v jednotné databázi spravované Úřadem. Jde o přísnější standardizaci a větší soustředění dat, tedy o dílčí posun ke sdílení a kompatibilitě, nikoli o centrální řízení vývoje všech veřejných informačních systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Text se přímo týká informačních systémů stavební správy, jednotného geoportálu, databáze a možnosti systémy sdružit.",
+                "effectCz": "Navržené znění nově dovolovalo Úřadu sdružit více informačních systémů do jednoho společného systému; předchozí § 267 takové oprávnění podle dodaného kontextu neobsahoval. Schválená verze toto ustanovení v dodaném textu neobsahuje, ale ukládá vést územně analytické podklady v jednotné databázi a mění pravidla pro stavební informační systémy a zveřejňování dat. Jde o dílčí posun k soustředění a sdílení dat; u nových pravidel bez předchozího znění v kontextu nelze určit jejich směr oproti dřívějšímu stavu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-8",
+                "relevant": true,
+                "reasonCz": "Přechodná ustanovení převádějí informační systémy a zdrojové databáze stavební agendy na nový Úřad a určují jejich následné vložení do společného geoportálu.",
+                "effectCz": "Text nově stanoví předání systémů stavební agendy a databází novému Úřadu, převod podkladů do jednotné struktury a možnost dočasně používat i jiné systémy. Kontext předchozího znění těchto přechodných pravidel není dodán, takže směr změny oproti dosavadnímu právnímu stavu nelze z balíčku určit; popsané kroky však soustřeďují správu konkrétní agendy a dat u jednoho Úřadu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-4",
+                "relevant": true,
+                "reasonCz": "Ustanovení mění informační systém ochrany přírody a doplňuje registr krajiny, který má shromažďovat a zpřístupňovat další údaje.",
+                "effectCz": "Předchozí informační systém ochrany přírody již zahrnoval databázi druhů, evidenci druhové ochrany a další evidence; schválené znění rozšiřuje obsah těchto evidencí a nově přidává registr krajiny s funkcí zobrazovat a zpřístupňovat údaje. U nové části není v kontextu dřívější pravidlo, s nímž by šlo porovnat účinek; změna vytváří dílčí prostředek pro sdílení dat, nikoli centrální řízení vývoje veřejných systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-5",
+                "relevant": true,
+                "reasonCz": "Nově ukládá orgánům ochrany přírody předávat dokumentaci do registru krajiny, tedy propojuje jejich evidenci se společným registrem.",
+                "effectCz": "Dříve krajské úřady předávaly dokumentaci o vybraných přírodních územích do ústředního seznamu; schválené znění navíc ukládá předávat dokumentaci o přírodních parcích do registru krajiny. Jde o rozšíření povinnosti sdílet data, tedy o dílčí posun k interoperabilitě."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-7",
+                "relevant": true,
+                "reasonCz": "Přechodné ustanovení nařizuje převést již existující dokumentaci do registru krajiny, což je konkrétní sdílení dat mezi evidencemi.",
+                "effectCz": "Schválené znění nově stanoví, že příslušné orgány do 31. prosince 2027 předají starší dokumentaci do registru krajiny. Předchozí znění této nové přechodné povinnosti není v kontextu dodáno, takže směr oproti dřívějšímu stavu nelze určit; pravidlo samo vytváří jednorázovou povinnost sdílet data."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+                "relevant": true,
+                "reasonCz": "Změna výslovně určuje správce informačního systému výzkumu, vývoje a inovací a přesouvá jeho správu z Rady pro výzkum na ministerstvo, což se týká řízení konkrétního veřejného systému.",
+                "effectCz": "Před změnou zákon svěřoval Radě pro výzkum, vývoj a inovace úlohu správce a provozovatele systému; schválené znění určuje správcem Ministerstvo průmyslu a obchodu a tuto úlohu z působnosti Rady odstraňuje. Jde o přesun odpovědnosti za jeden systém, tedy o dílčí změnu jeho řízení; širší centralizaci vývoje napříč veřejnou správou tato úprava sama nezajišťuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43216-1",
+                "relevant": true,
+                "reasonCz": "Návrh vytváří registr jako informační systém veřejné správy a jednotné digitální kontaktní místo pro přijímání a předávání údajů o krátkodobém ubytování.",
+                "effectCz": "Předchozí § 10 umožňoval živnostenskému úřadu získat vybrané údaje od online zprostředkovatele na žádost; návrh nově vytváří centrálně spravovaný registr, do něhož se zapisují údaje o zařízeních a osobách a z něhož je předávají také online platformy. Pro nové paragrafy o registru předchozí znění v kontextu chybí, takže jejich směr oproti původnímu právnímu stavu nelze určit; navržené řešení však představuje dílčí sdílení údajů prostřednictvím jednoho systému."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-1",
+                "relevant": true,
+                "reasonCz": "Návrh dovoluje znovu využít biometrické údaje pořízené při žádosti o občanský průkaz také pro cestovní doklad, takže omezuje duplicitní pořizování údajů.",
+                "effectCz": "Před změnou se biometrické údaje pořizovaly při vyřizování žádosti o cestovní doklad; návrh přidává výjimku, kdy se využijí již pořízené údaje z žádosti o občanský průkaz podané tentýž den. Jde o zjednodušení opakovaného sběru a dílčí sdílení údajů, nikoli o změnu centrálního řízení vývoje systémů; předchozí znění § 21a odst. 3 neexistovalo."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43382-1",
+                "relevant": true,
+                "reasonCz": "Návrh zpřístupňuje údaje evidence skutečných majitelů přes systém propojení evidencí a určeným subjektům umožňuje přístup do tohoto systému.",
+                "effectCz": "Nově se ukládá ministerstvu zpřístupnit údaje prostřednictvím systému propojení evidencí a zajistit k němu přístup oprávněným osobám a orgánům. Předchozí znění tohoto nového ustanovení v kontextu není, takže směr oproti dřívějšímu právnímu stavu nelze určit; pravidlo ale výslovně vytváří cestu pro sdílení údajů mezi evidencemi."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-83",
+                "relevant": true,
+                "reasonCz": "Změna statutu Rady vlády pro informační společnost jí a jejímu grémiu svěřuje koordinaci digitalizace, sjednocování standardů a prioritizaci digitalizačních projektů.",
+                "effectCz": "Usnesení mění statut poradního a koordinačního orgánu vlády: grémium má řídit a kontrolovat plnění průřezových digitálních úkolů, prioritizovat projekty a podporovat sjednocování standardů. Jde o posílení koordinace a řízení projektů, ale statut sám neukládá centralizovat vývoj všech veřejných informačních systémů."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-122",
+                "relevant": true,
+                "reasonCz": "Usnesení převádí na ministerstvo agendu související se správou a provozem jednoho veřejného informačního systému pro výzkum, vývoj a inovace.",
+                "effectCz": "Usnesení přesouvá agendu podpory Rady pro výzkum na Ministerstvo průmyslu a obchodu a ukládá jeho útvaru zajišťovat provoz a rozvoj informačního systému výzkumu, vývoje a inovací. Dřívější znění tohoto vládního rozhodnutí neexistuje; jde o soustředění odpovědnosti za konkrétní systém u ministerstva, nikoli o centrální řízení vývoje všech systémů veřejné správy."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-167",
+                "relevant": true,
+                "reasonCz": "Usnesení zřizuje meziresortní výbory, které schvalují cílovou architekturu procesů a informační podpory a koordinují implementaci stavebního informačního systému.",
+                "effectCz": "Vláda nově zřizuje strategický a řídicí výbor s pravomocí schvalovat cílovou architekturu digitalizace, plán implementace, standardy a harmonogram stavební správy. Předchozí vládní úprava těchto výborů není v balíčku; usnesení vytváří dílčí koordinační a řídicí mechanismus pro jednu oblast, nikoli pro celou veřejnou správu."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-27",
+                "relevant": true,
+                "reasonCz": "Vláda zařadila do legislativního plánu přípravu nařízení, které má stanovit jednotný rámec pro správu údajů a interoperabilitu informačního systému výzkumu.",
+                "effectCz": "Usnesení samo nové právní povinnosti nezavádí, ale zařazuje do plánu přípravu nařízení o systému výzkumu, které má upravit předávání dat, jednotné standardy a interoperabilitu s dalšími systémy. Předchozí znění plánu v kontextu není; jde o návrhový krok směrem k dílčí standardizaci a sdílení dat."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-314",
+                "relevant": true,
+                "reasonCz": "Usnesení zavádí meziresortní řízení strategických ICT projektů, odpovědné manažery a centrální přehled projektů a programů.",
+                "effectCz": "Vláda nově vytváří centrální přehled strategických ICT programů a projektů, určuje odpovědné manažery a ukládá organizacím poskytovat součinnost a informace pro jejich řízení. Předchozí pravidlo v kontextu není; jde o konkrétní posílení centrální koordinace projektů, ale usnesení výslovně zachovává zákonné a interní kompetence jednotlivých organizací."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-587",
+                "relevant": true,
+                "reasonCz": "Expertní panel má koordinovat implementaci stavebního práva, konzultovat cílovou architekturu procesů a IT a ukládat úkoly Úřadu rozvoje území.",
+                "effectCz": "Usnesení nově zřizuje vládní dohledový a koordinační panel, který konzultuje plány, harmonogram i cílovou architekturu IT a může ukládat úkoly Úřadu rozvoje území. Předchozí stav není v balíčku zachycen; jde o dílčí koordinaci implementace stavební agendy, nikoli o řízení vývoje všech veřejných systémů."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-589",
+                "relevant": true,
+                "reasonCz": "Usnesení zavádí evidenci a prioritizaci ICT záměrů, přezkum zakázek a konzultace využití kapacit státních ICT organizací.",
+                "effectCz": "Vláda nově požaduje evidovat ICT záměry po celý jejich životní cyklus, určit jejich prioritu a projednávat určité zakázky centrálně; zároveň nařizuje využívat aktuální údaje z jiných veřejných informačních systémů bez opakovaného vyžadování. Jde o posílení centrálního dohledu a sdílení údajů, ale konzultace kapacit nezakládá povinnost zadat vývoj jediné státní ICT organizaci a realizace zůstává na předkladateli."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-653",
+                "relevant": true,
+                "reasonCz": "Usnesení ukládá ministerstvům napojit své portály na Registr zastupování nebo zveřejnit společné šablony pro elektronické služby.",
+                "effectCz": "Usnesení nově ukládá členům vlády do konce roku 2027 propojit ministerské portály s Registrem zastupování, případně zveřejnit šablony pro nejčastější elektronické služby, pokud to orgán vyhodnotí jako účelné. Předchozí znění usnesení není; jde o konkrétní krok k propojování portálů, podmíněný vyhodnocením účelnosti, nikoli o obecné centralizované řízení jejich vývoje."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-59fa8f6418c3--source",
+              "psp-core-2025--law-change-43174-1-3",
+              "psp-core-2025--law-change-43174-1-6",
+              "psp-core-2025--law-change-43174-1-8",
+              "psp-core-2025--law-change-43174-8-4",
+              "psp-core-2025--law-change-43174-8-5",
+              "psp-core-2025--law-change-43174-8-7",
+              "psp-core-2025--law-change-43184-approved-49",
+              "psp-core-2025--law-change-43216-1",
+              "psp-core-2025--law-change-43293-1",
+              "psp-core-2025--law-change-43382-1",
+              "zvlady-resolutions--law-change-uv-2026-83",
+              "zvlady-resolutions--law-change-uv-2026-122",
+              "zvlady-resolutions--law-change-uv-2026-167",
+              "zvlady-resolutions--law-change-uv-2026-175-27",
+              "zvlady-resolutions--law-change-uv-2026-314",
+              "zvlady-resolutions--law-change-uv-2026-587",
+              "zvlady-resolutions--law-change-uv-2026-589",
+              "zvlady-resolutions--law-change-uv-2026-653",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--amendment-1215",
+              "psp-core-2025--amendment-text-1215",
+              "psp-core-2025--vote-88190",
+              "psp-core-2025--amendment-text-1364",
+              "psp-core-2025--vote-88219",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88026",
+              "psp-core-2025--vote-88450",
+              "psp-core-2025--senate-resolution-43184-7",
+              "psp-core-2025--government-opinion-43216-1",
+              "psp-core-2025--print-step-211258",
+              "psp-core-2025--print-step-211918",
+              "zvlady-resolutions--2026-83",
+              "zvlady-resolutions--2026-122",
+              "zvlady-resolutions--2026-167",
+              "zvlady-resolutions--2026-175",
+              "zvlady-resolutions--2026-314",
+              "zvlady-resolutions--2026-587",
+              "zvlady-resolutions--2026-589",
+              "zvlady-resolutions--2026-653"
+            ],
+            "explanationCz": "Poslanci Motoristů předložili novelu stavebního zákona a podpořili její schválení; ta sjednocuje některá územní data a soustřeďuje část stavební agendy u nového Úřadu. Vláda také zavedla centrální přehled a koordinaci vybraných ICT projektů a nařídila napojovat ministerské portály na Registr zastupování. Jde o dílčí kroky k lepšímu sdílení dat a koordinaci, nikoli o doložené centrální řízení vývoje všech informačních systémů veřejné správy. Motoristé zároveň nepodpořili návrh na jednotnou databázi územně analytických podkladů, ale podpořili pozměňovací návrh na registr krajiny; jejich parlamentní kroky tedy nebyly zcela jednotné.",
+            "confidence": "high",
+            "uncertainties": [
+              "Není doloženo, že vláda centralizovala vývoj informačních systémů veřejné správy jako celek nebo že už snížila duplicitní investice; doložená opatření se týkají dílčích oblastí a projektů.",
+              "Motoristé nepodpořili pozměňovací návrh na jednotnou databázi územně analytických podkladů, ale podpořili jiný pozměňovací návrh týkající se registru krajiny. Tyto návrhy se týkají různých částí datové infrastruktury a směřují rozdílně."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": [
+      {
+        "error": "Assessment omits the relevance verdict for law change psp-core-2025--law-change-43174-8-7",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0859e8c3f254186b016aec50e5a1d887d1aa0fc902aa8febd1",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 139667,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 139664
+            },
+            "output_tokens": 12388,
+            "output_tokens_details": {
+              "reasoning_tokens": 7548
+            },
+            "total_tokens": 152055
+          },
+          "output": {
+            "promiseId": "candidate-59fa8f6418c3",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-3",
+                "relevant": true,
+                "reasonCz": "Úprava územně plánovacích dat zavádí jednotný standard a společnou databázi, což je konkrétní krok ke sdílení a sjednocení správy dat veřejné správy.",
+                "effectCz": "Dosud se v jednotném standardu zpracovávaly jen vybrané části plánovací dokumentace a podklady nebyly podle dodaného znění vedeny v jediné databázi pod správou Úřadu. Schválené znění požaduje jednotný standard pro plánovací dokumentaci a ukládá vést územně analytické podklady v geoportálu v jednotné databázi spravované Úřadem; jde o dílčí posílení standardizace a centralizace dat, nikoli o centrální řízení vývoje všech veřejných systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Navržené ustanovení výslovně umožňuje sdružit informační systémy veřejné správy do jednoho společného systému, tedy uskutečnit část slibu.",
+                "effectCz": "Předchozí znění § 267 odst. 6 neexistovalo. Navržené znění dávalo Úřadu možnost vést více systémů jako jeden společný systém; tato možnost však ve znění schváleném Sněmovnou není. Schválené znění zároveň upravuje provoz stavebních informačních systémů, například přidává portálu sledování stavu řízení a rozšiřuje zveřejňování dokumentů v geoportálu; celkově tedy podporuje dílčí propojení, ale výslovné slučování systémů do společného systému nepřineslo."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-8",
+                "relevant": true,
+                "reasonCz": "Ustanovení převádějí informační systémy a související data stavební agendy na nový úřad a do společného geoportálu, což je konkrétní centralizace v části veřejné správy.",
+                "effectCz": "Dodané znění převádí na Úřad spisy, dokumenty a provozované informační systémy související se stavební působností a ukládá převést územně analytické podklady do jednotné struktury a geoportálu. Kontekst předchozího rozdělení odpovědnosti za tyto systémy však dodán není, takže přesný posun oproti dosavadnímu stavu nelze určit; schválené znění navíc dočasně připouští používání jiných veřejných systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-4",
+                "relevant": true,
+                "reasonCz": "Úprava rozšiřuje přírodovědný informační systém o další evidenci a registr krajiny a stanoví, jak se v nich mají informace uchovávat a zpřístupňovat.",
+                "effectCz": "Před změnou informační systém ochrany přírody již byl jednotným celostátním systémem s pěti vyjmenovanými částmi. Schválené znění rozšiřuje obsah evidencí a přidává registr krajiny, který shromažďuje a zpřístupňuje informace; tím se zvyšuje možnost sjednoceného uchovávání a sdílení těchto dat, ale nemění se obecné řízení vývoje všech veřejných informačních systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-5",
+                "relevant": true,
+                "reasonCz": "Povinnost předávat dokumentaci přírodních parků a dalších území do registru krajiny vytváří konkrétní datové propojení mezi orgány a centrální evidencí.",
+                "effectCz": "Dosavadní § 77a ukládal předávat dokumentaci některých chráněných území do ústředního seznamu; změna navíc ukládá předávat dokumentaci přírodních parků do registru krajiny. Jde o rozšíření předávání údajů do společné evidence, tedy o dílčí posílení sdílení dat."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+                "relevant": true,
+                "reasonCz": "Změna přesouvá správu a provoz informačního systému výzkumu, vývoje a inovací z Rady vlády na ministerstvo, což mění, kdo odpovídá za jeden veřejný systém.",
+                "effectCz": "Dosud zákon svěřoval správu a provoz systému Radě pro výzkum, vývoj a inovace a výdaje související s jeho provozem vedl přes rozpočtovou kapitolu Úřadu vlády. Schválená změna svěřuje správu systému Ministerstvu průmyslu a obchodu a přesouvá související rozpočtové nároky; odpovědnost za tento jednotlivý systém se tak soustřeďuje na ministerstvu, nikoli však napříč veřejnou správou."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-1",
+                "relevant": true,
+                "reasonCz": "Schválené znění umožňuje využít údaje vedené v integrovaném informačním systému ministerstva pro rozhodování o podpoře bydlení, což je konkrétní sdílení dat mezi agendami.",
+                "effectCz": "Dosavadní § 138 připouštěl rozhodnutí jako první úkon jen na základě podkladů předložených účastníkem; schválené znění připouští také údaje z Integrovaného informačního systému Ministerstva práce a sociálních věcí, a tím rozšiřuje možnost opětovného využití dat. Předložený návrh současně rušil některé přechodné postupy využívající Jednotný informační systém práce a sociálních věcí; změna je proto v jednotlivých ustanoveních smíšená, ale schválené znění přináší konkrétní nové využití společných dat."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43216-1",
+                "relevant": true,
+                "reasonCz": "Návrh vytváří centrální registr ubytování a pravidla pro předávání údajů do něj, což se přímo dotýká sdílení dat mezi digitálními službami.",
+                "effectCz": "Předchozí znění § 10 pouze ukládalo online zprostředkovatelům poskytnout vybrané informace živnostenskému úřadu na jeho výzvu. Návrh vytváří registr jako informační systém veřejné správy, zavádí do něj registraci a předávání údajů a stanoví, že jde o jednotné digitální kontaktní místo pro jejich příjem a předávání. Tím centralizuje údaje v jedné agendě, ale nedokládá centrální řízení vývoje systémů veřejné správy jako celku."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-1",
+                "relevant": true,
+                "reasonCz": "Návrh dovoluje znovu použít biometrické údaje pořízené při žádosti o občanský průkaz při vyřizování cestovního dokladu.",
+                "effectCz": "Dosavadní § 21a upravoval pořízení biometrických údajů pro cestovní doklad, ale neobsahoval možnost převzít údaje pořízené při žádosti o občanský průkaz. Navržený nový odstavec tuto možnost zavádí pro žádosti podané v tentýž den, čímž rozšiřuje sdílení dat mezi dvěma agendami v omezeném rozsahu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43382-1",
+                "relevant": true,
+                "reasonCz": "Návrh zavádí systém propojení evidencí skutečných majitelů s evropským systémem a zpřístupňuje přes něj údaje příslušným orgánům.",
+                "effectCz": "Dosavadní § 17 upravoval dálkový přístup k české evidenci, nikoli přístup k systému propojení evidencí. Navržený § 17b ukládá ministerstvu zpřístupnit údaje přes tento systém a zajistit přístup oprávněným osobám a orgánům; jde o rozšíření přeshraničního sdílení, nikoli o obecnou centralizaci vývoje domácích systémů."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-83",
+                "relevant": true,
+                "reasonCz": "Usnesení svěřuje Radě vlády pro informační společnost průřezovou koordinaci digitalizace, sjednocování standardů a prioritizaci projektů.",
+                "effectCz": "Předchozí znění statutu Rady v balíčku obsaženo není, takže změnu oproti dosavadnímu stavu nelze přesně porovnat. Přijaté znění výslovně zakotvuje meziresortní koordinaci, sjednocování standardů digitálních služeb a prioritizaci digitalizačních projektů, což podporuje centrálnější řízení."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-122",
+                "relevant": true,
+                "reasonCz": "Usnesení převádí na ministerstvo agendu zajišťující provoz a rozvoj informačního systému výzkumu, vývoje a inovací.",
+                "effectCz": "Usnesení převádí agendu související s Radou pro výzkum, vývoj a inovace z Úřadu vlády na Ministerstvo průmyslu a obchodu a tomuto ministerstvu svěřuje provoz a rozvoj příslušného informačního systému. Předchozí znění uspořádání této agendy v usnesení dodáno není, takže rozsah změny oproti dosavadnímu stavu nelze úplně určit; text však jasně soustřeďuje odpovědnost za tento systém na jednom ministerstvu."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-167",
+                "relevant": true,
+                "reasonCz": "Usnesení vytváří meziresortní řízení implementace stavebního práva a ukládá výborům schvalovat cílovou architekturu digitalizace a informační podpory.",
+                "effectCz": "Předchozí uspořádání v balíčku uvedeno není, takže změnu proti němu nelze určit. Přijaté usnesení zřizuje strategický a řídicí výbor, které koordinují resorty a schvalují plán, cílovou architekturu procesů a informační podpory; jde o přípravné a koordinační řízení dílčí reformy, nikoli o přímé sloučení systémů."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-27",
+                "relevant": true,
+                "reasonCz": "Plán legislativních prací počítá s předpisem, který má stanovit jednotné standardy a interoperabilitu informačního systému výzkumu, vývoje a inovací.",
+                "effectCz": "Předchozí právní úprava ani samotné nařízení v balíčku dodány nejsou. Usnesení pouze plánuje návrh předpisu pro jednotný rámec správy údajů a interoperabilitu s dalšími systémy, takže jde o přípravný krok, nikoli již zavedenou povinnost či fungující propojení."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-314",
+                "relevant": true,
+                "reasonCz": "Usnesení zavádí centrální přehled ICT projektů, odpovědné manažery a meziinstitucionální koordinaci, což přímo podporuje společné řízení projektů a investic.",
+                "effectCz": "Předchozí pravidla centrálního řízení v balíčku obsažena nejsou, takže změnu oproti nim nelze vyčíslit. Usnesení zavádí společný přehled projektů, přiřazuje odpovědné manažery a stanoví jejich úkoly včetně koordinace organizací, řízení rizik a reportingu; současně výslovně nenahrazuje zákonné ani interní kompetence jednotlivých organizací, takže centralizuje koordinaci, ne veškeré řízení vývoje."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-587",
+                "relevant": true,
+                "reasonCz": "Expertní panel má koordinovat implementaci stavebního práva a posuzovat mimo jiné cílovou architekturu procesů a IT podpory.",
+                "effectCz": "Předchozí znění tohoto uspořádání není dodáno. Usnesení zřizuje panel, který konzultuje a koordinuje plány, harmonogramy a IT podporu reformy; posiluje tak koordinaci v jedné oblasti, ale samo nezavádí centrální správu vývoje všech veřejných systémů."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-589",
+                "relevant": true,
+                "reasonCz": "Usnesení zavádí evidenci ICT záměrů, přidělování priorit a společné posuzování části zakázek, tedy centrálnější kontrolu vývoje a investic do systémů.",
+                "effectCz": "Předchozí pravidla nejsou v balíčku dodána. Přijaté usnesení vyžaduje evidovat záměry a jejich změny, přidělovat priority, konzultovat možnosti státních ICT kapacit a předkládat vybrané zakázky k posouzení; tím posiluje centrální dohled a může omezovat duplicitní investice, ale samo nezajišťuje společný vývoj všech systémů."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-653",
+                "relevant": true,
+                "reasonCz": "Usnesení ukládá ministerstvům napojit portály na společný Registr zastupování nebo zpřístupnit vzory oprávnění pro elektronické služby.",
+                "effectCz": "Předchozí stav portálů a registru není popsán. Usnesení ukládá ministerstvům do konce roku 2027 portály napojit na Registr zastupování, anebo zveřejnit vzory pro nejčastější elektronické služby, pokud to příslušný orgán uzná za účelné; jde o konkrétní, ale podmíněné rozšíření propojení služeb."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-59fa8f6418c3--source",
+              "psp-core-2025--law-change-43174-1-3",
+              "psp-core-2025--law-change-43174-1-6",
+              "psp-core-2025--law-change-43174-1-8",
+              "psp-core-2025--law-change-43174-8-4",
+              "psp-core-2025--law-change-43174-8-5",
+              "psp-core-2025--law-change-43184-approved-49",
+              "psp-core-2025--law-change-43189-1",
+              "psp-core-2025--law-change-43216-1",
+              "psp-core-2025--law-change-43293-1",
+              "psp-core-2025--law-change-43382-1",
+              "zvlady-resolutions--law-change-uv-2026-83",
+              "zvlady-resolutions--law-change-uv-2026-122",
+              "zvlady-resolutions--law-change-uv-2026-167",
+              "zvlady-resolutions--law-change-uv-2026-175-27",
+              "zvlady-resolutions--law-change-uv-2026-314",
+              "zvlady-resolutions--law-change-uv-2026-587",
+              "zvlady-resolutions--law-change-uv-2026-589",
+              "zvlady-resolutions--law-change-uv-2026-653",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--amendment-text-1215",
+              "psp-core-2025--amendment-1215",
+              "psp-core-2025--vote-88190",
+              "psp-core-2025--vote-88219",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--vote-88026",
+              "psp-core-2025--vote-88450",
+              "psp-core-2025--print-step-210686",
+              "psp-core-2025--vote-87603",
+              "psp-core-2025--vote-87604",
+              "psp-core-2025--vote-87605",
+              "psp-core-2025--vote-87608",
+              "psp-core-2025--vote-87617",
+              "psp-core-2025--government-opinion-43216-1",
+              "psp-core-2025--print-step-211258",
+              "psp-core-2025--print-step-211918",
+              "zvlady-resolutions--2026-83",
+              "zvlady-resolutions--2026-122",
+              "zvlady-resolutions--2026-167",
+              "zvlady-resolutions--2026-175",
+              "zvlady-resolutions--2026-314",
+              "zvlady-resolutions--2026-587",
+              "zvlady-resolutions--2026-589",
+              "zvlady-resolutions--2026-653"
+            ],
+            "explanationCz": "Vláda zavedla společnou evidenci a koordinaci ICT projektů a uložila ministerstvům napojit portály na Registr zastupování nebo zpřístupnit vzory pro elektronické služby. Poslanci Motoristů také podpořili novelu stavebního zákona, která pro plánovací data stanoví jednotný standard a společnou databázi spravovanou novým úřadem. Jde o doložené, ale dílčí kroky: navržené výslovné oprávnění slučovat více informačních systémů do jednoho ve znění schváleném Sněmovnou chybí a centrální řízení vývoje všech systémů doloženo není. Proti tomuto směru stojí nesouhlas vlády s návrhem registru ubytování a nepodpoření návrhu na jednotnou databázi geoportálu; převažují však pozdější rozhodnutí podporující koordinaci a sdílení dat.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Vláda nesouhlasila s návrhem registru ubytování, který obsahoval centrální registr a předávání údajů; její stanovisko ale zároveň označilo zavedení tohoto systému za potřebné a kritizovalo konkrétní nedořešené otázky.",
+              "Poslanci Motoristů nepodpořili pozměňovací návrh na vedení územně analytických podkladů v jednotné databázi geoportálu; později však hlasovali pro schválený zákon obsahující jiné kroky ke standardizaci a centralizaci těchto dat.",
+              "U některých hlasování o pozměňovacích návrzích k zákonu o podpoře bydlení nejsou v balíčku samostatně doložena přesná znění jednotlivých variant. Jejich účinek proto nelze spolehlivě odlišit; závěr vychází zejména z konečného hlasování o schváleném znění."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-59fa8f6418c3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Změny pravidel pro územně plánovací dokumentaci výslovně upravují jednotné datové standardy a zveřejňování údajů v geoportálu, což se týká sdílení dat mezi veřejnými systémy.",
+          "effectCz": "Dříve se elektronicky a ve vektorové podobě zpracovávala plánovací dokumentace, ale jednotný standard se vztahoval jen na vybrané části; návrh standard rozšiřuje a schválené znění pro plánovací dokumentaci stanoví jednotný strojově čitelný vektorový formát. U § 66 se mění projednávání a zveřejnění analytických podkladů; schválené znění dále ukládá vedení údajů v geoportálu v jednotné databázi a svěřuje její správu Úřadu. Jde o zpřísnění jednotnosti dat a jejich dostupnosti v těchto agendách, nikoli o centrální řízení vývoje všech veřejných systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Část upravuje informační systémy stavební správy, sdružování systémů a ukládání územních dat do společného geoportálu, tedy přímo souvisí s centralizací a sdílením.",
+          "effectCz": "Navržené znění nově umožňovalo Úřadu sdružit informační systémy a vést více systémů jako jeden společný systém veřejné správy; předchozí § 267 vyjmenovával systémy stavební správy, ale takové oprávnění neobsahoval. Toto ustanovení se ve schváleném znění neobjevuje. Schválené znění přesto ukládá územně analytické údaje do jednotné databáze geoportálu a upravuje jeho informační funkce; oproti dosavadnímu popisu údajů a samostatným evidencím jde o dílčí sjednocení dat, ne o obecnou povinnost slučovat systémy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení převádějí informační systémy a datové podklady na nový Úřad a určují, kdy lze souběžně používat dosavadní systémy.",
+          "effectCz": "Schválené znění převádí na Úřad dokumenty, spisy a provozované informační systémy vztahující se k přecházející působnosti a ukládá převést analytické podklady do jednotné struktury geoportálu do konce roku 2027. Do konce přechodného období však připouští souběžné používání jiných informačních systémů. Předchozí znění těchto přechodných ustanovení balíček nedodává, takže směr změny oproti němu nelze určit; nové povinnosti nicméně směřují k soustředění správy a dat u Úřadu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-4",
+          "relevant": true,
+          "reasonCz": "Změny rozšiřují informační systém ochrany přírody o registr krajiny a stanoví vkládání či zpřístupňování údajů, takže se týkají propojení a sdílení veřejných dat.",
+          "effectCz": "Předchozí informační systém ochrany přírody měl několik oddělených evidencí, například databázi nálezů a evidenci druhové ochrany. Schválené znění rozšiřuje jejich funkce a přidává registr krajiny pro zobrazování a evidenci přírodních prvků a rozhodnutí; zároveň zapisuje registrované prvky do registru územní identifikace. Jde o větší rozsah propojených a dostupných údajů, nikoli o centralizaci vývoje všech informačních systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Ustanovení ukládají předávat dokumentaci a rozhodnutí orgánů ochrany přírody do registru krajiny, což přímo vytváří datové propojení mezi veřejnými evidencemi.",
+          "effectCz": "Dříve krajské a obecní orgány předávaly některé dokumenty do ústředního seznamu; návrh a schválené znění u vybraných dokumentů navíc ukládají předání do registru krajiny. Rozšiřuje se tak povinnost sdílet tyto údaje s další evidencí, ale pravidlo se týká jen vymezených údajů a agend."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-7",
+          "relevant": true,
+          "reasonCz": "Schválené přechodné ustanovení stanoví předání existující dokumentace do nového registru krajiny.",
+          "effectCz": "Schválené znění ukládá příslušným orgánům předat dokumentaci k vyjmenovaným chráněným územím a krajinným prvkům do registru krajiny do 31. prosince 2027. Předchozí znění tohoto přechodného ustanovení není v balíčku uvedeno, a proto nelze určit směr změny oproti dosavadnímu stavu; nová povinnost však soustřeďuje část údajů v registru."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+          "relevant": true,
+          "reasonCz": "Změna přesouvá správu informačního systému výzkumu, vývoje a inovací z Rady vlády na ministerstvo, tedy upravuje, kdo tento veřejný systém řídí.",
+          "effectCz": "Před změnou byl správcem a provozovatelem systému výzkumu, vývoje a inovací Úřad vlády prostřednictvím Rady pro výzkum, vývoj a inovace. Schválené znění svěřuje správu systému Ministerstvu průmyslu a obchodu a odpovídajícím způsobem mění působnost Rady. U tohoto jediného systému se odpovědnost přesouvá k jednomu ministerstvu; nejde o sjednocení řízení vývoje všech veřejných systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": true,
+          "reasonCz": "Schválené změny zapojují údaje z Integrovaného informačního systému Ministerstva práce a sociálních věcí a upravují používání souvisejících systémů podpory bydlení.",
+          "effectCz": "Dříve § 138 dovoloval vydat rozhodnutí jako první úkon jen na základě podkladů předložených účastníkem; schválené znění připouští také využití údajů vedených v Integrovaném informačním systému Ministerstva práce a sociálních věcí, což rozšiřuje opakované použití již vedených údajů. Schválené změny zároveň ruší některé přechodné úkony prostřednictvím informačního systému podpory bydlení. Předchozí znění těchto rušených bodů je v balíčku uvedeno, ale celý dopad přechodných změn nelze z vybraných odstavců určit; nově výslovně umožněné využití integrovaných údajů je dílčím posunem ke sdílení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-1",
+          "relevant": true,
+          "reasonCz": "Návrh vytváří jednotný veřejný registr krátkodobého ubytování a stanoví předávání údajů mezi ubytovateli, platformami a veřejnými orgány.",
+          "effectCz": "Dosavadní § 10 ukládal online zprostředkovatelům sdělovat údaje živnostenskému úřadu na jeho žádost; návrh zřizuje registr jako informační systém veřejné správy, jednotné digitální kontaktní místo a stanoví průběžné předávání údajů. Jde o nový systém bez předchozího znění dodaného pro jeho ustanovení; podporuje sdílení údajů v konkrétní agendě, ale necentralizuje vývoj veřejných systémů obecně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": true,
+          "reasonCz": "Návrh dovoluje znovu použít biometrické údaje pořízené při žádosti o občanský průkaz při žádosti o cestovní doklad, čímž přímo omezuje opakované pořizování stejných dat.",
+          "effectCz": "Předchozí § 21a ukládal pořídit biometrické údaje při žádosti o cestovní doklad; navržený nový odstavec stanoví, že při žádosti o občanský průkaz a cestovní doklad v tentýž den se údaje pořídí jen při prvním úkonu a znovu se použijí. To snižuje duplicitní sběr údajů v této konkrétní službě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43382-1",
+          "relevant": true,
+          "reasonCz": "Návrh propojuje evidenci skutečných majitelů s evropským systémem propojení evidencí a rozšiřuje přístup k údajům.",
+          "effectCz": "Nový § 17b ukládá ministerstvu zpřístupnit údaje prostřednictvím systému propojení evidencí a zajistit k němu přístup oprávněným osobám. Předchozí znění tohoto nového ustanovení není k dispozici, takže změnu oproti dosavadnímu stavu nelze přesně porovnat; návrh však výslovně zavádí přeshraniční sdílení v dané evidenci."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-83",
+          "relevant": true,
+          "reasonCz": "Změněný statut Rady pro informační společnost jí svěřuje průřezovou koordinaci digitalizace, sjednocování standardů a prioritizaci projektů.",
+          "effectCz": "Usnesení stanoví Radě a jejímu grémiu úkoly v koordinaci digitálních agend, sjednocování standardů a prioritizaci projektů veřejné správy. Předchozí znění statutu není v balíčku, takže nelze porovnat, o kolik se pravomoci rozšířily; přijaté znění však vytváří koordinační rámec, který se slibu týká jen částečně."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-122",
+          "relevant": true,
+          "reasonCz": "Usnesení převádí agendu spojenou se správou a rozvojem informačního systému výzkumu, vývoje a inovací na Ministerstvo průmyslu a obchodu.",
+          "effectCz": "Vláda stanoví převod agendy i zajištění provozu a rozvoje tohoto systému na Ministerstvo průmyslu a obchodu. Jde o soustředění odpovědnosti za jeden informační systém pod jeden resort; usnesení samo nepředepisuje společné řízení vývoje napříč veřejnou správou."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-167",
+          "relevant": true,
+          "reasonCz": "Usnesení zřizuje meziresortní struktury, které mají schvalovat cílovou architekturu procesů a digitalizace při zavádění stavební správy.",
+          "effectCz": "Vláda zřizuje strategický a řídicí výbor s pravomocemi schvalovat cílovou architekturu, harmonogram a standardy implementace nového modelu stavební správy. Předchozí organizační nastavení není v balíčku doloženo, takže směr změny proti němu nelze přesně určit; nové orgány vytvářejí koordinaci konkrétního projektu, nikoli obecné řízení všech systémů veřejné správy."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-27",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací počítá s prováděcím předpisem k informačnímu systému výzkumu, který má zavést jednotné standardy a interoperabilitu.",
+          "effectCz": "Vláda zařazuje jako plánovaný úkol přípravu nařízení, jež má upravit obsah systému výzkumu, formát a strukturu předávání dat a interoperabilitu s dalšími systémy. Jde o plán budoucího předpisu, nikoli o již zavedené pravidlo; předchozí právní úpravu tento záznam nemění."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-314",
+          "relevant": true,
+          "reasonCz": "Usnesení zavádí centrální řízení a přehled strategických ICT projektů, stanovování priorit a meziinstitucionální odpovědnost za jejich koordinaci.",
+          "effectCz": "Vláda zavádí centrální přehled projektů, odpovědné manažery, pravidelné reportování a koordinaci napříč organizacemi. U projektů ICT navíc stanoví evidenci a prioritu jako podmínku zahájení realizace či čerpání prostředků, s vymezenými výjimkami. Předchozí systém řízení není v balíčku popsán, ale nová opatření přímo posilují centrální dohled nad částí vývoje a investic."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-587",
+          "relevant": true,
+          "reasonCz": "Vláda zřizuje dohledový a koordinační panel, který posuzuje také cílovou IT architekturu při implementaci stavební reformy.",
+          "effectCz": "Usnesení vytváří panel, který konzultuje plány, milníky a cílovou architekturu včetně IT a může koordinovat činnost Úřadu pro rozvoj území. Předchozí stav není doložen, takže nelze změřit změnu oproti němu; jde o koordinační dohled nad konkrétní reformou, ne o všeobecné centralizované řízení systémů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-589",
+          "relevant": true,
+          "reasonCz": "Usnesení zavádí centrální evidenci, prioritizaci a posuzování ICT záměrů i zakázek a výslovně se vztahuje na vývoj a integraci informačních systémů.",
+          "effectCz": "Vláda stanoví evidenci záměrů, přidělování priorit a projednávání vybraných ICT zakázek; bez zaznamenané priority se zpravidla nesmí zahájit realizace ani čerpat veřejné prostředky. Zároveň ukládá konzultovat kapacity státních ICT podniků, ale výslovně neukládá jim zakázku zadat. Předchozí znění pravidel není dodáno, takže nelze určit přesný rozdíl; usnesení však zavádí centrálnější kontrolu a prioritizaci, nikoli povinné společné vyvíjení systémů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-653",
+          "relevant": true,
+          "reasonCz": "Usnesení ukládá ministerstvům napojit své portály na Registr zastupování nebo zveřejnit použitelné šablony, což přímo podporuje propojení digitálních služeb.",
+          "effectCz": "Vláda ukládá ministerstvům do konce roku 2027 napojit portály na Registr zastupování, případně zveřejnit šablony pro nejčastější elektronické služby, pokud to orgán vyhodnotí jako účelné. Předchozí znění není v balíčku uvedeno; nová povinnost vytváří konkrétní datové a funkční propojení, ale s možností zvolit náhradní šablony."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-59fa8f6418c3--source",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-8",
+        "psp-core-2025--law-change-43174-8-4",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-8-7",
+        "psp-core-2025--law-change-43184-approved-49",
+        "psp-core-2025--law-change-43189-1",
+        "psp-core-2025--law-change-43216-1",
+        "psp-core-2025--law-change-43293-1",
+        "psp-core-2025--law-change-43382-1",
+        "zvlady-resolutions--law-change-uv-2026-83",
+        "zvlady-resolutions--law-change-uv-2026-122",
+        "zvlady-resolutions--law-change-uv-2026-167",
+        "zvlady-resolutions--law-change-uv-2026-175-27",
+        "zvlady-resolutions--law-change-uv-2026-314",
+        "zvlady-resolutions--law-change-uv-2026-587",
+        "zvlady-resolutions--law-change-uv-2026-589",
+        "zvlady-resolutions--law-change-uv-2026-653",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--print-step-210686",
+        "psp-core-2025--amendment-text-762",
+        "psp-core-2025--vote-87603",
+        "psp-core-2025--vote-87604",
+        "psp-core-2025--vote-87605",
+        "psp-core-2025--vote-87608",
+        "psp-core-2025--vote-87617",
+        "psp-core-2025--government-opinion-43216-1",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--print-step-211918",
+        "zvlady-resolutions--2026-83",
+        "zvlady-resolutions--2026-122",
+        "zvlady-resolutions--2026-167",
+        "zvlady-resolutions--2026-175",
+        "zvlady-resolutions--2026-314",
+        "zvlady-resolutions--2026-587",
+        "zvlady-resolutions--2026-589",
+        "zvlady-resolutions--2026-653",
+        "psp-core-2025--amendment-text-1215",
+        "psp-core-2025--amendment-1215",
+        "psp-core-2025--amendment-text-1364",
+        "psp-core-2025--vote-88190",
+        "psp-core-2025--vote-88219",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Vláda zavedla centrální přehled a prioritizaci strategických ICT projektů a uložila ministerstvům propojit jejich portály s Registrem zastupování. Poslanci Motoristů také podpořili novelu stavebního zákona, která pro územní plánování zavádí jednotnou databázi a přesouvá související systémy a data k novému Úřadu. Jde o dílčí kroky k centrálnější koordinaci a sdílení údajů, nikoli o úplné sjednocení řízení vývoje všech veřejných informačních systémů. Proti tomu vláda nesouhlasila s návrhem na celostátní registr krátkodobého ubytování a poslanci Motoristů nepodpořili pozměňovací návrh na ukládání analytických podkladů do geoportálu; tyto návrhové kroky však nepřevažují nad pozdějšími přijatými opatřeními.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh novely stavebního zákona původně umožňoval sdružit více informačních systémů do jednoho společného systému, ale toto ustanovení ve schváleném znění není. Schválené znění přesto zavádí jednotnou databázi územních údajů a převod souvisejících systémů; balíček nedokládá, že bylo dosaženo obecného sloučení veřejných systémů.",
+        "Vláda nesouhlasila s návrhem na registr krátkodobého ubytování a poslanci Motoristů nepodpořili pozměňovací návrh týkající se ukládání územně analytických podkladů do geoportálu. Přesný vztah některých dílčích hlasování k jednotlivým bodům širšího pozměňovacího návrhu není z dodaných záznamů zřejmý.",
+        "Dodaný materiál dokládá přijetí pravidel a schválení zákonných změn, nikoli jejich následné technické zavedení nebo úplné splnění cíle slibu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-59fa8f6418c3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Změny zavádějí jednotnější digitální formát územně plánovacích dat a jejich zveřejňování v geoportálu, což se týká sdílení a standardizace veřejných dat.",
+          "effectCz": "Dříve se elektronicky a ve vektorové podobě pořizovala územně plánovací dokumentace a jednotným standardem byly jen vybrané její části; schválené znění vyžaduje jednotný standard pro veškerou uvedenou dokumentaci jako strojově čitelná digitální data. Územně analytické podklady mají být nově vedeny v jednotné databázi geoportálu. Tím se standardizace a sdílení těchto dat rozšiřují, ale pravidla se týkají územního plánování, nikoli obecného řízení vývoje všech veřejných informačních systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Nové ustanovení výslovně umožňuje sdružovat informační systémy veřejné správy do jednoho společného systému.",
+          "effectCz": "Před změnou § 267 odst. 6 neexistoval; nově může Úřad informační systémy sdružit a vést více systémů jako jeden společný informační systém veřejné správy. Rozšiřuje se tak možnost konsolidace systémů, ale ustanovení ji pouze umožňuje a neukládá ji pro všechny systémy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": true,
+          "reasonCz": "Upravuje převod informačních systémů a dat do nového Úřadu a jejich využití v národním geoportálu.",
+          "effectCz": "Schválené znění převádí na Úřad příslušné dokumenty, spisy a provozované informační systémy, ukládá převod územně analytických podkladů do jednotné struktury a geoportálu a během přechodného období dovoluje souběžně používat i jiné systémy. Kontext předchozího znění těchto přechodných ustanovení v balíčku chybí, takže směr změny oproti dřívějšímu stavu nelze plně určit; text nicméně stanoví konkrétní centralizaci vyjmenovaných systémů a dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-4",
+          "relevant": true,
+          "reasonCz": "Mění součásti informačního systému ochrany přírody a rozšiřuje evidenci a předávání údajů do registrů.",
+          "effectCz": "Před změnou informační systém ochrany přírody obsahoval databázi nálezů, evidenci druhové ochrany a další evidence; schválené znění rozšiřuje jejich obsah a zavádí registr krajiny, který informace shromažďuje a zpřístupňuje. Údaje o registrovaných krajinných prvcích se mají vést také v registru územní identifikace. Rozšiřuje se tak propojení a sdílení údajů v těchto konkrétních systémech, nikoli však obecné řízení vývoje všech veřejných systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Ukládá předávání dokumentace krajských orgánů ochrany přírody do registru krajiny.",
+          "effectCz": "Dosavadní § 77a odst. 4 písm. c) a j) ukládal předávání vybraných dokumentů do jiných evidencí či ústředního seznamu; nově se u příslušných úkonů doplňuje jejich předání také do registru krajiny. Sdílení údajů s tímto registrem se tedy rozšiřuje, jde však o konkrétní evidenci v ochraně přírody."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-7",
+          "relevant": true,
+          "reasonCz": "Přechodné ustanovení ukládá převést existující dokumentaci do registru krajiny.",
+          "effectCz": "Schválené znění ukládá orgánům ochrany přírody předat do 31. prosince 2027 dokumentaci k vyjmenovaným chráněným prvkům do registru krajiny. Předchozí znění tohoto přechodného ustanovení není v balíčku doloženo, takže směr změny oproti dřívějšímu stavu nelze určit; ustanovení ale zavádí konkrétní převod dat do společného registru."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+          "relevant": true,
+          "reasonCz": "Mění odpovědnost za správu informačního systému výzkumu, vývoje a inovací, tedy správu konkrétního veřejného systému.",
+          "effectCz": "Před změnou byl podle § 35 správcem a provozovatelem tohoto systému Výzkumný a vývojový úřad, zatímco § 30 určoval schvalování jeho koncepce správcem. Nově je správcem systému Ministerstvo průmyslu a obchodu a související úloha se odnímá Radě pro výzkum, vývoj a inovace. Mění se tedy odpovědný ústřední orgán pro jeden systém; zda tím dochází k širší centralizaci vývoje nebo k propojení s jinými systémy, text nedokládá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně počítá s využitím údajů z Integrovaného informačního systému Ministerstva práce a sociálních věcí.",
+          "effectCz": "Dosavadní § 138 dovoloval vydat rozhodnutí jako první úkon jen na základě podkladů předložených účastníkem; nově lze využít také údaje z Integrovaného informačního systému ministerstva, což rozšiřuje oporu pro sdílení dat mezi agendami. Schválené znění současně ruší některá přechodná pravidla pro používání systému podpory bydlení; jejich účinek na obecné řízení vývoje systémů nelze z dodaného textu dovodit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-1",
+          "relevant": true,
+          "reasonCz": "Návrh vytváří státem spravovaný digitální registr, který přijímá a předává údaje o krátkodobém ubytování.",
+          "effectCz": "Předchozí znění § 9f až § 9n v dodaném kontextu chybí; navržený text zřizuje registr jako informační systém veřejné správy, jehož správcem je ministerstvo, a označuje jej za jednotné digitální kontaktní místo pro příjem a předávání údajů. Ukládá také zápis a výměnu údajů. Jde o konkrétní centralizaci jedné agendy a dat, ale směr vůči dosavadním pravidlům nelze bez předchozího znění plně určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje znovu použít biometrické údaje pořízené při žádosti o občanský průkaz.",
+          "effectCz": "Dosavadní § 21a ukládal pořídit biometrické údaje při žádosti o cestovní doklad; nově se při žádosti o občanský průkaz i cestovní doklad v tentýž den biometrické údaje pro cestovní doklad znovu nepořizují a využijí se údaje pořízené při žádosti o občanský průkaz. Omezuje se duplicitní pořizování údajů a podporuje jejich opětovné využití, nikoli však centralizace řízení vývoje systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43382-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí systém propojení evidence skutečných majitelů s evropským systémem propojených evidencí.",
+          "effectCz": "Před změnou § 17 upravoval dálkový přístup k české evidenci; nové § 17b ukládá ministerstvu zpřístupnit údaje prostřednictvím systému propojení evidencí a zajistit k němu přístup příslušným osobám a orgánům. Jde o nové propojení a sdílení dat; předchozí znění tohoto systému v českém zákoně není doloženo, takže širší změnu centrální správy systémů nelze určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-83",
+          "relevant": true,
+          "reasonCz": "Upravuje koordinační roli Rady vlády pro informační společnost a sjednocování digitálních standardů.",
+          "effectCz": "Předchozí statut Rady není v balíčku uveden, takže přesnou změnu oproti dřívějšímu stavu nelze určit. Přijaté znění jí svěřuje meziresortní koordinaci, podporu sjednocování standardů digitálních služeb a prioritizaci digitalizačních projektů, což posiluje koordinaci, ale samo o sobě necentralizuje řízení vývoje všech systémů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-122",
+          "relevant": true,
+          "reasonCz": "Usnesení převádí odpovědnost za informační systém výzkumu, vývoje a inovací na jiné ministerstvo a ukládá mu jeho rozvoj.",
+          "effectCz": "Usnesení převádí agendu podpory Rady pro výzkum, vývoj a inovace na Ministerstvo průmyslu a obchodu a stanoví, že jeho příslušný útvar zajišťuje provoz a rozvoj informačního systému. Předchozí znění usnesení v balíčku není, proto nelze porovnat rozsah změny; konkrétní odpovědnost za jeden systém se však soustřeďuje na ministerstvo."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-167",
+          "relevant": true,
+          "reasonCz": "Zřizuje meziresortní řízení implementace stavebního práva a výslovně zahrnuje cílovou architekturu digitalizace.",
+          "effectCz": "Usnesení vytváří strategický a řídicí výbor, který schvaluje plán implementace, cílovou architekturu procesů a informační podpory, harmonogram a standardy a koordinuje zapojené úřady. Nejde o změnu dosavadního právního znění, které není přiloženo; vzniká však konkrétní koordinace a řízení informační podpory reformy."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-27",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací vlády obsahuje úkol připravit předpis o informačním systému výzkumu a jeho interoperabilitě.",
+          "effectCz": "Usnesení samo nemění pravidla systému; zařazuje do plánu přípravu nařízení, které má stanovit jednotné standardy, strukturu a způsob předávání údajů i interoperabilitu s dalšími systémy. Jde o plánovaný návrh, nikoli o již účinné pravidlo, a dosavadní právní úpravu nelze z tohoto usnesení porovnat."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-314",
+          "relevant": true,
+          "reasonCz": "Zavádí centrální přehled a meziresortní řízení strategických ICT projektů, jejich priorit a odpovědných manažerů.",
+          "effectCz": "Usnesení stanoví společný přehled projektů, jmenování odpovědných manažerů, jejich meziinstitucionální koordinaci a pravidelné vykazování. Zároveň ponechává zákonné a interní kompetence jednotlivým organizacím, takže samo nepřevádí veškeré řízení vývoje pod jednoho správce; centralizuje však evidenci a koordinaci vybraných strategických projektů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-587",
+          "relevant": true,
+          "reasonCz": "Zřizuje dohledový a koordinační panel pro implementaci stavebního práva včetně IT a informační podpory.",
+          "effectCz": "Usnesení zřizuje expertní panel, který konzultuje a koordinuje cílovou architekturu procesů, IT a informační podporu reformy stavebního práva. Předchozí pravidla nejsou doložena, takže změnu vůči nim nelze určit; jde o koordinaci konkrétní reformy, nikoli o obecné řízení vývoje všech systémů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-589",
+          "relevant": true,
+          "reasonCz": "Zavádí centrální evidenci, priority a meziresortní projednávání ICT záměrů a projektů.",
+          "effectCz": "Usnesení ukládá evidovat ICT záměry v jednom systému, určit jejich priority a projednávat vybrané zakázky centrálně; aktuální údaje dostupné v jiném veřejném systému se nemají předkladateli vyžadovat znovu. Současně výslovně ponechává volbu způsobu realizace předkladateli a stanoviska nenahrazují jeho rozhodnutí. Centralizuje tak část koordinace a sdílení dat, nikoli samotné řízení veškerého vývoje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-653",
+          "relevant": true,
+          "reasonCz": "Ukládá ministerstvům napojit portály na Registr zastupování nebo zveřejnit opakovaně využitelné šablony pro digitální služby.",
+          "effectCz": "Usnesení nově stanoví ministerstvům úkol napojit portály na Registr zastupování, případně zpřístupnit šablony pro nejčastější elektronické služby, pokud to považují za účelné. Předchozí stav není v balíčku doložen; jde o konkrétní propojování portálů s registrem, ale ne o centralizaci řízení vývoje všech systémů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-59fa8f6418c3--source",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-8",
+        "psp-core-2025--law-change-43174-8-4",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-8-7",
+        "psp-core-2025--law-change-43184-approved-49",
+        "psp-core-2025--law-change-43189-1",
+        "psp-core-2025--law-change-43216-1",
+        "psp-core-2025--law-change-43293-1",
+        "psp-core-2025--law-change-43382-1",
+        "zvlady-resolutions--law-change-uv-2026-83",
+        "zvlady-resolutions--law-change-uv-2026-122",
+        "zvlady-resolutions--law-change-uv-2026-167",
+        "zvlady-resolutions--law-change-uv-2026-175-27",
+        "zvlady-resolutions--law-change-uv-2026-314",
+        "zvlady-resolutions--law-change-uv-2026-587",
+        "zvlady-resolutions--law-change-uv-2026-589",
+        "zvlady-resolutions--law-change-uv-2026-653",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--print-step-210686",
+        "zvlady-resolutions--2026-83",
+        "zvlady-resolutions--2026-122",
+        "psp-core-2025--government-opinion-43216-1",
+        "zvlady-resolutions--2026-167",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211258",
+        "zvlady-resolutions--2026-314",
+        "psp-core-2025--vote-87603",
+        "psp-core-2025--vote-87604",
+        "psp-core-2025--vote-87605",
+        "psp-core-2025--vote-87608",
+        "psp-core-2025--vote-87617",
+        "psp-core-2025--amendment-1215",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88190",
+        "psp-core-2025--vote-88219",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--print-step-211918",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--vote-88454",
+        "zvlady-resolutions--2026-587",
+        "zvlady-resolutions--2026-589",
+        "zvlady-resolutions--2026-653"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili spolu s dalšími poslanci změny stavebního zákona, které mimo jiné umožňují sdružovat informační systémy a převádějí některé údaje do společných registrů; strana návrh podpořila i při závěrečném hlasování. Vláda také přijala pravidla pro centrální evidenci a koordinaci ICT projektů a uložila ministerstvům napojovat portály na Registr zastupování, což podporuje sdílení dat a koordinaci jen v části veřejné správy. Vláda naopak nesouhlasila s návrhem na jednotný digitální registr krátkodobého ubytování, který by údaje přijímal a předával. Dosavadní kroky tedy představují dílčí posun, nikoli centralizované řízení vývoje všech informačních systémů veřejné správy.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U hlasování o některých pozměňovacích návrzích k zákonu o podpoře bydlení není v dodaném textu přesně uveden obsah variant E1, E3 a E4, takže jejich účinek na slib nelze samostatně posoudit.",
+        "Usnesení o centrální evidenci a řízení ICT projektů ponechává volbu způsobu realizace jednotlivým předkladatelům; z balíčku proto nelze dovodit, že vláda převedla řízení vývoje všech veřejných informačních systémů pod jednoho správce.",
+        "Vláda současně nesouhlasila s návrhem na registr krátkodobého ubytování, přestože tento návrh počítal s jednotným systémem pro příjem a předávání údajů."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0ff9a0ba28364e3b016aec5068cf1487d1875aa15052fbff5f",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 139667,
+      "input_tokens_details": {
+        "cache_write_tokens": 133317,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 11999,
+      "output_tokens_details": {
+        "reasoning_tokens": 7033
+      },
+      "total_tokens": 151666
+    },
+    "output": {
+      "promiseId": "candidate-59fa8f6418c3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Změny pravidel pro územně plánovací dokumentaci výslovně upravují jednotné datové standardy a zveřejňování údajů v geoportálu, což se týká sdílení dat mezi veřejnými systémy.",
+          "effectCz": "Dříve se elektronicky a ve vektorové podobě zpracovávala plánovací dokumentace, ale jednotný standard se vztahoval jen na vybrané části; návrh standard rozšiřuje a schválené znění pro plánovací dokumentaci stanoví jednotný strojově čitelný vektorový formát. U § 66 se mění projednávání a zveřejnění analytických podkladů; schválené znění dále ukládá vedení údajů v geoportálu v jednotné databázi a svěřuje její správu Úřadu. Jde o zpřísnění jednotnosti dat a jejich dostupnosti v těchto agendách, nikoli o centrální řízení vývoje všech veřejných systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Část upravuje informační systémy stavební správy, sdružování systémů a ukládání územních dat do společného geoportálu, tedy přímo souvisí s centralizací a sdílením.",
+          "effectCz": "Navržené znění nově umožňovalo Úřadu sdružit informační systémy a vést více systémů jako jeden společný systém veřejné správy; předchozí § 267 vyjmenovával systémy stavební správy, ale takové oprávnění neobsahoval. Toto ustanovení se ve schváleném znění neobjevuje. Schválené znění přesto ukládá územně analytické údaje do jednotné databáze geoportálu a upravuje jeho informační funkce; oproti dosavadnímu popisu údajů a samostatným evidencím jde o dílčí sjednocení dat, ne o obecnou povinnost slučovat systémy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení převádějí informační systémy a datové podklady na nový Úřad a určují, kdy lze souběžně používat dosavadní systémy.",
+          "effectCz": "Schválené znění převádí na Úřad dokumenty, spisy a provozované informační systémy vztahující se k přecházející působnosti a ukládá převést analytické podklady do jednotné struktury geoportálu do konce roku 2027. Do konce přechodného období však připouští souběžné používání jiných informačních systémů. Předchozí znění těchto přechodných ustanovení balíček nedodává, takže směr změny oproti němu nelze určit; nové povinnosti nicméně směřují k soustředění správy a dat u Úřadu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-4",
+          "relevant": true,
+          "reasonCz": "Změny rozšiřují informační systém ochrany přírody o registr krajiny a stanoví vkládání či zpřístupňování údajů, takže se týkají propojení a sdílení veřejných dat.",
+          "effectCz": "Předchozí informační systém ochrany přírody měl několik oddělených evidencí, například databázi nálezů a evidenci druhové ochrany. Schválené znění rozšiřuje jejich funkce a přidává registr krajiny pro zobrazování a evidenci přírodních prvků a rozhodnutí; zároveň zapisuje registrované prvky do registru územní identifikace. Jde o větší rozsah propojených a dostupných údajů, nikoli o centralizaci vývoje všech informačních systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Ustanovení ukládají předávat dokumentaci a rozhodnutí orgánů ochrany přírody do registru krajiny, což přímo vytváří datové propojení mezi veřejnými evidencemi.",
+          "effectCz": "Dříve krajské a obecní orgány předávaly některé dokumenty do ústředního seznamu; návrh a schválené znění u vybraných dokumentů navíc ukládají předání do registru krajiny. Rozšiřuje se tak povinnost sdílet tyto údaje s další evidencí, ale pravidlo se týká jen vymezených údajů a agend."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-7",
+          "relevant": true,
+          "reasonCz": "Schválené přechodné ustanovení stanoví předání existující dokumentace do nového registru krajiny.",
+          "effectCz": "Schválené znění ukládá příslušným orgánům předat dokumentaci k vyjmenovaným chráněným územím a krajinným prvkům do registru krajiny do 31. prosince 2027. Předchozí znění tohoto přechodného ustanovení není v balíčku uvedeno, a proto nelze určit směr změny oproti dosavadnímu stavu; nová povinnost však soustřeďuje část údajů v registru."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+          "relevant": true,
+          "reasonCz": "Změna přesouvá správu informačního systému výzkumu, vývoje a inovací z Rady vlády na ministerstvo, tedy upravuje, kdo tento veřejný systém řídí.",
+          "effectCz": "Před změnou byl správcem a provozovatelem systému výzkumu, vývoje a inovací Úřad vlády prostřednictvím Rady pro výzkum, vývoj a inovace. Schválené znění svěřuje správu systému Ministerstvu průmyslu a obchodu a odpovídajícím způsobem mění působnost Rady. U tohoto jediného systému se odpovědnost přesouvá k jednomu ministerstvu; nejde o sjednocení řízení vývoje všech veřejných systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": true,
+          "reasonCz": "Schválené změny zapojují údaje z Integrovaného informačního systému Ministerstva práce a sociálních věcí a upravují používání souvisejících systémů podpory bydlení.",
+          "effectCz": "Dříve § 138 dovoloval vydat rozhodnutí jako první úkon jen na základě podkladů předložených účastníkem; schválené znění připouští také využití údajů vedených v Integrovaném informačním systému Ministerstva práce a sociálních věcí, což rozšiřuje opakované použití již vedených údajů. Schválené změny zároveň ruší některé přechodné úkony prostřednictvím informačního systému podpory bydlení. Předchozí znění těchto rušených bodů je v balíčku uvedeno, ale celý dopad přechodných změn nelze z vybraných odstavců určit; nově výslovně umožněné využití integrovaných údajů je dílčím posunem ke sdílení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-1",
+          "relevant": true,
+          "reasonCz": "Návrh vytváří jednotný veřejný registr krátkodobého ubytování a stanoví předávání údajů mezi ubytovateli, platformami a veřejnými orgány.",
+          "effectCz": "Dosavadní § 10 ukládal online zprostředkovatelům sdělovat údaje živnostenskému úřadu na jeho žádost; návrh zřizuje registr jako informační systém veřejné správy, jednotné digitální kontaktní místo a stanoví průběžné předávání údajů. Jde o nový systém bez předchozího znění dodaného pro jeho ustanovení; podporuje sdílení údajů v konkrétní agendě, ale necentralizuje vývoj veřejných systémů obecně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": true,
+          "reasonCz": "Návrh dovoluje znovu použít biometrické údaje pořízené při žádosti o občanský průkaz při žádosti o cestovní doklad, čímž přímo omezuje opakované pořizování stejných dat.",
+          "effectCz": "Předchozí § 21a ukládal pořídit biometrické údaje při žádosti o cestovní doklad; navržený nový odstavec stanoví, že při žádosti o občanský průkaz a cestovní doklad v tentýž den se údaje pořídí jen při prvním úkonu a znovu se použijí. To snižuje duplicitní sběr údajů v této konkrétní službě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43382-1",
+          "relevant": true,
+          "reasonCz": "Návrh propojuje evidenci skutečných majitelů s evropským systémem propojení evidencí a rozšiřuje přístup k údajům.",
+          "effectCz": "Nový § 17b ukládá ministerstvu zpřístupnit údaje prostřednictvím systému propojení evidencí a zajistit k němu přístup oprávněným osobám. Předchozí znění tohoto nového ustanovení není k dispozici, takže změnu oproti dosavadnímu stavu nelze přesně porovnat; návrh však výslovně zavádí přeshraniční sdílení v dané evidenci."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-83",
+          "relevant": true,
+          "reasonCz": "Změněný statut Rady pro informační společnost jí svěřuje průřezovou koordinaci digitalizace, sjednocování standardů a prioritizaci projektů.",
+          "effectCz": "Usnesení stanoví Radě a jejímu grémiu úkoly v koordinaci digitálních agend, sjednocování standardů a prioritizaci projektů veřejné správy. Předchozí znění statutu není v balíčku, takže nelze porovnat, o kolik se pravomoci rozšířily; přijaté znění však vytváří koordinační rámec, který se slibu týká jen částečně."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-122",
+          "relevant": true,
+          "reasonCz": "Usnesení převádí agendu spojenou se správou a rozvojem informačního systému výzkumu, vývoje a inovací na Ministerstvo průmyslu a obchodu.",
+          "effectCz": "Vláda stanoví převod agendy i zajištění provozu a rozvoje tohoto systému na Ministerstvo průmyslu a obchodu. Jde o soustředění odpovědnosti za jeden informační systém pod jeden resort; usnesení samo nepředepisuje společné řízení vývoje napříč veřejnou správou."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-167",
+          "relevant": true,
+          "reasonCz": "Usnesení zřizuje meziresortní struktury, které mají schvalovat cílovou architekturu procesů a digitalizace při zavádění stavební správy.",
+          "effectCz": "Vláda zřizuje strategický a řídicí výbor s pravomocemi schvalovat cílovou architekturu, harmonogram a standardy implementace nového modelu stavební správy. Předchozí organizační nastavení není v balíčku doloženo, takže směr změny proti němu nelze přesně určit; nové orgány vytvářejí koordinaci konkrétního projektu, nikoli obecné řízení všech systémů veřejné správy."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-27",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací počítá s prováděcím předpisem k informačnímu systému výzkumu, který má zavést jednotné standardy a interoperabilitu.",
+          "effectCz": "Vláda zařazuje jako plánovaný úkol přípravu nařízení, jež má upravit obsah systému výzkumu, formát a strukturu předávání dat a interoperabilitu s dalšími systémy. Jde o plán budoucího předpisu, nikoli o již zavedené pravidlo; předchozí právní úpravu tento záznam nemění."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-314",
+          "relevant": true,
+          "reasonCz": "Usnesení zavádí centrální řízení a přehled strategických ICT projektů, stanovování priorit a meziinstitucionální odpovědnost za jejich koordinaci.",
+          "effectCz": "Vláda zavádí centrální přehled projektů, odpovědné manažery, pravidelné reportování a koordinaci napříč organizacemi. U projektů ICT navíc stanoví evidenci a prioritu jako podmínku zahájení realizace či čerpání prostředků, s vymezenými výjimkami. Předchozí systém řízení není v balíčku popsán, ale nová opatření přímo posilují centrální dohled nad částí vývoje a investic."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-587",
+          "relevant": true,
+          "reasonCz": "Vláda zřizuje dohledový a koordinační panel, který posuzuje také cílovou IT architekturu při implementaci stavební reformy.",
+          "effectCz": "Usnesení vytváří panel, který konzultuje plány, milníky a cílovou architekturu včetně IT a může koordinovat činnost Úřadu pro rozvoj území. Předchozí stav není doložen, takže nelze změřit změnu oproti němu; jde o koordinační dohled nad konkrétní reformou, ne o všeobecné centralizované řízení systémů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-589",
+          "relevant": true,
+          "reasonCz": "Usnesení zavádí centrální evidenci, prioritizaci a posuzování ICT záměrů i zakázek a výslovně se vztahuje na vývoj a integraci informačních systémů.",
+          "effectCz": "Vláda stanoví evidenci záměrů, přidělování priorit a projednávání vybraných ICT zakázek; bez zaznamenané priority se zpravidla nesmí zahájit realizace ani čerpat veřejné prostředky. Zároveň ukládá konzultovat kapacity státních ICT podniků, ale výslovně neukládá jim zakázku zadat. Předchozí znění pravidel není dodáno, takže nelze určit přesný rozdíl; usnesení však zavádí centrálnější kontrolu a prioritizaci, nikoli povinné společné vyvíjení systémů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-653",
+          "relevant": true,
+          "reasonCz": "Usnesení ukládá ministerstvům napojit své portály na Registr zastupování nebo zveřejnit použitelné šablony, což přímo podporuje propojení digitálních služeb.",
+          "effectCz": "Vláda ukládá ministerstvům do konce roku 2027 napojit portály na Registr zastupování, případně zveřejnit šablony pro nejčastější elektronické služby, pokud to orgán vyhodnotí jako účelné. Předchozí znění není v balíčku uvedeno; nová povinnost vytváří konkrétní datové a funkční propojení, ale s možností zvolit náhradní šablony."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-59fa8f6418c3--source",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-8",
+        "psp-core-2025--law-change-43174-8-4",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-8-7",
+        "psp-core-2025--law-change-43184-approved-49",
+        "psp-core-2025--law-change-43189-1",
+        "psp-core-2025--law-change-43216-1",
+        "psp-core-2025--law-change-43293-1",
+        "psp-core-2025--law-change-43382-1",
+        "zvlady-resolutions--law-change-uv-2026-83",
+        "zvlady-resolutions--law-change-uv-2026-122",
+        "zvlady-resolutions--law-change-uv-2026-167",
+        "zvlady-resolutions--law-change-uv-2026-175-27",
+        "zvlady-resolutions--law-change-uv-2026-314",
+        "zvlady-resolutions--law-change-uv-2026-587",
+        "zvlady-resolutions--law-change-uv-2026-589",
+        "zvlady-resolutions--law-change-uv-2026-653",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--print-step-210686",
+        "psp-core-2025--amendment-text-762",
+        "psp-core-2025--vote-87603",
+        "psp-core-2025--vote-87604",
+        "psp-core-2025--vote-87605",
+        "psp-core-2025--vote-87608",
+        "psp-core-2025--vote-87617",
+        "psp-core-2025--government-opinion-43216-1",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--print-step-211918",
+        "zvlady-resolutions--2026-83",
+        "zvlady-resolutions--2026-122",
+        "zvlady-resolutions--2026-167",
+        "zvlady-resolutions--2026-175",
+        "zvlady-resolutions--2026-314",
+        "zvlady-resolutions--2026-587",
+        "zvlady-resolutions--2026-589",
+        "zvlady-resolutions--2026-653",
+        "psp-core-2025--amendment-text-1215",
+        "psp-core-2025--amendment-1215",
+        "psp-core-2025--amendment-text-1364",
+        "psp-core-2025--vote-88190",
+        "psp-core-2025--vote-88219",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Vláda zavedla centrální přehled a prioritizaci strategických ICT projektů a uložila ministerstvům propojit jejich portály s Registrem zastupování. Poslanci Motoristů také podpořili novelu stavebního zákona, která pro územní plánování zavádí jednotnou databázi a přesouvá související systémy a data k novému Úřadu. Jde o dílčí kroky k centrálnější koordinaci a sdílení údajů, nikoli o úplné sjednocení řízení vývoje všech veřejných informačních systémů. Proti tomu vláda nesouhlasila s návrhem na celostátní registr krátkodobého ubytování a poslanci Motoristů nepodpořili pozměňovací návrh na ukládání analytických podkladů do geoportálu; tyto návrhové kroky však nepřevažují nad pozdějšími přijatými opatřeními.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh novely stavebního zákona původně umožňoval sdružit více informačních systémů do jednoho společného systému, ale toto ustanovení ve schváleném znění není. Schválené znění přesto zavádí jednotnou databázi územních údajů a převod souvisejících systémů; balíček nedokládá, že bylo dosaženo obecného sloučení veřejných systémů.",
+        "Vláda nesouhlasila s návrhem na registr krátkodobého ubytování a poslanci Motoristů nepodpořili pozměňovací návrh týkající se ukládání územně analytických podkladů do geoportálu. Přesný vztah některých dílčích hlasování k jednotlivým bodům širšího pozměňovacího návrhu není z dodaných záznamů zřejmý.",
+        "Dodaný materiál dokládá přijetí pravidel a schválení zákonných změn, nikoli jejich následné technické zavedení nebo úplné splnění cíle slibu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_03a02d7388ebef9f016aec515df19487d18b0d3ebd81ca27bc",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 139667,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 139664
+      },
+      "output_tokens": 9396,
+      "output_tokens_details": {
+        "reasoning_tokens": 4575
+      },
+      "total_tokens": 149063
+    },
+    "output": {
+      "promiseId": "candidate-59fa8f6418c3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Změny zavádějí jednotnější digitální formát územně plánovacích dat a jejich zveřejňování v geoportálu, což se týká sdílení a standardizace veřejných dat.",
+          "effectCz": "Dříve se elektronicky a ve vektorové podobě pořizovala územně plánovací dokumentace a jednotným standardem byly jen vybrané její části; schválené znění vyžaduje jednotný standard pro veškerou uvedenou dokumentaci jako strojově čitelná digitální data. Územně analytické podklady mají být nově vedeny v jednotné databázi geoportálu. Tím se standardizace a sdílení těchto dat rozšiřují, ale pravidla se týkají územního plánování, nikoli obecného řízení vývoje všech veřejných informačních systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Nové ustanovení výslovně umožňuje sdružovat informační systémy veřejné správy do jednoho společného systému.",
+          "effectCz": "Před změnou § 267 odst. 6 neexistoval; nově může Úřad informační systémy sdružit a vést více systémů jako jeden společný informační systém veřejné správy. Rozšiřuje se tak možnost konsolidace systémů, ale ustanovení ji pouze umožňuje a neukládá ji pro všechny systémy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": true,
+          "reasonCz": "Upravuje převod informačních systémů a dat do nového Úřadu a jejich využití v národním geoportálu.",
+          "effectCz": "Schválené znění převádí na Úřad příslušné dokumenty, spisy a provozované informační systémy, ukládá převod územně analytických podkladů do jednotné struktury a geoportálu a během přechodného období dovoluje souběžně používat i jiné systémy. Kontext předchozího znění těchto přechodných ustanovení v balíčku chybí, takže směr změny oproti dřívějšímu stavu nelze plně určit; text nicméně stanoví konkrétní centralizaci vyjmenovaných systémů a dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-4",
+          "relevant": true,
+          "reasonCz": "Mění součásti informačního systému ochrany přírody a rozšiřuje evidenci a předávání údajů do registrů.",
+          "effectCz": "Před změnou informační systém ochrany přírody obsahoval databázi nálezů, evidenci druhové ochrany a další evidence; schválené znění rozšiřuje jejich obsah a zavádí registr krajiny, který informace shromažďuje a zpřístupňuje. Údaje o registrovaných krajinných prvcích se mají vést také v registru územní identifikace. Rozšiřuje se tak propojení a sdílení údajů v těchto konkrétních systémech, nikoli však obecné řízení vývoje všech veřejných systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Ukládá předávání dokumentace krajských orgánů ochrany přírody do registru krajiny.",
+          "effectCz": "Dosavadní § 77a odst. 4 písm. c) a j) ukládal předávání vybraných dokumentů do jiných evidencí či ústředního seznamu; nově se u příslušných úkonů doplňuje jejich předání také do registru krajiny. Sdílení údajů s tímto registrem se tedy rozšiřuje, jde však o konkrétní evidenci v ochraně přírody."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-7",
+          "relevant": true,
+          "reasonCz": "Přechodné ustanovení ukládá převést existující dokumentaci do registru krajiny.",
+          "effectCz": "Schválené znění ukládá orgánům ochrany přírody předat do 31. prosince 2027 dokumentaci k vyjmenovaným chráněným prvkům do registru krajiny. Předchozí znění tohoto přechodného ustanovení není v balíčku doloženo, takže směr změny oproti dřívějšímu stavu nelze určit; ustanovení ale zavádí konkrétní převod dat do společného registru."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+          "relevant": true,
+          "reasonCz": "Mění odpovědnost za správu informačního systému výzkumu, vývoje a inovací, tedy správu konkrétního veřejného systému.",
+          "effectCz": "Před změnou byl podle § 35 správcem a provozovatelem tohoto systému Výzkumný a vývojový úřad, zatímco § 30 určoval schvalování jeho koncepce správcem. Nově je správcem systému Ministerstvo průmyslu a obchodu a související úloha se odnímá Radě pro výzkum, vývoj a inovace. Mění se tedy odpovědný ústřední orgán pro jeden systém; zda tím dochází k širší centralizaci vývoje nebo k propojení s jinými systémy, text nedokládá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně počítá s využitím údajů z Integrovaného informačního systému Ministerstva práce a sociálních věcí.",
+          "effectCz": "Dosavadní § 138 dovoloval vydat rozhodnutí jako první úkon jen na základě podkladů předložených účastníkem; nově lze využít také údaje z Integrovaného informačního systému ministerstva, což rozšiřuje oporu pro sdílení dat mezi agendami. Schválené znění současně ruší některá přechodná pravidla pro používání systému podpory bydlení; jejich účinek na obecné řízení vývoje systémů nelze z dodaného textu dovodit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-1",
+          "relevant": true,
+          "reasonCz": "Návrh vytváří státem spravovaný digitální registr, který přijímá a předává údaje o krátkodobém ubytování.",
+          "effectCz": "Předchozí znění § 9f až § 9n v dodaném kontextu chybí; navržený text zřizuje registr jako informační systém veřejné správy, jehož správcem je ministerstvo, a označuje jej za jednotné digitální kontaktní místo pro příjem a předávání údajů. Ukládá také zápis a výměnu údajů. Jde o konkrétní centralizaci jedné agendy a dat, ale směr vůči dosavadním pravidlům nelze bez předchozího znění plně určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje znovu použít biometrické údaje pořízené při žádosti o občanský průkaz.",
+          "effectCz": "Dosavadní § 21a ukládal pořídit biometrické údaje při žádosti o cestovní doklad; nově se při žádosti o občanský průkaz i cestovní doklad v tentýž den biometrické údaje pro cestovní doklad znovu nepořizují a využijí se údaje pořízené při žádosti o občanský průkaz. Omezuje se duplicitní pořizování údajů a podporuje jejich opětovné využití, nikoli však centralizace řízení vývoje systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43382-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí systém propojení evidence skutečných majitelů s evropským systémem propojených evidencí.",
+          "effectCz": "Před změnou § 17 upravoval dálkový přístup k české evidenci; nové § 17b ukládá ministerstvu zpřístupnit údaje prostřednictvím systému propojení evidencí a zajistit k němu přístup příslušným osobám a orgánům. Jde o nové propojení a sdílení dat; předchozí znění tohoto systému v českém zákoně není doloženo, takže širší změnu centrální správy systémů nelze určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-83",
+          "relevant": true,
+          "reasonCz": "Upravuje koordinační roli Rady vlády pro informační společnost a sjednocování digitálních standardů.",
+          "effectCz": "Předchozí statut Rady není v balíčku uveden, takže přesnou změnu oproti dřívějšímu stavu nelze určit. Přijaté znění jí svěřuje meziresortní koordinaci, podporu sjednocování standardů digitálních služeb a prioritizaci digitalizačních projektů, což posiluje koordinaci, ale samo o sobě necentralizuje řízení vývoje všech systémů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-122",
+          "relevant": true,
+          "reasonCz": "Usnesení převádí odpovědnost za informační systém výzkumu, vývoje a inovací na jiné ministerstvo a ukládá mu jeho rozvoj.",
+          "effectCz": "Usnesení převádí agendu podpory Rady pro výzkum, vývoj a inovace na Ministerstvo průmyslu a obchodu a stanoví, že jeho příslušný útvar zajišťuje provoz a rozvoj informačního systému. Předchozí znění usnesení v balíčku není, proto nelze porovnat rozsah změny; konkrétní odpovědnost za jeden systém se však soustřeďuje na ministerstvo."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-167",
+          "relevant": true,
+          "reasonCz": "Zřizuje meziresortní řízení implementace stavebního práva a výslovně zahrnuje cílovou architekturu digitalizace.",
+          "effectCz": "Usnesení vytváří strategický a řídicí výbor, který schvaluje plán implementace, cílovou architekturu procesů a informační podpory, harmonogram a standardy a koordinuje zapojené úřady. Nejde o změnu dosavadního právního znění, které není přiloženo; vzniká však konkrétní koordinace a řízení informační podpory reformy."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-27",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací vlády obsahuje úkol připravit předpis o informačním systému výzkumu a jeho interoperabilitě.",
+          "effectCz": "Usnesení samo nemění pravidla systému; zařazuje do plánu přípravu nařízení, které má stanovit jednotné standardy, strukturu a způsob předávání údajů i interoperabilitu s dalšími systémy. Jde o plánovaný návrh, nikoli o již účinné pravidlo, a dosavadní právní úpravu nelze z tohoto usnesení porovnat."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-314",
+          "relevant": true,
+          "reasonCz": "Zavádí centrální přehled a meziresortní řízení strategických ICT projektů, jejich priorit a odpovědných manažerů.",
+          "effectCz": "Usnesení stanoví společný přehled projektů, jmenování odpovědných manažerů, jejich meziinstitucionální koordinaci a pravidelné vykazování. Zároveň ponechává zákonné a interní kompetence jednotlivým organizacím, takže samo nepřevádí veškeré řízení vývoje pod jednoho správce; centralizuje však evidenci a koordinaci vybraných strategických projektů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-587",
+          "relevant": true,
+          "reasonCz": "Zřizuje dohledový a koordinační panel pro implementaci stavebního práva včetně IT a informační podpory.",
+          "effectCz": "Usnesení zřizuje expertní panel, který konzultuje a koordinuje cílovou architekturu procesů, IT a informační podporu reformy stavebního práva. Předchozí pravidla nejsou doložena, takže změnu vůči nim nelze určit; jde o koordinaci konkrétní reformy, nikoli o obecné řízení vývoje všech systémů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-589",
+          "relevant": true,
+          "reasonCz": "Zavádí centrální evidenci, priority a meziresortní projednávání ICT záměrů a projektů.",
+          "effectCz": "Usnesení ukládá evidovat ICT záměry v jednom systému, určit jejich priority a projednávat vybrané zakázky centrálně; aktuální údaje dostupné v jiném veřejném systému se nemají předkladateli vyžadovat znovu. Současně výslovně ponechává volbu způsobu realizace předkladateli a stanoviska nenahrazují jeho rozhodnutí. Centralizuje tak část koordinace a sdílení dat, nikoli samotné řízení veškerého vývoje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-653",
+          "relevant": true,
+          "reasonCz": "Ukládá ministerstvům napojit portály na Registr zastupování nebo zveřejnit opakovaně využitelné šablony pro digitální služby.",
+          "effectCz": "Usnesení nově stanoví ministerstvům úkol napojit portály na Registr zastupování, případně zpřístupnit šablony pro nejčastější elektronické služby, pokud to považují za účelné. Předchozí stav není v balíčku doložen; jde o konkrétní propojování portálů s registrem, ale ne o centralizaci řízení vývoje všech systémů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-59fa8f6418c3--source",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-8",
+        "psp-core-2025--law-change-43174-8-4",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-8-7",
+        "psp-core-2025--law-change-43184-approved-49",
+        "psp-core-2025--law-change-43189-1",
+        "psp-core-2025--law-change-43216-1",
+        "psp-core-2025--law-change-43293-1",
+        "psp-core-2025--law-change-43382-1",
+        "zvlady-resolutions--law-change-uv-2026-83",
+        "zvlady-resolutions--law-change-uv-2026-122",
+        "zvlady-resolutions--law-change-uv-2026-167",
+        "zvlady-resolutions--law-change-uv-2026-175-27",
+        "zvlady-resolutions--law-change-uv-2026-314",
+        "zvlady-resolutions--law-change-uv-2026-587",
+        "zvlady-resolutions--law-change-uv-2026-589",
+        "zvlady-resolutions--law-change-uv-2026-653",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--print-step-210686",
+        "zvlady-resolutions--2026-83",
+        "zvlady-resolutions--2026-122",
+        "psp-core-2025--government-opinion-43216-1",
+        "zvlady-resolutions--2026-167",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211258",
+        "zvlady-resolutions--2026-314",
+        "psp-core-2025--vote-87603",
+        "psp-core-2025--vote-87604",
+        "psp-core-2025--vote-87605",
+        "psp-core-2025--vote-87608",
+        "psp-core-2025--vote-87617",
+        "psp-core-2025--amendment-1215",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88190",
+        "psp-core-2025--vote-88219",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--print-step-211918",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--vote-88454",
+        "zvlady-resolutions--2026-587",
+        "zvlady-resolutions--2026-589",
+        "zvlady-resolutions--2026-653"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili spolu s dalšími poslanci změny stavebního zákona, které mimo jiné umožňují sdružovat informační systémy a převádějí některé údaje do společných registrů; strana návrh podpořila i při závěrečném hlasování. Vláda také přijala pravidla pro centrální evidenci a koordinaci ICT projektů a uložila ministerstvům napojovat portály na Registr zastupování, což podporuje sdílení dat a koordinaci jen v části veřejné správy. Vláda naopak nesouhlasila s návrhem na jednotný digitální registr krátkodobého ubytování, který by údaje přijímal a předával. Dosavadní kroky tedy představují dílčí posun, nikoli centralizované řízení vývoje všech informačních systémů veřejné správy.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U hlasování o některých pozměňovacích návrzích k zákonu o podpoře bydlení není v dodaném textu přesně uveden obsah variant E1, E3 a E4, takže jejich účinek na slib nelze samostatně posoudit.",
+        "Usnesení o centrální evidenci a řízení ICT projektů ponechává volbu způsobu realizace jednotlivým předkladatelům; z balíčku proto nelze dovodit, že vláda převedla řízení vývoje všech veřejných informačních systémů pod jednoho správce.",
+        "Vláda současně nesouhlasila s návrhem na registr krátkodobého ubytování, přestože tento návrh počítal s jednotným systémem pro příjem a předávání údajů."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

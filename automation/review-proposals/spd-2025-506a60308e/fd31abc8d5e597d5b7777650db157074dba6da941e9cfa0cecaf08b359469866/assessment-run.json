@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-42-41-669Z--0e37569b0996",
+  "evaluatedAt": "2026-10-02T05:42:41.669Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-506a60308e/0e37569b0996799cb2c629d66c43176a53ab0459125ddd06f67cf5fe1c3ec540.json",
+  "packageHash": "0e37569b0996799cb2c629d66c43176a53ab0459125ddd06f67cf5fe1c3ec540",
+  "assessmentContentHash": "c487e6bda9f8d589d08837ff3365175f25c76734a83e1e99b5a6bda400681929",
+  "assessmentFingerprint": "fd31abc8d5e597d5b7777650db157074dba6da941e9cfa0cecaf08b359469866",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-506a60308e",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-506a60308e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-2",
+          "relevant": true,
+          "reasonCz": "Návrh u části cizinců s dočasnou ochranou váže nárok na dávku a započtení nákladů na bydlení či ubytování na evidenci uchazeče o zaměstnání nebo příjem z práce, což se přímo dotýká motivace k evidenci a zaměstnání."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": false,
+          "reasonCz": "Změny zákona o zaměstnanosti upravují zejména pravidla a výši podpor a postihy za nehlášenou práci, ale předložený text nezavádí rekvalifikace ani konkrétní podporu návratu nezaměstnaných do práce."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-506a60308e--source",
+        "psp-core-2025--law-change-43335-2",
+        "psp-core-2025--print-step-211537"
+      ],
+      "explanationCz": "Vláda, v níž SPD působí, předložila návrh zákona měnící pravidla pro dávky některých cizinců s dočasnou ochranou. Návrh váže nárok na dávku či započtení nákladů na bydlení nebo ubytování na evidenci uchazeče o zaměstnání, případně na příjem z práce nebo podnikání. Tím může část nezaměstnaných motivovat k evidenci nebo zaměstnání, což je dílčí posun směrem ke slibu. Návrh však nezavádí rekvalifikace ani nepokrývá návrat nezaměstnaných obecně.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh se týká jen některých cizinců s dočasnou ochranou a v evidenci je doloženo jeho předložení, nikoli přijetí; jeho skutečný dopad na návrat do zaměstnání proto zůstává nejistý."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-506a60308e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje humanitární dávku pro cizince s dočasnou ochranou a její podmínky, nikoli rekvalifikace nebo návrat nezaměstnaných do práce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": true,
+          "reasonCz": "Návrh mění ustanovení zákona o zaměstnanosti s číselnými sazbami a ruší § 51a, takže může ovlivnit podporu nezaměstnaných, avšak dodaný kontext neuvádí dosavadní znění těchto ustanovení."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-506a60308e--source",
+        "psp-core-2025--law-change-43422-14",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Volební program SPD slibuje podporu rekvalifikací a návratu nezaměstnaných do zaměstnání. Vláda, v níž byla SPD, předložila návrh novely zákona o zaměstnanosti, který mimo jiné snižuje některé číselné koeficienty v § 51 a ruší § 51a. To může omezovat podporu nezaměstnaných, a tedy jít proti části slibu, ale dodaný podklad neobsahuje dosavadní znění těchto ustanovení, takže jejich přesný dopad nelze ověřit.",
+      "confidence": "low",
+      "uncertainties": [
+        "Návrh u některých koeficientů uvádí nižší hodnoty, ale chybí dosavadní znění dotčených ustanovení; nelze proto spolehlivě určit, zda a jak změny zasahují podporu při rekvalifikaci nebo návratu do zaměstnání."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0d9cd6b6531823b7016abf44232c7487d19380286498e2e7d9",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 26023,
+      "input_tokens_details": {
+        "cache_write_tokens": 22699,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1944,
+      "output_tokens_details": {
+        "reasoning_tokens": 1436
+      },
+      "total_tokens": 27967
+    },
+    "output": {
+      "promiseId": "spd-2025-506a60308e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-2",
+          "relevant": true,
+          "reasonCz": "Návrh u části cizinců s dočasnou ochranou váže nárok na dávku a započtení nákladů na bydlení či ubytování na evidenci uchazeče o zaměstnání nebo příjem z práce, což se přímo dotýká motivace k evidenci a zaměstnání."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": false,
+          "reasonCz": "Změny zákona o zaměstnanosti upravují zejména pravidla a výši podpor a postihy za nehlášenou práci, ale předložený text nezavádí rekvalifikace ani konkrétní podporu návratu nezaměstnaných do práce."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-506a60308e--source",
+        "psp-core-2025--law-change-43335-2",
+        "psp-core-2025--print-step-211537"
+      ],
+      "explanationCz": "Vláda, v níž SPD působí, předložila návrh zákona měnící pravidla pro dávky některých cizinců s dočasnou ochranou. Návrh váže nárok na dávku či započtení nákladů na bydlení nebo ubytování na evidenci uchazeče o zaměstnání, případně na příjem z práce nebo podnikání. Tím může část nezaměstnaných motivovat k evidenci nebo zaměstnání, což je dílčí posun směrem ke slibu. Návrh však nezavádí rekvalifikace ani nepokrývá návrat nezaměstnaných obecně.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh se týká jen některých cizinců s dočasnou ochranou a v evidenci je doloženo jeho předložení, nikoli přijetí; jeho skutečný dopad na návrat do zaměstnání proto zůstává nejistý."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_07da97a41bdbeffe016abf442fe25487d1864d93fc3f20f8c3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 26023,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 26020
+      },
+      "output_tokens": 3614,
+      "output_tokens_details": {
+        "reasoning_tokens": 3131
+      },
+      "total_tokens": 29637
+    },
+    "output": {
+      "promiseId": "spd-2025-506a60308e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje humanitární dávku pro cizince s dočasnou ochranou a její podmínky, nikoli rekvalifikace nebo návrat nezaměstnaných do práce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": true,
+          "reasonCz": "Návrh mění ustanovení zákona o zaměstnanosti s číselnými sazbami a ruší § 51a, takže může ovlivnit podporu nezaměstnaných, avšak dodaný kontext neuvádí dosavadní znění těchto ustanovení."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-506a60308e--source",
+        "psp-core-2025--law-change-43422-14",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Volební program SPD slibuje podporu rekvalifikací a návratu nezaměstnaných do zaměstnání. Vláda, v níž byla SPD, předložila návrh novely zákona o zaměstnanosti, který mimo jiné snižuje některé číselné koeficienty v § 51 a ruší § 51a. To může omezovat podporu nezaměstnaných, a tedy jít proti části slibu, ale dodaný podklad neobsahuje dosavadní znění těchto ustanovení, takže jejich přesný dopad nelze ověřit.",
+      "confidence": "low",
+      "uncertainties": [
+        "Návrh u některých koeficientů uvádí nižší hodnoty, ale chybí dosavadní znění dotčených ustanovení; nelze proto spolehlivě určit, zda a jak změny zasahují podporu při rekvalifikaci nebo návratu do zaměstnání."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0dbaa767d3045178016abf4449197487d19e65d1be4d790747",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 26157,
+      "input_tokens_details": {
+        "cache_write_tokens": 23675,
+        "cached_tokens": 2479
+      },
+      "output_tokens": 478,
+      "output_tokens_details": {
+        "reasoning_tokens": 216
+      },
+      "total_tokens": 26635
+    },
+    "output": {
+      "choice": "cannot-decide",
+      "citedEvidenceIds": [
+        "psp-core-2025--law-change-43335-2",
+        "psp-core-2025--print-step-211537",
+        "psp-core-2025--law-change-43422-14",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Ani jedno hodnocení nemá pro svůj závěr dostatečnou oporu. Vláda s účastí SPD předložila změnu dávek pro lidi s dočasnou ochranou, podle níž k získání dávky může stačit evidence na úřadu práce. První hodnocení z toho vyvozuje podporu návratu do zaměstnání, kterou však tato podmínka sama nedokládá. Druhé hodnocení označuje jiný vládní návrh za krok proti slibu kvůli snížení některých částek, přestože chybí znění pravidel potřebné k ověření jejich významu. Samo přitom připouští, že dopad na rekvalifikace a návrat do práce nelze spolehlivě určit."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-cannot-decide",
+    "status": null,
+    "selectedReview": null
+  }
+}

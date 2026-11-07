@@ -1,0 +1,2394 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-47-39-882Z--855c045e2e20",
+  "evaluatedAt": "2026-11-05T10:47:39.882Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-ec7c8ad96f6f/855c045e2e20d63e3264e3bad51cfae6427447eceb9d0494c861ead4abe7f8c1.json",
+  "packageHash": "855c045e2e20d63e3264e3bad51cfae6427447eceb9d0494c861ead4abe7f8c1",
+  "assessmentContentHash": "9aff34ac9bb0e912cad3ede38a8cdedac854b6941c1bec5575283fc9561549ff",
+  "assessmentFingerprint": "c42c53c987da92f9e5c8fc6f35639c999907f6a3db5520865312b718efdae85b",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-ec7c8ad96f6f",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment cites duplicate evidence IDs",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_05ada087179c9e1e016aec5a88cf6487d198d511bc88a4d1c9",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 583673,
+            "input_tokens_details": {
+              "cache_write_tokens": 577323,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 16368,
+            "output_tokens_details": {
+              "reasoning_tokens": 8360
+            },
+            "total_tokens": 600041
+          },
+          "output": {
+            "promiseId": "candidate-ec7c8ad96f6f",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-1",
+                "relevant": true,
+                "reasonCz": "Mění základní ustanovení stavebního zákona a zavádí nové úřady rozvoje území, tedy přímo upravuje systém povolování staveb.",
+                "effectCz": "Dosud působnost vykonávaly ministerstvo, dosavadní stavební a územně plánovací orgány a další vyjmenované instituce; návrh vytváří nový Úřad rozvoje území a krajské úřady rozvoje území a sjednocuje některé pravomoci. Změny mají část rozhodování soustředit, ale samy o sobě nestanoví konkrétní dobu povolení ani nezaručují rychlejší schvalování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-2",
+                "relevant": true,
+                "reasonCz": "Upravuje nadřízenost úřadů, jejich pravomoci a rozdělení stavební působnosti, což přímo zasahuje do povolování staveb.",
+                "effectCz": "Před změnou byly pravomoci rozděleny mezi ministerstva, krajské a obecní stavební úřady a další orgány; návrh je nově rozděluje mezi Úřad rozvoje území, krajské úřady rozvoje území a územní pracoviště. Jde o organizační změnu a přesun úkonů; z dodaného znění nelze určit, že by sama o sobě zkrátila dobu povolení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-3",
+                "relevant": true,
+                "reasonCz": "Mění postupy územního plánování, řešení rozporů a lhůty či náležitosti účasti v něm, což je součástí přípravy staveb.",
+                "effectCz": "Dosavadní úprava obsahovala samostatné kroky a postupy pro projednání plánů a rozporů; návrh zavádí dohodovací řízení s lhůtami, upravuje projednání a připouští některé zjednodušené postupy. Některé kroky se zkracují nebo odpadávají, což může přípravu plánů urychlit; současně se rozšiřují možnosti převzetí některých ploch a koridorů bez běžného posuzování, takže se část omezení uvolňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": true,
+                "reasonCz": "Mění průběh pořizování územně plánovací dokumentace a možnost změn či zjednodušených postupů, které předcházejí povolení staveb.",
+                "effectCz": "Dosavadní úprava vyžadovala opakované projednání u podstatných změn a upravovala samostatné kroky pro změny územních plánů; návrh nově vymezuje případy, které se za podstatné nepovažují, a zjednodušuje některé následné postupy. Tím některé procesní povinnosti a čekání uvolňuje, avšak bez záruky konkrétního výsledného času povolování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-5",
+                "relevant": true,
+                "reasonCz": "Upravuje požadavky, podklady a úkony v samotném povolovacím řízení, včetně řízení o povolení a kolaudaci.",
+                "effectCz": "Dosavadní úprava vyžadovala dokumenty a stanoviska v samostatných krocích; návrh část úkonů integruje do rozhodnutí stavebního úřadu, zavádí předběžné informace a v některých případech souhlas při nečinnosti. Některé procesní překážky se tím uvolňují, ale nové podmínky a výjimky se liší podle druhu záměru; účinek na rychlost není ve všech případech stejný."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Obsahuje hlavní změny posuzování a povolování záměrů, a proto přímo naplňuje část slibu o zrychlení schvalování staveb.",
+                "effectCz": "Dosavadní stavební zákon vyžadoval posouzení souladu s územní dokumentací, právními předpisy a chráněnými zájmy; návrh tyto úkony soustřeďuje do řízení o záměru a zavádí další zjednodušené postupy. Některé podmínky se zmírňují a některé kontroly se přesouvají do společného řízení. Dodatek k § 212a, který poslanci ANO navrhli a podpořili, navíc u některých jednoduchých staveb a sítí zavádí fikci povolení po marném uplynutí lhůty, s možností následného přezkumu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-7",
+                "relevant": true,
+                "reasonCz": "Mění kategorie staveb a pravidla soudního přezkumu i další části povolovacího režimu, takže se týká rychlosti povolování.",
+                "effectCz": "Dosavadní příloha stanovovala konkrétní kategorie drobných staveb a soudní řád připouštěl širší přezkum; návrh některé stavby nově zařazuje do jednodušších kategorií a upravuje rozsah soudního přezkumu. V některých případech se požadavky na povolení nebo možnost napadnout rozhodnutí zužují, což může řízení urychlit; jiný samostatný účinek z dodaných odstavců nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-2",
+                "relevant": true,
+                "reasonCz": "Zakládá Úřad rozvoje území a přesouvá na něj působnost v územním plánování a stavebním řádu.",
+                "effectCz": "Dosud působilo Ministerstvo pro místní rozvoj jako ústřední orgán v těchto věcech; návrh zařazuje Úřad rozvoje území mezi ústřední správní orgány a tuto působnost z ministerstva vypouští. Jde o institucionální přesun, nikoli o přímé stanovení kratší lhůty."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-3",
+                "relevant": true,
+                "reasonCz": "Upravuje, jak se podmínky požární ochrany zapojují do povolování staveb.",
+                "effectCz": "Předchozí úprava počítala u dotčených staveb se závaznými stanovisky a technické podmínky stanovovalo ministerstvo; návrh část úkonů mění na vyjádření a svěřuje přípravu předpisu vládě na návrh nového Úřadu. U některých staveb se závaznost samostatného úkonu uvolňuje a může se začlenit do povolení; rozsah změny je omezen na požární ochranu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-4",
+                "relevant": true,
+                "reasonCz": "Mění požadavky státní památkové péče v řízeních o povolení staveb.",
+                "effectCz": "Dříve si vlastník u řady záměrů v památkových územích musel vyžádat rozhodnutí nebo závazné stanovisko památkového orgánu; schválené znění přesouvá část posouzení na stavební úřad a omezuje některé případy samostatného úkonu. Uvolňuje tím část procesních kroků, ale u některých chráněných území zachovává zvláštní režim."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-7",
+                "relevant": true,
+                "reasonCz": "Mění návaznost geologických vyjádření na žádost o povolení záměru, tedy procesní podklad stavebního řízení.",
+                "effectCz": "Předchozí znění vztahovalo příslušné vyjádření na územní rozhodnutí a mělo výjimku pro případy jednotného environmentálního stanoviska; návrh terminologii přesouvá na žádost o povolení záměru a ruší uvedenou výjimku. Směr změny v délce nebo náročnosti řízení nelze z dodaných ustanovení určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-1",
+                "relevant": true,
+                "reasonCz": "Upravuje, kdy je při přípravě území a staveb potřeba posoudit krajinný ráz.",
+                "effectCz": "Předchozí výjimka z posuzování krajinného rázu platila v zastavěném území a v plochách s podrobně stanovenou ochranou; návrh ji váže na zastavitelné území či jiné vymezené plochy schválené v souladu se stanoviskem orgánu ochrany přírody. V některých lokalitách se tak posouzení může zúžit; přesný rozsah nelze bez dalšího územního vymezení určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-2",
+                "relevant": true,
+                "reasonCz": "Přesouvá část úkonů ochrany přírody do řízení stavebního úřadu a upravuje jejich podklady.",
+                "effectCz": "Dosud vyžadovaly některé záměry samostatný souhlas či rozhodnutí orgánu ochrany přírody; návrh stanoví, že část podmínek posoudí stavební úřad v řízení o záměru. U dotčených záměrů tím slučuje procesní kroky, ale pro část chráněných území zůstává samostatný režim."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-3",
+                "relevant": true,
+                "reasonCz": "Mění podmínky výjimek ze zákazů ochrany zvláště chráněných druhů, které mohou být podkladem pro povolení staveb.",
+                "effectCz": "Dosavadní zákon umožňoval výjimky z více důvodů a upravoval podmínky jejich udělení; návrh mění důvody, podmínky a některé možnosti výjimek. Tím může změnit dostupnost podkladů pro dotčené záměry, avšak směr dopadu na rychlost povolování jako celek nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-4",
+                "relevant": true,
+                "reasonCz": "Mění právo organizací účastnit se správních řízení, která se týkají chráněných zájmů v povolování záměrů.",
+                "effectCz": "Dosavadní úprava umožňovala za stanovených podmínek účast občanských sdružení; návrh stanoví užší podmínky pro právnické osoby, včetně tříleté existence nebo podpory 200 osob, a u schváleného znění nepřipouští jejich účast v řízení vedeném stavebním úřadem. Procesní možnost účasti se tím zmenšuje, což může řízení zjednodušit, ale mění rozsah veřejného zapojení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-5",
+                "relevant": true,
+                "reasonCz": "Zavádí působnost stavebních úřadů při posuzování řady podmínek ochrany přírody v řízeních o záměru.",
+                "effectCz": "Dříve vykonávaly tyto úkony různé orgány ochrany přírody a u některých věcí se vydávaly samostatné souhlasy či výjimky; návrh část posouzení začleňuje do rozhodnutí stavebního úřadu, mimo vyjmenovaná chráněná území. Slučuje tak část povolovacích kroků, aniž by odstranil všechny věcné podmínky ochrany."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-7",
+                "relevant": true,
+                "reasonCz": "Mění, jak se při povolování staveb uplatní posouzení ochrany přírody a související přezkum.",
+                "effectCz": "Dosavadní úprava stanovila samostatné postupy a zapojení orgánů ochrany přírody; návrh je u záměrů povolovaných podle stavebního zákona převádí do společného režimu a upravuje přechod řízení. Procesní soustředění může odstranit duplicitní úkony, ale z dodaných částí nelze určit celkový časový dopad."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Začleňuje souhlas s odnětím zemědělské půdy do rozhodnutí stavebního úřadu.",
+                "effectCz": "Dosud byl souhlas s odnětím zemědělské půdy samostatným předpokladem povolení; návrh nechává stavební úřad posoudit podmínky v rozhodnutí o záměru a současně stanoví, že se některé zásady ochrany neposuzují v územích předem vymezených se stanoviskem příslušného orgánu. Zrušena je tak samostatná fáze u dotčených záměrů a v těchto vymezených územích se část limitů uvolňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-14",
+                "relevant": true,
+                "reasonCz": "Převádí souhlas a rozhodování o záboru lesních pozemků pro záměry do řízení stavebního úřadu.",
+                "effectCz": "Dříve byly pro dotčení lesa a ochranného pásma potřebné úkony orgánu státní správy lesů; návrh u záměrů podle stavebního zákona nahrazuje část závazných stanovisek vyjádřením a dává stavebnímu úřadu rozhodovací působnost. Procesní kroky se slučují, zatímco věcné podmínky ochrany lesa zůstávají posuzovány."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-17",
+                "relevant": true,
+                "reasonCz": "Mění veterinární posudky a vyjádření, které slouží jako podklady pro povolení staveb a jejich užívání.",
+                "effectCz": "Dosud byly pro některé provozy podkladem závazné posudky, které správní orgán nemohl překročit; schválené znění tento samostatný závazný posudek ruší a upravuje postup na vyjádření. Uvolňuje se tak samostatný podkladový krok, ale změna se týká jen dotčených provozů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-19",
+                "relevant": true,
+                "reasonCz": "Upravuje stanoviska a vyjádření ochrany obyvatelstva jako podklady pro povolení podle stavebního zákona.",
+                "effectCz": "Dosud se požadavky ochrany obyvatelstva posuzovaly prostřednictvím závazného stanoviska; schválené znění rozlišuje závazné stanovisko a vyjádření podle typu stavby a napojuje je na stavební řízení. Mění se forma podkladu a jeho návaznost, nikoli doložené věcné limity."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-20",
+                "relevant": true,
+                "reasonCz": "Převádí řadu úkonů ochrany veřejného zdraví pro stavební záměry do rozhodnutí stavebního úřadu.",
+                "effectCz": "Dříve se pro dotčené záměry vydávala stanoviska a některá povolení orgánu ochrany veřejného zdraví; návrh jejich samostatné vydávání v příslušných případech ruší a stanoví, že je rozhodnutím nahradí stavební úřad. Tím se procesně slučují kroky, avšak věcný obsah hygienických podmínek z dodaného znění nelze označit za plošně zmírněný."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": true,
+                "reasonCz": "Mění posuzování vlivů na životní prostředí a návaznost tohoto posouzení na povolení staveb.",
+                "effectCz": "Předchozí úprava provázala posouzení vlivů s jednotným environmentálním stanoviskem; návrh umožňuje, aby závazné stanovisko EIA na žádost nahradilo řadu správních úkonů a aby se některé podmínky v navazujícím řízení neposuzovaly znovu. Tím omezuje duplicitní kroky, současně však mění rozsah a prahy posuzování v dalších ustanoveních, takže dopad není pouze zrychlující."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Převádí povolení k nakládání s vodami a další vodoprávní úkony související se stavebním záměrem do rozhodnutí stavebního úřadu.",
+                "effectCz": "Dříve se povolení podle vodního zákona vydávala odděleně od stavebního povolení; návrh pro záměry podle stavebního zákona svěřuje řadu těchto rozhodnutí stavebnímu úřadu a upravuje související vyjádření. Slučuje povolovací kroky, zatímco vodní podmínky a požadavky na ochranu vody zůstávají."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-24",
+                "relevant": true,
+                "reasonCz": "Mění podklady a působnost orgánů při povolování krematorií a pohřebišť.",
+                "effectCz": "Dříve vydávala hygienická stanice a vodoprávní úřad samostatná stanoviska k některým záměrům; schválené znění posouvá posouzení veřejného zdraví na stavební úřad a mění vodoprávní podklad na vyjádření. U dotčených povolení se tím snižuje počet oddělených procesních kroků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-26",
+                "relevant": true,
+                "reasonCz": "Upravuje vztah pozemkových úprav k povolení staveb a společných zařízení.",
+                "effectCz": "Dosavadní úprava umožňovala u vybraných společných zařízení upustit od povolení záměru; schválené znění stanoví, že rozhodnutí o pozemkových úpravách se pro některé stavby považuje za rozhodnutí v části věci a vymezuje pozemky i podmínky umístění. Odpadá tím u dotčených zařízení část samostatného povolování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-27",
+                "relevant": true,
+                "reasonCz": "Mění soudní přezkum opatření obecné povahy, mezi která patří také územně plánovací dokumentace.",
+                "effectCz": "Dosavadní úprava umožňovala za stanovených podmínek napadnout opatření obecné povahy společně s žalobou; návrh upravuje přezkum zákonnosti jako závazného podkladu i po uplynutí lhůty a přezkum starších rozhodnutí. Mění tak možnosti a způsob přezkumu územních podkladů, ale směr dopadu na dobu povolení nelze z dodaných ustanovení určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": true,
+                "reasonCz": "Zavádí zvláštní režim pro povolování strategické infrastruktury včetně stavební a energetické bezpečnosti.",
+                "effectCz": "Dosavadní zrychlené postupy se vztahovaly na užší okruh projektů; návrh rozšiřuje jejich okruh, omezuje některé lhůty a odvolání a pro některé záměry upravuje soustředěné povolení. U vymezené infrastruktury se procesní překážky zmírňují, ale jde jen o určité druhy staveb, nikoli o celý slibovaný stavební zákon."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": true,
+                "reasonCz": "Začleňuje posouzení ochrany ovzduší a kompenzačních opatření do povolení stavebních záměrů.",
+                "effectCz": "Předchozí úprava vyžadovala samostatná závazná stanoviska pro některé zdroje a komunikace a podmiňovala souhlas kompenzačními opatřeními; návrh tyto úkony převádí do vyjádření a rozhodnutí o záměru. Proces se u dotčených staveb slučuje, zatímco povinnost zohlednit ochranu ovzduší zůstává."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-36",
+                "relevant": true,
+                "reasonCz": "Přesouvá do rozhodnutí stavebního úřadu podmínky prevence závažných havárií při povolování dotčených staveb.",
+                "effectCz": "Dříve rozhodoval o zařazení objektu a souvisejících podmínkách krajský úřad v samostatných úkonech; návrh svěřuje část rozhodování stavebnímu úřadu a začleňuje podmínky do rozhodnutí o záměru. Jde o sloučení postupu, nikoli o doložené zmírnění bezpečnostních požadavků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": true,
+                "reasonCz": "Přenáší posouzení odpadových povinností při provedení záměru do rozhodnutí stavebního úřadu.",
+                "effectCz": "Dříve vydával obecní úřad samostatná stanoviska či vyjádření k některým stavebním zásahům; návrh nově svěřuje stavebnímu úřadu posouzení požadavků odpadového zákona v rozhodnutí o záměru. Tím se slučuje procesní podklad, zatímco podmínky ochrany zdraví, životního prostředí a hierarchie odpadového hospodářství mohou být dál stanoveny."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": true,
+                "reasonCz": "Upravuje povolování záměrů pro obnovitelné zdroje a jejich soulad s územními opatřeními.",
+                "effectCz": "Dosavadní zákon počítal pro akcelerační oblasti se stanovisky a podmínkami; schválené znění převádí řadu úkonů na stavební úřad a upravuje posuzování i příslušné lhůty. Změna může zjednodušit povolování záměrů z obnovitelných zdrojů, ale vztahuje se pouze na tuto zvláštní oblast."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+                "relevant": true,
+                "reasonCz": "Zavádí osvobození od poplatku, pokud stavební úřad překročí zákonnou lhůtu pro rozhodnutí.",
+                "effectCz": "Předchozí znění položky 18 obsahovalo správní poplatky za povolení a kolaudaci bez této výjimky; schválené znění odpouští poplatek, pokud úřad nerozhodne ve stanovené lhůtě. Nevytváří přímo kratší lhůtu, ale snižuje náklad stavebníka při jejím překročení a představuje pobídku k včasnému rozhodnutí."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-52",
+                "relevant": true,
+                "reasonCz": "Prodlužuje platnost některých stanovisek EIA pro speciální dráhy, čímž mění jeden konkrétní podklad povolování infrastruktury.",
+                "effectCz": "Dosavadní přechodné pravidlo opakovaného prodlužování uvádělo jiné dopravní stavby; návrh do něj přidává speciální dráhy a stanoví, že určitá stanoviska se považují za platná do 31. prosince 2026. Jde o uvolnění časového omezení pro úzce vymezené projekty, nikoli o obecnou změnu povolování všech staveb."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-6",
+                "relevant": true,
+                "reasonCz": "Navrhuje, aby městské části Prahy mohly vystupovat jako účastníci stavebních povolovacích řízení v jejich území.",
+                "effectCz": "Dříve se účast městských částí vztahovala na starší typy řízení; návrh ji výslovně rozšiřuje na povolení záměru, rámcová povolení, opakovaná řízení a odstranění staveb. Rozšiřuje se procesní oprávnění městských částí; text nestanoví vliv na délku řízení, takže směr dopadu na rychlost nelze určit."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+                "relevant": false,
+                "reasonCz": "Usnesení zřizuje funkci a jmenuje zmocněnkyni, ale dodaný text nedokládá změnu povolovacího pravidla ani konkrétní část slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+                "relevant": false,
+                "reasonCz": "Dodaný výňatek pouze uvádí název novely stavebního zákona v přehledu prací; neobsahuje konkrétní úkol, lhůtu ani pravidlo, které by samo posouvalo slib.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-ec7c8ad96f6f--source",
+              "psp-core-2025--law-change-43174-1-1",
+              "psp-core-2025--law-change-43174-1-2",
+              "psp-core-2025--law-change-43174-1-3",
+              "psp-core-2025--law-change-43174-1-4",
+              "psp-core-2025--law-change-43174-1-5",
+              "psp-core-2025--law-change-43174-1-6",
+              "psp-core-2025--law-change-43174-1-7",
+              "psp-core-2025--law-change-43174-2",
+              "psp-core-2025--law-change-43174-3",
+              "psp-core-2025--law-change-43174-4",
+              "psp-core-2025--law-change-43174-7",
+              "psp-core-2025--law-change-43174-8-1",
+              "psp-core-2025--law-change-43174-8-2",
+              "psp-core-2025--law-change-43174-8-3",
+              "psp-core-2025--law-change-43174-8-4",
+              "psp-core-2025--law-change-43174-8-5",
+              "psp-core-2025--law-change-43174-8-7",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--law-change-43174-14",
+              "psp-core-2025--law-change-43174-17",
+              "psp-core-2025--law-change-43174-19",
+              "psp-core-2025--law-change-43174-20",
+              "psp-core-2025--law-change-43174-22",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-24",
+              "psp-core-2025--law-change-43174-26",
+              "psp-core-2025--law-change-43174-27",
+              "psp-core-2025--law-change-43174-32",
+              "psp-core-2025--law-change-43174-33",
+              "psp-core-2025--law-change-43174-36",
+              "psp-core-2025--law-change-43174-39",
+              "psp-core-2025--law-change-43174-42",
+              "psp-core-2025--law-change-43174-approved-38",
+              "psp-core-2025--law-change-43174-approved-52",
+              "psp-core-2025--law-change-43399-6",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--amendment-1148",
+              "psp-core-2025--amendment-1172",
+              "psp-core-2025--amendment-1173",
+              "psp-core-2025--vote-88143",
+              "psp-core-2025--vote-88144",
+              "psp-core-2025--vote-88184",
+              "psp-core-2025--vote-88194",
+              "psp-core-2025--vote-88195",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--amendment-text-1173",
+              "psp-core-2025--vote-88157",
+              "psp-core-2025--vote-88224",
+              "psp-core-2025--vote-88228",
+              "psp-core-2025--law-change-43174-30",
+              "psp-core-2025--law-change-43174-41",
+              "psp-core-2025--law-change-43174-10",
+              "psp-core-2025--law-change-43174-13",
+              "psp-core-2025--law-change-43174-16",
+              "psp-core-2025--law-change-43174-21",
+              "psp-core-2025--law-change-43174-29",
+              "psp-core-2025--law-change-43174-31",
+              "psp-core-2025--law-change-43174-34",
+              "psp-core-2025--law-change-43174-35",
+              "psp-core-2025--law-change-43174-37",
+              "psp-core-2025--law-change-43174-approved-52",
+              "zvlady-resolutions--law-change-uv-2026-59",
+              "zvlady-resolutions--law-change-uv-2026-175-193",
+              "zvlady-resolutions--2026-59",
+              "zvlady-resolutions--2026-175",
+              "psp-core-2025--amendment-text-1172",
+              "psp-core-2025--vote-88201",
+              "psp-core-2025--amendment-1213",
+              "psp-core-2025--vote-88157",
+              "psp-core-2025--amendment-text-1148",
+              "psp-core-2025--vote-88194",
+              "psp-core-2025--vote-88201",
+              "psp-core-2025--vote-88169",
+              "psp-core-2025--vote-88181",
+              "psp-core-2025--vote-88160",
+              "psp-core-2025--vote-88163",
+              "psp-core-2025--vote-88202",
+              "psp-core-2025--vote-88203",
+              "psp-core-2025--vote-88204",
+              "psp-core-2025--vote-88206",
+              "psp-core-2025--vote-88211",
+              "psp-core-2025--vote-88213",
+              "psp-core-2025--vote-88215",
+              "psp-core-2025--vote-88216",
+              "psp-core-2025--vote-88217",
+              "psp-core-2025--vote-88219",
+              "psp-core-2025--vote-88220",
+              "psp-core-2025--vote-88223",
+              "psp-core-2025--vote-88233",
+              "psp-core-2025--vote-88234",
+              "psp-core-2025--vote-88199",
+              "psp-core-2025--vote-88187"
+            ],
+            "explanationCz": "Poslanci ANO předložili rozsáhlou novelu stavebního zákona; po zamítnutí návrhu Senátem pro něj Sněmovna hlasovala znovu a trvala na schváleném znění. Návrh slučuje řadu dosavadních povolovacích kroků do rozhodnutí stavebního úřadu a mění organizaci úřadů, takže může naplnit část slibu o rychlejším povolování. Nesplňuje však závazek zrušit novelu a přijmout nový stavební zákon: jde o změnu dosavadního zákona č. 283/2021 Sb. Poslanci ANO zároveň podpořili posun účinnosti většiny změn na 1. ledna 2027, takže reformní kroky nenabývají účinnosti okamžitě.",
+            "confidence": "high",
+            "uncertainties": [
+              "Sněmovna schválila rozsáhlé změny stávajícího stavebního zákona, ale z dodaných podkladů nelze tvrdit, že byl přijat nový samostatný stavební zákon nebo zrušena dosavadní právní úprava.",
+              "Poslanci ANO podpořili pozměňovací návrh, který odložil většinu účinnosti na 1. ledna 2027. Je to protichůdný časový signál vůči slibu rychlejšího povolování, ale hlavní konečné hlasování se týkalo celého reformního balíku a mělo větší váhu.",
+              "Vláda předložila také samostatný návrh rozšiřující účast městských částí Prahy v povolovacích řízeních. Znění neurčuje dopad tohoto rozšíření na délku řízení a jde pouze o návrh, nikoli o konečné rozhodnutí."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": [
+      {
+        "error": "Assessment invented evidence ID: psp-core-2025--amendment-1239",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_00bf232d3de72644016aec5be0ed2887d1a56db3fa60a56898",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 583673,
+            "input_tokens_details": {
+              "cached_tokens": 583670,
+              "cache_write_tokens": 0
+            },
+            "output_tokens": 12627,
+            "output_tokens_details": {
+              "reasoning_tokens": 4307
+            },
+            "total_tokens": 596300
+          },
+          "output": {
+            "promiseId": "candidate-ec7c8ad96f6f",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-1",
+                "relevant": true,
+                "reasonCz": "Mění přímo stavební zákon, zejména působnost úřadů a pravidla spolupráce při povolování staveb.",
+                "effectCz": "Dříve povolovací agendy vykonávaly různé stavební a územně plánovací orgány; návrh je převádí na nové Úřady rozvoje území a jejich pracoviště a zavádí koordinaci stanovisek. Jde o organizační změnu navrženou jako součást nového povolovacího rámce, sama však nestanoví konkrétní kratší lhůty ani nezaručuje rychlejší vyřízení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-2",
+                "relevant": true,
+                "reasonCz": "Mění přímou správu územního plánování a výkon stavebního řádu, což je součástí systému schvalování staveb.",
+                "effectCz": "Dosavadní rozdělení pravomocí mezi ministerstvo, krajské a obecní úřady se mění na soustavu Úřadu a krajských úřadů rozvoje území; některé úkony mají být vykonávány nově nebo centralizovaně. Změna reorganizuje postup a může jej zjednodušit, ale z poskytnutých ustanovení nelze určit, že povolovací lhůty či povinnosti budou celkově kratší."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-3",
+                "relevant": true,
+                "reasonCz": "Mění proces územního plánování a stanovování pravidel, která předcházejí povolení staveb.",
+                "effectCz": "Dosavadní postupy projednání, řešení rozporů a lhůty se nahrazují novými pravidly, mimo jiné třicetidenním dohodovacím řízením a fikcí souhlasu při nečinnosti některých orgánů. Část změn může proces zrychlit, zatímco některé nové cesty a podmínky mají opačný či nejasný vliv; celek proto nelze z textu označit za jednoznačné zpřísnění nebo uvolnění."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": true,
+                "reasonCz": "Mění pravidla projednávání územních plánů, která ovlivňují přípravu a schvalování záměrů.",
+                "effectCz": "Předchozí úprava vyžadovala opakované kroky při projednání a úpravách plánovací dokumentace; návrh zkracuje nebo ruší některé procesní úkony a umožňuje menší úpravy bez opakování celého projednání. To může zrychlit plánovací fázi, ale některé nově zavedené možnosti převzít záměry bez obvyklého posuzování současně oslabují některé kontroly; předchozí znění dalších vynechaných ustanovení není v balíčku úplné."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-5",
+                "relevant": true,
+                "reasonCz": "Mění povolovací a navazující řízení, lhůty a rozsah povinností při realizaci staveb.",
+                "effectCz": "Dříve se u řady úkonů vyžadovala samostatná stanoviska a dokumentace; návrh sjednocuje některé podklady v řízení stavebního úřadu, zavádí lhůty a souhlas při nečinnosti u vyjádření některých subjektů a upravuje, kdy se požadavky znovu neposuzují. Tyto změny mohou zkrátit část procesu, ale také omezují některé možnosti připomínek a posuzování, takže celý dopad není jednoznačný."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Mění samotné řízení o povolení záměru, tedy přímo proces, jehož zrychlení slibuje strana.",
+                "effectCz": "Dosavadní pravidla posuzování a rozhodování se nahrazují novými pravidly pro povolení, včetně možnosti odchýlit se se souhlasy od některých plánovacích pravidel a omezení opakovaného posuzování některých otázek. Nová úprava má zjednodušit část povolování, ale současně zužuje některé procesní záruky; sama o sobě nepřevádí právní úpravu do zcela nového stavebního zákona."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-7",
+                "relevant": true,
+                "reasonCz": "Mění kategorie staveb a soudní přezkum rozhodnutí, což může ovlivnit rychlost povolování.",
+                "effectCz": "Dosavadní výčet drobných a jednoduchých staveb se mění a u některých činností rozšiřuje režim bez povolení či se zjednodušuje dokumentace; současně se upravují pravidla soudního přezkumu. Některé změny mohou povolení urychlit, jiné omezují přezkum; předchozí znění všech dotčených příloh není v balíčku celé."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-2",
+                "relevant": true,
+                "reasonCz": "Převádí působnost v oblasti stavebního řádu na nově zřizovaný ústřední úřad.",
+                "effectCz": "Dříve byl ústředním orgánem pro územní plánování a stavební řád jiný orgán; návrh nově jmenuje Úřad rozvoje území a odnímá tuto oblast ministerstvu pro místní rozvoj. Jde o institucionální změnu podporující nový systém, nikoli o prokázané zkrácení povolovací lhůty."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-3",
+                "relevant": true,
+                "reasonCz": "Mění, kdo a jak stanovuje požadavky požární ochrany při navrhování a povolování staveb.",
+                "effectCz": "Předchozí úprava svěřovala stanovení technických požadavků ministerstvu a využívala závazná stanoviska; návrh přesouvá část pravidel na nařízení vlády a v některých případech mění závazné stanovisko na vyjádření. Tím se část podkladů začleňuje do nového povolovacího rámce, ale směr změny na rychlost nelze u všech dotčených ustanovení určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-4",
+                "relevant": true,
+                "reasonCz": "Mění zapojení památkové péče do stavebního povolování.",
+                "effectCz": "Dosavadní úprava vyžadovala rozhodnutí nebo závazné stanovisko památkového orgánu pro širší okruh zásahů; návrh u některých záměrů předává posouzení stavebnímu úřadu a u části případů nahrazuje samostatný úkon začleněním do povolení. To může zjednodušit postup, avšak rozsah předchozího posouzení a ochranných podmínek se zároveň mění."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-7",
+                "relevant": true,
+                "reasonCz": "Mění pravidla geologických vyjádření v návaznosti na žádost o povolení záměru.",
+                "effectCz": "Předchozí ustanovení odkazovalo na územní rozhodnutí a obsahovalo zvláštní pravidlo pro záměr s jednotným environmentálním stanoviskem; návrh nahrazuje odkaz žádostí o povolení záměru a ruší uvedenou výjimku. Změna přizpůsobuje proces novému povolování, ale směr jejího vlivu na délku řízení nelze z těchto ustanovení určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-1",
+                "relevant": true,
+                "reasonCz": "Mění pravidla ochrany přírody, která se uplatňují při povolování staveb.",
+                "effectCz": "Dříve se krajinný ráz neposuzoval jen v zastavěném území a některých plochách s přesně stanovenými podmínkami; návrh váže výjimku na zastavitelné území vymezené v plánovací dokumentaci v souladu se stanoviskem orgánu ochrany přírody. Rozsah výjimky se mění a jeho celkový směr nelze bez dalších dotčených ustanovení určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-2",
+                "relevant": true,
+                "reasonCz": "Mění rozsah souhlasů orgánů ochrany přírody a převádí část jejich posuzování do povolovacího řízení.",
+                "effectCz": "Dosavadní úprava vyžadovala například souhlas v ochranných pásmech a při některých činnostech v chráněných územích; návrh přesouvá část posouzení záměrů na stavební úřad a zavádí výjimky v některých zastavitelných územích. Může to zkrátit samostatné kroky, ale současně mění rozsah ochranných podmínek; úplný dopad všech vynechaných ustanovení nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-3",
+                "relevant": true,
+                "reasonCz": "Mění pravidla pro výjimky z ochrany zvláště chráněných druhů, které mohou být podkladem povolení stavby.",
+                "effectCz": "Dosavadní zákon dovoloval výjimky při zákonných důvodech a dalších podmínkách; návrh mění okruh případů a podmínky povolení výjimky, včetně podmínky neexistence jiného uspokojivého řešení. Jde o změnu podmínek povolování, jejíž vliv na rychlost ani míru ochrany nelze z balíčku vyjádřit jedním směrem."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-4",
+                "relevant": true,
+                "reasonCz": "Mění účast ekologických organizací a roli stavebních úřadů v řízeních týkajících se ochrany přírody.",
+                "effectCz": "Dosavadní zákon umožňoval kvalifikovaným občanským sdružením účastnit se některých řízení; návrh mění oprávněné osoby, podmínky účasti a v některých případech vylučuje účast v řízení vedeném stavebním úřadem. To mění procesní účast a může řízení zjednodušit, zároveň však omezuje účast veřejnosti."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-5",
+                "relevant": true,
+                "reasonCz": "Zavádí stavebním úřadům část rozhodování o souhlasech ochrany přírody při povolování staveb.",
+                "effectCz": "Dříve řadu souhlasů a výjimek vydávaly samostatně orgány ochrany přírody; návrh část z nich začleňuje do výroku povolení záměru stavebního úřadu a stanoví, že se nevydávají samostatně. To může odstranit samostatný krok, zatímco některé orgány a výjimky zůstávají; staré znění nově vložených ustanovení neexistovalo."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-7",
+                "relevant": true,
+                "reasonCz": "Mění účast veřejnosti v řízeních o povolování staveb a způsob, jakým se posuzují zásahy do přírody.",
+                "effectCz": "Předchozí úprava umožňovala za stanovených podmínek účast občanských sdružení; návrh ji mění na účast právnických osob splňujících nové podmínky a výslovně omezuje účast v některých řízeních stavebního úřadu. Změna upravuje postup a může odstranit některé procesní kroky, ale současně omezuje možnosti účasti veřejnosti."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Mění, jak se ochrana zemědělské půdy posuzuje a schvaluje v povolení staveb.",
+                "effectCz": "Dříve bylo třeba samostatného souhlasu s odnětím půdy; návrh u záměrů vyžadujících povolení přesouvá posouzení do rozhodnutí stavebního úřadu a v zastavitelném území vymezeném se stanoviskem ochrany půdy některé zásady plošné ochrany neposuzuje. Integrace může zrychlit proces, zatímco výjimka z posuzování zmenšuje rozsah některých kontrol."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-10",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek neobsahuje žádné ustanovení této části, které by bylo možné spojit s obsahem slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-13",
+                "relevant": false,
+                "reasonCz": "Výňatek z této změny neobsahuje žádnou část textu, která by se dala věcně vztáhnout ke slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-14",
+                "relevant": true,
+                "reasonCz": "Mění lesní úřady a stanoviska nutná pro stavební záměry zasahující do lesa.",
+                "effectCz": "Dříve vydávaly souhlas či rozhodnutí orgány státní správy lesů; návrh u stavebních záměrů převádí posouzení podmínek a část rozhodování na stavební úřad, přičemž lesní orgán nadále poskytuje vyjádření. To slučuje kroky v jednom povolování, ale zachovává věcnou kontrolu ochrany lesa."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-16",
+                "relevant": false,
+                "reasonCz": "Text této části je ve výňatku celý vynechán, takže nelze doložit její konkrétní vztah ke slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-17",
+                "relevant": true,
+                "reasonCz": "Mění veterinární stanoviska, která mohou být podkladem stavebního povolení.",
+                "effectCz": "Dříve existoval závazný posudek Státní veterinární správy a samostatná vyjádření; návrh ruší závazný posudek a ponechává vyjádření pro příslušné stavby. Odstranění závazného podkladu může zjednodušit povolování, avšak konkrétní dopad na lhůty není v textu stanoven."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-19",
+                "relevant": true,
+                "reasonCz": "Mění uplatňování ochrany obyvatelstva v řízení o stavebním záměru.",
+                "effectCz": "Dosavadní předpis počítal u ochrany obyvatelstva se závazným stanoviskem; návrh pro některé stavby stanoví vyjádření a promítá požadavky do rozhodnutí o záměru. Tím se část samostatných úkonů začleňuje do stavebního řízení, aniž by se zrušily podmínky ochrany."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-20",
+                "relevant": true,
+                "reasonCz": "Mění, jak se požadavky ochrany veřejného zdraví uplatní při povolování staveb.",
+                "effectCz": "Dříve orgán ochrany veřejného zdraví vydával stanoviska k dotčeným věcem; návrh převádí jejich nahrazení do rozhodnutí stavebního úřadu a ruší některé samostatné kroky. Tím se postup může zjednodušit, ale z balíčku nelze určit dopad všech změněných zdravotních podmínek."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": false,
+                "reasonCz": "V poskytnutém výňatku nejsou vlastní ustanovení této části, která by šlo posoudit ve vztahu ke slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": true,
+                "reasonCz": "Mění posuzování vlivů a jeho návaznost na povolení staveb.",
+                "effectCz": "Předchozí úprava spojovala posuzování vlivů se samostatným environmentálním stanoviskem; návrh umožňuje, aby závazné stanovisko EIA nahradilo i další správní úkony a aby se splněné podmínky znovu neposuzovaly. To může snížit počet samostatných povolovacích kroků, ale některé další změny limitů EIA nelze ze zkráceného výňatku plně vyhodnotit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Mění povolení k nakládání s vodami a další vodoprávní úkony u stavebních záměrů.",
+                "effectCz": "Dříve se pro řadu vodoprávních úkonů vedla samostatná řízení; návrh je u souvisejících záměrů převádí do rozhodnutí stavebního úřadu, přičemž u některých významných případů zachovává závazné stanovisko vodoprávního orgánu. To může zkrátit řetězení řízení, ale neodstraňuje požadavek na vodohospodářské posouzení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-24",
+                "relevant": true,
+                "reasonCz": "Mění posouzení staveb krematorií a pohřebišť v rámci povolování záměru.",
+                "effectCz": "Dosavadní zřízení neveřejného pohřebiště vyžadovalo samostatné vyjádření krajského úřadu a u veřejného pohřebiště zvláštní stanoviska; návrh část posouzení svěřuje stavebnímu úřadu a vodoprávní orgán vydává vyjádření. Změna sjednocuje kroky do povolování, ale nezrušuje ochranu veřejného zdraví ani podzemních vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-26",
+                "relevant": true,
+                "reasonCz": "Mění, kdy se změny druhů a dělení pozemků řeší samostatně nebo v rámci povolení záměru.",
+                "effectCz": "Předchozí úprava umožňovala některé pozemky řešit v pozemkových úpravách pouze se souhlasem vlastníka a upravovala zvláštní režim zastavěných či zastavitelných pozemků; návrh mění tento okruh a výslovně umožňuje, aby schválené pozemkové úpravy představovaly část rozhodnutí o povolení záměru. To může zjednodušit návazný postup, avšak mění i pravidla pro souhlas vlastníků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-27",
+                "relevant": true,
+                "reasonCz": "Mění soudní přezkum stavebních rozhodnutí a opatření územního plánování, což ovlivňuje konečnost povolování.",
+                "effectCz": "Dříve mohl soud za podmínek zákona zrušit opatření obecné povahy a posuzovat jeho použitelnost; návrh zavádí samostatný přezkum zákonnosti jako závazného podkladu a upravuje postup při opožděném návrhu. Změna ovlivňuje navazující přezkum a může omezit opakované řízení, ale její celkový vliv na rychlost není jednoznačný."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-29",
+                "relevant": false,
+                "reasonCz": "Výňatek neobsahuje text změn zákona o vyvlastnění, který by umožnil určit jejich vztah ke konkrétnímu slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-30",
+                "relevant": false,
+                "reasonCz": "Navržená část o bezpečnosti a ochraně zdraví při práci byla z návrhu vyňata a její obsah není součástí konečného rozhodnutí.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-31",
+                "relevant": false,
+                "reasonCz": "Výňatek neobsahuje ustanovení této změny trestního zákoníku, která by šlo posoudit jako součást slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": true,
+                "reasonCz": "Mění zvláštní režim povolování strategicky významné infrastruktury a energetických staveb.",
+                "effectCz": "Dosavadní zvláštní postupy se vztahovaly na vymezené druhy infrastruktury; návrh je upravuje a rozšiřuje na další stavby a upravuje související lhůty a postupy. To může zrychlit povolení dotčených typů staveb, avšak vztahuje se jen na vymezené infrastruktury a není náhradou celého stavebního zákona."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": true,
+                "reasonCz": "Mění povolování z hlediska ochrany ovzduší a začleňuje jeho posouzení do rozhodnutí stavebního úřadu.",
+                "effectCz": "Předchozí úprava vyžadovala závazná stanoviska a v některých případech kompenzační opatření jako samostatné podklady; návrh převádí část posouzení a stanovení podmínek do povolení záměru. Zjednodušuje formu řízení, ale samotné požadavky na ochranu ovzduší se podle výňatku nemění jednoznačně směrem k mírnějšímu režimu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-34",
+                "relevant": false,
+                "reasonCz": "Žádná ustanovení této části nejsou ve výňatku uvedena, takže její věcný dopad na slib nelze doložit.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-35",
+                "relevant": false,
+                "reasonCz": "Výňatek neobsahuje text změny zákona o státní službě, který by bylo možné posoudit ve vztahu ke slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-36",
+                "relevant": true,
+                "reasonCz": "Mění, kdo posuzuje prevenci závažných havárií při povolování nových objektů a staveb v jejich dosahu.",
+                "effectCz": "Předtím vydával krajský úřad závazná stanoviska v řízeních stavebního úřadu; návrh přesouvá rozhodnutí a stanovení podmínek do rozhodnutí stavebního úřadu, který má posuzovat také dopad záměru v okolí rizikových objektů. Sloučení může omezit samostatné kroky, ale věcné požadavky prevence havárií přetrvávají."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-37",
+                "relevant": false,
+                "reasonCz": "Výňatek neobsahuje žádné ustanovení této části o veřejných zakázkách, které by bylo možné spojit se slibem.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": true,
+                "reasonCz": "Mění, jak se při povolení záměru posuzuje nakládání se stavebním odpadem.",
+                "effectCz": "Dříve vydával obecní úřad samostatné závazné stanovisko k některým stavebním pracím; návrh převádí posouzení požadavků odpadového zákona do rozhodnutí stavebního úřadu. Tím může odstranit samostatný krok, ale zachovává možnost stanovit ochranné podmínky."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": false,
+                "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku bylo z konečného textu odstraněno; samo jeho odstranění není důkazem změny směřující proti slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": true,
+                "reasonCz": "Mění režim povolování obnovitelných zdrojů v akceleračních oblastech, jako dílčí oblast stavebního povolování.",
+                "effectCz": "Dosavadní zákon svěřoval některá stanoviska a posouzení orgánům spojeným s environmentálním stanoviskem; návrh přesouvá tyto kroky k stavebnímu úřadu a mění, jak se podmínky ochrany životního prostředí začleňují do povolení. Změna integruje procedury pro část projektů, ale není obecným opatřením pro všechny stavby."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+                "relevant": true,
+                "reasonCz": "Zavádí osvobození od poplatku za povolení, pokud úřad nedodrží zákonnou lhůtu.",
+                "effectCz": "Předchozí znění položky správního poplatku takové osvobození neobsahovalo; návrh poplatek odpouští při nedodržení lhůty pro povolení nebo kolaudaci. Jde o pobídku k rychlejšímu rozhodování, nikoli o nové zkrácení lhůty."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-52",
+                "relevant": false,
+                "reasonCz": "Změna se týká prodloužení platnosti EIA pro speciální dráhy a její obsah nespojuje speciální železniční projekty s tímto obecným slibem.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-6",
+                "relevant": true,
+                "reasonCz": "Upravuje účast městských částí Prahy v řízeních o povolení záměru, tedy procesní rámec stavebního povolování.",
+                "effectCz": "Dříve byla možnost městské části účastnit se vybraných řízení formulována pro starší druhy územních a stavebních rozhodnutí; návrh ji rozšiřuje na nové typy řízení podle stavebního zákona. Rozšiřuje okruh účastníků a tím může přidat procesní vstup, ale nestanoví delší lhůty ani neprokazuje dopad na rychlost."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+                "relevant": true,
+                "reasonCz": "Usnesení vytváří funkci zmocněnce pro koordinaci zavádění nového povolovacího systému stavebního práva.",
+                "effectCz": "Usnesení zřizuje funkci a jmenuje zmocněnkyni, jejímž úkolem je koordinovat a uskutečňovat změny stavebního práva; nestanoví však samo nový stavební zákon ani nepřepisuje pravidla povolování. Jde o organizační podporu zavádění reformy, nikoli o splnění závazku přijmout nový zákon."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+                "relevant": true,
+                "reasonCz": "Příloha vládního plánu výslovně uvádí novelu stavebního zákona mezi plánovanými implementačními úkoly.",
+                "effectCz": "Příloha pouze zařazuje novelu stavebního zákona do výhledu legislativních prací; nejde o změnu zákona ani o samostatné zrychlení povolování. Je to plánovací krok, který sám o sobě nepřináší změnu povinnosti, lhůty nebo oprávnění."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-ec7c8ad96f6f--source",
+              "psp-core-2025--law-change-43174-1-1",
+              "psp-core-2025--law-change-43174-1-2",
+              "psp-core-2025--law-change-43174-1-3",
+              "psp-core-2025--law-change-43174-1-4",
+              "psp-core-2025--law-change-43174-1-5",
+              "psp-core-2025--law-change-43174-1-6",
+              "psp-core-2025--law-change-43174-1-7",
+              "psp-core-2025--law-change-43174-2",
+              "psp-core-2025--law-change-43174-3",
+              "psp-core-2025--law-change-43174-4",
+              "psp-core-2025--law-change-43174-7",
+              "psp-core-2025--law-change-43174-8-1",
+              "psp-core-2025--law-change-43174-8-2",
+              "psp-core-2025--law-change-43174-8-3",
+              "psp-core-2025--law-change-43174-8-4",
+              "psp-core-2025--law-change-43174-8-5",
+              "psp-core-2025--law-change-43174-8-7",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--law-change-43174-14",
+              "psp-core-2025--law-change-43174-17",
+              "psp-core-2025--law-change-43174-19",
+              "psp-core-2025--law-change-43174-20",
+              "psp-core-2025--law-change-43174-22",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-24",
+              "psp-core-2025--law-change-43174-26",
+              "psp-core-2025--law-change-43174-27",
+              "psp-core-2025--law-change-43174-32",
+              "psp-core-2025--law-change-43174-33",
+              "psp-core-2025--law-change-43174-36",
+              "psp-core-2025--law-change-43174-39",
+              "psp-core-2025--law-change-43174-42",
+              "psp-core-2025--law-change-43174-approved-38",
+              "psp-core-2025--law-change-43399-6",
+              "zvlady-resolutions--law-change-uv-2026-59",
+              "zvlady-resolutions--law-change-uv-2026-175-193",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--amendment-1148",
+              "psp-core-2025--amendment-text-1148",
+              "psp-core-2025--vote-88194",
+              "psp-core-2025--amendment-1172",
+              "psp-core-2025--amendment-text-1172",
+              "psp-core-2025--vote-88143",
+              "psp-core-2025--vote-88144",
+              "psp-core-2025--amendment-1173",
+              "psp-core-2025--amendment-text-1173",
+              "psp-core-2025--vote-88233",
+              "psp-core-2025--amendment-1365",
+              "psp-core-2025--amendment-text-1365",
+              "psp-core-2025--vote-88234",
+              "psp-core-2025--amendment-1368",
+              "psp-core-2025--amendment-text-1368",
+              "psp-core-2025--vote-88155",
+              "psp-core-2025--amendment-1239",
+              "psp-core-2025--vote-88157",
+              "psp-core-2025--vote-88160",
+              "psp-core-2025--vote-88163",
+              "psp-core-2025--vote-88169",
+              "psp-core-2025--vote-88181",
+              "psp-core-2025--vote-88202",
+              "psp-core-2025--vote-88203",
+              "psp-core-2025--vote-88204",
+              "psp-core-2025--vote-88206",
+              "psp-core-2025--vote-88211",
+              "psp-core-2025--vote-88213",
+              "psp-core-2025--vote-88215",
+              "psp-core-2025--vote-88216",
+              "psp-core-2025--vote-88217",
+              "psp-core-2025--vote-88219",
+              "psp-core-2025--vote-88220",
+              "psp-core-2025--vote-88223",
+              "psp-core-2025--vote-88224",
+              "psp-core-2025--vote-88228",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454"
+            ],
+            "explanationCz": "Poslanci ANO předložili rozsáhlou novelu stavebního zákona a vláda jí vyslovila souhlas; návrh slučuje některá povolení a stanoviska do řízení stavebního úřadu a upravuje další procesy tak, aby se část staveb povolovala rychleji. Sněmovna návrh schválila, Senát jej zamítl, ale poslanci poté setrvali na jeho přijetí. Nejde však o přijetí nového, samostatného stavebního zákona: schválený text mění stávající zákon č. 283/2021 Sb. a účinnost hlavní části odkládá na 1. ledna 2027. Dokládá tedy posun v části slibu týkající se rychlejšího povolování, nikoli splnění závazku zrušit novelu a přijmout nový zákon.",
+            "confidence": "high",
+            "uncertainties": [
+              "Návrh obsahoval také změny, které byly ze schváleného textu vypuštěny; konkrétní původní úpravy proto nejsou součástí konečné změny zákona.",
+              "Sněmovna návrh schválila a po zamítnutí Senátem na něm setrvala, ale balíček neobsahuje samostatný text zákona vyhlášeného ve Sbírce zákonů. Hodnocení se proto opírá o text schválený Sněmovnou a záznam o jejím konečném hlasování.",
+              "Některé související změny mohou zrychlit dílčí povolovací kroky, jiné mění nebo omezují postupy a účast v řízení; z poskytnutých textů nelze vyvodit, že všechny druhy staveb budou skutečně schváleny rychleji."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-ec7c8ad96f6f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Mění účel, obecné zásady a soustavu úřadů stavebního zákona, tedy přímo rámec povolování staveb.",
+          "effectCz": "Dosavadní zákon vymezoval působnost stavebních orgánů a obecný účel ochrany veřejných zájmů; návrh zřizuje úřady rozvoje území a upravuje zásady, koordinaci i působnosti. Nová zásada, že záměr lze odmítnout jen za stanovených podmínek, může povolování usnadnit, ale předchozí znění některých nově vložených ustanovení chybí; jde o změnu stávajícího zákona, nikoli o nový samostatný stavební zákon."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Mění nadřízenost a rozdělení pravomocí stavebních a územně plánovacích úřadů, což přímo ovlivňuje povolovací proces.",
+          "effectCz": "Dosavadní úprava svěřovala pravomoci ministerstvu, krajským a obecním úřadům i Dopravnímu a energetickému stavebnímu úřadu; text mění jejich rozdělení a zavádí úřady rozvoje území. Nejde samo o sobě o doložené zrychlení ani zpomalení lhůt; směr účinku na rychlost nelze z organizační změny určit. Jde o novelu platného zákona."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Mění lhůty a postupy územního plánování a řešení rozporů, které jsou součástí přípravy staveb.",
+          "effectCz": "Předchozí znění upravovalo projednávání, lhůty a soulad plánovací dokumentace; návrh u některých kroků zavádí lhůty, fikce souhlasu a zjednodušuje opakované projednání. Tyto změny mohou zkrátit některé přípravné kroky, ale jiné podmínky se mění také; celek nedokládá zásadní zrychlení všech povolení. Novelizuje stávající zákon."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Upravuje řízení o povolení záměru, námitky, lhůty a požadavky na stavby.",
+          "effectCz": "Předchozí pravidla požadovala povolení a stanovila běžný postup; návrh mění okruh požadavků a výjimek, zkracuje některé lhůty a upravuje námitky. Některé změny mohou proces urychlit, jiné omezují či mění věcné kontroly; účinek není jednotně jen zrychlující. Jde o novelu, nikoli nový zákon."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Mění pravidla vlastního povolovacího řízení, včetně práce s vyjádřeními a lhůtami.",
+          "effectCz": "Předchozí úprava vyžadovala podklady a stanoviska dotčených orgánů; návrh v řadě případů sjednocuje či nahrazuje jejich úkony a zavádí souhlas při nečinnosti, současně mění přezkum a účastníky. To může zkrátit některé kroky, ale také oslabuje či mění kontroly; směr celkového dopadu na rychlost nelze označit za jednoznačný."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Mění posuzování a schvalování záměrů, včetně možností zrychleného povolení.",
+          "effectCz": "Předchozí znění vyžadovalo posouzení souladu záměru s územním plánováním, veřejnými zájmy a námitkami; návrh umožňuje v určitých případech odchylku od plánovací dokumentace a považuje některé záměry v zastavitelném území za přípustné. To může povolení usnadnit, ale jde o dílčí změny pravidel stávajícího zákona, ne o jeho zrušení a nahrazení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Mění kategorie staveb a pravidla jejich povolování, což přímo ovlivňuje náročnost schvalování.",
+          "effectCz": "Předchozí příloha zákona stanovila limity pro drobné a jednoduché stavby; návrh mění některé limity a okruh staveb bez povolení či v jednodušším režimu. To může u části staveb snížit administrativu, ale současně nejde o nový samostatný zákon."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Přesouvá působnost v územním plánování a stavebním řádu na nově zřízený Úřad rozvoje území.",
+          "effectCz": "Dříve působnost v územním plánování a stavebním řádu náležela ministerstvu; návrh ji v příslušném rozsahu svěřuje novému Úřadu rozvoje území. Změna rozdělení institucí sama neprokazuje rychlejší řízení a nepředstavuje zrušení stavebního zákona."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": true,
+          "reasonCz": "Mění způsob posuzování požární bezpečnosti v rámci stavebního povolování.",
+          "effectCz": "Předtím Hasičský záchranný sbor vydával pro vymezené stavby závazná stanoviska; návrh část úkonů mění na vyjádření a převádí posuzování do stavebního řízení. To může zjednodušit některé kroky, ale pravidla požární ochrany zůstávají; jde o novelu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "Mění rozsah památkových úkonů a jejich postavení v povolovacím řízení.",
+          "effectCz": "Předchozí úprava vyžadovala rozhodnutí či závazná stanoviska památkové péče u vymezených záměrů; návrh u části záměrů přesouvá posouzení do stavebního úřadu a u některých případů mění závazné stanovisko na vyjádření. To může zrychlit část řízení, zároveň mění míru a podobu kontroly."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": true,
+          "reasonCz": "Mění podklady a postupy spojené s povolováním staveb v územích se zvláštními geologickými podmínkami.",
+          "effectCz": "Předchozí ustanovení požadovalo geologické vyjádření v určených územích; návrh upravuje vazbu na žádost o povolení záměru a ruší další procesní ustanovení. Směr dopadu na rychlost nelze bez kompletního znění zrušené části určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-1",
+          "relevant": true,
+          "reasonCz": "Mění pravidla ochrany přírody, která se uplatňují při povolování staveb.",
+          "effectCz": "Předchozí znění omezovalo výjimku z posuzování krajinného rázu na území s dohodnutými podmínkami v územním či regulačním plánu; návrh ji váže na územně plánovací dokumentaci vymezenou se stanoviskem orgánu ochrany přírody. Tím se mění, kde se krajinný ráz neposuzuje; dopad na rychlost závisí na konkrétním území."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-2",
+          "relevant": true,
+          "reasonCz": "Převádí část úkonů ochrany přírody do stavebního řízení.",
+          "effectCz": "Předchozí právní úprava vyžadovala samostatné souhlasy či rozhodnutí orgánů ochrany přírody; návrh v některých případech začleňuje jejich posouzení do rozhodnutí stavebního úřadu. Jde o integraci úkonů, která může zjednodušit proces, ale neodstraňuje všechny ochranné podmínky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-3",
+          "relevant": true,
+          "reasonCz": "Mění podmínky pro výjimky z ochrany zvláště chráněných druhů, které mohou ovlivnit povolení záměru.",
+          "effectCz": "Předchozí úprava dovolovala výjimky za stanovených veřejných zájmů a podmínek; návrh mění výčet i podmínky pro jejich povolení a zavádí další případy. Změna může některé zásahy usnadnit, ale není sama o sobě zrychlením celého povolovacího řízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-4",
+          "relevant": true,
+          "reasonCz": "Mění účast veřejnosti v řízeních souvisejících s ochranou přírody a zapojuje stavební úřady.",
+          "effectCz": "Předchozí úprava umožňovala vybraným sdružením účast v určitých řízeních; návrh mění podmínky účasti a přidává stavební úřady mezi orgány ochrany přírody. To mění procesní okruh účastníků, ale z dodaného textu nelze určit jednotný směr účinku na rychlost."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Zavádí přímo do povolování staveb pravomoci stavebních úřadů v agendě ochrany přírody.",
+          "effectCz": "Předchozí pravomoci vykonávaly orgány ochrany přírody; návrh pro některé záměry svěřuje posuzování, podmínky a rozhodování stavebním úřadům, s výjimkami pro chráněná území. To sjednocuje část procesu a může ji zkrátit, avšak jde o novelu stávajícího systému."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-7",
+          "relevant": true,
+          "reasonCz": "Upravuje přechod řízení při změně orgánů odpovědných za povolování.",
+          "effectCz": "Předchozí přechodné pravidlo odkazovalo na dokončení řízení podle nově účinné právní úpravy; schválený text přesněji rozděluje řízení mezi nový Úřad a další stavební úřady. To samo neposkytuje důkaz o rychlejším povolení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Mění posuzování záboru zemědělské půdy jako součásti povolování záměrů.",
+          "effectCz": "Předtím souhlas s odnětím půdy vydával orgán ochrany zemědělského půdního fondu; návrh zahrnuje posouzení do rozhodnutí stavebního úřadu a v zastavitelném území vymezeném podle stanoviska nezvažuje některé zásady ochrany. To může zjednodušit proces, ale současně mění věcné podmínky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-10",
+          "relevant": true,
+          "reasonCz": "Balíček řadí tuto část mezi změny relevantní pouze prostřednictvím pozměňovacího návrhu, který však není doložen jejím vlastním textem.",
+          "effectCz": "Vlastní text ani příslušný pozměňovací návrh k této části nejsou dodány; nelze určit, jaké pravidlo se mění ani zda se jeho účinek na povolování zpřísňuje či uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-13",
+          "relevant": true,
+          "reasonCz": "Jde o část zákona předloženého jako reforma povolování; balíček ji označuje za relevantní pouze prostřednictvím pozměňovacího návrhu.",
+          "effectCz": "Text této části i dotčeného pozměňovacího návrhu chybí, takže nelze určit předchozí a navrhované pravidlo ani směr změny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": true,
+          "reasonCz": "Mění způsob, jak se souhlasy a rozhodnutí lesní správy promítají do stavebního povolení.",
+          "effectCz": "Dosavadní lesní zákon vyžadoval samostatné závazné stanovisko či rozhodnutí; schválené znění u záměrů podle stavebního zákona převádí část posouzení do rozhodnutí stavebního úřadu a stanoví podkladové vyjádření lesního orgánu. Tím může zjednodušit postup, ale neodstraňuje věcné podmínky ochrany lesa."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-16",
+          "relevant": true,
+          "reasonCz": "Část je zahrnuta jen jako relevantní prostřednictvím pozměňovacích návrhů, jejichž obsah zde chybí.",
+          "effectCz": "Bez textu části a dotčeného pozměňovacího návrhu nelze porovnat dosavadní a navržené pravidlo ani určit směr účinku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": true,
+          "reasonCz": "Mění veterinární úkony, které slouží jako podklady pro povolení staveb.",
+          "effectCz": "Předchozí zákon vyžadoval u některých staveb závazný veterinární posudek a u dalších vyjádření; návrh ruší závazný posudek a převádí příslušné úkony na vyjádření. To může snížit závaznost podkladu, ale nemění samotný stavební zákon."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": true,
+          "reasonCz": "Mění posuzování ochrany obyvatelstva jako součást povolování staveb.",
+          "effectCz": "Dosavadní pravidlo vedlo k závaznému stanovisku orgánu ochrany obyvatelstva; návrh rozlišuje závazné stanovisko a vyjádření podle kategorie stavby a upravuje dohled. Změna může část řízení integrovat, ale samostatný dopad na rychlost nelze vyčíslit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Mění uplatňování požadavků ochrany veřejného zdraví při stavebním povolování.",
+          "effectCz": "Předchozí úprava počítala s úkony orgánu ochrany veřejného zdraví; návrh některé z nich začleňuje do rozhodnutí stavebního úřadu a upravuje jejich režim. To může zkrátit počet samostatných úkonů, neznamená však jejich úplné zrušení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Balíček ji označuje za relevantní pouze prostřednictvím pozměňovacího návrhu; text této části chybí.",
+          "effectCz": "Bez textu části a příslušné změny nelze určit, jaké pravidlo se mění ani jeho dopad na povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Mění postup posuzování vlivů na životní prostředí v návaznosti na stavební povolení.",
+          "effectCz": "Předchozí úprava spojovala posuzování některých záměrů s jednotným environmentálním stanoviskem; návrh upravuje obsah EIA a umožňuje, aby stanovisko nahradilo další správní úkony. To může zjednodušit postup, ale schválené změny současně posouvají účinnost a u části záměrů mění podmínky posuzování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Mění povolování nakládání s vodami a některých vodních úkonů v rámci povolení záměru.",
+          "effectCz": "Předchozí úprava oddělovala vodoprávní povolení a stavební povolení; návrh v řadě případů přesouvá rozhodnutí do řízení stavebního úřadu a stanoví potřebné vodoprávní podklady. To může odstranit samostatná řízení, ale ponechává vodní podmínky i závazná stanoviska v určitých případech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": true,
+          "reasonCz": "Mění posuzování podmínek pro stavbu krematorií a pohřebišť v povolovacím řízení.",
+          "effectCz": "Předchozí znění vyžadovalo vyjádření či stanovisko hygienických a vodoprávních orgánů; návrh přesouvá některá posouzení na stavební úřad a zachovává vyjádření vodoprávního úřadu. Změna slučuje část procesu, ale její dopad na všechny stavby nelze zobecnit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": true,
+          "reasonCz": "Mění pravidla pozemkových úprav a jejich vztah k povolení stavebních záměrů.",
+          "effectCz": "Dříve byly některé pozemky v zastavěném území a zastavitelných plochách řešeny v pozemkových úpravách jen se souhlasem vlastníka; schválené znění mění vymezení těchto ploch a pro společná zařízení může považovat schválený návrh pozemkových úprav za rozhodnutí v části povolovací věci. To může zjednodušit vybrané postupy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-27",
+          "relevant": true,
+          "reasonCz": "Mění soudní přezkum opatření obecné povahy používaných při územním plánování a povolování.",
+          "effectCz": "Předchozí úprava umožňovala v některých případech žádat zrušení opatření obecné povahy; návrh upravuje soudní přezkum zákonnosti a jeho účinky v pozdějších žalobách. To mění procesní ochranu, nikoli přímo rychlost schvalování staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": true,
+          "reasonCz": "Část zákona o vyvlastnění je zahrnuta mezi změny relevantní pouze prostřednictvím pozměňovacího návrhu.",
+          "effectCz": "Text příslušné části a dotčeného pozměňovacího návrhu chybí; nelze zjistit, jak se předchozí pravidlo mění ani jeho směr."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": true,
+          "reasonCz": "Tato část je relevantní pouze přes pozměňovací návrh, jehož obsah není uveden.",
+          "effectCz": "Schválená verze tuto část odstranila; navrhovaná verze se týkala pravidel bezpečnosti práce. Z doložených textů nelze určit dopad na povolování staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": true,
+          "reasonCz": "Část trestního zákoníku je označena jako relevantní pouze prostřednictvím pozměňovacího návrhu, jehož obsah chybí.",
+          "effectCz": "Text dotčené změny není poskytnut, proto nelze stanovit původní ani nové pravidlo či směr účinku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Mění zvláštní postupy povolování strategicky významných staveb a staveb pro energetickou bezpečnost.",
+          "effectCz": "Předchozí pravidla stanovila lhůty a zvláštní postupy pro některé infrastrukturní záměry; schválené znění upravuje jejich okruh a procesní pravidla, včetně zvláštních vodoprávních podmínek. To může některé záměry urychlit, ale vztahuje se jen na vymezenou infrastrukturu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Mění úkony ochrany ovzduší, které jsou součástí povolování záměrů.",
+          "effectCz": "Předtím se u vybraných záměrů vyžadovala závazná stanoviska a za určitých podmínek kompenzační opatření; návrh mění část stanovisek na vyjádření a jejich obsah přesouvá do rozhodnutí o povolení. To může sloučit úkony, ale kompenzační povinnosti zůstávají relevantní."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": true,
+          "reasonCz": "Část je uvedena jako relevantní jen díky pozměňovacímu návrhu; jeho text není součástí balíčku.",
+          "effectCz": "Nelze z dodaného textu určit, které pravidlo se mění ani směr změny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": true,
+          "reasonCz": "Část o státní službě je označena jako relevantní jen prostřednictvím pozměňovacího návrhu, jehož obsah chybí.",
+          "effectCz": "Bez textu návrhu nelze určit, jak se mění pravidla ani zda změna urychluje či zpomaluje povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": true,
+          "reasonCz": "Mění, kdo při povolování nových či změněných objektů posuzuje prevenci závažných havárií.",
+          "effectCz": "Dosud rozhodoval krajský úřad o zařazení objektu a podmínkách prevence; návrh tyto úkony začleňuje do rozhodnutí stavebního úřadu, přičemž bezpečnostní požadavky zachovává. Může jít o procesní sloučení, nikoli o zrušení věcných kontrol."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": true,
+          "reasonCz": "Část veřejných zakázek je v balíčku zahrnuta jako relevantní pouze prostřednictvím pozměňovacího návrhu.",
+          "effectCz": "Text změny ani dotčeného pozměňovacího návrhu zde není uveden; směr a dopad na schvalování nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": true,
+          "reasonCz": "Mění povolování zařízení pro nakládání s odpady v rámci stavebního řízení.",
+          "effectCz": "Dosavadní zákon ukládal obecnímu úřadu vydávat stanoviska či vyjádření k některým zařízením a záměrům; návrh svěřuje posouzení požadavků odpadového hospodářství stavebnímu úřadu v rozhodnutí o záměru. Jde o integraci úkonů, která může zjednodušit povolení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Navrhovala zrušit zákon o jednotném environmentálním stanovisku, který souvisí s povolováním staveb.",
+          "effectCz": "Navrhovaná verze celý zákon rušila, ale schválená verze tuto část odstranila; v konečném rozhodovaném textu tedy ke zrušení nedošlo."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Mění posuzování obnovitelných zdrojů a územních opatření pro jejich povolování.",
+          "effectCz": "Předchozí znění svěřovalo související úkony různým orgánům a stanovovalo zvláštní podmínky; schválené znění přesouvá část pravomocí na stavební úřad a upravuje, jak se záměry posuzují. Jde o dílčí integraci, nikoli náhradu stavebního zákona."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": true,
+          "reasonCz": "Nově osvobozuje žadatele od poplatku za povolení či kolaudaci, pokud stavební úřad nedodrží zákonnou lhůtu.",
+          "effectCz": "Předchozí znění tuto výjimku v dodaném textu neobsahuje; schválené znění stanoví osvobození od poplatku při nedodržení lhůty. Tím posiluje motivaci k včasnému rozhodnutí, ale samo nepřikazuje rychlejší povolení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-52",
+          "relevant": true,
+          "reasonCz": "Mění přechodná pravidla EIA pro speciální dráhy a tím ovlivňuje platnost podkladů pro stavební povolení.",
+          "effectCz": "Předchozí přechodná pravidla výslovně neuváděla speciální dráhy mezi projekty, jejichž stanovisko EIA lze opakovaně prodlužovat; schválené znění je doplňuje a umožňuje navazující prodloužení. To může zabránit opakování části posuzování, ale týká se vymezených dopravních staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": true,
+          "reasonCz": "Mění oprávnění městských částí účastnit se povolovacích řízení, a tím i proces schvalování staveb.",
+          "effectCz": "Dříve se účast městských částí týkala starších typů řízení; navrhované znění výslovně zahrnuje povolení záměru, rámcové povolení, opakované řízení a další uvedená řízení. To rozšiřuje procesní účast městské části; samo o sobě její dopad na rychlost nelze určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+          "relevant": true,
+          "reasonCz": "Zřizuje zmocněnce s úkolem koordinovat implementaci změn stavebního práva a jejich zrychlovací cíle.",
+          "effectCz": "Předchozí stav neobsahoval tuto funkci; usnesení jmenuje zmocněnce a ukládá koordinaci i návrhy opatření. Jde o organizační rozhodnutí a přípravu, nikoli samo o změnu povolovacích pravidel."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+          "relevant": true,
+          "reasonCz": "V plánu implementačních prací uvádí novelu stavebního zákona jako budoucí úkol vlády.",
+          "effectCz": "Usnesení předkládá výhled, který obsahuje novelu zákona č. 283/2021 Sb.; jde o plán dalšího legislativního kroku, nikoli o přijaté pravidlo ani samo o sobě o zrychlení povolování."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-ec7c8ad96f6f--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--law-change-43174-3",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--law-change-43174-7",
+        "psp-core-2025--law-change-43174-8-1",
+        "psp-core-2025--law-change-43174-8-2",
+        "psp-core-2025--law-change-43174-8-3",
+        "psp-core-2025--law-change-43174-8-4",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-8-7",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-10",
+        "psp-core-2025--law-change-43174-13",
+        "psp-core-2025--law-change-43174-14",
+        "psp-core-2025--law-change-43174-16",
+        "psp-core-2025--law-change-43174-17",
+        "psp-core-2025--law-change-43174-19",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-24",
+        "psp-core-2025--law-change-43174-26",
+        "psp-core-2025--law-change-43174-27",
+        "psp-core-2025--law-change-43174-29",
+        "psp-core-2025--law-change-43174-30",
+        "psp-core-2025--law-change-43174-31",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-34",
+        "psp-core-2025--law-change-43174-35",
+        "psp-core-2025--law-change-43174-36",
+        "psp-core-2025--law-change-43174-37",
+        "psp-core-2025--law-change-43174-39",
+        "psp-core-2025--law-change-43174-41",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-38",
+        "psp-core-2025--law-change-43174-approved-52",
+        "psp-core-2025--law-change-43399-6",
+        "zvlady-resolutions--law-change-uv-2026-59",
+        "zvlady-resolutions--law-change-uv-2026-175-193",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-212014",
+        "zvlady-resolutions--2026-59",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--amendment-1148",
+        "psp-core-2025--amendment-text-1148",
+        "psp-core-2025--vote-88194",
+        "psp-core-2025--amendment-1172",
+        "psp-core-2025--amendment-text-1172",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--amendment-1173",
+        "psp-core-2025--amendment-text-1173",
+        "psp-core-2025--vote-88144",
+        "psp-core-2025--vote-88147",
+        "psp-core-2025--amendment-1213",
+        "psp-core-2025--amendment-text-1213",
+        "psp-core-2025--vote-88184",
+        "psp-core-2025--amendment-1365",
+        "psp-core-2025--amendment-text-1365",
+        "psp-core-2025--vote-88233",
+        "psp-core-2025--amendment-1368",
+        "psp-core-2025--amendment-text-1368",
+        "psp-core-2025--vote-88234"
+      ],
+      "explanationCz": "Poslanci hnutí ANO předložili rozsáhlou novelu stavebního zákona a vláda jí vyslovila souhlas; návrh mění úřady i řadu postupů a část povolování může zjednodušit. Poslanecká sněmovna návrh schválila, Senát jej zamítl a Sněmovna poté setrvala na svém znění. Návrh však mění stávající stavební zákon č. 283/2021 Sb., místo aby jej zrušil a přijal nový zákon, jak slib požaduje. Protože současně obsahuje kroky směřující k rychlejšímu povolování, je výsledek smíšený, ale v rozhodující části jde proti výslovnému závazku zrušit novelu a nahradit ji novým zákonem.",
+      "confidence": "high",
+      "uncertainties": [
+        "Některé části balíčku jsou doloženy pouze jako změny související s povolováním; u částí bez textu nelze určit konkrétní ustanovení ani jejich směr.",
+        "Balíček neobsahuje vyhlášené konečné znění zákona ani následné rozhodnutí prezidenta; posouzení vychází z rozhodujícího hlasování Sněmovny po zamítnutí Senátem."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-ec7c8ad96f6f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Mění základní zásady stavebního zákona, role úřadů a postup při koordinaci stanovisek, tedy pravidla přímo ovlivňující povolování staveb.",
+          "effectCz": "Dosavadní zákon vyžadoval koordinaci veřejných zájmů a spolupráci úřadů, ale nové zásady dovolují nepřiměřeně neblokovat jiné zájmy; nové lhůty, společná jednání a nahrazení některých samostatných úkonů mají proces zjednodušit a zrychlit, nikoli však dokazují zrušení dosavadního zákona."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Přeskupuje příslušnost úřadů pro územní plánování i stavební řád, což přímo mění organizaci povolování.",
+          "effectCz": "Dosavadní působnost rozdělovaly ministerstva, krajské a obecní úřady i specializované stavební orgány; nově ji přebírá soustava úřadů rozvoje území a jejich pracovišť. Směr dopadu na rychlost nelze určit pouze z těchto ustanovení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Mění postup pořizování územně plánovací dokumentace, lhůty a pravidla pro stanoviska, což může urychlit přípravu podkladů pro stavby.",
+          "effectCz": "Dosavadní postupy vyžadovaly projednání, opakované kroky a stanoviska; nové znění zkracuje či zjednodušuje některé kroky a u některých nečinností stanoví souhlas, takže příslušné části procesu jsou volnější a rychlejší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Mění navazující projednání územních plánů i povolovacích podkladů, včetně lhůt a případů, kdy se projednání opakuje.",
+          "effectCz": "Dosavadní pravidla požadovala nové projednání při nově negativních dopadech a stanovovala více kroků; nová úprava zúžila, co je podstatná změna, a zrychlila některé úkony, čímž postup v těchto případech uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Mění požadavky pro rozhodování o záměrech a pravidla pro podklady, vyjádření a lhůty v povolovacím řízení.",
+          "effectCz": "Dosavadní znění vyžadovalo oddělené podklady a opakované posuzování; navržené a schválené změny soustřeďují některé úkony do řízení o záměru a zavádějí nové procesní fikce. Některé požadavky jsou volnější, ale jejich celkový dopad na rychlost nelze určit z vybraných ustanovení samotných."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Mění vlastní posuzování a povolování staveb, včetně možnosti odchýlit se od územního plánu a nových pravidel pro rozhodnutí.",
+          "effectCz": "Dříve se soulad záměru posuzoval podle územního plánu a dalších požadavků; nové znění připouští za stanovených souhlasů odchylku od dokumentace a předpokládá přípustnost některých záměrů v zastavitelném území. To uvolňuje část překážek, nikoli však nahrazuje celý stavební zákon."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Mění kategorie drobných staveb a rozsah záměrů, které potřebují povolení, což přímo ovlivňuje dobu schvalování části staveb.",
+          "effectCz": "Dosavadní příloha stanovovala konkrétní limity a seznam staveb bez povolení; nová příloha rozšiřuje některé výjimky a limity, takže pro tyto stavby jsou povolovací požadavky volnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Zakládá nový ústřední Úřad rozvoje území a mění, který úřad vykonává agendu územního plánování a stavebního řádu.",
+          "effectCz": "Dosud tyto oblasti náležely především ministerstvu pro místní rozvoj; nově je má převzít Úřad rozvoje území. Předchozí a nová slova jsou doložena, ale samotná změna institucionální odpovědnosti neukazuje, zda se povolování zrychlí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": true,
+          "reasonCz": "Přesouvá části požární agendy a pravidel pro stavby do nového systému povolování staveb.",
+          "effectCz": "Dříve technické podmínky stanovovalo ministerstvo a požární stanoviska byla samostatným podkladem; nově se mění jejich role a podmínky mají být řešeny v rámci stavebního řízení. To zmenšuje počet samostatných úkonů, ale z poskytnutých ustanovení nelze vyčíslit dopad na dobu řízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "Mění, jak se při povolování staveb posuzují zájmy památkové péče a jak se její úkony propojují se stavebním řízením.",
+          "effectCz": "Dosavadní pravidla vyžadovala rozhodnutí či závazná stanoviska památkových orgánů pro širší okruh prací; nová úprava převádí část posuzování do řízení stavebního úřadu a omezuje některé samostatné úkony, takže v těchto případech může proces zkrátit. Ochranné záruky jsou zároveň v části změněny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": true,
+          "reasonCz": "Převádí některé geologické požadavky a vyjádření do nového režimu povolení záměru.",
+          "effectCz": "Dosavadní znění vyžadovalo vyjádření krajského úřadu v některých územích; změna váže vyjádření na žádost o povolení záměru a ruší jednu samostatnou výjimku. Bez úplného předchozího znění nelze určit celkový směr dopadu na délku povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-1",
+          "relevant": true,
+          "reasonCz": "Mění posuzování krajinného rázu a podmínek území, které mohou ovlivnit povolení staveb.",
+          "effectCz": "Dříve se krajinný ráz neposuzoval jen v úzce vymezených plochách s konkrétní dohodnutou regulací; nové znění váže výjimku na zastavitelné území, koridory či plochy vymezené v souladu se stanoviskem ochrany přírody. Rozsah výjimky se mění a směr dopadu nelze považovat za obecné zrychlení všech řízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-2",
+          "relevant": true,
+          "reasonCz": "Převádí vybrané úkony ochrany přírody do stavebního řízení a mění souhlasy potřebné k povolení záměrů.",
+          "effectCz": "Dosud byly pro některé činnosti potřeba zvláštní souhlasy a řízení orgánů ochrany přírody; nové znění v části případů začleňuje posouzení do rozhodnutí stavebního úřadu, ale zároveň ponechává či upravuje podmínky ochrany. Některé samostatné kroky ubývají, avšak změna není jednoznačným uvolněním všech limitů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-3",
+          "relevant": true,
+          "reasonCz": "Mění podmínky výjimek ze zákazů pro chráněné druhy, které mohou být podkladem pro povolení stavebních záměrů.",
+          "effectCz": "Dosavadní § 56 umožňoval výjimky v určitých případech; schválené znění mění okruh důvodů a výslovně stanoví nárok po splnění podmínek. To může uvolnit část překážek, ale jde o dílčí režim a nikoli o zrušení celé stavební novely."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-4",
+          "relevant": true,
+          "reasonCz": "Mění účast environmentálních organizací a správních orgánů v řízeních souvisejících se stavbami.",
+          "effectCz": "Dosavadní zákon umožňoval kvalifikovaným občanským sdružením účastnit se vybraných řízení; nové znění omezuje jejich účast v části řízení vedených stavebním úřadem a stanoví podmínky založené na stáří či podpoře podpisy. Tím se zužuje procesní účast, což může omezit některé průtahy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Nově svěřuje stavebním úřadům posuzování řady dosavadních úkonů ochrany přírody při povolování staveb.",
+          "effectCz": "Dříve příslušné souhlasy a povolení vydávaly různé orgány ochrany přírody; nové znění některé z nich vkládá do výroku stavebního povolení, zatímco zvlášť chráněná území a další případy vyjímá. Snižuje počet samostatných úkonů u části staveb, ale neodstraňuje všechny podmínky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-7",
+          "relevant": true,
+          "reasonCz": "Upravuje přechod neukončených řízení mezi dosavadními orgány ochrany přírody a novými stavebními úřady.",
+          "effectCz": "Dosavadní řízení se měla dokončit podle dosavadních předpisů; schválené znění stanoví jejich převzetí novými úřady a zvláštní přechodné postupy. Mění, kdo řízení vede, ale rychlost z těchto přechodných pravidel nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Začleňuje souhlas s odnětím půdy ze zemědělského půdního fondu do povolení stavebního záměru.",
+          "effectCz": "Dosud byl pro odnětí půdy zpravidla potřeba samostatný souhlas; nově splnění podmínek v řízení o stavebním záměru posuzuje stavební úřad a některé zásady se v již vymezeném zastavitelném území neposuzují znovu. Jde o sloučení úkonů a uvolnění části posuzování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-10",
+          "relevant": false,
+          "reasonCz": "V předloženém výřezu není žádný odstavec změny a balíček neukazuje, jak by úprava daně z nemovitých věcí urychlila či brzdila schvalování staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-13",
+          "relevant": false,
+          "reasonCz": "Předložený výřez neobsahuje žádnou změnu zákona o vnitrozemské plavbě, kterou by bylo možné spojit s tímto slibem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": true,
+          "reasonCz": "Převádí část lesních souhlasů, odnětí a dalších úkonů do řízení stavebního úřadu.",
+          "effectCz": "Dosud se pro dotčení lesa vyžadovalo samostatné závazné stanovisko či rozhodnutí orgánu státní správy lesů; nově stavební úřad posuzuje podmínky v rozhodnutí o záměru, s výjimkou národních parků. Snižuje počet samostatných řízení, přičemž některá vyjádření zůstávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-16",
+          "relevant": false,
+          "reasonCz": "Text změny zákona o civilním letectví v balíčku neobsahuje vybrané odstavce, které by bylo možné spojit s obecnou rychlostí schvalování staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": true,
+          "reasonCz": "Přeměňuje veterinární úkony pro stavební záměry na vyjádření, která mohou být podkladem řízení o povolení.",
+          "effectCz": "Dříve se u některých zařízení vyžadoval závazný posudek, který úřad nemohl překročit; změna ruší tento samostatný posudek a ponechává vyjádření. Oslabuje samostatnou závaznost této překážky a začleňuje ji do nového systému."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": true,
+          "reasonCz": "Mění podklady požární ochrany a ochrany obyvatelstva používané při povolování staveb.",
+          "effectCz": "Dosavadní pravidla počítala se závaznými stanovisky, zatímco nové znění rozlišuje závazná stanoviska a vyjádření podle typu stavby a začleňuje je do stavebního řízení. Sjednocuje podklady, ale směr rychlosti závisí na tom, jak budou jednotlivé úkony vydávány."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Nahrazuje některá samostatná stanoviska ochrany veřejného zdraví rozhodnutím stavebního úřadu o záměru.",
+          "effectCz": "Dosud se pro stavební záměry vydávala stanoviska hygienických orgánů; nové znění je v rozsahu stavebního zákona nahrazuje rozhodnutím stavebního úřadu. Odstraňuje samostatný krok, ale neprokazuje zrychlení každého řízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Změna energetického zákona nemá v dodaném výřezu žádný text; nelze z něj určit konkrétní účinek na schvalování staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Mění, jak se při posuzování vlivů na životní prostředí zohlední některé další povolovací úkony a jak se navazující povolení koordinují.",
+          "effectCz": "Dříve se závazné stanovisko EIA u některých záměrů vydávalo současně jako jednotné environmentální stanovisko; navržené znění umožňuje stanovisku EIA nahradit další správní úkony, pokud o to oznamovatel požádá. Tato volba může sloučit posuzování a omezit opakování kroků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Mění povolení k nakládání s vodami a souhlasy, které jsou součástí povolování stavebních záměrů.",
+          "effectCz": "Dosud se v řadě případů povolení podle vodního zákona vyřizovala samostatně; návrh převádí jejich posouzení do rozhodnutí o záměru stavebního úřadu. Schválené části tuto integraci zachovávají, a tím snižují počet oddělených řízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": true,
+          "reasonCz": "Přesouvá posouzení požadavků na veřejné zdraví při zřizování krematoria a pohřebiště do stavebního řízení.",
+          "effectCz": "Dříve se u těchto záměrů vyžadovala samostatná stanoviska hygienické stanice; nové znění přenechává posouzení zdravotních podmínek stavebnímu úřadu, čímž odstraňuje samostatný krok."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": true,
+          "reasonCz": "Mění podmínky, za nichž se pro společná zařízení pozemkových úprav vyžaduje povolení záměru.",
+          "effectCz": "Dosavadní úprava některé společné prvky osvobozovala od povolení; nová úprava považuje schválený návrh pozemkových úprav za rozhodnutí v části věci pro uvedené stavby a společná zařízení. U vymezených záměrů tedy odstraňuje část samostatného povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-27",
+          "relevant": true,
+          "reasonCz": "Mění soudní přezkum rozhodnutí a opatření použitých při povolování staveb.",
+          "effectCz": "Dosud soud mohl opatření obecné povahy rušit v samostatném přezkumu; nově se u některých pozdě podaných návrhů zákonnost řeší jen v odůvodnění rozsudku. Tím se omezuje rozsah následného přezkumu, což může zkrátit navazující řízení, ale také oslabuje procesní nápravu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": false,
+          "reasonCz": "Předložený výřez neobsahuje žádnou změnu zákona o vyvlastnění, takže nelze posoudit její vazbu na tento slib.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": false,
+          "reasonCz": "Navržené změny se týkají zmocnění vlády k pravidlům bezpečnosti práce, nikoli povolování staveb; část byla navíc odstraněna ze schváleného znění.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": false,
+          "reasonCz": "Předložený výřez novely trestního zákoníku neobsahuje text, který by bylo možné spojit s rychlostí povolování staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Mění zvláštní režim povolování strategické infrastruktury, včetně staveb pro energetickou bezpečnost.",
+          "effectCz": "Dosavadní zákon obsahoval zvláštní lhůty a procesní pravidla pro některé druhy infrastruktury; schválené znění rozšiřuje a upravuje tento zvláštní režim a ponechává rozhodování v povolovacím řízení. Část pravidel zrychluje nebo zjednodušuje povolování vymezených strategických staveb, ale nejde o obecné zrušení stávající novely."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Mění stanoviska a podmínky ochrany ovzduší vydávané při povolování staveb.",
+          "effectCz": "Dříve byla pro některé záměry nutná závazná stanoviska orgánů ochrany ovzduší; nové znění převádí část jejich posouzení na vyjádření a do rozhodnutí stavebního úřadu. Zmenšuje počet samostatných úkonů, ale ponechává některé podmínky a kompenzace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": false,
+          "reasonCz": "Text zákona o Státním pozemkovém úřadu není obsažen ve výřezu a nelze určit souvislost s rychlostí schvalování staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": false,
+          "reasonCz": "Text zákona o státní službě není obsažen ve výřezu a nelze určit konkrétní účinek na povolovací řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": true,
+          "reasonCz": "Převádí část prevence závažných havárií do rozhodování stavebního úřadu o záměrech.",
+          "effectCz": "Dříve krajský úřad vydával pro některé nové objekty samostatná rozhodnutí a závazná stanoviska; nově stavební úřad stanoví podmínky v rozhodnutí o záměru a kolaudačním rozhodnutí. Sjednocuje úkony v jednom řízení, přičemž bezpečnostní podmínky zůstávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "Předložený text změny zákona o veřejných zakázkách neobsahuje žádné ustanovení, které by bylo možné spojit s povolováním staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": true,
+          "reasonCz": "Mění, kdo při povolování staveb posuzuje plnění odpadového zákona.",
+          "effectCz": "Dosud obecní úřad vydával samostatné stanovisko či vyjádření k vybraným stavebním záměrům; nové znění svěřuje posouzení stavebnímu úřadu v rozhodnutí o záměru. Tím se slučuje jeden z podkladových kroků do hlavního řízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Navrhovalo zrušit zákon o jednotném environmentálním stanovisku, tedy úpravu přímo spojenou se slučováním povolovacích úkonů, ale ze schváleného textu bylo odstraněno.",
+          "effectCz": "Předchozí znění zákona o jednotném environmentálním stanovisku není v kontextu poskytnuto, takže směr jeho zrušení nelze přesně určit; navržená část by zákon zrušila, avšak ve schválené verzi je odstraněna a žádnou změnu nepřináší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Mění postup povolování obnovitelných zdrojů v akceleračních oblastech, tedy přímo pravidla pro schvalování části stavebních záměrů.",
+          "effectCz": "Dosavadní zákon svěřoval přípravu stanoviska a podmínek jiným orgánům a počítal s jednotným environmentálním stanoviskem; nové znění přesouvá postup k stavebnímu úřadu a upravuje návaznost na povolení. U těchto záměrů mění správní postup, ale neprokazuje zrychlení všech staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": true,
+          "reasonCz": "Nově osvobozuje žadatele od poplatku za povolení záměru či kolaudaci, pokud úřad nedodrží zákonnou lhůtu.",
+          "effectCz": "Předchozí příloha poplatků neměla v poskytnutém kontextu toto osvobození; nové pravidlo přiznává osvobození při opožděném rozhodnutí. Nezrychluje řízení samo, ale zavádí důsledek prodlení úřadu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-52",
+          "relevant": false,
+          "reasonCz": "Výřez se týká pouze prodlužování platnosti posouzení vlivů pro speciální dráhu; slib nejmenuje takový konkrétní projekt ani skupinu staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje oprávnění městských částí Prahy účastnit se povolování záměrů na jejich území, takže mění procesní okruh u části staveb.",
+          "effectCz": "Dosavadní § 18 dával městským částem účast v užším okruhu řízení o územním rozhodnutí, společném povolení či dodatečném povolení; návrh zahrnuje i nová řízení o povolení a další uvedená řízení. Rozšiřuje procesní oprávnění, ale z balíčku nelze určit dopad na dobu schvalování."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+          "relevant": true,
+          "reasonCz": "Usnesení zřizuje funkci zmocněnce, jehož výslovným posláním je koordinovat implementaci stavebního práva.",
+          "effectCz": "Předtím taková vládní funkce podle dodaného textu nebyla; nově má zmocněnec koordinovat provádění novely stavebního práva a souvisejících předpisů. Vytváří implementační mechanismus, ale samo nemění povolovací pravidla ani nedokládá zrychlení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+          "relevant": true,
+          "reasonCz": "Příloha vládního výhledu legislativních prací výslovně uvádí novelu stavebního zákona.",
+          "effectCz": "Dosavadní plánovací výhled v tomto výřezu neuveden; nově dokument zařazuje novelu zákona č. 283/2021 Sb. mezi legislativní úkoly. Jde o plán či návrh další práce, nikoli o změnu povolovacích pravidel."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-ec7c8ad96f6f--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--law-change-43174-3",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--law-change-43174-7",
+        "psp-core-2025--law-change-43174-8-1",
+        "psp-core-2025--law-change-43174-8-2",
+        "psp-core-2025--law-change-43174-8-3",
+        "psp-core-2025--law-change-43174-8-4",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-8-7",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-14",
+        "psp-core-2025--law-change-43174-17",
+        "psp-core-2025--law-change-43174-19",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-24",
+        "psp-core-2025--law-change-43174-26",
+        "psp-core-2025--law-change-43174-27",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-36",
+        "psp-core-2025--law-change-43174-39",
+        "psp-core-2025--law-change-43174-41",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-38",
+        "psp-core-2025--law-change-43399-6",
+        "zvlady-resolutions--law-change-uv-2026-59",
+        "zvlady-resolutions--law-change-uv-2026-175-193",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-1172",
+        "psp-core-2025--amendment-1173",
+        "psp-core-2025--amendment-1148",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--vote-88144",
+        "psp-core-2025--vote-88194",
+        "psp-core-2025--vote-88195",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--amendment-1213",
+        "psp-core-2025--vote-88155",
+        "psp-core-2025--vote-88157",
+        "psp-core-2025--vote-88160",
+        "psp-core-2025--vote-88163",
+        "psp-core-2025--vote-88169",
+        "psp-core-2025--vote-88181",
+        "psp-core-2025--vote-88202",
+        "psp-core-2025--vote-88204",
+        "psp-core-2025--vote-88211",
+        "psp-core-2025--vote-88213",
+        "psp-core-2025--vote-88215",
+        "psp-core-2025--vote-88216",
+        "psp-core-2025--vote-88217",
+        "psp-core-2025--vote-88219",
+        "psp-core-2025--vote-88220",
+        "psp-core-2025--vote-88223",
+        "psp-core-2025--vote-88224",
+        "psp-core-2025--vote-88228",
+        "psp-core-2025--vote-88233",
+        "psp-core-2025--vote-88234",
+        "zvlady-resolutions--2026-59",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Poslanci ANO předložili rozsáhlou změnu stavebního zákona a vláda jí vyjádřila souhlas; návrh slučuje řadu dosavadních stanovisek a povolení do jednoho rozhodování a zjednodušuje některé postupy. Sněmovna návrh schválila, Senát jej odmítl, ale poslanci poté setrvali na svém znění. Jde o dílčí posun ke zrychlení povolování, nikoli o splnění slibu: předložená úprava mění stávající stavební zákon místo toho, aby jej zrušila a nahradila novým zákonem.",
+      "confidence": "high",
+      "uncertainties": [
+        "Poslanci ANO také předložili a podpořili změnu, která posunula hlavní účinnost novely z 1. července 2026 na 1. ledna 2027; tím se odkládá účinek plánovaných změn povolování.",
+        "Senát návrh vrátil jako zamítnutý; Poslanecká sněmovna následně setrvala na svém znění, ale v balíčku není doklad o jeho pozdějším vyhlášení.",
+        "Návrh obsahuje i změny, které zužují některé ochranné či procesní záruky; jejich vliv na délku jednotlivých povolovacích řízení nelze z dodaných textů spolehlivě určit."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0c4af72948a7d2ce016aec5b51125087d1bd5dbfb8b89bca4c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 583673,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 583670
+      },
+      "output_tokens": 14219,
+      "output_tokens_details": {
+        "reasoning_tokens": 6040
+      },
+      "total_tokens": 597892
+    },
+    "output": {
+      "promiseId": "candidate-ec7c8ad96f6f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Mění účel, obecné zásady a soustavu úřadů stavebního zákona, tedy přímo rámec povolování staveb.",
+          "effectCz": "Dosavadní zákon vymezoval působnost stavebních orgánů a obecný účel ochrany veřejných zájmů; návrh zřizuje úřady rozvoje území a upravuje zásady, koordinaci i působnosti. Nová zásada, že záměr lze odmítnout jen za stanovených podmínek, může povolování usnadnit, ale předchozí znění některých nově vložených ustanovení chybí; jde o změnu stávajícího zákona, nikoli o nový samostatný stavební zákon."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Mění nadřízenost a rozdělení pravomocí stavebních a územně plánovacích úřadů, což přímo ovlivňuje povolovací proces.",
+          "effectCz": "Dosavadní úprava svěřovala pravomoci ministerstvu, krajským a obecním úřadům i Dopravnímu a energetickému stavebnímu úřadu; text mění jejich rozdělení a zavádí úřady rozvoje území. Nejde samo o sobě o doložené zrychlení ani zpomalení lhůt; směr účinku na rychlost nelze z organizační změny určit. Jde o novelu platného zákona."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Mění lhůty a postupy územního plánování a řešení rozporů, které jsou součástí přípravy staveb.",
+          "effectCz": "Předchozí znění upravovalo projednávání, lhůty a soulad plánovací dokumentace; návrh u některých kroků zavádí lhůty, fikce souhlasu a zjednodušuje opakované projednání. Tyto změny mohou zkrátit některé přípravné kroky, ale jiné podmínky se mění také; celek nedokládá zásadní zrychlení všech povolení. Novelizuje stávající zákon."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Upravuje řízení o povolení záměru, námitky, lhůty a požadavky na stavby.",
+          "effectCz": "Předchozí pravidla požadovala povolení a stanovila běžný postup; návrh mění okruh požadavků a výjimek, zkracuje některé lhůty a upravuje námitky. Některé změny mohou proces urychlit, jiné omezují či mění věcné kontroly; účinek není jednotně jen zrychlující. Jde o novelu, nikoli nový zákon."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Mění pravidla vlastního povolovacího řízení, včetně práce s vyjádřeními a lhůtami.",
+          "effectCz": "Předchozí úprava vyžadovala podklady a stanoviska dotčených orgánů; návrh v řadě případů sjednocuje či nahrazuje jejich úkony a zavádí souhlas při nečinnosti, současně mění přezkum a účastníky. To může zkrátit některé kroky, ale také oslabuje či mění kontroly; směr celkového dopadu na rychlost nelze označit za jednoznačný."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Mění posuzování a schvalování záměrů, včetně možností zrychleného povolení.",
+          "effectCz": "Předchozí znění vyžadovalo posouzení souladu záměru s územním plánováním, veřejnými zájmy a námitkami; návrh umožňuje v určitých případech odchylku od plánovací dokumentace a považuje některé záměry v zastavitelném území za přípustné. To může povolení usnadnit, ale jde o dílčí změny pravidel stávajícího zákona, ne o jeho zrušení a nahrazení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Mění kategorie staveb a pravidla jejich povolování, což přímo ovlivňuje náročnost schvalování.",
+          "effectCz": "Předchozí příloha zákona stanovila limity pro drobné a jednoduché stavby; návrh mění některé limity a okruh staveb bez povolení či v jednodušším režimu. To může u části staveb snížit administrativu, ale současně nejde o nový samostatný zákon."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Přesouvá působnost v územním plánování a stavebním řádu na nově zřízený Úřad rozvoje území.",
+          "effectCz": "Dříve působnost v územním plánování a stavebním řádu náležela ministerstvu; návrh ji v příslušném rozsahu svěřuje novému Úřadu rozvoje území. Změna rozdělení institucí sama neprokazuje rychlejší řízení a nepředstavuje zrušení stavebního zákona."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": true,
+          "reasonCz": "Mění způsob posuzování požární bezpečnosti v rámci stavebního povolování.",
+          "effectCz": "Předtím Hasičský záchranný sbor vydával pro vymezené stavby závazná stanoviska; návrh část úkonů mění na vyjádření a převádí posuzování do stavebního řízení. To může zjednodušit některé kroky, ale pravidla požární ochrany zůstávají; jde o novelu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "Mění rozsah památkových úkonů a jejich postavení v povolovacím řízení.",
+          "effectCz": "Předchozí úprava vyžadovala rozhodnutí či závazná stanoviska památkové péče u vymezených záměrů; návrh u části záměrů přesouvá posouzení do stavebního úřadu a u některých případů mění závazné stanovisko na vyjádření. To může zrychlit část řízení, zároveň mění míru a podobu kontroly."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": true,
+          "reasonCz": "Mění podklady a postupy spojené s povolováním staveb v územích se zvláštními geologickými podmínkami.",
+          "effectCz": "Předchozí ustanovení požadovalo geologické vyjádření v určených územích; návrh upravuje vazbu na žádost o povolení záměru a ruší další procesní ustanovení. Směr dopadu na rychlost nelze bez kompletního znění zrušené části určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-1",
+          "relevant": true,
+          "reasonCz": "Mění pravidla ochrany přírody, která se uplatňují při povolování staveb.",
+          "effectCz": "Předchozí znění omezovalo výjimku z posuzování krajinného rázu na území s dohodnutými podmínkami v územním či regulačním plánu; návrh ji váže na územně plánovací dokumentaci vymezenou se stanoviskem orgánu ochrany přírody. Tím se mění, kde se krajinný ráz neposuzuje; dopad na rychlost závisí na konkrétním území."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-2",
+          "relevant": true,
+          "reasonCz": "Převádí část úkonů ochrany přírody do stavebního řízení.",
+          "effectCz": "Předchozí právní úprava vyžadovala samostatné souhlasy či rozhodnutí orgánů ochrany přírody; návrh v některých případech začleňuje jejich posouzení do rozhodnutí stavebního úřadu. Jde o integraci úkonů, která může zjednodušit proces, ale neodstraňuje všechny ochranné podmínky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-3",
+          "relevant": true,
+          "reasonCz": "Mění podmínky pro výjimky z ochrany zvláště chráněných druhů, které mohou ovlivnit povolení záměru.",
+          "effectCz": "Předchozí úprava dovolovala výjimky za stanovených veřejných zájmů a podmínek; návrh mění výčet i podmínky pro jejich povolení a zavádí další případy. Změna může některé zásahy usnadnit, ale není sama o sobě zrychlením celého povolovacího řízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-4",
+          "relevant": true,
+          "reasonCz": "Mění účast veřejnosti v řízeních souvisejících s ochranou přírody a zapojuje stavební úřady.",
+          "effectCz": "Předchozí úprava umožňovala vybraným sdružením účast v určitých řízeních; návrh mění podmínky účasti a přidává stavební úřady mezi orgány ochrany přírody. To mění procesní okruh účastníků, ale z dodaného textu nelze určit jednotný směr účinku na rychlost."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Zavádí přímo do povolování staveb pravomoci stavebních úřadů v agendě ochrany přírody.",
+          "effectCz": "Předchozí pravomoci vykonávaly orgány ochrany přírody; návrh pro některé záměry svěřuje posuzování, podmínky a rozhodování stavebním úřadům, s výjimkami pro chráněná území. To sjednocuje část procesu a může ji zkrátit, avšak jde o novelu stávajícího systému."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-7",
+          "relevant": true,
+          "reasonCz": "Upravuje přechod řízení při změně orgánů odpovědných za povolování.",
+          "effectCz": "Předchozí přechodné pravidlo odkazovalo na dokončení řízení podle nově účinné právní úpravy; schválený text přesněji rozděluje řízení mezi nový Úřad a další stavební úřady. To samo neposkytuje důkaz o rychlejším povolení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Mění posuzování záboru zemědělské půdy jako součásti povolování záměrů.",
+          "effectCz": "Předtím souhlas s odnětím půdy vydával orgán ochrany zemědělského půdního fondu; návrh zahrnuje posouzení do rozhodnutí stavebního úřadu a v zastavitelném území vymezeném podle stanoviska nezvažuje některé zásady ochrany. To může zjednodušit proces, ale současně mění věcné podmínky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-10",
+          "relevant": true,
+          "reasonCz": "Balíček řadí tuto část mezi změny relevantní pouze prostřednictvím pozměňovacího návrhu, který však není doložen jejím vlastním textem.",
+          "effectCz": "Vlastní text ani příslušný pozměňovací návrh k této části nejsou dodány; nelze určit, jaké pravidlo se mění ani zda se jeho účinek na povolování zpřísňuje či uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-13",
+          "relevant": true,
+          "reasonCz": "Jde o část zákona předloženého jako reforma povolování; balíček ji označuje za relevantní pouze prostřednictvím pozměňovacího návrhu.",
+          "effectCz": "Text této části i dotčeného pozměňovacího návrhu chybí, takže nelze určit předchozí a navrhované pravidlo ani směr změny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": true,
+          "reasonCz": "Mění způsob, jak se souhlasy a rozhodnutí lesní správy promítají do stavebního povolení.",
+          "effectCz": "Dosavadní lesní zákon vyžadoval samostatné závazné stanovisko či rozhodnutí; schválené znění u záměrů podle stavebního zákona převádí část posouzení do rozhodnutí stavebního úřadu a stanoví podkladové vyjádření lesního orgánu. Tím může zjednodušit postup, ale neodstraňuje věcné podmínky ochrany lesa."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-16",
+          "relevant": true,
+          "reasonCz": "Část je zahrnuta jen jako relevantní prostřednictvím pozměňovacích návrhů, jejichž obsah zde chybí.",
+          "effectCz": "Bez textu části a dotčeného pozměňovacího návrhu nelze porovnat dosavadní a navržené pravidlo ani určit směr účinku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": true,
+          "reasonCz": "Mění veterinární úkony, které slouží jako podklady pro povolení staveb.",
+          "effectCz": "Předchozí zákon vyžadoval u některých staveb závazný veterinární posudek a u dalších vyjádření; návrh ruší závazný posudek a převádí příslušné úkony na vyjádření. To může snížit závaznost podkladu, ale nemění samotný stavební zákon."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": true,
+          "reasonCz": "Mění posuzování ochrany obyvatelstva jako součást povolování staveb.",
+          "effectCz": "Dosavadní pravidlo vedlo k závaznému stanovisku orgánu ochrany obyvatelstva; návrh rozlišuje závazné stanovisko a vyjádření podle kategorie stavby a upravuje dohled. Změna může část řízení integrovat, ale samostatný dopad na rychlost nelze vyčíslit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Mění uplatňování požadavků ochrany veřejného zdraví při stavebním povolování.",
+          "effectCz": "Předchozí úprava počítala s úkony orgánu ochrany veřejného zdraví; návrh některé z nich začleňuje do rozhodnutí stavebního úřadu a upravuje jejich režim. To může zkrátit počet samostatných úkonů, neznamená však jejich úplné zrušení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Balíček ji označuje za relevantní pouze prostřednictvím pozměňovacího návrhu; text této části chybí.",
+          "effectCz": "Bez textu části a příslušné změny nelze určit, jaké pravidlo se mění ani jeho dopad na povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Mění postup posuzování vlivů na životní prostředí v návaznosti na stavební povolení.",
+          "effectCz": "Předchozí úprava spojovala posuzování některých záměrů s jednotným environmentálním stanoviskem; návrh upravuje obsah EIA a umožňuje, aby stanovisko nahradilo další správní úkony. To může zjednodušit postup, ale schválené změny současně posouvají účinnost a u části záměrů mění podmínky posuzování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Mění povolování nakládání s vodami a některých vodních úkonů v rámci povolení záměru.",
+          "effectCz": "Předchozí úprava oddělovala vodoprávní povolení a stavební povolení; návrh v řadě případů přesouvá rozhodnutí do řízení stavebního úřadu a stanoví potřebné vodoprávní podklady. To může odstranit samostatná řízení, ale ponechává vodní podmínky i závazná stanoviska v určitých případech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": true,
+          "reasonCz": "Mění posuzování podmínek pro stavbu krematorií a pohřebišť v povolovacím řízení.",
+          "effectCz": "Předchozí znění vyžadovalo vyjádření či stanovisko hygienických a vodoprávních orgánů; návrh přesouvá některá posouzení na stavební úřad a zachovává vyjádření vodoprávního úřadu. Změna slučuje část procesu, ale její dopad na všechny stavby nelze zobecnit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": true,
+          "reasonCz": "Mění pravidla pozemkových úprav a jejich vztah k povolení stavebních záměrů.",
+          "effectCz": "Dříve byly některé pozemky v zastavěném území a zastavitelných plochách řešeny v pozemkových úpravách jen se souhlasem vlastníka; schválené znění mění vymezení těchto ploch a pro společná zařízení může považovat schválený návrh pozemkových úprav za rozhodnutí v části povolovací věci. To může zjednodušit vybrané postupy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-27",
+          "relevant": true,
+          "reasonCz": "Mění soudní přezkum opatření obecné povahy používaných při územním plánování a povolování.",
+          "effectCz": "Předchozí úprava umožňovala v některých případech žádat zrušení opatření obecné povahy; návrh upravuje soudní přezkum zákonnosti a jeho účinky v pozdějších žalobách. To mění procesní ochranu, nikoli přímo rychlost schvalování staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": true,
+          "reasonCz": "Část zákona o vyvlastnění je zahrnuta mezi změny relevantní pouze prostřednictvím pozměňovacího návrhu.",
+          "effectCz": "Text příslušné části a dotčeného pozměňovacího návrhu chybí; nelze zjistit, jak se předchozí pravidlo mění ani jeho směr."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": true,
+          "reasonCz": "Tato část je relevantní pouze přes pozměňovací návrh, jehož obsah není uveden.",
+          "effectCz": "Schválená verze tuto část odstranila; navrhovaná verze se týkala pravidel bezpečnosti práce. Z doložených textů nelze určit dopad na povolování staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": true,
+          "reasonCz": "Část trestního zákoníku je označena jako relevantní pouze prostřednictvím pozměňovacího návrhu, jehož obsah chybí.",
+          "effectCz": "Text dotčené změny není poskytnut, proto nelze stanovit původní ani nové pravidlo či směr účinku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Mění zvláštní postupy povolování strategicky významných staveb a staveb pro energetickou bezpečnost.",
+          "effectCz": "Předchozí pravidla stanovila lhůty a zvláštní postupy pro některé infrastrukturní záměry; schválené znění upravuje jejich okruh a procesní pravidla, včetně zvláštních vodoprávních podmínek. To může některé záměry urychlit, ale vztahuje se jen na vymezenou infrastrukturu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Mění úkony ochrany ovzduší, které jsou součástí povolování záměrů.",
+          "effectCz": "Předtím se u vybraných záměrů vyžadovala závazná stanoviska a za určitých podmínek kompenzační opatření; návrh mění část stanovisek na vyjádření a jejich obsah přesouvá do rozhodnutí o povolení. To může sloučit úkony, ale kompenzační povinnosti zůstávají relevantní."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": true,
+          "reasonCz": "Část je uvedena jako relevantní jen díky pozměňovacímu návrhu; jeho text není součástí balíčku.",
+          "effectCz": "Nelze z dodaného textu určit, které pravidlo se mění ani směr změny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": true,
+          "reasonCz": "Část o státní službě je označena jako relevantní jen prostřednictvím pozměňovacího návrhu, jehož obsah chybí.",
+          "effectCz": "Bez textu návrhu nelze určit, jak se mění pravidla ani zda změna urychluje či zpomaluje povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": true,
+          "reasonCz": "Mění, kdo při povolování nových či změněných objektů posuzuje prevenci závažných havárií.",
+          "effectCz": "Dosud rozhodoval krajský úřad o zařazení objektu a podmínkách prevence; návrh tyto úkony začleňuje do rozhodnutí stavebního úřadu, přičemž bezpečnostní požadavky zachovává. Může jít o procesní sloučení, nikoli o zrušení věcných kontrol."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": true,
+          "reasonCz": "Část veřejných zakázek je v balíčku zahrnuta jako relevantní pouze prostřednictvím pozměňovacího návrhu.",
+          "effectCz": "Text změny ani dotčeného pozměňovacího návrhu zde není uveden; směr a dopad na schvalování nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": true,
+          "reasonCz": "Mění povolování zařízení pro nakládání s odpady v rámci stavebního řízení.",
+          "effectCz": "Dosavadní zákon ukládal obecnímu úřadu vydávat stanoviska či vyjádření k některým zařízením a záměrům; návrh svěřuje posouzení požadavků odpadového hospodářství stavebnímu úřadu v rozhodnutí o záměru. Jde o integraci úkonů, která může zjednodušit povolení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Navrhovala zrušit zákon o jednotném environmentálním stanovisku, který souvisí s povolováním staveb.",
+          "effectCz": "Navrhovaná verze celý zákon rušila, ale schválená verze tuto část odstranila; v konečném rozhodovaném textu tedy ke zrušení nedošlo."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Mění posuzování obnovitelných zdrojů a územních opatření pro jejich povolování.",
+          "effectCz": "Předchozí znění svěřovalo související úkony různým orgánům a stanovovalo zvláštní podmínky; schválené znění přesouvá část pravomocí na stavební úřad a upravuje, jak se záměry posuzují. Jde o dílčí integraci, nikoli náhradu stavebního zákona."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": true,
+          "reasonCz": "Nově osvobozuje žadatele od poplatku za povolení či kolaudaci, pokud stavební úřad nedodrží zákonnou lhůtu.",
+          "effectCz": "Předchozí znění tuto výjimku v dodaném textu neobsahuje; schválené znění stanoví osvobození od poplatku při nedodržení lhůty. Tím posiluje motivaci k včasnému rozhodnutí, ale samo nepřikazuje rychlejší povolení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-52",
+          "relevant": true,
+          "reasonCz": "Mění přechodná pravidla EIA pro speciální dráhy a tím ovlivňuje platnost podkladů pro stavební povolení.",
+          "effectCz": "Předchozí přechodná pravidla výslovně neuváděla speciální dráhy mezi projekty, jejichž stanovisko EIA lze opakovaně prodlužovat; schválené znění je doplňuje a umožňuje navazující prodloužení. To může zabránit opakování části posuzování, ale týká se vymezených dopravních staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": true,
+          "reasonCz": "Mění oprávnění městských částí účastnit se povolovacích řízení, a tím i proces schvalování staveb.",
+          "effectCz": "Dříve se účast městských částí týkala starších typů řízení; navrhované znění výslovně zahrnuje povolení záměru, rámcové povolení, opakované řízení a další uvedená řízení. To rozšiřuje procesní účast městské části; samo o sobě její dopad na rychlost nelze určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+          "relevant": true,
+          "reasonCz": "Zřizuje zmocněnce s úkolem koordinovat implementaci změn stavebního práva a jejich zrychlovací cíle.",
+          "effectCz": "Předchozí stav neobsahoval tuto funkci; usnesení jmenuje zmocněnce a ukládá koordinaci i návrhy opatření. Jde o organizační rozhodnutí a přípravu, nikoli samo o změnu povolovacích pravidel."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+          "relevant": true,
+          "reasonCz": "V plánu implementačních prací uvádí novelu stavebního zákona jako budoucí úkol vlády.",
+          "effectCz": "Usnesení předkládá výhled, který obsahuje novelu zákona č. 283/2021 Sb.; jde o plán dalšího legislativního kroku, nikoli o přijaté pravidlo ani samo o sobě o zrychlení povolování."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-ec7c8ad96f6f--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--law-change-43174-3",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--law-change-43174-7",
+        "psp-core-2025--law-change-43174-8-1",
+        "psp-core-2025--law-change-43174-8-2",
+        "psp-core-2025--law-change-43174-8-3",
+        "psp-core-2025--law-change-43174-8-4",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-8-7",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-10",
+        "psp-core-2025--law-change-43174-13",
+        "psp-core-2025--law-change-43174-14",
+        "psp-core-2025--law-change-43174-16",
+        "psp-core-2025--law-change-43174-17",
+        "psp-core-2025--law-change-43174-19",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-24",
+        "psp-core-2025--law-change-43174-26",
+        "psp-core-2025--law-change-43174-27",
+        "psp-core-2025--law-change-43174-29",
+        "psp-core-2025--law-change-43174-30",
+        "psp-core-2025--law-change-43174-31",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-34",
+        "psp-core-2025--law-change-43174-35",
+        "psp-core-2025--law-change-43174-36",
+        "psp-core-2025--law-change-43174-37",
+        "psp-core-2025--law-change-43174-39",
+        "psp-core-2025--law-change-43174-41",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-38",
+        "psp-core-2025--law-change-43174-approved-52",
+        "psp-core-2025--law-change-43399-6",
+        "zvlady-resolutions--law-change-uv-2026-59",
+        "zvlady-resolutions--law-change-uv-2026-175-193",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-212014",
+        "zvlady-resolutions--2026-59",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--amendment-1148",
+        "psp-core-2025--amendment-text-1148",
+        "psp-core-2025--vote-88194",
+        "psp-core-2025--amendment-1172",
+        "psp-core-2025--amendment-text-1172",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--amendment-1173",
+        "psp-core-2025--amendment-text-1173",
+        "psp-core-2025--vote-88144",
+        "psp-core-2025--vote-88147",
+        "psp-core-2025--amendment-1213",
+        "psp-core-2025--amendment-text-1213",
+        "psp-core-2025--vote-88184",
+        "psp-core-2025--amendment-1365",
+        "psp-core-2025--amendment-text-1365",
+        "psp-core-2025--vote-88233",
+        "psp-core-2025--amendment-1368",
+        "psp-core-2025--amendment-text-1368",
+        "psp-core-2025--vote-88234"
+      ],
+      "explanationCz": "Poslanci hnutí ANO předložili rozsáhlou novelu stavebního zákona a vláda jí vyslovila souhlas; návrh mění úřady i řadu postupů a část povolování může zjednodušit. Poslanecká sněmovna návrh schválila, Senát jej zamítl a Sněmovna poté setrvala na svém znění. Návrh však mění stávající stavební zákon č. 283/2021 Sb., místo aby jej zrušil a přijal nový zákon, jak slib požaduje. Protože současně obsahuje kroky směřující k rychlejšímu povolování, je výsledek smíšený, ale v rozhodující části jde proti výslovnému závazku zrušit novelu a nahradit ji novým zákonem.",
+      "confidence": "high",
+      "uncertainties": [
+        "Některé části balíčku jsou doloženy pouze jako změny související s povolováním; u částí bez textu nelze určit konkrétní ustanovení ani jejich směr.",
+        "Balíček neobsahuje vyhlášené konečné znění zákona ani následné rozhodnutí prezidenta; posouzení vychází z rozhodujícího hlasování Sněmovny po zamítnutí Senátem."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0f3df6ef10560e64016aec5c626fc487d1b46d77f30a68beae",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 583673,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 583670
+      },
+      "output_tokens": 14375,
+      "output_tokens_details": {
+        "reasoning_tokens": 6585
+      },
+      "total_tokens": 598048
+    },
+    "output": {
+      "promiseId": "candidate-ec7c8ad96f6f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Mění základní zásady stavebního zákona, role úřadů a postup při koordinaci stanovisek, tedy pravidla přímo ovlivňující povolování staveb.",
+          "effectCz": "Dosavadní zákon vyžadoval koordinaci veřejných zájmů a spolupráci úřadů, ale nové zásady dovolují nepřiměřeně neblokovat jiné zájmy; nové lhůty, společná jednání a nahrazení některých samostatných úkonů mají proces zjednodušit a zrychlit, nikoli však dokazují zrušení dosavadního zákona."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Přeskupuje příslušnost úřadů pro územní plánování i stavební řád, což přímo mění organizaci povolování.",
+          "effectCz": "Dosavadní působnost rozdělovaly ministerstva, krajské a obecní úřady i specializované stavební orgány; nově ji přebírá soustava úřadů rozvoje území a jejich pracovišť. Směr dopadu na rychlost nelze určit pouze z těchto ustanovení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Mění postup pořizování územně plánovací dokumentace, lhůty a pravidla pro stanoviska, což může urychlit přípravu podkladů pro stavby.",
+          "effectCz": "Dosavadní postupy vyžadovaly projednání, opakované kroky a stanoviska; nové znění zkracuje či zjednodušuje některé kroky a u některých nečinností stanoví souhlas, takže příslušné části procesu jsou volnější a rychlejší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Mění navazující projednání územních plánů i povolovacích podkladů, včetně lhůt a případů, kdy se projednání opakuje.",
+          "effectCz": "Dosavadní pravidla požadovala nové projednání při nově negativních dopadech a stanovovala více kroků; nová úprava zúžila, co je podstatná změna, a zrychlila některé úkony, čímž postup v těchto případech uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Mění požadavky pro rozhodování o záměrech a pravidla pro podklady, vyjádření a lhůty v povolovacím řízení.",
+          "effectCz": "Dosavadní znění vyžadovalo oddělené podklady a opakované posuzování; navržené a schválené změny soustřeďují některé úkony do řízení o záměru a zavádějí nové procesní fikce. Některé požadavky jsou volnější, ale jejich celkový dopad na rychlost nelze určit z vybraných ustanovení samotných."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Mění vlastní posuzování a povolování staveb, včetně možnosti odchýlit se od územního plánu a nových pravidel pro rozhodnutí.",
+          "effectCz": "Dříve se soulad záměru posuzoval podle územního plánu a dalších požadavků; nové znění připouští za stanovených souhlasů odchylku od dokumentace a předpokládá přípustnost některých záměrů v zastavitelném území. To uvolňuje část překážek, nikoli však nahrazuje celý stavební zákon."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Mění kategorie drobných staveb a rozsah záměrů, které potřebují povolení, což přímo ovlivňuje dobu schvalování části staveb.",
+          "effectCz": "Dosavadní příloha stanovovala konkrétní limity a seznam staveb bez povolení; nová příloha rozšiřuje některé výjimky a limity, takže pro tyto stavby jsou povolovací požadavky volnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Zakládá nový ústřední Úřad rozvoje území a mění, který úřad vykonává agendu územního plánování a stavebního řádu.",
+          "effectCz": "Dosud tyto oblasti náležely především ministerstvu pro místní rozvoj; nově je má převzít Úřad rozvoje území. Předchozí a nová slova jsou doložena, ale samotná změna institucionální odpovědnosti neukazuje, zda se povolování zrychlí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": true,
+          "reasonCz": "Přesouvá části požární agendy a pravidel pro stavby do nového systému povolování staveb.",
+          "effectCz": "Dříve technické podmínky stanovovalo ministerstvo a požární stanoviska byla samostatným podkladem; nově se mění jejich role a podmínky mají být řešeny v rámci stavebního řízení. To zmenšuje počet samostatných úkonů, ale z poskytnutých ustanovení nelze vyčíslit dopad na dobu řízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "Mění, jak se při povolování staveb posuzují zájmy památkové péče a jak se její úkony propojují se stavebním řízením.",
+          "effectCz": "Dosavadní pravidla vyžadovala rozhodnutí či závazná stanoviska památkových orgánů pro širší okruh prací; nová úprava převádí část posuzování do řízení stavebního úřadu a omezuje některé samostatné úkony, takže v těchto případech může proces zkrátit. Ochranné záruky jsou zároveň v části změněny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": true,
+          "reasonCz": "Převádí některé geologické požadavky a vyjádření do nového režimu povolení záměru.",
+          "effectCz": "Dosavadní znění vyžadovalo vyjádření krajského úřadu v některých územích; změna váže vyjádření na žádost o povolení záměru a ruší jednu samostatnou výjimku. Bez úplného předchozího znění nelze určit celkový směr dopadu na délku povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-1",
+          "relevant": true,
+          "reasonCz": "Mění posuzování krajinného rázu a podmínek území, které mohou ovlivnit povolení staveb.",
+          "effectCz": "Dříve se krajinný ráz neposuzoval jen v úzce vymezených plochách s konkrétní dohodnutou regulací; nové znění váže výjimku na zastavitelné území, koridory či plochy vymezené v souladu se stanoviskem ochrany přírody. Rozsah výjimky se mění a směr dopadu nelze považovat za obecné zrychlení všech řízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-2",
+          "relevant": true,
+          "reasonCz": "Převádí vybrané úkony ochrany přírody do stavebního řízení a mění souhlasy potřebné k povolení záměrů.",
+          "effectCz": "Dosud byly pro některé činnosti potřeba zvláštní souhlasy a řízení orgánů ochrany přírody; nové znění v části případů začleňuje posouzení do rozhodnutí stavebního úřadu, ale zároveň ponechává či upravuje podmínky ochrany. Některé samostatné kroky ubývají, avšak změna není jednoznačným uvolněním všech limitů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-3",
+          "relevant": true,
+          "reasonCz": "Mění podmínky výjimek ze zákazů pro chráněné druhy, které mohou být podkladem pro povolení stavebních záměrů.",
+          "effectCz": "Dosavadní § 56 umožňoval výjimky v určitých případech; schválené znění mění okruh důvodů a výslovně stanoví nárok po splnění podmínek. To může uvolnit část překážek, ale jde o dílčí režim a nikoli o zrušení celé stavební novely."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-4",
+          "relevant": true,
+          "reasonCz": "Mění účast environmentálních organizací a správních orgánů v řízeních souvisejících se stavbami.",
+          "effectCz": "Dosavadní zákon umožňoval kvalifikovaným občanským sdružením účastnit se vybraných řízení; nové znění omezuje jejich účast v části řízení vedených stavebním úřadem a stanoví podmínky založené na stáří či podpoře podpisy. Tím se zužuje procesní účast, což může omezit některé průtahy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Nově svěřuje stavebním úřadům posuzování řady dosavadních úkonů ochrany přírody při povolování staveb.",
+          "effectCz": "Dříve příslušné souhlasy a povolení vydávaly různé orgány ochrany přírody; nové znění některé z nich vkládá do výroku stavebního povolení, zatímco zvlášť chráněná území a další případy vyjímá. Snižuje počet samostatných úkonů u části staveb, ale neodstraňuje všechny podmínky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-7",
+          "relevant": true,
+          "reasonCz": "Upravuje přechod neukončených řízení mezi dosavadními orgány ochrany přírody a novými stavebními úřady.",
+          "effectCz": "Dosavadní řízení se měla dokončit podle dosavadních předpisů; schválené znění stanoví jejich převzetí novými úřady a zvláštní přechodné postupy. Mění, kdo řízení vede, ale rychlost z těchto přechodných pravidel nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Začleňuje souhlas s odnětím půdy ze zemědělského půdního fondu do povolení stavebního záměru.",
+          "effectCz": "Dosud byl pro odnětí půdy zpravidla potřeba samostatný souhlas; nově splnění podmínek v řízení o stavebním záměru posuzuje stavební úřad a některé zásady se v již vymezeném zastavitelném území neposuzují znovu. Jde o sloučení úkonů a uvolnění části posuzování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-10",
+          "relevant": false,
+          "reasonCz": "V předloženém výřezu není žádný odstavec změny a balíček neukazuje, jak by úprava daně z nemovitých věcí urychlila či brzdila schvalování staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-13",
+          "relevant": false,
+          "reasonCz": "Předložený výřez neobsahuje žádnou změnu zákona o vnitrozemské plavbě, kterou by bylo možné spojit s tímto slibem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": true,
+          "reasonCz": "Převádí část lesních souhlasů, odnětí a dalších úkonů do řízení stavebního úřadu.",
+          "effectCz": "Dosud se pro dotčení lesa vyžadovalo samostatné závazné stanovisko či rozhodnutí orgánu státní správy lesů; nově stavební úřad posuzuje podmínky v rozhodnutí o záměru, s výjimkou národních parků. Snižuje počet samostatných řízení, přičemž některá vyjádření zůstávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-16",
+          "relevant": false,
+          "reasonCz": "Text změny zákona o civilním letectví v balíčku neobsahuje vybrané odstavce, které by bylo možné spojit s obecnou rychlostí schvalování staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": true,
+          "reasonCz": "Přeměňuje veterinární úkony pro stavební záměry na vyjádření, která mohou být podkladem řízení o povolení.",
+          "effectCz": "Dříve se u některých zařízení vyžadoval závazný posudek, který úřad nemohl překročit; změna ruší tento samostatný posudek a ponechává vyjádření. Oslabuje samostatnou závaznost této překážky a začleňuje ji do nového systému."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": true,
+          "reasonCz": "Mění podklady požární ochrany a ochrany obyvatelstva používané při povolování staveb.",
+          "effectCz": "Dosavadní pravidla počítala se závaznými stanovisky, zatímco nové znění rozlišuje závazná stanoviska a vyjádření podle typu stavby a začleňuje je do stavebního řízení. Sjednocuje podklady, ale směr rychlosti závisí na tom, jak budou jednotlivé úkony vydávány."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Nahrazuje některá samostatná stanoviska ochrany veřejného zdraví rozhodnutím stavebního úřadu o záměru.",
+          "effectCz": "Dosud se pro stavební záměry vydávala stanoviska hygienických orgánů; nové znění je v rozsahu stavebního zákona nahrazuje rozhodnutím stavebního úřadu. Odstraňuje samostatný krok, ale neprokazuje zrychlení každého řízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Změna energetického zákona nemá v dodaném výřezu žádný text; nelze z něj určit konkrétní účinek na schvalování staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Mění, jak se při posuzování vlivů na životní prostředí zohlední některé další povolovací úkony a jak se navazující povolení koordinují.",
+          "effectCz": "Dříve se závazné stanovisko EIA u některých záměrů vydávalo současně jako jednotné environmentální stanovisko; navržené znění umožňuje stanovisku EIA nahradit další správní úkony, pokud o to oznamovatel požádá. Tato volba může sloučit posuzování a omezit opakování kroků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Mění povolení k nakládání s vodami a souhlasy, které jsou součástí povolování stavebních záměrů.",
+          "effectCz": "Dosud se v řadě případů povolení podle vodního zákona vyřizovala samostatně; návrh převádí jejich posouzení do rozhodnutí o záměru stavebního úřadu. Schválené části tuto integraci zachovávají, a tím snižují počet oddělených řízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": true,
+          "reasonCz": "Přesouvá posouzení požadavků na veřejné zdraví při zřizování krematoria a pohřebiště do stavebního řízení.",
+          "effectCz": "Dříve se u těchto záměrů vyžadovala samostatná stanoviska hygienické stanice; nové znění přenechává posouzení zdravotních podmínek stavebnímu úřadu, čímž odstraňuje samostatný krok."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": true,
+          "reasonCz": "Mění podmínky, za nichž se pro společná zařízení pozemkových úprav vyžaduje povolení záměru.",
+          "effectCz": "Dosavadní úprava některé společné prvky osvobozovala od povolení; nová úprava považuje schválený návrh pozemkových úprav za rozhodnutí v části věci pro uvedené stavby a společná zařízení. U vymezených záměrů tedy odstraňuje část samostatného povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-27",
+          "relevant": true,
+          "reasonCz": "Mění soudní přezkum rozhodnutí a opatření použitých při povolování staveb.",
+          "effectCz": "Dosud soud mohl opatření obecné povahy rušit v samostatném přezkumu; nově se u některých pozdě podaných návrhů zákonnost řeší jen v odůvodnění rozsudku. Tím se omezuje rozsah následného přezkumu, což může zkrátit navazující řízení, ale také oslabuje procesní nápravu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": false,
+          "reasonCz": "Předložený výřez neobsahuje žádnou změnu zákona o vyvlastnění, takže nelze posoudit její vazbu na tento slib.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": false,
+          "reasonCz": "Navržené změny se týkají zmocnění vlády k pravidlům bezpečnosti práce, nikoli povolování staveb; část byla navíc odstraněna ze schváleného znění.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": false,
+          "reasonCz": "Předložený výřez novely trestního zákoníku neobsahuje text, který by bylo možné spojit s rychlostí povolování staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Mění zvláštní režim povolování strategické infrastruktury, včetně staveb pro energetickou bezpečnost.",
+          "effectCz": "Dosavadní zákon obsahoval zvláštní lhůty a procesní pravidla pro některé druhy infrastruktury; schválené znění rozšiřuje a upravuje tento zvláštní režim a ponechává rozhodování v povolovacím řízení. Část pravidel zrychluje nebo zjednodušuje povolování vymezených strategických staveb, ale nejde o obecné zrušení stávající novely."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Mění stanoviska a podmínky ochrany ovzduší vydávané při povolování staveb.",
+          "effectCz": "Dříve byla pro některé záměry nutná závazná stanoviska orgánů ochrany ovzduší; nové znění převádí část jejich posouzení na vyjádření a do rozhodnutí stavebního úřadu. Zmenšuje počet samostatných úkonů, ale ponechává některé podmínky a kompenzace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": false,
+          "reasonCz": "Text zákona o Státním pozemkovém úřadu není obsažen ve výřezu a nelze určit souvislost s rychlostí schvalování staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": false,
+          "reasonCz": "Text zákona o státní službě není obsažen ve výřezu a nelze určit konkrétní účinek na povolovací řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": true,
+          "reasonCz": "Převádí část prevence závažných havárií do rozhodování stavebního úřadu o záměrech.",
+          "effectCz": "Dříve krajský úřad vydával pro některé nové objekty samostatná rozhodnutí a závazná stanoviska; nově stavební úřad stanoví podmínky v rozhodnutí o záměru a kolaudačním rozhodnutí. Sjednocuje úkony v jednom řízení, přičemž bezpečnostní podmínky zůstávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "Předložený text změny zákona o veřejných zakázkách neobsahuje žádné ustanovení, které by bylo možné spojit s povolováním staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": true,
+          "reasonCz": "Mění, kdo při povolování staveb posuzuje plnění odpadového zákona.",
+          "effectCz": "Dosud obecní úřad vydával samostatné stanovisko či vyjádření k vybraným stavebním záměrům; nové znění svěřuje posouzení stavebnímu úřadu v rozhodnutí o záměru. Tím se slučuje jeden z podkladových kroků do hlavního řízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Navrhovalo zrušit zákon o jednotném environmentálním stanovisku, tedy úpravu přímo spojenou se slučováním povolovacích úkonů, ale ze schváleného textu bylo odstraněno.",
+          "effectCz": "Předchozí znění zákona o jednotném environmentálním stanovisku není v kontextu poskytnuto, takže směr jeho zrušení nelze přesně určit; navržená část by zákon zrušila, avšak ve schválené verzi je odstraněna a žádnou změnu nepřináší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Mění postup povolování obnovitelných zdrojů v akceleračních oblastech, tedy přímo pravidla pro schvalování části stavebních záměrů.",
+          "effectCz": "Dosavadní zákon svěřoval přípravu stanoviska a podmínek jiným orgánům a počítal s jednotným environmentálním stanoviskem; nové znění přesouvá postup k stavebnímu úřadu a upravuje návaznost na povolení. U těchto záměrů mění správní postup, ale neprokazuje zrychlení všech staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": true,
+          "reasonCz": "Nově osvobozuje žadatele od poplatku za povolení záměru či kolaudaci, pokud úřad nedodrží zákonnou lhůtu.",
+          "effectCz": "Předchozí příloha poplatků neměla v poskytnutém kontextu toto osvobození; nové pravidlo přiznává osvobození při opožděném rozhodnutí. Nezrychluje řízení samo, ale zavádí důsledek prodlení úřadu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-52",
+          "relevant": false,
+          "reasonCz": "Výřez se týká pouze prodlužování platnosti posouzení vlivů pro speciální dráhu; slib nejmenuje takový konkrétní projekt ani skupinu staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje oprávnění městských částí Prahy účastnit se povolování záměrů na jejich území, takže mění procesní okruh u části staveb.",
+          "effectCz": "Dosavadní § 18 dával městským částem účast v užším okruhu řízení o územním rozhodnutí, společném povolení či dodatečném povolení; návrh zahrnuje i nová řízení o povolení a další uvedená řízení. Rozšiřuje procesní oprávnění, ale z balíčku nelze určit dopad na dobu schvalování."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+          "relevant": true,
+          "reasonCz": "Usnesení zřizuje funkci zmocněnce, jehož výslovným posláním je koordinovat implementaci stavebního práva.",
+          "effectCz": "Předtím taková vládní funkce podle dodaného textu nebyla; nově má zmocněnec koordinovat provádění novely stavebního práva a souvisejících předpisů. Vytváří implementační mechanismus, ale samo nemění povolovací pravidla ani nedokládá zrychlení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+          "relevant": true,
+          "reasonCz": "Příloha vládního výhledu legislativních prací výslovně uvádí novelu stavebního zákona.",
+          "effectCz": "Dosavadní plánovací výhled v tomto výřezu neuveden; nově dokument zařazuje novelu zákona č. 283/2021 Sb. mezi legislativní úkoly. Jde o plán či návrh další práce, nikoli o změnu povolovacích pravidel."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-ec7c8ad96f6f--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--law-change-43174-3",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--law-change-43174-7",
+        "psp-core-2025--law-change-43174-8-1",
+        "psp-core-2025--law-change-43174-8-2",
+        "psp-core-2025--law-change-43174-8-3",
+        "psp-core-2025--law-change-43174-8-4",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-8-7",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-14",
+        "psp-core-2025--law-change-43174-17",
+        "psp-core-2025--law-change-43174-19",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-24",
+        "psp-core-2025--law-change-43174-26",
+        "psp-core-2025--law-change-43174-27",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-36",
+        "psp-core-2025--law-change-43174-39",
+        "psp-core-2025--law-change-43174-41",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-38",
+        "psp-core-2025--law-change-43399-6",
+        "zvlady-resolutions--law-change-uv-2026-59",
+        "zvlady-resolutions--law-change-uv-2026-175-193",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-1172",
+        "psp-core-2025--amendment-1173",
+        "psp-core-2025--amendment-1148",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--vote-88144",
+        "psp-core-2025--vote-88194",
+        "psp-core-2025--vote-88195",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--amendment-1213",
+        "psp-core-2025--vote-88155",
+        "psp-core-2025--vote-88157",
+        "psp-core-2025--vote-88160",
+        "psp-core-2025--vote-88163",
+        "psp-core-2025--vote-88169",
+        "psp-core-2025--vote-88181",
+        "psp-core-2025--vote-88202",
+        "psp-core-2025--vote-88204",
+        "psp-core-2025--vote-88211",
+        "psp-core-2025--vote-88213",
+        "psp-core-2025--vote-88215",
+        "psp-core-2025--vote-88216",
+        "psp-core-2025--vote-88217",
+        "psp-core-2025--vote-88219",
+        "psp-core-2025--vote-88220",
+        "psp-core-2025--vote-88223",
+        "psp-core-2025--vote-88224",
+        "psp-core-2025--vote-88228",
+        "psp-core-2025--vote-88233",
+        "psp-core-2025--vote-88234",
+        "zvlady-resolutions--2026-59",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Poslanci ANO předložili rozsáhlou změnu stavebního zákona a vláda jí vyjádřila souhlas; návrh slučuje řadu dosavadních stanovisek a povolení do jednoho rozhodování a zjednodušuje některé postupy. Sněmovna návrh schválila, Senát jej odmítl, ale poslanci poté setrvali na svém znění. Jde o dílčí posun ke zrychlení povolování, nikoli o splnění slibu: předložená úprava mění stávající stavební zákon místo toho, aby jej zrušila a nahradila novým zákonem.",
+      "confidence": "high",
+      "uncertainties": [
+        "Poslanci ANO také předložili a podpořili změnu, která posunula hlavní účinnost novely z 1. července 2026 na 1. ledna 2027; tím se odkládá účinek plánovaných změn povolování.",
+        "Senát návrh vrátil jako zamítnutý; Poslanecká sněmovna následně setrvala na svém znění, ale v balíčku není doklad o jeho pozdějším vyhlášení.",
+        "Návrh obsahuje i změny, které zužují některé ochranné či procesní záruky; jejich vliv na délku jednotlivých povolovacích řízení nelze z dodaných textů spolehlivě určit."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_036f10d56bc9ac2e016aec5cb9ad0487d18df4341951a1bd10",
+    "model": "gpt-6-luna",
+    "reasoningEffort": "max",
+    "usage": {
+      "input_tokens": 597689,
+      "input_tokens_details": {
+        "cache_write_tokens": 593276,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 33900,
+      "output_tokens_details": {
+        "reasoning_tokens": 33524
+      },
+      "total_tokens": 631589
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "candidate-ec7c8ad96f6f--source",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43174-10"
+      ],
+      "explanationCz": "Volím posuzovatele B. Poslanci ANO předložili rozsáhlý návrh na změnu stavebního zákona, vedený ve Sněmovně jako tisk č. 67; jeho text upravuje některé kroky a lhůty při povolování staveb. Sněmovna návrh schválila a po jeho zamítnutí Senátem poslanci ANO znovu hlasovali pro něj, čímž podpořili část slibu o rychlejším povolování. Nejde ale o úplně nový zákon, takže celý slib splněn není; samotná změna dosavadního zákona však nedokazuje, že tento krok působí proti cíli rychlejšího povolování. B je přesnější i proto, že nepovažuje za související například část o dani z nemovitostí, u níž podklady neukazují vliv na schvalování staveb."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-towards",
+    "selectedReview": "assessor-b"
+  }
+}

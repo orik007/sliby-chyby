@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-44-23-506Z--5e873b976dd4",
+  "evaluatedAt": "2026-10-02T01:44:23.506Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-3bc20d1c4476/5e873b976dd4f153acf0ee30ac7a30888e53aa9452cf61b0417d33d90f63ad81.json",
+  "packageHash": "5e873b976dd4f153acf0ee30ac7a30888e53aa9452cf61b0417d33d90f63ad81",
+  "assessmentContentHash": "92db0e7febc96549c9945bd906b1fbf9411fff052710199f80fa57418c6c7ff8",
+  "assessmentFingerprint": "1ab716e24b413c436936e65ae9fc91e1c908febf136ad4d9df2be6fd2613277c",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-3bc20d1c4476",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-3bc20d1c4476",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu vyčleňuje prostředky také na obnovu a ochranu lesů, což může podpořit část slibu, ačkoli výsadbu odolných porostů výslovně neurčuje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-3bc20d1c4476--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh rozpočtu Státního fondu životního prostředí na rok 2026. Návrh vyčleňuje 2 miliardy korun na podporu lesního hospodářství, včetně obnovy a ochrany lesů. To může přispět k části slibu o podpoře lesních porostů. Rozpočet ale výslovně nezmiňuje výsadbu odolných porostů, zadržování vody ani snižování rizika sucha, takže nelze doložit splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet uvádí podporu obnovy a ochrany lesů, ale neupřesňuje, zda prostředky půjdou na výsadbu odolných porostů ani na opatření zaměřená na zadržování vody a omezení sucha."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-3bc20d1c4476",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet vyčleňuje 2 miliardy Kč na podporu lesního hospodářství včetně obnovy a ochrany lesů, což může podpořit část slibu, i když výslovně nezmiňuje odolné výsadby ani zadržování vody."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-3bc20d1c4476--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh rozpočtu Státního fondu životního prostředí na rok 2026. Ten vyčleňuje 2 miliardy Kč na podporu lesního hospodářství, včetně obnovy a ochrany lesů. Tím může podpořit část slibu o výsadbě odolných porostů, ale rozpočet výslovně nestanoví výsadbu odolných dřevin ani opatření k zadržování vody a snižování sucha.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet uvádí podporu lesního hospodářství a obnovy lesů, ale neurčuje, zda a v jakém rozsahu budou peníze použity přímo na výsadbu odolných porostů."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0e73efbbd336283c016abf0c64129887d1b1388963d2087d08",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 14515,
+      "input_tokens_details": {
+        "cache_write_tokens": 11191,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1581,
+      "output_tokens_details": {
+        "reasoning_tokens": 1209
+      },
+      "total_tokens": 16096
+    },
+    "output": {
+      "promiseId": "candidate-3bc20d1c4476",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu vyčleňuje prostředky také na obnovu a ochranu lesů, což může podpořit část slibu, ačkoli výsadbu odolných porostů výslovně neurčuje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-3bc20d1c4476--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh rozpočtu Státního fondu životního prostředí na rok 2026. Návrh vyčleňuje 2 miliardy korun na podporu lesního hospodářství, včetně obnovy a ochrany lesů. To může přispět k části slibu o podpoře lesních porostů. Rozpočet ale výslovně nezmiňuje výsadbu odolných porostů, zadržování vody ani snižování rizika sucha, takže nelze doložit splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet uvádí podporu obnovy a ochrany lesů, ale neupřesňuje, zda prostředky půjdou na výsadbu odolných porostů ani na opatření zaměřená na zadržování vody a omezení sucha."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_05a1407c123be9f2016abf0c6e315887d1bb13ff5c77f0cb8a",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 14515,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 14512
+      },
+      "output_tokens": 1080,
+      "output_tokens_details": {
+        "reasoning_tokens": 672
+      },
+      "total_tokens": 15595
+    },
+    "output": {
+      "promiseId": "candidate-3bc20d1c4476",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet vyčleňuje 2 miliardy Kč na podporu lesního hospodářství včetně obnovy a ochrany lesů, což může podpořit část slibu, i když výslovně nezmiňuje odolné výsadby ani zadržování vody."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-3bc20d1c4476--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh rozpočtu Státního fondu životního prostředí na rok 2026. Ten vyčleňuje 2 miliardy Kč na podporu lesního hospodářství, včetně obnovy a ochrany lesů. Tím může podpořit část slibu o výsadbě odolných porostů, ale rozpočet výslovně nestanoví výsadbu odolných dřevin ani opatření k zadržování vody a snižování sucha.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet uvádí podporu lesního hospodářství a obnovy lesů, ale neurčuje, zda a v jakém rozsahu budou peníze použity přímo na výsadbu odolných porostů."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

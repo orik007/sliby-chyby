@@ -1,0 +1,1695 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-06-38-801Z--044bdde78fb9",
+  "evaluatedAt": "2026-11-05T10:06:38.801Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-7a916b73cc66/044bdde78fb91fbd21c7c45ac216772797f2497c84d921e1f39ce918ace5bc65.json",
+  "packageHash": "044bdde78fb91fbd21c7c45ac216772797f2497c84d921e1f39ce918ace5bc65",
+  "assessmentContentHash": "b6ba99904e61dec72703a5b9d047f39c7a4dbd20038ae27336d5ab963da8a6bb",
+  "assessmentFingerprint": "a8c7cd634abb33becc4805d8fa3cee8dd648dbace904854ea2607217e9555082",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-7a916b73cc66",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment gives a law change more than one relevance verdict",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0650d7d9d34e870f016aec519018a887d1aa9caf894afc03cf",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 265218,
+            "input_tokens_details": {
+              "cache_write_tokens": 258868,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 16443,
+            "output_tokens_details": {
+              "reasoning_tokens": 8949
+            },
+            "total_tokens": 281661
+          },
+          "output": {
+            "promiseId": "candidate-7a916b73cc66",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-1",
+                "relevant": true,
+                "reasonCz": "Změny zakládají ústřední a krajské úřady rozvoje území a výslovně jim ukládají metodicky sjednocovat činnost stavebních úřadů, takže se týkají jednotnosti jedné skupiny státních služeb.",
+                "effectCz": "Před změnou působnost vykonávaly mimo jiné ministerstvo, kraje a obce; nově se zřizuje ústřední úřad a krajské úřady s územními pracovišti a ústřední úřad má sjednocovat metodiku. Posílení společného řízení a metodiky může přispět k jednotnější službě, ale text nezaručuje její stejnou kvalitu ani dostupnost."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-2",
+                "relevant": true,
+                "reasonCz": "Část přesouvá územní plánování a stavební agendu na hierarchicky uspořádané úřady rozvoje území, tedy na soustavu úřadů s celostátním a krajským působením.",
+                "effectCz": "Dosud působily v uvedených agendách ministerstvo, krajské a obecní stavební úřady a další orgány; návrh jejich úkoly převádí na ústřední úřad, krajské úřady a územní pracoviště, mimo jiné v obcích s rozšířenou působností. To sjednocuje organizační rámec, ale z dodaného textu nelze určit, zda se tím zlepší či zhorší skutečná dostupnost nebo kvalita služby."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-3",
+                "relevant": true,
+                "reasonCz": "Změny výslovně rozšiřují jednotný digitální standard územně-plánovacích dokumentů a ukládání dat do celostátního geoportálu.",
+                "effectCz": "Dříve se elektronicky a ve strojově čitelném formátu vyhotovovaly plánovací dokumenty, ale jednotný standard se vztahoval jen na vybrané části; schválené znění požaduje jednotný standard pro dokumentaci jako celek a digitální textová i prostorová data. Povinnost společného standardu se tedy rozšiřuje a může zlepšit jednotnost této služby; zrušení projednávání některých podkladů samo o sobě neurčuje kvalitu služby občanům."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Změny se týkají stavebního portálu, národního geoportálu a elektronického zveřejňování informací, tedy konkrétních systémů pro jednotné poskytování veřejné služby.",
+                "effectCz": "Portál stavebníka již umožňuje digitální úkony a předávání dokumentů; schválené znění mu navíc ukládá poskytovat sledování stavu řízení a stanoví zveřejňování dalších plánovacích podkladů v národním geoportálu. Funkce digitální služby se rozšiřují, což částečně napomáhá jednotnému systému, nikoli však samo o sobě stejné kvalitě služeb."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-7",
+                "relevant": true,
+                "reasonCz": "Přechodná pravidla přímo určují, jak dlouho lze při územním plánování používat alternativní informační systémy místo jednotného geoportálu.",
+                "effectCz": "Dosavadní přechodné období pro některé systémy a zveřejňování končilo nejpozději v roce 2027; schválené znění prodlužuje přechodné období do 31. prosince 2030 a dovoluje plnit povinnost zveřejnění i jiným způsobem dálkového přístupu. Jednotný systém se tak zavádí později a jeho používání je na přechodnou dobu méně jednotné."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-8",
+                "relevant": true,
+                "reasonCz": "Přechodná ustanovení určují, kdy převezmou agendu nové úřady a jak budou předávány spisy, zaměstnanci a informační systémy, což přímo ovlivňuje územní dostupnost služby.",
+                "effectCz": "Původní návrh počítal se zánikem krajských a obecních stavebních úřadů šest měsíců po účinnosti; schválená verze stanoví vznik ústředního úřadu 1. ledna 2027 a krajských úřadů a pracovišť 1. ledna 2028, přičemž dosavadní úřady do té doby pokračují. Zachovává se přechodná místní služba, ale celostátní nová soustava začne působit později."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-2",
+                "relevant": true,
+                "reasonCz": "Změna zakotvuje nový ústřední správní úřad odpovědný za stavební a územně-plánovací agendu, která je vykonávána po celé republice.",
+                "effectCz": "Dosud patřila územní a stavební agenda v § 14 zákona o zřízení ministerstev ministerstvu pro místní rozvoj; nově se tato působnost přesouvá a Úřad rozvoje území se zařazuje mezi ústřední orgány. Jde o organizační sjednocení, jehož dopad na kvalitu služby nelze z textu určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-4",
+                "relevant": true,
+                "reasonCz": "Změna slučuje některé úkony památkové péče do stavebního řízení, čímž mění způsob, jakým je tato veřejná služba poskytována.",
+                "effectCz": "Před změnou vlastník v řadě případů samostatně žádal orgán památkové péče o rozhodnutí či závazné stanovisko; schválené znění u části záměrů přenáší ověření podmínek do řízení stavebního úřadu. Proces se více soustředí do jednoho řízení, ale z textu nelze určit, zda tím bude služba ve všech místech stejně kvalitní."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-5",
+                "relevant": true,
+                "reasonCz": "Změna převádí vybrané úkony ochrany přírody do stavebního řízení a váže je na územní působnost nové stavební správy.",
+                "effectCz": "Dříve v uvedených případech rozhodovaly nebo vydávaly stanoviska orgány ochrany přírody; schválené znění ukládá stavebním úřadům v řízení o záměru posoudit řadu podmínek a začlenit je do rozhodnutí. Tím se část služby slučuje do stavebního řízení, ale nezavádí se pravidlo stejné kvality či dostupnosti."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-14",
+                "relevant": true,
+                "reasonCz": "Změna přesouvá posuzování některých lesních podmínek a souvisejících úkonů do řízení stavebního úřadu.",
+                "effectCz": "Před změnou vydávaly v uvedených případech stanoviska a rozhodnutí orgány státní správy lesů; schválené znění svěřuje stavebnímu úřadu posuzování podmínek a některá rozhodnutí v rámci povolení záměru. Jde o částečné soustředění služby do jednoho řízení, ale její stejnou kvalitu napříč územím text nezaručuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-29",
+                "relevant": true,
+                "reasonCz": "Změna svěřuje vyvlastňovací řízení novým úřadům rozvoje území a tím rozšiřuje jejich jednotnou územní soustavu.",
+                "effectCz": "Před změnou byly vyvlastňovacími úřady obecní úřady obcí s rozšířenou působností, městské magistráty a dopravní a energetický stavební úřad; nově rozhodují krajské úřady rozvoje území a ve vybraných věcech ústřední úřad. Působnost se přesouvá do nově sjednocené struktury, avšak text nezaručuje stejnou kvalitu výsledné služby."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": true,
+                "reasonCz": "Změna přidává stavební úřady mezi orgány vykonávající správní činnosti v ochraně ovzduší, tedy mění návaznost veřejných služeb na stavební řízení.",
+                "effectCz": "Před změnou vykonávaly uvedené činnosti zejména ministerstvo, inspekce, krajské a obecní úřady; schválené znění mezi orgány přidává stavební úřady a upravuje jejich postavení při dozoru. Jde o dílčí integraci agendy, ale směr dopadu na stejnou kvalitu služby nelze z dodaného textu určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-19",
+                "relevant": true,
+                "reasonCz": "Balíček označuje tuto část jako relevantní pouze prostřednictvím změn, které se jí týkají; její vlastní relevantní znění ani konkrétní dotčená ustanovení však dodáno není.",
+                "effectCz": "Text relevantní změny ani dřívější znění nejsou v balíčku uvedeny, proto nelze určit, co se mění ani zda se jednotnost či kvalita služby zlepšuje nebo zhoršuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-24",
+                "relevant": false,
+                "reasonCz": "Dodané výňatky neobsahují žádný odstavec této části týkající se slibu a nelze z názvu ani z chybějících odstavců odvozovat její obsah.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+                "relevant": false,
+                "reasonCz": "Uvedené změny pouze přizpůsobují zápis vyvlastněných nemovitostí a odkaz na příslušný úřad; nedokládají sjednocení nebo stejnou kvalitu služby občanům.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-approved-54",
+                "relevant": false,
+                "reasonCz": "Změna upravuje průřezovou odbornou způsobilost úředníků jen pro určité správní činnosti obcí, ale nedokládá jednotný systém služby občanům napříč ČR.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-1",
+                "relevant": true,
+                "reasonCz": "Vládní návrh upravuje kontaktní místa a postupy podpory bydlení, včetně podání přes informační systém a možnosti asistovaného podání.",
+                "effectCz": "Dřívější § 12 poskytoval poradenství každému zájemci; návrh přidává podmínky bydliště, práce či studia a podmínky bytové nouze. Pro digitální řízení zavádí elektronické podání, asistované podání i listinnou variantu, ale předchozí znění některých nových ustanovení chybí, takže celkový směr změny dostupnosti a kvality nelze plně určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-approved-2",
+                "relevant": true,
+                "reasonCz": "Schválená část svěřuje Úřadu práce úkoly v oblasti podpory bydlení, a tedy sjednocuje jejich výkon v celostátní instituci.",
+                "effectCz": "Před změnou § 4 zákona o Úřadu práce mezi jeho úkoly podporu bydlení výslovně nezařazoval; nově ji uvádí a upravuje návaznost na související informační systém. Rozsah celostátně svěřených úkolů se zvětšuje, což může sjednotit postup, ale samotné stejné kvality služby nezajišťuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-approved-3",
+                "relevant": false,
+                "reasonCz": "Tato část obsahuje přechodná ustanovení k odbornosti v poradenské psychoterapii, nikoli k jednotným systémům veřejných služeb.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-approved-4",
+                "relevant": true,
+                "reasonCz": "Schválené znění ruší předpisy vymezující další kontaktní místa pro bydlení a jejich správní obvody, což se přímo týká územního uspořádání služby.",
+                "effectCz": "Předchozí obsah a podmínky nařízení rušených ustanovením nejsou v balíčku uvedeny; lze doložit pouze jejich zrušení. Nelze proto určit, zda se tím dostupnost nebo jednotnost kontaktních míst zvyšuje či snižuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43210-1",
+                "relevant": true,
+                "reasonCz": "Návrh upravuje výkon veřejného opatrovnictví obcemi a umožňuje jeho přenos na jinou obec, což může ovlivnit dostupnost konkrétní veřejné služby v různých místech.",
+                "effectCz": "Dodané předchozí znění § 149 obecního zřízení neobsahuje pravidla výkonu veřejného opatrovnictví; návrh výslovně určuje obec jako vykonavatele a umožňuje přenos veřejnoprávní smlouvou i změnu obce. Směr změny kvality ani jednotnosti nelze z poskytnutého předchozího znění určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43239-1",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje digitální a asistované podávání žádostí o dávky státní sociální podpory, tedy se přímo týká jednotného systému veřejné služby.",
+                "effectCz": "Některá nově měněná ustanovení nemají v balíčku předchozí znění; návrh stanoví digitální podání a elektronický spis pro digitalizovanou dávku, současně ponechává asistované i listinné cesty. Nelze proto úplně určit směr změny oproti dřívější službě, ale návrh vytváří další společné digitální postupy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43239-2",
+                "relevant": true,
+                "reasonCz": "Tato část ruší připravované změny pravidel digitálního podávání, doručování a elektronických spisů u dávek, a proto se přímo týká jednotného digitálního systému služby.",
+                "effectCz": "Změna zákona č. 152/2025 Sb. ruší body, které měly zavést digitální podání a elektronický spis, elektronické doručování a související procesy, a vypouští jejich plánovanou účinnost od 1. července 2026. Namísto zavedení těchto pravidel se jejich účinek odkládá či ruší, což směřuje proti sjednocení digitální služby."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-1",
+                "relevant": true,
+                "reasonCz": "Návrh zavádí používání digitální peněženky k prokazování skutečností vůči orgánům veřejné moci, což je společný digitální nástroj pro veřejné služby.",
+                "effectCz": "Dřívější § 12 upravoval ověřování elektronických podpisů a pečetí; návrh nově ukládá orgánům veřejné moci umožnit prokazování skutečností elektronickými potvrzeními v digitální peněžence, také za fyzické přítomnosti. Vzniká další jednotná možnost prokázání skutečností; účinnost je však postupná a text nezaručuje shodnou kvalitu dalších služeb."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-2",
+                "relevant": true,
+                "reasonCz": "Část rozšiřuje použití evropské digitální peněženky pro elektronickou identifikaci a upravuje společný informační systém k její podpoře.",
+                "effectCz": "Dosavadní § 2 umožňoval elektronické prokázání totožnosti pouze prostřednictvím kvalifikovaného systému; návrh doplňuje digitální peněženku a ukládá povinnost ji v určeném režimu přijímat. Jde o rozšíření a částečné sjednocení možností digitální identifikace, s postupným náběhem podle přechodných ustanovení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-1",
+                "relevant": true,
+                "reasonCz": "Návrh umožňuje podat žádost o pas mimo pracoviště pro osoby, které se na něj ze zdravotních důvodů nedostaví, a volit úřad pro převzetí dokladu.",
+                "effectCz": "Dřívější úprava dovolovala podat žádost u kteréhokoli obecního úřadu obce s rozšířenou působností, ale převzetí bylo převážně vázáno na místo podání nebo omezený výběr; návrh přidává výjezdní službu pro dlouhodobě nemocné a širší volbu místa předání. Dostupnost se pro tyto situace rozšiřuje, avšak jen pro část uživatelů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-6",
+                "relevant": true,
+                "reasonCz": "Část ruší ustanovení o ověřování totožnosti při osobních úkonech digitální autentizací, což se týká návaznosti digitálních a osobních veřejných služeb.",
+                "effectCz": "Dřívější § 12 umožňoval uživateli požadovat autentizaci při osobním úkonu a upravoval související aplikaci a potvrzení; návrh odstavce 2 až 5 ruší. Tato konkrétní možnost se zužuje, tedy se omezuje jeden nástroj propojující osobní a digitální službu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43308-5",
+                "relevant": true,
+                "reasonCz": "Schválená změna prodlužuje termíny pro předání matrikových dat a zavedení jednotného informačního systému matrik, tedy přímo odkládá sjednocení digitální služby.",
+                "effectCz": "Dosavadní přechodná pravidla předpokládala převody a navazující kroky do let 2026 až 2028; schválené znění posouvá řadu termínů do roku 2028 a účinnost související části až na 1. ledna 2030. Přechod ke společnému systému se proto odkládá."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-12",
+                "relevant": false,
+                "reasonCz": "Změna rozšiřuje okruh veřejných orgánů používajících datové schránky o společenství obcí, ale dodané znění ji nespojuje s kvalitou služeb poskytovaných občanům.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43415-1",
+                "relevant": true,
+                "reasonCz": "Návrh zavádí dálkové podání a automatizované vyřízení části úkonů registrace vozidel a volbu způsobu doručení, což je konkrétní jednotná služba dostupná přes digitální rozhraní.",
+                "effectCz": "Dříve ministerstvo zajišťovalo výrobu registračních značek a úřady je předávaly podle požadavků; návrh přidává doručení prostřednictvím výdejních míst a stanoví digitální podání, volbu předání a automatizované vyřízení bez úředníka v části případů. Digitální a dálkové možnosti se rozšiřují, což částečně přispívá k dostupnosti, nikoli samo o sobě k rovné kvalitě všech služeb."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+                "relevant": true,
+                "reasonCz": "Usnesení zřizuje vládního zmocněnce, jehož úkolem je koordinovat jednotnou implementaci stavebního práva v praxi napříč ministerstvy, kraji a obcemi.",
+                "effectCz": "Usnesení samo vytváří koordinační funkci a ukládá součinnost; skutečné sjednocení praxe vyžaduje další práci a kroky úřadů. Jde o přípravný krok, nikoli o dosažený výsledek pro občany."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-83",
+                "relevant": true,
+                "reasonCz": "Usnesení přidává Radě vlády pro informační společnost úkol koordinovat a podporovat sjednocování standardů a uživatelské přívětivosti digitálních služeb.",
+                "effectCz": "Předchozí znění statutu není dodáno, takže nelze porovnat rozsah změny; doložené nové znění ukládá koordinaci a podporu sjednocování digitálních služeb. Jde o přípravný a koordinační krok, nikoli o přímou záruku stejné kvality služby."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-45",
+                "relevant": true,
+                "reasonCz": "Vládní plán výslovně počítá s návrhem, který má odstranit návštěvu úřadu a automatizovat úkony registrace vozidel.",
+                "effectCz": "Usnesení vlády plánuje předložení návrhu zákona a tím samo nezavádí změnu služby. Je to přípravný návrh na rozšíření vzdálených a automatizovaných úkonů, který částečně směřuje k jednotnější dostupnosti."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-73",
+                "relevant": true,
+                "reasonCz": "Plánovaný zákon má umožnit přenos veřejného opatrovnictví na jinou vhodnou obec a upravit sběr dat, což se týká dostupnosti jedné místní veřejné služby.",
+                "effectCz": "Usnesení stanoví plánovaný cíl a termíny předložení návrhu vládě, nikoli platné pravidlo; dosavadní právní úpravu nelze z tohoto plánu porovnat. Jde jen o přípravný záměr zlepšit výkon této dílčí služby."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-152",
+                "relevant": false,
+                "reasonCz": "Plán se týká evidence odborných kvalifikací a zkoušek v dalším vzdělávání, nikoli jednotného systému veřejné služby občanům v celé ČR.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-171",
+                "relevant": true,
+                "reasonCz": "Plánovaný zákon o sociálních službách výslovně zahrnuje nový informační systém a nástroje pro spravedlivější a předvídatelnější přístup ke službám.",
+                "effectCz": "Usnesení popisuje záměr nového zákona a samo službu nemění; předchozí a budoucí právní pravidla nejsou v této položce uvedena. Jde o přípravný návrh přímo zaměřený na jednotnější a spravedlivější přístup k části veřejných služeb."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-171",
+                "relevant": true,
+                "reasonCz": "Plánovaný zákon o sociálních službách výslovně zahrnuje nový informační systém a nástroje pro spravedlivější a předvídatelnější přístup ke službám.",
+                "effectCz": "Usnesení popisuje záměr nového zákona a samo službu nemění; předchozí a budoucí právní pravidla nejsou v této položce uvedena. Jde o přípravný návrh přímo zaměřený na jednotnější a spravedlivější přístup k části veřejných služeb."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-199",
+                "relevant": false,
+                "reasonCz": "Usnesení se věnuje certifikaci odborných služeb pro osoby se závislostí, nikoli jednotným systémům státních služeb pro občany obecně.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+                "relevant": true,
+                "reasonCz": "Vláda zrušila své dřívější usnesení týkající se funkčnosti a efektivity digitalizace stavebního řízení.",
+                "effectCz": "Obsah rušeného usnesení č. 732/2024 není v balíčku uveden, takže nelze určit, která konkrétní opatření ani povinnosti zanikají a zda zrušení oslabuje jednotnost systému."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-595",
+                "relevant": false,
+                "reasonCz": "Usnesení upravuje certifikaci adiktologických služeb, nikoli jednotný systém služeb státu obecně.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-653",
+                "relevant": true,
+                "reasonCz": "Usnesení ukládá napojení portálů ministerstev na Registr zastupování nebo zveřejnění šablon pro často využívané elektronické služby.",
+                "effectCz": "Usnesení přímo ukládá budoucí úkoly s termíny do konce roku 2027 a 2028 a současně poskytuje metodickou a technickou podporu. Jde o závazný přípravný krok k propojení elektronických služeb, ale jednotné napojení ještě není samotným usnesením dokončeno."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-7a916b73cc66--source",
+              "psp-core-2025--law-change-43174-1-1",
+              "psp-core-2025--law-change-43174-1-2",
+              "psp-core-2025--law-change-43174-1-3",
+              "psp-core-2025--law-change-43174-1-6",
+              "psp-core-2025--law-change-43174-1-7",
+              "psp-core-2025--law-change-43174-1-8",
+              "psp-core-2025--law-change-43174-2",
+              "psp-core-2025--law-change-43174-4",
+              "psp-core-2025--law-change-43174-8-5",
+              "psp-core-2025--law-change-43174-14",
+              "psp-core-2025--law-change-43174-19",
+              "psp-core-2025--law-change-43174-29",
+              "psp-core-2025--law-change-43174-33",
+              "psp-core-2025--law-change-43189-1",
+              "psp-core-2025--law-change-43189-approved-2",
+              "psp-core-2025--law-change-43189-approved-4",
+              "psp-core-2025--law-change-43210-1",
+              "psp-core-2025--law-change-43239-1",
+              "psp-core-2025--law-change-43239-2",
+              "psp-core-2025--law-change-43275-1",
+              "psp-core-2025--law-change-43275-2",
+              "psp-core-2025--law-change-43293-1",
+              "psp-core-2025--law-change-43293-6",
+              "psp-core-2025--law-change-43308-5",
+              "psp-core-2025--law-change-43415-1",
+              "zvlady-resolutions--law-change-uv-2026-59",
+              "zvlady-resolutions--law-change-uv-2026-83",
+              "zvlady-resolutions--law-change-uv-2026-175-45",
+              "zvlady-resolutions--law-change-uv-2026-175-73",
+              "zvlady-resolutions--law-change-uv-2026-175-171",
+              "zvlady-resolutions--law-change-uv-2026-377",
+              "zvlady-resolutions--law-change-uv-2026-653",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--print-step-210686",
+              "zvlady-resolutions--2026-59",
+              "psp-core-2025--print-step-210930",
+              "psp-core-2025--government-opinion-43210-1",
+              "psp-core-2025--government-opinion-43239-1",
+              "psp-core-2025--vote-87387",
+              "zvlady-resolutions--2026-83",
+              "zvlady-resolutions--2026-175",
+              "psp-core-2025--print-step-211101",
+              "psp-core-2025--print-step-211258",
+              "psp-core-2025--print-step-211352",
+              "psp-core-2025--government-opinion-43308-1",
+              "psp-core-2025--vote-88528",
+              "psp-core-2025--vote-88143",
+              "psp-core-2025--amendment-text-1360",
+              "psp-core-2025--vote-88242",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--vote-88450",
+              "zvlady-resolutions--2026-377",
+              "psp-core-2025--print-step-212014",
+              "psp-core-2025--print-step-212080",
+              "zvlady-resolutions--2026-653"
+            ],
+            "explanationCz": "Poslanci ANO předložili a následně podpořili změny stavebního zákona, které vytvářejí jednotnější soustavu úřadů a digitálních nástrojů; strana také podpořila změny, jež odkládají zavedení jednotného informačního systému matrik až do roku 2030. Tento pozdější schválený odklad je přímým krokem proti slibu jednotných systémů, i když reforma stavebních úřadů může jeho část naplňovat. Vláda zároveň uložila napojovat ministerské portály na Registr zastupování, ale jde o budoucí úkol, nikoli o již zajištěnou stejně kvalitní službu. Balíček nedokládá, že by stejné kvality služeb bylo v celé ČR skutečně dosaženo.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Změna zákona o matrikách posouvá termíny zavádění jednotného systému, ale balíček nepopisuje, jaké služby a data budou do té doby dostupné; hodnocení se proto týká odkladu sjednocení, nikoli prokázaného zhoršení konkrétních služeb.",
+              "Změny stavební správy a usnesení o Registru zastupování obsahují kroky směrem k jednotnějším službám, které jsou v napětí s pozdějším odkladem matrikového systému. Přijaté usnesení vlády o Registru zastupování ukládá budoucí napojování portálů, takže tento protichůdný krok zatím nedokládá dokončenou službu.",
+              "U části změn stavebního zákona a u zrušeného usnesení o digitalizaci stavebního řízení nejsou dodána všechna předchozí znění nebo obsah rušeného usnesení; jejich přesný dopad na jednotnost služby proto nelze určit."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-7a916b73cc66",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Zavádí novou soustavu stavebních a územně plánovacích úřadů s působností po celé republice, tedy mění organizaci a územní dostupnost veřejné služby.",
+          "effectCz": "Předtím působnost vykonávaly ministerstvo, dosavadní úřady územního plánování, stavební úřady, obce a kraje; změna zřizuje celostátní Úřad rozvoje území, krajské úřady rozvoje území a pracoviště v obcích s rozšířenou působností. Přidává také nové zásady koordinace a jednotnějšího metodického řízení. Změna tedy vytváří předpoklad jednotnějšího výkonu a místní dostupnosti, sama však nedokládá stejnou kvalitu služby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Mění rozdělení stavební a územně plánovací agendy mezi ústřední, krajské a místní úřady, takže může sjednotit postupy a zároveň ovlivnit dostupnost služby v území.",
+          "effectCz": "Předchozí úprava svěřovala řadu úkolů ministerstvu, krajským a obecním stavebním úřadům a dalším orgánům; schválená verze převádí většinu těchto úkolů do soustavy Úřadu rozvoje území, krajských úřadů a jejich územních pracovišť. Současně upravuje pravomoci obcí, krajů a další odborné požadavky. Jde o výraznější sjednocení institucionálního rámce, ale z dodaných ustanovení nelze určit, zda se tím fakticky zlepší dostupnost nebo kvalita ve všech obcích."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Zavádí jednotný digitální standard územně plánovacích dokumentů a jejich zveřejňování, což je konkrétní jednotný informační systém pro občany a úřady.",
+          "effectCz": "Předtím se dokumenty pořizovaly elektronicky a ve strojově čitelném formátu, ale jednotnému standardu podléhaly jen vybrané části. Schválená verze požaduje, aby dokumentace byla vydávána v jednotném standardu jako digitální textová a prostorová vektorová data, a údaje mají být vedeny v jednotné databázi či zveřejňovány v národním geoportálu. Rozsah standardizace a sdílení dat se tím zvětšuje, což slib posouvá směrem k jednotnému systému."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Upravuje stavební informační systémy, digitální portál a zveřejňování dokumentů, tedy přímo prostředky, které mohou sjednotit poskytování stavební agendy.",
+          "effectCz": "Dosavadní stavební zákon již určoval stavební portál a národní geoportál a ukládal evidovat úkony a vkládat dokumenty; schválená verze přidává například službu sledování stavu řízení a mění rozsah zveřejňovaných údajů. Tím rozšiřuje digitální funkce, ale z těchto ustanovení nelze dovodit, že systém sám zajistí stejně kvalitní služby v celé republice."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Prodlužuje přechodné používání alternativních informačních systémů ve stavební a územně plánovací agendě, a tím přímo ovlivňuje zavádění jednotného digitálního systému.",
+          "effectCz": "Předchozí přechodné období pro části informačních systémů končilo nejpozději v roce 2027; schválený text je prodlužuje do 31. prosince 2030 a dovoluje i nadále zveřejňovat některé dokumenty jiným způsobem než v národním geoportálu. Přechodné období a možnost používat náhradní systémy se tedy prodlužují, což zavedení jednotného systému oddaluje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": true,
+          "reasonCz": "Určuje, kdy vzniknou nové ústřední a krajské stavební úřady a jak na ně přejdou agendy i zaměstnanci, což ovlivňuje jednotný výkon služby v regionech.",
+          "effectCz": "Předchozí systém tvořily dosavadní stavební úřady a jejich působnosti; schválená verze stanoví vznik Úřadu rozvoje území k 1. lednu 2027 a krajských úřadů rozvoje území a jejich pracovišť k 1. lednu 2028, s převodem agend, zaměstnanců a systémů. Vytváří jednotnější celostátní síť, ale její zavedení rozkládá v čase a z dodaného textu nelze určit, zda bude přechod územně stejně dostupný."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Zřizuje Úřad rozvoje území jako ústřední správní orgán a mění odpovědnost za stavební a územně plánovací agendu.",
+          "effectCz": "Před změnou patřila územní plánovací a stavební agenda do působnosti Ministerstva pro místní rozvoj; schválená verze zapisuje Úřad rozvoje území mezi ústřední orgány a tuto působnost z ministerstva odnímá. Vzniká jednotnější ústřední odpovědnost, což může podporovat standardizaci, ale samotná změna nezaručuje stejnou kvalitu služeb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Dodané odstavce upravují zejména ochranu památek při povolování staveb; nevytvářejí jednotný systém služeb ani přímo nemění jejich územní dostupnost.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": false,
+          "reasonCz": "Dodané odstavce přerozdělují pravomoci ochrany přírody v řízeních o stavbách, ale nesjednocují systém služeb ani přímo neřeší jejich kvalitu podle místa bydliště.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": false,
+          "reasonCz": "Dodané změny lesního zákona upravují posuzování staveb a poplatků, nikoli jednotné poskytování služeb státu občanům v různých částech republiky.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "U této části není dodán žádný její vlastní text ani relevantní pozměňovací návrh; nelze z ní doložit vztah k jednotným službám.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": false,
+          "reasonCz": "U této části není dodán žádný její vlastní text ani relevantní pozměňovací návrh; nelze z ní doložit vztah k jednotným službám.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": false,
+          "reasonCz": "Dodaná ustanovení přenášejí vyvlastňovací agendu na nové stavební úřady, ale nedokládají změnu jednotných informačních systémů ani kvality služby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Dodané odstavce mění orgány ochrany ovzduší, ale jejich vztah k jednotnému systému služeb nebo stejné kvalitě napříč republikou není doložen.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": false,
+          "reasonCz": "Dodané změny týkající se vyvlastňování pro obranu přesouvají jednotlivé úkony na nový úřad, ale nedokládají širší změnu jednotného systému služeb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-54",
+          "relevant": false,
+          "reasonCz": "Mění kvalifikační požadavky některých úředníků obcí, ale dodaný text neukazuje přímou souvislost s jednotnými systémy, které slib výslovně zavádí.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Dodaný text upravuje cílové skupiny a agendu podpory bydlení, ale neprokazuje, že by měnil jednotné systémy zajišťující stejnou kvalitu služby v celé republice.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-2",
+          "relevant": false,
+          "reasonCz": "Doplňuje působnost Úřadu práce v oblasti podpory bydlení, ale samo o sobě nedokládá změnu jednotného systému ani rozdíly v kvalitě služby podle místa.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-3",
+          "relevant": false,
+          "reasonCz": "Dodaný text upravuje přechodné požadavky pro psychoterapeutické služby, nikoli jednotné systémy veřejných služeb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-4",
+          "relevant": false,
+          "reasonCz": "Ruší předpisy týkající se kontaktních míst pro bydlení a správních obvodů, ale dodaný text neukazuje dopad na jednotné systémy slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43210-1",
+          "relevant": false,
+          "reasonCz": "Upravuje výkon veřejného opatrovnictví, ale návrh sám nezavádí jednotný systém služeb a nedokládá jejich stejnou kvalitu podle místa.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Upravuje elektronické podávání, vedení spisů a doručování při vyřizování dávek, což je konkrétní digitální systém státní služby.",
+          "effectCz": "Dodaný kontext neobsahuje předchozí znění některých novelizovaných ustanovení o zahájení řízení a digitálním spisu, takže nelze určit celý směr změny. Schválené znění zavádí informační systém pro digitální podání, elektronické doručování a elektronické spisy, ale zachovává také asistované podání a některé listinné možnosti. Zřizuje tedy další jednotné digitální kanály, aniž by samo dokazovalo stejnou kvalitu služby v každém místě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Ruší dříve přijaté body zákona o dávkách, které upravovaly digitální podání, doručování a vedení spisů, takže přímo ovlivňuje zavádění jednotného digitálního systému.",
+          "effectCz": "Předchozí znění zákona již počítalo s digitálním podáním, elektronickým doručováním a elektronickým spisem v bodech, které tato část ruší. Tato část jejich účinnost odstraňuje; současně však související první část schváleného zákona nové digitální postupy znovu stanoví. Samostatný účinek této části tedy omezuje již naplánované změny, ale její výsledný dopad v celém zákoně není možné hodnotit bez souběžné první části."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Zavádí používání digitální peněženky pro prokazování údajů vůči orgánům veřejné moci, tedy společný digitální nástroj pro veřejné služby.",
+          "effectCz": "Předchozí úprava v dodaném kontextu řešila ověřování elektronických podpisů a pečetí, nikoli použití digitální peněženky; ustanovení o peněžence jsou nová. Návrh ukládá orgánům veřejné moci umožnit ověření údajů peněženkou a vytváří jednotné schéma elektronických potvrzení. Rozšiřuje tak digitální možnosti, avšak konkrétní účinek na kvalitu služby v jednotlivých místech zatím text nedokládá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Mění pravidla elektronické identifikace u veřejných služeb a propojuje je s digitální peněženkou.",
+          "effectCz": "Předtím bylo podle dodaného kontextu možné elektronickou identifikaci umožnit pouze přes kvalifikovaný systém. Návrh vedle něj připouští digitální peněženku, v některých případech přes kvalifikovaný systém, a stanoví povinnost přijmout vymezené způsoby identifikace. Rozšiřuje a sjednocuje možnosti digitálního prokazování, byť pro orgány veřejné moci omezuje využití peněženky mimo kvalifikovaný systém."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje možnost podat žádost o pas a převzít jej mimo běžné pracoviště, což přímo zlepšuje územní dostupnost služby pro část občanů.",
+          "effectCz": "Předtím bylo možné podat žádost na kterémkoli obecním úřadě obce s rozšířenou působností a některé pasy převzít na jiném úřadě, ale dodaný text neumožňuje podat či převzít pas mimo pracoviště pro osoby s dlouhodobými zdravotními obtížemi. Návrh zavádí takovou možnost a rozšiřuje volbu místa převzetí. Územní dostupnost této služby se tím pro dotčené osoby zvyšuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": true,
+          "reasonCz": "Ruší dosavadní možnost autentizace při osobním jednání, takže mění digitální a osobní způsoby přístupu k veřejné službě.",
+          "effectCz": "Předtím měl uživatel za stanovených podmínek právo na autentizaci při osobním jednání a mohl žádat potvrzení o autentizaci; návrh tato ustanovení ruší. Zrušení zmenšuje tento konkrétní nárok a dostupnou možnost ověření, což je dílčí krok proti rozšiřování jednotných digitálních služeb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-5",
+          "relevant": true,
+          "reasonCz": "Prodlužuje termíny pro předání matričních dat a spuštění matričního informačního systému, tedy přímo oddaluje jednotný informační systém veřejné správy.",
+          "effectCz": "Předchozí termíny počítaly s převodem údajů do konce roku 2026 a se souvisejícími kroky od ledna 2027; schválený text je posouvá na červen 2028 a červenec 2028 a další navazující termín až na leden 2030. Přechod na nový systém se tak odkládá, což zavedení jednotného systému zpomaluje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-12",
+          "relevant": false,
+          "reasonCz": "Rozšiřuje používání datových schránek na společenství obcí, ale dodaný text neukazuje přímý dopad na jednotné systémy služeb poskytované občanům.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Zavádí vzdálené podávání žádostí, automatizované vyřizování a další způsoby předání dokladů při registraci vozidel.",
+          "effectCz": "Dosavadní znění podle dodaného kontextu zajišťovalo výrobu registračních značek a jejich poskytování úřadům; nové znění přidává výdejní místa a nová ustanovení umožňují dálkové podání a za stanovených podmínek automatizované vyřízení. Rozšiřuje digitální kanály a způsoby doručení, čímž může zlepšit jednotnou dostupnost služby; předchozí znění nových ustanovení však v balíčku není, takže jejich celkový směr nelze porovnat."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+          "relevant": true,
+          "reasonCz": "Vláda zřizuje zmocněnce, jehož úkoly zahrnují koordinaci a jednotné zavádění stavebního práva v celé státní správě.",
+          "effectCz": "Usnesení vytváří funkci vládního zmocněnce a ukládá spolupráci při její činnosti; dosavadní znění funkce není v balíčku uvedeno. Statut stanoví koordinaci mezi ministerstvy, kraji a obcemi a spolupráci na jednotném uplatňování stavebního práva. Jde o nový koordinační nástroj, který může podpořit jednotnější služby, ale vyžaduje další kroky a sám výsledek nedodává."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-83",
+          "relevant": true,
+          "reasonCz": "Mění statut vládní rady tak, aby koordinovala a podporovala sjednocování standardů a uživatelské přívětivosti digitálních služeb.",
+          "effectCz": "Dodaný text předchozího znění statutu není k dispozici, takže nelze určit, zda je tato pravomoc nová nebo rozšířená. Přijaté znění však výslovně svěřuje grémiu koordinaci a podporu sjednocování standardů digitálních služeb. To směřuje k jednotnějším digitálním službám, ale jde o koordinační úkol, nikoli o jejich přímé zavedení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-45",
+          "relevant": true,
+          "reasonCz": "Vládní legislativní plán počítá s návrhem zákona pro automatizaci registrace vozidel a odstranění nutnosti návštěvy úřadu.",
+          "effectCz": "Jde o plánovaný návrh, nikoli změnu již platného pravidla; předchozí právní znění se proto v této položce nemění. Plán popisuje záměr automatizovat vybrané úkony a omezit návštěvy úřadu, tedy rozšířit jednotné digitální poskytování služby, jehož uskutečnění závisí na následném návrhu a schválení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-73",
+          "relevant": false,
+          "reasonCz": "Plánuje změny veřejného opatrovnictví, ale dodaný popis se zaměřuje na převod agendy a sběr dat, nikoli na jednotný systém služeb pro občany.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-152",
+          "relevant": true,
+          "reasonCz": "Plánuje povinný informační systém pro evidenci ověřování kvalifikací, což je konkrétní jednotný digitální nástroj veřejné agendy.",
+          "effectCz": "Usnesení pouze plánuje předložení návrhu zákona; žádné platné pravidlo v této položce ještě nemění a předchozí znění není dodáno. Popis navrhovaného systému počítá s evidencí procesů ověřování kvalifikací autorizovanými osobami, tedy s jednotnou digitální evidencí. Je to přípravný krok, jehož účinek na kvalitu služeb závisí na následném zákonu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-171",
+          "relevant": true,
+          "reasonCz": "Plánuje nový informační systém sociálních služeb a nástroje pro spravedlivější a předvídatelnější přístup k nim.",
+          "effectCz": "Usnesení plánuje přípravu nového zákona, nikoli přímou změnu platných pravidel; jejich předchozí znění není v této položce uvedeno. Návrh má zavést informační systém a nástroje pro dostupnost sociálních služeb a spravedlivý, předvídatelný přístup. To je záměr směřující k části slibu, ale jeho uskutečnění vyžaduje další legislativní kroky."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-199",
+          "relevant": false,
+          "reasonCz": "Upravuje certifikaci a kvalitu adiktologických služeb, ale dodaný text je nepropojuje s jednotnými systémy státní správy, které slib zavést.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Vláda ruší usnesení zaměřené na zajištění funkčnosti a efektivity digitalizace stavebního řízení, tedy ruší předchozí koordinační krok k jednotnému systému.",
+          "effectCz": "Předchozí usnesení č. 732/2024 mělo podle dodaného textu řešit funkčnost a efektivitu digitalizace stavebního řízení; nové usnesení je ruší. Rozsah jeho dosavadních úkolů není v balíčku celý uveden, proto nelze určit, které konkrétní prostředky odpadly, ale zrušení tohoto koordinačního podkladu je dílčím krokem proti pokračování jednotné digitalizace."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-595",
+          "relevant": false,
+          "reasonCz": "Reviduje statut rady pro oblast závislostí a kvalitu adiktologických služeb, nikoli jednotné systémy státní správy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-653",
+          "relevant": true,
+          "reasonCz": "Vláda ukládá napojovat portály ministerstev na Registr zastupování nebo zveřejnit použitelné šablony pro elektronické služby.",
+          "effectCz": "Předchozí znění není v balíčku uvedeno. Usnesení stanoví ministerstvům termín do konce roku 2027 a ostatním ústředním správním úřadům do konce roku 2028 pro napojení portálů nebo zveřejnění šablon, pokud to orgán pokládá za účelné. Rozšiřuje tedy koordinaci a slučitelnost vybraných digitálních služeb, ale ponechává podmínku účelnosti a vyžaduje následnou realizaci."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-7a916b73cc66--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-1-8",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1172",
+        "psp-core-2025--amendment-1172",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--amendment-text-1360",
+        "psp-core-2025--vote-88242",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--print-step-210930",
+        "psp-core-2025--government-opinion-43239-1",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43293-1",
+        "psp-core-2025--law-change-43293-6",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--law-change-43308-5",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--government-opinion-43308-1",
+        "psp-core-2025--vote-88528",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--print-step-212080",
+        "zvlady-resolutions--law-change-uv-2026-59",
+        "zvlady-resolutions--2026-59",
+        "zvlady-resolutions--law-change-uv-2026-83",
+        "zvlady-resolutions--2026-83",
+        "zvlady-resolutions--law-change-uv-2026-175-45",
+        "zvlady-resolutions--law-change-uv-2026-175-152",
+        "zvlady-resolutions--law-change-uv-2026-175-171",
+        "zvlady-resolutions--2026-175",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "zvlady-resolutions--2026-377",
+        "zvlady-resolutions--law-change-uv-2026-653",
+        "zvlady-resolutions--2026-653"
+      ],
+      "explanationCz": "Poslanci ANO podpořili novelu stavebního zákona, která vytváří celostátní úřad, krajská pracoviště a jednotnější digitální nástroje. Zároveň zákon prodlužuje přechodné používání jiných systémů až do roku 2030, takže zavádění jednotného řešení odkládá. ANO také hlasovalo pro prodloužení termínů zavádění matričního informačního systému až do roku 2028, s dalším souvisejícím termínem v roce 2030. Přes další návrhy na digitalizaci a lepší dostupnost tak převažují rozhodnutí, která zavedení jednotných systémů zpomalují; balíček ale nedokládá, kdy budou služby skutečně stejně kvalitní v celé republice.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Stavební novela současně vytváří jednotnější celostátní úřady a digitální standardy, ale prodlužuje přechodné období pro používání jiných systémů do roku 2030; proto zůstává viditelné i jednání ve prospěch slibu.",
+        "Balíček dokládá změny zákonů a termíny pro zavádění systémů, nikoli skutečnou kvalitu služeb v jednotlivých obcích ani to, zda občané už dostávají stejně kvalitní službu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-7a916b73cc66",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Změna zřizuje ústřední i krajské úřady rozvoje území a jejich pracoviště, tedy přímo mění organizaci státní služby v jednotlivých částech ČR.",
+          "effectCz": "Dosavadní § 17 upravoval Dopravní a energetický stavební úřad s celostátní působností a pracovišti určenými ministerstvem; schválený text namísto toho zřizuje ústřední Úřad rozvoje území, krajské úřady a jejich územní pracoviště. Vytváří se jednotnější celostátní organizační soustava, avšak samotnou kvalitu služeb nezaručuje; krajská pracoviště mají vzniknout až 1. ledna 2028."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Změny působnosti a uspořádání stavebních úřadů mohou přímo ovlivnit jednotnost a územní dostupnost stavebních služeb.",
+          "effectCz": "Před změnou vykonávaly působnost v územním plánování a stavebním řádu ministerstvo, krajské a obecní úřady a další určené úřady; nově ji rozděluje mezi Úřad rozvoje území, krajské úřady a územní pracoviště a stanoví jejich nadřízenost. Text vytváří celostátně sjednocenější soustavu, ale sám neurčuje srovnatelnou kvalitu služeb; podle přechodných ustanovení regionální soustava začne působit až v roce 2028."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Jednotný standard a společný geoportál pro územní plánování jsou přímo příklady sjednocených digitálních systémů veřejné správy.",
+          "effectCz": "Dříve se v elektronické, strojově čitelné podobě pořizovaly územně plánovací dokumenty, ale jednotný standard se týkal jen vybraných částí; schválený text požaduje digitální vektorová data v jednotném standardu a ukládá údaje o území do jednotné databáze geoportálu. To rozšiřuje a sjednocuje digitální systém, a tedy posouvá slib kupředu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Změny stavebního portálu a geoportálu se týkají jednotného digitálního rozhraní pro vyřizování a sledování řízení.",
+          "effectCz": "Původní § 268 umožňoval digitální úkony a vkládání dokumentů do stavebních informačních systémů, ale neposkytoval výslovně sledování stavu řízení; schválený text tuto službu účastníkům řízení přidává a upravuje zveřejňování dokumentů v geoportálu. Rozšiřuje digitální službu, jde však jen o část státních služeb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Mění lhůty přechodného období, v němž se mají používat a naplňovat jednotné stavební informační systémy a geoportál.",
+          "effectCz": "Dosavadní přechodné lhůty končily podle jednotlivých ustanovení v letech 2026 a 2027; schválený text prodlužuje přechodné období do konce roku 2030. Tím se odkládá plné využívání jednotných digitálních systémů a dosažení jednotného postupu, což slib v této části ztěžuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení převádějí zaměstnance, agendy, spisy a pracoviště mezi dosavadními úřady a novou státní soustavou.",
+          "effectCz": "Dřívější návrh počítal s převodem agend a zánikem krajských a obecních stavebních úřadů po šesti měsících; schválený text určuje vznik ústředního úřadu od 1. ledna 2027 a krajských úřadů a pracovišť od 1. ledna 2028, včetně převodu zaměstnanců, spisů a rozpočtů. Stanoví cestu k jednotné soustavě, ale její plné územní zavedení odkládá; dopad na výslednou kvalitu z textu určit nelze."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Zřízení ústředního Úřadu rozvoje území jako správního orgánu je součástí centralizace a sjednocení stavebních služeb.",
+          "effectCz": "Dosavadní úprava svěřovala územní plánování a stavební řád Ministerstvu pro místní rozvoj; schválený text vedle této úpravy zařazuje Úřad rozvoje území mezi ústřední orgány a vyjímá tyto oblasti z působnosti ministerstva. Vytváří jednotné ústřední místo, ale samo neurčuje, zda budou služby kvalitnější či stejně dostupné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "U záměrů v památkových územích převádí část vyřizování na stavební úřady, tedy do nově sjednocované soustavy.",
+          "effectCz": "Dříve vydávaly příslušné orgány památkové péče samostatná rozhodnutí nebo závazná stanoviska a vykonávaly související dozor; schválený text svěřuje ověření podmínek v některých stavebních řízeních stavebnímu úřadu a mění rozsah působnosti památkových orgánů. Může zjednodušit vyřízení záměru prostřednictvím stavebního úřadu, ale změna sama nezaručuje stejnou kvalitu v celé ČR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Předává stavebním úřadům část posuzování přírody a krajiny v rámci povolování záměrů, tedy související veřejnou službu.",
+          "effectCz": "Před změnou posuzovaly uvedené podmínky ochrany přírody samostatné orgány ochrany přírody; schválený text v řadě běžných případů vkládá posouzení do řízení stavebního úřadu, zatímco pro chráněná území ponechává zvláštní příslušnost. Jde o částečné sjednocení vyřízení, nikoli o záruku stejné kvality; některé výjimky zachovávají odlišné postupy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": true,
+          "reasonCz": "Převádí část rozhodování a kontrol v lesních věcech souvisejících se záměry na stavební úřady.",
+          "effectCz": "Před změnou rozhodovaly o lesních pozemcích a souvisejících stanoviscích orgány státní správy lesů; schválený text u záměrů povolovaných podle stavebního zákona svěřuje část posouzení a rozhodnutí stavebnímu úřadu, přičemž orgán lesní správy poskytuje vyjádření. Zjednodušuje a sjednocuje vyřizování jen této části agendy; stejné kvality služby v celé ČR výslovně nezaručuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": true,
+          "reasonCz": "Nahrazuje dosavadní různé vyvlastňovací úřady úřady rozvoje území, tedy mění jednotnost jedné státní služby.",
+          "effectCz": "Dříve byly vyvlastňovacími úřady obecní a městské úřady i Dopravní a energetický stavební úřad; schválený text svěřuje tuto působnost úřadům rozvoje území krajů a pro vybrané případy ústřednímu úřadu. Zjednodušuje a sjednocuje strukturu příslušnosti, ale sám nestanoví stejnou kvalitu rozhodování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Zařazuje stavební úřady mezi orgány vykonávající správní činnosti podle zákona o ochraně ovzduší.",
+          "effectCz": "Před změnou byly vyjmenovanými orgány ochrany ovzduší ministerstvo, inspekce, krajské a obecní úřady a další úřady; schválený text do výčtu a dozoru přidává stavební úřady. Tím přenáší část související agendy do nové soustavy, ale rozsah ani kvalitu služeb podle jednotlivých míst nesjednocuje úplně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": true,
+          "reasonCz": "Převádí některé úkony spojené s vyvlastněním pro obranu na nový ústřední Úřad rozvoje území.",
+          "effectCz": "Dosavadní úprava svěřovala úkony zkráceného vyvlastnění a zápisu do katastru krajskému úřadu; schválený text svěřuje uvedené úkony Úřadu rozvoje území České republiky. Jde o sjednocení příslušnosti v omezené oblasti, nikoli o záruku stejné kvality služeb obecně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění kontaktní místa podpory bydlení, jejich postupy i digitální podávání a přechází k Úřadu práce, což přímo ovlivňuje dostupnost veřejné služby.",
+          "effectCz": "Dosavadní zákon umožňoval poradenství na kontaktním místě; návrh ANO a vlády přesouvá významnou část agendy na Úřad práce, zavádí digitální podání a elektronický spis, ale ponechává také asistované a listinné možnosti. Zajišťuje společnější systém pro tuto agendu, současně však mění místní kontaktní síť; přesný dopad na dostupnost v každém místě z textu nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-2",
+          "relevant": true,
+          "reasonCz": "Přidává Úřadu práce působnost v podpoře bydlení, čímž začleňuje tuto veřejnou službu do jednotné státní instituce.",
+          "effectCz": "Před změnou vyjmenovaný rozsah úkolů Úřadu práce podporu bydlení neobsahoval; schválený text ji mezi jeho úkoly výslovně doplňuje. Rozšiřuje jednotné státní místo pro tuto agendu, ale samo neurčuje územní dostupnost ani kvalitu služby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-4",
+          "relevant": true,
+          "reasonCz": "Ruší předpisy určující další kontaktní místa pro bydlení a jejich správní obvody, což přímo mění místní uspořádání této služby.",
+          "effectCz": "Schválený text ruší nařízení o dalších kontaktních místech a správních obvodech; jejich původní obsah ani úplné náhradní rozmístění nejsou v balíčku uvedeny. Lze určit, že dosavadní zvláštní síť a vymezení obvodů zanikají, ale z balíčku nelze určit, zda se tím místní dostupnost zlepší či zhorší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Zavádí digitální podávání a elektronické doručování u dávek a mění způsob, jakým občané jednají s Úřadem práce.",
+          "effectCz": "Před změnou se žádosti o tyto dávky vyřizovaly v dosavadním režimu; schválený text zavádí informační systém pro digitální podání, asistované podání a elektronický spis u vymezených dávek. Jde o částečné zavedení jednotnější digitální služby, přičemž ne všechny dávky jsou v textu digitalizovány stejně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Ruší dříve přijaté body o elektronických postupech u státní sociální podpory, a proto přímo zasahuje do zavádění jednotných digitálních služeb.",
+          "effectCz": "Změna ruší osm dříve schválených novelizačních bodů, mezi nimi ustanovení týkající se digitálního podávání, elektronického spisu a doručování u dávek státní sociální podpory. V témže zákoně jsou některé digitální postupy znovu upraveny pro vymezené dávky, takže čistý rozsah výsledné digitalizace nelze z této části samostatně určit; rušení původních bodů však znamená, že slibované sjednocení není jednoznačné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Zavádí celostátní používání digitální peněženky a elektronických potvrzení při prokazování skutečností veřejným orgánům.",
+          "effectCz": "Dosavadní úprava řešila ověřování elektronických podpisů; návrh nově umožňuje a ukládá orgánům veřejné moci přijímat elektronická potvrzení atributů a digitální peněženku. Rozšiřuje jednotné digitální prokazování skutečností, přičemž zavedení je postupné a plný přínos nastává až v dalších letech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje elektronickou identifikaci a zavádí systém na podporu digitální peněženky pro veřejné orgány.",
+          "effectCz": "Dříve bylo možné elektronicky prokázat totožnost pouze prostřednictvím kvalifikovaného systému; návrh přidává digitální peněženku a informační systém pro její podporu a stanoví postupné zavádění. Rozšiřuje jednotné způsoby digitálního přístupu k veřejným službám, ale jejich zavedení odkládá pro různé orgány do let 2028 a 2029."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": true,
+          "reasonCz": "Umožňuje občanům podat žádost o pas mimo úřad a zvolit si místo jeho převzetí, tedy přímo zlepšuje dostupnost služby bez ohledu na bydliště.",
+          "effectCz": "Před změnou se žádost podávala u kteréhokoli úřadu obce s rozšířenou působností nebo zastupitelského úřadu, ale převzetí bylo zpravidla vázáno na místo podání; návrh umožňuje u běžných žádostí zvolit jiný příslušný úřad k převzetí a některým lidem podat či převzít pas mimo pracoviště. Rozšiřuje územní volbu a dostupnost, tedy přímo posouvá dílčí část slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": true,
+          "reasonCz": "Ruší ustanovení o digitální autentizaci při osobním jednání, což mění dostupné způsoby využití jednotných digitálních služeb.",
+          "effectCz": "Dosavadní § 12 umožňoval uživateli požadovat autentizaci při osobním jednání, správci systému ukládal provoz aplikace a upravoval vydání potvrzení; návrh tyto odstavce ruší. Tím odstraňuje uvedenou možnost a podpůrnou aplikaci, což oslabuje tuto část digitálního přístupu; dopad na celkovou kvalitu služeb z textu nelze vyčíslit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-5",
+          "relevant": true,
+          "reasonCz": "Odkládá vytvoření a převod dat do jednotného matričního informačního systému, tedy přímo mění harmonogram jednotné digitální služby.",
+          "effectCz": "Dosavadní přechodná ustanovení počítala s převodem dat do konce roku 2026 a navazujícími kroky v roce 2027; schválený text posouvá příslušné termíny až na rok 2028 a jeden z nich na rok 2030. Odsouvá zavedení jednotného informačního systému matrik, a tím slib v této části ztěžuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-12",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje okruh subjektů zapojených do komunikace datovými schránkami o společenství obcí, tedy upravuje digitální komunikační systém veřejné správy.",
+          "effectCz": "Dosavadní § 1 zahrnoval územní samosprávné celky, ale výslovně ne společenství obcí; návrh je přidává mezi subjekty pokryté zákonem o datových schránkách. Rozšiřuje jednotný digitální komunikační kanál, avšak jen na tuto skupinu subjektů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Zavádí dálkové podávání a automatizované vyřizování registračních úkonů a doručování na výdejní místa, tedy přímo mění dostupnost státní služby.",
+          "effectCz": "Dosavadní citované ustanovení ukládalo ministerstvu zajistit výrobu registračních značek a jejich poskytování obecním úřadům; návrh navíc umožňuje dálková podání, některá automatizovaná rozhodnutí a doručování dokladů přes výdejní místa. Rozšiřuje jednotné a místně pružnější vyřízení, jde však o jednu konkrétní agendu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+          "relevant": true,
+          "reasonCz": "Usnesení zřizuje funkci vládního zmocněnce, jehož úkolem je koordinovat a sjednocovat zavádění stavebního práva v praxi.",
+          "effectCz": "Usnesení vytváří funkci zmocněnce a ukládá koordinaci mezi ministerstvy, kraji a obcemi i spolupráci na metodickém sjednocování praxe. Jde o přímý koordinační krok k jednotnějšímu uplatňování jedné skupiny státních služeb, nikoli o zavedení systému pro všechny služby."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-83",
+          "relevant": true,
+          "reasonCz": "Změna statutu Rady vlády pro informační společnost jí svěřuje koordinaci a podporu sjednocování standardů a uživatelské přívětivosti digitálních služeb.",
+          "effectCz": "Dodané znění svěřuje grémiu koordinaci a aktivní podporu sjednocování standardů a uživatelské přívětivosti digitálních služeb. Předchozí znění statutu není v balíčku, takže nelze přesně srovnat, co se oproti němu změnilo; uvedená nová působnost je v souladu s dílčí částí slibu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-45",
+          "relevant": true,
+          "reasonCz": "Plánuje návrh zákona, který má odstranit návštěvy úřadů a automatizovat registrační úkony u vozidel.",
+          "effectCz": "Jde o úkol v plánu legislativních prací, nikoli o změnu platného pravidla: vláda plánuje předložit návrh na dálkové a automatizované vyřizování registrace vozidel. Jako návrh přispívá k části slibu; sám službu ještě nezavádí."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-171",
+          "relevant": true,
+          "reasonCz": "Plánovaný zákon o sociálních službách má zavést nový informační systém a předvídatelnější přístup ke službám.",
+          "effectCz": "Jde o plánovaný legislativní návrh, který má vytvořit nový informační systém a nástroje pro spravedlivější a předvídatelnější přístup k sociálním službám. Jeho předchozí právní znění nelze s plánem srovnat jako změnu platné povinnosti; jde o návrh částečně podporující slib, nikoli o uskutečněnou službu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Usnesení ruší dřívější usnesení o zajištění funkčnosti a efektivity digitalizace stavebního řízení, tedy výslovně se dotýká zavádění jednotného digitálního systému.",
+          "effectCz": "Usnesení ruší usnesení vlády č. 732 z 16. října 2024 o navazujících krocích k funkčnosti a efektivitě digitalizace stavebního řízení. Text rušeného usnesení ani jeho konkrétní úkoly balíček neobsahuje, takže nelze určit, zda jejich zrušení digitální systém oslabuje, nebo nahrazuje jinými kroky."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-653",
+          "relevant": true,
+          "reasonCz": "Usnesení ukládá ministerstvům napojit portály na Registr zastupování nebo zveřejnit vzory oprávnění pro využívané elektronické služby.",
+          "effectCz": "Usnesení ukládá členům vlády napojit ministerské portály na registr do konce roku 2027, případně zveřejnit vzory oprávnění, a ukládá obdobný postup ostatním ústředním úřadům do konce roku 2028. Jde o konkrétní rozhodnutí podporující jednotné využívání elektronických služeb, byť s výjimkou tam, kde orgán takový postup nepovažuje za účelný."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Dodaná verze neobsahuje žádný vybraný odstavec týkající se slibu a připojené pozměňovací znění neukazuje relevantní změnu této části zákona.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": false,
+          "reasonCz": "Dodaná verze neobsahuje žádný vybraný odstavec týkající se sjednocování státních služeb nebo digitálních systémů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-54",
+          "relevant": false,
+          "reasonCz": "Změna odborné způsobilosti úředníků se týká kvalifikačních pravidel, ale dodané ustanovení neprokazuje sjednocení ani územní dostupnost služeb podle tohoto slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-3",
+          "relevant": false,
+          "reasonCz": "Dodaná část upravuje přechodná pravidla pro poradenskou psychoterapii, nikoli jednotné systémy státních služeb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43210-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje výkon veřejného opatrovnictví obcemi, ale nedokládá sjednocený systém služeb státu ani jejich stejnou kvalitu v celé ČR.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-73",
+          "relevant": false,
+          "reasonCz": "Plánovaný návrh se věnuje konkrétně veřejnému opatrovnictví, nikoli sjednocování státních služeb či systémů v celé ČR.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-152",
+          "relevant": false,
+          "reasonCz": "Plánovaný informační systém se týká evidence zkoušek dalšího vzdělávání autorizovanými osobami, nikoli služby občanům slíbené v programu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-199",
+          "relevant": false,
+          "reasonCz": "Statut upravuje certifikaci odbornosti adiktologických služeb, nikoli jednotné systémy veřejných služeb státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-595",
+          "relevant": false,
+          "reasonCz": "Dodaná změna statutu se týká ověřování kvality adiktologických služeb, nikoli slíbeného sjednocení státních služeb pro občany.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-7a916b73cc66--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-1-8",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-14",
+        "psp-core-2025--law-change-43174-29",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-approved-20",
+        "psp-core-2025--law-change-43189-1",
+        "psp-core-2025--law-change-43189-approved-2",
+        "psp-core-2025--law-change-43189-approved-4",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--law-change-43293-1",
+        "psp-core-2025--law-change-43293-6",
+        "psp-core-2025--law-change-43308-5",
+        "psp-core-2025--law-change-43399-12",
+        "psp-core-2025--law-change-43415-1",
+        "zvlady-resolutions--law-change-uv-2026-59",
+        "zvlady-resolutions--law-change-uv-2026-83",
+        "zvlady-resolutions--law-change-uv-2026-175-45",
+        "zvlady-resolutions--law-change-uv-2026-175-171",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "zvlady-resolutions--law-change-uv-2026-653",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-1172",
+        "psp-core-2025--amendment-text-1172",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--amendment-text-1360",
+        "psp-core-2025--vote-88242",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--print-step-210686",
+        "psp-core-2025--amendment-762",
+        "psp-core-2025--amendment-text-762",
+        "psp-core-2025--vote-87603",
+        "psp-core-2025--vote-87617",
+        "psp-core-2025--print-step-210930",
+        "psp-core-2025--government-opinion-43239-1",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--vote-88528",
+        "psp-core-2025--print-step-212014",
+        "psp-core-2025--print-step-212080",
+        "zvlady-resolutions--2026-59",
+        "zvlady-resolutions--2026-83",
+        "zvlady-resolutions--2026-175",
+        "zvlady-resolutions--2026-377",
+        "zvlady-resolutions--2026-653"
+      ],
+      "explanationCz": "Poslanci ANO předložili a prosadili změny, které zavádějí jednotnější síť stavebních úřadů, společný digitální geoportál a další elektronické služby; část agendy také převedli na Úřad práce. Zároveň se některé termíny zavedení jednotných systémů, včetně stavební digitalizace a matričního systému, posunuly, takže služba zatím není sjednocena ve všech uvedených oblastech. V říjnu vláda navíc uložila ministerstvům propojit jejich portály s Registrem zastupování nebo zveřejnit vzory pro elektronické služby. Jde proto o dílčí posun, nikoli o důkaz, že občané už dostávají stejně kvalitní služby v celé republice.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Usnesení vlády č. 377 zrušilo dřívější usnesení o digitalizaci stavebního řízení, ale jeho obsah a konkrétní zrušené úkoly nejsou v balíčku uvedeny, takže směr tohoto kroku nelze spolehlivě určit.",
+        "Z balíčku nelze zjistit, zda nové úřady a digitální systémy už v praxi poskytují stejně kvalitní službu ve všech regionech; podklady dokládají především přijatá pravidla, plánované kroky a odložené termíny."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_03944ab22755f3d9016aec531dc54487d1ba44bcc9a0604bd9",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 265218,
+      "input_tokens_details": {
+        "cache_write_tokens": 258868,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 17185,
+      "output_tokens_details": {
+        "reasoning_tokens": 9920
+      },
+      "total_tokens": 282403
+    },
+    "output": {
+      "promiseId": "candidate-7a916b73cc66",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Zavádí novou soustavu stavebních a územně plánovacích úřadů s působností po celé republice, tedy mění organizaci a územní dostupnost veřejné služby.",
+          "effectCz": "Předtím působnost vykonávaly ministerstvo, dosavadní úřady územního plánování, stavební úřady, obce a kraje; změna zřizuje celostátní Úřad rozvoje území, krajské úřady rozvoje území a pracoviště v obcích s rozšířenou působností. Přidává také nové zásady koordinace a jednotnějšího metodického řízení. Změna tedy vytváří předpoklad jednotnějšího výkonu a místní dostupnosti, sama však nedokládá stejnou kvalitu služby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Mění rozdělení stavební a územně plánovací agendy mezi ústřední, krajské a místní úřady, takže může sjednotit postupy a zároveň ovlivnit dostupnost služby v území.",
+          "effectCz": "Předchozí úprava svěřovala řadu úkolů ministerstvu, krajským a obecním stavebním úřadům a dalším orgánům; schválená verze převádí většinu těchto úkolů do soustavy Úřadu rozvoje území, krajských úřadů a jejich územních pracovišť. Současně upravuje pravomoci obcí, krajů a další odborné požadavky. Jde o výraznější sjednocení institucionálního rámce, ale z dodaných ustanovení nelze určit, zda se tím fakticky zlepší dostupnost nebo kvalita ve všech obcích."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Zavádí jednotný digitální standard územně plánovacích dokumentů a jejich zveřejňování, což je konkrétní jednotný informační systém pro občany a úřady.",
+          "effectCz": "Předtím se dokumenty pořizovaly elektronicky a ve strojově čitelném formátu, ale jednotnému standardu podléhaly jen vybrané části. Schválená verze požaduje, aby dokumentace byla vydávána v jednotném standardu jako digitální textová a prostorová vektorová data, a údaje mají být vedeny v jednotné databázi či zveřejňovány v národním geoportálu. Rozsah standardizace a sdílení dat se tím zvětšuje, což slib posouvá směrem k jednotnému systému."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Upravuje stavební informační systémy, digitální portál a zveřejňování dokumentů, tedy přímo prostředky, které mohou sjednotit poskytování stavební agendy.",
+          "effectCz": "Dosavadní stavební zákon již určoval stavební portál a národní geoportál a ukládal evidovat úkony a vkládat dokumenty; schválená verze přidává například službu sledování stavu řízení a mění rozsah zveřejňovaných údajů. Tím rozšiřuje digitální funkce, ale z těchto ustanovení nelze dovodit, že systém sám zajistí stejně kvalitní služby v celé republice."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Prodlužuje přechodné používání alternativních informačních systémů ve stavební a územně plánovací agendě, a tím přímo ovlivňuje zavádění jednotného digitálního systému.",
+          "effectCz": "Předchozí přechodné období pro části informačních systémů končilo nejpozději v roce 2027; schválený text je prodlužuje do 31. prosince 2030 a dovoluje i nadále zveřejňovat některé dokumenty jiným způsobem než v národním geoportálu. Přechodné období a možnost používat náhradní systémy se tedy prodlužují, což zavedení jednotného systému oddaluje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": true,
+          "reasonCz": "Určuje, kdy vzniknou nové ústřední a krajské stavební úřady a jak na ně přejdou agendy i zaměstnanci, což ovlivňuje jednotný výkon služby v regionech.",
+          "effectCz": "Předchozí systém tvořily dosavadní stavební úřady a jejich působnosti; schválená verze stanoví vznik Úřadu rozvoje území k 1. lednu 2027 a krajských úřadů rozvoje území a jejich pracovišť k 1. lednu 2028, s převodem agend, zaměstnanců a systémů. Vytváří jednotnější celostátní síť, ale její zavedení rozkládá v čase a z dodaného textu nelze určit, zda bude přechod územně stejně dostupný."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Zřizuje Úřad rozvoje území jako ústřední správní orgán a mění odpovědnost za stavební a územně plánovací agendu.",
+          "effectCz": "Před změnou patřila územní plánovací a stavební agenda do působnosti Ministerstva pro místní rozvoj; schválená verze zapisuje Úřad rozvoje území mezi ústřední orgány a tuto působnost z ministerstva odnímá. Vzniká jednotnější ústřední odpovědnost, což může podporovat standardizaci, ale samotná změna nezaručuje stejnou kvalitu služeb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Dodané odstavce upravují zejména ochranu památek při povolování staveb; nevytvářejí jednotný systém služeb ani přímo nemění jejich územní dostupnost.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": false,
+          "reasonCz": "Dodané odstavce přerozdělují pravomoci ochrany přírody v řízeních o stavbách, ale nesjednocují systém služeb ani přímo neřeší jejich kvalitu podle místa bydliště.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": false,
+          "reasonCz": "Dodané změny lesního zákona upravují posuzování staveb a poplatků, nikoli jednotné poskytování služeb státu občanům v různých částech republiky.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "U této části není dodán žádný její vlastní text ani relevantní pozměňovací návrh; nelze z ní doložit vztah k jednotným službám.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": false,
+          "reasonCz": "U této části není dodán žádný její vlastní text ani relevantní pozměňovací návrh; nelze z ní doložit vztah k jednotným službám.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": false,
+          "reasonCz": "Dodaná ustanovení přenášejí vyvlastňovací agendu na nové stavební úřady, ale nedokládají změnu jednotných informačních systémů ani kvality služby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Dodané odstavce mění orgány ochrany ovzduší, ale jejich vztah k jednotnému systému služeb nebo stejné kvalitě napříč republikou není doložen.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": false,
+          "reasonCz": "Dodané změny týkající se vyvlastňování pro obranu přesouvají jednotlivé úkony na nový úřad, ale nedokládají širší změnu jednotného systému služeb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-54",
+          "relevant": false,
+          "reasonCz": "Mění kvalifikační požadavky některých úředníků obcí, ale dodaný text neukazuje přímou souvislost s jednotnými systémy, které slib výslovně zavádí.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Dodaný text upravuje cílové skupiny a agendu podpory bydlení, ale neprokazuje, že by měnil jednotné systémy zajišťující stejnou kvalitu služby v celé republice.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-2",
+          "relevant": false,
+          "reasonCz": "Doplňuje působnost Úřadu práce v oblasti podpory bydlení, ale samo o sobě nedokládá změnu jednotného systému ani rozdíly v kvalitě služby podle místa.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-3",
+          "relevant": false,
+          "reasonCz": "Dodaný text upravuje přechodné požadavky pro psychoterapeutické služby, nikoli jednotné systémy veřejných služeb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-4",
+          "relevant": false,
+          "reasonCz": "Ruší předpisy týkající se kontaktních míst pro bydlení a správních obvodů, ale dodaný text neukazuje dopad na jednotné systémy slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43210-1",
+          "relevant": false,
+          "reasonCz": "Upravuje výkon veřejného opatrovnictví, ale návrh sám nezavádí jednotný systém služeb a nedokládá jejich stejnou kvalitu podle místa.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Upravuje elektronické podávání, vedení spisů a doručování při vyřizování dávek, což je konkrétní digitální systém státní služby.",
+          "effectCz": "Dodaný kontext neobsahuje předchozí znění některých novelizovaných ustanovení o zahájení řízení a digitálním spisu, takže nelze určit celý směr změny. Schválené znění zavádí informační systém pro digitální podání, elektronické doručování a elektronické spisy, ale zachovává také asistované podání a některé listinné možnosti. Zřizuje tedy další jednotné digitální kanály, aniž by samo dokazovalo stejnou kvalitu služby v každém místě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Ruší dříve přijaté body zákona o dávkách, které upravovaly digitální podání, doručování a vedení spisů, takže přímo ovlivňuje zavádění jednotného digitálního systému.",
+          "effectCz": "Předchozí znění zákona již počítalo s digitálním podáním, elektronickým doručováním a elektronickým spisem v bodech, které tato část ruší. Tato část jejich účinnost odstraňuje; současně však související první část schváleného zákona nové digitální postupy znovu stanoví. Samostatný účinek této části tedy omezuje již naplánované změny, ale její výsledný dopad v celém zákoně není možné hodnotit bez souběžné první části."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Zavádí používání digitální peněženky pro prokazování údajů vůči orgánům veřejné moci, tedy společný digitální nástroj pro veřejné služby.",
+          "effectCz": "Předchozí úprava v dodaném kontextu řešila ověřování elektronických podpisů a pečetí, nikoli použití digitální peněženky; ustanovení o peněžence jsou nová. Návrh ukládá orgánům veřejné moci umožnit ověření údajů peněženkou a vytváří jednotné schéma elektronických potvrzení. Rozšiřuje tak digitální možnosti, avšak konkrétní účinek na kvalitu služby v jednotlivých místech zatím text nedokládá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Mění pravidla elektronické identifikace u veřejných služeb a propojuje je s digitální peněženkou.",
+          "effectCz": "Předtím bylo podle dodaného kontextu možné elektronickou identifikaci umožnit pouze přes kvalifikovaný systém. Návrh vedle něj připouští digitální peněženku, v některých případech přes kvalifikovaný systém, a stanoví povinnost přijmout vymezené způsoby identifikace. Rozšiřuje a sjednocuje možnosti digitálního prokazování, byť pro orgány veřejné moci omezuje využití peněženky mimo kvalifikovaný systém."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje možnost podat žádost o pas a převzít jej mimo běžné pracoviště, což přímo zlepšuje územní dostupnost služby pro část občanů.",
+          "effectCz": "Předtím bylo možné podat žádost na kterémkoli obecním úřadě obce s rozšířenou působností a některé pasy převzít na jiném úřadě, ale dodaný text neumožňuje podat či převzít pas mimo pracoviště pro osoby s dlouhodobými zdravotními obtížemi. Návrh zavádí takovou možnost a rozšiřuje volbu místa převzetí. Územní dostupnost této služby se tím pro dotčené osoby zvyšuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": true,
+          "reasonCz": "Ruší dosavadní možnost autentizace při osobním jednání, takže mění digitální a osobní způsoby přístupu k veřejné službě.",
+          "effectCz": "Předtím měl uživatel za stanovených podmínek právo na autentizaci při osobním jednání a mohl žádat potvrzení o autentizaci; návrh tato ustanovení ruší. Zrušení zmenšuje tento konkrétní nárok a dostupnou možnost ověření, což je dílčí krok proti rozšiřování jednotných digitálních služeb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-5",
+          "relevant": true,
+          "reasonCz": "Prodlužuje termíny pro předání matričních dat a spuštění matričního informačního systému, tedy přímo oddaluje jednotný informační systém veřejné správy.",
+          "effectCz": "Předchozí termíny počítaly s převodem údajů do konce roku 2026 a se souvisejícími kroky od ledna 2027; schválený text je posouvá na červen 2028 a červenec 2028 a další navazující termín až na leden 2030. Přechod na nový systém se tak odkládá, což zavedení jednotného systému zpomaluje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-12",
+          "relevant": false,
+          "reasonCz": "Rozšiřuje používání datových schránek na společenství obcí, ale dodaný text neukazuje přímý dopad na jednotné systémy služeb poskytované občanům.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Zavádí vzdálené podávání žádostí, automatizované vyřizování a další způsoby předání dokladů při registraci vozidel.",
+          "effectCz": "Dosavadní znění podle dodaného kontextu zajišťovalo výrobu registračních značek a jejich poskytování úřadům; nové znění přidává výdejní místa a nová ustanovení umožňují dálkové podání a za stanovených podmínek automatizované vyřízení. Rozšiřuje digitální kanály a způsoby doručení, čímž může zlepšit jednotnou dostupnost služby; předchozí znění nových ustanovení však v balíčku není, takže jejich celkový směr nelze porovnat."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+          "relevant": true,
+          "reasonCz": "Vláda zřizuje zmocněnce, jehož úkoly zahrnují koordinaci a jednotné zavádění stavebního práva v celé státní správě.",
+          "effectCz": "Usnesení vytváří funkci vládního zmocněnce a ukládá spolupráci při její činnosti; dosavadní znění funkce není v balíčku uvedeno. Statut stanoví koordinaci mezi ministerstvy, kraji a obcemi a spolupráci na jednotném uplatňování stavebního práva. Jde o nový koordinační nástroj, který může podpořit jednotnější služby, ale vyžaduje další kroky a sám výsledek nedodává."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-83",
+          "relevant": true,
+          "reasonCz": "Mění statut vládní rady tak, aby koordinovala a podporovala sjednocování standardů a uživatelské přívětivosti digitálních služeb.",
+          "effectCz": "Dodaný text předchozího znění statutu není k dispozici, takže nelze určit, zda je tato pravomoc nová nebo rozšířená. Přijaté znění však výslovně svěřuje grémiu koordinaci a podporu sjednocování standardů digitálních služeb. To směřuje k jednotnějším digitálním službám, ale jde o koordinační úkol, nikoli o jejich přímé zavedení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-45",
+          "relevant": true,
+          "reasonCz": "Vládní legislativní plán počítá s návrhem zákona pro automatizaci registrace vozidel a odstranění nutnosti návštěvy úřadu.",
+          "effectCz": "Jde o plánovaný návrh, nikoli změnu již platného pravidla; předchozí právní znění se proto v této položce nemění. Plán popisuje záměr automatizovat vybrané úkony a omezit návštěvy úřadu, tedy rozšířit jednotné digitální poskytování služby, jehož uskutečnění závisí na následném návrhu a schválení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-73",
+          "relevant": false,
+          "reasonCz": "Plánuje změny veřejného opatrovnictví, ale dodaný popis se zaměřuje na převod agendy a sběr dat, nikoli na jednotný systém služeb pro občany.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-152",
+          "relevant": true,
+          "reasonCz": "Plánuje povinný informační systém pro evidenci ověřování kvalifikací, což je konkrétní jednotný digitální nástroj veřejné agendy.",
+          "effectCz": "Usnesení pouze plánuje předložení návrhu zákona; žádné platné pravidlo v této položce ještě nemění a předchozí znění není dodáno. Popis navrhovaného systému počítá s evidencí procesů ověřování kvalifikací autorizovanými osobami, tedy s jednotnou digitální evidencí. Je to přípravný krok, jehož účinek na kvalitu služeb závisí na následném zákonu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-171",
+          "relevant": true,
+          "reasonCz": "Plánuje nový informační systém sociálních služeb a nástroje pro spravedlivější a předvídatelnější přístup k nim.",
+          "effectCz": "Usnesení plánuje přípravu nového zákona, nikoli přímou změnu platných pravidel; jejich předchozí znění není v této položce uvedeno. Návrh má zavést informační systém a nástroje pro dostupnost sociálních služeb a spravedlivý, předvídatelný přístup. To je záměr směřující k části slibu, ale jeho uskutečnění vyžaduje další legislativní kroky."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-199",
+          "relevant": false,
+          "reasonCz": "Upravuje certifikaci a kvalitu adiktologických služeb, ale dodaný text je nepropojuje s jednotnými systémy státní správy, které slib zavést.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Vláda ruší usnesení zaměřené na zajištění funkčnosti a efektivity digitalizace stavebního řízení, tedy ruší předchozí koordinační krok k jednotnému systému.",
+          "effectCz": "Předchozí usnesení č. 732/2024 mělo podle dodaného textu řešit funkčnost a efektivitu digitalizace stavebního řízení; nové usnesení je ruší. Rozsah jeho dosavadních úkolů není v balíčku celý uveden, proto nelze určit, které konkrétní prostředky odpadly, ale zrušení tohoto koordinačního podkladu je dílčím krokem proti pokračování jednotné digitalizace."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-595",
+          "relevant": false,
+          "reasonCz": "Reviduje statut rady pro oblast závislostí a kvalitu adiktologických služeb, nikoli jednotné systémy státní správy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-653",
+          "relevant": true,
+          "reasonCz": "Vláda ukládá napojovat portály ministerstev na Registr zastupování nebo zveřejnit použitelné šablony pro elektronické služby.",
+          "effectCz": "Předchozí znění není v balíčku uvedeno. Usnesení stanoví ministerstvům termín do konce roku 2027 a ostatním ústředním správním úřadům do konce roku 2028 pro napojení portálů nebo zveřejnění šablon, pokud to orgán pokládá za účelné. Rozšiřuje tedy koordinaci a slučitelnost vybraných digitálních služeb, ale ponechává podmínku účelnosti a vyžaduje následnou realizaci."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-7a916b73cc66--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-1-8",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1172",
+        "psp-core-2025--amendment-1172",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--amendment-text-1360",
+        "psp-core-2025--vote-88242",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--print-step-210930",
+        "psp-core-2025--government-opinion-43239-1",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43293-1",
+        "psp-core-2025--law-change-43293-6",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--law-change-43308-5",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--government-opinion-43308-1",
+        "psp-core-2025--vote-88528",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--print-step-212080",
+        "zvlady-resolutions--law-change-uv-2026-59",
+        "zvlady-resolutions--2026-59",
+        "zvlady-resolutions--law-change-uv-2026-83",
+        "zvlady-resolutions--2026-83",
+        "zvlady-resolutions--law-change-uv-2026-175-45",
+        "zvlady-resolutions--law-change-uv-2026-175-152",
+        "zvlady-resolutions--law-change-uv-2026-175-171",
+        "zvlady-resolutions--2026-175",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "zvlady-resolutions--2026-377",
+        "zvlady-resolutions--law-change-uv-2026-653",
+        "zvlady-resolutions--2026-653"
+      ],
+      "explanationCz": "Poslanci ANO podpořili novelu stavebního zákona, která vytváří celostátní úřad, krajská pracoviště a jednotnější digitální nástroje. Zároveň zákon prodlužuje přechodné používání jiných systémů až do roku 2030, takže zavádění jednotného řešení odkládá. ANO také hlasovalo pro prodloužení termínů zavádění matričního informačního systému až do roku 2028, s dalším souvisejícím termínem v roce 2030. Přes další návrhy na digitalizaci a lepší dostupnost tak převažují rozhodnutí, která zavedení jednotných systémů zpomalují; balíček ale nedokládá, kdy budou služby skutečně stejně kvalitní v celé republice.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Stavební novela současně vytváří jednotnější celostátní úřady a digitální standardy, ale prodlužuje přechodné období pro používání jiných systémů do roku 2030; proto zůstává viditelné i jednání ve prospěch slibu.",
+        "Balíček dokládá změny zákonů a termíny pro zavádění systémů, nikoli skutečnou kvalitu služeb v jednotlivých obcích ani to, zda občané už dostávají stejně kvalitní službu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0510c88487458c2d016aec53b9c2a487d1a2635f521fbcf6bb",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 265218,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 265215
+      },
+      "output_tokens": 15815,
+      "output_tokens_details": {
+        "reasoning_tokens": 8516
+      },
+      "total_tokens": 281033
+    },
+    "output": {
+      "promiseId": "candidate-7a916b73cc66",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Změna zřizuje ústřední i krajské úřady rozvoje území a jejich pracoviště, tedy přímo mění organizaci státní služby v jednotlivých částech ČR.",
+          "effectCz": "Dosavadní § 17 upravoval Dopravní a energetický stavební úřad s celostátní působností a pracovišti určenými ministerstvem; schválený text namísto toho zřizuje ústřední Úřad rozvoje území, krajské úřady a jejich územní pracoviště. Vytváří se jednotnější celostátní organizační soustava, avšak samotnou kvalitu služeb nezaručuje; krajská pracoviště mají vzniknout až 1. ledna 2028."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Změny působnosti a uspořádání stavebních úřadů mohou přímo ovlivnit jednotnost a územní dostupnost stavebních služeb.",
+          "effectCz": "Před změnou vykonávaly působnost v územním plánování a stavebním řádu ministerstvo, krajské a obecní úřady a další určené úřady; nově ji rozděluje mezi Úřad rozvoje území, krajské úřady a územní pracoviště a stanoví jejich nadřízenost. Text vytváří celostátně sjednocenější soustavu, ale sám neurčuje srovnatelnou kvalitu služeb; podle přechodných ustanovení regionální soustava začne působit až v roce 2028."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Jednotný standard a společný geoportál pro územní plánování jsou přímo příklady sjednocených digitálních systémů veřejné správy.",
+          "effectCz": "Dříve se v elektronické, strojově čitelné podobě pořizovaly územně plánovací dokumenty, ale jednotný standard se týkal jen vybraných částí; schválený text požaduje digitální vektorová data v jednotném standardu a ukládá údaje o území do jednotné databáze geoportálu. To rozšiřuje a sjednocuje digitální systém, a tedy posouvá slib kupředu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Změny stavebního portálu a geoportálu se týkají jednotného digitálního rozhraní pro vyřizování a sledování řízení.",
+          "effectCz": "Původní § 268 umožňoval digitální úkony a vkládání dokumentů do stavebních informačních systémů, ale neposkytoval výslovně sledování stavu řízení; schválený text tuto službu účastníkům řízení přidává a upravuje zveřejňování dokumentů v geoportálu. Rozšiřuje digitální službu, jde však jen o část státních služeb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Mění lhůty přechodného období, v němž se mají používat a naplňovat jednotné stavební informační systémy a geoportál.",
+          "effectCz": "Dosavadní přechodné lhůty končily podle jednotlivých ustanovení v letech 2026 a 2027; schválený text prodlužuje přechodné období do konce roku 2030. Tím se odkládá plné využívání jednotných digitálních systémů a dosažení jednotného postupu, což slib v této části ztěžuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení převádějí zaměstnance, agendy, spisy a pracoviště mezi dosavadními úřady a novou státní soustavou.",
+          "effectCz": "Dřívější návrh počítal s převodem agend a zánikem krajských a obecních stavebních úřadů po šesti měsících; schválený text určuje vznik ústředního úřadu od 1. ledna 2027 a krajských úřadů a pracovišť od 1. ledna 2028, včetně převodu zaměstnanců, spisů a rozpočtů. Stanoví cestu k jednotné soustavě, ale její plné územní zavedení odkládá; dopad na výslednou kvalitu z textu určit nelze."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Zřízení ústředního Úřadu rozvoje území jako správního orgánu je součástí centralizace a sjednocení stavebních služeb.",
+          "effectCz": "Dosavadní úprava svěřovala územní plánování a stavební řád Ministerstvu pro místní rozvoj; schválený text vedle této úpravy zařazuje Úřad rozvoje území mezi ústřední orgány a vyjímá tyto oblasti z působnosti ministerstva. Vytváří jednotné ústřední místo, ale samo neurčuje, zda budou služby kvalitnější či stejně dostupné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "U záměrů v památkových územích převádí část vyřizování na stavební úřady, tedy do nově sjednocované soustavy.",
+          "effectCz": "Dříve vydávaly příslušné orgány památkové péče samostatná rozhodnutí nebo závazná stanoviska a vykonávaly související dozor; schválený text svěřuje ověření podmínek v některých stavebních řízeních stavebnímu úřadu a mění rozsah působnosti památkových orgánů. Může zjednodušit vyřízení záměru prostřednictvím stavebního úřadu, ale změna sama nezaručuje stejnou kvalitu v celé ČR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Předává stavebním úřadům část posuzování přírody a krajiny v rámci povolování záměrů, tedy související veřejnou službu.",
+          "effectCz": "Před změnou posuzovaly uvedené podmínky ochrany přírody samostatné orgány ochrany přírody; schválený text v řadě běžných případů vkládá posouzení do řízení stavebního úřadu, zatímco pro chráněná území ponechává zvláštní příslušnost. Jde o částečné sjednocení vyřízení, nikoli o záruku stejné kvality; některé výjimky zachovávají odlišné postupy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": true,
+          "reasonCz": "Převádí část rozhodování a kontrol v lesních věcech souvisejících se záměry na stavební úřady.",
+          "effectCz": "Před změnou rozhodovaly o lesních pozemcích a souvisejících stanoviscích orgány státní správy lesů; schválený text u záměrů povolovaných podle stavebního zákona svěřuje část posouzení a rozhodnutí stavebnímu úřadu, přičemž orgán lesní správy poskytuje vyjádření. Zjednodušuje a sjednocuje vyřizování jen této části agendy; stejné kvality služby v celé ČR výslovně nezaručuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": true,
+          "reasonCz": "Nahrazuje dosavadní různé vyvlastňovací úřady úřady rozvoje území, tedy mění jednotnost jedné státní služby.",
+          "effectCz": "Dříve byly vyvlastňovacími úřady obecní a městské úřady i Dopravní a energetický stavební úřad; schválený text svěřuje tuto působnost úřadům rozvoje území krajů a pro vybrané případy ústřednímu úřadu. Zjednodušuje a sjednocuje strukturu příslušnosti, ale sám nestanoví stejnou kvalitu rozhodování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Zařazuje stavební úřady mezi orgány vykonávající správní činnosti podle zákona o ochraně ovzduší.",
+          "effectCz": "Před změnou byly vyjmenovanými orgány ochrany ovzduší ministerstvo, inspekce, krajské a obecní úřady a další úřady; schválený text do výčtu a dozoru přidává stavební úřady. Tím přenáší část související agendy do nové soustavy, ale rozsah ani kvalitu služeb podle jednotlivých míst nesjednocuje úplně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": true,
+          "reasonCz": "Převádí některé úkony spojené s vyvlastněním pro obranu na nový ústřední Úřad rozvoje území.",
+          "effectCz": "Dosavadní úprava svěřovala úkony zkráceného vyvlastnění a zápisu do katastru krajskému úřadu; schválený text svěřuje uvedené úkony Úřadu rozvoje území České republiky. Jde o sjednocení příslušnosti v omezené oblasti, nikoli o záruku stejné kvality služeb obecně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění kontaktní místa podpory bydlení, jejich postupy i digitální podávání a přechází k Úřadu práce, což přímo ovlivňuje dostupnost veřejné služby.",
+          "effectCz": "Dosavadní zákon umožňoval poradenství na kontaktním místě; návrh ANO a vlády přesouvá významnou část agendy na Úřad práce, zavádí digitální podání a elektronický spis, ale ponechává také asistované a listinné možnosti. Zajišťuje společnější systém pro tuto agendu, současně však mění místní kontaktní síť; přesný dopad na dostupnost v každém místě z textu nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-2",
+          "relevant": true,
+          "reasonCz": "Přidává Úřadu práce působnost v podpoře bydlení, čímž začleňuje tuto veřejnou službu do jednotné státní instituce.",
+          "effectCz": "Před změnou vyjmenovaný rozsah úkolů Úřadu práce podporu bydlení neobsahoval; schválený text ji mezi jeho úkoly výslovně doplňuje. Rozšiřuje jednotné státní místo pro tuto agendu, ale samo neurčuje územní dostupnost ani kvalitu služby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-4",
+          "relevant": true,
+          "reasonCz": "Ruší předpisy určující další kontaktní místa pro bydlení a jejich správní obvody, což přímo mění místní uspořádání této služby.",
+          "effectCz": "Schválený text ruší nařízení o dalších kontaktních místech a správních obvodech; jejich původní obsah ani úplné náhradní rozmístění nejsou v balíčku uvedeny. Lze určit, že dosavadní zvláštní síť a vymezení obvodů zanikají, ale z balíčku nelze určit, zda se tím místní dostupnost zlepší či zhorší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Zavádí digitální podávání a elektronické doručování u dávek a mění způsob, jakým občané jednají s Úřadem práce.",
+          "effectCz": "Před změnou se žádosti o tyto dávky vyřizovaly v dosavadním režimu; schválený text zavádí informační systém pro digitální podání, asistované podání a elektronický spis u vymezených dávek. Jde o částečné zavedení jednotnější digitální služby, přičemž ne všechny dávky jsou v textu digitalizovány stejně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Ruší dříve přijaté body o elektronických postupech u státní sociální podpory, a proto přímo zasahuje do zavádění jednotných digitálních služeb.",
+          "effectCz": "Změna ruší osm dříve schválených novelizačních bodů, mezi nimi ustanovení týkající se digitálního podávání, elektronického spisu a doručování u dávek státní sociální podpory. V témže zákoně jsou některé digitální postupy znovu upraveny pro vymezené dávky, takže čistý rozsah výsledné digitalizace nelze z této části samostatně určit; rušení původních bodů však znamená, že slibované sjednocení není jednoznačné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Zavádí celostátní používání digitální peněženky a elektronických potvrzení při prokazování skutečností veřejným orgánům.",
+          "effectCz": "Dosavadní úprava řešila ověřování elektronických podpisů; návrh nově umožňuje a ukládá orgánům veřejné moci přijímat elektronická potvrzení atributů a digitální peněženku. Rozšiřuje jednotné digitální prokazování skutečností, přičemž zavedení je postupné a plný přínos nastává až v dalších letech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje elektronickou identifikaci a zavádí systém na podporu digitální peněženky pro veřejné orgány.",
+          "effectCz": "Dříve bylo možné elektronicky prokázat totožnost pouze prostřednictvím kvalifikovaného systému; návrh přidává digitální peněženku a informační systém pro její podporu a stanoví postupné zavádění. Rozšiřuje jednotné způsoby digitálního přístupu k veřejným službám, ale jejich zavedení odkládá pro různé orgány do let 2028 a 2029."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": true,
+          "reasonCz": "Umožňuje občanům podat žádost o pas mimo úřad a zvolit si místo jeho převzetí, tedy přímo zlepšuje dostupnost služby bez ohledu na bydliště.",
+          "effectCz": "Před změnou se žádost podávala u kteréhokoli úřadu obce s rozšířenou působností nebo zastupitelského úřadu, ale převzetí bylo zpravidla vázáno na místo podání; návrh umožňuje u běžných žádostí zvolit jiný příslušný úřad k převzetí a některým lidem podat či převzít pas mimo pracoviště. Rozšiřuje územní volbu a dostupnost, tedy přímo posouvá dílčí část slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": true,
+          "reasonCz": "Ruší ustanovení o digitální autentizaci při osobním jednání, což mění dostupné způsoby využití jednotných digitálních služeb.",
+          "effectCz": "Dosavadní § 12 umožňoval uživateli požadovat autentizaci při osobním jednání, správci systému ukládal provoz aplikace a upravoval vydání potvrzení; návrh tyto odstavce ruší. Tím odstraňuje uvedenou možnost a podpůrnou aplikaci, což oslabuje tuto část digitálního přístupu; dopad na celkovou kvalitu služeb z textu nelze vyčíslit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-5",
+          "relevant": true,
+          "reasonCz": "Odkládá vytvoření a převod dat do jednotného matričního informačního systému, tedy přímo mění harmonogram jednotné digitální služby.",
+          "effectCz": "Dosavadní přechodná ustanovení počítala s převodem dat do konce roku 2026 a navazujícími kroky v roce 2027; schválený text posouvá příslušné termíny až na rok 2028 a jeden z nich na rok 2030. Odsouvá zavedení jednotného informačního systému matrik, a tím slib v této části ztěžuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-12",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje okruh subjektů zapojených do komunikace datovými schránkami o společenství obcí, tedy upravuje digitální komunikační systém veřejné správy.",
+          "effectCz": "Dosavadní § 1 zahrnoval územní samosprávné celky, ale výslovně ne společenství obcí; návrh je přidává mezi subjekty pokryté zákonem o datových schránkách. Rozšiřuje jednotný digitální komunikační kanál, avšak jen na tuto skupinu subjektů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Zavádí dálkové podávání a automatizované vyřizování registračních úkonů a doručování na výdejní místa, tedy přímo mění dostupnost státní služby.",
+          "effectCz": "Dosavadní citované ustanovení ukládalo ministerstvu zajistit výrobu registračních značek a jejich poskytování obecním úřadům; návrh navíc umožňuje dálková podání, některá automatizovaná rozhodnutí a doručování dokladů přes výdejní místa. Rozšiřuje jednotné a místně pružnější vyřízení, jde však o jednu konkrétní agendu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+          "relevant": true,
+          "reasonCz": "Usnesení zřizuje funkci vládního zmocněnce, jehož úkolem je koordinovat a sjednocovat zavádění stavebního práva v praxi.",
+          "effectCz": "Usnesení vytváří funkci zmocněnce a ukládá koordinaci mezi ministerstvy, kraji a obcemi i spolupráci na metodickém sjednocování praxe. Jde o přímý koordinační krok k jednotnějšímu uplatňování jedné skupiny státních služeb, nikoli o zavedení systému pro všechny služby."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-83",
+          "relevant": true,
+          "reasonCz": "Změna statutu Rady vlády pro informační společnost jí svěřuje koordinaci a podporu sjednocování standardů a uživatelské přívětivosti digitálních služeb.",
+          "effectCz": "Dodané znění svěřuje grémiu koordinaci a aktivní podporu sjednocování standardů a uživatelské přívětivosti digitálních služeb. Předchozí znění statutu není v balíčku, takže nelze přesně srovnat, co se oproti němu změnilo; uvedená nová působnost je v souladu s dílčí částí slibu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-45",
+          "relevant": true,
+          "reasonCz": "Plánuje návrh zákona, který má odstranit návštěvy úřadů a automatizovat registrační úkony u vozidel.",
+          "effectCz": "Jde o úkol v plánu legislativních prací, nikoli o změnu platného pravidla: vláda plánuje předložit návrh na dálkové a automatizované vyřizování registrace vozidel. Jako návrh přispívá k části slibu; sám službu ještě nezavádí."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-171",
+          "relevant": true,
+          "reasonCz": "Plánovaný zákon o sociálních službách má zavést nový informační systém a předvídatelnější přístup ke službám.",
+          "effectCz": "Jde o plánovaný legislativní návrh, který má vytvořit nový informační systém a nástroje pro spravedlivější a předvídatelnější přístup k sociálním službám. Jeho předchozí právní znění nelze s plánem srovnat jako změnu platné povinnosti; jde o návrh částečně podporující slib, nikoli o uskutečněnou službu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Usnesení ruší dřívější usnesení o zajištění funkčnosti a efektivity digitalizace stavebního řízení, tedy výslovně se dotýká zavádění jednotného digitálního systému.",
+          "effectCz": "Usnesení ruší usnesení vlády č. 732 z 16. října 2024 o navazujících krocích k funkčnosti a efektivitě digitalizace stavebního řízení. Text rušeného usnesení ani jeho konkrétní úkoly balíček neobsahuje, takže nelze určit, zda jejich zrušení digitální systém oslabuje, nebo nahrazuje jinými kroky."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-653",
+          "relevant": true,
+          "reasonCz": "Usnesení ukládá ministerstvům napojit portály na Registr zastupování nebo zveřejnit vzory oprávnění pro využívané elektronické služby.",
+          "effectCz": "Usnesení ukládá členům vlády napojit ministerské portály na registr do konce roku 2027, případně zveřejnit vzory oprávnění, a ukládá obdobný postup ostatním ústředním úřadům do konce roku 2028. Jde o konkrétní rozhodnutí podporující jednotné využívání elektronických služeb, byť s výjimkou tam, kde orgán takový postup nepovažuje za účelný."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Dodaná verze neobsahuje žádný vybraný odstavec týkající se slibu a připojené pozměňovací znění neukazuje relevantní změnu této části zákona.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": false,
+          "reasonCz": "Dodaná verze neobsahuje žádný vybraný odstavec týkající se sjednocování státních služeb nebo digitálních systémů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-54",
+          "relevant": false,
+          "reasonCz": "Změna odborné způsobilosti úředníků se týká kvalifikačních pravidel, ale dodané ustanovení neprokazuje sjednocení ani územní dostupnost služeb podle tohoto slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-3",
+          "relevant": false,
+          "reasonCz": "Dodaná část upravuje přechodná pravidla pro poradenskou psychoterapii, nikoli jednotné systémy státních služeb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43210-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje výkon veřejného opatrovnictví obcemi, ale nedokládá sjednocený systém služeb státu ani jejich stejnou kvalitu v celé ČR.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-73",
+          "relevant": false,
+          "reasonCz": "Plánovaný návrh se věnuje konkrétně veřejnému opatrovnictví, nikoli sjednocování státních služeb či systémů v celé ČR.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-152",
+          "relevant": false,
+          "reasonCz": "Plánovaný informační systém se týká evidence zkoušek dalšího vzdělávání autorizovanými osobami, nikoli služby občanům slíbené v programu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-199",
+          "relevant": false,
+          "reasonCz": "Statut upravuje certifikaci odbornosti adiktologických služeb, nikoli jednotné systémy veřejných služeb státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-595",
+          "relevant": false,
+          "reasonCz": "Dodaná změna statutu se týká ověřování kvality adiktologických služeb, nikoli slíbeného sjednocení státních služeb pro občany.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-7a916b73cc66--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-1-8",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-14",
+        "psp-core-2025--law-change-43174-29",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-approved-20",
+        "psp-core-2025--law-change-43189-1",
+        "psp-core-2025--law-change-43189-approved-2",
+        "psp-core-2025--law-change-43189-approved-4",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--law-change-43293-1",
+        "psp-core-2025--law-change-43293-6",
+        "psp-core-2025--law-change-43308-5",
+        "psp-core-2025--law-change-43399-12",
+        "psp-core-2025--law-change-43415-1",
+        "zvlady-resolutions--law-change-uv-2026-59",
+        "zvlady-resolutions--law-change-uv-2026-83",
+        "zvlady-resolutions--law-change-uv-2026-175-45",
+        "zvlady-resolutions--law-change-uv-2026-175-171",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "zvlady-resolutions--law-change-uv-2026-653",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-1172",
+        "psp-core-2025--amendment-text-1172",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--amendment-text-1360",
+        "psp-core-2025--vote-88242",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--print-step-210686",
+        "psp-core-2025--amendment-762",
+        "psp-core-2025--amendment-text-762",
+        "psp-core-2025--vote-87603",
+        "psp-core-2025--vote-87617",
+        "psp-core-2025--print-step-210930",
+        "psp-core-2025--government-opinion-43239-1",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--vote-88528",
+        "psp-core-2025--print-step-212014",
+        "psp-core-2025--print-step-212080",
+        "zvlady-resolutions--2026-59",
+        "zvlady-resolutions--2026-83",
+        "zvlady-resolutions--2026-175",
+        "zvlady-resolutions--2026-377",
+        "zvlady-resolutions--2026-653"
+      ],
+      "explanationCz": "Poslanci ANO předložili a prosadili změny, které zavádějí jednotnější síť stavebních úřadů, společný digitální geoportál a další elektronické služby; část agendy také převedli na Úřad práce. Zároveň se některé termíny zavedení jednotných systémů, včetně stavební digitalizace a matričního systému, posunuly, takže služba zatím není sjednocena ve všech uvedených oblastech. V říjnu vláda navíc uložila ministerstvům propojit jejich portály s Registrem zastupování nebo zveřejnit vzory pro elektronické služby. Jde proto o dílčí posun, nikoli o důkaz, že občané už dostávají stejně kvalitní služby v celé republice.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Usnesení vlády č. 377 zrušilo dřívější usnesení o digitalizaci stavebního řízení, ale jeho obsah a konkrétní zrušené úkoly nejsou v balíčku uvedeny, takže směr tohoto kroku nelze spolehlivě určit.",
+        "Z balíčku nelze zjistit, zda nové úřady a digitální systémy už v praxi poskytují stejně kvalitní službu ve všech regionech; podklady dokládají především přijatá pravidla, plánované kroky a odložené termíny."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0219705453bedd85016aec5444c39087d1826563e6e324fcd2",
+    "model": "gpt-6-luna",
+    "reasoningEffort": "max",
+    "usage": {
+      "input_tokens": 277164,
+      "input_tokens_details": {
+        "cache_write_tokens": 277161,
+        "cached_tokens": 0
+      },
+      "output_tokens": 25217,
+      "output_tokens_details": {
+        "reasoning_tokens": 24832
+      },
+      "total_tokens": 302381
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "candidate-7a916b73cc66--source",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43308-5",
+        "psp-core-2025--vote-88528",
+        "zvlady-resolutions--law-change-uv-2026-653",
+        "zvlady-resolutions--2026-653",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "zvlady-resolutions--2026-377"
+      ],
+      "explanationCz": "Volím hodnotitele B, protože zohledňuje jak odklady, tak pozdější konkrétní krok vlády. ANO podpořilo společná digitální data pro územní plánování, ale také hlasovalo pro posunutí termínů systému pro digitální vedení matrik. V říjnu vláda uložila ministerstvům propojit jejich portály s registrem, který úřadům pomáhá ověřit, koho člověk smí zastupovat, nebo zveřejnit vzory pro běžné elektronické služby, tam, kde to uznají za účelné. Je to dílčí krok, nikoli důkaz, že lidé už všude dostávají stejně kvalitní služby, ale podporuje závěr B o částečném posunu. B také správně upozorňuje, že obsah staršího vládního rozhodnutí o digitalizaci stavebního řízení, které bylo zrušeno, zde není uveden, takže jeho dopad nelze s jistotou označit za škodlivý."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-towards",
+    "selectedReview": "assessor-b"
+  }
+}

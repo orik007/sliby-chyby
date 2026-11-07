@@ -1,0 +1,570 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T09-46-09-479Z--a387bc6c4ecf",
+  "evaluatedAt": "2026-11-05T09:46:09.479Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-4d69a262a609/a387bc6c4ecf2571dfd59f8f5b015d1452a60a2b43b9332c794c4148281c35cc.json",
+  "packageHash": "a387bc6c4ecf2571dfd59f8f5b015d1452a60a2b43b9332c794c4148281c35cc",
+  "assessmentContentHash": "9dc9f4f7bd26b3aab85ddaebd3738190f49b36d3146bfe5daa1b9f0d2fff7433",
+  "assessmentFingerprint": "002ca86dc1e5fc92c167ab9fdfaead83af3638530368450e56eb7a36b09f2394",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-4d69a262a609",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment gives a law change more than one relevance verdict",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_03dbccab288e2515016aec4f77f0b887d19da5e516fa0d6492",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 82194,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 82191
+            },
+            "output_tokens": 6861,
+            "output_tokens_details": {
+              "reasoning_tokens": 3771
+            },
+            "total_tokens": 89055
+          },
+          "output": {
+            "promiseId": "candidate-4d69a262a609",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-1",
+                "relevant": true,
+                "reasonCz": "Změna nahrazuje dosavadní stavební úřad novou soustavou úřadů rozvoje území a přímo se tak dotýká počtu a uspořádání úřadů.",
+                "effectCz": "Dosavadní § 17 upravoval jeden celostátní Dopravní a energetický stavební úřad; nově se zřizuje ústřední Úřad rozvoje území, 14 krajských úřadů a jejich územní pracoviště, přičemž části působnosti se přesouvají od ministerstev a dalších orgánů. Jde o nahrazení a reorganizaci existujících úřadů, ale text současně výslovně vytváří další úřady a pracoviště; z dodaných ustanovení nelze určit celkový čistý počet ani to, které úřady jsou nepotřebné."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-2",
+                "relevant": true,
+                "reasonCz": "Text ruší Ústav územního rozvoje i některá dosavadní ustanovení o stavebních a územně plánovacích úřadech a nahrazuje jejich uspořádání novou soustavou.",
+                "effectCz": "Dosavadní § 29 zřizoval Ústav územního rozvoje jako samostatnou organizační složku státu a § 25 a další ustanovení vymezovala působnost obecních či krajských úřadů. Návrh § 29 ruší a převádí řadu funkcí na nové úřady rozvoje území; ruší také některá dosavadní ustanovení o stavebních úřadech a zavádí jejich nové rozdělení. Některé instituce či jejich dosavadní právní postavení tedy zanikají, jiné jsou nahrazeny; celkové snížení počtu úřadů z textu určit nelze."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-8",
+                "relevant": true,
+                "reasonCz": "Přechodná ustanovení výslovně stanoví zánik několika úřadů a převod jejich působnosti na jiné orgány.",
+                "effectCz": "Předchozí znění přechodných ustanovení v balíčku chybí, takže nelze porovnat dřívější právní úpravu. Schválený text stanoví zánik Dopravního a energetického stavebního úřadu, Ústavu územního rozvoje i dosavadních krajských a obecních stavebních úřadů; jejich působnost, majetek či zaměstnanci přecházejí na nové úřady rozvoje území nebo na jiné orgány. Jde o zrušení dosavadních úřadů, nikoli však nutně o čisté snížení počtu, protože současně vznikají nástupnické úřady."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-2",
+                "relevant": true,
+                "reasonCz": "Změna vytváří nový ústřední správní úřad a přesouvá na něj část působnosti ministerstva, což přímo souvisí s reorganizací úřadů.",
+                "effectCz": "Dosavadní § 2 vypočítával jiné ústřední orgány státní správy a mezi nimi Úřad rozvoje území neuváděl; § 14 odst. 1 svěřoval Ministerstvu pro místní rozvoj územní plánování a stavební řád. Změna do seznamu doplňuje nový Úřad rozvoje území České republiky a příslušnou působnost z ministerstva vypouští. Zřizuje tedy nový úřad a přesouvá agendu, ale sama neukládá zrušení ministerstva ani neurčuje čistý počet úřadů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-8",
+                "relevant": true,
+                "reasonCz": "Přechodná ustanovení výslovně stanoví zánik několika úřadů a převod jejich působnosti na jiné orgány.",
+                "effectCz": "Předchozí znění přechodných ustanovení v balíčku chybí, takže nelze porovnat dřívější právní úpravu. Schválený text stanoví zánik Dopravního a energetického stavebního úřadu, Ústavu územního rozvoje i dosavadních krajských a obecních stavebních úřadů; jejich působnost, majetek či zaměstnanci přecházejí na nové úřady rozvoje území nebo na jiné orgány. Jde o zrušení dosavadních úřadů, nikoli však nutně o čisté snížení počtu, protože současně vznikají nástupnické úřady."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-2",
+                "relevant": true,
+                "reasonCz": "Změna vytváří nový ústřední správní úřad a přesouvá na něj část působnosti ministerstva, což přímo souvisí s reorganizací úřadů.",
+                "effectCz": "Dosavadní § 2 vypočítával jiné ústřední orgány státní správy a mezi nimi Úřad rozvoje území neuváděl; § 14 odst. 1 svěřoval Ministerstvu pro místní rozvoj územní plánování a stavební řád. Změna do seznamu doplňuje nový Úřad rozvoje území České republiky a příslušnou působnost z ministerstva vypouští. Zřizuje tedy nový úřad a přesouvá agendu, ale sama neukládá zrušení ministerstva ani neurčuje čistý počet úřadů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-29",
+                "relevant": false,
+                "reasonCz": "Změna pouze přiděluje agendu vyvlastnění úřadům rozvoje území a sama žádný úřad nezřizuje ani neruší.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": true,
+                "reasonCz": "Schválený text ruší vyhlášky upravující stanovení obecních stavebních úřadů, a tím se dotýká jejich dosavadního právního uspořádání.",
+                "effectCz": "Dřívější znění rušených vyhlášek není v balíčku uvedeno, takže nelze určit, jaká konkrétní pravidla stanovily ani zda jejich zrušení samo o sobě snižuje počet úřadů. Schválený text ruší vyhlášku o stanovení obecních stavebních úřadů a dvě její novely; jejich věcný dopad na počet úřadů proto nelze z dodaných podkladů přesně určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43395-1",
+                "relevant": true,
+                "reasonCz": "Návrh mění zeměměřické a katastrální inspektoráty ze samostatných správních a účetních jednotek na vnitřní organizační jednotky Českého úřadu zeměměřického a katastrálního.",
+                "effectCz": "Dosavadní § 2 odst. 2 označoval inspektoráty za jiné správní úřady a účetní jednotky; návrh z nich činí vnitřní organizační jednotky Českého úřadu zeměměřického a katastrálního, přičemž jim ponechává název a část jejich činností. Zaniká tedy jejich samostatné právní a účetní postavení, nikoli nutně samotná pracoviště."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43439-1",
+                "relevant": true,
+                "reasonCz": "Návrh výslovně ruší Českou plemenářskou inspekci jako správní úřad a slučuje ji se Státní veterinární správou.",
+                "effectCz": "Dosavadní § 24 zřizoval Českou plemenářskou inspekci jako samostatný orgán státní správy s vlastními úkoly; návrh stanoví, že inspekce se sloučí se Státní veterinární správou a jako správní úřad, organizační složka státu a účetní jednotka zanikne. Její agenda, majetek a zaměstnanci přecházejí na Státní veterinární správu. Jde o přímé zrušení jednoho úřadu, tedy o část slibu."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-620",
+                "relevant": true,
+                "reasonCz": "Usnesení vlády navrhuje sloučit CzechTourism s agenturou CzechBusiness a stanoví, že CzechTourism následně zanikne.",
+                "effectCz": "Předchozí právní úprava ani počet dotčených pracovišť v balíčku uvedeny nejsou. Vláda schválila návrh, podle něhož CzechTourism po provedení nezbytných právních kroků zanikne bez likvidace a CzechBusiness se stane jeho právním nástupcem. Jde o návrh na sloučení, nikoli o doložené dokončené zrušení."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-4d69a262a609--source",
+              "psp-core-2025--law-change-43174-1-1",
+              "psp-core-2025--law-change-43174-1-2",
+              "psp-core-2025--law-change-43174-1-8",
+              "psp-core-2025--law-change-43174-2",
+              "psp-core-2025--law-change-43174-approved-56",
+              "psp-core-2025--law-change-43395-1",
+              "psp-core-2025--law-change-43439-1",
+              "zvlady-resolutions--law-change-uv-2026-620",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--amendment-text-1360",
+              "psp-core-2025--vote-88242",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--print-step-211959",
+              "zvlady-resolutions--2026-620",
+              "psp-core-2025--print-step-212206",
+              "psp-core-2025--government-opinion-43439-1"
+            ],
+            "explanationCz": "Poslanci SPD předložili spolu s dalšími poslanci novelu stavebního zákona, sněmovní tisk č. 67, a strana ji podpořila i při závěrečném hlasování po zamítnutí Senátem. Návrh ruší několik dosavadních úřadů, ale zároveň vytváří novou soustavu úřadů rozvoje území, takže nejde doložit celkové snížení jejich počtu. SPD také hlasovala proti návrhu na povinná další detašovaná pracoviště, který by soustavu rozšířil. Vláda se souhlasně vyjádřila k návrhu na sloučení České plemenářské inspekce se Státní veterinární správou a schválila návrh na sloučení CzechTourism s CzechBusiness; jde však zatím o návrhy, nikoli o doložené dokončení těchto změn.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Slib neuvádí, které úřady považuje strana za nepotřebné; podklady proto neumožňují určit, zda jsou nové úřady nebo pracoviště zbytečné ani jaký bude čistý dopad na jejich počet.",
+              "Podklady dokládají podporu přijatému znění novely, ale u sloučení České plemenářské inspekce a CzechTourism popisují návrhy, nikoli dokončený zánik."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-4d69a262a609",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Změna nahrazuje dosavadní rozdělení stavební a územně plánovací správy novou soustavou ústředního, krajských a územních úřadů.",
+          "effectCz": "Před změnou § 17 popisoval Dopravní a energetický stavební úřad a § 19 svěřoval územní plánování ministerstvu, úřadům územního plánování a některým obecním úřadům; po změně vzniká Úřad rozvoje území České republiky, krajské úřady rozvoje území a jejich územní pracoviště a působnost se přerozděluje. Jde o reorganizaci, nikoli o prosté zrušení úřadů; text současně zavádí nové orgány, takže čistý dopad na počet úřadů nelze z dodaných ustanovení určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Změna ruší některé dosavadní organizační a správní útvary a přesouvá jejich úkoly do nově uspořádané soustavy úřadů.",
+          "effectCz": "Dosavadní § 29 zřizoval Ústav územního rozvoje jako organizační složku státu; schválené znění jej ruší. Dosavadní § 25 svěřoval úkoly obecním úřadům obcí s rozšířenou působností a § 30 vyjmenovával dosavadní stavební úřady; nová úprava tyto kompetence přerozděluje mezi Úřad rozvoje území, krajské úřady rozvoje území a jejich územní pracoviště. Zrušení Ústavu je konkrétní zánik samostatného útvaru, ale převod úkolů a vytvoření náhradní soustavy neprokazují celkový úbytek úřadů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení výslovně stanoví zánik několika dosavadních úřadů a převedení jejich působnosti na nové orgány.",
+          "effectCz": "Předchozí znění těchto přechodných ustanovení v balíčku není uvedeno, proto nelze porovnat dřívější právní úpravu ani určit čistou změnu počtu úřadů. Schválený text stanoví zánik Dopravního a energetického stavebního úřadu a Ústavu územního rozvoje a později také krajských a obecních stavebních úřadů; jejich působnost, zaměstnanci či majetek přecházejí na nově vznikající úřady. Jde tedy o zánik některých samostatných orgánů, zároveň však o přesun jejich činnosti do nové soustavy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Změna přímo přidává nový ústřední správní úřad a mění rozdělení působnosti mezi ním a ministerstvem.",
+          "effectCz": "Dosavadní § 2 vypočítával 17 dalších ústředních orgánů státní správy; změna do něj přidává Úřad rozvoje území České republiky. Ministerstvo pro místní rozvoj dosud mělo působnost v územním plánování, stavebním řádu a vyvlastnění; po změně se tato působnost ze seznamu jeho úkolů vypouští. Změna tedy zavádí nový úřad a převádí na něj působnost, nikoli zrušení ministerstva; její čistý dopad na počet institucí nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": true,
+          "reasonCz": "Změna mění, které úřady vykonávají vyvlastňovací působnost, a nahrazuje část dosavadních orgánů novou soustavou.",
+          "effectCz": "Dosavadní § 15 označoval za vyvlastňovací úřady obecní úřady obcí s rozšířenou působností, pražský magistrát, magistráty územně členěných statutárních měst a Dopravní a energetický stavební úřad; schválený text tuto působnost svěřuje Úřadu rozvoje území České republiky a krajským úřadům rozvoje území. Dosavadní § 16 určoval místní příslušnost podle obvodu a vymezoval působnost Dopravního a energetického stavebního úřadu; nové znění ji přiděluje krajskému nebo ústřednímu úřadu podle druhu případu. Jde o přesun působnosti mezi orgány, ale text neříká, zda tím celkový počet úřadů klesne."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Dodané znění ruší předpisy určující obecní stavební úřady, ale neuvádí zrušení samotných úřadů ani snížení jejich počtu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": true,
+          "reasonCz": "Změna převádí zeměměřické a katastrální inspektoráty ze samostatných správních úřadů do vnitřní organizační struktury Českého úřadu zeměměřického a katastrálního.",
+          "effectCz": "Dosavadní § 2 odst. 2 zřizoval inspektoráty jako samostatné správní úřady a účetní jednotky; návrh jim ponechává úkoly, ale pro hospodaření, účetnictví a pracovněprávní vztahy z nich činí vnitřní organizační jednotky Českého úřadu zeměměřického a katastrálního. Přechodná ustanovení převádějí na tento úřad zaměstnance i majetek. Samostatné postavení inspektorátů se tedy zmenšuje, jejich činnost však nezaniká."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43439-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně stanoví zánik České plemenářské inspekce a sloučení jejích úkolů se Státní veterinární správou.",
+          "effectCz": "Dosavadní § 24 zřizoval Českou plemenářskou inspekci jako samostatný orgán státní správy a svěřoval jí kontrolní a další úkoly; návrh stanoví, že inspekce zanikne a dozor a kontrolní působnost převezme Státní veterinární správa a krajské veterinární správy. Přechodná ustanovení převádějí zaměstnance, majetek, řízení i další agendu. Samostatný úřad tedy zaniká, ale jeho činnost pokračuje u jiných orgánů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-620",
+          "relevant": true,
+          "reasonCz": "Usnesení navrhuje sloučení státní organizace CzechTourism s agenturou CzechBusiness a výslovně počítá se zánikem CzechTourism.",
+          "effectCz": "Předchozí právní úprava není v balíčku uvedena. Vláda navrhuje, aby CzechTourism po provedení nezbytných právních kroků zanikl bez likvidace a CzechBusiness se stal jeho právním nástupcem. Jde o návrh sloučení dvou organizací, nikoli o okamžité uskutečnění jejich sloučení."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4d69a262a609--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-8",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--law-change-43174-29",
+        "psp-core-2025--law-change-43395-1",
+        "psp-core-2025--law-change-43439-1",
+        "zvlady-resolutions--law-change-uv-2026-620",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1360",
+        "psp-core-2025--vote-88242",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-211959",
+        "zvlady-resolutions--2026-620",
+        "psp-core-2025--print-step-212206",
+        "psp-core-2025--government-opinion-43439-1"
+      ],
+      "explanationCz": "Poslanci SPD předložili a podpořili novelu stavebního zákona, která ruší některé dosavadní úřady, ale jejich působnost převádí do nově vytvořené soustavy. Vláda také podpořila návrh na zánik České plemenářské inspekce a její sloučení se Státní veterinární správou. Další vládní usnesení navrhuje sloučit CzechTourism s CzechBusiness, přičemž CzechTourism má zaniknout. Jde o konkrétní kroky k slučování či rušení samostatných institucí, ale část z nich je zatím jen návrhem a celkový úbytek úřadů není z podkladů zřejmý.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela stavebního zákona současně ruší některé dosavadní orgány a vytváří novou soustavu ústředních, krajských a územních pracovišť; podklady proto neukazují, zda se počet úřadů celkově sníží.",
+        "Návrh na sloučení České plemenářské inspekce se Státní veterinární správou ani návrh na sloučení CzechTourism s CzechBusiness nejsou v dodaných podkladech doloženy jako dokončené kroky.",
+        "Slib nejmenuje konkrétní úřady a podklady neurčují, které z rušených či slučovaných institucí strana považovala za nepotřebné."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-4d69a262a609",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Část mění soustavu stavebních a územně plánovacích úřadů, takže přímo ovlivňuje, které úřady existují a jak jsou uspořádány.",
+          "effectCz": "Dosavadní § 17 upravoval Dopravní a energetický stavební úřad a § 15 svěřoval působnost mimo jiné ministerstvu, orgánům územního plánování a stavebním úřadům; navržené znění zřizuje Úřad rozvoje území České republiky, krajské úřady rozvoje území a jejich územní pracoviště a mění výčet orgánů. Nová struktura nahrazuje a přesouvá působnosti, ale vytváří více druhů úřadů; z dodaného znění nelze určit čistý početní úbytek ani to, které z nich jsou nepotřebné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Mění soustavu úřadů a výslovně ruší některá dosavadní ustanovení o úřadech, přičemž část jejich agend převádí na nové instituce.",
+          "effectCz": "Dosavadní stavební zákon svěřoval úkoly například Ústavu územního rozvoje, ministerstvu, krajským a obecním stavebním úřadům; schválené znění ruší § 29 o Ústavu územního rozvoje a další uvedená ustanovení a svěřuje kompetence Úřadu rozvoje území a jeho krajským úřadům a pracovištím. Ústav tak zaniká, ale jeho působnost přebírá nový úřad a současně vzniká nová síť; jde o dílčí rušení institucí, nikoli o doložené celkové zmenšení počtu úřadů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení výslovně stanoví zánik dosavadních úřadů a převod jejich působnosti na nově vznikající úřady.",
+          "effectCz": "Předchozí stav tvořily mimo jiné Dopravní a energetický stavební úřad, Ústav územního rozvoje, krajské a obecní stavební úřady a úřady ministerstev; schválený text stanoví zánik prvních dvou ke konci roku 2026 a krajských a obecních stavebních úřadů ke konci roku 2027, zatímco agendy, majetek a část zaměstnanců přecházejí na nové úřady. Některé instituce tedy zaniknou, ale jejich funkce se z velké části zachovají v nových strukturách, takže čistý úbytek úřadů není z textu jistý."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Změna zákona nově zařazuje Úřad rozvoje území mezi ústřední správní orgány a převádí na něj působnost ministerstva.",
+          "effectCz": "Dosavadní § 2 vyjmenovával jiné ústřední orgány bez Úřadu rozvoje území a § 14 svěřoval ministerstvu pro místní rozvoj také územní plánování, stavební řád a vyvlastnění; schválené znění doplňuje nový úřad do výčtu a uvedené oblasti z působnosti ministerstva odnímá. Vzniká nový ústřední úřad, ale samotné znění nedokládá zrušení ministerstva ani čisté snížení počtu úřadů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": true,
+          "reasonCz": "Mění, které správní úřady vykonávají vyvlastňovací působnost, a tím přímo zasahuje do organizace úřadů.",
+          "effectCz": "Dosavadní § 15 uváděl jako vyvlastňovací úřady obecní úřady obcí s rozšířenou působností, pražský magistrát, magistráty územně členěných statutárních měst a Dopravní a energetický stavební úřad; schválené znění svěřuje tuto roli Úřadu rozvoje území České republiky a krajským úřadům rozvoje území. Jde o nahrazení dosavadních vykonavatelů novými, nikoli o jasně doložené zrušení všech dotčených úřadů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Ruší předpisy, které určují obecní stavební úřady, v rámci změny jejich soustavy.",
+          "effectCz": "Předchozí úpravu tvořily vyhlášky o stanovení obecních stavebních úřadů a jejich změnách; schválené znění tyto vyhlášky vypouští ze seznamu rušených předpisů v zákoně. Samotné zrušení vyhlášek ale nedokládá zánik všech úřadů, které určovaly; jejich působnost se podle dodaných souvisejících ustanovení převádí do nové soustavy, takže čistý účinek na počet úřadů nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": true,
+          "reasonCz": "Návrh převádí zeměměřické a katastrální inspektoráty z postavení samostatných účetních jednotek na vnitřní organizační jednotky úřadu.",
+          "effectCz": "Předchozí § 2 uváděl inspektoráty jako jiné správní úřady a samostatné účetní jednotky; návrh je pro správu majetku, účetnictví a pracovněprávní vztahy nově označuje za vnitřní organizační jednotky Českého úřadu zeměměřického a katastrálního a převádí na něj související práva, povinnosti a majetek. Ztrácejí samostatné organizační a účetní postavení, ale text ponechává jejich činnost; jde o dílčí organizační sloučení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43439-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně stanoví zánik České plemenářské inspekce a převod jejích úkolů na Státní veterinární správu.",
+          "effectCz": "Dosavadní § 24 zřizoval Českou plemenářskou inspekci jako správní úřad, organizační složku státu a účetní jednotku; návrh stanoví, že se sloučí se Státní veterinární správou a jako správní úřad, organizační složka a účetní jednotka zanikne, přičemž její úkoly, zaměstnanci a majetek přecházejí na Státní veterinární správu. Jde o výslovné zrušení jednoho úřadu, byť jeho agendy pokračují u jiného."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-620",
+          "relevant": true,
+          "reasonCz": "Usnesení navrhuje sloučení CzechTourism s agenturou CzechBusiness a stanoví, že CzechTourism zanikne.",
+          "effectCz": "Usnesení vlády navrhuje, aby po nezbytných právních krocích CzechTourism zanikl bez likvidace a CzechBusiness se stal jeho právním nástupcem. Předchozí právní znění není součástí balíčku; jde o návrh na zrušení jedné organizace sloučením, nikoli o již uskutečněný zánik."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4d69a262a609--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-8",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--law-change-43174-29",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43395-1",
+        "psp-core-2025--law-change-43439-1",
+        "zvlady-resolutions--law-change-uv-2026-620",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1360",
+        "psp-core-2025--vote-88242",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--print-step-211959",
+        "psp-core-2025--vote-88454",
+        "zvlady-resolutions--2026-620",
+        "psp-core-2025--print-step-212206",
+        "psp-core-2025--government-opinion-43439-1"
+      ],
+      "explanationCz": "Poslanci SPD předložili a podpořili změnu stavebního zákona, která ruší některé dosavadní úřady, ale jejich agendy převádí na novou soustavu včetně ústředního a krajských úřadů rozvoje území. Vláda také navrhla sloučit CzechTourism s CzechBusiness a poslanci SPD předložili návrh na sloučení České plemenářské inspekce se Státní veterinární správou; vláda s druhým návrhem vyslovila souhlas. To dokládá dílčí postup ke zrušení některých institucí, nikoli splnění celého obecného slibu. Současně návrhy stavební reformy vytvářejí nové úřady, takže z podkladů nelze určit celkový úbytek ani to, které úřady strana považuje za nepotřebné.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Slib neuvádí, které úřady jsou nepotřebné; podklady proto neumožňují posoudit, zda nově zřizované úřady rozvoje území odporují právě této části závazku.",
+        "Změna stavební správy ruší některé instituce, ale převádí jejich agendy do nových úřadů; početní čistý úbytek úřadů z dodaných ustanovení nelze bezpečně určit.",
+        "Sloučení CzechTourism s CzechBusiness je usnesením vládou navrženo až po dalších právních krocích, takže podklady nedokládají, že už k zániku CzechTourism došlo."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_050d2bcf29b6ead9016aec4f04002887d1b19b25b64082aff3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 82194,
+      "input_tokens_details": {
+        "cache_write_tokens": 75844,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 7862,
+      "output_tokens_details": {
+        "reasoning_tokens": 5320
+      },
+      "total_tokens": 90056
+    },
+    "output": {
+      "promiseId": "candidate-4d69a262a609",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Změna nahrazuje dosavadní rozdělení stavební a územně plánovací správy novou soustavou ústředního, krajských a územních úřadů.",
+          "effectCz": "Před změnou § 17 popisoval Dopravní a energetický stavební úřad a § 19 svěřoval územní plánování ministerstvu, úřadům územního plánování a některým obecním úřadům; po změně vzniká Úřad rozvoje území České republiky, krajské úřady rozvoje území a jejich územní pracoviště a působnost se přerozděluje. Jde o reorganizaci, nikoli o prosté zrušení úřadů; text současně zavádí nové orgány, takže čistý dopad na počet úřadů nelze z dodaných ustanovení určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Změna ruší některé dosavadní organizační a správní útvary a přesouvá jejich úkoly do nově uspořádané soustavy úřadů.",
+          "effectCz": "Dosavadní § 29 zřizoval Ústav územního rozvoje jako organizační složku státu; schválené znění jej ruší. Dosavadní § 25 svěřoval úkoly obecním úřadům obcí s rozšířenou působností a § 30 vyjmenovával dosavadní stavební úřady; nová úprava tyto kompetence přerozděluje mezi Úřad rozvoje území, krajské úřady rozvoje území a jejich územní pracoviště. Zrušení Ústavu je konkrétní zánik samostatného útvaru, ale převod úkolů a vytvoření náhradní soustavy neprokazují celkový úbytek úřadů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení výslovně stanoví zánik několika dosavadních úřadů a převedení jejich působnosti na nové orgány.",
+          "effectCz": "Předchozí znění těchto přechodných ustanovení v balíčku není uvedeno, proto nelze porovnat dřívější právní úpravu ani určit čistou změnu počtu úřadů. Schválený text stanoví zánik Dopravního a energetického stavebního úřadu a Ústavu územního rozvoje a později také krajských a obecních stavebních úřadů; jejich působnost, zaměstnanci či majetek přecházejí na nově vznikající úřady. Jde tedy o zánik některých samostatných orgánů, zároveň však o přesun jejich činnosti do nové soustavy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Změna přímo přidává nový ústřední správní úřad a mění rozdělení působnosti mezi ním a ministerstvem.",
+          "effectCz": "Dosavadní § 2 vypočítával 17 dalších ústředních orgánů státní správy; změna do něj přidává Úřad rozvoje území České republiky. Ministerstvo pro místní rozvoj dosud mělo působnost v územním plánování, stavebním řádu a vyvlastnění; po změně se tato působnost ze seznamu jeho úkolů vypouští. Změna tedy zavádí nový úřad a převádí na něj působnost, nikoli zrušení ministerstva; její čistý dopad na počet institucí nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": true,
+          "reasonCz": "Změna mění, které úřady vykonávají vyvlastňovací působnost, a nahrazuje část dosavadních orgánů novou soustavou.",
+          "effectCz": "Dosavadní § 15 označoval za vyvlastňovací úřady obecní úřady obcí s rozšířenou působností, pražský magistrát, magistráty územně členěných statutárních měst a Dopravní a energetický stavební úřad; schválený text tuto působnost svěřuje Úřadu rozvoje území České republiky a krajským úřadům rozvoje území. Dosavadní § 16 určoval místní příslušnost podle obvodu a vymezoval působnost Dopravního a energetického stavebního úřadu; nové znění ji přiděluje krajskému nebo ústřednímu úřadu podle druhu případu. Jde o přesun působnosti mezi orgány, ale text neříká, zda tím celkový počet úřadů klesne."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Dodané znění ruší předpisy určující obecní stavební úřady, ale neuvádí zrušení samotných úřadů ani snížení jejich počtu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": true,
+          "reasonCz": "Změna převádí zeměměřické a katastrální inspektoráty ze samostatných správních úřadů do vnitřní organizační struktury Českého úřadu zeměměřického a katastrálního.",
+          "effectCz": "Dosavadní § 2 odst. 2 zřizoval inspektoráty jako samostatné správní úřady a účetní jednotky; návrh jim ponechává úkoly, ale pro hospodaření, účetnictví a pracovněprávní vztahy z nich činí vnitřní organizační jednotky Českého úřadu zeměměřického a katastrálního. Přechodná ustanovení převádějí na tento úřad zaměstnance i majetek. Samostatné postavení inspektorátů se tedy zmenšuje, jejich činnost však nezaniká."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43439-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně stanoví zánik České plemenářské inspekce a sloučení jejích úkolů se Státní veterinární správou.",
+          "effectCz": "Dosavadní § 24 zřizoval Českou plemenářskou inspekci jako samostatný orgán státní správy a svěřoval jí kontrolní a další úkoly; návrh stanoví, že inspekce zanikne a dozor a kontrolní působnost převezme Státní veterinární správa a krajské veterinární správy. Přechodná ustanovení převádějí zaměstnance, majetek, řízení i další agendu. Samostatný úřad tedy zaniká, ale jeho činnost pokračuje u jiných orgánů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-620",
+          "relevant": true,
+          "reasonCz": "Usnesení navrhuje sloučení státní organizace CzechTourism s agenturou CzechBusiness a výslovně počítá se zánikem CzechTourism.",
+          "effectCz": "Předchozí právní úprava není v balíčku uvedena. Vláda navrhuje, aby CzechTourism po provedení nezbytných právních kroků zanikl bez likvidace a CzechBusiness se stal jeho právním nástupcem. Jde o návrh sloučení dvou organizací, nikoli o okamžité uskutečnění jejich sloučení."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4d69a262a609--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-8",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--law-change-43174-29",
+        "psp-core-2025--law-change-43395-1",
+        "psp-core-2025--law-change-43439-1",
+        "zvlady-resolutions--law-change-uv-2026-620",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1360",
+        "psp-core-2025--vote-88242",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-211959",
+        "zvlady-resolutions--2026-620",
+        "psp-core-2025--print-step-212206",
+        "psp-core-2025--government-opinion-43439-1"
+      ],
+      "explanationCz": "Poslanci SPD předložili a podpořili novelu stavebního zákona, která ruší některé dosavadní úřady, ale jejich působnost převádí do nově vytvořené soustavy. Vláda také podpořila návrh na zánik České plemenářské inspekce a její sloučení se Státní veterinární správou. Další vládní usnesení navrhuje sloučit CzechTourism s CzechBusiness, přičemž CzechTourism má zaniknout. Jde o konkrétní kroky k slučování či rušení samostatných institucí, ale část z nich je zatím jen návrhem a celkový úbytek úřadů není z podkladů zřejmý.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela stavebního zákona současně ruší některé dosavadní orgány a vytváří novou soustavu ústředních, krajských a územních pracovišť; podklady proto neukazují, zda se počet úřadů celkově sníží.",
+        "Návrh na sloučení České plemenářské inspekce se Státní veterinární správou ani návrh na sloučení CzechTourism s CzechBusiness nejsou v dodaných podkladech doloženy jako dokončené kroky.",
+        "Slib nejmenuje konkrétní úřady a podklady neurčují, které z rušených či slučovaných institucí strana považovala za nepotřebné."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_04c77be1612200fc016aec5026085887d18f1e4082247b80fd",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 82194,
+      "input_tokens_details": {
+        "cache_write_tokens": 75844,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 5803,
+      "output_tokens_details": {
+        "reasoning_tokens": 3001
+      },
+      "total_tokens": 87997
+    },
+    "output": {
+      "promiseId": "candidate-4d69a262a609",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Část mění soustavu stavebních a územně plánovacích úřadů, takže přímo ovlivňuje, které úřady existují a jak jsou uspořádány.",
+          "effectCz": "Dosavadní § 17 upravoval Dopravní a energetický stavební úřad a § 15 svěřoval působnost mimo jiné ministerstvu, orgánům územního plánování a stavebním úřadům; navržené znění zřizuje Úřad rozvoje území České republiky, krajské úřady rozvoje území a jejich územní pracoviště a mění výčet orgánů. Nová struktura nahrazuje a přesouvá působnosti, ale vytváří více druhů úřadů; z dodaného znění nelze určit čistý početní úbytek ani to, které z nich jsou nepotřebné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Mění soustavu úřadů a výslovně ruší některá dosavadní ustanovení o úřadech, přičemž část jejich agend převádí na nové instituce.",
+          "effectCz": "Dosavadní stavební zákon svěřoval úkoly například Ústavu územního rozvoje, ministerstvu, krajským a obecním stavebním úřadům; schválené znění ruší § 29 o Ústavu územního rozvoje a další uvedená ustanovení a svěřuje kompetence Úřadu rozvoje území a jeho krajským úřadům a pracovištím. Ústav tak zaniká, ale jeho působnost přebírá nový úřad a současně vzniká nová síť; jde o dílčí rušení institucí, nikoli o doložené celkové zmenšení počtu úřadů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení výslovně stanoví zánik dosavadních úřadů a převod jejich působnosti na nově vznikající úřady.",
+          "effectCz": "Předchozí stav tvořily mimo jiné Dopravní a energetický stavební úřad, Ústav územního rozvoje, krajské a obecní stavební úřady a úřady ministerstev; schválený text stanoví zánik prvních dvou ke konci roku 2026 a krajských a obecních stavebních úřadů ke konci roku 2027, zatímco agendy, majetek a část zaměstnanců přecházejí na nové úřady. Některé instituce tedy zaniknou, ale jejich funkce se z velké části zachovají v nových strukturách, takže čistý úbytek úřadů není z textu jistý."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Změna zákona nově zařazuje Úřad rozvoje území mezi ústřední správní orgány a převádí na něj působnost ministerstva.",
+          "effectCz": "Dosavadní § 2 vyjmenovával jiné ústřední orgány bez Úřadu rozvoje území a § 14 svěřoval ministerstvu pro místní rozvoj také územní plánování, stavební řád a vyvlastnění; schválené znění doplňuje nový úřad do výčtu a uvedené oblasti z působnosti ministerstva odnímá. Vzniká nový ústřední úřad, ale samotné znění nedokládá zrušení ministerstva ani čisté snížení počtu úřadů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": true,
+          "reasonCz": "Mění, které správní úřady vykonávají vyvlastňovací působnost, a tím přímo zasahuje do organizace úřadů.",
+          "effectCz": "Dosavadní § 15 uváděl jako vyvlastňovací úřady obecní úřady obcí s rozšířenou působností, pražský magistrát, magistráty územně členěných statutárních měst a Dopravní a energetický stavební úřad; schválené znění svěřuje tuto roli Úřadu rozvoje území České republiky a krajským úřadům rozvoje území. Jde o nahrazení dosavadních vykonavatelů novými, nikoli o jasně doložené zrušení všech dotčených úřadů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Ruší předpisy, které určují obecní stavební úřady, v rámci změny jejich soustavy.",
+          "effectCz": "Předchozí úpravu tvořily vyhlášky o stanovení obecních stavebních úřadů a jejich změnách; schválené znění tyto vyhlášky vypouští ze seznamu rušených předpisů v zákoně. Samotné zrušení vyhlášek ale nedokládá zánik všech úřadů, které určovaly; jejich působnost se podle dodaných souvisejících ustanovení převádí do nové soustavy, takže čistý účinek na počet úřadů nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": true,
+          "reasonCz": "Návrh převádí zeměměřické a katastrální inspektoráty z postavení samostatných účetních jednotek na vnitřní organizační jednotky úřadu.",
+          "effectCz": "Předchozí § 2 uváděl inspektoráty jako jiné správní úřady a samostatné účetní jednotky; návrh je pro správu majetku, účetnictví a pracovněprávní vztahy nově označuje za vnitřní organizační jednotky Českého úřadu zeměměřického a katastrálního a převádí na něj související práva, povinnosti a majetek. Ztrácejí samostatné organizační a účetní postavení, ale text ponechává jejich činnost; jde o dílčí organizační sloučení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43439-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně stanoví zánik České plemenářské inspekce a převod jejích úkolů na Státní veterinární správu.",
+          "effectCz": "Dosavadní § 24 zřizoval Českou plemenářskou inspekci jako správní úřad, organizační složku státu a účetní jednotku; návrh stanoví, že se sloučí se Státní veterinární správou a jako správní úřad, organizační složka a účetní jednotka zanikne, přičemž její úkoly, zaměstnanci a majetek přecházejí na Státní veterinární správu. Jde o výslovné zrušení jednoho úřadu, byť jeho agendy pokračují u jiného."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-620",
+          "relevant": true,
+          "reasonCz": "Usnesení navrhuje sloučení CzechTourism s agenturou CzechBusiness a stanoví, že CzechTourism zanikne.",
+          "effectCz": "Usnesení vlády navrhuje, aby po nezbytných právních krocích CzechTourism zanikl bez likvidace a CzechBusiness se stal jeho právním nástupcem. Předchozí právní znění není součástí balíčku; jde o návrh na zrušení jedné organizace sloučením, nikoli o již uskutečněný zánik."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4d69a262a609--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-8",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--law-change-43174-29",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43395-1",
+        "psp-core-2025--law-change-43439-1",
+        "zvlady-resolutions--law-change-uv-2026-620",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1360",
+        "psp-core-2025--vote-88242",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--print-step-211959",
+        "psp-core-2025--vote-88454",
+        "zvlady-resolutions--2026-620",
+        "psp-core-2025--print-step-212206",
+        "psp-core-2025--government-opinion-43439-1"
+      ],
+      "explanationCz": "Poslanci SPD předložili a podpořili změnu stavebního zákona, která ruší některé dosavadní úřady, ale jejich agendy převádí na novou soustavu včetně ústředního a krajských úřadů rozvoje území. Vláda také navrhla sloučit CzechTourism s CzechBusiness a poslanci SPD předložili návrh na sloučení České plemenářské inspekce se Státní veterinární správou; vláda s druhým návrhem vyslovila souhlas. To dokládá dílčí postup ke zrušení některých institucí, nikoli splnění celého obecného slibu. Současně návrhy stavební reformy vytvářejí nové úřady, takže z podkladů nelze určit celkový úbytek ani to, které úřady strana považuje za nepotřebné.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Slib neuvádí, které úřady jsou nepotřebné; podklady proto neumožňují posoudit, zda nově zřizované úřady rozvoje území odporují právě této části závazku.",
+        "Změna stavební správy ruší některé instituce, ale převádí jejich agendy do nových úřadů; početní čistý úbytek úřadů z dodaných ustanovení nelze bezpečně určit.",
+        "Sloučení CzechTourism s CzechBusiness je usnesením vládou navrženo až po dalších právních krocích, takže podklady nedokládají, že už k zániku CzechTourism došlo."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

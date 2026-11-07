@@ -1,0 +1,373 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T02-21-58-445Z--ccf0992250b3",
+  "evaluatedAt": "2026-11-04T02:21:58.445Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-6386c23a5432/ccf0992250b371a73bc09d4d7f7e376022c31cc174c0e784c7bc7bc2c183aed5.json",
+  "packageHash": "ccf0992250b371a73bc09d4d7f7e376022c31cc174c0e784c7bc7bc2c183aed5",
+  "assessmentContentHash": "664f19f7d33046377c89428c588eec0cf5e7bd627fa401958a578e6f7693a705",
+  "assessmentFingerprint": "b7bfa29822ce82c7688d0a640541906c4f4552beca8634377896fe7f93272660",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-6386c23a5432",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment cites law change psp-core-2025--law-change-43310-5 it found not relevant",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_03c2a0d9aedecc5d016aea9538554487d1a278c879e3b7d52e",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 49468,
+            "input_tokens_details": {
+              "cache_write_tokens": 43118,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 8075,
+            "output_tokens_details": {
+              "reasoning_tokens": 6684
+            },
+            "total_tokens": 57543
+          },
+          "output": {
+            "promiseId": "candidate-6386c23a5432",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-1",
+                "relevant": true,
+                "reasonCz": "Zákon zavádí evidenční povinnosti pro podnikatelské tržby a senátní návrh i poslanecký pozměňovací návrh výslovně řeší přímý prodej zemědělských produktů, tedy podmínky zemědělského podnikání.",
+                "effectCz": "Jde o nový zákon, takže balíček nedává předchozí znění, s nímž by šlo změnu porovnat. Zákon ukládá dotčeným podnikatelům získat certifikát, oznámit evidenční jednotky a zasílat údaje o tržbách; jen některé tržby vyjímá, mimo jiné úzce vymezený sezónní prodej sladkovodních ryb. Pro zemědělské podnikatele, jejichž tržby výjimka nepokrývá, tak zavádí další povinnosti a zhoršuje podmínky podnikání, což jde proti části slibu o lepších podmínkách začínajících zemědělců."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-5",
+                "relevant": false,
+                "reasonCz": "Dodané znění této části chybí a žádný poskytnutý text pozměňovacího návrhu neukazuje, jak by změna zákona o Celní správě sama ovlivnila podporu mladých nebo začínajících zemědělců.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+                "relevant": true,
+                "reasonCz": "Ustanovení mění kvalifikační podmínku pro přímé platby zemědělcům a přidává možnost doložit zemědělskou praxi, což může usnadnit přístup k podpoře i začínajícím zemědělcům.",
+                "effectCz": "Balíček neuvádí celé předchozí znění podmínky, ale dodaný text přidává k dosavadním způsobům doložení profesní kvalifikace také nejméně dvouletou praxi v zemědělské výrobě. Tím se rozšiřuje okruh osob, které mohou kvalifikační podmínku splnit, a podmínka se v tomto směru zmírňuje; změna podporuje jen část slibu."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-160",
+                "relevant": true,
+                "reasonCz": "Vláda zařadila do legislativního plánu návrh předkupního práva k zemědělské půdě pro aktivní zemědělce, což může zlepšit přístup k půdě a podmínky pro začínající zemědělce.",
+                "effectCz": "Usnesení samo půdu nepřevádí ani předkupní právo nezavádí; stanoví plán připravit a předložit návrh zákona pro aktivní zemědělce, s plánovaným předložením vládě v prvním čtvrtletí 2027. Jde tedy o přípravu možné budoucí výhody, nikoli o již platné právo; přímé zacílení na mladé či začínající zemědělce text neuvádí."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-6386c23a5432--source",
+              "psp-core-2025--law-change-43310-1",
+              "psp-core-2025--law-change-43310-5",
+              "esbirka-regulations--law-change-sb-2026-45",
+              "zvlady-resolutions--law-change-uv-2026-175-160",
+              "psp-core-2025--senate-resolution-43310-6",
+              "psp-core-2025--amendment-text-1565",
+              "psp-core-2025--print-step-211390",
+              "psp-core-2025--vote-88298",
+              "psp-core-2025--vote-88356",
+              "psp-core-2025--vote-88456",
+              "esbirka-regulations--2026-45",
+              "zvlady-resolutions--2026-175"
+            ],
+            "explanationCz": "Vláda přijala změnu podmínek přímých zemědělských plateb: nově lze kvalifikaci doložit také nejméně dvouletou praxí v zemědělství, což může usnadnit přístup k podpoře. Vláda také naplánovala přípravu zákona o předkupním právu k půdě pro aktivní zemědělce, ale tento plán sám právo nezavádí. Zároveň vláda předložila a poslanci strany podpořili zákon o evidenci tržeb, který ukládá některým podnikatelům nové evidenční povinnosti; poslanci nepodpořili ani návrh na výjimku pro drobný přímý prodej vlastní zemědělské produkce. Tato rozhodnutí zhoršují podmínky pro část zemědělských podnikatelů, a proto nynější hodnocení vyjadřuje posun proti části slibu, přestože změna platebních podmínek působí opačným směrem.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Změna podmínek přímých plateb nerozlišuje mladé ani začínající zemědělce, takže míra, v jaké jim konkrétně pomůže, není z dodaných podkladů jasná.",
+              "Evidence tržeb se vztahuje na podnikatele obecně; podklady ale ukazují přímou souvislost s prodejem zemědělských produktů a neúspěšný návrh na výjimku pro jejich přímý prodej. Neuvádějí, kolika mladých či začínajících zemědělců se nové povinnosti skutečně dotknou."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-6386c23a5432",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí povinnosti evidence tržeb pro podnikatele, tedy i pro zemědělce, a současně upravuje výjimky pro některé jejich prodeje; jde o pravidla přímo ovlivňující podmínky zemědělského podnikání.",
+          "effectCz": "Jde o nový zákon, takže balíček neposkytuje předchozí znění, se kterým by šlo změnu porovnat. Schválený text ukládá podnikatelům evidovat vymezené tržby, včetně zasílání údajů správci daně, a stanoví výjimky, mimo jiné pro prodej sladkovodních ryb v určitém předvánočním období. Povinnosti jsou pro podnikající zemědělce novou administrativní zátěží, zatímco výjimky ji pro některé prodeje zmírňují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": true,
+          "reasonCz": "Tato část návrhu je v balíčku zachycena pouze prostřednictvím pozměňovacího návrhu týkajícího se evidence tržeb u přímého prodeje vlastní zemědělské produkce.",
+          "effectCz": "Vlastní znění této části ani předchozí znění měněných ustanovení balíček neobsahuje. Pozměňovací návrh G4 navrhl vyjmout z evidence drobný prodej vlastní zemědělské produkce mimo provozovnu do 50 000 Kč za zdaňovací období; přijetí této výjimky by povinnost evidence pro takové prodeje zmírnilo."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+          "relevant": true,
+          "reasonCz": "Nařízení mění podmínky poskytování přímých plateb zemědělcům a doplňuje možnost prokázat zemědělskou zkušenost, což se týká podmínek pro začínající zemědělce.",
+          "effectCz": "Nařízení přidává k uvedeným dokladům o vzdělání či kvalifikaci také možnost doložit nejméně dvouletou praxi v zemědělské výrobě. Předchozí úplné znění těchto podmínek balíček neuvádí, ale podle textu změny jde o další způsob splnění kvalifikační podmínky, který ji pro část žadatelů uvolňuje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-160",
+          "relevant": true,
+          "reasonCz": "Vláda zařadila přípravu zákonného předkupního práva pro aktivní zemědělce, které by mohlo zlepšit jejich přístup k zemědělské půdě.",
+          "effectCz": "Usnesení samo předkupní právo nezavádí, ale plánuje návrh zákona, který má doplnit takové právo pro aktivní zemědělce. Oproti slibu jde o návrh podpory lepších podmínek pro zemědělce, nikoli o opatření zaměřené výslovně na mladé či začínající zemědělce."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6386c23a5432--source",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-5",
+        "esbirka-regulations--law-change-sb-2026-45",
+        "zvlady-resolutions--law-change-uv-2026-175-160",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88298",
+        "psp-core-2025--vote-88315",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--senate-resolution-43310-6",
+        "esbirka-regulations--2026-45",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--amendment-text-1565",
+        "psp-core-2025--amendment-text-1566"
+      ],
+      "explanationCz": "Vláda Motoristů předložila návrh zákona o evidenci tržeb a poslanci strany jej následně schválili; zákon ukládá podnikatelům evidovat vybrané tržby, což se týká i zemědělců. Senát navrhl výjimku pro přímý prodej vlastní zemědělské produkce, ale poslanci Motoristů hlasovali pro setrvání u původního znění, takže tuto úlevu zákon nepřijal. Vláda zároveň změnila podmínky přímých plateb tak, aby bylo možné doložit zemědělskou praxi, a naplánovala návrh předkupního práva k půdě pro aktivní zemědělce. Tyto kroky podporují některé podmínky pro zemědělce, ale nově zavedená evidence tržeb představuje pro jejich podnikání dodatečnou povinnost; celkově proto doložené rozhodnutí působí proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček neuvádí předchozí úplné znění podmínek přímých plateb, takže přesný rozsah uvolnění kvalifikačních podmínek nelze plně porovnat.",
+        "U návrhu na změnu zákona o Celní správě není v balíčku vlastní text této části; její vztah k zemědělskému prodeji lze posoudit jen podle připojeného pozměňovacího návrhu G4.",
+        "Pozměňovací návrh M1 obsahuje výjimky pro chov koní a velbloudů, avšak části dalších ustanovení tohoto rozsáhlého návrhu nejsou v balíčku uvedeny; jejich účinek proto nelze dovozovat z vynechaného textu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-6386c23a5432",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá podnikatelům evidovat tržby, což se vztahuje i na zemědělské podnikatele a může zhoršit podmínky jejich podnikání; obsahuje také omezené vynětí pro prodej sladkovodních ryb.",
+          "effectCz": "Jde o nový zákon, takže balíček neuvádí předchozí znění, s nímž by šlo pravidlo porovnat. Schválený text zavádí povinnost elektronicky evidovat podnikatelské tržby a související povinnosti, ale vyjímá mimo jiné prodej sladkovodních ryb v týdnu před Vánoci. Povinnost přidává administrativní zátěž i zemědělským podnikatelům, a tím může zhoršit část podmínek, které slib míní zlepšit; rybářské vynětí je omezeným ulehčením."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje text této části ani žádný předložený pozměňovací návrh, u něhož by bylo doloženo, že mění pravidla celní správy způsobem souvisejícím s podporou mladých zemědělců.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+          "relevant": true,
+          "reasonCz": "Změna podmínek přímých plateb zemědělcům přidává možnost prokázat potřebnou způsobilost také zemědělskou praxí, což se týká podmínek začínajících zemědělců.",
+          "effectCz": "Nařízení doplňuje k dosavadním možnostem prokázání způsobilosti také nejméně dvouletou praxi v zemědělské výrobě. Tím rozšiřuje okruh lidí, kteří mohou podmínku splnit, a pravidlo v tomto ohledu uvolňuje; celý předchozí odstavec balíček neuvádí."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-160",
+          "relevant": true,
+          "reasonCz": "Vládní plán počítá s návrhem zákonného předkupního práva na zemědělskou půdu pro aktivní zemědělce, což může zlepšit přístup začínajících zemědělců k půdě.",
+          "effectCz": "Usnesení samo žádné předkupní právo nezavádí; plánuje přípravu návrhu zákona, který by je zavedl pro aktivní zemědělce. Jde o návrh možné podpory přístupu k půdě, nikoli o již účinné právo, a usnesení nevymezuje zvláštní výhodu pro mladé zemědělce."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6386c23a5432--source",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--amendment-text-1565",
+        "psp-core-2025--vote-88298",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "esbirka-regulations--law-change-sb-2026-45",
+        "esbirka-regulations--2026-45",
+        "zvlady-resolutions--law-change-uv-2026-175-160",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda předložila návrh na elektronickou evidenci tržeb a poslanci Motoristů jej podpořili i při konečném hlasování po vrácení Senátem. Návrh ukládá povinnosti podnikatelům včetně zemědělců; Senát navrhl vyjmout z evidence přímý prodej vlastní zemědělské produkce, ale Motoristé nepodpořili pozměňovací návrh na takové vynětí. Proti tomu stojí nařízení, které uznává dvouletou zemědělskou praxi jako další cestu ke splnění podmínek přímých plateb, a vládní plán na přípravu předkupního práva k půdě pro aktivní zemědělce. U doložených kroků ale poslední závazné hlasování podporuje pravidla, která mohou začínajícím zemědělcům podnikání ztížit, a žádný z nich nezavádí slíbené daňové prázdniny ani snazší přístup k profesnímu vzdělávání.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Nařízení a plánované předkupní právo jsou podpůrné kroky, které působí proti závěru o zhoršení podmínek; plán navíc zatím nepředstavuje účinné právo. Balíček nedokládá, jak velký dopad budou nové evidenční povinnosti mít konkrétně na mladé a začínající zemědělce."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0482e4b4cd9bbbc0016aea95bcd02887d1b36d1fb63c2755b8",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 49468,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 49465
+      },
+      "output_tokens": 6991,
+      "output_tokens_details": {
+        "reasoning_tokens": 5568
+      },
+      "total_tokens": 56459
+    },
+    "output": {
+      "promiseId": "candidate-6386c23a5432",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí povinnosti evidence tržeb pro podnikatele, tedy i pro zemědělce, a současně upravuje výjimky pro některé jejich prodeje; jde o pravidla přímo ovlivňující podmínky zemědělského podnikání.",
+          "effectCz": "Jde o nový zákon, takže balíček neposkytuje předchozí znění, se kterým by šlo změnu porovnat. Schválený text ukládá podnikatelům evidovat vymezené tržby, včetně zasílání údajů správci daně, a stanoví výjimky, mimo jiné pro prodej sladkovodních ryb v určitém předvánočním období. Povinnosti jsou pro podnikající zemědělce novou administrativní zátěží, zatímco výjimky ji pro některé prodeje zmírňují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": true,
+          "reasonCz": "Tato část návrhu je v balíčku zachycena pouze prostřednictvím pozměňovacího návrhu týkajícího se evidence tržeb u přímého prodeje vlastní zemědělské produkce.",
+          "effectCz": "Vlastní znění této části ani předchozí znění měněných ustanovení balíček neobsahuje. Pozměňovací návrh G4 navrhl vyjmout z evidence drobný prodej vlastní zemědělské produkce mimo provozovnu do 50 000 Kč za zdaňovací období; přijetí této výjimky by povinnost evidence pro takové prodeje zmírnilo."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+          "relevant": true,
+          "reasonCz": "Nařízení mění podmínky poskytování přímých plateb zemědělcům a doplňuje možnost prokázat zemědělskou zkušenost, což se týká podmínek pro začínající zemědělce.",
+          "effectCz": "Nařízení přidává k uvedeným dokladům o vzdělání či kvalifikaci také možnost doložit nejméně dvouletou praxi v zemědělské výrobě. Předchozí úplné znění těchto podmínek balíček neuvádí, ale podle textu změny jde o další způsob splnění kvalifikační podmínky, který ji pro část žadatelů uvolňuje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-160",
+          "relevant": true,
+          "reasonCz": "Vláda zařadila přípravu zákonného předkupního práva pro aktivní zemědělce, které by mohlo zlepšit jejich přístup k zemědělské půdě.",
+          "effectCz": "Usnesení samo předkupní právo nezavádí, ale plánuje návrh zákona, který má doplnit takové právo pro aktivní zemědělce. Oproti slibu jde o návrh podpory lepších podmínek pro zemědělce, nikoli o opatření zaměřené výslovně na mladé či začínající zemědělce."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6386c23a5432--source",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-5",
+        "esbirka-regulations--law-change-sb-2026-45",
+        "zvlady-resolutions--law-change-uv-2026-175-160",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88298",
+        "psp-core-2025--vote-88315",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--senate-resolution-43310-6",
+        "esbirka-regulations--2026-45",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--amendment-text-1565",
+        "psp-core-2025--amendment-text-1566"
+      ],
+      "explanationCz": "Vláda Motoristů předložila návrh zákona o evidenci tržeb a poslanci strany jej následně schválili; zákon ukládá podnikatelům evidovat vybrané tržby, což se týká i zemědělců. Senát navrhl výjimku pro přímý prodej vlastní zemědělské produkce, ale poslanci Motoristů hlasovali pro setrvání u původního znění, takže tuto úlevu zákon nepřijal. Vláda zároveň změnila podmínky přímých plateb tak, aby bylo možné doložit zemědělskou praxi, a naplánovala návrh předkupního práva k půdě pro aktivní zemědělce. Tyto kroky podporují některé podmínky pro zemědělce, ale nově zavedená evidence tržeb představuje pro jejich podnikání dodatečnou povinnost; celkově proto doložené rozhodnutí působí proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček neuvádí předchozí úplné znění podmínek přímých plateb, takže přesný rozsah uvolnění kvalifikačních podmínek nelze plně porovnat.",
+        "U návrhu na změnu zákona o Celní správě není v balíčku vlastní text této části; její vztah k zemědělskému prodeji lze posoudit jen podle připojeného pozměňovacího návrhu G4.",
+        "Pozměňovací návrh M1 obsahuje výjimky pro chov koní a velbloudů, avšak části dalších ustanovení tohoto rozsáhlého návrhu nejsou v balíčku uvedeny; jejich účinek proto nelze dovozovat z vynechaného textu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0e1897e49f78ef9b016aea9646ee5887d19152d4ab3fded661",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 49468,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 49465
+      },
+      "output_tokens": 6359,
+      "output_tokens_details": {
+        "reasoning_tokens": 4999
+      },
+      "total_tokens": 55827
+    },
+    "output": {
+      "promiseId": "candidate-6386c23a5432",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá podnikatelům evidovat tržby, což se vztahuje i na zemědělské podnikatele a může zhoršit podmínky jejich podnikání; obsahuje také omezené vynětí pro prodej sladkovodních ryb.",
+          "effectCz": "Jde o nový zákon, takže balíček neuvádí předchozí znění, s nímž by šlo pravidlo porovnat. Schválený text zavádí povinnost elektronicky evidovat podnikatelské tržby a související povinnosti, ale vyjímá mimo jiné prodej sladkovodních ryb v týdnu před Vánoci. Povinnost přidává administrativní zátěž i zemědělským podnikatelům, a tím může zhoršit část podmínek, které slib míní zlepšit; rybářské vynětí je omezeným ulehčením."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje text této části ani žádný předložený pozměňovací návrh, u něhož by bylo doloženo, že mění pravidla celní správy způsobem souvisejícím s podporou mladých zemědělců.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+          "relevant": true,
+          "reasonCz": "Změna podmínek přímých plateb zemědělcům přidává možnost prokázat potřebnou způsobilost také zemědělskou praxí, což se týká podmínek začínajících zemědělců.",
+          "effectCz": "Nařízení doplňuje k dosavadním možnostem prokázání způsobilosti také nejméně dvouletou praxi v zemědělské výrobě. Tím rozšiřuje okruh lidí, kteří mohou podmínku splnit, a pravidlo v tomto ohledu uvolňuje; celý předchozí odstavec balíček neuvádí."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-160",
+          "relevant": true,
+          "reasonCz": "Vládní plán počítá s návrhem zákonného předkupního práva na zemědělskou půdu pro aktivní zemědělce, což může zlepšit přístup začínajících zemědělců k půdě.",
+          "effectCz": "Usnesení samo žádné předkupní právo nezavádí; plánuje přípravu návrhu zákona, který by je zavedl pro aktivní zemědělce. Jde o návrh možné podpory přístupu k půdě, nikoli o již účinné právo, a usnesení nevymezuje zvláštní výhodu pro mladé zemědělce."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6386c23a5432--source",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--amendment-text-1565",
+        "psp-core-2025--vote-88298",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "esbirka-regulations--law-change-sb-2026-45",
+        "esbirka-regulations--2026-45",
+        "zvlady-resolutions--law-change-uv-2026-175-160",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda předložila návrh na elektronickou evidenci tržeb a poslanci Motoristů jej podpořili i při konečném hlasování po vrácení Senátem. Návrh ukládá povinnosti podnikatelům včetně zemědělců; Senát navrhl vyjmout z evidence přímý prodej vlastní zemědělské produkce, ale Motoristé nepodpořili pozměňovací návrh na takové vynětí. Proti tomu stojí nařízení, které uznává dvouletou zemědělskou praxi jako další cestu ke splnění podmínek přímých plateb, a vládní plán na přípravu předkupního práva k půdě pro aktivní zemědělce. U doložených kroků ale poslední závazné hlasování podporuje pravidla, která mohou začínajícím zemědělcům podnikání ztížit, a žádný z nich nezavádí slíbené daňové prázdniny ani snazší přístup k profesnímu vzdělávání.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Nařízení a plánované předkupní právo jsou podpůrné kroky, které působí proti závěru o zhoršení podmínek; plán navíc zatím nepředstavuje účinné právo. Balíček nedokládá, jak velký dopad budou nové evidenční povinnosti mít konkrétně na mladé a začínající zemědělce."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

@@ -1,0 +1,246 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T18-56-53-035Z--d38880bf4526",
+  "evaluatedAt": "2026-10-06T18:56:53.035Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-8de74b698cf3/d38880bf4526f5fdc0b342d130a1ab7a243e00aa6d0fd675fdfa057b6c843be8.json",
+  "packageHash": "d38880bf4526f5fdc0b342d130a1ab7a243e00aa6d0fd675fdfa057b6c843be8",
+  "assessmentContentHash": "524baf99c136c01ab71367b6660d313cdd942b91c7724dd45938583606eb6ca9",
+  "assessmentFingerprint": "a4cbb738b417c1a56ec001133642d6405002257e597e61733642615b75a99c3b",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-8de74b698cf3",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-8de74b698cf3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Změna výslovně upravuje, jak saldo zdravotních pojišťoven ovlivňuje stanovení úhrad hrazených služeb, tedy oblast, která může omezovat financování dalších hrazených programů.",
+          "effectCz": "Dříve se při odvozování výdajového rámce výsledek zdravotních pojišťoven vylučoval, ale dodané znění nestanovovalo, že jejich saldo závazně určuje výši úhrad. Nově saldo schválené spolu se státním rozpočtem zavazuje Ministerstvo zdravotnictví při stanovení úhrad hrazených služeb a dalších uvedených parametrů; oproti dřívějšímu znění jde o přísnější rozpočtové omezení rozhodování o úhradách, a může tak ztížit zavedení dalších hrazených programů. Ostatní změny se týkají širších rozpočtových pravidel a dohledu, nikoli screeningových programů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-1",
+          "relevant": false,
+          "reasonCz": "Nový cizinecký zákon stanoví požadavky na zdravotní pojištění cizinců včetně preventivní péče, ale nezavádí ani nerozšiřuje konkrétní hrazené screeningové programy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": false,
+          "reasonCz": "Ustanovení o zdravotních službách pro cizince se týkají zejména péče při zajištění a před vycestováním, nikoli dalších hrazených screeningových programů.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-8de74b698cf3--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "SPD slíbila prosadit další hrazené preventivní screeningové programy. Vláda předložila návrh změny rozpočtových pravidel a poslanci SPD jej podpořili při schválení i při následných hlasováních po vrácení návrhu Senátem a prezidentem. Zákon nově činí saldo zdravotních pojišťoven závazným při stanovování úhrad hrazených služeb, což může omezit prostor pro rozšiřování hrazené péče. Změna sama žádný nový screeningový program nezavádí a její dopad na konkrétní programy není doložen.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Zákonná vazba mezi saldem pojišťoven a výší úhrad může rozšíření hrazených programů ztížit, ale podklady nedokládají, že by konkrétní screeningový program zakázala nebo že by přímo vedla ke snížení úhrad."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-8de74b698cf3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Změna pravidel veřejných rozpočtů nově váže úhrady hrazených zdravotních služeb na saldo zdravotních pojišťoven, a tím se dotýká prostoru pro rozšíření služeb hrazených z veřejného pojištění.",
+          "effectCz": "Dosavadní § 12 nestanovil, že by saldo zdravotních pojišťoven závazně určovalo úhrady hrazených služeb; nové znění ukládá ministerstvu zdravotnictví při jejich stanovení dodržet vládou schválené saldo, s výjimkou mimořádné události ohrožující životy či zdraví. Jde o přísnější rozpočtové omezení, které může zúžit prostor pro hrazení dalších screeningů, samo však jejich zavedení nezakazuje. Ostatní změny v této části upravují pravidla rozpočtového plánování, limitů a dohledu; z dodaných textů nevyplývá, že by přímo měnily nárok na screening."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-1",
+          "relevant": false,
+          "reasonCz": "Ustanovení upravují vstup a pobyt cizinců a jejich soukromé zdravotní pojištění, nikoli rozšiřování screeningových programů hrazených z veřejného zdravotního pojištění.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": false,
+          "reasonCz": "Část o návratu cizinců upravuje mimo jiné zdravotní služby poskytované v souvislosti se zajištěním či vycestováním, nikoli veřejně hrazené preventivní screeningové programy.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-8de74b698cf3--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Vláda předložila novelu pravidel rozpočtové odpovědnosti a poslanci SPD ji podpořili při schválení i při pozdějším hlasování po vrácení zákona. Nová úprava váže výši úhrad zdravotních služeb na schválené saldo zdravotních pojišťoven. Tím může omezit rozpočtový prostor pro přidávání dalších hrazených screeningů, byť jejich zavedení výslovně nezakazuje. Jde proto o krok proti části slibu, nikoli o důkaz, že nové screeningy vůbec nelze prosadit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text neurčuje, jak velké saldo zdravotních pojišťoven bude schváleno ani zda toto omezení skutečně zabrání financování konkrétních nových screeningů; jeho praktický dopad proto nelze vyčíslit."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0b561d66a197d643016ac54418f2a487d2a7fd507fec327532",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 143829,
+      "input_tokens_details": {
+        "cache_write_tokens": 139859,
+        "cached_tokens": 3967
+      },
+      "output_tokens": 3167,
+      "output_tokens_details": {
+        "reasoning_tokens": 2306
+      },
+      "total_tokens": 146996
+    },
+    "output": {
+      "promiseId": "candidate-8de74b698cf3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Změna výslovně upravuje, jak saldo zdravotních pojišťoven ovlivňuje stanovení úhrad hrazených služeb, tedy oblast, která může omezovat financování dalších hrazených programů.",
+          "effectCz": "Dříve se při odvozování výdajového rámce výsledek zdravotních pojišťoven vylučoval, ale dodané znění nestanovovalo, že jejich saldo závazně určuje výši úhrad. Nově saldo schválené spolu se státním rozpočtem zavazuje Ministerstvo zdravotnictví při stanovení úhrad hrazených služeb a dalších uvedených parametrů; oproti dřívějšímu znění jde o přísnější rozpočtové omezení rozhodování o úhradách, a může tak ztížit zavedení dalších hrazených programů. Ostatní změny se týkají širších rozpočtových pravidel a dohledu, nikoli screeningových programů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-1",
+          "relevant": false,
+          "reasonCz": "Nový cizinecký zákon stanoví požadavky na zdravotní pojištění cizinců včetně preventivní péče, ale nezavádí ani nerozšiřuje konkrétní hrazené screeningové programy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": false,
+          "reasonCz": "Ustanovení o zdravotních službách pro cizince se týkají zejména péče při zajištění a před vycestováním, nikoli dalších hrazených screeningových programů.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-8de74b698cf3--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "SPD slíbila prosadit další hrazené preventivní screeningové programy. Vláda předložila návrh změny rozpočtových pravidel a poslanci SPD jej podpořili při schválení i při následných hlasováních po vrácení návrhu Senátem a prezidentem. Zákon nově činí saldo zdravotních pojišťoven závazným při stanovování úhrad hrazených služeb, což může omezit prostor pro rozšiřování hrazené péče. Změna sama žádný nový screeningový program nezavádí a její dopad na konkrétní programy není doložen.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Zákonná vazba mezi saldem pojišťoven a výší úhrad může rozšíření hrazených programů ztížit, ale podklady nedokládají, že by konkrétní screeningový program zakázala nebo že by přímo vedla ke snížení úhrad."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0b7553e24d13c9ec016ac5444a456c87d2953357fcbaf0986b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 143829,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 143826
+      },
+      "output_tokens": 2682,
+      "output_tokens_details": {
+        "reasoning_tokens": 1908
+      },
+      "total_tokens": 146511
+    },
+    "output": {
+      "promiseId": "candidate-8de74b698cf3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Změna pravidel veřejných rozpočtů nově váže úhrady hrazených zdravotních služeb na saldo zdravotních pojišťoven, a tím se dotýká prostoru pro rozšíření služeb hrazených z veřejného pojištění.",
+          "effectCz": "Dosavadní § 12 nestanovil, že by saldo zdravotních pojišťoven závazně určovalo úhrady hrazených služeb; nové znění ukládá ministerstvu zdravotnictví při jejich stanovení dodržet vládou schválené saldo, s výjimkou mimořádné události ohrožující životy či zdraví. Jde o přísnější rozpočtové omezení, které může zúžit prostor pro hrazení dalších screeningů, samo však jejich zavedení nezakazuje. Ostatní změny v této části upravují pravidla rozpočtového plánování, limitů a dohledu; z dodaných textů nevyplývá, že by přímo měnily nárok na screening."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-1",
+          "relevant": false,
+          "reasonCz": "Ustanovení upravují vstup a pobyt cizinců a jejich soukromé zdravotní pojištění, nikoli rozšiřování screeningových programů hrazených z veřejného zdravotního pojištění.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": false,
+          "reasonCz": "Část o návratu cizinců upravuje mimo jiné zdravotní služby poskytované v souvislosti se zajištěním či vycestováním, nikoli veřejně hrazené preventivní screeningové programy.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-8de74b698cf3--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Vláda předložila novelu pravidel rozpočtové odpovědnosti a poslanci SPD ji podpořili při schválení i při pozdějším hlasování po vrácení zákona. Nová úprava váže výši úhrad zdravotních služeb na schválené saldo zdravotních pojišťoven. Tím může omezit rozpočtový prostor pro přidávání dalších hrazených screeningů, byť jejich zavedení výslovně nezakazuje. Jde proto o krok proti části slibu, nikoli o důkaz, že nové screeningy vůbec nelze prosadit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text neurčuje, jak velké saldo zdravotních pojišťoven bude schváleno ani zda toto omezení skutečně zabrání financování konkrétních nových screeningů; jeho praktický dopad proto nelze vyčíslit."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

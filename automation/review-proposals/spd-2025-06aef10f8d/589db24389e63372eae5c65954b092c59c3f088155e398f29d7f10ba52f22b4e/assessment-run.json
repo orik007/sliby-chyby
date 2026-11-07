@@ -1,0 +1,225 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-41-03-690Z--72b1fc71e08b",
+  "evaluatedAt": "2026-10-02T05:41:03.690Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-06aef10f8d/72b1fc71e08b687eaa655f073c87c4c1e5b1e04dcabd5459b79908c285d997c0.json",
+  "packageHash": "72b1fc71e08b687eaa655f073c87c4c1e5b1e04dcabd5459b79908c285d997c0",
+  "assessmentContentHash": "bf8598de59cd7108144a41ac59353767168aabce698a9c3dd4aa3fc559f51dc8",
+  "assessmentFingerprint": "589db24389e63372eae5c65954b092c59c3f088155e398f29d7f10ba52f22b4e",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-06aef10f8d",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-06aef10f8d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu fondu podpory investic popisuje a financuje programy dostupného nájemního bydlení a podpory výstavby pro obce, takže se týká části slibu o obecních bytech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Rozpočet fondu životního prostředí uvádí podporu dostupného bydlení pro sociálně slabé, ale nespojuje ji s výstavbou obecních bytů ani se zkrácením stavebního řízení."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-06aef10f8d--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Návrh rozpočtu Státního fondu podpory investic na rok 2026 počítá s podporou dostupného nájemního bydlení a popisuje také programy podpory výstavby pro obce. Poslanci SPD hlasovali pro jeho schválení v prvním čtení, které je pouze předběžnou fází projednávání, nikoli konečným rozhodnutím Sněmovny. Tento hlas proto podle použitých pravidel nepředstavuje rozhodující krok strany k naplnění slibu. V podkladech není doloženo ani rozhodující jednání SPD ke zkrácení stavebního řízení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Hlasování o rozpočtu proběhlo pouze v prvním čtení, takže není rozhodujícím hlasováním, které by podle pravidel měnilo hodnocení. Podklady také neobsahují důkaz o rozhodujícím jednání SPD ke zkrácení stavebního řízení."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-06aef10f8d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet počítá s financováním programu Dostupné nájemní bydlení zaměřeného na zvýšení nabídky bydlení a pokračováním programu Výstavba pro obce, takže se věcně týká podpory bytové výstavby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Rozpočet vyčleňuje prostředky na dostupné bydlení pro sociálně slabé, ale neuvádí podporu výstavby obecních bytů ani obcí jako příjemců."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-06aef10f8d--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro rozpočet Státního fondu podpory investic na rok 2026, tedy plán financování státního fondu podporujícího mimo jiné bydlení. Rozpočet počítá s financováním programu Dostupné nájemní bydlení a s pokračováním programu Výstavba pro obce, čímž podporuje bytovou výstavbu. Sám však nezkracuje stavební řízení ani nedokládá spuštění nového programu obecních bytů. Jde proto o posun pouze v části slibu týkající se podpory výstavby.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet potvrzuje financování již existujících programů, ale doklady neukazují, že SPD spustila nový program podpory výstavby obecních bytů.",
+        "V dodaných relevantních podkladech není doložen krok SPD ke zkrácení stavebního řízení."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_09593d6aabc17fb8016abf43c9240c87d19a8428ab9189288b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 26423,
+      "input_tokens_details": {
+        "cache_write_tokens": 23099,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2299,
+      "output_tokens_details": {
+        "reasoning_tokens": 1760
+      },
+      "total_tokens": 28722
+    },
+    "output": {
+      "promiseId": "spd-2025-06aef10f8d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu fondu podpory investic popisuje a financuje programy dostupného nájemního bydlení a podpory výstavby pro obce, takže se týká části slibu o obecních bytech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Rozpočet fondu životního prostředí uvádí podporu dostupného bydlení pro sociálně slabé, ale nespojuje ji s výstavbou obecních bytů ani se zkrácením stavebního řízení."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-06aef10f8d--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Návrh rozpočtu Státního fondu podpory investic na rok 2026 počítá s podporou dostupného nájemního bydlení a popisuje také programy podpory výstavby pro obce. Poslanci SPD hlasovali pro jeho schválení v prvním čtení, které je pouze předběžnou fází projednávání, nikoli konečným rozhodnutím Sněmovny. Tento hlas proto podle použitých pravidel nepředstavuje rozhodující krok strany k naplnění slibu. V podkladech není doloženo ani rozhodující jednání SPD ke zkrácení stavebního řízení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Hlasování o rozpočtu proběhlo pouze v prvním čtení, takže není rozhodujícím hlasováním, které by podle pravidel měnilo hodnocení. Podklady také neobsahují důkaz o rozhodujícím jednání SPD ke zkrácení stavebního řízení."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0bb003e08c6c38e6016abf43d8799087d1bf373c61e957a81b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 26423,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 26420
+      },
+      "output_tokens": 2525,
+      "output_tokens_details": {
+        "reasoning_tokens": 1999
+      },
+      "total_tokens": 28948
+    },
+    "output": {
+      "promiseId": "spd-2025-06aef10f8d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet počítá s financováním programu Dostupné nájemní bydlení zaměřeného na zvýšení nabídky bydlení a pokračováním programu Výstavba pro obce, takže se věcně týká podpory bytové výstavby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Rozpočet vyčleňuje prostředky na dostupné bydlení pro sociálně slabé, ale neuvádí podporu výstavby obecních bytů ani obcí jako příjemců."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-06aef10f8d--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro rozpočet Státního fondu podpory investic na rok 2026, tedy plán financování státního fondu podporujícího mimo jiné bydlení. Rozpočet počítá s financováním programu Dostupné nájemní bydlení a s pokračováním programu Výstavba pro obce, čímž podporuje bytovou výstavbu. Sám však nezkracuje stavební řízení ani nedokládá spuštění nového programu obecních bytů. Jde proto o posun pouze v části slibu týkající se podpory výstavby.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet potvrzuje financování již existujících programů, ale doklady neukazují, že SPD spustila nový program podpory výstavby obecních bytů.",
+        "V dodaných relevantních podkladech není doložen krok SPD ke zkrácení stavebního řízení."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_07dc8ee5ab00a3b2016abf43e8743c87d19e88c1e61a43a821",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 26519,
+      "input_tokens_details": {
+        "cache_write_tokens": 24037,
+        "cached_tokens": 2479
+      },
+      "output_tokens": 417,
+      "output_tokens_details": {
+        "reasoning_tokens": 171
+      },
+      "total_tokens": 26936
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "spd-2025-06aef10f8d--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Volím druhé hodnocení, protože správně uznává dílčí posun k podpoře výstavby obecních bytů. Devět z patnácti poslanců SPD podpořilo rozpočet Státního fondu podpory investic, který financuje dostupné nájemní bydlení a pokračování programu Výstavba pro obce. Podle doloženého záznamu šlo o konečné schválení rozpočtu, přestože proběhlo v prvním čtení; první hodnocení proto tento hlas neprávem považuje za předběžný. Schválení peněz pro existující programy ale samo nedokládá spuštění slíbeného programu, takže nelze označit celý slib za splněný."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-towards",
+    "selectedReview": "assessor-b"
+  }
+}

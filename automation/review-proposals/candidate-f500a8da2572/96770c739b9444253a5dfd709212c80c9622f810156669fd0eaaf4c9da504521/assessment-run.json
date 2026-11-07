@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-31-37-137Z--49bd89438608",
+  "evaluatedAt": "2026-11-05T10:31:37.137Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-f500a8da2572/49bd89438608cb756d7f9200ecf932e70c00dfbe07706eba9c51e126c2eb8339.json",
+  "packageHash": "49bd89438608cb756d7f9200ecf932e70c00dfbe07706eba9c51e126c2eb8339",
+  "assessmentContentHash": "ec872505d3cdeed109e1315d441c97bf054d5c9b4c19dc47892e39fc16fab1c7",
+  "assessmentFingerprint": "96770c739b9444253a5dfd709212c80c9622f810156669fd0eaaf4c9da504521",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-f500a8da2572",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-f500a8da2572",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-169",
+          "relevant": true,
+          "reasonCz": "Úkol výslovně počítá s návrhem zákona, který má změnit částky životního minima, a tím se věcně týká slibu zavést zvláštní částku pro seniory a příjemce invalidních důchodů.",
+          "effectCz": "Usnesení samo zákon nemění; ukládá připravit návrh na aktualizaci částek životního a existenčního minima podle reálných nákladů, s plánovanou implementací v 1. čtvrtletí 2028 a předložením vládě v červenci 2029. Žádnou konkrétní částku ani zvláštní sazbu pro seniory či příjemce invalidních důchodů nestanoví, takže zatím nemění jejich nárok ani neurčuje, zda se přiblíží hranici 6 000 Kč."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-f500a8da2572--source",
+        "zvlady-resolutions--law-change-uv-2026-175-169",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda, v níž bylo ANO, přijala usnesení, které ukládá ministerstvu práce připravit návrh zákona na aktualizaci částek životního a existenčního minima podle reálných nákladů. Jde o návrh dalšího postupu, nikoli o změnu současných částek. Usnesení ale nestanoví zvláštní minimum pro seniory a příjemce invalidních důchodů ani slíbených 6 000 Kč, takže k naplnění konkrétního slibu zatím nedošlo.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Obsah budoucího návrhu zákona není znám; z usnesení nelze zjistit, zda zavede zvláštní částku pro seniory a příjemce invalidních důchodů ani zda bude činit 6 000 Kč."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-f500a8da2572",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-169",
+          "relevant": true,
+          "reasonCz": "Usnesení vlády plánuje přípravu novely zákona o životním a existenčním minimu a výslovně ji řadí k programové prioritě zahrnující zvláštní minimum 6 000 Kč pro seniory a příjemce invalidních důchodů.",
+          "effectCz": "Usnesení nemění dosavadní právní úpravu a balíček neuvádí její předchozí znění; jako legislativní úkol plánuje aktualizovat částky životního a existenčního minima podle reálných nákladů a předložit návrh vládě v červenci 2029, s implementací v 1. čtvrtletí 2028. Nestanoví však zvláštní částku 6 000 Kč ani výslovně zvláštní minimum pro seniory a příjemce invalidních důchodů, takže samo o sobě jejich nárok ani jeho výši nemění."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-f500a8da2572--source",
+        "zvlady-resolutions--law-change-uv-2026-175-169",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení, které plánuje připravit novelu zákona o životním a existenčním minimu a aktualizovat jeho částky podle reálných nákladů. Úkol výslovně souvisí s programovou prioritou zavést zvláštní životní minimum pro seniory a příjemce invalidních důchodů. Jde ale o plán přípravy návrhu, nikoli o změnu zákona, a usnesení nestanoví zvláštní částku 6 000 Kč; slib tedy posouvá jen částečně.",
+      "confidence": "high",
+      "uncertainties": [
+        "Usnesení neurčuje, zda připravovaná novela zavede zvláštní životní minimum pro seniory a příjemce invalidních důchodů ani zda bude činit 6 000 Kč."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_040173d7035701e0016aec5ae81a5c87d1b0576056ba3b5fda",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8523,
+      "input_tokens_details": {
+        "cache_write_tokens": 2173,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 1770,
+      "output_tokens_details": {
+        "reasoning_tokens": 1268
+      },
+      "total_tokens": 10293
+    },
+    "output": {
+      "promiseId": "candidate-f500a8da2572",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-169",
+          "relevant": true,
+          "reasonCz": "Úkol výslovně počítá s návrhem zákona, který má změnit částky životního minima, a tím se věcně týká slibu zavést zvláštní částku pro seniory a příjemce invalidních důchodů.",
+          "effectCz": "Usnesení samo zákon nemění; ukládá připravit návrh na aktualizaci částek životního a existenčního minima podle reálných nákladů, s plánovanou implementací v 1. čtvrtletí 2028 a předložením vládě v červenci 2029. Žádnou konkrétní částku ani zvláštní sazbu pro seniory či příjemce invalidních důchodů nestanoví, takže zatím nemění jejich nárok ani neurčuje, zda se přiblíží hranici 6 000 Kč."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-f500a8da2572--source",
+        "zvlady-resolutions--law-change-uv-2026-175-169",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda, v níž bylo ANO, přijala usnesení, které ukládá ministerstvu práce připravit návrh zákona na aktualizaci částek životního a existenčního minima podle reálných nákladů. Jde o návrh dalšího postupu, nikoli o změnu současných částek. Usnesení ale nestanoví zvláštní minimum pro seniory a příjemce invalidních důchodů ani slíbených 6 000 Kč, takže k naplnění konkrétního slibu zatím nedošlo.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Obsah budoucího návrhu zákona není znám; z usnesení nelze zjistit, zda zavede zvláštní částku pro seniory a příjemce invalidních důchodů ani zda bude činit 6 000 Kč."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0ad5c122a56c994e016aec5afd1d4487d19d3a9deed37fa94e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8523,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8520
+      },
+      "output_tokens": 1136,
+      "output_tokens_details": {
+        "reasoning_tokens": 621
+      },
+      "total_tokens": 9659
+    },
+    "output": {
+      "promiseId": "candidate-f500a8da2572",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-169",
+          "relevant": true,
+          "reasonCz": "Usnesení vlády plánuje přípravu novely zákona o životním a existenčním minimu a výslovně ji řadí k programové prioritě zahrnující zvláštní minimum 6 000 Kč pro seniory a příjemce invalidních důchodů.",
+          "effectCz": "Usnesení nemění dosavadní právní úpravu a balíček neuvádí její předchozí znění; jako legislativní úkol plánuje aktualizovat částky životního a existenčního minima podle reálných nákladů a předložit návrh vládě v červenci 2029, s implementací v 1. čtvrtletí 2028. Nestanoví však zvláštní částku 6 000 Kč ani výslovně zvláštní minimum pro seniory a příjemce invalidních důchodů, takže samo o sobě jejich nárok ani jeho výši nemění."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-f500a8da2572--source",
+        "zvlady-resolutions--law-change-uv-2026-175-169",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení, které plánuje připravit novelu zákona o životním a existenčním minimu a aktualizovat jeho částky podle reálných nákladů. Úkol výslovně souvisí s programovou prioritou zavést zvláštní životní minimum pro seniory a příjemce invalidních důchodů. Jde ale o plán přípravy návrhu, nikoli o změnu zákona, a usnesení nestanoví zvláštní částku 6 000 Kč; slib tedy posouvá jen částečně.",
+      "confidence": "high",
+      "uncertainties": [
+        "Usnesení neurčuje, zda připravovaná novela zavede zvláštní životní minimum pro seniory a příjemce invalidních důchodů ani zda bude činit 6 000 Kč."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

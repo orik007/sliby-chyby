@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-35-42-056Z--c888a1728591",
+  "evaluatedAt": "2026-10-02T05:35:42.056Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-2c4ceceb1f/c888a1728591a3804f1c46d5fd14528bc850c3a5d3d87013532ef5709fdfe774.json",
+  "packageHash": "c888a1728591a3804f1c46d5fd14528bc850c3a5d3d87013532ef5709fdfe774",
+  "assessmentContentHash": "fe24a2f335a1e2b454c96cfdad93b0ea7500b7f8522286728cd83669e78f9544",
+  "assessmentFingerprint": "b658f67ed1a7285d5e435a09477ebcd3cb7157dbb0c25b0b40ec642ee04ef637",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-2c4ceceb1f",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-2c4ceceb1f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43350-1",
+          "relevant": true,
+          "reasonCz": "Registr žáků má zaznamenávat průběh vzdělávání i dosažené a předchozí vzdělání, takže může poskytnout podklady pro sledování pokroku žáků, ačkoli sám neurčuje hodnocení kvality jednotlivých škol."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43350-3",
+          "relevant": true,
+          "reasonCz": "Změny školského zákona upravují předávání a statistické zpracování údajů ze školních matrik a registrů, tedy dat, která mohou být důležitá pro sledování pokroku žáků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-2c4ceceb1f--source",
+        "psp-core-2025--law-change-43350-1",
+        "psp-core-2025--law-change-43350-3",
+        "psp-core-2025--print-step-211636"
+      ],
+      "explanationCz": "Vláda 17. června 2026 předložila návrh zákona o registrech ve vzdělávání; Motoristé sobě patřili mezi strany, jejichž vláda návrh předložila. Návrh zřizuje registr žáků, který má obsahovat údaje o průběhu vzdělávání a dosaženém či předchozím vzdělání, a upravuje také nakládání se školními údaji. To může vytvořit podklady pro sledování pokroku žáků, a proto jde o krok směrem ke slibu. Návrh však sám nezavádí měření kvality jednotlivých škol podle pokroku jejich žáků.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložený návrh neurčuje, jak se mají údaje o pokroku porovnávat mezi školami ani jak z nich má vzniknout měření kvality škol; doložen je proto jen podpůrný krok, nikoli zavedení slíbeného měření."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-2c4ceceb1f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43350-1",
+          "relevant": true,
+          "reasonCz": "Navrhuje registr, který má evidovat průběh vzdělávání a dosažené vzdělání žáků, tedy údaje použitelné jako dílčí podklad pro sledování jejich progresu, ačkoli měření kvality škol nestanoví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43350-3",
+          "relevant": true,
+          "reasonCz": "Mění pravidla statistického sdružování údajů a výslovně z něj vyjímá údaje vedené v nových vzdělávacích registrech, což se může týkat využití údajů o progresu při hodnocení škol."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-2c4ceceb1f--source",
+        "psp-core-2025--law-change-43350-1",
+        "psp-core-2025--law-change-43350-3",
+        "psp-core-2025--print-step-211636"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona o registrech ve vzdělávání, který by shromažďoval také údaje o průběhu vzdělávání a dosaženém vzdělání žáků. Návrh ale zároveň vyjímá údaje z těchto registrů ze statistického sdružování, jehož výsledky ministerstvo používá i k vyhodnocování vzdělávání. Návrh proto může omezit využití údajů potřebných pro hodnocení škol podle pokroku žáků; samotné měření kvality podle tohoto pokroku nezavádí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh současně vytváří evidenci údajů o průběhu vzdělávání, která může slib částečně podpořit, ale její vynětí ze statistického sdružování může toto využití omezit; podklady neukazují, zda existuje jiný způsob, jak údaje pro měření kvality škol využít."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_070e9e169f7c2054016abf4285032487d18347343522ac89f3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 13476,
+      "input_tokens_details": {
+        "cache_write_tokens": 10152,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 3150,
+      "output_tokens_details": {
+        "reasoning_tokens": 2642
+      },
+      "total_tokens": 16626
+    },
+    "output": {
+      "promiseId": "motoriste-2025-2c4ceceb1f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43350-1",
+          "relevant": true,
+          "reasonCz": "Registr žáků má zaznamenávat průběh vzdělávání i dosažené a předchozí vzdělání, takže může poskytnout podklady pro sledování pokroku žáků, ačkoli sám neurčuje hodnocení kvality jednotlivých škol."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43350-3",
+          "relevant": true,
+          "reasonCz": "Změny školského zákona upravují předávání a statistické zpracování údajů ze školních matrik a registrů, tedy dat, která mohou být důležitá pro sledování pokroku žáků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-2c4ceceb1f--source",
+        "psp-core-2025--law-change-43350-1",
+        "psp-core-2025--law-change-43350-3",
+        "psp-core-2025--print-step-211636"
+      ],
+      "explanationCz": "Vláda 17. června 2026 předložila návrh zákona o registrech ve vzdělávání; Motoristé sobě patřili mezi strany, jejichž vláda návrh předložila. Návrh zřizuje registr žáků, který má obsahovat údaje o průběhu vzdělávání a dosaženém či předchozím vzdělání, a upravuje také nakládání se školními údaji. To může vytvořit podklady pro sledování pokroku žáků, a proto jde o krok směrem ke slibu. Návrh však sám nezavádí měření kvality jednotlivých škol podle pokroku jejich žáků.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložený návrh neurčuje, jak se mají údaje o pokroku porovnávat mezi školami ani jak z nich má vzniknout měření kvality škol; doložen je proto jen podpůrný krok, nikoli zavedení slíbeného měření."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0bce878879159d23016abf42992a3487d1b742acec510c5198",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 13476,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 13473
+      },
+      "output_tokens": 2291,
+      "output_tokens_details": {
+        "reasoning_tokens": 1783
+      },
+      "total_tokens": 15767
+    },
+    "output": {
+      "promiseId": "motoriste-2025-2c4ceceb1f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43350-1",
+          "relevant": true,
+          "reasonCz": "Navrhuje registr, který má evidovat průběh vzdělávání a dosažené vzdělání žáků, tedy údaje použitelné jako dílčí podklad pro sledování jejich progresu, ačkoli měření kvality škol nestanoví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43350-3",
+          "relevant": true,
+          "reasonCz": "Mění pravidla statistického sdružování údajů a výslovně z něj vyjímá údaje vedené v nových vzdělávacích registrech, což se může týkat využití údajů o progresu při hodnocení škol."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-2c4ceceb1f--source",
+        "psp-core-2025--law-change-43350-1",
+        "psp-core-2025--law-change-43350-3",
+        "psp-core-2025--print-step-211636"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona o registrech ve vzdělávání, který by shromažďoval také údaje o průběhu vzdělávání a dosaženém vzdělání žáků. Návrh ale zároveň vyjímá údaje z těchto registrů ze statistického sdružování, jehož výsledky ministerstvo používá i k vyhodnocování vzdělávání. Návrh proto může omezit využití údajů potřebných pro hodnocení škol podle pokroku žáků; samotné měření kvality podle tohoto pokroku nezavádí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh současně vytváří evidenci údajů o průběhu vzdělávání, která může slib částečně podpořit, ale její vynětí ze statistického sdružování může toto využití omezit; podklady neukazují, zda existuje jiný způsob, jak údaje pro měření kvality škol využít."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_09695e4f5088f8e3016abf42a7eadc87d1a01babf59c22b869",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 13635,
+      "input_tokens_details": {
+        "cache_write_tokens": 11153,
+        "cached_tokens": 2479
+      },
+      "output_tokens": 364,
+      "output_tokens_details": {
+        "reasoning_tokens": 124
+      },
+      "total_tokens": 13999
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "motoriste-2025-2c4ceceb1f--source",
+        "psp-core-2025--law-change-43350-1",
+        "psp-core-2025--law-change-43350-3",
+        "psp-core-2025--print-step-211636"
+      ],
+      "explanationCz": "Volím první hodnocení, protože vláda s účastí Motoristů sobě předložila návrh, který vytváří podklady pro sledování pokroku žáků. Návrh zákona o registrech ve vzdělávání má shromažďovat údaje o průběhu a dosaženém vzdělání, ale samotné hodnocení kvality škol podle pokroku žáků ještě nezavádí. Druhé hodnocení nesprávně chápe výjimku z předávání údajů školami ministerstvu jako omezení jejich statistického využití. Doložen je tedy přípravný krok ke slibu, nikoli jeho splnění ani krok proti němu."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-towards",
+    "selectedReview": "assessor-a"
+  }
+}

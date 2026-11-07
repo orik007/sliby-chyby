@@ -1,0 +1,210 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-48-37-575Z--b75c8e11d8ef",
+  "evaluatedAt": "2026-10-02T01:48:37.575Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-706a7112de8b/b75c8e11d8ef4a6ab2c6f4e0c26b6c629699fd0bc7f650b8ed30c1a102822526.json",
+  "packageHash": "b75c8e11d8ef4a6ab2c6f4e0c26b6c629699fd0bc7f650b8ed30c1a102822526",
+  "assessmentContentHash": "b89dca3b8ede5b239bd923f185aba9bb9639da08b0def7687dbfdc5996405c56",
+  "assessmentFingerprint": "60e1b01c8db9b0f7ed252baa96a9844b7c9ce1be519a328ad75d26cbc65c74b9",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-706a7112de8b",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-706a7112de8b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Schválený text ruší vyhlášku upravující územně plánovací dokumentaci, takže se dotýká právního rámce plánů, ale předložené znění neukazuje, zda tato vyhláška obsahovala závazný podíl ploch nebo slíbené indikátory."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": false,
+          "reasonCz": "Navržené změny ruší odkazy na některá ustanovení zákona o správě informací o stavbě, ale jejich text neukazuje souvislost se závazným podílem zastavitelných ploch ani s indikátory funkčnosti plánů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-706a7112de8b--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Program slibuje závazný podíl zastavitelných ploch podle počtu obyvatel a ukazatele funkčnosti plánů. Poslanci Motoristů hlasovali pro novelu stavebního zákona, jejíž schválený text ruší také vyhlášku o územně analytických podkladech a územně plánovací dokumentaci; po zamítnutí návrhu Senátem hlasovali znovu pro jeho prosazení. Z předložených podkladů ale nelze zjistit, zda rušená vyhláška obsahovala ustanovení odpovídající slibu, ani zda její zrušení slib naplňuje či oslabuje. Proto zatím nelze doložit podstatný posun v plnění slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady uvádějí zrušení vyhlášky upravující územní plánování, ale neobsahují její relevantní ustanovení; nelze proto určit, zda hlasování pro novelu slib podporovalo, nebo mu odporovalo."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-706a7112de8b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Schválený text vyjmenovává rušené předpisy včetně vyhlášky o územně plánovací dokumentaci, ale nedokládá zavedení ani zrušení závazného podílu zastavitelných ploch či indikátorů funkčnosti plánů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": false,
+          "reasonCz": "Návrh ruší některé body zákona o správě informací o stavbě, avšak z poskytnutého textu nevyplývá změna závazného podílu zastavitelných ploch ani indikátorů plánů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-706a7112de8b--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43372-11",
+        "psp-core-2025--print-step-211843"
+      ],
+      "explanationCz": "Program Motoristů slibuje zavést závazný podíl zastavitelných ploch podle počtu obyvatel a ukazatele funkčnosti územních plánů. Poslanci strany hlasovali pro novelu stavebního zákona, jejíž schválený text mimo jiné ruší vyhlášku týkající se územně plánovací dokumentace; z dostupného znění ale nelze doložit, že tím mění právě slíbený podíl nebo indikátory. Poslanci strany také předložili návrh o standardizaci, jehož zde uvedená část ruší vybraná ustanovení o informacích o stavbách, nikoli slíbené nástroje. Protože podklady neukazují přímý účinek těchto změn na slib, nelze ověřit podstatný posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U schválené novely stavebního zákona není v podkladech uveden obsah rušené vyhlášky o územně plánovací dokumentaci; nelze proto určit, zda její zrušení ovlivňuje možnost zavést slíbené indikátory."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_04030caeb2448073016abf0d50b96087d1a6596fd6eebf00c5",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10273,
+      "input_tokens_details": {
+        "cache_write_tokens": 6949,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2287,
+      "output_tokens_details": {
+        "reasoning_tokens": 1743
+      },
+      "total_tokens": 12560
+    },
+    "output": {
+      "promiseId": "candidate-706a7112de8b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Schválený text ruší vyhlášku upravující územně plánovací dokumentaci, takže se dotýká právního rámce plánů, ale předložené znění neukazuje, zda tato vyhláška obsahovala závazný podíl ploch nebo slíbené indikátory."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": false,
+          "reasonCz": "Navržené změny ruší odkazy na některá ustanovení zákona o správě informací o stavbě, ale jejich text neukazuje souvislost se závazným podílem zastavitelných ploch ani s indikátory funkčnosti plánů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-706a7112de8b--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Program slibuje závazný podíl zastavitelných ploch podle počtu obyvatel a ukazatele funkčnosti plánů. Poslanci Motoristů hlasovali pro novelu stavebního zákona, jejíž schválený text ruší také vyhlášku o územně analytických podkladech a územně plánovací dokumentaci; po zamítnutí návrhu Senátem hlasovali znovu pro jeho prosazení. Z předložených podkladů ale nelze zjistit, zda rušená vyhláška obsahovala ustanovení odpovídající slibu, ani zda její zrušení slib naplňuje či oslabuje. Proto zatím nelze doložit podstatný posun v plnění slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady uvádějí zrušení vyhlášky upravující územní plánování, ale neobsahují její relevantní ustanovení; nelze proto určit, zda hlasování pro novelu slib podporovalo, nebo mu odporovalo."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_07f293cf92a2a35d016abf0d618fc887d19caa419a642810b2",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10273,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 10270
+      },
+      "output_tokens": 2853,
+      "output_tokens_details": {
+        "reasoning_tokens": 2201
+      },
+      "total_tokens": 13126
+    },
+    "output": {
+      "promiseId": "candidate-706a7112de8b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Schválený text vyjmenovává rušené předpisy včetně vyhlášky o územně plánovací dokumentaci, ale nedokládá zavedení ani zrušení závazného podílu zastavitelných ploch či indikátorů funkčnosti plánů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": false,
+          "reasonCz": "Návrh ruší některé body zákona o správě informací o stavbě, avšak z poskytnutého textu nevyplývá změna závazného podílu zastavitelných ploch ani indikátorů plánů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-706a7112de8b--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43372-11",
+        "psp-core-2025--print-step-211843"
+      ],
+      "explanationCz": "Program Motoristů slibuje zavést závazný podíl zastavitelných ploch podle počtu obyvatel a ukazatele funkčnosti územních plánů. Poslanci strany hlasovali pro novelu stavebního zákona, jejíž schválený text mimo jiné ruší vyhlášku týkající se územně plánovací dokumentace; z dostupného znění ale nelze doložit, že tím mění právě slíbený podíl nebo indikátory. Poslanci strany také předložili návrh o standardizaci, jehož zde uvedená část ruší vybraná ustanovení o informacích o stavbách, nikoli slíbené nástroje. Protože podklady neukazují přímý účinek těchto změn na slib, nelze ověřit podstatný posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U schválené novely stavebního zákona není v podkladech uveden obsah rušené vyhlášky o územně plánovací dokumentaci; nelze proto určit, zda její zrušení ovlivňuje možnost zavést slíbené indikátory."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

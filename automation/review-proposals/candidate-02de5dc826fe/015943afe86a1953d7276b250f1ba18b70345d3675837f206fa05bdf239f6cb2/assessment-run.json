@@ -1,0 +1,2458 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T09-51-57-760Z--868265c7565a",
+  "evaluatedAt": "2026-11-05T09:51:57.760Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-02de5dc826fe/868265c7565a7d7ec76e07c9d253625a5cbaa8f1619f9793ece5f4b20c34474c.json",
+  "packageHash": "868265c7565a7d7ec76e07c9d253625a5cbaa8f1619f9793ece5f4b20c34474c",
+  "assessmentContentHash": "4ee16ca462d25a96942a05c8d062c05665ce409f2332201226d6aa978d429106",
+  "assessmentFingerprint": "015943afe86a1953d7276b250f1ba18b70345d3675837f206fa05bdf239f6cb2",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-02de5dc826fe",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": "Assessment cites duplicate evidence IDs",
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment gives a law change more than one relevance verdict",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_00e06043f1014269016aec4b75b5c487d1b766c03347091f35",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 464256,
+            "input_tokens_details": {
+              "cache_write_tokens": 457906,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 21068,
+            "output_tokens_details": {
+              "reasoning_tokens": 11941
+            },
+            "total_tokens": 485324
+          },
+          "output": {
+            "promiseId": "candidate-02de5dc826fe",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-1-1",
+                "relevant": true,
+                "reasonCz": "Mění česká pravidla pro fluorované skleníkové plyny a tím přímo ovlivňuje regulaci látek s klimatickým účinkem.",
+                "effectCz": "Dosavadní zákon navazoval na starší unijní předpisy o fluorovaných plynech; návrh jej přizpůsobuje novějším unijním pravidlům a ukládá další povinnosti, například pro označování, certifikaci a nakládání s plyny. Tím se regulace zpřísňuje, nikoli zastavuje; souvislost s Fit for 55 není v dodaném textu výslovně uvedena."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-1-2",
+                "relevant": true,
+                "reasonCz": "Upravuje certifikaci, školení, hlášení a kontrolu fluorovaných skleníkových plynů, tedy přímou regulaci klimaticky působících látek.",
+                "effectCz": "Dosavadní ustanovení upravovala povolování a kontrolu certifikačních činností podle starších unijních pravidel; návrh přidává nové povinnosti obnovování znalostí, evidování a předávání údajů i kontroly. Rozsah regulace a její vymahatelnost se zvětšují, nikoli zmenšují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-1-3",
+                "relevant": true,
+                "reasonCz": "Zavádí trestní odpovědnost také za neoprávněné nakládání s fluorovanými skleníkovými plyny a jejich vypouštění.",
+                "effectCz": "Dosavadní trestní ustanovení postihovalo neoprávněné nakládání s látkami poškozujícími ozonovou vrstvu; návrh do něj přidává fluorované skleníkové plyny a jejich vypouštění. Tím se rozšiřuje trestní ochrana klimatu a zpřísňuje postih, což jde proti zastavení této části regulace."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-1-4",
+                "relevant": false,
+                "reasonCz": "Dodané změny se týkají především rozdělení správních a kontrolních pravomocí; neukazují změnu závazku zastavit Green Deal či Fit for 55 ani pravidel krajiny a vody.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-2",
+                "relevant": false,
+                "reasonCz": "Změna trestního zákoníku se týká fluorovaných skleníkových plynů, ale v dodaném výřezu nepředstavuje samostatné pravidlo k závazku zastavit Green Deal či Fit for 55; hlavní změny těchto pravidel jsou v jiných částech tisku.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-3",
+                "relevant": true,
+                "reasonCz": "Zavádí omezení používání desfluranu kvůli jeho vazbě na unijní předpis o fluorovaných skleníkových plynech.",
+                "effectCz": "Dříve uvedená pravidla zdravotních služeb takové omezení desfluranu neobsahovala; návrh jeho použití omezuje na případy, kdy nelze ze zdravotních důvodů použít jiné anestetikum, a vyžaduje evidenci. Nová povinnost je přísnější a podporuje uplatnění klimatické regulace."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-1",
+                "relevant": true,
+                "reasonCz": "Mění základní pravidla stavebního rozhodování a způsob, jakým se při povolování poměřují zájmy životního prostředí a rozvoje území.",
+                "effectCz": "Dosavadní účel stavebního zákona zdůrazňoval integrovanou ochranu veřejných zájmů a udržitelný rozvoj; schválené znění přidává bydlení, práci a rozvoj sídel a stanoví, že zásah do jednoho zájmu nesmí nepřiměřeně převážit přínosy jiných. Ochrana životního prostředí zůstává uvedena, ale její přednost se oslabuje ve prospěch vyvažování s rozvojem."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-3",
+                "relevant": true,
+                "reasonCz": "Zavádí možnost převzít plochy a koridory do vyšších územních plánů bez posuzování vlivů na udržitelný rozvoj území.",
+                "effectCz": "Dříve tato ustanovení upravovala pořizování územního rozvojového plánu a zásad územního rozvoje a při splnění podmínek vyžadovala vyhodnocení vlivů; nová ustanovení umožňují převzít určité již vymezené záměry bez tohoto řízení a bez posouzení souladu s nadřazenými plány. Posuzovací povinnost se pro uvedené případy uvolňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": true,
+                "reasonCz": "Mění požadavky na výstavbu i pravidla pro veřejná prostranství u vodních toků a v krajině.",
+                "effectCz": "Původní § 137 uplatňoval požadavky na výstavbu obecně; schválené znění dovoluje řadu požadavků, včetně úspory energie, v některých případech neuplatnit a připouští jejich splnění finančním příspěvkem. Naproti tomu nové § 141 požadují zachovat prostupnost podél toků a propojení veřejných prostranství s volnou krajinou. Celek obsahuje uvolnění stavebních povinností i dílčí posílení ochrany veřejného prostoru."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-5",
+                "relevant": true,
+                "reasonCz": "Umožňuje jednodušší umisťování fotovoltaických výroben a dalších instalací využívajících obnovitelné zdroje.",
+                "effectCz": "Dřívější § 144a připouštěl fotovoltaiku na stávajících stavbách a v určitých výrobních či skladovacích plochách; schválené znění stanoví domněnku, že instalace obnovitelného zdroje není v rozporu s charakterem území ani s památkovou péčí, s výjimkou kulturních památek. Přístup k instalaci se tím uvolňuje a rozšiřuje, což odporuje části slibu zastavit opatření spojená s Green Dealem."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Zavádí výjimky z posuzování krajinného rázu a ochrany zemědělské půdy a mění povolování záměrů v zastavitelném území.",
+                "effectCz": "Dříve stavební úřad posuzoval soulad záměru mimo jiné s požadavky jiných právních předpisů a ochranou krajinného rázu; nové znění předpokládá přípustnost některých záměrů v zastavitelném území a výslovně vylučuje posuzování krajinného rázu a podmínek odnětí půdy v případech, kdy byly tyto zájmy zohledněny již při plánování. Ochrana krajiny a půdy při jednotlivém povolování se tím zužuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-5",
+                "relevant": true,
+                "reasonCz": "Mění ochranu krajiny, půdy a vody při některých obnovitelných zdrojích a stavebních záměrech.",
+                "effectCz": "Viz změny § 144a popsané u této části: instalace obnovitelných zdrojů se snáze považují za slučitelné s charakterem území. Zároveň schválená část stanoví podmínky zachování vegetace pro některé solární instalace; zjednodušení povolování je však materiálně důležité pro prosazování obnovitelných zdrojů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Upravuje posuzování vlivů záměrů na krajinu a zemědělskou půdu.",
+                "effectCz": "Dříve se při povolování v uvedených případech posuzoval krajinný ráz a podmínky odnětí zemědělské půdy; schválené znění stanoví, že se tyto otázky při povolení záměru znovu neposuzují, pokud byly území a záměr dříve vymezeny s příslušným stanoviskem. Jde o uvolnění individuální ochrany."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-3",
+                "relevant": true,
+                "reasonCz": "Zkracuje environmentální posuzování u vybraných záměrů v územních plánech.",
+                "effectCz": "Viz dříve popsaná změna: nové postupy převzetí ploch a koridorů mohou obejít vyhodnocení vlivů na udržitelný rozvoj území. V těchto případech se povolovací a plánovací ochrana životního prostředí oslabuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": true,
+                "reasonCz": "Mění pravidla pro úsporu energie a současně posiluje prostupnost veřejných prostranství kolem vod.",
+                "effectCz": "Požadavky na výstavbu, včetně úspory energie, lze u vybraných staveb neuplatnit při technických či ekonomických překážkách; naopak nové pravidlo chrání existující pěší a cyklistickou prostupnost podél vodních toků a ploch. Úspora energie může být v uvedených případech mírnější, zatímco část ochrany vodního prostoru se posiluje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-5",
+                "relevant": true,
+                "reasonCz": "Upravuje přístup k obnovitelným zdrojům, které slib výslovně řadí mezi opatření k zastavení.",
+                "effectCz": "Dřívější pravidlo dovolovalo solární výrobnu na stávající stavbě, pokud to nevylučoval regulační plán; schválené znění dále rozšiřuje domněnku slučitelnosti instalací obnovitelných zdrojů s územím. Tím se omezení pro jejich umisťování uvolňují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Umožňuje u některých staveb upustit od posouzení krajinného rázu a záboru zemědělské půdy.",
+                "effectCz": "Před změnou se krajinný ráz a půdní ochrana posuzovaly při povolení záměru; po změně se u dříve plánovaných zastavitelných území neposuzují znovu. Závazky ochrany krajiny a půdy při konkrétním povolování jsou volnější."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-1",
+                "relevant": true,
+                "reasonCz": "Zavádí nový rámec, v němž se ochrana životního prostředí vyvažuje s rozvojem území a staveb.",
+                "effectCz": "Dřívější § 1 stavěl na integrované ochraně veřejných zájmů a udržitelném rozvoji; změna zdůrazňuje též podmínky pro bydlení, práci a rozvoj a vyžaduje poměřování přínosů a zásahů. Ochrana přírodních hodnot zůstává, ale pravidlo ji více podřizuje vzájemnému vyvažování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": true,
+                "reasonCz": "Zasahuje do povinností týkajících se zelené infrastruktury, energie a veřejných prostranství podél vod.",
+                "effectCz": "Stavební normy, včetně úspory energie, se v některých případech neuplatní nebo mohou být splněny příspěvkem, což je uvolnění povinností. Nová pravidla naopak stanoví preferenci veřejně přístupných nábřeží a zachování prostupnosti podél toků; směr dopadu na ochranu krajiny je proto smíšený."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-5",
+                "relevant": true,
+                "reasonCz": "Přináší pravidla výslovně zaměřená na fotovoltaiku a další obnovitelné zdroje energie.",
+                "effectCz": "Schválené znění předpokládá slučitelnost instalací obnovitelných zdrojů s charakterem území a zjednodušuje jejich umisťování. Jde o rozšíření možností pro zdroje, jejichž podporu chce slib zastavit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Zmenšuje roli samostatného posouzení krajinného rázu a zemědělské půdy u některých povolovaných staveb.",
+                "effectCz": "Dříve se tyto zájmy mohly znovu posoudit při rozhodování o konkrétním záměru; schválené znění je v některých zastavitelných územích vylučuje, pokud už byly řešeny v plánu. Ochranné posouzení se tím zužuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Mění možnost odchýlit se od územního plánu a zavádí zjednodušené posuzování záměrů.",
+                "effectCz": "Dosavadní § 193 vyžadoval posuzovat soulad s územním plánem, právními předpisy a veřejnými zájmy; schválené znění připouští odchylku se souhlasem příslušných osob a domněnku přípustnosti některých záměrů v zastavitelném území. Nově se také u vybraných záměrů neposuzuje krajinný ráz ani půdní ochrana, což tyto limity uvolňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-3",
+                "relevant": false,
+                "reasonCz": "Dodané změny zákona o požární ochraně upravují postup a zmocnění k požárním technickým podmínkám, nikoli environmentální závazek slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-5",
+                "relevant": true,
+                "reasonCz": "Mění postupy povolování těžby a výslovně oslabuje některé procesní pojistky ochrany prostředí.",
+                "effectCz": "Dosavadní pravidla pro kritické nerosty výslovně vylučovala z fikce souhlasu některá environmentální stanoviska; navržené nové znění tuto výjimku omezuje na posouzení vlivů na životní prostředí a stanoví, že při nevydání stanoviska se může považovat za souhlasné. Ochrana v části řízení se tím uvolňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-6",
+                "relevant": true,
+                "reasonCz": "Mění povolování hornické činnosti pro kritické nerosty a pravidla pro stanoviska dotčených orgánů.",
+                "effectCz": "Dřívější § 18b vyjímal jednotné environmentální stanovisko z fikce souhlasu při jeho nevydání; schválené znění tuto výjimku odstraňuje a ponechává výjimku jen pro stanovisko k posouzení vlivů. V daných řízeních tak může být ochrana prostředí méně účinná."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-7",
+                "relevant": false,
+                "reasonCz": "Vlastní text této části ani dodané pozměňovací výřezy neukazují konkrétní změnu, která by materiálně zasahovala do závazku slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-1",
+                "relevant": true,
+                "reasonCz": "Zavádí nová pravidla na podporu opylovačů a obnovu jejich biotopů v krajině a ve veřejné zeleni.",
+                "effectCz": "Před změnou § 5b upravoval odchylný postup při ochraně ptáků a neobsahoval tuto obecnou povinnost; nově se vyžaduje předcházet zbytečnému poškozování biotopů opylovačů a podporovat jejich obnovu. Schválené znění však vypustilo navrhovaný minimální podíl 30 % plochy a váže opatření na možnosti využití, takže konkrétní rozsah povinnosti je volnější."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-5",
+                "relevant": true,
+                "reasonCz": "Změna souvisí s tím, zda obnovitelné zdroje využívající energii vodního toku podléhají pravidlu o převažujícím veřejném zájmu.",
+                "effectCz": "Před změnou § 82a odst. 3 vylučoval nové obnovitelné zdroje využívající energii vodního toku z pravidla v § 82a odst. 1; schválené znění tento odstavec ruší. Výjimka tedy zaniká a předpoklad veřejného zájmu se může vztahovat i na nové vodní zdroje, což jejich povolování usnadňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-6",
+                "relevant": true,
+                "reasonCz": "Doplňuje sankce za porušení nových povinností na ochranu přírody a opylovačů.",
+                "effectCz": "Před novelou tyto skutkové podstaty přestupků neexistovaly; nově se zavádějí pokuty za nedodržení ochranných postupů a pravidel pro opylovače. Jde o posílení vymahatelnosti environmentálních povinností."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Mění ochranu zemědělské půdy a pravidla jejího odnětí pro stavební a energetické záměry.",
+                "effectCz": "Dřívější § 4 odst. 4 zakazoval odnětí půdy I. a II. třídy pro velké obchodní či skladovací záměry a solární zařízení, s výjimkou agrovoltaiky; schválené znění přidává výjimku pro záměry do 500 metrů od významné dopravní infrastruktury a dovoluje dočasné odnětí pro solární zařízení. Zákaz se tím uvolňuje v uvedených případech."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-18",
+                "relevant": false,
+                "reasonCz": "Upravuje převod vlastnictví některých pozemků veřejné zeleně na obce, ale nemění pravidla ochrany krajiny, vody ani opatření Green Dealu či Fit for 55.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Mění vodní zákon a výjimku z pravidla o převažujícím veřejném zájmu pro nové vodní obnovitelné zdroje.",
+                "effectCz": "Dosavadní § 23b odst. 2 vyjímal nové obnovitelné zdroje využívající energii vodního toku z pravidla v odstavci 1; schválené znění odstavec 2 ruší. Tím se výjimka odstraňuje a předpoklad veřejného zájmu se rozšiřuje i na tyto zdroje, což jejich realizaci usnadňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": true,
+                "reasonCz": "Mění řízení pro strategickou infrastrukturu a odstraňuje některé dosavadní kroky spojené s jednotným environmentálním stanoviskem.",
+                "effectCz": "Dřívější pravidla stanovila pro některé energetické stavby samostatné lhůty a postupy pro jednotné environmentální stanovisko; návrh odstraňuje část těchto ustanovení a schválený text zahrnuje některé vodoprávní úkony do povolení stavebním úřadem. Posouzení a podmínky nezanikají úplně, ale jejich samostatnost a procesní prostor se zmenšují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": true,
+                "reasonCz": "Obsahuje přímo změny povinných podílů obnovitelných paliv a požadovaného snižování emisí skleníkových plynů.",
+                "effectCz": "Dosavadní cíle pro dodavatele paliv činily v letech 2027 až 2029 postupně 1,5 %, 2,5 % a 3,75 % pokročilých obnovitelných paliv a snížení emisí 6,75 %, 7,5 % a 8,75 %; schválené znění je snižuje na 1,25 %, 2 % a 3,5 % a na 6,5 %, 7 % a 8 %. Povinnosti se tedy mírně uvolňují, ale zůstávají v platnosti."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": false,
+                "reasonCz": "Dodané znění této části chybí a připojené výřezy pozměňovacích návrhů neukazují konkrétní změnu, kterou by bylo možné spojit se závazkem slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": true,
+                "reasonCz": "Převádí pravidla pro akcelerační oblasti obnovitelných zdrojů a jejich environmentální posouzení do stavebního povolování.",
+                "effectCz": "Původně zákon ukládal samostatné stanovisko krajského úřadu a vodoprávního úřadu včetně podmínek a zmírňujících opatření; schválené znění přesouvá tyto úkony do postupů stavebního úřadu a povolení záměru. Ochranné podmínky zůstávají, ale přechod k jednoduššímu povolování obnovitelných zdrojů oslabuje samostatné posuzování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+                "relevant": false,
+                "reasonCz": "Upravuje pouze vymezení pozemků pro zákaz některých rostlinolékařských přípravků a dodaný text neukazuje zásah do závazku slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+                "relevant": true,
+                "reasonCz": "Mění povinné podíly obnovitelných paliv a snižování emisí, tedy přímo klimatické závazky související s unijními opatřeními.",
+                "effectCz": "Dosavadní podíly a cíle pro roky 2027 až 2029 byly vyšší než hodnoty schválené v tomto znění; nové limity jsou nižší, ale zachovávají povinnost přechodu k obnovitelným palivům a snižování emisí. Jde o částečné uvolnění těchto povinností, nikoli o jejich zastavení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+                "relevant": false,
+                "reasonCz": "Pouze prodlužuje lhůtu k vložení již schválených havarijních plánů do systému ohlašování; pravidla ochrany vody ani závazek slibu věcně nemění.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": false,
+                "reasonCz": "Z dodaných částí návrhu státního rozpočtu nejsou patrné konkrétní částky na ochranu krajiny, vody či opatření Fit for 55; rozpočtové pozměňovací návrhy jsou samostatné důkazy.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43223-1",
+                "relevant": false,
+                "reasonCz": "Upravuje dozor nad ekodesignem výrobků, ale dodané znění neprokazuje materiální vazbu na krajinu, vodní hospodářství ani opatření Fit for 55.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43223-3",
+                "relevant": false,
+                "reasonCz": "Přizpůsobuje česká pravidla unijnímu rámci ekodesignu výrobků spojených se spotřebou energie, nikoli však konkrétním oblastem či opatřením, které tento slib jmenuje.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43223-5",
+                "relevant": false,
+                "reasonCz": "Rozšiřuje dozor nad trhem na výrobky nesplňující unijní požadavky ekodesignu, ale nemění konkrétní pravidlo z oblastí slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43224-1",
+                "relevant": true,
+                "reasonCz": "Vytváří státní správu a sankce pro unijní mechanismus uhlíkového vyrovnání na hranicích, který je součástí klimatické regulace EU.",
+                "effectCz": "Jde o nový zákon, takže předchozí české znění v balíčku není. Návrh stanoví pravomoci k prodeji a vyřazování certifikátů CBAM, kontrolám a sankcím za jejich neodevzdání; tím umožňuje pokračování unijního uhlíkového mechanismu, místo aby jej zastavil."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43255-3",
+                "relevant": true,
+                "reasonCz": "Dodaný text mezinárodní dohody se týká obnovy populací stěhovavých vodních ptáků, plánů obnovy a udržitelného využívání.",
+                "effectCz": "Jde o změnu příloh mezinárodní dohody, nikoli o novelu českého zákona. Dodané znění žádá strany, aby obnovovaly populace vodních ptáků, zakládaly plány obnovy s hodnocením dopadů na životní prostředí a používaly zásadu trvale udržitelného využívání; podporuje část slibu o udržitelných opatřeních."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43415-1",
+                "relevant": false,
+                "reasonCz": "Návrh upravuje schvalování vozidel a jejich emisní či bateriové parametry podle unijního předpisu, ale dodaný text jej nespojuje s Fit for 55 ani s ochranou krajiny a vody.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-167",
+                "relevant": true,
+                "reasonCz": "Mění podmínky zemědělských plateb tak, aby změny trvalých travních porostů byly vázány na ochranu evropských stanovišť a lokalit Natura 2000.",
+                "effectCz": "Jde o změnu nařízení, pro kterou balíček neposkytuje předchozí znění dotčených ustanovení. Nově lze při splnění podmínek změnit kulturu nebo zorat trvalý travní porost, pokud stanovisko orgánu ochrany přírody potvrzuje, že nejsou dotčena evropská stanoviště ani lokality Natura 2000; rozsah povolených výjimek se zvětšuje, avšak s konkrétními ochrannými podmínkami."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2025-1018",
+                "relevant": true,
+                "reasonCz": "Usnesení výslovně odmítá transpozici ETS2, systému zahrnujícího emise z vytápění budov a silniční dopravy, a ukládá usilovat o jeho zrušení.",
+                "effectCz": "Nejde o změnu zákona, nýbrž o vládní rozhodnutí neprovádět do českého práva pravidla ETS2 a hledat jejich zrušení či zmírnění na úrovni EU. V oblasti, kterou slib jmenuje, jde o krok směrem k zastavení části Fit for 55."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-30",
+                "relevant": true,
+                "reasonCz": "Zavádí vládního zmocněnce, jehož úkolem je koordinovat tvorbu a vyjednávání politik EU v oblasti klimatu a Green Dealu.",
+                "effectCz": "Před změnou funkce zmocněnce pro tuto koordinaci nebylo; usnesení ji zřizuje a stanoví úkoly včetně přípravy vládních stanovisek a doporučení. Nezastavuje politiku Green Dealu, ale vytváří mechanismus pro její další vyjednávání a úpravy."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-107",
+                "relevant": true,
+                "reasonCz": "Vládní legislativní plán počítá s návrhem transponujícím unijní směrnici o průmyslových emisích a ochraně životního prostředí.",
+                "effectCz": "Nejde o změnu existujícího pravidla, ale o plán předložit návrh zákona v roce 2026 a jeho účinnost v roce 2026. Plánování provedení unijní směrnice jde proti závazku zastavovat unijní environmentální opatření."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-112",
+                "relevant": true,
+                "reasonCz": "Plánuje návrh zákona k provedení unijního nařízení o obnově přírody a opatření na posílení ochrany zeleně a dřevin.",
+                "effectCz": "Usnesení samo pravidlo nemění, ale plánuje návrh zákona k provedení nařízení o obnově přírody a posílení ochrany dřevin. Podporuje udržitelné kroky v krajině, avšak pokračuje v unijním politickém rámci, který slib chce zastavit."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-192",
+                "relevant": true,
+                "reasonCz": "Příloha uvádí řadu připravovaných unijních implementačních zákonů týkajících se vod, ovzduší a průmyslového znečištění.",
+                "effectCz": "Tato část plánu sama nemění žádné právní povinnosti; uvádí připravované předpisy k čištění městských odpadních vod, kvalitě ovzduší a průmyslovým emisím. Jde o plánování pokračujícího provádění unijních environmentálních opatření, nikoli o jejich zastavení."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+                "relevant": true,
+                "reasonCz": "Vláda ruší akční plány podpory využívání biometanu a obnovitelného tepla, tedy konkrétní plány pro obnovitelné zdroje.",
+                "effectCz": "Usnesení ruší dva dřívější akční plány, které podporovaly biometan a nízkopotenciální obnovitelné a odpadní teplo. Zrušení plánovací podpory těchto zdrojů je krokem směrem k zastavení části politik spojených s Green Dealem."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-451",
+                "relevant": true,
+                "reasonCz": "Ukládá připravit a aktualizovat metodiky pro zásadu významně nepoškozovat a prověřování klimatického dopadu infrastruktury financované z fondů EU.",
+                "effectCz": "Před tímto usnesením balíček nedokládá obdobný úkol; vláda nově ukládá připravit a aktualizovat metodiky pro klimatické prověřování a zásadu významně nepoškozovat. Jde o pokračování environmentálních podmínek u veřejných investic, nikoli o jejich zastavení."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-506",
+                "relevant": true,
+                "reasonCz": "Usnesení převádí peníze na projekty Národního plánu obnovy v oblasti biodiverzity, sucha, ovzduší a obnovitelných zdrojů.",
+                "effectCz": "Jde o rozhodnutí o převodu 10 160 830 520,85 Kč mezi kapitolami a organizačními složkami státu; v dodaných řádcích jsou například projekty podpory biodiverzity a boje se suchem i obnovitelných zdrojů. Jde o uskutečnění konkrétních environmentálních a energetických opatření, ne o zastavení jejich financování."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-02de5dc826fe--source",
+              "psp-core-2025--law-change-43174-1-1",
+              "psp-core-2025--law-change-43174-1-3",
+              "psp-core-2025--law-change-43174-1-4",
+              "psp-core-2025--law-change-43174-1-5",
+              "psp-core-2025--law-change-43174-1-6",
+              "psp-core-2025--law-change-43174-5",
+              "psp-core-2025--law-change-43174-6",
+              "psp-core-2025--law-change-43174-8-1",
+              "psp-core-2025--law-change-43174-8-5",
+              "psp-core-2025--law-change-43174-8-6",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-32",
+              "psp-core-2025--law-change-43174-33",
+              "psp-core-2025--law-change-43174-42",
+              "psp-core-2025--law-change-43174-approved-43",
+              "psp-core-2025--law-change-43224-1",
+              "psp-core-2025--law-change-43255-3",
+              "esbirka-regulations--law-change-sb-2026-167",
+              "zvlady-resolutions--law-change-uv-2025-1018",
+              "zvlady-resolutions--law-change-uv-2026-30",
+              "zvlady-resolutions--law-change-uv-2026-175-107",
+              "zvlady-resolutions--law-change-uv-2026-175-112",
+              "zvlady-resolutions--law-change-uv-2026-175-192",
+              "zvlady-resolutions--law-change-uv-2026-377",
+              "zvlady-resolutions--law-change-uv-2026-451",
+              "zvlady-resolutions--law-change-uv-2026-506",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--amendment-text-1253",
+              "psp-core-2025--vote-88248",
+              "psp-core-2025--vote-88143",
+              "psp-core-2025--vote-88165",
+              "psp-core-2025--vote-88167",
+              "psp-core-2025--print-step-210830",
+              "psp-core-2025--vote-88529",
+              "zvlady-resolutions--2025-1018",
+              "zvlady-resolutions--2026-30",
+              "zvlady-resolutions--2026-175",
+              "zvlady-resolutions--2026-377",
+              "zvlady-resolutions--2026-451",
+              "zvlady-resolutions--2026-506",
+              "esbirka-regulations--2026-167",
+              "psp-core-2025--amendment-text-1630",
+              "psp-core-2025--vote-88696"
+            ],
+            "explanationCz": "Vláda SPD odmítla převést ETS2 do českého práva a usilovat o jeho zrušení, ale zároveň zřídila funkci, která má koordinovat další jednání o Green Dealu. Poslanci SPD podpořili novelu stavebního zákona, která v některých případech omezuje samostatné posuzování krajinného rázu a zemědělské půdy a usnadňuje povolování obnovitelných zdrojů; Sněmovna zákon prosadila i po jeho zamítnutí Senátem. Novela současně obsahuje i některé ochranné prvky, například pravidla pro opylovače a prostupnost podél vod, a vláda zrušila plány podpory biometanu a obnovitelného tepla. Převážil však schválený zásah do posuzování krajiny a podpory obnovitelných zdrojů, který jde proti části slibu.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Schválená novela stavebního zákona obsahuje také opatření na ochranu opylovačů a přístupnosti vodních toků; jejich přínos je v rozporu s oslabením posuzování krajinného rázu, půdy a některých povolovacích postupů.",
+              "Vládní odmítnutí transpozice ETS2 směřuje opačným směrem než plánování dalších unijních environmentálních opatření a financování projektů Národního plánu obnovy.",
+              "Dodaný výřez rozpočtu neobsahuje konkrétní částky na environmentální dotace. Z něj proto nelze určit, jaký byl konečný dopad rozpočtu na jejich financování.",
+              "Některé předpisy o fluorovaných plynech a ekodesignu se týkají klimatické či environmentální regulace, ale dodaný materiál je výslovně nespojuje s Fit for 55; jejich přesná vazba na tuto část slibu proto zůstává nejistá."
+            ]
+          }
+        }
+      },
+      {
+        "error": "Assessment cites duplicate evidence IDs",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0c2421090fb4ed73016aec4d24e63887d18e4d1b0ca6d713a9",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 464256,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 464253
+            },
+            "output_tokens": 18903,
+            "output_tokens_details": {
+              "reasoning_tokens": 10262
+            },
+            "total_tokens": 483159
+          },
+          "output": {
+            "promiseId": "candidate-02de5dc826fe",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-1-1",
+                "relevant": true,
+                "reasonCz": "Upravuje povinnosti navazující na unijní pravidla pro fluorované skleníkové plyny, které patří k tématu klimatických opatření zmíněných ve slibu.",
+                "effectCz": "Dříve zákon obecně odkazoval na starší unijní předpisy a chránil klima před účinky fluorovaných plynů; návrh odkazuje na nová nařízení EU. Z dodaného textu neplyne samo o sobě zpřísnění ani zmírnění emisního limitu, ale mění právní rámec pro uplatnění těchto unijních pravidel."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-1-2",
+                "relevant": true,
+                "reasonCz": "Změny rozšiřují a upravují povinnosti při nakládání s fluorovanými skleníkovými plyny, a tím přímo souvisejí s klimatickými opatřeními ve slibu.",
+                "effectCz": "Dosavadní pravidla pro školení, certifikaci, evidenci a kontrolu nahrazují novými povinnostmi navázanými na unijní nařízení; například zavádějí obnovovací školení a oznamování údajů. Některé povinnosti jsou podrobnější a přísnější, zatímco u části povinností nelze z dodaného znění určit změnu jejich věcného rozsahu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-1-3",
+                "relevant": true,
+                "reasonCz": "Nové přestupky a sankce se týkají dodržování unijních pravidel pro skleníkové plyny a látky poškozující ozonovou vrstvu.",
+                "effectCz": "Dosavadní přestupková ustanovení nahrazuje rozsáhlejší soupisem porušení unijních povinností, včetně zákazů používání některých plynů, a pokutami až 5 milionů Kč. Vynucování těchto povinností se tím zpřísňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-1-4",
+                "relevant": true,
+                "reasonCz": "Mění státní dozor a kontrolní postupy vztahující se k pravidlům o skleníkových plynech a ochraně ozonové vrstvy.",
+                "effectCz": "Dosavadní rozdělení kompetencí mezi úřady mění a rozšiřuje informační a kontrolní mechanismy, například o možnost zadržet zboží při podezření na porušení povinností. Kontrola se tím posiluje; z předložených ustanovení nelze dovodit změnu samotných emisních limitů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-2",
+                "relevant": true,
+                "reasonCz": "Rozšiřuje trestní odpovědnost na neoprávněné nakládání s fluorovanými skleníkovými plyny.",
+                "effectCz": "Dříve trestní zákoník v dodaném znění trestal neoprávněné nakládání s látkami poškozujícími ozonovou vrstvu; návrh stejný postih rozšiřuje také na fluorované plyny a jejich vypouštění. Vymáhání pravidel se zpřísňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-3",
+                "relevant": true,
+                "reasonCz": "Zavádí omezení používání desfluranu kvůli unijním pravidlům o fluorovaných skleníkových plynech, tedy konkrétní klimatické opatření.",
+                "effectCz": "Dosavadní znění § 47 zákona o zdravotních službách v dodaném kontextu toto omezení neobsahuje; návrh dovoluje desfluran jen tehdy, když ze zdravotních důvodů nelze použít jiné anestetikum, a ukládá použití evidovat. Jde o nové omezení použití daného plynu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-1",
+                "relevant": true,
+                "reasonCz": "Mění pravidla rozhodování o rozvoji území a ochraně životního prostředí, krajiny a vody, tedy oblast výslovně uvedenou ve slibu.",
+                "effectCz": "Původní pravidlo kladlo důraz na integrovanou ochranu veřejných zájmů a udržitelný rozvoj; návrh nově podmiňuje omezení rozvoje možností chránit jiné hodnoty podmínkami či kompenzacemi a mění, kdo zájmy posuzuje. Ochranné zájmy se mají poměřovat s rozvojem a v řadě řízení se jejich posouzení přesouvá na stavební úřady, což oslabuje dosavadní samostatné posuzování; schválené znění některé formulace změnilo, ale zachovává nové poměřování zájmů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-3",
+                "relevant": true,
+                "reasonCz": "Umožňuje převádět některé územně plánovací záměry do nadřazených plánů bez posuzování vlivů na udržitelný rozvoj území.",
+                "effectCz": "Dosavadní § 76 a § 79 takový zvláštní postup nestanovily; návrh umožňuje převzít některé již vymezené plochy a koridory bez řízení a bez posouzení vlivů na udržitelný rozvoj. Tím se oslabuje rozsah posuzování a ochranných prověření."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": true,
+                "reasonCz": "Mění požadavky na výstavbu včetně ochrany krajiny, prostupnosti a vody.",
+                "effectCz": "Dosavadní pravidla uplatňovala požadavky na výstavbu i při změnách a údržbě staveb, pokud tomu nebránily závažné důvody; návrh přidává širší výjimky a umožňuje některé požadavky splnit finančním příspěvkem. Zároveň nově chrání prostupnost podél vodních toků a propojení veřejných prostranství s krajinou. Celkově se část stavebních limitů uvolňuje, zatímco uvedená pravidla pro veřejná prostranství jsou novými ochrannými prvky."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-5",
+                "relevant": true,
+                "reasonCz": "Upravuje podmínky pro fotovoltaiku a další obnovitelné zdroje i požadavky na energetickou úspornost staveb.",
+                "effectCz": "Původní § 144a umožňoval umístění solárních výroben na stávající stavby, pokud to nevylučoval regulační plán; schválené znění zavádí domněnku, že některé obnovitelné instalace nejsou v rozporu s charakterem území ani s památkovou péčí. To uvolňuje povolovací omezení. Další změny prodlužují lhůtu pro vybrané systémy budov z technicky na technicky a ekonomicky proveditelné, což povinnost zužuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Zavádí domněnky přípustnosti staveb v zastavitelném území a omezuje některá posouzení krajinného rázu a půdy.",
+                "effectCz": "Dosavadní posouzení záměru vyžadovalo zohlednit soulad s předpisy chránícími veřejné zájmy a práva účastníků; návrh nově předpokládá přípustnost záměru v zastavitelném území a v některých případech vylučuje posouzení krajinného rázu či podmínek odnětí půdy. Ochranné prověření se tak v těchto případech zužuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-3",
+                "relevant": false,
+                "reasonCz": "Dodaný text upravuje odborná stanoviska a technické podmínky požární ochrany, ale neukazuje materiální změnu závazků týkajících se krajiny, vody nebo klimatických opatření slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-4",
+                "relevant": true,
+                "reasonCz": "Dodaný pozměňovací návrh omezuje posuzování úprav dřevin v památkově chráněných územích, což má přímý vztah k zeleni a krajině.",
+                "effectCz": "V poskytnutém textu zákonné části není vlastní změna; pozměňovací návrh by omezil posouzení úprav dřevin památkovými orgány na zachování chráněných hodnot stávajících dřevin a významných pohledových os. V tomto rozsahu by se památkové posuzování zúžilo; směr změny jiných ustanovení této části z balíčku určit nelze."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-5",
+                "relevant": true,
+                "reasonCz": "Mění postupy při povolování dobývacích prostorů a odstraňuje výjimky vztahující se k environmentálnímu stanovisku.",
+                "effectCz": "Původní pravidla v dodaném kontextu vylučovala fikci souhlasu, pokud nebylo vydáno jednotné environmentální stanovisko nebo stanovisko k posouzení vlivů; návrh tyto výjimky vypouští. Ochrana před souhlasem vzniklým pouhým nečinnostním uplynutím lhůty se tím oslabuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-6",
+                "relevant": true,
+                "reasonCz": "Upravuje povolování dobývání kritických nerostů a oslabuje výjimku, která chrání environmentální posuzování před fikcí souhlasu.",
+                "effectCz": "Dosavadní pravidlo výslovně vylučovalo jednotné environmentální stanovisko z fikce souhlasu při nečinnosti úřadu; schválené znění tuto výjimku zrušilo, přičemž přechodně zachovává výjimku pro posouzení vlivů na životní prostředí. Ochrana před fikcí souhlasu se proto zužuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-7",
+                "relevant": false,
+                "reasonCz": "Vlastní text této části ani obsah pozměňovacích návrhů vztahujících se ke konkrétnímu závazku slibu nejsou dodány.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-1",
+                "relevant": true,
+                "reasonCz": "Vytváří nové povinnosti pro ochranu biotopů opylovačů při zemědělství, stavebních pracích i správě zeleně.",
+                "effectCz": "Dosavadní § 5b řešil odchylný postup při ochraně ptáků; nově se ukládá povinnost předcházet zbytečnému poškozování biotopů opylovačů a obnovovat je. Navržené minimum 30 % veřejné zeleně bylo ve schváleném znění nahrazeno rozsahem, který umožňuje charakter využití; ochrana se posiluje, ale kvantitativní povinnost se zmírňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-5",
+                "relevant": true,
+                "reasonCz": "Týká se kompetencí a postupů orgánů ochrany přírody a ve schváleném znění také výjimky pro obnovitelné zdroje využívající vodní tok.",
+                "effectCz": "Navržené změny přesouvají část rozhodování o zásazích do přírody do stavebního řízení a nahrazují některá samostatná povolení podmínkami stavebního rozhodnutí; tím se mění dosavadní postup a oddělenost ochranného posouzení. Schválený výřez navíc ruší výjimku pro nové vodní obnovitelné zdroje, ale text § 82a odst. 1, na který se výjimka vztahuje, v balíčku chybí, takže dopad této konkrétní změny nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-6",
+                "relevant": true,
+                "reasonCz": "Ukládá sankce za neprovedení opatření na ochranu opylovačů zavedených v téže novele přírody.",
+                "effectCz": "Dříve dodané znění přestupků tyto nové povinnosti neobsahovalo; návrh je postihuje jako přestupky fyzických osob i podnikatelů. Povinnost ochrany opylovačů se tím stává vymahatelnější."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Mění ochranu zemědělské půdy a způsob posuzování odnětí půdy ze zemědělského půdního fondu.",
+                "effectCz": "Dosavadní pravidla vyžadovala upřednostnit méně kvalitní půdu a odnímat jen nezbytnou plochu; schválené znění zavádí výjimku ze zákazu odnětí půdy I. a II. třídy pro některé obchodní a skladovací záměry do 500 metrů od dopravních staveb. To ochranu nejkvalitnější půdy v těchto případech uvolňuje. Další změny přesouvají posuzování a povolování na stavební úřady; jejich úplný dopad nelze z vynechaných odstavců určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-18",
+                "relevant": true,
+                "reasonCz": "Upravuje možnost bezúplatného převodu státních pozemků určených pro veřejnou zeleň na obce.",
+                "effectCz": "Původní pravidlo umožňovalo převod pozemků pro veřejnou zeleň v zastavěném území nebo zastavitelné ploše; návrh po změně pojmů omezuje tuto možnost na pozemky v zastavitelném území. Okruh pozemků způsobilých k převodu se tím mění a podle dodaného znění zužuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Mění vodní zákon a zvláštní výjimku pro nové obnovitelné zdroje využívající energii vodního toku.",
+                "effectCz": "Dosavadní § 23b odst. 2 vylučoval plánování a výstavbu nových vodních obnovitelných zdrojů z pravidla odstavce 1; návrh odstavec 2 ruší. Tím se na tyto zdroje nově rozšiřuje pravidlo odstavce 1, jehož obsah v balíčku chybí, takže nelze určit, zda změna ochranu vod zpřísňuje, nebo uvolňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": true,
+                "reasonCz": "Upravuje zvláštní povolování strategické infrastruktury a odstraňuje část samostatného environmentálního posuzování.",
+                "effectCz": "Dosavadní pravidla pro strategické stavby obsahovala lhůty a samostatné posuzování jednotného environmentálního stanoviska; návrh některé tyto prvky ruší a přenáší řízení do stavebního povolení. Schválené znění současně upravuje rozhodování o vodoprávních povoleních v rámci stavebního řízení a stanoviska vodoprávního úřadu; samostatné procedurální záruky se mění, aniž lze z výňatku určit dopad na všechny věcné limity."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": true,
+                "reasonCz": "Mění povinné podíly obnovitelných paliv a cíle snižování emisí, tedy klimatické závazky v oblasti dopravy.",
+                "effectCz": "Pro roky 2027 až 2029 schválené znění snižuje povinný podíl pokročilých biopaliv či nebiologických obnovitelných paliv z 1,5/2,5/3,75 % na 1,25/2/3,5 % a povinné snížení emisí z 6,75/7,5/8,75 % na 6,5/7/8 %. Tyto klimatické povinnosti se uvolňují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": false,
+                "reasonCz": "Vlastní text části není dodán a poskytnuté texty pozměňovacích návrhů neukazují konkrétní změnu zákona o jednotném environmentálním stanovisku, kterou lze spojit se závazkem slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": true,
+                "reasonCz": "Mění povolování projektů obnovitelných zdrojů v akceleračních oblastech a způsob jejich environmentálního posouzení.",
+                "effectCz": "Původní právní úprava počítala se samostatným stanoviskem vodoprávního úřadu a jednotným environmentálním stanoviskem; schválené znění přesouvá část posuzování do stavebního řízení a ruší samostatné stanovisko podle § 14. Zároveň zachovává požadavky na zmírňující opatření včetně ochrany vod, ale snižuje oddělenost a počet samostatných posouzení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+                "relevant": true,
+                "reasonCz": "Mění územní rozsah, v němž se omezuje aplikace vybraných přípravků na ochranu rostlin.",
+                "effectCz": "Dosavadní zákaz aplikace se vztahoval na zastavěné stavební pozemky a jejich okolí do 20 metrů; schválené znění váže územní vymezení na pozemky „zázemí stavby“. Přesný rozsah této nové kategorie není v dodaném kontextu uveden, takže směr změny nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+                "relevant": true,
+                "reasonCz": "Mění povinné podíly obnovitelných paliv a snižování emisí v dopravě.",
+                "effectCz": "Dřívější cíle pro roky 2027 až 2029 činily 1,5/2,5/3,75 % obnovitelných paliv a 6,75/7,5/8,75 % snížení emisí; schválené znění je snižuje na 1,25/2/3,5 % a 6,5/7/8 %. Povinnosti se uvolňují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+                "relevant": true,
+                "reasonCz": "Prodlužuje lhůtu pro vložení havarijních plánů do ohlašovacího systému, což se týká nakládání s vodními riziky.",
+                "effectCz": "Dosavadní přechodná lhůta byla 2 roky od účinnosti změny vodního zákona; schválené znění ji prodlužuje na 4 roky. Povinnost se tím odkládá."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": false,
+                "reasonCz": "Dodaný výřez rozpočtového zákona odkazuje pouze na přehledy kapitol; neobsahuje konkrétní částky ani opatření k závazku slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43223-1",
+                "relevant": true,
+                "reasonCz": "Zavádí výkon státní správy a dozor nad požadavky na ekodesign udržitelných výrobků, což souvisí s částí slibu o používání udržitelných opatření.",
+                "effectCz": "Nový zákon stanoví správní dohled, povinnosti hospodářských subjektů a sankce při porušení unijních požadavků na ekodesign; předchozí vnitrostátní úprava pro tento nový rámec v dodaném kontextu není uvedena. Vytváří tak nový mechanismus prosazování těchto požadavků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43223-3",
+                "relevant": true,
+                "reasonCz": "Mění pravidla ekodesignu energetických výrobků a návaznost na nové unijní požadavky.",
+                "effectCz": "Dosavadní § 8a vycházel z dřívějšího unijního rámce a českého prováděcího předpisu; návrh jej nahrazuje odkazem na nový přímo použitelný rámec EU pro ekodesign udržitelných výrobků. Mění se právní základ, nikoli v dodaném výňatku konkrétní hodnoty energetických limitů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43223-5",
+                "relevant": true,
+                "reasonCz": "Rozšiřuje dozor nad trhem na výrobky nesplňující evropské požadavky na ekodesign.",
+                "effectCz": "Dosavadní dohled se vztahoval na bezpečnostní a jiné povinnosti u výrobků; návrh doplňuje opatření a pravomoci také pro výrobky nesplňující nařízení EU o ekodesignu udržitelných výrobků. Kontrola a možnost nápravy se rozšiřují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43224-1",
+                "relevant": true,
+                "reasonCz": "Navazuje na unijní mechanismus uhlíkového vyrovnání na hranicích, tedy na konkrétní klimatické opatření EU.",
+                "effectCz": "Nový zákon stanoví pravidla pro jistoty, kontrolu prohlášení, prodej a vyřazování certifikátů CBAM i sankce za nedodržení povinností. Nejde o změnu existujícího českého zákona; zavádí správní rámec pro uplatnění mechanismu, který slib odmítá."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43255-3",
+                "relevant": true,
+                "reasonCz": "Navrhované změny mezinárodní dohody se týkají obnovy populací stěhovavých vodních ptáků a ochrany jejich stanovišť.",
+                "effectCz": "Jako část mezinárodní dohody podporuje obnovu populací v jejich tradičních areálech, plánování založené na vědeckých studiích a ochranu stanovišť. Jde o nový závazek k udržitelnému přístupu, který věcně odpovídá části slibu o krajině a vodě."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43415-1",
+                "relevant": true,
+                "reasonCz": "Zavádí pravidla schvalování vozidel podle evropského předpisu o emisích a životnosti baterií.",
+                "effectCz": "Dosavadní § 36 neobsahoval zákaz zabudovat neschválené systémy; návrh jej zavádí a rozšiřuje z osobních a lehkých užitkových vozidel na další kategorie. Povinnost schvalování se tím rozšiřuje a zpřísňuje."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-167",
+                "relevant": true,
+                "reasonCz": "Mění podmínky, za kterých mohou zemědělci měnit kulturu travního porostu, což se týká krajiny a stanovišť.",
+                "effectCz": "Nařízení přidává možnost změnit trvalý travní porost na jinou kulturu nebo jej zorat při vyjádření orgánu ochrany přírody, že nejsou dotčena evropská stanoviště a lokalita významně ovlivněna. Otevírá novou možnost změny půdy, ale váže ji na environmentální prověření; z dodaného výňatku nelze posoudit všechny původní podmínky."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2025-1018",
+                "relevant": true,
+                "reasonCz": "Usnesení se přímo týká systému ETS2, který zahrnuje vytápění budov a silniční dopravu a je výslovně v tématu slibu.",
+                "effectCz": "Vláda stanovila, že nebude do českého práva převádět část směrnice EU, která by zatížila spalování fosilních paliv v uvedených sektorech, a uložila ministrům hledat podporu pro zrušení systému či zmírnění jeho dopadů. Jde o vládní postoj a úkol k dalšímu jednání, nikoli o zrušení evropského systému."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-30",
+                "relevant": true,
+                "reasonCz": "Usnesení vytváří funkci vládního zmocněnce pro klimatickou politiku a Green Deal a přímo se dotýká závazku slibu.",
+                "effectCz": "Vláda vytváří funkci koordinující vyjednávání a provádění klimatických politik EU a ukládá zmocněnci vyhodnocovat dopady a navrhovat změny. Nezastavuje tyto politiky; vytváří mechanismus k jejich koordinaci a úpravám."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-107",
+                "relevant": true,
+                "reasonCz": "Plánuje transpozici unijní směrnice o průmyslových emisích a skládkách, která se týká ochrany životního prostředí.",
+                "effectCz": "Vláda zařadila přípravu zákona k provedení směrnice EU do legislativního plánu; plán uvádí cíl snížit emise a přenos znečišťujících látek. Jde o návrh budoucí právní úpravy, který by rozšířil regulaci, nikoli o okamžitou změnu existujících povinností."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-112",
+                "relevant": true,
+                "reasonCz": "Plánuje zákon k provedení unijního nařízení o obnově přírody a opatření pro ochranu zeleně a dřevin.",
+                "effectCz": "Vláda plánuje předložit návrh na vymezení pravidel pro národní plán obnovy přírody a posílení ochrany dřevin v sídlech. Jde o legislativní záměr, který by mohl posílit ochranu přírody, nikoli o již účinnou změnu."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-192",
+                "relevant": true,
+                "reasonCz": "Příloha plánuje řadu legislativních kroků týkajících se vody, ovzduší, odpadů a průmyslových emisí.",
+                "effectCz": "Příloha uvádí přípravu zákonů k městským odpadním vodám, vodnímu zákonu, kvalitě ovzduší a průmyslovým emisím. Jde o plán budoucích návrhů, nikoli o změnu současných pravidel."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+                "relevant": true,
+                "reasonCz": "Ruší vládní akční plány pro rozvoj nízkopotenciálního tepla a biometanu, které se týkají energetických opatření Green Dealu.",
+                "effectCz": "Usnesení ruší dva předchozí akční plány na rozvoj obnovitelného tepla a biometanu. Tím ruší nástroje na podporu těchto energetických řešení, což přispívá k omezení části příslušné politiky."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-451",
+                "relevant": true,
+                "reasonCz": "Ukládá přípravu metodik pro klimatické dopady infrastruktury a zásadu významně nepoškozovat při využívání fondů EU.",
+                "effectCz": "Usnesení ukládá vytvořit a aktualizovat metodiky pro uplatnění zásady významně nepoškozovat a prověřování klimatických dopadů infrastruktury. Samo zavádí metodickou přípravu, nikoli nové právní limity; směřuje k tomu, aby financované záměry prošly environmentálním posouzením."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-506",
+                "relevant": true,
+                "reasonCz": "Vláda schvaluje převody prostředků pro projekty obnovy přírody, ochrany biodiverzity, úspor energie a obnovitelných zdrojů.",
+                "effectCz": "Usnesení rozhoduje o převodu 10,16 miliardy Kč z prostředků Národního plánu obnovy podle skutečně vynaložených výdajů; příloha uvádí mimo jiné projekty biodiverzity, boje se suchem, čisté energie a obnovitelných zdrojů. Nejde o změnu zákonných povinností, ale o přímé financování části udržitelných opatření."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-02de5dc826fe--source",
+              "psp-core-2025--law-change-43174-1-1",
+              "psp-core-2025--law-change-43174-1-3",
+              "psp-core-2025--law-change-43174-1-4",
+              "psp-core-2025--law-change-43174-1-5",
+              "psp-core-2025--law-change-43174-1-6",
+              "psp-core-2025--law-change-43174-4",
+              "psp-core-2025--law-change-43174-5",
+              "psp-core-2025--law-change-43174-6",
+              "psp-core-2025--law-change-43174-8-1",
+              "psp-core-2025--law-change-43174-8-5",
+              "psp-core-2025--law-change-43174-8-6",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--law-change-43174-18",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-32",
+              "psp-core-2025--law-change-43174-33",
+              "psp-core-2025--law-change-43174-42",
+              "psp-core-2025--law-change-43174-approved-36",
+              "psp-core-2025--law-change-43174-approved-43",
+              "psp-core-2025--law-change-43174-approved-53",
+              "zvlady-resolutions--law-change-uv-2025-1018",
+              "zvlady-resolutions--law-change-uv-2026-30",
+              "zvlady-resolutions--law-change-uv-2026-175-107",
+              "zvlady-resolutions--law-change-uv-2026-175-112",
+              "zvlady-resolutions--law-change-uv-2026-175-192",
+              "zvlady-resolutions--law-change-uv-2026-377",
+              "zvlady-resolutions--law-change-uv-2026-451",
+              "zvlady-resolutions--law-change-uv-2026-506",
+              "esbirka-regulations--law-change-sb-2026-167",
+              "psp-core-2025--law-change-43223-1",
+              "psp-core-2025--law-change-43223-3",
+              "psp-core-2025--law-change-43223-5",
+              "psp-core-2025--law-change-43224-1",
+              "psp-core-2025--law-change-43255-3",
+              "psp-core-2025--law-change-43415-1",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--amendment-1175",
+              "psp-core-2025--amendment-text-1175",
+              "psp-core-2025--vote-88143",
+              "psp-core-2025--amendment-text-1172",
+              "psp-core-2025--vote-88150",
+              "psp-core-2025--amendment-text-1253",
+              "psp-core-2025--vote-88248",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88165",
+              "psp-core-2025--vote-88167",
+              "psp-core-2025--vote-88185",
+              "psp-core-2025--vote-88186",
+              "psp-core-2025--vote-88192",
+              "psp-core-2025--vote-88206",
+              "psp-core-2025--vote-88219",
+              "psp-core-2025--vote-88235",
+              "psp-core-2025--vote-88152",
+              "psp-core-2025--vote-88159",
+              "psp-core-2025--vote-88178",
+              "psp-core-2025--vote-88179",
+              "psp-core-2025--vote-88166",
+              "psp-core-2025--vote-88454",
+              "zvlady-resolutions--2025-1018",
+              "zvlady-resolutions--2026-30",
+              "zvlady-resolutions--2026-175",
+              "zvlady-resolutions--2026-377",
+              "zvlady-resolutions--2026-451",
+              "zvlady-resolutions--2026-506",
+              "psp-core-2025--print-step-210830",
+              "psp-core-2025--print-step-210832",
+              "psp-core-2025--vote-88529",
+              "psp-core-2025--print-step-211007",
+              "psp-core-2025--law-change-43121-1-1",
+              "psp-core-2025--law-change-43121-1-2",
+              "psp-core-2025--law-change-43121-1-3",
+              "psp-core-2025--law-change-43121-1-4",
+              "psp-core-2025--law-change-43121-2",
+              "psp-core-2025--law-change-43121-3",
+              "psp-core-2025--amendment-text-1630",
+              "psp-core-2025--vote-88696",
+              "psp-core-2025--law-change-43174-approved-53",
+              "psp-core-2025--law-change-43255-3",
+              "psp-core-2025--law-change-43415-1",
+              "psp-core-2025--print-step-212080"
+            ],
+            "explanationCz": "SPD se podílela na předložení rozsáhlé novely stavebního zákona, kterou Senát odmítl a Poslanecká sněmovna ji poté znovu schválila hlasy SPD. Novela některé ochranné postupy pro krajinu, půdu a životní prostředí uvolňuje, například rozšiřuje výjimky při odnímání kvalitní zemědělské půdy a omezuje některá environmentální posouzení. Obsahuje také dílčí ochranná opatření, například pro biotopy opylovačů a prostupnost podél vodních toků, takže nejde o popření celého slibu. Vláda zároveň přijala usnesení odmítající zavést ETS2 do českého práva a usilovat o zrušení systému; jde však o další jednání, nikoli o jeho zrušení.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Slib spojuje více témat a výslovně jmenuje Green Deal a Fit for 55, nikoli jednotlivé povolovací či dotační nástroje; u části souvisejících změn proto záleží na jejich věcné vazbě na krajinu, vodu a životní prostředí.",
+              "Některé části stavební novely mění postupy a přesouvají rozhodování mezi úřady, aniž dodaný výřez umožňuje určit dopad na všechny konkrétní ochranné limity. Výsledný zákon je v těchto částech smíšený: obsahuje jak uvolnění ochrany, tak dílčí opatření na její podporu.",
+              "Vládní usnesení k ETS2 vyjadřuje záměr odmítnout transpozici a usilovat o změnu evropského systému, ale samo o sobě ETS2 neruší; jeho další osud nelze z dodaných podkladů určit."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": [
+      {
+        "error": "Assessment cites law change psp-core-2025--law-change-43174-1-5 it found not relevant",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_072fcd9f78d22958016aec4edd5b2c87d19900115ba855cda2",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 464256,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 464253
+            },
+            "output_tokens": 15521,
+            "output_tokens_details": {
+              "reasoning_tokens": 7768
+            },
+            "total_tokens": 479777
+          },
+          "output": {
+            "promiseId": "candidate-02de5dc826fe",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-1-1",
+                "relevant": true,
+                "reasonCz": "Upravuje česká pravidla pro fluorované skleníkové plyny podle nového předpisu EU, a tím se přímo týká klimatické části slibu.",
+                "effectCz": "Dosavadní § 1 odkazoval na starší unijní předpisy o regulovaných látkách a fluorovaných plynech; návrh jej aktualizuje podle nařízení EU 2024/590 a 2024/573. Mění tedy právní rámec tak, aby navazoval na nová unijní pravidla, nikoli aby je zastavil; jde proti požadavku zastavit související unijní opatření."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-1-2",
+                "relevant": true,
+                "reasonCz": "Mění podrobné povinnosti pro nakládání s fluorovanými skleníkovými plyny podle unijních předpisů, které se týkají ochrany klimatu.",
+                "effectCz": "Předchozí znění vyžadovalo školení a certifikace podle starších pravidel EU; návrh převádí povinnosti na nová nařízení, zavádí mimo jiné obnovování znalostí a další evidenci. Rozšiřuje či upravuje provádění unijních pravidel místo jejich zastavení; rozsah změny povinností nelze bez vynechaných odstavců plně určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-1-3",
+                "relevant": true,
+                "reasonCz": "Převádí unijní klimatická pravidla pro fluorované plyny do českých přestupků a sankcí.",
+                "effectCz": "Předchozí znění postihovalo zejména porušení starších pravidel EU; návrh zahrnuje nové povinnosti podle nařízení EU 2024/573 a 2024/590 a stanoví pokuty až do 5 milionů Kč. Zvyšuje vymahatelnost těchto unijních opatření, tedy neusiluje o jejich zastavení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-1-4",
+                "relevant": true,
+                "reasonCz": "Upravuje státní dozor a vymáhání pravidel EU o fluorovaných skleníkových plynech a látkách poškozujících ozonovou vrstvu.",
+                "effectCz": "Předchozí znění rozdělovalo dozor a související úkoly mezi úřady; návrh přizpůsobuje jejich pravomoci novým unijním předpisům a posiluje celní kontrolu včetně zadržení zboží. Jde o účinnější provádění unijních pravidel, nikoli o jejich zastavení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-2",
+                "relevant": false,
+                "reasonCz": "Dodané ustanovení trestního zákoníku se týká trestání neoprávněného nakládání s látkami a zařízeními; podklady neprokazují přímý dopad na zastavení Green Dealu či Fit for 55.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-3",
+                "relevant": false,
+                "reasonCz": "Omezení použití anestetika a související evidence ve zdravotnictví nejsou doloženy jako změna závazku zastavit Green Deal nebo Fit for 55 v posuzovaných oblastech slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-1",
+                "relevant": true,
+                "reasonCz": "Mění zásady stavebního rozhodování a začlenění ochrany životního prostředí, krajiny a vody do povolování záměrů.",
+                "effectCz": "Dříve stavební zákon směřoval k integrované ochraně veřejných zájmů a udržitelnému rozvoji; předložená verze nově zdůrazňovala vyvažování zájmů a nahrazování úkonů dotčených orgánů stavebním úřadem. Schválená verze přitom výslovně zachovala respekt k právu EU a zahrnula životní prostředí mezi chráněné zájmy. Celkový účinek na přísnost ochrany nelze z poskytnutého výřezu určit jednoznačně; návrh však nepředstavoval zastavení ekologických pravidel."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-3",
+                "relevant": false,
+                "reasonCz": "Dodané změny stavebního zákona v tomto oddílu se týkají hlavně převodu ploch a koridorů v územních plánech; jejich konkrétní dopad na závazek slibu není doložen.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": true,
+                "reasonCz": "Mění požadavky na výstavbu a pravidla pro veřejná prostranství podél vodních toků, tedy přímo oblast krajiny a vody.",
+                "effectCz": "Předchozí § 137 uplatňoval požadavky na stavby při změnách či údržbě, pokud tomu nebránily vážné důvody; schválené znění dovoluje jejich neuplatnění i při zjevné ekonomické nepřiměřenosti a plnění některých požadavků příspěvkem. To uvolňuje některé limity. Současně nové § 141 chrání prostupnost podél toků a propojení veřejných prostranství s volnou krajinou; jde tedy o smíšenou změnu, jejíž celkový účinek není jednotný."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-5",
+                "relevant": false,
+                "reasonCz": "Předložené změny se týkají zejména fotovoltaiky a energetických staveb; dodaný obsah nedokládá přímou změnu pravidel Green Dealu nebo Fit for 55 pro ochranu krajiny či vody.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Zjednodušuje povolování v zastavitelném území a omezuje posuzování krajinného rázu a ochrany zemědělské půdy.",
+                "effectCz": "Dříve stavební úřad posuzoval soulad záměru s požadavky dalších předpisů a ochranou veřejných zájmů; schválené znění zavádí předpoklad přípustnosti záměru v zastavitelném území a stanoví, že se při povolování neposuzuje krajinný ráz ani podmínky odnětí zemědělské půdy, pokud již bylo území vymezeno jako zastavitelné. Tyto konkrétní ochranné limity jsou volnější, což je v napětí s ochranou krajiny."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-3",
+                "relevant": false,
+                "reasonCz": "Změny pravidel požární ochrany staveb samy o sobě nedokládají dopad na závazek zastavit Green Deal či Fit for 55.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-4",
+                "relevant": false,
+                "reasonCz": "Text této části není dodán; souvislost se slibem se objevuje jen v pozměňovacích návrzích, nikoli v doloženém znění této změny.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-5",
+                "relevant": false,
+                "reasonCz": "Změny povolování dobývacích prostorů pro kritické nerosty jsou v podkladech spojeny s konkrétní procedurou, nikoli doloženě se zastavením Green Dealu či Fit for 55.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-6",
+                "relevant": false,
+                "reasonCz": "Dodaný text mění postup povolování hornické činnosti pro kritické nerosty; podklady neukazují přímou vazbu na konkrétní závazek slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-7",
+                "relevant": false,
+                "reasonCz": "Vlastní text této části není dodán a text pozměňovacích návrhů nedokládá konkrétní dopad na závazek slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-1",
+                "relevant": true,
+                "reasonCz": "Zavádí pravidla pro ochranu opylovačů a zásahy do veřejné zeleně, což se přímo týká ochrany přírody a krajiny.",
+                "effectCz": "Předchozí § 5b upravoval odchylný postup při ochraně ptáků; nové § 5c zavádí povinnost bránit zbytečnému poškození biotopů opylovačů a opatření pro obnovu těchto biotopů. Předložená verze stanovila obnovu nejméně na 30 % příslušných ploch, schválená verze tento číselný limit vypustila a ponechala rozsah podle toho, co umožní charakter využití. Nová ochrana přibývá, ale její požadovaný rozsah je proti předložené verzi volnější."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-5",
+                "relevant": true,
+                "reasonCz": "Mění, zda se na nové vodní obnovitelné zdroje vztahuje domněnka převažujícího veřejného zájmu, tedy vztah mezi energetickými projekty a ochranou přírody.",
+                "effectCz": "Předchozí § 82a odst. 3 vylučoval plánování a výstavbu nových obnovitelných zdrojů využívajících energii vodního toku z domněnky převažujícího veřejného zájmu. Schválený výňatek toto ustanovení ruší, takže výjimka odpadá a domněnka se může vztahovat i na tyto zdroje. To oslabuje tuto konkrétní pojistku při posuzování střetu zájmů; další účinek vynechaných ustanovení nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-6",
+                "relevant": true,
+                "reasonCz": "Stanoví sankce za porušení nových povinností k ochraně biotopů opylovačů.",
+                "effectCz": "Předchozí přestupková ustanovení neobsahovala uvedené skutkové podstaty týkající se opatření podle nového § 5c; schválené znění je doplňuje. Tím se nová ochranná povinnost stává vymahatelnou a zpřísňuje odpovědnost za její porušení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Mění ochranu nejkvalitnější zemědělské půdy a podmínky pro odnětí půdy, zejména při energetických a stavebních záměrech.",
+                "effectCz": "Dosavadní § 4 odst. 4 zakazoval odnímat půdu I. a II. třídy ochrany pro velké obchodní či skladovací záměry a energetická zařízení využívající sluneční energii (s výjimkou agrovoltaiky). Schválená změna přidává výjimku pro obchodní a skladovací záměry blízko vybraných dopravních staveb a umožňuje dočasné odnětí půdy pro některé solární záměry. Zákaz je tím v těchto případech užší a ochrana půdy volnější; konečný rozsah výjimky závisel také na pozměňovacích návrzích."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-18",
+                "relevant": false,
+                "reasonCz": "Změna pravidel bezúplatného převodu pozemků pro veřejnou zeleň není v dodaném znění doložena jako věcná změna závazku slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Mění výjimku z domněnky převažujícího veřejného zájmu pro nové obnovitelné zdroje využívající vodní tok.",
+                "effectCz": "Dosavadní § 23b odst. 2 stanovil, že se § 23b odst. 1 nepoužije na plánování a výstavbu nových obnovitelných zdrojů využívajících energii vodního toku. Schválené znění odstavec ruší, takže tuto výjimku odstraňuje a domněnka veřejného zájmu se může uplatnit i na tyto zdroje. Jde o uvolnění této konkrétní překážky pro vodní energetické projekty."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": true,
+                "reasonCz": "Mění povolování energetických a vodních staveb, včetně přípravných prací a rozhodování o povoleních podle vodního zákona.",
+                "effectCz": "Dřívější pravidla pro energetickou bezpečnost obsahovala lhůty a postupy pro vyjádření a jednotné environmentální stanovisko; schválené znění přesouvá některá vodoprávní rozhodnutí do stavebního řízení na základě závazného stanoviska krajského úřadu a umožňuje samostatně povolit přípravné práce. V poskytnutých ustanoveních se zároveň zachovává posouzení vodních dopadů, ale změna řízení může oslabit oddělený postup; celkový směr ochrany nelze z výřezu určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": false,
+                "reasonCz": "Předložené znění se zabývá hlavně přesunem pravomocí při povolování a provozu; konkrétní dopad na závazek slibu není doložen.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": false,
+                "reasonCz": "Text zrušovací části není dodán a připojené podklady neukazují konkrétní změnu ochrany krajiny, vody či životního prostředí.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": true,
+                "reasonCz": "Mění povolování akceleračních oblastí a obnovitelných zdrojů energie včetně podmínek ochrany vod a přírody.",
+                "effectCz": "Předchozí úprava svěřovala stanoviska k akceleračním oblastem krajskému a vodoprávnímu úřadu a vyžadovala zvláštní posouzení rizika zhoršení vodních útvarů. Schválená verze svěřuje stanovisko stavebnímu úřadu, zatímco podmínky a zmírňující opatření pro vodu zůstávají zachovány v upravené podobě. Mění tedy institucionální a povolovací postup; samotný text nedokládá, že by vodní limit byl zrušen."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+                "relevant": true,
+                "reasonCz": "Mění, kde se zakazuje aplikovat některé rizikové přípravky na ochranu rostlin, což má přímý vztah k ochraně prostředí.",
+                "effectCz": "Předchozí § 52b odst. 3 zakazoval aplikaci vyjmenovaných přípravků na zastavěných stavebních pozemcích a v jejich okolí do 20 metrů; schválené znění nahrazuje tento pojem odkazem na „pozemky zázemí stavby“. Jeho přesný rozsah není v balíčku definován, takže směr změny ochrany ani její přísnost nelze z podkladů určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+                "relevant": true,
+                "reasonCz": "Upravuje číselné povinnosti pro obnovitelná paliva a snižování emisí v dopravě, tedy část klimatických unijních opatření.",
+                "effectCz": "Dřívější znění stanovovalo pro roky 2027–2029 vyšší minimální podíly či cíle: u pokročilých obnovitelných paliv 1,5 %, 2,5 % a 3,75 %, a u snižování emisí 6,75 %, 7,5 % a 8,75 %. Schválené znění je snižuje na 1,25 %, 2 % a 3,50 %, respektive 6,50 %, 7 % a 8 %. Zmenšuje tedy přísnost těchto klimatických povinností a částečně odpovídá záměru omezit unijní opatření."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+                "relevant": true,
+                "reasonCz": "Prodlužuje lhůtu pro vložení havarijních plánů k vodě do informačního systému, což se přímo týká vodního hospodářství.",
+                "effectCz": "Dosavadní přechodné ustanovení vyžadovalo vložit existující havarijní plán do systému nejpozději do dvou let; schválená změna prodlužuje lhůtu na čtyři roky. Povinnost zůstává, ale její splnění se odkládá, takže je v tomto ohledu mírnější."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": false,
+                "reasonCz": "Dodané části státního rozpočtu neobsahují konkrétní rozpočtové položky pro ochranu krajiny, vodu či životní prostředí, které by šlo vztáhnout ke slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43223-1",
+                "relevant": true,
+                "reasonCz": "Zavádí český výkon státní správy a dozor nad unijními požadavky na ekodesign udržitelných výrobků.",
+                "effectCz": "Jde o nový zákon, takže předchozí znění této úpravy není. Návrh stanoví působnost orgánů, dozor a sankce pro požadavky unijního rámce ekodesignu udržitelných výrobků; tím podporuje provádění unijní environmentální politiky, nikoli její zastavení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43223-3",
+                "relevant": true,
+                "reasonCz": "Upravuje ekodesign energetických výrobků a jeho kontrolu, tedy další část unijních environmentálních požadavků na výrobky.",
+                "effectCz": "Předchozí zákon upravoval ekodesign energetických výrobků podle starší směrnice; návrh přechází na přímo použitelný unijní rámec a jeho předpisy a zachovává do jejich účinnosti dosavadní režim. Rozšiřuje či aktualizuje provádění unijních požadavků, nikoli jejich zastavení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43223-5",
+                "relevant": true,
+                "reasonCz": "Rozšiřuje dozor nad trhem o výrobky, které nesplňují unijní požadavky na ekodesign.",
+                "effectCz": "Předchozí dozorová ustanovení se týkala nebezpečných výrobků; návrh je výslovně rozšiřuje také na výrobky nesplňující nařízení EU 2024/1781. Přidává tak nástroj pro vymáhání unijních požadavků na ekodesign, místo aby je zastavoval."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43224-1",
+                "relevant": true,
+                "reasonCz": "Zavádí správní pravidla pro mechanismus uhlíkového vyrovnání na hranicích, který je součástí unijní klimatické politiky.",
+                "effectCz": "Jde o nový zákon, takže předchozí znění není. Návrh stanoví mimo jiné jistoty, kontrolu prohlášení, nákup a vyřazování uhlíkových certifikátů a sankce; umožňuje tak provádět unijní uhlíkové vyrovnání, nikoli jej zastavit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43255-3",
+                "relevant": true,
+                "reasonCz": "Navrhuje změny mezinárodní ochrany stěhovavých vodních ptáků a obnovu jejich populací, což je přímo spojeno s udržitelnou ochranou přírody.",
+                "effectCz": "Jde o návrh změny mezinárodní dohody, nikoli o novelu českého zákona; předchozí znění se proto neposkytuje. Dodaný text požaduje obnovu vybraných populací, vědecky podložené plány obnovy a přípravu doporučení pro ochranu stanovišť. Ve vztahu k části slibu o používání udržitelných a obhajitelných opatření jde o ochranné opatření."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43415-1",
+                "relevant": true,
+                "reasonCz": "Zavádí pravidla a sankce k unijním požadavkům na emise a životnost baterií silničních vozidel, tedy klimatické regulaci dopravy.",
+                "effectCz": "Předchozí zákon neupravoval dodatečně vyjmenované postupy k novému unijnímu nařízení 2024/1257; návrh zakazuje zabudování neschválených částí a doplňuje přestupky za nedovolené zásahy. Rozšiřuje vymáhání evropských emisních a bateriových pravidel, nikoli jejich zastavení."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-167",
+                "relevant": true,
+                "reasonCz": "Mění podmínky, za kterých lze měnit trvalý travní porost, a výslovně zohledňuje krajinné prvky a chráněná stanoviště.",
+                "effectCz": "Nařízení doplňuje další možnost změny trvalého travního porostu na jinou zemědělskou kulturu či orby při vyjádření orgánu ochrany přírody, že nejsou dotčena evropská stanoviště a významně ovlivněny chráněné lokality; také doplňuje krajinný prvek mezi další podmínky. Předchozí znění dotčených podmínek není dodáno, takže celkovou změnu jejich přísnosti nelze z balíčku určit."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2025-1018",
+                "relevant": true,
+                "reasonCz": "Usnesení výslovně odmítá zavést ETS2 pro vytápění, dopravu a další činnosti, což je opatření spojené s Fit for 55.",
+                "effectCz": "Usnesení vlády stanoví záměr netransponovat příslušná ustanovení evropské směrnice a ukládá ministrům hledat podporu pro zrušení systému ETS2 či ochranu domácností a podniků. Nejde samo o zrušení evropského systému, ale o politický postup směřující k omezení jeho zavedení."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-30",
+                "relevant": true,
+                "reasonCz": "Vláda vytváří funkci zmocněnce, jehož úkolem je koordinovat tvorbu a uplatňování politik EU v oblasti klimatu a Green Dealu.",
+                "effectCz": "Usnesení vytváří funkci a stanoví její úkol koordinovat stanoviska a opatření EU v oblasti klimatu a Green Dealu, vyhodnocovat dopady a navrhovat vládě úpravy tempa či způsobu implementace. Jde o návrh či organizační krok, nikoli o zastavení těchto politik; směrování je proto v napětí se slibem, i když zahrnuje ochranu českých zájmů."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-107",
+                "relevant": false,
+                "reasonCz": "Úkol transponovat směrnici o průmyslových emisích se v dodaném znění nevztahuje konkrétně k Fit for 55 ani k závazku zastavit Green Deal.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-112",
+                "relevant": true,
+                "reasonCz": "Vláda plánuje zákon k provedení unijního nařízení o obnově přírody a opatření na podporu dřevin, což se přímo týká ochrany přírody i Green Dealu.",
+                "effectCz": "Usnesení samo nemění právní pravidla; ukládá připravit návrh zákona, který má vymezit přípravu a schvalování národního plánu obnovy přírody a posílit ochranu zeleně a dřevin. Je to návrh environmentálních opatření, nikoli jejich zastavení."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-192",
+                "relevant": true,
+                "reasonCz": "Plán implementačních prací zahrnuje unijní předpisy o vodě, ovzduší, průmyslových emisích a odpadech, tedy oblast ochrany prostředí a vody.",
+                "effectCz": "Příloha usnesení uvádí připravované zákony a nařízení k unijním předpisům, mimo jiné k čištění městských odpadních vod, kvalitě ovzduší a průmyslovým emisím. Nezakládá zatím nové povinnosti, ale plánuje jejich provedení; konkrétní přísnost budoucích pravidel z tohoto plánu určit nelze."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+                "relevant": true,
+                "reasonCz": "Vláda ruší akční plány pro nízkopotenciální obnovitelné a odpadní teplo a pro biometan, což se přímo dotýká energetických projektů Green Dealu.",
+                "effectCz": "Usnesení ruší dvě dřívější usnesení schvalující akční plány pro obnovitelné a odpadní teplo a pro biometan. Předchozí plány jsou tím odstraněny, takže jde o krok směrem k omezení části politiky podpory obnovitelných zdrojů."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-451",
+                "relevant": true,
+                "reasonCz": "Usnesení ukládá připravit a aktualizovat metodiky pro zásadu významně nepoškozovat a posuzování klimatického dopadu projektů financovaných z fondů EU.",
+                "effectCz": "Usnesení samo nemění podmínky projektů, ale ukládá vládním činitelům připravit a aktualizovat metodické dokumenty k posuzování škod na životním prostředí a klimatického dopadu. Jde o přípravný krok k uplatňování těchto environmentálních a klimatických požadavků, nikoli o jejich zastavení."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-506",
+                "relevant": true,
+                "reasonCz": "Rozděluje prostředky mimo jiné na ochranu biodiverzity a boj se suchem, renovace a infrastrukturu pro obnovitelné zdroje.",
+                "effectCz": "Usnesení převádí 10,16 miliardy Kč prostředků Národního plánu obnovy na organizační složky státu. Dodaný výňatek uvádí například 812 301 Kč na podporu biodiverzity a boj se suchem a 381 900 139,79 Kč na infrastrukturu pro obnovitelné zdroje; jde o konkrétní financování environmentálních a energetických aktivit, nikoli o změnu právního limitu."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-02de5dc826fe--source",
+              "psp-core-2025--law-change-43174-1-1",
+              "psp-core-2025--law-change-43174-1-4",
+              "psp-core-2025--law-change-43174-1-6",
+              "psp-core-2025--law-change-43174-8-1",
+              "psp-core-2025--law-change-43174-8-5",
+              "psp-core-2025--law-change-43174-8-6",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-42",
+              "psp-core-2025--law-change-43174-approved-43",
+              "psp-core-2025--law-change-43174-approved-53",
+              "psp-core-2025--law-change-43223-1",
+              "psp-core-2025--law-change-43223-3",
+              "psp-core-2025--law-change-43223-5",
+              "psp-core-2025--law-change-43224-1",
+              "psp-core-2025--law-change-43255-3",
+              "psp-core-2025--law-change-43415-1",
+              "zvlady-resolutions--law-change-uv-2025-1018",
+              "zvlady-resolutions--law-change-uv-2026-30",
+              "zvlady-resolutions--law-change-uv-2026-175-112",
+              "zvlady-resolutions--law-change-uv-2026-175-192",
+              "zvlady-resolutions--law-change-uv-2026-377",
+              "zvlady-resolutions--law-change-uv-2026-451",
+              "zvlady-resolutions--law-change-uv-2026-506",
+              "psp-core-2025--law-change-43174-1-5",
+              "psp-core-2025--law-change-43174-32",
+              "psp-core-2025--law-change-43174-approved-36",
+              "esbirka-regulations--law-change-sb-2026-167",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--amendment-text-1253",
+              "psp-core-2025--vote-88248",
+              "psp-core-2025--vote-88192",
+              "psp-core-2025--vote-88529",
+              "psp-core-2025--vote-88696",
+              "psp-core-2025--vote-88143",
+              "psp-core-2025--amendment-text-1175",
+              "psp-core-2025--vote-88150",
+              "psp-core-2025--vote-88165",
+              "psp-core-2025--vote-88186"
+            ],
+            "explanationCz": "Poslanci SPD předložili spolu s dalšími poslanci novelu stavebního zákona a vláda jí vyjádřila souhlas. Poslanci SPD ji pak podpořili i po zamítnutí Senátem; schválené změny mimo jiné omezují posuzování krajinného rázu a ochrany zemědělské půdy u některých staveb a rozšiřují možnosti pro energetické projekty. To se týká jen části slibu, ale je to v rozporu s cílem chránit krajinu a zastavit související unijní projekty. Proti tomu stojí i kroky vlády směřující k omezení ETS2 a návrhy SPD na zachování ochrany kvalitní zemědělské půdy; tyto rozpory zůstávají v hodnocení viditelné.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Senát návrh stavebního zákona zamítl a Sněmovna na něm následně setrvala; výsledný dopad se proto opírá o schválené znění zákona, nikoli o předpoklad, že každé navržené ustanovení bude beze změny účinné.",
+              "Některé části novely rozšiřují ochranu opylovačů nebo zajišťují ochranu vod při energetických záměrech, zatímco jiné uvolňují povolovací a půdní ochranné limity. Dopad celé novely na ochranu prostředí není ve všech bodech stejnosměrný.",
+              "Vláda zároveň přijala usnesení proti transpozici ETS2 a poslanci SPD podpořili návrh zachovávající zákaz odnětí nejkvalitnější zemědělské půdy; tyto kroky směřují ke slibu, ale nepřevážily pozdější rozhodnutí podpořit novelu s oslabením části ochranných pravidel."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": null,
+    "assessor-b": {
+      "promiseId": "candidate-02de5dc826fe",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení aktualizují pravidla pro regulované látky a fluorované skleníkové plyny podle nových předpisů EU, tedy přímo zasahují do závazku zastavit unijní klimatická opatření.",
+          "effectCz": "Dřívější § 1 odst. 1 odkazoval na nařízení EU z let 2009 a 2014; navržené znění odkazuje na nařízení z roku 2024 a upravuje ochranu ozonové vrstvy a klimatického systému podle jejich nových definic. Jde o pokračování a aktualizaci unijního režimu, nikoli o jeho zastavení; změna rozsahu povinností se z dodaného výňatku nedá plně určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-2",
+          "relevant": true,
+          "reasonCz": "Část mění povinnosti při nakládání s fluorovanými plyny, které souvisejí s klimatickou politikou EU a závazkem zastavit její opatření.",
+          "effectCz": "Dosavadní znění stanovovalo méně konkrétní povinnosti k evidenci, certifikaci a školení. Návrh přidává obnovení znalostí, hodnocení, další evidenci a oznamování; některé požadavky tedy zpřísňuje a rozšiřuje. Směřuje k provádění unijního režimu, ne k jeho zastavení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-3",
+          "relevant": true,
+          "reasonCz": "Navržené přestupky výslovně postihují porušení pravidel EU pro fluorované skleníkové plyny, včetně jejich úniků.",
+          "effectCz": "Dříve uvedené přestupky postihovaly především neoprávněné nakládání s látkami poškozujícími ozonovou vrstvu; návrh mezi ně přidává širokou škálu porušení pravidel pro fluorované plyny a související sankce. Vynucování povinností se rozšiřuje a zpřísňuje, takže se unijní režim nezastavuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-4",
+          "relevant": true,
+          "reasonCz": "Část upravuje kontrolu a vymáhání pravidel EU pro fluorované plyny a látky poškozující ozonovou vrstvu.",
+          "effectCz": "Dosavadní pravidla přidělovala kontrolní úkoly a předávání údajů celním orgánům; návrh mění příslušné orgány, rozšiřuje výměnu informací a umožňuje zadržení zboží při podezření na porušení pravidel EU. Kontrola a vymáhání se rozšiřují, což podporuje pokračování tohoto režimu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-2",
+          "relevant": true,
+          "reasonCz": "Navrhuje rozšířit trestní postih na fluorované skleníkové plyny a jejich vypouštění, tedy přímo na klimatické regulace EU.",
+          "effectCz": "Dosavadní § 298a trestního zákoníku postihoval nedovolenou výrobu a nakládání s látkami poškozujícími ozonovou vrstvu. Návrh přidává fluorované plyny, jejich vypouštění i uvádění zařízení do provozu; rozsah trestní odpovědnosti se rozšiřuje a zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-3",
+          "relevant": true,
+          "reasonCz": "Nově omezuje použití desfluranu kvůli jeho vazbě na přímo použitelný předpis EU o fluorovaných skleníkových plynech.",
+          "effectCz": "Pro tuto povinnost dosavadní znění zákona o zdravotních službách žádné pravidlo neobsahovalo. Návrh dovoluje desfluran pouze tehdy, pokud ze zdravotních důvodů nelze použít jiné anestetikum, a přidává evidenci; povinnost je nová a přísnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Mění způsob, jak se při povolování staveb vyvažují zájmy životního prostředí a rozvoje území.",
+          "effectCz": "Dosavadní účel zákona výslovně zahrnoval integrovanou ochranu veřejných zájmů a udržitelný rozvoj. Navržené znění přidává podmínky rozvoje sídel, hospodářství a infrastruktury a stanoví, že zásah do žádného zájmu nemá svými nepříznivými následky převážit přínosy; ochrana životního prostředí zůstává, ale její postavení se více vyvažuje s rozvojem. Schválené znění dále svěřuje posuzování zájmů stavebním úřadům a jejich rozhodnutím nahrazuje řadu úkonů jiných dotčených orgánů, což může oslabit samostatné uplatňování některých ochran."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Mění posuzování vlivů při přebírání územních záměrů do plánů, což může omezit kontrolu jejich dopadu na krajinu a životní prostředí.",
+          "effectCz": "Dříve uvedené paragrafy takový zvláštní postup neobsahovaly. Návrh umožňuje převzít některé již vymezené plochy a koridory bez řízení a posuzování vlivů na udržitelný rozvoj; schválené znění tuto výjimku zachovává. Procesní ochrana a přezkum se tím v těchto případech oslabují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Část současně upravuje požadavky na výstavbu a přidává pravidla pro veřejná prostranství podél vod, takže se dotýká krajiny i vodního hospodářství.",
+          "effectCz": "Dosavadní § 137 uplatňoval požadavky na výstavbu u vyjmenovaných staveb, pokud tomu nebránily závažné důvody nebo jiný veřejný zájem. Schválené znění přidává výjimky při ekonomické nepřiměřenosti a možnost splnit některé požadavky příspěvkem, což pravidla uvolňuje; zároveň nově stanoví zachování průchodnosti podél vod a propojení veřejných prostranství s volnou krajinou, což ochranu části krajiny posiluje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Schválená část usnadňuje instalace fotovoltaiky a mění požadavky na ochranu přírody a úsporu energie při stavbách.",
+          "effectCz": "Dřívější pravidla pro fotovoltaické stavby nezahrnovala všechny výjimky a domněnky schválené ve znění návrhu; to považuje některé instalace na stavbách za souladné s charakterem území a usnadňuje jejich povolení. V témže schváleném výňatku se doplňují povinnosti předcházet poškození zvláště chráněných rostlin, živočichů a jejich biotopů. Část tedy současně usnadňuje obnovitelné zdroje a posiluje některé ochrany přírody."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Při povolování v již vymezeném zastavitelném území omezuje posouzení krajinného rázu a půdy, což zasahuje do ochrany krajiny.",
+          "effectCz": "Dosavadní § 193 vyžadoval posouzení souladu záměru s právními předpisy chránícími veřejné zájmy. Schválené znění zakládá domněnku přípustnosti v zastavitelném území a stanoví, že se v určitých případech neposuzuje krajinný ráz ani podmínky odnětí půdy ze zemědělského půdního fondu. Ochranné posouzení se v těchto případech zužuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Dodaný text se týká technických pravidel požární ochrany, nikoli zastavení Green Dealu či Fit for 55 ani konkrétní ochrany krajiny nebo vody.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "Jediný relevantní připojený návrh se týká instalací malých fotovoltaických zdrojů v památkově chráněných územích.",
+          "effectCz": "Vlastní text této části ani předchozí znění dotčených ustanovení nejsou dodány. Pozměňovací návrh navrhuje zvláštní zacházení s instalacemi malých solárních zdrojů; směr změny této části nelze z jejího vlastního textu určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-5",
+          "relevant": true,
+          "reasonCz": "Mění výjimky z povolovacích lhůt pro těžbu kritických nerostů, včetně výjimek pro environmentální posouzení.",
+          "effectCz": "Dosavadní § 28a a § 28b výslovně vylučovaly jednotné environmentální stanovisko z pravidla, podle něhož může nečinnost orgánu znamenat souhlas bez podmínek. Navržené změny ruší tuto výjimku; ve schváleném znění je zachována jen přechodně, do zrušení příslušného zákona. Následně by se environmentální stanovisko mohlo dostat pod mírnější režim, takže procesní ochrana se oslabuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-6",
+          "relevant": true,
+          "reasonCz": "Upravuje povolování hornické činnosti u kritických nerostů a pravidla pro stanoviska dotčených orgánů.",
+          "effectCz": "Dosavadní § 18b vylučoval jednotné environmentální stanovisko z fikce souhlasného stanoviska při nečinnosti orgánu. Schválené znění zavádí nové lhůty, při jejichž zmeškání se stanovisko považuje za souhlasné, a tuto výjimku zachovává pouze do zrušení zákona o jednotném environmentálním stanovisku. Po této přechodné době se procesní ochrana může oslabit; ostatní změněná ustanovení nelze z dodaného textu plně porovnat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Předložené znění této části chybí a dodané texty pozměňovacích návrhů neukazují konkrétní změnu geologických pravidel spojenou se slibem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-1",
+          "relevant": true,
+          "reasonCz": "Zavádí povinnosti na ochranu biotopů opylovačů při údržbě krajiny, veřejné zeleně a vodních ploch.",
+          "effectCz": "Předchozí § 5b upravoval odchylný postup při ochraně ptáků, nikoli povinnosti na ochranu biotopů opylovačů. Nový § 5c stanoví, že se jejich biotopy nemají zbytečně poškozovat a že se mají využívat opatření k jejich obnově. Původně navržený požadavek na nejméně 30 % plochy byl ve schváleném znění změněn na rozsah, který dovoluje charakter využití; ochranný závazek je nový, ale jeho konkrétní míra je volnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Schválená změna ruší výjimku pro nové vodní obnovitelné zdroje z pravidla týkajícího se převažujícího veřejného zájmu.",
+          "effectCz": "Dosavadní § 82a odst. 3 stanoví, že se odstavec 1 nepoužije na plánování a výstavbu nových obnovitelných zdrojů využívajících energii vodního toku. Schválené znění odstavec 3 ruší, takže se výjimka pro nové vodní zdroje odstraní a obecné pravidlo odstavce 1 se na ně nově vztáhne; předchozí znění odstavce 1 není v balíčku, proto jeho úplný dopad na ochranné limity nelze ověřit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-6",
+          "relevant": true,
+          "reasonCz": "Přidává sankce za nedodržení nových pravidel na ochranu biotopů opylovačů.",
+          "effectCz": "Dřívější přestupkové paragrafy tyto nově zaváděné povinnosti neobsahovaly. Schválené znění mezi přestupky zařazuje jejich porušení; vynutitelnost nových ekologických povinností se tedy rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Mění ochranu zemědělské půdy, pravidla jejího odnětí i povolování solárních zařízení.",
+          "effectCz": "Dosavadní § 4 odst. 4 zakazoval odnětí půdy I. a II. třídy pro velké obchodní či skladovací záměry a pro energetická zařízení využívající sluneční záření, s výjimkou agrovoltaiky. Schválené znění zavádí výjimku u obchodních a skladovacích záměrů v blízkosti vybraných dopravních staveb a možnost dočasného odnětí pro solární zařízení. Tyto výjimky ochranu nejkvalitnější půdy uvolňují. Navržené změny zároveň převádějí část posuzování odnětí na stavební úřady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-18",
+          "relevant": false,
+          "reasonCz": "Mění převod některých státních pozemků určených pro veřejnou zeleň, ale dodaný text nedokládá, že by tím měnil její ochranu nebo závazek zastavit konkrétní unijní opatření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Změna vodního zákona rozšiřuje zvláštní režim veřejného zájmu na nové vodní obnovitelné zdroje.",
+          "effectCz": "Dřívější § 23b odst. 2 stanoví, že se odstavec 1 nepoužije na plánování a výstavbu nových obnovitelných zdrojů využívajících energii vodního toku. Schválené znění odstavec 2 ruší, a proto se výjimka pro nové vodní zdroje odstraní. Znění odstavce 1 v balíčku chybí; pozměňovací návrh uvádí, že jde o domněnku převažujícího veřejného zájmu, takže její rozšíření na nové vodní zdroje usnadňuje jejich prosazení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Zrychluje povolování energetické infrastruktury a mění posuzování přípravných prací s možným dopadem na životní prostředí a vodní režim.",
+          "effectCz": "Dřívější znění vyžadovalo zvláštní stanoviska a postupy pro vybrané energetické záměry. Schválené znění některá rozhodnutí začleňuje do stavebního povolení a umožňuje samostatně povolovat přípravné práce, které se pak v povolení a posouzení hlavní stavby znovu nezohlední v rozsahu, v jakém již byly povoleny. To může oslabit nebo oddělit část environmentálního posouzení; přesný dopad na jednotlivé limity nelze bez dalších ustanovení určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Schválené změny snižují budoucí cíle pro obnovitelná paliva a snižování emisí skleníkových plynů.",
+          "effectCz": "Dosavadní požadavky na pokročilá biopaliva či obnovitelná paliva nebiologického původu činily pro roky 2027–2029 1,5 %, 2,5 % a 3,75 % energie; schválené hodnoty jsou 1,25 %, 2 % a 3,5 %. Cíle na snížení emisí skleníkových plynů se rovněž snižují z 6,75 %, 7,5 % a 8,75 % na 6,5 %, 7 % a 8 %. Povinnosti se tedy zmírňují, což částečně odpovídá závazku omezovat unijní klimatická opatření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Vlastní text této části chybí, ale dodané podklady se vztahují k rušení jednotného environmentálního stanoviska, tedy k přístupu k posuzování dopadů na životní prostředí.",
+          "effectCz": "Text této části ani předchozí znění rušeného zákona nejsou v balíčku dodány. Směr a rozsah změny proto nelze z poskytnutých ustanovení určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Mění pravidla pro akcelerační oblasti obnovitelných zdrojů a zahrnuje jejich dopady na vodu, půdu a ochranu přírody.",
+          "effectCz": "Dosavadní § 13 a § 14 svěřovaly přípravu environmentálních a vodních stanovisek samostatným orgánům a obsahovaly návrhy zmírňujících podmínek. Schválené znění některé úkoly přesouvá na stavební úřad a začleňuje je do povolení záměru; současně zachovává podmínky a zmírňující opatření k ochraně vod. Posuzování se tedy mění a propojuje s povolováním obnovitelných zdrojů, nikoli však jednoduše ruší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+          "relevant": true,
+          "reasonCz": "Mění ochrannou vzdálenost, v níž jsou zakázány některé pesticidy, tedy přímou ochranu životního prostředí a obyvatel.",
+          "effectCz": "Dosavadní pravidlo vztahovalo zákaz aplikace vybraných nebezpečných pesticidů na zastavěné stavební pozemky a okolí do 20 metrů. Schválený text nahrazuje pojem „zastavěný stavební pozemek“ pojmem „pozemek zázemí stavby“. Jeho přesný rozsah podle nové definice v balíčku chybí, takže směr rozšíření či zúžení ochranného pásma nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Mění zákonné cíle pro obnovitelná paliva a snižování emisí skleníkových plynů v dopravě.",
+          "effectCz": "Dosavadní pravidla stanovovala vyšší minima obnovitelných paliv a snížení emisí pro roky 2027–2029. Schválené znění hodnoty snižuje, a tím zmírňuje příslušné povinnosti; tato část je v souladu se závazkem omezovat unijní klimatické požadavky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": true,
+          "reasonCz": "Prodlužuje lhůtu, v níž musí být starší havarijní plány týkající se vody vloženy do systému hlášení.",
+          "effectCz": "Dosavadní přechodné pravidlo ukládalo vložit plán nejpozději do dvou let; schválená změna prodlužuje lhůtu na čtyři roky. Povinnost je tedy časově mírnější a ochranná evidence se zavádí později."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet obsahuje výdaje na podporu obnovitelných zdrojů, které přímo souvisejí se závazkem zastavit Green Deal.",
+          "effectCz": "Jde o rozpočet bez dřívějšího znění měněného zákona. Dodaný výřez odkazuje na kapitoly a ukazatele, ale neobsahuje jejich schválené částky pro obnovitelné zdroje; výši ani změnu podpory proto z této části nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43223-1",
+          "relevant": true,
+          "reasonCz": "Zákon zavádí výkon státní správy k unijním požadavkům na ekodesign udržitelných výrobků.",
+          "effectCz": "Jde o nový zákon bez předchozího znění. Vymezuje orgány a jejich úkoly pro uplatňování nařízení EU 2024/1781; konkrétní požadavky na výrobky stanoví toto nařízení a prováděcí akty. Návrh tedy vytváří vnitrostátní rámec pro pokračování unijní regulace ekodesignu, nikoli pro její zastavení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43223-3",
+          "relevant": true,
+          "reasonCz": "Mění zákon o hospodaření energií tak, aby jeho pravidla dále uplatňovala unijní rámec pro ekodesign.",
+          "effectCz": "Dosavadní § 8a odkazoval na starší směrnici o ekodesignu. Návrh nahrazuje tento odkaz přímo použitelným unijním rámcem a předpisy Evropské komise; provádění ekodesignových požadavků pokračuje v nové právní podobě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43223-5",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje dozor nad trhem na výrobky, které nesplňují unijní požadavky na ekodesign udržitelných výrobků.",
+          "effectCz": "Dřívější ustanovení umožňovala opatření proti nebezpečným výrobkům a výrobkům nesplňujícím jiné požadavky. Návrh výslovně zahrnuje i výrobky porušující nařízení EU 2024/1781 a přidává dozorové orgány; vymáhání ekodesignových požadavků se rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43224-1",
+          "relevant": true,
+          "reasonCz": "Zavádí vnitrostátní pravidla pro uhlíkové vyrovnání na hranicích, které souvisí s unijní klimatickou politikou a Fit for 55.",
+          "effectCz": "Jde o nový zákon bez předchozího znění. Upravuje jistoty, prodej a vyřazování certifikátů CBAM, kontrolu dovozu a sankce za nesplnění povinností podle přímo použitelného unijního předpisu. Vytváří podmínky pro další uplatňování unijního uhlíkového mechanismu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43255-3",
+          "relevant": true,
+          "reasonCz": "Dodaný text mezinárodní dohody požaduje plány obnovy populací stěhovavých vodních ptáků a jejich stanovišť.",
+          "effectCz": "Jde o návrh změn mezinárodní dohody, nikoli o změnu českého zákona. Ukládá stranám věnovat péči obnově vybraných populací, připravovat plány založené na vědeckých studiích a hodnotit jejich dopad na životní prostředí; podporuje tedy část slibu týkající se ochrany přírody."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek se týká schvalování emisí vozidel, nikoli krajiny, vodního hospodářství nebo opatření Fit for 55, jejichž zastavení slib řeší.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-167",
+          "relevant": true,
+          "reasonCz": "Nařízení připouští další způsob přeměny trvalého travního porostu, což přímo zasahuje do ochrany krajiny a stanovišť.",
+          "effectCz": "Předchozí § 12 odst. 6 písm. a) a b) uvedené možnosti výjimky neobsahoval. Nařízení přidává možnost změnit trvalý travní porost na jinou zemědělskou kulturu nebo jej zorat, pokud orgán ochrany přírody potvrdí, že nejsou dotčena evropská stanoviště a významně ovlivněny evropsky významné lokality či ptačí oblasti. Nová možnost je podmíněná, ale přesto rozšiřuje případy, kdy lze porost změnit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1018",
+          "relevant": true,
+          "reasonCz": "Vláda navrhuje odmítnout zavedení systému ETS2 pro vytápění, dopravu a další sektory, což je přímo součástí závazku zastavit Fit for 55.",
+          "effectCz": "Usnesení stanoví, že vláda nebude do českého práva převádět ustanovení ETS2, která by zatížila fosilní paliva v dotčených sektorech, a ukládá hledat evropskou podporu pro zrušení systému. Jde o návrh politického postupu, nikoli o rozhodnutí, které samo může zrušit unijní systém."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-30",
+          "relevant": true,
+          "reasonCz": "Usnesení přímo zřizuje funkci vládního zmocněnce pro klima a Green Deal a určuje jeho úkoly.",
+          "effectCz": "Dosud taková funkce v dodaném textu stanovena nebyla. Usnesení ji zavádí a ukládá koordinovat tvorbu a vyjednávání unijních klimatických opatření, současně však zmocněnce úkoluje chránit české zájmy a navrhovat využití výjimek či úpravu tempa provádění. Samo unijní opatření nezastavuje; jeho dopad na slib závisí na budoucích doporučeních."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-107",
+          "relevant": true,
+          "reasonCz": "Plánuje zákon k provedení nové směrnice EU o průmyslových emisích a prevenci znečištění.",
+          "effectCz": "Jde o plán legislativních prací, nikoli o platnou změnu pravidel. Vláda plánuje transponovat směrnici 2024/1785 a uvádí jako cíl rozšířit kontrolu na další činnosti a snížit emise a přenosy znečištění. Jde o návrh na pokračování unijního environmentálního režimu, ne o jeho zastavení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-112",
+          "relevant": true,
+          "reasonCz": "Plánuje zákon k provedení unijního nařízení o obnově přírody a opatření na posílení ochrany zeleně a dřevin.",
+          "effectCz": "Jde o plán budoucí legislativy, nikoli o již platnou změnu. Vláda chce upravit přípravu a provádění národního plánu obnovy přírody a posílit význam dřevin a zeleně v sídlech. Konkrétní nové povinnosti ani jejich míru plán v tomto podkladu neurčuje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-192",
+          "relevant": true,
+          "reasonCz": "Příloha plánu zahrnuje přípravu předpisů EU v oblasti vody, ovzduší, odpadů a průmyslových emisí.",
+          "effectCz": "Příloha plánuje přípravu zákonů a nařízení provádějících uvedené unijní předpisy, například k městským odpadním vodám, průmyslovým emisím a kvalitě ovzduší. Jde o budoucí legislativní práci; bez textů těchto návrhů nelze určit konkrétní změnu povinností, ale plán neznamená zastavení příslušných unijních opatření."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Vláda ruší akční plány pro využívání obnovitelného tepla a biometanu, které se týkají přechodu k obnovitelným zdrojům.",
+          "effectCz": "Usnesení ruší dva dřívější vládní akční plány pro obnovitelné teplo a biometan. Tím ukončuje tyto konkrétní programové nástroje, což odpovídá části slibu o zastavení zelených projektů; samo však nemění obecná pravidla ani jiné evropské závazky."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-451",
+          "relevant": true,
+          "reasonCz": "Usnesení ukládá připravit a aktualizovat klimatické prověřování infrastruktury a pravidla „významně nepoškozovat“ pro fondy EU.",
+          "effectCz": "V dodaném textu není dřívější obdobná povinnost uvedena. Usnesení ukládá několika ministrům připravit a aktualizovat metodické dokumenty pro klimatické dopady a zásadu významně nepoškozovat. Jde o přípravný krok, který udržuje environmentální podmínky pro budoucí financování, nikoli o jejich zastavení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-506",
+          "relevant": true,
+          "reasonCz": "Usnesení rozděluje prostředky také na obnovu biodiverzity, boj se suchem, ochranu ovzduší a infrastrukturu obnovitelných zdrojů.",
+          "effectCz": "Jde o rozhodnutí o převodu 10 160 830 520,85 Kč na organizační složky státu podle přílohy. Příloha obsahuje mimo jiné prostředky pro programy biodiverzity a boje se suchem i pro infrastrukturu obnovitelných zdrojů. Rozhodnutí tedy současně podporuje přírodně zaměřené projekty a obnovitelné zdroje; jednotlivé přidělené částky nejsou v dodaném výňatku úplně zachyceny."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-02de5dc826fe--source",
+        "psp-core-2025--law-change-43121-1-1",
+        "psp-core-2025--law-change-43121-1-2",
+        "psp-core-2025--law-change-43121-1-3",
+        "psp-core-2025--law-change-43121-1-4",
+        "psp-core-2025--law-change-43121-2",
+        "psp-core-2025--law-change-43121-3",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--law-change-43174-5",
+        "psp-core-2025--law-change-43174-6",
+        "psp-core-2025--law-change-43174-8-1",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-8-6",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-41",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-36",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--law-change-43174-approved-53",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43223-1",
+        "psp-core-2025--law-change-43223-3",
+        "psp-core-2025--law-change-43223-5",
+        "psp-core-2025--law-change-43224-1",
+        "psp-core-2025--law-change-43255-3",
+        "esbirka-regulations--law-change-sb-2026-167",
+        "zvlady-resolutions--law-change-uv-2025-1018",
+        "zvlady-resolutions--law-change-uv-2026-30",
+        "zvlady-resolutions--law-change-uv-2026-175-107",
+        "zvlady-resolutions--law-change-uv-2026-175-112",
+        "zvlady-resolutions--law-change-uv-2026-175-192",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "zvlady-resolutions--law-change-uv-2026-451",
+        "zvlady-resolutions--law-change-uv-2026-506",
+        "psp-core-2025--amendment-text-1175",
+        "psp-core-2025--amendment-text-1253",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--vote-88150",
+        "psp-core-2025--vote-88165",
+        "psp-core-2025--vote-88167",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--vote-88219",
+        "psp-core-2025--vote-88248",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-86833",
+        "psp-core-2025--vote-86839",
+        "psp-core-2025--vote-86842",
+        "psp-core-2025--vote-86844",
+        "psp-core-2025--vote-86845",
+        "psp-core-2025--vote-86850",
+        "psp-core-2025--vote-86858",
+        "psp-core-2025--vote-86863",
+        "psp-core-2025--vote-86864",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--vote-86879",
+        "psp-core-2025--vote-86880",
+        "psp-core-2025--vote-86898",
+        "psp-core-2025--vote-86899",
+        "psp-core-2025--vote-86901",
+        "psp-core-2025--vote-86902",
+        "psp-core-2025--vote-86903",
+        "psp-core-2025--vote-86904",
+        "psp-core-2025--vote-86910",
+        "psp-core-2025--vote-86916",
+        "psp-core-2025--vote-86918",
+        "psp-core-2025--vote-86921",
+        "psp-core-2025--vote-86936",
+        "psp-core-2025--vote-86946",
+        "psp-core-2025--vote-86953",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-88529",
+        "psp-core-2025--vote-88696",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-1175",
+        "psp-core-2025--amendment-1253",
+        "zvlady-resolutions--2025-1018",
+        "zvlady-resolutions--2026-30",
+        "zvlady-resolutions--2026-175",
+        "zvlady-resolutions--2026-377",
+        "zvlady-resolutions--2026-451",
+        "zvlady-resolutions--2026-506",
+        "esbirka-regulations--2026-167",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--print-step-210830",
+        "psp-core-2025--print-step-210832",
+        "psp-core-2025--print-step-211007"
+      ],
+      "explanationCz": "Poslanci SPD podpořili novelu stavebního zákona, kterou Senát předtím zamítl a Sněmovna následně schválila znovu. Schválené znění usnadňuje některé záměry v již zastavitelných územích, oslabuje část ochrany zemědělské půdy a podporuje povolování obnovitelných zdrojů; zároveň zavádí i nové povinnosti na ochranu opylovačů a snižuje některé cíle pro obnovitelná paliva. Vláda dříve odmítla zavedení ETS2 a později zrušila akční plány pro obnovitelné teplo a biometan, jde však o návrhy či užší kroky, které nepřevažují nad pozdějším rozhodnutím Sněmovny. Podklady proto dokládají částečný, nikoli úplný postup proti slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozhodnutí Sněmovny o stavebním zákoně zahrnuje jak omezení některých ochran krajiny a půdy, tak nové povinnosti na ochranu opylovačů a zmírnění některých unijních klimatických cílů; tyto protichůdné části nelze sloučit do jednoznačně úplného splnění ani úplného popření slibu.",
+        "Výňatek schváleného rozpočtu neobsahuje konkrétní částky podpory obnovitelných zdrojů, takže nelze přesně určit rozsah této položky; hlasování SPD proti několika návrhům na její snížení je však doloženo.",
+        "Text části zákona o zrušení jednotného environmentálního stanoviska chybí, takže jeho konkrétní dopad nelze určit z poskytnutých podkladů.",
+        "Schválená změna vymezení území s omezením pesticidů používá nový pojem, jehož přesný rozsah není v balíčku uveden; směr změny ochranného pásma proto nelze posoudit."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_087e9f7a2058a05c016aec4dc4881887d1bd1024f19e539a4f",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 464256,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 464253
+      },
+      "output_tokens": 21216,
+      "output_tokens_details": {
+        "reasoning_tokens": 12466
+      },
+      "total_tokens": 485472
+    },
+    "output": {
+      "promiseId": "candidate-02de5dc826fe",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-1",
+          "relevant": true,
+          "reasonCz": "Upravuje česká pravidla pro fluorované skleníkové plyny a jejich návaznost na nové unijní předpisy, tedy část klimatických opatření, na jejichž zastavení se slib vztahuje.",
+          "effectCz": "Dosavadní účel zákona odkazoval na starší unijní předpisy; návrh jej váže na nařízení EU 2024/590 a 2024/573. Jde o aktualizaci právního rámce, nikoli o doložené zmírnění klimatických pravidel; konkrétní změnu emisních limitů dodaný výřez neukazuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-2",
+          "relevant": true,
+          "reasonCz": "Mění školení, certifikaci a evidenci osob nakládajících s fluorovanými skleníkovými plyny, což může ovlivnit vymáhání klimatických opatření.",
+          "effectCz": "Dosavadní úprava nevyžadovala pravidelné obnovování znalostí; návrh zavádí školení nebo hodnocení, evidenci a další povinnosti. U těchto podmínek je režim přísnější, nikoli volnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-3",
+          "relevant": true,
+          "reasonCz": "Upravuje sankce za porušování pravidel pro fluorované skleníkové plyny a tím jejich vymáhání.",
+          "effectCz": "Dosavadní přestupková úprava se nahrazuje širším souborem skutků a sankcí navázaných na nové unijní předpisy. Z dodaného výňatku plyne rozšíření postihovaných porušení; konkrétní srovnání všech pokut nelze úplně určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-4",
+          "relevant": true,
+          "reasonCz": "Mění výkon dozoru a pravomoci úřadů při prosazování pravidel pro fluorované skleníkové plyny.",
+          "effectCz": "Dosavadní pravomoci orgánů se přizpůsobují novým unijním pravidlům a návrh doplňuje nástroje jako zadržení nebo stažení některých výrobků z trhu. To posiluje vymáhání pravidel, ale výňatek nedokládá změnu samotných emisních limitů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-2",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje trestní postih na nakládání s fluorovanými skleníkovými plyny, které slib řadí mezi klimatická opatření k zastavení.",
+          "effectCz": "Dosavadní trestní ustanovení se týkalo látek poškozujících ozonovou vrstvu; návrh přidává fluorované skleníkové plyny a související jednání. Okruh trestně postižitelných jednání se rozšiřuje, tedy zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-3",
+          "relevant": true,
+          "reasonCz": "Nově omezuje používání desfluranu s vysokým dopadem na klima a vztahuje se k ochraně životního prostředí.",
+          "effectCz": "Dosavadní text § 47 zákona o zdravotních službách takové omezení neobsahoval; nově lze desfluran použít jen při zdravotním důvodu, který vylučuje jiná anestetika, a použití se eviduje. Omezení je přísnější; předchozí znění tohoto nového ustanovení v balíčku není."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Mění cíle stavebního zákona a způsob poměřování ochrany životního prostředí s rozvojem území.",
+          "effectCz": "Dosavadní účel výslovně zdůrazňoval integrovanou ochranu veřejných zájmů a udržitelný rozvoj. Navržené znění dává větší prostor rozvoji, pokud lze jiné zájmy chránit podmínkami; schválená verze zároveň výslovně zachovává soulad s právem EU a mezinárodními závazky. Ochranné hledisko je v tomto směru oslabeno, byť ne odstraněno."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Zavádí možnost převzít některé dřívější plochy a koridory bez posouzení vlivů na udržitelný rozvoj území.",
+          "effectCz": "Předchozí § 76 a § 79 takovou výjimku neobsahovaly. Nové odstavce umožňují převzetí ploch a koridorů bez stanoveného posuzování; v této části se ochranný a hodnoticí postup uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Mění výjimky z požadavků na výstavbu a současně přidává pravidla pro prostupnost krajiny a přístup k vodním tokům.",
+          "effectCz": "Dosavadní požadavky na výstavbu se nově mohou neuplatnit ve více situacích, včetně případů ekonomické nepřiměřenosti, což jejich použití uvolňuje. Nově se naopak preferují veřejně přístupné plochy u vody a chrání prostupnost podél toků; pro tyto nové povinnosti předchozí znění v balíčku není."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Mění pravidla pro energetické stavby, solární a další obnovitelné zdroje a požadavky na úsporu energie.",
+          "effectCz": "Původní úprava solární výrobu v některých plochách omezovala podmínkou zachování zeleně a umožňovala umístění na existující stavbě, pokud to regulační plán nevylučoval. Schválené znění rozšiřuje předpoklad slučitelnosti instalací obnovitelných zdrojů s charakterem území a památkovou péčí; tím se cesta k těmto stavbám uvolňuje, zatímco některé podmínky zachování vegetace zůstávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Zavádí předpoklady přípustnosti staveb v zastavitelném území a v některých případech vylučuje posouzení krajinného rázu.",
+          "effectCz": "Dosavadní § 193 vyžadoval poměření souladu záměru s právními předpisy a veřejnými zájmy; nově se u vymezeného území předpokládá přípustnost a krajinný ráz se při povolení neposuzuje. U vymezených projektů je ochrana krajinného rázu a přezkum slabší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Dodané změny zákona o požární ochraně upravují pravomoci a technické podmínky požární bezpečnosti, nikoli závazek týkající se Green Dealu, Fit for 55, krajiny nebo vodního hospodářství.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-5",
+          "relevant": true,
+          "reasonCz": "Mění postupy pro dobývání kritických nerostů a související lhůty orgánů, včetně environmentálního stanoviska.",
+          "effectCz": "Dosavadní znění výslovně vyjímalo jednotné environmentální stanovisko z pravidla, podle něhož se opožděné stanovisko považuje za souhlasné bez podmínek. Navržené znění tuto výjimku ruší, takže po uplynutí lhůty může být ochranné stanovisko považováno za souhlas; pravidlo je v této části volnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-6",
+          "relevant": true,
+          "reasonCz": "Mění povolování těžby kritických nerostů a pravidla pro environmentální stanoviska k těžebním činnostem.",
+          "effectCz": "Původní znění vylučovalo jednotné environmentální stanovisko z fikce souhlasu při jeho nevydání. Schválený text tuto ochranu zachovává jen přechodně do zrušení příslušného zákona; po této změně může být ochrana lhůtou oslabena. Dlouhodobý režim nelze z balíčku určit bez chybějícího textu související změny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-1",
+          "relevant": true,
+          "reasonCz": "Vkládá do zákona o ochraně přírody a krajiny povinnosti chránit biotopy opylovačů při práci v krajině a při správě veřejné zeleně.",
+          "effectCz": "Pro tyto nové povinnosti předchozí znění neposkytuje pravidlo; návrh ukládá předcházet zbytečnému poškozování biotopů a využívat opatření na jejich obnovu. Schválené znění zachovává povinnosti, ale vypouští navržené pevné minimum 30 % veřejné zeleně, takže rozsah této konkrétní povinnosti je volnější než v návrhu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Mění systém povolování a správní působnosti v ochraně přírody a krajiny; schválené znění také ruší výjimku z předpokladu převažujícího veřejného zájmu pro nové vodní obnovitelné zdroje.",
+          "effectCz": "Schválené znění ruší dosavadní pravidlo, že se předpoklad převažujícího veřejného zájmu nevztahuje na plánování a výstavbu nových obnovitelných zdrojů využívajících vodní tok. Tím se tento předpoklad rozšiřuje na vodní zdroje a usnadňuje se jejich prosazení; přesný směr ostatních změn v této části nelze z dodaného výřezu schváleného znění určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-6",
+          "relevant": true,
+          "reasonCz": "Doplňuje sankce za nedodržení nových povinností na ochranu biotopů opylovačů.",
+          "effectCz": "Předchozí přestupková ustanovení sankce za porušení nových povinností podle § 5c neobsahovala. Nové sankce posilují vymahatelnost ochrany; předchozí úprava těchto nových povinností chyběla."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Mění ochranu zemědělské půdy a povolování jejího odnětí pro stavby, včetně solární energetiky.",
+          "effectCz": "Dosavadní § 4 odst. 4 zakazoval odnětí nejkvalitnější půdy pro velké obchodní či skladové záměry a solární energetiku, s výjimkou agrovoltaiky. Schválený text přidává výjimku pro projekty u vybraných dopravních staveb, takže ochrana půdy je méně přísná; současně zavádí některá nová pravidla pro posuzování odnětí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-18",
+          "relevant": true,
+          "reasonCz": "Mění podmínky bezúplatného převodu pozemků určených pro veřejnou zeleň, což se přímo týká prostoru pro zeleň v sídlech.",
+          "effectCz": "Dosavadní pravidlo umožňovalo převod obecního pozemku pro veřejnou zeleň v zastavěném území nebo zastavitelné ploše. Nové znění ponechává jen zastavitelné plochy, a tedy zužuje okruh způsobilých pozemků pro převod určený veřejné zeleni."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Mění výjimku z domněnky veřejného zájmu u obnovitelných zdrojů využívajících vodní tok, která se týká vodního hospodářství a krajiny.",
+          "effectCz": "Dosavadní § 23b odst. 2 vylučoval nové vodní obnovitelné zdroje z domněnky převažujícího veřejného zájmu. Schválený text tento odstavec ruší, takže se domněnka rozšiřuje a výstavba těchto zdrojů se právně usnadňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Mění zvláštní povolovací režim strategické infrastruktury, včetně energetických staveb a přípravných prací, které mohou zasáhnout do krajiny a vod.",
+          "effectCz": "Dosavadní úprava pracovala s jednotným environmentálním stanoviskem a samostatným posouzením některých dopadů. Schválené znění přesouvá některá rozhodnutí do stavebního řízení a dovoluje samostatně povolovat přípravné práce, které se pak v rozsahu povolení nezohlední při pozdějším posuzování; environmentální přezkum se tím v části oslabuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Mění povinné podíly obnovitelných paliv a cíle snižování emisí skleníkových plynů, tedy část klimatických opatření slibu.",
+          "effectCz": "Znění účinné před změnou požadovalo v letech 2027–2029 podíly 1,5 %, 2,5 % a 3,75 % pokročilých paliv a snížení emisí o 6,75 %, 7,5 % a 8,75 %. Schválené znění snižuje tyto hodnoty na 1,25 %, 2 % a 3,5 % a na 6,5 %, 7 % a 8 %, čímž povinnosti mírní a částečně odpovídá záměru omezit klimatická opatření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Tato část je podle dodaných údajů relevantní pouze prostřednictvím pozměňovacích návrhů, ale její vlastní text ani příslušné pozměňovací znění umožňující věcně posoudit změnu nejsou v balíčku doloženy.",
+          "effectCz": "Z balíčku nelze zjistit předchozí ani nové znění ani směr změny. Jde o materiální mezeru v podkladech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Mění pravidla pro akcelerační oblasti a povolování obnovitelných zdrojů, včetně ochrany vody a životního prostředí.",
+          "effectCz": "Dosavadní úprava stanovovala zvláštní stanoviska orgánu ochrany životního prostředí a vodoprávního úřadu, včetně podmínek proti zhoršení stavu vod. Schválené znění přesouvá část odpovědnosti na stavební úřad, ale ponechává některé podmínky a zmírňující opatření; povolování obnovitelných zdrojů se tím zjednodušuje a část samostatného dohledu se oslabuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+          "relevant": false,
+          "reasonCz": "Změna vymezuje místo použití přípravků na ochranu rostlin; dodaný text neukazuje materiální změnu závazku zastavit Green Deal nebo Fit for 55 ani konkrétní pravidlo ochrany krajiny či vody.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Mění povinné minimální podíly obnovitelných paliv a emisní cíle v dopravě, tedy klimatická opatření související s Fit for 55.",
+          "effectCz": "Dosavadní předpis stanovoval pro roky 2027–2029 povinné podíly 1,5 %, 2,5 % a 3,75 % a snížení emisí o 6,75 %, 7,5 % a 8,75 %. Schválené znění tyto hodnoty snižuje na 1,25 %, 2 % a 3,5 % a na 6,5 %, 7 % a 8 %, takže povinnosti uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": true,
+          "reasonCz": "Mění lhůtu pro vložení havarijního plánu uživatelů závadných látek do systému ohlašování, což se týká prevence znečištění vod.",
+          "effectCz": "Dosavadní přechodná lhůta byla nejpozději 2 roky; schválené znění prodlužuje ji na 4 roky. Povinnost splnit požadavek se tedy odkládá a kontrola ochrany vod je v přechodném období volnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o státní rozpočet pro rok 2026 a pozměňovací návrhy k němu přímo měnily dotace na obnovitelné zdroje energie.",
+          "effectCz": "Rozpočet bez předchozího srovnávacího znění stanoví výdaje pro rok 2026, ale dodané výňatky odkazují pouze na přílohy a neobsahují částky pro dotace na obnovitelné zdroje. Pozměňovací návrhy výslovně navrhovaly jejich snížení, například o 7,3 miliardy Kč, avšak schválenou částku z balíčku určit nelze."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43223-1",
+          "relevant": false,
+          "reasonCz": "Dodaný text upravuje správní působnost a dozor nad ekodesignem výrobků; neukazuje konkrétní změnu v krajině, vodním hospodářství, ochraně přírody ani opatření Fit for 55.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43223-3",
+          "relevant": false,
+          "reasonCz": "Dodaný výřez mění rámec ekodesignu výrobků spojených se spotřebou energie, ale neobsahuje konkrétní pravidlo pro krajinu, vodu nebo ochranu životního prostředí podle závazku slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43223-5",
+          "relevant": false,
+          "reasonCz": "Mění dozor nad trhem s výrobky a přestupky za nesoulad s ekodesignem; konkrétní dopad na krajinu, vodu či opatření Fit for 55 dodaný text nedokládá.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43224-1",
+          "relevant": true,
+          "reasonCz": "Zavádí správu uhlíkového vyrovnání na hranicích, tedy klimatické opatření EU, které slib řadí mezi unijní opatření k zastavení.",
+          "effectCz": "Jde o nový zákon bez předchozího znění v balíčku. Zavádí správu jistot, certifikátů CBAM, kontrol a sankcí při dovozu zboží podle unijního mechanismu; jeho zavedení podporuje uplatňování tohoto klimatického opatření, nikoli jeho zastavení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43255-3",
+          "relevant": true,
+          "reasonCz": "Dohoda obsahuje pravidla obnovy populací a stanovišť stěhovavých vodních ptáků, což přímo souvisí s ochranou přírody a udržitelnými opatřeními.",
+          "effectCz": "Jde o navrhovanou změnu mezinárodní dohody bez předchozího znění v balíčku. Text stanoví obnovu populací a přípravu plánů založených na vědeckých studiích; představuje návrh na posílení ochrany přírody, nikoli na zavedení Fit for 55."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Upravuje schvalování vozidel podle unijních pravidel o emisích a životnosti baterií, tedy klimatickou část opatření EU.",
+          "effectCz": "Dosavadní zákon podle dodaného kontextu neupravoval tyto nové požadavky na schvalování vozidel. Návrh zavádí pravidla pro emise a životnost baterií a postihy za nedovolené zásahy; jde o implementaci/administraci unijního emisního rámce, která nepodporuje jeho zastavení."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-167",
+          "relevant": true,
+          "reasonCz": "Podmiňuje změnu trvalého travního porostu posouzením dopadů na chráněná stanoviště a lokality, tedy přímo zasahuje do ochrany krajiny.",
+          "effectCz": "Dosavadní podmínky přímých plateb takovou výslovnou podmínku v § 12 odst. 6 písm. c) neobsahovaly. Nařízení nově vyžaduje vyjádření orgánu ochrany přírody, že změna nepoškodí stanoviště ani významně neovlivní chráněnou lokalitu; ochrana je přísnější."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1018",
+          "relevant": true,
+          "reasonCz": "Vláda výslovně rozhodla neprovádět ETS2 pro paliva v budovách, dopravě a dalších odvětvích a usilovat o zrušení systému, což přímo odpovídá části slibu o zastavení unijních klimatických opatření.",
+          "effectCz": "Usnesení rozhoduje, že příslušná ustanovení ETS2 nebudou převedena do českého práva, a ukládá ministrům usilovat o zrušení systému nebo ochranu domácností a podniků. To zastavuje či omezuje část klimatického opatření; širší dopad na celou ochranu životního prostředí nedokládá."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-30",
+          "relevant": true,
+          "reasonCz": "Vláda zřídila funkci zmocněnce pro klima a Green Deal a jeho úkolem je koordinovat politiky EU právě v oblasti, kterou slib výslovně zmiňuje.",
+          "effectCz": "Usnesení vytváří funkci koordinující postoje a návrhy k politikám EU v oblasti klimatu a Green Dealu, včetně doporučení k tempu a způsobu jejich provádění. Samo nestanoví zrušení ani konkrétní nové klimatické povinnosti; zachovává však koordinační mechanismus místo zastavení těchto politik."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-107",
+          "relevant": false,
+          "reasonCz": "Plán transponuje směrnici o průmyslových emisích, nikoli opatření Fit for 55; dodaný text neprokazuje přímou souvislost s přesným závazkem slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-112",
+          "relevant": true,
+          "reasonCz": "Vláda plánuje právní úpravu ochrany přírody a obnovy stanovišť, což může přímo naplňovat část slibu o udržitelných a obhajitelných opatřeních.",
+          "effectCz": "Plán stanoví přípravu zákona pro národní plán obnovy přírody a posílení ochrany zeleně a dřevin v sídlech. Jde o návrh budoucího posílení ochrany a adaptace krajiny; sám zatím existující povinnosti nemění."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-192",
+          "relevant": false,
+          "reasonCz": "Jde o přehled různých implementačních prací; dodané vybrané řádky neukazují konkrétní rozhodnutí či návrh, který by sám materiálně měnil závazek slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Vláda zrušila akční plány pro rozvoj nízkopotenciálního obnovitelného a odpadního tepla a biometanu, tedy část politiky spojené s Green Dealem.",
+          "effectCz": "Usnesení ruší dva dříve přijaté akční plány, které podporovaly obnovitelné teplo a biometan. Jde o rozhodnutí omezit část podpůrných opatření pro obnovitelné zdroje, což odpovídá části slibu o zastavení projektů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-451",
+          "relevant": true,
+          "reasonCz": "Nařizuje přípravu a aktualizaci metodik pro klimatické prověřování infrastruktury, tedy přidává klimatická hlediska do použití fondů EU.",
+          "effectCz": "Dosavadní rámec v dodaném textu není uveden; usnesení ukládá připravit a aktualizovat metodiky pro posouzení, zda projekty významně nepoškozují cíle a jaký mají klimatický dopad. Jde o budoucí procesní požadavek podporující klimatické prověřování, nikoli o přímou změnu environmentálních limitů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-506",
+          "relevant": true,
+          "reasonCz": "Vláda rozděluje prostředky na ochranu biodiverzity, sucho, obnovitelné zdroje a čistou mobilitu, což přímo zasahuje do environmentální i klimatické politiky slibu.",
+          "effectCz": "Usnesení převádí celkem 10 160 830 520,85 Kč na organizační složky státu; dodané řádky zahrnují ochranu biodiverzity a boj se suchem, ale také obnovitelné zdroje a čistou mobilitu. Rozhodnutí má současně podpůrné i protichůdné části vůči slibu a v balíčku není doložena změna předchozího rozpočtového pravidla."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-02de5dc826fe--source",
+        "psp-core-2025--law-change-43121-1-1",
+        "psp-core-2025--law-change-43121-1-2",
+        "psp-core-2025--law-change-43121-1-3",
+        "psp-core-2025--law-change-43121-1-4",
+        "psp-core-2025--law-change-43121-2",
+        "psp-core-2025--law-change-43121-3",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-5",
+        "psp-core-2025--law-change-43174-6",
+        "psp-core-2025--law-change-43174-8-1",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-8-6",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-18",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-41",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--law-change-43174-approved-53",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43224-1",
+        "psp-core-2025--law-change-43255-3",
+        "psp-core-2025--law-change-43415-1",
+        "esbirka-regulations--law-change-sb-2026-167",
+        "zvlady-resolutions--law-change-uv-2025-1018",
+        "zvlady-resolutions--law-change-uv-2026-30",
+        "zvlady-resolutions--law-change-uv-2026-175-112",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "zvlady-resolutions--law-change-uv-2026-451",
+        "zvlady-resolutions--law-change-uv-2026-506",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-1175",
+        "psp-core-2025--amendment-1253",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--vote-88150",
+        "psp-core-2025--vote-88152",
+        "psp-core-2025--vote-88159",
+        "psp-core-2025--vote-88165",
+        "psp-core-2025--vote-88166",
+        "psp-core-2025--vote-88167",
+        "psp-core-2025--vote-88178",
+        "psp-core-2025--vote-88179",
+        "psp-core-2025--vote-88185",
+        "psp-core-2025--vote-88186",
+        "psp-core-2025--vote-88192",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--vote-88219",
+        "psp-core-2025--vote-88235",
+        "psp-core-2025--vote-88248",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-512",
+        "psp-core-2025--amendment-text-523",
+        "psp-core-2025--amendment-text-535",
+        "psp-core-2025--amendment-text-536",
+        "psp-core-2025--amendment-text-451",
+        "psp-core-2025--amendment-text-475",
+        "psp-core-2025--amendment-text-503",
+        "psp-core-2025--amendment-text-381",
+        "psp-core-2025--amendment-text-360",
+        "psp-core-2025--amendment-text-415",
+        "psp-core-2025--amendment-text-487",
+        "psp-core-2025--amendment-text-472",
+        "psp-core-2025--amendment-text-501",
+        "psp-core-2025--amendment-text-502",
+        "psp-core-2025--amendment-text-504",
+        "psp-core-2025--amendment-text-580",
+        "psp-core-2025--amendment-text-526",
+        "psp-core-2025--amendment-text-579",
+        "psp-core-2025--amendment-text-506",
+        "psp-core-2025--amendment-text-509",
+        "psp-core-2025--amendment-text-551",
+        "psp-core-2025--amendment-text-515",
+        "psp-core-2025--amendment-text-528",
+        "psp-core-2025--amendment-text-560",
+        "psp-core-2025--vote-86833",
+        "psp-core-2025--vote-86839",
+        "psp-core-2025--vote-86842",
+        "psp-core-2025--vote-86844",
+        "psp-core-2025--vote-86845",
+        "psp-core-2025--vote-86850",
+        "psp-core-2025--vote-86858",
+        "psp-core-2025--vote-86863",
+        "psp-core-2025--vote-86864",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--vote-86879",
+        "psp-core-2025--vote-86880",
+        "psp-core-2025--vote-86898",
+        "psp-core-2025--vote-86899",
+        "psp-core-2025--vote-86901",
+        "psp-core-2025--vote-86902",
+        "psp-core-2025--vote-86903",
+        "psp-core-2025--vote-86904",
+        "psp-core-2025--vote-86910",
+        "psp-core-2025--vote-86916",
+        "psp-core-2025--vote-86918",
+        "psp-core-2025--vote-86921",
+        "psp-core-2025--vote-86936",
+        "psp-core-2025--vote-86946",
+        "psp-core-2025--vote-86953",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-88529",
+        "psp-core-2025--print-step-210832",
+        "psp-core-2025--print-step-211007",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--amendment-1175",
+        "psp-core-2025--amendment-1253",
+        "zvlady-resolutions--2026-377",
+        "psp-core-2025--vote-88165",
+        "psp-core-2025--vote-88166",
+        "psp-core-2025--vote-88167",
+        "psp-core-2025--vote-88178",
+        "psp-core-2025--vote-88179",
+        "psp-core-2025--vote-88185",
+        "psp-core-2025--vote-88186",
+        "psp-core-2025--vote-88192",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--vote-88219",
+        "psp-core-2025--vote-88235",
+        "psp-core-2025--vote-88248",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--vote-88696",
+        "psp-core-2025--amendment-text-1630",
+        "psp-core-2025--vote-88696"
+      ],
+      "explanationCz": "Poslanci SPD předložili a podpořili změny stavebního zákona, které v některých případech usnadňují energetické a jiné stavby a oslabují posouzení dopadů na krajinu či půdu; Sněmovna na jejich hlasech po vrácení Senátem na zákonu setrvala. Součástí změn je také rozšíření předpokladu veřejného zájmu na nové obnovitelné zdroje využívající vodní tok, což je v napětí se slibem zastavovat unijní zelená opatření. Proti tomu vláda odmítla zavádět ETS2 a přijala některé kroky k omezení podpory obnovitelných zdrojů; zákon zároveň přináší i ochranu opylovačů a zmírňuje některé klimatické povinnosti. Z poskytnutých podkladů ale chybí text změny zákona o jednotném environmentálním stanovisku, takže její dopad nelze spolehlivě posoudit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dopad části o zrušení zákona o jednotném environmentálním stanovisku nelze ověřit: balíček neobsahuje její text ani pozměňovací znění, které se jí týká.",
+        "Výňatek státního rozpočtu neuvádí schválenou částku dotací na obnovitelné zdroje; SPD nepodpořila několik návrhů na jejich snížení, ale schválené rozpočtové nastavení z těchto výňatků nelze určit.",
+        "Změny stavebního zákona obsahují také podporu ochrany opylovačů, lepší přístup k vodním tokům a přísnější podmínky pro zemědělské změny; současně však některé schválené části usnadňují energetické projekty a oslabují část ochranných postupů."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0f27e494fb4eb2c2016aec5006825887d1a070829846b73427",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 464256,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 464253
+      },
+      "output_tokens": 21555,
+      "output_tokens_details": {
+        "reasoning_tokens": 11349
+      },
+      "total_tokens": 485811
+    },
+    "output": {
+      "promiseId": "candidate-02de5dc826fe",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení aktualizují pravidla pro regulované látky a fluorované skleníkové plyny podle nových předpisů EU, tedy přímo zasahují do závazku zastavit unijní klimatická opatření.",
+          "effectCz": "Dřívější § 1 odst. 1 odkazoval na nařízení EU z let 2009 a 2014; navržené znění odkazuje na nařízení z roku 2024 a upravuje ochranu ozonové vrstvy a klimatického systému podle jejich nových definic. Jde o pokračování a aktualizaci unijního režimu, nikoli o jeho zastavení; změna rozsahu povinností se z dodaného výňatku nedá plně určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-2",
+          "relevant": true,
+          "reasonCz": "Část mění povinnosti při nakládání s fluorovanými plyny, které souvisejí s klimatickou politikou EU a závazkem zastavit její opatření.",
+          "effectCz": "Dosavadní znění stanovovalo méně konkrétní povinnosti k evidenci, certifikaci a školení. Návrh přidává obnovení znalostí, hodnocení, další evidenci a oznamování; některé požadavky tedy zpřísňuje a rozšiřuje. Směřuje k provádění unijního režimu, ne k jeho zastavení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-3",
+          "relevant": true,
+          "reasonCz": "Navržené přestupky výslovně postihují porušení pravidel EU pro fluorované skleníkové plyny, včetně jejich úniků.",
+          "effectCz": "Dříve uvedené přestupky postihovaly především neoprávněné nakládání s látkami poškozujícími ozonovou vrstvu; návrh mezi ně přidává širokou škálu porušení pravidel pro fluorované plyny a související sankce. Vynucování povinností se rozšiřuje a zpřísňuje, takže se unijní režim nezastavuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-4",
+          "relevant": true,
+          "reasonCz": "Část upravuje kontrolu a vymáhání pravidel EU pro fluorované plyny a látky poškozující ozonovou vrstvu.",
+          "effectCz": "Dosavadní pravidla přidělovala kontrolní úkoly a předávání údajů celním orgánům; návrh mění příslušné orgány, rozšiřuje výměnu informací a umožňuje zadržení zboží při podezření na porušení pravidel EU. Kontrola a vymáhání se rozšiřují, což podporuje pokračování tohoto režimu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-2",
+          "relevant": true,
+          "reasonCz": "Navrhuje rozšířit trestní postih na fluorované skleníkové plyny a jejich vypouštění, tedy přímo na klimatické regulace EU.",
+          "effectCz": "Dosavadní § 298a trestního zákoníku postihoval nedovolenou výrobu a nakládání s látkami poškozujícími ozonovou vrstvu. Návrh přidává fluorované plyny, jejich vypouštění i uvádění zařízení do provozu; rozsah trestní odpovědnosti se rozšiřuje a zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-3",
+          "relevant": true,
+          "reasonCz": "Nově omezuje použití desfluranu kvůli jeho vazbě na přímo použitelný předpis EU o fluorovaných skleníkových plynech.",
+          "effectCz": "Pro tuto povinnost dosavadní znění zákona o zdravotních službách žádné pravidlo neobsahovalo. Návrh dovoluje desfluran pouze tehdy, pokud ze zdravotních důvodů nelze použít jiné anestetikum, a přidává evidenci; povinnost je nová a přísnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Mění způsob, jak se při povolování staveb vyvažují zájmy životního prostředí a rozvoje území.",
+          "effectCz": "Dosavadní účel zákona výslovně zahrnoval integrovanou ochranu veřejných zájmů a udržitelný rozvoj. Navržené znění přidává podmínky rozvoje sídel, hospodářství a infrastruktury a stanoví, že zásah do žádného zájmu nemá svými nepříznivými následky převážit přínosy; ochrana životního prostředí zůstává, ale její postavení se více vyvažuje s rozvojem. Schválené znění dále svěřuje posuzování zájmů stavebním úřadům a jejich rozhodnutím nahrazuje řadu úkonů jiných dotčených orgánů, což může oslabit samostatné uplatňování některých ochran."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Mění posuzování vlivů při přebírání územních záměrů do plánů, což může omezit kontrolu jejich dopadu na krajinu a životní prostředí.",
+          "effectCz": "Dříve uvedené paragrafy takový zvláštní postup neobsahovaly. Návrh umožňuje převzít některé již vymezené plochy a koridory bez řízení a posuzování vlivů na udržitelný rozvoj; schválené znění tuto výjimku zachovává. Procesní ochrana a přezkum se tím v těchto případech oslabují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Část současně upravuje požadavky na výstavbu a přidává pravidla pro veřejná prostranství podél vod, takže se dotýká krajiny i vodního hospodářství.",
+          "effectCz": "Dosavadní § 137 uplatňoval požadavky na výstavbu u vyjmenovaných staveb, pokud tomu nebránily závažné důvody nebo jiný veřejný zájem. Schválené znění přidává výjimky při ekonomické nepřiměřenosti a možnost splnit některé požadavky příspěvkem, což pravidla uvolňuje; zároveň nově stanoví zachování průchodnosti podél vod a propojení veřejných prostranství s volnou krajinou, což ochranu části krajiny posiluje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Schválená část usnadňuje instalace fotovoltaiky a mění požadavky na ochranu přírody a úsporu energie při stavbách.",
+          "effectCz": "Dřívější pravidla pro fotovoltaické stavby nezahrnovala všechny výjimky a domněnky schválené ve znění návrhu; to považuje některé instalace na stavbách za souladné s charakterem území a usnadňuje jejich povolení. V témže schváleném výňatku se doplňují povinnosti předcházet poškození zvláště chráněných rostlin, živočichů a jejich biotopů. Část tedy současně usnadňuje obnovitelné zdroje a posiluje některé ochrany přírody."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Při povolování v již vymezeném zastavitelném území omezuje posouzení krajinného rázu a půdy, což zasahuje do ochrany krajiny.",
+          "effectCz": "Dosavadní § 193 vyžadoval posouzení souladu záměru s právními předpisy chránícími veřejné zájmy. Schválené znění zakládá domněnku přípustnosti v zastavitelném území a stanoví, že se v určitých případech neposuzuje krajinný ráz ani podmínky odnětí půdy ze zemědělského půdního fondu. Ochranné posouzení se v těchto případech zužuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Dodaný text se týká technických pravidel požární ochrany, nikoli zastavení Green Dealu či Fit for 55 ani konkrétní ochrany krajiny nebo vody.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "Jediný relevantní připojený návrh se týká instalací malých fotovoltaických zdrojů v památkově chráněných územích.",
+          "effectCz": "Vlastní text této části ani předchozí znění dotčených ustanovení nejsou dodány. Pozměňovací návrh navrhuje zvláštní zacházení s instalacemi malých solárních zdrojů; směr změny této části nelze z jejího vlastního textu určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-5",
+          "relevant": true,
+          "reasonCz": "Mění výjimky z povolovacích lhůt pro těžbu kritických nerostů, včetně výjimek pro environmentální posouzení.",
+          "effectCz": "Dosavadní § 28a a § 28b výslovně vylučovaly jednotné environmentální stanovisko z pravidla, podle něhož může nečinnost orgánu znamenat souhlas bez podmínek. Navržené změny ruší tuto výjimku; ve schváleném znění je zachována jen přechodně, do zrušení příslušného zákona. Následně by se environmentální stanovisko mohlo dostat pod mírnější režim, takže procesní ochrana se oslabuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-6",
+          "relevant": true,
+          "reasonCz": "Upravuje povolování hornické činnosti u kritických nerostů a pravidla pro stanoviska dotčených orgánů.",
+          "effectCz": "Dosavadní § 18b vylučoval jednotné environmentální stanovisko z fikce souhlasného stanoviska při nečinnosti orgánu. Schválené znění zavádí nové lhůty, při jejichž zmeškání se stanovisko považuje za souhlasné, a tuto výjimku zachovává pouze do zrušení zákona o jednotném environmentálním stanovisku. Po této přechodné době se procesní ochrana může oslabit; ostatní změněná ustanovení nelze z dodaného textu plně porovnat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Předložené znění této části chybí a dodané texty pozměňovacích návrhů neukazují konkrétní změnu geologických pravidel spojenou se slibem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-1",
+          "relevant": true,
+          "reasonCz": "Zavádí povinnosti na ochranu biotopů opylovačů při údržbě krajiny, veřejné zeleně a vodních ploch.",
+          "effectCz": "Předchozí § 5b upravoval odchylný postup při ochraně ptáků, nikoli povinnosti na ochranu biotopů opylovačů. Nový § 5c stanoví, že se jejich biotopy nemají zbytečně poškozovat a že se mají využívat opatření k jejich obnově. Původně navržený požadavek na nejméně 30 % plochy byl ve schváleném znění změněn na rozsah, který dovoluje charakter využití; ochranný závazek je nový, ale jeho konkrétní míra je volnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Schválená změna ruší výjimku pro nové vodní obnovitelné zdroje z pravidla týkajícího se převažujícího veřejného zájmu.",
+          "effectCz": "Dosavadní § 82a odst. 3 stanoví, že se odstavec 1 nepoužije na plánování a výstavbu nových obnovitelných zdrojů využívajících energii vodního toku. Schválené znění odstavec 3 ruší, takže se výjimka pro nové vodní zdroje odstraní a obecné pravidlo odstavce 1 se na ně nově vztáhne; předchozí znění odstavce 1 není v balíčku, proto jeho úplný dopad na ochranné limity nelze ověřit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-6",
+          "relevant": true,
+          "reasonCz": "Přidává sankce za nedodržení nových pravidel na ochranu biotopů opylovačů.",
+          "effectCz": "Dřívější přestupkové paragrafy tyto nově zaváděné povinnosti neobsahovaly. Schválené znění mezi přestupky zařazuje jejich porušení; vynutitelnost nových ekologických povinností se tedy rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Mění ochranu zemědělské půdy, pravidla jejího odnětí i povolování solárních zařízení.",
+          "effectCz": "Dosavadní § 4 odst. 4 zakazoval odnětí půdy I. a II. třídy pro velké obchodní či skladovací záměry a pro energetická zařízení využívající sluneční záření, s výjimkou agrovoltaiky. Schválené znění zavádí výjimku u obchodních a skladovacích záměrů v blízkosti vybraných dopravních staveb a možnost dočasného odnětí pro solární zařízení. Tyto výjimky ochranu nejkvalitnější půdy uvolňují. Navržené změny zároveň převádějí část posuzování odnětí na stavební úřady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-18",
+          "relevant": false,
+          "reasonCz": "Mění převod některých státních pozemků určených pro veřejnou zeleň, ale dodaný text nedokládá, že by tím měnil její ochranu nebo závazek zastavit konkrétní unijní opatření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Změna vodního zákona rozšiřuje zvláštní režim veřejného zájmu na nové vodní obnovitelné zdroje.",
+          "effectCz": "Dřívější § 23b odst. 2 stanoví, že se odstavec 1 nepoužije na plánování a výstavbu nových obnovitelných zdrojů využívajících energii vodního toku. Schválené znění odstavec 2 ruší, a proto se výjimka pro nové vodní zdroje odstraní. Znění odstavce 1 v balíčku chybí; pozměňovací návrh uvádí, že jde o domněnku převažujícího veřejného zájmu, takže její rozšíření na nové vodní zdroje usnadňuje jejich prosazení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Zrychluje povolování energetické infrastruktury a mění posuzování přípravných prací s možným dopadem na životní prostředí a vodní režim.",
+          "effectCz": "Dřívější znění vyžadovalo zvláštní stanoviska a postupy pro vybrané energetické záměry. Schválené znění některá rozhodnutí začleňuje do stavebního povolení a umožňuje samostatně povolovat přípravné práce, které se pak v povolení a posouzení hlavní stavby znovu nezohlední v rozsahu, v jakém již byly povoleny. To může oslabit nebo oddělit část environmentálního posouzení; přesný dopad na jednotlivé limity nelze bez dalších ustanovení určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Schválené změny snižují budoucí cíle pro obnovitelná paliva a snižování emisí skleníkových plynů.",
+          "effectCz": "Dosavadní požadavky na pokročilá biopaliva či obnovitelná paliva nebiologického původu činily pro roky 2027–2029 1,5 %, 2,5 % a 3,75 % energie; schválené hodnoty jsou 1,25 %, 2 % a 3,5 %. Cíle na snížení emisí skleníkových plynů se rovněž snižují z 6,75 %, 7,5 % a 8,75 % na 6,5 %, 7 % a 8 %. Povinnosti se tedy zmírňují, což částečně odpovídá závazku omezovat unijní klimatická opatření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Vlastní text této části chybí, ale dodané podklady se vztahují k rušení jednotného environmentálního stanoviska, tedy k přístupu k posuzování dopadů na životní prostředí.",
+          "effectCz": "Text této části ani předchozí znění rušeného zákona nejsou v balíčku dodány. Směr a rozsah změny proto nelze z poskytnutých ustanovení určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Mění pravidla pro akcelerační oblasti obnovitelných zdrojů a zahrnuje jejich dopady na vodu, půdu a ochranu přírody.",
+          "effectCz": "Dosavadní § 13 a § 14 svěřovaly přípravu environmentálních a vodních stanovisek samostatným orgánům a obsahovaly návrhy zmírňujících podmínek. Schválené znění některé úkoly přesouvá na stavební úřad a začleňuje je do povolení záměru; současně zachovává podmínky a zmírňující opatření k ochraně vod. Posuzování se tedy mění a propojuje s povolováním obnovitelných zdrojů, nikoli však jednoduše ruší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+          "relevant": true,
+          "reasonCz": "Mění ochrannou vzdálenost, v níž jsou zakázány některé pesticidy, tedy přímou ochranu životního prostředí a obyvatel.",
+          "effectCz": "Dosavadní pravidlo vztahovalo zákaz aplikace vybraných nebezpečných pesticidů na zastavěné stavební pozemky a okolí do 20 metrů. Schválený text nahrazuje pojem „zastavěný stavební pozemek“ pojmem „pozemek zázemí stavby“. Jeho přesný rozsah podle nové definice v balíčku chybí, takže směr rozšíření či zúžení ochranného pásma nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Mění zákonné cíle pro obnovitelná paliva a snižování emisí skleníkových plynů v dopravě.",
+          "effectCz": "Dosavadní pravidla stanovovala vyšší minima obnovitelných paliv a snížení emisí pro roky 2027–2029. Schválené znění hodnoty snižuje, a tím zmírňuje příslušné povinnosti; tato část je v souladu se závazkem omezovat unijní klimatické požadavky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": true,
+          "reasonCz": "Prodlužuje lhůtu, v níž musí být starší havarijní plány týkající se vody vloženy do systému hlášení.",
+          "effectCz": "Dosavadní přechodné pravidlo ukládalo vložit plán nejpozději do dvou let; schválená změna prodlužuje lhůtu na čtyři roky. Povinnost je tedy časově mírnější a ochranná evidence se zavádí později."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet obsahuje výdaje na podporu obnovitelných zdrojů, které přímo souvisejí se závazkem zastavit Green Deal.",
+          "effectCz": "Jde o rozpočet bez dřívějšího znění měněného zákona. Dodaný výřez odkazuje na kapitoly a ukazatele, ale neobsahuje jejich schválené částky pro obnovitelné zdroje; výši ani změnu podpory proto z této části nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43223-1",
+          "relevant": true,
+          "reasonCz": "Zákon zavádí výkon státní správy k unijním požadavkům na ekodesign udržitelných výrobků.",
+          "effectCz": "Jde o nový zákon bez předchozího znění. Vymezuje orgány a jejich úkoly pro uplatňování nařízení EU 2024/1781; konkrétní požadavky na výrobky stanoví toto nařízení a prováděcí akty. Návrh tedy vytváří vnitrostátní rámec pro pokračování unijní regulace ekodesignu, nikoli pro její zastavení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43223-3",
+          "relevant": true,
+          "reasonCz": "Mění zákon o hospodaření energií tak, aby jeho pravidla dále uplatňovala unijní rámec pro ekodesign.",
+          "effectCz": "Dosavadní § 8a odkazoval na starší směrnici o ekodesignu. Návrh nahrazuje tento odkaz přímo použitelným unijním rámcem a předpisy Evropské komise; provádění ekodesignových požadavků pokračuje v nové právní podobě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43223-5",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje dozor nad trhem na výrobky, které nesplňují unijní požadavky na ekodesign udržitelných výrobků.",
+          "effectCz": "Dřívější ustanovení umožňovala opatření proti nebezpečným výrobkům a výrobkům nesplňujícím jiné požadavky. Návrh výslovně zahrnuje i výrobky porušující nařízení EU 2024/1781 a přidává dozorové orgány; vymáhání ekodesignových požadavků se rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43224-1",
+          "relevant": true,
+          "reasonCz": "Zavádí vnitrostátní pravidla pro uhlíkové vyrovnání na hranicích, které souvisí s unijní klimatickou politikou a Fit for 55.",
+          "effectCz": "Jde o nový zákon bez předchozího znění. Upravuje jistoty, prodej a vyřazování certifikátů CBAM, kontrolu dovozu a sankce za nesplnění povinností podle přímo použitelného unijního předpisu. Vytváří podmínky pro další uplatňování unijního uhlíkového mechanismu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43255-3",
+          "relevant": true,
+          "reasonCz": "Dodaný text mezinárodní dohody požaduje plány obnovy populací stěhovavých vodních ptáků a jejich stanovišť.",
+          "effectCz": "Jde o návrh změn mezinárodní dohody, nikoli o změnu českého zákona. Ukládá stranám věnovat péči obnově vybraných populací, připravovat plány založené na vědeckých studiích a hodnotit jejich dopad na životní prostředí; podporuje tedy část slibu týkající se ochrany přírody."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek se týká schvalování emisí vozidel, nikoli krajiny, vodního hospodářství nebo opatření Fit for 55, jejichž zastavení slib řeší.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-167",
+          "relevant": true,
+          "reasonCz": "Nařízení připouští další způsob přeměny trvalého travního porostu, což přímo zasahuje do ochrany krajiny a stanovišť.",
+          "effectCz": "Předchozí § 12 odst. 6 písm. a) a b) uvedené možnosti výjimky neobsahoval. Nařízení přidává možnost změnit trvalý travní porost na jinou zemědělskou kulturu nebo jej zorat, pokud orgán ochrany přírody potvrdí, že nejsou dotčena evropská stanoviště a významně ovlivněny evropsky významné lokality či ptačí oblasti. Nová možnost je podmíněná, ale přesto rozšiřuje případy, kdy lze porost změnit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1018",
+          "relevant": true,
+          "reasonCz": "Vláda navrhuje odmítnout zavedení systému ETS2 pro vytápění, dopravu a další sektory, což je přímo součástí závazku zastavit Fit for 55.",
+          "effectCz": "Usnesení stanoví, že vláda nebude do českého práva převádět ustanovení ETS2, která by zatížila fosilní paliva v dotčených sektorech, a ukládá hledat evropskou podporu pro zrušení systému. Jde o návrh politického postupu, nikoli o rozhodnutí, které samo může zrušit unijní systém."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-30",
+          "relevant": true,
+          "reasonCz": "Usnesení přímo zřizuje funkci vládního zmocněnce pro klima a Green Deal a určuje jeho úkoly.",
+          "effectCz": "Dosud taková funkce v dodaném textu stanovena nebyla. Usnesení ji zavádí a ukládá koordinovat tvorbu a vyjednávání unijních klimatických opatření, současně však zmocněnce úkoluje chránit české zájmy a navrhovat využití výjimek či úpravu tempa provádění. Samo unijní opatření nezastavuje; jeho dopad na slib závisí na budoucích doporučeních."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-107",
+          "relevant": true,
+          "reasonCz": "Plánuje zákon k provedení nové směrnice EU o průmyslových emisích a prevenci znečištění.",
+          "effectCz": "Jde o plán legislativních prací, nikoli o platnou změnu pravidel. Vláda plánuje transponovat směrnici 2024/1785 a uvádí jako cíl rozšířit kontrolu na další činnosti a snížit emise a přenosy znečištění. Jde o návrh na pokračování unijního environmentálního režimu, ne o jeho zastavení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-112",
+          "relevant": true,
+          "reasonCz": "Plánuje zákon k provedení unijního nařízení o obnově přírody a opatření na posílení ochrany zeleně a dřevin.",
+          "effectCz": "Jde o plán budoucí legislativy, nikoli o již platnou změnu. Vláda chce upravit přípravu a provádění národního plánu obnovy přírody a posílit význam dřevin a zeleně v sídlech. Konkrétní nové povinnosti ani jejich míru plán v tomto podkladu neurčuje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-192",
+          "relevant": true,
+          "reasonCz": "Příloha plánu zahrnuje přípravu předpisů EU v oblasti vody, ovzduší, odpadů a průmyslových emisí.",
+          "effectCz": "Příloha plánuje přípravu zákonů a nařízení provádějících uvedené unijní předpisy, například k městským odpadním vodám, průmyslovým emisím a kvalitě ovzduší. Jde o budoucí legislativní práci; bez textů těchto návrhů nelze určit konkrétní změnu povinností, ale plán neznamená zastavení příslušných unijních opatření."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Vláda ruší akční plány pro využívání obnovitelného tepla a biometanu, které se týkají přechodu k obnovitelným zdrojům.",
+          "effectCz": "Usnesení ruší dva dřívější vládní akční plány pro obnovitelné teplo a biometan. Tím ukončuje tyto konkrétní programové nástroje, což odpovídá části slibu o zastavení zelených projektů; samo však nemění obecná pravidla ani jiné evropské závazky."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-451",
+          "relevant": true,
+          "reasonCz": "Usnesení ukládá připravit a aktualizovat klimatické prověřování infrastruktury a pravidla „významně nepoškozovat“ pro fondy EU.",
+          "effectCz": "V dodaném textu není dřívější obdobná povinnost uvedena. Usnesení ukládá několika ministrům připravit a aktualizovat metodické dokumenty pro klimatické dopady a zásadu významně nepoškozovat. Jde o přípravný krok, který udržuje environmentální podmínky pro budoucí financování, nikoli o jejich zastavení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-506",
+          "relevant": true,
+          "reasonCz": "Usnesení rozděluje prostředky také na obnovu biodiverzity, boj se suchem, ochranu ovzduší a infrastrukturu obnovitelných zdrojů.",
+          "effectCz": "Jde o rozhodnutí o převodu 10 160 830 520,85 Kč na organizační složky státu podle přílohy. Příloha obsahuje mimo jiné prostředky pro programy biodiverzity a boje se suchem i pro infrastrukturu obnovitelných zdrojů. Rozhodnutí tedy současně podporuje přírodně zaměřené projekty a obnovitelné zdroje; jednotlivé přidělené částky nejsou v dodaném výňatku úplně zachyceny."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-02de5dc826fe--source",
+        "psp-core-2025--law-change-43121-1-1",
+        "psp-core-2025--law-change-43121-1-2",
+        "psp-core-2025--law-change-43121-1-3",
+        "psp-core-2025--law-change-43121-1-4",
+        "psp-core-2025--law-change-43121-2",
+        "psp-core-2025--law-change-43121-3",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--law-change-43174-5",
+        "psp-core-2025--law-change-43174-6",
+        "psp-core-2025--law-change-43174-8-1",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-8-6",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-41",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-36",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--law-change-43174-approved-53",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43223-1",
+        "psp-core-2025--law-change-43223-3",
+        "psp-core-2025--law-change-43223-5",
+        "psp-core-2025--law-change-43224-1",
+        "psp-core-2025--law-change-43255-3",
+        "esbirka-regulations--law-change-sb-2026-167",
+        "zvlady-resolutions--law-change-uv-2025-1018",
+        "zvlady-resolutions--law-change-uv-2026-30",
+        "zvlady-resolutions--law-change-uv-2026-175-107",
+        "zvlady-resolutions--law-change-uv-2026-175-112",
+        "zvlady-resolutions--law-change-uv-2026-175-192",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "zvlady-resolutions--law-change-uv-2026-451",
+        "zvlady-resolutions--law-change-uv-2026-506",
+        "psp-core-2025--amendment-text-1175",
+        "psp-core-2025--amendment-text-1253",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--vote-88150",
+        "psp-core-2025--vote-88165",
+        "psp-core-2025--vote-88167",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--vote-88219",
+        "psp-core-2025--vote-88248",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-86833",
+        "psp-core-2025--vote-86839",
+        "psp-core-2025--vote-86842",
+        "psp-core-2025--vote-86844",
+        "psp-core-2025--vote-86845",
+        "psp-core-2025--vote-86850",
+        "psp-core-2025--vote-86858",
+        "psp-core-2025--vote-86863",
+        "psp-core-2025--vote-86864",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--vote-86879",
+        "psp-core-2025--vote-86880",
+        "psp-core-2025--vote-86898",
+        "psp-core-2025--vote-86899",
+        "psp-core-2025--vote-86901",
+        "psp-core-2025--vote-86902",
+        "psp-core-2025--vote-86903",
+        "psp-core-2025--vote-86904",
+        "psp-core-2025--vote-86910",
+        "psp-core-2025--vote-86916",
+        "psp-core-2025--vote-86918",
+        "psp-core-2025--vote-86921",
+        "psp-core-2025--vote-86936",
+        "psp-core-2025--vote-86946",
+        "psp-core-2025--vote-86953",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-88529",
+        "psp-core-2025--vote-88696",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-1175",
+        "psp-core-2025--amendment-1253",
+        "zvlady-resolutions--2025-1018",
+        "zvlady-resolutions--2026-30",
+        "zvlady-resolutions--2026-175",
+        "zvlady-resolutions--2026-377",
+        "zvlady-resolutions--2026-451",
+        "zvlady-resolutions--2026-506",
+        "esbirka-regulations--2026-167",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--print-step-210830",
+        "psp-core-2025--print-step-210832",
+        "psp-core-2025--print-step-211007"
+      ],
+      "explanationCz": "Poslanci SPD podpořili novelu stavebního zákona, kterou Senát předtím zamítl a Sněmovna následně schválila znovu. Schválené znění usnadňuje některé záměry v již zastavitelných územích, oslabuje část ochrany zemědělské půdy a podporuje povolování obnovitelných zdrojů; zároveň zavádí i nové povinnosti na ochranu opylovačů a snižuje některé cíle pro obnovitelná paliva. Vláda dříve odmítla zavedení ETS2 a později zrušila akční plány pro obnovitelné teplo a biometan, jde však o návrhy či užší kroky, které nepřevažují nad pozdějším rozhodnutím Sněmovny. Podklady proto dokládají částečný, nikoli úplný postup proti slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozhodnutí Sněmovny o stavebním zákoně zahrnuje jak omezení některých ochran krajiny a půdy, tak nové povinnosti na ochranu opylovačů a zmírnění některých unijních klimatických cílů; tyto protichůdné části nelze sloučit do jednoznačně úplného splnění ani úplného popření slibu.",
+        "Výňatek schváleného rozpočtu neobsahuje konkrétní částky podpory obnovitelných zdrojů, takže nelze přesně určit rozsah této položky; hlasování SPD proti několika návrhům na její snížení je však doloženo.",
+        "Text části zákona o zrušení jednotného environmentálního stanoviska chybí, takže jeho konkrétní dopad nelze určit z poskytnutých podkladů.",
+        "Schválená změna vymezení území s omezením pesticidů používá nový pojem, jehož přesný rozsah není v balíčku uveden; směr změny ochranného pásma proto nelze posoudit."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0d89da650a5122e4016aec50e6649487d18badf8ca1e0bbf33",
+    "model": "gpt-6-luna",
+    "reasoningEffort": "max",
+    "usage": {
+      "input_tokens": 471672,
+      "input_tokens_details": {
+        "cache_write_tokens": 471669,
+        "cached_tokens": 0
+      },
+      "output_tokens": 14412,
+      "output_tokens_details": {
+        "reasoning_tokens": 14003
+      },
+      "total_tokens": 486084
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-8-1",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--vote-88529",
+        "psp-core-2025--law-change-43223-3",
+        "zvlady-resolutions--2025-1018",
+        "zvlady-resolutions--law-change-uv-2025-1018"
+      ],
+      "explanationCz": "Volím posudek B: je jediný dostupný a jeho závěr odpovídá doloženým krokům. Poslanci SPD hlasovali pro opětovné schválení novely stavebního zákona, vedené ve Sněmovně jako tisk č. 67, poté co ji Senát odmítl. Novela usnadňuje některé stavby v místech určených k výstavbě a solární zařízení, ale zároveň přidává ochranu opylovačů a snižuje některé cíle pro obnovitelná paliva. SPD později podpořila také zákon zavádějící unijní pravidla pro navrhování udržitelnějších výrobků; dřívější vládní snaha odmítnout povolenky pro vytápění a dopravu vyžadovala další podporu v EU. Tyto doložené kroky odůvodňují závěr, že část jednání jde proti slibu, ale nejde o jeho úplné popření."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-confirmed-single-assessor",
+    "status": "moving-against",
+    "selectedReview": "assessor-b"
+  }
+}

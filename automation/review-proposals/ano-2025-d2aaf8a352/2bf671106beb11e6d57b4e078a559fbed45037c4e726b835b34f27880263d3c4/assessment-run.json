@@ -1,0 +1,645 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T01-55-28-940Z--078096723033",
+  "evaluatedAt": "2026-11-04T01:55:28.940Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-d2aaf8a352/0780967230333c995bcb1d1ed836e20e50e0d14d35fdd083379d49e4e9a07c4d.json",
+  "packageHash": "0780967230333c995bcb1d1ed836e20e50e0d14d35fdd083379d49e4e9a07c4d",
+  "assessmentContentHash": "c29358451aada8e3e9de2374f92f34ca8f23ca421425cdd5a5796fe2bc9aaf88",
+  "assessmentFingerprint": "2bf671106beb11e6d57b4e078a559fbed45037c4e726b835b34f27880263d3c4",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-d2aaf8a352",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0a4f2e405c23a7c0016aea8ed9175c87d18ad58b905372f2bd",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 156019,
+            "input_tokens_details": {
+              "cache_write_tokens": 149669,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 12483,
+            "output_tokens_details": {
+              "reasoning_tokens": 9618
+            },
+            "total_tokens": 168502
+          },
+          "output": {
+            "promiseId": "ano-2025-d2aaf8a352",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-1",
+                "relevant": true,
+                "reasonCz": "Text mění pravidla územního plánování tak, že mezi výslovně chráněné veřejné zájmy řadí výrobu a hospodaření s energií, což se týká podmínek pro umístění energetických staveb.",
+                "effectCz": "Dosavadní § 1 vymezoval obecný cíl udržitelného rozvoje; nově se vkládají pravidla vyvažování zájmů a výslovně se chrání výroba a hospodaření s energií. Nové ustanovení navíc omezuje možnost zablokovat rozvoj, pokud lze jiné hodnoty ochránit podmínkami či zmírňujícími opatřeními, takže pro energetické stavby pravidla v tomto směru uvolňuje. U nově vkládaných ustanovení § 1a a § 1b není v podkladech dřívější znění."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-2",
+                "relevant": true,
+                "reasonCz": "Změna výslovně svěřuje úřadu povolování jaderných zařízení a vydávání rámcových povolení pro ně i související stavby.",
+                "effectCz": "Předchozí znění § 32 popisovalo působnost ministerstva, ale neuvádělo pravomoc vydávat rámcová povolení pro jaderná zařízení. Schválené znění svěřuje tuto působnost novému úřadu a zahrnuje i související stavby. Jde o změnu příslušného úřadu a povolovacího postupu; podklady neukazují změnu věcných podmínek povolení, takže přísnost či mírnost těchto podmínek se nemění."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": true,
+                "reasonCz": "Schválené znění výslovně upravuje povolování staveb pro energetickou bezpečnost v nezastavitelném území.",
+                "effectCz": "Dosavadní § 122 umožňoval jen vymezené záměry v nezastavěném území, a to v souladu s jeho charakterem. Nový odstavec dovoluje také stavby pro energetickou bezpečnost a přímo je považuje za souladné s charakterem území, čímž povolovací omezení pro tyto stavby uvolňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Změna se dotýká pravidla přímo pro areál jaderného zařízení a mění, jaké plochy se započítávají do jeho maximálního rozsahu.",
+                "effectCz": "Dosavadní § 223 odst. 1 písm. e) stanovoval maximální výměru „zastavěných ploch“ pro umístění staveb v areálu jaderného zařízení; schválené znění nahrazuje tento pojem výrazem „zastavitelných ploch“. Samotná maximální výměra zůstává, ale podklady neumožňují určit, zda nový pojem její praktický rozsah zvětšuje, nebo zmenšuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Upravený vodní zákon výslovně stanoví postup při povolování staveb pro energetickou bezpečnost, kam zákon řadí jaderné stavby.",
+                "effectCz": "Dříve se příslušná povolení a souhlasy podle vodního zákona řešily samostatně vodoprávním úřadem; změna je u záměrů povolovaných stavebním zákonem začleňuje do rozhodování stavebního úřadu. Schválené znění u staveb pro energetickou bezpečnost zachovává závazné vodoprávní stanovisko s podmínkami a limity. Mění se tedy zejména uspořádání řízení, nikoli doložená míra ochranných podmínek."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-30",
+                "relevant": false,
+                "reasonCz": "Předložená část upravovala pouze pověření vlády k vydání nařízení v oblasti bezpečnosti práce a ve schváleném znění byla vypuštěna.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": true,
+                "reasonCz": "Změna zákona o urychlení výstavby upravuje zvláštní postupy pro energetickou bezpečnost a energetickou infrastrukturu, kam spadají jaderné stavby a jejich související stavby.",
+                "effectCz": "Předchozí znění upravovalo zvláštní lhůty, přednostní projednávání a některé postupy pro energetickou bezpečnost a energetickou infrastrukturu. Navržené a schválené změny upravují rozsah těchto režimů a některé povolovací a majetkoprávní postupy; podklady dokládají rozšíření či změnu zvláštního režimu pro energetické stavby, ale neumožňují vyhodnotit směr každé jednotlivé změny. Samotný režim tím vytváří zvláštní právní podmínky, nikoli však financování konkrétního projektu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": true,
+                "reasonCz": "Část nemá vlastní dodaný text, ale pozměňovací návrh k ní zařadil další jaderné projekty na seznam staveb pro energetickou bezpečnost.",
+                "effectCz": "V rámci této změny byl navržen zápis nových jaderných zdrojů v lokalitách Tušimice a Dětmarovice do přílohy zákona o urychlení výstavby strategicky významné infrastruktury. Tím se rozšiřuje seznam projektů zahrnutých do zvláštního režimu; podklady neobsahují vlastní text této části zákona, její účinek lze proto posoudit jen podle dodaného pozměňovacího návrhu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-8",
+                "relevant": true,
+                "reasonCz": "Změna pravidel rozpočtové odpovědnosti výslovně upravuje započítávání výdajů na financování nízkouhlíkových výroben, tedy související finanční podmínku pro výrobu energie.",
+                "effectCz": "Předchozí § 13 počítal zadlužení jako dluh veřejných institucí po odečtení rezervy státního dluhu. Nové znění navíc odečítá další výdaje podle § 11 a výdaje na financování nízkouhlíkové výrobny. Tím uvolňuje výpočetní limit zadlužení pro veřejné financování těchto výroben, samo však nezakládá investorovi nárok na peníze."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+                "relevant": true,
+                "reasonCz": "Nové znění zákona o nízkouhlíkové energetice zavádí finanční mechanismus pro výstavbu nízkouhlíkových výroben, který může tvořit část finančních podmínek pro jaderný zdroj.",
+                "effectCz": "Dosavadní § 4 umožňoval návratnou finanční výpomoc ze státního rozpočtu na výstavbu nízkouhlíkové výrobny, s úrokem nejméně 2 %. Nové znění umožňuje ministerstvu po předchozím souhlasu vlády poskytnout návratné, úročené prostředky z mimorozpočtového účtu; stanoví sazbu odvozenou od výnosů dluhopisů nebo eurových swapů plus jeden procentní bod, nejméně 2 %, a výslovně říká, že na peníze není právní nárok. Vzniká konkrétní finanční rámec, ale proti předchozímu postupu přibývá předchozí souhlas vlády a podklady nedokládají jeho použití pro SMR či výrobu komponent."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-d2aaf8a352--source",
+              "psp-core-2025--law-change-43174-1-1",
+              "psp-core-2025--law-change-43174-1-2",
+              "psp-core-2025--law-change-43174-1-4",
+              "psp-core-2025--law-change-43174-1-6",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-32",
+              "psp-core-2025--law-change-43174-41",
+              "psp-core-2025--law-change-43200-8",
+              "psp-core-2025--law-change-43200-approved-9",
+              "psp-core-2025--amendment-text-1274",
+              "psp-core-2025--amendment-text-1224",
+              "psp-core-2025--amendment-text-1230",
+              "psp-core-2025--amendment-text-1216",
+              "psp-core-2025--amendment-text-1346",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88165",
+              "psp-core-2025--vote-88195",
+              "psp-core-2025--vote-88206",
+              "psp-core-2025--vote-88220",
+              "psp-core-2025--vote-88232",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--print-step-210731",
+              "psp-core-2025--amendment-text-795",
+              "psp-core-2025--amendment-795",
+              "psp-core-2025--vote-87417",
+              "psp-core-2025--vote-87430",
+              "psp-core-2025--senate-resolution-43200-6",
+              "psp-core-2025--vote-88105",
+              "psp-core-2025--vote-88416"
+            ],
+            "explanationCz": "Slib ANO se týká právních i finančních podmínek pro malé modulární reaktory a výrobu jejich komponent ve společném projektu s Rolls-Royce. Poslanci ANO předložili a vláda podpořila novelu stavebního zákona (sněmovní tisk 67), která upravuje povolování jaderných zařízení a staveb pro energetickou bezpečnost; ANO pro ni hlasovalo i po jejím zamítnutí Senátem. ANO podpořilo také zařazení dalších jaderných lokalit do zvláštního režimu a možnost povolovat energetické stavby v nezastavitelném území. Vláda předložila návrh zákona o veřejných rozpočtech (sněmovní tisk 90), jehož schválené znění zavedlo návratné, úročené financování nízkouhlíkových výroben, ale bez právního nároku investora na poskytnutí peněz. Jde o dílčí právní a finanční posun; předložené dokumenty nedokládají podmínky přímo pro výrobu komponent ani pro projekt s Rolls-Royce.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Finanční režim se týká nízkouhlíkových výroben obecně; podklady výslovně nepotvrzují, zda a za jakých podmínek by se použil na konkrétní SMR nebo výrobu jeho komponent.",
+              "Pozměňovací návrh, kterému ANO nepodpořilo hlasováním, navrhoval účast kraje v řízení o některých velkých stavbách. Podklady neukazují, zda by tato změna povolování SMR zpomalila nebo jinak ztížila, proto ji nelze vyhodnotit jako doložený postup proti slibu."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-d2aaf8a352",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení stavebního zákona výslovně zahrnují výrobu a hospodaření s energií mezi chráněné veřejné zájmy, a proto mohou ovlivnit právní podmínky pro energetické stavby.",
+          "effectCz": "Před změnou § 1 vymezoval účel zákona jako integrovanou ochranu veřejných zájmů a udržitelný rozvoj; návrh doplňuje pravidla pro poměřování zájmů a výslovně uvádí energetiku. Ustanovení § 1a je nové a nemá předchozí znění. Změna tedy energetické stavby výslovně zohledňuje, ale z dodaného textu nelze určit, že by konkrétní investiční povinnost či limit pro SMR uvolnila nebo zpřísnila."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Změna svěřuje zvláštnímu úřadu povolování jaderných zařízení a souvisejících staveb, což přímo zasahuje do jejich právních a povolovacích podmínek.",
+          "effectCz": "Dosavadní § 32 svěřoval ministerstvu zejména dohled a kontrolní úkoly; schválené znění vytváří úřadu působnost stavebního úřadu pro vyhrazené stavby a rámcová povolení jaderných zařízení i souvisejících staveb. Jde o novou pravomoc, která vytváří zvláštní povolovací cestu, avšak rámcové povolení samo provedení stavby nepovoluje, takže účinek na celkovou náročnost investice je jen částečný."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně umožňuje povolovat stavby pro energetickou bezpečnost v nezastavitelném území, což může zahrnovat jaderné energetické stavby.",
+          "effectCz": "Před změnou § 122 dovoloval v nezastavěném území jen vyjmenované záměry v souladu s charakterem území; nový odstavec dovoluje také stavby pro energetickou bezpečnost a považuje je za souladné s charakterem území. Tím se pro tuto skupinu staveb rozšiřuje možnost umístění a povolení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Změna se dotýká limitu ploch pro stavby uvnitř jaderného zařízení, což může ovlivnit prostorové podmínky pro jaderné projekty.",
+          "effectCz": "Před změnou § 223 odst. 1 písm. e) stanovoval maximální výměru zastavěných ploch pro umístění staveb v areálu jaderného zařízení; schválené znění nahrazuje „zastavěných“ slovem „zastavitelných“. Protože dodaný kontext nevysvětluje vztah obou pojmů ani jejich rozsah, nelze z balíčku určit, zda se limit tím zpřísňuje, nebo uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Schválená změna výslovně upravuje vodoprávní povolování staveb pro energetickou bezpečnost, tedy také možnou část povolovacích podmínek jaderných projektů.",
+          "effectCz": "Dosavadní znění svěřovalo povolení k nakládání s vodami vodoprávním úřadům. Schválené znění umožňuje rozhodnout o souvisejících vodních povoleních v rámci rozhodnutí stavebního úřadu, avšak u staveb pro energetickou bezpečnost ponechává závazné stanovisko vodoprávního úřadu a stanovené podmínky a limity. Změna tak zjednodušuje a spojuje řízení, ale sama neodstraňuje věcné vodoprávní požadavky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": false,
+          "reasonCz": "Navržené ustanovení se týká obecné pravomoci vlády vydávat nařízení k bezpečnosti práce a v textu schváleném Sněmovnou bylo odstraněno; dodaný text je nespojuje s podmínkami pro SMR.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změna zákona o urychlení výstavby strategicky významné infrastruktury rozšiřuje zvláštní režimy pro energetickou bezpečnost a jaderné stavby.",
+          "effectCz": "Dosavadní úprava již dávala stavbám pro energetickou bezpečnost některé přednostní a zrychlené postupy; návrh a schválené znění mění jejich procesní pravidla a rozšiřuje zvláštní režimy pro energetickou infrastrukturu a související stavby. Z dodaných ustanovení plyne snazší či rychlejší příprava a povolování některých energetických projektů, nikoli však jejich automatické povolení ani konkrétní financování SMR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Ačkoli vlastní text této části není dodán, pozměňovací návrh k ní výslovně doplňuje jaderné projekty v Tušimicích a Dětmarovicích do seznamu strategických staveb.",
+          "effectCz": "Vlastní text této části v balíčku chybí; posoudit lze pouze texty pozměňovacích návrhů. Návrh doplňuje jaderné zdroje v Tušimicích a Dětmarovicích do přílohy zákona o urychlení výstavby strategicky významné infrastruktury, v níž jsou v dodaném kontextu uvedeny Temelín a Dukovany. Pokud by byl návrh přijat, rozšířil by zvláštní režim na další jaderné projekty; jde o právní podmínku, nikoli o doložení projektu Rolls-Royce nebo výroby komponent."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Změna upravuje výpočet zadlužení tak, aby z něj byly odečítány výdaje na financování nízkouhlíkových výroben, což se týká finančních podmínek pro energetické investice.",
+          "effectCz": "Před změnou § 13 odečítal od dluhu sektoru veřejných institucí pouze rezervu na financování státního dluhu. Nové znění odečítá také stanovené výdaje z předchozího roku a výdaje na financování výstavby nízkouhlíkové výrobny. Tím se snižuje takto vypočtené zadlužení a uvolňuje se část fiskálního omezení pro takové financování; změna sama peníze investorovi neposkytuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": true,
+          "reasonCz": "Schválené a následně vyhlášené znění vytváří mechanismus státního financování výstavby nízkouhlíkových výroben, a tím může pokrýt finanční část slibu.",
+          "effectCz": "Dosavadní § 4 umožňoval návratnou finanční výpomoc ze státního rozpočtu; nové znění umožňuje ministerstvu po předchozím souhlasu vlády poskytnout návratné, úročené prostředky z mimorozpočtového účtu. Úrok činí nejméně 2 % ročně a na poskytnutí peněz není právní nárok. Změna tedy zavádí finanční mechanismus pro nízkouhlíkové výrobny, ale nedokládá, že je dostupný konkrétnímu projektu SMR či výrobě komponent."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-d2aaf8a352--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-41",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--amendment-795",
+        "psp-core-2025--amendment-text-795",
+        "psp-core-2025--vote-87417",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--amendment-1274",
+        "psp-core-2025--amendment-text-1274",
+        "psp-core-2025--vote-88195",
+        "psp-core-2025--amendment-text-1224",
+        "psp-core-2025--vote-88165",
+        "psp-core-2025--amendment-text-1230",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--amendment-text-1216",
+        "psp-core-2025--vote-88220",
+        "psp-core-2025--amendment-text-1346",
+        "psp-core-2025--vote-88232",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO spolu s dalšími předkladateli předložili návrh novely stavebního zákona (sněmovní tisk č. 67), vláda jej podpořila a poslanci ANO hlasovali pro jeho přijetí i po zamítnutí Senátem. Novela zavádí zvláštní povolovací rámec pro jaderné stavby a umožňuje stavby pro energetickou bezpečnost i v nezastavitelném území; podpořený pozměňovací návrh navíc přidal Tušimice a Dětmarovice mezi vyjmenované jaderné lokality. Vláda také předložila a prosadila pravidla pro návratné financování výstavby nízkouhlíkové výrobny z mimorozpočtového účtu, které však není nárokové a je podmíněné. Jde proto o částečné legislativní a finanční podmínky, nikoli o doložení všech podmínek pro výrobu komponent SMR v Česku ve společném projektu s Rolls-Royce.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný balíček nedokládá, že financování bylo přiznáno konkrétnímu projektu SMR, ani že byly připraveny podmínky pro výrobu komponent ve společném projektu s Rolls-Royce.",
+        "Poslanci ANO nepodpořili pozměňovací návrh, který by do povolování některých velkých staveb zapojil také kraj; z dodaného textu nelze určit, zda by toto zapojení povolování jaderného projektu ztížilo.",
+        "U změny limitu ploch uvnitř jaderného zařízení nelze z dodaného kontextu určit, zda náhrada pojmu „zastavěné plochy“ pojmem „zastavitelné plochy“ limit zpřísňuje, nebo uvolňuje."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-d2aaf8a352",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Mění obecná pravidla územního plánování a výslovně zahrnuje výrobu a hospodaření s energií a energetickou bezpečnost, takže se může týkat přípravy energetických projektů.",
+          "effectCz": "Dosavadní účel stavebního zákona byl udržitelný rozvoj a kvalita prostředí; návrh doplňuje podmínky pro bydlení, práci a život lidí. Nový § 1a zavádí vyvažování veřejných zájmů a stanoví, že rozvoj sídel, hospodářství či infrastruktury lze znemožnit jen tehdy, nelze-li jiné hodnoty ochránit podmínkami nebo zmírňujícími opatřeními; energetika je výslovně uvedena mezi chráněnými zájmy. To může usnadnit územní přípravu energetických projektů, ale nepředepisuje zvláštní podmínky pro SMR, financování ani výrobu komponent."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Text výslovně zavádí působnost úřadu pro povolování jaderných zařízení a souvisejících staveb.",
+          "effectCz": "Před změnou měl § 32 obecně vymezené úkoly ministerstva ve stavební správě; schválený text svěřuje novému úřadu působnost stavebního úřadu pro vyhrazené a související stavby a vydávání rámcového povolení pro jaderná zařízení. Jde o nové, konkrétnější povolovací uspořádání pro jaderné stavby, nikoli o změnu jejich finančních podmínek či pravidel pro výrobu komponent."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Schválená verze výslovně umožňuje povolovat stavby pro energetickou bezpečnost i v nezastavitelném území.",
+          "effectCz": "Před změnou § 122 vyjmenovával záměry povolitelné v nezastavěném území a dovoloval je v souladu s charakterem území, pokud je územní dokumentace výslovně nevyloučila. Schválená verze přidává možnost povolit tam také stavby pro energetickou bezpečnost a považuje je za souladné s charakterem území. Jde o uvolnění územního omezení pro tuto kategorii staveb, které může zahrnout jaderné projekty; samo však neurčuje jejich financování ani komponentovou výrobu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Upravuje limit zastavěných ploch v areálu jaderného zařízení, což může ovlivnit podmínky pro umístění jaderných staveb.",
+          "effectCz": "Dřívější § 223 odst. 1 písm. e) stanovoval maximální výměru zastavěných ploch v areálu jaderného zařízení; návrh mění základ vymezení z „zastavěných“ na „zastavitelných“ ploch. Balíček nevysvětluje vzájemný rozsah těchto kategorií, takže nelze určit, zda se skutečný limit tímto posunem zpřísní, nebo uvolní."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Mění povolování vodních oprávnění v rámci stavebního řízení a schválená verze výslovně řeší stavby pro energetickou bezpečnost.",
+          "effectCz": "Před změnou rozhodovaly o vodních povoleních a souhlasech vodoprávní úřady v samostatných postupech, případně vydávaly závazná stanoviska. Návrh převádí u některých záměrů souvisejících se stavebním povolením rozhodování do stavebního řízení; schválený text pro vymezené energetické stavby stanoví, že stavební úřad rozhoduje na základě závazného stanoviska vodoprávního úřadu a jím určených podmínek a limitů. Mění se především uspořádání a spojení povolovacích kroků; z dodaného textu neplyne, že by se samotné vodní limity pro SMR staly mírnějšími."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": false,
+          "reasonCz": "Dodané znění se týká zmocnění vlády k nařízením v oblasti bezpečnosti práce a schválená verze tuto část odstraňuje; text ji nespojuje s investicemi do SMR ani s jejich komponentami.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Mění zvláštní režim přípravy, povolování a majetkoprávního zajištění energetické infrastruktury, do níž text zákona řadí také jaderné stavby a související projekty.",
+          "effectCz": "Před změnou zákon č. 416/2009 Sb. již vymezoval energetickou infrastrukturu a stavby pro energetickou bezpečnost včetně jaderných zařízení, ale dodané znění novely mění zvláštní procesní režim. Nově se například doplňují pravidla pro přípravné práce a zvláštní postupy při povolování a vyvlastňování energetických staveb; v některých případech se řízení upřednostní a zkrátí se lhůty pro stanoviska. Tato pravidla usnadňují a zrychlují přípravu jaderných projektů, ale nezakládají finanční podporu ani výrobu komponent s Rolls-Royce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Vlastní text této části není dodán, ale relevantní pozměňovací návrh k ní výslovně doplňuje jaderné lokality, včetně projektů SMR, do seznamu strategicky významných staveb.",
+          "effectCz": "Vlastní text části a její předchozí znění nejsou v balíčku k dispozici. Dodaný pozměňovací návrh přidává do přílohy seznamu strategických staveb nové jaderné zdroje v Tušimicích a Dětmarovicích; jeho text výslovně uvádí, že se připravují projekty malých modulárních reaktorů. Pokud jde o tyto projekty, rozšiřuje jejich přístup ke zvláštnímu režimu strategické infrastruktury; účinek dalších ustanovení této části nelze z balíčku posoudit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Mění výpočet zadlužení tak, že z něj odečítá výdaje na financování nízkouhlíkových výroben, což se vztahuje k finančním podmínkám pro nízkouhlíkové investice.",
+          "effectCz": "Před změnou se ukazatel dluhu počítal z dluhu sektoru veřejných institucí po odečtení rezervy na financování státního dluhu. Nové znění od něj odečítá také stanovené výdaje na financování nízkouhlíkové výrobny. Tím se snižuje vykazovaný ukazatel zadlužení o příslušné výdaje a uvolňuje se omezení dané tímto ukazatelem; samo toto ustanovení však peníze investorovi neposkytuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": true,
+          "reasonCz": "Zavádí konkrétní finanční mechanismus pro financování výstavby nízkouhlíkových výroben, který může být relevantní pro investice do jaderných zdrojů.",
+          "effectCz": "Před změnou § 4 umožňoval poskytnout investorovi návratnou finanční výpomoc ze státního rozpočtu, bez právního nároku a s úročením nejméně 2 % od nabytí povolení k provozu. Nové znění umožňuje ministerstvu po souhlasu vlády poskytnout návratné, úročené prostředky z účtu mimo státní rozpočet, v korunách nebo eurech; úrok nezačne běžet před povolením k provozu a sazba je odvozena od odpovídajícího státního dluhopisu nebo eurového úrokového swapu navýšeného o 1 procentní bod, nejméně však 2 %. Změna vytváří konkrétnější finanční nástroj pro výstavbu nízkouhlíkové výrobny, ale zachovává, že na poskytnutí není právní nárok, a nestanoví částku ani výslovné určení pro projekt s Rolls-Royce."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-d2aaf8a352--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-41",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1224",
+        "psp-core-2025--vote-88165",
+        "psp-core-2025--amendment-text-1230",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--amendment-text-1216",
+        "psp-core-2025--vote-88220",
+        "psp-core-2025--amendment-text-1274",
+        "psp-core-2025--vote-88195",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--amendment-text-795",
+        "psp-core-2025--amendment-795",
+        "psp-core-2025--vote-87417",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--senate-resolution-43200-6"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh novely stavebního zákona a po zamítnutí Senátem prosadili jeho schválení; novela upravuje povolování jaderných a dalších energetických staveb. Vláda také předložila změnu financování nízkouhlíkových výroben a poslanec ANO navrhl její konkrétní podobu; poslanci ANO návrh podpořili a byl přijat zákonem. Ten umožňuje poskytovat návratné půjčky na výstavbu nízkouhlíkových výroben, takže vznikly dílčí legislativní i finanční podmínky. Podklady ale nedokládají přidělení peněz pro SMR, výrobu jejich komponent ani projekt s Rolls-Royce.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný právní text zavádí financování nízkouhlíkových výroben a zvláštní povolovací režim jaderných staveb, ale výslovně nespojuje finanční mechanismus s konkrétními SMR, výrobou jejich komponent v ČR ani společným projektem s Rolls-Royce. Není doloženo ani konkrétní poskytnutí peněz investorovi."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0a9db48f85ba0293016aea8f82e69c87d1a3253480de7bf9fe",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 156019,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 156016
+      },
+      "output_tokens": 12277,
+      "output_tokens_details": {
+        "reasoning_tokens": 9178
+      },
+      "total_tokens": 168296
+    },
+    "output": {
+      "promiseId": "ano-2025-d2aaf8a352",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení stavebního zákona výslovně zahrnují výrobu a hospodaření s energií mezi chráněné veřejné zájmy, a proto mohou ovlivnit právní podmínky pro energetické stavby.",
+          "effectCz": "Před změnou § 1 vymezoval účel zákona jako integrovanou ochranu veřejných zájmů a udržitelný rozvoj; návrh doplňuje pravidla pro poměřování zájmů a výslovně uvádí energetiku. Ustanovení § 1a je nové a nemá předchozí znění. Změna tedy energetické stavby výslovně zohledňuje, ale z dodaného textu nelze určit, že by konkrétní investiční povinnost či limit pro SMR uvolnila nebo zpřísnila."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Změna svěřuje zvláštnímu úřadu povolování jaderných zařízení a souvisejících staveb, což přímo zasahuje do jejich právních a povolovacích podmínek.",
+          "effectCz": "Dosavadní § 32 svěřoval ministerstvu zejména dohled a kontrolní úkoly; schválené znění vytváří úřadu působnost stavebního úřadu pro vyhrazené stavby a rámcová povolení jaderných zařízení i souvisejících staveb. Jde o novou pravomoc, která vytváří zvláštní povolovací cestu, avšak rámcové povolení samo provedení stavby nepovoluje, takže účinek na celkovou náročnost investice je jen částečný."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně umožňuje povolovat stavby pro energetickou bezpečnost v nezastavitelném území, což může zahrnovat jaderné energetické stavby.",
+          "effectCz": "Před změnou § 122 dovoloval v nezastavěném území jen vyjmenované záměry v souladu s charakterem území; nový odstavec dovoluje také stavby pro energetickou bezpečnost a považuje je za souladné s charakterem území. Tím se pro tuto skupinu staveb rozšiřuje možnost umístění a povolení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Změna se dotýká limitu ploch pro stavby uvnitř jaderného zařízení, což může ovlivnit prostorové podmínky pro jaderné projekty.",
+          "effectCz": "Před změnou § 223 odst. 1 písm. e) stanovoval maximální výměru zastavěných ploch pro umístění staveb v areálu jaderného zařízení; schválené znění nahrazuje „zastavěných“ slovem „zastavitelných“. Protože dodaný kontext nevysvětluje vztah obou pojmů ani jejich rozsah, nelze z balíčku určit, zda se limit tím zpřísňuje, nebo uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Schválená změna výslovně upravuje vodoprávní povolování staveb pro energetickou bezpečnost, tedy také možnou část povolovacích podmínek jaderných projektů.",
+          "effectCz": "Dosavadní znění svěřovalo povolení k nakládání s vodami vodoprávním úřadům. Schválené znění umožňuje rozhodnout o souvisejících vodních povoleních v rámci rozhodnutí stavebního úřadu, avšak u staveb pro energetickou bezpečnost ponechává závazné stanovisko vodoprávního úřadu a stanovené podmínky a limity. Změna tak zjednodušuje a spojuje řízení, ale sama neodstraňuje věcné vodoprávní požadavky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": false,
+          "reasonCz": "Navržené ustanovení se týká obecné pravomoci vlády vydávat nařízení k bezpečnosti práce a v textu schváleném Sněmovnou bylo odstraněno; dodaný text je nespojuje s podmínkami pro SMR.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změna zákona o urychlení výstavby strategicky významné infrastruktury rozšiřuje zvláštní režimy pro energetickou bezpečnost a jaderné stavby.",
+          "effectCz": "Dosavadní úprava již dávala stavbám pro energetickou bezpečnost některé přednostní a zrychlené postupy; návrh a schválené znění mění jejich procesní pravidla a rozšiřuje zvláštní režimy pro energetickou infrastrukturu a související stavby. Z dodaných ustanovení plyne snazší či rychlejší příprava a povolování některých energetických projektů, nikoli však jejich automatické povolení ani konkrétní financování SMR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Ačkoli vlastní text této části není dodán, pozměňovací návrh k ní výslovně doplňuje jaderné projekty v Tušimicích a Dětmarovicích do seznamu strategických staveb.",
+          "effectCz": "Vlastní text této části v balíčku chybí; posoudit lze pouze texty pozměňovacích návrhů. Návrh doplňuje jaderné zdroje v Tušimicích a Dětmarovicích do přílohy zákona o urychlení výstavby strategicky významné infrastruktury, v níž jsou v dodaném kontextu uvedeny Temelín a Dukovany. Pokud by byl návrh přijat, rozšířil by zvláštní režim na další jaderné projekty; jde o právní podmínku, nikoli o doložení projektu Rolls-Royce nebo výroby komponent."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Změna upravuje výpočet zadlužení tak, aby z něj byly odečítány výdaje na financování nízkouhlíkových výroben, což se týká finančních podmínek pro energetické investice.",
+          "effectCz": "Před změnou § 13 odečítal od dluhu sektoru veřejných institucí pouze rezervu na financování státního dluhu. Nové znění odečítá také stanovené výdaje z předchozího roku a výdaje na financování výstavby nízkouhlíkové výrobny. Tím se snižuje takto vypočtené zadlužení a uvolňuje se část fiskálního omezení pro takové financování; změna sama peníze investorovi neposkytuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": true,
+          "reasonCz": "Schválené a následně vyhlášené znění vytváří mechanismus státního financování výstavby nízkouhlíkových výroben, a tím může pokrýt finanční část slibu.",
+          "effectCz": "Dosavadní § 4 umožňoval návratnou finanční výpomoc ze státního rozpočtu; nové znění umožňuje ministerstvu po předchozím souhlasu vlády poskytnout návratné, úročené prostředky z mimorozpočtového účtu. Úrok činí nejméně 2 % ročně a na poskytnutí peněz není právní nárok. Změna tedy zavádí finanční mechanismus pro nízkouhlíkové výrobny, ale nedokládá, že je dostupný konkrétnímu projektu SMR či výrobě komponent."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-d2aaf8a352--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-41",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--amendment-795",
+        "psp-core-2025--amendment-text-795",
+        "psp-core-2025--vote-87417",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--amendment-1274",
+        "psp-core-2025--amendment-text-1274",
+        "psp-core-2025--vote-88195",
+        "psp-core-2025--amendment-text-1224",
+        "psp-core-2025--vote-88165",
+        "psp-core-2025--amendment-text-1230",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--amendment-text-1216",
+        "psp-core-2025--vote-88220",
+        "psp-core-2025--amendment-text-1346",
+        "psp-core-2025--vote-88232",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO spolu s dalšími předkladateli předložili návrh novely stavebního zákona (sněmovní tisk č. 67), vláda jej podpořila a poslanci ANO hlasovali pro jeho přijetí i po zamítnutí Senátem. Novela zavádí zvláštní povolovací rámec pro jaderné stavby a umožňuje stavby pro energetickou bezpečnost i v nezastavitelném území; podpořený pozměňovací návrh navíc přidal Tušimice a Dětmarovice mezi vyjmenované jaderné lokality. Vláda také předložila a prosadila pravidla pro návratné financování výstavby nízkouhlíkové výrobny z mimorozpočtového účtu, které však není nárokové a je podmíněné. Jde proto o částečné legislativní a finanční podmínky, nikoli o doložení všech podmínek pro výrobu komponent SMR v Česku ve společném projektu s Rolls-Royce.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný balíček nedokládá, že financování bylo přiznáno konkrétnímu projektu SMR, ani že byly připraveny podmínky pro výrobu komponent ve společném projektu s Rolls-Royce.",
+        "Poslanci ANO nepodpořili pozměňovací návrh, který by do povolování některých velkých staveb zapojil také kraj; z dodaného textu nelze určit, zda by toto zapojení povolování jaderného projektu ztížilo.",
+        "U změny limitu ploch uvnitř jaderného zařízení nelze z dodaného kontextu určit, zda náhrada pojmu „zastavěné plochy“ pojmem „zastavitelné plochy“ limit zpřísňuje, nebo uvolňuje."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_00823760ce78e343016aea90229c2887d18ec3ca25635389de",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 156019,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 156016
+      },
+      "output_tokens": 9705,
+      "output_tokens_details": {
+        "reasoning_tokens": 6794
+      },
+      "total_tokens": 165724
+    },
+    "output": {
+      "promiseId": "ano-2025-d2aaf8a352",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Mění obecná pravidla územního plánování a výslovně zahrnuje výrobu a hospodaření s energií a energetickou bezpečnost, takže se může týkat přípravy energetických projektů.",
+          "effectCz": "Dosavadní účel stavebního zákona byl udržitelný rozvoj a kvalita prostředí; návrh doplňuje podmínky pro bydlení, práci a život lidí. Nový § 1a zavádí vyvažování veřejných zájmů a stanoví, že rozvoj sídel, hospodářství či infrastruktury lze znemožnit jen tehdy, nelze-li jiné hodnoty ochránit podmínkami nebo zmírňujícími opatřeními; energetika je výslovně uvedena mezi chráněnými zájmy. To může usnadnit územní přípravu energetických projektů, ale nepředepisuje zvláštní podmínky pro SMR, financování ani výrobu komponent."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Text výslovně zavádí působnost úřadu pro povolování jaderných zařízení a souvisejících staveb.",
+          "effectCz": "Před změnou měl § 32 obecně vymezené úkoly ministerstva ve stavební správě; schválený text svěřuje novému úřadu působnost stavebního úřadu pro vyhrazené a související stavby a vydávání rámcového povolení pro jaderná zařízení. Jde o nové, konkrétnější povolovací uspořádání pro jaderné stavby, nikoli o změnu jejich finančních podmínek či pravidel pro výrobu komponent."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Schválená verze výslovně umožňuje povolovat stavby pro energetickou bezpečnost i v nezastavitelném území.",
+          "effectCz": "Před změnou § 122 vyjmenovával záměry povolitelné v nezastavěném území a dovoloval je v souladu s charakterem území, pokud je územní dokumentace výslovně nevyloučila. Schválená verze přidává možnost povolit tam také stavby pro energetickou bezpečnost a považuje je za souladné s charakterem území. Jde o uvolnění územního omezení pro tuto kategorii staveb, které může zahrnout jaderné projekty; samo však neurčuje jejich financování ani komponentovou výrobu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Upravuje limit zastavěných ploch v areálu jaderného zařízení, což může ovlivnit podmínky pro umístění jaderných staveb.",
+          "effectCz": "Dřívější § 223 odst. 1 písm. e) stanovoval maximální výměru zastavěných ploch v areálu jaderného zařízení; návrh mění základ vymezení z „zastavěných“ na „zastavitelných“ ploch. Balíček nevysvětluje vzájemný rozsah těchto kategorií, takže nelze určit, zda se skutečný limit tímto posunem zpřísní, nebo uvolní."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Mění povolování vodních oprávnění v rámci stavebního řízení a schválená verze výslovně řeší stavby pro energetickou bezpečnost.",
+          "effectCz": "Před změnou rozhodovaly o vodních povoleních a souhlasech vodoprávní úřady v samostatných postupech, případně vydávaly závazná stanoviska. Návrh převádí u některých záměrů souvisejících se stavebním povolením rozhodování do stavebního řízení; schválený text pro vymezené energetické stavby stanoví, že stavební úřad rozhoduje na základě závazného stanoviska vodoprávního úřadu a jím určených podmínek a limitů. Mění se především uspořádání a spojení povolovacích kroků; z dodaného textu neplyne, že by se samotné vodní limity pro SMR staly mírnějšími."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": false,
+          "reasonCz": "Dodané znění se týká zmocnění vlády k nařízením v oblasti bezpečnosti práce a schválená verze tuto část odstraňuje; text ji nespojuje s investicemi do SMR ani s jejich komponentami.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Mění zvláštní režim přípravy, povolování a majetkoprávního zajištění energetické infrastruktury, do níž text zákona řadí také jaderné stavby a související projekty.",
+          "effectCz": "Před změnou zákon č. 416/2009 Sb. již vymezoval energetickou infrastrukturu a stavby pro energetickou bezpečnost včetně jaderných zařízení, ale dodané znění novely mění zvláštní procesní režim. Nově se například doplňují pravidla pro přípravné práce a zvláštní postupy při povolování a vyvlastňování energetických staveb; v některých případech se řízení upřednostní a zkrátí se lhůty pro stanoviska. Tato pravidla usnadňují a zrychlují přípravu jaderných projektů, ale nezakládají finanční podporu ani výrobu komponent s Rolls-Royce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Vlastní text této části není dodán, ale relevantní pozměňovací návrh k ní výslovně doplňuje jaderné lokality, včetně projektů SMR, do seznamu strategicky významných staveb.",
+          "effectCz": "Vlastní text části a její předchozí znění nejsou v balíčku k dispozici. Dodaný pozměňovací návrh přidává do přílohy seznamu strategických staveb nové jaderné zdroje v Tušimicích a Dětmarovicích; jeho text výslovně uvádí, že se připravují projekty malých modulárních reaktorů. Pokud jde o tyto projekty, rozšiřuje jejich přístup ke zvláštnímu režimu strategické infrastruktury; účinek dalších ustanovení této části nelze z balíčku posoudit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Mění výpočet zadlužení tak, že z něj odečítá výdaje na financování nízkouhlíkových výroben, což se vztahuje k finančním podmínkám pro nízkouhlíkové investice.",
+          "effectCz": "Před změnou se ukazatel dluhu počítal z dluhu sektoru veřejných institucí po odečtení rezervy na financování státního dluhu. Nové znění od něj odečítá také stanovené výdaje na financování nízkouhlíkové výrobny. Tím se snižuje vykazovaný ukazatel zadlužení o příslušné výdaje a uvolňuje se omezení dané tímto ukazatelem; samo toto ustanovení však peníze investorovi neposkytuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": true,
+          "reasonCz": "Zavádí konkrétní finanční mechanismus pro financování výstavby nízkouhlíkových výroben, který může být relevantní pro investice do jaderných zdrojů.",
+          "effectCz": "Před změnou § 4 umožňoval poskytnout investorovi návratnou finanční výpomoc ze státního rozpočtu, bez právního nároku a s úročením nejméně 2 % od nabytí povolení k provozu. Nové znění umožňuje ministerstvu po souhlasu vlády poskytnout návratné, úročené prostředky z účtu mimo státní rozpočet, v korunách nebo eurech; úrok nezačne běžet před povolením k provozu a sazba je odvozena od odpovídajícího státního dluhopisu nebo eurového úrokového swapu navýšeného o 1 procentní bod, nejméně však 2 %. Změna vytváří konkrétnější finanční nástroj pro výstavbu nízkouhlíkové výrobny, ale zachovává, že na poskytnutí není právní nárok, a nestanoví částku ani výslovné určení pro projekt s Rolls-Royce."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-d2aaf8a352--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-41",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1224",
+        "psp-core-2025--vote-88165",
+        "psp-core-2025--amendment-text-1230",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--amendment-text-1216",
+        "psp-core-2025--vote-88220",
+        "psp-core-2025--amendment-text-1274",
+        "psp-core-2025--vote-88195",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--amendment-text-795",
+        "psp-core-2025--amendment-795",
+        "psp-core-2025--vote-87417",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--senate-resolution-43200-6"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh novely stavebního zákona a po zamítnutí Senátem prosadili jeho schválení; novela upravuje povolování jaderných a dalších energetických staveb. Vláda také předložila změnu financování nízkouhlíkových výroben a poslanec ANO navrhl její konkrétní podobu; poslanci ANO návrh podpořili a byl přijat zákonem. Ten umožňuje poskytovat návratné půjčky na výstavbu nízkouhlíkových výroben, takže vznikly dílčí legislativní i finanční podmínky. Podklady ale nedokládají přidělení peněz pro SMR, výrobu jejich komponent ani projekt s Rolls-Royce.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný právní text zavádí financování nízkouhlíkových výroben a zvláštní povolovací režim jaderných staveb, ale výslovně nespojuje finanční mechanismus s konkrétními SMR, výrobou jejich komponent v ČR ani společným projektem s Rolls-Royce. Není doloženo ani konkrétní poskytnutí peněz investorovi."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

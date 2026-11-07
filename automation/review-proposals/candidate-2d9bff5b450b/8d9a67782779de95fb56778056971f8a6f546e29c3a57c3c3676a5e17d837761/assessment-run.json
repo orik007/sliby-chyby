@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-43-58-912Z--ab0f85cd4d5b",
+  "evaluatedAt": "2026-10-02T01:43:58.912Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-2d9bff5b450b/ab0f85cd4d5be50d5646ebb1dc44b7e108e0d1490daa7619d7beebb0f695cfce.json",
+  "packageHash": "ab0f85cd4d5be50d5646ebb1dc44b7e108e0d1490daa7619d7beebb0f695cfce",
+  "assessmentContentHash": "d9a49c12fee1a91305e332e256a1ecb3eb2ec9824a157a051f06f11171dbe18f",
+  "assessmentFingerprint": "8d9a67782779de95fb56778056971f8a6f546e29c3a57c3c3676a5e17d837761",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-2d9bff5b450b",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-2d9bff5b450b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění pravidla stavebního řízení a obsahuje i ustanovení o obnovitelných zdrojích, ale nezavádí podporu ani pravidla pro výměnu domácích kotlů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet vyčleňuje prostředky na energetické úspory v rezidenčním sektoru a zvýhodněné financování renovací domů, což může představovat dílčí podporu výměny kotlů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-2d9bff5b450b--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh rozpočtu Státního fondu životního prostředí na rok 2026. Rozpočet počítá s podporou energetických úspor v domácnostech a se zvýhodněnými půjčkami na renovace domů, což může posunout i výměnu starých kotlů. Jde proto o dílčí krok směrem ke slibu, nikoli o doklad výměny stovek tisíc kotlů. Rozpočet ale konkrétně neuvádí, kolik prostředků půjde na kotle ani zda jejich výměnu přímo podpoří.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet uvádí podporu energetických úspor v domácnostech a zvýhodněné půjčky na renovace, ale nedokládá, zda lze z těchto prostředků přímo financovat výměnu kotlů ani jaký počet výměn podpoří."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-2d9bff5b450b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Změny stavebního zákona upravují především povolování a organizaci stavebních úřadů, nikoli podporu výměny domácích kotlů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu počítá s financováním energetických úspor v domácnostech a zvýhodněnými půjčkami na program Oprav dům po babičce, které mohou podpořit část slibu týkající se modernizace domácího vytápění."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-2d9bff5b450b--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro rozpočet Státního fondu životního prostředí na rok 2026, který počítá s podporou energetických úspor v domácnostech a s půjčkami na program Oprav dům po babičce. Takové financování může přispět k modernizaci domácího vytápění, a proto jde o částečný posun směrem ke slibu. Rozpočet ale nespecifikuje výměnu kotlů, podporované typy zařízení ani slíbený počet výměn.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet uvádí podporu energetických úspor a půjček na renovace, ale neříká, zda lze z těchto prostředků financovat konkrétně výměnu starých kotlů; neuvádí ani počty podpořených výměn."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_08eb6d204cc45e83016abf0c14121887d18ed1192ad50619b2",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 295075,
+      "input_tokens_details": {
+        "cache_write_tokens": 291751,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 3103,
+      "output_tokens_details": {
+        "reasoning_tokens": 2634
+      },
+      "total_tokens": 298178
+    },
+    "output": {
+      "promiseId": "candidate-2d9bff5b450b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění pravidla stavebního řízení a obsahuje i ustanovení o obnovitelných zdrojích, ale nezavádí podporu ani pravidla pro výměnu domácích kotlů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet vyčleňuje prostředky na energetické úspory v rezidenčním sektoru a zvýhodněné financování renovací domů, což může představovat dílčí podporu výměny kotlů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-2d9bff5b450b--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh rozpočtu Státního fondu životního prostředí na rok 2026. Rozpočet počítá s podporou energetických úspor v domácnostech a se zvýhodněnými půjčkami na renovace domů, což může posunout i výměnu starých kotlů. Jde proto o dílčí krok směrem ke slibu, nikoli o doklad výměny stovek tisíc kotlů. Rozpočet ale konkrétně neuvádí, kolik prostředků půjde na kotle ani zda jejich výměnu přímo podpoří.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet uvádí podporu energetických úspor v domácnostech a zvýhodněné půjčky na renovace, ale nedokládá, zda lze z těchto prostředků přímo financovat výměnu kotlů ani jaký počet výměn podpoří."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_07285683a2f96d97016abf0c503c1087d196d9a635f1b98ea3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 295075,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 295072
+      },
+      "output_tokens": 2070,
+      "output_tokens_details": {
+        "reasoning_tokens": 1615
+      },
+      "total_tokens": 297145
+    },
+    "output": {
+      "promiseId": "candidate-2d9bff5b450b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Změny stavebního zákona upravují především povolování a organizaci stavebních úřadů, nikoli podporu výměny domácích kotlů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu počítá s financováním energetických úspor v domácnostech a zvýhodněnými půjčkami na program Oprav dům po babičce, které mohou podpořit část slibu týkající se modernizace domácího vytápění."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-2d9bff5b450b--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro rozpočet Státního fondu životního prostředí na rok 2026, který počítá s podporou energetických úspor v domácnostech a s půjčkami na program Oprav dům po babičce. Takové financování může přispět k modernizaci domácího vytápění, a proto jde o částečný posun směrem ke slibu. Rozpočet ale nespecifikuje výměnu kotlů, podporované typy zařízení ani slíbený počet výměn.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet uvádí podporu energetických úspor a půjček na renovace, ale neříká, zda lze z těchto prostředků financovat konkrétně výměnu starých kotlů; neuvádí ani počty podpořených výměn."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

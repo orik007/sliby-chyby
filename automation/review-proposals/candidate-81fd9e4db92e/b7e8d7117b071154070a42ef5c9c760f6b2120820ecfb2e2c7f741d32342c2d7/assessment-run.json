@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-49-35-523Z--51200b3b215e",
+  "evaluatedAt": "2026-10-02T01:49:35.523Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-81fd9e4db92e/51200b3b215ece87e4985ca17bd3e2c5869d4b950568862dd44285358a9dc548.json",
+  "packageHash": "51200b3b215ece87e4985ca17bd3e2c5869d4b950568862dd44285358a9dc548",
+  "assessmentContentHash": "81dd593c48720f709d7d9b39f5966e2ed292274f3e3b1b5627e838420dcc2d38",
+  "assessmentFingerprint": "b7e8d7117b071154070a42ef5c9c760f6b2120820ecfb2e2c7f741d32342c2d7",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-81fd9e4db92e",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-81fd9e4db92e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Schválený text ruší část novely energetického zákona, ale bez jejího znění nelze doložit konkrétní souvislost s rozšířením ETS2 na bydlení a osobní dopravu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-81fd9e4db92e--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh změn stavebního zákona a po jeho zamítnutí Senátem hlasovali znovu pro setrvání Sněmovny na návrhu. Schválený text ruší také část novely energetického zákona, avšak podklady neuvádějí její obsah. Nelze proto ověřit, zda tato změna souvisí se slibem nezavádět ETS2 pro bydlení a osobní dopravu, a hlasování samo o sobě neprokazuje věcný posun ke slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Není doloženo, čeho se týkala rušená část novely energetického zákona; bez jejího znění nelze posoudit dopad této části ani hlasování ANO na ETS2 pro bydlení a osobní dopravu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-81fd9e4db92e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Schválený text ruší mimo jiné blíže neurčenou část novely energetického zákona, ale nedodává její znění ani neukazuje souvislost s ETS2, bydlením či osobní dopravou."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-81fd9e4db92e--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "ANO slíbilo nezavést systém emisních povolenek ETS2 pro bydlení a osobní dopravu. Poslanci ANO hlasovali pro novelu stavebního zákona; její schválené znění ruší také blíže neurčenou část novely energetického zákona, ale předložené podklady neukazují, co tato část upravovala. Senát návrh odmítl a Sněmovna pak návrh znovu podpořila, avšak bez znalosti obsahu rušené části nelze určit, zda hlasování slib naplňovalo nebo mu odporovalo. Proto zde není ověřen podstatný posun ve slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují znění rušené části novely energetického zákona, takže nelze zjistit, zda se týkala ETS2 ani jaký by její zrušení mělo dopad na slib.",
+        "ANO hlasovalo pro návrh jako celek, ale bez chybějícího znění nelze jeho hlasování v této věci zařadit jako krok ke splnění či proti slibu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0c6c1b0ec2c08b35016abf0d8a0d3c87d1b2d622cd362be8d4",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8645,
+      "input_tokens_details": {
+        "cache_write_tokens": 5321,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2749,
+      "output_tokens_details": {
+        "reasoning_tokens": 2356
+      },
+      "total_tokens": 11394
+    },
+    "output": {
+      "promiseId": "candidate-81fd9e4db92e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Schválený text ruší část novely energetického zákona, ale bez jejího znění nelze doložit konkrétní souvislost s rozšířením ETS2 na bydlení a osobní dopravu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-81fd9e4db92e--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh změn stavebního zákona a po jeho zamítnutí Senátem hlasovali znovu pro setrvání Sněmovny na návrhu. Schválený text ruší také část novely energetického zákona, avšak podklady neuvádějí její obsah. Nelze proto ověřit, zda tato změna souvisí se slibem nezavádět ETS2 pro bydlení a osobní dopravu, a hlasování samo o sobě neprokazuje věcný posun ke slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Není doloženo, čeho se týkala rušená část novely energetického zákona; bez jejího znění nelze posoudit dopad této části ani hlasování ANO na ETS2 pro bydlení a osobní dopravu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_044d35e50d7accfb016abf0d9d78c487d1948b013b815ee1dc",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8645,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8642
+      },
+      "output_tokens": 2498,
+      "output_tokens_details": {
+        "reasoning_tokens": 1990
+      },
+      "total_tokens": 11143
+    },
+    "output": {
+      "promiseId": "candidate-81fd9e4db92e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Schválený text ruší mimo jiné blíže neurčenou část novely energetického zákona, ale nedodává její znění ani neukazuje souvislost s ETS2, bydlením či osobní dopravou."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-81fd9e4db92e--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "ANO slíbilo nezavést systém emisních povolenek ETS2 pro bydlení a osobní dopravu. Poslanci ANO hlasovali pro novelu stavebního zákona; její schválené znění ruší také blíže neurčenou část novely energetického zákona, ale předložené podklady neukazují, co tato část upravovala. Senát návrh odmítl a Sněmovna pak návrh znovu podpořila, avšak bez znalosti obsahu rušené části nelze určit, zda hlasování slib naplňovalo nebo mu odporovalo. Proto zde není ověřen podstatný posun ve slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují znění rušené části novely energetického zákona, takže nelze zjistit, zda se týkala ETS2 ani jaký by její zrušení mělo dopad na slib.",
+        "ANO hlasovalo pro návrh jako celek, ale bez chybějícího znění nelze jeho hlasování v této věci zařadit jako krok ke splnění či proti slibu."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-43-53-459Z--06c7ebc7256b",
+  "evaluatedAt": "2026-11-05T10:43:53.459Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-9ad071a1e2/06c7ebc7256b93649ec067451d3de2c00174ec485a114d1abbc73af47a5869d5.json",
+  "packageHash": "06c7ebc7256b93649ec067451d3de2c00174ec485a114d1abbc73af47a5869d5",
+  "assessmentContentHash": "9e9ce289be0dd56f1268e2ab7e015c0fe2560436788388f208719eefab695015",
+  "assessmentFingerprint": "4dc00a8f02b2a9cd3dde3dea3cc2e75f2d1cfd5217e6c2d37f7082bbb0ee525f",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-9ad071a1e2",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-9ad071a1e2",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+          "relevant": true,
+          "reasonCz": "Výhled implementačních prací vlády výslovně uvádí návrh nařízení o zavedení digitálního eura a související novelu zákona o platebním styku, tedy kroky přímo spojené s projektem CBDC.",
+          "effectCz": "Usnesení nemění právní předpis; zařazuje do výhledu implementačních prací návrh evropského nařízení o zavedení digitálního eura a novelu zákona o platebním styku. Jde o plánované implementační práce, nikoli o již zavedené digitální euro, ale jejich zařazení směřuje proti závazku, že se ČR projektu CBDC nebude účastnit. Předchozí znění právního pravidla se zde neuplatní."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-9ad071a1e2--source",
+        "zvlady-resolutions--law-change-uv-2026-175-193",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení k plánu legislativních a implementačních prací na rok 2026 a další období. Jeho výhled implementačních prací uvádí návrh evropského nařízení o zavedení digitálního eura i související novelu zákona o platebním styku. Zařazení těchto prací do vládního plánu směřuje proti slibu, že se Česká republika projektu digitální měny centrální banky nebude účastnit. Usnesení ale samo digitální euro nezavádí, jde o plánovaný postup.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek uvádí návrhy zařazené do výhledu implementačních prací, ale nepopisuje konkrétní úkoly vlády ani nedokládá, že k jejich provedení již došlo."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-9ad071a1e2",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+          "relevant": true,
+          "reasonCz": "Příloha uvádí implementační práce k návrhům unijních nařízení o digitálním euru a související změny zákona o platebním styku, což se přímo týká slibu neúčastnit se projektu CBDC.",
+          "effectCz": "Usnesení samo žádné dosavadní znění zákona nemění; uvádí jako výhled implementačních prací návrhy nařízení o poskytování služeb v digitálních eurech i o zavedení digitálního eura a k oběma související novelu zákona o platebním styku. Jde o plánovaný krok směrem k legislativnímu zapojení do projektu digitálního eura, tedy proti závazku neúčastnit se; samo usnesení však digitální euro nezavádí ani novelu nepřijímá."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-9ad071a1e2--source",
+        "zvlady-resolutions--law-change-uv-2026-175-193",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda Motoristů sobě přijala usnesení, jehož výhled implementačních prací uvádí návrhy unijních nařízení o digitálním euru a související novely zákona o platebním styku. Jde o plánovaný legislativní krok, nikoli o již přijaté pravidlo, ale směřuje k zapojení do digitálního eura. Tím jde proti slibu, že se Česká republika projektu digitálních peněz centrálních bank nebude účastnit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výhled prací sám nedokládá, že vláda později navržené změny skutečně předloží nebo přijme; balíček také nedokládá žádný krok k posílení práva na hotovost."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0fe97dfe2b562757016aec5dc6d22c87d19729e53a66101a7d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8254,
+      "input_tokens_details": {
+        "cache_write_tokens": 1904,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 1435,
+      "output_tokens_details": {
+        "reasoning_tokens": 876
+      },
+      "total_tokens": 9689
+    },
+    "output": {
+      "promiseId": "motoriste-2025-9ad071a1e2",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+          "relevant": true,
+          "reasonCz": "Výhled implementačních prací vlády výslovně uvádí návrh nařízení o zavedení digitálního eura a související novelu zákona o platebním styku, tedy kroky přímo spojené s projektem CBDC.",
+          "effectCz": "Usnesení nemění právní předpis; zařazuje do výhledu implementačních prací návrh evropského nařízení o zavedení digitálního eura a novelu zákona o platebním styku. Jde o plánované implementační práce, nikoli o již zavedené digitální euro, ale jejich zařazení směřuje proti závazku, že se ČR projektu CBDC nebude účastnit. Předchozí znění právního pravidla se zde neuplatní."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-9ad071a1e2--source",
+        "zvlady-resolutions--law-change-uv-2026-175-193",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení k plánu legislativních a implementačních prací na rok 2026 a další období. Jeho výhled implementačních prací uvádí návrh evropského nařízení o zavedení digitálního eura i související novelu zákona o platebním styku. Zařazení těchto prací do vládního plánu směřuje proti slibu, že se Česká republika projektu digitální měny centrální banky nebude účastnit. Usnesení ale samo digitální euro nezavádí, jde o plánovaný postup.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek uvádí návrhy zařazené do výhledu implementačních prací, ale nepopisuje konkrétní úkoly vlády ani nedokládá, že k jejich provedení již došlo."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0b2ecd0a5ffbb85a016aec5dd3376c87d1983cf5a3ccf6157f",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8254,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8251
+      },
+      "output_tokens": 1738,
+      "output_tokens_details": {
+        "reasoning_tokens": 1226
+      },
+      "total_tokens": 9992
+    },
+    "output": {
+      "promiseId": "motoriste-2025-9ad071a1e2",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+          "relevant": true,
+          "reasonCz": "Příloha uvádí implementační práce k návrhům unijních nařízení o digitálním euru a související změny zákona o platebním styku, což se přímo týká slibu neúčastnit se projektu CBDC.",
+          "effectCz": "Usnesení samo žádné dosavadní znění zákona nemění; uvádí jako výhled implementačních prací návrhy nařízení o poskytování služeb v digitálních eurech i o zavedení digitálního eura a k oběma související novelu zákona o platebním styku. Jde o plánovaný krok směrem k legislativnímu zapojení do projektu digitálního eura, tedy proti závazku neúčastnit se; samo usnesení však digitální euro nezavádí ani novelu nepřijímá."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-9ad071a1e2--source",
+        "zvlady-resolutions--law-change-uv-2026-175-193",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda Motoristů sobě přijala usnesení, jehož výhled implementačních prací uvádí návrhy unijních nařízení o digitálním euru a související novely zákona o platebním styku. Jde o plánovaný legislativní krok, nikoli o již přijaté pravidlo, ale směřuje k zapojení do digitálního eura. Tím jde proti slibu, že se Česká republika projektu digitálních peněz centrálních bank nebude účastnit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výhled prací sám nedokládá, že vláda později navržené změny skutečně předloží nebo přijme; balíček také nedokládá žádný krok k posílení práva na hotovost."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

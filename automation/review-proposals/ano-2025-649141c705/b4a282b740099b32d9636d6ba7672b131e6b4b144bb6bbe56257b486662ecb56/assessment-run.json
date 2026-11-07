@@ -1,0 +1,1392 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T01-43-11-110Z--bf77532d602f",
+  "evaluatedAt": "2026-11-04T01:43:11.110Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-649141c705/bf77532d602f3da9f12bf3676d49e7eeadc42e195e2116e4804a9ee9969cbb6f.json",
+  "packageHash": "bf77532d602f3da9f12bf3676d49e7eeadc42e195e2116e4804a9ee9969cbb6f",
+  "assessmentContentHash": "d57ec29df7e399b3e3edf2f052cac4e5b2cfaf871a75bf74e0692ad931e85142",
+  "assessmentFingerprint": "b4a282b740099b32d9636d6ba7672b131e6b4b144bb6bbe56257b486662ecb56",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-649141c705",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment cites law change psp-core-2025--law-change-43370-1 it found not relevant",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0fd1f41ec3c5d023016aea8be3e09887d180fe24a355e1fbc3",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 296947,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 296944
+            },
+            "output_tokens": 14662,
+            "output_tokens_details": {
+              "reasoning_tokens": 8942
+            },
+            "total_tokens": 311609
+          },
+          "output": {
+            "promiseId": "ano-2025-649141c705",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-28",
+                "relevant": true,
+                "reasonCz": "Změna přímo upravuje, kdy je pozemek stavebním pozemkem pro DPH, a tím může rozšířit okruh zdanitelných prodejů.",
+                "effectCz": "Dosavadní § 55a odst. 2 písm. a) odkazoval mimo jiné na vymezení zastavěného území; schválená změna nahrazuje „zastavěného“ slovem „zastavitelného“. Tím se rozšiřuje hranice, v níž lze pozemek považovat za stavební a jeho dodání zdanit; jde tedy o zvýšení daňového zatížení v dotčených případech."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-35",
+                "relevant": true,
+                "reasonCz": "Ačkoli vlastní text této části není předložen, záznamy o hlasování odkazují na pozměňovací návrhy s daňovými ustanoveními, která mohou měnit daňové zatížení.",
+                "effectCz": "Vlastní text části ani její předchozí znění nejsou v balíčku obsaženy. Pozměňovací návrh na snížení DPH u vybraných stavebních prací na 5 % by daň snížil; pozměňovací návrh na mimořádný odpočet z nájmů by také snížil daň některým pronajímatelům. Směr změny této části jako celku proto nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43194-1",
+                "relevant": true,
+                "reasonCz": "Navrhovaná smlouva obsahuje konkrétní pravidla pro zdanění příjmů, včetně stropů srážkových daní a zápočtu daní, takže může ovlivnit daně alespoň u dotčených přeshraničních příjmů.",
+                "effectCz": "Smlouva stanoví například maximální sazbu 7,5 % u dividend, 10 % u úroků, 15 % u licenčních poplatků a 12,5 % u technických služeb a upravuje zápočet daně zaplacené v druhém státě. Předchozí smluvní sazby ani jejich srovnání s těmito pravidly balíček neuvádí, takže nelze určit, zda se daňová povinnost českých poplatníků celkově zpřísní, nebo zmírní."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43215-1",
+                "relevant": true,
+                "reasonCz": "Navrhovaná smlouva stanoví konkrétní limity zdanění některých příjmů mezi Českem a Keňou, a může tak měnit daňové zatížení části poplatníků.",
+                "effectCz": "Text stanoví například strop 10 % u dividend, 12 % u úroků a licenčních poplatků a 12 % u poplatků za technické služby, spolu s pravidly pro zamezení dvojímu zdanění. Předchozí smluvní sazby ani jejich srovnání nejsou dodány, proto nelze určit směr změny daňového zatížení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43230-2",
+                "relevant": true,
+                "reasonCz": "Změna daňových pravidel pro penzijní spoření upravuje případy, kdy se vrací daňová podpora, a může tak snížit daňovou povinnost části účastníků.",
+                "effectCz": "Dosavadní § 15b odst. 4 obsahoval výjimky z vracení daňové podpory, ale neobsahoval výslovně některá jednorázová plnění a částečné odbytné. Návrh doplňuje další výjimky, takže u dotčených výplat zmírňuje povinnost vracet dříve uplatněnou daňovou podporu; ostatní podmínky, včetně 120 měsíců a věku 60 let, zásadně nemění."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43237-1",
+                "relevant": true,
+                "reasonCz": "Návrh mění konstrukci osobní daňové slevy a daňových bonusů, takže přímo zasahuje do výše daně a do možnosti uplatnit daňovou podporu.",
+                "effectCz": "Návrh převádí osobní slevu 30 840 Kč z § 35ba do daňového zvýhodnění podle § 35c a mění podmínky pro daňové bonusy; část bonusu nově váže na zaplacené pojistné. Nominální částka osobní podpory se nemění, ale mění se její dostupnost a podmínky, takže celkový směr daňového zatížení pro různé skupiny nelze určit jako jednoznačné snížení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43233-1",
+                "relevant": true,
+                "reasonCz": "Návrh výslovně zvyšuje částky daňového zvýhodnění na děti, a tedy snižuje daň rodičům, kteří je mohou uplatnit.",
+                "effectCz": "Předchozí částky činily 15 204 Kč, 22 320 Kč a 27 840 Kč ročně; návrh je zvyšuje na 22 380 Kč, 29 808 Kč a 37 176 Kč. Daňová úleva se tím zvětšuje, tedy daňové zatížení oprávněných poplatníků klesá."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43289-1",
+                "relevant": true,
+                "reasonCz": "Návrh zavádí druhou sníženou sazbu DPH 6 % pro výslovně vyjmenované zboží a může tak snížit daň z jeho prodeje.",
+                "effectCz": "Předchozí znění stanovilo pro vyjmenované zboží sníženou sazbu 12 %. Návrh pro vybrané položky, například některé potraviny, zeleninu, ovoce a vodu, vytváří druhou sazbu 6 %, takže daň u této skupiny snižuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-1",
+                "relevant": false,
+                "reasonCz": "Dodané odstavce části o evidenci tržeb neobsahují konkrétní daňovou sazbu, slevu ani jinou změnu daňové povinnosti.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-2",
+                "relevant": true,
+                "reasonCz": "Tato část zavádí daňové úlevy, ale také novou přirážku, která u některých poplatníků zvýší daňovou platbu.",
+                "effectCz": "Předchozí úprava neobsahovala slevu na studenta, slevu za umístění dítěte ani slevu za evidenci tržeb; návrh je zavádí a rozšiřuje některá osvobození zaměstnaneckých plnění. Současně zavádí pro přihlášené poplatníky přirážku 1 400 Kč za měsíc a odpovídající navýšení paušální daně či výpočtu daně. Výsledek je smíšený: část poplatníků získá nižší daň, jiným se daňové zatížení zvýší."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-3",
+                "relevant": true,
+                "reasonCz": "Změna upravuje sazby DPH u nápojů a další pravidla pro odpočet či opravu daně, takže přímo ovlivňuje daňovou povinnost.",
+                "effectCz": "Předchozí příloha č. 2 ponechávala v restauracích 12% sazbu pro vodu a vybrané nápoje, zatímco ostatní nealkoholické nápoje podléhaly 21 %. Schválené znění podřazuje pod 12% sazbu podávání jiných než alkoholických nápojů, čímž daň u nově zařazených nápojů snižuje. Změny pro nedobytné pohledávky také rozšiřují některé možnosti opravy základu daně; jiné dílčí změny ruší limity odpočtu DPH u vybraných osobních automobilů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-4",
+                "relevant": false,
+                "reasonCz": "V balíčku není žádný text této části ani konkrétní daňové pravidlo, které by bylo možné spojit se slibem.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43318-1",
+                "relevant": true,
+                "reasonCz": "Navrhovaná smlouva obsahuje konkrétní pravidla zdanění příjmů a majetku mezi Českem a Maltou, která mohou ovlivnit daň alespoň u dotčených poplatníků.",
+                "effectCz": "Smlouva stanoví například maximální srážkovou daň 5 % u některých dividend a licenčních poplatků a upravuje zápočty daní z příjmů i majetku. Předchozí smluvní sazby ani jejich srovnání nejsou v balíčku, takže nelze určit, zda jde oproti dosavadnímu stavu o snížení, nebo zvýšení daně."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43340-1",
+                "relevant": true,
+                "reasonCz": "Návrh upravuje případy osvobození od DPH a vracení daně, a může proto snížit daňovou povinnost omezeného okruhu poplatníků.",
+                "effectCz": "Návrh výslovně zakládá osvobození od DPH u některých nákupů osobami požívajícími výsad a imunit a doplňuje potvrzování osvobození pro nástroj SAFE. U této skupiny se daňová povinnost snižuje; předchozí znění nového § 71m neexistovalo."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43366-1",
+                "relevant": true,
+                "reasonCz": "Návrh současně ruší slevu na manžela a zvyšuje daňové zvýhodnění na malé děti, čímž mění daně obou skupin poplatníků.",
+                "effectCz": "Předchozí právo umožňovalo slevu na manžela až 24 840 Kč; návrh ji ruší, což může zvýšit daň dotčených domácností. Zároveň přidává zvýšení daňového zvýhodnění na dítě mladší tří let o 1 000 Kč měsíčně, případně 4 000 Kč při stanovené podmínce průkazu ZTP/P, což daň snižuje. Celkový dopad je smíšený."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43370-1",
+                "relevant": false,
+                "reasonCz": "Dodané změny se týkají převodu a daňové podpory penzijních produktů, ale balíček neukazuje, že by měnily výši daně nebo daňové zatížení ve směru slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43378-1",
+                "relevant": true,
+                "reasonCz": "Navrhovaná smlouva stanoví konkrétní stropy srážkových daní a pravidla zápočtu, takže může ovlivnit daně z příjmů u přeshraničních případů.",
+                "effectCz": "Text stanoví například stropy 10 nebo 15 % u dividend, 12 % u úroků a 5 nebo 10 % u licenčních poplatků a pravidla pro zápočet daní. Předchozí smluvní sazby nejsou dodány, takže směr změny daňového zatížení nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43407-2",
+                "relevant": true,
+                "reasonCz": "Návrh doplňuje výjimku z vracení daňové podpory u některých částečných výplat z doplňkového penzijního spoření.",
+                "effectCz": "Předchozí § 15b odst. 4 výslovně vyžadoval vrácení daňové podpory u výplaty před uplynutím příslušné doby, s vyjmenovanými výjimkami. Návrh doplňuje výjimku pro určité částečné odbytné a stanoví její použití už za zdaňovací období 2026, čímž u dotčených výplat povinnost zmírňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-4",
+                "relevant": true,
+                "reasonCz": "Návrh přidává nové osvobození od daně z příjmů pro náhradu ušlého výdělku u některých řízení před orgány veřejné moci.",
+                "effectCz": "Dosavadní § 4 odst. 1 takové osvobození výslovně neobsahoval; návrh přidává osvobození příjmu ve formě náhrady ušlého výdělku při účasti na úkonu řízení. Daňové zatížení příjemců této náhrady se snižuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43433-1",
+                "relevant": true,
+                "reasonCz": "Návrh obnovuje mimořádnou sektorovou daň pro vymezené podniky zpracovávající ropu, a proto může zvýšit daňové zatížení části poplatníků.",
+                "effectCz": "Předchozí režim daně z neočekávaných zisků se vztahoval na roky 2023 až 2025 a měl sazbu 60 %. Návrh ho nahrazuje mimořádnou sektorovou daní se sazbou 50 % pro vymezené podniky a období zahrnující roky 2025 až 2027. U kvalifikovaných podniků tím zachovává či rozšiřuje daňovou povinnost do dalších let; bez přesného srovnání základů nelze říci, zda bude jejich celkové zatížení vyšší než dříve."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43443-6",
+                "relevant": true,
+                "reasonCz": "Návrh vyjímá psychomodulační látky z položek podléhajících snížené sazbě DPH, a tím může zvýšit jejich daňové zatížení.",
+                "effectCz": "Příloha č. 3 před změnou zahrnovala vymezené zboží pod sníženou sazbou; návrh z ní psychomodulační látky vylučuje. Tím se u nich ruší nárok na sníženou sazbu a daň se zvyšuje, avšak konkrétní následná sazba není v dodaném kontextu uvedena."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-24",
+                "relevant": true,
+                "reasonCz": "Vládní legislativní plán výslovně uvádí připravovaný zákon o podpoře startupů a zmiňuje daňové úlevy a odpisovou politiku pro investory.",
+                "effectCz": "Usnesení ukládá připravit návrh zákona, který má zahrnovat úlevy nebo možnost využívat zaměstnanecké akcie a motivační odpisy pro investory; samo však žádnou sazbu ani nárok nemění. Jde o návrh možného snížení daňové zátěže, jeho konkrétní rozsah a účinek nelze z tohoto plánu určit."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+                "relevant": true,
+                "reasonCz": "Vládní plán popisuje daňové úlevy při zavedení evidence tržeb i snížení DPH na nápoje v gastronomii.",
+                "effectCz": "Plán navrhuje budoucí úlevy poplatníkům evidujícím tržby, osvobození spropitného a snížení DPH na nealkoholické nápoje podávané v restauracích. Oproti současným sazbám nejde ještě o účinnou změnu; jde o návrh zamýšleného snížení daní."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+                "relevant": true,
+                "reasonCz": "Plán pro květen 2026 konkrétně opakuje přípravu daňových úlev a snížení DPH na nápoje v gastronomii.",
+                "effectCz": "Dokument navrhuje budoucí daňové úlevy pro poplatníky evidující tržby, osvobození spropitného a snížení DPH na nealkoholické nápoje. Změnu pouze plánuje, takže daňové zatížení samo nesnižuje."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-163",
+                "relevant": true,
+                "reasonCz": "Plán legislativních prací uvádí konkrétní zamýšlené snížení DPH na léky na předpis a daňovou slevu pro rodiny s více dětmi.",
+                "effectCz": "Plán navrhuje zavést 0% DPH na léky na předpis a zvýšit daňovou slevu za čtvrté a další dítě, což by snížilo daň dotčeným pacientům a rodinám. Jde však pouze o budoucí legislativní návrh, nikoli o již účinné snížení."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-347",
+                "relevant": false,
+                "reasonCz": "Usnesení pouze souhlasí se sjednáním smlouvy a odkazuje na její návrh v nepřiložené části materiálu; konkrétní daňová pravidla nelze z dodaného textu posoudit.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-700",
+                "relevant": false,
+                "reasonCz": "Usnesení pouze souhlasí se sjednáním smlouvy a odkazuje na návrh smlouvy, jehož daňové články v balíčku nejsou.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-649141c705--source",
+              "psp-core-2025--law-change-43174-28",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--law-change-43174-35",
+              "psp-core-2025--vote-88236",
+              "psp-core-2025--vote-88237",
+              "psp-core-2025--vote-88238",
+              "psp-core-2025--law-change-43194-1",
+              "psp-core-2025--print-step-210710",
+              "psp-core-2025--law-change-43215-1",
+              "psp-core-2025--print-step-210795",
+              "psp-core-2025--law-change-43230-2",
+              "psp-core-2025--print-step-210874",
+              "psp-core-2025--government-opinion-43230-1",
+              "psp-core-2025--vote-87495",
+              "psp-core-2025--vote-87498",
+              "psp-core-2025--law-change-43237-1",
+              "psp-core-2025--government-opinion-43237-1",
+              "psp-core-2025--law-change-43233-1",
+              "psp-core-2025--law-change-43289-1",
+              "psp-core-2025--government-opinion-43289-1",
+              "psp-core-2025--law-change-43318-1",
+              "psp-core-2025--print-step-211439",
+              "psp-core-2025--law-change-43310-2",
+              "psp-core-2025--law-change-43310-3",
+              "psp-core-2025--print-step-211390",
+              "psp-core-2025--amendment-1546",
+              "psp-core-2025--amendment-1547",
+              "psp-core-2025--vote-88086",
+              "psp-core-2025--vote-88279",
+              "psp-core-2025--vote-88280",
+              "psp-core-2025--vote-88281",
+              "psp-core-2025--vote-88282",
+              "psp-core-2025--vote-88289",
+              "psp-core-2025--vote-88294",
+              "psp-core-2025--vote-88295",
+              "psp-core-2025--vote-88296",
+              "psp-core-2025--vote-88299",
+              "psp-core-2025--vote-88305",
+              "psp-core-2025--vote-88306",
+              "psp-core-2025--vote-88307",
+              "psp-core-2025--vote-88308",
+              "psp-core-2025--vote-88309",
+              "psp-core-2025--vote-88310",
+              "psp-core-2025--vote-88311",
+              "psp-core-2025--vote-88312",
+              "psp-core-2025--vote-88313",
+              "psp-core-2025--vote-88314",
+              "psp-core-2025--vote-88352",
+              "psp-core-2025--vote-88354",
+              "psp-core-2025--vote-88356",
+              "psp-core-2025--law-change-43340-1",
+              "psp-core-2025--print-step-211581",
+              "psp-core-2025--law-change-43366-1",
+              "psp-core-2025--government-opinion-43366-1",
+              "psp-core-2025--law-change-43370-1",
+              "psp-core-2025--government-opinion-43370-1",
+              "psp-core-2025--law-change-43378-1",
+              "psp-core-2025--print-step-211887",
+              "psp-core-2025--law-change-43407-2",
+              "psp-core-2025--print-step-212048",
+              "psp-core-2025--law-change-43422-4",
+              "psp-core-2025--print-step-212101",
+              "psp-core-2025--law-change-43433-1",
+              "psp-core-2025--print-step-212169",
+              "psp-core-2025--law-change-43443-6",
+              "psp-core-2025--print-step-212242",
+              "zvlady-resolutions--law-change-uv-2026-175-24",
+              "zvlady-resolutions--law-change-uv-2026-175-32",
+              "zvlady-resolutions--law-change-uv-2026-175-117",
+              "zvlady-resolutions--law-change-uv-2026-175-163",
+              "zvlady-resolutions--2026-175"
+            ],
+            "explanationCz": "Vláda navrhla více daňových úlev, mimo jiné nižší DPH na nealkoholické nápoje v restauracích, ale v návrhu evidence tržeb zároveň zavedla přirážku 1 400 Kč měsíčně pro část podnikatelů. Poslanci ANO návrh podpořili a 9. září 2026 hlasovali také pro jeho prosazení po vrácení Senátem. Ve stejný den podpořili i změnu pravidel pro pozemky, která může rozšířit případy, kdy se jejich prodej zatíží DPH. Protože tyto přijaté změny současně obsahují daňová snížení i zvýšení, strana směřuje proti slibu alespoň v jeho části.",
+            "confidence": "high",
+            "uncertainties": [
+              "Několik navrhovaných smluv o zamezení dvojímu zdanění stanovuje konkrétní limity daní, ale balíček neobsahuje dosavadní smluvní sazby pro srovnání; nelze proto určit, zda jejich sjednání daňové zatížení sníží, nebo zvýší.",
+              "Návrh evidence tržeb kombinuje nové daňové úlevy s přirážkou 1 400 Kč měsíčně a další daňové návrhy mohou některým skupinám daně snížit a jiným zvýšit. Hodnocení proto vychází z toho, že rozhodující hlasování přijalo změnu, která obsahuje oba směry."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-649141c705",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": true,
+          "reasonCz": "Změna určení stavebního pozemku pro DPH může rozšířit okruh pozemků, jejichž prodej se zdaňuje.",
+          "effectCz": "Před změnou zákon v § 55a odst. 2 písm. a) odkazoval na vymezení zastavěného území; návrh nahrazuje „zastavěného“ slovem „zastavitelného“. Tím se může rozšířit okruh pozemků považovaných za stavební a jejich dodání tak může být zdanitelné místo osvobozeného; změna tedy v tomto směru daňovou povinnost zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": true,
+          "reasonCz": "Tato část je relevantní jen kvůli pozměňovacím návrhům, které mění daňové zákony.",
+          "effectCz": "V pozměňovacích návrzích je směs úlev a zvýšení daní: návrh Z2 zavádí 5% DPH na vybrané práce v oblasti bydlení namísto dosavadních 12 %, návrh Z3 zavádí mimořádný odpočet části nákladů na dlouhodobý nájem a návrh Z4 umožňuje obcím stanovit pro nemovitosti nesloužící dlouhodobému bydlení místní koeficient 2 až 10. U posledního návrhu předchozí rozpětí ani přesnou dosavadní sazbu pro tuto skupinu balíček neuvádí, takže celkový daňový účinek těchto různých návrhů nelze určit jedním směrem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43194-1",
+          "relevant": true,
+          "reasonCz": "Smlouva stanovuje konkrétní pravidla a stropy zdanění některých přeshraničních příjmů, tedy může měnit daňové zatížení části poplatníků.",
+          "effectCz": "Smlouva stanoví rozdělení daňových práv mezi Česko a Tanzanii a u některých příjmů stropy srážkové daně, například 7,5 % u dividend, 10 % u úroků a 15 % u licenčních poplatků. Předchozí použitelné sazby ani jejich srovnání s těmito stropy balíček neuvádí, takže nelze určit, zda tato úprava daně snižuje, zvyšuje, nebo nemění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": true,
+          "reasonCz": "Smlouva stanovuje pravidla zdanění přeshraničních příjmů a konkrétní stropy, které mohou ovlivnit daň části poplatníků.",
+          "effectCz": "Smlouva přiděluje daňová práva mezi Česko a Keňu a stanoví například stropy 10 % u dividend, 12 % u úroků, 12 % u licenčních poplatků a 12 % u poplatků za technické služby. Předchozí sazby použitelné bez smlouvy ani jejich srovnání balíček neobsahuje, proto nelze určit směr změny daňové zátěže."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43230-2",
+          "relevant": true,
+          "reasonCz": "Změny zákona o daních z příjmů upravují daňovou podporu penzijního spoření a osvobození některých výplat.",
+          "effectCz": "Dosavadní pravidla pro daňovou podporu spoření na stáří obsahovala časové podmínky výplaty; návrh upravuje jejich uplatnění a doplňuje osvobození některých jednorázových vyrovnání od daně z příjmů. V části vztahující se k těmto výplatám se tedy daňová zátěž snižuje; u změn podmínek zachování daňové podpory nelze z dodaného kontextu určit celkový účinek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43237-1",
+          "relevant": true,
+          "reasonCz": "Návrh převádí základní slevu na poplatníka do daňového zvýhodnění a mění možnost čerpat podporu jako bonus.",
+          "effectCz": "Před změnou byla základní sleva 30 840 Kč nevratnou slevou a zvýhodnění na děti mělo sazby 15 204, 22 320 a 27 840 Kč ročně. Návrh umožňuje uplatnit základní částku 30 840 Kč i jako daňový bonus a stanoví nové podmínky pro bonusy; jde o rozšíření nároku pro část lidí s nízkou daňovou povinností, a tedy o dílčí snížení jejich daňové zátěže."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43233-1",
+          "relevant": true,
+          "reasonCz": "Návrh přímo zvyšuje daňové zvýhodnění na vyživované děti.",
+          "effectCz": "Před změnou činilo zvýhodnění na první, druhé a další dítě 15 204, 22 320 a 27 840 Kč ročně. Návrh částky zvyšuje na 22 380, 29 808 a 37 176 Kč, čímž daňové zvýhodnění zvětšuje a daň snižuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43289-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí nižší sazbu DPH pro vybrané zboží a mění sazby, které se uplatní na spotřebitele.",
+          "effectCz": "Před změnou byla jedna snížená sazba 12 % a zboží v příloze č. 3 se jí řídilo. Návrh zavádí druhou sníženou sazbu 6 % a přiřazuje jí vybrané potraviny a další zboží, takže u těchto položek daň snižuje; balíček neukazuje změnu základní sazby 21 %."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": false,
+          "reasonCz": "Dodané výňatky této části zákona o evidenci tržeb neukazují konkrétní změnu daňové povinnosti ani sazby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Změny zavádějí nové daňové slevy i novou měsíční přirážku k paušální dani.",
+          "effectCz": "Nově se stanoví přirážka 1 400 Kč za každý měsíc, kdy je poplatník přihlášen k přirážce místo evidence tržeb; jde o nové daňové zatížení. Návrh současně zavádí slevu na studenta 4 020 Kč a slevu za umístění dítěte do výše doložených nákladů, nejvýše do minimální mzdy na dítě, a mění daňový režim některých zaměstnaneckých benefitů. U nově zavedených slev balíček předchozí pravidla nedokládá, takže jejich čistý účinek proti předchozímu stavu nelze přesně vyčíslit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Část mění více pravidel DPH, včetně sazby na nápoje, odpočtů u automobilů a oprav nedobytných pohledávek.",
+          "effectCz": "Před změnou byla u stravovacích služeb snížená sazba 12 % jen pro pitnou vodu a vybrané nápoje; návrh rozšiřuje 12% sazbu na podávání nealkoholických nápojů, jinak zatížených 21 %, a tím daň snižuje. U oprav nedobytných pohledávek zvyšuje jednotlivý limit z 10 000 na 20 000 Kč, zkracuje čekací dobu ze šesti na tři měsíce a zvyšuje roční souhrnný limit z 20 000 na 100 000 Kč, což rozšiřuje možnost opravy. Zároveň zkracuje ze šesti na tři měsíce lhůtu, po níž dlužník musí snížit odpočet; tato povinnost se zpřísňuje. Ruší také limity odpočtu DPH u vybraných osobních automobilů a pravidlo následného snížení odpočtu, což daňovou zátěž části plátců uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": false,
+          "reasonCz": "V dodaném balíčku není žádný text této části ani konkrétní změna daňové povinnosti v ní; její relevance by se musela dovozovat pouze z obecného tématu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": true,
+          "reasonCz": "Smlouva stanovuje konkrétní pravidla zdanění přeshraničních příjmů a může ovlivnit daň části poplatníků.",
+          "effectCz": "Smlouva stanoví například nejvýše 5% českou srážkovou daň z některých dividend a licenčních poplatků vyplácených rezidentům Malty a omezuje zdanění některých dalších příjmů. Balíček neuvádí předchozí sazby, takže nelze určit, zda stropy v každém případě daň snižují, zvyšují, nebo nemění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43340-1",
+          "relevant": true,
+          "reasonCz": "Návrh doplňuje osvobození od DPH pro některá plnění související s evropským obranným nástrojem a pravidla pro vrácení daně.",
+          "effectCz": "Návrh výslovně zavádí potvrzování osvobození od DPH pro účely nástroje SAFE a možnost vrátit daň z některých starších plnění, pokud byly splněny podmínky osvobození. Jde o daňovou úlevu pro vymezené příjemce a plnění; předchozí úprava v dodaném kontextu takové zvláštní potvrzování neobsahuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43366-1",
+          "relevant": true,
+          "reasonCz": "Návrh současně zrušuje slevu na manžela a zvyšuje daňové zvýhodnění na malé děti.",
+          "effectCz": "Před změnou byla sleva na manžela 24 840 Kč a daňové zvýhodnění na děti činilo ročně 15 204, 22 320 a 27 840 Kč. Návrh ruší slevu na manžela, čímž zvyšuje daň některým poplatníkům, ale současně přidává zvýhodnění 1 000 Kč měsíčně na dítě mladší tří let, případně 4 000 Kč měsíčně při stanovené podmínce ZTP/P. Dopad je smíšený a závisí na konkrétní domácnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43370-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění podmínky daňové podpory spoření na stáří a osvobození příspěvků zaměstnavatele.",
+          "effectCz": "Před změnou mohly být příspěvky zaměstnavatele na podporované produkty spoření na stáří osvobozeny do souhrnu 50 000 Kč ročně. Návrh do úpravy výslovně zahrnuje také povinné příspěvky a umožňuje při splnění podmínek sčítat dobu doplňkového penzijního spoření a dlouhodobého investičního produktu; mění také pravidla převodů mezi těmito produkty. Tím se může zachovat daňová podpora při převodu a rozšiřuje se její použitelnost, avšak výše 50 000 Kč z dodaného návrhu nezmizí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": true,
+          "reasonCz": "Smlouva stanoví stropy zdanění některých dividend, úroků a licenčních poplatků mezi Českem a Argentinou.",
+          "effectCz": "Návrh stanoví například strop 10 % nebo 15 % u dividend a 12 % u úroků a u části licenčních poplatků 5 % či 10 %. Balíček neuvádí předchozí použitelné sazby ani srovnání, a proto nelze určit směr změny daňové zátěže."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-2",
+          "relevant": true,
+          "reasonCz": "Návrh mění podmínky, za nichž výplaty z penzijního spoření nezpůsobí vrácení daňové podpory.",
+          "effectCz": "Před změnou vedla výplata z produktu před uplynutím stanovených lhůt obecně k navrácení daňové podpory, s vyjmenovanými výjimkami. Návrh přidává další výjimky pro některé částečné či jednorázové výplaty z doplňkového penzijního spoření a pro dotčené případy omezuje povinnost vracet podporu; daňová zátěž se tím snižuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-4",
+          "relevant": true,
+          "reasonCz": "Návrh doplňuje osvobození od daně z příjmů pro náhradu ušlého výdělku při účasti na řízení před veřejným orgánem.",
+          "effectCz": "Před změnou uvedený příjem v § 4 mezi osvobozenými příjmy výslovně nebyl; návrh přidává osvobození náhrady ušlého výdělku za účast na úkonu řízení před orgánem veřejné moci, takže daňovou povinnost příjemce snižuje. Změna v § 35d pouze nahrazuje odkaz na příjmy zdaněné srážkou odkazem na příjmy podle § 6 odst. 4; její samostatný účinek na výši daně z dodaného textu nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43433-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí mimořádnou sektorovou daň a nahrazuje dosavadní daň z neočekávaných zisků pro část podniků.",
+          "effectCz": "Dosavadní daň z neočekávaných zisků měla sazbu 60 % a vztahovala se na vymezené sektory a roky 2023–2025. Návrh vytváří mimořádnou sektorovou daň se sazbou 50 % pro roky 2026–2027 a vymezuje ji pro zpracování ropy a výrobu rafinovaných produktů. Protože základ daně i okruh poplatníků se mění, balíček neposkytuje údaje potřebné ke srovnání celkové daňové povinnosti; nelze určit, zda jde celkově o snížení či zvýšení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-6",
+          "relevant": true,
+          "reasonCz": "Návrh mění sazbu na vymezené psychomodulační látky a zavádí omezené osvobození dováženého kratomu.",
+          "effectCz": "Návrh vyjímá psychomodulační látky ze seznamu zboží se sníženou sazbou DPH, což může jejich zdanění zvýšit; předchozí úplné znění dotčené položky přílohy č. 3 ale v balíčku chybí, takže výchozí sazbu nelze ověřit. Současně zavádí osvobození dovozu kratomu cestujícím do limitu 50 g pevné nebo 10 ml tekuté formy, s výjimkou cestujících mladších 21 let; to je dílčí daňová úleva."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-24",
+          "relevant": true,
+          "reasonCz": "Vládní plán obsahuje úkol připravit motivační odpisovou politiku pro investory do startupů, která může snížit jejich daňovou zátěž.",
+          "effectCz": "Usnesení stanoví přípravu návrhu zákona o podpoře startupů a výslovně uvádí motivační odpisovou politiku pro investory. Konkrétní pravidla, částky ani výchozí daňové odpisy však neuvádí; jde o plán další legislativní změny, jejíž dopad zatím nelze určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+          "relevant": true,
+          "reasonCz": "Vláda plánuje daňové úlevy i snížení DPH v souvislosti s novou evidencí tržeb.",
+          "effectCz": "Usnesení plánuje daňové úlevy pro poplatníky vstupující do evidence tržeb, osvobození spropitného a snížení DPH na nealkoholické nápoje při stravovacích službách. Neuvádí konkrétní sazbu ani výši úlev, ale navrhuje přípravu opatření, která mohou daňovou zátěž části poplatníků snížit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+          "relevant": true,
+          "reasonCz": "Tento plánovací úkol opakuje konkrétní záměr připravit úlevy a snížení DPH u evidence tržeb.",
+          "effectCz": "Usnesení plánuje návrh slev pro poplatníky vstupující do evidence tržeb, osvobození spropitného a snížení DPH na nealkoholické nápoje při stravovacích službách. Jde o přípravu budoucího návrhu, nikoli o již účinnou změnu; přesnou velikost úlev balíček neuvádí."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-163",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně uvádí nulovou DPH na léky na předpis a vyšší slevu na čtvrté a další dítě.",
+          "effectCz": "Usnesení plánuje zavést 0% DPH na léky na předpis a citelnou slevu na čtvrté a další dítě; zároveň chce zastavit automatickou valorizaci daně z nemovitých věcí. Jde o plánované změny, nikoli již provedené snížení, a jejich konkrétní dopad zatím není určen."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-347",
+          "relevant": false,
+          "reasonCz": "Usnesení pouze schvaluje další postup při sjednání smlouvy o zamezení dvojímu zdanění; vlastní daňová ustanovení smlouvy ani jejich sazby v dodaném textu nejsou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-700",
+          "relevant": false,
+          "reasonCz": "Usnesení pouze schvaluje další postup při sjednání smlouvy s Japonskem; dodaný text neobsahuje její daňové sazby ani konkrétní změnu daňové povinnosti.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-649141c705--source",
+        "psp-core-2025--law-change-43174-28",
+        "psp-core-2025--law-change-43174-35",
+        "psp-core-2025--law-change-43194-1",
+        "psp-core-2025--law-change-43215-1",
+        "psp-core-2025--law-change-43230-2",
+        "psp-core-2025--law-change-43237-1",
+        "psp-core-2025--law-change-43233-1",
+        "psp-core-2025--law-change-43289-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--law-change-43310-3",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--law-change-43340-1",
+        "psp-core-2025--law-change-43366-1",
+        "psp-core-2025--law-change-43370-1",
+        "psp-core-2025--law-change-43378-1",
+        "psp-core-2025--law-change-43407-2",
+        "psp-core-2025--law-change-43422-4",
+        "psp-core-2025--law-change-43433-1",
+        "psp-core-2025--law-change-43443-6",
+        "zvlady-resolutions--law-change-uv-2026-175-24",
+        "zvlady-resolutions--law-change-uv-2026-175-32",
+        "zvlady-resolutions--law-change-uv-2026-175-117",
+        "zvlady-resolutions--law-change-uv-2026-175-163",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1252",
+        "psp-core-2025--vote-88192",
+        "psp-core-2025--amendment-text-1055",
+        "psp-core-2025--vote-88236",
+        "psp-core-2025--amendment-text-1109",
+        "psp-core-2025--vote-88237",
+        "psp-core-2025--amendment-text-1110",
+        "psp-core-2025--vote-88238",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-210710",
+        "psp-core-2025--print-step-210795",
+        "psp-core-2025--print-step-210874",
+        "psp-core-2025--government-opinion-43230-1",
+        "psp-core-2025--amendment-text-707",
+        "psp-core-2025--vote-87495",
+        "psp-core-2025--vote-87498",
+        "psp-core-2025--government-opinion-43237-1",
+        "psp-core-2025--government-opinion-43233-1",
+        "psp-core-2025--government-opinion-43289-1",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--amendment-text-1546",
+        "psp-core-2025--amendment-text-1547",
+        "psp-core-2025--vote-88086",
+        "psp-core-2025--vote-88280",
+        "psp-core-2025--vote-88281",
+        "psp-core-2025--vote-88282",
+        "psp-core-2025--amendment-text-1551",
+        "psp-core-2025--vote-88289",
+        "psp-core-2025--amendment-text-1400",
+        "psp-core-2025--vote-88294",
+        "psp-core-2025--amendment-text-1531",
+        "psp-core-2025--vote-88295",
+        "psp-core-2025--amendment-text-1533",
+        "psp-core-2025--vote-88296",
+        "psp-core-2025--amendment-text-1560",
+        "psp-core-2025--vote-88299",
+        "psp-core-2025--amendment-text-1448",
+        "psp-core-2025--vote-88279",
+        "psp-core-2025--amendment-text-1474",
+        "psp-core-2025--vote-88305",
+        "psp-core-2025--amendment-text-1475",
+        "psp-core-2025--vote-88306",
+        "psp-core-2025--amendment-text-1476",
+        "psp-core-2025--vote-88307",
+        "psp-core-2025--amendment-text-1477",
+        "psp-core-2025--vote-88308",
+        "psp-core-2025--amendment-text-1478",
+        "psp-core-2025--vote-88309",
+        "psp-core-2025--amendment-text-1555",
+        "psp-core-2025--vote-88310",
+        "psp-core-2025--amendment-text-1556",
+        "psp-core-2025--vote-88311",
+        "psp-core-2025--amendment-text-1557",
+        "psp-core-2025--vote-88312",
+        "psp-core-2025--amendment-text-1558",
+        "psp-core-2025--vote-88313",
+        "psp-core-2025--amendment-text-1559",
+        "psp-core-2025--vote-88314",
+        "psp-core-2025--amendment-text-1562",
+        "psp-core-2025--vote-88352",
+        "psp-core-2025--amendment-text-1401",
+        "psp-core-2025--vote-88354",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211439",
+        "psp-core-2025--print-step-211581",
+        "psp-core-2025--government-opinion-43366-1",
+        "psp-core-2025--government-opinion-43370-1",
+        "psp-core-2025--print-step-211887",
+        "psp-core-2025--print-step-212048",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--print-step-212169",
+        "psp-core-2025--print-step-212242"
+      ],
+      "explanationCz": "Vláda předložila návrh na obnovení některých daňových slev a snížení DPH na nápoje v restauracích; poslanci ANO návrh podpořili i při konečném hlasování po vrácení Senátem. Tentýž návrh však zavádí přirážku 1 400 Kč měsíčně pro část podnikatelů, zatímco další podpořená změna rozšiřuje okruh pozemků, jejichž dodání podléhá DPH. Vláda také nesouhlasila s několika návrhy na daňové úlevy, včetně zvýšení daňového zvýhodnění na děti. Protože jsou doloženy jak daňové úlevy, tak konkrétní zvýšení daňové zátěže, převažující rozhodnutí ANO směřují v části proti slibu, nikoli proti němu jako celku.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U smluv o zamezení dvojímu zdanění nejsou v balíčku uvedeny předchozí sazby, takže nelze určit, zda stanovené stropy skutečně snižují daňovou povinnost v každém dotčeném případě.",
+        "U mimořádné sektorové daně se mění sazba, základ i okruh poplatníků; balíček neumožňuje spolehlivě vypočítat, zda výsledné zatížení podniků celkově klesne, nebo vzroste."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-649141c705",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro osvobození dodání pozemků od DPH může rozšířit okruh pozemků podléhajících dani.",
+          "effectCz": "Před změnou se při posuzování stavebního pozemku zohledňovalo také vymezení zastavěného území; schválené znění místo toho uvádí vymezení zastavitelného území. Tím se rozšiřuje možnost považovat pozemek za stavební, a tedy zužuje osvobození od DPH a zvyšuje daňové zatížení dotčených dodání."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": true,
+          "reasonCz": "Text této části návrhu chybí, ale dodané pozměňovací návrhy obsahují daňové snížení i zvýšení vztahující se ke slibu.",
+          "effectCz": "Vlastní text části není dodán. Pozměňovací návrhy navrhovaly snížit DPH na vybrané práce v bydlení z 12 % na 5 % a umožnit mimořádný odpočet části nákladů na renovaci pronajímaných bytů; jiný návrh umožňoval obcím zvýšit místní koeficient daně z nemovitých věcí u bydlení, které neslouží dlouhodobému bydlení. Tyto návrhy mířily různými směry; jejich přesný dopad v této části nelze určit nad rámec dodaných pozměňovacích textů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43194-1",
+          "relevant": true,
+          "reasonCz": "Smlouva upravuje, ve kterých případech a do jakých mezí mohou státy zdanit přeshraniční příjmy.",
+          "effectCz": "Smlouva stanoví rozdělení práva zdanit různé příjmy mezi Českou republiku a Tanzanii; například daň ze zdrojových dividend omezuje na 7,5 %, u úroků na 10 % a u technických služeb na 12,5 % v uvedených případech. Předchozí smluvní či vnitrostátní pravidla pro porovnání nejsou v balíčku dodána, takže nelze určit, zda jde oproti dosavadnímu stavu o snížení, zvýšení, nebo žádnou změnu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": true,
+          "reasonCz": "Smlouva stanoví pravidla a limity zdanění příjmů mezi Českou republikou a Keňou.",
+          "effectCz": "Smlouva upravuje přidělení práva zdanit přeshraniční příjmy a stanoví například limity 10 % u dividend, 12 % u úroků a 12 % u licenčních poplatků v uvedených případech. Předchozí smluvní či vnitrostátní sazby nejsou dodány, proto nelze určit směr změny daňového zatížení oproti dosavadnímu stavu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43230-2",
+          "relevant": true,
+          "reasonCz": "Změny pravidel daňové podpory penzijního spoření mění, kdy se u některých výplat vrací daňová podpora.",
+          "effectCz": "Před změnou se při předčasném výběru běžně vracela daňová podpora; návrh z tohoto následku vyjímá některá jednorázová vyrovnání a umožňuje jejich osvobození od daně. U těchto výplat se tedy daňové zatížení zmírňuje, nikoli zvyšuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43237-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění uplatnění základní slevy a daňových bonusů, a může proto změnit výši daně některých poplatníků.",
+          "effectCz": "Dosavadní základní sleva na poplatníka činila 30 840 Kč a daňové zvýhodnění na děti 15 204, 22 320 a 27 840 Kč ročně podle pořadí dítěte. Návrh zachovává tyto částky, ale mění způsob uplatnění a podmínky bonusů; u některých poplatníků by mohl umožnit vratný bonus, zatímco jeho omezení odvedeným pojistným může u jiných nárok zúžit. Celkový směr nelze z dodaných ustanovení určit jako jednoznačné snížení či zvýšení daně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43233-1",
+          "relevant": true,
+          "reasonCz": "Návrh zvyšuje daňové zvýhodnění na vyživované děti, a tím snižuje daň dotčených rodin.",
+          "effectCz": "Před změnou činilo roční zvýhodnění 15 204 Kč na první dítě, 22 320 Kč na druhé a 27 840 Kč na třetí a další dítě. Návrh částky zvyšuje na 22 380 Kč, 29 808 Kč a 37 176 Kč, takže daňové zatížení oprávněných rodin klesá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43289-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí pro vybrané potraviny druhou sníženou sazbu DPH, tedy přímo mění výši daně.",
+          "effectCz": "Před změnou byla pro zboží v příloze č. 3 jedna snížená sazba 12 %. Návrh zavádí druhou sazbu 6 % pro vyjmenované potraviny a další zboží, takže se daň u těchto položek snižuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": false,
+          "reasonCz": "Dodané části upravují evidenci tržeb, ale neukazují změnu daňové sazby, povinnosti ani nároku souvisejícího se slibem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Tato část obsahuje zároveň nové daňové úlevy i měsíční přirážku k paušální dani.",
+          "effectCz": "Před změnou nebyla přirážka za nepodléhání evidenci tržeb stanovena; návrh ji určuje na 1 400 Kč za měsíc přihlášení, tedy zvyšuje daň některých podnikatelů. Současně zavádí či obnovuje daňové úlevy, například slevu na studenta, slevu za umístění dítěte a slevu za evidenci tržeb, a daňové osvobození vybraného spropitného a zdravotních benefitů. Jde tedy o změnu oběma směry."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Změny pravidel DPH rozšiřují sníženou sazbu na další nápoje a uvolňují některá omezení odpočtu.",
+          "effectCz": "Před změnou se při stravovací službě vztahovala snížená sazba 12 % jen na pitnou vodu a vybrané nápoje; ostatní nealkoholické nápoje podléhaly 21 %. Schválená úprava zahrnuje do snížené sazby také další nealkoholické nápoje, čímž jejich DPH snižuje z 21 % na 12 %. Zároveň se zvyšují limity pro opravu základu daně u nedobytných pohledávek a ruší část omezení odpočtu DPH u osobních automobilů, což rozšiřuje daňové úlevy v těchto případech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": false,
+          "reasonCz": "Vlastní text této části chybí a dodané relevantní části pozměňovacích návrhů se týkají jiných daňových pravidel, nikoli změny zákona o Finanční správě.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": true,
+          "reasonCz": "Smlouva upravuje rozdělení daňových pravomocí mezi Českou republiku a Maltu a stanoví limity pro některé příjmy.",
+          "effectCz": "Smlouva stanoví například nejvýše 5% daň z některých dividend a licenčních poplatků a stanoví, že úroky skutečně vlastněné rezidentem druhého státu podléhají zdanění pouze v tomto druhém státě. Předchozí pravidla nejsou v balíčku dodána, takže nelze porovnat, zda se daňové zatížení oproti dosavadnímu stavu snižuje, zvyšuje, nebo zůstává stejné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43340-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje osvobození od DPH na určité pořízení a plnění související s evropským obranným nástrojem.",
+          "effectCz": "Před změnou § 2a odkazoval na osvobození podle § 68 odst. 1 až 8 a 10; návrh přidává také odstavec 17. Nový § 71m určuje ministerstvo potvrzujícím osvědčení pro evropský nástroj SAFE. Tím se rozšiřuje možnost využít osvobození od DPH pro vymezené případy, tedy snižuje daňovou povinnost této skupiny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43366-1",
+          "relevant": true,
+          "reasonCz": "Návrh zvyšuje daňové zvýhodnění na malé děti, ale současně ruší slevu na manžela, takže mění daňové zatížení rodin oběma směry.",
+          "effectCz": "Před změnou byla sleva na manžela 24 840 Kč a zvýhodnění na děti činilo 15 204, 22 320 a 27 840 Kč ročně podle pořadí dítěte. Návrh ruší slevu na manžela, ale přidává 1 000 Kč měsíčně na dítě mladší tří let, případně 4 000 Kč při uvedeném nároku na průkaz ZTP/P. Pro rodiny s malými dětmi může snížit daň; odstranění slevy na manžela ji naopak může zvýšit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43370-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění podmínky daňové podpory příspěvků na spoření na stáří a umožňuje přesuny mezi některými produkty bez ztráty podpory.",
+          "effectCz": "Před změnou se požadovaných 120 měsíců počítalo od vzniku každého produktu zvlášť. Návrh umožňuje započítat společné trvání doplňkového penzijního spoření a dlouhodobého investičního produktu a některé jejich přímé převody nepovažuje za porušení podmínek podpory. To u dotčených poplatníků usnadňuje zachování daňové podpory a snižuje riziko jejího navrácení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": true,
+          "reasonCz": "Smlouva a protokol stanoví konkrétní limity zdanění přeshraničních příjmů a mohou změnit daňovou povinnost dotčených osob.",
+          "effectCz": "Smlouva stanoví například limity 10 % a 15 % u dividend, 12 % u úroků a 5 % či 10 % u licenčních poplatků; protokol u některých autorských poplatků stanoví také zvláštní limit 3 %. Předchozí smluvní či vnitrostátní pravidla nejsou dodána, takže nelze určit směr změny oproti dosavadnímu daňovému zatížení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-2",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje případy, kdy předčasná výplata penzijních prostředků nevede k navrácení daňové podpory.",
+          "effectCz": "Před změnou vedla předčasná výplata k navrácení podpory, pokud nespadala do výjimek uvedených v § 15b odst. 4 písm. a). Návrh doplňuje výplatu v podobě částečného odbytného jako další výjimku, čímž zmírňuje daňové následky pro dotčené účastníky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-4",
+          "relevant": true,
+          "reasonCz": "Návrh osvobozuje určitý příjem od daně a mění podmínku pro výplatu zaměstnaneckého daňového bonusu.",
+          "effectCz": "Před změnou nebyla náhrada ušlého výdělku za účast na úkonu před orgánem veřejné moci výslovně uvedena mezi osvobozenými příjmy; návrh ji od daně osvobozuje, a tedy snižuje daň dotčených osob. Změnu podmínky měsíčního bonusu nelze bez dalších údajů jednoznačně vyhodnotit jako celkové snížení či zvýšení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43433-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí mimořádnou sektorovou daň, a tím zvyšuje daňové zatížení vymezených podniků.",
+          "effectCz": "Dosavadní daň z neočekávaných zisků se vztahovala na roky 2023 až 2025 a měla sazbu 60 %. Návrh zavádí pro roky 2026 a 2027 mimořádnou sektorovou daň pro vymezené podniky zpracovávající ropu a vyrábějící rafinované ropné produkty se sazbou 50 %. Po skončení dřívější daně tak návrh znovu ukládá zvláštní daň na další období, což dotčeným podnikům daň zvyšuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-6",
+          "relevant": true,
+          "reasonCz": "Změna vylučuje psychomodulační látky ze seznamu zboží podléhajícího snížené sazbě DPH.",
+          "effectCz": "Před změnou mohly dotčené položky podle svého zařazení spadat do snížené sazby DPH 12 %. Návrh psychomodulační látky ze seznamu pro sníženou sazbu vyjímá, takže se na ně uplatní vyšší základní sazba; zároveň stanoví úzké osvobození při dovozu cestujícím do 50 g pevné nebo 10 ml tekuté konzistence. Pro běžná zdanitelná dodání jde o zvýšení DPH."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-24",
+          "relevant": true,
+          "reasonCz": "Vládní plán uvádí přípravu zákona o podpoře startupů s daňovými úlevami a motivačními odpisy.",
+          "effectCz": "Usnesení samo daňové pravidlo nemění; ukládá přípravu návrhu zákona, který má zahrnovat úlevy a motivační odpisovou politiku pro investory do startupů. Neuvádí konkrétní sazby ani částky, takže přesný dopad a rozsah případného snížení daně nelze určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně spojuje návrh evidence tržeb s daňovými úlevami a snížením sazby DPH na některé nápoje.",
+          "effectCz": "Usnesení samo daňové pravidlo nemění, ale navrhuje připravit daňová osvobození spropitného, slevy pro studenty a školkovné, úlevy pro evidující poplatníky a snížení DPH na nealkoholické nápoje podávané v gastronomii. Jde o návrh směřující ke snížení některých daní; přesné částky v této části nejsou uvedeny."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací znovu uvádí připravované daňové úlevy a snížení DPH na nápoje v gastronomii.",
+          "effectCz": "Usnesení samo daň nemění, ale plánuje návrh zákona s daňovými úlevami pro evidující poplatníky, osvobozením spropitného, obnovením slev na studenta a školkovného a snížením DPH na nealkoholické nápoje při stravovacích službách. Jde o návrh na nižší daňové zatížení u těchto položek, bez uvedení konkrétních částek v této části."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-163",
+          "relevant": true,
+          "reasonCz": "Plán na rok 2029 obsahuje konkrétní závazek zavést nulovou DPH na léky na předpis a vyšší slevu na další děti.",
+          "effectCz": "Usnesení samo daňové pravidlo nemění, ale navrhuje legislativní změnu pro zavedení 0% DPH na léky na předpis a citelné slevy na čtvrté a další dítě. Zároveň uvádí zastavení automatické valorizace daně z nemovitých věcí. Jde o návrhový plán směřující k nižšímu daňovému zatížení v uvedených oblastech; další částky nejsou specifikovány."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-347",
+          "relevant": true,
+          "reasonCz": "Usnesení schvaluje sjednání smlouvy o zamezení dvojímu zdanění, která může změnit daňové povinnosti při přeshraničních příjmech.",
+          "effectCz": "Usnesení samo daňovou povinnost nemění; schvaluje pouze návrh smlouvy a její předložení k podpisu a ratifikaci. Text smlouvy ani konkrétní limity nejsou v této evidenci dodány, takže dopad na výši daně nelze určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-700",
+          "relevant": true,
+          "reasonCz": "Usnesení schvaluje návrh smlouvy o zamezení dvojímu zdanění mezi Českou republikou a Japonskem.",
+          "effectCz": "Usnesení samo daňovou povinnost nemění; schvaluje sjednání smlouvy, která ještě vyžaduje podpis a ratifikaci. Text smlouvy ani její konkrétní daňové limity nejsou dodány, proto nelze určit směr případné změny daňového zatížení."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-649141c705--source",
+        "psp-core-2025--law-change-43174-28",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43174-35",
+        "psp-core-2025--vote-88236",
+        "psp-core-2025--vote-88237",
+        "psp-core-2025--vote-88238",
+        "psp-core-2025--law-change-43194-1",
+        "psp-core-2025--print-step-210710",
+        "psp-core-2025--law-change-43215-1",
+        "psp-core-2025--print-step-210795",
+        "psp-core-2025--law-change-43230-2",
+        "psp-core-2025--print-step-210874",
+        "psp-core-2025--government-opinion-43230-1",
+        "psp-core-2025--vote-87495",
+        "psp-core-2025--vote-87498",
+        "psp-core-2025--law-change-43233-1",
+        "psp-core-2025--government-opinion-43233-1",
+        "psp-core-2025--law-change-43289-1",
+        "psp-core-2025--government-opinion-43289-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--law-change-43310-3",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--amendment-1546",
+        "psp-core-2025--amendment-1547",
+        "psp-core-2025--vote-88086",
+        "psp-core-2025--vote-88280",
+        "psp-core-2025--vote-88281",
+        "psp-core-2025--vote-88282",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--print-step-211439",
+        "psp-core-2025--law-change-43340-1",
+        "psp-core-2025--print-step-211581",
+        "psp-core-2025--law-change-43366-1",
+        "psp-core-2025--government-opinion-43366-1",
+        "psp-core-2025--law-change-43370-1",
+        "psp-core-2025--government-opinion-43370-1",
+        "psp-core-2025--law-change-43378-1",
+        "psp-core-2025--print-step-211887",
+        "psp-core-2025--law-change-43407-2",
+        "psp-core-2025--print-step-212048",
+        "psp-core-2025--law-change-43422-4",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--law-change-43433-1",
+        "psp-core-2025--print-step-212169",
+        "psp-core-2025--law-change-43443-6",
+        "psp-core-2025--print-step-212242",
+        "zvlady-resolutions--law-change-uv-2026-175-24",
+        "zvlady-resolutions--law-change-uv-2026-175-32",
+        "zvlady-resolutions--law-change-uv-2026-175-117",
+        "zvlady-resolutions--law-change-uv-2026-175-163",
+        "zvlady-resolutions--2026-175",
+        "zvlady-resolutions--law-change-uv-2026-347",
+        "zvlady-resolutions--2026-347",
+        "zvlady-resolutions--law-change-uv-2026-700",
+        "zvlady-resolutions--2026-700"
+      ],
+      "explanationCz": "Poslanci ANO podpořili změnu, která rozšiřuje vymezení stavebních pozemků pro DPH, a tedy může zúžit jejich osvobození. Vláda zároveň předložila zákon o evidenci tržeb, který přináší některé daňové úlevy, ale také přirážku 1 400 Kč měsíčně pro část podnikatelů; poslanci ANO zákon po vrácení Senátem podpořili. Přestože strana podpořila i některé návrhy na snížení DPH a daňové úlevy, rozhodnutí o zákonu obsahuje současně zvýšení daňového zatížení. Proto doložené rozhodnutí ukazuje spíše postup proti slibu než jeho naplňování.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U zákona o evidenci tržeb se v dodaných textech prolínají daňové úlevy a nová přirážka; Senát vrátil zákon s pozměňovacími návrhy a přesný text po těchto změnách není zveřejněn. Výsledný zákon proto nelze popsat jako změnu mířící jen jedním směrem.",
+        "U smluv o zamezení dvojímu zdanění chybí předchozí smluvní a vnitrostátní sazby, takže nelze přesně porovnat jejich dopad s dosavadním daňovým zatížením."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0423aeb23df03c57016aea8b1d157487d182593546f3396382",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 296947,
+      "input_tokens_details": {
+        "cache_write_tokens": 290597,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 14027,
+      "output_tokens_details": {
+        "reasoning_tokens": 7571
+      },
+      "total_tokens": 310974
+    },
+    "output": {
+      "promiseId": "ano-2025-649141c705",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": true,
+          "reasonCz": "Změna určení stavebního pozemku pro DPH může rozšířit okruh pozemků, jejichž prodej se zdaňuje.",
+          "effectCz": "Před změnou zákon v § 55a odst. 2 písm. a) odkazoval na vymezení zastavěného území; návrh nahrazuje „zastavěného“ slovem „zastavitelného“. Tím se může rozšířit okruh pozemků považovaných za stavební a jejich dodání tak může být zdanitelné místo osvobozeného; změna tedy v tomto směru daňovou povinnost zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": true,
+          "reasonCz": "Tato část je relevantní jen kvůli pozměňovacím návrhům, které mění daňové zákony.",
+          "effectCz": "V pozměňovacích návrzích je směs úlev a zvýšení daní: návrh Z2 zavádí 5% DPH na vybrané práce v oblasti bydlení namísto dosavadních 12 %, návrh Z3 zavádí mimořádný odpočet části nákladů na dlouhodobý nájem a návrh Z4 umožňuje obcím stanovit pro nemovitosti nesloužící dlouhodobému bydlení místní koeficient 2 až 10. U posledního návrhu předchozí rozpětí ani přesnou dosavadní sazbu pro tuto skupinu balíček neuvádí, takže celkový daňový účinek těchto různých návrhů nelze určit jedním směrem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43194-1",
+          "relevant": true,
+          "reasonCz": "Smlouva stanovuje konkrétní pravidla a stropy zdanění některých přeshraničních příjmů, tedy může měnit daňové zatížení části poplatníků.",
+          "effectCz": "Smlouva stanoví rozdělení daňových práv mezi Česko a Tanzanii a u některých příjmů stropy srážkové daně, například 7,5 % u dividend, 10 % u úroků a 15 % u licenčních poplatků. Předchozí použitelné sazby ani jejich srovnání s těmito stropy balíček neuvádí, takže nelze určit, zda tato úprava daně snižuje, zvyšuje, nebo nemění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": true,
+          "reasonCz": "Smlouva stanovuje pravidla zdanění přeshraničních příjmů a konkrétní stropy, které mohou ovlivnit daň části poplatníků.",
+          "effectCz": "Smlouva přiděluje daňová práva mezi Česko a Keňu a stanoví například stropy 10 % u dividend, 12 % u úroků, 12 % u licenčních poplatků a 12 % u poplatků za technické služby. Předchozí sazby použitelné bez smlouvy ani jejich srovnání balíček neobsahuje, proto nelze určit směr změny daňové zátěže."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43230-2",
+          "relevant": true,
+          "reasonCz": "Změny zákona o daních z příjmů upravují daňovou podporu penzijního spoření a osvobození některých výplat.",
+          "effectCz": "Dosavadní pravidla pro daňovou podporu spoření na stáří obsahovala časové podmínky výplaty; návrh upravuje jejich uplatnění a doplňuje osvobození některých jednorázových vyrovnání od daně z příjmů. V části vztahující se k těmto výplatám se tedy daňová zátěž snižuje; u změn podmínek zachování daňové podpory nelze z dodaného kontextu určit celkový účinek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43237-1",
+          "relevant": true,
+          "reasonCz": "Návrh převádí základní slevu na poplatníka do daňového zvýhodnění a mění možnost čerpat podporu jako bonus.",
+          "effectCz": "Před změnou byla základní sleva 30 840 Kč nevratnou slevou a zvýhodnění na děti mělo sazby 15 204, 22 320 a 27 840 Kč ročně. Návrh umožňuje uplatnit základní částku 30 840 Kč i jako daňový bonus a stanoví nové podmínky pro bonusy; jde o rozšíření nároku pro část lidí s nízkou daňovou povinností, a tedy o dílčí snížení jejich daňové zátěže."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43233-1",
+          "relevant": true,
+          "reasonCz": "Návrh přímo zvyšuje daňové zvýhodnění na vyživované děti.",
+          "effectCz": "Před změnou činilo zvýhodnění na první, druhé a další dítě 15 204, 22 320 a 27 840 Kč ročně. Návrh částky zvyšuje na 22 380, 29 808 a 37 176 Kč, čímž daňové zvýhodnění zvětšuje a daň snižuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43289-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí nižší sazbu DPH pro vybrané zboží a mění sazby, které se uplatní na spotřebitele.",
+          "effectCz": "Před změnou byla jedna snížená sazba 12 % a zboží v příloze č. 3 se jí řídilo. Návrh zavádí druhou sníženou sazbu 6 % a přiřazuje jí vybrané potraviny a další zboží, takže u těchto položek daň snižuje; balíček neukazuje změnu základní sazby 21 %."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": false,
+          "reasonCz": "Dodané výňatky této části zákona o evidenci tržeb neukazují konkrétní změnu daňové povinnosti ani sazby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Změny zavádějí nové daňové slevy i novou měsíční přirážku k paušální dani.",
+          "effectCz": "Nově se stanoví přirážka 1 400 Kč za každý měsíc, kdy je poplatník přihlášen k přirážce místo evidence tržeb; jde o nové daňové zatížení. Návrh současně zavádí slevu na studenta 4 020 Kč a slevu za umístění dítěte do výše doložených nákladů, nejvýše do minimální mzdy na dítě, a mění daňový režim některých zaměstnaneckých benefitů. U nově zavedených slev balíček předchozí pravidla nedokládá, takže jejich čistý účinek proti předchozímu stavu nelze přesně vyčíslit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Část mění více pravidel DPH, včetně sazby na nápoje, odpočtů u automobilů a oprav nedobytných pohledávek.",
+          "effectCz": "Před změnou byla u stravovacích služeb snížená sazba 12 % jen pro pitnou vodu a vybrané nápoje; návrh rozšiřuje 12% sazbu na podávání nealkoholických nápojů, jinak zatížených 21 %, a tím daň snižuje. U oprav nedobytných pohledávek zvyšuje jednotlivý limit z 10 000 na 20 000 Kč, zkracuje čekací dobu ze šesti na tři měsíce a zvyšuje roční souhrnný limit z 20 000 na 100 000 Kč, což rozšiřuje možnost opravy. Zároveň zkracuje ze šesti na tři měsíce lhůtu, po níž dlužník musí snížit odpočet; tato povinnost se zpřísňuje. Ruší také limity odpočtu DPH u vybraných osobních automobilů a pravidlo následného snížení odpočtu, což daňovou zátěž části plátců uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": false,
+          "reasonCz": "V dodaném balíčku není žádný text této části ani konkrétní změna daňové povinnosti v ní; její relevance by se musela dovozovat pouze z obecného tématu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": true,
+          "reasonCz": "Smlouva stanovuje konkrétní pravidla zdanění přeshraničních příjmů a může ovlivnit daň části poplatníků.",
+          "effectCz": "Smlouva stanoví například nejvýše 5% českou srážkovou daň z některých dividend a licenčních poplatků vyplácených rezidentům Malty a omezuje zdanění některých dalších příjmů. Balíček neuvádí předchozí sazby, takže nelze určit, zda stropy v každém případě daň snižují, zvyšují, nebo nemění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43340-1",
+          "relevant": true,
+          "reasonCz": "Návrh doplňuje osvobození od DPH pro některá plnění související s evropským obranným nástrojem a pravidla pro vrácení daně.",
+          "effectCz": "Návrh výslovně zavádí potvrzování osvobození od DPH pro účely nástroje SAFE a možnost vrátit daň z některých starších plnění, pokud byly splněny podmínky osvobození. Jde o daňovou úlevu pro vymezené příjemce a plnění; předchozí úprava v dodaném kontextu takové zvláštní potvrzování neobsahuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43366-1",
+          "relevant": true,
+          "reasonCz": "Návrh současně zrušuje slevu na manžela a zvyšuje daňové zvýhodnění na malé děti.",
+          "effectCz": "Před změnou byla sleva na manžela 24 840 Kč a daňové zvýhodnění na děti činilo ročně 15 204, 22 320 a 27 840 Kč. Návrh ruší slevu na manžela, čímž zvyšuje daň některým poplatníkům, ale současně přidává zvýhodnění 1 000 Kč měsíčně na dítě mladší tří let, případně 4 000 Kč měsíčně při stanovené podmínce ZTP/P. Dopad je smíšený a závisí na konkrétní domácnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43370-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění podmínky daňové podpory spoření na stáří a osvobození příspěvků zaměstnavatele.",
+          "effectCz": "Před změnou mohly být příspěvky zaměstnavatele na podporované produkty spoření na stáří osvobozeny do souhrnu 50 000 Kč ročně. Návrh do úpravy výslovně zahrnuje také povinné příspěvky a umožňuje při splnění podmínek sčítat dobu doplňkového penzijního spoření a dlouhodobého investičního produktu; mění také pravidla převodů mezi těmito produkty. Tím se může zachovat daňová podpora při převodu a rozšiřuje se její použitelnost, avšak výše 50 000 Kč z dodaného návrhu nezmizí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": true,
+          "reasonCz": "Smlouva stanoví stropy zdanění některých dividend, úroků a licenčních poplatků mezi Českem a Argentinou.",
+          "effectCz": "Návrh stanoví například strop 10 % nebo 15 % u dividend a 12 % u úroků a u části licenčních poplatků 5 % či 10 %. Balíček neuvádí předchozí použitelné sazby ani srovnání, a proto nelze určit směr změny daňové zátěže."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-2",
+          "relevant": true,
+          "reasonCz": "Návrh mění podmínky, za nichž výplaty z penzijního spoření nezpůsobí vrácení daňové podpory.",
+          "effectCz": "Před změnou vedla výplata z produktu před uplynutím stanovených lhůt obecně k navrácení daňové podpory, s vyjmenovanými výjimkami. Návrh přidává další výjimky pro některé částečné či jednorázové výplaty z doplňkového penzijního spoření a pro dotčené případy omezuje povinnost vracet podporu; daňová zátěž se tím snižuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-4",
+          "relevant": true,
+          "reasonCz": "Návrh doplňuje osvobození od daně z příjmů pro náhradu ušlého výdělku při účasti na řízení před veřejným orgánem.",
+          "effectCz": "Před změnou uvedený příjem v § 4 mezi osvobozenými příjmy výslovně nebyl; návrh přidává osvobození náhrady ušlého výdělku za účast na úkonu řízení před orgánem veřejné moci, takže daňovou povinnost příjemce snižuje. Změna v § 35d pouze nahrazuje odkaz na příjmy zdaněné srážkou odkazem na příjmy podle § 6 odst. 4; její samostatný účinek na výši daně z dodaného textu nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43433-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí mimořádnou sektorovou daň a nahrazuje dosavadní daň z neočekávaných zisků pro část podniků.",
+          "effectCz": "Dosavadní daň z neočekávaných zisků měla sazbu 60 % a vztahovala se na vymezené sektory a roky 2023–2025. Návrh vytváří mimořádnou sektorovou daň se sazbou 50 % pro roky 2026–2027 a vymezuje ji pro zpracování ropy a výrobu rafinovaných produktů. Protože základ daně i okruh poplatníků se mění, balíček neposkytuje údaje potřebné ke srovnání celkové daňové povinnosti; nelze určit, zda jde celkově o snížení či zvýšení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-6",
+          "relevant": true,
+          "reasonCz": "Návrh mění sazbu na vymezené psychomodulační látky a zavádí omezené osvobození dováženého kratomu.",
+          "effectCz": "Návrh vyjímá psychomodulační látky ze seznamu zboží se sníženou sazbou DPH, což může jejich zdanění zvýšit; předchozí úplné znění dotčené položky přílohy č. 3 ale v balíčku chybí, takže výchozí sazbu nelze ověřit. Současně zavádí osvobození dovozu kratomu cestujícím do limitu 50 g pevné nebo 10 ml tekuté formy, s výjimkou cestujících mladších 21 let; to je dílčí daňová úleva."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-24",
+          "relevant": true,
+          "reasonCz": "Vládní plán obsahuje úkol připravit motivační odpisovou politiku pro investory do startupů, která může snížit jejich daňovou zátěž.",
+          "effectCz": "Usnesení stanoví přípravu návrhu zákona o podpoře startupů a výslovně uvádí motivační odpisovou politiku pro investory. Konkrétní pravidla, částky ani výchozí daňové odpisy však neuvádí; jde o plán další legislativní změny, jejíž dopad zatím nelze určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+          "relevant": true,
+          "reasonCz": "Vláda plánuje daňové úlevy i snížení DPH v souvislosti s novou evidencí tržeb.",
+          "effectCz": "Usnesení plánuje daňové úlevy pro poplatníky vstupující do evidence tržeb, osvobození spropitného a snížení DPH na nealkoholické nápoje při stravovacích službách. Neuvádí konkrétní sazbu ani výši úlev, ale navrhuje přípravu opatření, která mohou daňovou zátěž části poplatníků snížit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+          "relevant": true,
+          "reasonCz": "Tento plánovací úkol opakuje konkrétní záměr připravit úlevy a snížení DPH u evidence tržeb.",
+          "effectCz": "Usnesení plánuje návrh slev pro poplatníky vstupující do evidence tržeb, osvobození spropitného a snížení DPH na nealkoholické nápoje při stravovacích službách. Jde o přípravu budoucího návrhu, nikoli o již účinnou změnu; přesnou velikost úlev balíček neuvádí."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-163",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně uvádí nulovou DPH na léky na předpis a vyšší slevu na čtvrté a další dítě.",
+          "effectCz": "Usnesení plánuje zavést 0% DPH na léky na předpis a citelnou slevu na čtvrté a další dítě; zároveň chce zastavit automatickou valorizaci daně z nemovitých věcí. Jde o plánované změny, nikoli již provedené snížení, a jejich konkrétní dopad zatím není určen."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-347",
+          "relevant": false,
+          "reasonCz": "Usnesení pouze schvaluje další postup při sjednání smlouvy o zamezení dvojímu zdanění; vlastní daňová ustanovení smlouvy ani jejich sazby v dodaném textu nejsou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-700",
+          "relevant": false,
+          "reasonCz": "Usnesení pouze schvaluje další postup při sjednání smlouvy s Japonskem; dodaný text neobsahuje její daňové sazby ani konkrétní změnu daňové povinnosti.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-649141c705--source",
+        "psp-core-2025--law-change-43174-28",
+        "psp-core-2025--law-change-43174-35",
+        "psp-core-2025--law-change-43194-1",
+        "psp-core-2025--law-change-43215-1",
+        "psp-core-2025--law-change-43230-2",
+        "psp-core-2025--law-change-43237-1",
+        "psp-core-2025--law-change-43233-1",
+        "psp-core-2025--law-change-43289-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--law-change-43310-3",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--law-change-43340-1",
+        "psp-core-2025--law-change-43366-1",
+        "psp-core-2025--law-change-43370-1",
+        "psp-core-2025--law-change-43378-1",
+        "psp-core-2025--law-change-43407-2",
+        "psp-core-2025--law-change-43422-4",
+        "psp-core-2025--law-change-43433-1",
+        "psp-core-2025--law-change-43443-6",
+        "zvlady-resolutions--law-change-uv-2026-175-24",
+        "zvlady-resolutions--law-change-uv-2026-175-32",
+        "zvlady-resolutions--law-change-uv-2026-175-117",
+        "zvlady-resolutions--law-change-uv-2026-175-163",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1252",
+        "psp-core-2025--vote-88192",
+        "psp-core-2025--amendment-text-1055",
+        "psp-core-2025--vote-88236",
+        "psp-core-2025--amendment-text-1109",
+        "psp-core-2025--vote-88237",
+        "psp-core-2025--amendment-text-1110",
+        "psp-core-2025--vote-88238",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-210710",
+        "psp-core-2025--print-step-210795",
+        "psp-core-2025--print-step-210874",
+        "psp-core-2025--government-opinion-43230-1",
+        "psp-core-2025--amendment-text-707",
+        "psp-core-2025--vote-87495",
+        "psp-core-2025--vote-87498",
+        "psp-core-2025--government-opinion-43237-1",
+        "psp-core-2025--government-opinion-43233-1",
+        "psp-core-2025--government-opinion-43289-1",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--amendment-text-1546",
+        "psp-core-2025--amendment-text-1547",
+        "psp-core-2025--vote-88086",
+        "psp-core-2025--vote-88280",
+        "psp-core-2025--vote-88281",
+        "psp-core-2025--vote-88282",
+        "psp-core-2025--amendment-text-1551",
+        "psp-core-2025--vote-88289",
+        "psp-core-2025--amendment-text-1400",
+        "psp-core-2025--vote-88294",
+        "psp-core-2025--amendment-text-1531",
+        "psp-core-2025--vote-88295",
+        "psp-core-2025--amendment-text-1533",
+        "psp-core-2025--vote-88296",
+        "psp-core-2025--amendment-text-1560",
+        "psp-core-2025--vote-88299",
+        "psp-core-2025--amendment-text-1448",
+        "psp-core-2025--vote-88279",
+        "psp-core-2025--amendment-text-1474",
+        "psp-core-2025--vote-88305",
+        "psp-core-2025--amendment-text-1475",
+        "psp-core-2025--vote-88306",
+        "psp-core-2025--amendment-text-1476",
+        "psp-core-2025--vote-88307",
+        "psp-core-2025--amendment-text-1477",
+        "psp-core-2025--vote-88308",
+        "psp-core-2025--amendment-text-1478",
+        "psp-core-2025--vote-88309",
+        "psp-core-2025--amendment-text-1555",
+        "psp-core-2025--vote-88310",
+        "psp-core-2025--amendment-text-1556",
+        "psp-core-2025--vote-88311",
+        "psp-core-2025--amendment-text-1557",
+        "psp-core-2025--vote-88312",
+        "psp-core-2025--amendment-text-1558",
+        "psp-core-2025--vote-88313",
+        "psp-core-2025--amendment-text-1559",
+        "psp-core-2025--vote-88314",
+        "psp-core-2025--amendment-text-1562",
+        "psp-core-2025--vote-88352",
+        "psp-core-2025--amendment-text-1401",
+        "psp-core-2025--vote-88354",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211439",
+        "psp-core-2025--print-step-211581",
+        "psp-core-2025--government-opinion-43366-1",
+        "psp-core-2025--government-opinion-43370-1",
+        "psp-core-2025--print-step-211887",
+        "psp-core-2025--print-step-212048",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--print-step-212169",
+        "psp-core-2025--print-step-212242"
+      ],
+      "explanationCz": "Vláda předložila návrh na obnovení některých daňových slev a snížení DPH na nápoje v restauracích; poslanci ANO návrh podpořili i při konečném hlasování po vrácení Senátem. Tentýž návrh však zavádí přirážku 1 400 Kč měsíčně pro část podnikatelů, zatímco další podpořená změna rozšiřuje okruh pozemků, jejichž dodání podléhá DPH. Vláda také nesouhlasila s několika návrhy na daňové úlevy, včetně zvýšení daňového zvýhodnění na děti. Protože jsou doloženy jak daňové úlevy, tak konkrétní zvýšení daňové zátěže, převažující rozhodnutí ANO směřují v části proti slibu, nikoli proti němu jako celku.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U smluv o zamezení dvojímu zdanění nejsou v balíčku uvedeny předchozí sazby, takže nelze určit, zda stanovené stropy skutečně snižují daňovou povinnost v každém dotčeném případě.",
+        "U mimořádné sektorové daně se mění sazba, základ i okruh poplatníků; balíček neumožňuje spolehlivě vypočítat, zda výsledné zatížení podniků celkově klesne, nebo vzroste."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0f35d9fb52e5b220016aea8cb1480887d1b2935a946a068180",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 296947,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 296944
+      },
+      "output_tokens": 14390,
+      "output_tokens_details": {
+        "reasoning_tokens": 8042
+      },
+      "total_tokens": 311337
+    },
+    "output": {
+      "promiseId": "ano-2025-649141c705",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro osvobození dodání pozemků od DPH může rozšířit okruh pozemků podléhajících dani.",
+          "effectCz": "Před změnou se při posuzování stavebního pozemku zohledňovalo také vymezení zastavěného území; schválené znění místo toho uvádí vymezení zastavitelného území. Tím se rozšiřuje možnost považovat pozemek za stavební, a tedy zužuje osvobození od DPH a zvyšuje daňové zatížení dotčených dodání."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": true,
+          "reasonCz": "Text této části návrhu chybí, ale dodané pozměňovací návrhy obsahují daňové snížení i zvýšení vztahující se ke slibu.",
+          "effectCz": "Vlastní text části není dodán. Pozměňovací návrhy navrhovaly snížit DPH na vybrané práce v bydlení z 12 % na 5 % a umožnit mimořádný odpočet části nákladů na renovaci pronajímaných bytů; jiný návrh umožňoval obcím zvýšit místní koeficient daně z nemovitých věcí u bydlení, které neslouží dlouhodobému bydlení. Tyto návrhy mířily různými směry; jejich přesný dopad v této části nelze určit nad rámec dodaných pozměňovacích textů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43194-1",
+          "relevant": true,
+          "reasonCz": "Smlouva upravuje, ve kterých případech a do jakých mezí mohou státy zdanit přeshraniční příjmy.",
+          "effectCz": "Smlouva stanoví rozdělení práva zdanit různé příjmy mezi Českou republiku a Tanzanii; například daň ze zdrojových dividend omezuje na 7,5 %, u úroků na 10 % a u technických služeb na 12,5 % v uvedených případech. Předchozí smluvní či vnitrostátní pravidla pro porovnání nejsou v balíčku dodána, takže nelze určit, zda jde oproti dosavadnímu stavu o snížení, zvýšení, nebo žádnou změnu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": true,
+          "reasonCz": "Smlouva stanoví pravidla a limity zdanění příjmů mezi Českou republikou a Keňou.",
+          "effectCz": "Smlouva upravuje přidělení práva zdanit přeshraniční příjmy a stanoví například limity 10 % u dividend, 12 % u úroků a 12 % u licenčních poplatků v uvedených případech. Předchozí smluvní či vnitrostátní sazby nejsou dodány, proto nelze určit směr změny daňového zatížení oproti dosavadnímu stavu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43230-2",
+          "relevant": true,
+          "reasonCz": "Změny pravidel daňové podpory penzijního spoření mění, kdy se u některých výplat vrací daňová podpora.",
+          "effectCz": "Před změnou se při předčasném výběru běžně vracela daňová podpora; návrh z tohoto následku vyjímá některá jednorázová vyrovnání a umožňuje jejich osvobození od daně. U těchto výplat se tedy daňové zatížení zmírňuje, nikoli zvyšuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43237-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění uplatnění základní slevy a daňových bonusů, a může proto změnit výši daně některých poplatníků.",
+          "effectCz": "Dosavadní základní sleva na poplatníka činila 30 840 Kč a daňové zvýhodnění na děti 15 204, 22 320 a 27 840 Kč ročně podle pořadí dítěte. Návrh zachovává tyto částky, ale mění způsob uplatnění a podmínky bonusů; u některých poplatníků by mohl umožnit vratný bonus, zatímco jeho omezení odvedeným pojistným může u jiných nárok zúžit. Celkový směr nelze z dodaných ustanovení určit jako jednoznačné snížení či zvýšení daně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43233-1",
+          "relevant": true,
+          "reasonCz": "Návrh zvyšuje daňové zvýhodnění na vyživované děti, a tím snižuje daň dotčených rodin.",
+          "effectCz": "Před změnou činilo roční zvýhodnění 15 204 Kč na první dítě, 22 320 Kč na druhé a 27 840 Kč na třetí a další dítě. Návrh částky zvyšuje na 22 380 Kč, 29 808 Kč a 37 176 Kč, takže daňové zatížení oprávněných rodin klesá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43289-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí pro vybrané potraviny druhou sníženou sazbu DPH, tedy přímo mění výši daně.",
+          "effectCz": "Před změnou byla pro zboží v příloze č. 3 jedna snížená sazba 12 %. Návrh zavádí druhou sazbu 6 % pro vyjmenované potraviny a další zboží, takže se daň u těchto položek snižuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": false,
+          "reasonCz": "Dodané části upravují evidenci tržeb, ale neukazují změnu daňové sazby, povinnosti ani nároku souvisejícího se slibem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Tato část obsahuje zároveň nové daňové úlevy i měsíční přirážku k paušální dani.",
+          "effectCz": "Před změnou nebyla přirážka za nepodléhání evidenci tržeb stanovena; návrh ji určuje na 1 400 Kč za měsíc přihlášení, tedy zvyšuje daň některých podnikatelů. Současně zavádí či obnovuje daňové úlevy, například slevu na studenta, slevu za umístění dítěte a slevu za evidenci tržeb, a daňové osvobození vybraného spropitného a zdravotních benefitů. Jde tedy o změnu oběma směry."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Změny pravidel DPH rozšiřují sníženou sazbu na další nápoje a uvolňují některá omezení odpočtu.",
+          "effectCz": "Před změnou se při stravovací službě vztahovala snížená sazba 12 % jen na pitnou vodu a vybrané nápoje; ostatní nealkoholické nápoje podléhaly 21 %. Schválená úprava zahrnuje do snížené sazby také další nealkoholické nápoje, čímž jejich DPH snižuje z 21 % na 12 %. Zároveň se zvyšují limity pro opravu základu daně u nedobytných pohledávek a ruší část omezení odpočtu DPH u osobních automobilů, což rozšiřuje daňové úlevy v těchto případech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": false,
+          "reasonCz": "Vlastní text této části chybí a dodané relevantní části pozměňovacích návrhů se týkají jiných daňových pravidel, nikoli změny zákona o Finanční správě.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": true,
+          "reasonCz": "Smlouva upravuje rozdělení daňových pravomocí mezi Českou republiku a Maltu a stanoví limity pro některé příjmy.",
+          "effectCz": "Smlouva stanoví například nejvýše 5% daň z některých dividend a licenčních poplatků a stanoví, že úroky skutečně vlastněné rezidentem druhého státu podléhají zdanění pouze v tomto druhém státě. Předchozí pravidla nejsou v balíčku dodána, takže nelze porovnat, zda se daňové zatížení oproti dosavadnímu stavu snižuje, zvyšuje, nebo zůstává stejné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43340-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje osvobození od DPH na určité pořízení a plnění související s evropským obranným nástrojem.",
+          "effectCz": "Před změnou § 2a odkazoval na osvobození podle § 68 odst. 1 až 8 a 10; návrh přidává také odstavec 17. Nový § 71m určuje ministerstvo potvrzujícím osvědčení pro evropský nástroj SAFE. Tím se rozšiřuje možnost využít osvobození od DPH pro vymezené případy, tedy snižuje daňovou povinnost této skupiny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43366-1",
+          "relevant": true,
+          "reasonCz": "Návrh zvyšuje daňové zvýhodnění na malé děti, ale současně ruší slevu na manžela, takže mění daňové zatížení rodin oběma směry.",
+          "effectCz": "Před změnou byla sleva na manžela 24 840 Kč a zvýhodnění na děti činilo 15 204, 22 320 a 27 840 Kč ročně podle pořadí dítěte. Návrh ruší slevu na manžela, ale přidává 1 000 Kč měsíčně na dítě mladší tří let, případně 4 000 Kč při uvedeném nároku na průkaz ZTP/P. Pro rodiny s malými dětmi může snížit daň; odstranění slevy na manžela ji naopak může zvýšit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43370-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění podmínky daňové podpory příspěvků na spoření na stáří a umožňuje přesuny mezi některými produkty bez ztráty podpory.",
+          "effectCz": "Před změnou se požadovaných 120 měsíců počítalo od vzniku každého produktu zvlášť. Návrh umožňuje započítat společné trvání doplňkového penzijního spoření a dlouhodobého investičního produktu a některé jejich přímé převody nepovažuje za porušení podmínek podpory. To u dotčených poplatníků usnadňuje zachování daňové podpory a snižuje riziko jejího navrácení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": true,
+          "reasonCz": "Smlouva a protokol stanoví konkrétní limity zdanění přeshraničních příjmů a mohou změnit daňovou povinnost dotčených osob.",
+          "effectCz": "Smlouva stanoví například limity 10 % a 15 % u dividend, 12 % u úroků a 5 % či 10 % u licenčních poplatků; protokol u některých autorských poplatků stanoví také zvláštní limit 3 %. Předchozí smluvní či vnitrostátní pravidla nejsou dodána, takže nelze určit směr změny oproti dosavadnímu daňovému zatížení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-2",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje případy, kdy předčasná výplata penzijních prostředků nevede k navrácení daňové podpory.",
+          "effectCz": "Před změnou vedla předčasná výplata k navrácení podpory, pokud nespadala do výjimek uvedených v § 15b odst. 4 písm. a). Návrh doplňuje výplatu v podobě částečného odbytného jako další výjimku, čímž zmírňuje daňové následky pro dotčené účastníky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-4",
+          "relevant": true,
+          "reasonCz": "Návrh osvobozuje určitý příjem od daně a mění podmínku pro výplatu zaměstnaneckého daňového bonusu.",
+          "effectCz": "Před změnou nebyla náhrada ušlého výdělku za účast na úkonu před orgánem veřejné moci výslovně uvedena mezi osvobozenými příjmy; návrh ji od daně osvobozuje, a tedy snižuje daň dotčených osob. Změnu podmínky měsíčního bonusu nelze bez dalších údajů jednoznačně vyhodnotit jako celkové snížení či zvýšení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43433-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí mimořádnou sektorovou daň, a tím zvyšuje daňové zatížení vymezených podniků.",
+          "effectCz": "Dosavadní daň z neočekávaných zisků se vztahovala na roky 2023 až 2025 a měla sazbu 60 %. Návrh zavádí pro roky 2026 a 2027 mimořádnou sektorovou daň pro vymezené podniky zpracovávající ropu a vyrábějící rafinované ropné produkty se sazbou 50 %. Po skončení dřívější daně tak návrh znovu ukládá zvláštní daň na další období, což dotčeným podnikům daň zvyšuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-6",
+          "relevant": true,
+          "reasonCz": "Změna vylučuje psychomodulační látky ze seznamu zboží podléhajícího snížené sazbě DPH.",
+          "effectCz": "Před změnou mohly dotčené položky podle svého zařazení spadat do snížené sazby DPH 12 %. Návrh psychomodulační látky ze seznamu pro sníženou sazbu vyjímá, takže se na ně uplatní vyšší základní sazba; zároveň stanoví úzké osvobození při dovozu cestujícím do 50 g pevné nebo 10 ml tekuté konzistence. Pro běžná zdanitelná dodání jde o zvýšení DPH."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-24",
+          "relevant": true,
+          "reasonCz": "Vládní plán uvádí přípravu zákona o podpoře startupů s daňovými úlevami a motivačními odpisy.",
+          "effectCz": "Usnesení samo daňové pravidlo nemění; ukládá přípravu návrhu zákona, který má zahrnovat úlevy a motivační odpisovou politiku pro investory do startupů. Neuvádí konkrétní sazby ani částky, takže přesný dopad a rozsah případného snížení daně nelze určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně spojuje návrh evidence tržeb s daňovými úlevami a snížením sazby DPH na některé nápoje.",
+          "effectCz": "Usnesení samo daňové pravidlo nemění, ale navrhuje připravit daňová osvobození spropitného, slevy pro studenty a školkovné, úlevy pro evidující poplatníky a snížení DPH na nealkoholické nápoje podávané v gastronomii. Jde o návrh směřující ke snížení některých daní; přesné částky v této části nejsou uvedeny."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací znovu uvádí připravované daňové úlevy a snížení DPH na nápoje v gastronomii.",
+          "effectCz": "Usnesení samo daň nemění, ale plánuje návrh zákona s daňovými úlevami pro evidující poplatníky, osvobozením spropitného, obnovením slev na studenta a školkovného a snížením DPH na nealkoholické nápoje při stravovacích službách. Jde o návrh na nižší daňové zatížení u těchto položek, bez uvedení konkrétních částek v této části."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-163",
+          "relevant": true,
+          "reasonCz": "Plán na rok 2029 obsahuje konkrétní závazek zavést nulovou DPH na léky na předpis a vyšší slevu na další děti.",
+          "effectCz": "Usnesení samo daňové pravidlo nemění, ale navrhuje legislativní změnu pro zavedení 0% DPH na léky na předpis a citelné slevy na čtvrté a další dítě. Zároveň uvádí zastavení automatické valorizace daně z nemovitých věcí. Jde o návrhový plán směřující k nižšímu daňovému zatížení v uvedených oblastech; další částky nejsou specifikovány."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-347",
+          "relevant": true,
+          "reasonCz": "Usnesení schvaluje sjednání smlouvy o zamezení dvojímu zdanění, která může změnit daňové povinnosti při přeshraničních příjmech.",
+          "effectCz": "Usnesení samo daňovou povinnost nemění; schvaluje pouze návrh smlouvy a její předložení k podpisu a ratifikaci. Text smlouvy ani konkrétní limity nejsou v této evidenci dodány, takže dopad na výši daně nelze určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-700",
+          "relevant": true,
+          "reasonCz": "Usnesení schvaluje návrh smlouvy o zamezení dvojímu zdanění mezi Českou republikou a Japonskem.",
+          "effectCz": "Usnesení samo daňovou povinnost nemění; schvaluje sjednání smlouvy, která ještě vyžaduje podpis a ratifikaci. Text smlouvy ani její konkrétní daňové limity nejsou dodány, proto nelze určit směr případné změny daňového zatížení."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-649141c705--source",
+        "psp-core-2025--law-change-43174-28",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43174-35",
+        "psp-core-2025--vote-88236",
+        "psp-core-2025--vote-88237",
+        "psp-core-2025--vote-88238",
+        "psp-core-2025--law-change-43194-1",
+        "psp-core-2025--print-step-210710",
+        "psp-core-2025--law-change-43215-1",
+        "psp-core-2025--print-step-210795",
+        "psp-core-2025--law-change-43230-2",
+        "psp-core-2025--print-step-210874",
+        "psp-core-2025--government-opinion-43230-1",
+        "psp-core-2025--vote-87495",
+        "psp-core-2025--vote-87498",
+        "psp-core-2025--law-change-43233-1",
+        "psp-core-2025--government-opinion-43233-1",
+        "psp-core-2025--law-change-43289-1",
+        "psp-core-2025--government-opinion-43289-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--law-change-43310-3",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--amendment-1546",
+        "psp-core-2025--amendment-1547",
+        "psp-core-2025--vote-88086",
+        "psp-core-2025--vote-88280",
+        "psp-core-2025--vote-88281",
+        "psp-core-2025--vote-88282",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--print-step-211439",
+        "psp-core-2025--law-change-43340-1",
+        "psp-core-2025--print-step-211581",
+        "psp-core-2025--law-change-43366-1",
+        "psp-core-2025--government-opinion-43366-1",
+        "psp-core-2025--law-change-43370-1",
+        "psp-core-2025--government-opinion-43370-1",
+        "psp-core-2025--law-change-43378-1",
+        "psp-core-2025--print-step-211887",
+        "psp-core-2025--law-change-43407-2",
+        "psp-core-2025--print-step-212048",
+        "psp-core-2025--law-change-43422-4",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--law-change-43433-1",
+        "psp-core-2025--print-step-212169",
+        "psp-core-2025--law-change-43443-6",
+        "psp-core-2025--print-step-212242",
+        "zvlady-resolutions--law-change-uv-2026-175-24",
+        "zvlady-resolutions--law-change-uv-2026-175-32",
+        "zvlady-resolutions--law-change-uv-2026-175-117",
+        "zvlady-resolutions--law-change-uv-2026-175-163",
+        "zvlady-resolutions--2026-175",
+        "zvlady-resolutions--law-change-uv-2026-347",
+        "zvlady-resolutions--2026-347",
+        "zvlady-resolutions--law-change-uv-2026-700",
+        "zvlady-resolutions--2026-700"
+      ],
+      "explanationCz": "Poslanci ANO podpořili změnu, která rozšiřuje vymezení stavebních pozemků pro DPH, a tedy může zúžit jejich osvobození. Vláda zároveň předložila zákon o evidenci tržeb, který přináší některé daňové úlevy, ale také přirážku 1 400 Kč měsíčně pro část podnikatelů; poslanci ANO zákon po vrácení Senátem podpořili. Přestože strana podpořila i některé návrhy na snížení DPH a daňové úlevy, rozhodnutí o zákonu obsahuje současně zvýšení daňového zatížení. Proto doložené rozhodnutí ukazuje spíše postup proti slibu než jeho naplňování.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U zákona o evidenci tržeb se v dodaných textech prolínají daňové úlevy a nová přirážka; Senát vrátil zákon s pozměňovacími návrhy a přesný text po těchto změnách není zveřejněn. Výsledný zákon proto nelze popsat jako změnu mířící jen jedním směrem.",
+        "U smluv o zamezení dvojímu zdanění chybí předchozí smluvní a vnitrostátní sazby, takže nelze přesně porovnat jejich dopad s dosavadním daňovým zatížením."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

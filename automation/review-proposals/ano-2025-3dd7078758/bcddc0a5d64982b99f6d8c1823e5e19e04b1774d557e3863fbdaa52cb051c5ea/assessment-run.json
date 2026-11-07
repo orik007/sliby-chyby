@@ -1,0 +1,354 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T09-48-20-662Z--2f8e2471fad6",
+  "evaluatedAt": "2026-10-06T09:48:20.662Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-3dd7078758/2f8e2471fad60ee2a0e9775082f96bfed62d85153a39bdccad29342cc39ba7b9.json",
+  "packageHash": "2f8e2471fad60ee2a0e9775082f96bfed62d85153a39bdccad29342cc39ba7b9",
+  "assessmentContentHash": "bcf4473689c825e7a71b7cc4e48989a7cdfba7cf466792f94a987329bf256310",
+  "assessmentFingerprint": "bcddc0a5d64982b99f6d8c1823e5e19e04b1774d557e3863fbdaa52cb051c5ea",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-3dd7078758",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "896183856f59cf7b7f884677e026eff83d04d3270a7022fc423d1bd835056749"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "053e64deb7e1d5df590c6b798d874a0b67b1d21cce7951638cf94138fe42bb91"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment omits the relevance verdict for law change psp-core-2025--law-change-43240-5",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_068b28bff5c385d0016ac4c2b6693887d2b094c7a6d5493d2d",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 43197,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 43194
+            },
+            "output_tokens": 6869,
+            "output_tokens_details": {
+              "reasoning_tokens": 5571
+            },
+            "total_tokens": 50066
+          },
+          "output": {
+            "promiseId": "ano-2025-3dd7078758",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43195-3",
+                "relevant": false,
+                "reasonCz": "Text mění pouze termíny účinnosti odkazovaných ustanovení zákona č. 152/2025 Sb., ale podklady neukazují konkrétní obsahovou vazbu těchto ustanovení na posuzování zdravotního postižení.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43198-4",
+                "relevant": false,
+                "reasonCz": "Změny prodlužují přechodné lhůty pro výplatu a zachování jiných sociálních dávek, nikoli pravidla posuzování osob se zdravotním postižením.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43240-1",
+                "relevant": true,
+                "reasonCz": "Změna upravuje povinnosti a předávání zdravotních podkladů při posuzování nároku na příspěvek na péči, tedy skutečnou část systému posuzování osob se zdravotním postižením.",
+                "effectCz": "Dosavadní § 21 vyžadoval zejména sociální šetření, zdravotní vyšetření a součinnost při zpracování posudku; nové znění navíc požaduje označení ošetřujícího lékaře a osob poskytujících pomoc a umožňuje lékaři poslat potvrzení elektronicky v předepsaném formátu, což může předávání zjednodušit, ale nové informační povinnosti zároveň rozšiřuje. Odkazy v § 13, § 25, § 26, § 14a, § 16 a § 29 se převážně upravují podle přečíslování povinností a samy pravidla nemění; nově vložený § 4 odst. 4 dovoluje ve vymezeném případě odstranit tvrdost související s předpisy EU, nikoli zrychlit posuzování. Změny § 21, které se posuzování týkají, mají podle schváleného textu nabýt účinnosti až 1. června 2028."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43240-4",
+                "relevant": true,
+                "reasonCz": "Změna odkládá a ruší části dříve přijaté reformy, která měla upravit řízení a posuzování příspěvku na péči, a proto přímo ovlivňuje rychlost zavedení změn v posuzování.",
+                "effectCz": "Dosavadní čl. XX zákona č. 300/2025 Sb. počítal s účinností od 1. července 2026; novela tento termín posouvá na 1. června 2028, takže zavedení reformy se odkládá téměř o dva roky. Současně ruší body 4, 12, 14 a 20 až 23 čl. I: ruší se tak mimo jiné dříve vložená úprava výjimky při tvrdosti, změny odkazů na příslušné úřady a ustanovení o lékařských podkladech, povinnostech žadatele a elektronickém informačním systému; tyto rušené body samy o sobě neposkytovaly nová pravidla posuzování. Úprava odkazu z odstavce 5 na odstavec 7 u kvalifikačního kurzu pracovníků v sociálních službách se slibu netýká. Odklad účinnosti nové úpravy posuzování a rušení některých souvisejících postupů ztěžují rychlé zavedení změn, ačkoli novela sama neurčuje konkrétní délku posuzování."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-3dd7078758--source",
+              "psp-core-2025--law-change-43240-1",
+              "psp-core-2025--law-change-43240-4",
+              "psp-core-2025--print-step-210938",
+              "psp-core-2025--vote-87394"
+            ],
+            "explanationCz": "Poslanci ANO předložili novelu zákona o sociálních službách a hlasovali pro její schválení. Novela upravuje podklady při posuzování příspěvku na péči a umožňuje lékaři poslat některé potvrzení elektronicky; její další ustanovení stanoví kroky a lhůty pro posouzení. Zároveň ale odkládá účinnost související reformy z července 2026 na červen 2028 a ruší několik jejích dříve přijatých částí. Protože schválený návrh obsahuje dílčí zlepšení i odklad změn, převažuje rozpor se slibem rychlého a efektivního posuzování.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Schválená novela současně zavádí dílčí změny v posuzování a odkládá účinnost související reformy; její konečný praktický dopad na dobu vyřízení nelze z textu samotného určit."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-3dd7078758",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text mění pouze účinnost blíže neurčených ustanovení zákona o dávce státní sociální pomoci a balíček nedokládá, že se týkají posuzování zdravotního postižení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Změna prodlužuje přechodné lhůty pro některé sociální dávky a posouvá účinnost dalších blíže neurčených ustanovení, ale nedokládá souvislost s posuzováním zdravotního postižení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-1",
+          "relevant": true,
+          "reasonCz": "Mění povinnosti a předávání zdravotních podkladů v řízení o příspěvku na péči, tedy přímo související část posuzování osob se zdravotním postižením.",
+          "effectCz": "Dosavadní § 21 ukládal žadateli doložit zdravotní podklady, podrobit se sociálnímu šetření a vyšetření a poskytnout potřebnou součinnost; nové znění přidává mimo jiné uvedení ošetřujícího lékaře a rozsahu pomoci a umožňuje lékaři zaslat potvrzení elektronicky. To může usnadnit předávání podkladů, ale zároveň přibývají dokládané údaje a znění samo nestanoví kratší lhůtu posouzení. Převážně jde o změnu postupů, nikoli o prokazatelné zrychlení; nové znění § 21 má navíc podle textu nabýt účinnosti až 1. června 2028. Ostatní uvedené změny v této části jsou nové pravidlo pro odstranění tvrdosti v případech unijních předpisů nebo technické přečíslování odkazů, které posuzování nezrychlují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-4",
+          "relevant": true,
+          "reasonCz": "Nové znění pravidel pro posuzování závislosti zavádí konkrétní lhůty pro sociální šetření a rozhodnutí, zatímco další změny téhož návrhu posouvají účinnost souvisejících postupů.",
+          "effectCz": "Dřívější znění zákona upravovalo posouzení prostřednictvím dosavadního postupu; schválené znění nově ukládá zahájit sociální šetření do 5 pracovních dnů a provést je do 20 dnů a stanoví lhůtu 15 dnů pro vydání rozhodnutí, přičemž její běh po dobu posuzování neběží. Tyto lhůty směřují k rychlejšímu a předvídatelnějšímu procesu, byť čekání na vlastní posouzení z lhůty pro rozhodnutí vyjmuto zůstává. Současně se účinnost některých změn včetně nového znění § 21 odkládá na 1. června 2028; oproti dosavadnímu termínu 1. července 2026 je to později, takže část aktualizace a elektronického předávání podkladů se zavádí pomaleji. Rušení a přečíslování dalších ustanovení z uvedené části nemění samo o sobě lhůty posouzení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": false,
+          "reasonCz": "Změna ruší dvě blíže neurčené úpravy dávek pro osoby se zdravotním postižením a mění jejich účinnost, ale balíček nedokládá, že se týkají systému posuzování nebo rychlosti řízení.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-3dd7078758--source",
+        "psp-core-2025--law-change-43240-1",
+        "psp-core-2025--law-change-43240-4",
+        "psp-core-2025--print-step-210938",
+        "psp-core-2025--vote-87394"
+      ],
+      "explanationCz": "Poslanci ANO předložili a poté podpořili novelu zákona o sociálních službách, která upravuje posuzování příspěvku na péči. Zavádí například lhůtu pěti pracovních dnů pro zahájení sociálního šetření, dvacet dnů na jeho provedení a patnáctidenní lhůtu pro rozhodnutí, což posouvá část slibu kupředu. Zároveň se nové znění pravidel pro doklady a jejich předávání začne používat až od června 2028, tedy později než dosavadní plánovaný termín. Podpora návrhu tak přináší dílčí zlepšení, ale také odklad části aktualizace, proto strana zatím postupuje proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Lhůta pro vydání rozhodnutí neběží po dobu posuzování zdravotního stavu, takže z podkladů nelze určit celkovou dobu vyřízení žádosti.",
+        "Nové znění § 21 má nabýt účinnosti až v červnu 2028; z balíčku není možné určit, jak rychle se jeho elektronické předávání podkladů po zavedení projeví v praxi."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-3dd7078758",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text upravuje termíny účinnosti změn navázaných na dávku státní sociální pomoci, ale žádné ustanovení o posuzování zdravotního postižení ani o rychlosti posudkového řízení v něm uvedeno není.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Změna posouvá termíny přechodu na dávku státní sociální pomoci, nikoli pravidla posuzování zdravotního postižení nebo rychlost posudkového řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-1",
+          "relevant": true,
+          "reasonCz": "Mění pravidla řízení o příspěvku na péči a zdravotních podkladech, tedy přímo část posuzování lidí se zdravotním postižením.",
+          "effectCz": "Dosavadní § 21 ukládal žadateli zejména podrobit se sociálnímu šetření a zdravotnímu či odbornému vyšetření a poskytnout potřebnou součinnost; nové znění tyto povinnosti podrobněji rozepisuje a nově umožňuje, aby lékař poslal zdravotní potvrzení elektronicky v předepsaném formátu. To přidává elektronickou cestu a může posuzování modernizovat, avšak samo o sobě nestanoví kratší lhůtu. Nový § 4 odst. 4 umožňuje ve vymezených případech odstranit tvrdost, což rozšiřuje možnost individuální úlevy; předchozí text tohoto nového odstavce neexistoval. Změny odkazů a přečíslování souvisejících povinností podle poskytnutého znění mění jejich označení, nikoli jejich věcnou přísnost."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-4",
+          "relevant": true,
+          "reasonCz": "Ruší některé plánované změny zdravotních podkladů a odkládá účinnost rozsáhlé přestavby posuzování, která zavádí konkrétní lhůty.",
+          "effectCz": "Před touto změnou zákon č. 300/2025 Sb. počítal s účinností hlavních změn od 1. července 2026; nově se jejich účinnost posouvá na 1. června 2028, takže zavedení rychlejšího systému se odkládá téměř o dva roky. Plánované nové znění § 25 mělo zahájit sociální šetření do pěti pracovních dnů a provést je do dvaceti dnů; nové znění § 26 počítalo s rozhodnutím do patnácti dnů, s přerušením této lhůty po dobu posuzování. Tato pravidla jsou odložena. Zrušeny jsou také body, které mezi plánované změny řadily elektronické zasílání zdravotního potvrzení; přesné předchozí znění některých rušených ustanovení zákona č. 108/2006 Sb. kontext neobsahuje, takže jejich úplný věcný účinek nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": false,
+          "reasonCz": "Změna odkládá nebo ruší body 2 a 5 jiné novely zákona o dávkách pro osoby se zdravotním postižením, ale jejich obsah v balíčku chybí, takže nelze doložit, že se týkají posuzování nebo rychlosti řízení.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-3dd7078758--source",
+        "psp-core-2025--law-change-43240-1",
+        "psp-core-2025--law-change-43240-4",
+        "psp-core-2025--print-step-210938",
+        "psp-core-2025--vote-87394"
+      ],
+      "explanationCz": "Poslanci ANO předložili a v závěrečném hlasování podpořili novelu zákona o sociálních službách. Ta počítá s elektronickým předáváním zdravotních podkladů a s pevnými lhůtami pro zahájení a provedení posouzení. Zároveň ale hlavní změny posunula z července 2026 až na červen 2028 a některé plánované elektronické úpravy vypustila. Návrh tedy obsahuje dílčí modernizaci, ale odkládá důležitou část rychlejšího systému, a proto jde proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček stanoví nové procesní lhůty a termíny účinnosti, ale neukazuje, zda se po jejich zavedení skutečná doba vyřízení žádostí zkrátí.",
+        "U některých zrušených bodů novely zákona o sociálních službách není v balíčku uvedeno původní úplné znění, takže jejich dílčí dopady nelze posoudit."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0355ce05c1bedb8c016ac4c1ee40f487d2b48dbc0d53fab44d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 43197,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 43194
+      },
+      "output_tokens": 6548,
+      "output_tokens_details": {
+        "reasoning_tokens": 5249
+      },
+      "total_tokens": 49745
+    },
+    "output": {
+      "promiseId": "ano-2025-3dd7078758",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text mění pouze účinnost blíže neurčených ustanovení zákona o dávce státní sociální pomoci a balíček nedokládá, že se týkají posuzování zdravotního postižení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Změna prodlužuje přechodné lhůty pro některé sociální dávky a posouvá účinnost dalších blíže neurčených ustanovení, ale nedokládá souvislost s posuzováním zdravotního postižení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-1",
+          "relevant": true,
+          "reasonCz": "Mění povinnosti a předávání zdravotních podkladů v řízení o příspěvku na péči, tedy přímo související část posuzování osob se zdravotním postižením.",
+          "effectCz": "Dosavadní § 21 ukládal žadateli doložit zdravotní podklady, podrobit se sociálnímu šetření a vyšetření a poskytnout potřebnou součinnost; nové znění přidává mimo jiné uvedení ošetřujícího lékaře a rozsahu pomoci a umožňuje lékaři zaslat potvrzení elektronicky. To může usnadnit předávání podkladů, ale zároveň přibývají dokládané údaje a znění samo nestanoví kratší lhůtu posouzení. Převážně jde o změnu postupů, nikoli o prokazatelné zrychlení; nové znění § 21 má navíc podle textu nabýt účinnosti až 1. června 2028. Ostatní uvedené změny v této části jsou nové pravidlo pro odstranění tvrdosti v případech unijních předpisů nebo technické přečíslování odkazů, které posuzování nezrychlují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-4",
+          "relevant": true,
+          "reasonCz": "Nové znění pravidel pro posuzování závislosti zavádí konkrétní lhůty pro sociální šetření a rozhodnutí, zatímco další změny téhož návrhu posouvají účinnost souvisejících postupů.",
+          "effectCz": "Dřívější znění zákona upravovalo posouzení prostřednictvím dosavadního postupu; schválené znění nově ukládá zahájit sociální šetření do 5 pracovních dnů a provést je do 20 dnů a stanoví lhůtu 15 dnů pro vydání rozhodnutí, přičemž její běh po dobu posuzování neběží. Tyto lhůty směřují k rychlejšímu a předvídatelnějšímu procesu, byť čekání na vlastní posouzení z lhůty pro rozhodnutí vyjmuto zůstává. Současně se účinnost některých změn včetně nového znění § 21 odkládá na 1. června 2028; oproti dosavadnímu termínu 1. července 2026 je to později, takže část aktualizace a elektronického předávání podkladů se zavádí pomaleji. Rušení a přečíslování dalších ustanovení z uvedené části nemění samo o sobě lhůty posouzení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": false,
+          "reasonCz": "Změna ruší dvě blíže neurčené úpravy dávek pro osoby se zdravotním postižením a mění jejich účinnost, ale balíček nedokládá, že se týkají systému posuzování nebo rychlosti řízení.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-3dd7078758--source",
+        "psp-core-2025--law-change-43240-1",
+        "psp-core-2025--law-change-43240-4",
+        "psp-core-2025--print-step-210938",
+        "psp-core-2025--vote-87394"
+      ],
+      "explanationCz": "Poslanci ANO předložili a poté podpořili novelu zákona o sociálních službách, která upravuje posuzování příspěvku na péči. Zavádí například lhůtu pěti pracovních dnů pro zahájení sociálního šetření, dvacet dnů na jeho provedení a patnáctidenní lhůtu pro rozhodnutí, což posouvá část slibu kupředu. Zároveň se nové znění pravidel pro doklady a jejich předávání začne používat až od června 2028, tedy později než dosavadní plánovaný termín. Podpora návrhu tak přináší dílčí zlepšení, ale také odklad části aktualizace, proto strana zatím postupuje proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Lhůta pro vydání rozhodnutí neběží po dobu posuzování zdravotního stavu, takže z podkladů nelze určit celkovou dobu vyřízení žádosti.",
+        "Nové znění § 21 má nabýt účinnosti až v červnu 2028; z balíčku není možné určit, jak rychle se jeho elektronické předávání podkladů po zavedení projeví v praxi."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0dad436859a36762016ac4c36a700487d2be80265907e6bf56",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 43197,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 43194
+      },
+      "output_tokens": 5882,
+      "output_tokens_details": {
+        "reasoning_tokens": 4541
+      },
+      "total_tokens": 49079
+    },
+    "output": {
+      "promiseId": "ano-2025-3dd7078758",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text upravuje termíny účinnosti změn navázaných na dávku státní sociální pomoci, ale žádné ustanovení o posuzování zdravotního postižení ani o rychlosti posudkového řízení v něm uvedeno není.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Změna posouvá termíny přechodu na dávku státní sociální pomoci, nikoli pravidla posuzování zdravotního postižení nebo rychlost posudkového řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-1",
+          "relevant": true,
+          "reasonCz": "Mění pravidla řízení o příspěvku na péči a zdravotních podkladech, tedy přímo část posuzování lidí se zdravotním postižením.",
+          "effectCz": "Dosavadní § 21 ukládal žadateli zejména podrobit se sociálnímu šetření a zdravotnímu či odbornému vyšetření a poskytnout potřebnou součinnost; nové znění tyto povinnosti podrobněji rozepisuje a nově umožňuje, aby lékař poslal zdravotní potvrzení elektronicky v předepsaném formátu. To přidává elektronickou cestu a může posuzování modernizovat, avšak samo o sobě nestanoví kratší lhůtu. Nový § 4 odst. 4 umožňuje ve vymezených případech odstranit tvrdost, což rozšiřuje možnost individuální úlevy; předchozí text tohoto nového odstavce neexistoval. Změny odkazů a přečíslování souvisejících povinností podle poskytnutého znění mění jejich označení, nikoli jejich věcnou přísnost."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-4",
+          "relevant": true,
+          "reasonCz": "Ruší některé plánované změny zdravotních podkladů a odkládá účinnost rozsáhlé přestavby posuzování, která zavádí konkrétní lhůty.",
+          "effectCz": "Před touto změnou zákon č. 300/2025 Sb. počítal s účinností hlavních změn od 1. července 2026; nově se jejich účinnost posouvá na 1. června 2028, takže zavedení rychlejšího systému se odkládá téměř o dva roky. Plánované nové znění § 25 mělo zahájit sociální šetření do pěti pracovních dnů a provést je do dvaceti dnů; nové znění § 26 počítalo s rozhodnutím do patnácti dnů, s přerušením této lhůty po dobu posuzování. Tato pravidla jsou odložena. Zrušeny jsou také body, které mezi plánované změny řadily elektronické zasílání zdravotního potvrzení; přesné předchozí znění některých rušených ustanovení zákona č. 108/2006 Sb. kontext neobsahuje, takže jejich úplný věcný účinek nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": false,
+          "reasonCz": "Změna odkládá nebo ruší body 2 a 5 jiné novely zákona o dávkách pro osoby se zdravotním postižením, ale jejich obsah v balíčku chybí, takže nelze doložit, že se týkají posuzování nebo rychlosti řízení.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-3dd7078758--source",
+        "psp-core-2025--law-change-43240-1",
+        "psp-core-2025--law-change-43240-4",
+        "psp-core-2025--print-step-210938",
+        "psp-core-2025--vote-87394"
+      ],
+      "explanationCz": "Poslanci ANO předložili a v závěrečném hlasování podpořili novelu zákona o sociálních službách. Ta počítá s elektronickým předáváním zdravotních podkladů a s pevnými lhůtami pro zahájení a provedení posouzení. Zároveň ale hlavní změny posunula z července 2026 až na červen 2028 a některé plánované elektronické úpravy vypustila. Návrh tedy obsahuje dílčí modernizaci, ale odkládá důležitou část rychlejšího systému, a proto jde proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček stanoví nové procesní lhůty a termíny účinnosti, ale neukazuje, zda se po jejich zavedení skutečná doba vyřízení žádostí zkrátí.",
+        "U některých zrušených bodů novely zákona o sociálních službách není v balíčku uvedeno původní úplné znění, takže jejich dílčí dopady nelze posoudit."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

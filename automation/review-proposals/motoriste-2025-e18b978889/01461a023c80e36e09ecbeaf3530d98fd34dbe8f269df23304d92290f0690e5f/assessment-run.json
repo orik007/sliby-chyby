@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-47-46-981Z--e50a9bb7aef3",
+  "evaluatedAt": "2026-11-05T10:47:46.981Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-e18b978889/e50a9bb7aef33002530bb7f3037b30de9f408fc6b818bd1dd6a281cb322e597a.json",
+  "packageHash": "e50a9bb7aef33002530bb7f3037b30de9f408fc6b818bd1dd6a281cb322e597a",
+  "assessmentContentHash": "8b728cef24550b88b68d636242980cb5a20306169b25f319bf7b79e932384baf",
+  "assessmentFingerprint": "01461a023c80e36e09ecbeaf3530d98fd34dbe8f269df23304d92290f0690e5f",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-e18b978889",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-e18b978889",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43180-1-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně zavádí zvláštní režim pro reklamní letáky, který se týká jejich regulace a podle stanoviska vlády také recyklačního poplatku, proti němuž se slib vymezuje.",
+          "effectCz": "Před změnou existoval § 15b upravující zvláštní povinnosti pro některé jednorázové plastové obaly, ale nový § 15c pro reklamní letáky v dosavadním znění nebyl. Návrh by letáky definoval a obdobně na ně rozšířil ustanovení o obalech s výjimkou § 3 až 5, čímž by pro ně zavedl další regulatorní povinnosti. Z dodaného znění nelze určit přesnou výši ani konkrétní podobu poplatku; vláda však ve svém stanovisku návrh výslovně označila za zavádějící recyklační poplatky zatěžující tisk a distribuci letáků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-e18b978889--source",
+        "psp-core-2025--law-change-43180-1-1",
+        "psp-core-2025--government-opinion-43180-1"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působí, nesouhlasila s poslaneckým návrhem na změnu zákona o obalech. Návrh by nově vztáhl část pravidel pro obaly také na reklamní letáky a vláda uvedla, že tím zavádí recyklační poplatky pro jejich tisk a distribuci. Nesouhlas vlády s návrhem je v souladu se slibem odmítnout takový poplatek, jde však o stanovisko k návrhu, nikoli o rozhodnutí, které by jeho zavedení samo znemožnilo.",
+      "confidence": "high",
+      "uncertainties": [
+        "Dodané znění návrhu neuvádí konkrétní výši ani přesný mechanismus poplatku; vláda však návrh ve svém stanovisku výslovně popsala jako zavádějící recyklační poplatky pro reklamní letáky."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-e18b978889",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43180-1-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně zavádí pravidla pro reklamní letáky a podřizuje je vybraným ustanovením o obalech, takže se může týkat poplatku za jejich tisk a distribuci.",
+          "effectCz": "Před změnou § 15c neexistoval; návrh nově definuje reklamní leták a stanoví, že se na něj obdobně použijí ustanovení o obalech s výjimkou § 3 až 5. Z dodaného kontextu nelze zjistit obsah těchto odkazovaných ustanovení, a proto nelze určit, zda a jak návrh zavádí nebo mění recyklační poplatek za letáky."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-e18b978889--source",
+        "psp-core-2025--law-change-43180-1-1",
+        "psp-core-2025--government-opinion-43180-1"
+      ],
+      "explanationCz": "Slib Motoristů sobě odmítá zavedení recyklačního poplatku za tisk a distribuci reklamních letáků. Vláda, na níž se Motoristé sobě podíleli, nesouhlasila s poslaneckým návrhem zákona, který nově podřizoval letáky vybraným pravidlům pro obaly. Vláda svůj nesouhlas spojila také s výslovným závazkem takové poplatky nezavádět, což naznačuje postup proti návrhu, který by mohl poplatek zavést. Dodané znění však neobsahuje pravidla, na něž návrh odkazuje, takže nelze ověřit, zda poplatek skutečně zavádí; hodnocení je proto nejisté.",
+      "confidence": "low",
+      "uncertainties": [
+        "Znění ustanovení o obalech, která se mají na reklamní letáky použít, v balíčku chybí. Nelze proto potvrdit, zda návrh skutečně zaváděl recyklační poplatek; závěr o posunu vychází z toho, že vláda svůj nesouhlas s návrhem výslovně spojila se závazkem takový poplatek nezavádět."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_052d8763b3b7b20f016aec5eb593c487d1acb261fdf2127276",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9686,
+      "input_tokens_details": {
+        "cache_write_tokens": 3336,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 1399,
+      "output_tokens_details": {
+        "reasoning_tokens": 828
+      },
+      "total_tokens": 11085
+    },
+    "output": {
+      "promiseId": "motoriste-2025-e18b978889",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43180-1-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně zavádí zvláštní režim pro reklamní letáky, který se týká jejich regulace a podle stanoviska vlády také recyklačního poplatku, proti němuž se slib vymezuje.",
+          "effectCz": "Před změnou existoval § 15b upravující zvláštní povinnosti pro některé jednorázové plastové obaly, ale nový § 15c pro reklamní letáky v dosavadním znění nebyl. Návrh by letáky definoval a obdobně na ně rozšířil ustanovení o obalech s výjimkou § 3 až 5, čímž by pro ně zavedl další regulatorní povinnosti. Z dodaného znění nelze určit přesnou výši ani konkrétní podobu poplatku; vláda však ve svém stanovisku návrh výslovně označila za zavádějící recyklační poplatky zatěžující tisk a distribuci letáků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-e18b978889--source",
+        "psp-core-2025--law-change-43180-1-1",
+        "psp-core-2025--government-opinion-43180-1"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působí, nesouhlasila s poslaneckým návrhem na změnu zákona o obalech. Návrh by nově vztáhl část pravidel pro obaly také na reklamní letáky a vláda uvedla, že tím zavádí recyklační poplatky pro jejich tisk a distribuci. Nesouhlas vlády s návrhem je v souladu se slibem odmítnout takový poplatek, jde však o stanovisko k návrhu, nikoli o rozhodnutí, které by jeho zavedení samo znemožnilo.",
+      "confidence": "high",
+      "uncertainties": [
+        "Dodané znění návrhu neuvádí konkrétní výši ani přesný mechanismus poplatku; vláda však návrh ve svém stanovisku výslovně popsala jako zavádějící recyklační poplatky pro reklamní letáky."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_017882b185848b57016aec5ec1e79c87d1a79d1481150bc673",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9686,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 9683
+      },
+      "output_tokens": 1839,
+      "output_tokens_details": {
+        "reasoning_tokens": 1265
+      },
+      "total_tokens": 11525
+    },
+    "output": {
+      "promiseId": "motoriste-2025-e18b978889",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43180-1-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně zavádí pravidla pro reklamní letáky a podřizuje je vybraným ustanovením o obalech, takže se může týkat poplatku za jejich tisk a distribuci.",
+          "effectCz": "Před změnou § 15c neexistoval; návrh nově definuje reklamní leták a stanoví, že se na něj obdobně použijí ustanovení o obalech s výjimkou § 3 až 5. Z dodaného kontextu nelze zjistit obsah těchto odkazovaných ustanovení, a proto nelze určit, zda a jak návrh zavádí nebo mění recyklační poplatek za letáky."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-e18b978889--source",
+        "psp-core-2025--law-change-43180-1-1",
+        "psp-core-2025--government-opinion-43180-1"
+      ],
+      "explanationCz": "Slib Motoristů sobě odmítá zavedení recyklačního poplatku za tisk a distribuci reklamních letáků. Vláda, na níž se Motoristé sobě podíleli, nesouhlasila s poslaneckým návrhem zákona, který nově podřizoval letáky vybraným pravidlům pro obaly. Vláda svůj nesouhlas spojila také s výslovným závazkem takové poplatky nezavádět, což naznačuje postup proti návrhu, který by mohl poplatek zavést. Dodané znění však neobsahuje pravidla, na něž návrh odkazuje, takže nelze ověřit, zda poplatek skutečně zavádí; hodnocení je proto nejisté.",
+      "confidence": "low",
+      "uncertainties": [
+        "Znění ustanovení o obalech, která se mají na reklamní letáky použít, v balíčku chybí. Nelze proto potvrdit, zda návrh skutečně zaváděl recyklační poplatek; závěr o posunu vychází z toho, že vláda svůj nesouhlas s návrhem výslovně spojila se závazkem takový poplatek nezavádět."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "moving-towards",
+    "selectedReview": "assessor-a"
+  }
+}

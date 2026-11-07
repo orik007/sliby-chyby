@@ -1,0 +1,1578 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T09-38-53-690Z--b83124871fa4",
+  "evaluatedAt": "2026-11-05T09:38:53.690Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-2911ff53f576/b83124871fa4871ea45d3c7d3fb96a1b14bf06926edf0f5de0f0b94504eab037.json",
+  "packageHash": "b83124871fa4871ea45d3c7d3fb96a1b14bf06926edf0f5de0f0b94504eab037",
+  "assessmentContentHash": "9188a4b30c14bdb759fe5506170e607000702f2aad29abbcb4a1b1c36cb78efc",
+  "assessmentFingerprint": "9a4f761ea851254bd342ab99b0582af996ffeed906b267e17920e4cbf6c96d85",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-2911ff53f576",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment omits the relevance verdict for law change psp-core-2025--law-change-43174-9",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_04d67cc0da59c608016aec4dbe84a887d1a42fce554f02499d",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 185225,
+            "input_tokens_details": {
+              "cache_write_tokens": 178875,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 10799,
+            "output_tokens_details": {
+              "reasoning_tokens": 5439
+            },
+            "total_tokens": 196024
+          },
+          "output": {
+            "promiseId": "candidate-2911ff53f576",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-5",
+                "relevant": true,
+                "reasonCz": "Ustanovení o povolování těžby kritických a strategických nerostů se dotýkají environmentálního posuzování, které může ovlivnit vodu.",
+                "effectCz": "Před změnou se fikce souhlasu po marném uplynutí lhůty nevztahovala na jednotné environmentální stanovisko; návrh tuto výjimku vypouští, a tím může oslabit předchozí posouzení vlivů na vodu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-6",
+                "relevant": true,
+                "reasonCz": "Změna pravidel povolování hornické činnosti výslovně zasahuje do environmentálního stanoviska u činnosti, která může mít dopad na vodu.",
+                "effectCz": "Dosavadní pravidlo vylučovalo fikci souhlasu pro jednotné environmentální stanovisko; návrh tuto výjimku odstraňuje, takže může oslabit ochranu při posuzování vlivů těžby na vodu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-1",
+                "relevant": true,
+                "reasonCz": "Mění obecnou povinnost předcházet úhynu živočichů a ničení jejich biotopů, což může zahrnovat rybí populace.",
+                "effectCz": "Před změnou se povinnost vztahovala na dostupné technické a ekonomické prostředky; nové znění ji formuluje jako dostupné postupy a opatření a výslovně zahrnuje biotopy druhů, takže pravidlo ochrany je výslovnější, jeho celkovou přísnost však z dodaného srovnání nelze spolehlivě určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-3",
+                "relevant": true,
+                "reasonCz": "Nově upravuje záchranné a další programy pro vybrané ohrožené druhy, což může zahrnovat rybí populace.",
+                "effectCz": "Dosavadní zákon požadoval záchranné programy pro zvláště chráněné druhy s cílem posílit jejich populace; návrh zavádí také celostátní programy, regionální akční plány a programy péče pro vybrané druhy, ale nezaručuje, že budou zahrnovat ryby."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-5",
+                "relevant": true,
+                "reasonCz": "Rozděluje odpovědnost za uvedené programy ochrany druhů a zavádí stanoviska k vysazování nepůvodních druhů při povolování rybářského práva.",
+                "effectCz": "Dříve byly záchranné programy a péče o chráněné druhy svěřeny dosavadním orgánům; návrh nově rozděluje tvorbu a realizaci programů mezi kraje, Agenturu a ministerstvo a přidává stanovisko k nepůvodním druhům, aniž by sám zajistil konkrétní program pro ryby."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Mění povolování nakládání s vodami a vypouštění odpadních vod i kontroly jejich znečištění, a přímo se tedy týká čistoty vod.",
+                "effectCz": "Vodní zákon už stanovoval limity pro vypouštění a ochranu vod; schválené znění nově posiluje kontinuální sledování některých odpadních vod a povinnosti u malých čistíren, současně však pro některé malé čistírny zavádí výjimku z povolení a části kontroly a přesouvá některá rozhodnutí na stavební úřady, takže účinek na čistotu vod je smíšený."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-24",
+                "relevant": true,
+                "reasonCz": "Upravuje posuzování ochrany podzemních vod při zřizování veřejných pohřebišť.",
+                "effectCz": "Dříve se při povolování pohřebiště uplatňovalo stanovisko vodoprávního úřadu, v některých případech nahrazené jednotným environmentálním stanoviskem; schválené znění ponechává vyjádření vodoprávního úřadu k ochraně podzemních vod, ale mění postup a příslušnost, nikoli doložené kvalitativní limity."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-31",
+                "relevant": true,
+                "reasonCz": "Původní návrh zpřísňoval trestní postihy za závažné poškození životního prostředí a populací chráněných druhů, ale tato část byla z návrhu odstraněna.",
+                "effectCz": "Původní znění mělo rozšířit případy závažného poškození ekosystémů a populací, za něž hrozí trestní postih; v textu schváleném Sněmovnou tato část chybí, takže nepřinesla slíbenou ochranu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-30",
+                "relevant": true,
+                "reasonCz": "Změna se týká systému domovních čistíren odpadních vod a nepřímo i pravidel kontinuálního sledování znečištění.",
+                "effectCz": "Předchozí znění vodního zákona nemělo dodanou zvláštní úpravu soustav domovních čistíren; pozměňovací návrhy ji doplňují, ale zároveň u části vypouštění zavádějí výjimky a odklad monitoringu, takže směr účinku na čistotu vod je smíšený."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": true,
+                "reasonCz": "Dodaný text stanoví podmínky a zmírňující opatření pro záměry v akceleračních oblastech, které mohou zhoršit stav povrchových či podzemních vod.",
+                "effectCz": "Před změnou dodaný text takové zvláštní podmínky v uvedených ustanoveních nestanovoval; návrh je zavádí pro vodní dopady projektů obnovitelných zdrojů, čímž posiluje ochranu před zhoršením vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+                "relevant": true,
+                "reasonCz": "Prodlužuje lhůtu pro vložení starších havarijních plánů do informačního systému v oblasti ochrany životního prostředí.",
+                "effectCz": "Dosavadní lhůta činila dva roky od účinnosti příslušné novely; schválené znění ji prodlužuje na čtyři roky, a tím oddaluje splnění evidenční povinnosti související s prevencí havárií."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43190-1",
+                "relevant": true,
+                "reasonCz": "Návrh výslovně zahrnuje ekologické škody na vodách i významné úhyny ryb a upravuje preventivní a nápravná opatření.",
+                "effectCz": "Dosavadní definice ekologické újmy zahrnovala závažné nepříznivé účinky na stav vody; návrh ji rozšiřuje o další případy zhoršení jakosti vody a významného úhynu ryb a upravuje postupy prevence a nápravy, takže ochranu rozšiřuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43192-1",
+                "relevant": true,
+                "reasonCz": "Návrh zavádí obecní soustavy domovních čistíren odpadních vod s koordinovaným provozem a odborným dohledem.",
+                "effectCz": "Dodaný text dosavadní zákon neobsahuje tuto zvláštní úpravu; návrh nově vyžaduje bezpečný a odborný provoz soustav malých čistíren, což vytváří další prostředek pro čištění odpadních vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43203-16",
+                "relevant": true,
+                "reasonCz": "Předkládaná dohoda výslovně zmiňuje kvalitu vody a hospodaření s vodními zdroji.",
+                "effectCz": "Jde o mezinárodní dohodu bez předchozího znění českého právního předpisu; v předložené části stanoví spolupráci, jejímž cílem je mimo jiné zachování a zlepšování kvality vody, ale neukládá konkrétní český program."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43207-1",
+                "relevant": true,
+                "reasonCz": "Rozpočet SFŽP výslovně počítá s podporou vodohospodářské infrastruktury a čištění odpadních vod.",
+                "effectCz": "Jde o návrh rozpočtu bez předchozího znění měněného zákona; obsahuje 2 miliardy Kč na podporu vodohospodářské infrastruktury a 825 817 770 Kč na zásobování pitnou vodou a odvádění odpadních vod, což podporuje část slibu týkající se čistoty vod, nikoli konkrétní programy pro ryby."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43362-1",
+                "relevant": true,
+                "reasonCz": "Předložené změny úmluvy zařazují do ochranných příloh několik druhů ryb.",
+                "effectCz": "Jde o návrh mezinárodní dohody bez předchozího znění českého předpisu; zahrnuje mimo jiné několik druhů žraloků a dalších ryb do příloh úmluvy, čímž přispívá k ochraně části rybích populací."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43424-2",
+                "relevant": true,
+                "reasonCz": "Předložená změna úmluvy nově řadí paokouna vrankovitého mezi přísně chráněné druhy.",
+                "effectCz": "Jde o návrh mezinárodní dohody bez předchozího znění českého předpisu; přidává jeden druh ryby mezi přísně chráněné druhy, a tím podporuje ochranu části rybích populací."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-8",
+                "relevant": false,
+                "reasonCz": "Dodaný text obsahuje obecnou mezinárodní spolupráci v ochraně přírody a vodních zdrojů, ale nedokládá konkrétní program pro ryby ani opatření na čistotu vody.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-9",
+                "relevant": true,
+                "reasonCz": "Dohoda obsahuje konkrétní závazky ke sledování a zachování rybích populací a k omezení nadměrného rybolovu.",
+                "effectCz": "Jde o návrh mezinárodní dohody bez předchozího znění českého předpisu; předložený text stanoví spolupráci a účinná opatření k zachování populací ryb, zejména v oblasti rybolovu, a tím podporuje část slibu o ochraně ryb."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-38",
+                "relevant": true,
+                "reasonCz": "Dohoda obsahuje opatření k ochraně mořských rybích zdrojů, udržitelnému rybolovu a odpovědné akvakultuře.",
+                "effectCz": "Jde o návrh mezinárodní dohody bez předchozího znění českého předpisu; text předpokládá opatření k udržitelnému zachování a řízení mořských biologických zdrojů a akvakultury, tedy přispívá k ochraně části rybích populací."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-23",
+                "relevant": true,
+                "reasonCz": "Nařízení stanoví zemědělské podmínky týkající se vypouštění odpadních vod, fosforečnanů a ochrany vod.",
+                "effectCz": "Nařízení stanoví požadavky podmíněnosti zemědělských plateb včetně pravidel pro odpadní vody, fosforečnany, upravené kaly a ochranné pásy u vod; předchozí znění těchto pravidel v balíčku není uvedeno, takže směr změny nelze určit."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-34",
+                "relevant": true,
+                "reasonCz": "Změny upravují evidenci porušení podmínek podopatření omezujícího pesticidy v ochranných pásmech vodních zdrojů.",
+                "effectCz": "Nařízení nově uvádí případy porušení podmínek tohoto podopatření v členění pro hodnocení a sankce; protože předchozí znění těchto částí není dodáno, nelze určit, zda je postih přísnější či mírnější."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-158",
+                "relevant": true,
+                "reasonCz": "Vyhláška zřizuje ochranu konkrétního vodního toku a výslovně chrání jeho vodní ekosystémy i populace několika druhů ryb.",
+                "effectCz": "Jde o nový předpis bez předchozího znění; vyhlašuje přírodní památku Zlatý potok a omezuje činnosti, které mohou zhoršit stav vody potřebný pro zachování perlorodky, mihule a vranky, takže přímo chrání část rybích populací a čistotu vody v dané lokalitě."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-107",
+                "relevant": true,
+                "reasonCz": "Plán vlády zařazuje přípravu zákona o průmyslových emisích s cílem snížit přenosy znečišťujících látek mezi prostředími.",
+                "effectCz": "Jde o plánovaný návrh, nikoli změnu dosavadního pravidla; vláda stanovila legislativní úkol zaměřený na omezení emisí a znečištění, který může přispět k čistotě vod, ale konkrétní opatření zatím dodáno není."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-115",
+                "relevant": true,
+                "reasonCz": "Plánuje změnu pravidel pro ukazatele znečištění a vypouštění odpadních vod.",
+                "effectCz": "Jde o plánovaný návrh nařízení bez změny dosavadních limitů v dodaném textu; jeho deklarovaným cílem je zlepšit kvalitu odpadních vod vypouštěných do prostředí, ale konkrétní nové požadavky nejsou uvedeny."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-192",
+                "relevant": true,
+                "reasonCz": "Přehled implementačních prací uvádí přípravu předpisu zaměřeného na kvalitu odpadních vod.",
+                "effectCz": "Jde o plánovací položku bez změny dosavadních pravidel; uvádí přípravu nařízení k čištění městských odpadních vod, jehož konkrétní obsah však dodán není."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-356",
+                "relevant": true,
+                "reasonCz": "Usnesení se týká strategie financování ochrany vod před znečištěním dusičnany ze zemědělských zdrojů.",
+                "effectCz": "Jde o vládní usnesení, nikoli změnu zákona; vláda bere aktualizaci strategie na vědomí a ukládá její další aktualizaci a prosazování, ale dodaný text neuvádí částky ani konkrétní nová opatření."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-2911ff53f576--source",
+              "psp-core-2025--law-change-43174-5",
+              "psp-core-2025--law-change-43174-6",
+              "psp-core-2025--law-change-43174-8-1",
+              "psp-core-2025--law-change-43174-8-3",
+              "psp-core-2025--law-change-43174-8-5",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-24",
+              "psp-core-2025--law-change-43174-31",
+              "psp-core-2025--law-change-43174-30",
+              "psp-core-2025--law-change-43174-42",
+              "psp-core-2025--law-change-43174-approved-53",
+              "psp-core-2025--law-change-43190-1",
+              "psp-core-2025--law-change-43192-1",
+              "psp-core-2025--law-change-43203-16",
+              "psp-core-2025--law-change-43207-1",
+              "psp-core-2025--law-change-43362-1",
+              "psp-core-2025--law-change-43424-2",
+              "psp-core-2025--law-change-43453-9",
+              "psp-core-2025--law-change-43453-38",
+              "esbirka-regulations--law-change-sb-2026-23",
+              "esbirka-regulations--law-change-sb-2026-34",
+              "esbirka-regulations--law-change-sb-2026-158",
+              "zvlady-resolutions--law-change-uv-2026-175-107",
+              "zvlady-resolutions--law-change-uv-2026-175-115",
+              "zvlady-resolutions--law-change-uv-2026-175-192",
+              "zvlady-resolutions--law-change-uv-2026-356",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--government-opinion-43190-1",
+              "psp-core-2025--government-opinion-43192-1",
+              "psp-core-2025--vote-86968",
+              "esbirka-regulations--2026-23",
+              "esbirka-regulations--2026-34",
+              "zvlady-resolutions--2026-175",
+              "zvlady-resolutions--2026-356",
+              "psp-core-2025--amendment-1223",
+              "psp-core-2025--amendment-text-1223",
+              "psp-core-2025--vote-88152",
+              "psp-core-2025--amendment-text-1219",
+              "psp-core-2025--vote-88199",
+              "psp-core-2025--vote-88221",
+              "psp-core-2025--amendment-text-1217",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454",
+              "esbirka-regulations--2026-158",
+              "psp-core-2025--print-step-210760",
+              "psp-core-2025--print-step-211758",
+              "psp-core-2025--print-step-212105",
+              "psp-core-2025--print-step-212285"
+            ],
+            "explanationCz": "Poslanci ANO předložili a podpořili změny, které zavádějí nové programy pro vybrané ohrožené druhy a stanovují ochranu konkrétního potoka i jeho ryb. Schválili také rozpočet fondu životního prostředí s dvěma miliardami korun na vodohospodářskou infrastrukturu a vládní nařízení s podmínkami ochrany vod. Vláda zároveň plánuje další pravidla pro kvalitu odpadních vod a přijala usnesení k financování ochrany vod před dusičnany. Některé pozměňovací návrhy ale oslabovaly nebo odkládaly kontrolu znečištění a konkrétní programy pro ryby nejsou doloženy jako zavedené, takže jde jen o posun v části slibu.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Schválené změny zavádějí programy pro vybrané ohrožené druhy, ale dodaný materiál neukazuje, že byl některý z nich skutečně zaměřen na rybí populace.",
+              "Některé podpořené změny odkládají nebo omezují kontrolu vypouštění odpadních vod; jejich dopad se v dostupném textu mísí s posílením monitoringu a povinností malých čistíren.",
+              "Plánované vládní předpisy o kvalitě odpadních vod jsou zatím pouze legislativní úkoly, nikoli přijatá pravidla."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-2911ff53f576",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-5",
+          "relevant": false,
+          "reasonCz": "Dodané změny horního zákona se týkají povolování těžby a řešení rozporů, nikoli ochrany rybích populací nebo čistoty vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-6",
+          "relevant": false,
+          "reasonCz": "Dodaná změna upravuje povolování hornické činnosti, nikoli slíbené programy nebo čistotu vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení o předcházení úhynu živočichů a ničení jejich biotopů se může týkat i ryb.",
+          "effectCz": "Dosavadní pravidlo ukládalo při řadě činností předcházet zbytečnému úhynu živočichů a ničení jejich biotopů dostupnými prostředky. Nové znění výslovně zahrnuje plánování terénních úprav a hovoří o dostupných postupech a opatřeních; povinnost je v tomto směru konkrétnější a širší, ale nejde samo o program ochrany rybích populací ani o pravidlo čistoty vody."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-3",
+          "relevant": true,
+          "reasonCz": "Nové záchranné programy a regionální akční plány mohou zahrnovat ochranu ohrožených rybích druhů.",
+          "effectCz": "Dosavadní § 52 již ukládal orgánům ochrany přírody zajišťovat záchranné programy zvláště chráněných druhů s cílem posílit jejich populace. Nové § 52a vedle toho zavádí celostátní záchranné programy, regionální akční plány a programy péče pro vybrané vzácné a ohrožené druhy; přidává tedy další programové nástroje, aniž by dodaný text vymezoval, které rybí druhy budou zahrnuty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Text svěřuje krajům a Agentuře konkrétní úkoly při zpracování a uskutečňování programů ochrany druhů.",
+          "effectCz": "Dřívější pravidla svěřovala Agentuře a dalším orgánům obecné úkoly v ochraně přírody a zajišťování záchranných programů. Nové znění výslovně ukládá krajům zpracovávat, schvalovat a uskutečňovat regionální akční plány a Agentuře zajišťovat realizaci záchranných programů a koordinaci těchto plánů; rozšiřuje tak organizační odpovědnost za programovou ochranu druhů, ale neurčuje, že se týká konkrétních rybích populací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Z dodaného výňatku nejsou k dispozici ustanovení této změny, která by se věcně týkala ryb nebo čistoty vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-12",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje ustanovení změny zákona o dráhách, která by se týkala slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-13",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neukazuje věcnou změnu zákona o vnitrozemské plavbě vztahující se k rybím populacím nebo čistotě vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny veterinárního zákona věcně spojené se slibem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neukazuje ustanovení změny zákona o ochraně veřejného zdraví, která by se týkala čistoty vod nebo ryb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje konkrétní změnu pravidel posuzování vlivů, která by dokládala vztah ke slíbeným programům či čistotě vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Změny vodního zákona se přímo týkají povolení vypouštění odpadních vod, jejich sledování a čištění.",
+          "effectCz": "Předchozí úprava vyžadovala povolení pro nakládání s vodami a měření množství i znečištění vypouštěných odpadních vod; vodoprávní úřady také posuzovaly řadu souvisejících podmínek. Schválené znění přesouvá část rozhodování na stavební úřady, zavádí výjimku pro některé malé čistírny s výrobkem označeným CE, u nichž se vypouštění považuje za povolené a nepoužije se běžná povinnost měření, a přidává jejich pravidelné technické revize. To v těchto případech uvolňuje povolovací a monitorovací požadavky, zatímco revize a požadavky na účinnost čištění představují dílčí kontrolní pojistky; celkový dopad na čistotu vod je proto smíšený."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": false,
+          "reasonCz": "Dodané změny upravují ochranu podzemních vod při zřizování pohřebišť, nikoli ochranu ryb nebo slíbené programy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-25",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neukazuje změnu mysliveckého zákona s věcným dopadem na rybí populace či čistotu vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": true,
+          "reasonCz": "Změna se týká slibu pouze prostřednictvím pozměňovacích návrhů upravujících sledování znečištění odpadních vod.",
+          "effectCz": "Vlastní text této části není dodán; pozměňovací návrh k ní rozšiřuje výjimku z kontinuálního sledování znečištění pro některá průmyslová zařízení, zároveň přidává povinnost zpřístupnit výsledky kontrolním orgánům a odkládá použitelnost nových pravidel. Výjimka požadavky na sledování u části zařízení uvolňuje, přístup kontrolních orgánů k výsledkům je naopak posiluje; bez samostatného předchozího znění všech těchto ustanovení nelze určit celkový směr změny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": true,
+          "reasonCz": "Navržená trestní ustanovení se výslovně týkala závažného poškození ekosystémů a populací chráněných druhů, ale v textu schváleném Sněmovnou byla odstraněna.",
+          "effectCz": "Navržené znění mělo doplnit pravidla, kdy se poškození životního prostředí považuje za čin ve větším rozsahu, a upravit trestní postih za dlouhodobé či nevratné poškození populací chráněných druhů. Schválené znění tuto část odstranilo, takže uvedené zpřísnění se v textu, o němž se hlasovalo, neprojevilo."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek změny pravidel pro strategickou infrastrukturu neukazuje ustanovení přímo související s rybími populacemi nebo čistotou vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": false,
+          "reasonCz": "Dodaná část o Státním pozemkovém úřadu neobsahuje doloženou změnu věcně spojenou se slibem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek změny zákona o státní službě neukazuje věcnou vazbu na ochranu ryb či čistotu vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek změny zákona o odpadech neobsahuje ustanovení, která by dokládala přímý dopad na slib.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku bylo ze schváleného textu odstraněno a dodané pasáže nedokládají konkrétní dopad na ryby či čistotu vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Navržené změny vyžadovaly opatření proti zhoršení stavu povrchových a podzemních vod při projektech obnovitelných zdrojů.",
+          "effectCz": "Předchozí § 13 upravoval podmínky k ochraně ptáků a dalších environmentálních zájmů, nikoli dodanou povinnost navrhnout opatření pro vodní stav. Navržené znění takovou povinnost přidává a posiluje ochranu vod při dotčených projektech. Schválený výňatek však tyto konkrétní body neobsahuje, takže nelze určit, zda v této podobě zůstaly ve znění schváleném Sněmovnou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Změna pouze prodlužuje lhůtu pro vložení starších havarijních plánů do systému ohlašování; přímý dopad na slíbené programy nebo čistotu vody doložen není.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Dodané zrušovací ustanovení neukazuje konkrétní změnu ochrany rybích populací nebo čistoty vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43190-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje vymezení ekologické újmy o zhoršení vod a významný úhyn ryb a upravuje prevenci i nápravu takové újmy.",
+          "effectCz": "Předchozí definice zahrnovala závažný nepříznivý účinek na stav vody a újmu na chráněných druzích, ale neobsahovala dodané výslovné příklady zhoršení jakosti vody, ohrožení zdrojů pitné vody a významného úhynu ryb při havárii či provozu. Návrh tyto situace výslovně zahrnuje a upravuje také preventivní a nápravná opatření; rozšiřuje tedy ochranu vody a ryb. Směr příslušných ustanovení je ochranný, ačkoli návrh současně zavádí podmínky pro zahájení řízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43192-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí obecní soustavy domovních čistíren odpadních vod a stanoví pravidla pro jejich odborné a koordinované provozování.",
+          "effectCz": "Dřívější dodané ustanovení § 55c upravovalo odstraňování nefunkčních vodních děl pro obnovu přirozených koryt, nikoli soustavy čistíren. Návrh nově definuje soustavy domovních čistíren, ukládá jejich bezpečné a plynulé provozování a požaduje odborně způsobilou osobu; zavádí tak organizační nástroj pro čištění odpadních vod, ale nestanoví konkrétní limity čištění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": false,
+          "reasonCz": "Dodaný úryvek smlouvy mluví obecně o spolupráci v oblasti kvality vody a vodních zdrojů, ale neukazuje opatření spojené se slíbenými programy nebo čistotou vod v Česku.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu výslovně vyčleňuje prostředky na vodohospodářskou infrastrukturu a projekty odvádění odpadních vod.",
+          "effectCz": "Jde o rozpočtový návrh bez předchozího znění, s nímž by jej bylo možné porovnat. Uvádí 2 miliardy Kč na podporu vodohospodářské infrastruktury, 825 817 770 Kč na opatření pro pitnou vodu a odvádění odpadních vod a předpokládané čerpání 2 850 milionů Kč na infrastrukturní projekty v roce 2026. To je finanční podpora části závazku týkající se čistoty vod, nikoli samostatný program ochrany ryb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43362-1",
+          "relevant": true,
+          "reasonCz": "Návrh mezinárodních změn výslovně zařazuje několik rybích taxonů do příloh úmluvy o ochraně stěhovavých druhů.",
+          "effectCz": "Jde o návrh smluvních změn bez předchozího znění v balíčku; podle dodaného textu přidává sedm uvedených rybích taxonů do příloh I nebo II úmluvy. Může tak přispět k ochraně těchto rybích populací, ale text nedokládá konkrétní český program ani širší opatření pro čistotu vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43424-2",
+          "relevant": true,
+          "reasonCz": "Návrh přidává jeden rybí druh mezi nově přísně chráněné druhy úmluvy.",
+          "effectCz": "Jde o návrh mezinárodní smluvní změny bez předchozího znění v balíčku. Do seznamu nově přidává paokouna vrankovitého; jde o dílčí ochranu jednoho rybího druhu, nikoli o program ochrany rybích populací nebo opatření k čistotě vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-8",
+          "relevant": false,
+          "reasonCz": "Dodaný text smlouvy stanoví obecnou environmentální spolupráci a správu vodních zdrojů, ale neukazuje konkrétní program či opatření k čistotě vody.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-9",
+          "relevant": true,
+          "reasonCz": "Kapitola smlouvy obsahuje konkrétní závazky k zachování rybích populací a prevenci nadměrného rybolovu.",
+          "effectCz": "Jde o návrh smlouvy bez předchozího znění. Dodaný text stanoví spolupráci a opatření pro zachování rybích populací, kontrolu a potírání nezákonného rybolovu a podporu udržitelné akvakultury; podporuje tedy část ochrany ryb, ale nezavádí výslovně slíbené české programy ani pravidla čistoty vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-38",
+          "relevant": true,
+          "reasonCz": "Dodaný text smlouvy obsahuje závazky k zachování mořských biologických zdrojů, udržitelnému řízení rybolovu a akvakultuře.",
+          "effectCz": "Jde o návrh smlouvy bez předchozího znění. Nově předkládaný text zavazuje strany k opatřením pro zachování a udržitelné využívání mořských rybích zdrojů a k potírání nezákonného rybolovu; jde o podporu části ochrany rybích populací, nikoli o konkrétní programy nebo opatření k čistotě vod v Česku."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-23",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví zemědělské podmínky týkající se ochrany povrchových a podzemních vod před znečištěním.",
+          "effectCz": "Dodaný text uvádí požadavky na dodržování povolení k odběru a vypouštění vod, zacházení s fosforečnany a ochranu vodních toků, ale neposkytuje předchozí znění tabulky, kterou nařízení nahrazuje. Nelze proto určit, zda se příslušné povinnosti zpřísnily, uvolnily, nebo zůstaly stejné."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-34",
+          "relevant": true,
+          "reasonCz": "Nařízení mění seznam podmínek a sankcí pro opatření omezující používání pesticidů v ochranných pásmech vodních zdrojů.",
+          "effectCz": "Dodané pasáže upravují odkazy na podmínky a jejich zařazení mezi porušení, ale neobsahují samotné podmínky ani jejich předchozí znění. Z balíčku proto nelze určit, zda se povinnost omezit pesticidy či její vymáhání zpřísnily nebo uvolnily."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-158",
+          "relevant": true,
+          "reasonCz": "Vyhláška chrání vodní biotopy a populace několika druhů ryb a stanoví ochranné podmínky pro zachování kvality vody.",
+          "effectCz": "Vyhláška nově vyhlašuje národní přírodní památku Zlatý potok, včetně biotopů a populací vranky obecné a mihule potoční, a podmiňuje souhlas některými zásahy. Výslovně zakazuje souhlas s činností, která zhorší stav povrchové vody potřebný k zachování perlorodky říční; pro toto území tak zpřísňuje ochranu vody a druhů a naplňuje dílčí část slibu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-107",
+          "relevant": false,
+          "reasonCz": "Plánovaný návrh integrované prevence se podle dodaného úkolu zaměřuje na průmyslové emise obecně; přímé spojení s čistotou vod nebo rybími programy doloženo není.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-115",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně počítá s předpisem, jehož cílem je zlepšit kvalitu městských odpadních vod vypouštěných do životního prostředí.",
+          "effectCz": "Jde o plánovaný návrh předpisu, nikoli o změnu již platného pravidla, takže předchozí a následné limity nejsou dodány. Plánované nařízení má provést směrnici o čištění městských odpadních vod a podle textu má komplexně zlepšit kvalitu vypouštěných odpadních vod; jde o návrh postupující směrem k části slibu o čistotě vod."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-192",
+          "relevant": true,
+          "reasonCz": "Přehled implementačních prací uvádí přípravu stejného nařízení, jehož cílem je zlepšení kvality městských odpadních vod.",
+          "effectCz": "Příloha plánu prací uvádí přípravu návrhu nařízení o ukazatelích znečištění a povoleních k vypouštění odpadních vod, s termíny 12/2026 a 07/2027. Jde o plánovaný krok, který sám ještě nemění limity ani kvalitu vody."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-356",
+          "relevant": true,
+          "reasonCz": "Usnesení ukládá prosazovat a aktualizovat strategii ochrany vod před znečištěním dusičnany ze zemědělských zdrojů.",
+          "effectCz": "Usnesení samo nemění dosavadní limity znečištění; bere na vědomí aktualizaci strategie a ukládá ministrům její další aktualizaci, prosazování a průběžnou implementaci nitrátové směrnice. Jde o vládní návrhový krok na podporu čistoty vod, nikoli o dokončený program ochrany ryb."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-2911ff53f576--source",
+        "psp-core-2025--law-change-43174-8-1",
+        "psp-core-2025--law-change-43174-8-3",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-30",
+        "psp-core-2025--law-change-43174-31",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43190-1",
+        "psp-core-2025--law-change-43192-1",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--law-change-43362-1",
+        "psp-core-2025--law-change-43424-2",
+        "psp-core-2025--law-change-43453-9",
+        "psp-core-2025--law-change-43453-38",
+        "esbirka-regulations--law-change-sb-2026-23",
+        "esbirka-regulations--law-change-sb-2026-34",
+        "esbirka-regulations--law-change-sb-2026-158",
+        "zvlady-resolutions--law-change-uv-2026-175-115",
+        "zvlady-resolutions--law-change-uv-2026-175-192",
+        "zvlady-resolutions--law-change-uv-2026-356",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--government-opinion-43190-1",
+        "psp-core-2025--government-opinion-43192-1",
+        "psp-core-2025--vote-86968",
+        "esbirka-regulations--2026-23",
+        "esbirka-regulations--2026-34",
+        "zvlady-resolutions--2026-175",
+        "zvlady-resolutions--2026-356",
+        "psp-core-2025--amendment-1223",
+        "psp-core-2025--amendment-text-1223",
+        "psp-core-2025--vote-88199",
+        "psp-core-2025--amendment-text-1219",
+        "psp-core-2025--vote-88152",
+        "psp-core-2025--amendment-text-1217",
+        "psp-core-2025--vote-88221",
+        "psp-core-2025--vote-88252",
+        "esbirka-regulations--2026-158",
+        "psp-core-2025--print-step-211758",
+        "psp-core-2025--print-step-212105",
+        "psp-core-2025--print-step-212285",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili a ve Sněmovně podpořili novelu stavebního zákona, která mimo jiné zavádí nové programy a plány ochrany některých ohrožených druhů. Současně schválená změna vodního zákona uvolňuje povolení a sledování vypouštění u některých malých čistíren, což oslabuje kontrolu čistoty vod. Ministerstvo životního prostředí také vyhlásilo ochranu Zlatého potoka a souvisejících rybích populací, což je dílčí posun ke slibu. Při pozdějším hlasování o novele jako celku však převážila její část, která jde proti závazku na čistotu vod, proto je současné hodnocení záporné.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Změna vodního zákona zároveň zavádí nové kontroly malých čistíren a obsahuje další ustanovení na podporu ochrany vod; její účinek na čistotu vod je tedy smíšený.",
+        "Vyhláška o Zlatém potoce chrání konkrétní území a druhy, nikoli všechny rybí populace ani samostatný celostátní program.",
+        "U části návrhů a nařízení nejsou dodána předchozí znění všech podmínek, takže nelze přesně určit změnu jejich přísnosti."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-2911ff53f576",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-5",
+          "relevant": true,
+          "reasonCz": "Změna výjimek z fikce souhlasu v povolování těžby zasahuje do environmentálního posuzování, které může chránit i vody.",
+          "effectCz": "Dosavadní znění vylučovalo jednotné environmentální stanovisko z fikce souhlasu při nečinnosti úřadu; návrh toto vyloučení odstraňuje, takže souhlas může být presumován i bez tohoto stanoviska. Jde o oslabení procesní ochrany životního prostředí, avšak dodaný text neukazuje konkrétní dopad na vodu ani ryby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-6",
+          "relevant": true,
+          "reasonCz": "Změna obdobné výjimky pro povolování hornické činnosti se může dotknout environmentální ochrany včetně ochrany vod.",
+          "effectCz": "Dříve se fikce souhlasu při zmeškání lhůty nevztahovala na jednotné environmentální stanovisko; návrh tuto výjimku ruší. Tím se procesní ochrana oslabuje, ale balíček nedokládá konkrétní vodní dopad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-1",
+          "relevant": true,
+          "reasonCz": "Mění obecnou povinnost předcházet úhynu živočichů a ničení jejich biotopů, což se může týkat ryb a vodních stanovišť.",
+          "effectCz": "Předchozí znění vyžadovalo postupovat tak, aby se zabránilo zbytečnému úhynu a ničení biotopů dostupnými prostředky; návrh výslovně zahrnuje plánování terénních úprav a technicky i ekonomicky dostupná opatření. Povinnost se tím v uvedených ohledech rozšiřuje a zpřesňuje, nikoli však výslovně pro ryby či čistotu vody."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-3",
+          "relevant": true,
+          "reasonCz": "Zavádí nové typy záchranných, regionálních a pečovatelských programů pro chráněné druhy a jejich biotopy.",
+          "effectCz": "Dosavadní § 52 ukládal zajišťovat záchranné programy zvláště chráněných druhů; návrh vedle nich stanoví celostátní záchranné programy a regionální akční plány pro vybrané vzácné a ohrožené druhy a programy péče. Přidává další nástroje, ale předchozí úprava již programy ochrany druhů znala; text neukazuje, že by všechny rybí populace musely být zahrnuty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Rozděluje odpovědnost za zpracování a realizaci programů ochrany druhů a obsahuje také nové stanovisko k vysazování nepůvodních druhů při povolování rybářského práva.",
+          "effectCz": "Dříve byly příslušné orgány zapojeny do ochrany a záchranných programů podle stávajících ustanovení; návrh výslovně ukládá krajům a Agentuře další úkoly při programech a stanoví kontrolní stanovisko k vysazování nepůvodních druhů. U programů zpřesňuje a rozděluje odpovědnost; u vysazování přidává ochranný procesní nástroj."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Balíček výslovně uvádí, že tuto část mohou měnit pouze pozměňovací návrhy relevantní ke slibu, jejichž text však není dodán.",
+          "effectCz": "Vlastní znění této části ani relevantní pozměňovací pasáž nejsou v balíčku uvedeny, proto nelze určit předchozí ani navrhovaný stav či směr změny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-12",
+          "relevant": true,
+          "reasonCz": "Tato část je v balíčku označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-13",
+          "relevant": true,
+          "reasonCz": "Tato část je označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": true,
+          "reasonCz": "Tato část je označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Tato část je označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Tato část je označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Mění vodní zákon včetně pravidel pro povolování vypouštění odpadních vod a jejich sledování.",
+          "effectCz": "Dosavadní předpis svěřoval řadu vodohospodářských úkonů vodoprávním úřadům a u vypouštění odpadních vod vyžadoval povolení a měření. Schválené znění přidává mimo jiné nové povinnosti průběžného sledování a revizí, ale také výjimky: u některých malých čistíren s výrobkem CE se vypouštění považuje za povolené a nevztahuje se na ně jedna z měřicích povinností; rozšiřuje také výjimku z průběžného monitoringu pro některé průmyslové provozy. Část pravidel ochranu zpřísňuje, uvedené výjimky ji v těchto případech oslabují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": true,
+          "reasonCz": "Upravuje stanoviska k veřejným pohřebištím z hlediska ochrany podzemních vod.",
+          "effectCz": "Původní znění požadovalo stanovisko vodoprávního úřadu k ochraně podzemních vod, ale při jednotném environmentálním stanovisku se nevydávalo; schválené znění stanoví, že vodoprávní úřad vydá vyjádření k ochraně podzemních vod. V této procesní situaci se tedy kontrolní krok rozšiřuje; přímou změnu čistoty vody text nestanoví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-25",
+          "relevant": true,
+          "reasonCz": "Tato část je označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": true,
+          "reasonCz": "Pozměňovací návrhy k této části obsahují pravidla pro malé čistírny odpadních vod a průběžné sledování znečištění.",
+          "effectCz": "Vlastní text části chybí. Dodaný návrh O1 u malých čistíren s výrobkem CE ruší povinnost podle § 38 odst. 6; návrh H1 naopak zavádí odborně zajištěné provozování soustav domovních čistíren. První změna kontrolní povinnost oslabuje, druhá zavádí provozní záruky; bez úplného textu nelze posoudit jejich výslednou rovnováhu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": true,
+          "reasonCz": "Navrhované změny trestního zákoníku posilovaly postihy za poškození populací a biotopů druhů, tedy i za část jednání relevantních k ochraně ryb.",
+          "effectCz": "Dosavadní úprava používala pro trestné činy mimo jiné rozsah území a některé kategorie druhů; návrh měl nově zahrnout dlouhodobé či nevratné poškození populací a biotopů. Šlo o rozšíření trestněprávní ochrany, tato část však byla v textu schváleném Sněmovnou odstraněna."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Tato část je označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": true,
+          "reasonCz": "Tato část je označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": true,
+          "reasonCz": "Tato část je označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": true,
+          "reasonCz": "Tato část je označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Návrh rušil zákon o jednotném environmentálním stanovisku, tedy nástroj, který může zahrnovat posouzení ochrany vod.",
+          "effectCz": "Návrh rušil celý zákon o jednotném environmentálním stanovisku, takže by odstranil tento způsob společného environmentálního posuzování. Předchozí znění příslušného zákona není v balíčku dodáno, takže podrobnější dopad na vodní ochranu nelze určit; tato část byla ze schváleného textu odstraněna."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Navrhovaná pravidla pro záměry obnovitelných zdrojů výslovně počítala s opatřeními proti zhoršení stavu povrchových a podzemních vod.",
+          "effectCz": "Předchozí ustanovení požadovalo podmínky pro ochranu přírody a druhů, nikoli zde uvedené vodní podmínky; návrh přidával podmínky a zmírňující opatření, pokud by záměr mohl zhoršit stav vod. To by ochranu vod v tomto procesu zpřesnilo; schválený výňatek však tyto konkrétní body neobsahuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": true,
+          "reasonCz": "Prodlužuje lhůtu pro vložení havarijních plánů do systému ohlašování v oblasti životního prostředí.",
+          "effectCz": "Dosavadní přechodná lhůta byla 2 roky; schválené znění ji prodlužuje na 4 roky. Povinnost je tak méně časově naléhavá, což může odložit dostupnost informací potřebných při ochraně vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Schválené zrušovací ustanovení znovu ruší zákon o jednotném environmentálním stanovisku, který může zahrnovat ochranu vod.",
+          "effectCz": "Schválené ustanovení zrušuje zákon o jednotném environmentálním stanovisku. Balíček nedodává předchozí znění zákona ani neumožňuje určit konkrétní dopad na ochranu vod; směr v tomto konkrétním ohledu proto nelze bezpečně stanovit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43190-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje pojem ekologické újmy mimo jiné o případy zhoršení jakosti vody a významného úhynu ryb.",
+          "effectCz": "Předchozí definice zahrnovala závažné nepříznivé účinky na stav vody a chráněné druhy; návrh doplňuje výslovné případy znečištění vody, ohrožení zdrojů a významného úhynu ryb a upravuje postup preventivních a nápravných opatření. Rozšiřuje tak zachycení a nápravu některých vodních škod; jde o návrh, k němuž vláda vyslovila nesouhlas."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43192-1",
+          "relevant": true,
+          "reasonCz": "Navrhuje soustavy domovních čistíren odpadních vod s koordinovaným čištěním a odborně způsobilým provozováním.",
+          "effectCz": "Předchozí § 55c upravoval odstraňování nefunkčních vodních děl, nikoli soustavy domovních čistíren; návrh nově stanoví jejich definici, odborný provoz a odpovědnost vlastníka. Tím vytváří nástroj pro účinnější čištění odpadních vod, ale jde o návrh, s nímž vláda nesouhlasila."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": false,
+          "reasonCz": "Dodaný úryvek smlouvy uvádí obecný cíl mezinárodní spolupráce v oblasti kvality vody, ale neukazuje opatření nebo závazek vztahující se ke slibu zavést konkrétní programy či zajistit čistotu vod v České republice.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet fondu zahrnuje 2 miliardy Kč na podporu vodohospodářské infrastruktury a výdaje na zásobování pitnou vodou a odvádění odpadních vod.",
+          "effectCz": "Jde o návrh rozpočtu, nikoli změnu dřívějšího zákonného pravidla: pro rok 2026 uvádí 2 miliardy Kč na podporu vodohospodářské infrastruktury, 825 817 770 Kč na program pro pitnou vodu a odvádění odpadních vod a předpokládané čerpání 2,85 miliardy Kč ve vyhlášených výzvách. Podporuje infrastrukturu související s čistotou vod, ale nezavádí rybí programy ani samo nedokládá dosažení čistoty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43362-1",
+          "relevant": true,
+          "reasonCz": "Vládní návrh smluvních změn zahrnuje nové druhy ryb do příloh úmluvy o ochraně stěhovavých druhů.",
+          "effectCz": "Jde o předkládané změny mezinárodní úmluvy, nikoli o změnu českého zákona; úryvek uvádí zařazení několika druhů ryb do ochranných příloh. To může přispět k ochraně části rybích populací, ale nezavádí domácí programy ani neřeší čistotu vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43424-2",
+          "relevant": true,
+          "reasonCz": "Vládní návrh změn úmluvy přidává rybí druh mezi přísně chráněné druhy.",
+          "effectCz": "Jde o předkládanou změnu přílohy mezinárodní úmluvy, která nově zařazuje paokouna vrankovitého mezi přísně chráněné druhy. Jde o dílčí ochranu rybí populace, nikoli o program ochrany ryb v České republice nebo zajištění čistoty vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-8",
+          "relevant": true,
+          "reasonCz": "Navrhovaná smlouva obsahuje spolupráci na ochraně vody, biologické rozmanitosti a udržitelném hospodaření s vodními zdroji.",
+          "effectCz": "Jde o návrh mezinárodní dohody, který vyjadřuje společné závazky chránit a obnovovat vodní zdroje a podporovat integrované hospodaření s vodou. Může přispět k části slibu týkající se vod, ale nepředstavuje konkrétní domácí program."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-9",
+          "relevant": true,
+          "reasonCz": "Navrhovaná dohoda výslovně podporuje zachování populací ryb, udržitelný rybolov a udržitelnou akvakulturu.",
+          "effectCz": "Jde o návrh mezinárodní dohody, který stanoví spolupráci na zachování rybích populací a udržitelném řízení rybolovu a akvakultury. Je to dílčí závazek k ochraně ryb, nikoli zavedení domácích programů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-38",
+          "relevant": true,
+          "reasonCz": "Navrhovaná dohoda upravuje zachování mořských biologických zdrojů, udržitelný rybolov a odpovědnou akvakulturu.",
+          "effectCz": "Jde o návrh mezinárodní dohody, který stanoví spolupráci na ochraně a udržitelném využívání mořských populací ryb. Podporuje pouze část slibu týkající se ochrany populací a neřeší čistotu vod v České republice."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-23",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví zemědělské podmínky plateb, jejichž součástí jsou výslovné požadavky na ochranu vod před znečištěním.",
+          "effectCz": "Nařízení nově uvádí v tabulce požadavky na dodržování povolení k vypouštění odpadních vod, omezování difuzního znečištění fosforečnany, ochranné pásy podél vod a kvalitativní požadavky na skladování látek. Text předchozí tabulky není dodán, takže nelze srovnat, zda jde o nové či změněné povinnosti; přijatá pravidla výslovně propojují zemědělské platby s ochranou vod."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-34",
+          "relevant": true,
+          "reasonCz": "Nařízení se v dodaných odstavcích vztahuje k podopatření omezení pesticidů v ochranných pásmech vodních zdrojů.",
+          "effectCz": "Dodaný text upravuje označení účinné látky a doplňuje porušení podmínek protierozního a pesticidního podopatření do výčtu pro krácení plateb. Předchozí znění tabulek není poskytnuto, takže nelze určit, zda a jak se mění samotné povinnosti či jejich vynucování."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-158",
+          "relevant": true,
+          "reasonCz": "Vyhláška chrání vodní a mokřadní ekosystémy Zlatého potoka a výslovně populaci vranky obecné i její biotop.",
+          "effectCz": "Vyhláška nově vyhlašuje národní přírodní památku a zakazuje bez souhlasu mimo jiné změny vodního režimu, vysazování živočichů a používání chemických prostředků; souhlas se nesmí vydat, pokud by se zhoršil stav vod nutný pro zachování perlorodky. Jde o konkrétní, místně omezenou ochranu vod a rybích populací."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-107",
+          "relevant": true,
+          "reasonCz": "Vládní legislativní plán počítá s návrhem změn předpisů k průmyslovým emisím a s cílem snižovat znečišťující emise.",
+          "effectCz": "Usnesení samo žádný zákon nemění; v plánu ukládá připravit návrh zákona k provedení směrnice o průmyslových emisích, jehož cílem je snížení znečištění. Jde o přípravný krok, nikoli již přijaté pravidlo pro vodu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-115",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně počítá s návrhem nařízení pro zlepšení kvality městských odpadních vod vypouštěných do životního prostředí.",
+          "effectCz": "Usnesení samo nemění limity znečištění; plánuje předložit návrh nařízení k provedení evropské směrnice o čištění městských odpadních vod. Jde o přípravný návrh, který by mohl přispět k čistotě vod."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-192",
+          "relevant": true,
+          "reasonCz": "Příloha vládního usnesení uvádí implementační práci zaměřenou na čištění městských odpadních vod a příslušný návrh nařízení.",
+          "effectCz": "Příloha pouze stanoví harmonogram implementační práce na návrhu nařízení o ukazatelích a hodnotách znečištění a čištění městských odpadních vod; sama limity ani povinnosti nemění. Je to přípravný krok k možné změně."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-356",
+          "relevant": true,
+          "reasonCz": "Vláda řeší financování provádění nitrátové směrnice na ochranu vod před znečištěním ze zemědělství a ukládá její provádění.",
+          "effectCz": "Usnesení bere na vědomí aktualizaci finanční strategie a ukládá ministrům strategii znovu aktualizovat do 31. května 2028 a prosazovat její naplňování; ministru zemědělství ukládá průběžně zajišťovat provádění směrnice. Jde o přípravné a realizační úkoly, nikoli o konkrétní nové limity čistoty vody."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-2911ff53f576--source",
+        "psp-core-2025--law-change-43174-5",
+        "psp-core-2025--law-change-43174-6",
+        "psp-core-2025--law-change-43174-8-1",
+        "psp-core-2025--law-change-43174-8-3",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-12",
+        "psp-core-2025--law-change-43174-13",
+        "psp-core-2025--law-change-43174-17",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-24",
+        "psp-core-2025--law-change-43174-25",
+        "psp-core-2025--law-change-43174-30",
+        "psp-core-2025--law-change-43174-31",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-34",
+        "psp-core-2025--law-change-43174-35",
+        "psp-core-2025--law-change-43174-39",
+        "psp-core-2025--law-change-43174-41",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-53",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43190-1",
+        "psp-core-2025--law-change-43192-1",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--law-change-43362-1",
+        "psp-core-2025--law-change-43424-2",
+        "psp-core-2025--law-change-43453-8",
+        "psp-core-2025--law-change-43453-9",
+        "psp-core-2025--law-change-43453-38",
+        "esbirka-regulations--law-change-sb-2026-23",
+        "esbirka-regulations--law-change-sb-2026-34",
+        "esbirka-regulations--law-change-sb-2026-158",
+        "zvlady-resolutions--law-change-uv-2026-175-107",
+        "zvlady-resolutions--law-change-uv-2026-175-115",
+        "zvlady-resolutions--law-change-uv-2026-175-192",
+        "zvlady-resolutions--law-change-uv-2026-356",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1223",
+        "psp-core-2025--amendment-1223",
+        "psp-core-2025--amendment-text-1219",
+        "psp-core-2025--vote-88152",
+        "psp-core-2025--vote-88199",
+        "psp-core-2025--amendment-text-1217",
+        "psp-core-2025--vote-88221",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--government-opinion-43190-1",
+        "psp-core-2025--government-opinion-43192-1",
+        "psp-core-2025--vote-86968",
+        "esbirka-regulations--2026-23",
+        "esbirka-regulations--2026-34",
+        "esbirka-regulations--2026-158",
+        "zvlady-resolutions--2026-175",
+        "zvlady-resolutions--2026-356",
+        "psp-core-2025--print-step-211758",
+        "psp-core-2025--print-step-212105",
+        "psp-core-2025--print-step-212285"
+      ],
+      "explanationCz": "Poslanci ANO předložili rozsáhlý návrh, který zavádí nové programy a plány ochrany vybraných druhů; Sněmovna jej po zamítnutí Senátem znovu schválila. Schválené změny zároveň přidávají některé kontroly čištění odpadních vod, ale také výjimky z povolování a měření u části malých čistíren a průmyslových provozů, což jde proti zajišťování čistoty vod. Vláda navíc nesouhlasila s návrhem na posílení nápravy ekologických škod ani s návrhem na odborně provozované soustavy domácích čistíren. Přes dílčí kroky k ochraně druhů a vod proto převažuje v nejvýznamnějším pozdějším rozhodnutí dílčí oslabení ochrany; u několika částí zákona chybí text příslušných pozměňovacích návrhů, takže posouzení není úplné.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U částí návrhu na stavební zákon, které balíček označuje jako relevantní pouze prostřednictvím pozměňovacích návrhů, nejsou dodány příslušné texty; nelze proto určit jejich účinek ani vyloučit další dopady na slib.",
+        "Schválená novela vodního zákona současně zavádí některá kontrolní opatření a vytváří výjimky z povolování či měření u vybraných čistíren a provozů. Balíček proto dokládá protichůdné dopady na čistotu vod; nelze přesně určit jejich výsledný praktický rozsah.",
+        "Návrh rozpočtu fondu obsahuje vodohospodářské částky, ale přiložený hlasovací záznam uvádí jeho projednání v prvním čtení; samotný záznam proto nedokládá konečné schválení tohoto rozpočtu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0449623a96205ba1016aec4cd6012887d1bbe017aa0664c055",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 185225,
+      "input_tokens_details": {
+        "cache_write_tokens": 178875,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 16214,
+      "output_tokens_details": {
+        "reasoning_tokens": 9436
+      },
+      "total_tokens": 201439
+    },
+    "output": {
+      "promiseId": "candidate-2911ff53f576",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-5",
+          "relevant": false,
+          "reasonCz": "Dodané změny horního zákona se týkají povolování těžby a řešení rozporů, nikoli ochrany rybích populací nebo čistoty vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-6",
+          "relevant": false,
+          "reasonCz": "Dodaná změna upravuje povolování hornické činnosti, nikoli slíbené programy nebo čistotu vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení o předcházení úhynu živočichů a ničení jejich biotopů se může týkat i ryb.",
+          "effectCz": "Dosavadní pravidlo ukládalo při řadě činností předcházet zbytečnému úhynu živočichů a ničení jejich biotopů dostupnými prostředky. Nové znění výslovně zahrnuje plánování terénních úprav a hovoří o dostupných postupech a opatřeních; povinnost je v tomto směru konkrétnější a širší, ale nejde samo o program ochrany rybích populací ani o pravidlo čistoty vody."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-3",
+          "relevant": true,
+          "reasonCz": "Nové záchranné programy a regionální akční plány mohou zahrnovat ochranu ohrožených rybích druhů.",
+          "effectCz": "Dosavadní § 52 již ukládal orgánům ochrany přírody zajišťovat záchranné programy zvláště chráněných druhů s cílem posílit jejich populace. Nové § 52a vedle toho zavádí celostátní záchranné programy, regionální akční plány a programy péče pro vybrané vzácné a ohrožené druhy; přidává tedy další programové nástroje, aniž by dodaný text vymezoval, které rybí druhy budou zahrnuty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Text svěřuje krajům a Agentuře konkrétní úkoly při zpracování a uskutečňování programů ochrany druhů.",
+          "effectCz": "Dřívější pravidla svěřovala Agentuře a dalším orgánům obecné úkoly v ochraně přírody a zajišťování záchranných programů. Nové znění výslovně ukládá krajům zpracovávat, schvalovat a uskutečňovat regionální akční plány a Agentuře zajišťovat realizaci záchranných programů a koordinaci těchto plánů; rozšiřuje tak organizační odpovědnost za programovou ochranu druhů, ale neurčuje, že se týká konkrétních rybích populací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Z dodaného výňatku nejsou k dispozici ustanovení této změny, která by se věcně týkala ryb nebo čistoty vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-12",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje ustanovení změny zákona o dráhách, která by se týkala slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-13",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neukazuje věcnou změnu zákona o vnitrozemské plavbě vztahující se k rybím populacím nebo čistotě vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny veterinárního zákona věcně spojené se slibem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neukazuje ustanovení změny zákona o ochraně veřejného zdraví, která by se týkala čistoty vod nebo ryb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje konkrétní změnu pravidel posuzování vlivů, která by dokládala vztah ke slíbeným programům či čistotě vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Změny vodního zákona se přímo týkají povolení vypouštění odpadních vod, jejich sledování a čištění.",
+          "effectCz": "Předchozí úprava vyžadovala povolení pro nakládání s vodami a měření množství i znečištění vypouštěných odpadních vod; vodoprávní úřady také posuzovaly řadu souvisejících podmínek. Schválené znění přesouvá část rozhodování na stavební úřady, zavádí výjimku pro některé malé čistírny s výrobkem označeným CE, u nichž se vypouštění považuje za povolené a nepoužije se běžná povinnost měření, a přidává jejich pravidelné technické revize. To v těchto případech uvolňuje povolovací a monitorovací požadavky, zatímco revize a požadavky na účinnost čištění představují dílčí kontrolní pojistky; celkový dopad na čistotu vod je proto smíšený."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": false,
+          "reasonCz": "Dodané změny upravují ochranu podzemních vod při zřizování pohřebišť, nikoli ochranu ryb nebo slíbené programy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-25",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neukazuje změnu mysliveckého zákona s věcným dopadem na rybí populace či čistotu vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": true,
+          "reasonCz": "Změna se týká slibu pouze prostřednictvím pozměňovacích návrhů upravujících sledování znečištění odpadních vod.",
+          "effectCz": "Vlastní text této části není dodán; pozměňovací návrh k ní rozšiřuje výjimku z kontinuálního sledování znečištění pro některá průmyslová zařízení, zároveň přidává povinnost zpřístupnit výsledky kontrolním orgánům a odkládá použitelnost nových pravidel. Výjimka požadavky na sledování u části zařízení uvolňuje, přístup kontrolních orgánů k výsledkům je naopak posiluje; bez samostatného předchozího znění všech těchto ustanovení nelze určit celkový směr změny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": true,
+          "reasonCz": "Navržená trestní ustanovení se výslovně týkala závažného poškození ekosystémů a populací chráněných druhů, ale v textu schváleném Sněmovnou byla odstraněna.",
+          "effectCz": "Navržené znění mělo doplnit pravidla, kdy se poškození životního prostředí považuje za čin ve větším rozsahu, a upravit trestní postih za dlouhodobé či nevratné poškození populací chráněných druhů. Schválené znění tuto část odstranilo, takže uvedené zpřísnění se v textu, o němž se hlasovalo, neprojevilo."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek změny pravidel pro strategickou infrastrukturu neukazuje ustanovení přímo související s rybími populacemi nebo čistotou vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": false,
+          "reasonCz": "Dodaná část o Státním pozemkovém úřadu neobsahuje doloženou změnu věcně spojenou se slibem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek změny zákona o státní službě neukazuje věcnou vazbu na ochranu ryb či čistotu vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek změny zákona o odpadech neobsahuje ustanovení, která by dokládala přímý dopad na slib.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku bylo ze schváleného textu odstraněno a dodané pasáže nedokládají konkrétní dopad na ryby či čistotu vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Navržené změny vyžadovaly opatření proti zhoršení stavu povrchových a podzemních vod při projektech obnovitelných zdrojů.",
+          "effectCz": "Předchozí § 13 upravoval podmínky k ochraně ptáků a dalších environmentálních zájmů, nikoli dodanou povinnost navrhnout opatření pro vodní stav. Navržené znění takovou povinnost přidává a posiluje ochranu vod při dotčených projektech. Schválený výňatek však tyto konkrétní body neobsahuje, takže nelze určit, zda v této podobě zůstaly ve znění schváleném Sněmovnou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Změna pouze prodlužuje lhůtu pro vložení starších havarijních plánů do systému ohlašování; přímý dopad na slíbené programy nebo čistotu vody doložen není.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Dodané zrušovací ustanovení neukazuje konkrétní změnu ochrany rybích populací nebo čistoty vod.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43190-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje vymezení ekologické újmy o zhoršení vod a významný úhyn ryb a upravuje prevenci i nápravu takové újmy.",
+          "effectCz": "Předchozí definice zahrnovala závažný nepříznivý účinek na stav vody a újmu na chráněných druzích, ale neobsahovala dodané výslovné příklady zhoršení jakosti vody, ohrožení zdrojů pitné vody a významného úhynu ryb při havárii či provozu. Návrh tyto situace výslovně zahrnuje a upravuje také preventivní a nápravná opatření; rozšiřuje tedy ochranu vody a ryb. Směr příslušných ustanovení je ochranný, ačkoli návrh současně zavádí podmínky pro zahájení řízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43192-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí obecní soustavy domovních čistíren odpadních vod a stanoví pravidla pro jejich odborné a koordinované provozování.",
+          "effectCz": "Dřívější dodané ustanovení § 55c upravovalo odstraňování nefunkčních vodních děl pro obnovu přirozených koryt, nikoli soustavy čistíren. Návrh nově definuje soustavy domovních čistíren, ukládá jejich bezpečné a plynulé provozování a požaduje odborně způsobilou osobu; zavádí tak organizační nástroj pro čištění odpadních vod, ale nestanoví konkrétní limity čištění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": false,
+          "reasonCz": "Dodaný úryvek smlouvy mluví obecně o spolupráci v oblasti kvality vody a vodních zdrojů, ale neukazuje opatření spojené se slíbenými programy nebo čistotou vod v Česku.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu výslovně vyčleňuje prostředky na vodohospodářskou infrastrukturu a projekty odvádění odpadních vod.",
+          "effectCz": "Jde o rozpočtový návrh bez předchozího znění, s nímž by jej bylo možné porovnat. Uvádí 2 miliardy Kč na podporu vodohospodářské infrastruktury, 825 817 770 Kč na opatření pro pitnou vodu a odvádění odpadních vod a předpokládané čerpání 2 850 milionů Kč na infrastrukturní projekty v roce 2026. To je finanční podpora části závazku týkající se čistoty vod, nikoli samostatný program ochrany ryb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43362-1",
+          "relevant": true,
+          "reasonCz": "Návrh mezinárodních změn výslovně zařazuje několik rybích taxonů do příloh úmluvy o ochraně stěhovavých druhů.",
+          "effectCz": "Jde o návrh smluvních změn bez předchozího znění v balíčku; podle dodaného textu přidává sedm uvedených rybích taxonů do příloh I nebo II úmluvy. Může tak přispět k ochraně těchto rybích populací, ale text nedokládá konkrétní český program ani širší opatření pro čistotu vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43424-2",
+          "relevant": true,
+          "reasonCz": "Návrh přidává jeden rybí druh mezi nově přísně chráněné druhy úmluvy.",
+          "effectCz": "Jde o návrh mezinárodní smluvní změny bez předchozího znění v balíčku. Do seznamu nově přidává paokouna vrankovitého; jde o dílčí ochranu jednoho rybího druhu, nikoli o program ochrany rybích populací nebo opatření k čistotě vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-8",
+          "relevant": false,
+          "reasonCz": "Dodaný text smlouvy stanoví obecnou environmentální spolupráci a správu vodních zdrojů, ale neukazuje konkrétní program či opatření k čistotě vody.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-9",
+          "relevant": true,
+          "reasonCz": "Kapitola smlouvy obsahuje konkrétní závazky k zachování rybích populací a prevenci nadměrného rybolovu.",
+          "effectCz": "Jde o návrh smlouvy bez předchozího znění. Dodaný text stanoví spolupráci a opatření pro zachování rybích populací, kontrolu a potírání nezákonného rybolovu a podporu udržitelné akvakultury; podporuje tedy část ochrany ryb, ale nezavádí výslovně slíbené české programy ani pravidla čistoty vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-38",
+          "relevant": true,
+          "reasonCz": "Dodaný text smlouvy obsahuje závazky k zachování mořských biologických zdrojů, udržitelnému řízení rybolovu a akvakultuře.",
+          "effectCz": "Jde o návrh smlouvy bez předchozího znění. Nově předkládaný text zavazuje strany k opatřením pro zachování a udržitelné využívání mořských rybích zdrojů a k potírání nezákonného rybolovu; jde o podporu části ochrany rybích populací, nikoli o konkrétní programy nebo opatření k čistotě vod v Česku."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-23",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví zemědělské podmínky týkající se ochrany povrchových a podzemních vod před znečištěním.",
+          "effectCz": "Dodaný text uvádí požadavky na dodržování povolení k odběru a vypouštění vod, zacházení s fosforečnany a ochranu vodních toků, ale neposkytuje předchozí znění tabulky, kterou nařízení nahrazuje. Nelze proto určit, zda se příslušné povinnosti zpřísnily, uvolnily, nebo zůstaly stejné."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-34",
+          "relevant": true,
+          "reasonCz": "Nařízení mění seznam podmínek a sankcí pro opatření omezující používání pesticidů v ochranných pásmech vodních zdrojů.",
+          "effectCz": "Dodané pasáže upravují odkazy na podmínky a jejich zařazení mezi porušení, ale neobsahují samotné podmínky ani jejich předchozí znění. Z balíčku proto nelze určit, zda se povinnost omezit pesticidy či její vymáhání zpřísnily nebo uvolnily."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-158",
+          "relevant": true,
+          "reasonCz": "Vyhláška chrání vodní biotopy a populace několika druhů ryb a stanoví ochranné podmínky pro zachování kvality vody.",
+          "effectCz": "Vyhláška nově vyhlašuje národní přírodní památku Zlatý potok, včetně biotopů a populací vranky obecné a mihule potoční, a podmiňuje souhlas některými zásahy. Výslovně zakazuje souhlas s činností, která zhorší stav povrchové vody potřebný k zachování perlorodky říční; pro toto území tak zpřísňuje ochranu vody a druhů a naplňuje dílčí část slibu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-107",
+          "relevant": false,
+          "reasonCz": "Plánovaný návrh integrované prevence se podle dodaného úkolu zaměřuje na průmyslové emise obecně; přímé spojení s čistotou vod nebo rybími programy doloženo není.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-115",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně počítá s předpisem, jehož cílem je zlepšit kvalitu městských odpadních vod vypouštěných do životního prostředí.",
+          "effectCz": "Jde o plánovaný návrh předpisu, nikoli o změnu již platného pravidla, takže předchozí a následné limity nejsou dodány. Plánované nařízení má provést směrnici o čištění městských odpadních vod a podle textu má komplexně zlepšit kvalitu vypouštěných odpadních vod; jde o návrh postupující směrem k části slibu o čistotě vod."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-192",
+          "relevant": true,
+          "reasonCz": "Přehled implementačních prací uvádí přípravu stejného nařízení, jehož cílem je zlepšení kvality městských odpadních vod.",
+          "effectCz": "Příloha plánu prací uvádí přípravu návrhu nařízení o ukazatelích znečištění a povoleních k vypouštění odpadních vod, s termíny 12/2026 a 07/2027. Jde o plánovaný krok, který sám ještě nemění limity ani kvalitu vody."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-356",
+          "relevant": true,
+          "reasonCz": "Usnesení ukládá prosazovat a aktualizovat strategii ochrany vod před znečištěním dusičnany ze zemědělských zdrojů.",
+          "effectCz": "Usnesení samo nemění dosavadní limity znečištění; bere na vědomí aktualizaci strategie a ukládá ministrům její další aktualizaci, prosazování a průběžnou implementaci nitrátové směrnice. Jde o vládní návrhový krok na podporu čistoty vod, nikoli o dokončený program ochrany ryb."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-2911ff53f576--source",
+        "psp-core-2025--law-change-43174-8-1",
+        "psp-core-2025--law-change-43174-8-3",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-30",
+        "psp-core-2025--law-change-43174-31",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43190-1",
+        "psp-core-2025--law-change-43192-1",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--law-change-43362-1",
+        "psp-core-2025--law-change-43424-2",
+        "psp-core-2025--law-change-43453-9",
+        "psp-core-2025--law-change-43453-38",
+        "esbirka-regulations--law-change-sb-2026-23",
+        "esbirka-regulations--law-change-sb-2026-34",
+        "esbirka-regulations--law-change-sb-2026-158",
+        "zvlady-resolutions--law-change-uv-2026-175-115",
+        "zvlady-resolutions--law-change-uv-2026-175-192",
+        "zvlady-resolutions--law-change-uv-2026-356",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--government-opinion-43190-1",
+        "psp-core-2025--government-opinion-43192-1",
+        "psp-core-2025--vote-86968",
+        "esbirka-regulations--2026-23",
+        "esbirka-regulations--2026-34",
+        "zvlady-resolutions--2026-175",
+        "zvlady-resolutions--2026-356",
+        "psp-core-2025--amendment-1223",
+        "psp-core-2025--amendment-text-1223",
+        "psp-core-2025--vote-88199",
+        "psp-core-2025--amendment-text-1219",
+        "psp-core-2025--vote-88152",
+        "psp-core-2025--amendment-text-1217",
+        "psp-core-2025--vote-88221",
+        "psp-core-2025--vote-88252",
+        "esbirka-regulations--2026-158",
+        "psp-core-2025--print-step-211758",
+        "psp-core-2025--print-step-212105",
+        "psp-core-2025--print-step-212285",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili a ve Sněmovně podpořili novelu stavebního zákona, která mimo jiné zavádí nové programy a plány ochrany některých ohrožených druhů. Současně schválená změna vodního zákona uvolňuje povolení a sledování vypouštění u některých malých čistíren, což oslabuje kontrolu čistoty vod. Ministerstvo životního prostředí také vyhlásilo ochranu Zlatého potoka a souvisejících rybích populací, což je dílčí posun ke slibu. Při pozdějším hlasování o novele jako celku však převážila její část, která jde proti závazku na čistotu vod, proto je současné hodnocení záporné.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Změna vodního zákona zároveň zavádí nové kontroly malých čistíren a obsahuje další ustanovení na podporu ochrany vod; její účinek na čistotu vod je tedy smíšený.",
+        "Vyhláška o Zlatém potoce chrání konkrétní území a druhy, nikoli všechny rybí populace ani samostatný celostátní program.",
+        "U části návrhů a nařízení nejsou dodána předchozí znění všech podmínek, takže nelze přesně určit změnu jejich přísnosti."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0866afb03a32ce96016aec4e246a5c87d1be9521e8d2f52bde",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 185225,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 185222
+      },
+      "output_tokens": 15624,
+      "output_tokens_details": {
+        "reasoning_tokens": 8410
+      },
+      "total_tokens": 200849
+    },
+    "output": {
+      "promiseId": "candidate-2911ff53f576",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-5",
+          "relevant": true,
+          "reasonCz": "Změna výjimek z fikce souhlasu v povolování těžby zasahuje do environmentálního posuzování, které může chránit i vody.",
+          "effectCz": "Dosavadní znění vylučovalo jednotné environmentální stanovisko z fikce souhlasu při nečinnosti úřadu; návrh toto vyloučení odstraňuje, takže souhlas může být presumován i bez tohoto stanoviska. Jde o oslabení procesní ochrany životního prostředí, avšak dodaný text neukazuje konkrétní dopad na vodu ani ryby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-6",
+          "relevant": true,
+          "reasonCz": "Změna obdobné výjimky pro povolování hornické činnosti se může dotknout environmentální ochrany včetně ochrany vod.",
+          "effectCz": "Dříve se fikce souhlasu při zmeškání lhůty nevztahovala na jednotné environmentální stanovisko; návrh tuto výjimku ruší. Tím se procesní ochrana oslabuje, ale balíček nedokládá konkrétní vodní dopad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-1",
+          "relevant": true,
+          "reasonCz": "Mění obecnou povinnost předcházet úhynu živočichů a ničení jejich biotopů, což se může týkat ryb a vodních stanovišť.",
+          "effectCz": "Předchozí znění vyžadovalo postupovat tak, aby se zabránilo zbytečnému úhynu a ničení biotopů dostupnými prostředky; návrh výslovně zahrnuje plánování terénních úprav a technicky i ekonomicky dostupná opatření. Povinnost se tím v uvedených ohledech rozšiřuje a zpřesňuje, nikoli však výslovně pro ryby či čistotu vody."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-3",
+          "relevant": true,
+          "reasonCz": "Zavádí nové typy záchranných, regionálních a pečovatelských programů pro chráněné druhy a jejich biotopy.",
+          "effectCz": "Dosavadní § 52 ukládal zajišťovat záchranné programy zvláště chráněných druhů; návrh vedle nich stanoví celostátní záchranné programy a regionální akční plány pro vybrané vzácné a ohrožené druhy a programy péče. Přidává další nástroje, ale předchozí úprava již programy ochrany druhů znala; text neukazuje, že by všechny rybí populace musely být zahrnuty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Rozděluje odpovědnost za zpracování a realizaci programů ochrany druhů a obsahuje také nové stanovisko k vysazování nepůvodních druhů při povolování rybářského práva.",
+          "effectCz": "Dříve byly příslušné orgány zapojeny do ochrany a záchranných programů podle stávajících ustanovení; návrh výslovně ukládá krajům a Agentuře další úkoly při programech a stanoví kontrolní stanovisko k vysazování nepůvodních druhů. U programů zpřesňuje a rozděluje odpovědnost; u vysazování přidává ochranný procesní nástroj."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Balíček výslovně uvádí, že tuto část mohou měnit pouze pozměňovací návrhy relevantní ke slibu, jejichž text však není dodán.",
+          "effectCz": "Vlastní znění této části ani relevantní pozměňovací pasáž nejsou v balíčku uvedeny, proto nelze určit předchozí ani navrhovaný stav či směr změny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-12",
+          "relevant": true,
+          "reasonCz": "Tato část je v balíčku označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-13",
+          "relevant": true,
+          "reasonCz": "Tato část je označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": true,
+          "reasonCz": "Tato část je označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Tato část je označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Tato část je označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Mění vodní zákon včetně pravidel pro povolování vypouštění odpadních vod a jejich sledování.",
+          "effectCz": "Dosavadní předpis svěřoval řadu vodohospodářských úkonů vodoprávním úřadům a u vypouštění odpadních vod vyžadoval povolení a měření. Schválené znění přidává mimo jiné nové povinnosti průběžného sledování a revizí, ale také výjimky: u některých malých čistíren s výrobkem CE se vypouštění považuje za povolené a nevztahuje se na ně jedna z měřicích povinností; rozšiřuje také výjimku z průběžného monitoringu pro některé průmyslové provozy. Část pravidel ochranu zpřísňuje, uvedené výjimky ji v těchto případech oslabují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": true,
+          "reasonCz": "Upravuje stanoviska k veřejným pohřebištím z hlediska ochrany podzemních vod.",
+          "effectCz": "Původní znění požadovalo stanovisko vodoprávního úřadu k ochraně podzemních vod, ale při jednotném environmentálním stanovisku se nevydávalo; schválené znění stanoví, že vodoprávní úřad vydá vyjádření k ochraně podzemních vod. V této procesní situaci se tedy kontrolní krok rozšiřuje; přímou změnu čistoty vody text nestanoví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-25",
+          "relevant": true,
+          "reasonCz": "Tato část je označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": true,
+          "reasonCz": "Pozměňovací návrhy k této části obsahují pravidla pro malé čistírny odpadních vod a průběžné sledování znečištění.",
+          "effectCz": "Vlastní text části chybí. Dodaný návrh O1 u malých čistíren s výrobkem CE ruší povinnost podle § 38 odst. 6; návrh H1 naopak zavádí odborně zajištěné provozování soustav domovních čistíren. První změna kontrolní povinnost oslabuje, druhá zavádí provozní záruky; bez úplného textu nelze posoudit jejich výslednou rovnováhu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": true,
+          "reasonCz": "Navrhované změny trestního zákoníku posilovaly postihy za poškození populací a biotopů druhů, tedy i za část jednání relevantních k ochraně ryb.",
+          "effectCz": "Dosavadní úprava používala pro trestné činy mimo jiné rozsah území a některé kategorie druhů; návrh měl nově zahrnout dlouhodobé či nevratné poškození populací a biotopů. Šlo o rozšíření trestněprávní ochrany, tato část však byla v textu schváleném Sněmovnou odstraněna."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Tato část je označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": true,
+          "reasonCz": "Tato část je označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": true,
+          "reasonCz": "Tato část je označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": true,
+          "reasonCz": "Tato část je označena jako relevantní pouze prostřednictvím pozměňovacích návrhů, jejich příslušný text zde ale chybí.",
+          "effectCz": "Vlastní znění části ani relevantní pozměňovací pasáž nejsou dodány; směr změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Návrh rušil zákon o jednotném environmentálním stanovisku, tedy nástroj, který může zahrnovat posouzení ochrany vod.",
+          "effectCz": "Návrh rušil celý zákon o jednotném environmentálním stanovisku, takže by odstranil tento způsob společného environmentálního posuzování. Předchozí znění příslušného zákona není v balíčku dodáno, takže podrobnější dopad na vodní ochranu nelze určit; tato část byla ze schváleného textu odstraněna."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Navrhovaná pravidla pro záměry obnovitelných zdrojů výslovně počítala s opatřeními proti zhoršení stavu povrchových a podzemních vod.",
+          "effectCz": "Předchozí ustanovení požadovalo podmínky pro ochranu přírody a druhů, nikoli zde uvedené vodní podmínky; návrh přidával podmínky a zmírňující opatření, pokud by záměr mohl zhoršit stav vod. To by ochranu vod v tomto procesu zpřesnilo; schválený výňatek však tyto konkrétní body neobsahuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": true,
+          "reasonCz": "Prodlužuje lhůtu pro vložení havarijních plánů do systému ohlašování v oblasti životního prostředí.",
+          "effectCz": "Dosavadní přechodná lhůta byla 2 roky; schválené znění ji prodlužuje na 4 roky. Povinnost je tak méně časově naléhavá, což může odložit dostupnost informací potřebných při ochraně vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Schválené zrušovací ustanovení znovu ruší zákon o jednotném environmentálním stanovisku, který může zahrnovat ochranu vod.",
+          "effectCz": "Schválené ustanovení zrušuje zákon o jednotném environmentálním stanovisku. Balíček nedodává předchozí znění zákona ani neumožňuje určit konkrétní dopad na ochranu vod; směr v tomto konkrétním ohledu proto nelze bezpečně stanovit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43190-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje pojem ekologické újmy mimo jiné o případy zhoršení jakosti vody a významného úhynu ryb.",
+          "effectCz": "Předchozí definice zahrnovala závažné nepříznivé účinky na stav vody a chráněné druhy; návrh doplňuje výslovné případy znečištění vody, ohrožení zdrojů a významného úhynu ryb a upravuje postup preventivních a nápravných opatření. Rozšiřuje tak zachycení a nápravu některých vodních škod; jde o návrh, k němuž vláda vyslovila nesouhlas."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43192-1",
+          "relevant": true,
+          "reasonCz": "Navrhuje soustavy domovních čistíren odpadních vod s koordinovaným čištěním a odborně způsobilým provozováním.",
+          "effectCz": "Předchozí § 55c upravoval odstraňování nefunkčních vodních děl, nikoli soustavy domovních čistíren; návrh nově stanoví jejich definici, odborný provoz a odpovědnost vlastníka. Tím vytváří nástroj pro účinnější čištění odpadních vod, ale jde o návrh, s nímž vláda nesouhlasila."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": false,
+          "reasonCz": "Dodaný úryvek smlouvy uvádí obecný cíl mezinárodní spolupráce v oblasti kvality vody, ale neukazuje opatření nebo závazek vztahující se ke slibu zavést konkrétní programy či zajistit čistotu vod v České republice.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet fondu zahrnuje 2 miliardy Kč na podporu vodohospodářské infrastruktury a výdaje na zásobování pitnou vodou a odvádění odpadních vod.",
+          "effectCz": "Jde o návrh rozpočtu, nikoli změnu dřívějšího zákonného pravidla: pro rok 2026 uvádí 2 miliardy Kč na podporu vodohospodářské infrastruktury, 825 817 770 Kč na program pro pitnou vodu a odvádění odpadních vod a předpokládané čerpání 2,85 miliardy Kč ve vyhlášených výzvách. Podporuje infrastrukturu související s čistotou vod, ale nezavádí rybí programy ani samo nedokládá dosažení čistoty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43362-1",
+          "relevant": true,
+          "reasonCz": "Vládní návrh smluvních změn zahrnuje nové druhy ryb do příloh úmluvy o ochraně stěhovavých druhů.",
+          "effectCz": "Jde o předkládané změny mezinárodní úmluvy, nikoli o změnu českého zákona; úryvek uvádí zařazení několika druhů ryb do ochranných příloh. To může přispět k ochraně části rybích populací, ale nezavádí domácí programy ani neřeší čistotu vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43424-2",
+          "relevant": true,
+          "reasonCz": "Vládní návrh změn úmluvy přidává rybí druh mezi přísně chráněné druhy.",
+          "effectCz": "Jde o předkládanou změnu přílohy mezinárodní úmluvy, která nově zařazuje paokouna vrankovitého mezi přísně chráněné druhy. Jde o dílčí ochranu rybí populace, nikoli o program ochrany ryb v České republice nebo zajištění čistoty vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-8",
+          "relevant": true,
+          "reasonCz": "Navrhovaná smlouva obsahuje spolupráci na ochraně vody, biologické rozmanitosti a udržitelném hospodaření s vodními zdroji.",
+          "effectCz": "Jde o návrh mezinárodní dohody, který vyjadřuje společné závazky chránit a obnovovat vodní zdroje a podporovat integrované hospodaření s vodou. Může přispět k části slibu týkající se vod, ale nepředstavuje konkrétní domácí program."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-9",
+          "relevant": true,
+          "reasonCz": "Navrhovaná dohoda výslovně podporuje zachování populací ryb, udržitelný rybolov a udržitelnou akvakulturu.",
+          "effectCz": "Jde o návrh mezinárodní dohody, který stanoví spolupráci na zachování rybích populací a udržitelném řízení rybolovu a akvakultury. Je to dílčí závazek k ochraně ryb, nikoli zavedení domácích programů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-38",
+          "relevant": true,
+          "reasonCz": "Navrhovaná dohoda upravuje zachování mořských biologických zdrojů, udržitelný rybolov a odpovědnou akvakulturu.",
+          "effectCz": "Jde o návrh mezinárodní dohody, který stanoví spolupráci na ochraně a udržitelném využívání mořských populací ryb. Podporuje pouze část slibu týkající se ochrany populací a neřeší čistotu vod v České republice."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-23",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví zemědělské podmínky plateb, jejichž součástí jsou výslovné požadavky na ochranu vod před znečištěním.",
+          "effectCz": "Nařízení nově uvádí v tabulce požadavky na dodržování povolení k vypouštění odpadních vod, omezování difuzního znečištění fosforečnany, ochranné pásy podél vod a kvalitativní požadavky na skladování látek. Text předchozí tabulky není dodán, takže nelze srovnat, zda jde o nové či změněné povinnosti; přijatá pravidla výslovně propojují zemědělské platby s ochranou vod."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-34",
+          "relevant": true,
+          "reasonCz": "Nařízení se v dodaných odstavcích vztahuje k podopatření omezení pesticidů v ochranných pásmech vodních zdrojů.",
+          "effectCz": "Dodaný text upravuje označení účinné látky a doplňuje porušení podmínek protierozního a pesticidního podopatření do výčtu pro krácení plateb. Předchozí znění tabulek není poskytnuto, takže nelze určit, zda a jak se mění samotné povinnosti či jejich vynucování."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-158",
+          "relevant": true,
+          "reasonCz": "Vyhláška chrání vodní a mokřadní ekosystémy Zlatého potoka a výslovně populaci vranky obecné i její biotop.",
+          "effectCz": "Vyhláška nově vyhlašuje národní přírodní památku a zakazuje bez souhlasu mimo jiné změny vodního režimu, vysazování živočichů a používání chemických prostředků; souhlas se nesmí vydat, pokud by se zhoršil stav vod nutný pro zachování perlorodky. Jde o konkrétní, místně omezenou ochranu vod a rybích populací."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-107",
+          "relevant": true,
+          "reasonCz": "Vládní legislativní plán počítá s návrhem změn předpisů k průmyslovým emisím a s cílem snižovat znečišťující emise.",
+          "effectCz": "Usnesení samo žádný zákon nemění; v plánu ukládá připravit návrh zákona k provedení směrnice o průmyslových emisích, jehož cílem je snížení znečištění. Jde o přípravný krok, nikoli již přijaté pravidlo pro vodu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-115",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně počítá s návrhem nařízení pro zlepšení kvality městských odpadních vod vypouštěných do životního prostředí.",
+          "effectCz": "Usnesení samo nemění limity znečištění; plánuje předložit návrh nařízení k provedení evropské směrnice o čištění městských odpadních vod. Jde o přípravný návrh, který by mohl přispět k čistotě vod."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-192",
+          "relevant": true,
+          "reasonCz": "Příloha vládního usnesení uvádí implementační práci zaměřenou na čištění městských odpadních vod a příslušný návrh nařízení.",
+          "effectCz": "Příloha pouze stanoví harmonogram implementační práce na návrhu nařízení o ukazatelích a hodnotách znečištění a čištění městských odpadních vod; sama limity ani povinnosti nemění. Je to přípravný krok k možné změně."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-356",
+          "relevant": true,
+          "reasonCz": "Vláda řeší financování provádění nitrátové směrnice na ochranu vod před znečištěním ze zemědělství a ukládá její provádění.",
+          "effectCz": "Usnesení bere na vědomí aktualizaci finanční strategie a ukládá ministrům strategii znovu aktualizovat do 31. května 2028 a prosazovat její naplňování; ministru zemědělství ukládá průběžně zajišťovat provádění směrnice. Jde o přípravné a realizační úkoly, nikoli o konkrétní nové limity čistoty vody."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-2911ff53f576--source",
+        "psp-core-2025--law-change-43174-5",
+        "psp-core-2025--law-change-43174-6",
+        "psp-core-2025--law-change-43174-8-1",
+        "psp-core-2025--law-change-43174-8-3",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-12",
+        "psp-core-2025--law-change-43174-13",
+        "psp-core-2025--law-change-43174-17",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-24",
+        "psp-core-2025--law-change-43174-25",
+        "psp-core-2025--law-change-43174-30",
+        "psp-core-2025--law-change-43174-31",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-34",
+        "psp-core-2025--law-change-43174-35",
+        "psp-core-2025--law-change-43174-39",
+        "psp-core-2025--law-change-43174-41",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-53",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43190-1",
+        "psp-core-2025--law-change-43192-1",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--law-change-43362-1",
+        "psp-core-2025--law-change-43424-2",
+        "psp-core-2025--law-change-43453-8",
+        "psp-core-2025--law-change-43453-9",
+        "psp-core-2025--law-change-43453-38",
+        "esbirka-regulations--law-change-sb-2026-23",
+        "esbirka-regulations--law-change-sb-2026-34",
+        "esbirka-regulations--law-change-sb-2026-158",
+        "zvlady-resolutions--law-change-uv-2026-175-107",
+        "zvlady-resolutions--law-change-uv-2026-175-115",
+        "zvlady-resolutions--law-change-uv-2026-175-192",
+        "zvlady-resolutions--law-change-uv-2026-356",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1223",
+        "psp-core-2025--amendment-1223",
+        "psp-core-2025--amendment-text-1219",
+        "psp-core-2025--vote-88152",
+        "psp-core-2025--vote-88199",
+        "psp-core-2025--amendment-text-1217",
+        "psp-core-2025--vote-88221",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--government-opinion-43190-1",
+        "psp-core-2025--government-opinion-43192-1",
+        "psp-core-2025--vote-86968",
+        "esbirka-regulations--2026-23",
+        "esbirka-regulations--2026-34",
+        "esbirka-regulations--2026-158",
+        "zvlady-resolutions--2026-175",
+        "zvlady-resolutions--2026-356",
+        "psp-core-2025--print-step-211758",
+        "psp-core-2025--print-step-212105",
+        "psp-core-2025--print-step-212285"
+      ],
+      "explanationCz": "Poslanci ANO předložili rozsáhlý návrh, který zavádí nové programy a plány ochrany vybraných druhů; Sněmovna jej po zamítnutí Senátem znovu schválila. Schválené změny zároveň přidávají některé kontroly čištění odpadních vod, ale také výjimky z povolování a měření u části malých čistíren a průmyslových provozů, což jde proti zajišťování čistoty vod. Vláda navíc nesouhlasila s návrhem na posílení nápravy ekologických škod ani s návrhem na odborně provozované soustavy domácích čistíren. Přes dílčí kroky k ochraně druhů a vod proto převažuje v nejvýznamnějším pozdějším rozhodnutí dílčí oslabení ochrany; u několika částí zákona chybí text příslušných pozměňovacích návrhů, takže posouzení není úplné.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U částí návrhu na stavební zákon, které balíček označuje jako relevantní pouze prostřednictvím pozměňovacích návrhů, nejsou dodány příslušné texty; nelze proto určit jejich účinek ani vyloučit další dopady na slib.",
+        "Schválená novela vodního zákona současně zavádí některá kontrolní opatření a vytváří výjimky z povolování či měření u vybraných čistíren a provozů. Balíček proto dokládá protichůdné dopady na čistotu vod; nelze přesně určit jejich výsledný praktický rozsah.",
+        "Návrh rozpočtu fondu obsahuje vodohospodářské částky, ale přiložený hlasovací záznam uvádí jeho projednání v prvním čtení; samotný záznam proto nedokládá konečné schválení tohoto rozpočtu."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "moving-against",
+    "selectedReview": "assessor-a"
+  }
+}

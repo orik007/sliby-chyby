@@ -1,0 +1,261 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T15-50-03-852Z--8da216113c73",
+  "evaluatedAt": "2026-10-06T15:50:03.852Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-01b5b8c551/8da216113c73c28801f552f0df4ebcebb583a70f71d7fa5a84970a8816587fde.json",
+  "packageHash": "8da216113c73c28801f552f0df4ebcebb583a70f71d7fa5a84970a8816587fde",
+  "assessmentContentHash": "2343ad346e3c4ebee28d337698fb759c5dd021979837ca0d5f90b13fecf1259b",
+  "assessmentFingerprint": "4842cdc62235508a8eabaf436af6dcbbea6a156d9c8fabcb3c4059331e5d633b",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-01b5b8c551",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-01b5b8c551",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43212-6",
+          "relevant": false,
+          "reasonCz": "Návrh mění pravidla pro odčerpání majetku a některé podmínky prokazování bezúhonnosti, ale podle dodaného textu nemění insolvenční postup ani možnost lidí s vícečetnými exekucemi dosáhnout oddlužení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje spotřebitelské úvěry, dluhové poradenství a opatření věřitelů při prodlení, ale nedokládá změnu insolvenčního procesu ani přístupu lidí s vícečetnými exekucemi k oddlužení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-6",
+          "relevant": false,
+          "reasonCz": "Návrh pouze posouvá účinnost některých ustanovení dřívější novely občanského zákoníku a dodaný text je nespojuje se zjednodušením oddlužení pro lidi s vícečetnými exekucemi.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-01b5b8c551--source",
+        "psp-core-2025--law-change-43212-6",
+        "psp-core-2025--law-change-43266-1",
+        "psp-core-2025--law-change-43308-6"
+      ],
+      "explanationCz": "ANO slíbilo zjednodušit insolvenční proces, aby lidé s vícečetnými exekucemi měli šanci na oddlužení. Dodané změny upravují odčerpání majetku, pravidla spotřebitelských úvěrů a termín účinnosti jiné novely, ale žádná podle dostupného textu nemění cestu k oddlužení. Proto zde není doložen podstatný posun v plnění slibu; samotná souvislost s dluhy nebo občanským právem nestačí. Z dodaných podkladů tak nelze spolehlivě vyhodnotit případné kroky k samotnému zjednodušení insolvenčního procesu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U změny zákona č. 123/2024 Sb. podklady neuvádějí obsah ustanovení, jejichž účinnost se odkládá; nelze proto ověřit případnou nepřímou souvislost s oddlužením. Dodaný text však žádné spojení se slibem nedokládá.",
+        "Žádná z předložených změn není podle svého dodaného textu materiálně relevantní pro konkrétní závazek. Proto nelze z tohoto balíčku ověřit, zda ANO podniklo kroky ke zjednodušení insolvence pro lidi s vícečetnými exekucemi."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-01b5b8c551",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43212-6",
+          "relevant": true,
+          "reasonCz": "Navržená změna insolvenčního zákona omezuje možnost oddlužení u zvláštní skupiny závazků, a proto se přímo dotýká šance dlužníků na oddlužení.",
+          "effectCz": "Dosud § 170 vyjmenovával pohledávky, které se v insolvenci neuspokojují; návrh k nim přidává odčerpávací opatření, takže takový závazek nebude v řízení uspokojen. § 359 dosud připouštěl výjimku ze zániku těchto pohledávek při reorganizaci pro majetkové sankce; návrh mezi výjimky přidává i odčerpávací opatření. § 416 dosud stanovil, že osvobození dlužníka nezasahuje do vyjmenovaných trestních a jiných majetkových závazků; návrh mezi ně zařazuje také odčerpávací opatření. U těchto opatření se tedy možnost zbavit se závazku oddlužením zužuje, což jde proti slibu. Změny § 418c oproti dosavadním pravidlům upravují dokládání bezúhonnosti osob právnické osoby žádající o akreditaci: nově se stanoví využití výpisu z rejstříku trestů a dokladů ze zahraničí, případně čestného prohlášení, a upřesňuje se odkaz na osoby, jejichž bezúhonnost se prokazuje; poznámka pod čarou s odkazem na zákon o Rejstříku trestů se ruší. Tyto změny se týkají akreditace poskytovatelů služeb, nikoli šance dlužníka na oddlužení, a v tomto slibu proto nemění její rozsah."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-1",
+          "relevant": false,
+          "reasonCz": "Změny spotřebitelského úvěru upravují zejména informování, poradenství a řešení prodlení, ale nemění insolvenční řízení ani podmínky oddlužení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-6",
+          "relevant": false,
+          "reasonCz": "Změna posouvá termín účinnosti některých ustanovení občanského zákoníku, avšak nesouvisí s insolvenčním procesem ani oddlužením.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-01b5b8c551--source",
+        "psp-core-2025--law-change-43212-6",
+        "psp-core-2025--print-step-210781"
+      ],
+      "explanationCz": "Vláda, v níž ANO působí, předložila návrh zákona, který mění insolvenční zákon, tedy pravidla pro řešení úpadku a oddlužení. Návrh rozšiřuje seznam závazků, kterých se oddlužení nedotkne, také o odčerpávací opatření. Pro dlužníky s takovým závazkem by proto bylo obtížnější dosáhnout toho, aby se jej oddlužením zbavili, což jde částečně proti slibu ANO. Jde o vládní návrh, nikoli o doloženou změnu již platného práva.",
+      "confidence": "high",
+      "uncertainties": [
+        "Návrh se týká pouze závazků z odčerpávacích opatření; podklady neukazují, nakolik se tato skupina překrývá s lidmi, kteří mají vícečetné exekuce."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0d75632107b8b76e016ac517a8301887d1bd18e47675bf1508",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 106525,
+      "input_tokens_details": {
+        "cache_write_tokens": 102555,
+        "cached_tokens": 3967
+      },
+      "output_tokens": 2685,
+      "output_tokens_details": {
+        "reasoning_tokens": 1894
+      },
+      "total_tokens": 109210
+    },
+    "output": {
+      "promiseId": "ano-2025-01b5b8c551",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43212-6",
+          "relevant": false,
+          "reasonCz": "Návrh mění pravidla pro odčerpání majetku a některé podmínky prokazování bezúhonnosti, ale podle dodaného textu nemění insolvenční postup ani možnost lidí s vícečetnými exekucemi dosáhnout oddlužení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje spotřebitelské úvěry, dluhové poradenství a opatření věřitelů při prodlení, ale nedokládá změnu insolvenčního procesu ani přístupu lidí s vícečetnými exekucemi k oddlužení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-6",
+          "relevant": false,
+          "reasonCz": "Návrh pouze posouvá účinnost některých ustanovení dřívější novely občanského zákoníku a dodaný text je nespojuje se zjednodušením oddlužení pro lidi s vícečetnými exekucemi.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-01b5b8c551--source",
+        "psp-core-2025--law-change-43212-6",
+        "psp-core-2025--law-change-43266-1",
+        "psp-core-2025--law-change-43308-6"
+      ],
+      "explanationCz": "ANO slíbilo zjednodušit insolvenční proces, aby lidé s vícečetnými exekucemi měli šanci na oddlužení. Dodané změny upravují odčerpání majetku, pravidla spotřebitelských úvěrů a termín účinnosti jiné novely, ale žádná podle dostupného textu nemění cestu k oddlužení. Proto zde není doložen podstatný posun v plnění slibu; samotná souvislost s dluhy nebo občanským právem nestačí. Z dodaných podkladů tak nelze spolehlivě vyhodnotit případné kroky k samotnému zjednodušení insolvenčního procesu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U změny zákona č. 123/2024 Sb. podklady neuvádějí obsah ustanovení, jejichž účinnost se odkládá; nelze proto ověřit případnou nepřímou souvislost s oddlužením. Dodaný text však žádné spojení se slibem nedokládá.",
+        "Žádná z předložených změn není podle svého dodaného textu materiálně relevantní pro konkrétní závazek. Proto nelze z tohoto balíčku ověřit, zda ANO podniklo kroky ke zjednodušení insolvence pro lidi s vícečetnými exekucemi."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0c660df2d4f74f77016ac518012aec87d1b384920e72e8742e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 106525,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 106522
+      },
+      "output_tokens": 4558,
+      "output_tokens_details": {
+        "reasoning_tokens": 3584
+      },
+      "total_tokens": 111083
+    },
+    "output": {
+      "promiseId": "ano-2025-01b5b8c551",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43212-6",
+          "relevant": true,
+          "reasonCz": "Navržená změna insolvenčního zákona omezuje možnost oddlužení u zvláštní skupiny závazků, a proto se přímo dotýká šance dlužníků na oddlužení.",
+          "effectCz": "Dosud § 170 vyjmenovával pohledávky, které se v insolvenci neuspokojují; návrh k nim přidává odčerpávací opatření, takže takový závazek nebude v řízení uspokojen. § 359 dosud připouštěl výjimku ze zániku těchto pohledávek při reorganizaci pro majetkové sankce; návrh mezi výjimky přidává i odčerpávací opatření. § 416 dosud stanovil, že osvobození dlužníka nezasahuje do vyjmenovaných trestních a jiných majetkových závazků; návrh mezi ně zařazuje také odčerpávací opatření. U těchto opatření se tedy možnost zbavit se závazku oddlužením zužuje, což jde proti slibu. Změny § 418c oproti dosavadním pravidlům upravují dokládání bezúhonnosti osob právnické osoby žádající o akreditaci: nově se stanoví využití výpisu z rejstříku trestů a dokladů ze zahraničí, případně čestného prohlášení, a upřesňuje se odkaz na osoby, jejichž bezúhonnost se prokazuje; poznámka pod čarou s odkazem na zákon o Rejstříku trestů se ruší. Tyto změny se týkají akreditace poskytovatelů služeb, nikoli šance dlužníka na oddlužení, a v tomto slibu proto nemění její rozsah."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-1",
+          "relevant": false,
+          "reasonCz": "Změny spotřebitelského úvěru upravují zejména informování, poradenství a řešení prodlení, ale nemění insolvenční řízení ani podmínky oddlužení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-6",
+          "relevant": false,
+          "reasonCz": "Změna posouvá termín účinnosti některých ustanovení občanského zákoníku, avšak nesouvisí s insolvenčním procesem ani oddlužením.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-01b5b8c551--source",
+        "psp-core-2025--law-change-43212-6",
+        "psp-core-2025--print-step-210781"
+      ],
+      "explanationCz": "Vláda, v níž ANO působí, předložila návrh zákona, který mění insolvenční zákon, tedy pravidla pro řešení úpadku a oddlužení. Návrh rozšiřuje seznam závazků, kterých se oddlužení nedotkne, také o odčerpávací opatření. Pro dlužníky s takovým závazkem by proto bylo obtížnější dosáhnout toho, aby se jej oddlužením zbavili, což jde částečně proti slibu ANO. Jde o vládní návrh, nikoli o doloženou změnu již platného práva.",
+      "confidence": "high",
+      "uncertainties": [
+        "Návrh se týká pouze závazků z odčerpávacích opatření; podklady neukazují, nakolik se tato skupina překrývá s lidmi, kteří mají vícečetné exekuce."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_08c7430ce5391cca016ac51899f62087d1a99de8f9b0db5263",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 107068,
+      "input_tokens_details": {
+        "cache_write_tokens": 107065,
+        "cached_tokens": 0
+      },
+      "output_tokens": 445,
+      "output_tokens_details": {
+        "reasoning_tokens": 144
+      },
+      "total_tokens": 107513
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "ano-2025-01b5b8c551--source",
+        "psp-core-2025--law-change-43212-6",
+        "psp-core-2025--print-step-210781",
+        "psp-core-2025--law-change-43266-1",
+        "psp-core-2025--law-change-43308-6"
+      ],
+      "explanationCz": "Volím hodnocení A, protože lépe rozlišuje slíbené zjednodušení insolvence od jiných změn pravidel pro dluhy. Vláda s účastí ANO navrhla, aby se oddlužením nezanikla povinnost odevzdat majetek nevysvětleného původu. To je nová výjimka z oddlužení, ale podklady ji nespojují se zjednodušením postupu pro lidi s vícečetnými exekucemi; hodnocení B ji proto příliš široce označuje za krok proti slibu. Změny spotřebitelských úvěrů samotnou insolvenci nezjednodušují a u odkládaných ustanovení jiné novely chybí jejich obsah. Z předložených podkladů tedy není doložen podstatný posun v plnění tohoto slibu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

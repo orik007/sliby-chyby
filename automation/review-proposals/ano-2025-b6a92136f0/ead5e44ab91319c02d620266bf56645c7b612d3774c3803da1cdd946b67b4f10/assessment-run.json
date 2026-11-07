@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T09-18-18-386Z--b23e9fcd487c",
+  "evaluatedAt": "2026-11-05T09:18:18.386Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-b6a92136f0/b23e9fcd487cdbebd87375b238ad77b5856590c45ce5fa20102ad4f8f4890e53.json",
+  "packageHash": "b23e9fcd487cdbebd87375b238ad77b5856590c45ce5fa20102ad4f8f4890e53",
+  "assessmentContentHash": "0ba8250eddc124dd639e918ff20e10b326490ea1446bb7dbdec6a6773139b191",
+  "assessmentFingerprint": "ead5e44ab91319c02d620266bf56645c7b612d3774c3803da1cdd946b67b4f10",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-b6a92136f0",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-b6a92136f0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-9",
+          "relevant": false,
+          "reasonCz": "Ustanovení se týká transparentnosti kolektivních správců a jejich příjmů, srážek a rozdělování výnosů, ale nedokládá změnu pravidel poplatků pro podnikatele ani omezení administrativy či šikany.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-b6a92136f0--source",
+        "psp-core-2025--law-change-43203-9",
+        "psp-core-2025--print-step-210760"
+      ],
+      "explanationCz": "Program ANO slibuje zásadní revizi poplatků pro OSA a další kolektivní správce a omezení zbytečné administrativy i šikany. Vláda předložila Parlamentu dohodu s Uzbekistánem, jejíž doložená část podporuje transparentnost organizací kolektivní správy. Tato část ale nemění pravidla poplatků ani nedokládá naplnění ostatních částí slibu. V předložených podkladech proto není doložen podstatný posun ve slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady obsahují pouze vybrané odstavce dohody s Uzbekistánem; žádný z nich ale nedokládá změnu systému poplatků slíbenou ANO."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-b6a92136f0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-9",
+          "relevant": true,
+          "reasonCz": "Ustanovení se výslovně týká transparentnosti organizací kolektivní správy a srážek z příjmů z výkonu práv, což představuje dílčí část slibu o srozumitelnějších pravidlech pro kolektivní správce.",
+          "effectCz": "Dohoda jako nový mezinárodní závazek nemá v podkladech předchozí znění, s nímž by šlo změnu porovnat. Uvedené ustanovení stanoví, že strany podporují transparentnost kolektivní správy, zejména u vybíraných příjmů, srážek, použití příjmů, rozdělování a repertoáru. Tím podporuje dílčí cíl větší přehlednosti, ale samo nestanoví konkrétní změnu poplatků pro OSA, živnostníky či pořadatele ani omezení administrativy či šikany."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-b6a92136f0--source",
+        "psp-core-2025--law-change-43203-9",
+        "psp-core-2025--print-step-210760"
+      ],
+      "explanationCz": "Vláda předložila Parlamentu dohodu o partnerství a spolupráci s Uzbekistánem. Její ustanovení podporuje transparentnost kolektivních správců, mimo jiné ohledně srážek z vybíraných příjmů, což odpovídá dílčí části slibu o srozumitelnějších pravidlech. Dohoda však sama nemění konkrétní systém poplatků pro OSA ani výslovně neřeší administrativu či jednání vůči malým podnikatelům. Jde proto o návrh posouvající část slibu, nikoli o jeho splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z poskytnutého ustanovení není zřejmé, jaké konkrétní dopady by podpora transparentnosti měla na český systém poplatků pro OSA a další kolektivní správce."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0e2af4311daece61016aec49b4c80487d19f6f380323f8faac",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8484,
+      "input_tokens_details": {
+        "cache_write_tokens": 2134,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 867,
+      "output_tokens_details": {
+        "reasoning_tokens": 456
+      },
+      "total_tokens": 9351
+    },
+    "output": {
+      "promiseId": "ano-2025-b6a92136f0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-9",
+          "relevant": false,
+          "reasonCz": "Ustanovení se týká transparentnosti kolektivních správců a jejich příjmů, srážek a rozdělování výnosů, ale nedokládá změnu pravidel poplatků pro podnikatele ani omezení administrativy či šikany.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-b6a92136f0--source",
+        "psp-core-2025--law-change-43203-9",
+        "psp-core-2025--print-step-210760"
+      ],
+      "explanationCz": "Program ANO slibuje zásadní revizi poplatků pro OSA a další kolektivní správce a omezení zbytečné administrativy i šikany. Vláda předložila Parlamentu dohodu s Uzbekistánem, jejíž doložená část podporuje transparentnost organizací kolektivní správy. Tato část ale nemění pravidla poplatků ani nedokládá naplnění ostatních částí slibu. V předložených podkladech proto není doložen podstatný posun ve slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady obsahují pouze vybrané odstavce dohody s Uzbekistánem; žádný z nich ale nedokládá změnu systému poplatků slíbenou ANO."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0f0e8ed4d25b63a8016aec49c17cb087d1a986c5b010153e36",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8484,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8481
+      },
+      "output_tokens": 1716,
+      "output_tokens_details": {
+        "reasoning_tokens": 1185
+      },
+      "total_tokens": 10200
+    },
+    "output": {
+      "promiseId": "ano-2025-b6a92136f0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-9",
+          "relevant": true,
+          "reasonCz": "Ustanovení se výslovně týká transparentnosti organizací kolektivní správy a srážek z příjmů z výkonu práv, což představuje dílčí část slibu o srozumitelnějších pravidlech pro kolektivní správce.",
+          "effectCz": "Dohoda jako nový mezinárodní závazek nemá v podkladech předchozí znění, s nímž by šlo změnu porovnat. Uvedené ustanovení stanoví, že strany podporují transparentnost kolektivní správy, zejména u vybíraných příjmů, srážek, použití příjmů, rozdělování a repertoáru. Tím podporuje dílčí cíl větší přehlednosti, ale samo nestanoví konkrétní změnu poplatků pro OSA, živnostníky či pořadatele ani omezení administrativy či šikany."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-b6a92136f0--source",
+        "psp-core-2025--law-change-43203-9",
+        "psp-core-2025--print-step-210760"
+      ],
+      "explanationCz": "Vláda předložila Parlamentu dohodu o partnerství a spolupráci s Uzbekistánem. Její ustanovení podporuje transparentnost kolektivních správců, mimo jiné ohledně srážek z vybíraných příjmů, což odpovídá dílčí části slibu o srozumitelnějších pravidlech. Dohoda však sama nemění konkrétní systém poplatků pro OSA ani výslovně neřeší administrativu či jednání vůči malým podnikatelům. Jde proto o návrh posouvající část slibu, nikoli o jeho splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z poskytnutého ustanovení není zřejmé, jaké konkrétní dopady by podpora transparentnosti měla na český systém poplatků pro OSA a další kolektivní správce."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0dd655f104338d87016aec49d3f64887d1b237804cce79228a",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 7428,
+      "input_tokens_details": {
+        "cache_write_tokens": 3015,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 295,
+      "output_tokens_details": {
+        "reasoning_tokens": 60
+      },
+      "total_tokens": 7723
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "ano-2025-b6a92136f0--source",
+        "psp-core-2025--law-change-43203-9",
+        "psp-core-2025--print-step-210760"
+      ],
+      "explanationCz": "Přesvědčivější je první posouzení: společné téma kolektivních správců samo o sobě nedokládá posun ke slíbené revizi poplatků. Vláda s účastí ANO předložila dohodu s Uzbekistánem, jejíž doložená část obecně podporuje průhledné nakládání s příjmy kolektivních správců. Nenavrhuje však změnu poplatků ani pravidel vůči drobným podnikatelům a pořadatelům malých akcí. Druhé posouzení proto přisuzuje této obecné podpoře větší význam pro slib, než jaký dokládá předložený text."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

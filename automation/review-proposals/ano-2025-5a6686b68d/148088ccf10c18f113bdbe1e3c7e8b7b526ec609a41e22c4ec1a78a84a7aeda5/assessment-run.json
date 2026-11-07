@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-31-46-385Z--d4aa8eb5b749",
+  "evaluatedAt": "2026-10-02T01:31:46.385Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-5a6686b68d/d4aa8eb5b7493c1c86f655eec1c61ba0b392f7df9c15c08ff4f10b82ad16d083.json",
+  "packageHash": "d4aa8eb5b7493c1c86f655eec1c61ba0b392f7df9c15c08ff4f10b82ad16d083",
+  "assessmentContentHash": "68ebb900ba4bf4594daba0cbed482d5627dd1b2f147e65c02d0c3f89cc9d7d59",
+  "assessmentFingerprint": "148088ccf10c18f113bdbe1e3c7e8b7b526ec609a41e22c4ec1a78a84a7aeda5",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-5a6686b68d",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-5a6686b68d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43164-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí šetření hrozící nedostupnosti zdravotnických prostředků a umožňuje dočasně upravit jejich dodávání, předepisování či používání, takže může podpořit dostupnost části prostředků slíbených pacientům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43320-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje dokládání dovozu či výroby zubního amalgámu pro specifické zdravotní potřeby a nestanoví opatření zrychlující přístup pacientů k moderním prostředkům nebo léčbě."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-5a6686b68d--source",
+        "psp-core-2025--law-change-43164-1",
+        "psp-core-2025--vote-87045",
+        "psp-core-2025--senate-resolution-43164-2",
+        "psp-core-2025--vote-87487"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro novelu zákona o zdravotnických prostředcích a později také pro senátní úpravy této novely. Zákon má zavést sledování hrozící nedostupnosti důležitých prostředků a umožnit dočasně upravit podmínky jejich dodávání či používání. Tím může zlepšit dostupnost zdravotnických prostředků, ale sám nedokládá rychlejší přístup k lékům ani k novým léčebným postupům. Jde proto o posun k části slibu, nikoli o jeho úplné naplnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají přijetí pravidel pro řešení hrozící nedostupnosti prostředků, nikoli to, zda se díky nim pacienti skutečně dostali k prostředkům rychleji."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-5a6686b68d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43164-1",
+          "relevant": true,
+          "reasonCz": "Návrh vytváří sledování hrozící nedostupnosti zdravotnických prostředků a umožňuje dočasně upravit jejich dodávání, předepisování či používání, což může zlepšit dostupnost této části slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43320-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje evidenci a dokládání dovozu či výroby zubního amalgámu pro specifické zdravotní potřeby, ale nestanoví opatření zrychlující přístup pacientů k prostředkům nebo léčbě."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-5a6686b68d--source",
+        "psp-core-2025--law-change-43164-1",
+        "psp-core-2025--vote-87045",
+        "psp-core-2025--senate-resolution-43164-2",
+        "psp-core-2025--vote-87487"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro novelu zákona o zdravotnických prostředcích a následně také pro senátní pozměňovací návrhy. Novela zavádí sledování hrozící nedostupnosti prostředků a umožňuje ministerstvu dočasně upravit jejich dodávání, předepisování, výdej či používání. To může zlepšit dostupnost zdravotnických prostředků, řeší však jen část slibu a samo o sobě nezrychluje přístup k lékům ani novým léčebným postupům. Proto jde o částečný posun ke splnění slibu.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0233d28c022e9816016abf0957c82487d1888d065f627d084f",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 42751,
+      "input_tokens_details": {
+        "cache_write_tokens": 39427,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1387,
+      "output_tokens_details": {
+        "reasoning_tokens": 839
+      },
+      "total_tokens": 44138
+    },
+    "output": {
+      "promiseId": "ano-2025-5a6686b68d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43164-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí šetření hrozící nedostupnosti zdravotnických prostředků a umožňuje dočasně upravit jejich dodávání, předepisování či používání, takže může podpořit dostupnost části prostředků slíbených pacientům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43320-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje dokládání dovozu či výroby zubního amalgámu pro specifické zdravotní potřeby a nestanoví opatření zrychlující přístup pacientů k moderním prostředkům nebo léčbě."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-5a6686b68d--source",
+        "psp-core-2025--law-change-43164-1",
+        "psp-core-2025--vote-87045",
+        "psp-core-2025--senate-resolution-43164-2",
+        "psp-core-2025--vote-87487"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro novelu zákona o zdravotnických prostředcích a později také pro senátní úpravy této novely. Zákon má zavést sledování hrozící nedostupnosti důležitých prostředků a umožnit dočasně upravit podmínky jejich dodávání či používání. Tím může zlepšit dostupnost zdravotnických prostředků, ale sám nedokládá rychlejší přístup k lékům ani k novým léčebným postupům. Jde proto o posun k části slibu, nikoli o jeho úplné naplnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají přijetí pravidel pro řešení hrozící nedostupnosti prostředků, nikoli to, zda se díky nim pacienti skutečně dostali k prostředkům rychleji."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_02aeef12f6a3f0db016abf096808a087d1870fcf68da940f4b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 42751,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 42748
+      },
+      "output_tokens": 2414,
+      "output_tokens_details": {
+        "reasoning_tokens": 1919
+      },
+      "total_tokens": 45165
+    },
+    "output": {
+      "promiseId": "ano-2025-5a6686b68d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43164-1",
+          "relevant": true,
+          "reasonCz": "Návrh vytváří sledování hrozící nedostupnosti zdravotnických prostředků a umožňuje dočasně upravit jejich dodávání, předepisování či používání, což může zlepšit dostupnost této části slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43320-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje evidenci a dokládání dovozu či výroby zubního amalgámu pro specifické zdravotní potřeby, ale nestanoví opatření zrychlující přístup pacientů k prostředkům nebo léčbě."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-5a6686b68d--source",
+        "psp-core-2025--law-change-43164-1",
+        "psp-core-2025--vote-87045",
+        "psp-core-2025--senate-resolution-43164-2",
+        "psp-core-2025--vote-87487"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro novelu zákona o zdravotnických prostředcích a následně také pro senátní pozměňovací návrhy. Novela zavádí sledování hrozící nedostupnosti prostředků a umožňuje ministerstvu dočasně upravit jejich dodávání, předepisování, výdej či používání. To může zlepšit dostupnost zdravotnických prostředků, řeší však jen část slibu a samo o sobě nezrychluje přístup k lékům ani novým léčebným postupům. Proto jde o částečný posun ke splnění slibu.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

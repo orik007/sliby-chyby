@@ -1,0 +1,686 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T01-42-38-502Z--29142c058879",
+  "evaluatedAt": "2026-11-04T01:42:38.502Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-916f270d37/29142c058879ae10ef958dd8d9ffa5e53e84bf95510ea31b4165354cc56b57a2.json",
+  "packageHash": "29142c058879ae10ef958dd8d9ffa5e53e84bf95510ea31b4165354cc56b57a2",
+  "assessmentContentHash": "9b5747824eb194d3853cdd74c482a5b42912f161b3db356ca852c90188460171",
+  "assessmentFingerprint": "b91cae7391c7f61769281592969a7fce423693a1354caf09e02fb1e51cedf01f",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-916f270d37",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment gives a law change more than one relevance verdict",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_027ca7d8f826b1aa016aea8ca600c487d1930009ae03321e9a",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 53251,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 53248
+            },
+            "output_tokens": 7923,
+            "output_tokens_details": {
+              "reasoning_tokens": 4482
+            },
+            "total_tokens": 61174
+          },
+          "output": {
+            "promiseId": "ano-2025-916f270d37",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43161-1",
+                "relevant": true,
+                "reasonCz": "Úprava řízeného přístupu k datům výslovně stanoví technické zabezpečení, ochranu před opětovnou identifikací a postup při narušení ochrany dat.",
+                "effectCz": "Předchozí znění měněných ustanovení v balíčku chybí, takže směr změny oproti dosavadní úpravě nelze určit. Návrh stanoví zabezpečení přístupu, povinnost chránit data před opětovnou identifikací, oznamovat porušení ochrany a kontrolovat dodržování pravidel; jde o opatření zaměřená na ochranu dat, nikoli o vybudování celé slibované sítě."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": true,
+                "reasonCz": "Rozpočet na rok 2026 je relevantní také proto, že jeho pozměňovací návrhy přímo cílí na kybernetickou obranu, Národní úřad pro kybernetickou a informační bezpečnost a další bezpečnostní kapacity.",
+                "effectCz": "Jde o nový státní rozpočet, takže nemá předchozí znění, s nímž by bylo možné srovnávat. Dodaný výňatek pouze uvádí, že celkové výdaje podle kapitol jsou v příloze č. 3 a ukazatele v příloze č. 4; konkrétní částky pro kybernetickou bezpečnost v něm nejsou. Z tohoto textu proto nelze určit, zda schválený rozpočet prostředky pro slibované zabezpečení zvýšil, nebo snížil."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-14",
+                "relevant": true,
+                "reasonCz": "Návrh umožňuje při zásahu do integrovaného informačního systému omezit nebo zakázat používání účtů, tedy obsahuje konkrétní ochrannou reakci na bezpečnostní hrozby vůči státnímu systému.",
+                "effectCz": "Předchozí znění ustanovení není v balíčku uvedeno, takže nelze určit, zda návrh dosavadní ochranu zpřísňuje. Návrh dovoluje dočasně omezit či zakázat účty při neoprávněném zásahu nebo nefunkčnosti systému a při zneužití účtů omezuje jejich funkce; jde o dílčí ochranné opatření, nikoli o celou slibovanou síť."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-1",
+                "relevant": true,
+                "reasonCz": "Návrh upravuje bezpečnost elektronických služeb důvěry, kryptografii, hlášení narušení a oddělení osobních údajů, což přímo souvisí s ochranou dat a systémů.",
+                "effectCz": "Dosavadní § 2 ukládal poskytovat kvalifikovanou službu na základě písemné smlouvy; návrh doplňuje statistické povinnosti a povinnost řídit se zveřejněnými pokyny ke kryptografii. Dosavadní § 13 svěřoval Agentuře dohled a některé úkoly týkající se certifikátů; návrh přidává její pokyny pro kryptografii a nové úkoly a podmínky ověřování atributů. Dosavadní § 17 již postihoval nedostatečná bezpečnostní opatření a ochranu dat; návrh rozšiřuje přestupky mimo jiné o kombinování osobních údajů, jejich nedostatečné oddělení a další bezpečnostní pochybení. U nových ustanovení § 12a až 12c předchozí znění chybí; v dodaném textu jsou nově popsány technické a bezpečnostní podmínky. Změna v uvedených částech posiluje některé bezpečnostní povinnosti, ale sama nevybuduje celou slibovanou síť."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-2",
+                "relevant": true,
+                "reasonCz": "Návrh přidává povinnosti související s reakcí na narušení bezpečnosti evropských digitálních peněženek, tedy s kybernetickou bezpečností elektronické identifikace.",
+                "effectCz": "Dosavadní § 16 již ukládal kvalifikovanému správci mimo jiné zajišťovat dostupnost systému, vést evidenci a zneplatňovat zneužité prostředky; návrh přidává povinnost zprostředkovat uživateli informace na žádost Agentury a součinnost při řešení narušení bezpečnosti digitálních peněženek. Tím rozšiřuje povinnosti v této dílčí oblasti, ale z dodaného textu nelze dovodit širší změnu ochrany všech státních systémů či osobních údajů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43290-3",
+                "relevant": true,
+                "reasonCz": "Smlouva stanoví zabezpečené předávání osobních údajů a spolupráci při potírání počítačové kriminality, což představuje dílčí příspěvek k ochraně před kybernetickými hrozbami.",
+                "effectCz": "Jde o novou smluvní úpravu bez předchozího znění v balíčku. Stanoví, že při předávání osobních údajů se musí zvolit zabezpečený přenos, a počítá se spoluprací při zajišťování digitálních stop, výměně údajů a potírání počítačové kriminality. Podporuje tak jen část slibu; nevytváří sama moderní ochrannou síť pro státní systémy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+                "relevant": true,
+                "reasonCz": "Nová úprava umožňuje vytvářet testovací identity pro ověřování bezpečnosti státních registrů a agendových informačních systémů a brání jejich záměně se skutečnými osobami.",
+                "effectCz": "Předchozí § 4 zákona o základních registrech vymezoval obsah registru bez uvedených testovacích údajů a § 4a popisoval údaje agendových systémů. Schválená změna rozšiřuje jejich úpravu o testovací identity a údaje pro testování bezpečnosti, funkčnosti a dostupnosti; výslovně stanoví, že jsou označeny jako testovací, nelze je přiřadit skutečným osobám a nezakládají práva ani povinnosti. Tím rozšiřuje možnost bezpečně testovat systémy a chrání osobní údaje, ale plní jen část slibu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43290-3",
+                "relevant": true,
+                "reasonCz": "Smlouva stanoví zabezpečené předávání osobních údajů a spolupráci při potírání počítačové kriminality, což představuje dílčí příspěvek k ochraně před kybernetickými hrozbami.",
+                "effectCz": "Jde o novou smluvní úpravu bez předchozího znění v balíčku. Stanoví, že při předávání osobních údajů se musí zvolit zabezpečený přenos, a počítá se spoluprací při zajišťování digitálních stop, výměně údajů a potírání počítačové kriminality. Podporuje tak jen část slibu; nevytváří sama moderní ochrannou síť pro státní systémy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-6",
+                "relevant": true,
+                "reasonCz": "Dohoda počítá se spoluprací proti kyberkriminalitě, ochranou kritické infrastruktury a podporou vysoké úrovně ochrany osobních údajů, což se týká částí slibu.",
+                "effectCz": "Jde o novou smlouvu bez předchozího znění v balíčku. Stanoví výměnu informací a osvědčených postupů proti kyberkriminalitě, spolupráci při ochraně kritické infrastruktury a podporu vysoké úrovně ochrany osobních údajů. Jde o příspěvek k mezinárodní spolupráci, nikoli o samotné vybudování slibované sítě."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-153",
+                "relevant": true,
+                "reasonCz": "Vyhláška stanoví ověřování přístupu do informačního systému a vedení auditních záznamů, což jsou konkrétní dílčí prvky zabezpečení systému a přístupu k údajům.",
+                "effectCz": "Jde o novou vyhlášku bez předchozího znění v balíčku. Stanoví přístup prostřednictvím elektronické identifikace nebo registrovaných údajů, ověřování totožnosti a nároku na roli a vedení záznamů o přihlášení, změnách dat a přidělování rolí. Tato úprava vytváří dílčí kontrolní a přístupová pravidla, ale z dodaného textu nelze určit, jak se srovnává s předchozím stavem."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-178",
+                "relevant": true,
+                "reasonCz": "Vyhláška pro portál kritické infrastruktury upravuje autentizaci, individuální nepřenosná oprávnění a omezení přístupu na nezbytný rozsah.",
+                "effectCz": "Jde o novou vyhlášku bez předchozího znění v balíčku. Stanoví autentizovaný přístup, jedinečná a nepřenosná oprávnění pro jednotlivé osoby a omezení přístupu jen na nezbytný rozsah. Jde o konkrétní dílčí bezpečnostní pravidla pro portál, nikoli o celou slibovanou síť."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-197",
+                "relevant": true,
+                "reasonCz": "Usnesení vyčleňuje prostředky na program zahrnující spojovací vojsko, informatizaci ministerstva obrany a informační a kybernetické síly armády.",
+                "effectCz": "Jde o nové usnesení bez předchozího znění. Vláda schválila program a stanovila účast státního rozpočtu až do výše 81 504,139 mil. Kč na období do 31. prosince 2034; program zahrnuje také informační a kybernetické síly a informatizaci. Usnesení tak podporuje dílčí bezpečnostní kapacity, ale výši prostředků určených konkrétně na kybernetickou ochranu z dodaného textu určit nelze."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-916f270d37--source",
+              "psp-core-2025--law-change-43161-1",
+              "psp-core-2025--law-change-43204-1",
+              "psp-core-2025--law-change-43264-14",
+              "psp-core-2025--law-change-43275-1",
+              "psp-core-2025--law-change-43275-2",
+              "psp-core-2025--law-change-43290-3",
+              "psp-core-2025--law-change-43308-approved-10",
+              "psp-core-2025--law-change-43453-6",
+              "esbirka-regulations--law-change-sb-2026-153",
+              "esbirka-regulations--law-change-sb-2026-178",
+              "zvlady-resolutions--law-change-uv-2026-197",
+              "psp-core-2025--print-step-210761",
+              "psp-core-2025--vote-86767",
+              "psp-core-2025--amendment-424",
+              "psp-core-2025--amendment-text-424",
+              "psp-core-2025--vote-86842",
+              "psp-core-2025--amendment-text-523",
+              "psp-core-2025--vote-86873",
+              "psp-core-2025--amendment-text-360",
+              "psp-core-2025--vote-86906",
+              "psp-core-2025--vote-86921",
+              "psp-core-2025--amendment-text-551",
+              "psp-core-2025--vote-86935",
+              "psp-core-2025--amendment-text-454",
+              "psp-core-2025--vote-86947",
+              "psp-core-2025--amendment-text-520",
+              "psp-core-2025--vote-86957",
+              "psp-core-2025--print-step-211048",
+              "zvlady-resolutions--2026-197",
+              "psp-core-2025--print-step-211101",
+              "psp-core-2025--print-step-211246",
+              "esbirka-regulations--2026-153",
+              "psp-core-2025--vote-88522",
+              "psp-core-2025--vote-88528",
+              "esbirka-regulations--2026-178",
+              "psp-core-2025--print-step-212285"
+            ],
+            "explanationCz": "Vláda přijala program pro spojovací vojsko, informatizaci ministerstva obrany a kybernetické síly s účastí státního rozpočtu až 81,5 miliardy Kč. Poslanci ANO také schválili pravidla pro testování bezpečnosti státních registrů a vláda vydala vyhlášky s přístupovými a kontrolními pravidly pro informační systémy. Jde o konkrétní, ale dílčí kroky; z předložených důkazů nevyplývá, že by již vznikla celá slibovaná síť. Současně poslanci ANO nepodpořili několik rozpočtových návrhů na posílení kybernetické obrany a Národního úřadu pro kybernetickou a informační bezpečnost.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Výňatek ze schváleného státního rozpočtu neuvádí konkrétní částky pro kybernetickou bezpečnost, takže nelze z něj určit celkový dopad rozpočtu na tento slib.",
+              "Poslanci ANO nepodpořili několik návrhů na navýšení nebo přesun prostředků pro kybernetickou obranu a Národní úřad pro kybernetickou a informační bezpečnost; dostupné důkazy však neukazují, jaké částky byly v této oblasti nakonec schváleny.",
+              "U několika návrhů právních pravidel balíček neuvádí dosavadní znění dotčených ustanovení, takže nelze spolehlivě určit, o kolik se jejich ochranný účinek oproti předchozímu stavu změnil."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-916f270d37",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení zavádějí pravidla pro řízený přístup k datům, zabezpečení, kontrolu a oznamování incidentů, tedy část ochrany dat.",
+          "effectCz": "Text zavádí podmínky pro bezpečné poskytování dat, povinnosti chránit je před opětovnou identifikací a oznamovat některá porušení ochrany; ukládá také kontrolu a sankce. Předchozí znění dotčených pravidel v balíčku chybí, takže nelze určit, nakolik jsou tyto povinnosti oproti dosavadnímu stavu přísnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet na rok 2026 může přímo financovat kybernetickou ochranu státu, ale dodaný výňatek neuvádí konkrétní příslušné výdaje.",
+          "effectCz": "Jde o nový státní rozpočet, nikoli změnu dřívějšího znění zákona. Dodaný text pouze odkazuje na přehled výdajů a ukazatelů v přílohách, ale jejich částky neobsahuje; nelze proto zjistit, jaké prostředky rozpočet na kybernetickou ochranu vyčleňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": true,
+          "reasonCz": "Ustanovení umožňují při neoprávněném zásahu nebo nefunkčnosti omezit či zakázat používání účtů v konkrétním státním informačním systému.",
+          "effectCz": "Návrh zavádí možnost dočasně omezit účty při bezpečnostním incidentu, výpadku či jeho bezprostřední hrozbě a povinnost omezit zneužívané funkce. Předchozí znění těchto pravidel balíček neobsahuje, takže nelze určit změnu oproti dosavadnímu stavu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Změny se týkají kryptografických postupů, bezpečnosti služeb vytvářejících důvěru, incidentů a oddělení osobních údajů.",
+          "effectCz": "Dosavadní znění již ukládalo poskytovatelům některá opatření k řízení bezpečnostních rizik a oznamování incidentů. Návrh doplňuje další pravidla pro kryptografické postupy a ochranu osobních údajů a mění přestupkové povinnosti; u nových ustanovení jde o rozšíření pravidel, ale u části změn nelze jejich přesný směr určit jen z dodaného kontextu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Návrh doplňuje povinnosti související s reakcí na narušení bezpečnosti digitálních identifikačních peněženek.",
+          "effectCz": "Dosavadní povinnosti kvalifikovaného správce zahrnovaly mimo jiné dostupnost systému a zneplatnění zneužitého identifikačního prostředku. Návrh přidává zprostředkování informací uživateli peněženky a součinnost při reakci na bezpečnostní narušení, takže povinnosti správce v této oblasti rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43290-3",
+          "relevant": false,
+          "reasonCz": "Ustanovení se týkají policejní spolupráce a zabezpečeného předávání údajů v jejím rámci, nikoli budování sítě chránící státní systémy a osobní údaje občanů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": true,
+          "reasonCz": "Nová pravidla umožňují testovat dostupnost, funkčnost, bezpečnost a interoperabilitu základních registrů a agendových informačních systémů pomocí testovacích identit a údajů.",
+          "effectCz": "Před změnou zákon upravoval obsah registrů a agendových systémů, ale nové § 4b výslovně zavádí testovací identity a údaje pro bezpečnostní a funkční testování a stanoví, že nejde o referenční údaje ani o podklad pro vznik či změnu práv a povinností. Rozšiřuje tak možnosti bezpečného testování, aniž by měnil obecnou povinnost zabezpečení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-6",
+          "relevant": false,
+          "reasonCz": "Text se věnuje mezinárodní spolupráci při potírání kyberkriminality a ochraně osobních údajů, ale nezavádí ani nefinancuje síť pro ochranu českých státních systémů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-153",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví přihlašování, ověřování rolí a vedení auditních záznamů v konkrétním státním informačním systému.",
+          "effectCz": "Vyhláška zavádí přístup do systému prostřednictvím elektronické identifikace nebo registrovaných údajů, ověřování identity a oprávnění a auditní záznamy o přihlášeních a změnách. Jako nové nařízení nemá v balíčku předchozí znění, s nímž by bylo možné změnu porovnat."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-178",
+          "relevant": true,
+          "reasonCz": "Vyhláška zabezpečuje portál kritické infrastruktury autentizací, individuálními přístupovými oprávněními a jejich omezením na nezbytný rozsah.",
+          "effectCz": "Vyhláška zavádí přístup po autentizaci, individuální a nepřenosná oprávnění a povinnost omezit přístup na nezbytný rozsah a aktualizovat okruh oprávněných osob. Jde o novou vyhlášku bez předchozího znění uvedeného v balíčku."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-197",
+          "relevant": true,
+          "reasonCz": "Usnesení vyčleňuje prostředky na program, jehož výslovnou součástí jsou informatizace a informační a kybernetické síly armády.",
+          "effectCz": "Vláda stanovila účast státního rozpočtu na programu do výše 81 504,139 mil. Kč do konce roku 2034. Program zahrnuje také informatizaci a informační a kybernetické síly, ale usnesení neuvádí, jaká část této částky připadne přímo na kybernetickou ochranu státních systémů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-916f270d37--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-523",
+        "psp-core-2025--vote-86842",
+        "psp-core-2025--amendment-text-360",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--amendment-text-551",
+        "psp-core-2025--vote-86921",
+        "psp-core-2025--amendment-text-454",
+        "psp-core-2025--vote-86935",
+        "psp-core-2025--amendment-text-520",
+        "psp-core-2025--vote-86947",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43264-14",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43308-approved-10",
+        "psp-core-2025--vote-88528",
+        "esbirka-regulations--law-change-sb-2026-153",
+        "esbirka-regulations--2026-153",
+        "esbirka-regulations--law-change-sb-2026-178",
+        "esbirka-regulations--2026-178",
+        "zvlady-resolutions--law-change-uv-2026-197",
+        "zvlady-resolutions--2026-197"
+      ],
+      "explanationCz": "Vláda předložila návrhy na posílení bezpečnostních povinností u elektronických služeb a peněženek a vláda také schválila financování programu zahrnujícího informační a kybernetické síly armády. Poslanci ANO podpořili zákon, který umožňuje bezpečnější testování státních informačních systémů, a vláda přijala vyhlášky upravující přístup a jeho kontrolu v konkrétních systémech včetně portálu kritické infrastruktury. Tyto kroky zajišťují dílčí prostředky ochrany, ale nedokládají vybudování celé slíbené sítě. Poslanci ANO zároveň nepodpořili několik návrhů na zvýšení prostředků pro kybernetickou obranu a Národní úřad pro kybernetickou a informační bezpečnost; navíc z dodaného výňatku státního rozpočtu nelze zjistit konečné částky pro tyto oblasti.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný výňatek státního rozpočtu neuvádí částky pro kybernetickou bezpečnost; hlasování pro rozpočet proto samo o sobě neprokazuje, kolik prostředků tyto oblasti získaly.",
+        "Usnesení o programu armády stanovuje celkový strop 81 504,139 mil. Kč, ale nerozepisuje část určenou přímo na kybernetickou ochranu.",
+        "Některá ustanovení v dodaných zákonných výňatcích nemají v balíčku předchozí znění, takže nelze přesně porovnat jejich změnu oproti dřívějším pravidlům.",
+        "Poslanci ANO nepodpořili pozměňovací návrhy na posílení kybernetické obrany a rozpočtu Národního úřadu pro kybernetickou a informační bezpečnost; tyto návrhy však samy o sobě nedokládají, jaké částky byly nakonec schváleny."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-916f270d37",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení o řízeném přístupu k datům zavádějí požadavky na jejich zabezpečení a ochranu osobních údajů, tedy řeší část slibu.",
+          "effectCz": "Jde o novou právní úpravu a předchozí znění těchto pravidel balíček neuvádí, takže změnu vůči dosavadnímu stavu nelze přesně určit. Dodané znění omezuje přístup k datům na nezbytný rozsah a stanoví zabezpečení, kontroly, oznamování porušení a sankce; jde o dílčí ochranná pravidla, nikoli o vybudování celé slibované sítě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet obsahuje výdaje kapitol v přílohách, které návrhy pozměňovacích návrhů výslovně mění i ve vztahu ke kybernetické obraně a NÚKIB.",
+          "effectCz": "Dodané znění rozpočtu pouze odkazuje na přehledy výdajů a ukazatelů v přílohách; konkrétní částky pro kybernetickou bezpečnost ani jejich předchozí výši neobsahuje. Směr účinku schváleného rozpočtu proto z předložených ustanovení nelze určit; pozměňovací návrhy samostatně navrhovaly navýšení prostředků na kybernetickou obranu a NÚKIB."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje omezit nebo zakázat používání cizineckých účtů při zásahu do informačního systému, jeho výpadku či hrozbě zahlcení.",
+          "effectCz": "Jde o nová ustanovení a předchozí znění těchto pravidel není uvedeno. Zavádějí dočasné bezpečnostní omezení účtů při útoku, nefunkčnosti systému nebo jeho zahlcení, což dílčím způsobem zvyšuje možnosti ochrany informačního systému."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Změna upravuje bezpečnostní povinnosti poskytovatelů důvěryhodných služeb, zacházení s osobními údaji a reakce na bezpečnostní incidenty.",
+          "effectCz": "Dosavadní § 17 již postihoval mimo jiné nepřijetí technických a organizačních opatření, neoznámení narušení bezpečnosti a nedostatečná opatření proti padělání či odcizení dat. Návrh některé povinnosti navazuje na aktualizovaná pravidla EU a výslovně doplňuje postih za kombinování osobních údajů a za jejich nedostatečné oddělení; u dalších nových či přeformulovaných povinností balíček neumožňuje přesně určit, zda se oproti dřívějším požadavkům rozšiřují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá kvalifikovaným správcům elektronické identifikace součinnost při řešení narušení bezpečnosti digitálních peněženek.",
+          "effectCz": "Dosavadní § 16 již obsahoval povinnosti kvalifikovaných správců, ale dodané nové písmeno o) ukládá také součinnost při bezpečnostních incidentech evropských peněženek digitální identity. Jde o doplnění dílčího nástroje reakce na incidenty; předchozí znění celé povinnosti spolupracovat při těchto incidentech balíček neuvádí, takže přesný rozsah změny nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43290-3",
+          "relevant": false,
+          "reasonCz": "Text se týká policejní spolupráce s Mongolskem při výměně informací a potírání kyberkriminality, nikoli vybudování ochranné sítě pro státní systémy a osobní údaje občanů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": true,
+          "reasonCz": "Změna zavádí testovací identity a údaje výslovně pro ověřování bezpečnosti a funkčnosti základních registrů a dalších informačních systémů.",
+          "effectCz": "Předchozí znění § 4 a § 4a obsahovalo vymezení údajů v registrech a agendových systémech, nikoli pravidla pro testovací identity a údaje. Nový § 4b jejich vytváření a používání povoluje jen pro testování, vyžaduje označení jako testovacích a zakazuje jejich záměnu se skutečnými osobami či subjekty; tím přidává dílčí nástroj pro bezpečnější testování systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-6",
+          "relevant": false,
+          "reasonCz": "Dohoda popisuje mezinárodní spolupráci a výměnu zkušeností v oblasti kyberkriminality, ochrany kritické infrastruktury a osobních údajů, sama však nebuduje ochrannou síť ani nestanoví její konkrétní opatření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-153",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví ověřování identity, podmínky přístupu a auditní záznamy pro konkrétní informační systém veřejné správy.",
+          "effectCz": "Jde o novou vyhlášku, takže předchozí znění těchto pravidel není uvedeno. Stanoví přístup do systému elektronickou identifikací nebo registrací, ověřování identity a oprávnění a zaznamenávání přihlášení, změn dat a přidělování rolí; jde o konkrétní dílčí opatření k zabezpečení systému."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-178",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví ověřený přístup a individuální, nepřenosná oprávnění do portálu kritické infrastruktury.",
+          "effectCz": "Jde o novou vyhlášku bez předchozího znění v balíčku. Přístup do portálu váže na autentizaci, oprávnění přiděluje jednotlivým osobám a omezuje jejich rozsah na nezbytné úkoly; tím zavádí dílčí pravidla ochrany systému a informací kritické infrastruktury."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-197",
+          "relevant": true,
+          "reasonCz": "Vláda schválila financování programu, jehož výslovnou součástí jsou informatizace ministerstva obrany a informační a kybernetické síly armády.",
+          "effectCz": "Usnesení stanoví účast státního rozpočtu až do výše 81 504,139 mil. Kč na program realizovaný do 31. prosince 2034. Jde o financování širšího obranného programu, včetně informatizace a kybernetických sil; podporuje část slibu, ale samo nezajišťuje ochranu všech státních systémů ani osobních údajů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-916f270d37--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-523",
+        "psp-core-2025--vote-86842",
+        "psp-core-2025--amendment-text-360",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--amendment-text-551",
+        "psp-core-2025--vote-86921",
+        "psp-core-2025--amendment-text-454",
+        "psp-core-2025--vote-86935",
+        "psp-core-2025--amendment-text-520",
+        "psp-core-2025--vote-86947",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43264-14",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43308-approved-10",
+        "psp-core-2025--vote-88528",
+        "esbirka-regulations--law-change-sb-2026-153",
+        "esbirka-regulations--2026-153",
+        "esbirka-regulations--law-change-sb-2026-178",
+        "esbirka-regulations--2026-178",
+        "zvlady-resolutions--law-change-uv-2026-197",
+        "zvlady-resolutions--2026-197"
+      ],
+      "explanationCz": "Vláda a poslanci ANO podpořili několik dílčích opatření: zabezpečení přístupu k datům, testování systémů a ochranu portálu kritické infrastruktury; vláda také vyčlenila až 81,5 miliardy korun na širší obranný program zahrnující kybernetické síly. To posouvá část slibu, ale nedokládá vybudování celé slibované sítě. Poslanci ANO zároveň nepodpořili několik návrhů na navýšení prostředků pro kybernetickou obranu a NÚKIB. Znění schváleného státního rozpočtu v dodaných podkladech neukazuje konkrétní částky pro tyto oblasti, takže jeho účinek na slib nelze spolehlivě posoudit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodané výňatky ze státního rozpočtu uvádějí pouze odkazy na přílohy, nikoli konkrétní schválené částky pro kybernetickou obranu nebo NÚKIB; nelze proto určit, jak se výsledný rozpočet v těchto položkách změnil.",
+        "Poslanci ANO nepodpořili několik pozměňovacích návrhů, které navrhovaly dodatečné prostředky na kybernetickou obranu nebo NÚKIB. Tyto návrhy však samy nerozhodovaly o výsledném rozpočtu a jejich zamítnutí je nutné hodnotit spolu s pozdějšími rozhodnutími.",
+        "U nových ustanovení bez předchozího znění v balíčku nelze přesně určit, nakolik se ochrana oproti dřívější praxi změnila."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0fa7c161e20f252f016aea8c47e71887d190d4fa16049e53f8",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 53251,
+      "input_tokens_details": {
+        "cache_write_tokens": 46901,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 5945,
+      "output_tokens_details": {
+        "reasoning_tokens": 3159
+      },
+      "total_tokens": 59196
+    },
+    "output": {
+      "promiseId": "ano-2025-916f270d37",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení zavádějí pravidla pro řízený přístup k datům, zabezpečení, kontrolu a oznamování incidentů, tedy část ochrany dat.",
+          "effectCz": "Text zavádí podmínky pro bezpečné poskytování dat, povinnosti chránit je před opětovnou identifikací a oznamovat některá porušení ochrany; ukládá také kontrolu a sankce. Předchozí znění dotčených pravidel v balíčku chybí, takže nelze určit, nakolik jsou tyto povinnosti oproti dosavadnímu stavu přísnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet na rok 2026 může přímo financovat kybernetickou ochranu státu, ale dodaný výňatek neuvádí konkrétní příslušné výdaje.",
+          "effectCz": "Jde o nový státní rozpočet, nikoli změnu dřívějšího znění zákona. Dodaný text pouze odkazuje na přehled výdajů a ukazatelů v přílohách, ale jejich částky neobsahuje; nelze proto zjistit, jaké prostředky rozpočet na kybernetickou ochranu vyčleňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": true,
+          "reasonCz": "Ustanovení umožňují při neoprávněném zásahu nebo nefunkčnosti omezit či zakázat používání účtů v konkrétním státním informačním systému.",
+          "effectCz": "Návrh zavádí možnost dočasně omezit účty při bezpečnostním incidentu, výpadku či jeho bezprostřední hrozbě a povinnost omezit zneužívané funkce. Předchozí znění těchto pravidel balíček neobsahuje, takže nelze určit změnu oproti dosavadnímu stavu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Změny se týkají kryptografických postupů, bezpečnosti služeb vytvářejících důvěru, incidentů a oddělení osobních údajů.",
+          "effectCz": "Dosavadní znění již ukládalo poskytovatelům některá opatření k řízení bezpečnostních rizik a oznamování incidentů. Návrh doplňuje další pravidla pro kryptografické postupy a ochranu osobních údajů a mění přestupkové povinnosti; u nových ustanovení jde o rozšíření pravidel, ale u části změn nelze jejich přesný směr určit jen z dodaného kontextu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Návrh doplňuje povinnosti související s reakcí na narušení bezpečnosti digitálních identifikačních peněženek.",
+          "effectCz": "Dosavadní povinnosti kvalifikovaného správce zahrnovaly mimo jiné dostupnost systému a zneplatnění zneužitého identifikačního prostředku. Návrh přidává zprostředkování informací uživateli peněženky a součinnost při reakci na bezpečnostní narušení, takže povinnosti správce v této oblasti rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43290-3",
+          "relevant": false,
+          "reasonCz": "Ustanovení se týkají policejní spolupráce a zabezpečeného předávání údajů v jejím rámci, nikoli budování sítě chránící státní systémy a osobní údaje občanů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": true,
+          "reasonCz": "Nová pravidla umožňují testovat dostupnost, funkčnost, bezpečnost a interoperabilitu základních registrů a agendových informačních systémů pomocí testovacích identit a údajů.",
+          "effectCz": "Před změnou zákon upravoval obsah registrů a agendových systémů, ale nové § 4b výslovně zavádí testovací identity a údaje pro bezpečnostní a funkční testování a stanoví, že nejde o referenční údaje ani o podklad pro vznik či změnu práv a povinností. Rozšiřuje tak možnosti bezpečného testování, aniž by měnil obecnou povinnost zabezpečení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-6",
+          "relevant": false,
+          "reasonCz": "Text se věnuje mezinárodní spolupráci při potírání kyberkriminality a ochraně osobních údajů, ale nezavádí ani nefinancuje síť pro ochranu českých státních systémů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-153",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví přihlašování, ověřování rolí a vedení auditních záznamů v konkrétním státním informačním systému.",
+          "effectCz": "Vyhláška zavádí přístup do systému prostřednictvím elektronické identifikace nebo registrovaných údajů, ověřování identity a oprávnění a auditní záznamy o přihlášeních a změnách. Jako nové nařízení nemá v balíčku předchozí znění, s nímž by bylo možné změnu porovnat."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-178",
+          "relevant": true,
+          "reasonCz": "Vyhláška zabezpečuje portál kritické infrastruktury autentizací, individuálními přístupovými oprávněními a jejich omezením na nezbytný rozsah.",
+          "effectCz": "Vyhláška zavádí přístup po autentizaci, individuální a nepřenosná oprávnění a povinnost omezit přístup na nezbytný rozsah a aktualizovat okruh oprávněných osob. Jde o novou vyhlášku bez předchozího znění uvedeného v balíčku."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-197",
+          "relevant": true,
+          "reasonCz": "Usnesení vyčleňuje prostředky na program, jehož výslovnou součástí jsou informatizace a informační a kybernetické síly armády.",
+          "effectCz": "Vláda stanovila účast státního rozpočtu na programu do výše 81 504,139 mil. Kč do konce roku 2034. Program zahrnuje také informatizaci a informační a kybernetické síly, ale usnesení neuvádí, jaká část této částky připadne přímo na kybernetickou ochranu státních systémů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-916f270d37--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-523",
+        "psp-core-2025--vote-86842",
+        "psp-core-2025--amendment-text-360",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--amendment-text-551",
+        "psp-core-2025--vote-86921",
+        "psp-core-2025--amendment-text-454",
+        "psp-core-2025--vote-86935",
+        "psp-core-2025--amendment-text-520",
+        "psp-core-2025--vote-86947",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43264-14",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43308-approved-10",
+        "psp-core-2025--vote-88528",
+        "esbirka-regulations--law-change-sb-2026-153",
+        "esbirka-regulations--2026-153",
+        "esbirka-regulations--law-change-sb-2026-178",
+        "esbirka-regulations--2026-178",
+        "zvlady-resolutions--law-change-uv-2026-197",
+        "zvlady-resolutions--2026-197"
+      ],
+      "explanationCz": "Vláda předložila návrhy na posílení bezpečnostních povinností u elektronických služeb a peněženek a vláda také schválila financování programu zahrnujícího informační a kybernetické síly armády. Poslanci ANO podpořili zákon, který umožňuje bezpečnější testování státních informačních systémů, a vláda přijala vyhlášky upravující přístup a jeho kontrolu v konkrétních systémech včetně portálu kritické infrastruktury. Tyto kroky zajišťují dílčí prostředky ochrany, ale nedokládají vybudování celé slíbené sítě. Poslanci ANO zároveň nepodpořili několik návrhů na zvýšení prostředků pro kybernetickou obranu a Národní úřad pro kybernetickou a informační bezpečnost; navíc z dodaného výňatku státního rozpočtu nelze zjistit konečné částky pro tyto oblasti.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný výňatek státního rozpočtu neuvádí částky pro kybernetickou bezpečnost; hlasování pro rozpočet proto samo o sobě neprokazuje, kolik prostředků tyto oblasti získaly.",
+        "Usnesení o programu armády stanovuje celkový strop 81 504,139 mil. Kč, ale nerozepisuje část určenou přímo na kybernetickou ochranu.",
+        "Některá ustanovení v dodaných zákonných výňatcích nemají v balíčku předchozí znění, takže nelze přesně porovnat jejich změnu oproti dřívějším pravidlům.",
+        "Poslanci ANO nepodpořili pozměňovací návrhy na posílení kybernetické obrany a rozpočtu Národního úřadu pro kybernetickou a informační bezpečnost; tyto návrhy však samy o sobě nedokládají, jaké částky byly nakonec schváleny."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0783b56f81eebfa7016aea8d1ebe3c87d1bfa8748eddd241ef",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 53251,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 53248
+      },
+      "output_tokens": 6889,
+      "output_tokens_details": {
+        "reasoning_tokens": 4053
+      },
+      "total_tokens": 60140
+    },
+    "output": {
+      "promiseId": "ano-2025-916f270d37",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení o řízeném přístupu k datům zavádějí požadavky na jejich zabezpečení a ochranu osobních údajů, tedy řeší část slibu.",
+          "effectCz": "Jde o novou právní úpravu a předchozí znění těchto pravidel balíček neuvádí, takže změnu vůči dosavadnímu stavu nelze přesně určit. Dodané znění omezuje přístup k datům na nezbytný rozsah a stanoví zabezpečení, kontroly, oznamování porušení a sankce; jde o dílčí ochranná pravidla, nikoli o vybudování celé slibované sítě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet obsahuje výdaje kapitol v přílohách, které návrhy pozměňovacích návrhů výslovně mění i ve vztahu ke kybernetické obraně a NÚKIB.",
+          "effectCz": "Dodané znění rozpočtu pouze odkazuje na přehledy výdajů a ukazatelů v přílohách; konkrétní částky pro kybernetickou bezpečnost ani jejich předchozí výši neobsahuje. Směr účinku schváleného rozpočtu proto z předložených ustanovení nelze určit; pozměňovací návrhy samostatně navrhovaly navýšení prostředků na kybernetickou obranu a NÚKIB."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje omezit nebo zakázat používání cizineckých účtů při zásahu do informačního systému, jeho výpadku či hrozbě zahlcení.",
+          "effectCz": "Jde o nová ustanovení a předchozí znění těchto pravidel není uvedeno. Zavádějí dočasné bezpečnostní omezení účtů při útoku, nefunkčnosti systému nebo jeho zahlcení, což dílčím způsobem zvyšuje možnosti ochrany informačního systému."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Změna upravuje bezpečnostní povinnosti poskytovatelů důvěryhodných služeb, zacházení s osobními údaji a reakce na bezpečnostní incidenty.",
+          "effectCz": "Dosavadní § 17 již postihoval mimo jiné nepřijetí technických a organizačních opatření, neoznámení narušení bezpečnosti a nedostatečná opatření proti padělání či odcizení dat. Návrh některé povinnosti navazuje na aktualizovaná pravidla EU a výslovně doplňuje postih za kombinování osobních údajů a za jejich nedostatečné oddělení; u dalších nových či přeformulovaných povinností balíček neumožňuje přesně určit, zda se oproti dřívějším požadavkům rozšiřují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá kvalifikovaným správcům elektronické identifikace součinnost při řešení narušení bezpečnosti digitálních peněženek.",
+          "effectCz": "Dosavadní § 16 již obsahoval povinnosti kvalifikovaných správců, ale dodané nové písmeno o) ukládá také součinnost při bezpečnostních incidentech evropských peněženek digitální identity. Jde o doplnění dílčího nástroje reakce na incidenty; předchozí znění celé povinnosti spolupracovat při těchto incidentech balíček neuvádí, takže přesný rozsah změny nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43290-3",
+          "relevant": false,
+          "reasonCz": "Text se týká policejní spolupráce s Mongolskem při výměně informací a potírání kyberkriminality, nikoli vybudování ochranné sítě pro státní systémy a osobní údaje občanů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": true,
+          "reasonCz": "Změna zavádí testovací identity a údaje výslovně pro ověřování bezpečnosti a funkčnosti základních registrů a dalších informačních systémů.",
+          "effectCz": "Předchozí znění § 4 a § 4a obsahovalo vymezení údajů v registrech a agendových systémech, nikoli pravidla pro testovací identity a údaje. Nový § 4b jejich vytváření a používání povoluje jen pro testování, vyžaduje označení jako testovacích a zakazuje jejich záměnu se skutečnými osobami či subjekty; tím přidává dílčí nástroj pro bezpečnější testování systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-6",
+          "relevant": false,
+          "reasonCz": "Dohoda popisuje mezinárodní spolupráci a výměnu zkušeností v oblasti kyberkriminality, ochrany kritické infrastruktury a osobních údajů, sama však nebuduje ochrannou síť ani nestanoví její konkrétní opatření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-153",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví ověřování identity, podmínky přístupu a auditní záznamy pro konkrétní informační systém veřejné správy.",
+          "effectCz": "Jde o novou vyhlášku, takže předchozí znění těchto pravidel není uvedeno. Stanoví přístup do systému elektronickou identifikací nebo registrací, ověřování identity a oprávnění a zaznamenávání přihlášení, změn dat a přidělování rolí; jde o konkrétní dílčí opatření k zabezpečení systému."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-178",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví ověřený přístup a individuální, nepřenosná oprávnění do portálu kritické infrastruktury.",
+          "effectCz": "Jde o novou vyhlášku bez předchozího znění v balíčku. Přístup do portálu váže na autentizaci, oprávnění přiděluje jednotlivým osobám a omezuje jejich rozsah na nezbytné úkoly; tím zavádí dílčí pravidla ochrany systému a informací kritické infrastruktury."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-197",
+          "relevant": true,
+          "reasonCz": "Vláda schválila financování programu, jehož výslovnou součástí jsou informatizace ministerstva obrany a informační a kybernetické síly armády.",
+          "effectCz": "Usnesení stanoví účast státního rozpočtu až do výše 81 504,139 mil. Kč na program realizovaný do 31. prosince 2034. Jde o financování širšího obranného programu, včetně informatizace a kybernetických sil; podporuje část slibu, ale samo nezajišťuje ochranu všech státních systémů ani osobních údajů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-916f270d37--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-523",
+        "psp-core-2025--vote-86842",
+        "psp-core-2025--amendment-text-360",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--amendment-text-551",
+        "psp-core-2025--vote-86921",
+        "psp-core-2025--amendment-text-454",
+        "psp-core-2025--vote-86935",
+        "psp-core-2025--amendment-text-520",
+        "psp-core-2025--vote-86947",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43264-14",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43308-approved-10",
+        "psp-core-2025--vote-88528",
+        "esbirka-regulations--law-change-sb-2026-153",
+        "esbirka-regulations--2026-153",
+        "esbirka-regulations--law-change-sb-2026-178",
+        "esbirka-regulations--2026-178",
+        "zvlady-resolutions--law-change-uv-2026-197",
+        "zvlady-resolutions--2026-197"
+      ],
+      "explanationCz": "Vláda a poslanci ANO podpořili několik dílčích opatření: zabezpečení přístupu k datům, testování systémů a ochranu portálu kritické infrastruktury; vláda také vyčlenila až 81,5 miliardy korun na širší obranný program zahrnující kybernetické síly. To posouvá část slibu, ale nedokládá vybudování celé slibované sítě. Poslanci ANO zároveň nepodpořili několik návrhů na navýšení prostředků pro kybernetickou obranu a NÚKIB. Znění schváleného státního rozpočtu v dodaných podkladech neukazuje konkrétní částky pro tyto oblasti, takže jeho účinek na slib nelze spolehlivě posoudit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodané výňatky ze státního rozpočtu uvádějí pouze odkazy na přílohy, nikoli konkrétní schválené částky pro kybernetickou obranu nebo NÚKIB; nelze proto určit, jak se výsledný rozpočet v těchto položkách změnil.",
+        "Poslanci ANO nepodpořili několik pozměňovacích návrhů, které navrhovaly dodatečné prostředky na kybernetickou obranu nebo NÚKIB. Tyto návrhy však samy nerozhodovaly o výsledném rozpočtu a jejich zamítnutí je nutné hodnotit spolu s pozdějšími rozhodnutími.",
+        "U nových ustanovení bez předchozího znění v balíčku nelze přesně určit, nakolik se ochrana oproti dřívější praxi změnila."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "moving-towards",
+    "selectedReview": "assessor-a"
+  }
+}

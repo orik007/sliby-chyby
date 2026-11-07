@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-42-00-690Z--5f4c310a4b18",
+  "evaluatedAt": "2026-10-02T05:42:00.690Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-3698c211b8/5f4c310a4b187d7e5734da69dcac6cc9975bd758588f26257f93b285aa025324.json",
+  "packageHash": "5f4c310a4b187d7e5734da69dcac6cc9975bd758588f26257f93b285aa025324",
+  "assessmentContentHash": "36d0ecefd3b00a342d23657c66cf74318a20f1242695d7fe50546f6ac8bf7945",
+  "assessmentFingerprint": "192938e17f91aed9a864a01a3c303e8fb22d49d595c40997ecbc8e4876a7fb4c",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-3698c211b8",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-3698c211b8",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": false,
+          "reasonCz": "Návrh sice výslovně zmiňuje zvýšení starobního důchodu podle ustanovení vztahujících se k výchově dítěte, mění však pouze pravidla pro oznamování zvýšení, nikoli nárok na něj ani jeho výši."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-3",
+          "relevant": false,
+          "reasonCz": "Text upravuje zejména správu sociálního zabezpečení v souvislosti s nelegální prací a odvody, nikoli důchody seniorů vychovávajících děti."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-3698c211b8--source",
+        "psp-core-2025--law-change-43392-2",
+        "psp-core-2025--print-step-211955",
+        "psp-core-2025--law-change-43422-3",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "SPD slibuje vyšší důchody seniorům, kteří řádně vychovali děti. Vláda, na jejímž návrhu se SPD podílela, předložila návrh změn důchodových předpisů, ale posuzovaná část pouze upravuje oznamování některých zvýšení důchodů; jejich výši ani nárok na ně nemění. Další předložený návrh mění pravidla správy sociálního zabezpečení v jiných oblastech a tento slib neřeší. Z dodaných podkladů proto nelze doložit podstatný posun ke slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady obsahují pouze uvedené části dvou vládních návrhů a nedokládají změnu, která by seniorům za výchovu dětí skutečně zvýšila důchod; nelze z nich posoudit případné další kroky mimo tyto texty."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-3698c211b8",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": false,
+          "reasonCz": "Tato část návrhu upravuje informování o zvýšení důchodů, nikoli jejich výši ani nárok na vyšší důchod za výchovu dětí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-3",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla sociálního zabezpečení zejména v souvislosti s nelegální prací a pojistným, nikoli důchody za výchovu dětí."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-3698c211b8--source",
+        "psp-core-2025--law-change-43392-2",
+        "psp-core-2025--law-change-43422-3"
+      ],
+      "explanationCz": "SPD slíbila vyšší důchody seniorům, kteří řádně vychovali děti. Posuzovaná část vládního návrhu důchodového zákona upravuje oznamování zvýšení důchodů, ale sama jejich výši ani nárok za výchovu dětí nemění. Druhá posuzovaná část se týká hlavně pravidel pro nelegální práci a pojistné. V podkladech proto není doložen podstatný krok k vyšším důchodům za výchovu dětí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují případnou jinou část návrhu důchodového zákona, která by mohla měnit výši důchodu nebo nárok na zvýšení za výchovu dětí."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0352a7fcc609af89016abf440193ec87d198b222bad71dec98",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 29504,
+      "input_tokens_details": {
+        "cache_write_tokens": 26180,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 3250,
+      "output_tokens_details": {
+        "reasoning_tokens": 2753
+      },
+      "total_tokens": 32754
+    },
+    "output": {
+      "promiseId": "spd-2025-3698c211b8",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": false,
+          "reasonCz": "Návrh sice výslovně zmiňuje zvýšení starobního důchodu podle ustanovení vztahujících se k výchově dítěte, mění však pouze pravidla pro oznamování zvýšení, nikoli nárok na něj ani jeho výši."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-3",
+          "relevant": false,
+          "reasonCz": "Text upravuje zejména správu sociálního zabezpečení v souvislosti s nelegální prací a odvody, nikoli důchody seniorů vychovávajících děti."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-3698c211b8--source",
+        "psp-core-2025--law-change-43392-2",
+        "psp-core-2025--print-step-211955",
+        "psp-core-2025--law-change-43422-3",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "SPD slibuje vyšší důchody seniorům, kteří řádně vychovali děti. Vláda, na jejímž návrhu se SPD podílela, předložila návrh změn důchodových předpisů, ale posuzovaná část pouze upravuje oznamování některých zvýšení důchodů; jejich výši ani nárok na ně nemění. Další předložený návrh mění pravidla správy sociálního zabezpečení v jiných oblastech a tento slib neřeší. Z dodaných podkladů proto nelze doložit podstatný posun ke slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady obsahují pouze uvedené části dvou vládních návrhů a nedokládají změnu, která by seniorům za výchovu dětí skutečně zvýšila důchod; nelze z nich posoudit případné další kroky mimo tyto texty."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0951d32ac9d5e20f016abf4419ecb087d1a0a897e042ec2fc8",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 29504,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 29501
+      },
+      "output_tokens": 1999,
+      "output_tokens_details": {
+        "reasoning_tokens": 1538
+      },
+      "total_tokens": 31503
+    },
+    "output": {
+      "promiseId": "spd-2025-3698c211b8",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": false,
+          "reasonCz": "Tato část návrhu upravuje informování o zvýšení důchodů, nikoli jejich výši ani nárok na vyšší důchod za výchovu dětí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-3",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla sociálního zabezpečení zejména v souvislosti s nelegální prací a pojistným, nikoli důchody za výchovu dětí."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-3698c211b8--source",
+        "psp-core-2025--law-change-43392-2",
+        "psp-core-2025--law-change-43422-3"
+      ],
+      "explanationCz": "SPD slíbila vyšší důchody seniorům, kteří řádně vychovali děti. Posuzovaná část vládního návrhu důchodového zákona upravuje oznamování zvýšení důchodů, ale sama jejich výši ani nárok za výchovu dětí nemění. Druhá posuzovaná část se týká hlavně pravidel pro nelegální práci a pojistné. V podkladech proto není doložen podstatný krok k vyšším důchodům za výchovu dětí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují případnou jinou část návrhu důchodového zákona, která by mohla měnit výši důchodu nebo nárok na zvýšení za výchovu dětí."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

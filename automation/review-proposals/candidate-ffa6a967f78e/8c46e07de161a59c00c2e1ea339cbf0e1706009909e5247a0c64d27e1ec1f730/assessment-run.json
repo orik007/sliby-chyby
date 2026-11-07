@@ -1,0 +1,381 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-35-32-649Z--a8ff2da5f010",
+  "evaluatedAt": "2026-10-02T05:35:32.649Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-ffa6a967f78e/a8ff2da5f01060479c00dc5f7af968ac6631a87f09e727f35d22dc17e8ca52e1.json",
+  "packageHash": "a8ff2da5f01060479c00dc5f7af968ac6631a87f09e727f35d22dc17e8ca52e1",
+  "assessmentContentHash": "9961a7ed16dad7be622eced88d678a35936dca0c2d274460d26b8d632dff4f3e",
+  "assessmentFingerprint": "8c46e07de161a59c00c2e1ea339cbf0e1706009909e5247a0c64d27e1ec1f730",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-ffa6a967f78e",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0c595dd107a10303016abf4261a5f487d1840205704cd51f96",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 55541,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 55538
+            },
+            "output_tokens": 6882,
+            "output_tokens_details": {
+              "reasoning_tokens": 5696
+            },
+            "total_tokens": 62423
+          },
+          "output": {
+            "promiseId": "candidate-ffa6a967f78e",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43215-1",
+                "relevant": false,
+                "reasonCz": "Dodaná verze obsahuje jen odkaz na PDF, nikoli text ustanovení měnících podporu penzijního spoření; samotné tematické zařazení takovou souvislost nedokládá."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43230-1",
+                "relevant": true,
+                "reasonCz": "Návrh přiznává některým účastníkům penzijního spoření jednorázové vyrovnání a v úzce vymezených případech obnovuje státní příspěvek, čímž rozšiřuje finanční podporu části účastníků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43230-2",
+                "relevant": true,
+                "reasonCz": "Návrh mění daňové zacházení s některými plněními z penzijního spoření, a dotýká se tak daňové podpory, byť jen u zvláštních jednorázových případů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43318-1",
+                "relevant": false,
+                "reasonCz": "Dodaná verze obsahuje jen odkaz na PDF, nikoli ustanovení měnící podporu penzijního spoření; z dostupného textu proto nelze doložit věcnou souvislost se slibem."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43407-1",
+                "relevant": true,
+                "reasonCz": "Návrh mění státní příspěvky podle výše měsíční úložky a věku a zvyšuje podporu dětem a části mladších účastníků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43407-2",
+                "relevant": true,
+                "reasonCz": "Návrh nově spojuje částečné odbytné s vrácením daňové podpory, což omezuje daňové zvýhodnění penzijního spoření v konkrétní situaci."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43407-4",
+                "relevant": false,
+                "reasonCz": "Text ruší řadu dřívějších předpisů, ale neuvádí konkrétní změnu finanční či daňové podpory měsíčních úložek."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-ffa6a967f78e--source",
+              "psp-core-2025--law-change-43230-1",
+              "psp-core-2025--law-change-43230-2",
+              "psp-core-2025--law-change-43407-1",
+              "psp-core-2025--law-change-43407-2",
+              "psp-core-2025--print-step-210874",
+              "psp-core-2025--vote-87498",
+              "psp-core-2025--print-step-212048"
+            ],
+            "explanationCz": "Poslanci SPD hlasovali pro návrh zákona předložený jako sněmovní tisk 119, tedy návrh projednávaný Poslaneckou sněmovnou, který rozšířil jednorázové vyrovnání a související daňové zacházení pro některé účastníky. Jde ale o úzce vymezené případy, nikoli o plošné zvýšení podpory při každé měsíční úložce. Vláda, v níž SPD působí, později předložila sněmovní tisk 285, který by zvýšil státní příspěvky dětem a části mladších účastníků, ale u částečného odbytného by zároveň nově vyžadoval vrácení daňové podpory. Doložené rozhodnutí tak představuje dílčí posun, nikoli splnění celého slibu.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Vládní návrh předložený jako sněmovní tisk 285 je zatím doložen jen jako předložený, nikoli přijatý; jeho změna týkající se částečného odbytného je navíc v napětí se slibem vyšší daňové podpory.",
+              "U návrhů smluv o zamezení dvojímu zdanění je v balíčku uvedeno, že plný text je pouze v PDF, takže jejich případný dopad nelze ověřit; dostupné údaje však nedokládají změnu podpory pravidelných úložek."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-ffa6a967f78e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": false,
+          "reasonCz": "Návrh smlouvy o zamezení dvojímu zdanění mezi Českem a Keňou neupravuje podporu penzijního spoření ani měsíční příspěvky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43230-1",
+          "relevant": false,
+          "reasonCz": "Tato část řeší jednorázové vyrovnání pro vymezené účastníky po zániku spoření, nikoli zvýšení podpory při pravidelných měsíčních úložkách."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43230-2",
+          "relevant": false,
+          "reasonCz": "Daňová ustanovení se týkají jednorázového vyrovnání a navracení daňové podpory, nikoli zvýšení daňové podpory pro měsíční úložky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Návrh smlouvy o zamezení dvojímu zdanění mezi Českem a Maltou neupravuje podporu penzijního spoření ani měsíční příspěvky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění výši státního příspěvku podle věku a u dětí i jeho nárok od nižší měsíční úložky, takže přímo rozšiřuje finanční podporu části účastníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-2",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje případy, kdy se vrací daňová podpora, o částečné odbytné, a tím mění daňové zacházení s penzijním spořením."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-4",
+          "relevant": false,
+          "reasonCz": "Tato část pouze ruší dřívější předpisy a z dodaného textu nelze doložit konkrétní změnu podpory při měsíční úložce ani jejího daňového zvýhodnění."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-ffa6a967f78e--source",
+        "psp-core-2025--law-change-43407-1",
+        "psp-core-2025--law-change-43407-2",
+        "psp-core-2025--print-step-212048"
+      ],
+      "explanationCz": "Vláda předložila návrh novely zákona o doplňkovém penzijním spoření, který zvyšuje státní příspěvek dětem a účastníkům ve věku 18 až 29 let při některých měsíčních úložkách. U lidí od 30 let se výše příspěvku nemění a návrh zároveň rozšiřuje případy, kdy se při částečném odbytném vrací daňová podpora. Návrh tak posouvá finanční podporu části účastníků, ale nezvyšuje podporu pro všechny měsíční úložky ani nepřináší obecné zvýšení daňové podpory. Jde o vládní návrh, nikoli o schválenou změnu zákona.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh rozšiřuje podporu jen pro některé věkové skupiny a výše úložek; současně nově zahrnuje částečné odbytné mezi případy, kdy se vrací daňová podpora. Jeho konečné znění zatím není doloženo."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-ffa6a967f78e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": false,
+          "reasonCz": "Návrh smlouvy o zamezení dvojímu zdanění s Keňou nemění podporu penzijního spoření ani příspěvky podle měsíční úložky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43230-1",
+          "relevant": false,
+          "reasonCz": "Ustanovení rozšiřuje nárok na jednorázové vyrovnání a vrací státní příspěvek vybraným bývalým účastníkům, nikoli podporu při měsíčním spoření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43230-2",
+          "relevant": false,
+          "reasonCz": "Daňové změny upravují zdanění zvláštního jednorázového vyrovnání, nikoli daňovou podporu při měsíčním spoření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Návrh smlouvy o zamezení dvojímu zdanění s Maltou nemění podporu penzijního spoření ani příspěvky podle měsíční úložky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění státní příspěvky v závislosti na výši měsíčního příspěvku a věku účastníka, takže přímo zvyšuje finanční podporu části střadatelů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-2",
+          "relevant": true,
+          "reasonCz": "Návrh zařazuje částečné odbytné mezi případy, které mohou vést k vrácení daňové podpory, a tím mění daňové podmínky penzijního spoření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-4",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení se týká starších zákonů a jejich změn, ale samo nemění výši podpory podle měsíční úložky."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-ffa6a967f78e--source",
+        "psp-core-2025--law-change-43407-1",
+        "psp-core-2025--law-change-43407-2",
+        "psp-core-2025--print-step-212048"
+      ],
+      "explanationCz": "Vláda, v níž SPD působí, předložila návrh, který zvyšuje státní příspěvky mladším účastníkům penzijního spoření při některých měsíčních úložkách. Pro lidi od 30 let návrh sazby nezvyšuje a u částečného předčasného výběru může naopak vést k vrácení daňové podpory. Jde tedy o dílčí posun směrem ke slibu, nikoli o jeho úplné splnění; doloženo je předložení návrhu, ne jeho schválení.",
+      "confidence": "high",
+      "uncertainties": [
+        "Daňová změna se týká částečného odbytného, nikoli běžných měsíčních příspěvků; jde proto o omezený protichůdný dopad na daňovou část slibu. Předložený návrh podle dodaných podkladů ještě nebyl schválen."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0102f6afe4308606016abf423fde0c87d1a721c01afd5f2454",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 55541,
+      "input_tokens_details": {
+        "cache_write_tokens": 52217,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 5247,
+      "output_tokens_details": {
+        "reasoning_tokens": 4241
+      },
+      "total_tokens": 60788
+    },
+    "output": {
+      "promiseId": "candidate-ffa6a967f78e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": false,
+          "reasonCz": "Návrh smlouvy o zamezení dvojímu zdanění mezi Českem a Keňou neupravuje podporu penzijního spoření ani měsíční příspěvky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43230-1",
+          "relevant": false,
+          "reasonCz": "Tato část řeší jednorázové vyrovnání pro vymezené účastníky po zániku spoření, nikoli zvýšení podpory při pravidelných měsíčních úložkách."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43230-2",
+          "relevant": false,
+          "reasonCz": "Daňová ustanovení se týkají jednorázového vyrovnání a navracení daňové podpory, nikoli zvýšení daňové podpory pro měsíční úložky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Návrh smlouvy o zamezení dvojímu zdanění mezi Českem a Maltou neupravuje podporu penzijního spoření ani měsíční příspěvky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění výši státního příspěvku podle věku a u dětí i jeho nárok od nižší měsíční úložky, takže přímo rozšiřuje finanční podporu části účastníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-2",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje případy, kdy se vrací daňová podpora, o částečné odbytné, a tím mění daňové zacházení s penzijním spořením."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-4",
+          "relevant": false,
+          "reasonCz": "Tato část pouze ruší dřívější předpisy a z dodaného textu nelze doložit konkrétní změnu podpory při měsíční úložce ani jejího daňového zvýhodnění."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-ffa6a967f78e--source",
+        "psp-core-2025--law-change-43407-1",
+        "psp-core-2025--law-change-43407-2",
+        "psp-core-2025--print-step-212048"
+      ],
+      "explanationCz": "Vláda předložila návrh novely zákona o doplňkovém penzijním spoření, který zvyšuje státní příspěvek dětem a účastníkům ve věku 18 až 29 let při některých měsíčních úložkách. U lidí od 30 let se výše příspěvku nemění a návrh zároveň rozšiřuje případy, kdy se při částečném odbytném vrací daňová podpora. Návrh tak posouvá finanční podporu části účastníků, ale nezvyšuje podporu pro všechny měsíční úložky ani nepřináší obecné zvýšení daňové podpory. Jde o vládní návrh, nikoli o schválenou změnu zákona.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh rozšiřuje podporu jen pro některé věkové skupiny a výše úložek; současně nově zahrnuje částečné odbytné mezi případy, kdy se vrací daňová podpora. Jeho konečné znění zatím není doloženo."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_053d1a229408ae46016abf428cb58487d1b1857eb5c12ea660",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 55541,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 55538
+      },
+      "output_tokens": 3947,
+      "output_tokens_details": {
+        "reasoning_tokens": 3106
+      },
+      "total_tokens": 59488
+    },
+    "output": {
+      "promiseId": "candidate-ffa6a967f78e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": false,
+          "reasonCz": "Návrh smlouvy o zamezení dvojímu zdanění s Keňou nemění podporu penzijního spoření ani příspěvky podle měsíční úložky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43230-1",
+          "relevant": false,
+          "reasonCz": "Ustanovení rozšiřuje nárok na jednorázové vyrovnání a vrací státní příspěvek vybraným bývalým účastníkům, nikoli podporu při měsíčním spoření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43230-2",
+          "relevant": false,
+          "reasonCz": "Daňové změny upravují zdanění zvláštního jednorázového vyrovnání, nikoli daňovou podporu při měsíčním spoření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Návrh smlouvy o zamezení dvojímu zdanění s Maltou nemění podporu penzijního spoření ani příspěvky podle měsíční úložky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění státní příspěvky v závislosti na výši měsíčního příspěvku a věku účastníka, takže přímo zvyšuje finanční podporu části střadatelů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-2",
+          "relevant": true,
+          "reasonCz": "Návrh zařazuje částečné odbytné mezi případy, které mohou vést k vrácení daňové podpory, a tím mění daňové podmínky penzijního spoření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-4",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení se týká starších zákonů a jejich změn, ale samo nemění výši podpory podle měsíční úložky."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-ffa6a967f78e--source",
+        "psp-core-2025--law-change-43407-1",
+        "psp-core-2025--law-change-43407-2",
+        "psp-core-2025--print-step-212048"
+      ],
+      "explanationCz": "Vláda, v níž SPD působí, předložila návrh, který zvyšuje státní příspěvky mladším účastníkům penzijního spoření při některých měsíčních úložkách. Pro lidi od 30 let návrh sazby nezvyšuje a u částečného předčasného výběru může naopak vést k vrácení daňové podpory. Jde tedy o dílčí posun směrem ke slibu, nikoli o jeho úplné splnění; doloženo je předložení návrhu, ne jeho schválení.",
+      "confidence": "high",
+      "uncertainties": [
+        "Daňová změna se týká částečného odbytného, nikoli běžných měsíčních příspěvků; jde proto o omezený protichůdný dopad na daňovou část slibu. Předložený návrh podle dodaných podkladů ještě nebyl schválen."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

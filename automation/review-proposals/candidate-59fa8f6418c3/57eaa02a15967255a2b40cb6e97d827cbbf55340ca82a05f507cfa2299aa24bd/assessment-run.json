@@ -1,0 +1,861 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T20-12-33-301Z--94809ef6c283",
+  "evaluatedAt": "2026-10-06T20:12:33.301Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-59fa8f6418c3/94809ef6c2832a83ec4af3c984aa95bed5cca6936a9d9c3b8c153112f12e9c81.json",
+  "packageHash": "94809ef6c2832a83ec4af3c984aa95bed5cca6936a9d9c3b8c153112f12e9c81",
+  "assessmentContentHash": "d50ef84ae8774e1cb7762608c3e10b9f7e77901d3cdd84dd6688edd757dc5e3e",
+  "assessmentFingerprint": "57eaa02a15967255a2b40cb6e97d827cbbf55340ca82a05f507cfa2299aa24bd",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-59fa8f6418c3",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": "Assessment omits the relevance verdict for law change psp-core-2025--law-change-43264-19",
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment gives a law change more than one relevance verdict",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_07e238dc54ba43a9016ac55310343c87d283f6dc9d1cacd5a7",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 544994,
+            "input_tokens_details": {
+              "cache_write_tokens": 541024,
+              "cached_tokens": 3967
+            },
+            "output_tokens": 10982,
+            "output_tokens_details": {
+              "reasoning_tokens": 6539
+            },
+            "total_tokens": 555976
+          },
+          "output": {
+            "promiseId": "candidate-59fa8f6418c3",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43161-1",
+                "relevant": true,
+                "reasonCz": "Nový zákon výslovně zavádí společné katalogy dat a popis datových rozhraní pro systémy veřejné správy, což může přímo podpořit jejich sdílení a spolupráci.",
+                "effectCz": "Jde o nový zákon, takže balíček neuvádí předchozí znění, s nímž by šlo pravidla porovnat. Zavádí správcům povinnosti popisovat data a rozhraní a vytvářet místní katalogy; zřizuje národní katalog a datový slovník veřejné správy. To podporuje sdílení dat, ale nezavádí centrální řízení vývoje systémů ani povinnost systémy spojovat."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Schválené znění výslovně umožňuje Úřadu sloučit více informačních systémů veřejné správy do jednoho společného systému, což je konkrétní nástroj pro centralizaci.",
+                "effectCz": "Ve znění, které Sněmovna schválila, se nově stanoví, že Úřad může informační systémy sdružit a vést více systémů jako jeden společný systém veřejné správy. Balíček neuvádí dřívější znění této konkrétní pravomoci; jde o nové oprávnění, nikoli povinnost. Rozšiřuje tedy možnost systém centralizovat, ale samo nezaručuje, že k jejich sloučení či centralizaci vývoje dojde."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+                "relevant": true,
+                "reasonCz": "Změna ukládá předávat strukturované informační kontejnery o stavbách do elektronické evidence, což se přímo týká sdílení digitálních údajů mezi veřejnými systémy.",
+                "effectCz": "Před změnou zákon už počítal s pořízením informačních kontejnerů pro povolení a kolaudaci stavby; schválená změna nově výslovně ukládá vložit je do evidence elektronických dokumentací nejpozději při podání příslušné žádosti. Povinnost jejich předání a dostupnosti se tím zpřesňuje a posiluje, což může podpořit standardizované sdílení dat, ale necentralizuje samo o sobě vývoj všech veřejných systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+                "relevant": true,
+                "reasonCz": "Upravený stavební zákon rozšiřuje využití elektronické evidence stavebních informací a datového standardu, což může být dílčím příspěvkem k interoperabilitě.",
+                "effectCz": "Dosavadní úprava předpokládala pořizování informačních kontejnerů pro vymezené fáze stavby. Nová povinnost jejich vložení do evidence elektronických dokumentací zavádí konkrétní návaznost na společnou elektronickou evidenci; je tedy přísnější v povinnosti údaje předávat. Nezavádí však centrální řízení vývoje systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-12",
+                "relevant": false,
+                "reasonCz": "Změna odstraňuje ustanovení o vedení poradního orgánu vlády, nikoli pravidla pro centrální řízení vývoje či propojování informačních systémů veřejné správy.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-23",
+                "relevant": false,
+                "reasonCz": "Změna upravuje jmenování vedení Digitální a informační agentury a související služební pravidla, nikoli centrální řízení vývoje nebo interoperabilitu systémů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-24",
+                "relevant": false,
+                "reasonCz": "Změna upravuje správu výzkumných agend a informačního systému výzkumu, ale nedokládá centrální řízení vývoje ani propojení veřejných informačních systémů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+                "relevant": false,
+                "reasonCz": "Změna přesouvá správu informačního systému výzkumu na ministerstvo, ale neupravuje slibované centrální řízení jeho vývoje ani spolupráci mezi veřejnými systémy.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-14",
+                "relevant": false,
+                "reasonCz": "Tato část upravuje procesní pravidla pro řízení s cizinci; samotný text této části nezavádí pravidla pro centrální řízení vývoje veřejných informačních systémů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-17",
+                "relevant": true,
+                "reasonCz": "Nový cizinecký zákon vytváří integrovaný informační systém pro digitální služby a úkony vůči ministerstvu, což je dílčí příklad sjednocení veřejné agendy do jednoho systému.",
+                "effectCz": "Jde o novou právní úpravu bez předchozího znění uvedeného v balíčku. Zřizuje integrovaný cizinecký agendový systém, určuje ministerstvo jeho správcem a stanoví jeho využití pro digitální služby, podání, evidenci dokumentů a cizinecké účty. Jde o dílčí centralizaci v jedné agendě, nikoli o společné řízení vývoje všech veřejných systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-19",
+                "relevant": false,
+                "reasonCz": "Tato část obsahuje především přechodná a zrušovací ustanovení k cizineckému zákonu; neupravuje centrální řízení vývoje systémů jako takové.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-1",
+                "relevant": true,
+                "reasonCz": "Návrh umožňuje prokazovat údaje přes digitální peněženku a ukládá veřejným orgánům umožnit takové ověření, což může podpořit propojené digitální služby.",
+                "effectCz": "Předchozí § 12 upravoval ověřování platnosti zaručených elektronických podpisů a pečetí. Návrh nově upravuje prokazování skutečností prostřednictvím digitální peněženky a povinnost veřejných orgánů takové prokázání umožnit; tím rozšiřuje možnosti digitálního předávání a ověřování údajů. Nezavádí však centrální řízení vývoje informačních systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-2",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje elektronické ověřování totožnosti o evropskou digitální peněženku a vyžaduje, aby veřejné orgány tuto možnost umožnily.",
+                "effectCz": "Před změnou bylo možné prokázat totožnost elektronicky pouze prostřednictvím kvalifikovaného systému. Návrh přidává možnost využít digitální peněženku a ukládá osobám s povinností ověřit totožnost, aby tuto možnost umožnily. Jde o rozšíření interoperability a sdílení ověřených údajů, nikoli o centralizaci vývoje systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-2",
+                "relevant": true,
+                "reasonCz": "Vytvoření právního rámce pro používání digitální peněženky napříč veřejnými službami přímo podporuje jejich vzájemné ověřování údajů.",
+                "effectCz": "Dosavadní pravidlo dovolovalo elektronické prokazování totožnosti jen přes kvalifikovaný systém; nově má být možné využít také peněženku a veřejné orgány mají umožnit některé způsoby jejího použití. Rozsah dostupných prostředků pro ověřování se tedy rozšiřuje, což je dílčí krok k interoperabilitě, nikoli příkaz k jednotnému vývoji systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-1",
+                "relevant": true,
+                "reasonCz": "Návrh doplňuje společná pravidla pro vydávání a ověřování digitálních potvrzení, která mohou umožnit sdílení údajů mezi různými aplikacemi veřejné správy.",
+                "effectCz": "Dřívější § 12 upravoval pouze ověřování elektronických podpisů a pečetí; návrh nově stanoví pravidla pro digitální potvrzení atributů a jejich ověřování prostřednictvím peněženky. Tím se rozšiřuje právní a technická možnost sdílet ověřené údaje, ale směr změny v celkovém řízení vývoje systémů z těchto pravidel určit nelze."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-2",
+                "relevant": true,
+                "reasonCz": "Pravidla pro elektronickou identifikaci a peněženku se mohou uplatnit napříč veřejnými službami, a proto se týkají slibované interoperability.",
+                "effectCz": "Předchozí úprava uznávala pro elektronické prokazování totožnosti kvalifikovaný systém; návrh doplňuje peněženku jako další prostředek a stanoví její technické a organizační podmínky. Tím rozšiřuje možnosti propojeného ověřování údajů, ale nepřikazuje centrální řízení vývoje informačních systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-1",
+                "relevant": true,
+                "reasonCz": "Zavádění jednotných digitálních potvrzení může být dílčím prostředkem, aby aplikace veřejné správy spolupracovaly a sdílely ověřené údaje.",
+                "effectCz": "Změna doplňuje dosavadní pravidla elektronického podpisu o elektronická potvrzení atributů a možnost jejich využití v peněžence. Zvětšuje tak množinu nástrojů pro digitální výměnu údajů; sama ale nestanoví centrální řízení vývoje ani konkrétní společný systém."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+                "relevant": true,
+                "reasonCz": "Nové testovací identity a testovací údaje jsou výslovně určeny k ověřování interoperability základních registrů a agendových systémů.",
+                "effectCz": "Jde o nově vložené ustanovení, takže balíček nedává jeho předchozí znění. Nově ukládá správcům vytvářet testovací identity a údaje, které odpovídají skutečným údajům, a umožňuje jejich využití k testování dostupnosti, funkčnosti, bezpečnosti a interoperability registrů a systémů. Tím přidává konkrétní nástroj pro ověřování spolupráce systémů, nikoli povinnost centralizovat jejich vývoj."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-1",
+                "relevant": true,
+                "reasonCz": "Návrh zavádí datový standard stavby a jeho veřejnou správu, což se může stát společným základem pro výměnu stavebních dat mezi systémy.",
+                "effectCz": "Jde o návrh nové právní úpravy standardizace a balíček neposkytuje použitelné předchozí znění příslušných pravidel, takže směr změny oproti dosavadnímu stavu nelze určit. Návrh zřizuje Agenturu a svěřuje jí tvorbu a zveřejnění datového standardu stavby; ve vztahu ke slibu jde o dílčí standardizační prostředek, ne o centrální řízení vývoje všech veřejných systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43395-1",
+                "relevant": false,
+                "reasonCz": "Návrh mění organizaci zeměměřických a katastrálních orgánů, ale dodané znění nedokládá centralizaci vývoje ani interoperability informačních systémů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-17",
+                "relevant": true,
+                "reasonCz": "Tato část vytváří integrovaný systém cizinecké agendy a výslovně stanoví jeho správce i účel digitálních služeb.",
+                "effectCz": "Dosavadní znění těchto nových ustanovení není v balíčku uvedeno. Nově se zřizuje integrovaný informační systém veřejné správy, spravovaný ministerstvem, pro digitální služby, podání a evidenci cizinecké agendy. Jde o dílčí centralizaci jedné oblasti, nikoli o společné řízení vývoje všech systémů veřejné správy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-19",
+                "relevant": false,
+                "reasonCz": "Přechodná ustanovení zachovávají a převádějí existující cizinecké účty a řízení, ale sama nestanoví centrální řízení vývoje systémů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-1",
+                "relevant": true,
+                "reasonCz": "Změny digitálních důvěryhodných služeb vytvářejí pravidla pro digitální potvrzení, která mohou být používána napříč veřejnými aplikacemi.",
+                "effectCz": "Dosavadní § 12 se týkal ověřování zaručených elektronických podpisů a pečetí. Návrh přidává možnost elektronicky prokazovat skutečnosti potvrzeními atributů, včetně potvrzení v digitální peněžence; tím rozšiřuje možnosti sdílení ověřených údajů. Neznamená však centralizaci vývoje veřejných informačních systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-2",
+                "relevant": true,
+                "reasonCz": "Návrh zavádí společný právní rámec pro elektronické prokazování totožnosti, včetně použití peněženky vůči veřejným orgánům.",
+                "effectCz": "Původní pravidlo umožňovalo elektronické prokázání totožnosti jen prostřednictvím kvalifikovaného systému. Návrh doplňuje digitální peněženku a povinnost ověřujících osob tuto možnost umožnit, což rozšiřuje interoperabilitu ověřování. Centrální řízení vývoje systémů ale neupravuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+                "relevant": true,
+                "reasonCz": "Zákon výslovně zavádí testovací údaje pro ověřování funkčnosti a interoperability základních registrů a agendových informačních systémů.",
+                "effectCz": "Nové ustanovení nemá v balíčku předchozí znění. Správcům ukládá vytvářet testovací identity a údaje pro bezpečné testování systémů a umožňuje jejich zápis do registrů. Jde o dílčí nástroj pro spolupráci a kompatibilitu, ne o centralizované řízení vývoje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-1",
+                "relevant": true,
+                "reasonCz": "Návrh zavádí jednotný datový standard stavby, který může veřejným systémům poskytnout společnou strukturu pro sdílení stavebních dat.",
+                "effectCz": "Předchozí znění pravidel standardizace není v balíčku dostupné, proto nelze určit, zda jde o zpřísnění či rozšíření oproti dosavadnímu stavu. Návrh svěřuje Agentuře tvorbu, správu a zveřejnění datového standardu stavby; to může podpořit interoperabilitu, ale nesplňuje samo závazek centrálně řídit vývoj všech informačních systémů."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-59fa8f6418c3--source",
+              "psp-core-2025--law-change-43161-1",
+              "psp-core-2025--vote-86767",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-approved-55",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--law-change-43264-17",
+              "psp-core-2025--print-step-211048",
+              "psp-core-2025--vote-88522",
+              "psp-core-2025--law-change-43275-1",
+              "psp-core-2025--law-change-43275-2",
+              "psp-core-2025--print-step-211101",
+              "psp-core-2025--law-change-43308-approved-10",
+              "psp-core-2025--vote-88528",
+              "psp-core-2025--law-change-43372-1",
+              "psp-core-2025--print-step-211843"
+            ],
+            "explanationCz": "Poslanci Motoristů spolu s dalšími předložili novelu stavebního zákona; schválené znění umožňuje Úřadu sloučit více veřejných informačních systémů do jednoho a klub strany toto znění podpořil. Vláda také navrhla integrovaný systém pro cizineckou agendu a digitální peněženku pro ověřování údajů. Při závěrečném hlasování o cizineckém zákoně ani o návrhu testovacích identit pro ověřování interoperability však klub Motoristů neměl většinu hlasů pro podporu. Tyto dva návrhy řeší jen dílčí části slibu, proto výsledek znamená posun proti části závazku, nikoli proti slibu jako celku.",
+            "confidence": "medium",
+            "uncertainties": [
+              "U hlasování o stavebním zákoně Senát návrh nejprve zamítl a Sněmovna jej později podpořila znovu; podklad dokládá hlasování Motoristů pro, nikoli uskutečnění konkrétního sloučení informačních systémů.",
+              "Hlasování o datovém zákoně, které balíček označuje jako připsané straně, je v parlamentní historii zařazeno do prvního čtení, nikoli mezi konečná rozhodnutí Sněmovny; proto je nezapočítávám jako rozhodující hlasování.",
+              "U návrhu zákona o standardizaci chybí v balíčku použitelné předchozí znění příslušných pravidel, takže nelze určit, jak velkou změnu oproti dosavadnímu stavu jeho datový standard představuje."
+            ]
+          }
+        }
+      },
+      {
+        "error": "Relevance verdict names something other than a law change in the package: psp-core-2025--law-change-43184-1",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_03bb090564744561016ac553b208ac87d2bac0ef438f3bd9da",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 544994,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 544991
+            },
+            "output_tokens": 10398,
+            "output_tokens_details": {
+              "reasoning_tokens": 7074
+            },
+            "total_tokens": 555392
+          },
+          "output": {
+            "promiseId": "candidate-59fa8f6418c3",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43161-1",
+                "relevant": true,
+                "reasonCz": "Zákon upravuje správu dat, metadata a datová rozhraní informačních systémů veřejné správy, tedy přímo přispívá ke sdílení dat, které slib zmiňuje.",
+                "effectCz": "Jde o nový zákon, takže balíček nedává předchozí znění pravidel, s nímž by šlo změnu porovnat. Zřizuje národní katalog dat a ukládá správcům vytvářet katalogy, popisovat data a rozhraní a aktualizovat jejich metadata; Agentuře svěřuje koordinaci správy dat. Podporuje sdílení dat, ale neukládá centrální řízení vývoje všech systémů a z jeho působnosti jsou vyloučeny systémy spravované obcemi a kraji."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Novela výslovně umožňuje spojovat informační systémy veřejné správy do společného systému, což může omezit jejich oddělený vývoj a duplicity.",
+                "effectCz": "Dříve § 267 stavebního zákona vyjmenovával informační systémy stavební správy a určoval jejich správce, ale nedával Úřadu výslovnou možnost systémy sloučit; změna mu nově dovoluje „informační systémy sdružit a vést jich více jako jeden společný informační systém“. Možnost centralizace se tím rozšiřuje, ale jde o oprávnění, nikoli povinnost, a týká se systémů v oblasti stavebního práva."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+                "relevant": true,
+                "reasonCz": "Změna propojuje informační kontejnery o stavbách s evidencí elektronických dokumentací, což je konkrétní krok k jednotnému zpracování a předávání digitálních údajů.",
+                "effectCz": "Dřívější § 7 zákona o správě informací o stavbě stanovoval, kdy se pořizují informační kontejnery pro povolení, provádění a kolaudaci, ale neukládal výslovně jejich vložení do evidence elektronických dokumentací. Nové znění ukládá vložit kontejnery pro povolení a kolaudaci právě do této evidence v okamžiku podání příslušné žádosti. Zpřesňuje a posiluje propojení digitálních údajů se společnou evidencí, ale samo nezakládá centrální řízení vývoje systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-1",
+                "relevant": false,
+                "reasonCz": "Změna upravuje vedení Rady vlády pro informační společnost, nikoli vývoj, centralizaci nebo interoperabilitu informačních systémů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-23",
+                "relevant": false,
+                "reasonCz": "Změna se týká jmenování a pravomocí vedení Digitální a informační agentury, nikoli řízení vývoje či propojování informačních systémů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-24",
+                "relevant": false,
+                "reasonCz": "Změna upravuje personální a organizační pravidla výzkumných agentur, nikoli správu vývoje nebo spolupráci jejich informačních systémů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+                "relevant": true,
+                "reasonCz": "Změna svěřuje správu informačního systému výzkumu, vývoje a inovací Ministerstvu průmyslu a obchodu, a proto se týká centralizované odpovědnosti za konkrétní veřejný systém.",
+                "effectCz": "Před změnou zákon svěřoval Radě pro výzkum, vývoj a inovace úlohu správce a provozovatele informačního systému; nově se tato úloha svěřuje Ministerstvu průmyslu a obchodu. Odpovědnost za správu jednoho systému se tak přesouvá na ústřední ministerstvo, což je dílčí přesun řízení do centra, nikoli centralizace vývoje všech systémů ani povinnost jejich propojení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-14",
+                "relevant": false,
+                "reasonCz": "Ustanovení upravují procesní pravidla pro cizinecká řízení; technické tlumočení či videokonference samy o sobě neřeší vývoj, řízení ani sdílení dat mezi informačními systémy.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-17",
+                "relevant": true,
+                "reasonCz": "Nový zákon zavádí integrovaný cizinecký agendový systém pro digitální služby, podání a dokumenty, což je konkrétní integrovaný systém veřejné správy.",
+                "effectCz": "Jde o nový zákon, a proto balíček neposkytuje dřívější znění tohoto systému k porovnání. Zřizuje integrovaný cizinecký agendový systém jako informační systém veřejné správy, určuje ministerstvo jeho správcem a počítá s digitálními úkony, evidencí podání a přístupem více veřejných orgánů. Vytváří dílčí centralizovanou platformu, ale neurčuje společné řízení vývoje všech informačních systémů veřejné správy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-19",
+                "relevant": true,
+                "reasonCz": "Přechodná ustanovení stanovují zavedení cizineckých účtů a jejich aktivaci, tedy konkrétní kroky k nasazení nového integrovaného informačního systému.",
+                "effectCz": "Jde o přechodná ustanovení nového zákona, takže balíček neuvádí dřívější znění tohoto režimu. Ukládají připravit účty pro stávající cizince, stanovit termíny jejich aktivace a umožňují účty při nesplnění termínu založit ze zákona; povinné elektronické podávání má začít účinností nového zákona. Poskytují dílčí plán zavedení integrovaného systému, nikoli pravidlo centralizující vývoj všech veřejných systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-1",
+                "relevant": true,
+                "reasonCz": "Novela umožňuje používat digitální peněženku k prokazování skutečností před veřejnými orgány, což představuje konkrétní prostředek interoperability digitálních služeb.",
+                "effectCz": "Dříve zákon upravoval uchovávání dokumentů a ověřování podpisů a pečetí; neobsahoval pravidla pro elektronická potvrzení atributů v digitální peněžence. Nově stanoví, že veřejné orgány musí umožnit ověření vybraných skutečností pomocí peněženky, jejích potvrzení a zveřejněných schémat. Rozšiřuje společný způsob prokazování údajů napříč službami, ale nemění odpovědnost za řízení vývoje informačních systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-2",
+                "relevant": true,
+                "reasonCz": "Novela rozšiřuje elektronické ověřování totožnosti o digitální peněženku, což usnadňuje kompatibilní přístup k digitálním službám veřejné správy.",
+                "effectCz": "Dříve bylo možné elektronicky prokazovat totožnost pouze prostřednictvím kvalifikovaného systému elektronické identifikace. Nově zákon připouští také digitální peněženku, včetně jejího použití přes kvalifikovaný systém, a ukládá povinnost umožnit ověření osobě, která má tuto povinnost podle právního předpisu. Rozšiřuje interoperabilitu ověřování totožnosti, ale nezavádí centralizované řízení vývoje veřejných informačních systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-3",
+                "relevant": false,
+                "reasonCz": "V balíčku není žádná třetí změna zákona z tisku 154; změny tisku jsou v balíčku označeny jako 43275-1 a 43275-2.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+                "relevant": true,
+                "reasonCz": "Změna zavádí testovací identity a údaje určené výslovně k ověřování interoperability základních registrů a agendových systémů.",
+                "effectCz": "Dřívější § 4 a § 4a vymezovaly údaje základních registrů a agendových informačních systémů, ale neupravovaly testovací identity ani testovací data. Nový § 4b ukládá správci registru tyto testovací údaje vytvářet a umožňuje jejich vytváření a sdílení pro testování registrů, referenčního rozhraní a agendových systémů. Rozšiřuje možnost bezpečně testovat jejich interoperabilitu, ale necentralizuje jejich vývoj."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-1",
+                "relevant": true,
+                "reasonCz": "Návrh svěřuje Agentuře tvorbu a zveřejňování datového standardu stavebních informací, což může sjednocovat údaje používané různými veřejnými systémy.",
+                "effectCz": "Tato část návrhu obsahuje nový zákon o standardizaci a balíček neposkytuje předchozí znění ustanovení, která nahrazuje, takže jejich změnový směr nelze určit. Návrh svěřuje Agentuře tvorbu a správu datového standardu stavby a zpřístupňování technických norem veřejným orgánům. Tím soustřeďuje standardizační činnost u Agentury a může podpořit kompatibilitu dat, ale neurčuje centralizované řízení vývoje informačních systémů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43395-1",
+                "relevant": true,
+                "reasonCz": "Návrh soustřeďuje správu digitální mapy veřejné správy a informačního systému základního modelu vystavěného prostředí u Českého úřadu zeměměřického a katastrálního.",
+                "effectCz": "Dřívější § 3 a § 3a vymezovaly úkoly Českého úřadu zeměměřického a katastrálního a Zeměměřického úřadu, ale výslovně mu nesvěřovaly správu informačního systému digitální mapy veřejné správy ani systému základního modelu vystavěného prostředí. Návrh tyto odpovědnosti nově přiděluje úřadu, zároveň mění inspektoráty na jeho vnitřní organizační jednotky. Zvyšuje tak centralizaci správy těchto konkrétních systémů, ale neukládá centrální řízení vývoje všech veřejných systémů."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-59fa8f6418c3--source",
+              "psp-core-2025--law-change-43161-1",
+              "psp-core-2025--vote-86767",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-approved-55",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--law-change-43184-approved-49",
+              "psp-core-2025--vote-88026",
+              "psp-core-2025--vote-88450",
+              "psp-core-2025--law-change-43264-17",
+              "psp-core-2025--law-change-43264-19",
+              "psp-core-2025--print-step-211048",
+              "psp-core-2025--vote-88522",
+              "psp-core-2025--law-change-43275-1",
+              "psp-core-2025--law-change-43275-2",
+              "psp-core-2025--print-step-211101",
+              "psp-core-2025--law-change-43308-approved-10",
+              "psp-core-2025--vote-88528",
+              "psp-core-2025--law-change-43372-1",
+              "psp-core-2025--print-step-211843",
+              "psp-core-2025--law-change-43395-1",
+              "psp-core-2025--print-step-211959"
+            ],
+            "explanationCz": "Poslanci Motoristů hlasovali pro novelu stavebního zákona, která umožňuje sloučit více informačních systémů do jednoho společného systému. Dne 11. září však strana nezískala většinu svých poslanců pro vládní návrh integrovaného cizineckého systému ani pro návrh testovacích údajů určených k ověřování interoperability registrů a systémů. Tyto dva návrhy by přinesly dílčí kroky ke sdílení dat a propojení systémů, takže nedostatečná podpora strany představuje posun proti slibu. Strana zároveň předložila nebo podpořila návrhy na společné datové standardy a centralizovanou správu některých systémů, ty však nepřevažují nad pozdějšími hlasováními.",
+            "confidence": "high",
+            "uncertainties": [
+              "Záznamy dokládají návrhy a hlasování, nikoli to, zda byly systémy skutečně zavedeny nebo zda již aplikace sdílejí data; pro současné hodnocení je rozhodující pozdější chování v hlasováních.",
+              "Dřívější hlasování Motoristů pro sloučení systémů ve stavebním sektoru a jejich návrhy centralizující některou správu systémů působí opačným směrem než pozdější nedostatečná podpora integrovaného systému a testování interoperability."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": null,
+    "assessor-b": {
+      "promiseId": "candidate-59fa8f6418c3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Zákon upravuje správu dat ve veřejných informačních systémech a zavádí společné katalogy a pravidla pro datová rozhraní, což může přispět ke sdílení dat a spolupráci aplikací.",
+          "effectCz": "Jde o novou právní úpravu bez předchozího znění uvedeného v balíčku: ukládá správcům systémů popisovat data a rozhraní, vést místní katalogy a zveřejňovat jejich obsah v národním katalogu dat, který spravuje Digitální a informační agentura. Tím se rozšiřují povinnosti týkající se popisu a zpřístupnění dat a usnadňuje se jejich sdílení; odpovědnost za správu jednotlivých dat a systémů však zůstává jejich správcům, takže centrální řízení vývoje systémů se nezavádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela stavebního zákona umožňuje spojovat veřejné informační systémy a stanovuje jednotnější digitální podobu územně plánovacích dat, což přímo podporuje část slibu o spolupráci systémů.",
+          "effectCz": "Dosavadní úprava svěřovala správu stavebních informačních systémů ministerstvu a neobsahovala výslovnou možnost vést více systémů jako jeden společný; nově může Úřad informační systémy sdružit a vést je společně, ale nemusí to udělat. Dříve se územně plánovací dokumentace pořizovala elektronicky ve strojově čitelném formátu včetně prostorových dat; nově se vyhotovuje a vydává v jednotném standardu jako digitální textová a prostorová data, což zpřísňuje sjednocení formátu a usnadňuje interoperabilitu. Změna tak rozšiřuje možnost a standardizaci centrálního propojování, ale sama neukládá centrální řízení vývoje všech systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": true,
+          "reasonCz": "Ustanovení propojuje informační kontejnery o stavbách s evidencí elektronických dokumentací podle stavebního zákona, a tím podporuje jednotnější výměnu digitálních dat.",
+          "effectCz": "Dosavadní pravidlo určovalo, kdy se informační kontejner pořizuje; nově se navíc ukládá vložit kontejner pro povolení stavby do evidence elektronických dokumentací nejpozději se žádostí o povolení a kontejner pro kolaudaci nejpozději se žádostí o kolaudační rozhodnutí. Povinnost se tedy rozšiřuje a výměna údajů přes společnou evidenci je konkrétnější, nejde však o centralizaci vývoje systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Změna se týká vedení poradního orgánu vlády pro informační společnost, ale text neukazuje, že by upravovala centrální řízení vývoje informačních systémů nebo jejich interoperabilitu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-23",
+          "relevant": false,
+          "reasonCz": "Upravuje jmenování a postavení vedení Digitální a informační agentury, nikoli pravidla řízení vývoje, propojování nebo sdílení dat mezi veřejnými informačními systémy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-24",
+          "relevant": false,
+          "reasonCz": "Přesouvá správu informačního systému výzkumu a vývoje mezi úřady, ale text nepropojuje tuto změnu s centrálním řízením vývoje veřejných informačních systémů ani se sdílením dat mezi aplikacemi.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+          "relevant": false,
+          "reasonCz": "Mění správce informačního systému výzkumu a vývoje a související úkoly, ale nedokládá vazbu na slibovanou koordinaci vývoje nebo interoperabilitu systémů veřejné správy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": false,
+          "reasonCz": "Upravuje procesní pravidla řízení o pobytu cizinců, ale samotný text této části nezavádí centrální řízení vývoje systémů ani jejich propojení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Zřizuje integrovaný informační systém pro agendu cizinců, který spravuje ministerstvo a který umožňuje digitální úkony a evidenci podání, což je konkrétní dílčí příklad centralizovaného systému.",
+          "effectCz": "Jde o novou úpravu bez předchozího znění dodaného v balíčku: zřizuje integrovaný cizinecký agendový systém spravovaný ministerstvem, který má poskytovat digitální služby, přijímat digitální úkony a evidovat podání i rozhodnutí. Oproti chybějící předchozí úpravě se pro tuto agendu zavádí společný spravovaný systém, ale pouze pro cizineckou agendu; obecné centrální řízení vývoje všech veřejných informačních systémů nezakládá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-19",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení určují zavedení cizineckých účtů a přechod na nový integrovaný systém, tedy praktickou část zavádění centralizovaných digitálních služeb.",
+          "effectCz": "Jde o nová přechodná pravidla bez předchozího znění dodaného v balíčku: stanoví, že účty bude možné zakládat od účinnosti zákona, stávající účty se mají aktivovat v termínech do 30. června 2029, 31. prosince 2030 nebo 31. prosince 2031 podle skupiny a neaktivované účty se následně založí ze zákona. Tato povinnost rozšiřuje přechod na společný digitální systém v jedné agendě; neukládá však centralizaci vývoje všech systémů veřejné správy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Nová pravidla umožňují prokazovat skutečnosti elektronickou peněženkou pomocí digitálních potvrzení atributů a ukládají orgánům veřejné moci tuto možnost přijímat, což podporuje sdílení údajů mezi digitálními službami.",
+          "effectCz": "Dosavadní § 12 upravoval ověřování platnosti zaručených elektronických podpisů a pečetí; nově stanoví možnost prokazovat online skutečnosti elektronickými potvrzeními atributů a ukládá orgánům veřejné moci tuto možnost umožnit. Rozsah digitálního prokazování se tedy rozšiřuje a usnadňuje předávání vybraných údajů mezi službami, avšak změna neurčuje centrálního správce vývoje všech veřejných systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": false,
+          "reasonCz": "Upravuje elektronickou identifikaci a peněženky, ale dodaný text neukazuje přímou vazbu na řízení vývoje veřejných informačních systémů nebo na sdílení dat mezi jejich aplikacemi.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": true,
+          "reasonCz": "Zavádí testovací identity a údaje pro ověřování funkčnosti, bezpečnosti a interoperability základních registrů a agendových systémů, tedy přímo podporuje testování jejich spolupráce.",
+          "effectCz": "Dosavadní úprava vymezovala údaje v základních registrech a agendových systémech, ale dodaný kontext neuvádí pravidla pro testovací identity; nově se zavádí jejich tvorba a správa a možnost požadovat je pro testování dostupnosti, funkčnosti, bezpečnosti a interoperability. Povinnost a možnosti testování se rozšiřují, ale testovací údaje nesmějí být zaměnitelné se skutečnými údaji a nevytvářejí samy o sobě provozní sdílení dat ani centrální řízení vývoje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-1",
+          "relevant": true,
+          "reasonCz": "Zavádí standardizaci a datový standard staveb, což může sjednotit informace používané v digitálních stavebních systémech a podpořit jejich interoperabilitu.",
+          "effectCz": "Dodaný balíček neobsahuje předchozí znění ustanovení o datovém standardu staveb, takže směr změny vůči dosavadní právní úpravě nelze určit. Návrh svěřuje České agentuře pro standardizaci tvorbu, správu a zveřejňování datového standardu stavby; stanoví tedy společný standard pro oblast staveb, nikoli obecné řízení vývoje všech veřejných informačních systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": true,
+          "reasonCz": "Návrh přiděluje Českému úřadu zeměměřickému a katastrálnímu správu informačních systémů digitální mapy veřejné správy a základního modelu vystavěného prostředí, což je dílčí centralizace správy konkrétních systémů.",
+          "effectCz": "Dosavadní § 3a vyjmenovával úkoly Zeměměřického úřadu, ale neuváděl správu informačního systému digitální mapy veřejné správy ani systému základního modelu vystavěného prostředí; návrh tyto dvě odpovědnosti doplňuje. Rozšiřuje tím soustředění správy konkrétních systémů u jednoho úřadu, nikoli však centrální řízení vývoje všech systémů veřejné správy."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-59fa8f6418c3--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-approved-55",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--law-change-43264-19",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43308-approved-10",
+        "psp-core-2025--vote-88528",
+        "psp-core-2025--law-change-43372-1",
+        "psp-core-2025--print-step-211843",
+        "psp-core-2025--law-change-43395-1",
+        "psp-core-2025--print-step-211959"
+      ],
+      "explanationCz": "Motoristé slíbili centralizovat řízení vývoje veřejných informačních systémů tak, aby spolu aplikace spolupracovaly a sdílely data. Jejich poslanci podpořili novelu stavebního zákona, která umožňuje sloučit více systémů do jednoho společného, ale tuto možnost pouze otevírá a neukládá. V pozdějších závěrečných hlasováních o zákonu o pobytu cizinců a o zákonu zavádějícím testovací údaje klub Motoristů nedal většinu hlasů pro předlohy, které přinášely dílčí nástroje pro společné digitální služby a interoperabilitu. Protože tato novější rozhodnutí převážila nad dřívější podporou stavební novely, strana se v současnosti v dílčích bodech posouvá proti slibu; celý slib splněn není.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Hlasování o správě dat se podle parlamentního záznamu týkalo prvního čtení, nikoli konečného rozhodnutí, a proto samo skóre nemění, přestože je v balíčku vedeno jako připsané hlasování.",
+        "Novější hlasování o cizineckém zákoně a zákoně o testovacích údajích dokládají, že klub Motoristů nedal většinu hlasů pro předlohy, nikoli že všichni jeho poslanci hlasovali proti; obě předlohy přinášely pouze dílčí nástroje, ne úplné centrální řízení vývoje všech veřejných systémů."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0dc2526d4732d848016ac5544aab4087d2891f392d72f27eea",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 544994,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 544991
+      },
+      "output_tokens": 12524,
+      "output_tokens_details": {
+        "reasoning_tokens": 9453
+      },
+      "total_tokens": 557518
+    },
+    "output": {
+      "promiseId": "candidate-59fa8f6418c3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Zákon zavádí společné katalogy, popis datových rozhraní a povinnosti správy dat, které mohou skutečně podpořit sdílení dat mezi systémy veřejné správy.",
+          "effectCz": "Jde o nově navrhovaný zákon, takže předchozí znění těchto pravidel v balíčku není. Zavádí metadata a datové slovníky, lokální i národní katalog dat a povinnost popisovat rozhraní určená ke zpřístupnění a sdílení dat. Tím vytváří společný základ pro výměnu dat, ale neukládá centralizovat řízení vývoje informačních systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změna stavebního zákona výslovně umožňuje sdružovat informační systémy veřejné správy do společného systému, což je konkrétní nástroj centralizace.",
+          "effectCz": "Před změnou § 267 vyjmenovával systémy stavební správy, ale nedával Úřadu výslovnou možnost je sdružit. Nově může Úřad informační systémy sloučit a vést více systémů jako jeden společný informační systém. Změna tedy rozšiřuje možnost centralizace, ale její využití pouze dovoluje, nenařizuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": true,
+          "reasonCz": "Změna vyžaduje ukládat vybrané informační kontejnery staveb do evidence elektronické dokumentace, a tím přímo upravuje sdílení digitálních podkladů mezi systémy veřejné správy.",
+          "effectCz": "Dříve § 7 zákona o správě informací o stavbě stanovil, kdy se pořizují informační kontejnery pro povolení, provádění a kolaudaci stavby, ale nedoložené znění neukládá jejich vložení do evidence elektronických dokumentací. Nový odstavec 5 ukládá vložit kontejnery pro povolení a kolaudaci do této evidence v příslušné lhůtě. Jde o větší povinnost evidovat data ve společném systému a o krok usnadňující interoperabilitu, nikoli o centralizaci celého vývoje veřejných systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Změna se týká složení a vedení poradního orgánu vlády, nikoli centrálního řízení vývoje nebo interoperability informačních systémů veřejné správy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-23",
+          "relevant": false,
+          "reasonCz": "Změna upravuje jmenování a postavení ředitele Digitální a informační agentury, ale nedokládá změnu řízení vývoje či propojování veřejných informačních systémů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-24",
+          "relevant": true,
+          "reasonCz": "Změna přesouvá správu informačního systému výzkumu a inovací mezi ústředními orgány, tedy přímo mění odpovědnost za jeden veřejný informační systém.",
+          "effectCz": "Dosavadní § 85 označoval Úřad vlády za správce i provozovatele informačního systému výzkumu, vývoje a inovací. Nově se z textu vypouští provozovatel a správcem se stává Ministerstvo průmyslu a obchodu. Jde o přesun odpovědnosti mezi ústředními orgány; z těchto ustanovení nelze určit, zda se tím řízení vývoje stává celkově více či méně centralizovaným."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+          "relevant": true,
+          "reasonCz": "Tato část téhož návrhu mění správce výzkumného informačního systému a odnímá jeho dosavadní roli Radě pro výzkum, takže přímo zasahuje do řízení systému.",
+          "effectCz": "Před změnou § 30 popisoval výzkumný informační systém jako propojený celek čtyř částí a § 35 svěřoval jeho správu a provoz Radě pro výzkum, vývoj a inovace. Nově se správcem systému stává Ministerstvo průmyslu a obchodu a úkol Rady se ruší. Přesun odpovědnosti mění, kdo systém řídí, ale zachovává jeden správce; samotný směr vlivu na centralizaci vývoje širšího okruhu systémů z balíčku určit nelze."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": false,
+          "reasonCz": "Ustanovení řeší procesní pravidla řízení o pobytu cizinců, nikoli centrální řízení vývoje nebo spolupráci informačních systémů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Zřizuje integrovaný informační systém pro agendu cizinců, což je konkrétní příklad společného systému a digitalizované agendy veřejné správy.",
+          "effectCz": "Jde o nově navrhovaný zákon, takže předchozí znění systému v balíčku není. Zřizuje Integrovaný cizinecký agendový systém, určuje Ministerstvo vnitra jako jeho správce a umožňuje přes něj digitální služby, úkony a evidenci. Tím vytváří společný systém pro jednu oblast, ale nezavádí centrální řízení vývoje napříč veřejnou správou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení zavádí digitální potvrzování údajů použitelné pro veřejné služby, a tedy přímo podporuje sdílení a ověřování dat mezi aplikacemi.",
+          "effectCz": "Před změnou § 12 upravoval pouze ověřování platnosti elektronických podpisů a pečetí. Nově dovoluje prokazovat údaje on-line prostřednictvím digitální peněženky a ukládá orgánům veřejné moci umožnit takové prokázání. To rozšiřuje možnosti bezpečného sdílení a ověřování údajů, ale nemění, kdo centrálně řídí vývoj systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje elektronickou identifikaci o digitální peněženku a stanoví pravidla pro její přijímání při prokazování totožnosti, což je konkrétní interoperabilní prvek digitálních služeb.",
+          "effectCz": "Dříve § 2 umožňoval elektronicky prokazovat totožnost pouze prostřednictvím kvalifikovaného systému elektronické identifikace. Nově zahrnuje také digitální peněženku, avšak orgánu veřejné moci zakazuje přijmout ji mimo kvalifikovaný systém; ostatní povinné ověřující subjekty ji musí umožnit. Změna tak rozšiřuje využitelné cesty pro digitální identifikaci, aniž by centralizovala vývoj informačních systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": true,
+          "reasonCz": "Nově zavádí testovací identity a data pro ověřování interoperability základních registrů, referenčního rozhraní a agendových informačních systémů.",
+          "effectCz": "Před změnou § 4 a § 4a vymezovaly údaje základních registrů a agendových systémů, ale testovací identity a údaje v nich uvedeny nebyly. Nový § 4b ukládá vytvářet testovací identity a dovoluje příslušným orgánům vyžádat jejich vytvoření pro testování interoperability a dalších vlastností systémů. Zlepšuje tak možnost testovat propojení systémů, ale sám nezavádí centrální řízení jejich vývoje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-1",
+          "relevant": true,
+          "reasonCz": "Navrhuje společný režim standardizace a svěřuje Agentuře tvorbu datového standardu stavby, který může sjednocovat datové formáty používané ve veřejných informačních systémech.",
+          "effectCz": "Jde o nový navrhovaný zákon, takže předchozí znění tohoto režimu v balíčku není. Návrh svěřuje Agentuře tvorbu a zveřejnění datového standardu stavby a nastavuje pravidla pro technické normy. To může sjednotit datové podklady pro stavební agendu, ale nezavádí obecnou povinnost centrálně řídit vývoj veřejných systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": true,
+          "reasonCz": "Návrh svěřuje zeměměřickým orgánům správu systému digitální mapy veřejné správy a systému základního modelu vystavěného prostředí, což přímo mění správu veřejných informačních systémů.",
+          "effectCz": "Dříve § 3a vypočítával úkoly Zeměměřického úřadu, například správu geodetických základů, mapových děl a archivu, ale správu uvedených dvou systémů neuváděl. Nově má Úřad spravovat informační systém digitální mapy veřejné správy a Zeměměřický úřad systém základního modelu vystavěného prostředí. Změna výslovně přidává správu těchto systémů do působnosti ústředního orgánu, ale znění neurčuje společné řízení vývoje všech veřejných systémů."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-59fa8f6418c3--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-approved-55",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43184-24",
+        "psp-core-2025--law-change-43184-approved-49",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43308-approved-10",
+        "psp-core-2025--vote-88528",
+        "psp-core-2025--law-change-43372-1",
+        "psp-core-2025--print-step-211843",
+        "psp-core-2025--law-change-43395-1",
+        "psp-core-2025--print-step-211959"
+      ],
+      "explanationCz": "Poslanci Motoristů podpořili změnu stavebního zákona, která dovoluje sloučit informační systémy do společného systému, a vláda navrhla společné katalogy dat a digitální peněženku pro prokazování údajů. Jde o dílčí kroky k lepšímu sdílení dat, nikoli o zavedení centrálního řízení vývoje všech veřejných systémů. Při hlasování o návrhu na testovací data pro ověřování propojení registrů neměli poslanci Motoristů většinu hlasující pro; většinu pro něj neměli ani při hlasování o integrovaném systému pro agendu cizinců. Proto slib zatím směřuje proti cíli, přestože strana podpořila i některé dílčí kroky vpřed.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrhy a hlasování se týkají jednotlivých oblastí a systémů; balíček nedokládá, že se systémy skutečně propojily nebo že došlo k omezení duplicitních investic.",
+        "Motoristé podpořili možnost sdružovat stavební informační systémy a návrh digitální správy dat, ale neměli většinu hlasů pro dva pozdější návrhy, které by přispěly k interoperabilitě. Nejnovější z těchto hlasování se týkalo testování propojení registrů."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_07e78fb518a29045016ac555174cf487d28e7df8aac32bc39d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 544994,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 544991
+      },
+      "output_tokens": 11446,
+      "output_tokens_details": {
+        "reasoning_tokens": 8278
+      },
+      "total_tokens": 556440
+    },
+    "output": {
+      "promiseId": "candidate-59fa8f6418c3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Zákon upravuje správu dat ve veřejných informačních systémech a zavádí společné katalogy a pravidla pro datová rozhraní, což může přispět ke sdílení dat a spolupráci aplikací.",
+          "effectCz": "Jde o novou právní úpravu bez předchozího znění uvedeného v balíčku: ukládá správcům systémů popisovat data a rozhraní, vést místní katalogy a zveřejňovat jejich obsah v národním katalogu dat, který spravuje Digitální a informační agentura. Tím se rozšiřují povinnosti týkající se popisu a zpřístupnění dat a usnadňuje se jejich sdílení; odpovědnost za správu jednotlivých dat a systémů však zůstává jejich správcům, takže centrální řízení vývoje systémů se nezavádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela stavebního zákona umožňuje spojovat veřejné informační systémy a stanovuje jednotnější digitální podobu územně plánovacích dat, což přímo podporuje část slibu o spolupráci systémů.",
+          "effectCz": "Dosavadní úprava svěřovala správu stavebních informačních systémů ministerstvu a neobsahovala výslovnou možnost vést více systémů jako jeden společný; nově může Úřad informační systémy sdružit a vést je společně, ale nemusí to udělat. Dříve se územně plánovací dokumentace pořizovala elektronicky ve strojově čitelném formátu včetně prostorových dat; nově se vyhotovuje a vydává v jednotném standardu jako digitální textová a prostorová data, což zpřísňuje sjednocení formátu a usnadňuje interoperabilitu. Změna tak rozšiřuje možnost a standardizaci centrálního propojování, ale sama neukládá centrální řízení vývoje všech systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": true,
+          "reasonCz": "Ustanovení propojuje informační kontejnery o stavbách s evidencí elektronických dokumentací podle stavebního zákona, a tím podporuje jednotnější výměnu digitálních dat.",
+          "effectCz": "Dosavadní pravidlo určovalo, kdy se informační kontejner pořizuje; nově se navíc ukládá vložit kontejner pro povolení stavby do evidence elektronických dokumentací nejpozději se žádostí o povolení a kontejner pro kolaudaci nejpozději se žádostí o kolaudační rozhodnutí. Povinnost se tedy rozšiřuje a výměna údajů přes společnou evidenci je konkrétnější, nejde však o centralizaci vývoje systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Změna se týká vedení poradního orgánu vlády pro informační společnost, ale text neukazuje, že by upravovala centrální řízení vývoje informačních systémů nebo jejich interoperabilitu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-23",
+          "relevant": false,
+          "reasonCz": "Upravuje jmenování a postavení vedení Digitální a informační agentury, nikoli pravidla řízení vývoje, propojování nebo sdílení dat mezi veřejnými informačními systémy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-24",
+          "relevant": false,
+          "reasonCz": "Přesouvá správu informačního systému výzkumu a vývoje mezi úřady, ale text nepropojuje tuto změnu s centrálním řízením vývoje veřejných informačních systémů ani se sdílením dat mezi aplikacemi.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+          "relevant": false,
+          "reasonCz": "Mění správce informačního systému výzkumu a vývoje a související úkoly, ale nedokládá vazbu na slibovanou koordinaci vývoje nebo interoperabilitu systémů veřejné správy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": false,
+          "reasonCz": "Upravuje procesní pravidla řízení o pobytu cizinců, ale samotný text této části nezavádí centrální řízení vývoje systémů ani jejich propojení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Zřizuje integrovaný informační systém pro agendu cizinců, který spravuje ministerstvo a který umožňuje digitální úkony a evidenci podání, což je konkrétní dílčí příklad centralizovaného systému.",
+          "effectCz": "Jde o novou úpravu bez předchozího znění dodaného v balíčku: zřizuje integrovaný cizinecký agendový systém spravovaný ministerstvem, který má poskytovat digitální služby, přijímat digitální úkony a evidovat podání i rozhodnutí. Oproti chybějící předchozí úpravě se pro tuto agendu zavádí společný spravovaný systém, ale pouze pro cizineckou agendu; obecné centrální řízení vývoje všech veřejných informačních systémů nezakládá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-19",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení určují zavedení cizineckých účtů a přechod na nový integrovaný systém, tedy praktickou část zavádění centralizovaných digitálních služeb.",
+          "effectCz": "Jde o nová přechodná pravidla bez předchozího znění dodaného v balíčku: stanoví, že účty bude možné zakládat od účinnosti zákona, stávající účty se mají aktivovat v termínech do 30. června 2029, 31. prosince 2030 nebo 31. prosince 2031 podle skupiny a neaktivované účty se následně založí ze zákona. Tato povinnost rozšiřuje přechod na společný digitální systém v jedné agendě; neukládá však centralizaci vývoje všech systémů veřejné správy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Nová pravidla umožňují prokazovat skutečnosti elektronickou peněženkou pomocí digitálních potvrzení atributů a ukládají orgánům veřejné moci tuto možnost přijímat, což podporuje sdílení údajů mezi digitálními službami.",
+          "effectCz": "Dosavadní § 12 upravoval ověřování platnosti zaručených elektronických podpisů a pečetí; nově stanoví možnost prokazovat online skutečnosti elektronickými potvrzeními atributů a ukládá orgánům veřejné moci tuto možnost umožnit. Rozsah digitálního prokazování se tedy rozšiřuje a usnadňuje předávání vybraných údajů mezi službami, avšak změna neurčuje centrálního správce vývoje všech veřejných systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": false,
+          "reasonCz": "Upravuje elektronickou identifikaci a peněženky, ale dodaný text neukazuje přímou vazbu na řízení vývoje veřejných informačních systémů nebo na sdílení dat mezi jejich aplikacemi.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": true,
+          "reasonCz": "Zavádí testovací identity a údaje pro ověřování funkčnosti, bezpečnosti a interoperability základních registrů a agendových systémů, tedy přímo podporuje testování jejich spolupráce.",
+          "effectCz": "Dosavadní úprava vymezovala údaje v základních registrech a agendových systémech, ale dodaný kontext neuvádí pravidla pro testovací identity; nově se zavádí jejich tvorba a správa a možnost požadovat je pro testování dostupnosti, funkčnosti, bezpečnosti a interoperability. Povinnost a možnosti testování se rozšiřují, ale testovací údaje nesmějí být zaměnitelné se skutečnými údaji a nevytvářejí samy o sobě provozní sdílení dat ani centrální řízení vývoje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-1",
+          "relevant": true,
+          "reasonCz": "Zavádí standardizaci a datový standard staveb, což může sjednotit informace používané v digitálních stavebních systémech a podpořit jejich interoperabilitu.",
+          "effectCz": "Dodaný balíček neobsahuje předchozí znění ustanovení o datovém standardu staveb, takže směr změny vůči dosavadní právní úpravě nelze určit. Návrh svěřuje České agentuře pro standardizaci tvorbu, správu a zveřejňování datového standardu stavby; stanoví tedy společný standard pro oblast staveb, nikoli obecné řízení vývoje všech veřejných informačních systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": true,
+          "reasonCz": "Návrh přiděluje Českému úřadu zeměměřickému a katastrálnímu správu informačních systémů digitální mapy veřejné správy a základního modelu vystavěného prostředí, což je dílčí centralizace správy konkrétních systémů.",
+          "effectCz": "Dosavadní § 3a vyjmenovával úkoly Zeměměřického úřadu, ale neuváděl správu informačního systému digitální mapy veřejné správy ani systému základního modelu vystavěného prostředí; návrh tyto dvě odpovědnosti doplňuje. Rozšiřuje tím soustředění správy konkrétních systémů u jednoho úřadu, nikoli však centrální řízení vývoje všech systémů veřejné správy."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-59fa8f6418c3--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-approved-55",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--law-change-43264-19",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43308-approved-10",
+        "psp-core-2025--vote-88528",
+        "psp-core-2025--law-change-43372-1",
+        "psp-core-2025--print-step-211843",
+        "psp-core-2025--law-change-43395-1",
+        "psp-core-2025--print-step-211959"
+      ],
+      "explanationCz": "Motoristé slíbili centralizovat řízení vývoje veřejných informačních systémů tak, aby spolu aplikace spolupracovaly a sdílely data. Jejich poslanci podpořili novelu stavebního zákona, která umožňuje sloučit více systémů do jednoho společného, ale tuto možnost pouze otevírá a neukládá. V pozdějších závěrečných hlasováních o zákonu o pobytu cizinců a o zákonu zavádějícím testovací údaje klub Motoristů nedal většinu hlasů pro předlohy, které přinášely dílčí nástroje pro společné digitální služby a interoperabilitu. Protože tato novější rozhodnutí převážila nad dřívější podporou stavební novely, strana se v současnosti v dílčích bodech posouvá proti slibu; celý slib splněn není.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Hlasování o správě dat se podle parlamentního záznamu týkalo prvního čtení, nikoli konečného rozhodnutí, a proto samo skóre nemění, přestože je v balíčku vedeno jako připsané hlasování.",
+        "Novější hlasování o cizineckém zákoně a zákoně o testovacích údajích dokládají, že klub Motoristů nedal většinu hlasů pro předlohy, nikoli že všichni jeho poslanci hlasovali proti; obě předlohy přinášely pouze dílčí nástroje, ne úplné centrální řízení vývoje všech veřejných systémů."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0bc10fa4e530806b016ac555ed179887d295bf30e2676d5dd7",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 547104,
+      "input_tokens_details": {
+        "cache_write_tokens": 544192,
+        "cached_tokens": 2909
+      },
+      "output_tokens": 3120,
+      "output_tokens_details": {
+        "reasoning_tokens": 2890
+      },
+      "total_tokens": 550224
+    },
+    "output": {
+      "choice": "cannot-decide",
+      "citedEvidenceIds": [
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--vote-88528"
+      ],
+      "explanationCz": "Poslanci Motoristů podpořili stavební novelu, která umožňuje spojit více informačních systémů, ale nenařizuje to. Posudek B pak jako důkaz obratu proti slibu používá dvě hlasování o jiných návrzích. Záznamy je označují jako hlasování ve třetím čtení, ale nedokládají, že šlo o konečná rozhodnutí Sněmovny, která se podle pravidel započítávají. Proto tento posudek nemohu přijmout a druhý posudek není k dispozici."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-cannot-decide",
+    "status": null,
+    "selectedReview": null
+  }
+}

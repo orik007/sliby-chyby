@@ -1,0 +1,675 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-56-33-231Z--d54c008b5641",
+  "evaluatedAt": "2026-10-02T01:56:33.231Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-9e685aaa9ae4/d54c008b5641170e69373a2eaba5a828764b2d05fe2453496e0205ccadcddf0c.json",
+  "packageHash": "d54c008b5641170e69373a2eaba5a828764b2d05fe2453496e0205ccadcddf0c",
+  "assessmentContentHash": "fd638ff75cf3cbcdf4f5cdc0f5561032fc3abf18362b53586a60cea3daed8b6e",
+  "assessmentFingerprint": "f3dfcd5b771b39060e5ad7f891e398c63d87d9a8511922773d0143712bd35684",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-9e685aaa9ae4",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Relevance verdict names something other than a law change in the package: psp-core-2025--vote-86968",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_05005e61df743f3a016abf0e408d1887d198f0f79d2294b40c",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 583665,
+            "input_tokens_details": {
+              "cache_write_tokens": 580341,
+              "cached_tokens": 3321
+            },
+            "output_tokens": 11345,
+            "output_tokens_details": {
+              "reasoning_tokens": 9582
+            },
+            "total_tokens": 595010
+          },
+          "output": {
+            "promiseId": "candidate-9e685aaa9ae4",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Novela mění pravidla povolování staveb a výslovně upravuje umisťování fotovoltaických výroben, takže může usnadnit rozvoj solární energetiky."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Změny pravidel ochrany zemědělské půdy zahrnují agrovoltaiku a posuzování půdy pro povolované záměry, což se přímo týká možnosti rozvíjet solární výrobu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": true,
+                "reasonCz": "Změny energetického zákona upravují podmínky připojování a umisťování energetických zařízení, tedy část podmínek potřebných pro rozvoj elektráren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": true,
+                "reasonCz": "Novela mění postup posuzování vlivů na životní prostředí a související povolovací postupy, které se uplatňují také na energetické záměry."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Novela vodního zákona mění povolování nakládání s vodami a vodních děl, což se může týkat vodních elektráren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": true,
+                "reasonCz": "Změny zákona o urychlení výstavby zahrnují energetickou infrastrukturu a stavby pro energetickou bezpečnost, mezi něž text novely řadí také některé obnovitelné zdroje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": true,
+                "reasonCz": "Novela ovzduší mění postupy při povolování záměrů a podmínky ochrany ovzduší, které mohou ovlivnit povolování elektráren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-37",
+                "relevant": false,
+                "reasonCz": "Změny zadávání veřejných zakázek se týkají plánovacích smluv a nápravných opatření, nikoli podmínek pro rozvoj uvedených druhů elektráren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": true,
+                "reasonCz": "Novela zákona o urychlení obnovitelných zdrojů mění povolování záměrů v akceleračních oblastech, a přímo tak souvisí s rozvojem obnovitelné energetiky."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-27",
+                "relevant": false,
+                "reasonCz": "Jedinou změnou je nahrazení názvu ministerstva názvem nového úřadu, bez věcné změny podmínek pro elektrárny."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+                "relevant": true,
+                "reasonCz": "Novela zákona o podporovaných zdrojích mění pravidlo týkající se poplatku za elektřinu z větrných elektráren, a proto se může dotknout podmínek jejich rozvoje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": true,
+                "reasonCz": "Zrušovací ustanovení ruší mimo jiné předpis o bezpečné instalaci malých výroben elektřiny z obnovitelných zdrojů, a mění tak jejich podmínky instalace."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-2",
+                "relevant": true,
+                "reasonCz": "Vládní rozpočtový návrh umožňuje zvláštní výdaje na energetickou infrastrukturu a stavby pro energetickou bezpečnost, které mohou zahrnovat část obnovitelných zdrojů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+                "relevant": false,
+                "reasonCz": "Tato změna upravuje státní financování nízkouhlíkové výrobny, nikoli podmínky pro solární, větrné nebo vodní elektrárny."
+              },
+              {
+                "evidenceId": "psp-core-2025--vote-86968",
+                "relevant": true,
+                "reasonCz": "Hlasování ANO pro rozpočet Státního fondu životního prostředí souvisí s financováním obnovitelných zdrojů uvedeným v návrhu rozpočtu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43207-1",
+                "relevant": true,
+                "reasonCz": "Návrh rozpočtu výslovně uvádí podporu budování nových obnovitelných zdrojů energie z Modernizačního fondu."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-9e685aaa9ae4--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--law-change-43174-21",
+              "psp-core-2025--law-change-43174-22",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-32",
+              "psp-core-2025--law-change-43174-33",
+              "psp-core-2025--law-change-43174-42",
+              "psp-core-2025--law-change-43174-approved-43",
+              "psp-core-2025--law-change-43174-approved-56",
+              "psp-core-2025--law-change-43200-2",
+              "psp-core-2025--law-change-43207-1",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--print-step-210731",
+              "psp-core-2025--vote-87430",
+              "psp-core-2025--vote-88105",
+              "psp-core-2025--vote-88416",
+              "psp-core-2025--senate-resolution-43200-6",
+              "psp-core-2025--vote-86968"
+            ],
+            "explanationCz": "Poslanci ANO předložili spolu s dalšími poslanci novelu stavebního zákona, tedy pravidel pro povolování staveb, a následně hlasovali pro její přijetí i po zamítnutí Senátem. Schválené změny usnadňují některé postupy pro fotovoltaické elektrárny a obnovitelné zdroje a upravují také povolování vodních děl. ANO rovněž hlasovalo pro rozpočet Státního fondu životního prostředí, který počítá s podporou nových obnovitelných zdrojů. Jde o doložený dílčí posun k vytvoření podmínek pro rozvoj těchto elektráren, nikoli o důkaz, že byly elektrárny skutečně postaveny.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Novela zároveň mění pravidlo týkající se poplatku za elektřinu z větrných elektráren; z dodaných podkladů není jednoznačné, jaký bude dopad této změny na jejich rozvoj."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-9e685aaa9ae4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela stavebního zákona upravuje povolování a územní plánování a výslovně usnadňuje stavební úpravy pro instalace využívající obnovitelné zdroje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Změny ochrany zemědělské půdy upravují možnost umisťovat záměry na půdě, včetně výjimek a pravidel pro plochy určené k zástavbě, což může ovlivnit umístění elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Novela energetického zákona se dotýká obnovitelných zdrojů, mimo jiné tím, že výrobu elektřiny z nich výslovně zahrnuje mezi činnosti ve veřejném zájmu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Změny posuzování vlivů na životní prostředí zasahují do procesu, kterým procházejí i větší záměry obnovitelných elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Novela vodního zákona mění povolování vodních záměrů, a může proto ovlivnit podmínky pro vodní elektrárny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změny pravidel pro strategicky významnou infrastrukturu upravují povolování energetických staveb, mezi něž mohou patřit i některé obnovitelné zdroje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Změny ochrany ovzduší upravují povolování emisních zdrojů, ale text neukazuje podstatný dopad na solární, větrné ani vodní elektrárny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "Změny zadávání veřejných zakázek se týkají zakázek a plánovacích smluv, nikoli podmínek pro rozvoj uvedených typů elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Novela zákona o urychlení využívání obnovitelných zdrojů mění pravidla pro plánování a povolování záměrů těchto zdrojů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-27",
+          "relevant": false,
+          "reasonCz": "Změna pouze přesouvá působnost v oblasti energetického hospodaření mezi úřady a nestanoví podmínky pro výstavbu elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Změna poplatku spojeného s výrobou elektřiny z větru, včetně možnosti jeho snížení o platby obci, může ovlivnit ekonomické podmínky větrných elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Zrušovací ustanovení ruší samostatný zákon o urychlení využívání obnovitelných zdrojů, a proto může oslabit podmínky pro jejich rozvoj."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": false,
+          "reasonCz": "Změna rozpočtových pravidel umožňuje vyšší výdaje na vybrané stavby energetické bezpečnosti, ale z textu nelze doložit, že zahrnují sluneční, větrné či vodní elektrárny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": false,
+          "reasonCz": "Změna financování se týká nízkouhlíkové výrobny energie, ale text ji nespojuje se slunečními, větrnými ani vodními elektrárnami."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu fondu životního prostředí výslovně počítá s podporou budování nových obnovitelných zdrojů energie."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-9e685aaa9ae4--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-86968",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili a v závěrečném hlasování podpořili novelu stavebního zákona, tedy pravidel pro povolování staveb; poté, co ji Senát odmítl, hlasovali také pro setrvání Sněmovny na návrhu. Novela obsahuje dílčí usnadnění pro obnovitelné zdroje, například předpokládá, že stavební úprava pro jejich instalaci není v rozporu s charakterem území, a poslanci ANO podpořili také rozpočet fondu životního prostředí, který počítá s podporou nových obnovitelných zdrojů. Schválený celek však zároveň ruší samostatný zákon o urychlení využívání obnovitelných zdrojů energie, což jde proti části slibu. Celkově proto převažuje postup proti slibu, nikoli jeho úplné popření.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela stavebního zákona současně obsahuje dílčí usnadnění pro obnovitelné zdroje i zrušení samostatného zákona zaměřeného na jejich urychlené využívání; hodnocení jako kroku proti slibu vychází z významu tohoto zrušení, přestože některá jednotlivá opatření mohou rozvoj usnadnit."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-9e685aaa9ae4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela stavebního zákona výslovně upravuje instalace využívající obnovitelné zdroje, včetně fotovoltaiky, a může tím usnadnit jejich povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Změny pravidel pro odnětí zemědělské půdy a její ochranu mohou ovlivnit umisťování a povolování energetických záměrů na takových pozemcích."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválené znění označuje výrobu elektřiny z obnovitelných zdrojů a výrobu elektřiny z vody nad stanovenými prahy za veřejný zájem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Změny posuzování vlivů na životní prostředí a jeho návaznosti na povolení mohou ovlivnit povolování energetických projektů, pokud tomuto posouzení podléhají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Změna vodního zákona ruší výjimku vztahující se k plánování a výstavbě nových obnovitelných zdrojů využívajících energii vodního toku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změny pravidel pro strategickou infrastrukturu zahrnují energetickou infrastrukturu a mohou usnadnit realizaci souvisejících energetických staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Tato část mění obecné postupy ochrany ovzduší, ale její text neukazuje konkrétní dopad na rozvoj solárních, větrných nebo vodních elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "Změny pravidel pro veřejné zakázky se týkají zadávání zakázek, nikoli podmínek pro rozvoj uvedených elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Tato část přímo mění postupy pro povolování záměrů využívajících obnovitelné zdroje energie v akceleračních oblastech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-27",
+          "relevant": false,
+          "reasonCz": "Změna pouze přesouvá působnost pro vyjádření k územnímu plánování a neobsahuje konkrétní podmínky pro rozvoj uvedených zdrojů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Novela zákona o podporovaných zdrojích umožňuje snížit poplatek větrné elektrárny o peněžní plnění poskytnuté obci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Schválený text ruší část zákona o urychlení využívání obnovitelných zdrojů, ale její obsah není v balíčku uveden, takže dopad na slib nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": false,
+          "reasonCz": "Tato část mění obecná rozpočtová pravidla a neukazuje konkrétní financování ani jinou podmínku pro zdroje uvedené ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": false,
+          "reasonCz": "Financování je určeno obecně pro nízkouhlíkovou výrobnu a text neukazuje, že se týká některého ze zdrojů uvedených ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet Státního fondu životního prostředí výslovně počítá s podporou výstavby nových obnovitelných zdrojů energie."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-9e685aaa9ae4--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "ANO slíbilo vytvořit podmínky pro rozvoj solárních, větrných či dalších elektráren. Jeho poslanci předložili a podpořili novelu stavebního zákona, která usnadňuje některé instalace obnovitelných zdrojů a u vybraných výroben obnovitelné elektřiny výslovně stanoví veřejný zájem. Poté, co Senát návrh odmítl, poslanci ANO hlasovali pro setrvání na něm; součástí návrhu je však také zrušení zvláštní výjimky pro nové obnovitelné zdroje využívající energii vodního toku. ANO také hlasovalo pro rozpočet Státního fondu životního prostředí, který počítá s podporou výstavby nových obnovitelných zdrojů. Jde tedy o doložený posun, nikoli o splnění celého slibu, a dopad některých změn nelze z dostupných podkladů ověřit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U vodního zákona je doloženo zrušení výjimky pro nové obnovitelné zdroje využívající energii vodního toku, ale znění ustanovení, z něhož tato výjimka vycházela, není v balíčku uvedeno; nelze proto přesně určit, jak se tím mění jejich povolování.",
+        "Schválený text ruší část šestou zákona o urychlení využívání obnovitelných zdrojů energie, ale její obsah zde chybí. Nelze proto posoudit, zda zrušení podmínky pro rozvoj těchto zdrojů zlepšuje, nebo zhoršuje."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0d5bbedc1ca2401c016abf0e99e19087d1a7fa1b2b9df11ba3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 583665,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 583662
+      },
+      "output_tokens": 8971,
+      "output_tokens_details": {
+        "reasoning_tokens": 7291
+      },
+      "total_tokens": 592636
+    },
+    "output": {
+      "promiseId": "candidate-9e685aaa9ae4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela stavebního zákona upravuje povolování a územní plánování a výslovně usnadňuje stavební úpravy pro instalace využívající obnovitelné zdroje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Změny ochrany zemědělské půdy upravují možnost umisťovat záměry na půdě, včetně výjimek a pravidel pro plochy určené k zástavbě, což může ovlivnit umístění elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Novela energetického zákona se dotýká obnovitelných zdrojů, mimo jiné tím, že výrobu elektřiny z nich výslovně zahrnuje mezi činnosti ve veřejném zájmu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Změny posuzování vlivů na životní prostředí zasahují do procesu, kterým procházejí i větší záměry obnovitelných elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Novela vodního zákona mění povolování vodních záměrů, a může proto ovlivnit podmínky pro vodní elektrárny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změny pravidel pro strategicky významnou infrastrukturu upravují povolování energetických staveb, mezi něž mohou patřit i některé obnovitelné zdroje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Změny ochrany ovzduší upravují povolování emisních zdrojů, ale text neukazuje podstatný dopad na solární, větrné ani vodní elektrárny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "Změny zadávání veřejných zakázek se týkají zakázek a plánovacích smluv, nikoli podmínek pro rozvoj uvedených typů elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Novela zákona o urychlení využívání obnovitelných zdrojů mění pravidla pro plánování a povolování záměrů těchto zdrojů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-27",
+          "relevant": false,
+          "reasonCz": "Změna pouze přesouvá působnost v oblasti energetického hospodaření mezi úřady a nestanoví podmínky pro výstavbu elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Změna poplatku spojeného s výrobou elektřiny z větru, včetně možnosti jeho snížení o platby obci, může ovlivnit ekonomické podmínky větrných elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Zrušovací ustanovení ruší samostatný zákon o urychlení využívání obnovitelných zdrojů, a proto může oslabit podmínky pro jejich rozvoj."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": false,
+          "reasonCz": "Změna rozpočtových pravidel umožňuje vyšší výdaje na vybrané stavby energetické bezpečnosti, ale z textu nelze doložit, že zahrnují sluneční, větrné či vodní elektrárny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": false,
+          "reasonCz": "Změna financování se týká nízkouhlíkové výrobny energie, ale text ji nespojuje se slunečními, větrnými ani vodními elektrárnami."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu fondu životního prostředí výslovně počítá s podporou budování nových obnovitelných zdrojů energie."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-9e685aaa9ae4--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-86968",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili a v závěrečném hlasování podpořili novelu stavebního zákona, tedy pravidel pro povolování staveb; poté, co ji Senát odmítl, hlasovali také pro setrvání Sněmovny na návrhu. Novela obsahuje dílčí usnadnění pro obnovitelné zdroje, například předpokládá, že stavební úprava pro jejich instalaci není v rozporu s charakterem území, a poslanci ANO podpořili také rozpočet fondu životního prostředí, který počítá s podporou nových obnovitelných zdrojů. Schválený celek však zároveň ruší samostatný zákon o urychlení využívání obnovitelných zdrojů energie, což jde proti části slibu. Celkově proto převažuje postup proti slibu, nikoli jeho úplné popření.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela stavebního zákona současně obsahuje dílčí usnadnění pro obnovitelné zdroje i zrušení samostatného zákona zaměřeného na jejich urychlené využívání; hodnocení jako kroku proti slibu vychází z významu tohoto zrušení, přestože některá jednotlivá opatření mohou rozvoj usnadnit."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_03aa27d04b3f1ee0016abf0ee3dda487d191994900ae354cca",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 583665,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 583662
+      },
+      "output_tokens": 11764,
+      "output_tokens_details": {
+        "reasoning_tokens": 9822
+      },
+      "total_tokens": 595429
+    },
+    "output": {
+      "promiseId": "candidate-9e685aaa9ae4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela stavebního zákona výslovně upravuje instalace využívající obnovitelné zdroje, včetně fotovoltaiky, a může tím usnadnit jejich povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Změny pravidel pro odnětí zemědělské půdy a její ochranu mohou ovlivnit umisťování a povolování energetických záměrů na takových pozemcích."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválené znění označuje výrobu elektřiny z obnovitelných zdrojů a výrobu elektřiny z vody nad stanovenými prahy za veřejný zájem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Změny posuzování vlivů na životní prostředí a jeho návaznosti na povolení mohou ovlivnit povolování energetických projektů, pokud tomuto posouzení podléhají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Změna vodního zákona ruší výjimku vztahující se k plánování a výstavbě nových obnovitelných zdrojů využívajících energii vodního toku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změny pravidel pro strategickou infrastrukturu zahrnují energetickou infrastrukturu a mohou usnadnit realizaci souvisejících energetických staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Tato část mění obecné postupy ochrany ovzduší, ale její text neukazuje konkrétní dopad na rozvoj solárních, větrných nebo vodních elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "Změny pravidel pro veřejné zakázky se týkají zadávání zakázek, nikoli podmínek pro rozvoj uvedených elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Tato část přímo mění postupy pro povolování záměrů využívajících obnovitelné zdroje energie v akceleračních oblastech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-27",
+          "relevant": false,
+          "reasonCz": "Změna pouze přesouvá působnost pro vyjádření k územnímu plánování a neobsahuje konkrétní podmínky pro rozvoj uvedených zdrojů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Novela zákona o podporovaných zdrojích umožňuje snížit poplatek větrné elektrárny o peněžní plnění poskytnuté obci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Schválený text ruší část zákona o urychlení využívání obnovitelných zdrojů, ale její obsah není v balíčku uveden, takže dopad na slib nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": false,
+          "reasonCz": "Tato část mění obecná rozpočtová pravidla a neukazuje konkrétní financování ani jinou podmínku pro zdroje uvedené ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": false,
+          "reasonCz": "Financování je určeno obecně pro nízkouhlíkovou výrobnu a text neukazuje, že se týká některého ze zdrojů uvedených ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet Státního fondu životního prostředí výslovně počítá s podporou výstavby nových obnovitelných zdrojů energie."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-9e685aaa9ae4--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "ANO slíbilo vytvořit podmínky pro rozvoj solárních, větrných či dalších elektráren. Jeho poslanci předložili a podpořili novelu stavebního zákona, která usnadňuje některé instalace obnovitelných zdrojů a u vybraných výroben obnovitelné elektřiny výslovně stanoví veřejný zájem. Poté, co Senát návrh odmítl, poslanci ANO hlasovali pro setrvání na něm; součástí návrhu je však také zrušení zvláštní výjimky pro nové obnovitelné zdroje využívající energii vodního toku. ANO také hlasovalo pro rozpočet Státního fondu životního prostředí, který počítá s podporou výstavby nových obnovitelných zdrojů. Jde tedy o doložený posun, nikoli o splnění celého slibu, a dopad některých změn nelze z dostupných podkladů ověřit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U vodního zákona je doloženo zrušení výjimky pro nové obnovitelné zdroje využívající energii vodního toku, ale znění ustanovení, z něhož tato výjimka vycházela, není v balíčku uvedeno; nelze proto přesně určit, jak se tím mění jejich povolování.",
+        "Schválený text ruší část šestou zákona o urychlení využívání obnovitelných zdrojů energie, ale její obsah zde chybí. Nelze proto posoudit, zda zrušení podmínky pro rozvoj těchto zdrojů zlepšuje, nebo zhoršuje."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0b21635830650508016abf0f41faa087d198121c98cafbe218",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 586204,
+      "input_tokens_details": {
+        "cache_write_tokens": 583722,
+        "cached_tokens": 2479
+      },
+      "output_tokens": 423,
+      "output_tokens_details": {
+        "reasoning_tokens": 184
+      },
+      "total_tokens": 586627
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-approved-56"
+      ],
+      "explanationCz": "Volím druhé hodnocení, protože první nesprávně tvrdí, že návrh ruší celý zákon o urychlení využívání obnovitelných zdrojů. Ruší pouze jeho část a dodané podklady neukazují její obsah, takže nelze tvrdit, že tím rozvoj elektráren oslabuje. Poslanci ANO podpořili novelu stavebního zákona, která mimo jiné usnadňuje umisťování solárních panelů na stávající stavby, a na návrhu trvali i po odmítnutí Senátem. To dokládá dílčí posun ke slibu, nikoli jeho úplné splnění; některé další dopady zůstávají nejasné."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-b"
+  }
+}

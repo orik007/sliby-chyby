@@ -1,0 +1,351 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-39-29-358Z--4e92d2ec09d8",
+  "evaluatedAt": "2026-10-02T05:39:29.358Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-898c303f4f/4e92d2ec09d8f57a4cc3d4723cabd4c10dd4613439c9a5b06f15c171d17cdd67.json",
+  "packageHash": "4e92d2ec09d8f57a4cc3d4723cabd4c10dd4613439c9a5b06f15c171d17cdd67",
+  "assessmentContentHash": "188bf3ea24d37086739197c8f95353927a73d439fe32356a167f4e62d2bbcb53",
+  "assessmentFingerprint": "508db34ac755761e26d68f7afd15f343220822e261b114b20ed2a59e8289b166",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-898c303f4f",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment cites duplicate evidence IDs",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_005f6c11ebb38a20016abf43358da887d1a67482d1d682e73e",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 347967,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 347964
+            },
+            "output_tokens": 4418,
+            "output_tokens_details": {
+              "reasoning_tokens": 3624
+            },
+            "total_tokens": 352385
+          },
+          "output": {
+            "promiseId": "motoriste-2025-898c303f4f",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Novela výslovně zahrnuje železnice do veřejné infrastruktury a označuje plánování, přípravu i výstavbu veřejné infrastruktury za veřejný zájem, což může posílit postavení železničních projektů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": true,
+                "reasonCz": "Změny pravidel pro strategicky významnou infrastrukturu se vztahují také na dopravní infrastrukturu, a mohou tak usnadnit uskutečňování železničních staveb."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-22",
+                "relevant": false,
+                "reasonCz": "Změna upravuje převod pozemků se silniční stavbou do vlastnictví státu a neobsahuje ustanovení, které by se týkalo vysokorychlostních tratí nebo priority železniční výstavby."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-2",
+                "relevant": true,
+                "reasonCz": "Novela umožňuje zvýšit výdajový rámec kvůli financování výstavby drah, takže může posílit veřejné financování železničních projektů."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "motoriste-2025-898c303f4f--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-32",
+              "psp-core-2025--law-change-43200-2",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--print-step-210731",
+              "psp-core-2025--law-change-43200-2",
+              "psp-core-2025--vote-87430",
+              "psp-core-2025--senate-resolution-43200-6",
+              "psp-core-2025--vote-88105",
+              "psp-core-2025--vote-88416"
+            ],
+            "explanationCz": "Poslanci Motoristů spolu s dalšími poslanci předložili novelu stavebního zákona a jejich klub ji podpořil i poté, co ji Senát zamítl. Schválené znění označuje plánování a výstavbu veřejné infrastruktury za veřejný zájem a zahrnuje do ní železnice. Vláda také předložila změnu rozpočtových pravidel, kterou poslanci Motoristů podpořili; ta umožňuje zvýšit výdaje na výstavbu drah. Tato rozhodnutí jdou proti části slibu, protože podporují železniční výstavbu jako celek; žádné z doložených ustanovení však výslovně nejmenuje vysokorychlostní tratě.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Doložené změny se týkají železniční a veřejné infrastruktury obecně, nikoli výslovně vysokorychlostních tratí; balíček proto nedokládá, že konkrétní trať VRT získala finance nebo byla určena jako priorita."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-898c303f4f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela stavebního zákona označuje plánování, přípravu, výstavbu a provoz veřejné infrastruktury za veřejný zájem; její pravidla se vztahují i na železniční infrastrukturu, a mohou tak usnadnit realizaci VRT, ale VRT jako prioritu výslovně neuvádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro strategicky významnou infrastrukturu upravuje postupy vztahující se také na dopravní infrastrukturu, což může ovlivnit realizaci železničních staveb, byť vysokorychlostní tratě výslovně nezmiňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-22",
+          "relevant": false,
+          "reasonCz": "Změna pouze upravuje označení pozemku v ustanovení zákona o krajích a z jejího textu nevyplývá dopad na prioritu či financování VRT."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválený text umožňuje v letech 2026–2036 navýšit výdajový rámec o výdaje na výstavbu drah, což se týká financování železničních projektů včetně případných VRT."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-898c303f4f--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--senate-resolution-43200-6"
+      ],
+      "explanationCz": "Poslanci Motoristů se podíleli na předložení novely stavebního zákona a jejich klub hlasoval pro její schválení; novela označuje výstavbu veřejné infrastruktury za veřejný zájem a mění také pravidla pro strategickou infrastrukturu. V jiné novele rozpočtových pravidel vláda navrhla, aby se výdaje na výstavbu drah mohly v letech 2026–2036 přičíst nad běžný výdajový rámec, a poslanci Motoristů hlasovali pro tento návrh i pro jeho pozdější prosazení po vrácení Senátem. Tato opatření mohou usnadnit výstavbu a financování železničních projektů, a jsou proto v rozporu alespoň s částí slibu nepovažovat VRT za prioritu. Protože ale podklady neukazují, že by se tato pravidla výslovně vztahovala na VRT nebo zaručovala jejich financování, jde o posun proti části slibu, nikoli o popření celého závazku.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady spojují podporu výstavby drah a obecná pravidla pro dopravní infrastrukturu s možným postupem VRT, ale neuvádějí VRT výslovně jako financovaný nebo urychlovaný projekt.",
+        "Přesné znění textu rozpočtové novely, o němž se hlasovalo po jejím vrácení prezidentem, není zveřejněno; dřívější rozhodující hlasování Motoristů pro návrh s výdajovou výjimkou pro výstavbu drah je však doloženo."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-898c303f4f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela stavebního zákona usnadňuje povolování veřejné infrastruktury a označuje její výstavbu za veřejný zájem, což může podpořit také železniční projekty včetně VRT."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změny pravidel pro urychlení výstavby infrastruktury se mohou vztáhnout i na železniční stavby, a tím podpořit jejich realizaci, byť VRT výslovně nejmenují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-22",
+          "relevant": false,
+          "reasonCz": "Tato část mění pouze vymezení pozemku v zákoně o krajích a neobsahuje opatření týkající se výstavby ani priorit VRT."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Novela rozpočtových pravidel výslovně umožňuje navýšit výdaje nad stanovený rámec na výstavbu železnic, což může znamenat přednostní podporu železniční infrastruktury."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-898c303f4f--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--senate-resolution-43200-6"
+      ],
+      "explanationCz": "Poslanci Motoristů se podíleli na předložení novely stavebního zákona a hlasovali pro její přijetí; ta mimo jiné označuje výstavbu veřejné infrastruktury za veřejný zájem a mění pravidla pro povolování staveb. Vláda také předložila novelu rozpočtových pravidel, která umožňuje navýšit výdaje nad běžný rámec na výstavbu železnic, a poslanci Motoristů ji podpořili při hlasování o návrhu i po jeho návratu ze Senátu. Tím strana podpořila opatření, která mohou železniční výstavbu zvýhodnit, což jde proti slibu, že VRT nemají být prioritou. Z předložených podkladů ale nevyplývá, že by tato opatření přímo vyčlenila prostředky na konkrétní trať VRT.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U obou novel stavebních předpisů jsou doložena obecná opatření pro infrastrukturu či železniční stavby, nikoli výslovné rozhodnutí upřednostnit konkrétní vysokorychlostní trať.",
+        "Přesné znění rozpočtové novely, o němž se hlasovalo po vrácení návrhu, není zveřejněno; dostupné znění a záznamy však dokládají podporu rozpočtového pravidla vztahujícího se na železniční výstavbu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0d8b9a83a12be1ac016abf42f98eac87d1810c8016d7ebccef",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 347967,
+      "input_tokens_details": {
+        "cache_write_tokens": 344643,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 4061,
+      "output_tokens_details": {
+        "reasoning_tokens": 3106
+      },
+      "total_tokens": 352028
+    },
+    "output": {
+      "promiseId": "motoriste-2025-898c303f4f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela stavebního zákona označuje plánování, přípravu, výstavbu a provoz veřejné infrastruktury za veřejný zájem; její pravidla se vztahují i na železniční infrastrukturu, a mohou tak usnadnit realizaci VRT, ale VRT jako prioritu výslovně neuvádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro strategicky významnou infrastrukturu upravuje postupy vztahující se také na dopravní infrastrukturu, což může ovlivnit realizaci železničních staveb, byť vysokorychlostní tratě výslovně nezmiňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-22",
+          "relevant": false,
+          "reasonCz": "Změna pouze upravuje označení pozemku v ustanovení zákona o krajích a z jejího textu nevyplývá dopad na prioritu či financování VRT."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválený text umožňuje v letech 2026–2036 navýšit výdajový rámec o výdaje na výstavbu drah, což se týká financování železničních projektů včetně případných VRT."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-898c303f4f--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--senate-resolution-43200-6"
+      ],
+      "explanationCz": "Poslanci Motoristů se podíleli na předložení novely stavebního zákona a jejich klub hlasoval pro její schválení; novela označuje výstavbu veřejné infrastruktury za veřejný zájem a mění také pravidla pro strategickou infrastrukturu. V jiné novele rozpočtových pravidel vláda navrhla, aby se výdaje na výstavbu drah mohly v letech 2026–2036 přičíst nad běžný výdajový rámec, a poslanci Motoristů hlasovali pro tento návrh i pro jeho pozdější prosazení po vrácení Senátem. Tato opatření mohou usnadnit výstavbu a financování železničních projektů, a jsou proto v rozporu alespoň s částí slibu nepovažovat VRT za prioritu. Protože ale podklady neukazují, že by se tato pravidla výslovně vztahovala na VRT nebo zaručovala jejich financování, jde o posun proti části slibu, nikoli o popření celého závazku.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady spojují podporu výstavby drah a obecná pravidla pro dopravní infrastrukturu s možným postupem VRT, ale neuvádějí VRT výslovně jako financovaný nebo urychlovaný projekt.",
+        "Přesné znění textu rozpočtové novely, o němž se hlasovalo po jejím vrácení prezidentem, není zveřejněno; dřívější rozhodující hlasování Motoristů pro návrh s výdajovou výjimkou pro výstavbu drah je však doloženo."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0fb09ffeb647ecc4016abf4371934487d1b1bd7d94533c6475",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 347967,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 347964
+      },
+      "output_tokens": 4468,
+      "output_tokens_details": {
+        "reasoning_tokens": 3604
+      },
+      "total_tokens": 352435
+    },
+    "output": {
+      "promiseId": "motoriste-2025-898c303f4f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela stavebního zákona usnadňuje povolování veřejné infrastruktury a označuje její výstavbu za veřejný zájem, což může podpořit také železniční projekty včetně VRT."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změny pravidel pro urychlení výstavby infrastruktury se mohou vztáhnout i na železniční stavby, a tím podpořit jejich realizaci, byť VRT výslovně nejmenují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-22",
+          "relevant": false,
+          "reasonCz": "Tato část mění pouze vymezení pozemku v zákoně o krajích a neobsahuje opatření týkající se výstavby ani priorit VRT."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Novela rozpočtových pravidel výslovně umožňuje navýšit výdaje nad stanovený rámec na výstavbu železnic, což může znamenat přednostní podporu železniční infrastruktury."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-898c303f4f--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--senate-resolution-43200-6"
+      ],
+      "explanationCz": "Poslanci Motoristů se podíleli na předložení novely stavebního zákona a hlasovali pro její přijetí; ta mimo jiné označuje výstavbu veřejné infrastruktury za veřejný zájem a mění pravidla pro povolování staveb. Vláda také předložila novelu rozpočtových pravidel, která umožňuje navýšit výdaje nad běžný rámec na výstavbu železnic, a poslanci Motoristů ji podpořili při hlasování o návrhu i po jeho návratu ze Senátu. Tím strana podpořila opatření, která mohou železniční výstavbu zvýhodnit, což jde proti slibu, že VRT nemají být prioritou. Z předložených podkladů ale nevyplývá, že by tato opatření přímo vyčlenila prostředky na konkrétní trať VRT.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U obou novel stavebních předpisů jsou doložena obecná opatření pro infrastrukturu či železniční stavby, nikoli výslovné rozhodnutí upřednostnit konkrétní vysokorychlostní trať.",
+        "Přesné znění rozpočtové novely, o němž se hlasovalo po vrácení návrhu, není zveřejněno; dostupné znění a záznamy však dokládají podporu rozpočtového pravidla vztahujícího se na železniční výstavbu."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

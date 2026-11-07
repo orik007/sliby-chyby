@@ -1,0 +1,220 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-38-05-274Z--0826d93d6d4c",
+  "evaluatedAt": "2026-10-02T05:38:05.274Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-9723e1fa18/0826d93d6d4cd5e31bef2de392d039b4fab2f4ba6c65e5d1bdc5403797936c6a.json",
+  "packageHash": "0826d93d6d4cd5e31bef2de392d039b4fab2f4ba6c65e5d1bdc5403797936c6a",
+  "assessmentContentHash": "0461a9bb3ccdf059f87cb5191f143cb0b24a1f4f28ed4990edee3b095a1c5667",
+  "assessmentFingerprint": "498c79010f579cd2f876d5e3b8607c791f07e254e215f9e272348c7433752faf",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-9723e1fa18",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-9723e1fa18",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení o správě dat a zabezpečeném řízeném přístupu k datům veřejné správy mohou podpořit bezpečné nakládání s resortními daty, tedy část slibu, přestože nezavádějí národní model umělé inteligence."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-4",
+          "relevant": false,
+          "reasonCz": "Změna pouze stanoví poplatek za žádost o povolení řízeného přístupu k datům a nijak materiálně neřeší vytvoření ani bezpečné interní využití státního modelu umělé inteligence."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-9723e1fa18--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě většinově hlasovali pro návrh zákona o správě dat, který stanoví pravidla pro nakládání s daty veřejné správy a zavádí jejich zabezpečený řízený přístup. To může přispět k bezpečnému nakládání s resortními daty, ale schválený text nezřizuje státem provozovaný model umělé inteligence ani neurčuje jeho trénování pro interní potřebu resortů. Jde proto o posun k části slibu, nikoli o jeho splnění.",
+      "confidence": "medium",
+      "uncertainties": []
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-9723e1fa18",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": false,
+          "reasonCz": "Text upravuje správu veřejných dat a jejich řízené zpřístupňování pro vymezené účely, ale nezavádí státní model umělé inteligence ani trénování modelu resortními daty pro interní potřebu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-4",
+          "relevant": false,
+          "reasonCz": "Tato část pouze zavádí správní poplatek za žádost o řízený přístup k datům a nijak neupravuje vytvoření ani provoz národního modelu umělé inteligence."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-9723e1fa18--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--law-change-43161-4"
+      ],
+      "explanationCz": "Slib Motoristů sobě se týká státem provozovaného modelu umělé inteligence trénovaného resortními daty pro interní využití. Vládní návrh zákona o správě dat stanoví pravidla pro katalogizaci veřejných dat a jejich řízené zpřístupňování, nikoli vytvoření takového modelu nebo jeho trénování. Další část návrhu pouze zavádí poplatek za žádost o řízený přístup k datům. V doložených podkladech proto není ověřen podstatný posun ke splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují relevantní opatření ani informace o případném vytvoření národního modelu umělé inteligence či jeho provozu; nelze z nich určit, zda k takovým krokům došlo mimo zachycené zákonné změny."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0b9d492342ed0568016abf4321602487d1b37d060c18a164f4",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 27466,
+      "input_tokens_details": {
+        "cache_write_tokens": 24142,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1663,
+      "output_tokens_details": {
+        "reasoning_tokens": 1249
+      },
+      "total_tokens": 29129
+    },
+    "output": {
+      "promiseId": "motoriste-2025-9723e1fa18",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení o správě dat a zabezpečeném řízeném přístupu k datům veřejné správy mohou podpořit bezpečné nakládání s resortními daty, tedy část slibu, přestože nezavádějí národní model umělé inteligence."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-4",
+          "relevant": false,
+          "reasonCz": "Změna pouze stanoví poplatek za žádost o povolení řízeného přístupu k datům a nijak materiálně neřeší vytvoření ani bezpečné interní využití státního modelu umělé inteligence."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-9723e1fa18--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě většinově hlasovali pro návrh zákona o správě dat, který stanoví pravidla pro nakládání s daty veřejné správy a zavádí jejich zabezpečený řízený přístup. To může přispět k bezpečnému nakládání s resortními daty, ale schválený text nezřizuje státem provozovaný model umělé inteligence ani neurčuje jeho trénování pro interní potřebu resortů. Jde proto o posun k části slibu, nikoli o jeho splnění.",
+      "confidence": "medium",
+      "uncertainties": []
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_088ff6bc6d72fcc3016abf432cc03487d1941dd1e1d20b21f1",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 27466,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 27463
+      },
+      "output_tokens": 1594,
+      "output_tokens_details": {
+        "reasoning_tokens": 1130
+      },
+      "total_tokens": 29060
+    },
+    "output": {
+      "promiseId": "motoriste-2025-9723e1fa18",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": false,
+          "reasonCz": "Text upravuje správu veřejných dat a jejich řízené zpřístupňování pro vymezené účely, ale nezavádí státní model umělé inteligence ani trénování modelu resortními daty pro interní potřebu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-4",
+          "relevant": false,
+          "reasonCz": "Tato část pouze zavádí správní poplatek za žádost o řízený přístup k datům a nijak neupravuje vytvoření ani provoz národního modelu umělé inteligence."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-9723e1fa18--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--law-change-43161-4"
+      ],
+      "explanationCz": "Slib Motoristů sobě se týká státem provozovaného modelu umělé inteligence trénovaného resortními daty pro interní využití. Vládní návrh zákona o správě dat stanoví pravidla pro katalogizaci veřejných dat a jejich řízené zpřístupňování, nikoli vytvoření takového modelu nebo jeho trénování. Další část návrhu pouze zavádí poplatek za žádost o řízený přístup k datům. V doložených podkladech proto není ověřen podstatný posun ke splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují relevantní opatření ani informace o případném vytvoření národního modelu umělé inteligence či jeho provozu; nelze z nich určit, zda k takovým krokům došlo mimo zachycené zákonné změny."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_06bcce636a8fcb54016abf43387b5887d184d9866516c584dc",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 27488,
+      "input_tokens_details": {
+        "cache_write_tokens": 25006,
+        "cached_tokens": 2479
+      },
+      "output_tokens": 276,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 27764
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "motoriste-2025-9723e1fa18--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--law-change-43161-4",
+        "psp-core-2025--vote-86767"
+      ],
+      "explanationCz": "Volím druhé hodnocení, protože obecná pravidla pro správu a ochranu dat sama o sobě nenaplňují část slibu o státním modelu umělé inteligence. Devět poslanců Motoristů sobě podpořilo zákon o správě dat a řízeném přístupu k nim, vedený ve Sněmovně jako tisk č. 54. Schválený text ale neřeší vytvoření takového modelu, jeho provoz státem ani trénování na datech ministerstev pro jejich vlastní potřeby; další posuzovaná změna pouze zavádí poplatek za žádost o přístup k datům. První hodnocení proto přisuzuje obecným pravidlům příliš velký význam a doložené podklady podstatný posun v tomto slibu neprokazují."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-b"
+  }
+}

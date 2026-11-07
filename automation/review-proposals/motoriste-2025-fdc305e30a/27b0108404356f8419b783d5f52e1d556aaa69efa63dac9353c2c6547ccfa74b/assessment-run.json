@@ -1,0 +1,474 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T13-37-34-092Z--4b3d4b29d7c2",
+  "evaluatedAt": "2026-11-05T13:37:34.092Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-fdc305e30a/4b3d4b29d7c25eb2d3c204c48c3b49c088eb798dd8e27f4c4b6846a0f9e54bc2.json",
+  "packageHash": "4b3d4b29d7c25eb2d3c204c48c3b49c088eb798dd8e27f4c4b6846a0f9e54bc2",
+  "assessmentContentHash": "cc468a26d8ccea4068b19cd55fa71303db5a14cac5b9c286c31fd86cd35ae641",
+  "assessmentFingerprint": "27b0108404356f8419b783d5f52e1d556aaa69efa63dac9353c2c6547ccfa74b",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-fdc305e30a",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment omits the relevance verdict for law change psp-core-2025--law-change-43174-8-5",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_08689dd178653483016aec849f43b887d190c4ef879afd24fd",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 81803,
+            "input_tokens_details": {
+              "cache_write_tokens": 75453,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 9618,
+            "output_tokens_details": {
+              "reasoning_tokens": 7545
+            },
+            "total_tokens": 91421
+          },
+          "output": {
+            "promiseId": "motoriste-2025-fdc305e30a",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-1",
+                "relevant": true,
+                "reasonCz": "Změny stavebního zákona výslovně zahrnují energetiku a veřejnou infrastrukturu, a mohou tak ovlivnit plánování přečerpávacích elektráren.",
+                "effectCz": "Dříve účel zákona obecně směřoval k integrované ochraně veřejných zájmů a udržitelnému rozvoji; nové znění výslovně doplňuje rozvoj sídel, hospodářství a veřejné infrastruktury a stanoví, že plánování, příprava, výstavba a provoz veřejné infrastruktury jsou ve veřejném zájmu. Energetika je výslovně uvedena mezi chráněnými zájmy. Tím se obecně usnadňuje a podporuje příprava infrastruktury, ale ustanovení samo přípravu konkrétní přečerpávací elektrárny nezahajuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-2",
+                "relevant": true,
+                "reasonCz": "Změna úkolů územního plánování se výslovně týká ploch pro výrobu, skladování a distribuci energie, tedy i plánování energetických úložišť.",
+                "effectCz": "Před změnou se vhodné plochy pro výrobu elektřiny vyhodnocovaly a vymezovaly jen tehdy, bylo-li to účelné; po změně tato podmínka mizí a přibývá skladování a distribuce. Plánovací úkol se tak rozšiřuje a uvolňuje prostor pro vymezování ploch souvisejících s energetickými úložišti, což přípravě může pomoci, ale samo ji nezahajuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": true,
+                "reasonCz": "Nové pravidlo umožňuje povolovat některé stavby pro energetickou bezpečnost i v nezastavitelném území, což může být pro umístění energetické stavby podstatné.",
+                "effectCz": "Dříve bylo možné v nezastavěném území povolovat jen vyjmenované druhy záměrů; schválené znění nově připouští také stavby pro energetickou bezpečnost a pokládá je za souladné s charakterem území. To rozšiřuje možnost povolení takových staveb, avšak z balíčku nelze zjistit, zda přečerpávací elektrárna do této kategorie spadá."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": true,
+                "reasonCz": "Změna energetického zákona upravuje povolování výroben elektřiny a nakládání s pozemky, což může ovlivnit přípravu energetických staveb.",
+                "effectCz": "Předchozí znění vyžadovalo státní autorizaci pro výstavbu výrobny elektřiny od 1 MW; schválené znění hranici zvyšuje na 100 MW, čímž pro menší výrobny požadavek uvolňuje. Zároveň upravuje případy, kdy lze kvůli energetické stavbě omezit vlastnická práva; z textu nelze určit, zda se nová úprava vztahuje na konkrétní přečerpávací elektrárnu. Předchozí znění již označovalo výrobu elektřiny využívající vodní energii od 0,015 MW za veřejný zájem, takže tuto skutečnost nelze přičítat této změně."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Vodní zákon upravuje povolování vodních děl a nakládání s vodami, což je součástí povolovací přípravy přečerpávací elektrárny.",
+                "effectCz": "Dříve se pro vodní záměry uplatňovaly samostatné vodoprávní souhlasy a úkony; schválené znění u některých záměrů mění souhlas na vyjádření jako podklad pro rozhodnutí stavebního úřadu a přesouvá část působnosti na stavební úřady. Jde o změnu způsobu a koordinace povolování, nikoli o přímé zahájení přípravy elektrárny; z poskytnutých ustanovení nelze určit celkový dopad na její povolitelnost."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": true,
+                "reasonCz": "Změna zákona o strategické infrastruktuře výslovně mění režim infrastruktury a vypouští z přílohy konkrétní lokalitu uváděnou pro přečerpávací elektrárnu.",
+                "effectCz": "Původní znění přílohy č. 3 výslovně uvádělo lokalitu Dolu Československé armády také pro potřeby přečerpávací vodní elektrárny; schválené znění tuto zmínku nahrazuje jiným výčtem využití a elektrárnu již neuvádí. Tím se této konkrétní možnosti odnímá výslovná opora v příloze. Současně se upravuje režim pro širší okruh energetické infrastruktury, ale z dodaného textu nelze určit celkový dopad těchto změn na jiné elektrárny."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-376",
+                "relevant": true,
+                "reasonCz": "Usnesení vlády výslovně počítá s přípravou varianty přečerpávací vodní elektrárny Libouš a s financováním její předprojektové přípravy.",
+                "effectCz": "Jde o nové usnesení, takže nemá předchozí znění právního předpisu. Vláda souhlasila se zpracováním varianty elektrárny Libouš a uložila přípravu územního vymezení, financování předprojektové přípravy a dalších kroků. To je konkrétní posun k části slibu, nikoli dokončená příprava či výstavba."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "motoriste-2025-fdc305e30a--source",
+              "psp-core-2025--law-change-43174-1-1",
+              "psp-core-2025--law-change-43174-1-2",
+              "psp-core-2025--law-change-43174-1-4",
+              "psp-core-2025--law-change-43174-21",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-32",
+              "zvlady-resolutions--law-change-uv-2026-376",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "zvlady-resolutions--2026-376",
+              "psp-core-2025--amendment-text-1230",
+              "psp-core-2025--vote-88206",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454"
+            ],
+            "explanationCz": "Vláda schválila přípravu varianty přečerpávací elektrárny Libouš a uložila kroky k její předprojektové přípravě; jde však o návrh dalších kroků, nikoli o jejich dokončení. Poslanci Motoristů také podpořili novelu stavebních a energetických pravidel, která v některých ohledech usnadňuje plánování a povolování energetických staveb. Při konečném hlasování po zamítnutí Senátem však podpořili i změnu, která vypouští výslovné uvedení přečerpávací elektrárny u Dolu Československé armády ze seznamu strategických staveb. Protože jde o jednu konkrétní možnost, nikoli o zákaz přípravy přečerpávacích elektráren obecně, závěr je částečně negativní; příprava elektrárny Libouš zůstává doloženým posunem.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Slib neuvádí lokalitu; z balíčku proto nelze zjistit, zda elektrárna u Dolu Československé armády byla jednou z konkrétních možností, kterou měl slib na mysli.",
+              "Není doloženo, zda by elektrárna Libouš spadala pod novou kategorii staveb pro energetickou bezpečnost ani jaký by měla výkon, takže dopad některých změn stavebního a energetického zákona na ni nelze přesně určit."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-fdc305e30a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": false,
+          "reasonCz": "Ustanovení upravují obecné zásady stavebního řízení a ochranu energetických zájmů, ale nedokládají přípravu ani konkrétní podmínky výstavby přečerpávací elektrárny.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": false,
+          "reasonCz": "Změna územního plánování se týká obecného vymezování ploch pro výrobu, skladování a distribuci, nikoli přímo přípravy přečerpávací vodní elektrárny.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": false,
+          "reasonCz": "Nové pravidlo pro energetické stavby v nezastavitelném území není v dodaném textu spojeno s přípravou přečerpávací vodní elektrárny.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": false,
+          "reasonCz": "Změny působnosti orgánů ochrany přírody se týkají povolování staveb obecně a text je nespojuje s přípravou přečerpávací elektrárny.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Dodané změny energetického zákona upravují energetiku obecně a neukládají ani nepřipravují výstavbu přečerpávací vodní elektrárny.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změny vodního zákona přesouvají některé úkony do stavebního řízení, ale v dodaném textu nejsou konkrétně spojeny s přípravou přečerpávací elektrárny.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Text před změnou výslovně uváděl přečerpávací vodní elektrárnu mezi možnými účely lokality Dolu Československé armády, zatímco schválené znění tuto zmínku vypouští; jde tedy o konkrétní možnost související se slibovaným typem stavby, byť slib lokalitu neurčuje.",
+          "effectCz": "Předchozí znění přílohy výslovně uvádělo přečerpávací vodní elektrárnu jako jeden z účelů lokality Dolu Československé armády; schválené znění ji z výčtu vypouští a uvádí jiné záměry. Tím se zmenšuje výslovná opora pro tento účel v seznamu, ale z dodaného textu nelze určit, zda se tím elektrárna právně vylučuje nebo zda se její příprava či výstavba stává obtížnější."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-376",
+          "relevant": true,
+          "reasonCz": "Usnesení vlády výslovně počítá s výběrem varianty přečerpávací elektrárny Libouš a ukládá konkrétní kroky její přípravy.",
+          "effectCz": "Usnesení samo nemění zákon; souhlasí s přípravou variant přečerpávací elektrárny Libouš, ukládá iniciovat její vymezení v územním rozvojovém plánu a zajistit financování předprojektové přípravy. Jde o zahájení části slibované přípravy, nikoli o dokončení přípravy či výstavbu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-fdc305e30a--source",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "zvlady-resolutions--law-change-uv-2026-376",
+        "zvlady-resolutions--2026-376"
+      ],
+      "explanationCz": "Vláda usnesením schválila přípravu variant přečerpávací elektrárny Libouš, uložila kroky k jejímu územnímu vymezení a zajistila financování předprojektové přípravy. To je konkrétní posun k přípravě výstavby, ale samo usnesení ještě neznamená, že elektrárna bude postavena. Poslanci zároveň schválili novelu, která vypouští přečerpávací elektrárnu z výčtu možných účelů jiné lokality, Dolu Československé armády; z podkladů však nelze dovodit, že tím její přípravu nebo výstavbu zakazují. Nejlépe doložený aktuální stav proto představuje částečný postup ke slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Schválená novela vypouští přečerpávací elektrárnu z výčtu možných účelů Dolu Československé armády, ale podklady neukazují, zda tato změna elektrárnu v lokalitě právně vylučuje nebo jí jinak brání. Usnesení vlády se navíc týká lokality Libouš."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-fdc305e30a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Změny stavebního zákona upravují ochranu energetiky a veřejné infrastruktury při plánování a povolování, takže mohou usnadnit přípravu přečerpávací elektrárny.",
+          "effectCz": "Dosavadní účel stavebního zákona zahrnoval udržitelný rozvoj; schválené znění navíc stanoví, že veřejnou infrastrukturu nelze znemožnit, pokud lze jiné hodnoty ochránit podmínkami či opatřeními, a plánování, příprava, výstavba a provoz veřejné infrastruktury jsou ve veřejném zájmu. To obecně usnadňuje přípravu infrastruktury, ale samo nezakládá povinnost připravit konkrétní přečerpávací elektrárnu. Nové zásady a ustanovení nemají v dodaném kontextu předchozí znění, takže jejich srovnávací směr nelze určit; navržená změna terminologie zařízení pro ukládání energie na akumulaci sama o sobě neukazuje na věcnou změnu a její osud ve schváleném textu z dodaného výňatku není zřejmý."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Změna se přímo týká územního plánování ploch pro skladování energie, což může zahrnovat přípravu energetického úložiště, jako je přečerpávací elektrárna.",
+          "effectCz": "Dosavadní znění ukládalo plochy pro výrobu vyhodnocovat a, je-li to účelné, vymezovat; u ploch pro výrobu elektřiny, plynu a tepla se zohledňovaly také cíle energetické koncepce a klimatické cíle. Schválená změna vypouští podmínku „je-li to účelné“ a výslovně zahrnuje skladování a distribuci energie, takže rozšiřuje a zpřísňuje úkol územního plánování pro energetické skladování. Neukládá však přípravu konkrétní přečerpávací elektrárny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": false,
+          "reasonCz": "Dodané znění se týká povolování staveb energetické bezpečnosti v nezastavitelném území, ale neprokazuje, že mezi ně patří tato obecně formulovaná příprava přečerpávací elektrárny.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": false,
+          "reasonCz": "Změny přesouvají a upravují působnost při ochraně přírody, avšak dodané znění je nespojuje s přípravou přečerpávací elektrárny ani neukazuje, že se týká tohoto slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Změny energetického zákona upravují jiné obecné podmínky energetiky a dodané podklady neukazují jejich konkrétní vazbu na přípravu přečerpávací elektrárny.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změna vodního zákona upravuje povolovací postupy pro vodní záměry obecně, ale dodané znění ji nespojuje s přípravou přečerpávací elektrárny ani s konkrétním projektem ze slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změna se týká zvláštního režimu strategické infrastruktury a úpravy konkrétní lokality, ale slib žádnou lokalitu nejmenuje a dodané podklady tuto změnu s jeho naplněním nespojují.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-376",
+          "relevant": true,
+          "reasonCz": "Usnesení výslovně zahajuje přípravné kroky pro přečerpávací elektrárnu Libouš, a tedy se přímo týká přípravy výstavby přečerpávací elektrárny.",
+          "effectCz": "Usnesení nemění dřívější znění zákona; schvaluje přípravu variant přečerpávací elektrárny Libouš, ukládá zajistit financování předprojektové přípravy a iniciovat územní plánovací kroky. Jde o konkrétní posun k přípravě, nikoli o rozhodnutí, které by samo dokončilo přípravu nebo zahájilo výstavbu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-fdc305e30a--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--amendment-text-1224",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88165",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "zvlady-resolutions--law-change-uv-2026-376",
+        "zvlady-resolutions--2026-376"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili spolu s dalšími poslanci návrh změn stavebního zákona a strana později podpořila jeho schválení; změny mimo jiné rozšiřují územní plánování ploch pro skladování energie. Vláda také přijala usnesení, které zadává přípravu variant přečerpávací elektrárny Libouš a předprojektové přípravy. Sněmovna návrh po zamítnutí Senátem znovu podpořila. Jde o konkrétní kroky směrem k přípravě, nikoli o doklad, že už byla zahájena samotná výstavba.",
+      "confidence": "high",
+      "uncertainties": [
+        "Dodaný materiál dokládá přípravné úkoly a plánování elektrárny Libouš, nikoli jejich dokončení ani zahájení vlastní výstavby.",
+        "Změny stavebního zákona se týkají energetické infrastruktury obecně a samy neurčují, že bude připravena konkrétní přečerpávací elektrárna."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_069a009e9bd2a1b3016aec855574e487d18123eabad56450c8",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 81803,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 81800
+      },
+      "output_tokens": 6849,
+      "output_tokens_details": {
+        "reasoning_tokens": 5353
+      },
+      "total_tokens": 88652
+    },
+    "output": {
+      "promiseId": "motoriste-2025-fdc305e30a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": false,
+          "reasonCz": "Ustanovení upravují obecné zásady stavebního řízení a ochranu energetických zájmů, ale nedokládají přípravu ani konkrétní podmínky výstavby přečerpávací elektrárny.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": false,
+          "reasonCz": "Změna územního plánování se týká obecného vymezování ploch pro výrobu, skladování a distribuci, nikoli přímo přípravy přečerpávací vodní elektrárny.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": false,
+          "reasonCz": "Nové pravidlo pro energetické stavby v nezastavitelném území není v dodaném textu spojeno s přípravou přečerpávací vodní elektrárny.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": false,
+          "reasonCz": "Změny působnosti orgánů ochrany přírody se týkají povolování staveb obecně a text je nespojuje s přípravou přečerpávací elektrárny.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Dodané změny energetického zákona upravují energetiku obecně a neukládají ani nepřipravují výstavbu přečerpávací vodní elektrárny.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změny vodního zákona přesouvají některé úkony do stavebního řízení, ale v dodaném textu nejsou konkrétně spojeny s přípravou přečerpávací elektrárny.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Text před změnou výslovně uváděl přečerpávací vodní elektrárnu mezi možnými účely lokality Dolu Československé armády, zatímco schválené znění tuto zmínku vypouští; jde tedy o konkrétní možnost související se slibovaným typem stavby, byť slib lokalitu neurčuje.",
+          "effectCz": "Předchozí znění přílohy výslovně uvádělo přečerpávací vodní elektrárnu jako jeden z účelů lokality Dolu Československé armády; schválené znění ji z výčtu vypouští a uvádí jiné záměry. Tím se zmenšuje výslovná opora pro tento účel v seznamu, ale z dodaného textu nelze určit, zda se tím elektrárna právně vylučuje nebo zda se její příprava či výstavba stává obtížnější."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-376",
+          "relevant": true,
+          "reasonCz": "Usnesení vlády výslovně počítá s výběrem varianty přečerpávací elektrárny Libouš a ukládá konkrétní kroky její přípravy.",
+          "effectCz": "Usnesení samo nemění zákon; souhlasí s přípravou variant přečerpávací elektrárny Libouš, ukládá iniciovat její vymezení v územním rozvojovém plánu a zajistit financování předprojektové přípravy. Jde o zahájení části slibované přípravy, nikoli o dokončení přípravy či výstavbu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-fdc305e30a--source",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "zvlady-resolutions--law-change-uv-2026-376",
+        "zvlady-resolutions--2026-376"
+      ],
+      "explanationCz": "Vláda usnesením schválila přípravu variant přečerpávací elektrárny Libouš, uložila kroky k jejímu územnímu vymezení a zajistila financování předprojektové přípravy. To je konkrétní posun k přípravě výstavby, ale samo usnesení ještě neznamená, že elektrárna bude postavena. Poslanci zároveň schválili novelu, která vypouští přečerpávací elektrárnu z výčtu možných účelů jiné lokality, Dolu Československé armády; z podkladů však nelze dovodit, že tím její přípravu nebo výstavbu zakazují. Nejlépe doložený aktuální stav proto představuje částečný postup ke slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Schválená novela vypouští přečerpávací elektrárnu z výčtu možných účelů Dolu Československé armády, ale podklady neukazují, zda tato změna elektrárnu v lokalitě právně vylučuje nebo jí jinak brání. Usnesení vlády se navíc týká lokality Libouš."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_09b625970f0461a4016aec85f2846087d190ce138480961b6f",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 81803,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 81800
+      },
+      "output_tokens": 8095,
+      "output_tokens_details": {
+        "reasoning_tokens": 6484
+      },
+      "total_tokens": 89898
+    },
+    "output": {
+      "promiseId": "motoriste-2025-fdc305e30a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Změny stavebního zákona upravují ochranu energetiky a veřejné infrastruktury při plánování a povolování, takže mohou usnadnit přípravu přečerpávací elektrárny.",
+          "effectCz": "Dosavadní účel stavebního zákona zahrnoval udržitelný rozvoj; schválené znění navíc stanoví, že veřejnou infrastrukturu nelze znemožnit, pokud lze jiné hodnoty ochránit podmínkami či opatřeními, a plánování, příprava, výstavba a provoz veřejné infrastruktury jsou ve veřejném zájmu. To obecně usnadňuje přípravu infrastruktury, ale samo nezakládá povinnost připravit konkrétní přečerpávací elektrárnu. Nové zásady a ustanovení nemají v dodaném kontextu předchozí znění, takže jejich srovnávací směr nelze určit; navržená změna terminologie zařízení pro ukládání energie na akumulaci sama o sobě neukazuje na věcnou změnu a její osud ve schváleném textu z dodaného výňatku není zřejmý."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Změna se přímo týká územního plánování ploch pro skladování energie, což může zahrnovat přípravu energetického úložiště, jako je přečerpávací elektrárna.",
+          "effectCz": "Dosavadní znění ukládalo plochy pro výrobu vyhodnocovat a, je-li to účelné, vymezovat; u ploch pro výrobu elektřiny, plynu a tepla se zohledňovaly také cíle energetické koncepce a klimatické cíle. Schválená změna vypouští podmínku „je-li to účelné“ a výslovně zahrnuje skladování a distribuci energie, takže rozšiřuje a zpřísňuje úkol územního plánování pro energetické skladování. Neukládá však přípravu konkrétní přečerpávací elektrárny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": false,
+          "reasonCz": "Dodané znění se týká povolování staveb energetické bezpečnosti v nezastavitelném území, ale neprokazuje, že mezi ně patří tato obecně formulovaná příprava přečerpávací elektrárny.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": false,
+          "reasonCz": "Změny přesouvají a upravují působnost při ochraně přírody, avšak dodané znění je nespojuje s přípravou přečerpávací elektrárny ani neukazuje, že se týká tohoto slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Změny energetického zákona upravují jiné obecné podmínky energetiky a dodané podklady neukazují jejich konkrétní vazbu na přípravu přečerpávací elektrárny.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změna vodního zákona upravuje povolovací postupy pro vodní záměry obecně, ale dodané znění ji nespojuje s přípravou přečerpávací elektrárny ani s konkrétním projektem ze slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změna se týká zvláštního režimu strategické infrastruktury a úpravy konkrétní lokality, ale slib žádnou lokalitu nejmenuje a dodané podklady tuto změnu s jeho naplněním nespojují.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-376",
+          "relevant": true,
+          "reasonCz": "Usnesení výslovně zahajuje přípravné kroky pro přečerpávací elektrárnu Libouš, a tedy se přímo týká přípravy výstavby přečerpávací elektrárny.",
+          "effectCz": "Usnesení nemění dřívější znění zákona; schvaluje přípravu variant přečerpávací elektrárny Libouš, ukládá zajistit financování předprojektové přípravy a iniciovat územní plánovací kroky. Jde o konkrétní posun k přípravě, nikoli o rozhodnutí, které by samo dokončilo přípravu nebo zahájilo výstavbu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-fdc305e30a--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--amendment-text-1224",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88165",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "zvlady-resolutions--law-change-uv-2026-376",
+        "zvlady-resolutions--2026-376"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili spolu s dalšími poslanci návrh změn stavebního zákona a strana později podpořila jeho schválení; změny mimo jiné rozšiřují územní plánování ploch pro skladování energie. Vláda také přijala usnesení, které zadává přípravu variant přečerpávací elektrárny Libouš a předprojektové přípravy. Sněmovna návrh po zamítnutí Senátem znovu podpořila. Jde o konkrétní kroky směrem k přípravě, nikoli o doklad, že už byla zahájena samotná výstavba.",
+      "confidence": "high",
+      "uncertainties": [
+        "Dodaný materiál dokládá přípravné úkoly a plánování elektrárny Libouš, nikoli jejich dokončení ani zahájení vlastní výstavby.",
+        "Změny stavebního zákona se týkají energetické infrastruktury obecně a samy neurčují, že bude připravena konkrétní přečerpávací elektrárna."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

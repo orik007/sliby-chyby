@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-36-01-310Z--e2fccad4d9e0",
+  "evaluatedAt": "2026-10-02T05:36:01.310Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-5e87201bd5/e2fccad4d9e05f64d7e6abb8c748091342a6067daf08828899eafa81910da42f.json",
+  "packageHash": "e2fccad4d9e05f64d7e6abb8c748091342a6067daf08828899eafa81910da42f",
+  "assessmentContentHash": "b6574369a113c34f0e3c4322e3f00dd76c8b8bfc21e66dd66e018b12d051ed33",
+  "assessmentFingerprint": "9c93d922bd2517c7b2a5de8d3a0609c337dc435feaa6f3eb8905df227020a239",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-5e87201bd5",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-5e87201bd5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text ruší části energetických předpisů, ale neuvádí jejich obsah, takže samotná zmínka o energetice a obnovitelných zdrojích nedokládá změnu povinné fotovoltaiky na rodinných domech ani zákazů plynových kotlů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-5e87201bd5--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci Motoristů hlasovali pro návrh změn stavebního zákona a po zamítnutí návrhu Senátem také pro setrvání Sněmovny na jeho znění. Schválený text ruší části některých energetických předpisů, ale jejich konkrétní obsah není doložen. Nelze proto ověřit, zda tyto hlasy souvisely s povinnou fotovoltaikou na rodinných domech nebo se zákazy plynových kotlů, a nelze je započítat jako posun ve slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují znění rušených částí energetických předpisů; není tedy možné určit, zda jejich zrušení odstraňuje povinnost instalovat fotovoltaiku nebo zákaz plynových kotlů, anebo se slibu vůbec netýká."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-5e87201bd5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text ruší mimo jiné část zákona o urychlení využívání obnovitelných zdrojů, ale neuvádí její obsah ani neprokazuje, že se týká povinné fotovoltaiky na rodinných domech nebo zákazu plynových kotlů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-5e87201bd5--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě hlasovali pro návrh, který mimo jiné ruší část zákona o urychlení využívání obnovitelných zdrojů. Z dostupného textu ale není patrné, co tato část obsahovala ani zda se týkala povinné fotovoltaiky na rodinných domech či zákazu plynových kotlů. Proto nelze doložit, že hlasování posunulo tento konkrétní slib; zůstává bez ověřeného podstatného posunu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Obsah rušené části zákona o urychlení využívání obnovitelných zdrojů není v podkladech uveden, takže nelze určit její dopad na povinnou fotovoltaiku na rodinných domech ani na zákazy plynových kotlů."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0aec8ee6114a2f5b016abf42a4ec3087d1b6a23366d95262d4",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8631,
+      "input_tokens_details": {
+        "cache_write_tokens": 5307,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 3035,
+      "output_tokens_details": {
+        "reasoning_tokens": 2572
+      },
+      "total_tokens": 11666
+    },
+    "output": {
+      "promiseId": "motoriste-2025-5e87201bd5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text ruší části energetických předpisů, ale neuvádí jejich obsah, takže samotná zmínka o energetice a obnovitelných zdrojích nedokládá změnu povinné fotovoltaiky na rodinných domech ani zákazů plynových kotlů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-5e87201bd5--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci Motoristů hlasovali pro návrh změn stavebního zákona a po zamítnutí návrhu Senátem také pro setrvání Sněmovny na jeho znění. Schválený text ruší části některých energetických předpisů, ale jejich konkrétní obsah není doložen. Nelze proto ověřit, zda tyto hlasy souvisely s povinnou fotovoltaikou na rodinných domech nebo se zákazy plynových kotlů, a nelze je započítat jako posun ve slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují znění rušených částí energetických předpisů; není tedy možné určit, zda jejich zrušení odstraňuje povinnost instalovat fotovoltaiku nebo zákaz plynových kotlů, anebo se slibu vůbec netýká."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_00f40fa1c5f65a71016abf42b66ad087d18cbfe0d2e41b1e88",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8631,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8628
+      },
+      "output_tokens": 1845,
+      "output_tokens_details": {
+        "reasoning_tokens": 1409
+      },
+      "total_tokens": 10476
+    },
+    "output": {
+      "promiseId": "motoriste-2025-5e87201bd5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text ruší mimo jiné část zákona o urychlení využívání obnovitelných zdrojů, ale neuvádí její obsah ani neprokazuje, že se týká povinné fotovoltaiky na rodinných domech nebo zákazu plynových kotlů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-5e87201bd5--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě hlasovali pro návrh, který mimo jiné ruší část zákona o urychlení využívání obnovitelných zdrojů. Z dostupného textu ale není patrné, co tato část obsahovala ani zda se týkala povinné fotovoltaiky na rodinných domech či zákazu plynových kotlů. Proto nelze doložit, že hlasování posunulo tento konkrétní slib; zůstává bez ověřeného podstatného posunu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Obsah rušené části zákona o urychlení využívání obnovitelných zdrojů není v podkladech uveden, takže nelze určit její dopad na povinnou fotovoltaiku na rodinných domech ani na zákazy plynových kotlů."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

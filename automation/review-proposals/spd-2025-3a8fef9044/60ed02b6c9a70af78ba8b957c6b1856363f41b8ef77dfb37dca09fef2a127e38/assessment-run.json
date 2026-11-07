@@ -1,0 +1,672 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T13-42-08-101Z--1acad623a038",
+  "evaluatedAt": "2026-11-05T13:42:08.101Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-3a8fef9044/1acad623a0380d86551563957d35de90d5709d11cf09c027b5ee7da7c6575716.json",
+  "packageHash": "1acad623a0380d86551563957d35de90d5709d11cf09c027b5ee7da7c6575716",
+  "assessmentContentHash": "8febfc7fff7566b9fcd40a8482ab6009332e7890fc17d9b73a2fa72382df4537",
+  "assessmentFingerprint": "60ed02b6c9a70af78ba8b957c6b1856363f41b8ef77dfb37dca09fef2a127e38",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-3a8fef9044",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_012110244df19913016aec85f1afe887d1b8bdb6ca7fad023d",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 56521,
+            "input_tokens_details": {
+              "cache_write_tokens": 50171,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 7972,
+            "output_tokens_details": {
+              "reasoning_tokens": 4961
+            },
+            "total_tokens": 64493
+          },
+          "output": {
+            "promiseId": "spd-2025-3a8fef9044",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-20",
+                "relevant": true,
+                "reasonCz": "Změna hygienických povinností škol přímo ovlivňuje bezpečnost školního prostředí a právní pravidla, jimiž se školy řídí.",
+                "effectCz": "Před změnou měly školy plnit hygienické požadavky na prostorové podmínky, vybavení, provoz, osvětlení, vytápění, mikroklima, vodu, úklid a prádlo a vnitřní prostředí mělo odpovídat limitům chemických, fyzikálních a biologických ukazatelů; schválené znění zužuje výslovné požadavky zejména na vybavení, úklid, prádlo a mikroklima, odstraňuje odkazy na požadavky na prostory a přesouvá zmocnění k prováděcím předpisům. Oproti předchozímu znění jsou hygienické povinnosti v uvedených oblastech užší, což oslabuje část záruk bezpečného prostředí."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43214-1",
+                "relevant": true,
+                "reasonCz": "Návrh stanoví pravidla pro používání a dočasné odebrání telefonů ve školách, což se přímo dotýká školního řádu i podmínek bezpečného vzdělávání.",
+                "effectCz": "Dosavadní § 30 odst. 3 školského zákona umožňoval školám omezit nebo zakázat používání zařízení s výjimkou nezbytného zdravotního použití; návrh pro vymezené věkové skupiny zavádí zákaz přímo zákonem, stanoví výjimky a připouští dočasné odebrání, zatímco školní řády mají upravit jeho provedení. Pravidla jsou konkrétnější a zákaz pro dané skupiny přísnější, což může podpořit klidnější a bezpečnější výuku, ale omezuje dosavadní volnost škol nastavit si režim samostatně."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43354-1",
+                "relevant": true,
+                "reasonCz": "Návrh zavádí celostátní pravidla pro používání telefonů a jejich odkládání ve školách, a tím se týká právní jistoty škol i prostředí pro vzdělávání.",
+                "effectCz": "Dosavadní § 30 odst. 3 ponechával školám možnost zařízení omezit nebo zakázat; návrh vkládá zákaz používání telefonu pro vyjmenované děti a žáky s určenými výjimkami, umožňuje škole stanovit pravidla pro ostatní a upravit odložení či odevzdání telefonu. Jde o konkrétnější a pro vymezené skupiny přísnější pravidla, která mohou přispět k bezpečnému prostředí, avšak návrh zatím není přijatým zákonem."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43477-1",
+                "relevant": true,
+                "reasonCz": "Návrh mění pravidla revizí poradenských doporučení a dostupnosti psychologů, speciálních pedagogů a asistentů, což ovlivňuje právní jistotu škol i podporu žáků.",
+                "effectCz": "Dosavadní úprava revize začínala na žádost a její výsledek mohl obsahovat nové doporučení; návrh dovoluje zahájit revizi i bez žádosti při pochybnostech, požaduje výsledek do 60 dnů a umožňuje závazný pokyn či lhůtu k novému doporučení, čímž zpřesňuje proces. Zároveň nově omezuje poskytování některých podpůrných opatření a ukládá škole zajistit práci odborníků či asistentů jen tehdy, je-li to vzhledem k potřebám odůvodněné; část podpory tedy může být méně dostupná, takže návrh má ve vztahu ke slibu smíšený účinek."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43477-4",
+                "relevant": true,
+                "reasonCz": "Návrh upravuje kvalifikaci a práci pedagogických pracovníků a zavádí metodické vedení asistentů, což se přímo týká právní jistoty učitelů a fungování škol.",
+                "effectCz": "Dosavadní úprava vymezovala zvláštní kvalifikační pravidla pro asistenta pedagoga podle konkrétního působení; návrh ruší uvedené omezení, mění stanovení rozsahu přímé pedagogické činnosti z prováděcího předpisu na nařízení vlády a doplňuje pravidla pro metodické vedení asistentů pedagogickým pracovníkem. Nové vymezení role a vedení může zpřesnit odpovědnosti ve škole, ale u kvalifikační změny nelze z dodaného textu určit její úplný dopad na jistotu pracovníků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43477-5",
+                "relevant": true,
+                "reasonCz": "Přechodné pravidlo se týká toho, podle jaké právní úpravy se budou poskytovat některá podpůrná opatření psychologů a speciálních pedagogů.",
+                "effectCz": "Předchozí přechodné ustanovení odkazovalo na pravidla § 16 odst. 11 a 12 účinná od 1. ledna 2026; návrh odkaz mění na § 18a účinný od 1. září 2027. Mění tedy právní základ a časové určení přechodu podpory; dopad na její rozsah nelze z dodaného znění bezpečně určit."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-99",
+                "relevant": false,
+                "reasonCz": "Upravená pravidla se týkají maturitních prací a úprav přijímacích zkoušek; dodaný text je nespojuje s právní jistotou učitelů ani s bezpečností škol.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-111",
+                "relevant": true,
+                "reasonCz": "Vyhláška pro školy zřizované Ministerstvem obrany upravuje výchovná opatření a poradenské a preventivní služby, tedy dílčí pravidla pro bezpečné fungování škol.",
+                "effectCz": "Dodaný text stanoví pravidla pochval a kázeňských opatření, školní poradenské služby, preventivní programy a spolupráci pracovníků; předchozí znění těchto ustanovení v balíčku chybí, takže směr změny oproti dřívější úpravě nelze určit."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-121",
+                "relevant": true,
+                "reasonCz": "Vyhláška stanoví, jak mohou žáci ve školách nakládat s nebezpečnými látkami a jak se zajišťuje ochrana jejich zdraví.",
+                "effectCz": "Nová vyhláška stanoví věkové a dohledové podmínky pro práci s nebezpečnými chemickými látkami, prachem a biologickými činiteli, vyžaduje osobní ochranné prostředky a ukládá školám upravit bezpečnostní postupy v řádech; předchozí pravidla nejsou v balíčku uvedena, proto nelze určit, zda je výsledná ochrana celkově přísnější."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-137",
+                "relevant": true,
+                "reasonCz": "Vyhláška pro školy zřizované Ministerstvem vnitra obsahuje pravidla pro bezpečnost žáků, evidenci úrazů a ochranná opatření při výuce.",
+                "effectCz": "Dodaný text stanoví mimo jiné evidenci a hlášení úrazů, přihlížení k bezpečnosti při dělení tříd a ochranná opatření při praktické výuce; předchozí znění v balíčku chybí, takže směr změny oproti dosavadním pravidlům nelze určit."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-170",
+                "relevant": true,
+                "reasonCz": "Vyhláška konkretizuje školní programy proti šikaně, krizové plány a poradenské a intervenční činnosti zaměřené na bezpečné klima a duševní zdraví.",
+                "effectCz": "Dodaný text výslovně zahrnuje školní program proti šikanování a krizové plány do preventivních činností a vymezuje úlohy školního metodika prevence a psychologa při řešení rizikového chování; předchozí úplné znění těchto ustanovení není dodáno, takže směr vůči dřívějšímu stavu nelze spolehlivě srovnat."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-151",
+                "relevant": true,
+                "reasonCz": "Vláda zařadila přípravu nového zákona o pedagogických pracovnících, jehož cílem je větší srozumitelnost a předvídatelnost pravidel pro učitele.",
+                "effectCz": "Usnesení ukládá plánovat věcný záměr zákona, který má zavést kariérní systém, změnit další vzdělávání, zjednodušit kvalifikační cesty a zvýšit srozumitelnost a předvídatelnost právní úpravy; jde o záměr, nikoli o účinnou změnu, takže zatím jen navrhuje posun k větší právní jistotě."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "spd-2025-3a8fef9044--source",
+              "psp-core-2025--law-change-43174-20",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--law-change-43214-1",
+              "psp-core-2025--government-opinion-43214-1",
+              "psp-core-2025--law-change-43354-1",
+              "psp-core-2025--government-opinion-43354-1",
+              "psp-core-2025--law-change-43477-1",
+              "psp-core-2025--law-change-43477-4",
+              "psp-core-2025--law-change-43477-5",
+              "psp-core-2025--print-step-212471",
+              "esbirka-regulations--law-change-sb-2026-111",
+              "esbirka-regulations--2026-111",
+              "esbirka-regulations--law-change-sb-2026-121",
+              "esbirka-regulations--2026-121",
+              "esbirka-regulations--law-change-sb-2026-137",
+              "esbirka-regulations--2026-137",
+              "esbirka-regulations--law-change-sb-2026-170",
+              "esbirka-regulations--2026-170",
+              "zvlady-resolutions--law-change-uv-2026-175-151",
+              "zvlady-resolutions--2026-175"
+            ],
+            "explanationCz": "Poslanci SPD předložili spolu s dalšími poslanci návrh zákona, vedený ve Sněmovně jako tisk 67, a vláda s ním vyslovila souhlas. Poslanci SPD pak hlasovali pro jeho schválení i pro setrvání na něm po zamítnutí Senátem; schválená část zužuje hygienické požadavky na prostory škol a limity pro vnitřní prostředí, což oslabuje část záruk bezpečného prostředí. Vláda zároveň podpořila návrh pravidel pro používání telefonů a přijala vyhlášky zaměřené na bezpečnost a prevenci, tyto dílčí kroky však uvedené rozhodnutí nepřebíjejí. Další vládní návrh z října 2026 zatím zůstává pouze návrhem.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Změny hygienických pravidel představují rozpor s částí slibu o bezpečném školním prostředí, ale příslib neurčuje konkrétní standardy ani měřitelný cíl; nelze proto doložit, že by byla popřena jeho celá podstata.",
+              "Některé vyhlášky podporují bezpečnost, prevenci nebo poradenské služby, avšak jejich starší znění není v balíčku a nelze vždy určit, jak se celková ochrana oproti dřívějšku změnila.",
+              "Vládní návrh z října 2026 mění podpůrná opatření i pravidla práce pedagogů, ale dosud jde o návrh; jeho konečný dopad na školy a žáky není doložen."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-3a8fef9044",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Změna hygienických povinností škol přímo ovlivňuje podmínky bezpečného prostředí pro vzdělávání.",
+          "effectCz": "Před změnou měly školy zajistit hygienické požadavky na prostory, vybavení, provoz, osvětlení, vytápění, mikroklima, vodu, úklid a prádlo; schválený text ponechává v § 7 jen vybavení, úklid, prádlo a mikroklima, takže povinnost zužuje. Dříve muselo vnitřní prostředí pobytových místností splňovat limity chemických, fyzikálních i biologických ukazatelů; nově se požadavky týkají jen mikroklimatu, což ochranu rovněž oslabuje. V § 108 se zároveň mění a přesouvá zmocnění k vydávání prováděcích předpisů a v § 108 odst. 2 se vypouštějí „prostory a“; z tohoto přesunu samotného nelze určit další věcný dopad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43214-1",
+          "relevant": true,
+          "reasonCz": "Navržená pravidla pro používání telefonů a jejich dočasné odebrání se přímo týkají podmínek výuky a školního prostředí.",
+          "effectCz": "Dosavadní § 30 odst. 3 dovoloval škole používání telefonů omezit nebo zakázat, s výjimkou nezbytného zdravotního použití. Návrh zavádí zákaz pro vybrané věkové skupiny, upravuje výjimky a umožňuje dočasné odebrání; regulaci tedy zpřesňuje a pro dotčené žáky zpřísňuje, což může přispět k bezpečnějšímu prostředí při výuce. Návrh však není přijatým zákonem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43354-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje používání telefonů při vzdělávání a podmínky, za kterých je školy mohou omezit či zakázat.",
+          "effectCz": "Dosavadní § 30 odst. 3 ponechával regulaci na školním řádu; návrh zavádí zákaz pro vybrané děti a žáky během vzdělávání a souvisejících činností, s výjimkami pro zdravotní důvody, vzdělávání a některé akce. Zároveň umožňuje škole stanovit povinnost telefon odložit nebo odevzdat. Pro dotčené skupiny je tak omezení přísnější a pravidla jsou konkrétnější, což může podpořit bezpečné prostředí při výuce; jde zatím jen o návrh."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění dostupnost podpory psychologů, speciálních pedagogů a asistentů, která může ovlivnit bezpečné a podpůrné prostředí školy.",
+          "effectCz": "Dosavadní zákon již omezoval poskytování podpory psychologa či speciálního pedagoga podle § 16 odst. 11 a ukládal školám související povinnost podle odstavce 12; návrh tato pravidla přesouvá do § 18a a u povinnosti ředitele mění podmínku z nezbytnosti na důvodnost. Nový § 18b omezuje poskytování podpůrného opatření spočívajícího v asistentovi pedagoga pro vyjmenované skupiny, zatímco řediteli ukládá zajistit jeho práci jen do výše financovaného rozsahu a je-li to důvodné. To může zúžit nárok na podpůrné opatření; současně návrh upravuje revize zpráv a metodické vedení asistentů, takže jeho dílčí účinky jsou smíšené."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-4",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje kvalifikaci a metodické vedení pedagogických pracovníků, a tím se dotýká podpory škol a podmínek práce učitelů.",
+          "effectCz": "Návrh rozšiřuje požadavek kvalifikace asistenta pedagoga na všechny asistenty, nikoli jen na ty, kteří působí ve vyjmenovaných třídách či školách, což je přísnější kvalifikační podmínka. Současně nově uznává metodické vedení a konzultace některých pracovníků jako přímou pedagogickou činnost a zavádí funkci metodika asistentů pedagoga. Tato ustanovení mohou posílit metodickou podporu, ale jejich dopad na bezpečí škol není z textu vyčíslen; jde o návrh."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-5",
+          "relevant": true,
+          "reasonCz": "Přechodné pravidlo se týká pokračování podpory psychologů a speciálních pedagogů ve školách.",
+          "effectCz": "Dosavadní přechodné pravidlo odkazovalo na § 16 odst. 11 a 12 ve znění účinném od 1. ledna 2026; návrh odkazuje na § 18a ve znění účinném od 1. září 2027. Mění tedy časový a právní odkaz na pravidla pro psychologickou a speciálněpedagogickou podporu. Z poskytnutého znění lze určit posun data, nikoli samostatně přesný dopad na rozsah podpory."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-99",
+          "relevant": false,
+          "reasonCz": "Uvedená ustanovení upravují společné maturitní práce a úpravy přijímacího řízení, nikoli právní jistotu učitelů ani bezpečné prostředí školy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-111",
+          "relevant": true,
+          "reasonCz": "Vyhláška upravuje kázeňská opatření a poradenské a preventivní služby ve školách zřizovaných Ministerstvem obrany.",
+          "effectCz": "Text stanoví pravidla pro pochvaly a kázeňská opatření, informování žáků a rodičů a organizaci poradenských služeb, včetně podpory žáků se speciálními vzdělávacími potřebami. Tato pravidla mohou částečně přispět k bezpečnému a podpůrnému prostředí, ale vztahují se na školy zřizované Ministerstvem obrany. Balíček neuvádí předchozí znění měněných ustanovení, takže směr změny oproti dřívějším pravidlům nelze určit."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-121",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví dohled, ochranné prostředky a bezpečnostní podmínky pro práci žáků s nebezpečnými látkami a dalšími riziky.",
+          "effectCz": "Vyhláška určuje, které skupiny žáků mohou s nebezpečnými látkami, prachem a biologickými činiteli pracovat, za jakého dohledu, a ukládá školám zajistit vhodné ochranné prostředky a pravidla bezpečnosti. Tím přímo stanoví část bezpečnostních podmínek školního vzdělávání. Předchozí znění pro srovnání balíček neuvádí, takže nelze určit, zda jsou pravidla přísnější než dříve."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-137",
+          "relevant": true,
+          "reasonCz": "Vyhláška pro školy zřizované Ministerstvem vnitra upravuje bezpečnost při výuce, evidenci úrazů a jejich hlášení.",
+          "effectCz": "Ustanovení vyžadují přihlížet při dělení tříd k bezpečnosti a ochraně zdraví, stanoví evidenci a hlášení úrazů a upravují bezpečnostní opatření při praktickém vyučování. Tím upravují dílčí podmínky bezpečné školy, avšak jen pro školy a zařízení zřizované Ministerstvem vnitra. Předchozí znění měněných pravidel není v balíčku uvedeno, takže směr změny nelze určit."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-170",
+          "relevant": true,
+          "reasonCz": "Vyhláška posiluje školní prevenci šikany a rizikového chování, podporu duševního zdraví a krizovou intervenci.",
+          "effectCz": "Text výslovně zařazuje školní program proti šikanování a krizové plány mezi preventivní činnosti a popisuje úkoly metodika prevence, psychologa a dalších pracovníků při podpoře duševního zdraví a řešení krizí. Jde o přímý dílčí příspěvek k bezpečnému prostředí; balíček však neposkytuje předchozí znění předpisu, takže nelze přesně určit, o kolik se povinnosti oproti dřívějšku rozšiřují."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-151",
+          "relevant": true,
+          "reasonCz": "Vládní plán počítá s novým zákonem pro pedagogické pracovníky a výslovně si klade za cíl větší srozumitelnost a předvídatelnost právní úpravy.",
+          "effectCz": "Usnesení zařazuje přípravu věcného záměru nového zákona o pedagogických pracovnících, který má zavést kariérní systém a zvýšit srozumitelnost a předvídatelnost pravidel. Jde o návrhový krok k části slibu týkající se právní jistoty učitelů, nikoli o změnu, která by sama již upravovala bezpečnost škol."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-3a8fef9044--source",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43214-1",
+        "psp-core-2025--law-change-43354-1",
+        "psp-core-2025--law-change-43477-1",
+        "psp-core-2025--law-change-43477-4",
+        "psp-core-2025--law-change-43477-5",
+        "esbirka-regulations--law-change-sb-2026-111",
+        "esbirka-regulations--law-change-sb-2026-121",
+        "esbirka-regulations--law-change-sb-2026-137",
+        "esbirka-regulations--law-change-sb-2026-170",
+        "zvlady-resolutions--law-change-uv-2026-175-151",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--government-opinion-43214-1",
+        "psp-core-2025--government-opinion-43354-1",
+        "psp-core-2025--print-step-212471",
+        "esbirka-regulations--2026-111",
+        "esbirka-regulations--2026-121",
+        "esbirka-regulations--2026-137",
+        "esbirka-regulations--2026-170",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro novelu zákona o ochraně veřejného zdraví, tedy návrh změny hygienických pravidel pro školy, a po zamítnutí Senátem podpořili i její potvrzení. Schválené znění zužovalo povinnost škol dodržovat hygienické požadavky na prostory a vnitřní prostředí, čímž oslabovalo jednu část ochrany bezpečného prostředí pro vzdělávání. Vláda SPD zároveň přijala pravidla pro bezpečnou práci s nebezpečnými látkami a pro prevenci šikany a podpořila návrhy na regulaci telefonů ve školách. Tyto dílčí kroky jsou v protisměru k rozhodnutí o hygienických požadavcích, které je pro současné hodnocení rozhodující.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Bezpečnostní vyhlášky č. 111/2026 a 137/2026 Sb. se vztahují jen na školy zřizované Ministerstvem obrany, respektive Ministerstvem vnitra; jejich přínos proto nedokládá změnu pro všechny školy.",
+        "Vládní návrh předložený v říjnu 2026 obsahuje jak omezení některých podpůrných opatření, tak nová pravidla pro metodické vedení pracovníků; zatím nebyl rozhodnut a jeho konečný účinek není znám."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-3a8fef9044",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Upravuje hygienické povinnosti škol a jejich právní základ, a proto přímo souvisí s bezpečností škol i právní jistotou.",
+          "effectCz": "Původně školy musely zajišťovat hygienické požadavky na prostorové podmínky, vybavení, provoz, osvětlení, vytápění, mikroklima, vodu, úklid a prádlo; schválené znění rozsah v § 7 zužuje hlavně na vybavení, úklid, prádlo a mikroklima. U vnitřního prostředí se původní limity chemických, fyzikálních a biologických ukazatelů nahrazují požadavky jen na mikroklima, což je zúžení ochrany. Změny § 108 upravují, kdo vydává prováděcí vyhlášky, a neruší toto zúžení; celek tedy snižuje rozsah hygienických povinností týkajících se škol."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43214-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí zákonná pravidla používání telefonů ve školách, která mohou ovlivnit bezpečné a nerušené vzdělávání i předvídatelnost školních pravidel.",
+          "effectCz": "Dosavadní školský zákon umožňoval školnímu řádu používání telefonů omezit nebo zakázat; návrh přidává zákazy pro vymezené věkové skupiny, výjimky pro vzdělávání a zdravotní důvody i možnost dočasného odebrání telefonu. Pro tyto skupiny stanoví konkrétnější pravidla a rozšiřuje možnost školy vymáhat je, ale předchozí obecnou možnost školního řádu nenahrazuje zcela."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43354-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění pravidla pro telefony při vzdělávání a školských službách, což se týká bezpečného a soustředěného prostředí i právní předvídatelnosti.",
+          "effectCz": "Předchozí § 30 odst. 3 dovoloval školnímu řádu používání zařízení omezit či zakázat; návrh zavádí zákonný zákaz pro vyjmenované děti a žáky, stanoví výjimky a umožňuje určit odložení či odevzdání telefonu. Pro určené skupiny tak pravidla konkretizuje a zákonný zákaz zpřísňuje, zatímco u ostatních nadále připouští regulaci školním řádem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-1",
+          "relevant": true,
+          "reasonCz": "Upravuje školní poradenskou a podpůrnou práci včetně psychologů, speciálních pedagogů a asistentů, což souvisí s podporou bezpečného prostředí a jistotou škol při zajišťování služeb.",
+          "effectCz": "Návrh přesouvá pravidla pro psychologickou a speciálněpedagogickou podporu do nových ustanovení a stanoví povinnost zajistit práci odborníků, je-li to vzhledem ke vzdělávacím potřebám důvodné; dosavadní text obdobnou povinnost vázal na to, že je nezbytná. Současně omezuje poskytování asistenta pedagoga jako podpůrného opatření pro vyjmenované skupiny, ale ukládá škole za stanovených podmínek jeho práci zajistit. U některých nových omezení předchozí pravidlo v dodaném kontextu chybí, takže jejich směr vůči dosavadní úpravě nelze určit; celek je smíšený."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-4",
+          "relevant": true,
+          "reasonCz": "Mění kvalifikaci a pracovní náplň pedagogických pracovníků a zavádí metodické vedení asistentů, což se dotýká právní jistoty učitelů i podpory ve školách.",
+          "effectCz": "Dosavadní požadavek odborné kvalifikace asistenta se podle dodaného znění vztahoval na konkrétní vymezené situace; návrh tato slova vypouští, a tím rozšiřuje okruh asistentů, na něž se pravidlo vztahuje. Dále mění odkaz na předpis stanovující rozsah přímé pedagogické činnosti a nově započítává některé metodické činnosti psychologů a dalších odborníků; přesný směr změny rozsahu nelze bez znění budoucího nařízení určit. Nový metodik asistentů má vymezenou práci a kvalifikační podmínky, což přidává pravidla a odpovědnosti, ale pro toto nové ustanovení není dodán předchozí stav."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-5",
+          "relevant": true,
+          "reasonCz": "Mění přechodné pravidlo pro psychologickou a speciálněpedagogickou podporu ve školách, takže může ovlivnit právní předvídatelnost jejího poskytování.",
+          "effectCz": "Dosavadní přechodné ustanovení odkazovalo na pravidla psychologické a speciálněpedagogické podpory účinná od 1. ledna 2026; návrh odkazuje na nové § 18a účinné od 1. září 2027. Jde o posun a aktualizaci právního odkazu, ale dodaný text neumožňuje určit, zda se tím konkrétní nárok na podporu rozšiřuje nebo zužuje."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-99",
+          "relevant": false,
+          "reasonCz": "Dodané změny se týkají podmínek maturitní práce a přijímacího řízení, nikoli právní jistoty učitelů ani bezpečnosti škol.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-111",
+          "relevant": true,
+          "reasonCz": "Vyhláška pro školy zřizované Ministerstvem obrany upravuje poradenství, prevenci a bezpečné klima, tedy přímo část slibu o bezpečném školním prostředí.",
+          "effectCz": "Vyhláška stanoví mimo jiné bezplatné poradenské služby, informování o nich, preventivní program a úkoly pracovníků při prevenci a podpoře žáků. Předchozí znění těchto pravidel v balíčku není, takže nelze určit, zda jsou povinnosti přísnější či volnější; text ale stanoví konkrétní rámec pro školy zřizované Ministerstvem obrany."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-121",
+          "relevant": true,
+          "reasonCz": "Vyhláška přímo stanoví bezpečnostní pravidla pro práci žáků s nebezpečnými látkami, prachem a biologickými činiteli ve školách.",
+          "effectCz": "Stanoví, které skupiny žáků mohou s nebezpečnými látkami pracovat, za jakého dohledu, a ukládá školám zajistit ochranné prostředky a upravit podrobnosti ve školním řádu. Předchozí znění pravidel není v balíčku, proto nelze určit, zda se bezpečnostní požadavky oproti dřívějšímu stavu zpřísnily nebo zmírnily."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-137",
+          "relevant": true,
+          "reasonCz": "Vyhláška pro školy zřizované Ministerstvem vnitra obsahuje pravidla ochrany zdraví, evidence úrazů a bezpečného zacházení s rizikovými látkami.",
+          "effectCz": "Text odkazuje na bezpečnostní pravidla pro nebezpečné látky a upravuje například evidenci a oznamování úrazů i ochranu zdraví při praktickém vyučování. Dřívější znění těchto předpisů není dodáno, takže směr změny vůči dosavadní úpravě nelze určit."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-170",
+          "relevant": true,
+          "reasonCz": "Vyhláška konkretizuje školní prevenci šikany a rizikového chování, krizové plány a činnosti poradenských pracovníků, což přímo souvisí s bezpečným prostředím.",
+          "effectCz": "Dosavadní pravidlo zahrnovalo v preventivním programu strategii předcházení šikaně a dalším rizikovým projevům; nové znění výslovně požaduje školní program proti šikanování a krizové plány a podrobněji stanoví preventivní a poradenské činnosti. Jde o konkrétnější vymezení povinností, ale z dodaného textu nelze bezpečně určit celkovou míru jejich zpřísnění."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-151",
+          "relevant": true,
+          "reasonCz": "Plánuje přípravu nové právní úpravy pedagogických pracovníků s cílem zvýšit srozumitelnost a předvídatelnost pravidel pro pedagogy.",
+          "effectCz": "Usnesení plánuje nahradit dosavadní zákon novou úpravou, která má zavést kariérní stupně, upravit profesní rozvoj a zpřehlednit právní instituty. Jde o plán legislativní přípravy, nikoli o již platnou změnu pravidel, takže nynější povinnosti ani nároky zatím nemění."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-3a8fef9044--source",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43214-1",
+        "psp-core-2025--law-change-43354-1",
+        "psp-core-2025--law-change-43477-1",
+        "psp-core-2025--law-change-43477-4",
+        "psp-core-2025--law-change-43477-5",
+        "esbirka-regulations--law-change-sb-2026-111",
+        "esbirka-regulations--law-change-sb-2026-121",
+        "esbirka-regulations--law-change-sb-2026-137",
+        "esbirka-regulations--law-change-sb-2026-170",
+        "zvlady-resolutions--law-change-uv-2026-175-151",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--government-opinion-43214-1",
+        "psp-core-2025--government-opinion-43354-1",
+        "psp-core-2025--print-step-212471",
+        "esbirka-regulations--2026-111",
+        "esbirka-regulations--2026-121",
+        "esbirka-regulations--2026-137",
+        "esbirka-regulations--2026-170",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala pravidla pro školní prevenci šikany a krizové plány a podpořila návrhy na zpřesnění pravidel používání telefonů. Zároveň však Poslanecká sněmovna přijala změnu zákona o ochraně veřejného zdraví, která zužuje hygienické požadavky na školy, mimo jiné vypuštěním limitů pro některé fyzikální a biologické ukazatele. Poslanci SPD hlasovali pro přijetí této změny i po jejím vrácení Senátem, čímž podpořili oslabení části pravidel důležitých pro bezpečnost škol. Proto dosavadní rozhodnutí strany v této oblasti směřuje proti části slibu, přestože jiné kroky mají podpůrný účinek.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Některé přijaté vyhlášky a návrhy zavádějí nebo zpřesňují bezpečnostní a preventivní pravidla, zatímco změna hygienických požadavků jde opačným směrem; konečné hodnocení vychází z konkrétního hlasování o zúžení hygienických povinností.",
+        "Vládní návrh změn školského zákona z října 2026 obsahuje současně nové povinnosti pro školy i omezení některých podpůrných opatření a zatím nebyl schválen."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0f43135d81cbcad6016aec868b933c87d1be808530780b5018",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 56521,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 56518
+      },
+      "output_tokens": 9640,
+      "output_tokens_details": {
+        "reasoning_tokens": 6333
+      },
+      "total_tokens": 66161
+    },
+    "output": {
+      "promiseId": "spd-2025-3a8fef9044",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Změna hygienických povinností škol přímo ovlivňuje podmínky bezpečného prostředí pro vzdělávání.",
+          "effectCz": "Před změnou měly školy zajistit hygienické požadavky na prostory, vybavení, provoz, osvětlení, vytápění, mikroklima, vodu, úklid a prádlo; schválený text ponechává v § 7 jen vybavení, úklid, prádlo a mikroklima, takže povinnost zužuje. Dříve muselo vnitřní prostředí pobytových místností splňovat limity chemických, fyzikálních i biologických ukazatelů; nově se požadavky týkají jen mikroklimatu, což ochranu rovněž oslabuje. V § 108 se zároveň mění a přesouvá zmocnění k vydávání prováděcích předpisů a v § 108 odst. 2 se vypouštějí „prostory a“; z tohoto přesunu samotného nelze určit další věcný dopad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43214-1",
+          "relevant": true,
+          "reasonCz": "Navržená pravidla pro používání telefonů a jejich dočasné odebrání se přímo týkají podmínek výuky a školního prostředí.",
+          "effectCz": "Dosavadní § 30 odst. 3 dovoloval škole používání telefonů omezit nebo zakázat, s výjimkou nezbytného zdravotního použití. Návrh zavádí zákaz pro vybrané věkové skupiny, upravuje výjimky a umožňuje dočasné odebrání; regulaci tedy zpřesňuje a pro dotčené žáky zpřísňuje, což může přispět k bezpečnějšímu prostředí při výuce. Návrh však není přijatým zákonem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43354-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje používání telefonů při vzdělávání a podmínky, za kterých je školy mohou omezit či zakázat.",
+          "effectCz": "Dosavadní § 30 odst. 3 ponechával regulaci na školním řádu; návrh zavádí zákaz pro vybrané děti a žáky během vzdělávání a souvisejících činností, s výjimkami pro zdravotní důvody, vzdělávání a některé akce. Zároveň umožňuje škole stanovit povinnost telefon odložit nebo odevzdat. Pro dotčené skupiny je tak omezení přísnější a pravidla jsou konkrétnější, což může podpořit bezpečné prostředí při výuce; jde zatím jen o návrh."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění dostupnost podpory psychologů, speciálních pedagogů a asistentů, která může ovlivnit bezpečné a podpůrné prostředí školy.",
+          "effectCz": "Dosavadní zákon již omezoval poskytování podpory psychologa či speciálního pedagoga podle § 16 odst. 11 a ukládal školám související povinnost podle odstavce 12; návrh tato pravidla přesouvá do § 18a a u povinnosti ředitele mění podmínku z nezbytnosti na důvodnost. Nový § 18b omezuje poskytování podpůrného opatření spočívajícího v asistentovi pedagoga pro vyjmenované skupiny, zatímco řediteli ukládá zajistit jeho práci jen do výše financovaného rozsahu a je-li to důvodné. To může zúžit nárok na podpůrné opatření; současně návrh upravuje revize zpráv a metodické vedení asistentů, takže jeho dílčí účinky jsou smíšené."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-4",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje kvalifikaci a metodické vedení pedagogických pracovníků, a tím se dotýká podpory škol a podmínek práce učitelů.",
+          "effectCz": "Návrh rozšiřuje požadavek kvalifikace asistenta pedagoga na všechny asistenty, nikoli jen na ty, kteří působí ve vyjmenovaných třídách či školách, což je přísnější kvalifikační podmínka. Současně nově uznává metodické vedení a konzultace některých pracovníků jako přímou pedagogickou činnost a zavádí funkci metodika asistentů pedagoga. Tato ustanovení mohou posílit metodickou podporu, ale jejich dopad na bezpečí škol není z textu vyčíslen; jde o návrh."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-5",
+          "relevant": true,
+          "reasonCz": "Přechodné pravidlo se týká pokračování podpory psychologů a speciálních pedagogů ve školách.",
+          "effectCz": "Dosavadní přechodné pravidlo odkazovalo na § 16 odst. 11 a 12 ve znění účinném od 1. ledna 2026; návrh odkazuje na § 18a ve znění účinném od 1. září 2027. Mění tedy časový a právní odkaz na pravidla pro psychologickou a speciálněpedagogickou podporu. Z poskytnutého znění lze určit posun data, nikoli samostatně přesný dopad na rozsah podpory."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-99",
+          "relevant": false,
+          "reasonCz": "Uvedená ustanovení upravují společné maturitní práce a úpravy přijímacího řízení, nikoli právní jistotu učitelů ani bezpečné prostředí školy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-111",
+          "relevant": true,
+          "reasonCz": "Vyhláška upravuje kázeňská opatření a poradenské a preventivní služby ve školách zřizovaných Ministerstvem obrany.",
+          "effectCz": "Text stanoví pravidla pro pochvaly a kázeňská opatření, informování žáků a rodičů a organizaci poradenských služeb, včetně podpory žáků se speciálními vzdělávacími potřebami. Tato pravidla mohou částečně přispět k bezpečnému a podpůrnému prostředí, ale vztahují se na školy zřizované Ministerstvem obrany. Balíček neuvádí předchozí znění měněných ustanovení, takže směr změny oproti dřívějším pravidlům nelze určit."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-121",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví dohled, ochranné prostředky a bezpečnostní podmínky pro práci žáků s nebezpečnými látkami a dalšími riziky.",
+          "effectCz": "Vyhláška určuje, které skupiny žáků mohou s nebezpečnými látkami, prachem a biologickými činiteli pracovat, za jakého dohledu, a ukládá školám zajistit vhodné ochranné prostředky a pravidla bezpečnosti. Tím přímo stanoví část bezpečnostních podmínek školního vzdělávání. Předchozí znění pro srovnání balíček neuvádí, takže nelze určit, zda jsou pravidla přísnější než dříve."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-137",
+          "relevant": true,
+          "reasonCz": "Vyhláška pro školy zřizované Ministerstvem vnitra upravuje bezpečnost při výuce, evidenci úrazů a jejich hlášení.",
+          "effectCz": "Ustanovení vyžadují přihlížet při dělení tříd k bezpečnosti a ochraně zdraví, stanoví evidenci a hlášení úrazů a upravují bezpečnostní opatření při praktickém vyučování. Tím upravují dílčí podmínky bezpečné školy, avšak jen pro školy a zařízení zřizované Ministerstvem vnitra. Předchozí znění měněných pravidel není v balíčku uvedeno, takže směr změny nelze určit."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-170",
+          "relevant": true,
+          "reasonCz": "Vyhláška posiluje školní prevenci šikany a rizikového chování, podporu duševního zdraví a krizovou intervenci.",
+          "effectCz": "Text výslovně zařazuje školní program proti šikanování a krizové plány mezi preventivní činnosti a popisuje úkoly metodika prevence, psychologa a dalších pracovníků při podpoře duševního zdraví a řešení krizí. Jde o přímý dílčí příspěvek k bezpečnému prostředí; balíček však neposkytuje předchozí znění předpisu, takže nelze přesně určit, o kolik se povinnosti oproti dřívějšku rozšiřují."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-151",
+          "relevant": true,
+          "reasonCz": "Vládní plán počítá s novým zákonem pro pedagogické pracovníky a výslovně si klade za cíl větší srozumitelnost a předvídatelnost právní úpravy.",
+          "effectCz": "Usnesení zařazuje přípravu věcného záměru nového zákona o pedagogických pracovnících, který má zavést kariérní systém a zvýšit srozumitelnost a předvídatelnost pravidel. Jde o návrhový krok k části slibu týkající se právní jistoty učitelů, nikoli o změnu, která by sama již upravovala bezpečnost škol."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-3a8fef9044--source",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43214-1",
+        "psp-core-2025--law-change-43354-1",
+        "psp-core-2025--law-change-43477-1",
+        "psp-core-2025--law-change-43477-4",
+        "psp-core-2025--law-change-43477-5",
+        "esbirka-regulations--law-change-sb-2026-111",
+        "esbirka-regulations--law-change-sb-2026-121",
+        "esbirka-regulations--law-change-sb-2026-137",
+        "esbirka-regulations--law-change-sb-2026-170",
+        "zvlady-resolutions--law-change-uv-2026-175-151",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--government-opinion-43214-1",
+        "psp-core-2025--government-opinion-43354-1",
+        "psp-core-2025--print-step-212471",
+        "esbirka-regulations--2026-111",
+        "esbirka-regulations--2026-121",
+        "esbirka-regulations--2026-137",
+        "esbirka-regulations--2026-170",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro novelu zákona o ochraně veřejného zdraví, tedy návrh změny hygienických pravidel pro školy, a po zamítnutí Senátem podpořili i její potvrzení. Schválené znění zužovalo povinnost škol dodržovat hygienické požadavky na prostory a vnitřní prostředí, čímž oslabovalo jednu část ochrany bezpečného prostředí pro vzdělávání. Vláda SPD zároveň přijala pravidla pro bezpečnou práci s nebezpečnými látkami a pro prevenci šikany a podpořila návrhy na regulaci telefonů ve školách. Tyto dílčí kroky jsou v protisměru k rozhodnutí o hygienických požadavcích, které je pro současné hodnocení rozhodující.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Bezpečnostní vyhlášky č. 111/2026 a 137/2026 Sb. se vztahují jen na školy zřizované Ministerstvem obrany, respektive Ministerstvem vnitra; jejich přínos proto nedokládá změnu pro všechny školy.",
+        "Vládní návrh předložený v říjnu 2026 obsahuje jak omezení některých podpůrných opatření, tak nová pravidla pro metodické vedení pracovníků; zatím nebyl rozhodnut a jeho konečný účinek není znám."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_099ec1af2ef08bea016aec872e264487d18d708c4c7fcbcca2",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 56521,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 56518
+      },
+      "output_tokens": 7420,
+      "output_tokens_details": {
+        "reasoning_tokens": 4198
+      },
+      "total_tokens": 63941
+    },
+    "output": {
+      "promiseId": "spd-2025-3a8fef9044",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Upravuje hygienické povinnosti škol a jejich právní základ, a proto přímo souvisí s bezpečností škol i právní jistotou.",
+          "effectCz": "Původně školy musely zajišťovat hygienické požadavky na prostorové podmínky, vybavení, provoz, osvětlení, vytápění, mikroklima, vodu, úklid a prádlo; schválené znění rozsah v § 7 zužuje hlavně na vybavení, úklid, prádlo a mikroklima. U vnitřního prostředí se původní limity chemických, fyzikálních a biologických ukazatelů nahrazují požadavky jen na mikroklima, což je zúžení ochrany. Změny § 108 upravují, kdo vydává prováděcí vyhlášky, a neruší toto zúžení; celek tedy snižuje rozsah hygienických povinností týkajících se škol."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43214-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí zákonná pravidla používání telefonů ve školách, která mohou ovlivnit bezpečné a nerušené vzdělávání i předvídatelnost školních pravidel.",
+          "effectCz": "Dosavadní školský zákon umožňoval školnímu řádu používání telefonů omezit nebo zakázat; návrh přidává zákazy pro vymezené věkové skupiny, výjimky pro vzdělávání a zdravotní důvody i možnost dočasného odebrání telefonu. Pro tyto skupiny stanoví konkrétnější pravidla a rozšiřuje možnost školy vymáhat je, ale předchozí obecnou možnost školního řádu nenahrazuje zcela."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43354-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění pravidla pro telefony při vzdělávání a školských službách, což se týká bezpečného a soustředěného prostředí i právní předvídatelnosti.",
+          "effectCz": "Předchozí § 30 odst. 3 dovoloval školnímu řádu používání zařízení omezit či zakázat; návrh zavádí zákonný zákaz pro vyjmenované děti a žáky, stanoví výjimky a umožňuje určit odložení či odevzdání telefonu. Pro určené skupiny tak pravidla konkretizuje a zákonný zákaz zpřísňuje, zatímco u ostatních nadále připouští regulaci školním řádem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-1",
+          "relevant": true,
+          "reasonCz": "Upravuje školní poradenskou a podpůrnou práci včetně psychologů, speciálních pedagogů a asistentů, což souvisí s podporou bezpečného prostředí a jistotou škol při zajišťování služeb.",
+          "effectCz": "Návrh přesouvá pravidla pro psychologickou a speciálněpedagogickou podporu do nových ustanovení a stanoví povinnost zajistit práci odborníků, je-li to vzhledem ke vzdělávacím potřebám důvodné; dosavadní text obdobnou povinnost vázal na to, že je nezbytná. Současně omezuje poskytování asistenta pedagoga jako podpůrného opatření pro vyjmenované skupiny, ale ukládá škole za stanovených podmínek jeho práci zajistit. U některých nových omezení předchozí pravidlo v dodaném kontextu chybí, takže jejich směr vůči dosavadní úpravě nelze určit; celek je smíšený."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-4",
+          "relevant": true,
+          "reasonCz": "Mění kvalifikaci a pracovní náplň pedagogických pracovníků a zavádí metodické vedení asistentů, což se dotýká právní jistoty učitelů i podpory ve školách.",
+          "effectCz": "Dosavadní požadavek odborné kvalifikace asistenta se podle dodaného znění vztahoval na konkrétní vymezené situace; návrh tato slova vypouští, a tím rozšiřuje okruh asistentů, na něž se pravidlo vztahuje. Dále mění odkaz na předpis stanovující rozsah přímé pedagogické činnosti a nově započítává některé metodické činnosti psychologů a dalších odborníků; přesný směr změny rozsahu nelze bez znění budoucího nařízení určit. Nový metodik asistentů má vymezenou práci a kvalifikační podmínky, což přidává pravidla a odpovědnosti, ale pro toto nové ustanovení není dodán předchozí stav."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-5",
+          "relevant": true,
+          "reasonCz": "Mění přechodné pravidlo pro psychologickou a speciálněpedagogickou podporu ve školách, takže může ovlivnit právní předvídatelnost jejího poskytování.",
+          "effectCz": "Dosavadní přechodné ustanovení odkazovalo na pravidla psychologické a speciálněpedagogické podpory účinná od 1. ledna 2026; návrh odkazuje na nové § 18a účinné od 1. září 2027. Jde o posun a aktualizaci právního odkazu, ale dodaný text neumožňuje určit, zda se tím konkrétní nárok na podporu rozšiřuje nebo zužuje."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-99",
+          "relevant": false,
+          "reasonCz": "Dodané změny se týkají podmínek maturitní práce a přijímacího řízení, nikoli právní jistoty učitelů ani bezpečnosti škol.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-111",
+          "relevant": true,
+          "reasonCz": "Vyhláška pro školy zřizované Ministerstvem obrany upravuje poradenství, prevenci a bezpečné klima, tedy přímo část slibu o bezpečném školním prostředí.",
+          "effectCz": "Vyhláška stanoví mimo jiné bezplatné poradenské služby, informování o nich, preventivní program a úkoly pracovníků při prevenci a podpoře žáků. Předchozí znění těchto pravidel v balíčku není, takže nelze určit, zda jsou povinnosti přísnější či volnější; text ale stanoví konkrétní rámec pro školy zřizované Ministerstvem obrany."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-121",
+          "relevant": true,
+          "reasonCz": "Vyhláška přímo stanoví bezpečnostní pravidla pro práci žáků s nebezpečnými látkami, prachem a biologickými činiteli ve školách.",
+          "effectCz": "Stanoví, které skupiny žáků mohou s nebezpečnými látkami pracovat, za jakého dohledu, a ukládá školám zajistit ochranné prostředky a upravit podrobnosti ve školním řádu. Předchozí znění pravidel není v balíčku, proto nelze určit, zda se bezpečnostní požadavky oproti dřívějšímu stavu zpřísnily nebo zmírnily."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-137",
+          "relevant": true,
+          "reasonCz": "Vyhláška pro školy zřizované Ministerstvem vnitra obsahuje pravidla ochrany zdraví, evidence úrazů a bezpečného zacházení s rizikovými látkami.",
+          "effectCz": "Text odkazuje na bezpečnostní pravidla pro nebezpečné látky a upravuje například evidenci a oznamování úrazů i ochranu zdraví při praktickém vyučování. Dřívější znění těchto předpisů není dodáno, takže směr změny vůči dosavadní úpravě nelze určit."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-170",
+          "relevant": true,
+          "reasonCz": "Vyhláška konkretizuje školní prevenci šikany a rizikového chování, krizové plány a činnosti poradenských pracovníků, což přímo souvisí s bezpečným prostředím.",
+          "effectCz": "Dosavadní pravidlo zahrnovalo v preventivním programu strategii předcházení šikaně a dalším rizikovým projevům; nové znění výslovně požaduje školní program proti šikanování a krizové plány a podrobněji stanoví preventivní a poradenské činnosti. Jde o konkrétnější vymezení povinností, ale z dodaného textu nelze bezpečně určit celkovou míru jejich zpřísnění."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-151",
+          "relevant": true,
+          "reasonCz": "Plánuje přípravu nové právní úpravy pedagogických pracovníků s cílem zvýšit srozumitelnost a předvídatelnost pravidel pro pedagogy.",
+          "effectCz": "Usnesení plánuje nahradit dosavadní zákon novou úpravou, která má zavést kariérní stupně, upravit profesní rozvoj a zpřehlednit právní instituty. Jde o plán legislativní přípravy, nikoli o již platnou změnu pravidel, takže nynější povinnosti ani nároky zatím nemění."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-3a8fef9044--source",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43214-1",
+        "psp-core-2025--law-change-43354-1",
+        "psp-core-2025--law-change-43477-1",
+        "psp-core-2025--law-change-43477-4",
+        "psp-core-2025--law-change-43477-5",
+        "esbirka-regulations--law-change-sb-2026-111",
+        "esbirka-regulations--law-change-sb-2026-121",
+        "esbirka-regulations--law-change-sb-2026-137",
+        "esbirka-regulations--law-change-sb-2026-170",
+        "zvlady-resolutions--law-change-uv-2026-175-151",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--government-opinion-43214-1",
+        "psp-core-2025--government-opinion-43354-1",
+        "psp-core-2025--print-step-212471",
+        "esbirka-regulations--2026-111",
+        "esbirka-regulations--2026-121",
+        "esbirka-regulations--2026-137",
+        "esbirka-regulations--2026-170",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala pravidla pro školní prevenci šikany a krizové plány a podpořila návrhy na zpřesnění pravidel používání telefonů. Zároveň však Poslanecká sněmovna přijala změnu zákona o ochraně veřejného zdraví, která zužuje hygienické požadavky na školy, mimo jiné vypuštěním limitů pro některé fyzikální a biologické ukazatele. Poslanci SPD hlasovali pro přijetí této změny i po jejím vrácení Senátem, čímž podpořili oslabení části pravidel důležitých pro bezpečnost škol. Proto dosavadní rozhodnutí strany v této oblasti směřuje proti části slibu, přestože jiné kroky mají podpůrný účinek.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Některé přijaté vyhlášky a návrhy zavádějí nebo zpřesňují bezpečnostní a preventivní pravidla, zatímco změna hygienických požadavků jde opačným směrem; konečné hodnocení vychází z konkrétního hlasování o zúžení hygienických povinností.",
+        "Vládní návrh změn školského zákona z října 2026 obsahuje současně nové povinnosti pro školy i omezení některých podpůrných opatření a zatím nebyl schválen."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

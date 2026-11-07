@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-41-01-682Z--5f8dc92f8991",
+  "evaluatedAt": "2026-10-02T05:41:01.682Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-1082b23385/5f8dc92f8991169320398a1885aae452d930cf7724c546d7d1a3d855e0ecea87.json",
+  "packageHash": "5f8dc92f8991169320398a1885aae452d930cf7724c546d7d1a3d855e0ecea87",
+  "assessmentContentHash": "3569ebae6a68d475feb5d82d726a20eb083dce5642fae08db0ce8a43fb72faf4",
+  "assessmentFingerprint": "799bea7d5fd93f03f7226e087f3f17f3c29ca9c990a19548bd1241a319df2620",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-1082b23385",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-1082b23385",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text ruší části dřívějších předpisů o infrastruktuře, ale neuvádí obsah rušených ustanovení ani nedokládá změnu vlastnictví či správy vody."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí trestnost poškození vodního zdroje a za určitých podmínek i neoprávněného odběru vody, což je dílčí opatření k větší kontrole nad vodou."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-1082b23385--source",
+        "psp-core-2025--law-change-43329-1",
+        "psp-core-2025--print-step-211494"
+      ],
+      "explanationCz": "Vláda, v níž SPD působí, předložila návrh novely trestního zákoníku. Návrh zavádí trestnost poškození vodního zdroje a za určitých podmínek i neoprávněného odběru vody, což představuje dílčí krok k větší kontrole nad nakládáním s vodou. Návrh však nepřevádí vodárenský majetek do českého vlastnictví, takže celý slib nedokládá.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh se týká jen vymezených případů poškození zdroje a neoprávněného odběru vody; předložené důkazy nedokládají změnu vlastnictví vody ani vodárenského majetku."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-1082b23385",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text ruší dřívější část předpisu o urychlení výstavby infrastruktury, ale neukazuje, že by měnil vlastnictví vody, kontrolu nad ní nebo vodní soběstačnost; obsah rušené části není uveden."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí trestné činy poškození vodního zdroje a neoprávněného odběru vody, což představuje konkrétní, byť omezený krok k regulaci a ochraně vodních zdrojů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-1082b23385--source",
+        "psp-core-2025--law-change-43329-1",
+        "psp-core-2025--print-step-211494"
+      ],
+      "explanationCz": "Vláda, v níž SPD působí, předložila návrh novely trestního zákoníku. Návrh zavádí trestní postih za poškození chráněného vodního zdroje i za neoprávněný odběr vody. Jde o dílčí posílení kontroly a ochrany vodních zdrojů, takže návrh posouvá slib kupředu. Nepřevádí však vodu do českého vlastnictví ani sám nezajišťuje vodní soběstačnost.",
+      "confidence": "medium",
+      "uncertainties": []
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_024af1dab1ebeb62016abf43d02ff087d19345f6f0fb6b6c25",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 35819,
+      "input_tokens_details": {
+        "cache_write_tokens": 32495,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1796,
+      "output_tokens_details": {
+        "reasoning_tokens": 1361
+      },
+      "total_tokens": 37615
+    },
+    "output": {
+      "promiseId": "spd-2025-1082b23385",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text ruší části dřívějších předpisů o infrastruktuře, ale neuvádí obsah rušených ustanovení ani nedokládá změnu vlastnictví či správy vody."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí trestnost poškození vodního zdroje a za určitých podmínek i neoprávněného odběru vody, což je dílčí opatření k větší kontrole nad vodou."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-1082b23385--source",
+        "psp-core-2025--law-change-43329-1",
+        "psp-core-2025--print-step-211494"
+      ],
+      "explanationCz": "Vláda, v níž SPD působí, předložila návrh novely trestního zákoníku. Návrh zavádí trestnost poškození vodního zdroje a za určitých podmínek i neoprávněného odběru vody, což představuje dílčí krok k větší kontrole nad nakládáním s vodou. Návrh však nepřevádí vodárenský majetek do českého vlastnictví, takže celý slib nedokládá.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh se týká jen vymezených případů poškození zdroje a neoprávněného odběru vody; předložené důkazy nedokládají změnu vlastnictví vody ani vodárenského majetku."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_03769c23ee784807016abf43dc379487d19f0722b20570cb3e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 35819,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 35816
+      },
+      "output_tokens": 2576,
+      "output_tokens_details": {
+        "reasoning_tokens": 2123
+      },
+      "total_tokens": 38395
+    },
+    "output": {
+      "promiseId": "spd-2025-1082b23385",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text ruší dřívější část předpisu o urychlení výstavby infrastruktury, ale neukazuje, že by měnil vlastnictví vody, kontrolu nad ní nebo vodní soběstačnost; obsah rušené části není uveden."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí trestné činy poškození vodního zdroje a neoprávněného odběru vody, což představuje konkrétní, byť omezený krok k regulaci a ochraně vodních zdrojů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-1082b23385--source",
+        "psp-core-2025--law-change-43329-1",
+        "psp-core-2025--print-step-211494"
+      ],
+      "explanationCz": "Vláda, v níž SPD působí, předložila návrh novely trestního zákoníku. Návrh zavádí trestní postih za poškození chráněného vodního zdroje i za neoprávněný odběr vody. Jde o dílčí posílení kontroly a ochrany vodních zdrojů, takže návrh posouvá slib kupředu. Nepřevádí však vodu do českého vlastnictví ani sám nezajišťuje vodní soběstačnost.",
+      "confidence": "medium",
+      "uncertainties": []
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

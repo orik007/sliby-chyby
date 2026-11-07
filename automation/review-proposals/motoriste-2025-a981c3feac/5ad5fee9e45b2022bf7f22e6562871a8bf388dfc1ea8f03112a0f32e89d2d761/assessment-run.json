@@ -1,0 +1,650 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T21-09-58-762Z--9b6deeb9ddb1",
+  "evaluatedAt": "2026-10-06T21:09:58.762Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-a981c3feac/9b6deeb9ddb1663d46598c5afda9d3eac29064327264ca0c11a77bc4ddbbbe96.json",
+  "packageHash": "9b6deeb9ddb1663d46598c5afda9d3eac29064327264ca0c11a77bc4ddbbbe96",
+  "assessmentContentHash": "1168594d8f6a0e38d396bd9c66ade75840f83c063916db298731c7628ff2ebf7",
+  "assessmentFingerprint": "5ad5fee9e45b2022bf7f22e6562871a8bf388dfc1ea8f03112a0f32e89d2d761",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-a981c3feac",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment cites duplicate evidence IDs",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0f4ccc874c4f34bb016ac56202b07487d29fa158e7fd62298c",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 663428,
+            "input_tokens_details": {
+              "cache_write_tokens": 659458,
+              "cached_tokens": 3967
+            },
+            "output_tokens": 11151,
+            "output_tokens_details": {
+              "reasoning_tokens": 8804
+            },
+            "total_tokens": 674579
+          },
+          "output": {
+            "promiseId": "motoriste-2025-a981c3feac",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Změna přímo přeskupuje stavební úřady a výslovně stanoví převod zaměstnanců na nově zřízené státní úřady.",
+                "effectCz": "Dosavadní úprava počítala s Dopravním a energetickým stavebním úřadem a krajskými a obecními stavebními úřady; schválený text zřizuje Úřad rozvoje území a 14 krajských úřadů a převádí na ně působnosti i zaměstnance. Některé dosavadní obecní a krajské zaměstnance tak mění na státní zaměstnance a zachovává jejich platové zařazení; zároveň vznikají nové úřady a vedoucí místa. Text neuvádí počty převáděných ani celkové počty pracovníků před a po změně, takže čistý dopad na celkový počet nelze určit; převod zaměstnanců ale sám o sobě slíbené snížení nepředstavuje a může je ztížit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-2",
+                "relevant": true,
+                "reasonCz": "Změna zakládá nový ústřední správní úřad a přesouvá působnost ministerstva, což přímo mění uspořádání státní správy, na něž se slib vztahuje.",
+                "effectCz": "Před změnou vykonávalo Ministerstvo pro místní rozvoj státní správu v územním plánování a stavebním řádu; schválený text tyto oblasti z působnosti ministerstva vypouští a přidává Úřad rozvoje území mezi ústřední správní úřady. Nový úřad vzniká, ale text neurčuje jeho počet zaměstnanců ani to, kolik pracovníků přesune ministerstvo, takže dopad na celkový počet osob pracujících pro stát nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": false,
+                "reasonCz": "Mění působnost a postupy při ochraně přírody, ale žádné ustanovení této části neurčuje počet zaměstnanců ani jejich převod či snížení.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": false,
+                "reasonCz": "Ustanovení pouze nahrazují pojmy související se zastavěným a zastavitelným územím a neupravují počet pracovníků státu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+                "relevant": true,
+                "reasonCz": "Schválená část umožňuje zřídit státní příspěvkovou organizaci pro obranu, ale neuvádí její personální rozsah.",
+                "effectCz": "Před změnou citované ustanovení § 6 takovou možnost neobsahovalo; nové § 6a umožňuje Ministerstvu obrany státní příspěvkovou organizaci zřídit, sloučit, rozdělit nebo zrušit. Text nestanoví počet zaměstnanců ani zda se úkoly a zaměstnanci převedou z existujících institucí, takže směr dopadu na počet osob pracujících pro stát nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-1",
+                "relevant": false,
+                "reasonCz": "Návrh upravuje právní poměry a organizaci státních zaměstnanců, nikoli počet pracovních míst nebo závazek jejich snižování.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-2",
+                "relevant": false,
+                "reasonCz": "Tato část upravuje organizaci kabinetů a zastupování členů vlády, ale nedokládá změnu počtu osob pracujících pro stát.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-4",
+                "relevant": false,
+                "reasonCz": "Mění pracovněprávní zařazení zaměstnanců sociálního zabezpečení, nikoli jejich počet ani počet pracovních míst.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-21",
+                "relevant": false,
+                "reasonCz": "Upravuje pravidla zahraniční služby, ale neobsahuje opatření ke snížení počtu státních zaměstnanců.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-24",
+                "relevant": true,
+                "reasonCz": "Přechodná ustanovení výslovně počítají s přeřazením dosavadních zaměstnanců Grantové a Technologické agentury na pracovní místa státních zaměstnanců.",
+                "effectCz": "Předchozí úprava počítala s první systemizací služebních i pracovních míst a převodem dosavadních zaměstnanců na tato místa; schválená verze zachovává přeřazení dosavadních zaměstnanců na odpovídající pracovní místa a stanoví, že vedoucí mohou na svých místech působit do výběrového řízení. Nejde o pravidlo, které by snižovalo počet těchto zaměstnanců; jde o jejich zachování při změně právního režimu. Text neuvádí počty osob ani výslednou změnu celkového počtu pracovníků státu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-approved-27",
+                "relevant": false,
+                "reasonCz": "Změna se týká jen odstranění požadavku na služební postavení předsedy komise pro zkoušky auditorů, nikoli počtu pracovníků státu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-1",
+                "relevant": false,
+                "reasonCz": "Vládní návrh mění pravidla podpory bydlení a svěřování úkonů úřadům, ale neuvádí změnu počtu zaměstnanců státu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-5",
+                "relevant": true,
+                "reasonCz": "Návrh ruší samostatný Puncovní úřad a rozděluje jeho působnost mezi jiné instituce, což může být součástí snižování počtu státních pracovníků.",
+                "effectCz": "Dosavadní zákon svěřoval výkon puncovnictví Ministerstvu průmyslu a obchodu a samostatnému Puncovnímu úřadu; návrh ruší Puncovní úřad a jeho úkoly rozděluje mezi Český metrologický institut, Českou obchodní inspekci a další úřady. Jde o zrušení samostatného úřadu, ale text neurčuje, zda se jeho zaměstnanci propustí, převedou nebo v jakém počtu, takže dopad na počet osob pracujících pro stát nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-1",
+                "relevant": false,
+                "reasonCz": "Návrh upravuje svazky obcí a jejich zaměstnance, nikoli počet osob pracujících pro stát.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "motoriste-2025-a981c3feac--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-2",
+              "psp-core-2025--law-change-43174-approved-20",
+              "psp-core-2025--law-change-43184-24",
+              "psp-core-2025--law-change-43372-5",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--senate-resolution-43184-7",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--print-step-210648",
+              "psp-core-2025--vote-87958",
+              "psp-core-2025--vote-88026",
+              "psp-core-2025--vote-88449",
+              "psp-core-2025--print-step-210648",
+              "psp-core-2025--vote-88026",
+              "psp-core-2025--vote-88450",
+              "psp-core-2025--print-step-211843"
+            ],
+            "explanationCz": "Motoristé spolu s dalšími poslanci předložili návrhy na změnu stavební správy a zákona o státních zaměstnancích. Poslanci Motoristů hlasovali pro vznik nových úřadů rozvoje území a pro převod dosavadních obecních a krajských zaměstnanců na státní místa; hlasovali také pro přeřazení zaměstnanců Grantové a Technologické agentury na odpovídající místa. To jde proti části slibu, protože tyto změny zaměstnance převádějí či zachovávají, místo aby dokládaly jejich úbytek. Jeden poslanec Motoristů zároveň navrhl zrušit Puncovní úřad, ale návrh neuvádí, zda se tím sníží počet jeho pracovníků.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Předložené změny neuvádějí celkový počet osob pracujících pro stát před změnami ani po nich; nelze proto určit čistý dopad na slíbené snížení alespoň o 20 %.",
+              "U zrušení Puncovního úřadu nejsou uvedeny počty zaměstnanců ani jejich další osud, takže nelze doložit, zda by návrh počet státních pracovníků skutečně snížil.",
+              "Schválené změny týkající se obranné příspěvkové organizace neurčují její personální rozsah ani případné přesuny pracovníků."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-a981c3feac",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změna převádí zaměstnance obecních a krajských stavebních úřadů do státní služby a zřizuje nové úřady rozvoje území, takže může přímo ovlivnit počet lidí vedených jako státní zaměstnanci.",
+          "effectCz": "Před změnou vykonávaly stavební správu mimo jiné dosavadní státní a samosprávné úřady; nově se zřizuje Úřad rozvoje území a krajské úřady rozvoje území a zaměstnanci části dosavadních obecních a krajských úřadů přecházejí do státní služby. Zároveň se některá klíčová služební místa výslovně stanoví nad rámec limitů. To umožňuje zvýšit počet státních zaměstnanců, a je tedy v napětí se slibem snížit počet lidí pracujících pro stát; paket ale neuvádí počty převáděných ani nových zaměstnanců ani čistý dopad na celkový počet pracovníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Změna zařazuje nově zřizovaný Úřad rozvoje území mezi ústřední orgány státní správy a převádí na něj působnost, což vytváří další státní instituci relevantní k počtu státních zaměstnanců.",
+          "effectCz": "Před změnou seznam ústředních orgánů tento úřad neobsahoval a Ministerstvo pro místní rozvoj mělo působnost v územním plánování a stavebním řádu; nově je mezi ústřední orgány doplněn Úřad rozvoje území a příslušná působnost ministerstva se vypouští. Jde o vznik nového ústředního úřadu a přesun funkcí, který může zvyšovat počet pracovníků státu, ale samotné znění ani kontext neurčují, zda se celkový počet pracovníků zvětší nebo zmenší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Změny ochrany přírody a rozdělení pravomocí mezi úřady nestanovují ani nemění počet zaměstnanců nebo závazek jeho snížení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Úpravy energetického zákona řeší energetická zařízení a jejich regulaci, nikoli počet lidí pracujících pro stát nebo jeho snižování.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": false,
+          "reasonCz": "Změna obranného zákona se týká státní příspěvkové organizace pro obranu a vyvlastňování, ale nestanoví změnu počtu pracovníků státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje právní poměry a řízení státních zaměstnanců, ale v dodaném znění nestanoví snížení ani zvýšení jejich počtu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-2",
+          "relevant": false,
+          "reasonCz": "Organizační pravidla pro ministerstva a Úřad vlády neobsahují ustanovení o počtu zaměstnanců ani o jeho snižování.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-4",
+          "relevant": false,
+          "reasonCz": "Úprava postavení zdravotnických pracovníků sociálního zabezpečení nemění podle dodaného textu počet lidí pracujících pro stát.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-21",
+          "relevant": false,
+          "reasonCz": "Změny zahraniční služby upravují pracovněprávní režim a organizaci práce, nikoli počet pracovníků státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-24",
+          "relevant": false,
+          "reasonCz": "Přechod zaměstnanců Grantové a Technologické agentury na nová pracovní místa mění jejich právní režim, nikoli doložený počet lidí pracujících pro stát.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-27",
+          "relevant": false,
+          "reasonCz": "Změna pozemních komunikací odstraňuje požadavek na výkon státní služby pro členy zkušební komise, ale nemění počet pracovníků státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Vládní návrh změny podpory bydlení přesouvá některé úkony mezi institucemi, avšak neuvádí změnu počtu zaměstnanců ani opatření ke splnění tohoto slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-5",
+          "relevant": false,
+          "reasonCz": "Změna puncovního zákona převádí kompetence mezi úřady, ale nepředepisuje změnu počtu pracovníků státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-1",
+          "relevant": false,
+          "reasonCz": "Změny pravidel pro svazky obcí a odměňování zastupitelů se netýkají počtu osob pracujících pro stát.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-a981c3feac--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Motoristé se podíleli na předložení návrhu novely stavebního zákona, která zřizuje Úřad rozvoje území a převádí část zaměstnanců obecních a krajských stavebních úřadů do státní služby. Poslanci Motoristů hlasovali pro schválení návrhu a po jeho odmítnutí Senátem také pro setrvání Poslanecké sněmovny na návrhu. Nové úřady a pracovní místa nad stanovenými limity mohou jít proti slibu snížit počet lidí pracujících pro stát. Z dodaných podkladů ale nelze zjistit, kolik zaměstnanců se převede ani jak se změnil celkový počet pracovníků.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neuvádějí počet převáděných zaměstnanců ani čistý dopad zřízení nových úřadů na celkový počet osob pracujících pro stát; nelze proto určit rozsah tohoto protichůdného dopadu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-a981c3feac",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela převádí zaměstnance krajů a obcí vykonávající převáděné činnosti do státního úřadu a mění tak přímo počet osob pracujících pro stát.",
+          "effectCz": "Dosavadní stavební agendu vykonávaly mimo jiné úřady ministerstev, krajské a obecní stavební úřady a Dopravní a energetický stavební úřad; nově vznikají Úřad rozvoje území a krajské úřady rozvoje území a zaměstnancům krajů a obcí, jejichž činnosti přecházejí, přecházejí pracovní práva na stát. To zvyšuje počet státních zaměstnanců nejméně o převáděné pracovníky, zatímco zánik a přesun dalších úřadů může působit opačně; celkový čistý dopad nelze z textu vyčíslit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Změna přesouvá pravomoci v oblasti stavební správy z ministerstva na nový ústřední úřad, jehož zaměstnanci jsou zaměstnanci státu.",
+          "effectCz": "Dosavadní § 2 zákona o zřízení ministerstev nový úřad neuváděl a § 14 odst. 1 řadil územní plánování, stavební řád a vyvlastnění mezi působnosti Ministerstva pro místní rozvoj. Nově je Úřad rozvoje území uveden mezi ústředními orgány a tyto působnosti se z Ministerstva pro místní rozvoj vypouštějí; změna sama počet zaměstnanců neurčuje, takže její čistý dopad na slíbené snížení nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Změny pravidel ochrany přírody a krajiny nestanoví ani nemění počet osob pracujících pro stát.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Úpravy energetického zákona se týkají terminologie území, přípojek a ochranných pásem, nikoli počtu státních zaměstnanců.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": false,
+          "reasonCz": "Změna zákona o zajišťování obrany umožňuje zřídit příspěvkovou organizaci a mění postupy při vyvlastnění, ale nestanoví žádné snížení ani změnu počtu zaměstnanců.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje pracovní poměry, systemizaci a výběr státních zaměstnanců, ale neobsahuje závazek ani opatření ke snížení jejich počtu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-2",
+          "relevant": false,
+          "reasonCz": "Úprava kabinetů a náměstků členů vlády neukládá ani neprovádí snížení počtu osob pracujících pro stát.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-4",
+          "relevant": false,
+          "reasonCz": "Změny organizace sociálního zabezpečení se počtu pracovníků věcně nedotýkají; část pouze vyjímá určité zdravotnické pracovníky z právního režimu státních zaměstnanců.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-21",
+          "relevant": false,
+          "reasonCz": "Změna zákona o zahraniční službě převážně převádí její pracovní poměry do nového právního režimu a nestanoví snížení počtu zaměstnanců.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-24",
+          "relevant": false,
+          "reasonCz": "Úprava zaměstnanců grantových agentur mění jejich pracovní a organizační režim, nikoli jejich počet.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-27",
+          "relevant": false,
+          "reasonCz": "Změna silničního zákona vypouští požadavek, aby člen zkušební komise byl státním zaměstnancem, ale neukládá ani neprovádí snížení počtu osob pracujících pro stát.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění podmínky podpory bydlení a příslušnost úřadů, nikoli celkový počet osob pracujících pro stát.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-5",
+          "relevant": false,
+          "reasonCz": "Návrh ruší Puncovní úřad a převádí jeho působnost na jiné instituce, ale nedokládá, že by tím došlo ke snížení počtu osob pracujících pro stát.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje organizaci svazků obcí a jejich rejstřík, nikoli počet osob pracujících pro stát.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-a981c3feac--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Motoristé spolu s dalšími poslanci předložili novelu stavebního zákona, která zřizuje nové úřady rozvoje území a převádí na stát zaměstnance krajů a obcí vykonávající přebírané činnosti. Poslanci Motoristů hlasovali pro její schválení a po zamítnutí Senátem také pro setrvání na návrhu; Senát je horní komora Parlamentu. Převod zaměstnanců do státní správy jde proti části slibu o snížení jejich počtu, i když novela neurčuje celkový počet ani čistý dopad změn úřadů. Proto nelze tvrdit, že hlasování odporuje celému cíli snížit počet nejméně o pětinu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela převádí některé zaměstnance krajů a obcí na stát, ale zároveň přesouvá a ruší dosavadní úřady; podklady neuvádějí počty zaměstnanců před změnou a po ní, takže čistý dopad na celkový počet nelze vyčíslit."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_055a83e387b99e40016ac562ceb7f087d2b10ef1d46d2ae999",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 663428,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 663425
+      },
+      "output_tokens": 7193,
+      "output_tokens_details": {
+        "reasoning_tokens": 5207
+      },
+      "total_tokens": 670621
+    },
+    "output": {
+      "promiseId": "motoriste-2025-a981c3feac",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změna převádí zaměstnance obecních a krajských stavebních úřadů do státní služby a zřizuje nové úřady rozvoje území, takže může přímo ovlivnit počet lidí vedených jako státní zaměstnanci.",
+          "effectCz": "Před změnou vykonávaly stavební správu mimo jiné dosavadní státní a samosprávné úřady; nově se zřizuje Úřad rozvoje území a krajské úřady rozvoje území a zaměstnanci části dosavadních obecních a krajských úřadů přecházejí do státní služby. Zároveň se některá klíčová služební místa výslovně stanoví nad rámec limitů. To umožňuje zvýšit počet státních zaměstnanců, a je tedy v napětí se slibem snížit počet lidí pracujících pro stát; paket ale neuvádí počty převáděných ani nových zaměstnanců ani čistý dopad na celkový počet pracovníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Změna zařazuje nově zřizovaný Úřad rozvoje území mezi ústřední orgány státní správy a převádí na něj působnost, což vytváří další státní instituci relevantní k počtu státních zaměstnanců.",
+          "effectCz": "Před změnou seznam ústředních orgánů tento úřad neobsahoval a Ministerstvo pro místní rozvoj mělo působnost v územním plánování a stavebním řádu; nově je mezi ústřední orgány doplněn Úřad rozvoje území a příslušná působnost ministerstva se vypouští. Jde o vznik nového ústředního úřadu a přesun funkcí, který může zvyšovat počet pracovníků státu, ale samotné znění ani kontext neurčují, zda se celkový počet pracovníků zvětší nebo zmenší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Změny ochrany přírody a rozdělení pravomocí mezi úřady nestanovují ani nemění počet zaměstnanců nebo závazek jeho snížení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Úpravy energetického zákona řeší energetická zařízení a jejich regulaci, nikoli počet lidí pracujících pro stát nebo jeho snižování.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": false,
+          "reasonCz": "Změna obranného zákona se týká státní příspěvkové organizace pro obranu a vyvlastňování, ale nestanoví změnu počtu pracovníků státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje právní poměry a řízení státních zaměstnanců, ale v dodaném znění nestanoví snížení ani zvýšení jejich počtu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-2",
+          "relevant": false,
+          "reasonCz": "Organizační pravidla pro ministerstva a Úřad vlády neobsahují ustanovení o počtu zaměstnanců ani o jeho snižování.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-4",
+          "relevant": false,
+          "reasonCz": "Úprava postavení zdravotnických pracovníků sociálního zabezpečení nemění podle dodaného textu počet lidí pracujících pro stát.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-21",
+          "relevant": false,
+          "reasonCz": "Změny zahraniční služby upravují pracovněprávní režim a organizaci práce, nikoli počet pracovníků státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-24",
+          "relevant": false,
+          "reasonCz": "Přechod zaměstnanců Grantové a Technologické agentury na nová pracovní místa mění jejich právní režim, nikoli doložený počet lidí pracujících pro stát.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-27",
+          "relevant": false,
+          "reasonCz": "Změna pozemních komunikací odstraňuje požadavek na výkon státní služby pro členy zkušební komise, ale nemění počet pracovníků státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Vládní návrh změny podpory bydlení přesouvá některé úkony mezi institucemi, avšak neuvádí změnu počtu zaměstnanců ani opatření ke splnění tohoto slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-5",
+          "relevant": false,
+          "reasonCz": "Změna puncovního zákona převádí kompetence mezi úřady, ale nepředepisuje změnu počtu pracovníků státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-1",
+          "relevant": false,
+          "reasonCz": "Změny pravidel pro svazky obcí a odměňování zastupitelů se netýkají počtu osob pracujících pro stát.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-a981c3feac--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Motoristé se podíleli na předložení návrhu novely stavebního zákona, která zřizuje Úřad rozvoje území a převádí část zaměstnanců obecních a krajských stavebních úřadů do státní služby. Poslanci Motoristů hlasovali pro schválení návrhu a po jeho odmítnutí Senátem také pro setrvání Poslanecké sněmovny na návrhu. Nové úřady a pracovní místa nad stanovenými limity mohou jít proti slibu snížit počet lidí pracujících pro stát. Z dodaných podkladů ale nelze zjistit, kolik zaměstnanců se převede ani jak se změnil celkový počet pracovníků.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neuvádějí počet převáděných zaměstnanců ani čistý dopad zřízení nových úřadů na celkový počet osob pracujících pro stát; nelze proto určit rozsah tohoto protichůdného dopadu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0b4b93be4cadbfbf016ac5633e302c87d2bb500074a285535f",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 663428,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 663425
+      },
+      "output_tokens": 6870,
+      "output_tokens_details": {
+        "reasoning_tokens": 5110
+      },
+      "total_tokens": 670298
+    },
+    "output": {
+      "promiseId": "motoriste-2025-a981c3feac",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela převádí zaměstnance krajů a obcí vykonávající převáděné činnosti do státního úřadu a mění tak přímo počet osob pracujících pro stát.",
+          "effectCz": "Dosavadní stavební agendu vykonávaly mimo jiné úřady ministerstev, krajské a obecní stavební úřady a Dopravní a energetický stavební úřad; nově vznikají Úřad rozvoje území a krajské úřady rozvoje území a zaměstnancům krajů a obcí, jejichž činnosti přecházejí, přecházejí pracovní práva na stát. To zvyšuje počet státních zaměstnanců nejméně o převáděné pracovníky, zatímco zánik a přesun dalších úřadů může působit opačně; celkový čistý dopad nelze z textu vyčíslit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Změna přesouvá pravomoci v oblasti stavební správy z ministerstva na nový ústřední úřad, jehož zaměstnanci jsou zaměstnanci státu.",
+          "effectCz": "Dosavadní § 2 zákona o zřízení ministerstev nový úřad neuváděl a § 14 odst. 1 řadil územní plánování, stavební řád a vyvlastnění mezi působnosti Ministerstva pro místní rozvoj. Nově je Úřad rozvoje území uveden mezi ústředními orgány a tyto působnosti se z Ministerstva pro místní rozvoj vypouštějí; změna sama počet zaměstnanců neurčuje, takže její čistý dopad na slíbené snížení nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Změny pravidel ochrany přírody a krajiny nestanoví ani nemění počet osob pracujících pro stát.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Úpravy energetického zákona se týkají terminologie území, přípojek a ochranných pásem, nikoli počtu státních zaměstnanců.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": false,
+          "reasonCz": "Změna zákona o zajišťování obrany umožňuje zřídit příspěvkovou organizaci a mění postupy při vyvlastnění, ale nestanoví žádné snížení ani změnu počtu zaměstnanců.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje pracovní poměry, systemizaci a výběr státních zaměstnanců, ale neobsahuje závazek ani opatření ke snížení jejich počtu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-2",
+          "relevant": false,
+          "reasonCz": "Úprava kabinetů a náměstků členů vlády neukládá ani neprovádí snížení počtu osob pracujících pro stát.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-4",
+          "relevant": false,
+          "reasonCz": "Změny organizace sociálního zabezpečení se počtu pracovníků věcně nedotýkají; část pouze vyjímá určité zdravotnické pracovníky z právního režimu státních zaměstnanců.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-21",
+          "relevant": false,
+          "reasonCz": "Změna zákona o zahraniční službě převážně převádí její pracovní poměry do nového právního režimu a nestanoví snížení počtu zaměstnanců.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-24",
+          "relevant": false,
+          "reasonCz": "Úprava zaměstnanců grantových agentur mění jejich pracovní a organizační režim, nikoli jejich počet.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-27",
+          "relevant": false,
+          "reasonCz": "Změna silničního zákona vypouští požadavek, aby člen zkušební komise byl státním zaměstnancem, ale neukládá ani neprovádí snížení počtu osob pracujících pro stát.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění podmínky podpory bydlení a příslušnost úřadů, nikoli celkový počet osob pracujících pro stát.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-5",
+          "relevant": false,
+          "reasonCz": "Návrh ruší Puncovní úřad a převádí jeho působnost na jiné instituce, ale nedokládá, že by tím došlo ke snížení počtu osob pracujících pro stát.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje organizaci svazků obcí a jejich rejstřík, nikoli počet osob pracujících pro stát.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-a981c3feac--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Motoristé spolu s dalšími poslanci předložili novelu stavebního zákona, která zřizuje nové úřady rozvoje území a převádí na stát zaměstnance krajů a obcí vykonávající přebírané činnosti. Poslanci Motoristů hlasovali pro její schválení a po zamítnutí Senátem také pro setrvání na návrhu; Senát je horní komora Parlamentu. Převod zaměstnanců do státní správy jde proti části slibu o snížení jejich počtu, i když novela neurčuje celkový počet ani čistý dopad změn úřadů. Proto nelze tvrdit, že hlasování odporuje celému cíli snížit počet nejméně o pětinu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela převádí některé zaměstnance krajů a obcí na stát, ale zároveň přesouvá a ruší dosavadní úřady; podklady neuvádějí počty zaměstnanců před změnou a po ní, takže čistý dopad na celkový počet nelze vyčíslit."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

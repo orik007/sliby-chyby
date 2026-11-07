@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-31-37-576Z--42713de8485a",
+  "evaluatedAt": "2026-11-05T10:31:37.576Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-f17f56643f2f/42713de8485a08eabc39c4fd6dfd57009b8b6a8a7221a7213910a6e7c3bd5c02.json",
+  "packageHash": "42713de8485a08eabc39c4fd6dfd57009b8b6a8a7221a7213910a6e7c3bd5c02",
+  "assessmentContentHash": "16522c065f608b530ef2f3a43be58dbb25f1964ff5002f06bbb3acc19665ed48",
+  "assessmentFingerprint": "860c7154c8570680b9ef3c8e47a6506c9ac78add8422bd7639fdec78db37a83f",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-f17f56643f2f",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-f17f56643f2f",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-180",
+          "relevant": true,
+          "reasonCz": "Úkol v plánu legislativních prací se týká změny veřejného zdravotního pojištění a výslovně jej spojuje s finančními bonusy za účast na preventivních prohlídkách, tedy s částí slibu.",
+          "effectCz": "Usnesení nemění dosavadní právní pravidla veřejného zdravotního pojištění. Zařazuje úkol předložit vládě návrh zákona v prvním čtvrtletí 2028 a ve vazbě na něj uvádí vládní prioritu zavést finanční bonusy za pravidelné preventivní prohlídky. Jde o návrh dalšího legislativního kroku, nikoli o zavedený nárok; bonusy za prevenci odpovídají části slibu, ale text výslovně nezmiňuje slevy na pojistném ani širší péči o zdraví."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-f17f56643f2f--source",
+        "zvlady-resolutions--law-change-uv-2026-175-180",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení č. 175/2026, tedy plán legislativních prací pro rok 2026 a další období. Plán ukládá připravit změnu zákona o veřejném zdravotním pojištění a spojuje ji s prioritou zavést finanční bonusy za pravidelné preventivní prohlídky. To posouvá část slibu týkající se odměn za prevenci, ale zatím jde jen o plán budoucího návrhu zákona. Usnesení neslibuje výslovně slevy na pojistném ani bonusy za širší aktivní péči o zdraví.",
+      "confidence": "high",
+      "uncertainties": [
+        "Z podkladů nelze zjistit, zda budoucí návrh zákona skutečně zavede bonusy a zda budou zahrnovat slevy na pojistném či další formy péče o zdraví."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-f17f56643f2f",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-180",
+          "relevant": true,
+          "reasonCz": "Příloha plánu legislativních prací výslovně uvádí finanční bonusy za pravidelnou účast na preventivních prohlídkách, což je část slíbeného systému.",
+          "effectCz": "Usnesení nemění dosavadní právní úpravu ani samo nezakládá nárok na bonusy; ukládá plánovat návrh novely zákona o veřejném zdravotním pojištění k předložení vládě v prvním čtvrtletí roku 2028 a mezi souvisejícími prioritami uvádí finanční bonusy za pravidelné preventivní prohlídky. Jde o posun směrem k části slibu, nikoli o zavedení bonusů ani slev na pojistném."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-f17f56643f2f--source",
+        "zvlady-resolutions--law-change-uv-2026-175-180",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení k plánu legislativních prací, které počítá s přípravou návrhu změny zákona o veřejném zdravotním pojištění. V souvisejících vládních prioritách jsou uvedeny finanční bonusy za pravidelné preventivní prohlídky. To posouvá slib směrem k jeho části týkající se prevence, ale samotné usnesení bonusy ani slevy na pojistném nezavádí.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0e6358424977e9c1016aec5ad3101487d1bf792acad31a3364",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8835,
+      "input_tokens_details": {
+        "cache_write_tokens": 2485,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 1199,
+      "output_tokens_details": {
+        "reasoning_tokens": 673
+      },
+      "total_tokens": 10034
+    },
+    "output": {
+      "promiseId": "candidate-f17f56643f2f",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-180",
+          "relevant": true,
+          "reasonCz": "Úkol v plánu legislativních prací se týká změny veřejného zdravotního pojištění a výslovně jej spojuje s finančními bonusy za účast na preventivních prohlídkách, tedy s částí slibu.",
+          "effectCz": "Usnesení nemění dosavadní právní pravidla veřejného zdravotního pojištění. Zařazuje úkol předložit vládě návrh zákona v prvním čtvrtletí 2028 a ve vazbě na něj uvádí vládní prioritu zavést finanční bonusy za pravidelné preventivní prohlídky. Jde o návrh dalšího legislativního kroku, nikoli o zavedený nárok; bonusy za prevenci odpovídají části slibu, ale text výslovně nezmiňuje slevy na pojistném ani širší péči o zdraví."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-f17f56643f2f--source",
+        "zvlady-resolutions--law-change-uv-2026-175-180",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení č. 175/2026, tedy plán legislativních prací pro rok 2026 a další období. Plán ukládá připravit změnu zákona o veřejném zdravotním pojištění a spojuje ji s prioritou zavést finanční bonusy za pravidelné preventivní prohlídky. To posouvá část slibu týkající se odměn za prevenci, ale zatím jde jen o plán budoucího návrhu zákona. Usnesení neslibuje výslovně slevy na pojistném ani bonusy za širší aktivní péči o zdraví.",
+      "confidence": "high",
+      "uncertainties": [
+        "Z podkladů nelze zjistit, zda budoucí návrh zákona skutečně zavede bonusy a zda budou zahrnovat slevy na pojistném či další formy péče o zdraví."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_078879ce7b7be30c016aec5aec7be887d1853c2a52f3b83177",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8835,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8832
+      },
+      "output_tokens": 863,
+      "output_tokens_details": {
+        "reasoning_tokens": 404
+      },
+      "total_tokens": 9698
+    },
+    "output": {
+      "promiseId": "candidate-f17f56643f2f",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-180",
+          "relevant": true,
+          "reasonCz": "Příloha plánu legislativních prací výslovně uvádí finanční bonusy za pravidelnou účast na preventivních prohlídkách, což je část slíbeného systému.",
+          "effectCz": "Usnesení nemění dosavadní právní úpravu ani samo nezakládá nárok na bonusy; ukládá plánovat návrh novely zákona o veřejném zdravotním pojištění k předložení vládě v prvním čtvrtletí roku 2028 a mezi souvisejícími prioritami uvádí finanční bonusy za pravidelné preventivní prohlídky. Jde o posun směrem k části slibu, nikoli o zavedení bonusů ani slev na pojistném."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-f17f56643f2f--source",
+        "zvlady-resolutions--law-change-uv-2026-175-180",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení k plánu legislativních prací, které počítá s přípravou návrhu změny zákona o veřejném zdravotním pojištění. V souvisejících vládních prioritách jsou uvedeny finanční bonusy za pravidelné preventivní prohlídky. To posouvá slib směrem k jeho části týkající se prevence, ale samotné usnesení bonusy ani slevy na pojistném nezavádí.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

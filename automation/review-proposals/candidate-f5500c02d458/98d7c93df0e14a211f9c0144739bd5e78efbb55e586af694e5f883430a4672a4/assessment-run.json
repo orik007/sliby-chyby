@@ -1,0 +1,313 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-55-07-823Z--2ec6f665b07f",
+  "evaluatedAt": "2026-11-05T10:55:07.823Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-f5500c02d458/2ec6f665b07f2b2200fa07f456acdc92f7dc34a7b8efd194ef628ad1b6d7d885.json",
+  "packageHash": "2ec6f665b07f2b2200fa07f456acdc92f7dc34a7b8efd194ef628ad1b6d7d885",
+  "assessmentContentHash": "8330ec46a9721b320fab93c69e043962cc2f1c36b351619ec68a5840e2d66c40",
+  "assessmentFingerprint": "98d7c93df0e14a211f9c0144739bd5e78efbb55e586af694e5f883430a4672a4",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-f5500c02d458",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-f5500c02d458",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Rozpočtový zákon obsahuje výdaje podle kapitol, k nimž se vztahují návrhy na financování prevence, duševního zdraví a zdravotní péče.",
+          "effectCz": "Jde o nový státní rozpočet na rok 2026, nikoli změnu dřívějšího znění; předložený výňatek pouze odkazuje na tabulky výdajů v přílohách a neuvádí příslušné částky, takže skutečný dopad přijatého rozpočtu na slib nelze z dodaného textu určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-11",
+          "relevant": false,
+          "reasonCz": "Ustanovení o obecné spolupráci v oblasti veřejného zdraví neuvádí osvětu o zdravém životním stylu, cílený screening ani rehabilitaci chronicky nemocných.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2025-586",
+          "relevant": true,
+          "reasonCz": "Vyhláška mění podmínky lázeňské léčebně rehabilitační péče a může ovlivnit její dostupnost.",
+          "effectCz": "Vyhláška přidává Mariánské Lázně jako možné lázeňské místo pro indikace IV/2 a IV/3, čímž rozšiřuje nabídku míst pro tyto indikace; u indikační skupiny XXVI nově stanoví výjimku z uvedeného kritéria, což toto kritérium zmírňuje. Dodaný text neuvádí, zda se tyto indikace týkají chronicky nemocných, takže dopad na tuto konkrétní skupinu nelze určit."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-f5500c02d458--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--amendment-text-482",
+        "psp-core-2025--amendment-482",
+        "psp-core-2025--vote-86897",
+        "psp-core-2025--amendment-text-462",
+        "psp-core-2025--vote-86859",
+        "psp-core-2025--amendment-text-506",
+        "psp-core-2025--vote-86916",
+        "psp-core-2025--amendment-text-510",
+        "psp-core-2025--vote-86917",
+        "esbirka-regulations--law-change-sb-2025-586",
+        "esbirka-regulations--2025-586"
+      ],
+      "explanationCz": "Vláda předložila návrh státního rozpočtu na rok 2026 a poslanci ANO podpořili návrh na 100 milionů korun pro výdaje spojené s protidrogovou prevencí. Zároveň klub ANO nepodpořil návrhy na financování prevence a včasného zachycení potíží v oblasti duševního zdraví a závislostí; tyto návrhy se týkaly jen části slibu. Ministerstvo zdravotnictví také vydalo vyhlášku, tedy prováděcí předpis, která rozšiřuje nabídku lázeňských míst pro některé indikace. Z dodaných podkladů ale není zřejmé, zda se tato změna vztahuje na chronicky nemocné, ani jaké částky pro související oblasti obsahuje schválený rozpočet; proto nelze současný stav spolehlivě uzavřít.",
+      "confidence": "low",
+      "uncertainties": [
+        "Text vyhlášky uvádí změny pro indikace IV/2, IV/3 a skupinu XXVI, ale podklady nevysvětlují, zda se týkají chronicky nemocných; proto nelze určit, zda rozhodnutí vlády zpřístupňuje rehabilitaci právě této skupině.",
+        "Výňatek ze schváleného rozpočtu neobsahuje částky ani podrobné položky v přílohách, takže nelze ověřit dopad rozpočtového rozhodnutí na osvětu, screening nebo rehabilitaci. Tato mezera může změnit posouzení výsledného postupu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-f5500c02d458",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o rozpočet, jehož pozměňovací návrhy výslovně mění výdaje na prevenci závislostí, duševní zdraví a zdravotní péči, tedy se týkají částí slibu.",
+          "effectCz": "Jako nový státní rozpočet nemá předchozí znění, s nímž by bylo možné srovnávat. Dodaný výňatek pouze odkazuje na přílohy s výdaji podle kapitol a jejich ukazateli, ale neobsahuje příslušné částky, takže nelze určit, jak schválený rozpočet mění prostředky pro oblasti slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-11",
+          "relevant": true,
+          "reasonCz": "Navrhovaná dohoda obsahuje spolupráci v oblasti veřejného zdraví včetně prevence a podpory zdraví, což se přímo týká části slibu o osvětě.",
+          "effectCz": "Jde o novou dohodu, nikoli změnu dřívějšího znění. Navrhuje spolupráci v oblasti veřejného zdraví, včetně prevence a podpory zdraví, výměny informací a odborné přípravy; tím podporuje část slibu o osvětě, ale výňatek nestanoví konkrétní screeningové programy ani zpřístupnění rehabilitace."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2025-586",
+          "relevant": false,
+          "reasonCz": "Dodaný text uvádí změnu kritéria pro lázeňskou péči a doplnění Mariánských Lázní u indikací IV/2 a IV/3, ale neukazuje, že se tato pravidla týkají chronicky nemocných.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-f5500c02d458--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43453-11",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-482",
+        "psp-core-2025--amendment-482",
+        "psp-core-2025--vote-86897",
+        "psp-core-2025--amendment-text-533",
+        "psp-core-2025--vote-86843",
+        "psp-core-2025--amendment-text-462",
+        "psp-core-2025--vote-86859",
+        "psp-core-2025--amendment-text-506",
+        "psp-core-2025--vote-86916",
+        "psp-core-2025--amendment-text-510",
+        "psp-core-2025--vote-86917",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--print-step-212285"
+      ],
+      "explanationCz": "Vláda předložila dohodu Evropské unie s Mexikem, která navrhuje spolupráci v prevenci a podpoře zdraví, a tím posouvá část slibu o osvětě. Poslanci ANO také navrhli a podpořili přesun 100 milionů korun na vládní poradní orgány; návrh uvádí, že peníze mají podpořit prevenci závislostí. Zároveň klub ANO nepodpořil návrhy na prostředky pro prevenci a včasné odhalování potíží, duševní zdraví dětí ani lůžkovou péči. Schválený státní rozpočet je relevantní, ale dodané znění neobsahuje částky z příloh, takže nelze posoudit jeho celkový dopad na slib.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek ze schváleného rozpočtu neobsahuje příslušné částky z příloh; proto nelze určit, zda rozpočet jako celek prostředky pro osvětu, screening či rehabilitaci zvyšuje, nebo snižuje."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0bc1a4cd4247d1da016aec5afd18c487d18e86c3fae4b95c3b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 27825,
+      "input_tokens_details": {
+        "cache_write_tokens": 21475,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 5760,
+      "output_tokens_details": {
+        "reasoning_tokens": 4637
+      },
+      "total_tokens": 33585
+    },
+    "output": {
+      "promiseId": "candidate-f5500c02d458",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Rozpočtový zákon obsahuje výdaje podle kapitol, k nimž se vztahují návrhy na financování prevence, duševního zdraví a zdravotní péče.",
+          "effectCz": "Jde o nový státní rozpočet na rok 2026, nikoli změnu dřívějšího znění; předložený výňatek pouze odkazuje na tabulky výdajů v přílohách a neuvádí příslušné částky, takže skutečný dopad přijatého rozpočtu na slib nelze z dodaného textu určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-11",
+          "relevant": false,
+          "reasonCz": "Ustanovení o obecné spolupráci v oblasti veřejného zdraví neuvádí osvětu o zdravém životním stylu, cílený screening ani rehabilitaci chronicky nemocných.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2025-586",
+          "relevant": true,
+          "reasonCz": "Vyhláška mění podmínky lázeňské léčebně rehabilitační péče a může ovlivnit její dostupnost.",
+          "effectCz": "Vyhláška přidává Mariánské Lázně jako možné lázeňské místo pro indikace IV/2 a IV/3, čímž rozšiřuje nabídku míst pro tyto indikace; u indikační skupiny XXVI nově stanoví výjimku z uvedeného kritéria, což toto kritérium zmírňuje. Dodaný text neuvádí, zda se tyto indikace týkají chronicky nemocných, takže dopad na tuto konkrétní skupinu nelze určit."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-f5500c02d458--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--amendment-text-482",
+        "psp-core-2025--amendment-482",
+        "psp-core-2025--vote-86897",
+        "psp-core-2025--amendment-text-462",
+        "psp-core-2025--vote-86859",
+        "psp-core-2025--amendment-text-506",
+        "psp-core-2025--vote-86916",
+        "psp-core-2025--amendment-text-510",
+        "psp-core-2025--vote-86917",
+        "esbirka-regulations--law-change-sb-2025-586",
+        "esbirka-regulations--2025-586"
+      ],
+      "explanationCz": "Vláda předložila návrh státního rozpočtu na rok 2026 a poslanci ANO podpořili návrh na 100 milionů korun pro výdaje spojené s protidrogovou prevencí. Zároveň klub ANO nepodpořil návrhy na financování prevence a včasného zachycení potíží v oblasti duševního zdraví a závislostí; tyto návrhy se týkaly jen části slibu. Ministerstvo zdravotnictví také vydalo vyhlášku, tedy prováděcí předpis, která rozšiřuje nabídku lázeňských míst pro některé indikace. Z dodaných podkladů ale není zřejmé, zda se tato změna vztahuje na chronicky nemocné, ani jaké částky pro související oblasti obsahuje schválený rozpočet; proto nelze současný stav spolehlivě uzavřít.",
+      "confidence": "low",
+      "uncertainties": [
+        "Text vyhlášky uvádí změny pro indikace IV/2, IV/3 a skupinu XXVI, ale podklady nevysvětlují, zda se týkají chronicky nemocných; proto nelze určit, zda rozhodnutí vlády zpřístupňuje rehabilitaci právě této skupině.",
+        "Výňatek ze schváleného rozpočtu neobsahuje částky ani podrobné položky v přílohách, takže nelze ověřit dopad rozpočtového rozhodnutí na osvětu, screening nebo rehabilitaci. Tato mezera může změnit posouzení výsledného postupu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0411e0249fa792b7016aec5b3301e887d195b8383d4ead0fd4",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 27825,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 27822
+      },
+      "output_tokens": 5114,
+      "output_tokens_details": {
+        "reasoning_tokens": 4142
+      },
+      "total_tokens": 32939
+    },
+    "output": {
+      "promiseId": "candidate-f5500c02d458",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o rozpočet, jehož pozměňovací návrhy výslovně mění výdaje na prevenci závislostí, duševní zdraví a zdravotní péči, tedy se týkají částí slibu.",
+          "effectCz": "Jako nový státní rozpočet nemá předchozí znění, s nímž by bylo možné srovnávat. Dodaný výňatek pouze odkazuje na přílohy s výdaji podle kapitol a jejich ukazateli, ale neobsahuje příslušné částky, takže nelze určit, jak schválený rozpočet mění prostředky pro oblasti slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-11",
+          "relevant": true,
+          "reasonCz": "Navrhovaná dohoda obsahuje spolupráci v oblasti veřejného zdraví včetně prevence a podpory zdraví, což se přímo týká části slibu o osvětě.",
+          "effectCz": "Jde o novou dohodu, nikoli změnu dřívějšího znění. Navrhuje spolupráci v oblasti veřejného zdraví, včetně prevence a podpory zdraví, výměny informací a odborné přípravy; tím podporuje část slibu o osvětě, ale výňatek nestanoví konkrétní screeningové programy ani zpřístupnění rehabilitace."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2025-586",
+          "relevant": false,
+          "reasonCz": "Dodaný text uvádí změnu kritéria pro lázeňskou péči a doplnění Mariánských Lázní u indikací IV/2 a IV/3, ale neukazuje, že se tato pravidla týkají chronicky nemocných.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-f5500c02d458--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43453-11",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-482",
+        "psp-core-2025--amendment-482",
+        "psp-core-2025--vote-86897",
+        "psp-core-2025--amendment-text-533",
+        "psp-core-2025--vote-86843",
+        "psp-core-2025--amendment-text-462",
+        "psp-core-2025--vote-86859",
+        "psp-core-2025--amendment-text-506",
+        "psp-core-2025--vote-86916",
+        "psp-core-2025--amendment-text-510",
+        "psp-core-2025--vote-86917",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--print-step-212285"
+      ],
+      "explanationCz": "Vláda předložila dohodu Evropské unie s Mexikem, která navrhuje spolupráci v prevenci a podpoře zdraví, a tím posouvá část slibu o osvětě. Poslanci ANO také navrhli a podpořili přesun 100 milionů korun na vládní poradní orgány; návrh uvádí, že peníze mají podpořit prevenci závislostí. Zároveň klub ANO nepodpořil návrhy na prostředky pro prevenci a včasné odhalování potíží, duševní zdraví dětí ani lůžkovou péči. Schválený státní rozpočet je relevantní, ale dodané znění neobsahuje částky z příloh, takže nelze posoudit jeho celkový dopad na slib.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek ze schváleného rozpočtu neobsahuje příslušné částky z příloh; proto nelze určit, zda rozpočet jako celek prostředky pro osvětu, screening či rehabilitaci zvyšuje, nebo snižuje."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0cc929ca542b9b4a016aec607bf85887d1ab471d4517c05f94",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 27867,
+      "input_tokens_details": {
+        "cache_write_tokens": 23454,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 585,
+      "output_tokens_details": {
+        "reasoning_tokens": 273
+      },
+      "total_tokens": 28452
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "psp-core-2025--law-change-43453-11",
+        "psp-core-2025--amendment-text-482",
+        "psp-core-2025--vote-86897",
+        "psp-core-2025--amendment-text-510",
+        "psp-core-2025--vote-86917",
+        "psp-core-2025--law-change-43204-1",
+        "esbirka-regulations--law-change-sb-2025-586"
+      ],
+      "explanationCz": "Volím první posouzení, protože obecná dohoda o zdravotní spolupráci s Mexikem sama nedokládá podporu slíbené osvěty. Poslanci ANO sice podpořili přidání 100 milionů korun na prevenci závislostí, ale ve stejný den nepodpořili také návrh na širší financování prevence a informování veřejnosti. U takto protichůdných kroků stejné váhy a ze stejného dne pravidla dávají přednost horšímu hodnocení. První posouzení přitom správně upozorňuje, že bez rozpočtových částek a vysvětlení dotčených skupin lázeňských pacientů nelze spolehlivě určit dopad schváleného rozpočtu ani vyhlášky."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

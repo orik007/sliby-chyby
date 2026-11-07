@@ -1,0 +1,943 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-19-46-502Z--721878be2656",
+  "evaluatedAt": "2026-11-05T10:19:46.502Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-afb17f188dfb/721878be2656f2369631accbfbea203482503f8975faaf1ceb92df7ef3376292.json",
+  "packageHash": "721878be2656f2369631accbfbea203482503f8975faaf1ceb92df7ef3376292",
+  "assessmentContentHash": "7f44dda4d12bb4580c5e99ae9e76ae82805c97bf36bf86f7c4054e9b660eb705",
+  "assessmentFingerprint": "fa58e0323657ab9cd251061bdc1e2d6f48d88b70aa2b95a76f7d2a234de0328f",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-afb17f188dfb",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment cites duplicate evidence IDs",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0f04576636193a06016aec5674784087d1877e5df4e3aa4306",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 106199,
+            "input_tokens_details": {
+              "cache_write_tokens": 99849,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 9321,
+            "output_tokens_details": {
+              "reasoning_tokens": 5548
+            },
+            "total_tokens": 115520
+          },
+          "output": {
+            "promiseId": "candidate-afb17f188dfb",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-5",
+                "relevant": true,
+                "reasonCz": "Změny výslovně řeší technické požadavky na technickou infrastrukturu a zapojení subjektů kritické infrastruktury do přípravy místních pravidel, takže se dotýkají její ochrany.",
+                "effectCz": "Předchozí znění § 152 neukládalo obcím projednat místní pravidla pro umisťování technické infrastruktury se subjekty kritické infrastruktury; schválené znění tuto povinnost nově přidává, což posiluje jejich procesní zapojení, nikoli však přímo provozní odolnost. Navržené znění navíc zavádělo souhlas bez podmínek při marném uplynutí lhůty vlastníka infrastruktury; konečné znění tohoto ustanovení v dodaném výňatku není, proto nelze určit, zda tato změna zůstala."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+                "relevant": false,
+                "reasonCz": "Ustanovení umožňuje zřídit příspěvkovou organizaci k zajišťování obrany, ale dodaný text nepropojuje její zřízení s ochranou kritické infrastruktury ani s odolností bezpečnostních složek v krizích.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43203-16",
+                "relevant": true,
+                "reasonCz": "Navržená dohoda obsahuje spolupráci na bezpečnosti energetických zařízení a na odolnosti společnosti a infrastruktury vůči katastrofám.",
+                "effectCz": "Dohoda oproti dosavadnímu stavu navrhuje spolupráci při zvyšování bezpečnosti energetických zařízení a odolnosti infrastruktury a společnosti při katastrofách; jde o dílčí mezinárodní spolupráci, nikoli o přímou změnu domácích povinností či kapacit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": true,
+                "reasonCz": "Státní rozpočet může financovat bezpečnostní složky a krizovou připravenost; dodané části zároveň odkazují na rozpočtové přílohy, jejichž konkrétní částky nejsou uvedeny.",
+                "effectCz": "Jde o rozpočet, nikoli novelu s předchozím zněním. Dodaný text schváleného rozpočtu pouze odkazuje na přílohy s výdaji a ukazateli; jejich částky ani konkrétní alokace pro bezpečnostní složky zde nejsou, takže směr a rozsah změny pro tento slib nelze z balíčku určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43228-3",
+                "relevant": true,
+                "reasonCz": "Dohoda umožňuje policistům a hasičským jednotkám přeshraničně zasáhnout při bezprostředním ohrožení a upravuje spolupráci při hromadných neštěstích.",
+                "effectCz": "Dohoda nově stanoví možnost předběžného zásahu do vzdálenosti 10 km od hranic při bezprostředním ohrožení života či zdraví a spolupráci při identifikaci obětí neštěstí; tím rozšiřuje možnosti přeshraniční pomoci bezpečnostních a záchranných složek v krizích."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-6",
+                "relevant": true,
+                "reasonCz": "Navržená dohoda výslovně počítá se spoluprací proti kyberkriminalitě a s ochranou kritické infrastruktury.",
+                "effectCz": "Dohoda nově navrhuje výměnu informací a zkušeností při prevenci a potírání kyberkriminality, včetně ochrany kritické infrastruktury; jde o dílčí mezinárodní spolupráci, nikoli o přímou změnu domácích povinností."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-122",
+                "relevant": true,
+                "reasonCz": "Vyhláška ukládá subjektům kritické infrastruktury posuzovat rizika, plánovat odolnost, připravovat kontinuitu činnosti a reagovat na incidenty.",
+                "effectCz": "Vyhláška nově stanoví povinný obsah hodnocení rizik a plánů odolnosti, opatření pro kontinuitu a fyzickou bezpečnost i postupy přípravy na incidenty a jejich řešení. Oproti stavu bez těchto pravidel konkretizuje a posiluje povinnosti subjektů kritické infrastruktury, tedy přímo posouvá její odolnost."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-123",
+                "relevant": true,
+                "reasonCz": "Nařízení upravuje krizový plán státu a posouzení rizik, včetně hrozeb pro bezpečnost a základní služby.",
+                "effectCz": "Nařízení nově vymezuje obsah krizového plánu České republiky a posouzení rizik, které má zahrnout mimo jiné hrozby z ozbrojených konfliktů a hybridního působení; krizové plány se mají souhrnně aktualizovat ve čtyřletých cyklech a při změně bezodkladně. Jde o konkrétnější a pravidelnější plánování krizové připravenosti."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-127",
+                "relevant": true,
+                "reasonCz": "Nařízení vymezuje základní služby a kritéria, podle nichž se poskytovatelé zařazují mezi subjekty kritické infrastruktury.",
+                "effectCz": "Nařízení nově stanoví seznamy základních služeb a kritéria významnosti pro zařazení jejich poskytovatelů na seznam subjektů kritické infrastruktury; ve srovnání s předchozími zrušenými nařízeními zavádí nové vymezení, ale dodaný výňatek neumožňuje porovnat, zda okruh či nároky byly rozšířeny nebo zúženy."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-178",
+                "relevant": true,
+                "reasonCz": "Vyhláška zavádí portál pro předávání informací a hlášení incidentů kritické infrastruktury, a tím podporuje koordinaci při jejich zvládání.",
+                "effectCz": "Vyhláška nově upravuje přístup oprávněných uživatelů k portálu, předávání informací a hlášení incidentů včetně individuálních přístupových oprávnění. Jde o podpůrný nástroj pro plnění povinností a sdílení informací; sama o sobě však nestanoví silnější fyzickou či provozní ochranu infrastruktury."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-22",
+                "relevant": true,
+                "reasonCz": "Usnesení zadává přípravu koncepce detekce dronů a odolnosti kritických objektů a pověřuje koordinací strategické bezpečnosti.",
+                "effectCz": "Usnesení nově pověřuje vládního zmocněnce přípravou koncepce detekce dronů a posílení odolnosti kritických objektů a koordinací v oblasti ochrany kritické infrastruktury a krizového řízení. Protože jde o přípravu koncepce, nikoli o její uskutečnění, jde o dílčí posun."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-43",
+                "relevant": true,
+                "reasonCz": "Usnesení určuje, jak lze využívat rozpočtovou rezervu na krizové situace, jejich předcházení a potřeby integrovaného záchranného systému.",
+                "effectCz": "Usnesení stanoví pravidla pro uvolňování rezervy na krizové situace a předcházení jejich následkům a připouští podporu integrovaného záchranného systému. Ve výňatku nejsou uvedeny částky, takže nelze posoudit rozsah zdrojů; samotné pravidlo umožňuje účelové financování krizové připravenosti."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-314",
+                "relevant": true,
+                "reasonCz": "Usnesení zařazuje moderní systémy krizového řízení a varování obyvatel mezi strategické projekty a stanoví jejich řízení a koordinaci.",
+                "effectCz": "Usnesení nově zavádí odpovědné řízení a koordinaci projektu moderních systémů krizového řízení a varování obyvatel, s termínem 31. prosince 2028. Jde o organizační a projektovou přípravu, nikoli o již dokončené posílení schopností."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-634",
+                "relevant": true,
+                "reasonCz": "Usnesení uvolňuje prostředky na mimořádné náklady policie a hasičů při zásahu u požáru a zvyšuje prostředky na služební příjmy hasičů.",
+                "effectCz": "Usnesení schvaluje 16 320 775 Kč na kompenzaci mimořádných výdajů policie a Hasičského záchranného sboru při zásahu a navýšení prostředků na služební příjmy hasičů o 6 266 073 Kč. Jde o konkrétní, ale pouze dílčí podporu bezpečnostních složek při krizovém zásahu."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-698",
+                "relevant": true,
+                "reasonCz": "Usnesení navyšuje prostředky na služební příjmy hasičů v souvislosti s akceschopností a připraveností sboru při rostoucím rozsahu zásahů.",
+                "effectCz": "Usnesení schvaluje navýšení prostředků na služební příjmy příslušníků Hasičského záchranného sboru o 14 836 795 Kč pro zajištění akceschopnosti a připravenosti sboru. Jde o dílčí podporu odolnosti složky při zásazích; dodaný výňatek neobsahuje odpovídající část o policii."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-afb17f188dfb--source",
+              "psp-core-2025--law-change-43174-1-5",
+              "psp-core-2025--law-change-43203-16",
+              "psp-core-2025--law-change-43204-1",
+              "psp-core-2025--law-change-43228-3",
+              "psp-core-2025--law-change-43453-6",
+              "esbirka-regulations--law-change-sb-2026-122",
+              "esbirka-regulations--law-change-sb-2026-123",
+              "esbirka-regulations--law-change-sb-2026-127",
+              "esbirka-regulations--law-change-sb-2026-178",
+              "zvlady-resolutions--law-change-uv-2026-22",
+              "zvlady-resolutions--law-change-uv-2026-43",
+              "zvlady-resolutions--law-change-uv-2026-314",
+              "zvlady-resolutions--law-change-uv-2026-634",
+              "zvlady-resolutions--law-change-uv-2026-698",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--print-step-210760",
+              "psp-core-2025--print-step-210761",
+              "psp-core-2025--print-step-210866",
+              "zvlady-resolutions--2026-22",
+              "zvlady-resolutions--2026-43",
+              "zvlady-resolutions--2026-314",
+              "zvlady-resolutions--2026-634",
+              "zvlady-resolutions--2026-698",
+              "esbirka-regulations--2026-122",
+              "esbirka-regulations--2026-123",
+              "esbirka-regulations--2026-127",
+              "esbirka-regulations--2026-178",
+              "psp-core-2025--amendment-text-523",
+              "psp-core-2025--vote-86842",
+              "psp-core-2025--amendment-text-475",
+              "psp-core-2025--vote-86858",
+              "psp-core-2025--amendment-text-360",
+              "psp-core-2025--vote-86873",
+              "psp-core-2025--amendment-text-380",
+              "psp-core-2025--vote-86875",
+              "psp-core-2025--amendment-text-526",
+              "psp-core-2025--vote-86904",
+              "psp-core-2025--amendment-text-548",
+              "psp-core-2025--vote-86919",
+              "psp-core-2025--amendment-text-551",
+              "psp-core-2025--vote-86921",
+              "psp-core-2025--amendment-text-552",
+              "psp-core-2025--vote-86922",
+              "psp-core-2025--amendment-text-585",
+              "psp-core-2025--vote-86923",
+              "psp-core-2025--amendment-text-586",
+              "psp-core-2025--vote-86924",
+              "psp-core-2025--amendment-text-454",
+              "psp-core-2025--vote-86935",
+              "psp-core-2025--amendment-text-520",
+              "psp-core-2025--vote-86947",
+              "psp-core-2025--amendment-text-530",
+              "psp-core-2025--vote-86952",
+              "psp-core-2025--amendment-text-569",
+              "psp-core-2025--vote-86954",
+              "psp-core-2025--vote-86957",
+              "esbirka-regulations--2026-123",
+              "esbirka-regulations--2026-122",
+              "esbirka-regulations--2026-127",
+              "esbirka-regulations--2026-178"
+            ],
+            "explanationCz": "Vláda Motoristů předložila dohody o policejní spolupráci a o spolupráci proti kyberkriminalitě a přijala pravidla pro posílení odolnosti kritické infrastruktury i krizové plánování. Schválila také prostředky na zásah policie a hasičů při požáru a na připravenost hasičského sboru; to jsou konkrétní, ale jen dílčí kroky ke slibu. Poslanci Motoristů zároveň hlasovali pro novelu stavebního zákona, která zapojuje subjekty kritické infrastruktury do tvorby některých pravidel, ale také pro státní rozpočet, jehož konkrétní výdaje pro bezpečnostní složky nejsou v dodaných částech rozepsány. Strana naopak nepodpořila několik rozpočtových návrhů na posílení hasičů, zpravodajských a kyberbezpečnostních kapacit; tyto návrhy však nebyly schváleny jako závazná opatření. Z dostupných podkladů plyne dílčí posun, nikoli splnění celého slibu.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Dodaný výňatek státního rozpočtu uvádí pouze odkazy na rozpočtové přílohy, nikoli konečné částky pro bezpečnostní složky; nelze proto určit skutečný rozpočtový dopad schváleného rozpočtu.",
+              "U novely stavebního zákona není ve výňatku schváleného znění uveden konečný osud navrženého pravidla, podle něhož by se nevyjádření vlastníka infrastruktury považovalo za bezpodmínečný souhlas. Proti dílčím krokům k ochraně infrastruktury tak stojí nejistota, zda toto navržené oslabení zůstalo v přijatém textu.",
+              "V dodaných podkladech není doložen konkrétní krok k zajištění toho, aby bezpečnostní složky nebyly využívány politickými elitami; hodnocení se proto opírá o doložené části slibu týkající se infrastruktury a krizové odolnosti."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-afb17f188dfb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Text se dotýká technické infrastruktury a v podobě schválené Sněmovnou výslovně ukládá konzultovat pravidla pro její umisťování s vlastníky, kteří jsou subjekty kritické infrastruktury.",
+          "effectCz": "Schválená verze nově vyžaduje konzultaci místních pravidel s dotčenými vlastníky kritické infrastruktury; předchozí znění § 152 takovou konzultaci nestanovilo, takže se posiluje jejich procesní zapojení, nikoli přímo bezpečnostní standard. Předložená verze navíc zaváděla souhlas vlastníka veřejné dopravní či technické infrastruktury bez podmínek při jeho nečinnosti; dříve měl vlastník na vyjádření 30, ve zvlášť složitých případech 60 dnů. Tato navržená změna by ochrannou možnost vlastníka oslabila, ale poskytnutý výňatek schváleného textu neukazuje, zda se do něj dostala."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": false,
+          "reasonCz": "Nová státní příspěvková organizace ministerstva obrany může zajišťovat obranu a zdravotní služby vojákům, dodaný text ji však nespojuje s ochranou kritické infrastruktury ani s odolností bezpečnostních složek v krizích.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": true,
+          "reasonCz": "Návrh smlouvy zahrnuje spolupráci při zabezpečení energetické infrastruktury a při prevenci, zvládání a obnově po katastrofách.",
+          "effectCz": "Smlouva navrhuje spolupráci na bezpečnosti energetických infrastruktur a na odolnosti společností a infrastruktury při katastrofách; jde o dílčí podporu ochrany infrastruktury, nikoli o přímé posílení českých bezpečnostních složek. Předchozí znění není, protože jde o návrh smluvního rámce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet obsahuje výdaje bezpečnostních a krizových institucí a projednávané změny rozpočtu výslovně navrhovaly prostředky pro kybernetickou bezpečnost, hasiče a další bezpečnostní kapacity.",
+          "effectCz": "Jde o nový státní rozpočet na rok 2026, nikoli změnu dřívějšího zákona; dodaný výňatek pouze odkazuje na rozpočtové tabulky, ale neobsahuje příslušné částky. Z balíčku proto nelze určit, zda schválené výdaje pro bezpečnostní a krizové složky jejich kapacity zvyšují, nebo snižují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-3",
+          "relevant": true,
+          "reasonCz": "Navržená policejní smlouva umožňuje v naléhavé situaci přeshraniční zásah a upravuje spolupráci policistů při odvracení bezprostředního ohrožení.",
+          "effectCz": "Smlouva nově vytváří rámec pro přeshraniční policejní spolupráci, včetně naléhavých zásahů na ochranu života a zdraví a spolupráce při identifikaci obětí hromadných neštěstí. Jde o dílčí posílení schopnosti reagovat v krizích; předchozí smluvní znění není dodáno."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-6",
+          "relevant": true,
+          "reasonCz": "Návrh smlouvy výslovně počítá se spoluprací proti kyberkriminalitě a s ochranou kritické infrastruktury.",
+          "effectCz": "Navržená smlouva stanoví spolupráci proti praní peněz a financování terorismu a sdílení informací a zkušeností při potírání kyberkriminality, včetně ochrany kritické infrastruktury. Jde o dílčí rámec spolupráce, nikoli o přímé zavedení českých bezpečnostních opatření; předchozí smluvní znění není dodáno."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-122",
+          "relevant": true,
+          "reasonCz": "Vyhláška ukládá subjektům kritické infrastruktury plánovat odolnost, řídit rizika, připravit se na incidenty a chránit infrastrukturu.",
+          "effectCz": "Vyhláška stanoví požadavky na posuzování rizik a plány odolnosti, opatření pro kontinuitu činnosti, fyzickou bezpečnost, připravenost na incidenty a jejich hlášení. Tím se přímo zavádějí povinnosti podporující ochranu kritické infrastruktury a její odolnost; předchozí znění právního rámce není v balíčku, takže rozsah změny oproti němu nelze určit."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-123",
+          "relevant": true,
+          "reasonCz": "Nařízení upravuje krizový plán České republiky a posouzení rizik, včetně hrozeb ozbrojených konfliktů a hybridního působení.",
+          "effectCz": "Nařízení vkládá úpravu národního krizového plánu a posouzení rizik, vyžaduje zohledňovat přírodní i člověkem způsobené hrozby a stanoví souhrnnou aktualizaci krizových plánů ve čtyřletých cyklech i při změně okolností. To přímo podporuje připravenost na krize; předchozí znění měněného nařízení není dodáno, takže míru zpřísnění nelze určit."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-127",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví základní služby a kritéria pro zařazení jejich poskytovatelů mezi subjekty kritické infrastruktury.",
+          "effectCz": "Nařízení nově stanoví okruh základních služeb a kritéria významnosti pro zařazení poskytovatelů na seznam subjektů kritické infrastruktury a ruší dřívější nařízení o kritériích pro určení jejího prvku. Výňatek neobsahuje seznam služeb ani konkrétní kritéria, takže nelze určit, zda se rozsah chráněných subjektů zvětšuje, nebo zmenšuje."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-178",
+          "relevant": true,
+          "reasonCz": "Vyhláška vytváří portál pro předávání informací o kritické infrastruktuře, spolupráci oprávněných uživatelů a hlášení incidentů.",
+          "effectCz": "Vyhláška stanoví přístup do portálu, individuální oprávnění uživatelů, pravidla pro vkládání informací a možnost hlásit incidenty. Jde o dílčí podporu koordinace a reakce na incidenty; předchozí stav portálu není v balíčku popsán."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-22",
+          "relevant": true,
+          "reasonCz": "Usnesení svěřuje vládnímu zmocněnci koordinaci strategické bezpečnosti a přípravu koncepce detekce dronů a odolnosti kritických objektů.",
+          "effectCz": "Vláda vytvořila koordinační funkci pro strategickou bezpečnost a uložila připravit koncepci detekce dronů a posílení odolnosti kritických objektů. Jde o přípravný krok, nikoli již zavedené bezpečnostní opatření."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-43",
+          "relevant": true,
+          "reasonCz": "Usnesení stanoví použití krizové rezervy také na financování integrovaného záchranného systému, prevenci krizí a jejich řešení.",
+          "effectCz": "Usnesení vymezuje, že krizová rezerva může pokrýt prvotní náklady při krizovém stavu, některé náklady dobrovolných hasičských jednotek a také prevenci krizových situací. Jde o dílčí finanční podporu krizové připravenosti, ale dodaný výňatek neuvádí výši rezervy ani skutečně uvolněné částky."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-314",
+          "relevant": true,
+          "reasonCz": "Usnesení zařazuje moderní systémy krizového řízení a varování obyvatel mezi strategické projekty a určuje jejich koordinaci.",
+          "effectCz": "Vláda schválila projekt moderních systémů krizového řízení a varování obyvatel a stanovila jeho odpovědné řízení s termínem do 31. prosince 2028. Jde o přípravný a koordinační krok; samotný systém usnesení nezavádí."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-634",
+          "relevant": true,
+          "reasonCz": "Usnesení přímo uvolňuje prostředky na mimořádné výdaje hasičů a policie při zásahu u požáru v Národním parku České Švýcarsko.",
+          "effectCz": "Vláda schválila 16 320 775 Kč na kompenzaci mimořádných výdajů hasičského záchranného sboru a policie za zásah a navýšila prostředky na služební příjmy hasičů o 6 266 073 Kč. Jde o konkrétní, ale omezenou podporu složek při krizovém zásahu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-698",
+          "relevant": true,
+          "reasonCz": "Usnesení navyšuje prostředky na služební příjmy hasičů s odůvodněním, že je třeba zajistit jejich akceschopnost a připravenost.",
+          "effectCz": "Vláda schválila navýšení prostředků na služební příjmy hasičů o 14 836 795 Kč pro rok 2026. Jde o dílčí podporu jejich připravenosti, nikoli o naplnění celého slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-afb17f188dfb--source",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1245",
+        "psp-core-2025--vote-88169",
+        "psp-core-2025--amendment-text-1206",
+        "psp-core-2025--vote-88228",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43203-16",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-523",
+        "psp-core-2025--vote-86842",
+        "psp-core-2025--amendment-text-360",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--amendment-text-380",
+        "psp-core-2025--vote-86875",
+        "psp-core-2025--amendment-text-454",
+        "psp-core-2025--vote-86935",
+        "psp-core-2025--amendment-text-548",
+        "psp-core-2025--vote-86919",
+        "psp-core-2025--amendment-text-551",
+        "psp-core-2025--vote-86921",
+        "psp-core-2025--amendment-text-552",
+        "psp-core-2025--vote-86922",
+        "psp-core-2025--amendment-text-585",
+        "psp-core-2025--vote-86923",
+        "psp-core-2025--amendment-text-586",
+        "psp-core-2025--vote-86924",
+        "psp-core-2025--amendment-text-520",
+        "psp-core-2025--vote-86947",
+        "psp-core-2025--amendment-text-569",
+        "psp-core-2025--vote-86954",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43228-3",
+        "psp-core-2025--print-step-210866",
+        "psp-core-2025--law-change-43453-6",
+        "psp-core-2025--print-step-212285",
+        "esbirka-regulations--law-change-sb-2026-122",
+        "esbirka-regulations--2026-122",
+        "esbirka-regulations--law-change-sb-2026-123",
+        "esbirka-regulations--2026-123",
+        "esbirka-regulations--law-change-sb-2026-127",
+        "esbirka-regulations--2026-127",
+        "esbirka-regulations--law-change-sb-2026-178",
+        "esbirka-regulations--2026-178",
+        "zvlady-resolutions--law-change-uv-2026-22",
+        "zvlady-resolutions--2026-22",
+        "zvlady-resolutions--law-change-uv-2026-43",
+        "zvlady-resolutions--2026-43",
+        "zvlady-resolutions--law-change-uv-2026-314",
+        "zvlady-resolutions--2026-314",
+        "zvlady-resolutions--law-change-uv-2026-634",
+        "zvlady-resolutions--2026-634",
+        "zvlady-resolutions--law-change-uv-2026-698",
+        "zvlady-resolutions--2026-698"
+      ],
+      "explanationCz": "Vláda a ministerstvo vnitra přijaly pravidla pro posuzování rizik, plány odolnosti a fyzickou ochranu kritické infrastruktury; vláda také schválila krizové plánování a konkrétní příspěvky hasičům a policii při mimořádném zásahu. Poslanci Motoristů podpořili stavební novelu, která zavádí konzultaci pravidel pro technickou infrastrukturu s některými jejími vlastníky, a vláda předložila smlouvy o spolupráci při policejních zásazích a potírání kyberkriminality. Současně poslanci Motoristů nepodpořili několik návrhů na zvýšení prostředků pro kybernetickou bezpečnost, hasiče a zpravodajské služby, ale hlasovali pro schválení státního rozpočtu. Dílčí závazná opatření a navýšení pro hasiče dokládají posun k části slibu, nikoli jeho úplné splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek ze schváleného rozpočtu neuvádí konkrétní částky pro bezpečnostní a krizové složky, takže nelze posoudit, jak se jejich rozpočty změnily; hlasování Motoristů proti některým navýšením zůstává v rozporu s pozdějšími dílčími kroky vlády.",
+        "Předložená stavební novela obsahovala fikci souhlasu vlastníka infrastruktury při jeho nečinnosti, ale tato část není ve výňatku schváleného znění zachycena, takže nelze určit, zda se stala součástí konečného textu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-afb17f188dfb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Schválená verze přidává konzultaci se subjekty kritické infrastruktury při tvorbě některých místních pravidel pro umisťování technické infrastruktury, což se přímo týká její ochrany.",
+          "effectCz": "Dříve mohl samosprávný celek stanovit podrobné požadavky na výstavbu odchylně od celostátního předpisu a měl zajistit přístup k určeným normám; nově musí při pravidlech pro vymezování pozemků a umisťování technické infrastruktury návrh projednat s dotčenými vlastníky, kteří jsou subjekty kritické infrastruktury. Přibývá procesní konzultace, ale text nestanoví nové bezpečnostní standardy ani povinnost infrastrukturu lépe chránit; ochranná úroveň se proto mění jen omezeně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": false,
+          "reasonCz": "Ustanovení umožňuje Ministerstvu obrany zřizovat a řídit státní příspěvkovou organizaci pro obranu státu, ale dodaný text ji nespojuje s ochranou kritické infrastruktury ani s odolností bezpečnostních složek při krizích.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": true,
+          "reasonCz": "Dohoda výslovně zahrnuje bezpečnost elektráren a odolnost infrastruktury při přírodních i člověkem způsobených katastrofách, tedy části slibu o ochraně infrastruktury a krizové odolnosti.",
+          "effectCz": "Jde o návrh mezinárodní dohody, nikoli změnu dřívějšího českého pravidla. Uvedené části zakládají spolupráci na bezpečnosti energetických zařízení a na prevenci, připravenosti, reakci a obnově po katastrofách; přispívají k odolnosti, ale nestanoví konkrétní domácí ochranná opatření ani jejich rozsah."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet obsahuje souhrnné výdaje podle kapitol a související hlasování se týkala financování kybernetické bezpečnosti, zpravodajských kapacit a hasičských jednotek.",
+          "effectCz": "Jde o návrh rozpočtu na rok 2026, nikoli změnu dřívějšího pravidla. Dodané pasáže pouze uvádějí, že výdaje a rozpočtové ukazatele jsou v přílohách č. 3 a 4; jejich konkrétní částky ani schválené výdaje pro dotčené složky zde nejsou, takže směr a rozsah rozpočtové změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-3",
+          "relevant": true,
+          "reasonCz": "Dohoda umožňuje policistům a hasičským jednotkám přeshraničně zasáhnout při bezprostředním ohrožení života či zdraví a upravuje spolupráci při hromadných neštěstích.",
+          "effectCz": "Jde o návrh mezinárodní dohody, nikoli změnu dřívějšího českého pravidla. Stanoví možnost naléhavého přeshraničního zásahu a spolupráci při identifikaci obětí; tím rozšiřuje možnosti bezpečnostních a záchranných složek reagovat v krizích, avšak jen v rozsahu dohody a bez číselného cíle."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-6",
+          "relevant": true,
+          "reasonCz": "Dohoda se výslovně věnuje kyberkriminalitě a spolupráci při ochraně kritické infrastruktury, včetně energetiky, telekomunikací a financí.",
+          "effectCz": "Jde o návrh mezinárodní dohody, nikoli změnu dřívějšího českého pravidla. Uvedené části zavazují strany ke spolupráci a výměně informací, zkušeností a postupů v boji proti kyberkriminalitě a při ochraně kritické infrastruktury; jde o dílčí podporu slibu, nikoli o konkrétní domácí ochranný standard."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-122",
+          "relevant": true,
+          "reasonCz": "Vyhláška ukládá subjektům kritické infrastruktury posuzovat rizika, plánovat kontinuitu služeb, připravovat se na incidenty a zavádět opatření fyzické i personální bezpečnosti.",
+          "effectCz": "Jde o nový prováděcí předpis, takže balíček neposkytuje předchozí znění srovnatelných ustanovení. Vyhláška nově stanoví požadavky na posouzení rizik a plán odolnosti, opatření proti incidentům, fyzickou ochranu infrastruktury, řízení kontinuity a hlášení incidentů; přímo zpřísňuje povinnosti subjektů a posiluje ochranu a odolnost kritické infrastruktury."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-123",
+          "relevant": true,
+          "reasonCz": "Nařízení doplňuje krizový plán České republiky o posuzování rizik, plány pro konkrétní hrozby a krizovou komunikaci, což přímo souvisí s připraveností na krize.",
+          "effectCz": "Jde o nový předpis měnící prováděcí nařízení; dodaný balíček neobsahuje předchozí znění dotčených ustanovení. Nově předepisuje obsah krizového plánu, zahrnutí přírodních, lidských, přeshraničních a hybridních hrozeb do posouzení rizik a aktualizaci plánů při změně; připravenost krizového řízení se tím rozšiřuje a konkretizuje."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-127",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví základní služby a kritéria, podle nichž se poskytovatelé zařazují mezi subjekty kritické infrastruktury, tedy určuje rozsah ochranného režimu slibu.",
+          "effectCz": "Jde o nový předpis bez dřívějšího znění v balíčku. Stanoví seznam základních služeb a kritéria významnosti pro zařazení jejich poskytovatelů mezi subjekty kritické infrastruktury a ruší dřívější předpisy o určování prvků kritické infrastruktury; vytváří základ pro určení toho, koho se ochranný režim týká, ale samo nařízení neukládá konkrétní opatření odolnosti."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-178",
+          "relevant": true,
+          "reasonCz": "Vyhláška upravuje portál kritické infrastruktury, jehož prostřednictvím oprávnění uživatelé spolupracují a hlásí incidenty.",
+          "effectCz": "Jde o nový prováděcí předpis bez předchozího znění v balíčku. Zřizuje pravidla přístupu, individuálních oprávnění a předávání informací v portálu, včetně hlášení incidentů; usnadňuje koordinaci a evidenci, avšak sám nezavádí novou povinnost fyzické ochrany infrastruktury."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-22",
+          "relevant": true,
+          "reasonCz": "Usnesení vytváří funkci vládního zmocněnce pro strategickou bezpečnost a ukládá připravit koncepci detekce dronů a zvýšení odolnosti kritických objektů.",
+          "effectCz": "Jde o vládní usnesení, nikoli změnu zákona; předchozí pravidlo proto dodáno není. Usnesení zavádí koordinaci strategické bezpečnosti a zadává přípravu koncepce, ale samotná opatření ani jejich účinnost ještě nestanoví; posun je přípravný."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-43",
+          "relevant": true,
+          "reasonCz": "Usnesení upravuje použití krizové rezervy, včetně financování integrovaného záchranného systému, předcházení krizím a odstraňování jejich následků.",
+          "effectCz": "Jde o usnesení k návrhu státního rozpočtu na rok 2026, nikoli změnu dřívějšího pravidla. Určuje účel a postup uvolňování prostředků z rezervy na řešení krizí a financování integrovaného záchranného systému; konkrétní částka rezervy však v dodaných pasážích chybí, takže její dostatečnost nelze posoudit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-314",
+          "relevant": true,
+          "reasonCz": "Usnesení zařazuje moderní systémy krizového řízení a varování obyvatel mezi strategické projekty a stanoví jejich koordinaci.",
+          "effectCz": "Jde o nové organizační usnesení bez předchozího znění. Zavádí řízení projektu krizového řízení a varování s termínem do 31. prosince 2028, ale zajišťuje pouze jeho koordinaci a řízení, nikoli dokončení systému; jde o přípravný posun."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-634",
+          "relevant": true,
+          "reasonCz": "Usnesení uvolňuje prostředky na mimořádné výdaje hasičů a policie spojené se zásahem při požáru a navyšuje prostředky na služební příjmy hasičů.",
+          "effectCz": "Jde o konkrétní rozhodnutí vlády, nikoli změnu dřívějšího pravidla. Schvaluje 16 320 775 Kč na mimořádné výdaje hasičů a policie při zásahu a navyšuje prostředky na služební příjmy hasičů o 6 266 073 Kč; podporuje činnost složek při krizové události, ale jen v její dílčí části."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-698",
+          "relevant": true,
+          "reasonCz": "Usnesení navyšuje prostředky na služební příjmy hasičů v souvislosti s jejich akceschopností a připraveností k zásahům.",
+          "effectCz": "Jde o konkrétní rozhodnutí vlády bez předchozího znění. Navyšuje objem prostředků na služební příjmy hasičů v roce 2026 o 14 836 795 Kč; posiluje jednu dílčí složku připravenosti, nikoli celý slib."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-afb17f188dfb--source",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1245",
+        "psp-core-2025--vote-88169",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43203-16",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-523",
+        "psp-core-2025--vote-86842",
+        "psp-core-2025--amendment-text-360",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--amendment-text-380",
+        "psp-core-2025--vote-86875",
+        "psp-core-2025--amendment-text-424",
+        "psp-core-2025--vote-86906",
+        "psp-core-2025--amendment-text-548",
+        "psp-core-2025--vote-86919",
+        "psp-core-2025--amendment-text-551",
+        "psp-core-2025--vote-86921",
+        "psp-core-2025--amendment-text-552",
+        "psp-core-2025--vote-86922",
+        "psp-core-2025--amendment-text-585",
+        "psp-core-2025--vote-86923",
+        "psp-core-2025--amendment-text-586",
+        "psp-core-2025--vote-86924",
+        "psp-core-2025--amendment-text-454",
+        "psp-core-2025--vote-86935",
+        "psp-core-2025--amendment-text-520",
+        "psp-core-2025--vote-86947",
+        "psp-core-2025--amendment-text-530",
+        "psp-core-2025--vote-86952",
+        "psp-core-2025--amendment-text-569",
+        "psp-core-2025--vote-86954",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43228-3",
+        "psp-core-2025--print-step-210866",
+        "psp-core-2025--law-change-43453-6",
+        "psp-core-2025--print-step-212285",
+        "esbirka-regulations--law-change-sb-2026-122",
+        "esbirka-regulations--2026-122",
+        "esbirka-regulations--law-change-sb-2026-123",
+        "esbirka-regulations--2026-123",
+        "esbirka-regulations--law-change-sb-2026-127",
+        "esbirka-regulations--2026-127",
+        "esbirka-regulations--law-change-sb-2026-178",
+        "esbirka-regulations--2026-178",
+        "zvlady-resolutions--law-change-uv-2026-22",
+        "zvlady-resolutions--2026-22",
+        "zvlady-resolutions--law-change-uv-2026-43",
+        "zvlady-resolutions--2026-43",
+        "zvlady-resolutions--law-change-uv-2026-314",
+        "zvlady-resolutions--2026-314",
+        "zvlady-resolutions--law-change-uv-2026-634",
+        "zvlady-resolutions--2026-634",
+        "zvlady-resolutions--law-change-uv-2026-698",
+        "zvlady-resolutions--2026-698"
+      ],
+      "explanationCz": "Ministerstvo vnitra vydalo vyhlášku, která ukládá subjektům kritické infrastruktury posuzovat rizika, plánovat kontinuitu služeb a připravovat se na incidenty; vláda také upravila krizové plánování a koordinaci systémů varování. Vláda navíc rozhodla o mimořádných prostředcích pro hasiče a policii a o navýšení prostředků na služební příjmy hasičů, což je dílčí posílení připravenosti složek. Motoristé však nepodpořili několik rozpočtových návrhů na posílení kybernetické bezpečnosti, zpravodajských kapacit a dobrovolných hasičů; později hlasovali pro celý státní rozpočet. Dodané pasáže rozpočtu neukazují konkrétní částky pro tyto oblasti, takže dopad tohoto celkového hlasování nelze přesně určit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodané znění schváleného rozpočtu uvádí pouze to, že výdaje jsou rozepsány v přílohách; jejich částky pro bezpečnostní a záchranné složky zde nejsou. Proto nelze z balíčku posoudit, jak jejich rozpočty ovlivnilo schválení celého rozpočtu.",
+        "Motoristé hlasovali proti několika jednotlivým návrhům na navýšení prostředků pro kybernetickou bezpečnost, zpravodajskou službu a dobrovolné hasiče, zatímco vládní předpisy a pozdější usnesení zavádějí nebo podporují některá opatření pro odolnost a připravenost."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0fdc48fcca70f692016aec571e7f8887d195581fc62845b01d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 106199,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 106196
+      },
+      "output_tokens": 13301,
+      "output_tokens_details": {
+        "reasoning_tokens": 9266
+      },
+      "total_tokens": 119500
+    },
+    "output": {
+      "promiseId": "candidate-afb17f188dfb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Text se dotýká technické infrastruktury a v podobě schválené Sněmovnou výslovně ukládá konzultovat pravidla pro její umisťování s vlastníky, kteří jsou subjekty kritické infrastruktury.",
+          "effectCz": "Schválená verze nově vyžaduje konzultaci místních pravidel s dotčenými vlastníky kritické infrastruktury; předchozí znění § 152 takovou konzultaci nestanovilo, takže se posiluje jejich procesní zapojení, nikoli přímo bezpečnostní standard. Předložená verze navíc zaváděla souhlas vlastníka veřejné dopravní či technické infrastruktury bez podmínek při jeho nečinnosti; dříve měl vlastník na vyjádření 30, ve zvlášť složitých případech 60 dnů. Tato navržená změna by ochrannou možnost vlastníka oslabila, ale poskytnutý výňatek schváleného textu neukazuje, zda se do něj dostala."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": false,
+          "reasonCz": "Nová státní příspěvková organizace ministerstva obrany může zajišťovat obranu a zdravotní služby vojákům, dodaný text ji však nespojuje s ochranou kritické infrastruktury ani s odolností bezpečnostních složek v krizích.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": true,
+          "reasonCz": "Návrh smlouvy zahrnuje spolupráci při zabezpečení energetické infrastruktury a při prevenci, zvládání a obnově po katastrofách.",
+          "effectCz": "Smlouva navrhuje spolupráci na bezpečnosti energetických infrastruktur a na odolnosti společností a infrastruktury při katastrofách; jde o dílčí podporu ochrany infrastruktury, nikoli o přímé posílení českých bezpečnostních složek. Předchozí znění není, protože jde o návrh smluvního rámce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet obsahuje výdaje bezpečnostních a krizových institucí a projednávané změny rozpočtu výslovně navrhovaly prostředky pro kybernetickou bezpečnost, hasiče a další bezpečnostní kapacity.",
+          "effectCz": "Jde o nový státní rozpočet na rok 2026, nikoli změnu dřívějšího zákona; dodaný výňatek pouze odkazuje na rozpočtové tabulky, ale neobsahuje příslušné částky. Z balíčku proto nelze určit, zda schválené výdaje pro bezpečnostní a krizové složky jejich kapacity zvyšují, nebo snižují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-3",
+          "relevant": true,
+          "reasonCz": "Navržená policejní smlouva umožňuje v naléhavé situaci přeshraniční zásah a upravuje spolupráci policistů při odvracení bezprostředního ohrožení.",
+          "effectCz": "Smlouva nově vytváří rámec pro přeshraniční policejní spolupráci, včetně naléhavých zásahů na ochranu života a zdraví a spolupráce při identifikaci obětí hromadných neštěstí. Jde o dílčí posílení schopnosti reagovat v krizích; předchozí smluvní znění není dodáno."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-6",
+          "relevant": true,
+          "reasonCz": "Návrh smlouvy výslovně počítá se spoluprací proti kyberkriminalitě a s ochranou kritické infrastruktury.",
+          "effectCz": "Navržená smlouva stanoví spolupráci proti praní peněz a financování terorismu a sdílení informací a zkušeností při potírání kyberkriminality, včetně ochrany kritické infrastruktury. Jde o dílčí rámec spolupráce, nikoli o přímé zavedení českých bezpečnostních opatření; předchozí smluvní znění není dodáno."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-122",
+          "relevant": true,
+          "reasonCz": "Vyhláška ukládá subjektům kritické infrastruktury plánovat odolnost, řídit rizika, připravit se na incidenty a chránit infrastrukturu.",
+          "effectCz": "Vyhláška stanoví požadavky na posuzování rizik a plány odolnosti, opatření pro kontinuitu činnosti, fyzickou bezpečnost, připravenost na incidenty a jejich hlášení. Tím se přímo zavádějí povinnosti podporující ochranu kritické infrastruktury a její odolnost; předchozí znění právního rámce není v balíčku, takže rozsah změny oproti němu nelze určit."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-123",
+          "relevant": true,
+          "reasonCz": "Nařízení upravuje krizový plán České republiky a posouzení rizik, včetně hrozeb ozbrojených konfliktů a hybridního působení.",
+          "effectCz": "Nařízení vkládá úpravu národního krizového plánu a posouzení rizik, vyžaduje zohledňovat přírodní i člověkem způsobené hrozby a stanoví souhrnnou aktualizaci krizových plánů ve čtyřletých cyklech i při změně okolností. To přímo podporuje připravenost na krize; předchozí znění měněného nařízení není dodáno, takže míru zpřísnění nelze určit."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-127",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví základní služby a kritéria pro zařazení jejich poskytovatelů mezi subjekty kritické infrastruktury.",
+          "effectCz": "Nařízení nově stanoví okruh základních služeb a kritéria významnosti pro zařazení poskytovatelů na seznam subjektů kritické infrastruktury a ruší dřívější nařízení o kritériích pro určení jejího prvku. Výňatek neobsahuje seznam služeb ani konkrétní kritéria, takže nelze určit, zda se rozsah chráněných subjektů zvětšuje, nebo zmenšuje."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-178",
+          "relevant": true,
+          "reasonCz": "Vyhláška vytváří portál pro předávání informací o kritické infrastruktuře, spolupráci oprávněných uživatelů a hlášení incidentů.",
+          "effectCz": "Vyhláška stanoví přístup do portálu, individuální oprávnění uživatelů, pravidla pro vkládání informací a možnost hlásit incidenty. Jde o dílčí podporu koordinace a reakce na incidenty; předchozí stav portálu není v balíčku popsán."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-22",
+          "relevant": true,
+          "reasonCz": "Usnesení svěřuje vládnímu zmocněnci koordinaci strategické bezpečnosti a přípravu koncepce detekce dronů a odolnosti kritických objektů.",
+          "effectCz": "Vláda vytvořila koordinační funkci pro strategickou bezpečnost a uložila připravit koncepci detekce dronů a posílení odolnosti kritických objektů. Jde o přípravný krok, nikoli již zavedené bezpečnostní opatření."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-43",
+          "relevant": true,
+          "reasonCz": "Usnesení stanoví použití krizové rezervy také na financování integrovaného záchranného systému, prevenci krizí a jejich řešení.",
+          "effectCz": "Usnesení vymezuje, že krizová rezerva může pokrýt prvotní náklady při krizovém stavu, některé náklady dobrovolných hasičských jednotek a také prevenci krizových situací. Jde o dílčí finanční podporu krizové připravenosti, ale dodaný výňatek neuvádí výši rezervy ani skutečně uvolněné částky."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-314",
+          "relevant": true,
+          "reasonCz": "Usnesení zařazuje moderní systémy krizového řízení a varování obyvatel mezi strategické projekty a určuje jejich koordinaci.",
+          "effectCz": "Vláda schválila projekt moderních systémů krizového řízení a varování obyvatel a stanovila jeho odpovědné řízení s termínem do 31. prosince 2028. Jde o přípravný a koordinační krok; samotný systém usnesení nezavádí."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-634",
+          "relevant": true,
+          "reasonCz": "Usnesení přímo uvolňuje prostředky na mimořádné výdaje hasičů a policie při zásahu u požáru v Národním parku České Švýcarsko.",
+          "effectCz": "Vláda schválila 16 320 775 Kč na kompenzaci mimořádných výdajů hasičského záchranného sboru a policie za zásah a navýšila prostředky na služební příjmy hasičů o 6 266 073 Kč. Jde o konkrétní, ale omezenou podporu složek při krizovém zásahu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-698",
+          "relevant": true,
+          "reasonCz": "Usnesení navyšuje prostředky na služební příjmy hasičů s odůvodněním, že je třeba zajistit jejich akceschopnost a připravenost.",
+          "effectCz": "Vláda schválila navýšení prostředků na služební příjmy hasičů o 14 836 795 Kč pro rok 2026. Jde o dílčí podporu jejich připravenosti, nikoli o naplnění celého slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-afb17f188dfb--source",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1245",
+        "psp-core-2025--vote-88169",
+        "psp-core-2025--amendment-text-1206",
+        "psp-core-2025--vote-88228",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43203-16",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-523",
+        "psp-core-2025--vote-86842",
+        "psp-core-2025--amendment-text-360",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--amendment-text-380",
+        "psp-core-2025--vote-86875",
+        "psp-core-2025--amendment-text-454",
+        "psp-core-2025--vote-86935",
+        "psp-core-2025--amendment-text-548",
+        "psp-core-2025--vote-86919",
+        "psp-core-2025--amendment-text-551",
+        "psp-core-2025--vote-86921",
+        "psp-core-2025--amendment-text-552",
+        "psp-core-2025--vote-86922",
+        "psp-core-2025--amendment-text-585",
+        "psp-core-2025--vote-86923",
+        "psp-core-2025--amendment-text-586",
+        "psp-core-2025--vote-86924",
+        "psp-core-2025--amendment-text-520",
+        "psp-core-2025--vote-86947",
+        "psp-core-2025--amendment-text-569",
+        "psp-core-2025--vote-86954",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43228-3",
+        "psp-core-2025--print-step-210866",
+        "psp-core-2025--law-change-43453-6",
+        "psp-core-2025--print-step-212285",
+        "esbirka-regulations--law-change-sb-2026-122",
+        "esbirka-regulations--2026-122",
+        "esbirka-regulations--law-change-sb-2026-123",
+        "esbirka-regulations--2026-123",
+        "esbirka-regulations--law-change-sb-2026-127",
+        "esbirka-regulations--2026-127",
+        "esbirka-regulations--law-change-sb-2026-178",
+        "esbirka-regulations--2026-178",
+        "zvlady-resolutions--law-change-uv-2026-22",
+        "zvlady-resolutions--2026-22",
+        "zvlady-resolutions--law-change-uv-2026-43",
+        "zvlady-resolutions--2026-43",
+        "zvlady-resolutions--law-change-uv-2026-314",
+        "zvlady-resolutions--2026-314",
+        "zvlady-resolutions--law-change-uv-2026-634",
+        "zvlady-resolutions--2026-634",
+        "zvlady-resolutions--law-change-uv-2026-698",
+        "zvlady-resolutions--2026-698"
+      ],
+      "explanationCz": "Vláda a ministerstvo vnitra přijaly pravidla pro posuzování rizik, plány odolnosti a fyzickou ochranu kritické infrastruktury; vláda také schválila krizové plánování a konkrétní příspěvky hasičům a policii při mimořádném zásahu. Poslanci Motoristů podpořili stavební novelu, která zavádí konzultaci pravidel pro technickou infrastrukturu s některými jejími vlastníky, a vláda předložila smlouvy o spolupráci při policejních zásazích a potírání kyberkriminality. Současně poslanci Motoristů nepodpořili několik návrhů na zvýšení prostředků pro kybernetickou bezpečnost, hasiče a zpravodajské služby, ale hlasovali pro schválení státního rozpočtu. Dílčí závazná opatření a navýšení pro hasiče dokládají posun k části slibu, nikoli jeho úplné splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek ze schváleného rozpočtu neuvádí konkrétní částky pro bezpečnostní a krizové složky, takže nelze posoudit, jak se jejich rozpočty změnily; hlasování Motoristů proti některým navýšením zůstává v rozporu s pozdějšími dílčími kroky vlády.",
+        "Předložená stavební novela obsahovala fikci souhlasu vlastníka infrastruktury při jeho nečinnosti, ale tato část není ve výňatku schváleného znění zachycena, takže nelze určit, zda se stala součástí konečného textu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0eca551dd1943f72016aec57c664d487d1a7a05f2392a6e041",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 106199,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 106196
+      },
+      "output_tokens": 11040,
+      "output_tokens_details": {
+        "reasoning_tokens": 7250
+      },
+      "total_tokens": 117239
+    },
+    "output": {
+      "promiseId": "candidate-afb17f188dfb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Schválená verze přidává konzultaci se subjekty kritické infrastruktury při tvorbě některých místních pravidel pro umisťování technické infrastruktury, což se přímo týká její ochrany.",
+          "effectCz": "Dříve mohl samosprávný celek stanovit podrobné požadavky na výstavbu odchylně od celostátního předpisu a měl zajistit přístup k určeným normám; nově musí při pravidlech pro vymezování pozemků a umisťování technické infrastruktury návrh projednat s dotčenými vlastníky, kteří jsou subjekty kritické infrastruktury. Přibývá procesní konzultace, ale text nestanoví nové bezpečnostní standardy ani povinnost infrastrukturu lépe chránit; ochranná úroveň se proto mění jen omezeně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": false,
+          "reasonCz": "Ustanovení umožňuje Ministerstvu obrany zřizovat a řídit státní příspěvkovou organizaci pro obranu státu, ale dodaný text ji nespojuje s ochranou kritické infrastruktury ani s odolností bezpečnostních složek při krizích.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": true,
+          "reasonCz": "Dohoda výslovně zahrnuje bezpečnost elektráren a odolnost infrastruktury při přírodních i člověkem způsobených katastrofách, tedy části slibu o ochraně infrastruktury a krizové odolnosti.",
+          "effectCz": "Jde o návrh mezinárodní dohody, nikoli změnu dřívějšího českého pravidla. Uvedené části zakládají spolupráci na bezpečnosti energetických zařízení a na prevenci, připravenosti, reakci a obnově po katastrofách; přispívají k odolnosti, ale nestanoví konkrétní domácí ochranná opatření ani jejich rozsah."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet obsahuje souhrnné výdaje podle kapitol a související hlasování se týkala financování kybernetické bezpečnosti, zpravodajských kapacit a hasičských jednotek.",
+          "effectCz": "Jde o návrh rozpočtu na rok 2026, nikoli změnu dřívějšího pravidla. Dodané pasáže pouze uvádějí, že výdaje a rozpočtové ukazatele jsou v přílohách č. 3 a 4; jejich konkrétní částky ani schválené výdaje pro dotčené složky zde nejsou, takže směr a rozsah rozpočtové změny nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-3",
+          "relevant": true,
+          "reasonCz": "Dohoda umožňuje policistům a hasičským jednotkám přeshraničně zasáhnout při bezprostředním ohrožení života či zdraví a upravuje spolupráci při hromadných neštěstích.",
+          "effectCz": "Jde o návrh mezinárodní dohody, nikoli změnu dřívějšího českého pravidla. Stanoví možnost naléhavého přeshraničního zásahu a spolupráci při identifikaci obětí; tím rozšiřuje možnosti bezpečnostních a záchranných složek reagovat v krizích, avšak jen v rozsahu dohody a bez číselného cíle."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-6",
+          "relevant": true,
+          "reasonCz": "Dohoda se výslovně věnuje kyberkriminalitě a spolupráci při ochraně kritické infrastruktury, včetně energetiky, telekomunikací a financí.",
+          "effectCz": "Jde o návrh mezinárodní dohody, nikoli změnu dřívějšího českého pravidla. Uvedené části zavazují strany ke spolupráci a výměně informací, zkušeností a postupů v boji proti kyberkriminalitě a při ochraně kritické infrastruktury; jde o dílčí podporu slibu, nikoli o konkrétní domácí ochranný standard."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-122",
+          "relevant": true,
+          "reasonCz": "Vyhláška ukládá subjektům kritické infrastruktury posuzovat rizika, plánovat kontinuitu služeb, připravovat se na incidenty a zavádět opatření fyzické i personální bezpečnosti.",
+          "effectCz": "Jde o nový prováděcí předpis, takže balíček neposkytuje předchozí znění srovnatelných ustanovení. Vyhláška nově stanoví požadavky na posouzení rizik a plán odolnosti, opatření proti incidentům, fyzickou ochranu infrastruktury, řízení kontinuity a hlášení incidentů; přímo zpřísňuje povinnosti subjektů a posiluje ochranu a odolnost kritické infrastruktury."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-123",
+          "relevant": true,
+          "reasonCz": "Nařízení doplňuje krizový plán České republiky o posuzování rizik, plány pro konkrétní hrozby a krizovou komunikaci, což přímo souvisí s připraveností na krize.",
+          "effectCz": "Jde o nový předpis měnící prováděcí nařízení; dodaný balíček neobsahuje předchozí znění dotčených ustanovení. Nově předepisuje obsah krizového plánu, zahrnutí přírodních, lidských, přeshraničních a hybridních hrozeb do posouzení rizik a aktualizaci plánů při změně; připravenost krizového řízení se tím rozšiřuje a konkretizuje."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-127",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví základní služby a kritéria, podle nichž se poskytovatelé zařazují mezi subjekty kritické infrastruktury, tedy určuje rozsah ochranného režimu slibu.",
+          "effectCz": "Jde o nový předpis bez dřívějšího znění v balíčku. Stanoví seznam základních služeb a kritéria významnosti pro zařazení jejich poskytovatelů mezi subjekty kritické infrastruktury a ruší dřívější předpisy o určování prvků kritické infrastruktury; vytváří základ pro určení toho, koho se ochranný režim týká, ale samo nařízení neukládá konkrétní opatření odolnosti."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-178",
+          "relevant": true,
+          "reasonCz": "Vyhláška upravuje portál kritické infrastruktury, jehož prostřednictvím oprávnění uživatelé spolupracují a hlásí incidenty.",
+          "effectCz": "Jde o nový prováděcí předpis bez předchozího znění v balíčku. Zřizuje pravidla přístupu, individuálních oprávnění a předávání informací v portálu, včetně hlášení incidentů; usnadňuje koordinaci a evidenci, avšak sám nezavádí novou povinnost fyzické ochrany infrastruktury."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-22",
+          "relevant": true,
+          "reasonCz": "Usnesení vytváří funkci vládního zmocněnce pro strategickou bezpečnost a ukládá připravit koncepci detekce dronů a zvýšení odolnosti kritických objektů.",
+          "effectCz": "Jde o vládní usnesení, nikoli změnu zákona; předchozí pravidlo proto dodáno není. Usnesení zavádí koordinaci strategické bezpečnosti a zadává přípravu koncepce, ale samotná opatření ani jejich účinnost ještě nestanoví; posun je přípravný."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-43",
+          "relevant": true,
+          "reasonCz": "Usnesení upravuje použití krizové rezervy, včetně financování integrovaného záchranného systému, předcházení krizím a odstraňování jejich následků.",
+          "effectCz": "Jde o usnesení k návrhu státního rozpočtu na rok 2026, nikoli změnu dřívějšího pravidla. Určuje účel a postup uvolňování prostředků z rezervy na řešení krizí a financování integrovaného záchranného systému; konkrétní částka rezervy však v dodaných pasážích chybí, takže její dostatečnost nelze posoudit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-314",
+          "relevant": true,
+          "reasonCz": "Usnesení zařazuje moderní systémy krizového řízení a varování obyvatel mezi strategické projekty a stanoví jejich koordinaci.",
+          "effectCz": "Jde o nové organizační usnesení bez předchozího znění. Zavádí řízení projektu krizového řízení a varování s termínem do 31. prosince 2028, ale zajišťuje pouze jeho koordinaci a řízení, nikoli dokončení systému; jde o přípravný posun."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-634",
+          "relevant": true,
+          "reasonCz": "Usnesení uvolňuje prostředky na mimořádné výdaje hasičů a policie spojené se zásahem při požáru a navyšuje prostředky na služební příjmy hasičů.",
+          "effectCz": "Jde o konkrétní rozhodnutí vlády, nikoli změnu dřívějšího pravidla. Schvaluje 16 320 775 Kč na mimořádné výdaje hasičů a policie při zásahu a navyšuje prostředky na služební příjmy hasičů o 6 266 073 Kč; podporuje činnost složek při krizové události, ale jen v její dílčí části."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-698",
+          "relevant": true,
+          "reasonCz": "Usnesení navyšuje prostředky na služební příjmy hasičů v souvislosti s jejich akceschopností a připraveností k zásahům.",
+          "effectCz": "Jde o konkrétní rozhodnutí vlády bez předchozího znění. Navyšuje objem prostředků na služební příjmy hasičů v roce 2026 o 14 836 795 Kč; posiluje jednu dílčí složku připravenosti, nikoli celý slib."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-afb17f188dfb--source",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1245",
+        "psp-core-2025--vote-88169",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43203-16",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-523",
+        "psp-core-2025--vote-86842",
+        "psp-core-2025--amendment-text-360",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--amendment-text-380",
+        "psp-core-2025--vote-86875",
+        "psp-core-2025--amendment-text-424",
+        "psp-core-2025--vote-86906",
+        "psp-core-2025--amendment-text-548",
+        "psp-core-2025--vote-86919",
+        "psp-core-2025--amendment-text-551",
+        "psp-core-2025--vote-86921",
+        "psp-core-2025--amendment-text-552",
+        "psp-core-2025--vote-86922",
+        "psp-core-2025--amendment-text-585",
+        "psp-core-2025--vote-86923",
+        "psp-core-2025--amendment-text-586",
+        "psp-core-2025--vote-86924",
+        "psp-core-2025--amendment-text-454",
+        "psp-core-2025--vote-86935",
+        "psp-core-2025--amendment-text-520",
+        "psp-core-2025--vote-86947",
+        "psp-core-2025--amendment-text-530",
+        "psp-core-2025--vote-86952",
+        "psp-core-2025--amendment-text-569",
+        "psp-core-2025--vote-86954",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43228-3",
+        "psp-core-2025--print-step-210866",
+        "psp-core-2025--law-change-43453-6",
+        "psp-core-2025--print-step-212285",
+        "esbirka-regulations--law-change-sb-2026-122",
+        "esbirka-regulations--2026-122",
+        "esbirka-regulations--law-change-sb-2026-123",
+        "esbirka-regulations--2026-123",
+        "esbirka-regulations--law-change-sb-2026-127",
+        "esbirka-regulations--2026-127",
+        "esbirka-regulations--law-change-sb-2026-178",
+        "esbirka-regulations--2026-178",
+        "zvlady-resolutions--law-change-uv-2026-22",
+        "zvlady-resolutions--2026-22",
+        "zvlady-resolutions--law-change-uv-2026-43",
+        "zvlady-resolutions--2026-43",
+        "zvlady-resolutions--law-change-uv-2026-314",
+        "zvlady-resolutions--2026-314",
+        "zvlady-resolutions--law-change-uv-2026-634",
+        "zvlady-resolutions--2026-634",
+        "zvlady-resolutions--law-change-uv-2026-698",
+        "zvlady-resolutions--2026-698"
+      ],
+      "explanationCz": "Ministerstvo vnitra vydalo vyhlášku, která ukládá subjektům kritické infrastruktury posuzovat rizika, plánovat kontinuitu služeb a připravovat se na incidenty; vláda také upravila krizové plánování a koordinaci systémů varování. Vláda navíc rozhodla o mimořádných prostředcích pro hasiče a policii a o navýšení prostředků na služební příjmy hasičů, což je dílčí posílení připravenosti složek. Motoristé však nepodpořili několik rozpočtových návrhů na posílení kybernetické bezpečnosti, zpravodajských kapacit a dobrovolných hasičů; později hlasovali pro celý státní rozpočet. Dodané pasáže rozpočtu neukazují konkrétní částky pro tyto oblasti, takže dopad tohoto celkového hlasování nelze přesně určit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodané znění schváleného rozpočtu uvádí pouze to, že výdaje jsou rozepsány v přílohách; jejich částky pro bezpečnostní a záchranné složky zde nejsou. Proto nelze z balíčku posoudit, jak jejich rozpočty ovlivnilo schválení celého rozpočtu.",
+        "Motoristé hlasovali proti několika jednotlivým návrhům na navýšení prostředků pro kybernetickou bezpečnost, zpravodajskou službu a dobrovolné hasiče, zatímco vládní předpisy a pozdější usnesení zavádějí nebo podporují některá opatření pro odolnost a připravenost."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

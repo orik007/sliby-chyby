@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T02-20-29-028Z--4ed46904f467",
+  "evaluatedAt": "2026-11-04T02:20:29.028Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-5b5059fe91b0/4ed46904f467112d746b54c1e93bf2bd557d4b7fb1757825382e34b9df7c6ef0.json",
+  "packageHash": "4ed46904f467112d746b54c1e93bf2bd557d4b7fb1757825382e34b9df7c6ef0",
+  "assessmentContentHash": "7c5d0e6296f417538c6e39b70cb771feb5c3b2dc0c25ec6172c214af8e41ede8",
+  "assessmentFingerprint": "fa8e5ca520dd789226bbe1843b51c9c1cc7c304fa8b33255e2c8f12811c27159",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-5b5059fe91b0",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-5b5059fe91b0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43289-1",
+          "relevant": false,
+          "reasonCz": "Dodané pasáže ponechávají zboží v příloze č. 3 v první snížené sazbě; léky jsou podle kontextu v této příloze a změna jejich sazbu na nulu nestanoví.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-163",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně spojuje připravovaný daňový zákon se zavedením nulové DPH na léky na předpis, což přímo odpovídá slibu.",
+          "effectCz": "Usnesení samo žádné znění zákona nemění a sazbu DPH ihned neupravuje. Ukládá připravit návrh zákona ve druhém čtvrtletí 2028 s účinností změn od 1. ledna 2029 a výslovně uvádí zavedení nulové DPH na léky na předpis; jde tedy o plánovaný krok ke splnění slibu, nikoli o již zavedenou sazbu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-5b5059fe91b0--source",
+        "zvlady-resolutions--law-change-uv-2026-175-163",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala plán legislativních prací, který ukládá připravit ve druhém čtvrtletí 2028 návrh daňového zákona s účinností změn od ledna 2029. Plán výslovně uvádí zavedení nulové DPH na léky na předpis, tedy přesně cíl slibu Motoristů sobě. Usnesení ale sazbu samo nemění; dokládá přípravu budoucího návrhu, nikoli již zavedenou nulovou sazbu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Balíček dokládá plán přípravy zákona, nikoli jeho následné předložení nebo přijetí; nulová sazba proto není doložena jako již zavedená."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-5b5059fe91b0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43289-1",
+          "relevant": false,
+          "reasonCz": "Dodané pasáže mění obecné rozdělení zboží do snížených sazeb, ale nedokládají změnu sazby pro léky na předpis ani zavedení jejich nulové sazby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-163",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací výslovně uvádí zavedení nulové sazby DPH na léky na předpis, tedy přesně cíl slibu.",
+          "effectCz": "Usnesení nemění zákon ani samo sazbu nezavádí; plánuje návrh daňového zákona pro rok 2029, s předložením vládě ve 2. čtvrtletí 2028 a zamýšlenou účinností od ledna 2029. Plán výslovně uvádí nulovou sazbu DPH na léky na předpis, což odpovídá slibu, ale jde zatím jen o přípravu budoucího návrhu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-5b5059fe91b0--source",
+        "zvlady-resolutions--law-change-uv-2026-175-163",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě byli zastoupeni, přijala plán legislativních prací. Počítá s budoucím daňovým zákonem a výslovně uvádí, že má zavést nulovou DPH na léky na předpis. Sazba zatím přijata nebyla, takže jde o přípravný krok ke splnění slibu, nikoli o jeho naplnění.",
+      "confidence": "high",
+      "uncertainties": [
+        "Usnesení pouze plánuje budoucí zákon; dodané podklady nedokládají, že nulová sazba už byla přijata nebo nabyla účinnosti."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0bb7247b65c8f21c016aea94c38e2487d19a62f3b61cd2e8ee",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 15091,
+      "input_tokens_details": {
+        "cache_write_tokens": 8741,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 3213,
+      "output_tokens_details": {
+        "reasoning_tokens": 2672
+      },
+      "total_tokens": 18304
+    },
+    "output": {
+      "promiseId": "candidate-5b5059fe91b0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43289-1",
+          "relevant": false,
+          "reasonCz": "Dodané pasáže ponechávají zboží v příloze č. 3 v první snížené sazbě; léky jsou podle kontextu v této příloze a změna jejich sazbu na nulu nestanoví.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-163",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně spojuje připravovaný daňový zákon se zavedením nulové DPH na léky na předpis, což přímo odpovídá slibu.",
+          "effectCz": "Usnesení samo žádné znění zákona nemění a sazbu DPH ihned neupravuje. Ukládá připravit návrh zákona ve druhém čtvrtletí 2028 s účinností změn od 1. ledna 2029 a výslovně uvádí zavedení nulové DPH na léky na předpis; jde tedy o plánovaný krok ke splnění slibu, nikoli o již zavedenou sazbu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-5b5059fe91b0--source",
+        "zvlady-resolutions--law-change-uv-2026-175-163",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala plán legislativních prací, který ukládá připravit ve druhém čtvrtletí 2028 návrh daňového zákona s účinností změn od ledna 2029. Plán výslovně uvádí zavedení nulové DPH na léky na předpis, tedy přesně cíl slibu Motoristů sobě. Usnesení ale sazbu samo nemění; dokládá přípravu budoucího návrhu, nikoli již zavedenou nulovou sazbu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Balíček dokládá plán přípravy zákona, nikoli jeho následné předložení nebo přijetí; nulová sazba proto není doložena jako již zavedená."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_03315e68445bfb61016aea9625847887d1bbb308a2b0d2c6a0",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 15091,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 15088
+      },
+      "output_tokens": 3897,
+      "output_tokens_details": {
+        "reasoning_tokens": 3325
+      },
+      "total_tokens": 18988
+    },
+    "output": {
+      "promiseId": "candidate-5b5059fe91b0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43289-1",
+          "relevant": false,
+          "reasonCz": "Dodané pasáže mění obecné rozdělení zboží do snížených sazeb, ale nedokládají změnu sazby pro léky na předpis ani zavedení jejich nulové sazby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-163",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací výslovně uvádí zavedení nulové sazby DPH na léky na předpis, tedy přesně cíl slibu.",
+          "effectCz": "Usnesení nemění zákon ani samo sazbu nezavádí; plánuje návrh daňového zákona pro rok 2029, s předložením vládě ve 2. čtvrtletí 2028 a zamýšlenou účinností od ledna 2029. Plán výslovně uvádí nulovou sazbu DPH na léky na předpis, což odpovídá slibu, ale jde zatím jen o přípravu budoucího návrhu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-5b5059fe91b0--source",
+        "zvlady-resolutions--law-change-uv-2026-175-163",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě byli zastoupeni, přijala plán legislativních prací. Počítá s budoucím daňovým zákonem a výslovně uvádí, že má zavést nulovou DPH na léky na předpis. Sazba zatím přijata nebyla, takže jde o přípravný krok ke splnění slibu, nikoli o jeho naplnění.",
+      "confidence": "high",
+      "uncertainties": [
+        "Usnesení pouze plánuje budoucí zákon; dodané podklady nedokládají, že nulová sazba už byla přijata nebo nabyla účinnosti."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

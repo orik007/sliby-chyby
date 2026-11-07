@@ -1,0 +1,203 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-37-33-387Z--245f173882ee",
+  "evaluatedAt": "2026-10-02T01:37:33.387Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-c6f58445bb/245f173882ee4947b3958aa9747614b97859781b02b2e47295995b96688f0c9a.json",
+  "packageHash": "245f173882ee4947b3958aa9747614b97859781b02b2e47295995b96688f0c9a",
+  "assessmentContentHash": "9a20c0931aadad7bd009808b37ea6f7597b3dadd1aa8e38529ae6363cee2b5d6",
+  "assessmentFingerprint": "0c8f705ca4ff1a81ade9c48eb9640eb6130685a84bb2b75da7a5e35d7f304841",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-c6f58445bb",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-c6f58445bb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu podporuje dostupné nájemní bydlení zvýhodněnými úvěry a dotacemi, ale neuvádí podporu firem při výstavbě služebních bytů pro jejich zaměstnance ani daňové úlevy či investiční pobídky."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-c6f58445bb--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Slib ANO počítá s daňovými úlevami, investičními pobídkami a zvýhodněnými úvěry pro firmy stavějící služební byty zaměstnancům. Poslanci ANO hlasovali pro návrh rozpočtu Státního fondu podpory investic na rok 2026, který počítá s podporou dostupného nájemního bydlení, včetně zvýhodněných úvěrů. Z předloženého textu ale nelze doložit, že tato podpora míří na služební byty stavěné firmami pro jejich zaměstnance, ani že zavádí slíbené daňové úlevy nebo pobídky.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh rozpočtu zahrnuje zvýhodněné úvěry a dotace na dostupné nájemní bydlení, ale dostupné podklady neukazují, zda nebo jak z nich mohou čerpat firmy na služební byty pro zaměstnance; proto hlasování ANO nelze spolehlivě vyhodnotit jako posun k tomuto konkrétnímu slibu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-c6f58445bb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu financuje dotačně-úvěrový program dostupného nájemního bydlení, který výslovně počítá také s podporou bydlení pro osoby vykonávající prospěšnou profesi, a tím se týká části slibu o zvýhodněných úvěrech na bydlení."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-c6f58445bb--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh rozpočtu Státního fondu podpory investic, který financuje dotace a zvýhodněné úvěry na dostupné nájemní bydlení. Program míří také na osoby vykonávající prospěšnou profesi, takže jde o dílčí posun v podpoře bydlení pro tuto skupinu. Návrh ale výslovně nespojuje podporu s firmami stavějícími služební byty pro své zaměstnance ani neobsahuje slíbené daňové úlevy.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neuvádějí, zda mohou podporu z tohoto programu čerpat přímo firmy na stavbu služebních bytů pro vlastní zaměstnance; doložen je jen program dostupného nájemního bydlení pro vybrané skupiny, včetně osob v prospěšných profesích."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_074d51509a8e76fa016abf0abdedd087d1adac18bb212c3ad0",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 15710,
+      "input_tokens_details": {
+        "cache_write_tokens": 12386,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1542,
+      "output_tokens_details": {
+        "reasoning_tokens": 1095
+      },
+      "total_tokens": 17252
+    },
+    "output": {
+      "promiseId": "ano-2025-c6f58445bb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu podporuje dostupné nájemní bydlení zvýhodněnými úvěry a dotacemi, ale neuvádí podporu firem při výstavbě služebních bytů pro jejich zaměstnance ani daňové úlevy či investiční pobídky."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-c6f58445bb--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Slib ANO počítá s daňovými úlevami, investičními pobídkami a zvýhodněnými úvěry pro firmy stavějící služební byty zaměstnancům. Poslanci ANO hlasovali pro návrh rozpočtu Státního fondu podpory investic na rok 2026, který počítá s podporou dostupného nájemního bydlení, včetně zvýhodněných úvěrů. Z předloženého textu ale nelze doložit, že tato podpora míří na služební byty stavěné firmami pro jejich zaměstnance, ani že zavádí slíbené daňové úlevy nebo pobídky.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh rozpočtu zahrnuje zvýhodněné úvěry a dotace na dostupné nájemní bydlení, ale dostupné podklady neukazují, zda nebo jak z nich mohou čerpat firmy na služební byty pro zaměstnance; proto hlasování ANO nelze spolehlivě vyhodnotit jako posun k tomuto konkrétnímu slibu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_040aa82a51a9c20c016abf0acf196487d18868435a1cdf656a",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 15710,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 15707
+      },
+      "output_tokens": 1717,
+      "output_tokens_details": {
+        "reasoning_tokens": 1273
+      },
+      "total_tokens": 17427
+    },
+    "output": {
+      "promiseId": "ano-2025-c6f58445bb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu financuje dotačně-úvěrový program dostupného nájemního bydlení, který výslovně počítá také s podporou bydlení pro osoby vykonávající prospěšnou profesi, a tím se týká části slibu o zvýhodněných úvěrech na bydlení."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-c6f58445bb--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh rozpočtu Státního fondu podpory investic, který financuje dotace a zvýhodněné úvěry na dostupné nájemní bydlení. Program míří také na osoby vykonávající prospěšnou profesi, takže jde o dílčí posun v podpoře bydlení pro tuto skupinu. Návrh ale výslovně nespojuje podporu s firmami stavějícími služební byty pro své zaměstnance ani neobsahuje slíbené daňové úlevy.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neuvádějí, zda mohou podporu z tohoto programu čerpat přímo firmy na stavbu služebních bytů pro vlastní zaměstnance; doložen je jen program dostupného nájemního bydlení pro vybrané skupiny, včetně osob v prospěšných profesích."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0f9b314c7a2b3a1f016abf0ad9069887d1b5faaad47495a4c4",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 15699,
+      "input_tokens_details": {
+        "cache_write_tokens": 13217,
+        "cached_tokens": 2479
+      },
+      "output_tokens": 269,
+      "output_tokens_details": {
+        "reasoning_tokens": 39
+      },
+      "total_tokens": 15968
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "ano-2025-c6f58445bb--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Přesvědčivější je první hodnocení, protože slib se týká podpory firem, které stavějí služební byty pro své zaměstnance. Poslanci ANO schválili rozpočet Státního fondu podpory investic na rok 2026, který financuje dotace a zvýhodněné úvěry na nájemní bydlení. Podpora bydlení pro lidi v prospěšných profesích ale sama nedokládá podporu firemní výstavby bytů pro vlastní zaměstnance, jak předpokládá druhé hodnocení. Z dodaných podkladů proto nelze potvrdit ani dílčí posun v tomto konkrétním slibu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

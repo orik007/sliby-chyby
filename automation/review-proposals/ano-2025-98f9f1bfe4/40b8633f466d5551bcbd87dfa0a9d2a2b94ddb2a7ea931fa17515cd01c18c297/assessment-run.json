@@ -1,0 +1,1548 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-41-42-325Z--a5d141221761",
+  "evaluatedAt": "2026-10-02T01:41:42.325Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-98f9f1bfe4/a5d1412217617571f5e29437697291f4d291348dae1b1249dcba70acc951f06d.json",
+  "packageHash": "a5d1412217617571f5e29437697291f4d291348dae1b1249dcba70acc951f06d",
+  "assessmentContentHash": "dd30f0495d1e78da3875c6478b8dd41725352ca88419ba3192ae35406aab9270",
+  "assessmentFingerprint": "40b8633f466d5551bcbd87dfa0a9d2a2b94ddb2a7ea931fa17515cd01c18c297",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-98f9f1bfe4",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment gives a law change more than one relevance verdict",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0d6eae0cad53f6a7016abf0a00110887d1976520116bf7587d",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 787728,
+            "input_tokens_details": {
+              "cache_write_tokens": 784404,
+              "cached_tokens": 3321
+            },
+            "output_tokens": 12842,
+            "output_tokens_details": {
+              "reasoning_tokens": 9740
+            },
+            "total_tokens": 800570
+          },
+          "output": {
+            "promiseId": "ano-2025-98f9f1bfe4",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Schválené změny stavebního zákona upravují povolování staveb včetně veřejné infrastruktury, takže se mohou týkat výstavby kanalizací a čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-2",
+                "relevant": false,
+                "reasonCz": "Změna vymezuje ústřední správní orgány a nepřináší pravidlo pro výstavbu kanalizací, čistíren ani ochranu vodních toků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-3",
+                "relevant": false,
+                "reasonCz": "Úpravy pravidel požární ochrany nemění výstavbu kanalizací a čistíren ani ochranu vodních toků před znečištěním."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-4",
+                "relevant": false,
+                "reasonCz": "Změny památkové péče se týkají ochrany kulturních památek a jejich obnovy, nikoli kanalizací, čistíren nebo vodních toků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-7",
+                "relevant": false,
+                "reasonCz": "Změna pravidel pro geologické práce neobsahuje opatření, které by mohlo urychlit výstavbu kanalizací či čistíren nebo zajistit čištění odpadních vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": false,
+                "reasonCz": "Upravená pravidla ochrany přírody a druhů neobsahují opatření přímo zaměřené na kanalizace, čistírny nebo znečištění vodních toků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": false,
+                "reasonCz": "Změna se týká ochrany zemědělské půdy a jejího odnímání, nikoli výstavby kanalizací či čistíren nebo čištění odpadních vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-14",
+                "relevant": false,
+                "reasonCz": "Změna lesního zákona upravuje správu lesů a povolování zásahů do nich, nikoli slíbenou výstavbu kanalizací a čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-18",
+                "relevant": false,
+                "reasonCz": "Změna pravidel převodu státního majetku se věnuje pozemkům a veřejné zeleni, nikoli výstavbě kanalizací nebo čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-19",
+                "relevant": false,
+                "reasonCz": "Změna zákona o integrovaném záchranném systému upravuje související správní postupy, nikoli kanalizační nebo čistírenskou infrastrukturu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-20",
+                "relevant": false,
+                "reasonCz": "Změna ochrany veřejného zdraví upravuje obecné hygienické a stavební postupy, nikoli čištění odpadních vod nebo ochranu vodních toků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": true,
+                "reasonCz": "Změny posuzování vlivů na životní prostředí mohou ovlivnit povolování stavebních projektů, a tedy i projektů kanalizací či čistíren, které takovému posuzování podléhají."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Změny vodního zákona přesouvají některá povolení k nakládání s vodami do řízení o povolení záměru, což se může týkat vodohospodářských staveb a jejich povolování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-26",
+                "relevant": false,
+                "reasonCz": "Změna pravidel pozemkových úprav se týká nakládání s pozemky a společných zařízení, nikoli konkrétně kanalizací, čistíren nebo ochrany vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-29",
+                "relevant": false,
+                "reasonCz": "Změna zákona o vyvlastnění upravuje příslušnost úřadů, ale nedokládá zrychlení výstavby kanalizací či čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-31",
+                "relevant": false,
+                "reasonCz": "Navržená změna trestního zákoníku byla z pozdějšího znění vypuštěna a její navržená ustanovení se netýkají výstavby kanalizací či čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": false,
+                "reasonCz": "Změna pravidel pro strategicky významnou infrastrukturu se zaměřuje na vyjmenované strategické stavby, nikoli na slíbenou obecní kanalizační a čistírenskou výstavbu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": false,
+                "reasonCz": "Změna zákona o ochraně ovzduší upravuje povolování z hlediska kvality ovzduší, nikoli čištění odpadních vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-34",
+                "relevant": false,
+                "reasonCz": "Změna pravidel Státního pozemkového úřadu upravuje převody pozemků, nikoli výstavbu kanalizací nebo čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": false,
+                "reasonCz": "Změna zákona o odpadech upravuje nakládání se stavebními odpady a další odpady, nikoli kanalizační a čistírenskou infrastrukturu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-40",
+                "relevant": false,
+                "reasonCz": "Změna zvláštních postupů souvisejících s konfliktem na Ukrajině neobsahuje opatření týkající se slíbených kanalizací, čistíren nebo ochrany vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": true,
+                "reasonCz": "Návrh rušil zákon o jednotném environmentálním stanovisku, což se mohlo dotknout povolování kanalizací a čistíren; chybí však podklad pro posouzení dopadu této změny na rychlost povolování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-23",
+                "relevant": false,
+                "reasonCz": "Změna zákona o hlavním městě Praze upravuje účast městských částí a další otázky, nikoli výstavbu kanalizací a čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+                "relevant": true,
+                "reasonCz": "Změna zákona o vodovodech a kanalizacích upravuje nakládání s ochrannými pásmy vodovodních řadů a kanalizačních stok, a může tak ovlivnit realizaci kanalizačních staveb."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+                "relevant": false,
+                "reasonCz": "Změny správních poplatků nejsou věcným opatřením pro výstavbu kanalizací, čistíren ani ochranu vodních toků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-51",
+                "relevant": false,
+                "reasonCz": "Změna přechodných ustanovení k jednotnému environmentálnímu stanovisku nepřináší samostatné opatření pro kanalizace, čistírny nebo ochranu vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+                "relevant": false,
+                "reasonCz": "Změna správy informací o stavbě se týká dokumentace a informačních kontejnerů, nikoli konkrétní výstavby kanalizací či čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": false,
+                "reasonCz": "Zrušovací ustanovení se týkají právních předpisů a vyhlášek obecně a nepřinášejí samostatné opatření pro slíbenou infrastrukturu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43202-1",
+                "relevant": false,
+                "reasonCz": "Rozpočet Státního fondu podpory investic uvádí podporu technické infrastruktury pro bydlení, ale nevymezuje ji jako kanalizační či čistírenské projekty."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43207-1",
+                "relevant": true,
+                "reasonCz": "Návrh rozpočtu výslovně počítá s podporou vodohospodářské infrastruktury a s opatřeními pro efektivní odvádění odpadních vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43288-1",
+                "relevant": false,
+                "reasonCz": "Návrh pouze prodlužuje přechodné období pro stavební informační systémy, nikoli výstavbu kanalizací a čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43329-1",
+                "relevant": false,
+                "reasonCz": "Navrhované změny trestního zákoníku postihují trestné činy proti životnímu prostředí, ale nepřinášejí opatření pro výstavbu či provoz čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-11",
+                "relevant": false,
+                "reasonCz": "Návrh zákona o standardizaci mění pravidla pro informační kontejnery staveb, nikoli výstavbu kanalizací či čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-6",
+                "relevant": false,
+                "reasonCz": "Návrh upravuje účast městských částí Prahy a další pravidla samosprávy, nikoli slíbenou výstavbu kanalizací a čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43207-1",
+                "relevant": true,
+                "reasonCz": "Návrh rozpočtu výslovně počítá s podporou vodohospodářské infrastruktury a s opatřeními pro efektivní odvádění odpadních vod."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-98f9f1bfe4--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-22",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-41",
+              "psp-core-2025--law-change-43174-approved-32",
+              "psp-core-2025--law-change-43207-1",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-86968",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15"
+            ],
+            "explanationCz": "Poslanci ANO předložili a podpořili rozsáhlou novelu stavebního zákona, tedy předpisu upravujícího povolování staveb; po zamítnutí Senátem, horní komorou Parlamentu, Sněmovna na návrhu setrvala. Novela upravuje povolování stavební a vodohospodářské infrastruktury a změny vodního zákona přesouvají některá související povolení do řízení o povolení záměru. ANO také hlasovalo pro rozpočet Státního fondu životního prostředí, který počítá s podporou vodohospodářské infrastruktury a odvádění odpadních vod. Doklady ale neukazují, že byly vybudovány kanalizace a čistírny ve stovkách obcí, ani že nové čistírny zajišťují ochranu vodních toků, takže je doložen jen částečný posun.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Rozpočtový návrh a změny pravidel povolování dokládají podporu a možný rychlejší postup, nikoli skutečné dokončení staveb; není doloženo ani to, zda výstavba proběhla ve stovkách obcí.",
+              "Balíček obsahoval návrh na zrušení zákona o jednotném environmentálním stanovisku, ale poskytnuté podklady neukazují, jak by tato navržená změna ovlivnila rychlost povolování kanalizací a čistíren; v později schváleném textu byla vypuštěna."
+            ]
+          }
+        }
+      },
+      {
+        "error": "Assessment gives a law change more than one relevance verdict",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_00a59f65dd5f3b28016abf0a8b11a887d1993bc5c480a571c8",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 787728,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 787725
+            },
+            "output_tokens": 9847,
+            "output_tokens_details": {
+              "reasoning_tokens": 6849
+            },
+            "total_tokens": 797575
+          },
+          "output": {
+            "promiseId": "ano-2025-98f9f1bfe4",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Změny stavebního zákona upravují povolování staveb a zahrnují odvádění a čištění odpadních vod mezi technickou infrastrukturu, takže mohou urychlit výstavbu kanalizací a čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-2",
+                "relevant": false,
+                "reasonCz": "Tato část pouze upravuje zařazení a působnost ústředních správních orgánů a sama nemění výstavbu kanalizací ani ochranu vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-3",
+                "relevant": false,
+                "reasonCz": "Tato část mění předpisy o požární ochraně staveb, nikoli výstavbu kanalizací či čištění odpadních vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-4",
+                "relevant": false,
+                "reasonCz": "Tato část se týká památkové péče a obnovy památek, nikoli kanalizací, čistíren nebo ochrany vod před znečištěním."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-7",
+                "relevant": false,
+                "reasonCz": "Tato část upravuje geologické práce a související povolování, ale nepřináší opatření pro výstavbu kanalizací či čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": false,
+                "reasonCz": "Změny se týkají obecné ochrany přírody, nikoli výslovně výstavby čistíren nebo ochrany toků před znečištěním z odpadních vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": false,
+                "reasonCz": "Tato část upravuje ochranu zemědělské půdy a povolování odnětí půdy, aniž by text spojoval změny s kanalizacemi nebo čistírnami."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-14",
+                "relevant": false,
+                "reasonCz": "Tato část mění pravidla pro lesní pozemky a neobsahuje opatření vztahující se k výstavbě kanalizací či čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-18",
+                "relevant": false,
+                "reasonCz": "Tato část upravuje převody státního majetku pro samosprávy a nemění výstavbu vodohospodářské infrastruktury."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-19",
+                "relevant": false,
+                "reasonCz": "Změna pravidel integrovaného záchranného systému se slibu o kanalizacích, čistírnách a ochraně vodních toků věcně netýká."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-20",
+                "relevant": false,
+                "reasonCz": "Tato část upravuje veřejné zdraví a související povolovací postupy, ale neřeší kanalizace, čistírny ani znečištění vodních toků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": true,
+                "reasonCz": "Změny procesu posuzování vlivů a souvisejících povolení se mohou týkat větších staveb čistíren a ovlivnit rychlost jejich povolování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Změny vodního zákona upravují povolování nakládání s vodami a souhlasů pro stavby ovlivňující vodní poměry, tedy i postupy relevantní pro vodohospodářské stavby."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-26",
+                "relevant": false,
+                "reasonCz": "Tato část upravuje pozemkové úpravy a názvy územních kategorií, nikoli výstavbu čistíren nebo ochranu toků před znečištěním."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-29",
+                "relevant": false,
+                "reasonCz": "Změna vyvlastňovacích úřadů a příslušnosti sama nestanoví opatření pro rychlejší výstavbu kanalizací či čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-31",
+                "relevant": false,
+                "reasonCz": "Navrhované změny trestního zákoníku byly v textu schváleném Sněmovnou odstraněny, a navíc přímo neupravovaly výstavbu čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": false,
+                "reasonCz": "Změny pravidel pro strategickou infrastrukturu se týkají vyjmenovaných strategických projektů, nikoli výslovně kanalizací a čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": false,
+                "reasonCz": "Tato část se věnuje ochraně ovzduší a prašnosti při stavbách, nikoli čištění odpadních vod nebo znečištění vodních toků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-34",
+                "relevant": false,
+                "reasonCz": "Změny převodů státních pozemků pro obce a kraje neobsahují konkrétní opatření pro kanalizační či čistírenskou infrastrukturu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": false,
+                "reasonCz": "Tato část upravuje obecné povinnosti při nakládání s odpady, ne výstavbu kanalizací nebo požadavky na čištění odpadních vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-40",
+                "relevant": false,
+                "reasonCz": "Tato část mění mimořádné stavební postupy související s válkou na Ukrajině a slibu se věcně netýká."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": false,
+                "reasonCz": "Navrhované zrušení zákona o jednotném environmentálním stanovisku bylo z textu schváleného Sněmovnou odstraněno."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-23",
+                "relevant": false,
+                "reasonCz": "Tato dodatečná část upravuje působnost hlavního města Prahy a s výstavbou kanalizací či čistíren nesouvisí."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+                "relevant": true,
+                "reasonCz": "Tato dodatečně vložená změna vodovodního a kanalizačního zákona upravuje ochranná pásma vodovodů a kanalizací, a může tak ovlivnit povolování jejich výstavby."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+                "relevant": false,
+                "reasonCz": "Změny správních poplatků se výslovně nevztahují k výstavbě kanalizací, čistíren ani k ochraně vodních toků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-51",
+                "relevant": false,
+                "reasonCz": "Tato část upravuje přechodná pravidla související s posuzováním vlivů, nikoli konkrétní výstavbu čištění odpadních vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+                "relevant": false,
+                "reasonCz": "Změny informačních kontejnerů pro stavby neupravují věcně výstavbu kanalizací ani ochranu vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": false,
+                "reasonCz": "Tato část ruší a upravuje různé předpisy, ale její text neobsahuje opatření k výstavbě kanalizací nebo čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43202-1",
+                "relevant": false,
+                "reasonCz": "Rozpočet Státního fondu podpory investic se soustředí zejména na bydlení a podklady neuvádějí podporu kanalizací či čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43207-1",
+                "relevant": true,
+                "reasonCz": "Návrh rozpočtu Státního fondu životního prostředí výslovně počítá s podporou vodohospodářské infrastruktury a efektivního odvádění odpadních vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43288-1",
+                "relevant": false,
+                "reasonCz": "Návrh pouze prodlužuje přechodné období pro informační systémy stavební správy a neřeší vodohospodářské stavby."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43329-1",
+                "relevant": false,
+                "reasonCz": "Navržené změny trestního zákoníku zpřísňují postihy za poškozování životního prostředí, ale nestanoví opatření pro výstavbu čistíren ani ochranu toků prostřednictvím jejich provozu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-11",
+                "relevant": false,
+                "reasonCz": "Tato část návrhu o standardizaci se týká informačních pravidel pro stavby a nedokládá konkrétní zrychlení kanalizací či čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-6",
+                "relevant": false,
+                "reasonCz": "Změny zákona o hlavním městě Praze se týkají samosprávy a odměňování, nikoli vodohospodářské infrastruktury."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+                "relevant": true,
+                "reasonCz": "Doplněná změna zákona o vodovodech a kanalizacích upravuje ochranná pásma jejich řadů a stok, což může ovlivnit povolování kanalizačních staveb."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-98f9f1bfe4--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-22",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-approved-32",
+              "psp-core-2025--law-change-43207-1",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--vote-86968",
+              "psp-core-2025--senate-resolution-43174-15"
+            ],
+            "explanationCz": "Poslanci ANO spolu s dalšími poslanci předložili návrh změn stavebního zákona a později hlasovali pro jeho prosazení i poté, co jej Senát odmítl. Schválený text zahrnuje kanalizace a čistírny odpadních vod mezi technickou infrastrukturu a mění postupy jejího povolování, takže může urychlit výstavbu. Poslanci ANO také hlasovali pro rozpočet Státního fondu životního prostředí, který počítá s podporou vodohospodářské infrastruktury a odvádění odpadních vod. Jde tedy o dílčí posun; podklady nedokládají výstavbu kanalizací ve stovkách obcí ani novou konkrétní povinnost čistíren chránit vodní toky před znečištěním.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Podklady neukazují, zda změny povolovacích postupů skutečně zrychlí výstavbu kanalizací a čistíren v praxi.",
+              "Rozpočtová podpora se vztahuje k vodohospodářské infrastruktuře obecně; předložený rozpočet nevyčísluje konkrétní počet obcí ani výši určenou přímo na čistírny.",
+              "V předložených podkladech není doloženo, že přijaté změny stanoví konkrétní nové požadavky, které zajistí ochranu vodních toků před znečištěním z provozu čistíren."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": [
+      {
+        "error": "Assessment gives a law change more than one relevance verdict",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0a3fd454b0cc6a88016abf0b3f470887d1aa38ff747eff19ee",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 787728,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 787725
+            },
+            "output_tokens": 12672,
+            "output_tokens_details": {
+              "reasoning_tokens": 9454
+            },
+            "total_tokens": 800400
+          },
+          "output": {
+            "promiseId": "ano-2025-98f9f1bfe4",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Schválené změny stavebního práva upravují povolování staveb a technické infrastruktury včetně odvádění a čištění odpadních vod, takže mohou urychlit část slíbené výstavby."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-2",
+                "relevant": false,
+                "reasonCz": "Změna pouze upravuje působnost ústředních správních orgánů a sama nemění výstavbu kanalizací ani čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-3",
+                "relevant": false,
+                "reasonCz": "Změny se týkají požární ochrany staveb, nikoli kanalizací, čistíren odpadních vod nebo ochrany toků před znečištěním."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-4",
+                "relevant": false,
+                "reasonCz": "Změny upravují památkovou péči a povolování v památkově chráněných územích, nikoli závazek týkající se kanalizací a čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-7",
+                "relevant": false,
+                "reasonCz": "Změna pravidel geologických prací neobsahuje ustanovení, které by se věcně týkalo výstavby kanalizací či čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": true,
+                "reasonCz": "Změny ochrany přírody začleňují posuzování některých environmentálních podmínek do řízení o stavebním záměru, a mohou tak ovlivnit povolování vodohospodářských staveb."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Změny ochrany zemědělské půdy přesouvají posuzování jejího odnětí u stavebních záměrů do řízení o povolení, což může odstranit část překážek výstavby sítí a čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-14",
+                "relevant": false,
+                "reasonCz": "Změny lesního práva se týkají povolování záměrů na lesních pozemcích, ale text nespojuje toto řízení s výstavbou kanalizací či čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-18",
+                "relevant": false,
+                "reasonCz": "Změna pravidel převodu státního majetku na obce a kraje nepředstavuje konkrétní opatření pro kanalizace, čistírny ani ochranu vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-19",
+                "relevant": false,
+                "reasonCz": "Změna zákona o integrovaném záchranném systému neupravuje vodohospodářskou výstavbu ani ochranu vodních toků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-20",
+                "relevant": false,
+                "reasonCz": "Změny ochrany veřejného zdraví upravují hygienické podklady a působnost úřadů, nikoli slíbenou výstavbu nebo účinnost čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": true,
+                "reasonCz": "Změny posuzování vlivů na životní prostředí upravují, jak se při povolování záměrů zohledňují environmentální podmínky, a mohou ovlivnit postup u větších vodohospodářských staveb."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Změny vodního práva upravují povolování nakládání s vodami a vypouštění odpadních vod v souvislosti se stavebním záměrem, tedy přímo souvisejí s kanalizacemi a čistírnami."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-26",
+                "relevant": false,
+                "reasonCz": "Změny pravidel pozemkových úprav se soustředí na uspořádání pozemků a nepředstavují konkrétní opatření pro kanalizace nebo čistírny."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-29",
+                "relevant": false,
+                "reasonCz": "Změna upravuje příslušnost vyvlastňovacích úřadů, nikoli konkrétní podmínky výstavby kanalizací či čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-31",
+                "relevant": false,
+                "reasonCz": "Navržená změna trestního zákoníku byla v textu schváleném Sněmovnou odstraněna, a proto se netýká výsledného opatření k tomuto slibu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": false,
+                "reasonCz": "Změny pravidel strategické infrastruktury se podle textu týkají zejména energetiky a dalších strategických projektů, nikoli slíbené obecní kanalizační výstavby."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": false,
+                "reasonCz": "Změny se týkají ochrany ovzduší a nestanovují pravidla pro čištění odpadních vod ani jejich vypouštění do toků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-34",
+                "relevant": false,
+                "reasonCz": "Změna pravidel Státního pozemkového úřadu se týká převodů pozemků a sama nedokládá konkrétní urychlení kanalizační nebo čistírenské výstavby."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": false,
+                "reasonCz": "Změny zákona o odpadech se týkají nakládání s odpady při stavebních záměrech, nikoli odvádění a čištění odpadních vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-40",
+                "relevant": false,
+                "reasonCz": "Změna zvláštních stavebních postupů se týká zařízení souvisejících s konfliktem na Ukrajině, nikoli obecní vodohospodářské infrastruktury."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": false,
+                "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku bylo z textu schváleného Sněmovnou odstraněno."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-23",
+                "relevant": false,
+                "reasonCz": "Změna pravidel hlavního města Prahy upravuje postavení městských částí a nepředstavuje konkrétní opatření pro kanalizace či čistírny."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+                "relevant": true,
+                "reasonCz": "Změna zákona o vodovodech a kanalizacích se týká pravidel pro tuto infrastrukturu, avšak poskytnuté znění neumožňuje určit, zda změna její výstavbu urychluje nebo brzdí."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+                "relevant": false,
+                "reasonCz": "Změna správních poplatků se týká sazeb za stavební úkony, ale neobsahuje zvláštní opatření pro kanalizace, čistírny ani ochranu vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-51",
+                "relevant": false,
+                "reasonCz": "Změna přechodných pravidel k jednotnému environmentálnímu stanovisku neobsahuje konkrétní ustanovení o výstavbě kanalizací nebo čištění odpadních vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+                "relevant": false,
+                "reasonCz": "Změna správy informací o stavbách upravuje informační dokumentaci staveb, nikoli výstavbu kanalizací nebo ochranu toků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": false,
+                "reasonCz": "Zrušovací ustanovení ruší několik předpisů a vyhlášek, ale samo nedokládá konkrétní opatření pro kanalizace či čistírny."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43202-1",
+                "relevant": false,
+                "reasonCz": "Návrh rozpočtu Fondu podpory investic vyčleňuje prostředky zejména na bydlení, nikoli na kanalizační nebo čistírenskou infrastrukturu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43207-1",
+                "relevant": true,
+                "reasonCz": "Návrh rozpočtu Fondu životního prostředí výslovně počítá s podporou vodohospodářské infrastruktury a efektivního odvádění odpadních vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43288-1",
+                "relevant": false,
+                "reasonCz": "Návrh pouze prodlužuje přechodné období pro informační systémy stavebního řízení a nemění povolování kanalizací ani čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43329-1",
+                "relevant": false,
+                "reasonCz": "Návrh trestního zákoníku řeší ochranu životního prostředí obecně, ale neobsahuje konkrétní ustanovení o výstavbě čistíren nebo ochraně toků odpadními vodami."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-11",
+                "relevant": false,
+                "reasonCz": "Návrh změn správy informací o stavbách neruší ani neupravuje konkrétní opatření týkající se kanalizací nebo čistíren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-6",
+                "relevant": false,
+                "reasonCz": "Vládní návrh upravuje pravidla hlavního města a svazků obcí, nikoli přímo slíbenou výstavbu čištění a odvádění odpadních vod."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43207-1",
+                "relevant": true,
+                "reasonCz": "Rozpočet navrhuje konkrétní prostředky na vodohospodářskou infrastrukturu, včetně odvádění odpadních vod, což je věcně součástí slibu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43288-1",
+                "relevant": false,
+                "reasonCz": "Prodloužení přechodného období pro stavební informační systémy samo nemění povolování ani ochranu vodních toků."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-98f9f1bfe4--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-8",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--law-change-43174-22",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-approved-32",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--law-change-43207-1",
+              "psp-core-2025--vote-86968"
+            ],
+            "explanationCz": "Poslanci ANO předložili společně s dalšími poslanci návrh na rozsáhlou změnu stavebního zákona, který upravuje povolování stavební a vodohospodářské infrastruktury. Po zamítnutí návrhu Senátem poslanci ANO hlasovali pro setrvání na sněmovní verzi; její změny vodního práva začleňují některá povolení pro nakládání s vodami a vypouštění odpadních vod do řízení o stavebním záměru. ANO také podpořilo v prvním čtení návrh rozpočtu Fondu životního prostředí, který počítá s podporou vodohospodářské infrastruktury a odvádění odpadních vod. Jde o doložený dílčí krok k urychlení výstavby, nikoli o důkaz, že byly kanalizace a čistírny ve stovkách obcí postaveny nebo že se prokázalo zlepšení ochrany toků před znečištěním.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Podklady nedokládají, že byly kanalizace nebo čistírny skutečně postaveny ve stovkách obcí, ani že se zlepšila ochrana vodních toků před znečištěním.",
+              "U změny zákona o vodovodech a kanalizacích není v dodaném podkladu uvedeno původní znění dotčeného ustanovení, takže nelze spolehlivě určit praktický směr této změny.",
+              "Hlasování ANO o rozpočtu Fondu životního prostředí proběhlo v prvním čtení; dodaný záznam nedokládá konečné schválení rozpočtu."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-98f9f1bfe4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změny stavebního zákona výslovně označují plánování a výstavbu veřejné infrastruktury za veřejný zájem a upravují povolování staveb technické infrastruktury, k níž patří i kanalizace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje působnost ústředních orgánů, ale nepřináší konkrétní změnu povolování kanalizací, čistíren ani ochrany vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Změny se týkají požární ochrany staveb a nedokládají opatření pro výstavbu kanalizací či čistíren nebo ochranu vodních toků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje památkovou péči, nikoli výstavbu kanalizací či čistíren ani ochranu vodních toků před znečištěním."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Změny geologických prací neobsahují konkrétní opatření pro kanalizace, čistírny odpadních vod nebo jejich ochrannou funkci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Změny se týkají obecné ochrany přírody a povolování různých záměrů, ale text neukazuje konkrétní souvislost s kanalizacemi či čistírnami."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Tato část mění ochranu zemědělské půdy a neobsahuje konkrétní opatření pro slibovanou výstavbu kanalizací nebo čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": false,
+          "reasonCz": "Změny lesního zákona se netýkají konkrétně kanalizací, čistíren ani ochrany vodních toků před znečištěním."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-18",
+          "relevant": false,
+          "reasonCz": "Tato část řeší převody státního majetku pro veřejnou zeleň a jiné účely, nikoli slibovanou vodohospodářskou infrastrukturu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Změny zákona o integrovaném záchranném systému neobsahují opatření pro kanalizace, čistírny ani ochranu vodních toků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje ochranu veřejného zdraví při stavbách, ale neobsahuje konkrétní opatření pro kanalizace či čistírny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Úpravy posuzování vlivů na životní prostředí se mohou promítnout do povolování vodohospodářských staveb, a tím ovlivnit rychlost jejich přípravy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Změny vodního zákona přesouvají povolování souvisejícího nakládání s vodami a vypouštění odpadních vod do řízení o stavebním záměru, což může zjednodušit povolování vodohospodářských staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje pozemkové úpravy a neobsahuje konkrétní změnu vztahující se k výstavbě kanalizací nebo čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": false,
+          "reasonCz": "Změny pravidel vyvlastnění nejsou v dodaném textu konkrétně spojeny s kanalizacemi, čistírnami ani jejich výstavbou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": false,
+          "reasonCz": "Tato část trestního zákoníku byla z textu schváleného Poslaneckou sněmovnou odstraněna."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Dodaný text mění pravidla zákona o infrastruktuře, ale neukazuje konkrétní souvislost s kanalizacemi, čistírnami ani jejich výstavbou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje ochranu ovzduší a neobsahuje konkrétní opatření pro kanalizace, čistírny nebo ochranu vodních toků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": false,
+          "reasonCz": "Změny zákona o Státním pozemkovém úřadu upravují zejména převody pozemků a neřeší slibovanou výstavbu vodohospodářské infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Tato část mění obecná pravidla nakládání s odpady, nikoli konkrétně výstavbu kanalizací či čistíren nebo ochranu vodních toků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": false,
+          "reasonCz": "Změna zvláštních postupů pro Ukrajinu neobsahuje konkrétní opatření vztahující se k tomuto slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku bylo z textu schváleného Poslaneckou sněmovnou odstraněno."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-23",
+          "relevant": false,
+          "reasonCz": "Změna zákona o hlavním městě Praze upravuje jiné záležitosti samosprávy a neobsahuje konkrétní opatření pro kanalizace či čistírny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": false,
+          "reasonCz": "Změna se týká zákona o vodovodech a kanalizacích, ale dodané znění změny a podklady neurčují obsah dotčeného ustanovení natolik, aby bylo možné doložit dopad na slib."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": false,
+          "reasonCz": "Změna správních poplatků se týká obecně stavebních řízení a sama neukazuje konkrétní dopad na kanalizace nebo čistírny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-51",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje přechodná pravidla pro posuzování vlivů na životní prostředí, nikoli konkrétně slibovanou infrastrukturu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": false,
+          "reasonCz": "Změny správy informací o stavbách neobsahují konkrétní opatření pro výstavbu kanalizací nebo čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Tato část ruší vyjmenované předpisy a sama nestanoví konkrétní opatření pro slibovanou výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu Státního fondu podpory investic se podle dodaného textu zaměřuje na bydlení a nespecifikuje podporu kanalizací nebo čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu životního prostředí výslovně počítá s podporou vodohospodářské infrastruktury a s odváděním odpadních vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43288-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění pouze délku přechodného období stavebního zákona a neřeší konkrétně kanalizace nebo čistírny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-1",
+          "relevant": false,
+          "reasonCz": "Návrh trestního zákoníku upravuje trestné činy proti životnímu prostředí, ale neřeší výstavbu kanalizací ani čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": false,
+          "reasonCz": "Navržená úprava informačních kontejnerů pro stavby neobsahuje konkrétní vazbu na výstavbu kanalizací nebo čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": false,
+          "reasonCz": "Tato část zákona o hlavním městě Praze upravuje dobrovolné svazky obcí a odměňování, nikoli plnění tohoto slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-98f9f1bfe4--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "ANO spolu s dalšími poslanci předložilo návrh novely stavebního zákona, tedy předpisu upravujícího povolování staveb, a jeho poslanci hlasovali pro jeho schválení i pro setrvání na textu po zamítnutí Senátem. Návrh označuje výstavbu veřejné infrastruktury za veřejný zájem a mění pravidla povolování vodohospodářských staveb včetně nakládání s odpadními vodami. To může urychlit přípravu části kanalizací a čistíren, samo však nedokládá, že byly v obcích skutečně postaveny nebo že se zlepšila čistota toků. Poslanci ANO také podpořili v prvním čtení rozpočet s výdaji na vodohospodářskou infrastrukturu, ale nešlo o konečné rozhodnutí o rozpočtu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný soubor nedokládá počet skutečně postavených kanalizací či čistíren ani výsledné zlepšení kvality vodních toků; proto nelze považovat celý slib za splněný.",
+        "Hlasování ANO pro rozpočet Státního fondu životního prostředí proběhlo v prvním čtení, nikoli při konečném rozhodnutí o rozpočtu, a podle pravidel proto samo o sobě stav slibu nemění."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-98f9f1bfe4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela stavebního zákona mění povolování staveb a výslovně zahrnuje vodohospodářskou infrastrukturu, takže může urychlit výstavbu kanalizací a čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": false,
+          "reasonCz": "Tato část pouze zřizuje Úřad rozvoje území a mění působnost ministerstva, ale nemění pravidla výstavby kanalizací ani čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Změny upravují požární ochranu staveb, nikoli výstavbu kanalizací a čistíren nebo ochranu vodních toků před znečištěním."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Tato část se týká památkové péče a neobsahuje opatření podstatně související s výstavbou kanalizací či čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Změny geologických prací upravují související povolovací postupy, ale neřeší kanalizace, čistírny ani jejich vliv na vodní toky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": true,
+          "reasonCz": "Změny zákona o ochraně přírody začleňují některá posouzení stavebních záměrů do povolování staveb, což může ovlivnit rychlost povolování kanalizačních a čistírenských staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Změny ochrany zemědělské půdy přesouvají posouzení odnětí půdy u stavebních záměrů do povolování stavby, což může urychlit výstavbu vodohospodářské infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": false,
+          "reasonCz": "Lesní zákon upravuje povolování záměrů na lesních pozemcích, ale předložené změny nejsou materiálně zaměřené na kanalizace, čistírny ani ochranu vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-18",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje převody státního majetku pro vymezené účely, nikoli výstavbu kanalizací a čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Změny zákona o integrovaném záchranném systému se týkají krizové připravenosti a nejsou věcně zaměřené na vodohospodářské stavby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla ochrany veřejného zdraví, ale nepředstavuje konkrétní opatření pro kanalizace, čistírny či čistotu toků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Změny posuzování vlivů na životní prostředí upravují postup u projektů, které tomuto posuzování podléhají, a mohou tak ovlivnit povolování větších čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Změny vodního zákona výslovně upravují povolení nakládání s vodami a vypouštění odpadních vod v souvislosti se stavebním záměrem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "Změny pozemkových úprav upravují nakládání s pozemky, ale nepřinášejí konkrétní opatření pro výstavbu kanalizací nebo čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": false,
+          "reasonCz": "Tato část mění příslušnost vyvlastňovacích úřadů a neprokazuje podstatnou změnu pro konkrétní závazek týkající se kanalizací a čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": false,
+          "reasonCz": "Trestněprávní ustanovení byla v textu schváleném Poslaneckou sněmovnou odstraněna, takže tato část slib neovlivňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změny pravidel pro strategickou infrastrukturu se týkají vymezených velkých projektů, nikoli výstavby obecních kanalizací a čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla ochrany ovzduší a nemá doloženou věcnou vazbu na kanalizace, čistírny nebo ochranu vodních toků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": false,
+          "reasonCz": "Změny zákona o Státním pozemkovém úřadu se týkají převodu pozemků a samy nemění výstavbu kanalizací ani čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změny zákona o odpadech upravují nakládání s odpady při stavebních záměrech, ale neřeší kanalizaci, čištění odpadních vod ani ochranu toků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": false,
+          "reasonCz": "Tato část mění zvláštní postupy pro vymezené záměry související s konfliktem na Ukrajině, nikoli slib týkající se kanalizací a čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku bylo v textu schváleném Poslaneckou sněmovnou odstraněno."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-23",
+          "relevant": false,
+          "reasonCz": "Změna zákona o hlavním městě Praze se týká účasti městských částí a nezakládá opatření pro obecní kanalizace či čistírny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": true,
+          "reasonCz": "Změna pravidel ochranných pásem vodovodů a kanalizací může ovlivnit podmínky výstavby a umisťování kanalizačních sítí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": false,
+          "reasonCz": "Změny správních poplatků se netýkají věcného povolování, financování ani ochrany vodohospodářských staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-51",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje přechodné ustanovení k posuzování vlivů, ale její obsah nemění konkrétně pravidla pro kanalizace nebo čistírny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": false,
+          "reasonCz": "Změny informačních kontejnerů pro stavby řeší předávání dat, nikoli podstatně výstavbu kanalizací či čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení samo o sobě nemění konkrétní pravidla pro výstavbu kanalizací, čistíren nebo ochranu vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu Státního fondu podpory investic se týká především bydlení a neobsahuje doložené financování kanalizací či čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Navržený rozpočet Státního fondu životního prostředí obsahuje podporu vodohospodářské infrastruktury a efektivního odvádění odpadních vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43288-1",
+          "relevant": false,
+          "reasonCz": "Tato novela pouze prodlužuje přechodné období pro informační systémy stavební správy a neřeší kanalizace ani čistírny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-1",
+          "relevant": false,
+          "reasonCz": "Návrh trestněprávních změn chrání životní prostředí obecně, ale neukládá čističkám konkrétní požadavky ani nezrychluje jejich výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": false,
+          "reasonCz": "Návrh změn zákona o správě informací o stavbách se týká informačních kontejnerů, ne kanalizační a čistírenské infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": false,
+          "reasonCz": "Navrhované změny zákona o hlavním městě Praze upravují postavení městských částí a nemají materiální vazbu na slib."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-98f9f1bfe4--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-8",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-approved-32",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Poslanci ANO spolu s dalšími poslanci předložili novelu stavebního zákona, která mění povolování staveb včetně vodohospodářské infrastruktury; po zamítnutí Senátem pak ANO hlasovalo pro setrvání na návrhu. Novela vodního zákona převádí některá povolení související s nakládáním s vodami a vypouštěním odpadních vod do rozhodování o stavebním záměru. ANO také hlasovalo pro návrh rozpočtu Státního fondu životního prostředí, který počítá s podporou vodohospodářské infrastruktury a odvádění odpadních vod. Jde o dílčí posun k rychlejší výstavbě, nikoli o důkaz, že už vznikly kanalizace či čistírny ve stovkách obcí nebo že konkrétní čistírny prokazatelně chrání vodní toky před znečištěním.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložené doklady popisují změny povolování a navržené financování, ale nedokládají, zda se kanalizace a čistírny skutečně postavily ani v kolika obcích.",
+        "Změny pravidel pro povolování nevysvětlují, zda se změnily konkrétní limity pro vypouštění odpadních vod nebo jak budou čistírny v praxi chránit vodní toky."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0d20b1c04cd7a122016abf0afa0f6887d1953a37c8c7bce844",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 787728,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 787725
+      },
+      "output_tokens": 11678,
+      "output_tokens_details": {
+        "reasoning_tokens": 8793
+      },
+      "total_tokens": 799406
+    },
+    "output": {
+      "promiseId": "ano-2025-98f9f1bfe4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změny stavebního zákona výslovně označují plánování a výstavbu veřejné infrastruktury za veřejný zájem a upravují povolování staveb technické infrastruktury, k níž patří i kanalizace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje působnost ústředních orgánů, ale nepřináší konkrétní změnu povolování kanalizací, čistíren ani ochrany vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Změny se týkají požární ochrany staveb a nedokládají opatření pro výstavbu kanalizací či čistíren nebo ochranu vodních toků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje památkovou péči, nikoli výstavbu kanalizací či čistíren ani ochranu vodních toků před znečištěním."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Změny geologických prací neobsahují konkrétní opatření pro kanalizace, čistírny odpadních vod nebo jejich ochrannou funkci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Změny se týkají obecné ochrany přírody a povolování různých záměrů, ale text neukazuje konkrétní souvislost s kanalizacemi či čistírnami."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Tato část mění ochranu zemědělské půdy a neobsahuje konkrétní opatření pro slibovanou výstavbu kanalizací nebo čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": false,
+          "reasonCz": "Změny lesního zákona se netýkají konkrétně kanalizací, čistíren ani ochrany vodních toků před znečištěním."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-18",
+          "relevant": false,
+          "reasonCz": "Tato část řeší převody státního majetku pro veřejnou zeleň a jiné účely, nikoli slibovanou vodohospodářskou infrastrukturu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Změny zákona o integrovaném záchranném systému neobsahují opatření pro kanalizace, čistírny ani ochranu vodních toků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje ochranu veřejného zdraví při stavbách, ale neobsahuje konkrétní opatření pro kanalizace či čistírny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Úpravy posuzování vlivů na životní prostředí se mohou promítnout do povolování vodohospodářských staveb, a tím ovlivnit rychlost jejich přípravy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Změny vodního zákona přesouvají povolování souvisejícího nakládání s vodami a vypouštění odpadních vod do řízení o stavebním záměru, což může zjednodušit povolování vodohospodářských staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje pozemkové úpravy a neobsahuje konkrétní změnu vztahující se k výstavbě kanalizací nebo čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": false,
+          "reasonCz": "Změny pravidel vyvlastnění nejsou v dodaném textu konkrétně spojeny s kanalizacemi, čistírnami ani jejich výstavbou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": false,
+          "reasonCz": "Tato část trestního zákoníku byla z textu schváleného Poslaneckou sněmovnou odstraněna."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Dodaný text mění pravidla zákona o infrastruktuře, ale neukazuje konkrétní souvislost s kanalizacemi, čistírnami ani jejich výstavbou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje ochranu ovzduší a neobsahuje konkrétní opatření pro kanalizace, čistírny nebo ochranu vodních toků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": false,
+          "reasonCz": "Změny zákona o Státním pozemkovém úřadu upravují zejména převody pozemků a neřeší slibovanou výstavbu vodohospodářské infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Tato část mění obecná pravidla nakládání s odpady, nikoli konkrétně výstavbu kanalizací či čistíren nebo ochranu vodních toků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": false,
+          "reasonCz": "Změna zvláštních postupů pro Ukrajinu neobsahuje konkrétní opatření vztahující se k tomuto slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku bylo z textu schváleného Poslaneckou sněmovnou odstraněno."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-23",
+          "relevant": false,
+          "reasonCz": "Změna zákona o hlavním městě Praze upravuje jiné záležitosti samosprávy a neobsahuje konkrétní opatření pro kanalizace či čistírny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": false,
+          "reasonCz": "Změna se týká zákona o vodovodech a kanalizacích, ale dodané znění změny a podklady neurčují obsah dotčeného ustanovení natolik, aby bylo možné doložit dopad na slib."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": false,
+          "reasonCz": "Změna správních poplatků se týká obecně stavebních řízení a sama neukazuje konkrétní dopad na kanalizace nebo čistírny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-51",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje přechodná pravidla pro posuzování vlivů na životní prostředí, nikoli konkrétně slibovanou infrastrukturu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": false,
+          "reasonCz": "Změny správy informací o stavbách neobsahují konkrétní opatření pro výstavbu kanalizací nebo čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Tato část ruší vyjmenované předpisy a sama nestanoví konkrétní opatření pro slibovanou výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu Státního fondu podpory investic se podle dodaného textu zaměřuje na bydlení a nespecifikuje podporu kanalizací nebo čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu životního prostředí výslovně počítá s podporou vodohospodářské infrastruktury a s odváděním odpadních vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43288-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění pouze délku přechodného období stavebního zákona a neřeší konkrétně kanalizace nebo čistírny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-1",
+          "relevant": false,
+          "reasonCz": "Návrh trestního zákoníku upravuje trestné činy proti životnímu prostředí, ale neřeší výstavbu kanalizací ani čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": false,
+          "reasonCz": "Navržená úprava informačních kontejnerů pro stavby neobsahuje konkrétní vazbu na výstavbu kanalizací nebo čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": false,
+          "reasonCz": "Tato část zákona o hlavním městě Praze upravuje dobrovolné svazky obcí a odměňování, nikoli plnění tohoto slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-98f9f1bfe4--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "ANO spolu s dalšími poslanci předložilo návrh novely stavebního zákona, tedy předpisu upravujícího povolování staveb, a jeho poslanci hlasovali pro jeho schválení i pro setrvání na textu po zamítnutí Senátem. Návrh označuje výstavbu veřejné infrastruktury za veřejný zájem a mění pravidla povolování vodohospodářských staveb včetně nakládání s odpadními vodami. To může urychlit přípravu části kanalizací a čistíren, samo však nedokládá, že byly v obcích skutečně postaveny nebo že se zlepšila čistota toků. Poslanci ANO také podpořili v prvním čtení rozpočet s výdaji na vodohospodářskou infrastrukturu, ale nešlo o konečné rozhodnutí o rozpočtu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný soubor nedokládá počet skutečně postavených kanalizací či čistíren ani výsledné zlepšení kvality vodních toků; proto nelze považovat celý slib za splněný.",
+        "Hlasování ANO pro rozpočet Státního fondu životního prostředí proběhlo v prvním čtení, nikoli při konečném rozhodnutí o rozpočtu, a podle pravidel proto samo o sobě stav slibu nemění."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_093d5bf6fd6959c7016abf0b8ea48087d18a99eb6d25fcb7b3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 787728,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 787725
+      },
+      "output_tokens": 11684,
+      "output_tokens_details": {
+        "reasoning_tokens": 8711
+      },
+      "total_tokens": 799412
+    },
+    "output": {
+      "promiseId": "ano-2025-98f9f1bfe4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela stavebního zákona mění povolování staveb a výslovně zahrnuje vodohospodářskou infrastrukturu, takže může urychlit výstavbu kanalizací a čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": false,
+          "reasonCz": "Tato část pouze zřizuje Úřad rozvoje území a mění působnost ministerstva, ale nemění pravidla výstavby kanalizací ani čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Změny upravují požární ochranu staveb, nikoli výstavbu kanalizací a čistíren nebo ochranu vodních toků před znečištěním."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Tato část se týká památkové péče a neobsahuje opatření podstatně související s výstavbou kanalizací či čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Změny geologických prací upravují související povolovací postupy, ale neřeší kanalizace, čistírny ani jejich vliv na vodní toky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": true,
+          "reasonCz": "Změny zákona o ochraně přírody začleňují některá posouzení stavebních záměrů do povolování staveb, což může ovlivnit rychlost povolování kanalizačních a čistírenských staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Změny ochrany zemědělské půdy přesouvají posouzení odnětí půdy u stavebních záměrů do povolování stavby, což může urychlit výstavbu vodohospodářské infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": false,
+          "reasonCz": "Lesní zákon upravuje povolování záměrů na lesních pozemcích, ale předložené změny nejsou materiálně zaměřené na kanalizace, čistírny ani ochranu vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-18",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje převody státního majetku pro vymezené účely, nikoli výstavbu kanalizací a čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Změny zákona o integrovaném záchranném systému se týkají krizové připravenosti a nejsou věcně zaměřené na vodohospodářské stavby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla ochrany veřejného zdraví, ale nepředstavuje konkrétní opatření pro kanalizace, čistírny či čistotu toků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Změny posuzování vlivů na životní prostředí upravují postup u projektů, které tomuto posuzování podléhají, a mohou tak ovlivnit povolování větších čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Změny vodního zákona výslovně upravují povolení nakládání s vodami a vypouštění odpadních vod v souvislosti se stavebním záměrem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "Změny pozemkových úprav upravují nakládání s pozemky, ale nepřinášejí konkrétní opatření pro výstavbu kanalizací nebo čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": false,
+          "reasonCz": "Tato část mění příslušnost vyvlastňovacích úřadů a neprokazuje podstatnou změnu pro konkrétní závazek týkající se kanalizací a čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": false,
+          "reasonCz": "Trestněprávní ustanovení byla v textu schváleném Poslaneckou sněmovnou odstraněna, takže tato část slib neovlivňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změny pravidel pro strategickou infrastrukturu se týkají vymezených velkých projektů, nikoli výstavby obecních kanalizací a čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla ochrany ovzduší a nemá doloženou věcnou vazbu na kanalizace, čistírny nebo ochranu vodních toků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": false,
+          "reasonCz": "Změny zákona o Státním pozemkovém úřadu se týkají převodu pozemků a samy nemění výstavbu kanalizací ani čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změny zákona o odpadech upravují nakládání s odpady při stavebních záměrech, ale neřeší kanalizaci, čištění odpadních vod ani ochranu toků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": false,
+          "reasonCz": "Tato část mění zvláštní postupy pro vymezené záměry související s konfliktem na Ukrajině, nikoli slib týkající se kanalizací a čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku bylo v textu schváleném Poslaneckou sněmovnou odstraněno."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-23",
+          "relevant": false,
+          "reasonCz": "Změna zákona o hlavním městě Praze se týká účasti městských částí a nezakládá opatření pro obecní kanalizace či čistírny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": true,
+          "reasonCz": "Změna pravidel ochranných pásem vodovodů a kanalizací může ovlivnit podmínky výstavby a umisťování kanalizačních sítí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": false,
+          "reasonCz": "Změny správních poplatků se netýkají věcného povolování, financování ani ochrany vodohospodářských staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-51",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje přechodné ustanovení k posuzování vlivů, ale její obsah nemění konkrétně pravidla pro kanalizace nebo čistírny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": false,
+          "reasonCz": "Změny informačních kontejnerů pro stavby řeší předávání dat, nikoli podstatně výstavbu kanalizací či čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení samo o sobě nemění konkrétní pravidla pro výstavbu kanalizací, čistíren nebo ochranu vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu Státního fondu podpory investic se týká především bydlení a neobsahuje doložené financování kanalizací či čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Navržený rozpočet Státního fondu životního prostředí obsahuje podporu vodohospodářské infrastruktury a efektivního odvádění odpadních vod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43288-1",
+          "relevant": false,
+          "reasonCz": "Tato novela pouze prodlužuje přechodné období pro informační systémy stavební správy a neřeší kanalizace ani čistírny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-1",
+          "relevant": false,
+          "reasonCz": "Návrh trestněprávních změn chrání životní prostředí obecně, ale neukládá čističkám konkrétní požadavky ani nezrychluje jejich výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": false,
+          "reasonCz": "Návrh změn zákona o správě informací o stavbách se týká informačních kontejnerů, ne kanalizační a čistírenské infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": false,
+          "reasonCz": "Navrhované změny zákona o hlavním městě Praze upravují postavení městských částí a nemají materiální vazbu na slib."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-98f9f1bfe4--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-8",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-approved-32",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Poslanci ANO spolu s dalšími poslanci předložili novelu stavebního zákona, která mění povolování staveb včetně vodohospodářské infrastruktury; po zamítnutí Senátem pak ANO hlasovalo pro setrvání na návrhu. Novela vodního zákona převádí některá povolení související s nakládáním s vodami a vypouštěním odpadních vod do rozhodování o stavebním záměru. ANO také hlasovalo pro návrh rozpočtu Státního fondu životního prostředí, který počítá s podporou vodohospodářské infrastruktury a odvádění odpadních vod. Jde o dílčí posun k rychlejší výstavbě, nikoli o důkaz, že už vznikly kanalizace či čistírny ve stovkách obcí nebo že konkrétní čistírny prokazatelně chrání vodní toky před znečištěním.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložené doklady popisují změny povolování a navržené financování, ale nedokládají, zda se kanalizace a čistírny skutečně postavily ani v kolika obcích.",
+        "Změny pravidel pro povolování nevysvětlují, zda se změnily konkrétní limity pro vypouštění odpadních vod nebo jak budou čistírny v praxi chránit vodní toky."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

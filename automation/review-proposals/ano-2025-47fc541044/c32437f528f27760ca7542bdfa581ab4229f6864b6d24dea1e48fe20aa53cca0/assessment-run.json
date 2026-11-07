@@ -1,0 +1,509 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-34-46-760Z--ee3d375ffe7b",
+  "evaluatedAt": "2026-10-02T01:34:46.760Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-47fc541044/ee3d375ffe7b9d2a2f335611c981f34a3a1f3b64926283ea6109774fe1082d73.json",
+  "packageHash": "ee3d375ffe7b9d2a2f335611c981f34a3a1f3b64926283ea6109774fe1082d73",
+  "assessmentContentHash": "6b0798f5f86aaebfb7b069e6f5bf23754cebc0439d9c6be07526f87fe5ce0f0a",
+  "assessmentFingerprint": "c32437f528f27760ca7542bdfa581ab4229f6864b6d24dea1e48fe20aa53cca0",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-47fc541044",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0651d52aef3bb444016abf096335ec87d1b2bf81d14efd7c15",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 523247,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 523244
+            },
+            "output_tokens": 10401,
+            "output_tokens_details": {
+              "reasoning_tokens": 9106
+            },
+            "total_tokens": 533648
+          },
+          "output": {
+            "promiseId": "ano-2025-47fc541044",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Změny stavebního zákona výslovně upravují povolování energetické infrastruktury a staveb pro energetickou bezpečnost, což může usnadnit výstavbu části náhradních zdrojů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": false,
+                "reasonCz": "Změny ochrany zemědělské půdy se sice dotýkají agrovoltaiky, ale nedokládají podporu stabilních zdrojů ani zachování uhelných elektráren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": false,
+                "reasonCz": "Změny energetického zákona upravují vymezení zastavitelných území a související pravidla pro zařízení, nikoli stabilitu dodávek nebo náhradu uhelných zdrojů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": false,
+                "reasonCz": "Novela pravidel posuzování vlivů na životní prostředí mění postupy povolování, ale její znění samo nedokládá opatření k zajištění stabilních zdrojů elektřiny."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": false,
+                "reasonCz": "Změny vodního zákona upravují povolení a správu vodních děl a nakládání s vodami, nikoli zajištění stabilní dodávky elektřiny."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": true,
+                "reasonCz": "Změny pravidel pro strategickou infrastrukturu se vztahují také na energetickou bezpečnost a mohou usnadnit přípravu a povolování souvisejících energetických staveb."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-37",
+                "relevant": false,
+                "reasonCz": "Výjimky ze zadávání veřejných zakázek pro plánovací smlouvy a nápravná opatření nemění dostupnost zdrojů ani dodávky elektřiny."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": false,
+                "reasonCz": "Text pouze ruší blíže nepopsané části dalších zákonů, takže z dodaných podkladů nelze určit dopad na stabilní zdroje nebo uhelné elektrárny."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-2",
+                "relevant": true,
+                "reasonCz": "Schválené znění rozpočtových pravidel umožňuje navýšit výdaje na energetickou infrastrukturu a stavby pro energetickou bezpečnost."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+                "relevant": true,
+                "reasonCz": "Schválené znění umožňuje poskytnout návratné financování výstavby nízkouhlíkové výrobny elektřiny."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-47fc541044--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-32",
+              "psp-core-2025--law-change-43200-2",
+              "psp-core-2025--law-change-43200-approved-9",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-87430",
+              "psp-core-2025--vote-88105",
+              "psp-core-2025--senate-resolution-43200-6",
+              "psp-core-2025--vote-88416"
+            ],
+            "explanationCz": "Poslanci ANO předložili návrh změn stavebního zákona (sněmovní tisk 67, tedy návrh projednávaný Poslaneckou sněmovnou) a hlasovali pro něj i poté, co jej Senát zamítl; novela upravuje povolování některých energetických staveb. Sněmovna také schválila rozpočtovou novelu, jejíž schválené znění umožňuje financovat energetickou infrastrukturu a nízkouhlíkovou výrobnu elektřiny, a poslanci ANO hlasovali pro. Tyto kroky mohou podpořit výstavbu dalších zdrojů, ale samy nedokládají, že stabilní zdroje už nahradí uhelné elektrárny, ani nezaručují, že nedojde k výpadkům či závislosti na dovozech. Slib proto vykazuje dílčí posun, nikoli splnění.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Přesné konečné znění rozpočtové novely, o němž se hlasovalo po jejím vrácení prezidentem, není v podkladech zveřejněno; dřívější hlasování ANO pro schválené znění však dokládá podporu financování nízkouhlíkové výrobny.",
+              "Podklady nedokládají, zda financované nebo povolované projekty skutečně zajistí dostatek stabilní elektřiny, ani zda uhelné elektrárny zůstanou v provozu do jejich plné náhrady."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-47fc541044",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela mění pravidla územního plánování a povolování staveb energetické infrastruktury, včetně jaderných staveb, a může tak usnadnit vznik stabilních zdrojů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Změny ochrany zemědělské půdy se týkají zejména agrovoltaiky a dalších staveb, ale text nesměřuje k zajištění stabilních zdrojů elektřiny ani k udržení uhelných elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválená verze zavádí kapacitní mechanismus pro zajištění dostupnosti výkonu elektráren či jiných energetických zařízení, což se přímo týká spolehlivosti dodávek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Změny posuzování vlivů na životní prostředí upravují obecné postupy a text nedokládá konkrétní opatření k zajištění stabilních zdrojů energie."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Změny vodního zákona začleňují povolení nakládání s vodami do povolování staveb, což může ovlivnit povolení vodních energetických zdrojů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Novela výslovně zahrnuje některé plynové a obnovitelné zdroje mezi strategické energetické stavby a mění pravidla jejich povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "Změny zadávání veřejných zakázek pro nápravná opatření a plánovací smlouvy neřeší zdroje elektřiny ani jejich provoz."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení se týká mimo jiné předpisů o obnovitelných zdrojích, nikoli však přímo závazku zachovat uhelné elektrárny do zajištění stabilních náhradních zdrojů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla státního rozpočtu, ale sama nestanoví opatření k dostupnosti elektřiny ani k náhradě uhelných elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": true,
+          "reasonCz": "Schválená část vytváří možnost financovat výstavbu nízkouhlíkové elektrárny a váže část financování na povolení jaderného zařízení, což podporuje vznik náhradního zdroje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-47fc541044--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--senate-resolution-43200-6"
+      ],
+      "explanationCz": "Poslanci ANO předložili spolu s dalšími poslanci novelu stavebního zákona a následně pro ni hlasovali; po odmítnutí Senátem hlasovali také pro setrvání Sněmovny na jejím znění. Schválená úprava mimo jiné zavádí kapacitní mechanismus pro dostupnost výkonu a usnadňuje povolování některých energetických staveb. Vláda pak předložila návrh, jehož schválená část umožňuje financovat výstavbu nízkouhlíkového zdroje, včetně financování navázaného na povolení jaderného zařízení; poslanci ANO hlasovali pro jeho přijetí i po senátních změnách. Jde o kroky podporující část slibu, nikoli o důkaz, že už jsou k dispozici dostatečné stabilní náhrady nebo že uhelné elektrárny zůstanou v provozu do jejich zajištění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložené důkazy dokládají pravidla pro povolování a financování energetických zdrojů, nikoli to, že byly nové stabilní zdroje skutečně postaveny nebo uvedeny do provozu. Neprokazují také, zda je jejich výkon dostatečný, zda byly uhelné elektrárny odstaveny, ani zda nastaly výpadky dodávek nebo závislost na dovozu elektřiny."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-47fc541044",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela upravuje povolování energetických staveb včetně jaderných zařízení, takže může usnadnit vznik dalších zdrojů elektřiny, ačkoli jejich skutečný výkon nezajišťuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Změny se týkají ochrany zemědělské půdy a agrovoltaiky, ale neřeší stabilní zdroje elektřiny, odstavování uhlí ani bezpečnost dodávek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválený text zavádí kapacitní mechanismus, který má zajistit potřebnou dostupnost výkonu elektráren či jiných energetických zařízení, a tím souvisí s bezpečností dodávek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Změny procesu posuzování vlivů upravují postupy pro povolování záměrů, a mohou tak ovlivnit přípravu energetických staveb, byť nestanovují jejich výstavbu ani výkon."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Novela vodního zákona upravuje převážně vodoprávní povolení a dohled, nikoli zajištění stabilní výroby elektřiny nebo setrvání uhelných elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Novela zrychluje povolování strategické infrastruktury a výslovně zahrnuje stavby pro energetickou bezpečnost, které mohou zahrnovat další energetické zdroje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "Změny pravidel veřejných zakázek se věnují zadávání zakázek a plánovacím smlouvám, nikoli slíbenému zachování uhlí nebo zajištění stabilních dodávek elektřiny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení ruší i předpisy týkající se obnovitelných zdrojů, ale samo nezajišťuje ani neomezuje konkrétně stabilní zdroje, odstavení uhlí či dodávky elektřiny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválený text rozšiřuje prostor pro výdaje na strategickou a energetickou infrastrukturu, což může podpořit výstavbu dalších zdrojů či jejich připojení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": true,
+          "reasonCz": "Schválený text upravuje financování výstavby nízkouhlíkové elektrárny, a může tak pomoci rozšířit nabídku dalších zdrojů elektřiny."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-47fc541044--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--senate-resolution-43200-6"
+      ],
+      "explanationCz": "Poslanci ANO se spolupředkladateli navrhli novelu stavebního zákona; Sněmovna ji schválila a po zamítnutí Senátem na svém znění setrvala. Novela mění povolování energetických staveb a zavádí mechanismus, který má zajistit dostupnost výkonu elektráren či jiných energetických zařízení. ANO také hlasovalo pro rozpočtovou novelu, jejíž schválené znění umožňuje financovat energetickou infrastrukturu a výstavbu nízkouhlíkové elektrárny. Jde o kroky, které mohou podpořit další zdroje a bezpečnost dodávek, ale nedokládají, že už je stabilní elektřiny dost nebo že se uhlí neodstaví dříve.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Počáteční vládní návrh rozpočtové novely neobsahoval financování energetických staveb ani nízkouhlíkové elektrárny; tyto části se objevily až ve schváleném textu, pro který poslanci ANO následně hlasovali.",
+        "Podklady dokládají legislativní podporu budoucích zdrojů a dostupnosti výkonu, nikoli jejich skutečné dokončení, dostatečnou výrobu nebo to, zda a kdy budou uhelné elektrárny odstaveny."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0b23f504f722cea1016abf090a155487d1b70a26db8cf0ef00",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 523247,
+      "input_tokens_details": {
+        "cache_write_tokens": 519923,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 7029,
+      "output_tokens_details": {
+        "reasoning_tokens": 5696
+      },
+      "total_tokens": 530276
+    },
+    "output": {
+      "promiseId": "ano-2025-47fc541044",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela mění pravidla územního plánování a povolování staveb energetické infrastruktury, včetně jaderných staveb, a může tak usnadnit vznik stabilních zdrojů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Změny ochrany zemědělské půdy se týkají zejména agrovoltaiky a dalších staveb, ale text nesměřuje k zajištění stabilních zdrojů elektřiny ani k udržení uhelných elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválená verze zavádí kapacitní mechanismus pro zajištění dostupnosti výkonu elektráren či jiných energetických zařízení, což se přímo týká spolehlivosti dodávek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Změny posuzování vlivů na životní prostředí upravují obecné postupy a text nedokládá konkrétní opatření k zajištění stabilních zdrojů energie."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Změny vodního zákona začleňují povolení nakládání s vodami do povolování staveb, což může ovlivnit povolení vodních energetických zdrojů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Novela výslovně zahrnuje některé plynové a obnovitelné zdroje mezi strategické energetické stavby a mění pravidla jejich povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "Změny zadávání veřejných zakázek pro nápravná opatření a plánovací smlouvy neřeší zdroje elektřiny ani jejich provoz."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení se týká mimo jiné předpisů o obnovitelných zdrojích, nikoli však přímo závazku zachovat uhelné elektrárny do zajištění stabilních náhradních zdrojů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla státního rozpočtu, ale sama nestanoví opatření k dostupnosti elektřiny ani k náhradě uhelných elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": true,
+          "reasonCz": "Schválená část vytváří možnost financovat výstavbu nízkouhlíkové elektrárny a váže část financování na povolení jaderného zařízení, což podporuje vznik náhradního zdroje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-47fc541044--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--senate-resolution-43200-6"
+      ],
+      "explanationCz": "Poslanci ANO předložili spolu s dalšími poslanci novelu stavebního zákona a následně pro ni hlasovali; po odmítnutí Senátem hlasovali také pro setrvání Sněmovny na jejím znění. Schválená úprava mimo jiné zavádí kapacitní mechanismus pro dostupnost výkonu a usnadňuje povolování některých energetických staveb. Vláda pak předložila návrh, jehož schválená část umožňuje financovat výstavbu nízkouhlíkového zdroje, včetně financování navázaného na povolení jaderného zařízení; poslanci ANO hlasovali pro jeho přijetí i po senátních změnách. Jde o kroky podporující část slibu, nikoli o důkaz, že už jsou k dispozici dostatečné stabilní náhrady nebo že uhelné elektrárny zůstanou v provozu do jejich zajištění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložené důkazy dokládají pravidla pro povolování a financování energetických zdrojů, nikoli to, že byly nové stabilní zdroje skutečně postaveny nebo uvedeny do provozu. Neprokazují také, zda je jejich výkon dostatečný, zda byly uhelné elektrárny odstaveny, ani zda nastaly výpadky dodávek nebo závislost na dovozu elektřiny."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0ff02af2cdc652cd016abf09d540bc87d181e140917a1f9a4f",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 523247,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 523244
+      },
+      "output_tokens": 8346,
+      "output_tokens_details": {
+        "reasoning_tokens": 7003
+      },
+      "total_tokens": 531593
+    },
+    "output": {
+      "promiseId": "ano-2025-47fc541044",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela upravuje povolování energetických staveb včetně jaderných zařízení, takže může usnadnit vznik dalších zdrojů elektřiny, ačkoli jejich skutečný výkon nezajišťuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Změny se týkají ochrany zemědělské půdy a agrovoltaiky, ale neřeší stabilní zdroje elektřiny, odstavování uhlí ani bezpečnost dodávek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválený text zavádí kapacitní mechanismus, který má zajistit potřebnou dostupnost výkonu elektráren či jiných energetických zařízení, a tím souvisí s bezpečností dodávek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Změny procesu posuzování vlivů upravují postupy pro povolování záměrů, a mohou tak ovlivnit přípravu energetických staveb, byť nestanovují jejich výstavbu ani výkon."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Novela vodního zákona upravuje převážně vodoprávní povolení a dohled, nikoli zajištění stabilní výroby elektřiny nebo setrvání uhelných elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Novela zrychluje povolování strategické infrastruktury a výslovně zahrnuje stavby pro energetickou bezpečnost, které mohou zahrnovat další energetické zdroje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "Změny pravidel veřejných zakázek se věnují zadávání zakázek a plánovacím smlouvám, nikoli slíbenému zachování uhlí nebo zajištění stabilních dodávek elektřiny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení ruší i předpisy týkající se obnovitelných zdrojů, ale samo nezajišťuje ani neomezuje konkrétně stabilní zdroje, odstavení uhlí či dodávky elektřiny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválený text rozšiřuje prostor pro výdaje na strategickou a energetickou infrastrukturu, což může podpořit výstavbu dalších zdrojů či jejich připojení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": true,
+          "reasonCz": "Schválený text upravuje financování výstavby nízkouhlíkové elektrárny, a může tak pomoci rozšířit nabídku dalších zdrojů elektřiny."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-47fc541044--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--senate-resolution-43200-6"
+      ],
+      "explanationCz": "Poslanci ANO se spolupředkladateli navrhli novelu stavebního zákona; Sněmovna ji schválila a po zamítnutí Senátem na svém znění setrvala. Novela mění povolování energetických staveb a zavádí mechanismus, který má zajistit dostupnost výkonu elektráren či jiných energetických zařízení. ANO také hlasovalo pro rozpočtovou novelu, jejíž schválené znění umožňuje financovat energetickou infrastrukturu a výstavbu nízkouhlíkové elektrárny. Jde o kroky, které mohou podpořit další zdroje a bezpečnost dodávek, ale nedokládají, že už je stabilní elektřiny dost nebo že se uhlí neodstaví dříve.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Počáteční vládní návrh rozpočtové novely neobsahoval financování energetických staveb ani nízkouhlíkové elektrárny; tyto části se objevily až ve schváleném textu, pro který poslanci ANO následně hlasovali.",
+        "Podklady dokládají legislativní podporu budoucích zdrojů a dostupnosti výkonu, nikoli jejich skutečné dokončení, dostatečnou výrobu nebo to, zda a kdy budou uhelné elektrárny odstaveny."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

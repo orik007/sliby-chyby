@@ -1,0 +1,1773 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-26-41-269Z--79147ca63e19",
+  "evaluatedAt": "2026-11-05T10:26:41.269Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-bb35fbd70fd7/79147ca63e19ed2b27ff8dbd775c9d1785773d5a29f0f35b7464278b7fec6eb5.json",
+  "packageHash": "79147ca63e19ed2b27ff8dbd775c9d1785773d5a29f0f35b7464278b7fec6eb5",
+  "assessmentContentHash": "c7930250cf94aa886f8ed1b55d9ad477dbf234f04441576680aa03e1b43a7c04",
+  "assessmentFingerprint": "5ee2cdb5103efd498953fb8d5033a3461ff8b0eeb1cae5b169b954a222eeafde",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-bb35fbd70fd7",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment invented evidence ID: psp-core-2025--government-resolution-43295-1",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_02e24f425e473605016aec5776cf1487d18646da7e0b7c750b",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 209316,
+            "input_tokens_details": {
+              "cache_write_tokens": 202966,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 13334,
+            "output_tokens_details": {
+              "reasoning_tokens": 6666
+            },
+            "total_tokens": 222650
+          },
+          "output": {
+            "promiseId": "candidate-bb35fbd70fd7",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-1-1",
+                "relevant": true,
+                "reasonCz": "Text ruší dosavadní zákaz nakládání s určitými jednorázovými nádobami, tedy odstraňuje konkrétní právní omezení.",
+                "effectCz": "Před změnou bylo použití, prodej, převod, směna i skladování těchto nádob zakázáno; návrh § 4a ruší, takže toto omezení uvolňuje. Změna zároveň upravuje zkoušky a uznávání dřívější kvalifikace; v dodaném kontextu není uvedeno dosavadní znění § 8a odst. 5, proto jejich přesný směr nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-1-5",
+                "relevant": true,
+                "reasonCz": "Přechodná ustanovení uznávají dříve absolvované školení a hodnocení, čímž mohou zmírnit nově vznikající povinnost opakovat kvalifikaci.",
+                "effectCz": "Změna stanoví, že určitá dříve absolvovaná školení a hodnocení se započtou jako první splnění nové povinnosti; pro dotčené osoby je tedy přechodný režim mírnější. Kontext předchozího znění těchto ustanovení není dodán."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-2",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje trestní odpovědnost za nakládání s látkami a plyny, což přímo přidává státní omezení a sankce.",
+                "effectCz": "Před změnou se trestný čin podle § 298a vztahoval na zakázané nakládání s látkami poškozujícími ozonovou vrstvu; návrh jej rozšiřuje také na fluorované skleníkové plyny, výrobky a zařízení a nově postihuje i jejich uvedení do provozu. Okruh jednání ohrožených trestem se tedy rozšiřuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43163-3",
+                "relevant": true,
+                "reasonCz": "Nová pravidla o odebírání komunikačního vedení omezují možnost vlastníka nemovitosti rozhodovat o zásahu do svého majetku.",
+                "effectCz": "Před změnou dodaný § 104 obsahoval souhlas vlastníka s umístěním vnitřního vedení, ale neobsahoval uvedené limity jeho odvolání ani úhradu nákladů odstranění. Nové odstavce dovolují odvolat souhlas jen ze závažných důvodů nebo po deseti letech a ukládají náklady; možnost vlastníka zasáhnout do dřívějšího rozhodnutí se tím zužuje. U změny § 150 odst. 5 jde podle textu pouze o odkaz na jiné ustanovení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Změny stavebního zákona uvolňují některé podmínky povolování a užívání staveb, což je konkrétní omezení jednání jednotlivců a stavebníků.",
+                "effectCz": "Návrh mimo jiné připouští odchylku od územně plánovací dokumentace se souhlasy, u některých podmínek považuje požadavky za splněné, omezuje rozsah posuzování změn a rozšiřuje možnosti užívání či kolaudace. Oproti dodanému předchozímu znění tím v těchto bodech zmírňuje povolovací překážky; jednotlivé nové postupy ale současně zachovávají podmínky a ochranu dalších zájmů, takže nejde o zrušení všech regulací."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43180-1-2",
+                "relevant": true,
+                "reasonCz": "Návrh zavádí povinný zálohový systém pro vybrané obaly a tím ukládá nové povinnosti prodejcům i kupujícím.",
+                "effectCz": "Text nově stanoví zálohový systém pro vybrané plastové nápojové lahve a kovové nádoby; dodané znění předchozí úpravy této povinnosti chybí, takže nelze porovnat její rozsah s dosavadním stavem. Návrh zavádí další povinnosti a omezení nakládání s těmito obaly."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-approved-3",
+                "relevant": true,
+                "reasonCz": "Přechodná ustanovení se týkají požadavků na odbornou způsobilost pro podnikání v poradenské psychoterapii.",
+                "effectCz": "Dosavadní přechodné ustanovení vyžadovalo splnění příslušné kvalifikace nejpozději do 1. července 2027; schválené znění prodlužuje lhůtu pro vymezené podnikatele do 1. července 2029. Povinnost se tedy pro tuto skupinu odkládá a její bezprostřední omezení se zmírňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43193-2",
+                "relevant": true,
+                "reasonCz": "Nově umožňuje obcím podmínit práci řidičů taxislužby zkouškou z jazyka a dalších znalostí, což může omezit přístup jednotlivců k povolání.",
+                "effectCz": "Dodané předchozí znění § 21b obcím takovou zkoušku neumožňovalo; návrh přidává možnost stanovit znalost češtiny, místních poměrů a povinnost složit zkoušku jako podmínku nabízení či poskytování přepravy. Jde o nové oprávnění obcí zavádět podmínky, a tedy o možné zpřísnění pro řidiče."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43203-14",
+                "relevant": true,
+                "reasonCz": "Kapitola dohody upravuje vstup a dočasný pobyt poskytovatelů služeb a pravidla licencování, tedy svobodu poskytovat služby přes hranice.",
+                "effectCz": "Dohoda stanoví postupné usnadňování přeshraničního obchodu se službami a požaduje jasná, objektivní a přístupná pravidla licencování; současně stanoví kvalifikační a pobytové podmínky a zachovává pracovněprávní předpisy. Jde o novou smluvní úpravu bez předchozího znění v dodaných podkladech; její dopad na konkrétní dosavadní české povinnosti proto nelze plně určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43203-16",
+                "relevant": false,
+                "reasonCz": "Dodaný výňatek se týká obecné mobility účastníků dohody a neukazuje konkrétní změnu regulace osobní svobody nebo závislosti na státu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43216-1",
+                "relevant": true,
+                "reasonCz": "Návrh vytváří centrální registr ubytování a ukládá povinnosti zapisovat údaje o ubytování a ubytovaných osobách.",
+                "effectCz": "Dodaný kontext neobsahuje předchozí znění § 9e až § 9n; návrh nově vytváří registr, ukládá registraci ubytování a předávání osobních údajů a umožňuje jejich uchovávání až šest let, s výjimkami. Jde o rozšíření administrativních povinností a rozsahu státního sběru údajů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43216-3",
+                "relevant": true,
+                "reasonCz": "Změna umožňuje oznámit živnostenskému úřadu zahájení či ukončení ubytování prostřednictvím registru, čímž může zjednodušit plnění již existující oznamovací povinnosti.",
+                "effectCz": "Předchozí § 17 odst. 3 ukládal podnikateli samostatně oznámit zahájení a ukončení provozovny a uvést stanovené údaje. Návrh považuje zápis do registru za splnění této oznamovací povinnosti a dovoluje společné podání, takže snižuje počet samostatných úkonů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43216-5",
+                "relevant": true,
+                "reasonCz": "Změna dovoluje splnit některé povinnosti vůči cizinecké policii zápisem údajů do společného registru, čímž odstraňuje duplicitní hlášení.",
+                "effectCz": "Dřívější § 97 ukládal sdělit údaje policii a § 102 ukládal oznámit ubytování cizince policii; návrh stanoví, že zápis příslušných údajů do registru tyto povinnosti splní. Pro dotčené ubytovatele se tedy snižuje administrativní zátěž."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43295-2",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje policejní oprávnění ke vstupu také do obydlí při podezření na týrání zvířete, což zasahuje do soukromí jednotlivce.",
+                "effectCz": "Předchozí § 40 odst. 2 písm. c) umožňoval vstup do jiného prostoru nebo na pozemek, nikoli do obydlí; návrh výslovně přidává obydlí. Oprávnění státu vstoupit do soukromého prostoru se rozšiřuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-3",
+                "relevant": true,
+                "reasonCz": "Ačkoli vlastní text této části není dodán, předložené pozměňovací návrhy by zmírnily povinnosti evidence tržeb pro podnikatele.",
+                "effectCz": "Část sama neobsahuje text, takže její vlastní účinek nelze určit. Dodané pozměňovací návrhy by prodloužily lhůtu pro dodatečné odeslání údajů na pět pracovních dnů a vyňaly drobný prodej vlastní zemědělské produkce do limitu 50 000 Kč; obě úpravy by zmenšily povinnosti, ale nejsou v této části samy o sobě přijaty."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-5",
+                "relevant": true,
+                "reasonCz": "Změna rozšiřuje působnost Celní správy na evidenci tržeb a tím posiluje státní kontrolní nástroje vůči podnikatelům.",
+                "effectCz": "Předchozí výčet úkolů Celní správy evidenci tržeb neobsahoval; schválené znění ji do výčtu doplňuje. Jde o rozšíření působnosti státního kontrolního orgánu, tedy o posílení státního dohledu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43343-1",
+                "relevant": false,
+                "reasonCz": "Změna pravidel střetu zájmů upravuje konkrétní povinnosti veřejných funkcionářů a jejich společností, nikoli obecné omezení osobní svobody nebo závislost občanů na státu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43356-1",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje právní formy, v nichž mohou autorizovaní odborníci vykonávat povolání, a ruší související omezení.",
+                "effectCz": "Předchozí znění dovolovalo výkon povolání jen v určených formách a zvlášť upravovalo profesní společnosti; návrh některé z těchto omezení ruší a připouští také komanditní společnosti a běžné společnosti s ručením omezeným. Možnosti organizovat výkon povolání se rozšiřují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43356-2",
+                "relevant": true,
+                "reasonCz": "Změna ukládá autorizovaným zeměměřickým inženýrům povinné pojištění a další profesní povinnosti, které podmiňují výkon povolání.",
+                "effectCz": "Předchozí znění § 16e až § 16i neobsahovalo uvedenou povinnost pojištění ani nový důvod pozastavení autorizace při dlouhém prodlení s příspěvkem; návrh tyto povinnosti přidává. Současně dovoluje až dva roky praxe v zahraničí, což jednu kvalifikační podmínku uvolňuje; celkově část přináší nové povinné profesní požadavky."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43365-1",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje zákaz maloobchodního prodeje na další svátky, což omezuje rozhodování podnikatelů i zákazníků.",
+                "effectCz": "Návrh nově stanoví zákaz prodeje o vyjmenovaných svátcích a na Štědrý den od poledne, s výjimkami pro určité prodejny. Předchozí znění zákona v balíčku chybí, takže přesný rozsah změny oproti dosavadnímu zákazu nelze porovnat; navržený text však stanoví konkrétní omezení prodeje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43396-1",
+                "relevant": true,
+                "reasonCz": "Část současně rozšiřuje výjimky z hlukových pravidel a zpřísňuje povolování práce s azbestem, tedy mění konkrétní omezení jednání.",
+                "effectCz": "Předchozí § 30 odst. 2 nevyjímal zvuk z běžného užívání venkovního sportovního náčiní ani zvuk oznamování náboženských obřadů a času; návrh tyto výjimky přidává, a v tomto rozsahu omezení hluku uvolňuje. U azbestu návrh místo dosavadního hlášení a projednání vyžaduje předchozí pravomocné povolení a při určitých změnách nové řízení, čímž požadavky zpřísňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43443-1",
+                "relevant": true,
+                "reasonCz": "Návrh přidává zákazy a rozšiřuje regulaci prodeje psychomodulačních látek, čímž zasahuje do osobního rozhodování a podnikání.",
+                "effectCz": "Předchozí znění vymezovalo uvádění na trh jako poskytnutí spotřebiteli; návrh zahrnuje také nabídku, vystavování, skladování, přepravu a další kroky směřující k předání. Doplňuje zákazy zpracování některých látek a omezuje práci s technickým konopím, takže okruh regulovaných jednání se rozšiřuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43443-3",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje zákazy týkající se složení bylinných výrobků určených ke kouření a ukládá další povinnosti výrobcům a prodejcům.",
+                "effectCz": "Dosavadní § 12j odst. 6 zakazoval v bylinných výrobcích psychomodulační a zařazené psychoaktivní látky; návrh přidává další skupiny látek a látky s vyjmenovanými účinky. Nové požadavky na složení, vlastnosti a související odpovědnost rozšiřují regulaci výrobků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43443-7",
+                "relevant": true,
+                "reasonCz": "Část upravuje poplatky za povolení k nakládání s psychomodulačními látkami a tím mění finanční překážky výkonu regulovaných činností.",
+                "effectCz": "Ve srovnání s dodaným zněním položky 100 zůstávají některé poplatky beze změny, poplatek za povolení prodeje v provozovně roste z 20 000 na 30 000 Kč a poplatek za dálkový prodej klesá z 200 000 na 20 000 Kč a odpadá účtování za každou internetovou stránku či aplikaci. Směr je tedy smíšený: jedna povinnost se zdražuje, jiná výrazně zlevňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43443-9",
+                "relevant": true,
+                "reasonCz": "Návrh zvyšuje věkovou hranici pro prodej psychomodulačních látek a umožňuje obcím jejich prodejny omezit nebo zakázat.",
+                "effectCz": "Předchozí znění stanovilo prodejní a vstupní hranici 18 let; návrh ji u některých ustanovení zvyšuje na 21 let, ruší dosavadní zvláštní režim dálkového prodeje a umožňuje obcím prodejny místně omezit nebo zcela zakázat. Omezující pravidla se tím rozšiřují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-31",
+                "relevant": true,
+                "reasonCz": "Kapitola dohody výslovně zakazuje předchozí povolení pro elektronické služby a uznává právní účinky elektronických smluv, což přímo uvolňuje některá omezení.",
+                "effectCz": "Dohoda stanoví, že elektronické služby nemají podléhat předchozímu povolení a že elektronickým smlouvám nelze upřít účinky jen proto, že jsou uzavřeny elektronicky. Současně obsahuje výjimky a zachovává možnost regulace v určitých oblastech; jde o novou smluvní úpravu, u níž dodaný balíček neposkytuje předchozí české znění k porovnání."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-97",
+                "relevant": true,
+                "reasonCz": "Dodatek vymezuje přístup zahraničních poskytovatelů služeb a zachovává pro Českou republiku testy ekonomické potřebnosti u řady povolání.",
+                "effectCz": "Text stanoví pro české poskytovatele a nezávislé odborníky v řadě oblastí test ekonomické potřebnosti, například u právních, účetních, architektonických, inženýrských či překladatelských služeb. Jde o výslovně zachované podmínky přístupu; předchozí znění není v balíčku dodáno, takže jejich změnu oproti dosavadnímu stavu nelze ověřit."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-15",
+                "relevant": false,
+                "reasonCz": "Dodaný text stanoví technické a zdravotní požadavky na vystavování pyrotechniky a profesní oprávnění, ale neukazuje konkrétní zásah do osobní svobody nebo závislosti na státu ve smyslu tohoto slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-106",
+                "relevant": true,
+                "reasonCz": "Vyhláška stanoví rozsáhlé povinné vzdělání jako podmínku odborné způsobilosti k podnikání v poradenské psychoterapii.",
+                "effectCz": "Vyhláška stanoví vzdělávací program v délce nejméně 1 450 hodin rozložených alespoň do pěti let, včetně teorie, sebezkušenosti, praxe a supervize. Předchozí úprava není v balíčku dodána, takže nelze přesně porovnat změnu, ale vyhláška sama stanoví podstatné podmínky pro přístup k povolání."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-151",
+                "relevant": true,
+                "reasonCz": "Nařízení upravuje rozsah živnosti psychologického poradenství a poradenské psychoterapie, tedy pravidla přístupu jednotlivců k výkonu povolání.",
+                "effectCz": "Nařízení nově uvádí společný název živnosti a vymezuje její obsah pro psychologické poradenství i poradenskou psychoterapii. Dodané znění původní obsahové náplně chybí, a proto nelze určit, zda se celkový rozsah oprávnění oproti předchozímu stavu rozšířil, nebo zúžil."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-133",
+                "relevant": true,
+                "reasonCz": "Plán vlády výslovně počítá s novým požadavkem na jazykovou a profesní kvalifikaci řidičů taxislužby.",
+                "effectCz": "Usnesení navrhuje předložit zákon zavádějící povinnost pro řidiče taxislužby prokazovat znalost češtiny a splnit sjednocené profesní podmínky. Jde o plánované zpřísnění přístupu k povolání, nikoli o již účinnou povinnost."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-bb35fbd70fd7--source",
+              "psp-core-2025--law-change-43121-1-1",
+              "psp-core-2025--law-change-43121-1-5",
+              "psp-core-2025--law-change-43121-2",
+              "psp-core-2025--law-change-43163-3",
+              "psp-core-2025--law-change-43174-1-6",
+              "psp-core-2025--law-change-43180-1-2",
+              "psp-core-2025--law-change-43189-approved-3",
+              "psp-core-2025--law-change-43193-2",
+              "psp-core-2025--law-change-43203-14",
+              "psp-core-2025--law-change-43216-1",
+              "psp-core-2025--law-change-43216-3",
+              "psp-core-2025--law-change-43216-5",
+              "psp-core-2025--law-change-43295-2",
+              "psp-core-2025--law-change-43310-3",
+              "psp-core-2025--law-change-43310-5",
+              "psp-core-2025--law-change-43356-1",
+              "psp-core-2025--law-change-43356-2",
+              "psp-core-2025--law-change-43365-1",
+              "psp-core-2025--law-change-43396-1",
+              "psp-core-2025--law-change-43443-1",
+              "psp-core-2025--law-change-43443-3",
+              "psp-core-2025--law-change-43443-7",
+              "psp-core-2025--law-change-43443-9",
+              "psp-core-2025--law-change-43453-31",
+              "psp-core-2025--law-change-43453-97",
+              "esbirka-regulations--law-change-sb-2026-106",
+              "esbirka-regulations--law-change-sb-2026-151",
+              "zvlady-resolutions--law-change-uv-2026-175-133",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88143",
+              "psp-core-2025--amendment-text-1172",
+              "psp-core-2025--vote-88152",
+              "psp-core-2025--amendment-text-1219",
+              "psp-core-2025--vote-88154",
+              "psp-core-2025--amendment-text-1351",
+              "psp-core-2025--vote-88170",
+              "psp-core-2025--amendment-text-1247",
+              "psp-core-2025--vote-88172",
+              "psp-core-2025--amendment-text-1183",
+              "psp-core-2025--vote-88194",
+              "psp-core-2025--amendment-text-1148",
+              "psp-core-2025--vote-88211",
+              "psp-core-2025--amendment-text-1249",
+              "psp-core-2025--vote-88213",
+              "psp-core-2025--amendment-text-1270",
+              "psp-core-2025--vote-88217",
+              "psp-core-2025--amendment-text-1366",
+              "psp-core-2025--vote-88234",
+              "psp-core-2025--amendment-text-1368",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--government-opinion-43180-1",
+              "psp-core-2025--print-step-210709",
+              "psp-core-2025--vote-88548",
+              "psp-core-2025--government-opinion-43216-1",
+              "psp-core-2025--print-step-211274",
+              "psp-core-2025--government-opinion-43295-1",
+              "psp-core-2025--vote-88297",
+              "psp-core-2025--vote-88298",
+              "psp-core-2025--amendment-text-1564",
+              "psp-core-2025--amendment-text-1565",
+              "psp-core-2025--print-step-211658",
+              "psp-core-2025--government-opinion-43365-1",
+              "psp-core-2025--print-step-211961",
+              "psp-core-2025--print-step-212242",
+              "psp-core-2025--print-step-212285",
+              "psp-core-2025--vote-88696",
+              "psp-core-2025--amendment-text-1630",
+              "psp-core-2025--vote-88697",
+              "psp-core-2025--amendment-text-1735",
+              "psp-core-2025--print-step-211390",
+              "psp-core-2025--vote-88356",
+              "psp-core-2025--vote-88456",
+              "psp-core-2025--senate-resolution-43310-6",
+              "esbirka-regulations--2026-106",
+              "esbirka-regulations--2026-151",
+              "zvlady-resolutions--2026-175",
+              "psp-core-2025--vote-88562",
+              "psp-core-2025--government-resolution-43295-1"
+            ],
+            "explanationCz": "SPD podpořila změny stavebního zákona, které v některých případech zjednodušují povolování a užívání staveb, ale nepodpořila všechny návrhy na další uvolnění pravidel. Zároveň její poslanci hlasovali pro změnu, která zařazuje evidenci tržeb do působnosti Celní správy, a nepodpořili návrhy zmírňující povinnosti této evidence. Vláda také předložila či podpořila další opatření, která rozšiřují povinnosti nebo státní dohled, například pravidla pro psychomodulační látky a vstup policie do obydlí. Existují i opačné kroky, například rušení zákazu některých nádob a zjednodušení části oznamovacích povinností, ale doložené jednání zatím znamená jen dílčí posun proti slibu.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Slib je obecně formulován a neurčuje, které konkrétní regulace strana považuje za nesmyslné; posouzení proto vychází jen z doložených změn, které přímo uvolňují nebo zpřísňují možnosti jednotlivců a podnikatelů.",
+              "V balíčku jsou současně kroky uvolňující stavební a některá profesní pravidla i kroky rozšiřující evidenci, kontrolu a podmínky výkonu činnosti. Přijatá novela stavebního zákona proto ukazuje opačný směr než přijatá rozšíření kontrolní působnosti Celní správy; nejsilnější dopad na výsledné hodnocení má zde doložené hlasování pro evidenci tržeb.",
+              "U některých návrhů nejsou dodána předchozí znění nebo finální znění po projednání, takže lze hodnotit pouze obsah předloženého návrhu, schválené verze nebo uvedeného pozměňovacího návrhu."
+            ]
+          }
+        }
+      },
+      {
+        "error": "Assessment invented evidence ID: psp-core-2025--print-step-211542",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0eaca372f6bcbd37016aec5826fa5087d18ec716f8b67b55b7",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 209316,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 209313
+            },
+            "output_tokens": 14311,
+            "output_tokens_details": {
+              "reasoning_tokens": 7951
+            },
+            "total_tokens": 223627
+          },
+          "output": {
+            "promiseId": "candidate-bb35fbd70fd7",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-1-1",
+                "relevant": true,
+                "reasonCz": "Návrh ruší konkrétní zákaz nakládání s jednorázovými nádobami a mění pravidla zkoušek a certifikace, tedy přímo zasahuje do regulací.",
+                "effectCz": "Předchozí znění zakazovalo použití, prodej, převod, směnu i skladování uvedených nádob; návrh § 4a ruší a tento zákaz odstraňuje. Nově také dovoluje prominout část zkoušky odpovídající dříve získané kvalifikaci, takže tuto povinnost zmírňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-1-5",
+                "relevant": true,
+                "reasonCz": "Přechodná pravidla uznávají dříve absolvovaná školení jako splnění nové povinnosti, a tím snižují regulační zátěž části osob.",
+                "effectCz": "Předchozí znění těchto přechodných ustanovení v balíčku není; návrh nově uznává vyhovující dřívější školení či hodnocení jako první splnění povinnosti obnovit znalosti, takže pro dotčené osoby povinnost zmírňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43121-2",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje trestní zákaz na fluorované plyny a zařízení s nimi, a tím rozšiřuje státní omezení a hrozbu trestu.",
+                "effectCz": "Dosavadní § 298a trestal neoprávněné nakládání s látkami poškozujícími ozonovou vrstvu; návrh rozšiřuje trestný čin také na fluorované skleníkové plyny, výrobky a zařízení s těmito plyny i jejich uvádění do provozu. Okruh zakázaného jednání se tím zvětšuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43163-3",
+                "relevant": true,
+                "reasonCz": "Návrh omezuje možnost vlastníka odvolat souhlas s komunikačním vedením v jeho nemovitosti, což přímo zasahuje do vlastnické svobody.",
+                "effectCz": "Dříve postačoval k umístění vnitřního vedení písemný souhlas vlastníka; navržené nové odstavce stanoví, že jej lze odvolat jen ze závažných důvodů nebo po deseti letech, a přidávají povinnost spolupráce při zásazích. Možnost vlastníka rozhodovat o odstranění vedení se zmenšuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Změny stavebního zákona uvolňují některé podmínky a povolovací postupy, které omezují nakládání s pozemky a uskutečňování stavebních záměrů.",
+                "effectCz": "V dodaných ustanoveních se dosavadní posuzování souladu stavebního záměru s územní dokumentací a dalšími požadavky doplňuje o možnost odchýlit se od územní dokumentace se souhlasy a za stanovených podmínek; v některých již zastavitelných územích se také předpokládá přípustnost záměru a vypouštějí se vybraná samostatná povolení či administrativní kroky. Tyto konkrétní požadavky a postupy se uvolňují, zatímco zůstávají limity ochrany veřejných zájmů a práv dalších osob; balíček neumožňuje vyhodnotit všechny vynechané části."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43180-1-2",
+                "relevant": true,
+                "reasonCz": "Navrhuje povinné zálohování vybraných jednorázových nápojových obalů, což přidává povinnost prodejcům a výrobcům.",
+                "effectCz": "Předchozí znění nově vkládaných ustanovení není, protože jde o nový zálohový systém; návrh zakládá povinnost zálohovat vybrané plastové lahve a kovové nádoby na nápoje. Jde o nové povinnosti, nikoli o odstranění regulace."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-approved-3",
+                "relevant": true,
+                "reasonCz": "Přechodná ustanovení upravují kvalifikační podmínky pro poradenskou psychoterapii, které mohou omezovat možnost podnikat v této profesi.",
+                "effectCz": "Dřívější přechodné znění uznávalo u některých stávajících poskytovatelů praxi, ale neobsahovalo zde uvedenou lhůtu pro dodatečné zajištění magisterského vzdělání. Schválený text nově ukládá dotčeným podnikatelům tuto kvalifikaci zajistit do 1. července 2029, čímž jejich kvalifikační povinnost rozšiřuje, zároveň však poskytuje přechodnou lhůtu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43193-2",
+                "relevant": true,
+                "reasonCz": "Schválené znění umožňuje obcím podmínit výkon taxislužby zkouškou znalosti češtiny a místních poměrů, což může omezit přístup k povolání.",
+                "effectCz": "Předchozí § 21b dovoloval obcím stanovit technické požadavky na vozidla taxislužby; schválené znění nově umožňuje vyžadovat také zkoušku znalosti práv a povinností, češtiny a míst významných pro taxislužbu. Podmínky pro řidiče se tím rozšiřují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43216-1",
+                "relevant": true,
+                "reasonCz": "Návrh zavádí registr ubytování a povinné hlášení údajů o ubytovatelích, ubytovacích místech a ubytovaných osobách.",
+                "effectCz": "Předchozí znění uvedených nových ustanovení není; návrh zakládá registr a ukládá nové evidenční a oznamovací povinnosti, včetně předávání osobních údajů. Regulační a evidenční povinnosti se zvětšují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43216-3",
+                "relevant": true,
+                "reasonCz": "Návrh umožňuje splnit některá živnostenská oznámení prostřednictvím jednoho registru, čímž může odstranit duplicitní administrativní krok.",
+                "effectCz": "Dosavadní § 17 ukládal podnikateli oznámit zahájení a ukončení živnosti v provozovně živnostenskému úřadu. Návrh stanoví, že oznámení přes registr ubytovacích zařízení může tuto povinnost splnit a dovoluje související zápis přes živnostenský úřad; tento konkrétní administrativní požadavek se zmírňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43216-5",
+                "relevant": true,
+                "reasonCz": "Návrh dovoluje plnit některé oznamovací povinnosti k pobytu cizinců zápisem do nového ubytovacího registru, tedy mění rozsah související administrativy.",
+                "effectCz": "Dosavadní znění vyžadovalo samostatné hlášení pobytu cizince policii a oznámení jeho ubytování; návrh stanoví, že zápis všech požadovaných údajů do registru může tyto povinnosti splnit. Požadavek samostatného hlášení se pro tyto případy zmírňuje, současně však vzniká nový evidenční systém."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43295-2",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje oprávnění policie vstoupit na pozemek při podezření na týrání zvířete také na vstup do obydlí, což zasahuje do osobního soukromí.",
+                "effectCz": "Dosavadní § 40 odst. 2 písm. c) opravňoval policii vstoupit do jiného prostoru nebo na pozemek; návrh do tohoto ustanovení doplňuje obydlí. Oprávnění k zásahu do soukromého prostoru se rozšiřuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-3",
+                "relevant": true,
+                "reasonCz": "Tato část je relevantní pouze prostřednictvím předložené změny, která navrhuje zkrátit povinnou dobu uchovávání provozních a lokalizačních údajů.",
+                "effectCz": "Text této části návrhu v balíčku chybí; pozměňovací návrh k ní mění dobu uchovávání údajů ze šesti na čtyři měsíce a ukládá jejich likvidaci po uplynutí nové lhůty. Povinnost uchovávání se zmenšuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-5",
+                "relevant": true,
+                "reasonCz": "Schválený text rozšiřuje pravomoc celní správy na kontrolu evidence tržeb, což zvětšuje státní kontrolní zásah do podnikání.",
+                "effectCz": "Dosavadní § 11e umožňoval celní správě kontrolní nákupy v několika vyjmenovaných oblastech, nikoli evidenci tržeb; schválený text doplňuje evidenci tržeb mezi kontrolované oblasti. Rozsah státní kontroly se zvětšuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43356-1",
+                "relevant": true,
+                "reasonCz": "Návrh odstraňuje některá omezení právní formy a způsobu výkonu povolání autorizovaných architektů a inženýrů.",
+                "effectCz": "Dosavadní znění připouštělo výkon povolání ve vyjmenovaných formách a omezovalo společný výkon prostřednictvím profesních společností; návrh rozšiřuje přípustné právní formy a ruší § 15a až § 15c. Omezení organizačního způsobu výkonu povolání se zmenšují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43356-2",
+                "relevant": true,
+                "reasonCz": "Návrh nově ukládá autorizovaným zeměměřickým inženýrům povinnosti k pojištění a členství, které ovlivňují možnost vykonávat povolání.",
+                "effectCz": "Dosavadní dodané znění upravovalo udělení autorizace, ale neobsahovalo uvedenou povinnost pojištění; návrh přidává pojištění odpovědnosti po celou dobu výkonu činnosti a povinnost platit členské příspěvky. Povinnosti pro výkon povolání se zvětšují, zatímco možnost vykonat část praxe v zahraničí se rozšiřuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43365-1",
+                "relevant": true,
+                "reasonCz": "Návrh přímo upravuje zákazy maloobchodního prodeje o svátcích, tedy regulaci rozhodování podnikatelů a spotřebitelů.",
+                "effectCz": "Balíček neobsahuje předchozí znění § 1, takže nelze určit, zda navržený seznam zakázaných dnů a výjimek omezení zpřísňuje, nebo zmírňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43396-1",
+                "relevant": true,
+                "reasonCz": "Návrh současně vyjímá další zvuky z regulace hluku a zpřísňuje povolování práce s azbestem.",
+                "effectCz": "Dosavadní definice hluku nezahrnovala vyjmenované zvuky, ale nezahrnovala ani zvuk běžného užívání venkovního sportovního náčiní či oznamování církevních obřadů; návrh je z definice vyjímá, a tím použití hlukové regulace zužuje. U azbestu dosavadní úprava vyžadovala hlášení a rozhodnutí o povolení, zatímco návrh výslovně zakazuje zahájit práci před pravomocným povolením a vyžaduje nové povolení při změně některých údajů, což povinnost zpřísňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43443-1",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje zákazy a regulované činnosti týkající se psychomodulačních látek a technického konopí.",
+                "effectCz": "Dosavadní definice uvádění psychomodulačních látek na trh zahrnovala jejich poskytnutí spotřebiteli; návrh ji rozšiřuje na zpřístupnění i činnosti k němu směřující. Přidává zákazy prodeje či předávání výrobků z technického konopí, jeho obohacování a zpracování některých látek, takže okruh zakázaného jednání se zvětšuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43443-3",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje omezení složení bylinných výrobků určených ke kouření a přidává povinnosti jejich prodejcům.",
+                "effectCz": "Dosavadní pravidlo zakazovalo v těchto výrobcích psychomodulační a zařazené psychoaktivní látky; návrh zákaz rozšiřuje také na návykové látky, kanabinoidy a další vyjmenované látky. Přidává požadavky na složení a vlastnosti a odpovídající přestupkovou odpovědnost, takže povinnosti se zvětšují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43443-7",
+                "relevant": true,
+                "reasonCz": "Návrh stanoví vysoké správní poplatky za žádosti o povolení k činnostem s psychomodulačními látkami, což může omezit možnost podnikání.",
+                "effectCz": "Předchozí sazebník již obsahoval poplatky za uvedené žádosti; návrh mění jejich rozdělení a u žádosti za každou provozovnu pro prodej zvyšuje částku z 20 000 Kč na 30 000 Kč, zatímco u žádosti za internetovou stránku či aplikaci mění sazbu z 200 000 Kč na 20 000 Kč. Dopad na náklady je tedy podle typu žádosti různý."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43443-9",
+                "relevant": true,
+                "reasonCz": "Návrh zvyšuje věkovou hranici pro prodej psychomodulačních látek a přidává omezení jejich prodeje a umístění prodejen.",
+                "effectCz": "Dosavadní věková hranice pro prodej a vstup do specializované prodejny byla 18 let; návrh ji mění na 21 let a přidává požadavek ověření věku, pravidla pro označení a provoz prodejen i možnost obcí jejich provozování omezit či zakázat. Omezení prodeje a přístupu se zpřísňují."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-15",
+                "relevant": true,
+                "reasonCz": "Vyhláška stanoví školení a zdravotní způsobilost pro zacházení s některými kategoriemi pyrotechniky, čímž upravuje přístup k této činnosti.",
+                "effectCz": "Předchozí znění těchto ustanovení není v balíčku; vyhláška stanoví školení v rozsahu 16 nebo 40 výukových hodin, zkušební řád a zdravotní prohlídky pro uvedené kategorie. Zakládá konkrétní kvalifikační a zdravotní podmínky; jejich změnu vůči předchozímu stavu nelze z balíčku určit."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-106",
+                "relevant": true,
+                "reasonCz": "Vyhláška stanoví rozsáhlé vzdělávací podmínky pro získání oprávnění k poradenské psychoterapii, a tím omezuje vstup do této profese.",
+                "effectCz": "Jde o nově doloženou úpravu bez předchozího znění v balíčku; stanoví nejméně 1 450 hodin vzdělávání rozložených alespoň do pěti let, včetně teorie, sebezkušenosti, praxe, supervize a závěrečného případu. Zavádí významnou kvalifikační povinnost."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-151",
+                "relevant": true,
+                "reasonCz": "Nařízení vymezuje obsah živnosti zahrnující poradenskou psychoterapii a psychologické poradenství, tedy pravidla přístupu a výkonu povolání.",
+                "effectCz": "Nařízení nahrazuje název živnosti „Psychologické poradenství a diagnostika“ širším spojeným názvem a vymezuje její obsah včetně poradenské psychoterapie. Samo v dodaném textu nestanoví kvalifikační podmínky; změnu přísnosti těchto podmínek proto nelze z balíčku určit."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-133",
+                "relevant": true,
+                "reasonCz": "Plán vlády navrhuje zavést povinnost řidičů taxislužby prokazovat znalost češtiny a dalších profesních podmínek.",
+                "effectCz": "Předchozí znění plánu v balíčku není; usnesení navrhuje připravit zákon, který zavede jazykovou zkoušku a sjednotí profesní a kvalifikační podmínky pro řidiče taxislužby a přepravní platformy. Jde o návrh nových podmínek, nikoli o již účinnou povinnost."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-bb35fbd70fd7--source",
+              "psp-core-2025--law-change-43121-1-1",
+              "psp-core-2025--law-change-43121-1-5",
+              "psp-core-2025--law-change-43121-2",
+              "psp-core-2025--law-change-43163-3",
+              "psp-core-2025--law-change-43174-1-6",
+              "psp-core-2025--law-change-43180-1-2",
+              "psp-core-2025--law-change-43189-approved-3",
+              "psp-core-2025--law-change-43193-2",
+              "psp-core-2025--law-change-43216-1",
+              "psp-core-2025--law-change-43216-3",
+              "psp-core-2025--law-change-43216-5",
+              "psp-core-2025--law-change-43295-2",
+              "psp-core-2025--law-change-43310-3",
+              "psp-core-2025--law-change-43310-5",
+              "psp-core-2025--law-change-43356-1",
+              "psp-core-2025--law-change-43356-2",
+              "psp-core-2025--law-change-43365-1",
+              "psp-core-2025--law-change-43396-1",
+              "psp-core-2025--law-change-43443-1",
+              "psp-core-2025--law-change-43443-3",
+              "psp-core-2025--law-change-43443-7",
+              "psp-core-2025--law-change-43443-9",
+              "esbirka-regulations--law-change-sb-2026-15",
+              "esbirka-regulations--law-change-sb-2026-106",
+              "esbirka-regulations--law-change-sb-2026-151",
+              "zvlady-resolutions--law-change-uv-2026-175-133",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88143",
+              "psp-core-2025--amendment-text-1219",
+              "psp-core-2025--vote-88152",
+              "psp-core-2025--amendment-text-1351",
+              "psp-core-2025--vote-88154",
+              "psp-core-2025--amendment-text-1247",
+              "psp-core-2025--vote-88170",
+              "psp-core-2025--amendment-text-1183",
+              "psp-core-2025--vote-88172",
+              "psp-core-2025--amendment-text-1148",
+              "psp-core-2025--vote-88194",
+              "psp-core-2025--amendment-text-1249",
+              "psp-core-2025--vote-88211",
+              "psp-core-2025--amendment-text-1270",
+              "psp-core-2025--vote-88213",
+              "psp-core-2025--amendment-text-1366",
+              "psp-core-2025--vote-88217",
+              "psp-core-2025--amendment-text-1368",
+              "psp-core-2025--vote-88234",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--print-step-210709",
+              "psp-core-2025--vote-88548",
+              "psp-core-2025--government-opinion-43180-1",
+              "psp-core-2025--print-step-211542",
+              "psp-core-2025--vote-87617",
+              "psp-core-2025--government-opinion-43216-1",
+              "psp-core-2025--print-step-211274",
+              "psp-core-2025--government-opinion-43295-1",
+              "psp-core-2025--print-step-211390",
+              "psp-core-2025--amendment-text-1564",
+              "psp-core-2025--vote-88297",
+              "psp-core-2025--amendment-text-1565",
+              "psp-core-2025--vote-88298",
+              "psp-core-2025--vote-88356",
+              "psp-core-2025--print-step-211658",
+              "psp-core-2025--government-opinion-43365-1",
+              "psp-core-2025--print-step-211961",
+              "psp-core-2025--print-step-212242",
+              "esbirka-regulations--2026-15",
+              "esbirka-regulations--2026-106",
+              "esbirka-regulations--2026-151",
+              "zvlady-resolutions--2026-175",
+              "psp-core-2025--print-step-212285",
+              "psp-core-2025--amendment-text-1630",
+              "psp-core-2025--vote-88696",
+              "psp-core-2025--amendment-text-1735",
+              "psp-core-2025--vote-88697"
+            ],
+            "explanationCz": "Poslanci SPD v září podpořili novelu silniční dopravy, která obcím umožňuje požadovat po řidičích taxislužby zkoušku z češtiny a místních poměrů. Tato nová podmínka může ztížit vstup do povolání, takže jde proti části slibu odstraňovat omezující regulace. Strana zároveň podpořila některé změny stavebního zákona a vláda odmítla návrh na zavedení zálohování obalů, což představuje protichůdné kroky. Pozdější vládní návrhy na další omezení prodeje psychomodulačních látek jsou zatím jen návrhy a nepřevažují rozhodující hlasování.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Slib obecně hovoří o regulacích omezujících osobní svobodu, ale neurčuje konkrétní předpisy ani měřitelný cíl; hodnocení jednotlivých profesních a podnikatelských omezení proto není ve všech případech jednoznačné.",
+              "U stavebního zákona jsou současně doloženy kroky ke zjednodušení povolování i hlasování proti některým návrhům na další uvolnění pravidel; výsledný zákon obsahuje více různých změn.",
+              "U návrhu na evidenci tržeb SPD nejprve nepodpořila některé pozměňovací návrhy zmírňující povinnosti, ale následně podpořila zákon jako celek. To je v rozporu s některými dalšími kroky strany.",
+              "Návrh zákona o návykových látkách z konce září i vládní plán jazykových zkoušek pro řidiče taxislužby jsou v dodaných záznamech návrhy; není doloženo, že by již byly přijaty jako rozhodnutí."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-bb35fbd70fd7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-1",
+          "relevant": true,
+          "reasonCz": "Mění pravidla pro nakládání s fluorovanými plyny a certifikaci osob, tedy omezení, která se mohou dotýkat jednání jednotlivců i jejich profesní činnosti.",
+          "effectCz": "Předchozí § 4a zakazoval použití, prodej, převod či skladování jednorázových nádob pro fluorované plyny; návrh tento zákaz ruší, a proto v tomto bodě omezení zmírňuje. Nový § 8a odst. 5 umožňuje uznat dříve získanou kvalifikaci a odpovídající část zkoušky nepožadovat, což snižuje požadavky na žadatele. Změna tedy část regulace uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-5",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení se týkají povinných obnovovacích školení a uznávání již absolvované přípravy.",
+          "effectCz": "Předchozí znění příslušných ustanovení není v kontextu uvedeno, takže směr změny nelze plně určit. Text však výslovně uznává některá dřívější školení a hodnocení jako první splnění budoucích povinností, což v tomto rozsahu snižuje opakovanou zátěž."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-2",
+          "relevant": true,
+          "reasonCz": "Rozšíření trestného činu na nakládání s fluorovanými plyny přidává trestní omezení jednání jednotlivců.",
+          "effectCz": "Dosavadní § 298a trestal hrubě nedbalé či úmyslné protiprávní nakládání pouze s látkami poškozujícími ozonovou vrstvu. Návrh přidává fluorované plyny, výrobky a zařízení a trestá i jejich uvádění do provozu, takže okruh trestně postižitelných jednání rozšiřuje a regulaci zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43163-3",
+          "relevant": true,
+          "reasonCz": "Nové omezení vlastníka při odvolání souhlasu s komunikačním zařízením přímo zasahuje do nakládání s jeho nemovitostí.",
+          "effectCz": "Dosavadní § 104 odst. 3 vyžadoval k umístění vnitřního vedení písemný souhlas vlastníka, aniž zde uvedený text stanovil omezení jeho odvolání. Návrh dovoluje odvolat souhlas jen ze závažných důvodů nebo po deseti letech a ukládá vlastníkovi vyvolaného odstranění náklady, případně i nenavrácenou část nákladů na instalaci. To omezuje vlastníkovu možnost rozhodovat o své nemovitosti a zpřísňuje jeho povinnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Rozsáhlé změny stavebního povolování odstraňují některé administrativní požadavky, ale mění i pravidla zásahu do práv stavebníků a dalších osob.",
+          "effectCz": "Předchozí znění vyžadovalo posouzení souladu záměru s právními a technickými požadavky a samostatné povolení dělení či scelování pozemků; návrh v některých případech zjednodušuje posuzování, ruší některá samostatná povolení a umožňuje povolení jednoduché stavby či sítě fikcí po marném uplynutí lhůty. Zároveň navrhuje zjednodušené dodatečné povolení stavby při zjevně nepřiměřeném odstranění. Tyto části odstraňují omezení; jiné změny v poskytnutém textu mění procesní pravidla, jejichž dopad na osobní svobodu nelze z těchto výňatků obecně určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43180-1-2",
+          "relevant": true,
+          "reasonCz": "Navrhuje zálohový systém pro vybrané jednorázové nápojové obaly, který přidává povinnost související s nákupem a vracením obalů.",
+          "effectCz": "Předchozí znění § 29a ani navazujících ustanovení není v kontextu dodáno. Návrh nově definuje zálohovaný obal a stanoví, že vybrané jednorázové obaly se zálohují; jde tedy o nové povinnosti, jejichž přesné srovnání s dosavadním stavem nelze z balíčku provést."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-3",
+          "relevant": true,
+          "reasonCz": "Přechodné ustanovení ukládá části podnikatelů v poradenské psychoterapii doplnit odbornou způsobilost, tedy přímo upravuje možnost vykonávat profesi.",
+          "effectCz": "Dosavadní čl. III zákona č. 360/2025 Sb. neobsahoval v dodaném kontextu povinnost zajistit magisterské vzdělání pro tyto skupiny podnikatelů. Schválená změna jim ukládá zajistit požadovanou způsobilost do 1. července 2029, takže profesní požadavek zavádí, byť s přechodnou lhůtou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43193-2",
+          "relevant": false,
+          "reasonCz": "Dodané změny se týkají sběru a zveřejňování údajů o zastávkách veřejné dopravy a sankcí pro vlastníky či správce komunikací, nikoli omezení osobní svobody jednotlivce.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-14",
+          "relevant": true,
+          "reasonCz": "Text kapitoly upravuje přístup k přeshraničnímu obchodu se službami a administrativní a kvalifikační podmínky pro poskytovatele.",
+          "effectCz": "Jde o návrh smlouvy bez předchozího znění v kontextu. Text se zavazuje postupně umožňovat přeshraniční obchod se službami a usilovat o to, aby podmínky nebyly restriktivnější, a požaduje zjednodušování licenčních postupů. Zároveň ponechává v platnosti pracovní a sociální předpisy a stanoví kvalifikační podmínky; bez srovnání se stávajícím stavem nelze určit celkový směr změny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": false,
+          "reasonCz": "Dodané výňatky se týkají hlavně mobility řidičů a pracovníků a výzkumné či mládežnické spolupráce; neukazují konkrétní změnu regulace omezující osobní svobodu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí povinnou registraci ubytovacích zařízení a sběr údajů o ubytovatelích a ubytovaných osobách.",
+          "effectCz": "Předchozí znění nově označených § 9e až § 9n není v kontextu k dispozici. Návrh zavádí státní registr, povinnou registraci před poskytnutím ubytování, evidenci osobních údajů a jejich uchovávání, a tím nové povinnosti a státní dohled; v tomto rozsahu regulaci zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-3",
+          "relevant": true,
+          "reasonCz": "Umožňuje vyřídit živnostenské oznámení současně přes registr, což může zjednodušit plnění existující povinnosti podnikatele.",
+          "effectCz": "Předchozí § 17 odst. 3 ukládal podnikateli předem oznámit zahájení či ukončení provozování živnosti v provozovně živnostenskému úřadu. Návrh umožňuje splnit oznamovací povinnost prostřednictvím registru ubytovacích zařízení a ubytovaných osob, takže způsob splnění zjednodušuje, ale samotnou povinnost neruší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-5",
+          "relevant": true,
+          "reasonCz": "Změna nahrazuje některé povinnosti hlášení pobytu cizinců zápisem údajů do registru a upravuje jejich plnění u ubytování.",
+          "effectCz": "Dosavadní § 97 ukládal sdělit policii údaje vyplněním přihlašovacího tiskopisu a § 102 oznámit ubytování cizince policii do tří pracovních dnů. Návrh umožňuje splnit tyto povinnosti zápisem údajů do registru, takže mění a v případě jednotného zápisu může zjednodušit způsob hlášení; zároveň zachovává předávání požadovaných údajů státu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43295-2",
+          "relevant": true,
+          "reasonCz": "Doplnění „obydlí“ mezi místa, kam může policie vstoupit při podezření na týrané zvíře, přímo rozšiřuje zásah státu do soukromí jednotlivce.",
+          "effectCz": "Dosavadní § 40 odst. 2 písm. c) opravňoval policii vstoupit do jiného prostoru nebo na pozemek, má-li důvodné podezření na týrané zvíře. Návrh výslovně přidává obydlí, čímž rozšiřuje pravomoc policie a zpřísňuje omezení domovní sféry."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Tato část návrhu nemá vlastní dodaný text; její relevance plyne jen z předložených pozměňovacích návrhů týkajících se povinností evidence tržeb.",
+          "effectCz": "Vlastní text části není dodán, takže jeho změnu oproti předchozímu znění nelze určit. Pozměňovací návrhy, které se k tomuto tisku vážou, navrhovaly prodloužit lhůtu pro dodatečné odeslání údajů o tržbě a vyjmout drobný prodej vlastní zemědělské produkce do 50 000 Kč z evidence; jejich konkrétní účinky jsou účinky těchto pozměňovacích návrhů, nikoli zjištěného textu této části."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": true,
+          "reasonCz": "Rozšíření kontrolních nákupů celní správy na evidenci tržeb posiluje dohled státu nad jednáním podnikatelů.",
+          "effectCz": "Dosavadní § 11e dovoloval kontrolní nákup při kontrole vyjmenovaných povinností, včetně spotřebních daní a hazardních her, nikoli evidence tržeb. Schválené znění přidává evidenci tržeb do výčtu, takže rozšiřuje kontrolní pravomoc státu a v tomto rozsahu regulaci zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-1",
+          "relevant": true,
+          "reasonCz": "Návrh současně ruší část omezení účasti firem ve veřejných zakázkách a zavádí další oznamovací povinnosti veřejných funkcionářů.",
+          "effectCz": "Dosavadní § 4b zakazoval účast obchodním společnostem s nejméně 25% podílem veřejného funkcionáře, zatímco návrh tento paragraf ruší, čímž toto omezení uvolňuje. Dosavadní § 4c se vztahoval na širší okruh dotací a společností; návrh nově omezuje zákaz na některé dotace bez právního nároku a přidává samostatné oznamování veřejných zakázek a dotací. Návrh tedy některá omezení zmírňuje, ale současně přidává informační povinnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43356-1",
+          "relevant": true,
+          "reasonCz": "Změna odstraňuje některé právní formy a omezení, kterými mohou autorizovaní architekti a inženýři vykonávat povolání.",
+          "effectCz": "Předchozí § 14 dovoloval společnost s ručením omezeným zřízenou za účelem výkonu povolání a ukládal v ní většinové zastoupení autorizovaných osob; návrh nahrazuje toto omezení širší možností působit ve společnosti s ručením omezeným a ruší související §§ 15a až 15c. Tím uvolňuje právní rámec výkonu profese."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43356-2",
+          "relevant": true,
+          "reasonCz": "Navrhuje nové pojištění odpovědnosti, členské příspěvky a další profesní povinnosti autorizovaných zeměměřických inženýrů.",
+          "effectCz": "Předchozí § 16e až § 16q neobsahovaly v dodaném znění povinné pojištění odpovědnosti ani povinnost řídit se předpisy komory a platit příspěvky; návrh tyto povinnosti přidává a stanoví i důsledky neplacení. Zvyšuje tak regulační a finanční zátěž profese. Současně umožňuje započíst až dva roky praxe v zahraničí, což jednu kvalifikační podmínku uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43365-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně zakazuje maloobchodní prodej v určené svátky, čímž se dotýká možnosti podnikatelů a zákazníků rozhodovat o prodeji a nákupu.",
+          "effectCz": "Jde o nové znění § 1 bez dodaného předchozího znění, proto nelze z balíčku určit, zda oproti dosavadnímu právu prodejní dobu celkově rozšiřuje nebo zužuje. Návrh stanoví zákaz prodeje ve vyjmenovaných dnech a na Štědrý den od 12 hodin."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění výjimky z hlukové regulace a zavádí povolování práce s azbestem, takže se týká regulace jednání osob a zaměstnavatelů.",
+          "effectCz": "Dosavadní § 30 odst. 2 vyjímal z pojmu hluku například zvuk hudby ve venkovním prostoru; návrh doplňuje zvuk běžného užívání venkovního sportovního vybavení a některé zvuky při náboženských obřadech, čímž v těchto případech regulaci hluku uvolňuje. U práce s azbestem návrh naopak stanoví předchozí povolení a zakazuje zahájit či pokračovat v práci před jeho právní mocí, tedy omezení zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-1",
+          "relevant": true,
+          "reasonCz": "Návrh zpřísňuje pravidla nakládání s konopnými a psychomodulačními látkami a rozšiřuje zakázaná jednání.",
+          "effectCz": "Předchozí § 2 vymezoval uvádění psychomodulačních látek na trh jako jejich poskytnutí konečnému spotřebiteli; návrh zahrnuje i činnosti k takovému zpřístupnění, například nabídku či přepravu. Zároveň zakazuje prodej a předávání výrobků z technického konopí fyzickým osobám a rozšiřuje další zákazy. Okruh omezeného jednání se tedy rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-3",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje zákazy složení bylinných výrobků určených ke kouření a zavádí další požadavky pro výrobce a prodejce.",
+          "effectCz": "Dosavadní § 12j odst. 6 zakazoval v bylinných výrobcích psychomodulační a zařazené psychoaktivní látky. Návrh doplňuje zákaz návykových látek, kanabinoidů a dalších vyjmenovaných látek a ukládá zajistit další požadavky na složení, vzhled, jakost a vlastnosti. Regulaci výroby a prodeje zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-7",
+          "relevant": true,
+          "reasonCz": "Nové správní poplatky za povolení k nakládání s psychomodulačními látkami představují přímou finanční podmínku výkonu těchto činností.",
+          "effectCz": "Předchozí položka 100 již obsahovala poplatky 200 000 Kč za některá povolení a 20 000 Kč za jiná, přičemž návrh mění zejména poplatek za prodej v provozovně z 20 000 Kč na 30 000 Kč. Pro jiné žádosti se uvedené sazby zachovávají nebo mění jejich členění; tam, kde se sazba nemění, se povinnost nezvětšuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-9",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí věkovou hranici 21 let a nové podmínky pro prodej psychomodulačních látek, včetně možnosti obcí prodejny omezit či zakázat.",
+          "effectCz": "Dosavadní § 16a a § 16b umožňovaly prodej osobám od 18 let za stanovených podmínek; návrh zvyšuje hranici na 21 let, ukládá kontrolu věku a další omezení prodejen. Dosavadní úprava online prodeje v § 16c se ruší, zatímco text zavádí nové podmínky kamenného prodeje a obecní pravomoc prodejny omezit či zakázat. V těchto bodech se omezení zpřísňují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-31",
+          "relevant": true,
+          "reasonCz": "Smlouva stanoví, že poskytování elektronických služeb nemá podléhat předchozímu povolení, a tedy přímo omezuje prostor pro jednu formu regulace.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího vnitrostátního znění dodaného v kontextu. Text požaduje, aby elektronické služby nepodléhaly předchozímu povolení, s výjimkou obecných povolovacích požadavků a telekomunikačních služeb, a umožňuje elektronické smlouvy. Ve vymezeném rozsahu omezuje možnost zavádět zvláštní povolení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-97",
+          "relevant": true,
+          "reasonCz": "Příloha výslovně ponechává pro Českou republiku test ekonomické potřebnosti a kvalifikační podmínky pro řadu profesních služeb.",
+          "effectCz": "Příloha stanoví podmínky pro vstup a dočasný pobyt poskytovatelů služeb, včetně odborné praxe, vzdělání a profesní kvalifikace, a pro řadu oborů v České republice zachovává test ekonomické potřebnosti. Předchozí seznam závazků není dodán, takže nelze určit, zda jde oproti němu o zpřísnění či zmírnění."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-15",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví odbornou přípravu a zdravotní způsobilost jako podmínky nakládání s některými kategoriemi pyrotechnických výrobků.",
+          "effectCz": "Jde o prováděcí vyhlášku bez předchozího znění v kontextu. Stanoví školení v délce 16 nebo 40 výukových hodin a lékařské posouzení způsobilosti pro vybrané kategorie; tím zavádí konkrétní podmínky pro výkon dané činnosti."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-106",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví rozsáhlé vzdělávací podmínky pro získání odborné způsobilosti k poradenské psychoterapii, a tím ovlivňuje přístup k profesi.",
+          "effectCz": "Vyhláška stanoví vzdělávací program v délce nejméně 1 450 hodin rozložených alespoň do pěti let, včetně teorie, sebezkušenosti, praxe a supervize. Předchozí znění v kontextu není uvedeno, takže nelze určit, jak se tyto požadavky liší od dosavadních podmínek."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-151",
+          "relevant": true,
+          "reasonCz": "Nařízení mění vymezení činnosti poradenské psychoterapie a psychologického poradenství, tedy pravidla přístupu k profesní činnosti.",
+          "effectCz": "Nařízení nově spojuje psychologické poradenství a poradenskou psychoterapii v jednom vymezení živnosti a stanoví obsah těchto činností. Předchozí text nařízení není dodán, proto nelze určit, zda se tím dosavadní rozsah povolených činností celkově rozšiřuje, nebo omezuje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-133",
+          "relevant": true,
+          "reasonCz": "Vládní plán počítá s návrhem povinného prokazování znalosti češtiny pro řidiče taxislužby, tedy s novou profesní podmínkou.",
+          "effectCz": "Předchozí podmínky nejsou v kontextu uvedeny. Plán navrhuje zavést pro řidiče taxislužby povinnost prokazovat znalost českého jazyka a sjednotit profesní a kvalifikační požadavky, což by přidalo podmínku pro výkon této činnosti."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-bb35fbd70fd7--source",
+        "psp-core-2025--law-change-43121-1-1",
+        "psp-core-2025--law-change-43121-1-5",
+        "psp-core-2025--law-change-43121-2",
+        "psp-core-2025--law-change-43163-3",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43180-1-2",
+        "psp-core-2025--law-change-43189-approved-3",
+        "psp-core-2025--law-change-43203-14",
+        "psp-core-2025--law-change-43216-1",
+        "psp-core-2025--law-change-43216-3",
+        "psp-core-2025--law-change-43216-5",
+        "psp-core-2025--law-change-43295-2",
+        "psp-core-2025--law-change-43310-3",
+        "psp-core-2025--law-change-43310-5",
+        "psp-core-2025--law-change-43343-1",
+        "psp-core-2025--law-change-43356-1",
+        "psp-core-2025--law-change-43356-2",
+        "psp-core-2025--law-change-43365-1",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--law-change-43443-1",
+        "psp-core-2025--law-change-43443-3",
+        "psp-core-2025--law-change-43443-7",
+        "psp-core-2025--law-change-43443-9",
+        "psp-core-2025--law-change-43453-31",
+        "psp-core-2025--law-change-43453-97",
+        "esbirka-regulations--law-change-sb-2026-15",
+        "esbirka-regulations--law-change-sb-2026-106",
+        "esbirka-regulations--law-change-sb-2026-151",
+        "zvlady-resolutions--law-change-uv-2026-175-133",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--government-opinion-43180-1",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--government-opinion-43216-1",
+        "psp-core-2025--print-step-211274",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-87617",
+        "esbirka-regulations--2026-15",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211601",
+        "esbirka-regulations--2026-106",
+        "psp-core-2025--print-step-211658",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--vote-88152",
+        "psp-core-2025--vote-88154",
+        "psp-core-2025--vote-88170",
+        "psp-core-2025--vote-88172",
+        "psp-core-2025--vote-88194",
+        "psp-core-2025--vote-88211",
+        "psp-core-2025--vote-88213",
+        "psp-core-2025--vote-88217",
+        "psp-core-2025--vote-88234",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88297",
+        "psp-core-2025--vote-88298",
+        "psp-core-2025--vote-88356",
+        "esbirka-regulations--2026-151",
+        "psp-core-2025--government-opinion-43365-1",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--vote-88562",
+        "psp-core-2025--vote-88548",
+        "psp-core-2025--print-step-212242",
+        "psp-core-2025--print-step-212285",
+        "psp-core-2025--vote-88696",
+        "psp-core-2025--vote-88697"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro novelu stavebního zákona, která v některých případech zjednodušuje povolování, a také pro zákon o evidenci tržeb, jehož část rozšířila kontrolní nákupy celní správy na tuto oblast. Hlasování pro rozšíření kontrolních pravomocí jde proti závazku odstraňovat regulace; opačným směrem působilo schválení části stavebních zjednodušení. Vláda dále navrhla nové podmínky pro psychomodulační látky a pro práci s azbestem, zatímco v některých případech také podpořila či navrhla úlevy. Protože rozhodnutí z 9. září zahrnují jak uvolnění, tak nové omezení, a evidence tržeb přidává jen část omezení slíbeného k odstranění, jde o částečný posun proti slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Slib neurčuje, které regulace jsou „nesmyslné“ ani nevyjmenovává konkrétní pravidla; některé změny proto souvisejí se slibem jen jako obecné zásahy do podnikání či profesní činnosti.",
+        "U nových znění předpisů bez dodaného předchozího textu nelze vždy určit, zda se regulace oproti dosavadnímu stavu zpřísnila, nebo zmírnila.",
+        "Hlasování pro stavební změny uvolňující některé povolovací požadavky a hlasování pro rozšíření kontrol u evidence tržeb působí opačným směrem. Podle pravidla pro stejně významná rozhodnutí ve stejný den byl pro současný výsledek rozhodující nižší, tedy nepříznivý směr."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-bb35fbd70fd7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-1",
+          "relevant": true,
+          "reasonCz": "Ruší zákaz používání a prodeje jednorázových nádob na fluorované plyny a upravuje také povinnosti při certifikační zkoušce, tedy přímo mění konkrétní regulatorní omezení.",
+          "effectCz": "Dříve bylo použití, prodej, převod, směna i skladování těchto nádob zakázáno; navržené zrušení § 4a tento zákaz odstraňuje, takže omezení je volnější. Nová úleva v § 8a odst. 5 umožňuje uznat dříve získanou kvalifikaci a skládat jen dosud nepokrytou část zkoušky; její předchozí znění v podkladu není, proto nelze určit celkovou změnu zkouškových povinností."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-5",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení uznávají dřívější školení a hodnocení pro novou povinnost obnovovat znalosti, čímž mohou zmírnit část regulační zátěže.",
+          "effectCz": "Předchozí znění odkazovaných povinností § 9a a § 9b není v podkladu uvedeno, takže jejich celkovou změnu nelze určit. Text však výslovně uznává dříve absolvované odpovídající školení nebo hodnocení jako první splnění nové povinnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-2",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje trestní odpovědnost za nakládání s fluorovanými skleníkovými plyny a výrobky s nimi, tedy přidává sankční omezení jednání osob.",
+          "effectCz": "Dříve § 298a trestal hrubě nedbalé porušení předpisů při nakládání s látkami poškozujícími ozonovou vrstvu. Navržené znění rozšiřuje trestný čin také na fluorované plyny, výrobky a zařízení, včetně jejich uvádění do provozu; okruh jednání postižitelných odnětím svobody až na rok, zákazem činnosti či propadnutím věci se zvětšuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43163-3",
+          "relevant": true,
+          "reasonCz": "Nově omezuje vlastníka nemovitosti v možnosti odvolat souhlas s vnitřním komunikačním vedením a stanoví mu náklady při jeho odstranění.",
+          "effectCz": "Předchozí § 104 odst. 3 vyžadoval písemný souhlas vlastníka k umístění vnitřního vedení, ale neposkytuje v podkladu omezení možnosti souhlas odvolat. Nové odstavce dovolují odvolání jen ze závažných důvodů nebo po deseti letech a při dřívějším odstranění ukládají vlastníkovi také nevrácenou část nákladů; možnost vlastníka rozhodovat o své nemovitosti se tím zužuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Mění stavební povolování rozsáhlým souborem ustanovení, z nichž řada zjednodušuje postupy a odstraňuje některá samostatná povolení či posuzování.",
+          "effectCz": "Oproti dodanému předchozímu znění stavebního zákona některé změny rozšiřují možnost odchýlit se se souhlasem od územního plánu, slučují povolení, umožňují některé záměry považovat za přípustné či omezuje opakované dokládání a posuzování; tím část administrativních překážek uvolňuje. Schválené znění také zavádí fikci povolení u vybraných záměrů a zkracuje či zjednodušuje některé kolaudační postupy. Jiné nové podmínky a pravidla se současně zavádějí a ne všechny mají v poskytnutém kontextu předchozí znění, takže směr každého jednotlivého ustanovení nelze určit; celkově však jde o částečné uvolnění stavebních povinností."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43180-1-2",
+          "relevant": true,
+          "reasonCz": "Navrhuje povinný zálohový systém pro vybrané jednorázové nápojové obaly, a tím přidává povinnosti pro nakládání s nimi.",
+          "effectCz": "Předchozí znění konkrétních ustanovení o zálohování není v podkladu uvedeno. Návrh nově vymezuje vybrané plastové lahve a kovové nádoby, stanoví jejich zálohování a vyjímá mimo jiné některé prodeje a subjekty uvádějící na trh méně než 150 kg ročně; pro vymezené obaly tedy vytváří novou povinnost."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-3",
+          "relevant": true,
+          "reasonCz": "Schválená část stanoví kvalifikační požadavky pro podnikání v poradenské psychoterapii, které mohou omezit přístup k této činnosti.",
+          "effectCz": "Dřívější přechodné ustanovení dovolovalo pokračovat v dosavadních živnostech; schválené doplnění dává dotčeným podnikatelům čas do 1. července 2029 zajistit nově požadované magisterské vzdělání či splnění související povinnosti. Přechodná lhůta zátěž dočasně zmírňuje, ale samotný kvalifikační požadavek přístup k podnikání zpřísňuje; úplné předchozí znění nové kvalifikace v podkladu není."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43193-2",
+          "relevant": true,
+          "reasonCz": "Nově umožňuje obcím uložit řidičům taxislužby zkoušky ze znalostí jako podmínku pro nabízení či poskytování přepravy.",
+          "effectCz": "Předchozí § 21b obcím dovoloval stanovovat podmínky užívání stanovišť a zvláštní technické požadavky na vozidla, nikoli v dodaném znění podmiňovat činnost řidiče znalostní zkouškou. Nové odstavce umožňují vyžadovat znalost práv a povinností, češtiny a místních poměrů a stanovit zkoušku i její poplatek; regulační možnost a podmínky pro řidiče se rozšiřují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-14",
+          "relevant": true,
+          "reasonCz": "Část smlouvy obsahuje závazky k přeshraničnímu poskytování služeb a k tomu, aby licenční řízení byla přístupná, objektivní a zbytečně nekomplikovala činnost.",
+          "effectCz": "Jde o novou smlouvu bez předchozího domácího znění. Stanoví pravidla pro dočasný vstup některých poskytovatelů služeb a požaduje jasná a transparentní licenční kritéria a snahu o jednoduché postupy; současně zachovává pracovní, sociální a další právní požadavky. Může uvolnit část překážek pro vymezené přeshraniční služby, nikoli obecně rušit domácí regulaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": false,
+          "reasonCz": "Dodané úryvky mluví obecně o podpoře mobility a výzkumné spolupráce, ale neukazují konkrétní pravidlo, které by prokazatelně odstranilo či zpřísnilo omezení osobní svobody.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-1",
+          "relevant": true,
+          "reasonCz": "Zavádí státní registr ubytování, povinnou registraci a rozsáhlé povinnosti předávání údajů ubytovateli i online platformami.",
+          "effectCz": "Předchozí § 10 ukládal zprostředkovateli povinnost poskytnout živnostenskému úřadu určité údaje na jeho výzvu. Návrh vytváří centrální registr, ukládá ubytovatelům registraci, hlášení a evidenci údajů o hostech a umožňuje jejich přístup více orgánům; povinnosti a státní sběr údajů se rozšiřují. Některé nové odstavce nemají v podkladu předchozí znění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-3",
+          "relevant": true,
+          "reasonCz": "Umožňuje sdílet údaje o provozovně a ubytování prostřednictvím registru a při podání na živnostenském úřadě, což může zjednodušit vyřizování povinností.",
+          "effectCz": "Dřívější § 17 ukládal podnikateli oznámit zahájení či ukončení provozu provozovny živnostenskému úřadu. Nové ustanovení umožňuje splnit oznamovací povinnost prostřednictvím registru a podat u něj související údaje společně s ohlášením živnosti; jde o zjednodušení způsobu vyřízení, nikoli o odstranění samotných povinností."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-5",
+          "relevant": true,
+          "reasonCz": "Umožňuje splnit části povinností při hlášení pobytu cizinců zápisem údajů do nového registru ubytování, tedy mění administrativní zátěž ubytovatelů.",
+          "effectCz": "Dřívější § 97 vyžadoval sdělit policii identifikační a pobytové údaje cizince a § 102 oznámit jeho ubytování policii do tří pracovních dnů. Návrh uznává zápis údajů do registru jako splnění těchto povinností; snižuje duplicitní hlášení, ale zavádí jejich plnění v novém státním registru."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43295-2",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje policejní oprávnění ke vstupu tak, aby se výslovně týkalo i obydlí, což zasahuje do osobní svobody a soukromí.",
+          "effectCz": "Dosavadní § 40 odst. 2 písm. c) umožňoval policii vstup do jiného prostoru nebo na pozemek při důvodném podezření na týrané zvíře. Návrh do výčtu doplňuje obydlí, a rozšiřuje tak prostor, do něhož může policie vstoupit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Písemné návrhy k této části prodlužují lhůtu pro evidenci tržeb a navrhují výjimku pro drobný prodej vlastní zemědělské produkce, tedy přímo uvolňují evidenční povinnosti.",
+          "effectCz": "Vlastní text této části v balíčku není; důkaz tvoří pouze pozměňovací návrhy. Návrh G3 posouvá lhůtu pro dodatečné odeslání údajů z 48 hodin na pět pracovních dnů a vylučuje odpovědnost při výpadku systému správce daně; návrh G4 vyjímá drobný prodej vlastní produkce mimo provozovnu do 50 000 Kč za zdaňovací období. Oba návrhy by evidenční zátěž zmírnily."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje kontrolní působnost Celní správy o evidenci tržeb a mění možnost používat krycí prostředky při kontrolách, čímž upravuje rozsah státní kontroly podnikatelů.",
+          "effectCz": "Předchozí § 11e dovoloval kontrolní nákupy při kontrolách vybraných oblastí, nikoli evidence tržeb; § 38 odst. 2 dovoloval použití krycích dokladů jen pro vyjmenované kontroly. Schválené znění doplňuje evidenci tržeb jako další oblast kontrolního nákupu a obecnější oprávnění používat krycí prostředek; kontrolní působnost státu se rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-1",
+          "relevant": true,
+          "reasonCz": "Mění omezení podniků spojených s veřejnými funkcionáři při účasti ve veřejných zakázkách a při získávání dotací či pobídek.",
+          "effectCz": "Dřívější § 4b zakazoval účast společnosti s nejméně 25% podílem veřejného funkcionáře ve veřejných zakázkách a § 4c zakazoval jí dotace i investiční pobídky. Návrh § 4b ruší, ale zavádí v § 4c užší zákaz pro dotace bez právního nároku a pro konkrétní případy pobídek; v této části omezení podnikání uvolňuje, při dotacích současně zachovává a upravuje nová omezení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43356-1",
+          "relevant": true,
+          "reasonCz": "Ruší některé výhradní právní formy, v nichž smějí autorizované osoby působit, a mění podmínky výkonu jejich profese.",
+          "effectCz": "Dříve mohly autorizované osoby vykonávat povolání jako společníci profesně zřízené veřejné obchodní společnosti či společnosti s ručením omezeným, přičemž pro tyto společnosti platily zvláštní pravidla. Návrh umožňuje také komanditní společnosti a běžné společnosti s ručením omezeným a ruší části dosavadní zvláštní úpravy; právní formy výkonu profese se uvolňují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43356-2",
+          "relevant": true,
+          "reasonCz": "Zavádí pro autorizované zeměměřické inženýry nové povinnosti, například pojištění odpovědnosti, členské příspěvky a oznamování skutečností souvisejících s autorizací.",
+          "effectCz": "Předchozí znění § 16e, § 16i a dalších dodaných ustanovení neobsahovalo uvedenou povinnost pojištění ani nové disciplinární a členské povinnosti. Návrh je přidává a stanoví také podmínku odborné praxe v zahraničí až na dva roky; většina nových povinností profesní regulaci zpřísňuje, zatímco zahraniční praxe může přístup částečně usnadnit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43365-1",
+          "relevant": true,
+          "reasonCz": "Stanoví konkrétní zákazy maloobchodního prodeje v určitých dnech, které přímo omezují prodejce i možnost spotřebitelů nakupovat.",
+          "effectCz": "Předchozí znění § 1 zákona o prodejní době není v balíčku, takže nelze určit, zda a jak se rozsah zákazů oproti dosavadnímu stavu mění. Návrh stanoví zákaz prodeje ve vyjmenovaných svátcích a 24. prosince po poledni, s výjimkami pro menší prodejny a některé typy provozoven."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": true,
+          "reasonCz": "Mění hlukové výjimky a zavádí povolení práce s azbestem a další oznamovací podmínky, které se dotýkají možností osob jednat a podnikat.",
+          "effectCz": "U hluku návrh rozšiřuje výjimky o zvuk z běžného užívání venkovního sportovního náčiní a náboženského oznamování, takže v těchto případech omezení hlukovým režimem uvolňuje. U azbestu současně přidává povolení před zahájením práce, nové hlášení při změně a zákaz pokračovat do pravomocného povolení; tyto povinnosti zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-1",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje definici uvádění psychomodulačních látek na trh a zavádí další zákazy nakládání s technickým konopím a jeho zpracováním.",
+          "effectCz": "Dříve se uváděním psychomodulačních látek na trh rozumělo jejich poskytnutí konečnému spotřebiteli; návrh zahrnuje i činnosti směřující k tomuto poskytnutí, jako nabízení, skladování či přepravu. Dále přidává zákazy prodeje výrobků z technického konopí fyzickým osobám, jeho obohacování a některých chemických přeměn; regulace se rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-3",
+          "relevant": true,
+          "reasonCz": "Přidává požadavky na složení a vlastnosti bylinných výrobků ke kouření a další pravidla pro nikotinové sáčky, tedy omezuje výrobu a prodej těchto produktů.",
+          "effectCz": "Dříve bylinné výrobky nesměly obsahovat psychomodulační ani zařazené psychoaktivní látky a u nikotinových sáčků již platily požadavky na složení a balení. Návrh rozšiřuje zákaz v bylinných výrobcích také na návykové látky a další uvedené látky a ukládá nově výrobci, dovozci, prodejci a distributorovi povinnost dodržet požadavky na složení, vzhled, jakost a vlastnosti; omezení se zpřísňují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-7",
+          "relevant": true,
+          "reasonCz": "Stanoví vysoké správní poplatky za žádosti o povolení k nakládání s psychomodulačními látkami, což může ztížit vstup do podnikání.",
+          "effectCz": "Předchozí znění sazebníku už obsahovalo poplatky pro některé typy povolení, například 20 000 Kč za prodej a 200 000 Kč za výrobu. Návrh upravuje a přeskupuje jednotlivé položky a stanoví také poplatky 30 000 Kč za prodejní provozovnu a 200 000 Kč za některé další činnosti; směr změny pro všechny kategorie nelze určit, ale vysoké poplatky zůstávají významnou překážkou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-9",
+          "relevant": true,
+          "reasonCz": "Zvyšuje věkovou hranici pro prodej psychomodulačních látek a umožňuje obcím jejich prodejny místně omezit nebo zcela zakázat.",
+          "effectCz": "Dříve byl prodej psychomodulačních látek zakázán osobám mladším 18 let a na dálku platila podrobná pravidla včetně ochrany osobních údajů a předání do vlastních rukou. Návrh zvyšuje věkovou hranici na 21 let, přidává omezení označení a provozu prodejen a dává obcím možnost prodejny omezit či zakázat; část dosavadních pravidel pro dálkový prodej ruší, ale nové podmínky celkově omezení podstatně rozšiřují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-31",
+          "relevant": true,
+          "reasonCz": "Smlouva obsahuje pravidlo, že elektronické služby nepodléhají předchozímu povolení, a uznává právní účinky elektronických smluv.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího domácího znění. Stanoví, že elektronické služby obecně nemají podléhat předchozímu povolení a že elektronickým smlouvám nelze upřít právní účinky jen kvůli jejich formě, s výjimkami pro některé služby a smlouvy; v této části překážky uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-97",
+          "relevant": true,
+          "reasonCz": "Stanoví podmínky dočasného vstupu smluvních poskytovatelů služeb a nezávislých odborníků, včetně kvalifikace, délky pobytu a testů ekonomické potřebnosti.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího domácího znění. Umožňuje dočasné poskytování vyjmenovaných služeb, ale v České republice zachovává testy ekonomické potřebnosti pro řadu profesí a stanoví kvalifikační podmínky; otevírá omezenou cestu přeshraničnímu poskytování, zároveň ponechává významná omezení."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-15",
+          "relevant": true,
+          "reasonCz": "Stanoví povinné školení a zdravotní posouzení pro zacházení s vybranými kategoriemi pyrotechnických výrobků, což omezuje přístup k této činnosti.",
+          "effectCz": "Jde o nový prováděcí předpis bez předchozího znění v balíčku. Stanoví školení v délce 16 nebo 40 výukových hodin podle kategorie, zkušební řád a lékařská prohlídka včetně nemocí omezujících způsobilost; profesní podmínky zpřísňuje."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-106",
+          "relevant": true,
+          "reasonCz": "Stanoví rozsáhlý vzdělávací program jako podmínku odborné způsobilosti k poradenské psychoterapii, čímž omezuje možnost tuto živnost vykonávat.",
+          "effectCz": "Jde o nový prováděcí předpis bez předchozího znění v balíčku. Vyžaduje nejméně 1 450 hodin vzdělávání rozložených alespoň do pěti let, včetně teorie, sebezkušenosti, praxe, supervize a závěrečné kazuistiky; podmínky vstupu do živnosti zpřísňuje."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-151",
+          "relevant": false,
+          "reasonCz": "Úryvek vymezuje obsah psychologického poradenství a poradenské psychoterapie, ale neukazuje, že by toto nařízení samo stanovilo podmínky přístupu nebo jinak konkrétně omezovalo osobní svobodu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-133",
+          "relevant": true,
+          "reasonCz": "Vládní plán ukládá připravit návrh zákona, který má řidičům taxislužby zavést povinnost prokazovat znalost češtiny a další kvalifikační požadavky.",
+          "effectCz": "Jde o návrh budoucí úpravy, nikoli o změnu platného pravidla. V plánu je uveden cíl zavést řidičům taxislužby jazykovou a profesní kvalifikaci; pokud by byl uskutečněn, přidal by podmínky pro výkon práce, ale sám plán je ještě nestanoví."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-bb35fbd70fd7--source",
+        "psp-core-2025--law-change-43121-1-1",
+        "psp-core-2025--law-change-43121-1-5",
+        "psp-core-2025--law-change-43121-2",
+        "psp-core-2025--law-change-43163-3",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43180-1-2",
+        "psp-core-2025--law-change-43189-approved-3",
+        "psp-core-2025--law-change-43193-2",
+        "psp-core-2025--law-change-43203-14",
+        "psp-core-2025--law-change-43216-1",
+        "psp-core-2025--law-change-43216-3",
+        "psp-core-2025--law-change-43216-5",
+        "psp-core-2025--law-change-43295-2",
+        "psp-core-2025--law-change-43310-3",
+        "psp-core-2025--law-change-43310-5",
+        "psp-core-2025--law-change-43343-1",
+        "psp-core-2025--law-change-43356-1",
+        "psp-core-2025--law-change-43356-2",
+        "psp-core-2025--law-change-43365-1",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--law-change-43443-1",
+        "psp-core-2025--law-change-43443-3",
+        "psp-core-2025--law-change-43443-7",
+        "psp-core-2025--law-change-43443-9",
+        "psp-core-2025--law-change-43453-31",
+        "psp-core-2025--law-change-43453-97",
+        "esbirka-regulations--law-change-sb-2026-15",
+        "esbirka-regulations--law-change-sb-2026-106",
+        "zvlady-resolutions--law-change-uv-2026-175-133",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1172",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--amendment-text-1219",
+        "psp-core-2025--vote-88152",
+        "psp-core-2025--amendment-text-1351",
+        "psp-core-2025--vote-88154",
+        "psp-core-2025--amendment-text-1247",
+        "psp-core-2025--vote-88170",
+        "psp-core-2025--amendment-text-1183",
+        "psp-core-2025--vote-88172",
+        "psp-core-2025--amendment-text-1148",
+        "psp-core-2025--vote-88194",
+        "psp-core-2025--amendment-text-1249",
+        "psp-core-2025--vote-88211",
+        "psp-core-2025--amendment-text-1270",
+        "psp-core-2025--vote-88213",
+        "psp-core-2025--amendment-text-1366",
+        "psp-core-2025--vote-88217",
+        "psp-core-2025--amendment-text-1368",
+        "psp-core-2025--vote-88234",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--government-opinion-43180-1",
+        "psp-core-2025--vote-87617",
+        "psp-core-2025--print-step-210709",
+        "psp-core-2025--vote-88548",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--government-opinion-43216-1",
+        "psp-core-2025--print-step-211274",
+        "psp-core-2025--government-opinion-43295-1",
+        "psp-core-2025--amendment-text-1564",
+        "psp-core-2025--vote-88297",
+        "psp-core-2025--amendment-text-1565",
+        "psp-core-2025--vote-88298",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--print-step-211601",
+        "psp-core-2025--print-step-211658",
+        "psp-core-2025--government-opinion-43365-1",
+        "psp-core-2025--print-step-211961",
+        "psp-core-2025--print-step-212242",
+        "psp-core-2025--print-step-212285",
+        "psp-core-2025--amendment-text-1630",
+        "psp-core-2025--vote-88696",
+        "psp-core-2025--amendment-text-1735",
+        "psp-core-2025--vote-88697",
+        "esbirka-regulations--2026-15",
+        "esbirka-regulations--2026-106",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Poslanci SPD podpořili novelu silniční dopravy, která obcím umožňuje podmínit práci řidičů taxislužby zkouškou z češtiny a dalších znalostí; tím se část omezení osobní a pracovní svobody rozšiřuje. Dříve hlasovali také pro stavební zákon, který naopak zjednodušuje některá povolovací řízení, takže jejich postup není jednotný. Vláda i poslanci SPD podpořili také další návrhy, které přidávají podmínky pro podnikání a nakládání s psychomodulačními látkami, přestože některá jiná opatření zátěž snižují. Slib proto vykazuje dílčí rozporný posun, ale pozdější schválení nové podmínky pro řidiče taxislužby působí proti němu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Slib neurčuje, které regulace strana pokládá za nesmyslné ani které konkrétní zásahy do osobní svobody chce odstranit; některé obecné změny proto mohou být posuzovány různě.",
+        "Některé pozměňovací návrhy ke stavebnímu zákonu současně zjednodušují povolování a jiné ponechávají či nově stanoví podmínky. Proti tomuto uvolňujícímu rozhodnutí stojí pozdější hlasování SPD pro možnost obcí zavést zkoušky řidičů taxislužby."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0072e56ac9171311016aec58c3b42887d1a16f65864b78a85c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 209316,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 209313
+      },
+      "output_tokens": 12950,
+      "output_tokens_details": {
+        "reasoning_tokens": 6230
+      },
+      "total_tokens": 222266
+    },
+    "output": {
+      "promiseId": "candidate-bb35fbd70fd7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-1",
+          "relevant": true,
+          "reasonCz": "Mění pravidla pro nakládání s fluorovanými plyny a certifikaci osob, tedy omezení, která se mohou dotýkat jednání jednotlivců i jejich profesní činnosti.",
+          "effectCz": "Předchozí § 4a zakazoval použití, prodej, převod či skladování jednorázových nádob pro fluorované plyny; návrh tento zákaz ruší, a proto v tomto bodě omezení zmírňuje. Nový § 8a odst. 5 umožňuje uznat dříve získanou kvalifikaci a odpovídající část zkoušky nepožadovat, což snižuje požadavky na žadatele. Změna tedy část regulace uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-5",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení se týkají povinných obnovovacích školení a uznávání již absolvované přípravy.",
+          "effectCz": "Předchozí znění příslušných ustanovení není v kontextu uvedeno, takže směr změny nelze plně určit. Text však výslovně uznává některá dřívější školení a hodnocení jako první splnění budoucích povinností, což v tomto rozsahu snižuje opakovanou zátěž."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-2",
+          "relevant": true,
+          "reasonCz": "Rozšíření trestného činu na nakládání s fluorovanými plyny přidává trestní omezení jednání jednotlivců.",
+          "effectCz": "Dosavadní § 298a trestal hrubě nedbalé či úmyslné protiprávní nakládání pouze s látkami poškozujícími ozonovou vrstvu. Návrh přidává fluorované plyny, výrobky a zařízení a trestá i jejich uvádění do provozu, takže okruh trestně postižitelných jednání rozšiřuje a regulaci zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43163-3",
+          "relevant": true,
+          "reasonCz": "Nové omezení vlastníka při odvolání souhlasu s komunikačním zařízením přímo zasahuje do nakládání s jeho nemovitostí.",
+          "effectCz": "Dosavadní § 104 odst. 3 vyžadoval k umístění vnitřního vedení písemný souhlas vlastníka, aniž zde uvedený text stanovil omezení jeho odvolání. Návrh dovoluje odvolat souhlas jen ze závažných důvodů nebo po deseti letech a ukládá vlastníkovi vyvolaného odstranění náklady, případně i nenavrácenou část nákladů na instalaci. To omezuje vlastníkovu možnost rozhodovat o své nemovitosti a zpřísňuje jeho povinnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Rozsáhlé změny stavebního povolování odstraňují některé administrativní požadavky, ale mění i pravidla zásahu do práv stavebníků a dalších osob.",
+          "effectCz": "Předchozí znění vyžadovalo posouzení souladu záměru s právními a technickými požadavky a samostatné povolení dělení či scelování pozemků; návrh v některých případech zjednodušuje posuzování, ruší některá samostatná povolení a umožňuje povolení jednoduché stavby či sítě fikcí po marném uplynutí lhůty. Zároveň navrhuje zjednodušené dodatečné povolení stavby při zjevně nepřiměřeném odstranění. Tyto části odstraňují omezení; jiné změny v poskytnutém textu mění procesní pravidla, jejichž dopad na osobní svobodu nelze z těchto výňatků obecně určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43180-1-2",
+          "relevant": true,
+          "reasonCz": "Navrhuje zálohový systém pro vybrané jednorázové nápojové obaly, který přidává povinnost související s nákupem a vracením obalů.",
+          "effectCz": "Předchozí znění § 29a ani navazujících ustanovení není v kontextu dodáno. Návrh nově definuje zálohovaný obal a stanoví, že vybrané jednorázové obaly se zálohují; jde tedy o nové povinnosti, jejichž přesné srovnání s dosavadním stavem nelze z balíčku provést."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-3",
+          "relevant": true,
+          "reasonCz": "Přechodné ustanovení ukládá části podnikatelů v poradenské psychoterapii doplnit odbornou způsobilost, tedy přímo upravuje možnost vykonávat profesi.",
+          "effectCz": "Dosavadní čl. III zákona č. 360/2025 Sb. neobsahoval v dodaném kontextu povinnost zajistit magisterské vzdělání pro tyto skupiny podnikatelů. Schválená změna jim ukládá zajistit požadovanou způsobilost do 1. července 2029, takže profesní požadavek zavádí, byť s přechodnou lhůtou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43193-2",
+          "relevant": false,
+          "reasonCz": "Dodané změny se týkají sběru a zveřejňování údajů o zastávkách veřejné dopravy a sankcí pro vlastníky či správce komunikací, nikoli omezení osobní svobody jednotlivce.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-14",
+          "relevant": true,
+          "reasonCz": "Text kapitoly upravuje přístup k přeshraničnímu obchodu se službami a administrativní a kvalifikační podmínky pro poskytovatele.",
+          "effectCz": "Jde o návrh smlouvy bez předchozího znění v kontextu. Text se zavazuje postupně umožňovat přeshraniční obchod se službami a usilovat o to, aby podmínky nebyly restriktivnější, a požaduje zjednodušování licenčních postupů. Zároveň ponechává v platnosti pracovní a sociální předpisy a stanoví kvalifikační podmínky; bez srovnání se stávajícím stavem nelze určit celkový směr změny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": false,
+          "reasonCz": "Dodané výňatky se týkají hlavně mobility řidičů a pracovníků a výzkumné či mládežnické spolupráce; neukazují konkrétní změnu regulace omezující osobní svobodu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí povinnou registraci ubytovacích zařízení a sběr údajů o ubytovatelích a ubytovaných osobách.",
+          "effectCz": "Předchozí znění nově označených § 9e až § 9n není v kontextu k dispozici. Návrh zavádí státní registr, povinnou registraci před poskytnutím ubytování, evidenci osobních údajů a jejich uchovávání, a tím nové povinnosti a státní dohled; v tomto rozsahu regulaci zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-3",
+          "relevant": true,
+          "reasonCz": "Umožňuje vyřídit živnostenské oznámení současně přes registr, což může zjednodušit plnění existující povinnosti podnikatele.",
+          "effectCz": "Předchozí § 17 odst. 3 ukládal podnikateli předem oznámit zahájení či ukončení provozování živnosti v provozovně živnostenskému úřadu. Návrh umožňuje splnit oznamovací povinnost prostřednictvím registru ubytovacích zařízení a ubytovaných osob, takže způsob splnění zjednodušuje, ale samotnou povinnost neruší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-5",
+          "relevant": true,
+          "reasonCz": "Změna nahrazuje některé povinnosti hlášení pobytu cizinců zápisem údajů do registru a upravuje jejich plnění u ubytování.",
+          "effectCz": "Dosavadní § 97 ukládal sdělit policii údaje vyplněním přihlašovacího tiskopisu a § 102 oznámit ubytování cizince policii do tří pracovních dnů. Návrh umožňuje splnit tyto povinnosti zápisem údajů do registru, takže mění a v případě jednotného zápisu může zjednodušit způsob hlášení; zároveň zachovává předávání požadovaných údajů státu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43295-2",
+          "relevant": true,
+          "reasonCz": "Doplnění „obydlí“ mezi místa, kam může policie vstoupit při podezření na týrané zvíře, přímo rozšiřuje zásah státu do soukromí jednotlivce.",
+          "effectCz": "Dosavadní § 40 odst. 2 písm. c) opravňoval policii vstoupit do jiného prostoru nebo na pozemek, má-li důvodné podezření na týrané zvíře. Návrh výslovně přidává obydlí, čímž rozšiřuje pravomoc policie a zpřísňuje omezení domovní sféry."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Tato část návrhu nemá vlastní dodaný text; její relevance plyne jen z předložených pozměňovacích návrhů týkajících se povinností evidence tržeb.",
+          "effectCz": "Vlastní text části není dodán, takže jeho změnu oproti předchozímu znění nelze určit. Pozměňovací návrhy, které se k tomuto tisku vážou, navrhovaly prodloužit lhůtu pro dodatečné odeslání údajů o tržbě a vyjmout drobný prodej vlastní zemědělské produkce do 50 000 Kč z evidence; jejich konkrétní účinky jsou účinky těchto pozměňovacích návrhů, nikoli zjištěného textu této části."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": true,
+          "reasonCz": "Rozšíření kontrolních nákupů celní správy na evidenci tržeb posiluje dohled státu nad jednáním podnikatelů.",
+          "effectCz": "Dosavadní § 11e dovoloval kontrolní nákup při kontrole vyjmenovaných povinností, včetně spotřebních daní a hazardních her, nikoli evidence tržeb. Schválené znění přidává evidenci tržeb do výčtu, takže rozšiřuje kontrolní pravomoc státu a v tomto rozsahu regulaci zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-1",
+          "relevant": true,
+          "reasonCz": "Návrh současně ruší část omezení účasti firem ve veřejných zakázkách a zavádí další oznamovací povinnosti veřejných funkcionářů.",
+          "effectCz": "Dosavadní § 4b zakazoval účast obchodním společnostem s nejméně 25% podílem veřejného funkcionáře, zatímco návrh tento paragraf ruší, čímž toto omezení uvolňuje. Dosavadní § 4c se vztahoval na širší okruh dotací a společností; návrh nově omezuje zákaz na některé dotace bez právního nároku a přidává samostatné oznamování veřejných zakázek a dotací. Návrh tedy některá omezení zmírňuje, ale současně přidává informační povinnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43356-1",
+          "relevant": true,
+          "reasonCz": "Změna odstraňuje některé právní formy a omezení, kterými mohou autorizovaní architekti a inženýři vykonávat povolání.",
+          "effectCz": "Předchozí § 14 dovoloval společnost s ručením omezeným zřízenou za účelem výkonu povolání a ukládal v ní většinové zastoupení autorizovaných osob; návrh nahrazuje toto omezení širší možností působit ve společnosti s ručením omezeným a ruší související §§ 15a až 15c. Tím uvolňuje právní rámec výkonu profese."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43356-2",
+          "relevant": true,
+          "reasonCz": "Navrhuje nové pojištění odpovědnosti, členské příspěvky a další profesní povinnosti autorizovaných zeměměřických inženýrů.",
+          "effectCz": "Předchozí § 16e až § 16q neobsahovaly v dodaném znění povinné pojištění odpovědnosti ani povinnost řídit se předpisy komory a platit příspěvky; návrh tyto povinnosti přidává a stanoví i důsledky neplacení. Zvyšuje tak regulační a finanční zátěž profese. Současně umožňuje započíst až dva roky praxe v zahraničí, což jednu kvalifikační podmínku uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43365-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně zakazuje maloobchodní prodej v určené svátky, čímž se dotýká možnosti podnikatelů a zákazníků rozhodovat o prodeji a nákupu.",
+          "effectCz": "Jde o nové znění § 1 bez dodaného předchozího znění, proto nelze z balíčku určit, zda oproti dosavadnímu právu prodejní dobu celkově rozšiřuje nebo zužuje. Návrh stanoví zákaz prodeje ve vyjmenovaných dnech a na Štědrý den od 12 hodin."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění výjimky z hlukové regulace a zavádí povolování práce s azbestem, takže se týká regulace jednání osob a zaměstnavatelů.",
+          "effectCz": "Dosavadní § 30 odst. 2 vyjímal z pojmu hluku například zvuk hudby ve venkovním prostoru; návrh doplňuje zvuk běžného užívání venkovního sportovního vybavení a některé zvuky při náboženských obřadech, čímž v těchto případech regulaci hluku uvolňuje. U práce s azbestem návrh naopak stanoví předchozí povolení a zakazuje zahájit či pokračovat v práci před jeho právní mocí, tedy omezení zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-1",
+          "relevant": true,
+          "reasonCz": "Návrh zpřísňuje pravidla nakládání s konopnými a psychomodulačními látkami a rozšiřuje zakázaná jednání.",
+          "effectCz": "Předchozí § 2 vymezoval uvádění psychomodulačních látek na trh jako jejich poskytnutí konečnému spotřebiteli; návrh zahrnuje i činnosti k takovému zpřístupnění, například nabídku či přepravu. Zároveň zakazuje prodej a předávání výrobků z technického konopí fyzickým osobám a rozšiřuje další zákazy. Okruh omezeného jednání se tedy rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-3",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje zákazy složení bylinných výrobků určených ke kouření a zavádí další požadavky pro výrobce a prodejce.",
+          "effectCz": "Dosavadní § 12j odst. 6 zakazoval v bylinných výrobcích psychomodulační a zařazené psychoaktivní látky. Návrh doplňuje zákaz návykových látek, kanabinoidů a dalších vyjmenovaných látek a ukládá zajistit další požadavky na složení, vzhled, jakost a vlastnosti. Regulaci výroby a prodeje zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-7",
+          "relevant": true,
+          "reasonCz": "Nové správní poplatky za povolení k nakládání s psychomodulačními látkami představují přímou finanční podmínku výkonu těchto činností.",
+          "effectCz": "Předchozí položka 100 již obsahovala poplatky 200 000 Kč za některá povolení a 20 000 Kč za jiná, přičemž návrh mění zejména poplatek za prodej v provozovně z 20 000 Kč na 30 000 Kč. Pro jiné žádosti se uvedené sazby zachovávají nebo mění jejich členění; tam, kde se sazba nemění, se povinnost nezvětšuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-9",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí věkovou hranici 21 let a nové podmínky pro prodej psychomodulačních látek, včetně možnosti obcí prodejny omezit či zakázat.",
+          "effectCz": "Dosavadní § 16a a § 16b umožňovaly prodej osobám od 18 let za stanovených podmínek; návrh zvyšuje hranici na 21 let, ukládá kontrolu věku a další omezení prodejen. Dosavadní úprava online prodeje v § 16c se ruší, zatímco text zavádí nové podmínky kamenného prodeje a obecní pravomoc prodejny omezit či zakázat. V těchto bodech se omezení zpřísňují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-31",
+          "relevant": true,
+          "reasonCz": "Smlouva stanoví, že poskytování elektronických služeb nemá podléhat předchozímu povolení, a tedy přímo omezuje prostor pro jednu formu regulace.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího vnitrostátního znění dodaného v kontextu. Text požaduje, aby elektronické služby nepodléhaly předchozímu povolení, s výjimkou obecných povolovacích požadavků a telekomunikačních služeb, a umožňuje elektronické smlouvy. Ve vymezeném rozsahu omezuje možnost zavádět zvláštní povolení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-97",
+          "relevant": true,
+          "reasonCz": "Příloha výslovně ponechává pro Českou republiku test ekonomické potřebnosti a kvalifikační podmínky pro řadu profesních služeb.",
+          "effectCz": "Příloha stanoví podmínky pro vstup a dočasný pobyt poskytovatelů služeb, včetně odborné praxe, vzdělání a profesní kvalifikace, a pro řadu oborů v České republice zachovává test ekonomické potřebnosti. Předchozí seznam závazků není dodán, takže nelze určit, zda jde oproti němu o zpřísnění či zmírnění."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-15",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví odbornou přípravu a zdravotní způsobilost jako podmínky nakládání s některými kategoriemi pyrotechnických výrobků.",
+          "effectCz": "Jde o prováděcí vyhlášku bez předchozího znění v kontextu. Stanoví školení v délce 16 nebo 40 výukových hodin a lékařské posouzení způsobilosti pro vybrané kategorie; tím zavádí konkrétní podmínky pro výkon dané činnosti."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-106",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví rozsáhlé vzdělávací podmínky pro získání odborné způsobilosti k poradenské psychoterapii, a tím ovlivňuje přístup k profesi.",
+          "effectCz": "Vyhláška stanoví vzdělávací program v délce nejméně 1 450 hodin rozložených alespoň do pěti let, včetně teorie, sebezkušenosti, praxe a supervize. Předchozí znění v kontextu není uvedeno, takže nelze určit, jak se tyto požadavky liší od dosavadních podmínek."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-151",
+          "relevant": true,
+          "reasonCz": "Nařízení mění vymezení činnosti poradenské psychoterapie a psychologického poradenství, tedy pravidla přístupu k profesní činnosti.",
+          "effectCz": "Nařízení nově spojuje psychologické poradenství a poradenskou psychoterapii v jednom vymezení živnosti a stanoví obsah těchto činností. Předchozí text nařízení není dodán, proto nelze určit, zda se tím dosavadní rozsah povolených činností celkově rozšiřuje, nebo omezuje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-133",
+          "relevant": true,
+          "reasonCz": "Vládní plán počítá s návrhem povinného prokazování znalosti češtiny pro řidiče taxislužby, tedy s novou profesní podmínkou.",
+          "effectCz": "Předchozí podmínky nejsou v kontextu uvedeny. Plán navrhuje zavést pro řidiče taxislužby povinnost prokazovat znalost českého jazyka a sjednotit profesní a kvalifikační požadavky, což by přidalo podmínku pro výkon této činnosti."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-bb35fbd70fd7--source",
+        "psp-core-2025--law-change-43121-1-1",
+        "psp-core-2025--law-change-43121-1-5",
+        "psp-core-2025--law-change-43121-2",
+        "psp-core-2025--law-change-43163-3",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43180-1-2",
+        "psp-core-2025--law-change-43189-approved-3",
+        "psp-core-2025--law-change-43203-14",
+        "psp-core-2025--law-change-43216-1",
+        "psp-core-2025--law-change-43216-3",
+        "psp-core-2025--law-change-43216-5",
+        "psp-core-2025--law-change-43295-2",
+        "psp-core-2025--law-change-43310-3",
+        "psp-core-2025--law-change-43310-5",
+        "psp-core-2025--law-change-43343-1",
+        "psp-core-2025--law-change-43356-1",
+        "psp-core-2025--law-change-43356-2",
+        "psp-core-2025--law-change-43365-1",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--law-change-43443-1",
+        "psp-core-2025--law-change-43443-3",
+        "psp-core-2025--law-change-43443-7",
+        "psp-core-2025--law-change-43443-9",
+        "psp-core-2025--law-change-43453-31",
+        "psp-core-2025--law-change-43453-97",
+        "esbirka-regulations--law-change-sb-2026-15",
+        "esbirka-regulations--law-change-sb-2026-106",
+        "esbirka-regulations--law-change-sb-2026-151",
+        "zvlady-resolutions--law-change-uv-2026-175-133",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--government-opinion-43180-1",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--government-opinion-43216-1",
+        "psp-core-2025--print-step-211274",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-87617",
+        "esbirka-regulations--2026-15",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211601",
+        "esbirka-regulations--2026-106",
+        "psp-core-2025--print-step-211658",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--vote-88152",
+        "psp-core-2025--vote-88154",
+        "psp-core-2025--vote-88170",
+        "psp-core-2025--vote-88172",
+        "psp-core-2025--vote-88194",
+        "psp-core-2025--vote-88211",
+        "psp-core-2025--vote-88213",
+        "psp-core-2025--vote-88217",
+        "psp-core-2025--vote-88234",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88297",
+        "psp-core-2025--vote-88298",
+        "psp-core-2025--vote-88356",
+        "esbirka-regulations--2026-151",
+        "psp-core-2025--government-opinion-43365-1",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--vote-88562",
+        "psp-core-2025--vote-88548",
+        "psp-core-2025--print-step-212242",
+        "psp-core-2025--print-step-212285",
+        "psp-core-2025--vote-88696",
+        "psp-core-2025--vote-88697"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro novelu stavebního zákona, která v některých případech zjednodušuje povolování, a také pro zákon o evidenci tržeb, jehož část rozšířila kontrolní nákupy celní správy na tuto oblast. Hlasování pro rozšíření kontrolních pravomocí jde proti závazku odstraňovat regulace; opačným směrem působilo schválení části stavebních zjednodušení. Vláda dále navrhla nové podmínky pro psychomodulační látky a pro práci s azbestem, zatímco v některých případech také podpořila či navrhla úlevy. Protože rozhodnutí z 9. září zahrnují jak uvolnění, tak nové omezení, a evidence tržeb přidává jen část omezení slíbeného k odstranění, jde o částečný posun proti slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Slib neurčuje, které regulace jsou „nesmyslné“ ani nevyjmenovává konkrétní pravidla; některé změny proto souvisejí se slibem jen jako obecné zásahy do podnikání či profesní činnosti.",
+        "U nových znění předpisů bez dodaného předchozího textu nelze vždy určit, zda se regulace oproti dosavadnímu stavu zpřísnila, nebo zmírnila.",
+        "Hlasování pro stavební změny uvolňující některé povolovací požadavky a hlasování pro rozšíření kontrol u evidence tržeb působí opačným směrem. Podle pravidla pro stejně významná rozhodnutí ve stejný den byl pro současný výsledek rozhodující nižší, tedy nepříznivý směr."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_051a0d74b655ed02016aec5955dc7087d1b7bceb53d839bbaa",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 209316,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 209313
+      },
+      "output_tokens": 12754,
+      "output_tokens_details": {
+        "reasoning_tokens": 5560
+      },
+      "total_tokens": 222070
+    },
+    "output": {
+      "promiseId": "candidate-bb35fbd70fd7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-1",
+          "relevant": true,
+          "reasonCz": "Ruší zákaz používání a prodeje jednorázových nádob na fluorované plyny a upravuje také povinnosti při certifikační zkoušce, tedy přímo mění konkrétní regulatorní omezení.",
+          "effectCz": "Dříve bylo použití, prodej, převod, směna i skladování těchto nádob zakázáno; navržené zrušení § 4a tento zákaz odstraňuje, takže omezení je volnější. Nová úleva v § 8a odst. 5 umožňuje uznat dříve získanou kvalifikaci a skládat jen dosud nepokrytou část zkoušky; její předchozí znění v podkladu není, proto nelze určit celkovou změnu zkouškových povinností."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-1-5",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení uznávají dřívější školení a hodnocení pro novou povinnost obnovovat znalosti, čímž mohou zmírnit část regulační zátěže.",
+          "effectCz": "Předchozí znění odkazovaných povinností § 9a a § 9b není v podkladu uvedeno, takže jejich celkovou změnu nelze určit. Text však výslovně uznává dříve absolvované odpovídající školení nebo hodnocení jako první splnění nové povinnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43121-2",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje trestní odpovědnost za nakládání s fluorovanými skleníkovými plyny a výrobky s nimi, tedy přidává sankční omezení jednání osob.",
+          "effectCz": "Dříve § 298a trestal hrubě nedbalé porušení předpisů při nakládání s látkami poškozujícími ozonovou vrstvu. Navržené znění rozšiřuje trestný čin také na fluorované plyny, výrobky a zařízení, včetně jejich uvádění do provozu; okruh jednání postižitelných odnětím svobody až na rok, zákazem činnosti či propadnutím věci se zvětšuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43163-3",
+          "relevant": true,
+          "reasonCz": "Nově omezuje vlastníka nemovitosti v možnosti odvolat souhlas s vnitřním komunikačním vedením a stanoví mu náklady při jeho odstranění.",
+          "effectCz": "Předchozí § 104 odst. 3 vyžadoval písemný souhlas vlastníka k umístění vnitřního vedení, ale neposkytuje v podkladu omezení možnosti souhlas odvolat. Nové odstavce dovolují odvolání jen ze závažných důvodů nebo po deseti letech a při dřívějším odstranění ukládají vlastníkovi také nevrácenou část nákladů; možnost vlastníka rozhodovat o své nemovitosti se tím zužuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Mění stavební povolování rozsáhlým souborem ustanovení, z nichž řada zjednodušuje postupy a odstraňuje některá samostatná povolení či posuzování.",
+          "effectCz": "Oproti dodanému předchozímu znění stavebního zákona některé změny rozšiřují možnost odchýlit se se souhlasem od územního plánu, slučují povolení, umožňují některé záměry považovat za přípustné či omezuje opakované dokládání a posuzování; tím část administrativních překážek uvolňuje. Schválené znění také zavádí fikci povolení u vybraných záměrů a zkracuje či zjednodušuje některé kolaudační postupy. Jiné nové podmínky a pravidla se současně zavádějí a ne všechny mají v poskytnutém kontextu předchozí znění, takže směr každého jednotlivého ustanovení nelze určit; celkově však jde o částečné uvolnění stavebních povinností."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43180-1-2",
+          "relevant": true,
+          "reasonCz": "Navrhuje povinný zálohový systém pro vybrané jednorázové nápojové obaly, a tím přidává povinnosti pro nakládání s nimi.",
+          "effectCz": "Předchozí znění konkrétních ustanovení o zálohování není v podkladu uvedeno. Návrh nově vymezuje vybrané plastové lahve a kovové nádoby, stanoví jejich zálohování a vyjímá mimo jiné některé prodeje a subjekty uvádějící na trh méně než 150 kg ročně; pro vymezené obaly tedy vytváří novou povinnost."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-3",
+          "relevant": true,
+          "reasonCz": "Schválená část stanoví kvalifikační požadavky pro podnikání v poradenské psychoterapii, které mohou omezit přístup k této činnosti.",
+          "effectCz": "Dřívější přechodné ustanovení dovolovalo pokračovat v dosavadních živnostech; schválené doplnění dává dotčeným podnikatelům čas do 1. července 2029 zajistit nově požadované magisterské vzdělání či splnění související povinnosti. Přechodná lhůta zátěž dočasně zmírňuje, ale samotný kvalifikační požadavek přístup k podnikání zpřísňuje; úplné předchozí znění nové kvalifikace v podkladu není."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43193-2",
+          "relevant": true,
+          "reasonCz": "Nově umožňuje obcím uložit řidičům taxislužby zkoušky ze znalostí jako podmínku pro nabízení či poskytování přepravy.",
+          "effectCz": "Předchozí § 21b obcím dovoloval stanovovat podmínky užívání stanovišť a zvláštní technické požadavky na vozidla, nikoli v dodaném znění podmiňovat činnost řidiče znalostní zkouškou. Nové odstavce umožňují vyžadovat znalost práv a povinností, češtiny a místních poměrů a stanovit zkoušku i její poplatek; regulační možnost a podmínky pro řidiče se rozšiřují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-14",
+          "relevant": true,
+          "reasonCz": "Část smlouvy obsahuje závazky k přeshraničnímu poskytování služeb a k tomu, aby licenční řízení byla přístupná, objektivní a zbytečně nekomplikovala činnost.",
+          "effectCz": "Jde o novou smlouvu bez předchozího domácího znění. Stanoví pravidla pro dočasný vstup některých poskytovatelů služeb a požaduje jasná a transparentní licenční kritéria a snahu o jednoduché postupy; současně zachovává pracovní, sociální a další právní požadavky. Může uvolnit část překážek pro vymezené přeshraniční služby, nikoli obecně rušit domácí regulaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": false,
+          "reasonCz": "Dodané úryvky mluví obecně o podpoře mobility a výzkumné spolupráce, ale neukazují konkrétní pravidlo, které by prokazatelně odstranilo či zpřísnilo omezení osobní svobody.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-1",
+          "relevant": true,
+          "reasonCz": "Zavádí státní registr ubytování, povinnou registraci a rozsáhlé povinnosti předávání údajů ubytovateli i online platformami.",
+          "effectCz": "Předchozí § 10 ukládal zprostředkovateli povinnost poskytnout živnostenskému úřadu určité údaje na jeho výzvu. Návrh vytváří centrální registr, ukládá ubytovatelům registraci, hlášení a evidenci údajů o hostech a umožňuje jejich přístup více orgánům; povinnosti a státní sběr údajů se rozšiřují. Některé nové odstavce nemají v podkladu předchozí znění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-3",
+          "relevant": true,
+          "reasonCz": "Umožňuje sdílet údaje o provozovně a ubytování prostřednictvím registru a při podání na živnostenském úřadě, což může zjednodušit vyřizování povinností.",
+          "effectCz": "Dřívější § 17 ukládal podnikateli oznámit zahájení či ukončení provozu provozovny živnostenskému úřadu. Nové ustanovení umožňuje splnit oznamovací povinnost prostřednictvím registru a podat u něj související údaje společně s ohlášením živnosti; jde o zjednodušení způsobu vyřízení, nikoli o odstranění samotných povinností."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-5",
+          "relevant": true,
+          "reasonCz": "Umožňuje splnit části povinností při hlášení pobytu cizinců zápisem údajů do nového registru ubytování, tedy mění administrativní zátěž ubytovatelů.",
+          "effectCz": "Dřívější § 97 vyžadoval sdělit policii identifikační a pobytové údaje cizince a § 102 oznámit jeho ubytování policii do tří pracovních dnů. Návrh uznává zápis údajů do registru jako splnění těchto povinností; snižuje duplicitní hlášení, ale zavádí jejich plnění v novém státním registru."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43295-2",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje policejní oprávnění ke vstupu tak, aby se výslovně týkalo i obydlí, což zasahuje do osobní svobody a soukromí.",
+          "effectCz": "Dosavadní § 40 odst. 2 písm. c) umožňoval policii vstup do jiného prostoru nebo na pozemek při důvodném podezření na týrané zvíře. Návrh do výčtu doplňuje obydlí, a rozšiřuje tak prostor, do něhož může policie vstoupit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Písemné návrhy k této části prodlužují lhůtu pro evidenci tržeb a navrhují výjimku pro drobný prodej vlastní zemědělské produkce, tedy přímo uvolňují evidenční povinnosti.",
+          "effectCz": "Vlastní text této části v balíčku není; důkaz tvoří pouze pozměňovací návrhy. Návrh G3 posouvá lhůtu pro dodatečné odeslání údajů z 48 hodin na pět pracovních dnů a vylučuje odpovědnost při výpadku systému správce daně; návrh G4 vyjímá drobný prodej vlastní produkce mimo provozovnu do 50 000 Kč za zdaňovací období. Oba návrhy by evidenční zátěž zmírnily."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje kontrolní působnost Celní správy o evidenci tržeb a mění možnost používat krycí prostředky při kontrolách, čímž upravuje rozsah státní kontroly podnikatelů.",
+          "effectCz": "Předchozí § 11e dovoloval kontrolní nákupy při kontrolách vybraných oblastí, nikoli evidence tržeb; § 38 odst. 2 dovoloval použití krycích dokladů jen pro vyjmenované kontroly. Schválené znění doplňuje evidenci tržeb jako další oblast kontrolního nákupu a obecnější oprávnění používat krycí prostředek; kontrolní působnost státu se rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-1",
+          "relevant": true,
+          "reasonCz": "Mění omezení podniků spojených s veřejnými funkcionáři při účasti ve veřejných zakázkách a při získávání dotací či pobídek.",
+          "effectCz": "Dřívější § 4b zakazoval účast společnosti s nejméně 25% podílem veřejného funkcionáře ve veřejných zakázkách a § 4c zakazoval jí dotace i investiční pobídky. Návrh § 4b ruší, ale zavádí v § 4c užší zákaz pro dotace bez právního nároku a pro konkrétní případy pobídek; v této části omezení podnikání uvolňuje, při dotacích současně zachovává a upravuje nová omezení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43356-1",
+          "relevant": true,
+          "reasonCz": "Ruší některé výhradní právní formy, v nichž smějí autorizované osoby působit, a mění podmínky výkonu jejich profese.",
+          "effectCz": "Dříve mohly autorizované osoby vykonávat povolání jako společníci profesně zřízené veřejné obchodní společnosti či společnosti s ručením omezeným, přičemž pro tyto společnosti platily zvláštní pravidla. Návrh umožňuje také komanditní společnosti a běžné společnosti s ručením omezeným a ruší části dosavadní zvláštní úpravy; právní formy výkonu profese se uvolňují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43356-2",
+          "relevant": true,
+          "reasonCz": "Zavádí pro autorizované zeměměřické inženýry nové povinnosti, například pojištění odpovědnosti, členské příspěvky a oznamování skutečností souvisejících s autorizací.",
+          "effectCz": "Předchozí znění § 16e, § 16i a dalších dodaných ustanovení neobsahovalo uvedenou povinnost pojištění ani nové disciplinární a členské povinnosti. Návrh je přidává a stanoví také podmínku odborné praxe v zahraničí až na dva roky; většina nových povinností profesní regulaci zpřísňuje, zatímco zahraniční praxe může přístup částečně usnadnit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43365-1",
+          "relevant": true,
+          "reasonCz": "Stanoví konkrétní zákazy maloobchodního prodeje v určitých dnech, které přímo omezují prodejce i možnost spotřebitelů nakupovat.",
+          "effectCz": "Předchozí znění § 1 zákona o prodejní době není v balíčku, takže nelze určit, zda a jak se rozsah zákazů oproti dosavadnímu stavu mění. Návrh stanoví zákaz prodeje ve vyjmenovaných svátcích a 24. prosince po poledni, s výjimkami pro menší prodejny a některé typy provozoven."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": true,
+          "reasonCz": "Mění hlukové výjimky a zavádí povolení práce s azbestem a další oznamovací podmínky, které se dotýkají možností osob jednat a podnikat.",
+          "effectCz": "U hluku návrh rozšiřuje výjimky o zvuk z běžného užívání venkovního sportovního náčiní a náboženského oznamování, takže v těchto případech omezení hlukovým režimem uvolňuje. U azbestu současně přidává povolení před zahájením práce, nové hlášení při změně a zákaz pokračovat do pravomocného povolení; tyto povinnosti zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-1",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje definici uvádění psychomodulačních látek na trh a zavádí další zákazy nakládání s technickým konopím a jeho zpracováním.",
+          "effectCz": "Dříve se uváděním psychomodulačních látek na trh rozumělo jejich poskytnutí konečnému spotřebiteli; návrh zahrnuje i činnosti směřující k tomuto poskytnutí, jako nabízení, skladování či přepravu. Dále přidává zákazy prodeje výrobků z technického konopí fyzickým osobám, jeho obohacování a některých chemických přeměn; regulace se rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-3",
+          "relevant": true,
+          "reasonCz": "Přidává požadavky na složení a vlastnosti bylinných výrobků ke kouření a další pravidla pro nikotinové sáčky, tedy omezuje výrobu a prodej těchto produktů.",
+          "effectCz": "Dříve bylinné výrobky nesměly obsahovat psychomodulační ani zařazené psychoaktivní látky a u nikotinových sáčků již platily požadavky na složení a balení. Návrh rozšiřuje zákaz v bylinných výrobcích také na návykové látky a další uvedené látky a ukládá nově výrobci, dovozci, prodejci a distributorovi povinnost dodržet požadavky na složení, vzhled, jakost a vlastnosti; omezení se zpřísňují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-7",
+          "relevant": true,
+          "reasonCz": "Stanoví vysoké správní poplatky za žádosti o povolení k nakládání s psychomodulačními látkami, což může ztížit vstup do podnikání.",
+          "effectCz": "Předchozí znění sazebníku už obsahovalo poplatky pro některé typy povolení, například 20 000 Kč za prodej a 200 000 Kč za výrobu. Návrh upravuje a přeskupuje jednotlivé položky a stanoví také poplatky 30 000 Kč za prodejní provozovnu a 200 000 Kč za některé další činnosti; směr změny pro všechny kategorie nelze určit, ale vysoké poplatky zůstávají významnou překážkou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-9",
+          "relevant": true,
+          "reasonCz": "Zvyšuje věkovou hranici pro prodej psychomodulačních látek a umožňuje obcím jejich prodejny místně omezit nebo zcela zakázat.",
+          "effectCz": "Dříve byl prodej psychomodulačních látek zakázán osobám mladším 18 let a na dálku platila podrobná pravidla včetně ochrany osobních údajů a předání do vlastních rukou. Návrh zvyšuje věkovou hranici na 21 let, přidává omezení označení a provozu prodejen a dává obcím možnost prodejny omezit či zakázat; část dosavadních pravidel pro dálkový prodej ruší, ale nové podmínky celkově omezení podstatně rozšiřují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-31",
+          "relevant": true,
+          "reasonCz": "Smlouva obsahuje pravidlo, že elektronické služby nepodléhají předchozímu povolení, a uznává právní účinky elektronických smluv.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího domácího znění. Stanoví, že elektronické služby obecně nemají podléhat předchozímu povolení a že elektronickým smlouvám nelze upřít právní účinky jen kvůli jejich formě, s výjimkami pro některé služby a smlouvy; v této části překážky uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-97",
+          "relevant": true,
+          "reasonCz": "Stanoví podmínky dočasného vstupu smluvních poskytovatelů služeb a nezávislých odborníků, včetně kvalifikace, délky pobytu a testů ekonomické potřebnosti.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího domácího znění. Umožňuje dočasné poskytování vyjmenovaných služeb, ale v České republice zachovává testy ekonomické potřebnosti pro řadu profesí a stanoví kvalifikační podmínky; otevírá omezenou cestu přeshraničnímu poskytování, zároveň ponechává významná omezení."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-15",
+          "relevant": true,
+          "reasonCz": "Stanoví povinné školení a zdravotní posouzení pro zacházení s vybranými kategoriemi pyrotechnických výrobků, což omezuje přístup k této činnosti.",
+          "effectCz": "Jde o nový prováděcí předpis bez předchozího znění v balíčku. Stanoví školení v délce 16 nebo 40 výukových hodin podle kategorie, zkušební řád a lékařská prohlídka včetně nemocí omezujících způsobilost; profesní podmínky zpřísňuje."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-106",
+          "relevant": true,
+          "reasonCz": "Stanoví rozsáhlý vzdělávací program jako podmínku odborné způsobilosti k poradenské psychoterapii, čímž omezuje možnost tuto živnost vykonávat.",
+          "effectCz": "Jde o nový prováděcí předpis bez předchozího znění v balíčku. Vyžaduje nejméně 1 450 hodin vzdělávání rozložených alespoň do pěti let, včetně teorie, sebezkušenosti, praxe, supervize a závěrečné kazuistiky; podmínky vstupu do živnosti zpřísňuje."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-151",
+          "relevant": false,
+          "reasonCz": "Úryvek vymezuje obsah psychologického poradenství a poradenské psychoterapie, ale neukazuje, že by toto nařízení samo stanovilo podmínky přístupu nebo jinak konkrétně omezovalo osobní svobodu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-133",
+          "relevant": true,
+          "reasonCz": "Vládní plán ukládá připravit návrh zákona, který má řidičům taxislužby zavést povinnost prokazovat znalost češtiny a další kvalifikační požadavky.",
+          "effectCz": "Jde o návrh budoucí úpravy, nikoli o změnu platného pravidla. V plánu je uveden cíl zavést řidičům taxislužby jazykovou a profesní kvalifikaci; pokud by byl uskutečněn, přidal by podmínky pro výkon práce, ale sám plán je ještě nestanoví."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-bb35fbd70fd7--source",
+        "psp-core-2025--law-change-43121-1-1",
+        "psp-core-2025--law-change-43121-1-5",
+        "psp-core-2025--law-change-43121-2",
+        "psp-core-2025--law-change-43163-3",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43180-1-2",
+        "psp-core-2025--law-change-43189-approved-3",
+        "psp-core-2025--law-change-43193-2",
+        "psp-core-2025--law-change-43203-14",
+        "psp-core-2025--law-change-43216-1",
+        "psp-core-2025--law-change-43216-3",
+        "psp-core-2025--law-change-43216-5",
+        "psp-core-2025--law-change-43295-2",
+        "psp-core-2025--law-change-43310-3",
+        "psp-core-2025--law-change-43310-5",
+        "psp-core-2025--law-change-43343-1",
+        "psp-core-2025--law-change-43356-1",
+        "psp-core-2025--law-change-43356-2",
+        "psp-core-2025--law-change-43365-1",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--law-change-43443-1",
+        "psp-core-2025--law-change-43443-3",
+        "psp-core-2025--law-change-43443-7",
+        "psp-core-2025--law-change-43443-9",
+        "psp-core-2025--law-change-43453-31",
+        "psp-core-2025--law-change-43453-97",
+        "esbirka-regulations--law-change-sb-2026-15",
+        "esbirka-regulations--law-change-sb-2026-106",
+        "zvlady-resolutions--law-change-uv-2026-175-133",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1172",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--amendment-text-1219",
+        "psp-core-2025--vote-88152",
+        "psp-core-2025--amendment-text-1351",
+        "psp-core-2025--vote-88154",
+        "psp-core-2025--amendment-text-1247",
+        "psp-core-2025--vote-88170",
+        "psp-core-2025--amendment-text-1183",
+        "psp-core-2025--vote-88172",
+        "psp-core-2025--amendment-text-1148",
+        "psp-core-2025--vote-88194",
+        "psp-core-2025--amendment-text-1249",
+        "psp-core-2025--vote-88211",
+        "psp-core-2025--amendment-text-1270",
+        "psp-core-2025--vote-88213",
+        "psp-core-2025--amendment-text-1366",
+        "psp-core-2025--vote-88217",
+        "psp-core-2025--amendment-text-1368",
+        "psp-core-2025--vote-88234",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--government-opinion-43180-1",
+        "psp-core-2025--vote-87617",
+        "psp-core-2025--print-step-210709",
+        "psp-core-2025--vote-88548",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--government-opinion-43216-1",
+        "psp-core-2025--print-step-211274",
+        "psp-core-2025--government-opinion-43295-1",
+        "psp-core-2025--amendment-text-1564",
+        "psp-core-2025--vote-88297",
+        "psp-core-2025--amendment-text-1565",
+        "psp-core-2025--vote-88298",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--print-step-211601",
+        "psp-core-2025--print-step-211658",
+        "psp-core-2025--government-opinion-43365-1",
+        "psp-core-2025--print-step-211961",
+        "psp-core-2025--print-step-212242",
+        "psp-core-2025--print-step-212285",
+        "psp-core-2025--amendment-text-1630",
+        "psp-core-2025--vote-88696",
+        "psp-core-2025--amendment-text-1735",
+        "psp-core-2025--vote-88697",
+        "esbirka-regulations--2026-15",
+        "esbirka-regulations--2026-106",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Poslanci SPD podpořili novelu silniční dopravy, která obcím umožňuje podmínit práci řidičů taxislužby zkouškou z češtiny a dalších znalostí; tím se část omezení osobní a pracovní svobody rozšiřuje. Dříve hlasovali také pro stavební zákon, který naopak zjednodušuje některá povolovací řízení, takže jejich postup není jednotný. Vláda i poslanci SPD podpořili také další návrhy, které přidávají podmínky pro podnikání a nakládání s psychomodulačními látkami, přestože některá jiná opatření zátěž snižují. Slib proto vykazuje dílčí rozporný posun, ale pozdější schválení nové podmínky pro řidiče taxislužby působí proti němu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Slib neurčuje, které regulace strana pokládá za nesmyslné ani které konkrétní zásahy do osobní svobody chce odstranit; některé obecné změny proto mohou být posuzovány různě.",
+        "Některé pozměňovací návrhy ke stavebnímu zákonu současně zjednodušují povolování a jiné ponechávají či nově stanoví podmínky. Proti tomuto uvolňujícímu rozhodnutí stojí pozdější hlasování SPD pro možnost obcí zavést zkoušky řidičů taxislužby."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

@@ -1,0 +1,809 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T20-28-11-607Z--a31ac73ad033",
+  "evaluatedAt": "2026-10-06T20:28:11.607Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-b894b4f5856c/a31ac73ad0338bca4519b8fa045b3a33a288218c8916cbf53f48268760cdf4c8.json",
+  "packageHash": "a31ac73ad0338bca4519b8fa045b3a33a288218c8916cbf53f48268760cdf4c8",
+  "assessmentContentHash": "fcbf5391389ebb201b9d6f3b89bc1e4912820c2b13b9cc843d392e66dfb5b184",
+  "assessmentFingerprint": "93e22f2428fc8089973a2de516447a55eb3d6553a7669b9889e8a01df4d16eb9",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-b894b4f5856c",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment omits the relevance verdict for law change psp-core-2025--law-change-43329-1",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0acdaac89c7cc33a016ac55596a6b487d299b254ad9970066e",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 536383,
+            "input_tokens_details": {
+              "cache_write_tokens": 532413,
+              "cached_tokens": 3967
+            },
+            "output_tokens": 7621,
+            "output_tokens_details": {
+              "reasoning_tokens": 6145
+            },
+            "total_tokens": 544004
+          },
+          "output": {
+            "promiseId": "candidate-b894b4f5856c",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": false,
+                "reasonCz": "Změny stavebního zákona upravují hlavně povolování staveb a vyvažování veřejných zájmů, nikoli omezení samotného lesního hospodaření.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": true,
+                "reasonCz": "Novela zákona o ochraně přírody výslovně mění pravidla pro lesnické práce a zásahy do chráněných druhů.",
+                "effectCz": "Nově ukládá při lesnických pracích chránit biotopy opylovačů a použít technicky a ekonomicky dostupná opatření; jde o novou povinnost, její dopad na náklady lesního hospodaření však text nevyčísluje. Oproti dosavadní ochraně některých chráněných rostlin a živočichů novela současně výslovně připouští nezáměrné zásahy při běžném lesním hospodaření u druhů II. kategorie, pokud nedojde k poškození jejich biotopu nebo místní populace, a v některých případech vylučuje postih za lesnické zásahy mimo místa výskytu uvedená v lesním hospodářském plánu, pokud výskyt nebyl zřejmý. Tato pravidla část omezení uvolňují, ale nová povinnost chránit opylovače je naopak zpřísňuje; celkový ekonomický účinek na lesní hospodaření z balíčku určit nelze."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-14",
+                "relevant": false,
+                "reasonCz": "Změna lesního zákona se týká zejména povolování záměrů a odnětí lesních pozemků, nikoli pravidel běžného lesního hospodaření.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": false,
+                "reasonCz": "Změny posuzování vlivů na životní prostředí upravují povolovací postupy, ale balíček je nespojuje s omezeními samotného lesního hospodaření.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-31",
+                "relevant": false,
+                "reasonCz": "Navržené změny trestního zákoníku se týkaly ochrany životního prostředí, nikoli omezení lesního hospodaření, a ve schváleném textu byly odstraněny.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": false,
+                "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku nemá v předložených verzích přímou vazbu na omezení lesního hospodaření a ve schváleném textu bylo odstraněno.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": false,
+                "reasonCz": "Změny pravidel pro obnovitelné zdroje energie se týkají jejich povolování, nikoli environmentálních omezení lesního hospodaření.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+                "relevant": false,
+                "reasonCz": "Změna vymezení pozemků, kde se omezují některé přípravky na ochranu rostlin, není v balíčku spojena s lesním hospodařením.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": false,
+                "reasonCz": "Zrušovací ustanovení se týká dalších právních předpisů a neukazuje změnu omezení samotného lesního hospodaření.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-b894b4f5856c--source",
+              "psp-core-2025--law-change-43174-8",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454"
+            ],
+            "explanationCz": "Poslanci Motoristů spolu s dalšími poslanci předložili novelu stavebního zákona a v červenci pro ni hlasovali. Senát návrh zamítl, ale v září poslanci Motoristů hlasovali pro jeho prosazení a Sněmovna na své dřívější verzi setrvala. Novela uvolňuje část omezení lesnických zásahů kvůli chráněným druhům, zároveň ale zavádí povinnost chránit biotopy opylovačů při lesnických pracích. Jde tedy o částečný posun směrem ke slibu, nikoli o jeho úplné splnění; z dostupných podkladů nelze určit skutečný dopad nových pravidel na náklady lesního hospodaření.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Novela současně zavádí novou povinnost chránit biotopy opylovačů při lesnických pracích. Podklady nevyčíslují její náklady, takže nelze určit, zda jde o omezení, které by z lesního hospodaření dělalo ztrátovou činnost."
+            ]
+          }
+        }
+      },
+      {
+        "error": "Assessment omits the relevance verdict for law change psp-core-2025--law-change-43329-1",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_01f966a8ce2c40e8016ac5563e47c887d2b97d1248f20ddafe",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 536383,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 536380
+            },
+            "output_tokens": 8371,
+            "output_tokens_details": {
+              "reasoning_tokens": 6405
+            },
+            "total_tokens": 544754
+          },
+          "output": {
+            "promiseId": "candidate-b894b4f5856c",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Změny stavebního zákona výslovně zahrnují lesnictví mezi chráněné veřejné zájmy a upravují, jak se při střetu s ochranou životního prostředí poměřují omezení rozvoje a ekonomické možnosti.",
+                "effectCz": "Předchozí § 1 vymezoval integrovanou ochranu veřejných zájmů a udržitelný rozvoj; schválené znění nově výslovně uvádí lesnictví mezi veřejnými zájmy a stanoví, že rozvoj lze znemožnit jen tehdy, když ochranu jiných hodnot nelze zajistit podmínkami či kompenzací. Při střetu zájmů se navíc mají zohlednit ekonomicky a technicky přijatelné možnosti, takže možnost uplatňovat omezující podmínky je v této oblasti volnější; samotná povinnost lesního hospodaření ani jeho ziskovost se však neupravuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": true,
+                "reasonCz": "Novela zákona o ochraně přírody mění pravidla ochrany druhů a výslovně se dotýká lesnických prací i zohledňování chráněných druhů při lesním hospodaření.",
+                "effectCz": "Dříve § 5 odst. 3 ukládal při lesnických pracích předcházet zbytečnému úhynu či poškození biotopů prostředky dostupnými technicky i ekonomicky; schválené znění zachovává stejný základ a mluví o dostupných postupech a opatřeních, takže směr této povinnosti se zásadně nemění. Nové § 49a umožňuje některé nezáměrné zásahy do jedinců druhů II. kategorie při běžném lesnickém hospodaření na určených plochách, pokud není poškozena místní populace či biotop, což část omezení uvolňuje; zákaz významného poškození biotopů a populací zůstává. Nový § 48 odst. 5 zároveň ukládá zpracovateli lesního hospodářského plánu převzít údaje o výskytu chráněných druhů a orgánu ochrany přírody oznamovat další významný nález, což přidává informační povinnost; její konkrétní nákladový dopad podklady neukazují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-14",
+                "relevant": true,
+                "reasonCz": "Změna lesního zákona odstraňuje některé souhlasy a rozhodovací překážky týkající se lesních pozemků, což může uvolnit omezení spojená s jejich využíváním.",
+                "effectCz": "Předchozí § 12 odst. 3 vyžadoval souhlas lesního orgánu při dělení lesního pozemku, pokud některý díl klesl pod 1 ha; schválený text tento odstavec ruší, a tedy tuto podmínku uvolňuje. Předchozí § 14 vyžadoval závazné stanovisko lesního orgánu pro záměry dotýkající se lesa a pozemků do 30 metrů od jeho okraje; pro stavební řízení se toto stanovisko nově nevydává a podmínky posoudí stavební úřad po vyjádření lesního orgánu, takže odpadá samostatná závazná překážka. Změna se týká především dělení pozemků a stavebních záměrů, nikoli přímo běžného hospodaření či jeho ziskovosti."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": false,
+                "reasonCz": "Změny posuzování vlivů na životní prostředí upravují obecné postupy pro záměry, ale dodaný text je nespojuje s omezeními lesního hospodaření ani s jeho ziskovostí.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-31",
+                "relevant": false,
+                "reasonCz": "Navržené změny trestního zákoníku se týkaly postihů za závažné poškození životního prostředí, nikoli pravidel běžného lesního hospodaření; navíc byly ze schváleného textu vypuštěny.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": false,
+                "reasonCz": "Navrhované zrušení zákona o jednotném environmentálním stanovisku není ve schváleném textu a dodané podklady ho nespojují s lesním hospodařením.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": false,
+                "reasonCz": "Úprava pravidel pro urychlování obnovitelných zdrojů energie se týká akceleračních oblastí, nikoli doložených omezení lesního hospodaření.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+                "relevant": false,
+                "reasonCz": "Změna definice pozemků v zákoně o rostlinolékařské péči se podle dodaného znění netýká environmentálních omezení lesního hospodaření.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": false,
+                "reasonCz": "Toto zrušovací ustanovení se týká jiných předpisů a dodaný text neukazuje přímou souvislost s omezeními lesního hospodaření.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-b894b4f5856c--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-8",
+              "psp-core-2025--law-change-43174-14",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15"
+            ],
+            "explanationCz": "Poslanci Motoristů sobě předložili spolu s dalšími poslanci návrh změn stavebního, lesního a přírodního zákona. V červenci hlasovali pro jeho schválení a v září také pro setrvání na něm poté, co jej Senát odmítl. Schválené změny uvolňují některé překážky při dělení lesních pozemků a při povolování záměrů u lesa a zmírňují část omezení pro běžné lesnické hospodaření. Nová informační povinnost a další ochranná pravidla však zůstávají; podklady také neukazují, zda změny skutečně odstraní ztrátovost lesního hospodaření.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Změny lesního zákona se týkají hlavně dělení pozemků a stavebních záměrů; jejich přínos pro běžné lesní hospodaření není v podkladech vyčíslen.",
+              "Nová povinnost zohledňovat údaje o výskytu chráněných druhů v lesních hospodářských plánech může přinášet další náklady, ale jejich rozsah ani dopad na ziskovost podklady nedokládají."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": [
+      {
+        "error": "Assessment omits the relevance verdict for law change psp-core-2025--law-change-43329-1",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0fa1025d970acf04016ac557bcb1f887d2b6d05c933c8eba63",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 536383,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 536380
+            },
+            "output_tokens": 6701,
+            "output_tokens_details": {
+              "reasoning_tokens": 4825
+            },
+            "total_tokens": 543084
+          },
+          "output": {
+            "promiseId": "candidate-b894b4f5856c",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Novela stavebního zákona výslovně zahrnuje lesnictví mezi veřejné zájmy a mění pravidla pro poměřování těchto zájmů při územním plánování a povolování záměrů.",
+                "effectCz": "Dříve stavební zákon jako účel zdůrazňoval integrovanou ochranu veřejných zájmů a udržitelný rozvoj; schválený text nově výslovně požaduje poměřování zájmů a připouští omezení rozvoje jen tehdy, nelze-li ochranu jiných hodnot zajistit podmínkami či kompenzacemi. Lesnictví je přitom výslovně uvedeno mezi chráněnými zájmy. V rozsahu pravidel pro povolování a územní plánování se tím prostor pro nepřiměřené environmentální omezení lesnického rozvoje zužuje; novela však zároveň zachovává ochranu životního prostředí a lesnického zájmu nezbavuje všech omezení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": true,
+                "reasonCz": "Novela zákona o ochraně přírody přímo upravuje povinnosti při lesnických pracích a ochranu druhů a jejich biotopů, tedy environmentální pravidla dopadající na lesní hospodaření.",
+                "effectCz": "Dříve obecná povinnost při lesnických pracích předcházet zbytečnému úhynu a ničení biotopů připouštěla technicky a ekonomicky dostupné prostředky; schválený text ji zachovává, výslovně zahrnuje i narušení migračních tras a hovoří o dostupných postupech a opatřeních. Nově také ukládá předcházet zbytečnému poškození biotopů opylovačů při lesnických pracích, byť jen dostupnými technickými a ekonomickými opatřeními. Současně se ochrana zvláště chráněných druhů přepracovává: u některých druhů nově platí výjimka pro nezáměrné zásahy při běžném lesním hospodaření, pokud nedojde k poškození či zničení biotopu nebo místní populace; to lesnické omezení v tomto rozsahu uvolňuje. Jde tedy o smíšený účinek: část ochrany se uvolňuje, zatímco jiná povinnost je nově výslovně stanovena."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-14",
+                "relevant": true,
+                "reasonCz": "Novela lesního zákona mění požadavky a postupy při dělení lesních pozemků a při povolování záměrů, které se lesních pozemků dotýkají.",
+                "effectCz": "Dříve dělení lesních pozemků, při němž by některý díl měl méně než 1 ha, vyžadovalo souhlas orgánu státní správy lesů; schválený text tento souhlas odstraňuje, takže toto omezení je mírnější. U záměrů podle stavebního zákona se dřívější závazné stanovisko lesního orgánu nahrazuje jeho vyjádřením a posouzením podmínek stavebním úřadem; pravidlo tedy mění postup, ale z dodaného textu nelze dovodit, že by se věcné podmínky ochrany lesa obecně zmírnily. Také rozhodování o odnětí nebo omezení plnění funkcí lesa se začleňuje do povolení záměru, nikoli však bez dalšího ruší samotné podmínky odnětí."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": false,
+                "reasonCz": "Změny posuzování vlivů na životní prostředí se týkají obecného postupu pro záměry a dodaný text je nespojuje s konkrétními omezeními lesního hospodaření.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-31",
+                "relevant": false,
+                "reasonCz": "Navržená změna trestního zákoníku se týkala trestů za poškozování životního prostředí, nikoli konkrétních pravidel lesního hospodaření, a ve schváleném textu byla odstraněna.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": false,
+                "reasonCz": "Návrh zrušit zákon o jednotném environmentálním stanovisku byl ve schváleném textu odstraněn a jeho navržený obsah nesměřoval přímo k lesnickým omezením.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": false,
+                "reasonCz": "Změna pravidel pro akcelerační oblasti obnovitelných zdrojů energie se podle dodaného textu netýká konkrétních omezení lesního hospodaření.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+                "relevant": false,
+                "reasonCz": "Úprava vymezení pozemků v zákoně o rostlinolékařské péči neřeší environmentální omezení lesního hospodaření.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": false,
+                "reasonCz": "Zrušovací ustanovení se týká jiných předpisů a z dodaného textu nevyplývá jeho přímá souvislost s omezeními lesního hospodaření.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-b894b4f5856c--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-8",
+              "psp-core-2025--law-change-43174-14",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454"
+            ],
+            "explanationCz": "Poslanci Motoristů předložili společný návrh změn stavebního a dalších zákonů a v červenci hlasovali pro jeho schválení; po zamítnutí Senátem v září podpořili, aby na něm Sněmovna setrvala. Návrh uvolňuje některá pravidla: například ruší souhlas lesního úřadu pro dělení lesních pozemků pod jeden hektar a zavádí výjimku z některých druhových omezení při běžném lesním hospodaření. Zároveň ale výslovně ukládá předcházet poškozování biotopů opylovačů při lesnických pracích, takže přijatý balík obsahuje i nové environmentální povinnosti. Celkově jde o smíšený posun, který kvůli této části směřuje proti slibu; doložené podklady ale nevyčíslují dopad nových povinností na ziskovost lesního hospodaření.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Dodaný balík nevyčísluje, zda nová povinnost chránit biotopy opylovačů při lesnických pracích způsobí ztrátovost hospodaření; lze určit směr právní změny, nikoli její konkrétní ekonomický dopad.",
+              "Senát návrh zamítl, ale následně poslanci Motoristů hlasovali pro setrvání Sněmovny na návrhu; hodnocení vychází z jejich hlasování o textu, který podle záznamu posuzovali."
+            ]
+          }
+        }
+      },
+      {
+        "error": "Assessment omits the relevance verdict for law change psp-core-2025--law-change-43329-1",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_07fea945187ed68b016ac55848a20c87d2b366114a90c6d3ad",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 536383,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 536380
+            },
+            "output_tokens": 11255,
+            "output_tokens_details": {
+              "reasoning_tokens": 9091
+            },
+            "total_tokens": 547638
+          },
+          "output": {
+            "promiseId": "candidate-b894b4f5856c",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Novela výslovně řadí lesnictví mezi veřejné zájmy a mění pravidla pro poměřování ochrany životního prostředí s rozvojem hospodářství.",
+                "effectCz": "Před změnou stavební zákon obecně směřoval k integrované ochraně veřejných zájmů a udržitelnému rozvoji; nové zásady výslovně zahrnují lesnictví a stanoví, že ochrana veřejného zájmu nesmí nepřiměřeně zasáhnout jiné veřejné zájmy a že rozvoj lze znemožnit jen tehdy, nelze-li hodnoty ochránit podmínkami či kompenzacemi. To v rozhodování o využití území oslabuje možnost ukládat nepřiměřená omezení, ale nové ustanovení o výkonu ochrany veřejných zájmů stavebními úřady nahrazuje dosavadní dílčí úkony dotčených orgánů; jeho celkový dopad na přísnost ochrany lesa nelze z dodaného znění určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": true,
+                "reasonCz": "Změna přímo upravuje ochranu přírody při lesnických pracích a výslovně stanoví výjimku pro některé běžné lesnické činnosti.",
+                "effectCz": "Před změnou se při lesnických pracích měly používat technicky i ekonomicky dostupné prostředky k předcházení zbytečnému úhynu rostlin a živočichů; nové znění zachovává tuto povinnost, rozšiřuje ji o plánování terénních úprav a mluví o postupech a opatřeních. Nový § 5c navíc ukládá předcházet zbytečnému poškození biotopů opylovačů také při lesnických pracích, avšak pouze prostřednictvím technicky a ekonomicky dostupných opatření. Dřívější úprava chránila rostliny a živočichy zákazy zásahů do jedinců a jejich prostředí; nová úprava zakazuje poškození či zničení biotopu nebo místní populace, které je významné nebo trvalé, a u neúmyslných zásahů do jedinců druhů II. kategorie připouští běžné lesnické hospodaření na určených plochách, pokud nepoškodí biotop ani místní populaci. Tato výjimka omezuje některá dosavadní omezení lesnické činnosti, zatímco povinnost chránit biotopy opylovačů představuje nový, ekonomickou dostupností omezený požadavek."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-14",
+                "relevant": true,
+                "reasonCz": "Novela lesního zákona mění povolování záměrů na lesních pozemcích a v jejich okolí, tedy část environmentálních pravidel přímo se týkajících lesa.",
+                "effectCz": "Před změnou vyžadoval lesní zákon pro záměry dotýkající se lesních pozemků nebo pozemků do 30 metrů od lesa závazné stanovisko orgánu státní správy lesů a samostatné rozhodnutí o odnětí či omezení lesních pozemků. Nově se u záměrů podle stavebního zákona mimo národní parky samostatné závazné stanovisko nevydává a podmínky posuzuje stavební úřad po vyjádření lesního orgánu; rozhodnutí o odnětí či omezení a poplatku se začleňuje do povolení záměru. Samostatná procesní překážka se tím zmenšuje, ale z dodaného znění nelze určit, zda a nakolik se tím uvolňuje vlastní ochranný limit pro lesní hospodaření."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": false,
+                "reasonCz": "Změna upravuje obecný postup posuzování vlivů záměrů na životní prostředí, ale dodané znění ji nespojuje s lesním hospodařením ani s jeho konkrétními omezeními.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-31",
+                "relevant": true,
+                "reasonCz": "Navržená verze zpřísňuje trestní odpovědnost za závažné poškození ekosystémů a chráněných druhů, což mohlo představovat další omezení lesnických zásahů, přestože tato část byla z textu schváleného Sněmovnou vypuštěna.",
+                "effectCz": "Navržené změny rozšiřovaly trestní postih za závažné poškození ekosystémů a za nakládání s chráněnými druhy; v dřívějším znění byla například u části trestných činů vyšší závažnost spojena s poškozením místní populace či biotopu kriticky ohroženého druhu. Navržené znění by ochranu rozšířilo a zpřísnilo, a tím mohlo zvýšit právní omezení lesnických zásahů. Schválená verze tuto část odstranila, takže k takové změně v rozhodnutí, o kterém strana hlasovala, nedošlo."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": false,
+                "reasonCz": "Navrhované zrušení zákona o jednotném environmentálním stanovisku se týkalo obecného povolovacího postupu a dodané znění je nespojuje konkrétně s lesním hospodařením; navíc byla tato část vypuštěna.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": false,
+                "reasonCz": "Změna upravuje povolování obnovitelných zdrojů energie, nikoli environmentální omezení lesního hospodaření.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+                "relevant": false,
+                "reasonCz": "Změna zákona o rostlinolékařské péči upravuje vymezení pozemků u staveb, nikoli lesní hospodaření nebo jeho environmentální omezení.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": false,
+                "reasonCz": "Zrušovací ustanovení se týkají environmentálních předpisů a vyhlášek obecně, bez konkrétní vazby na omezení lesního hospodaření.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-b894b4f5856c--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-8",
+              "psp-core-2025--law-change-43174-14",
+              "psp-core-2025--law-change-43174-31",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15"
+            ],
+            "explanationCz": "Poslanci Motoristů sobě byli mezi předkladateli návrhu zákona, který měnil mimo jiné stavební, lesní a přírodně-ochranné předpisy. Při hlasování o návrhu i při následném hlasování po jeho odmítnutí Senátem podpořili jeho schválení. Změny mimo jiné výslovně zahrnuly lesnictví mezi veřejné zájmy, které se mají poměřovat s ochranou přírody, a dovolily některé neúmyslné zásahy při běžném lesnickém hospodaření, pokud nepoškodí biotop ani místní populaci. Tím se část omezení lesnické činnosti zmírňuje, takže strana postoupila k naplnění části slibu, nikoli však celého závazku.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Návrh původně obsahoval přísnější trestní pravidla pro závažné poškozování životního prostředí, ale tato část byla vypuštěna z textu schváleného Sněmovnou; její předložení bylo proti směru slibu, zatímco pozdější hlasování se jí již netýkalo.",
+              "Podklady nevyčíslují, zda nové povinnosti chránit biotopy opylovačů nebo další pravidla ochrany přírody zvýší náklady lesního hospodaření natolik, že by je změnily ve ztrátovou činnost.",
+              "Změna lesního zákona zjednodušuje samostatné povolovací kroky u záměrů na lesních pozemcích, ale podklady neukazují, jak ovlivní běžné lesnické hospodaření nebo ekonomiku venkova."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-b894b4f5856c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změny stavebního zákona se výslovně týkají i ochrany lesnictví a mění, jak se při povolování záměrů uplatňují veřejné zájmy a environmentální stanoviska.",
+          "effectCz": "Dříve dotčené orgány uplatňovaly stanoviska v rámci své působnosti a stavební úřad posuzoval soulad záměru s požadavky jiných zákonů; schválený text nově požaduje nejmírnější dostatečné prostředky, umožňuje odchylky od plánovací dokumentace a omezuje opakované posuzování. Současně ponechává lesnictví mezi chráněnými veřejnými zájmy. Celkově tedy některé postupy a omezení povolování zmírňuje, ale z balíčku nelze určit, jak se to projeví na konkrétních pravidlech lesního hospodaření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": true,
+          "reasonCz": "Novela zákona o ochraně přírody a krajiny přímo stanoví povinnosti při lesnických pracích a mění ochranu druhů a jejich biotopů.",
+          "effectCz": "Předchozí § 5 odst. 3 už ukládal při lesnických pracích předcházet zbytečnému úhynu rostlin a živočichů a používat technicky i ekonomicky dostupné prostředky; schválené znění obdobnou povinnost zachovává a nově doplňuje zvláštní ochranu biotopů opylovačů. Nová pravidla zároveň dovolují některé nezáměrné zásahy do jedinců druhů druhé kategorie při běžném lesním hospodaření, pokud se nepoškodí jejich biotop nebo místní populace, takže v tomto ohledu ochranu jednotlivých jedinců uvolňují. Změna je tedy smíšená: přidává omezení na ochranu opylovačů, ale některá pravidla pro běžné hospodaření zmírňuje; schválená verze neobsahuje původně navržený pevný 30% podíl ploch."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": true,
+          "reasonCz": "Změna lesního zákona přímo mění schvalování zásahů do lesních pozemků a dělení lesních pozemků.",
+          "effectCz": "Dříve bylo k dělení lesních pozemků, při němž některý díl klesl pod 1 ha, nutné povolení orgánu státní správy lesů, který je mohl odmítnout kvůli nevhodnému tvaru či velikosti; schválený text tuto podmínku ruší, a tím omezení uvolňuje. Dříve bylo pro záměry dotýkající se zájmů chráněných lesním zákonem třeba závazné stanovisko lesního orgánu; u záměrů povolovaných podle stavebního zákona se toto stanovisko nově nevydává a podmínky posuzuje stavební úřad po obdržení vyjádření lesního orgánu. Tím se oslabuje závaznost tohoto podkladu, avšak balíček nedokládá, že se mění samotné hmotné podmínky ochrany lesa."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Změna upravuje obecný proces posuzování vlivů na životní prostředí, ale dodané schválené znění ji nespojuje s konkrétními omezeními lesního hospodaření ani s jeho výnosností.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": false,
+          "reasonCz": "Navržené změny trestních činů chrání životní prostředí obecně a dodané znění neukazuje konkrétní vazbu na pravidla lesního hospodaření či jeho výnosnost; navíc byla tato část z výsledného textu vypuštěna.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navrhované zrušení zákona o jednotném environmentálním stanovisku upravuje obecný povolovací proces, nikoli konkrétní environmentální omezení lesního hospodaření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": false,
+          "reasonCz": "Změny se týkají povolování projektů obnovitelných zdrojů energie v akceleračních oblastech a dodané znění je nespojuje s hospodařením v lesích.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+          "relevant": false,
+          "reasonCz": "Změna pouze nahrazuje pojem týkající se vymezení pozemků a nemění environmentální omezení lesního hospodaření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení se týká převážně povolovacích předpisů obecně a neukazuje konkrétní změnu omezení lesního hospodaření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-1",
+          "relevant": false,
+          "reasonCz": "Vládní návrh zpřísňuje trestní ochranu životního prostředí obecně, ale dodané znění neukazuje přímou vazbu na pravidla lesního hospodaření, jejichž dopad na jeho výnosnost slib řeší.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-b894b4f5856c--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-8",
+        "psp-core-2025--law-change-43174-14",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Skupina poslanců Motoristů sobě předložila spolu s poslanci dalších stran návrh novely stavebního zákona; poslanci Motoristů pak hlasovali pro jeho schválení a po zamítnutí Senátem také pro setrvání na návrhu. Novela ruší samostatné povolení dělení malých lesních pozemků a u části stavebních záměrů nahrazuje závazné stanovisko lesního orgánu posouzením stavebním úřadem, což některá omezení uvolňuje. Současně zavádí zvláštní povinnost chránit biotopy opylovačů při lesnických pracích, zatímco jiné zásahy do chráněných druhů při běžném hospodaření za určitých podmínek povoluje. Jde tedy o částečný posun směrem ke slibu, nikoli o jeho úplné splnění; podklady neukazují, zda změny skutečně odstraní omezení, která činí lesní hospodaření ztrátovým.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají uvolnění některých pravidel, ale neuvádějí jejich dopad na náklady či výnosy lesního hospodaření, takže nelze ověřit, zda odstraní omezení, která podle slibu ohrožují ekonomiku venkova.",
+        "Senát návrh zákona zamítl; poslanci Motoristů však následně hlasovali pro setrvání na návrhu. Z dostupných podkladů není doloženo jeho konečné vyhlášení."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-b894b4f5856c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela stavebního zákona výslovně zahrnuje lesnictví mezi chráněné veřejné zájmy a mění, jak se tyto zájmy poměřují s dalšími zájmy při povolování záměrů.",
+          "effectCz": "Před změnou zákon stanovil obecný účel integrované ochrany veřejných zájmů, ale přiložené znění dřívějších ustanovení neobsahuje odpovídající pravidlo o poměřování střetů. Nově se má zásah do veřejného zájmu posuzovat také podle jeho přínosů a ekonomicky a technicky přijatelných možností a rozvoj lze znemožnit jen tehdy, nelze-li jiné hodnoty ochránit podmínkami či kompenzacemi. To obecně zužuje prostor pro omezování záměrů kvůli veřejným zájmům, včetně lesnictví; samo však nemění konkrétní povinnosti při lesním hospodaření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": true,
+          "reasonCz": "Změny zákona o ochraně přírody se týkají ochrany druhů a krajiny při činnostech včetně lesnických prací a obsahují výslovné výjimky pro některé zásahy při lesním hospodaření.",
+          "effectCz": "Před změnou zákon chránil zvláště chráněné druhy a jejich biotopy a ukládal při lesnických pracích předcházet zbytečnému úhynu či ničení biotopů prostředky, kterým lze zabránit technicky i ekonomicky. Tato obecná povinnost se nově zachovává, ale pravidla ochrany druhů se přeskupují do kategorií a výslovně připouštějí některé nezáměrné zásahy při běžném lesnickém hospodaření, pokud nedojde k poškození biotopu nebo místní populace; lesnické zásahy mimo místa výskytu uvedená v lesním hospodářském plánu nebo oznámená orgánem mohou být za dalších podmínek vyňaty z některých přestupkových postihů. V těchto konkrétních případech jsou omezení volnější, nejde však o zrušení ochrany druhů či biotopů obecně a změny mají i ochranné prvky; celkový hospodářský dopad na lesní hospodaření z balíčku určit nelze."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": true,
+          "reasonCz": "Novela lesního zákona přímo mění povolovací a souhlasové požadavky týkající se lesních pozemků a činností v jejich blízkosti.",
+          "effectCz": "Před změnou bylo k dělení lesních pozemků, při němž některý díl klesl pod 1 ha, třeba souhlas orgánu státní správy lesů; tato podmínka se ruší. Dříve také orgán lesní správy vydával závazné stanovisko k záměrům dotýkajícím se lesních zájmů a pozemků do 30 m od lesa; u záměru povolovaného podle stavebního zákona se nově samostatné závazné stanovisko nevydává a podmínky posoudí stavební úřad na základě vyjádření orgánu státní správy lesů. Tyto změny snižují počet samostatných souhlasových překážek, ale nemění obecný zákaz využít lesní pozemky k jiným účelům bez výjimky ani samy nedokládají dopad na ziskovost lesního hospodaření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Změny pravidel posuzování vlivů na životní prostředí nejsou v dodaném znění konkrétně spojeny s omezeními samotného lesního hospodaření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": false,
+          "reasonCz": "Navržené změny trestních postihů za závažné poškození životního prostředí nejsou spojeny s konkrétními omezeními lesního hospodaření, která slib výslovně řeší; tato část navíc v textu schváleném Sněmovnou odpadla.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku není v dodaných ustanoveních konkrétně spojeno s lesním hospodařením a ve schváleném textu bylo vypuštěno.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": false,
+          "reasonCz": "Úprava pravidel pro urychlení projektů obnovitelných zdrojů energie se podle dodaného znění netýká konkrétních omezení lesního hospodaření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+          "relevant": false,
+          "reasonCz": "Změna zákona o rostlinolékařské péči upravuje pouze označení pozemků pro účely zákazu některých přípravků a není spojena s omezeními lesního hospodaření, která slib řeší.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení ruší několik právních předpisů a jejich částí, ale dodaný text je nespojuje s konkrétními omezeními lesního hospodaření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-1",
+          "relevant": false,
+          "reasonCz": "Vládní návrh trestních pravidel se týká závažných zásahů do životního prostředí obecně, ale dodané znění jej nespojuje s omezeními, která by z běžného lesního hospodaření činila ztrátovou činnost.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-b894b4f5856c--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-8",
+        "psp-core-2025--law-change-43174-14",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci Motoristů spolu s poslanci ANO a SPD předložili návrh změn stavebního zákona; poslanci Motoristů pak hlasovali pro jeho schválení a po odmítnutí Senátem také pro setrvání na návrhu. Změny obecně omezují možnost blokovat záměry kvůli veřejným zájmům a uvolňují některé požadavky na ochranu přírody při lesnických zásazích. Novela lesního zákona navíc ruší některé samostatné souhlasy a přesouvá posuzování dotčených zájmů do povolování záměru. Jde o dílčí posun směrem ke slibu, nikoli o odmítnutí všech environmentálních omezení lesního hospodaření.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, zda uvedené změny skutečně odstraňují konkrétní omezení, která z lesního hospodaření dělají ztrátovou činnost, ani jaký mají dopad na jeho hospodářské výsledky. Novela zároveň zachovává ochranu druhů a biotopů; dodané důkazy neumožňují určit, zda některé její prvky představují další restrikce s přímým dopadem na ziskovost lesního hospodaření."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_098150a8434e211a016ac556f0199887d2a18fe31573e93e29",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 536383,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 536380
+      },
+      "output_tokens": 9669,
+      "output_tokens_details": {
+        "reasoning_tokens": 7768
+      },
+      "total_tokens": 546052
+    },
+    "output": {
+      "promiseId": "candidate-b894b4f5856c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změny stavebního zákona se výslovně týkají i ochrany lesnictví a mění, jak se při povolování záměrů uplatňují veřejné zájmy a environmentální stanoviska.",
+          "effectCz": "Dříve dotčené orgány uplatňovaly stanoviska v rámci své působnosti a stavební úřad posuzoval soulad záměru s požadavky jiných zákonů; schválený text nově požaduje nejmírnější dostatečné prostředky, umožňuje odchylky od plánovací dokumentace a omezuje opakované posuzování. Současně ponechává lesnictví mezi chráněnými veřejnými zájmy. Celkově tedy některé postupy a omezení povolování zmírňuje, ale z balíčku nelze určit, jak se to projeví na konkrétních pravidlech lesního hospodaření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": true,
+          "reasonCz": "Novela zákona o ochraně přírody a krajiny přímo stanoví povinnosti při lesnických pracích a mění ochranu druhů a jejich biotopů.",
+          "effectCz": "Předchozí § 5 odst. 3 už ukládal při lesnických pracích předcházet zbytečnému úhynu rostlin a živočichů a používat technicky i ekonomicky dostupné prostředky; schválené znění obdobnou povinnost zachovává a nově doplňuje zvláštní ochranu biotopů opylovačů. Nová pravidla zároveň dovolují některé nezáměrné zásahy do jedinců druhů druhé kategorie při běžném lesním hospodaření, pokud se nepoškodí jejich biotop nebo místní populace, takže v tomto ohledu ochranu jednotlivých jedinců uvolňují. Změna je tedy smíšená: přidává omezení na ochranu opylovačů, ale některá pravidla pro běžné hospodaření zmírňuje; schválená verze neobsahuje původně navržený pevný 30% podíl ploch."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": true,
+          "reasonCz": "Změna lesního zákona přímo mění schvalování zásahů do lesních pozemků a dělení lesních pozemků.",
+          "effectCz": "Dříve bylo k dělení lesních pozemků, při němž některý díl klesl pod 1 ha, nutné povolení orgánu státní správy lesů, který je mohl odmítnout kvůli nevhodnému tvaru či velikosti; schválený text tuto podmínku ruší, a tím omezení uvolňuje. Dříve bylo pro záměry dotýkající se zájmů chráněných lesním zákonem třeba závazné stanovisko lesního orgánu; u záměrů povolovaných podle stavebního zákona se toto stanovisko nově nevydává a podmínky posuzuje stavební úřad po obdržení vyjádření lesního orgánu. Tím se oslabuje závaznost tohoto podkladu, avšak balíček nedokládá, že se mění samotné hmotné podmínky ochrany lesa."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Změna upravuje obecný proces posuzování vlivů na životní prostředí, ale dodané schválené znění ji nespojuje s konkrétními omezeními lesního hospodaření ani s jeho výnosností.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": false,
+          "reasonCz": "Navržené změny trestních činů chrání životní prostředí obecně a dodané znění neukazuje konkrétní vazbu na pravidla lesního hospodaření či jeho výnosnost; navíc byla tato část z výsledného textu vypuštěna.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navrhované zrušení zákona o jednotném environmentálním stanovisku upravuje obecný povolovací proces, nikoli konkrétní environmentální omezení lesního hospodaření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": false,
+          "reasonCz": "Změny se týkají povolování projektů obnovitelných zdrojů energie v akceleračních oblastech a dodané znění je nespojuje s hospodařením v lesích.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+          "relevant": false,
+          "reasonCz": "Změna pouze nahrazuje pojem týkající se vymezení pozemků a nemění environmentální omezení lesního hospodaření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení se týká převážně povolovacích předpisů obecně a neukazuje konkrétní změnu omezení lesního hospodaření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-1",
+          "relevant": false,
+          "reasonCz": "Vládní návrh zpřísňuje trestní ochranu životního prostředí obecně, ale dodané znění neukazuje přímou vazbu na pravidla lesního hospodaření, jejichž dopad na jeho výnosnost slib řeší.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-b894b4f5856c--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-8",
+        "psp-core-2025--law-change-43174-14",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Skupina poslanců Motoristů sobě předložila spolu s poslanci dalších stran návrh novely stavebního zákona; poslanci Motoristů pak hlasovali pro jeho schválení a po zamítnutí Senátem také pro setrvání na návrhu. Novela ruší samostatné povolení dělení malých lesních pozemků a u části stavebních záměrů nahrazuje závazné stanovisko lesního orgánu posouzením stavebním úřadem, což některá omezení uvolňuje. Současně zavádí zvláštní povinnost chránit biotopy opylovačů při lesnických pracích, zatímco jiné zásahy do chráněných druhů při běžném hospodaření za určitých podmínek povoluje. Jde tedy o částečný posun směrem ke slibu, nikoli o jeho úplné splnění; podklady neukazují, zda změny skutečně odstraní omezení, která činí lesní hospodaření ztrátovým.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají uvolnění některých pravidel, ale neuvádějí jejich dopad na náklady či výnosy lesního hospodaření, takže nelze ověřit, zda odstraní omezení, která podle slibu ohrožují ekonomiku venkova.",
+        "Senát návrh zákona zamítl; poslanci Motoristů však následně hlasovali pro setrvání na návrhu. Z dostupných podkladů není doloženo jeho konečné vyhlášení."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_01ee9d4b8beff6a1016ac5593a555487d2bb41030971b03a32",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 536383,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 536380
+      },
+      "output_tokens": 7407,
+      "output_tokens_details": {
+        "reasoning_tokens": 5444
+      },
+      "total_tokens": 543790
+    },
+    "output": {
+      "promiseId": "candidate-b894b4f5856c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela stavebního zákona výslovně zahrnuje lesnictví mezi chráněné veřejné zájmy a mění, jak se tyto zájmy poměřují s dalšími zájmy při povolování záměrů.",
+          "effectCz": "Před změnou zákon stanovil obecný účel integrované ochrany veřejných zájmů, ale přiložené znění dřívějších ustanovení neobsahuje odpovídající pravidlo o poměřování střetů. Nově se má zásah do veřejného zájmu posuzovat také podle jeho přínosů a ekonomicky a technicky přijatelných možností a rozvoj lze znemožnit jen tehdy, nelze-li jiné hodnoty ochránit podmínkami či kompenzacemi. To obecně zužuje prostor pro omezování záměrů kvůli veřejným zájmům, včetně lesnictví; samo však nemění konkrétní povinnosti při lesním hospodaření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": true,
+          "reasonCz": "Změny zákona o ochraně přírody se týkají ochrany druhů a krajiny při činnostech včetně lesnických prací a obsahují výslovné výjimky pro některé zásahy při lesním hospodaření.",
+          "effectCz": "Před změnou zákon chránil zvláště chráněné druhy a jejich biotopy a ukládal při lesnických pracích předcházet zbytečnému úhynu či ničení biotopů prostředky, kterým lze zabránit technicky i ekonomicky. Tato obecná povinnost se nově zachovává, ale pravidla ochrany druhů se přeskupují do kategorií a výslovně připouštějí některé nezáměrné zásahy při běžném lesnickém hospodaření, pokud nedojde k poškození biotopu nebo místní populace; lesnické zásahy mimo místa výskytu uvedená v lesním hospodářském plánu nebo oznámená orgánem mohou být za dalších podmínek vyňaty z některých přestupkových postihů. V těchto konkrétních případech jsou omezení volnější, nejde však o zrušení ochrany druhů či biotopů obecně a změny mají i ochranné prvky; celkový hospodářský dopad na lesní hospodaření z balíčku určit nelze."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": true,
+          "reasonCz": "Novela lesního zákona přímo mění povolovací a souhlasové požadavky týkající se lesních pozemků a činností v jejich blízkosti.",
+          "effectCz": "Před změnou bylo k dělení lesních pozemků, při němž některý díl klesl pod 1 ha, třeba souhlas orgánu státní správy lesů; tato podmínka se ruší. Dříve také orgán lesní správy vydával závazné stanovisko k záměrům dotýkajícím se lesních zájmů a pozemků do 30 m od lesa; u záměru povolovaného podle stavebního zákona se nově samostatné závazné stanovisko nevydává a podmínky posoudí stavební úřad na základě vyjádření orgánu státní správy lesů. Tyto změny snižují počet samostatných souhlasových překážek, ale nemění obecný zákaz využít lesní pozemky k jiným účelům bez výjimky ani samy nedokládají dopad na ziskovost lesního hospodaření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Změny pravidel posuzování vlivů na životní prostředí nejsou v dodaném znění konkrétně spojeny s omezeními samotného lesního hospodaření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": false,
+          "reasonCz": "Navržené změny trestních postihů za závažné poškození životního prostředí nejsou spojeny s konkrétními omezeními lesního hospodaření, která slib výslovně řeší; tato část navíc v textu schváleném Sněmovnou odpadla.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku není v dodaných ustanoveních konkrétně spojeno s lesním hospodařením a ve schváleném textu bylo vypuštěno.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": false,
+          "reasonCz": "Úprava pravidel pro urychlení projektů obnovitelných zdrojů energie se podle dodaného znění netýká konkrétních omezení lesního hospodaření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+          "relevant": false,
+          "reasonCz": "Změna zákona o rostlinolékařské péči upravuje pouze označení pozemků pro účely zákazu některých přípravků a není spojena s omezeními lesního hospodaření, která slib řeší.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení ruší několik právních předpisů a jejich částí, ale dodaný text je nespojuje s konkrétními omezeními lesního hospodaření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-1",
+          "relevant": false,
+          "reasonCz": "Vládní návrh trestních pravidel se týká závažných zásahů do životního prostředí obecně, ale dodané znění jej nespojuje s omezeními, která by z běžného lesního hospodaření činila ztrátovou činnost.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-b894b4f5856c--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-8",
+        "psp-core-2025--law-change-43174-14",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci Motoristů spolu s poslanci ANO a SPD předložili návrh změn stavebního zákona; poslanci Motoristů pak hlasovali pro jeho schválení a po odmítnutí Senátem také pro setrvání na návrhu. Změny obecně omezují možnost blokovat záměry kvůli veřejným zájmům a uvolňují některé požadavky na ochranu přírody při lesnických zásazích. Novela lesního zákona navíc ruší některé samostatné souhlasy a přesouvá posuzování dotčených zájmů do povolování záměru. Jde o dílčí posun směrem ke slibu, nikoli o odmítnutí všech environmentálních omezení lesního hospodaření.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, zda uvedené změny skutečně odstraňují konkrétní omezení, která z lesního hospodaření dělají ztrátovou činnost, ani jaký mají dopad na jeho hospodářské výsledky. Novela zároveň zachovává ochranu druhů a biotopů; dodané důkazy neumožňují určit, zda některé její prvky představují další restrikce s přímým dopadem na ziskovost lesního hospodaření."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

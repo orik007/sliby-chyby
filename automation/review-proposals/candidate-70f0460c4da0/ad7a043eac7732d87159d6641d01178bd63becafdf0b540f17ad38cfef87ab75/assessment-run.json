@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-48-28-447Z--4e51f6235b17",
+  "evaluatedAt": "2026-10-02T01:48:28.447Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-70f0460c4da0/4e51f6235b170ca184b3a044ce72bb0e6f8909f634f7e141655daa6a8c96229e.json",
+  "packageHash": "4e51f6235b170ca184b3a044ce72bb0e6f8909f634f7e141655daa6a8c96229e",
+  "assessmentContentHash": "912218207f44a51d76ce74fadb25eacbd1c471f9c27a6609071ea54e0e8fe6bc",
+  "assessmentFingerprint": "ad7a043eac7732d87159d6641d01178bd63becafdf0b540f17ad38cfef87ab75",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-70f0460c4da0",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-70f0460c4da0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43205-1",
+          "relevant": false,
+          "reasonCz": "Rozpočet fondu uvádí celkové prostředky na zemědělskou politiku, ale nevyčleňuje podporu šetrného hospodaření, precizního zemědělství ani technologií omezujících chemickou zátěž."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Návrh dotačních programů výslovně zahrnuje biologickou a fyzikální ochranu jako náhradu chemické ochrany rostlin, tedy konkrétní část slibu o snižování chemické zátěže."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-70f0460c4da0--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro dotační programy zemědělství na rok 2026. Jejich návrh počítá mimo jiné s biologickou a fyzikální ochranou rostlin jako náhradou chemické ochrany, což podporuje část slibu o omezení chemické zátěže. Jde proto o posun v této části závazku, nikoli o doložené splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, zda se uvedená podpora skutečně uskutečnila ani zda programy podporují také precizní zemědělství."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-70f0460c4da0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43205-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu fondu uvádí celkové zemědělské výdaje, ale nevyčleňuje podporu šetrného hospodaření, precizního zemědělství ani omezení chemické zátěže."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Návrh dotačních programů výslovně zmiňuje agroenvironmentální podporu, včetně biologické a fyzikální ochrany rostlin jako náhrady chemické ochrany, což může naplnit část slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-70f0460c4da0--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro dotační programy zemědělství na rok 2026. Návrh mezi agroenvironmentálními opatřeními uvádí biologickou a fyzikální ochranu rostlin jako náhradu chemické ochrany, což podporuje část slibu týkající se snižování chemické zátěže. Text však nedokládá podporu všech částí slibu, zejména precizního zemědělství. Konkrétní rozsah realizovaných programů měl být upřesněn v následných zásadách ministerstva.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh uvádí, že konkrétní spektrum uskutečněných programů bude stanoveno v zásadách ministerstva podle dostupných prostředků; z těchto podkladů proto nelze určit, zda a v jakém rozsahu bude popsaná náhrada chemické ochrany skutečně financována."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0fff3586ff2cb6ca016abf0d535bc087d18c1f7c039accdb0e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9985,
+      "input_tokens_details": {
+        "cache_write_tokens": 6661,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1628,
+      "output_tokens_details": {
+        "reasoning_tokens": 1164
+      },
+      "total_tokens": 11613
+    },
+    "output": {
+      "promiseId": "candidate-70f0460c4da0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43205-1",
+          "relevant": false,
+          "reasonCz": "Rozpočet fondu uvádí celkové prostředky na zemědělskou politiku, ale nevyčleňuje podporu šetrného hospodaření, precizního zemědělství ani technologií omezujících chemickou zátěž."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Návrh dotačních programů výslovně zahrnuje biologickou a fyzikální ochranu jako náhradu chemické ochrany rostlin, tedy konkrétní část slibu o snižování chemické zátěže."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-70f0460c4da0--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro dotační programy zemědělství na rok 2026. Jejich návrh počítá mimo jiné s biologickou a fyzikální ochranou rostlin jako náhradou chemické ochrany, což podporuje část slibu o omezení chemické zátěže. Jde proto o posun v této části závazku, nikoli o doložené splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, zda se uvedená podpora skutečně uskutečnila ani zda programy podporují také precizní zemědělství."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0967e803c45bfc86016abf0d5f8ae087d1bc51ae774b3e5f93",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9985,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 9982
+      },
+      "output_tokens": 1893,
+      "output_tokens_details": {
+        "reasoning_tokens": 1423
+      },
+      "total_tokens": 11878
+    },
+    "output": {
+      "promiseId": "candidate-70f0460c4da0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43205-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu fondu uvádí celkové zemědělské výdaje, ale nevyčleňuje podporu šetrného hospodaření, precizního zemědělství ani omezení chemické zátěže."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Návrh dotačních programů výslovně zmiňuje agroenvironmentální podporu, včetně biologické a fyzikální ochrany rostlin jako náhrady chemické ochrany, což může naplnit část slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-70f0460c4da0--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro dotační programy zemědělství na rok 2026. Návrh mezi agroenvironmentálními opatřeními uvádí biologickou a fyzikální ochranu rostlin jako náhradu chemické ochrany, což podporuje část slibu týkající se snižování chemické zátěže. Text však nedokládá podporu všech částí slibu, zejména precizního zemědělství. Konkrétní rozsah realizovaných programů měl být upřesněn v následných zásadách ministerstva.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh uvádí, že konkrétní spektrum uskutečněných programů bude stanoveno v zásadách ministerstva podle dostupných prostředků; z těchto podkladů proto nelze určit, zda a v jakém rozsahu bude popsaná náhrada chemické ochrany skutečně financována."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

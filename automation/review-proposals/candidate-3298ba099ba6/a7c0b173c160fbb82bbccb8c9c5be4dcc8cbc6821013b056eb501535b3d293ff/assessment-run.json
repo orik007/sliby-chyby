@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T02-01-58-687Z--3e3c0da9060b",
+  "evaluatedAt": "2026-11-04T02:01:58.687Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-3298ba099ba6/3e3c0da9060bcc5819fa9969e0f1bbc1bba4eaaf47a1eca723726092dabad1a2.json",
+  "packageHash": "3e3c0da9060bcc5819fa9969e0f1bbc1bba4eaaf47a1eca723726092dabad1a2",
+  "assessmentContentHash": "82a153db7e3e68aff4b186b50efb8f241282a2ee419caae8a51677ec3927a50e",
+  "assessmentFingerprint": "a7c0b173c160fbb82bbccb8c9c5be4dcc8cbc6821013b056eb501535b3d293ff",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-3298ba099ba6",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-3298ba099ba6",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-3",
+          "relevant": true,
+          "reasonCz": "Změna odstraňuje požadavek na lékařské schválení a podpis části posudků, a tím přímo omezuje administrativní úkon lékařů, který slib usiluje zmenšit.",
+          "effectCz": "Před změnou musel lékař schválit a podepsat posudky podle § 8 odst. 4 písm. a) až c) i e); po změně se tato povinnost vztahuje jen na posudky podle písmen a) až c). U posudků podle písmene e) se tedy povinnost lékařského schválení a podpisu zmírňuje, což může lékařům ubrat administrativu; změna ale nezavádí zapojení administrativních pracovníků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-3298ba099ba6--source",
+        "psp-core-2025--law-change-43240-3",
+        "psp-core-2025--print-step-210938",
+        "psp-core-2025--government-opinion-43240-1",
+        "psp-core-2025--vote-87394"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh zákona o sociálních službách a vláda k němu dala souhlasné stanovisko. Při závěrečném hlasování poslanci ANO návrh podpořili. Schválená změna ruší nutnost lékařského schválení a podpisu u jedné skupiny posudků, takže může lékařům ubrat administrativu. Nepřináší však širší zapojení administrativních pracovníků, které slib výslovně zmiňuje; jde proto jen o dílčí posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají odstranění lékařského schvalování u jedné skupiny posudků, ale nedokládají širší zapojení administrativních pracovníků."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-3298ba099ba6",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-3",
+          "relevant": false,
+          "reasonCz": "Změna ruší povinnost lékaře schvalovat a podepisovat určité posudky, ale nerozšiřuje zapojení administrativních pracovníků, které je jádrem slibu.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-3298ba099ba6--source",
+        "psp-core-2025--law-change-43240-3",
+        "psp-core-2025--print-step-210938",
+        "psp-core-2025--government-opinion-43240-1",
+        "psp-core-2025--vote-87394"
+      ],
+      "explanationCz": "Slib se týká širšího zapojení administrativních pracovníků, kteří mají lékařům a sestrám ulevit od papírování. Poslanci ANO předložili návrh změn v oblasti sociálních služeb a vláda s ním souhlasila; poslanci ANO pak hlasovali pro jeho schválení. Příslušná změna zákona ale pouze ruší povinnost lékaře schvalovat a podepisovat určité posudky, nezavádí širší zapojení administrativních pracovníků. Z dodaných podkladů proto nelze doložit podstatný posun k tomuto slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují relevantní opatření týkající se širšího zapojení administrativních pracovníků; nevypovídají však o případných krocích, které v nich nejsou zachyceny."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_023ba0571d0d99c0016aea91f33b7887d1a9bf0de9eb45dfd7",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12208,
+      "input_tokens_details": {
+        "cache_write_tokens": 5858,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 1552,
+      "output_tokens_details": {
+        "reasoning_tokens": 998
+      },
+      "total_tokens": 13760
+    },
+    "output": {
+      "promiseId": "candidate-3298ba099ba6",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-3",
+          "relevant": true,
+          "reasonCz": "Změna odstraňuje požadavek na lékařské schválení a podpis části posudků, a tím přímo omezuje administrativní úkon lékařů, který slib usiluje zmenšit.",
+          "effectCz": "Před změnou musel lékař schválit a podepsat posudky podle § 8 odst. 4 písm. a) až c) i e); po změně se tato povinnost vztahuje jen na posudky podle písmen a) až c). U posudků podle písmene e) se tedy povinnost lékařského schválení a podpisu zmírňuje, což může lékařům ubrat administrativu; změna ale nezavádí zapojení administrativních pracovníků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-3298ba099ba6--source",
+        "psp-core-2025--law-change-43240-3",
+        "psp-core-2025--print-step-210938",
+        "psp-core-2025--government-opinion-43240-1",
+        "psp-core-2025--vote-87394"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh zákona o sociálních službách a vláda k němu dala souhlasné stanovisko. Při závěrečném hlasování poslanci ANO návrh podpořili. Schválená změna ruší nutnost lékařského schválení a podpisu u jedné skupiny posudků, takže může lékařům ubrat administrativu. Nepřináší však širší zapojení administrativních pracovníků, které slib výslovně zmiňuje; jde proto jen o dílčí posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají odstranění lékařského schvalování u jedné skupiny posudků, ale nedokládají širší zapojení administrativních pracovníků."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_08787df9ef54b045016aea92003b8087d1a523d693b67ba264",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12208,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 12205
+      },
+      "output_tokens": 2366,
+      "output_tokens_details": {
+        "reasoning_tokens": 1911
+      },
+      "total_tokens": 14574
+    },
+    "output": {
+      "promiseId": "candidate-3298ba099ba6",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-3",
+          "relevant": false,
+          "reasonCz": "Změna ruší povinnost lékaře schvalovat a podepisovat určité posudky, ale nerozšiřuje zapojení administrativních pracovníků, které je jádrem slibu.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-3298ba099ba6--source",
+        "psp-core-2025--law-change-43240-3",
+        "psp-core-2025--print-step-210938",
+        "psp-core-2025--government-opinion-43240-1",
+        "psp-core-2025--vote-87394"
+      ],
+      "explanationCz": "Slib se týká širšího zapojení administrativních pracovníků, kteří mají lékařům a sestrám ulevit od papírování. Poslanci ANO předložili návrh změn v oblasti sociálních služeb a vláda s ním souhlasila; poslanci ANO pak hlasovali pro jeho schválení. Příslušná změna zákona ale pouze ruší povinnost lékaře schvalovat a podepisovat určité posudky, nezavádí širší zapojení administrativních pracovníků. Z dodaných podkladů proto nelze doložit podstatný posun k tomuto slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují relevantní opatření týkající se širšího zapojení administrativních pracovníků; nevypovídají však o případných krocích, které v nich nejsou zachyceny."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0a62dc7dda6e26ac016aea9213018887d19da57b2dc64368b7",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 11164,
+      "input_tokens_details": {
+        "cache_write_tokens": 6751,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 208,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 11372
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "candidate-3298ba099ba6--source",
+        "psp-core-2025--law-change-43240-3",
+        "psp-core-2025--vote-87394"
+      ],
+      "explanationCz": "Přesvědčivější je druhé hodnocení, protože slib výslovně míří na širší zapojení administrativních pracovníků. Poslanci ANO podpořili změnu, která u části posudků ruší povinnost lékaře posudek schválit a podepsat. To může lékařům ubrat práci, ale samo o sobě to nezapojuje více administrativních pracovníků. První hodnocení proto zaměňuje možné snížení papírování za posun ke konkrétnímu slíbenému opatření, který dodané podklady nedokládají."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-b"
+  }
+}

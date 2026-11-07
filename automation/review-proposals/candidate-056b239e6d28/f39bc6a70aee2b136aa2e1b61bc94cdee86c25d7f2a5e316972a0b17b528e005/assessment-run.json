@@ -1,0 +1,983 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T02-00-39-745Z--7a727ff1de45",
+  "evaluatedAt": "2026-11-04T02:00:39.745Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-056b239e6d28/7a727ff1de45914b568c1fdde8296e23847e6e62bbaa289d5fa5fc2b1b278888.json",
+  "packageHash": "7a727ff1de45914b568c1fdde8296e23847e6e62bbaa289d5fa5fc2b1b278888",
+  "assessmentContentHash": "09613406ea0f6e919900f2f3a852974ded76c77b725d24f4959088f0176b7812",
+  "assessmentFingerprint": "f39bc6a70aee2b136aa2e1b61bc94cdee86c25d7f2a5e316972a0b17b528e005",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-056b239e6d28",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment omits the relevance verdict for law change psp-core-2025--law-change-43290-5",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0143cbd69a7f10bd016aea906be66887d1863964c75f4c7f00",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 73884,
+            "input_tokens_details": {
+              "cache_write_tokens": 67534,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 12103,
+            "output_tokens_details": {
+              "reasoning_tokens": 8286
+            },
+            "total_tokens": 85987
+          },
+          "output": {
+            "promiseId": "candidate-056b239e6d28",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": true,
+                "reasonCz": "Rozpočet obsahuje výdaje státních kapitol a související pozměňovací návrhy přímo míří na prevenci kriminality a ochranu dětí; samotné dodané části rozpočtu však částky neukazují.",
+                "effectCz": "Jde o nový státní rozpočet na rok 2026, nikoli o novelu s předchozím zněním. Dodaný text jen odkazuje na přílohy s výdaji a ukazateli podle kapitol, ale neuvádí jejich relevantní částky, takže nelze určit, jak rozpočet mění prostředky na prevenci a ochranu dětí ani jak se v tomto směru srovnává se slibem."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43221-5",
+                "relevant": true,
+                "reasonCz": "Změna pravidel pro osoby a organizace zajišťující sociálně-právní ochranu dětí může posílit i oslabit prověřování těch, kteří s dětmi pracují.",
+                "effectCz": "U žadatelů o zařazení do evidence se nově výslovně zohledňuje další trestný čin související s využitím služeb oběti obchodování s lidmi, což rozšiřuje důvody pro vyloučení. Současně se u některých dokladů mění opis rejstříku na výpis a ruší se pravidlo, že se při posuzování nepřihlíží k zahlazení odsouzení; to může prověřování zmírnit. Změna také rozšiřuje přestupkové ustanovení na organizátory, návodce a pomocníky při neoprávněném svěření dítěte. Dopad na ochranu dětí je tedy smíšený."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43225-1",
+                "relevant": true,
+                "reasonCz": "Změna trestného činu zanedbání výživy přímo upravuje trestní ochranu osob, mezi něž patří děti.",
+                "effectCz": "Před změnou bylo zanedbání povinné výživy trestné při neplnění delším než čtyři měsíce, pokud oprávněnou osobu vystavilo nebezpečí nouze; nově se postihuje úmyslné neplnění delší než čtyři měsíce i bez této podmínky, avšak základní horní hranice klesá ze dvou let na jeden rok a nedbalostní jednání už text nezahrnuje. Pro případ nebezpečí nouze zůstává horní hranice dva roky. Nová podmínka pro nepodmíněný trest má jinak formulovaná kritéria, takže její celkový směr nelze jednoznačně určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43225-2",
+                "relevant": true,
+                "reasonCz": "Ustanovení přímo mění přístup obětí zanedbání výživy k odborné pomoci, což se může týkat dětí.",
+                "effectCz": "Dosavadní § 5 odst. 1 ukládá poskytovat bezplatnou odbornou pomoc bez zbytečného odkladu zvlášť zranitelné oběti, která ji potřebuje. Nová věta stanoví výjimku pro oběť zanedbání povinné výživy; v tomto konkrétním případě tedy zužuje dosavadní povinnost poskytnout pomoc."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43228-2",
+                "relevant": true,
+                "reasonCz": "Navržená smlouva přímo zakládá spolupráci policie při předcházení trestným činům a plánování společných preventivních programů.",
+                "effectCz": "Jde o smluvní ustanovení bez předchozího znění domácího zákona. Zakládá spolupráci Česka a Slovenska při předcházení a odhalování trestných činů a umožňuje koordinaci postupů i společné programy prevence kriminality; stanoví tak nový nástroj spolupráce, který odpovídá části slibu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43228-3",
+                "relevant": true,
+                "reasonCz": "Ustanovení umožňuje společné nasazení pracovníků policejních orgánů při předcházení a odhalování trestných činů.",
+                "effectCz": "Jde o nový smluvní mechanismus bez předchozího znění domácího zákona. Umožňuje, aby pracovníci jedné strany po dohodě podporovali orgány druhé strany a za stanovených podmínek vykonávali její oprávnění; rozšiřuje tedy možnosti přeshraniční institucionální spolupráce, ale výslovně nezmiňuje ochranu dětí, seniorů ani hendikepovaných."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-18",
+                "relevant": true,
+                "reasonCz": "Navržený cizinecký zákon počítá s informováním dětského ombudsmana a se zprávami orgánu sociálně-právní ochrany dětí.",
+                "effectCz": "Dodaný text je částí nového zákona a neposkytuje předchozí znění těchto pravidel. Zavádí informování veřejného ochránce práv a ochránce práv dětí o vybraných policejních úkonech i součinnost při jejich monitorování; ministerstvu také umožňuje vyžádat si od orgánu sociálně-právní ochrany dětí zprávu o rodinných poměrech. Tím rozšiřuje informační a kontrolní spolupráci týkající se dětí."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43290-2",
+                "relevant": true,
+                "reasonCz": "Smlouva s Mongolskem výslovně zahrnuje spolupráci proti sexuálnímu zneužívání dětí a při předcházení trestné činnosti.",
+                "effectCz": "Jde o novou mezinárodní smlouvu bez předchozího znění domácího zákona. Stanoví spolupráci při předcházení a odhalování trestných činů a mezi jejími výslovně uvedenými oblastmi je sexuální zneužívání dětí; posiluje tak přeshraniční prevenci i spolupráci institucí v části slibu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43290-3",
+                "relevant": true,
+                "reasonCz": "Smluvní ustanovení upravuje výměnu informací a společné programy prevence kriminality.",
+                "effectCz": "Jde o nový smluvní nástroj bez předchozího znění domácího zákona. Umožňuje sdílet informace potřebné k předcházení a odhalování trestných činů a výslovně počítá s plánováním a realizací společných programů prevence; rozšiřuje proto možnosti spolupráce, aniž by dodaný text specifikoval skupiny chráněné těmito programy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43329-3",
+                "relevant": true,
+                "reasonCz": "Rozšíření výčtu trestných činů při prověřování žadatelů o práci v sociálně-právní ochraně dětí přímo souvisí s ochranou dětí.",
+                "effectCz": "Před změnou výčet v § 23e odst. 1 zahrnoval odsouzení za trestné činy vyjmenované v ustanovení, ale neobsahoval trestné činy související se rtutí. Novela doplňuje rtuť do výčtu látek; rozšiřuje tak okruh odsouzení, která mohou žadatele vyřadit, a prověřování zpřísňuje v tomto omezeném rozsahu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-7",
+                "relevant": true,
+                "reasonCz": "Nové přitěžující okolnosti se týkají převádění dětí bez doprovodu a dalších zranitelných osob přes hranice.",
+                "effectCz": "Před změnou § 340 odst. 3 zahrnoval jiné přitěžující okolnosti, například jednání se zbraní nebo vystavení většího počtu osob nelidskému zacházení. Návrh výslovně přidává případ, kdy převáděnou osobou je dítě bez doprovodu nebo osoba bezbranná či v tísni, a ponechává sazbu dva až osm let nebo propadnutí majetku; rozšiřuje tedy použití této přísnější sazby na další situace ochrany dětí a zranitelných osob."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-14",
+                "relevant": true,
+                "reasonCz": "Část návrhu mění pravidla nelegální práce nezletilých a související postihy, což přímo zasahuje ochranu dětí.",
+                "effectCz": "Novela nově zahrnuje do definice nelegální práce práci nezletilých v rozporu s občanským zákoníkem a rozšiřuje postihy za umožnění takové práce. Současně však stanoví výjimku z použití zákazu práce mezi 20. a 22. hodinou na činnost dítěte, což ochranu v tomto konkrétním ohledu uvolňuje. Změny jsou proto smíšené."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-6",
+                "relevant": true,
+                "reasonCz": "Dohoda výslovně upravuje spolupráci v boji proti obchodování s lidmi a pohlavnímu vykořisťování dětí i výměnu zkušeností a informací.",
+                "effectCz": "Jde o novou mezinárodní dohodu bez předchozího znění domácího zákona. Stanoví spolupráci a výměnu informací v oblasti organizovaného zločinu a obchodování s lidmi, ochranu migrujících dětí a spolupráci proti kyberkriminalitě se zvláštním důrazem na pohlavní vykořisťování dětí; rozšiřuje tak spolupráci a prevenci v relevantních oblastech."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43477-3",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje okolnosti, za nichž může obecní úřad vyžadovat odbornou pomoc pro dítě a rodinu.",
+                "effectCz": "Před změnou mohl obecní úřad uložit rodičům využít odbornou poradenskou pomoc mimo jiné tehdy, když ji nezajistili dítěti, které ji nezbytně potřebovalo, a úřad ji předtím doporučil. Novela doplňuje i případ, kdy škola nebo školské zařízení rodiče předem vyzvalo k vyhledání takové pomoci; rozšiřuje tedy možnost zásahu a propojuje školy se sociálně-právní ochranou dětí."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43478-1",
+                "relevant": false,
+                "reasonCz": "Dodaný text upravuje zveřejňování informací o trestním řízení obecně a nepropojuje změnu s ochranou dětí, seniorů či hendikepovaných ani s institucemi, které je chrání.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+                "relevant": false,
+                "reasonCz": "Dodaný text pouze ruší dřívější usnesení o návrhu na ratifikaci úmluvy a neuvádí její pravidla ani konkrétní vazbu na chráněné skupiny ze slibu.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-056b239e6d28--source",
+              "psp-core-2025--law-change-43204-1",
+              "psp-core-2025--amendment-text-511",
+              "psp-core-2025--amendment-text-462",
+              "psp-core-2025--amendment-text-378",
+              "psp-core-2025--amendment-text-450",
+              "psp-core-2025--amendment-text-513",
+              "psp-core-2025--amendment-text-578",
+              "psp-core-2025--amendment-text-577",
+              "psp-core-2025--amendment-text-554",
+              "psp-core-2025--amendment-text-555",
+              "psp-core-2025--amendment-text-459",
+              "psp-core-2025--amendment-text-532",
+              "psp-core-2025--print-step-210761",
+              "psp-core-2025--vote-86849",
+              "psp-core-2025--vote-86859",
+              "psp-core-2025--vote-86862",
+              "psp-core-2025--vote-86876",
+              "psp-core-2025--vote-86907",
+              "psp-core-2025--vote-86909",
+              "psp-core-2025--vote-86915",
+              "psp-core-2025--vote-86928",
+              "psp-core-2025--vote-86929",
+              "psp-core-2025--vote-86940",
+              "psp-core-2025--vote-86941",
+              "psp-core-2025--vote-86957",
+              "psp-core-2025--law-change-43221-5",
+              "psp-core-2025--print-step-210821",
+              "psp-core-2025--law-change-43225-1",
+              "psp-core-2025--law-change-43225-2",
+              "psp-core-2025--print-step-210844",
+              "psp-core-2025--government-opinion-43225-1",
+              "psp-core-2025--law-change-43228-2",
+              "psp-core-2025--law-change-43228-3",
+              "psp-core-2025--print-step-210866",
+              "psp-core-2025--law-change-43264-18",
+              "psp-core-2025--print-step-211048",
+              "psp-core-2025--vote-88522",
+              "psp-core-2025--law-change-43290-2",
+              "psp-core-2025--law-change-43290-3",
+              "psp-core-2025--print-step-211246",
+              "psp-core-2025--law-change-43329-3",
+              "psp-core-2025--print-step-211494",
+              "psp-core-2025--law-change-43335-7",
+              "psp-core-2025--print-step-211537",
+              "psp-core-2025--law-change-43422-14",
+              "psp-core-2025--print-step-212101",
+              "psp-core-2025--law-change-43453-6",
+              "psp-core-2025--print-step-212285",
+              "psp-core-2025--law-change-43477-3",
+              "psp-core-2025--print-step-212471"
+            ],
+            "explanationCz": "Vláda předložila návrhy na posílení policejní spolupráce při prevenci kriminality a na rozšíření pomoci dětem a jejich rodinám. Při závěrečném hlasování o novém cizineckém zákoně však Motoristé nezajistili většinovou podporu, přestože zákon posiloval informování dětského ombudsmana a spolupráci s orgány sociálně-právní ochrany dětí. Poslanci strany také nepodpořili několik návrhů na zvýšení rozpočtových prostředků pro prevenci kriminality a ochranu dětí. Protože zákon o cizincích přinesl jen část slibu, toto rozhodování ukazuje posun proti němu.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Schválené části státního rozpočtu dodané pro toto hodnocení neuvádějí konkrétní částky pro dotčené programy, takže nelze určit jejich konečné financování; doloženo je však, že poslanci Motoristů nepodpořili uvedené návrhy na navýšení prostředků.",
+              "Vláda současně předložila několik návrhů, které mohou naplnění části slibu podpořit, zejména v policejní spolupráci a při ochraně dětí; jde však o návrhy, zatímco hlasování o cizineckém zákoně bylo rozhodnutím."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-056b239e6d28",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet může ovlivnit prostředky na prevenci kriminality a ochranu dětí, ale dodané části jeho textu konkrétní výdaje neukazují.",
+          "effectCz": "Dodané znění pouze odkazuje na přílohy s rozpisem výdajů a neuvádí částky pro dotčené programy, takže z něj nelze zjistit, co bylo předtím, co je nově schváleno ani zda se prostředky na prevenci či ochranu zvyšují nebo snižují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-5",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro žadatele o péči o děti a postih neoprávněného předávání dětí se přímo dotýkají jejich ochrany.",
+          "effectCz": "Dosavadní výčet odsouzení vylučujících žadatele o zařazení do evidence se rozšiřuje o další trestné činy související s využíváním služeb obětí obchodování s lidmi; pravidlo pro bezúhonnost je tedy přísnější. Nově formulovaný přestupek postihuje také organizátora, návodce či pomocníka při neoprávněném svěření nebo přijetí dítěte do péče, čímž rozšiřuje ochranu dětí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43225-1",
+          "relevant": false,
+          "reasonCz": "Změny trestů za zanedbání vyživovací povinnosti se podle dodaného textu netýkají prevence kriminality ani spolupráce institucí chránících uvedené skupiny.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43225-2",
+          "relevant": true,
+          "reasonCz": "Výjimka z bezplatné odborné pomoci obětem zanedbání výživy může zasáhnout ochranu dětských obětí trestných činů.",
+          "effectCz": "Dosavadní pravidlo ukládá poskytovatelům v registru bez zbytečného odkladu bezplatně pomoci zvlášť zranitelným obětem, které pomoc potřebují; navržená věta tuto povinnost vylučuje u obětí zanedbání povinné výživy. Nárok na tuto pomoc se tedy v dané skupině zužuje, což může zhoršit ochranu části dětských obětí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-2",
+          "relevant": true,
+          "reasonCz": "Návrh smlouvy výslovně zahrnuje policejní spolupráci při předcházení trestné činnosti a společné preventivní programy.",
+          "effectCz": "Jde o novou smluvní úpravu, nikoli o změnu dřívějšího českého pravidla: stanoví spolupráci České republiky a Slovenska při prevenci a odhalování trestných činů, koordinaci postupů a společné programy prevence. To posiluje část slibu týkající se prevence a spolupráce institucí, ale text nevymezuje zvláštní zaměření na děti, seniory či hendikepované."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-3",
+          "relevant": true,
+          "reasonCz": "Smlouva připouští podporu policistů a dalších pracovníků druhé smluvní strany při prevenci a odhalování trestných činů.",
+          "effectCz": "Jde o novou smluvní možnost bez předchozího českého znění: pracovníci jedné strany mohou po dohodě pomáhat orgánům druhé strany a jednat pod jejich velením. Rozšiřuje možnosti institucionální spolupráce při prevenci kriminality, avšak neurčuje zvláštní ochranu uvedených skupin."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43290-2",
+          "relevant": true,
+          "reasonCz": "Smlouva s Mongolskem výslovně upravuje prevenci trestné činnosti a spolupráci proti sexuálnímu zneužívání dětí.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího znění českého zákona: stanoví prohloubení policejní spolupráce při prevenci a odhalování trestných činů a mezi oblastmi spolupráce výslovně uvádí sexuální zneužívání dětí a dětskou pornografii. Posiluje tak prevenci a ochranu dětí v uvedených oblastech, nikoli však ochranu seniorů či hendikepovaných."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43290-3",
+          "relevant": true,
+          "reasonCz": "Návrh smlouvy stanoví výměnu informací a společné programy prevence kriminality mezi příslušnými orgány.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího českého znění: umožňuje předávání informací potřebných k prevenci a odhalování trestných činů a koordinaci činnosti včetně společných preventivních programů. Rozšiřuje možnosti spolupráce orgánů, ale dodaný text ji výslovně nespojuje s ochranou seniorů či hendikepovaných."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43290-5",
+          "relevant": true,
+          "reasonCz": "Ustanovení smlouvy umožňuje použít předané osobní údaje pro prevenci a odhalování trestné činnosti.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího českého znění: umožňuje použití předaných osobních údajů zejména k účelu, pro který byly předány, a za stanovených podmínek také k prevenci a odhalování trestných činů. Vytváří nástroj pro spolupráci orgánů, ale samo o sobě nedokládá konkrétní ochranu uvedených skupin."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": true,
+          "reasonCz": "Změna ukládá policii informovat ochránce práv dětí a poskytovat mu součinnost a umožňuje vyžádat zprávu orgánu sociálně-právní ochrany dětí.",
+          "effectCz": "Jde o novou právní úpravu v rámci předkládaného zákona, nikoli o doloženou změnu již platného zákona: policie má informovat veřejného ochránce práv o některých úkonech a ministerstvo může žádat orgán sociálně-právní ochrany dětí o zprávu o rodině. Tím se rozšiřuje součinnost institucí při ochraně dětí; z dodaného textu neplyne změna ochrany seniorů či hendikepovaných."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-3",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje prověřování bezúhonnosti žadatelů o činnosti sociálně-právní ochrany dětí.",
+          "effectCz": "Dosavadní výčet odsouzení vylučujících žadatele o zařazení do evidence zahrnuje uvedené jedy; návrh jej rozšiřuje také o rtuť. Podmínka bezúhonnosti se tím v tomto bodě zpřísňuje a posiluje filtr pro osoby, které mohou vykonávat činnost související s ochranou dětí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-7",
+          "relevant": true,
+          "reasonCz": "Změna zvyšuje ochranu dětí a dalších zranitelných osob před závažnými formami převaděčství a nedovoleného překročení hranic.",
+          "effectCz": "Dosavadní přísnější sazba se vztahuje mimo jiné na vystavení většího počtu osob nelidskému zacházení; návrh výslovně doplňuje dítě bez doprovodu a osobu bezbrannou či v tísni. Rozšiřuje tedy výslovný rozsah okolností pro přísnější postih, což podporuje ochranu dětí a zranitelných osob."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": true,
+          "reasonCz": "Změny vymezují nelegální práci nezletilých a současně upravují jejich ochranu při práci, takže se přímo dotýkají ochrany dětí.",
+          "effectCz": "Dosavadní definice nelegální práce výslovně nezahrnuje nezletilé pracující v rozporu s občanským zákoníkem; návrh tuto kategorii doplňuje a rozšiřuje související postihy, což zpřísňuje ochranu před nelegálním zaměstnáváním. Zároveň však výslovně vylučuje použití zákazu práce mezi 20. a 22. hodinou u dětí, čímž tuto konkrétní ochrannou hranici uvolňuje; účinek na ochranu dětí je proto smíšený."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-6",
+          "relevant": true,
+          "reasonCz": "Dohoda zahrnuje spolupráci v prevenci kriminality a výslovně zmiňuje ochranu dětí před pohlavním vykořisťováním v kyberprostoru.",
+          "effectCz": "Jde o novou mezinárodní úpravu bez předchozího znění českého zákona: stanoví spolupráci a výměnu informací při potírání organizovaného zločinu a kyberkriminality a zdůrazňuje boj proti pohlavnímu vykořisťování dětí. Posiluje část slibu týkající se prevence a ochrany dětí, ale není určena zvláštní ochraně seniorů či hendikepovaných."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-3",
+          "relevant": true,
+          "reasonCz": "Změna propojuje školu s orgánem sociálně-právní ochrany dětí při zajištění odborné pomoci dítěti a rodině.",
+          "effectCz": "Dosavadní možnost uložit rodičům využít odbornou poradenskou pomoc se vztahuje na uvedené případy, například když dítě potřebuje pomoc a úřad ji předtím doporučil. Návrh doplňuje situaci, kdy rodiče k vyhledání pomoci předtím vyzvala škola nebo školské zařízení; rozšiřuje tak důvod pro zásah a součinnost institucí ve prospěch dítěte."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43478-1",
+          "relevant": false,
+          "reasonCz": "Změna pravidel pro zveřejňování informací v trestním řízení se podle dodaných ustanovení přímo netýká prevence ani spolupráce institucí chránících děti, seniory či hendikepované.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": false,
+          "reasonCz": "Dodaná část usnesení pouze ruší dřívější usnesení o návrhu na ratifikaci úmluvy a neukazuje konkrétní změnu ochrany skupin uvedených ve slibu.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-056b239e6d28--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-511",
+        "psp-core-2025--vote-86849",
+        "psp-core-2025--amendment-text-462",
+        "psp-core-2025--vote-86859",
+        "psp-core-2025--amendment-text-378",
+        "psp-core-2025--vote-86862",
+        "psp-core-2025--amendment-text-450",
+        "psp-core-2025--vote-86876",
+        "psp-core-2025--amendment-text-513",
+        "psp-core-2025--vote-86907",
+        "psp-core-2025--amendment-text-578",
+        "psp-core-2025--vote-86909",
+        "psp-core-2025--amendment-text-577",
+        "psp-core-2025--vote-86915",
+        "psp-core-2025--amendment-text-554",
+        "psp-core-2025--vote-86928",
+        "psp-core-2025--amendment-text-555",
+        "psp-core-2025--vote-86929",
+        "psp-core-2025--amendment-text-459",
+        "psp-core-2025--vote-86940",
+        "psp-core-2025--amendment-text-532",
+        "psp-core-2025--vote-86941",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43221-5",
+        "psp-core-2025--print-step-210821",
+        "psp-core-2025--law-change-43225-2",
+        "psp-core-2025--print-step-210844",
+        "psp-core-2025--government-opinion-43225-1",
+        "psp-core-2025--law-change-43228-2",
+        "psp-core-2025--law-change-43228-3",
+        "psp-core-2025--print-step-210866",
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43290-2",
+        "psp-core-2025--law-change-43290-3",
+        "psp-core-2025--law-change-43290-5",
+        "psp-core-2025--print-step-211246",
+        "psp-core-2025--law-change-43329-3",
+        "psp-core-2025--print-step-211494",
+        "psp-core-2025--law-change-43335-7",
+        "psp-core-2025--print-step-211537",
+        "psp-core-2025--law-change-43422-14",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--law-change-43453-6",
+        "psp-core-2025--print-step-212285",
+        "psp-core-2025--law-change-43477-3",
+        "psp-core-2025--print-step-212471"
+      ],
+      "explanationCz": "Motoristé jako součást vlády předložili změny pravidel sociálně-právní ochrany dětí, které rozšiřují prověřování žadatelů a možnost zapojit školu do zajištění odborné pomoci. Vláda také navrhla smluvní spolupráci se Slovenskem a Mongolskem při prevenci kriminality a předložila dohodu s Mexikem, která zahrnuje spolupráci proti kyberkriminalitě a pohlavnímu vykořisťování dětí. Poslanci Motoristů však nepodpořili několik návrhů na zvýšení rozpočtové podpory programů prevence recidivy, ochrany obětí a sociálně-právní ochrany dětí, a poté hlasovali pro státní rozpočet na rok 2026. Dodané části rozpočtu ukazují jen odkazy na přílohy, nikoli konkrétní schválené částky pro tyto programy, takže nelze určit, jaký účinek měl konečný rozpočet. Z dostupných návrhů je patrný posun k části slibu, ale dopad konečného rozpočtového rozhodnutí zůstává nejasný.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodané části návrhu i schváleného státního rozpočtu odkazují na přílohy s rozpisem výdajů, ale neobsahují příslušné částky. Strana hlasovala pro konečný rozpočet, takže bez těchto údajů nelze posoudit, zda jeho rozhodnutí podporu prevence a ochrany zvýšilo, zachovalo, nebo snížilo.",
+        "Rozpočet zároveň obsahoval návrhy na financování více programů souvisejících s prevencí kriminality a ochranou dětí; poslanci Motoristů je nepodpořili. Tyto postoje jsou v rozporu s některými pozdějšími návrhy vlády, které institucionální spolupráci a ochranu dětí rozšiřují."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-056b239e6d28",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o státní rozpočet, jehož výdaje mohou financovat prevenci kriminality a ochranu dětí; předložený výňatek však konkrétní související položky neobsahuje.",
+          "effectCz": "Rozpočet odkazuje na přílohy s výdaji podle kapitol, ale jejich částky ani konkrétní položky pro prevenci kriminality a ochranu zranitelných osob ve výňatku nejsou. Proto nelze určit, co rozpočet v této oblasti stanoví ani zda prostředky zvyšuje, nebo snižuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-5",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro posuzování bezúhonnosti a činnosti osob v sociálně-právní ochraně dětí přímo souvisí s bezpečností a ochranou dětí.",
+          "effectCz": "Dosavadní § 23e vylučoval z evidence žadatelů osoby odsouzené za vyjmenované trestné činy; návrh do výčtu doplňuje další jednání spojená s obchodováním s lidmi a péčí o dítě za odměnu, čímž tuto překážku rozšiřuje. U § 49 se požadovaný „opis“ mění na „výpis“; z dodaného znění nelze určit, jak se tím mění rozsah prověřování. Zrušení věty v § 49 odst. 10 odstraňuje pravidlo, podle něhož se při posuzování bezúhonnosti nepřihlíželo k zahlazení odsouzení, což tuto část prověřování uvolňuje. Nově se také postihuje neoprávněné svěření dítěte do péče jiné osoby za účelem vytvoření rodinných či obdobných vztahů; změna tak má smíšené účinky, včetně rozšíření ochrany dětí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43225-1",
+          "relevant": true,
+          "reasonCz": "Změna trestání neplacení výživného se týká ochrany osob závislých na výživě, včetně dětí, a tedy části prevence kriminality vůči zranitelným osobám.",
+          "effectCz": "Předchozí § 196 vyžadoval, aby neplacení výživného déle než čtyři měsíce vystavilo oprávněnou osobu nebezpečí nouze, a umožňoval trest odnětí svobody až na dva roky. Návrh trestnost rozšiřuje i na neplacení bez prokázání nouze, ale pro tento základní případ stanoví nejvýše jeden rok; dvouletou sazbu ponechává pro případ ohrožení nouzí. Současně zpřísňuje podmínky pro nepodmíněný trest. Dopad na ochranu je proto smíšený: trestnost se rozšiřuje, ale možnost nepodmíněného vězení se omezuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43225-2",
+          "relevant": true,
+          "reasonCz": "Změna omezuje bezplatnou odbornou pomoc některým obzvlášť zranitelným obětem, mezi něž mohou patřit děti, a souvisí tak s jejich ochranou po trestném činu.",
+          "effectCz": "Předchozí § 5 ukládal poskytovat obzvlášť zranitelným obětem, které pomoc potřebují, bezplatnou odbornou pomoc bez zbytečného odkladu. Návrh z této povinnosti vyjímá oběti trestného činu zanedbání povinné výživy, a tím jejich nárok zužuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-2",
+          "relevant": true,
+          "reasonCz": "Smlouva výslovně rozvíjí společné předcházení a odhalování trestných činů a umožňuje společné preventivní programy, což přímo odpovídá závazku posílit prevenci kriminality.",
+          "effectCz": "Smlouva zavádí spolupráci českých a slovenských orgánů při předcházení a odhalování trestných činů a výslovně počítá s koordinací i společnými programy prevence kriminality. Jde o novou možnost a rámec spolupráce, nikoli o změnu dřívějšího domácího pravidla; odpovídá části slibu o posílení prevence."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-3",
+          "relevant": true,
+          "reasonCz": "Umožňuje vzájemnou podporu pracovníků policejních orgánů při předcházení a odhalování trestných činů, a tím rozšiřuje spolupráci institucí.",
+          "effectCz": "Smlouva nově umožňuje, aby pracovníci jedné strany na základě dohody pomáhali orgánům druhé strany při prevenci a odhalování trestných činů. Předchozí znění v českých předpisech zde dodáno není; jde o nový rámec spolupráce, který posiluje možnost společného postupu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": true,
+          "reasonCz": "Změna ukládá policii spolupracovat s veřejným ochráncem práv a ochráncem práv dětí a umožňuje vyžádat si od orgánů sociálně-právní ochrany dětí zprávy o rodině.",
+          "effectCz": "V předložených ustanoveních cizineckého zákona se nově stanoví informování a součinnost policie s ochráncem práv, včetně ochránce práv dětí, a možnost ministerstva vyžádat si zprávu orgánu sociálně-právní ochrany dětí. Předchozí znění těchto pravidel není uvedeno; návrh ale výslovně upravuje spolupráci a přístup k informacím při ochraně dětí v řízeních o cizincích."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43290-2",
+          "relevant": true,
+          "reasonCz": "Smlouva spojuje policejní spolupráci s prevencí trestné činnosti a výslovně zahrnuje boj proti sexuálnímu zneužívání dětí.",
+          "effectCz": "Smlouva nově stanoví prohloubení spolupráce při předcházení a odhalování trestných činů a zahrnuje sexuální zneužívání dětí mezi oblastmi společného postupu. Dřívější znění není dodáno; jde o nový rámec spolupráce, který posiluje prevenci a ochranu dětí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43290-3",
+          "relevant": true,
+          "reasonCz": "Upravuje výměnu informací a plánování i uskutečňování společných programů prevence kriminality mezi příslušnými orgány.",
+          "effectCz": "Smlouva nově umožňuje předávání informací bez žádosti, koordinaci činnosti a společné programy prevence kriminality. Předchozí pravidlo není v balíčku uvedeno; nová ustanovení rozšiřují možnosti spolupráce orgánů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43290-5",
+          "relevant": true,
+          "reasonCz": "Upravuje zpracování osobních údajů předávaných v rámci policejní spolupráce, které je součástí efektivního sdílení informací při prevenci trestné činnosti.",
+          "effectCz": "Smlouva nově omezuje použití předaných údajů na sjednané účely a za stanovených podmínek, přičemž připouští jejich použití také pro prevenci a odhalování trestných činů. Pro jiné účely vyžaduje předchozí písemný souhlas. Předchozí pravidlo není dodáno; ustanovení vytváří ochranné limity pro sdílení, ale samo neurčuje, zda spolupráci celkově usnadní, nebo ztíží."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-3",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje seznam odsouzení rozhodných pro bezúhonnost žadatelů o zařazení do evidence související s ochranou dětí.",
+          "effectCz": "Dosavadní § 23e odst. 1 obsahoval výčet trestných činů, jejichž odsouzení brání zařazení do evidence žadatelů. Návrh do něj přidává trestné činy související s rtutí vedle již uvedených jedů, čímž rozšiřuje okruh překážek a zpřísňuje toto prověřovací kritérium."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-7",
+          "relevant": true,
+          "reasonCz": "Změna výslovně zvyšuje ochranu dítěte bez doprovodu nebo osoby bezbranné či v tísni při převádění přes hranice.",
+          "effectCz": "Dosavadní § 340 odst. 3 uváděl mezi okolnostmi přísnějšího trestu například vystavení většího počtu osob nelidskému zacházení. Návrh výslovně přidává případ, kdy je převáděnou osobou dítě bez doprovodu nebo osoba bezbranná či v tísni, při stejné sazbě dva až osm let; tím rozšiřuje ochranu těchto zranitelných osob."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": true,
+          "reasonCz": "Změna se týká nelegální práce nezletilých a souvisejících sankcí, tedy prevence vykořisťování a ochrany dětí.",
+          "effectCz": "Návrh rozšiřuje vymezení nelegální práce o práci nezletilých v rozporu s občanským zákoníkem a upravuje odpovídající přestupky. Současně v § 121 odst. 5 vyjímá zákaz práce mezi 20. a 22. hodinou z uvedeného rozsahu pracovněprávní ochrany dětí. Dopad je smíšený: nové vymezení rozšiřuje postih, ale výjimka v ochraně může část omezení uvolnit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-6",
+          "relevant": true,
+          "reasonCz": "Dohoda výslovně zahrnuje spolupráci v prevenci obchodování s lidmi a organizovaného zločinu, ochranu zranitelných dětí a boj proti sexuálnímu vykořisťování dětí.",
+          "effectCz": "Dohoda nově stanoví spolupráci a výměnu zkušeností v oblasti prevence závažné přeshraniční kriminality, výměnu postupů na ochranu žen a dětí bez doprovodu a spolupráci proti kyberkriminalitě se zvláštním důrazem na sexuální vykořisťování dětí. Předchozí znění není dodáno; jde o nový rámec, který posiluje prevenci i ochranu dětí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-3",
+          "relevant": true,
+          "reasonCz": "Změna posiluje možnost orgánu sociálně-právní ochrany dětí vyžadovat poradenskou pomoc, pokud školské zařízení už rodiče k jejímu vyhledání vyzvalo.",
+          "effectCz": "Předchozí § 12 umožňoval uložit rodičům využití poradenské pomoci mimo jiné tehdy, když ji dítě nezbytně potřebovalo a orgán sociálně-právní ochrany ji předtím doporučil. Návrh doplňuje také případ, kdy rodiče k vyhledání pomoci předtím vyzvala škola nebo školské zařízení, a tím rozšiřuje možnost včasného zásahu i institucionální spolupráce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43478-1",
+          "relevant": true,
+          "reasonCz": "Změna výslovně dovoluje zveřejnit údaj o státní příslušnosti, pokud je to nezbytné k předcházení trestné činnosti nebo ohrožení veřejného pořádku či vnitřní bezpečnosti.",
+          "effectCz": "Dosavadní § 8a odst. 1 omezoval zveřejňování údajů nesouvisejících přímo s trestnou činností a chránil také totožnost osob v přípravném řízení. Návrh výslovně stanoví povinnosti chránit objasnění věci a presumpci neviny, ale přidává výjimku umožňující zveřejnit státní příslušnost, je-li to nezbytné k prevenci kriminality či uvedených hrozeb. Jde o cílené uvolnění informačního omezení, nikoli o obecné rozšíření pravomoci."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Vláda zrušila své předchozí usnesení k ratifikaci úmluvy o prevenci a potírání násilí na ženách a domácího násilí; jde o krok vztahující se k prevenci násilí, ačkoli jeho konkrétní dopad na ochranu dětí zde není doložen.",
+          "effectCz": "Usnesení ruší dřívější usnesení vlády, které se týkalo návrhu na ratifikaci úmluvy o prevenci a potírání násilí na ženách a domácího násilí. Z dodaného textu nelze určit obsah rušeného usnesení ani změnu konkrétních právních nároků; ruší se však předchozí vládní krok směřující k ratifikaci, což odstraňuje jeden postup k posílení prevence násilí."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-056b239e6d28--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43221-5",
+        "psp-core-2025--law-change-43225-1",
+        "psp-core-2025--law-change-43225-2",
+        "psp-core-2025--law-change-43228-2",
+        "psp-core-2025--law-change-43228-3",
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--law-change-43290-2",
+        "psp-core-2025--law-change-43290-3",
+        "psp-core-2025--law-change-43290-5",
+        "psp-core-2025--law-change-43329-3",
+        "psp-core-2025--law-change-43335-7",
+        "psp-core-2025--law-change-43422-14",
+        "psp-core-2025--law-change-43453-6",
+        "psp-core-2025--law-change-43477-3",
+        "psp-core-2025--law-change-43478-1",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--print-step-210821",
+        "psp-core-2025--print-step-210844",
+        "psp-core-2025--print-step-210866",
+        "psp-core-2025--government-opinion-43225-1",
+        "psp-core-2025--vote-86849",
+        "psp-core-2025--vote-86859",
+        "psp-core-2025--vote-86862",
+        "psp-core-2025--vote-86876",
+        "psp-core-2025--vote-86907",
+        "psp-core-2025--vote-86909",
+        "psp-core-2025--vote-86915",
+        "psp-core-2025--vote-86928",
+        "psp-core-2025--vote-86929",
+        "psp-core-2025--vote-86940",
+        "psp-core-2025--vote-86941",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--print-step-211246",
+        "psp-core-2025--print-step-211494",
+        "psp-core-2025--print-step-211537",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--print-step-212285",
+        "psp-core-2025--print-step-212471",
+        "psp-core-2025--print-step-212473",
+        "psp-core-2025--vote-88522",
+        "zvlady-resolutions--2026-377",
+        "psp-core-2025--amendment-text-511",
+        "psp-core-2025--amendment-text-462",
+        "psp-core-2025--amendment-text-378",
+        "psp-core-2025--amendment-text-450",
+        "psp-core-2025--amendment-text-513",
+        "psp-core-2025--amendment-text-578",
+        "psp-core-2025--amendment-text-577",
+        "psp-core-2025--amendment-text-554",
+        "psp-core-2025--amendment-text-555",
+        "psp-core-2025--amendment-text-459",
+        "psp-core-2025--amendment-text-532"
+      ],
+      "explanationCz": "Vláda předložila několik návrhů na posílení policejní spolupráce a ochrany dětí, ale také zrušila dřívější usnesení týkající se ratifikace úmluvy o domácím násilí. Při závěrečném hlasování o cizineckém zákoně, který upravoval součinnost policie s ochráncem práv dětí, hlasovalo pro jen šest z třinácti poslanců Motoristů sobě, takže klub návrh většinově nepodpořil. Poslanci strany rovněž nepodpořili rozpočtové pozměňovací návrhy na financování programů prevence recidivy a ochrany dětí a obětí trestných činů. Návrhy na prevenci a ochranu jsou tedy v evidenci vedle kroků, které jim neposkytly podporu; dostupné podklady proto ukazují spíše postup proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek z rozpočtu neobsahuje konkrétní částky ani položky pro prevenci kriminality a ochranu zranitelných osob, takže nelze posoudit účinek závěrečného hlasování o rozpočtu na tyto oblasti.",
+        "Dodaný text usnesení o zrušení předchozího usnesení neuvádí jeho podrobnosti ani přímé následky pro ochranu dětí; jeho dopad je proto možné určit jen jako odstranění dřívějšího vládního kroku k ratifikaci.",
+        "Některé návrhy mají smíšený účinek: například změna trestání neplacení výživného rozšiřuje trestnost, ale omezuje možnost nepodmíněného vězení, a změny ochrany dětí při práci přidávají nové postihy, ale také jednu výjimku."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0c1fc720bfbaa620016aea90db0e1c87d1860a2775c3e06157",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 73884,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 73881
+      },
+      "output_tokens": 9880,
+      "output_tokens_details": {
+        "reasoning_tokens": 5646
+      },
+      "total_tokens": 83764
+    },
+    "output": {
+      "promiseId": "candidate-056b239e6d28",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet může ovlivnit prostředky na prevenci kriminality a ochranu dětí, ale dodané části jeho textu konkrétní výdaje neukazují.",
+          "effectCz": "Dodané znění pouze odkazuje na přílohy s rozpisem výdajů a neuvádí částky pro dotčené programy, takže z něj nelze zjistit, co bylo předtím, co je nově schváleno ani zda se prostředky na prevenci či ochranu zvyšují nebo snižují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-5",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro žadatele o péči o děti a postih neoprávněného předávání dětí se přímo dotýkají jejich ochrany.",
+          "effectCz": "Dosavadní výčet odsouzení vylučujících žadatele o zařazení do evidence se rozšiřuje o další trestné činy související s využíváním služeb obětí obchodování s lidmi; pravidlo pro bezúhonnost je tedy přísnější. Nově formulovaný přestupek postihuje také organizátora, návodce či pomocníka při neoprávněném svěření nebo přijetí dítěte do péče, čímž rozšiřuje ochranu dětí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43225-1",
+          "relevant": false,
+          "reasonCz": "Změny trestů za zanedbání vyživovací povinnosti se podle dodaného textu netýkají prevence kriminality ani spolupráce institucí chránících uvedené skupiny.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43225-2",
+          "relevant": true,
+          "reasonCz": "Výjimka z bezplatné odborné pomoci obětem zanedbání výživy může zasáhnout ochranu dětských obětí trestných činů.",
+          "effectCz": "Dosavadní pravidlo ukládá poskytovatelům v registru bez zbytečného odkladu bezplatně pomoci zvlášť zranitelným obětem, které pomoc potřebují; navržená věta tuto povinnost vylučuje u obětí zanedbání povinné výživy. Nárok na tuto pomoc se tedy v dané skupině zužuje, což může zhoršit ochranu části dětských obětí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-2",
+          "relevant": true,
+          "reasonCz": "Návrh smlouvy výslovně zahrnuje policejní spolupráci při předcházení trestné činnosti a společné preventivní programy.",
+          "effectCz": "Jde o novou smluvní úpravu, nikoli o změnu dřívějšího českého pravidla: stanoví spolupráci České republiky a Slovenska při prevenci a odhalování trestných činů, koordinaci postupů a společné programy prevence. To posiluje část slibu týkající se prevence a spolupráce institucí, ale text nevymezuje zvláštní zaměření na děti, seniory či hendikepované."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-3",
+          "relevant": true,
+          "reasonCz": "Smlouva připouští podporu policistů a dalších pracovníků druhé smluvní strany při prevenci a odhalování trestných činů.",
+          "effectCz": "Jde o novou smluvní možnost bez předchozího českého znění: pracovníci jedné strany mohou po dohodě pomáhat orgánům druhé strany a jednat pod jejich velením. Rozšiřuje možnosti institucionální spolupráce při prevenci kriminality, avšak neurčuje zvláštní ochranu uvedených skupin."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43290-2",
+          "relevant": true,
+          "reasonCz": "Smlouva s Mongolskem výslovně upravuje prevenci trestné činnosti a spolupráci proti sexuálnímu zneužívání dětí.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího znění českého zákona: stanoví prohloubení policejní spolupráce při prevenci a odhalování trestných činů a mezi oblastmi spolupráce výslovně uvádí sexuální zneužívání dětí a dětskou pornografii. Posiluje tak prevenci a ochranu dětí v uvedených oblastech, nikoli však ochranu seniorů či hendikepovaných."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43290-3",
+          "relevant": true,
+          "reasonCz": "Návrh smlouvy stanoví výměnu informací a společné programy prevence kriminality mezi příslušnými orgány.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího českého znění: umožňuje předávání informací potřebných k prevenci a odhalování trestných činů a koordinaci činnosti včetně společných preventivních programů. Rozšiřuje možnosti spolupráce orgánů, ale dodaný text ji výslovně nespojuje s ochranou seniorů či hendikepovaných."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43290-5",
+          "relevant": true,
+          "reasonCz": "Ustanovení smlouvy umožňuje použít předané osobní údaje pro prevenci a odhalování trestné činnosti.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího českého znění: umožňuje použití předaných osobních údajů zejména k účelu, pro který byly předány, a za stanovených podmínek také k prevenci a odhalování trestných činů. Vytváří nástroj pro spolupráci orgánů, ale samo o sobě nedokládá konkrétní ochranu uvedených skupin."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": true,
+          "reasonCz": "Změna ukládá policii informovat ochránce práv dětí a poskytovat mu součinnost a umožňuje vyžádat zprávu orgánu sociálně-právní ochrany dětí.",
+          "effectCz": "Jde o novou právní úpravu v rámci předkládaného zákona, nikoli o doloženou změnu již platného zákona: policie má informovat veřejného ochránce práv o některých úkonech a ministerstvo může žádat orgán sociálně-právní ochrany dětí o zprávu o rodině. Tím se rozšiřuje součinnost institucí při ochraně dětí; z dodaného textu neplyne změna ochrany seniorů či hendikepovaných."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-3",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje prověřování bezúhonnosti žadatelů o činnosti sociálně-právní ochrany dětí.",
+          "effectCz": "Dosavadní výčet odsouzení vylučujících žadatele o zařazení do evidence zahrnuje uvedené jedy; návrh jej rozšiřuje také o rtuť. Podmínka bezúhonnosti se tím v tomto bodě zpřísňuje a posiluje filtr pro osoby, které mohou vykonávat činnost související s ochranou dětí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-7",
+          "relevant": true,
+          "reasonCz": "Změna zvyšuje ochranu dětí a dalších zranitelných osob před závažnými formami převaděčství a nedovoleného překročení hranic.",
+          "effectCz": "Dosavadní přísnější sazba se vztahuje mimo jiné na vystavení většího počtu osob nelidskému zacházení; návrh výslovně doplňuje dítě bez doprovodu a osobu bezbrannou či v tísni. Rozšiřuje tedy výslovný rozsah okolností pro přísnější postih, což podporuje ochranu dětí a zranitelných osob."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": true,
+          "reasonCz": "Změny vymezují nelegální práci nezletilých a současně upravují jejich ochranu při práci, takže se přímo dotýkají ochrany dětí.",
+          "effectCz": "Dosavadní definice nelegální práce výslovně nezahrnuje nezletilé pracující v rozporu s občanským zákoníkem; návrh tuto kategorii doplňuje a rozšiřuje související postihy, což zpřísňuje ochranu před nelegálním zaměstnáváním. Zároveň však výslovně vylučuje použití zákazu práce mezi 20. a 22. hodinou u dětí, čímž tuto konkrétní ochrannou hranici uvolňuje; účinek na ochranu dětí je proto smíšený."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-6",
+          "relevant": true,
+          "reasonCz": "Dohoda zahrnuje spolupráci v prevenci kriminality a výslovně zmiňuje ochranu dětí před pohlavním vykořisťováním v kyberprostoru.",
+          "effectCz": "Jde o novou mezinárodní úpravu bez předchozího znění českého zákona: stanoví spolupráci a výměnu informací při potírání organizovaného zločinu a kyberkriminality a zdůrazňuje boj proti pohlavnímu vykořisťování dětí. Posiluje část slibu týkající se prevence a ochrany dětí, ale není určena zvláštní ochraně seniorů či hendikepovaných."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-3",
+          "relevant": true,
+          "reasonCz": "Změna propojuje školu s orgánem sociálně-právní ochrany dětí při zajištění odborné pomoci dítěti a rodině.",
+          "effectCz": "Dosavadní možnost uložit rodičům využít odbornou poradenskou pomoc se vztahuje na uvedené případy, například když dítě potřebuje pomoc a úřad ji předtím doporučil. Návrh doplňuje situaci, kdy rodiče k vyhledání pomoci předtím vyzvala škola nebo školské zařízení; rozšiřuje tak důvod pro zásah a součinnost institucí ve prospěch dítěte."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43478-1",
+          "relevant": false,
+          "reasonCz": "Změna pravidel pro zveřejňování informací v trestním řízení se podle dodaných ustanovení přímo netýká prevence ani spolupráce institucí chránících děti, seniory či hendikepované.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": false,
+          "reasonCz": "Dodaná část usnesení pouze ruší dřívější usnesení o návrhu na ratifikaci úmluvy a neukazuje konkrétní změnu ochrany skupin uvedených ve slibu.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-056b239e6d28--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-511",
+        "psp-core-2025--vote-86849",
+        "psp-core-2025--amendment-text-462",
+        "psp-core-2025--vote-86859",
+        "psp-core-2025--amendment-text-378",
+        "psp-core-2025--vote-86862",
+        "psp-core-2025--amendment-text-450",
+        "psp-core-2025--vote-86876",
+        "psp-core-2025--amendment-text-513",
+        "psp-core-2025--vote-86907",
+        "psp-core-2025--amendment-text-578",
+        "psp-core-2025--vote-86909",
+        "psp-core-2025--amendment-text-577",
+        "psp-core-2025--vote-86915",
+        "psp-core-2025--amendment-text-554",
+        "psp-core-2025--vote-86928",
+        "psp-core-2025--amendment-text-555",
+        "psp-core-2025--vote-86929",
+        "psp-core-2025--amendment-text-459",
+        "psp-core-2025--vote-86940",
+        "psp-core-2025--amendment-text-532",
+        "psp-core-2025--vote-86941",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43221-5",
+        "psp-core-2025--print-step-210821",
+        "psp-core-2025--law-change-43225-2",
+        "psp-core-2025--print-step-210844",
+        "psp-core-2025--government-opinion-43225-1",
+        "psp-core-2025--law-change-43228-2",
+        "psp-core-2025--law-change-43228-3",
+        "psp-core-2025--print-step-210866",
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43290-2",
+        "psp-core-2025--law-change-43290-3",
+        "psp-core-2025--law-change-43290-5",
+        "psp-core-2025--print-step-211246",
+        "psp-core-2025--law-change-43329-3",
+        "psp-core-2025--print-step-211494",
+        "psp-core-2025--law-change-43335-7",
+        "psp-core-2025--print-step-211537",
+        "psp-core-2025--law-change-43422-14",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--law-change-43453-6",
+        "psp-core-2025--print-step-212285",
+        "psp-core-2025--law-change-43477-3",
+        "psp-core-2025--print-step-212471"
+      ],
+      "explanationCz": "Motoristé jako součást vlády předložili změny pravidel sociálně-právní ochrany dětí, které rozšiřují prověřování žadatelů a možnost zapojit školu do zajištění odborné pomoci. Vláda také navrhla smluvní spolupráci se Slovenskem a Mongolskem při prevenci kriminality a předložila dohodu s Mexikem, která zahrnuje spolupráci proti kyberkriminalitě a pohlavnímu vykořisťování dětí. Poslanci Motoristů však nepodpořili několik návrhů na zvýšení rozpočtové podpory programů prevence recidivy, ochrany obětí a sociálně-právní ochrany dětí, a poté hlasovali pro státní rozpočet na rok 2026. Dodané části rozpočtu ukazují jen odkazy na přílohy, nikoli konkrétní schválené částky pro tyto programy, takže nelze určit, jaký účinek měl konečný rozpočet. Z dostupných návrhů je patrný posun k části slibu, ale dopad konečného rozpočtového rozhodnutí zůstává nejasný.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodané části návrhu i schváleného státního rozpočtu odkazují na přílohy s rozpisem výdajů, ale neobsahují příslušné částky. Strana hlasovala pro konečný rozpočet, takže bez těchto údajů nelze posoudit, zda jeho rozhodnutí podporu prevence a ochrany zvýšilo, zachovalo, nebo snížilo.",
+        "Rozpočet zároveň obsahoval návrhy na financování více programů souvisejících s prevencí kriminality a ochranou dětí; poslanci Motoristů je nepodpořili. Tyto postoje jsou v rozporu s některými pozdějšími návrhy vlády, které institucionální spolupráci a ochranu dětí rozšiřují."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_09d372a0458507db016aea9138b1f487d18091f8fcf2eab58e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 73884,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 73881
+      },
+      "output_tokens": 11648,
+      "output_tokens_details": {
+        "reasoning_tokens": 7123
+      },
+      "total_tokens": 85532
+    },
+    "output": {
+      "promiseId": "candidate-056b239e6d28",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o státní rozpočet, jehož výdaje mohou financovat prevenci kriminality a ochranu dětí; předložený výňatek však konkrétní související položky neobsahuje.",
+          "effectCz": "Rozpočet odkazuje na přílohy s výdaji podle kapitol, ale jejich částky ani konkrétní položky pro prevenci kriminality a ochranu zranitelných osob ve výňatku nejsou. Proto nelze určit, co rozpočet v této oblasti stanoví ani zda prostředky zvyšuje, nebo snižuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-5",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro posuzování bezúhonnosti a činnosti osob v sociálně-právní ochraně dětí přímo souvisí s bezpečností a ochranou dětí.",
+          "effectCz": "Dosavadní § 23e vylučoval z evidence žadatelů osoby odsouzené za vyjmenované trestné činy; návrh do výčtu doplňuje další jednání spojená s obchodováním s lidmi a péčí o dítě za odměnu, čímž tuto překážku rozšiřuje. U § 49 se požadovaný „opis“ mění na „výpis“; z dodaného znění nelze určit, jak se tím mění rozsah prověřování. Zrušení věty v § 49 odst. 10 odstraňuje pravidlo, podle něhož se při posuzování bezúhonnosti nepřihlíželo k zahlazení odsouzení, což tuto část prověřování uvolňuje. Nově se také postihuje neoprávněné svěření dítěte do péče jiné osoby za účelem vytvoření rodinných či obdobných vztahů; změna tak má smíšené účinky, včetně rozšíření ochrany dětí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43225-1",
+          "relevant": true,
+          "reasonCz": "Změna trestání neplacení výživného se týká ochrany osob závislých na výživě, včetně dětí, a tedy části prevence kriminality vůči zranitelným osobám.",
+          "effectCz": "Předchozí § 196 vyžadoval, aby neplacení výživného déle než čtyři měsíce vystavilo oprávněnou osobu nebezpečí nouze, a umožňoval trest odnětí svobody až na dva roky. Návrh trestnost rozšiřuje i na neplacení bez prokázání nouze, ale pro tento základní případ stanoví nejvýše jeden rok; dvouletou sazbu ponechává pro případ ohrožení nouzí. Současně zpřísňuje podmínky pro nepodmíněný trest. Dopad na ochranu je proto smíšený: trestnost se rozšiřuje, ale možnost nepodmíněného vězení se omezuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43225-2",
+          "relevant": true,
+          "reasonCz": "Změna omezuje bezplatnou odbornou pomoc některým obzvlášť zranitelným obětem, mezi něž mohou patřit děti, a souvisí tak s jejich ochranou po trestném činu.",
+          "effectCz": "Předchozí § 5 ukládal poskytovat obzvlášť zranitelným obětem, které pomoc potřebují, bezplatnou odbornou pomoc bez zbytečného odkladu. Návrh z této povinnosti vyjímá oběti trestného činu zanedbání povinné výživy, a tím jejich nárok zužuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-2",
+          "relevant": true,
+          "reasonCz": "Smlouva výslovně rozvíjí společné předcházení a odhalování trestných činů a umožňuje společné preventivní programy, což přímo odpovídá závazku posílit prevenci kriminality.",
+          "effectCz": "Smlouva zavádí spolupráci českých a slovenských orgánů při předcházení a odhalování trestných činů a výslovně počítá s koordinací i společnými programy prevence kriminality. Jde o novou možnost a rámec spolupráce, nikoli o změnu dřívějšího domácího pravidla; odpovídá části slibu o posílení prevence."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-3",
+          "relevant": true,
+          "reasonCz": "Umožňuje vzájemnou podporu pracovníků policejních orgánů při předcházení a odhalování trestných činů, a tím rozšiřuje spolupráci institucí.",
+          "effectCz": "Smlouva nově umožňuje, aby pracovníci jedné strany na základě dohody pomáhali orgánům druhé strany při prevenci a odhalování trestných činů. Předchozí znění v českých předpisech zde dodáno není; jde o nový rámec spolupráce, který posiluje možnost společného postupu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": true,
+          "reasonCz": "Změna ukládá policii spolupracovat s veřejným ochráncem práv a ochráncem práv dětí a umožňuje vyžádat si od orgánů sociálně-právní ochrany dětí zprávy o rodině.",
+          "effectCz": "V předložených ustanoveních cizineckého zákona se nově stanoví informování a součinnost policie s ochráncem práv, včetně ochránce práv dětí, a možnost ministerstva vyžádat si zprávu orgánu sociálně-právní ochrany dětí. Předchozí znění těchto pravidel není uvedeno; návrh ale výslovně upravuje spolupráci a přístup k informacím při ochraně dětí v řízeních o cizincích."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43290-2",
+          "relevant": true,
+          "reasonCz": "Smlouva spojuje policejní spolupráci s prevencí trestné činnosti a výslovně zahrnuje boj proti sexuálnímu zneužívání dětí.",
+          "effectCz": "Smlouva nově stanoví prohloubení spolupráce při předcházení a odhalování trestných činů a zahrnuje sexuální zneužívání dětí mezi oblastmi společného postupu. Dřívější znění není dodáno; jde o nový rámec spolupráce, který posiluje prevenci a ochranu dětí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43290-3",
+          "relevant": true,
+          "reasonCz": "Upravuje výměnu informací a plánování i uskutečňování společných programů prevence kriminality mezi příslušnými orgány.",
+          "effectCz": "Smlouva nově umožňuje předávání informací bez žádosti, koordinaci činnosti a společné programy prevence kriminality. Předchozí pravidlo není v balíčku uvedeno; nová ustanovení rozšiřují možnosti spolupráce orgánů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43290-5",
+          "relevant": true,
+          "reasonCz": "Upravuje zpracování osobních údajů předávaných v rámci policejní spolupráce, které je součástí efektivního sdílení informací při prevenci trestné činnosti.",
+          "effectCz": "Smlouva nově omezuje použití předaných údajů na sjednané účely a za stanovených podmínek, přičemž připouští jejich použití také pro prevenci a odhalování trestných činů. Pro jiné účely vyžaduje předchozí písemný souhlas. Předchozí pravidlo není dodáno; ustanovení vytváří ochranné limity pro sdílení, ale samo neurčuje, zda spolupráci celkově usnadní, nebo ztíží."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-3",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje seznam odsouzení rozhodných pro bezúhonnost žadatelů o zařazení do evidence související s ochranou dětí.",
+          "effectCz": "Dosavadní § 23e odst. 1 obsahoval výčet trestných činů, jejichž odsouzení brání zařazení do evidence žadatelů. Návrh do něj přidává trestné činy související s rtutí vedle již uvedených jedů, čímž rozšiřuje okruh překážek a zpřísňuje toto prověřovací kritérium."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-7",
+          "relevant": true,
+          "reasonCz": "Změna výslovně zvyšuje ochranu dítěte bez doprovodu nebo osoby bezbranné či v tísni při převádění přes hranice.",
+          "effectCz": "Dosavadní § 340 odst. 3 uváděl mezi okolnostmi přísnějšího trestu například vystavení většího počtu osob nelidskému zacházení. Návrh výslovně přidává případ, kdy je převáděnou osobou dítě bez doprovodu nebo osoba bezbranná či v tísni, při stejné sazbě dva až osm let; tím rozšiřuje ochranu těchto zranitelných osob."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": true,
+          "reasonCz": "Změna se týká nelegální práce nezletilých a souvisejících sankcí, tedy prevence vykořisťování a ochrany dětí.",
+          "effectCz": "Návrh rozšiřuje vymezení nelegální práce o práci nezletilých v rozporu s občanským zákoníkem a upravuje odpovídající přestupky. Současně v § 121 odst. 5 vyjímá zákaz práce mezi 20. a 22. hodinou z uvedeného rozsahu pracovněprávní ochrany dětí. Dopad je smíšený: nové vymezení rozšiřuje postih, ale výjimka v ochraně může část omezení uvolnit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-6",
+          "relevant": true,
+          "reasonCz": "Dohoda výslovně zahrnuje spolupráci v prevenci obchodování s lidmi a organizovaného zločinu, ochranu zranitelných dětí a boj proti sexuálnímu vykořisťování dětí.",
+          "effectCz": "Dohoda nově stanoví spolupráci a výměnu zkušeností v oblasti prevence závažné přeshraniční kriminality, výměnu postupů na ochranu žen a dětí bez doprovodu a spolupráci proti kyberkriminalitě se zvláštním důrazem na sexuální vykořisťování dětí. Předchozí znění není dodáno; jde o nový rámec, který posiluje prevenci i ochranu dětí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-3",
+          "relevant": true,
+          "reasonCz": "Změna posiluje možnost orgánu sociálně-právní ochrany dětí vyžadovat poradenskou pomoc, pokud školské zařízení už rodiče k jejímu vyhledání vyzvalo.",
+          "effectCz": "Předchozí § 12 umožňoval uložit rodičům využití poradenské pomoci mimo jiné tehdy, když ji dítě nezbytně potřebovalo a orgán sociálně-právní ochrany ji předtím doporučil. Návrh doplňuje také případ, kdy rodiče k vyhledání pomoci předtím vyzvala škola nebo školské zařízení, a tím rozšiřuje možnost včasného zásahu i institucionální spolupráce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43478-1",
+          "relevant": true,
+          "reasonCz": "Změna výslovně dovoluje zveřejnit údaj o státní příslušnosti, pokud je to nezbytné k předcházení trestné činnosti nebo ohrožení veřejného pořádku či vnitřní bezpečnosti.",
+          "effectCz": "Dosavadní § 8a odst. 1 omezoval zveřejňování údajů nesouvisejících přímo s trestnou činností a chránil také totožnost osob v přípravném řízení. Návrh výslovně stanoví povinnosti chránit objasnění věci a presumpci neviny, ale přidává výjimku umožňující zveřejnit státní příslušnost, je-li to nezbytné k prevenci kriminality či uvedených hrozeb. Jde o cílené uvolnění informačního omezení, nikoli o obecné rozšíření pravomoci."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Vláda zrušila své předchozí usnesení k ratifikaci úmluvy o prevenci a potírání násilí na ženách a domácího násilí; jde o krok vztahující se k prevenci násilí, ačkoli jeho konkrétní dopad na ochranu dětí zde není doložen.",
+          "effectCz": "Usnesení ruší dřívější usnesení vlády, které se týkalo návrhu na ratifikaci úmluvy o prevenci a potírání násilí na ženách a domácího násilí. Z dodaného textu nelze určit obsah rušeného usnesení ani změnu konkrétních právních nároků; ruší se však předchozí vládní krok směřující k ratifikaci, což odstraňuje jeden postup k posílení prevence násilí."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-056b239e6d28--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43221-5",
+        "psp-core-2025--law-change-43225-1",
+        "psp-core-2025--law-change-43225-2",
+        "psp-core-2025--law-change-43228-2",
+        "psp-core-2025--law-change-43228-3",
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--law-change-43290-2",
+        "psp-core-2025--law-change-43290-3",
+        "psp-core-2025--law-change-43290-5",
+        "psp-core-2025--law-change-43329-3",
+        "psp-core-2025--law-change-43335-7",
+        "psp-core-2025--law-change-43422-14",
+        "psp-core-2025--law-change-43453-6",
+        "psp-core-2025--law-change-43477-3",
+        "psp-core-2025--law-change-43478-1",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--print-step-210821",
+        "psp-core-2025--print-step-210844",
+        "psp-core-2025--print-step-210866",
+        "psp-core-2025--government-opinion-43225-1",
+        "psp-core-2025--vote-86849",
+        "psp-core-2025--vote-86859",
+        "psp-core-2025--vote-86862",
+        "psp-core-2025--vote-86876",
+        "psp-core-2025--vote-86907",
+        "psp-core-2025--vote-86909",
+        "psp-core-2025--vote-86915",
+        "psp-core-2025--vote-86928",
+        "psp-core-2025--vote-86929",
+        "psp-core-2025--vote-86940",
+        "psp-core-2025--vote-86941",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--print-step-211246",
+        "psp-core-2025--print-step-211494",
+        "psp-core-2025--print-step-211537",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--print-step-212285",
+        "psp-core-2025--print-step-212471",
+        "psp-core-2025--print-step-212473",
+        "psp-core-2025--vote-88522",
+        "zvlady-resolutions--2026-377",
+        "psp-core-2025--amendment-text-511",
+        "psp-core-2025--amendment-text-462",
+        "psp-core-2025--amendment-text-378",
+        "psp-core-2025--amendment-text-450",
+        "psp-core-2025--amendment-text-513",
+        "psp-core-2025--amendment-text-578",
+        "psp-core-2025--amendment-text-577",
+        "psp-core-2025--amendment-text-554",
+        "psp-core-2025--amendment-text-555",
+        "psp-core-2025--amendment-text-459",
+        "psp-core-2025--amendment-text-532"
+      ],
+      "explanationCz": "Vláda předložila několik návrhů na posílení policejní spolupráce a ochrany dětí, ale také zrušila dřívější usnesení týkající se ratifikace úmluvy o domácím násilí. Při závěrečném hlasování o cizineckém zákoně, který upravoval součinnost policie s ochráncem práv dětí, hlasovalo pro jen šest z třinácti poslanců Motoristů sobě, takže klub návrh většinově nepodpořil. Poslanci strany rovněž nepodpořili rozpočtové pozměňovací návrhy na financování programů prevence recidivy a ochrany dětí a obětí trestných činů. Návrhy na prevenci a ochranu jsou tedy v evidenci vedle kroků, které jim neposkytly podporu; dostupné podklady proto ukazují spíše postup proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek z rozpočtu neobsahuje konkrétní částky ani položky pro prevenci kriminality a ochranu zranitelných osob, takže nelze posoudit účinek závěrečného hlasování o rozpočtu na tyto oblasti.",
+        "Dodaný text usnesení o zrušení předchozího usnesení neuvádí jeho podrobnosti ani přímé následky pro ochranu dětí; jeho dopad je proto možné určit jen jako odstranění dřívějšího vládního kroku k ratifikaci.",
+        "Některé návrhy mají smíšený účinek: například změna trestání neplacení výživného rozšiřuje trestnost, ale omezuje možnost nepodmíněného vězení, a změny ochrany dětí při práci přidávají nové postihy, ale také jednu výjimku."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_09cbf3cd231b6700016aea91bd2c9887d1a4a598eee7fd10ba",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 80325,
+      "input_tokens_details": {
+        "cached_tokens": 4410,
+        "cache_write_tokens": 75912
+      },
+      "output_tokens": 460,
+      "output_tokens_details": {
+        "reasoning_tokens": 199
+      },
+      "total_tokens": 80785
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43477-3",
+        "psp-core-2025--print-step-212471"
+      ],
+      "explanationCz": "Volím druhé hodnocení, protože správně zohledňuje závěrečné hlasování o cizineckém zákoně, který upravuje spolupráci policie, ochránce práv a úřadů chránících děti. Pro návrh hlasovalo jen šest ze třinácti poslanců Motoristů sobě, takže jej většina klubu nepodpořila. Podle pravidel hodnocení má toto rozhodující hlasování větší váhu než pozdější vládní návrh na lepší návaznost pomoci školy a úřadů. První hodnocení tuto přednost rozhodujícího hlasování neuplatnilo; chybějící údaje o rozpočtu přitom zůstávají důvodem k opatrnosti."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-b"
+  }
+}

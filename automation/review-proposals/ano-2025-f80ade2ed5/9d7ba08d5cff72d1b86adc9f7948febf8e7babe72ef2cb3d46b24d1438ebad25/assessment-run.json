@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T01-52-25-840Z--85e86fbb2d8a",
+  "evaluatedAt": "2026-11-04T01:52:25.840Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-f80ade2ed5/85e86fbb2d8aeec37daf7fd36b38dbc6323f0276e3fbfed1cd4c90d093bfd043.json",
+  "packageHash": "85e86fbb2d8aeec37daf7fd36b38dbc6323f0276e3fbfed1cd4c90d093bfd043",
+  "assessmentContentHash": "851538a28567c9a5ce5dcdcf2e1eb26a420de98675ba6b3c357191f1f3f76383",
+  "assessmentFingerprint": "9d7ba08d5cff72d1b86adc9f7948febf8e7babe72ef2cb3d46b24d1438ebad25",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-f80ade2ed5",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-f80ade2ed5",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-61",
+          "relevant": true,
+          "reasonCz": "Usnesení přímo mění složení dozorčí rady VZP, tedy orgánu, jehož odpolitizování slibuje.",
+          "effectCz": "Vláda jmenovala Jakuba Haase členem Dozorčí rady VZP s účinností od 13. března 2026, a to na návrh ministryně financí. Usnesení nemění právní předpis a podklady neuvádějí dosavadní složení rady ani politické vazby jmenovaného či pravidla jeho výběru; nelze proto určit, zda se politický vliv zpřísnil, oslabil, nebo zůstal stejný."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-f80ade2ed5--source",
+        "zvlady-resolutions--law-change-uv-2026-61",
+        "zvlady-resolutions--2026-61"
+      ],
+      "explanationCz": "Vláda 26. ledna 2026 rozhodla o jmenování Jakuba Haase členem Dozorčí rady VZP s účinností od 13. března, na návrh ministryně financí. Jde o změnu složení orgánu, jehož odpolitizování ANO slíbilo. Podklady ale neuvádějí politické vazby jmenovaného ani to, zda způsob jeho výběru omezil politický vliv. Nelze proto doložit, že se slib naplňuje, ani že vláda postupovala proti němu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Usnesení neuvádí politické vazby jmenovaného ani dosavadní složení Dozorčí rady VZP, takže z něj nelze určit, zda jmenování orgán odpolitizovalo nebo zvýšilo politický vliv."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-f80ade2ed5",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-61",
+          "relevant": true,
+          "reasonCz": "Usnesení přímo jmenuje členy dozorčí rady VZP, tedy orgánu, jehož odpolitizování slib požaduje.",
+          "effectCz": "Usnesení jmenuje dva členy dozorčí rady VZP na návrh ministryně financí; nejde o změnu zákona a balíček neuvádí předchozí obsazení ani pravidla jmenování. Zachovává tak jmenování prostřednictvím návrhu člena vlády, což směřuje proti odpolitizování této části orgánů VZP, ale samo o sobě nedokládá politickou příslušnost jmenovaných."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-f80ade2ed5--source",
+        "zvlady-resolutions--law-change-uv-2026-61",
+        "zvlady-resolutions--2026-61"
+      ],
+      "explanationCz": "Vláda přijala usnesení o odvolání a jmenování členů dozorčích rad zdravotních pojišťoven. Do dozorčí rady VZP jmenovala dva členy na návrh ministryně financí. Tím zachovala jmenování na návrh člena vlády, což jde proti odpolitizování části orgánů VZP. Jde o dílčí rozpor se slibem; usnesení neuvádí, zda mají jmenovaní politické vazby.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neuvádějí politické vazby jmenovaných ani předchozí obsazení dozorčí rady VZP, takže nelze určit, zda se složení rady fakticky změnilo směrem k větší nezávislosti."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0c6353a803d16fe9016aea8facf0e887d18d10435ef42dafc7",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8152,
+      "input_tokens_details": {
+        "cache_write_tokens": 1802,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 1480,
+      "output_tokens_details": {
+        "reasoning_tokens": 1010
+      },
+      "total_tokens": 9632
+    },
+    "output": {
+      "promiseId": "ano-2025-f80ade2ed5",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-61",
+          "relevant": true,
+          "reasonCz": "Usnesení přímo mění složení dozorčí rady VZP, tedy orgánu, jehož odpolitizování slibuje.",
+          "effectCz": "Vláda jmenovala Jakuba Haase členem Dozorčí rady VZP s účinností od 13. března 2026, a to na návrh ministryně financí. Usnesení nemění právní předpis a podklady neuvádějí dosavadní složení rady ani politické vazby jmenovaného či pravidla jeho výběru; nelze proto určit, zda se politický vliv zpřísnil, oslabil, nebo zůstal stejný."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-f80ade2ed5--source",
+        "zvlady-resolutions--law-change-uv-2026-61",
+        "zvlady-resolutions--2026-61"
+      ],
+      "explanationCz": "Vláda 26. ledna 2026 rozhodla o jmenování Jakuba Haase členem Dozorčí rady VZP s účinností od 13. března, na návrh ministryně financí. Jde o změnu složení orgánu, jehož odpolitizování ANO slíbilo. Podklady ale neuvádějí politické vazby jmenovaného ani to, zda způsob jeho výběru omezil politický vliv. Nelze proto doložit, že se slib naplňuje, ani že vláda postupovala proti němu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Usnesení neuvádí politické vazby jmenovaného ani dosavadní složení Dozorčí rady VZP, takže z něj nelze určit, zda jmenování orgán odpolitizovalo nebo zvýšilo politický vliv."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_013ab9b163ae93d7016aea8fbfd2e887d1a3418eae907e86fc",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8152,
+      "input_tokens_details": {
+        "cached_tokens": 8149,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 1534,
+      "output_tokens_details": {
+        "reasoning_tokens": 1034
+      },
+      "total_tokens": 9686
+    },
+    "output": {
+      "promiseId": "ano-2025-f80ade2ed5",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-61",
+          "relevant": true,
+          "reasonCz": "Usnesení přímo jmenuje členy dozorčí rady VZP, tedy orgánu, jehož odpolitizování slib požaduje.",
+          "effectCz": "Usnesení jmenuje dva členy dozorčí rady VZP na návrh ministryně financí; nejde o změnu zákona a balíček neuvádí předchozí obsazení ani pravidla jmenování. Zachovává tak jmenování prostřednictvím návrhu člena vlády, což směřuje proti odpolitizování této části orgánů VZP, ale samo o sobě nedokládá politickou příslušnost jmenovaných."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-f80ade2ed5--source",
+        "zvlady-resolutions--law-change-uv-2026-61",
+        "zvlady-resolutions--2026-61"
+      ],
+      "explanationCz": "Vláda přijala usnesení o odvolání a jmenování členů dozorčích rad zdravotních pojišťoven. Do dozorčí rady VZP jmenovala dva členy na návrh ministryně financí. Tím zachovala jmenování na návrh člena vlády, což jde proti odpolitizování části orgánů VZP. Jde o dílčí rozpor se slibem; usnesení neuvádí, zda mají jmenovaní politické vazby.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neuvádějí politické vazby jmenovaných ani předchozí obsazení dozorčí rady VZP, takže nelze určit, zda se složení rady fakticky změnilo směrem k větší nezávislosti."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0e01fbf1909e4b86016aea8fd4d3f887d1b5f1395fa51a47bc",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 7123,
+      "input_tokens_details": {
+        "cache_write_tokens": 2710,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 270,
+      "output_tokens_details": {
+        "reasoning_tokens": 52
+      },
+      "total_tokens": 7393
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "ano-2025-f80ade2ed5--source",
+        "zvlady-resolutions--law-change-uv-2026-61",
+        "zvlady-resolutions--2026-61"
+      ],
+      "explanationCz": "Přesvědčivější je první posouzení, protože samotné jmenování na návrh ministryně nedokládá postup proti odpolitizování VZP. Vláda jmenovala do dozorčí rady VZP Jakuba Haase; druhé posouzení chybně uvádí dva členy, přestože druhý jmenovaný patří do jiné pojišťovny. Podklady nepopisují politické vazby Jakuba Haase ani to, zda jeho jmenování politický vliv oslabilo či posílilo. Nelze tedy doložit ani posun ke splnění slibu, ani postup proti němu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

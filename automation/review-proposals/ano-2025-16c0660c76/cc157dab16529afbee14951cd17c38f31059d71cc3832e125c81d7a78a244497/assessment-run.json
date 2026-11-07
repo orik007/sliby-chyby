@@ -1,0 +1,248 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-28-23-554Z--fcc64d57e1a1",
+  "evaluatedAt": "2026-10-02T01:28:23.554Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-16c0660c76/fcc64d57e1a1089e9174550009a1067fa6b76cb3bc90dd527fd0a4dcfaeed60a.json",
+  "packageHash": "fcc64d57e1a1089e9174550009a1067fa6b76cb3bc90dd527fd0a4dcfaeed60a",
+  "assessmentContentHash": "43a3994013690b307a29ff0604b3745ad65bc2261a25ba126e696106ec37b8ae",
+  "assessmentFingerprint": "cc157dab16529afbee14951cd17c38f31059d71cc3832e125c81d7a78a244497",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-16c0660c76",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-16c0660c76",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text mění pouze termíny účinnosti blíže neurčených ustanovení a z dodaného kontextu nelze zjistit, zda se týkají přídavků na děti, školkovného nebo daňové slevy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-1",
+          "relevant": true,
+          "reasonCz": "Změna posouvá vznik nároku na novou dávku státní sociální pomoci u domácností pobírajících mimo jiné přídavek na dítě z dubna na červenec, takže přímo ovlivňuje přechod těchto rodin k nové dávce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": false,
+          "reasonCz": "Změna pouze zařazuje novou dávku mezi započitatelné příjmy pro účely životního minima a nedokládá změnu přídavků na děti, školkovného ani slevy pro pečujícího rodiče."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": true,
+          "reasonCz": "Změna prodlužuje výplatu dosavadního přídavku na dítě některým domácnostem, které požádaly o novou dávku, a tím se přímo dotýká části slibu o přídavcích."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-16c0660c76--source",
+        "psp-core-2025--law-change-43198-1",
+        "psp-core-2025--law-change-43198-4",
+        "psp-core-2025--print-step-210727",
+        "psp-core-2025--vote-86697"
+      ],
+      "explanationCz": "Poslanec ANO předložil novelu zákona o dávce státní sociální pomoci a poslanci ANO ji většinově podpořili. Změna prodlužuje některým rodinám pobírajícím přídavek na dítě jeho výplatu do konce června, což zachovává část podpory dětem. Současně ale posouvá začátek nároku na novou dávku z dubna na červenec a neobnovuje trvalý systém přídavků; dodané podklady také nedokládají změnu školkovného ani slevy pro pečujícího rodiče. Jde proto o dílčí posun, nikoli o splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Změna současně odkládá vznik nároku na novou dávku státní sociální pomoci pro dotčené domácnosti; její dopad na celý slib je méně přímý než prodloužení výplaty dosavadních přídavků.",
+        "Dodaný materiál nepředkládá podklady o školkovném ani o slevě na dani pro pečujícího rodiče."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-16c0660c76",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text mění pouze termíny účinnosti ustanovení, jejichž obsah dodaný kontext neuvádí, takže z něj nelze doložit dopad na přídavky na děti, školkovné ani daňovou slevu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-1",
+          "relevant": true,
+          "reasonCz": "Posouvá vznik nároku na novou dávku a související přechod u domácností, mezi nimiž jsou příjemci přídavku na dítě, a tím se materiálně týká přechodu od této dávky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": false,
+          "reasonCz": "Zařazuje novou dávku státní sociální pomoci mezi započitatelné příjmy, ale text neukazuje dopad na přídavky na děti, školkovné ani slevu na dani pro pečujícího rodiče."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": true,
+          "reasonCz": "Výslovně prodlužuje výplatu dosavadního přídavku na dítě některým rodinám do 30. června 2026, a proto se přímo týká části slibu o přídavcích."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-16c0660c76--source",
+        "psp-core-2025--law-change-43198-1",
+        "psp-core-2025--law-change-43198-4",
+        "psp-core-2025--print-step-210727",
+        "psp-core-2025--vote-86697"
+      ],
+      "explanationCz": "Poslanec ANO předložil návrh, který prodlužuje výplatu dosavadního přídavku na dítě do 30. června 2026 rodinám, jež požádaly o novou dávku; poslanci ANO návrh podpořili. Návrh zároveň posouvá vznik nároku na novou dávku u dotčených domácností z dubna na červenec 2026. Jde o dočasné zachování části přídavků, nikoli o jejich trvalé obnovení podle aktuální situace rodin. Dodané podklady nedokládají změny školkovného ani slevy na dani pro pečujícího rodiče.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají pouze dočasné prodloužení výplaty přídavků pro některé rodiny; nedokládají obnovení přídavků podle aktuální situace rodin ani opatření ke školkovnému nebo slevě na dani pro pečujícího rodiče."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_07b9c4ae1db3188a016abf084216a087d1a22f1ed94fe8d03d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 21524,
+      "input_tokens_details": {
+        "cache_write_tokens": 18200,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 4151,
+      "output_tokens_details": {
+        "reasoning_tokens": 3339
+      },
+      "total_tokens": 25675
+    },
+    "output": {
+      "promiseId": "ano-2025-16c0660c76",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text mění pouze termíny účinnosti blíže neurčených ustanovení a z dodaného kontextu nelze zjistit, zda se týkají přídavků na děti, školkovného nebo daňové slevy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-1",
+          "relevant": true,
+          "reasonCz": "Změna posouvá vznik nároku na novou dávku státní sociální pomoci u domácností pobírajících mimo jiné přídavek na dítě z dubna na červenec, takže přímo ovlivňuje přechod těchto rodin k nové dávce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": false,
+          "reasonCz": "Změna pouze zařazuje novou dávku mezi započitatelné příjmy pro účely životního minima a nedokládá změnu přídavků na děti, školkovného ani slevy pro pečujícího rodiče."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": true,
+          "reasonCz": "Změna prodlužuje výplatu dosavadního přídavku na dítě některým domácnostem, které požádaly o novou dávku, a tím se přímo dotýká části slibu o přídavcích."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-16c0660c76--source",
+        "psp-core-2025--law-change-43198-1",
+        "psp-core-2025--law-change-43198-4",
+        "psp-core-2025--print-step-210727",
+        "psp-core-2025--vote-86697"
+      ],
+      "explanationCz": "Poslanec ANO předložil novelu zákona o dávce státní sociální pomoci a poslanci ANO ji většinově podpořili. Změna prodlužuje některým rodinám pobírajícím přídavek na dítě jeho výplatu do konce června, což zachovává část podpory dětem. Současně ale posouvá začátek nároku na novou dávku z dubna na červenec a neobnovuje trvalý systém přídavků; dodané podklady také nedokládají změnu školkovného ani slevy pro pečujícího rodiče. Jde proto o dílčí posun, nikoli o splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Změna současně odkládá vznik nároku na novou dávku státní sociální pomoci pro dotčené domácnosti; její dopad na celý slib je méně přímý než prodloužení výplaty dosavadních přídavků.",
+        "Dodaný materiál nepředkládá podklady o školkovném ani o slevě na dani pro pečujícího rodiče."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0ae45626c9ec5e36016abf0886d17087d1acbbf80833d8681e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 21524,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 21521
+      },
+      "output_tokens": 3689,
+      "output_tokens_details": {
+        "reasoning_tokens": 2918
+      },
+      "total_tokens": 25213
+    },
+    "output": {
+      "promiseId": "ano-2025-16c0660c76",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text mění pouze termíny účinnosti ustanovení, jejichž obsah dodaný kontext neuvádí, takže z něj nelze doložit dopad na přídavky na děti, školkovné ani daňovou slevu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-1",
+          "relevant": true,
+          "reasonCz": "Posouvá vznik nároku na novou dávku a související přechod u domácností, mezi nimiž jsou příjemci přídavku na dítě, a tím se materiálně týká přechodu od této dávky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": false,
+          "reasonCz": "Zařazuje novou dávku státní sociální pomoci mezi započitatelné příjmy, ale text neukazuje dopad na přídavky na děti, školkovné ani slevu na dani pro pečujícího rodiče."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": true,
+          "reasonCz": "Výslovně prodlužuje výplatu dosavadního přídavku na dítě některým rodinám do 30. června 2026, a proto se přímo týká části slibu o přídavcích."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-16c0660c76--source",
+        "psp-core-2025--law-change-43198-1",
+        "psp-core-2025--law-change-43198-4",
+        "psp-core-2025--print-step-210727",
+        "psp-core-2025--vote-86697"
+      ],
+      "explanationCz": "Poslanec ANO předložil návrh, který prodlužuje výplatu dosavadního přídavku na dítě do 30. června 2026 rodinám, jež požádaly o novou dávku; poslanci ANO návrh podpořili. Návrh zároveň posouvá vznik nároku na novou dávku u dotčených domácností z dubna na červenec 2026. Jde o dočasné zachování části přídavků, nikoli o jejich trvalé obnovení podle aktuální situace rodin. Dodané podklady nedokládají změny školkovného ani slevy na dani pro pečujícího rodiče.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají pouze dočasné prodloužení výplaty přídavků pro některé rodiny; nedokládají obnovení přídavků podle aktuální situace rodin ani opatření ke školkovnému nebo slevě na dani pro pečujícího rodiče."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

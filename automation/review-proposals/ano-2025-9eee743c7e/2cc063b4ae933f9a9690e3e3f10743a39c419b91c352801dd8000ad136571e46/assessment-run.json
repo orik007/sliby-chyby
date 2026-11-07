@@ -1,0 +1,309 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T01-43-29-374Z--3708366083dd",
+  "evaluatedAt": "2026-11-04T01:43:29.374Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-9eee743c7e/3708366083dd5438a781d3f31be2a94454f49610f39726d2b27745d71ec95568.json",
+  "packageHash": "3708366083dd5438a781d3f31be2a94454f49610f39726d2b27745d71ec95568",
+  "assessmentContentHash": "dfa7146b0e0c8bba85589a7f593f0fbea7d46b8942ab79e9a9cf90fd3672a8f2",
+  "assessmentFingerprint": "2cc063b4ae933f9a9690e3e3f10743a39c419b91c352801dd8000ad136571e46",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-9eee743c7e",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0c949ed0b9493cde016aea8d0ad65c87d1b2718df47b15eee0",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 62415,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 62412
+            },
+            "output_tokens": 5465,
+            "output_tokens_details": {
+              "reasoning_tokens": 4606
+            },
+            "total_tokens": 67880
+          },
+          "output": {
+            "promiseId": "ano-2025-9eee743c7e",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-1",
+                "relevant": false,
+                "reasonCz": "Ustanovení upravují obecné zásady stavebního řízení a veřejný zájem na infrastruktuře, ale dodané znění je nespojuje s regulačními zařízeními ani s přenosovými vedeními na polské hranici.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Schválené znění výslovně upravuje užívání staveb přenosové soustavy, a proto se vztahuje k uvedení zařízení na přenosových vedeních do provozu.",
+                "effectCz": "Dosavadní § 236 umožňoval předčasné užívání stavby na základě povolení stavebního úřadu, nejvýše na rok. Schválené znění nově dovoluje užívat stavby přenosové soustavy ihned po zprovoznění na základě platné revizní zprávy; pravidlo je tedy pro zahájení užívání volnější, samo však instalaci zařízení nenařizuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Schválená změna výslovně zahrnuje zařízení tvořící součást přenosové soustavy a její ochranné či řídicí techniky, tedy typ zařízení související s příslibem.",
+                "effectCz": "Před změnou se pro odnětí zemědělské půdy obecně vyžadoval souhlas a výjimky v § 9 odst. 2 zahrnovaly jiné vyjmenované případy. Schválené znění přidává výjimku pro zařízení součástí přenosové soustavy a související vedení, pokud jednotlivý případ nepřesáhne 100 m²; povinnost je v tomto rozsahu mírnější, což může usnadnit instalaci, ale nezajišťuje ji."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-9eee743c7e--source",
+              "psp-core-2025--law-change-43174-1-6",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454"
+            ],
+            "explanationCz": "Poslanci ANO předložili návrh novely vedený ve Sněmovně jako tisk 67 a vláda k němu zaujala souhlasné stanovisko. Sněmovna návrh schválila a po jeho zamítnutí Senátem na něm setrvala. Schválená pravidla usnadňují užívání staveb přenosové soustavy po zprovoznění a za stanovených podmínek zmírňují souhlas s odnětím půdy pro její zařízení, takže mohou usnadnit část příslibu. Dodané podklady ale nedokládají, že ANO zařízení na hranici s Polskem skutečně instalovalo.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Podklady dokládají pravidla, která mohou instalaci a uvedení zařízení přenosové soustavy do provozu usnadnit, nikoli skutečnou instalaci regulačních zařízení na hranici s Polskem."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-9eee743c7e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": false,
+          "reasonCz": "Dodané části upravují obecné zásady stavebního zákona a vymezují veřejný zájem u infrastruktury, ale text je nespojuje s instalací regulačních zařízení na hranici s Polskem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": false,
+          "reasonCz": "Schválená verze umožňuje užívat stavby přenosové soustavy po zprovoznění a předložení revizní zprávy, ale tato provozní podmínka sama zařízení na polské hranici neinstaluje ani ji s nimi výslovně nespojuje.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně zahrnuje zařízení přenosové soustavy a související vedení do výjimky týkající se odnětí půdy ze zemědělského půdního fondu, což může usnadnit umístění zařízení slibovaného na přenosových vedeních.",
+          "effectCz": "Před změnou zákon obecně vyžadoval pro odnětí zemědělské půdy souhlas orgánu ochrany zemědělského půdního fondu. Navržené znění pro záměry vyžadující stavební povolení nahrazuje samostatné vydání tohoto souhlasu posouzením podmínek stavebním úřadem; z dodaného textu neplyne, že by se tím samo o sobě měnila přísnost těchto podmínek. Schválená verze navíc uvádí výjimku pro zařízení přenosové soustavy, včetně měřicí, ochranné a řídicí techniky, do plochy 100 m² a související přípojná vedení. Oproti dřívějšímu obecnému požadavku na souhlas je tato výjimka v uvedeném rozsahu mírnější, avšak zařízení neinstaluje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-9eee743c7e--source",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili novelu zákona o ochraně zemědělského půdního fondu a vláda k ní zaujala souhlasné stanovisko. Novela ve schváleném znění zmírňuje povolovací překážku pro některá zařízení přenosové soustavy do 100 m², včetně měřicí, ochranné a řídicí techniky. Poslanci ANO hlasovali pro přijetí návrhu a po jeho zamítnutí Senátem také pro setrvání Sněmovny na návrhu. Jde o krok, který může usnadnit umístění slibovaných zařízení, nikoli o jejich samotnou instalaci; dodané podklady nepotvrzují, že už byla zařízení na hranici s Polskem skutečně instalována.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, zda se výjimka pro zařízení přenosové soustavy použila právě na slibovaná zařízení na hranici s Polskem ani zda už byla tato zařízení instalována."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-9eee743c7e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": false,
+          "reasonCz": "Dodané části mění obecná pravidla stavebního zákona, ale žádné z uvedených ustanovení se konkrétně netýká instalace regulačních zařízení na hranici s Polskem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": false,
+          "reasonCz": "Ustanovení se týkají povolování a užívání staveb; nové pravidlo o užívání přenosové soustavy po zprovoznění neřeší instalaci slíbených zařízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně zavádí výjimku z povinnosti získat souhlas s odnětím půdy pro některá zařízení přenosové soustavy, a může tak usnadnit instalaci části přenosového vybavení, k němuž slib patří.",
+          "effectCz": "Dosavadní § 9 odst. 2 obsahoval výjimky pro jiné vyjmenované záměry, nikoli zvláštní výjimku pro zařízení přenosové soustavy. Schválené znění nově uvádí zařízení tvořící součást přenosové soustavy a související vedení; u jednotlivých zařízení do 100 m² se v zastavitelném území nevyžaduje souhlas s odnětím půdy. Jde o zmírnění požadavků na povolení takových záměrů, nikoli o samotnou instalaci zařízení; výjimka je navíc omezena územím a plochou."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-9eee743c7e--source",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh, který zavádí výjimku z povinnosti získat souhlas s odnětím půdy pro některá zařízení přenosové soustavy; vláda s návrhem souhlasila. Sněmovna návrh schválila a po zamítnutí Senátem na něm setrvala. Změna může usnadnit povolení některých zařízení, která slib zmiňuje, ale sama jejich instalaci nezajišťuje. Doklady proto ukazují posun směrem ke slibu, nikoli jeho splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, zda konkrétní slíbená regulační zařízení spadají do nové výjimky ani zda by se na jejich instalaci vztahoval limit 100 m² a podmínka umístění v zastavitelném území.",
+        "Podklady nedokládají, že byla slíbená zařízení na hranici s Polskem skutečně instalována."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_093dc5f635dd831e016aea8caed4ec87d19cdc6d9a94d5b19e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 62415,
+      "input_tokens_details": {
+        "cache_write_tokens": 56065,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 4189,
+      "output_tokens_details": {
+        "reasoning_tokens": 3209
+      },
+      "total_tokens": 66604
+    },
+    "output": {
+      "promiseId": "ano-2025-9eee743c7e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": false,
+          "reasonCz": "Dodané části upravují obecné zásady stavebního zákona a vymezují veřejný zájem u infrastruktury, ale text je nespojuje s instalací regulačních zařízení na hranici s Polskem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": false,
+          "reasonCz": "Schválená verze umožňuje užívat stavby přenosové soustavy po zprovoznění a předložení revizní zprávy, ale tato provozní podmínka sama zařízení na polské hranici neinstaluje ani ji s nimi výslovně nespojuje.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně zahrnuje zařízení přenosové soustavy a související vedení do výjimky týkající se odnětí půdy ze zemědělského půdního fondu, což může usnadnit umístění zařízení slibovaného na přenosových vedeních.",
+          "effectCz": "Před změnou zákon obecně vyžadoval pro odnětí zemědělské půdy souhlas orgánu ochrany zemědělského půdního fondu. Navržené znění pro záměry vyžadující stavební povolení nahrazuje samostatné vydání tohoto souhlasu posouzením podmínek stavebním úřadem; z dodaného textu neplyne, že by se tím samo o sobě měnila přísnost těchto podmínek. Schválená verze navíc uvádí výjimku pro zařízení přenosové soustavy, včetně měřicí, ochranné a řídicí techniky, do plochy 100 m² a související přípojná vedení. Oproti dřívějšímu obecnému požadavku na souhlas je tato výjimka v uvedeném rozsahu mírnější, avšak zařízení neinstaluje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-9eee743c7e--source",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili novelu zákona o ochraně zemědělského půdního fondu a vláda k ní zaujala souhlasné stanovisko. Novela ve schváleném znění zmírňuje povolovací překážku pro některá zařízení přenosové soustavy do 100 m², včetně měřicí, ochranné a řídicí techniky. Poslanci ANO hlasovali pro přijetí návrhu a po jeho zamítnutí Senátem také pro setrvání Sněmovny na návrhu. Jde o krok, který může usnadnit umístění slibovaných zařízení, nikoli o jejich samotnou instalaci; dodané podklady nepotvrzují, že už byla zařízení na hranici s Polskem skutečně instalována.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, zda se výjimka pro zařízení přenosové soustavy použila právě na slibovaná zařízení na hranici s Polskem ani zda už byla tato zařízení instalována."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_005b11ca5e553e00016aea8d7613a487d1bd43a2676b3082ee",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 62415,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 62412
+      },
+      "output_tokens": 3893,
+      "output_tokens_details": {
+        "reasoning_tokens": 3098
+      },
+      "total_tokens": 66308
+    },
+    "output": {
+      "promiseId": "ano-2025-9eee743c7e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": false,
+          "reasonCz": "Dodané části mění obecná pravidla stavebního zákona, ale žádné z uvedených ustanovení se konkrétně netýká instalace regulačních zařízení na hranici s Polskem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": false,
+          "reasonCz": "Ustanovení se týkají povolování a užívání staveb; nové pravidlo o užívání přenosové soustavy po zprovoznění neřeší instalaci slíbených zařízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně zavádí výjimku z povinnosti získat souhlas s odnětím půdy pro některá zařízení přenosové soustavy, a může tak usnadnit instalaci části přenosového vybavení, k němuž slib patří.",
+          "effectCz": "Dosavadní § 9 odst. 2 obsahoval výjimky pro jiné vyjmenované záměry, nikoli zvláštní výjimku pro zařízení přenosové soustavy. Schválené znění nově uvádí zařízení tvořící součást přenosové soustavy a související vedení; u jednotlivých zařízení do 100 m² se v zastavitelném území nevyžaduje souhlas s odnětím půdy. Jde o zmírnění požadavků na povolení takových záměrů, nikoli o samotnou instalaci zařízení; výjimka je navíc omezena územím a plochou."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-9eee743c7e--source",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh, který zavádí výjimku z povinnosti získat souhlas s odnětím půdy pro některá zařízení přenosové soustavy; vláda s návrhem souhlasila. Sněmovna návrh schválila a po zamítnutí Senátem na něm setrvala. Změna může usnadnit povolení některých zařízení, která slib zmiňuje, ale sama jejich instalaci nezajišťuje. Doklady proto ukazují posun směrem ke slibu, nikoli jeho splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, zda konkrétní slíbená regulační zařízení spadají do nové výjimky ani zda by se na jejich instalaci vztahoval limit 100 m² a podmínka umístění v zastavitelném území.",
+        "Podklady nedokládají, že byla slíbená zařízení na hranici s Polskem skutečně instalována."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

@@ -1,0 +1,2415 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-34-41-126Z--62053e91527d",
+  "evaluatedAt": "2026-11-05T10:34:41.126Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-b47c5d9b4359/62053e91527dfb7a6051bebdcdd8e7d53f078831b6fc029f5b5c26a388a56524.json",
+  "packageHash": "62053e91527dfb7a6051bebdcdd8e7d53f078831b6fc029f5b5c26a388a56524",
+  "assessmentContentHash": "c94044fc140b64cde0703e8fa86f9519fea41c3f6f0bc3e03b8b1624297ac18c",
+  "assessmentFingerprint": "6059922ef84d50281a502f24c909145c50a9af964eea6ac2570ab17921e0bee8",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-b47c5d9b4359",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": "Assessment cites duplicate evidence IDs"
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_022e1b98bf18e923016aec580091bc87d19763ff2b7ca4e869",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 426460,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 426457
+            },
+            "output_tokens": 18849,
+            "output_tokens_details": {
+              "reasoning_tokens": 9557
+            },
+            "total_tokens": 445309
+          },
+          "output": {
+            "promiseId": "candidate-b47c5d9b4359",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-1",
+                "relevant": true,
+                "reasonCz": "Mění obecné zásady stavebního zákona tak, že výslovně zahrnují bydlení a omezují možnost zabránit rozvoji sídel, pokud lze zájmy chránit mírnějšími podmínkami.",
+                "effectCz": "Dříve účel zákona zdůrazňoval integrovanou ochranu veřejných zájmů a udržitelný rozvoj; schválené znění výslovně zahrnuje bydlení a stanoví, že rozvoj sídel či výstavbu lze znemožnit jen tehdy, nelze-li hodnoty ochránit podmínkami nebo kompenzacemi. Prostor pro výstavbu se tím v této části rozšiřuje, byť změna nezaručuje nižší ceny."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-2",
+                "relevant": true,
+                "reasonCz": "Mění úkoly územního plánování, včetně plánování bydlení a využívání zastavitelného území.",
+                "effectCz": "Dříve se územní plánování zaměřovalo na udržitelný rozvoj a vyhodnocování potenciálu; schválené znění výslovně zdůrazňuje rozvoj bydlení a efektivní využití zastavitelných ploch. Tím se plánování více orientuje na bytovou nabídku, ale přesný dopad na počet bytů či ceny text nestanoví."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-3",
+                "relevant": true,
+                "reasonCz": "Mění pravidla územního plánování a vymezení zastavitelných ploch, tedy přímo podmínky pro umístění nové výstavby.",
+                "effectCz": "Dříve navazující dokumentace zpřesňovala vymezení ploch uvnitř nadřazených dokumentů; schválené znění dovoluje za stanovených souhlasů odchylku při zpřesnění. Změny územního plánu také přesouvají vymezování zastavěného území k zastavitelnému území a mění související pravidla. Některé změny usnadňují pružnější plánování, ale protože předchozí text části novelizovaných ustanovení není uveden, celkový směr všech bodů nelze přesně určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": true,
+                "reasonCz": "Mění pravidla pořizování územních plánů a změn územního plánování, včetně podmínek pro nové zastavitelné území.",
+                "effectCz": "Dosavadní § 108 odst. 4 vyžadoval při změně územního plánu prokázání potřeby nových zastavitelných ploch; schválený návrh toto ustanovení ruší. Tím se požadavek na doložení potřeby nových ploch uvolňuje a jejich vymezování se může zjednodušit. Další změny zavádějí zvláštní rychlejší postup pro vybrané změny plánů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-5",
+                "relevant": true,
+                "reasonCz": "Mění požadavky na výstavbu, povolování a odborné podklady, které určují, jak snadno lze nové byty postavit.",
+                "effectCz": "Dříve byly některé požadavky na výstavbu uplatňovány vždy, pokud tomu nebránily závažné důvody; schválené znění výslovně umožňuje jejich neuplatnění v dalších případech, včetně staveb v prolukách, a dovoluje společné řešení některých požadavků prostřednictvím plánovací smlouvy. To může snížit náklady či překážky výstavby v uvedených situacích; u ostatních novelizovaných ustanovení nelze bez úplného předchozího znění určit celkový směr."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Mění povolování staveb a podmínky jejich souladu s územními plány, což může přímo usnadnit bytovou výstavbu.",
+                "effectCz": "Dříve stavební úřad posuzoval soulad záměru s územní dokumentací a jednotlivými zákonnými požadavky; schválené znění připouští za souhlasu příslušného pořizovatele odchylky od územní dokumentace a zavádí u zastavitelných území předpoklady přípustnosti některých záměrů. Tím se mohou zúžit překážky povolení v těchto případech, současně však přibývají výjimky a nové podmínky, jejichž celkový dopad na bytovou výstavbu nelze z výňatku plně vyčíslit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-7",
+                "relevant": true,
+                "reasonCz": "Schválená změna výslovně zařazuje menší bytové domy do kategorie jednoduchých staveb, což může zjednodušit jejich povolování.",
+                "effectCz": "Nově se za jednoduché stavby považují bytové domy do 500 m² zastavěné plochy, nejvýše se čtyřmi nadzemními podlažími, výškou do 9 metrů a jedním podzemním podlažím. Předchozí znění této části přílohy v balíčku chybí, takže nelze přesně porovnat rozsah změny; nové zařazení nicméně tyto vymezené domy podřazuje režimu jednoduchých staveb."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-8",
+                "relevant": false,
+                "reasonCz": "Dodané přechodné ustanovení se týká obecného přechodu působností a použitelnosti nových pravidel; jeho předložené odstavce neukazují konkrétní změnu bytové výstavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-2",
+                "relevant": false,
+                "reasonCz": "Text této části není dodán a balíček uvádí, že je relevantní pouze případná změna provedená jiným pozměňovacím návrhem; předložené podklady neukazují konkrétní vazbu této části na bytovou nabídku.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-3",
+                "relevant": true,
+                "reasonCz": "Mění postupy požární ochrany ve stavebním řízení, které se uplatňují také při povolování bytových staveb.",
+                "effectCz": "Dříve některé úkony požární ochrany končily závazným stanoviskem dotčeného orgánu; schválené znění u části staveb rozlišuje závazné stanovisko a vyjádření a mění způsob posuzování dokumentace. To přesouvá část kontroly do stavebního řízení a může zjednodušit některé kroky, ale z poskytnutého textu nelze určit dopad na konkrétní bytové projekty."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-4",
+                "relevant": true,
+                "reasonCz": "Mění památková pravidla pro obnovu a stavební záměry v památkově chráněných územích, včetně bydlení v existujícím fondu.",
+                "effectCz": "Dříve se u nemovitostí v památkových rezervacích, zónách a ochranných pásmech vyžadoval předchozí úkon památkové péče pro široký okruh zásahů; schválené znění zužuje některé povinnosti a přesouvá ověření podmínek záměru do stavebního řízení. To může u části obnov a záměrů snížit povolovací zátěž; rozsah změny se liší podle typu území a zásahu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-5",
+                "relevant": false,
+                "reasonCz": "Text této části není dodán a její relevantnost je podle balíčku možná jen prostřednictvím pozměňovacích návrhů; předložené podklady neprokazují, že se týkají bytové výstavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-6",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují konkrétní změnu hornického práva, která by měnila nabídku bytů nebo pravidla bytové výstavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-7",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují konkrétní změnu zákona o geologických pracích s přímou vazbou na bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-1",
+                "relevant": true,
+                "reasonCz": "Mění případy, kdy se v území určeném k výstavbě neposuzuje krajinný ráz, což ovlivňuje povolování staveb.",
+                "effectCz": "Dříve se krajinný ráz neposuzoval v zastavěných územích a v některých zastavitelných plochách s dohodnutými podmínkami; schválené znění váže výjimku na zastavitelné území, koridor či plochu těžby vymezené v souladu se stanoviskem orgánu ochrany přírody. Jde o přenastavení rozsahu výjimky; z poskytnutého znění nelze určit, zda se její celkový rozsah oproti dosavadnímu režimu zvětšuje či zmenšuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-2",
+                "relevant": true,
+                "reasonCz": "Mění výjimky a kompetence při ochraně přírody v souvislosti s výstavbou, včetně stavebního řízení.",
+                "effectCz": "Dosavadní výjimky a kompetence byly formulovány podle zastavěných území a zastavitelných ploch; schválené znění používá pojem zastavitelné území a mění rozdělení působnosti mezi orgány. Protože přesné hranice nového pojmu a úplné znění všech dotčených ustanovení zde nejsou, nelze určit, zda je ochranný limit pro bytovou výstavbu celkově přísnější, nebo mírnější."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-4",
+                "relevant": false,
+                "reasonCz": "Dodané odstavce upravují účast ekologických právnických osob v řízeních; neukazují změnu pravidla, které by samo zvyšovalo nebo snižovalo bytovou nabídku.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-5",
+                "relevant": true,
+                "reasonCz": "Přesouvá vybrané úkony ochrany přírody do stavebního řízení, což se může týkat povolování bytových staveb.",
+                "effectCz": "Dříve se u dotčených zájmů vydávaly samostatné souhlasy či povolení; nové § 77b svěřuje jejich posouzení v části území stavebním úřadům a začleňuje je do rozhodnutí o záměru. Tím se mění a v některých případech slučují povolovací kroky, ale bez znalosti konkrétního území nelze určit, jak se změní hmotné požadavky na bytovou výstavbu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Mění ochranu zemědělského půdního fondu a výslovně zahrnuje povolování záměrů bytové výstavby.",
+                "effectCz": "Dříve souhlas s odnětím zemědělské půdy ze zemědělského fondu předcházel povolení záměru; schválené znění slučuje posouzení se stavebním rozhodnutím a v území vymezeném v souladu se stanoviskem orgánu ochrany půdy vylučuje posuzování některých plošných zásad. To zjednodušuje postup v takto vymezených územích, ale neodstraňuje všechny podmínky ochrany půdy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-10",
+                "relevant": false,
+                "reasonCz": "Mění osvobození od daně z nemovitých věcí u zemědělských pozemků; dodaný text neprokazuje přímou změnu bytové výstavby nebo cen bytů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-11",
+                "relevant": false,
+                "reasonCz": "Doplnění se týká oznamování disciplinárních rozhodnutí o autorizaci a nemění podmínky ani nabídku bytové výstavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-12",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují konkrétní změnu zákona o dráhách s přímou vazbou na bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-13",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují konkrétní změnu zákona o vnitrozemské plavbě s přímou vazbou na bytovou nabídku.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-14",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují konkrétní změnu lesního práva s přímým dopadem na pravidla bytové výstavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-15",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují konkrétní změnu zákona o pozemních komunikacích, která by sama měnila bytovou nabídku.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-16",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují konkrétní změnu leteckého práva s přímou vazbou na bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-17",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují konkrétní změnu veterinárního práva, která by se materiálně týkala bytové výstavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-18",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují změnu nakládání s majetkem státu, která by přímo uvolňovala pozemky pro bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-19",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují změnu zákona o integrovaném záchranném systému s přímým dopadem na bytovou nabídku.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-20",
+                "relevant": true,
+                "reasonCz": "Mění způsob, jakým se hygienické úkony a stanoviska zapojují do povolení staveb, včetně bytových projektů.",
+                "effectCz": "Dříve orgán ochrany veřejného zdraví vydával stanovisko a u určených záměrů posuzoval hluk samostatně; schválené znění přenáší příslušné úkony do rozhodnutí stavebního úřadu. Jde o slučování povolovacích kroků, nikoli o doložené zrušení hygienických limitů, takže proces se může zjednodušit, ale požadavky na ochranu zdraví zůstávají relevantní."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": false,
+                "reasonCz": "Text této části není dodán a předložené podklady neukazují konkrétní změnu energetického práva, která by se týkala bytové výstavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": false,
+                "reasonCz": "Text této části není dodán a předložené podklady neukazují konkrétní změnu pravidel posuzování vlivů, kterou by bylo možné spojit s bytovou nabídkou.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují konkrétní změnu vodního práva s přímou vazbou na nabídku bytů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-24",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují konkrétní změnu pohřebnictví, která by materiálně měnila bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-25",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují konkrétní změnu mysliveckého práva s přímým dopadem na bytovou nabídku.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-26",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují konkrétní změnu pozemkových úprav, která by přímo měnila podmínky bytové výstavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-27",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují konkrétní změnu soudního řádu správního, která by sama měnila bytovou nabídku.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-28",
+                "relevant": true,
+                "reasonCz": "Mění vymezení stavebního pozemku pro účely DPH, což se může přímo promítnout do nákladů spojených s prodejem pozemků pro výstavbu.",
+                "effectCz": "Dříve se při určení stavebního pozemku odkazovalo mimo jiné na vymezení zastavěného území; nově se tento odkaz mění na zastavitelné území. Změna nahrazuje jednu územní kategorii druhou, ale balíček nevymezuje jejich vzájemný rozsah ani dopad na konkrétní pozemky; směr změny daňového zatížení proto nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-29",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují změnu vyvlastňovacího práva přímo spojenou s bytovou výstavbou nebo dostupností bytů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-30",
+                "relevant": false,
+                "reasonCz": "Text této části není dodán a podklady neukazují přímou změnu povinností v oblasti bezpečnosti práce, která by ovlivnila bytovou nabídku.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-31",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují konkrétní změnu trestního práva s přímým dopadem na bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": false,
+                "reasonCz": "Text této části není dodán a podklady neukazují konkrétní změnu strategické infrastruktury spojenou s bytovou nabídkou.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": true,
+                "reasonCz": "Mění postupy ochrany ovzduší při povolování záměrů a přesouvá některé úkony do stavebního řízení.",
+                "effectCz": "Dříve se pro vybrané zdroje a komunikace vyžadovalo samostatné závazné stanovisko a bez něj nebylo možné vydat povolení; schválené znění mění některé úkony na vyjádření a jejich posouzení propojuje s rozhodnutím o záměru. To může zjednodušit postup, ale zachovává související požadavky a kompenzační opatření; nelze tedy tvrdit, že se všechny limity zmírňují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-34",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují konkrétní změnu působnosti Státního pozemkového úřadu, která by sama uvolňovala půdu pro bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-35",
+                "relevant": false,
+                "reasonCz": "Text této části není dodán a podklady neprokazují konkrétní změnu služebního práva s přímým dopadem na bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-36",
+                "relevant": false,
+                "reasonCz": "Dodané podklady neukazují konkrétní změnu prevence havárií, která by přímo ovlivňovala nabídku bytů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-37",
+                "relevant": false,
+                "reasonCz": "Text této části není dodán a podklady neukazují konkrétní dopad pravidel veřejných zakázek na bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": false,
+                "reasonCz": "Text této části není dodán a předložené podklady neprokazují přímou vazbu odpadového práva na bytovou nabídku.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-40",
+                "relevant": true,
+                "reasonCz": "Mění územní podmínky pro výjimky při výstavbě související s konfliktem na Ukrajině; původní pravidlo výslovně zahrnovalo oblasti s bydlením.",
+                "effectCz": "Dříve mohla obec povolit výjimku z územního plánu pro nezbytnou stavbu v zastavěném území, zastavitelné ploše nebo ploše přestavby; schválené znění ponechává jen zastavitelné území. Rozsah míst, kde lze tuto zvláštní výjimku uplatnit, se zužuje, takže tato část výstavbu v dotčených lokalitách omezuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": false,
+                "reasonCz": "Text této části není dodán a balíček neukazuje konkrétní změnu jednotného environmentálního stanoviska, kterou by šlo samostatně posoudit vůči bytové výstavbě.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": false,
+                "reasonCz": "Text této části není dodán a předložené podklady neprokazují přímou vazbu pravidel pro obnovitelné zdroje na nabídku bytů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+                "relevant": false,
+                "reasonCz": "Mění správní poplatky za stavební úkony, ale dodaný text neukazuje konkrétní částku pro bytové záměry ani změnu, která by materiálně rozšiřovala jejich nabídku.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": false,
+                "reasonCz": "Ruší vyhlášky o dokumentaci a požadavcích na výstavbu, ale samotné zrušení bez náhradního znění neukazuje, jak se mění podmínky bytové výstavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43202-1",
+                "relevant": true,
+                "reasonCz": "Rozpočet Státního fondu podpory investic obsahuje financování programu Dostupné nájemní bydlení a podpory technické infrastruktury pro budoucí bytovou výstavbu.",
+                "effectCz": "Rozpočet popisuje program Dostupné nájemní bydlení s celkovou alokací 7 mld. Kč, včetně dotace 2,2 mld. Kč na rok 2026, a podporu infrastruktury pro následnou výstavbu. Jde o plánované prostředky, které podporují část nabídky nájemních bytů a přípravu pozemků; samy o sobě neslibují pokles cen všech bytů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": true,
+                "reasonCz": "Státní rozpočet na rok 2026 obsahuje výdaje kapitoly Ministerstva pro místní rozvoj a jeho podpora bydlení je předmětem doložených pozměňovacích návrhů.",
+                "effectCz": "Rozpočtový zákon stanoví výdaje podle kapitol a odkazuje na jejich přílohy, avšak relevantní výňatky neobsahují částky pro podporu bydlení. Proto nelze z tohoto textu samotného určit, zda přijatý rozpočet navýšil či snížil dostupné prostředky pro bytovou výstavbu ani jak se vztahuje k závazku."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43356-1",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje okruh autorizovaných osob a jejich činnosti při provádění staveb, což může rozšířit kapacitu pro bytovou výstavbu.",
+                "effectCz": "Dříve zákon znal autorizované architekty, inženýry a techniky; návrh přidává autorizovaného stavitele a výslovně mu svěřuje odborné činnosti při provádění stavby a zastupování stavebníka. Jde o návrh, který může rozšířit kapacitu odborné práce ve stavebnictví, ale zatím nepředstavuje přijaté opatření ani důkaz nižších cen bytů."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-97",
+                "relevant": true,
+                "reasonCz": "Mění prováděcí požadavky na výstavbu a výslovně umožňuje další stavbu pro bydlení na pozemku rodinného domu.",
+                "effectCz": "Nově dovoluje na pozemku rodinného domu umístit také další stavby pro bydlení podle uvedené kategorie jednoduchých staveb a mění tabulkové požadavky na parkovací stání. Předchozí znění změněných ustanovení vyhlášky není dodáno, takže nelze přesně porovnat limity parkování; možnost dalšího bydlení na pozemku však výslovně rozšiřuje."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-11",
+                "relevant": true,
+                "reasonCz": "Usnesení se týká financování úvěrového nástroje FN2 pro dostupné bydlení a ruší dřívější vládní řešení financování.",
+                "effectCz": "Usnesení ruší předchozí rozhodnutí o financování FN2 prostřednictvím projektových dluhopisů a uvádí, že 2,25 mld. Kč uložených u Národní rozvojové banky lze využít jen v souladu s příslušnými pravidly; zároveň ukládá prověřit alternativy. Předchozí usnesení č. 989 ani výsledná náhrada financování nejsou v balíčku, takže nelze určit, zda byla podpora zrušena, odložena, nebo nahrazena jiným zdrojem."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+                "relevant": true,
+                "reasonCz": "Usnesení jmenuje zmocněnce, jehož úkoly výslovně zahrnují koordinaci stavebního práva a dostupnost bydlení.",
+                "effectCz": "Usnesení vytváří a obsazuje funkci zmocněnce, kterému ukládá sledovat dopady stavebního práva na dostupnost bydlení a koordinovat jeho zavádění. Samo nemění podmínky výstavby ani nestaví byty, ale vytváří koordinační nástroj související s realizací opatření pro bydlení."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-69",
+                "relevant": true,
+                "reasonCz": "Plán legislativních prací vlády výslovně navrhuje změny bytového družstevnictví, státní garance pro výstavbu a daňové úlevy pro investory do dostupného bydlení.",
+                "effectCz": "Usnesení zařazuje do legislativního plánu návrh zákona o bytových družstvech s cílem zefektivnit jejich fungování a uvádí plánovaný termín předložení vládě 12/2026 a účinnosti 01/2028. Jde o příslib přípravy budoucího návrhu, nikoli o již účinné pravidlo, a směřuje k části nabídky družstevního a nájemního bydlení."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+                "relevant": true,
+                "reasonCz": "Usnesení ruší část dřívějšího rozhodnutí o směně a prodeji státního majetku za účelem dostupného bydlení a související infrastruktury.",
+                "effectCz": "Dřívější rozhodnutí podle předloženého textu směřovalo k přímému prodeji a směně majetku pro dostupné bydlení a infrastrukturu; nové usnesení ruší jeho bod II/2. Obsah tohoto bodu ani následné náhradní řešení nejsou dodány, takže nelze určit, zda se konkrétní bytový projekt či jeho pozemky zcela zastavily, ale část původního rozhodnutí byla odstraněna."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-b47c5d9b4359--source",
+              "psp-core-2025--law-change-43174-1-1",
+              "psp-core-2025--law-change-43174-1-2",
+              "psp-core-2025--law-change-43174-1-3",
+              "psp-core-2025--law-change-43174-1-4",
+              "psp-core-2025--law-change-43174-1-5",
+              "psp-core-2025--law-change-43174-1-6",
+              "psp-core-2025--law-change-43174-1-7",
+              "psp-core-2025--law-change-43174-3",
+              "psp-core-2025--law-change-43174-4",
+              "psp-core-2025--law-change-43174-8-1",
+              "psp-core-2025--law-change-43174-8-2",
+              "psp-core-2025--law-change-43174-8-5",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--law-change-43174-20",
+              "psp-core-2025--law-change-43174-28",
+              "psp-core-2025--law-change-43174-33",
+              "psp-core-2025--law-change-43174-40",
+              "psp-core-2025--law-change-43202-1",
+              "psp-core-2025--law-change-43204-1",
+              "psp-core-2025--law-change-43356-1",
+              "esbirka-regulations--law-change-sb-2026-97",
+              "zvlady-resolutions--law-change-uv-2026-11",
+              "zvlady-resolutions--law-change-uv-2026-59",
+              "zvlady-resolutions--law-change-uv-2026-175-69",
+              "zvlady-resolutions--law-change-uv-2026-377",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-86957",
+              "psp-core-2025--vote-86963",
+              "psp-core-2025--vote-88166",
+              "psp-core-2025--amendment-text-1242",
+              "psp-core-2025--vote-88167",
+              "psp-core-2025--amendment-text-1243",
+              "psp-core-2025--vote-88204",
+              "psp-core-2025--amendment-text-1228",
+              "psp-core-2025--vote-88207",
+              "psp-core-2025--amendment-text-1231",
+              "psp-core-2025--vote-88208",
+              "psp-core-2025--amendment-text-1232",
+              "psp-core-2025--vote-88209",
+              "psp-core-2025--amendment-text-1233",
+              "psp-core-2025--vote-88210",
+              "psp-core-2025--amendment-text-1234",
+              "psp-core-2025--vote-88215",
+              "psp-core-2025--amendment-text-1353",
+              "psp-core-2025--vote-88216",
+              "psp-core-2025--amendment-text-1354",
+              "psp-core-2025--vote-88223",
+              "psp-core-2025--amendment-text-1220",
+              "psp-core-2025--vote-88224",
+              "psp-core-2025--amendment-text-1143",
+              "psp-core-2025--vote-88227",
+              "psp-core-2025--amendment-text-1199",
+              "psp-core-2025--vote-88233",
+              "psp-core-2025--amendment-text-1365",
+              "psp-core-2025--vote-88234",
+              "psp-core-2025--amendment-text-1368",
+              "psp-core-2025--vote-88236",
+              "psp-core-2025--amendment-text-1055",
+              "psp-core-2025--vote-88144",
+              "psp-core-2025--amendment-text-1173",
+              "psp-core-2025--vote-86951",
+              "psp-core-2025--amendment-text-415",
+              "psp-core-2025--vote-86953",
+              "psp-core-2025--amendment-text-560",
+              "psp-core-2025--vote-86833",
+              "psp-core-2025--amendment-text-512",
+              "psp-core-2025--vote-86951",
+              "psp-core-2025--amendment-text-529",
+              "psp-core-2025--vote-86952",
+              "psp-core-2025--amendment-text-530",
+              "psp-core-2025--vote-88173",
+              "psp-core-2025--amendment-text-1184",
+              "psp-core-2025--vote-88175",
+              "psp-core-2025--amendment-text-1187",
+              "psp-core-2025--vote-88178",
+              "psp-core-2025--amendment-text-1191",
+              "psp-core-2025--vote-88179",
+              "psp-core-2025--amendment-text-1192",
+              "psp-core-2025--vote-88202",
+              "psp-core-2025--amendment-text-1225",
+              "psp-core-2025--vote-88211",
+              "psp-core-2025--amendment-text-1249",
+              "psp-core-2025--vote-88213",
+              "psp-core-2025--amendment-text-1270",
+              "psp-core-2025--vote-88172",
+              "psp-core-2025--amendment-text-1183",
+              "psp-core-2025--vote-88194",
+              "psp-core-2025--amendment-text-1148",
+              "psp-core-2025--vote-88147",
+              "psp-core-2025--amendment-text-1308",
+              "psp-core-2025--vote-88145",
+              "psp-core-2025--amendment-text-1334",
+              "psp-core-2025--vote-88233",
+              "psp-core-2025--vote-88169",
+              "psp-core-2025--amendment-text-1245"
+            ],
+            "explanationCz": "Poslanci SPD spolu s dalšími předložili novelu stavebního zákona (sněmovní tisk 67), která mění plánování a některé povolovací postupy tak, aby se vybraná bytová výstavba mohla připravovat a povolovat snáze; Sněmovna ji schválila a po odmítnutí Senátem na ní setrvala. Vláda také podpořila rozpočet fondu, který uvádí 7 miliard korun pro program dostupného nájemního bydlení, a přijala rozpočet na rok 2026, ale příslušná částka na bydlení v dodaném výňatku státního rozpočtu není. Současně poslanci SPD nepodpořili některé návrhy na další podporu bydlení či zjednodušení výstavby a vláda zrušila část dřívějšího řešení financování nástroje pro dostupné bydlení. Doložené kroky tedy posouvají nabídku bytů jen částečně; balíček neprokazuje, že ceny bytů už klesly nebo že se zastavil jejich růst.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Novela stavebního zákona představuje schválený krok k usnadnění části bytové výstavby, ale dostupné podklady nedokládají, že se v důsledku ní skutečně zvýšil počet bytů nebo klesly jejich ceny.",
+              "SPD nepodpořila návrhy na navýšení podpory bydlení v rozpočtu o 14 miliard a 3,5 miliardy korun ani některé návrhy na zjednodušení výstavby; jde o protichůdné návrhové kroky vedle její podpory jiných opatření.",
+              "Usnesení vlády č. 11/2026 zrušilo dřívější způsob financování dostupného bydlení přes projektové dluhopisy, ale text neukazuje, zda byl tento zdroj zcela ztracen, nebo nahrazen alternativním financováním.",
+              "Dodaný výňatek státního rozpočtu neobsahuje konkrétní částky podpory bydlení; údaj 7 miliard korun se vztahuje k rozpočtu SFPI, nikoli k částce doložené samotným zákonem o státním rozpočtu.",
+              "Hlavní novela byla v Poslanecké sněmovně prosazena po odmítnutí Senátem; schválení zahrnuje změny povolování, ale také odklad účinnosti hlavní části na 1. ledna 2027."
+            ]
+          }
+        }
+      },
+      {
+        "error": "Assessment cites duplicate evidence IDs",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_026103502a67bc8a016aec58cc6f7c87d1950cc0dc7b646480",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 426460,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 426457
+            },
+            "output_tokens": 13672,
+            "output_tokens_details": {
+              "reasoning_tokens": 6090
+            },
+            "total_tokens": 440132
+          },
+          "output": {
+            "promiseId": "candidate-b47c5d9b4359",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-1",
+                "relevant": true,
+                "reasonCz": "Mění zásady stavebního zákona tak, že bydlení zahrnuje mezi výslovně zmiňované potřeby a omezuje možnost znemožnit výstavbu.",
+                "effectCz": "Dříve zákon jen obecně směřoval k udržitelnému rozvoji a podmínkám pro něj; navržené znění výslovně přidává bydlení a stanoví, že výstavbu lze znemožnit jen tehdy, nelze-li jiné hodnoty chránit podmínkami či opatřeními. To podporuje možnost výstavby, ale nestanoví počet bytů ani ceny."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-2",
+                "relevant": true,
+                "reasonCz": "Mění cíle a úkoly územního plánování ve vztahu k bydlení, zastavitelnému území a rozvoji sídel.",
+                "effectCz": "Dříve územní plánování stanovovalo podmínky kvalitního bydlení a rozvoje sídel; schválené znění nově zdůrazňuje využití rozvojového potenciálu, bydlení a pestřejší využití zastavitelného území. Směřuje k širším možnostem bytové výstavby, ale předchozí znění současně chránilo rozvoj sídel, takže samotná změna cíle neprokazuje větší objem bytů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-3",
+                "relevant": true,
+                "reasonCz": "Mění pravidla územního plánování, včetně možností vymezování a využívání zastavitelných ploch a podmínek regulačních plánů.",
+                "effectCz": "Dříve se další zastavitelné plochy při změně územního plánu směly vymezit jen po prokázání jejich potřeby a regulační plán mohl stanovit konkrétní podmínky zastavitelnosti; schválené znění tento požadavek ruší a některá pravidla mění. Rušení povinného prokazování potřeby uvolňuje rozšiřování ploch, avšak u dalších úprav směr dopadu bez úplného znění všech změněných ustanovení nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": true,
+                "reasonCz": "Mění postupy územního plánování a pravidla pro změny dokumentace v zastavitelném území, tedy procesní podmínky přípravy výstavby.",
+                "effectCz": "Dříve se podstatné změny územních plánů musely znovu projednávat v širším rozsahu; návrh zavádí výjimky z opakovaného projednání a zvláštní postup pro některé změny v zastavitelném území. To může zjednodušit přípravu bytové výstavby, ale změna konkrétních lhůt a postupů není sama o sobě zárukou větší nabídky."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-5",
+                "relevant": true,
+                "reasonCz": "Mění pravidla povolování a vyjádření k záměrům, která mohou ovlivnit rychlost a podmínky bytové výstavby.",
+                "effectCz": "Text mění dobu platnosti dokumentace a postupy pro vyjádření a stanoviska; v některých případech nahrazuje samostatné úkony koordinovanými nebo fikcí souhlasu. To může zjednodušit povolování, ale poskytnuté části neumožňují určit celkový dopad na všechny povinnosti stavebníka."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Mění posuzování stavebních záměrů, podmínky výstavby a postupy, které přímo ovlivňují realizovatelnost bytových projektů.",
+                "effectCz": "Dříve stavební úřad posuzoval soulad záměru s územní dokumentací, předpisy a právy účastníků; návrh přidává mimo jiné možnost odchylek od územní dokumentace a různé výjimky z požadavků na výstavbu. Některé změny rozšiřují možnosti realizace, jiné jejich účinek závisí na podmínkách a výsledku posouzení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-7",
+                "relevant": true,
+                "reasonCz": "Mění kategorii jednoduchých staveb a zahrnuje do ní menší bytové domy, což ovlivňuje jejich povolování.",
+                "effectCz": "Dříve příloha mezi jednoduchými stavbami výslovně neuváděla bytové domy do 500 m²; schválené znění tuto kategorii přidává s limity čtyř nadzemních podlaží, výšky 9 m a jednoho podzemního podlaží. Rozšiřuje tedy okruh bytových staveb s jednodušším režimem, jen pro vymezenou kategorii."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-8",
+                "relevant": false,
+                "reasonCz": "Poskytnutá část upravuje hlavně přechod působností a zaměstnanců úřadů; neukazuje konkrétní změnu, která by sama rozšiřovala bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-2",
+                "relevant": false,
+                "reasonCz": "Text části ani obsah souvisejících pozměňovacích návrhů vztahujících se k tomuto dílu nejsou v balíčku doloženy, takže jeho dopad na bytovou výstavbu nelze určit.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-3",
+                "relevant": false,
+                "reasonCz": "Změny se týkají zejména organizace požární ochrany a navazujících předpisů; poskytnutá ustanovení nedokládají podstatný dopad na nabídku bytů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-4",
+                "relevant": true,
+                "reasonCz": "Mění pravidla pro obnovu a stavební rozvoj v památkově chráněných územích, kde může povolování bydlení narážet na zvláštní omezení.",
+                "effectCz": "Dříve vyžadovaly práce na nemovitostech v památkových rezervacích a zónách předchozí rozhodnutí či stanovisko a podmínky byly určovány z hlediska památkové ochrany; schválený text nově zdůrazňuje současné využití památkového fondu včetně bydlení a mění postupy. Může usnadnit některé obnovy a přeměny, ale směr nelze vztáhnout na veškerou výstavbu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-5",
+                "relevant": false,
+                "reasonCz": "Relevantní text této části není poskytnut, takže z balíčku nelze zjistit, zda změny horního zákona materiálně ovlivňují bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-6",
+                "relevant": false,
+                "reasonCz": "Relevantní text této části není poskytnut a nelze z něj doložit konkrétní dopad na nabídku bytů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-7",
+                "relevant": false,
+                "reasonCz": "Relevantní text této části není poskytnut, a proto nelze určit její věcný dopad na bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-1",
+                "relevant": true,
+                "reasonCz": "Mění, kdy se u staveb v zastavitelném území posuzuje krajinný ráz, což může ovlivnit povolování nových bytů.",
+                "effectCz": "Dříve se krajinný ráz neposuzoval v zastavěném území a v některých zastavitelných plochách s dohodnutými podmínkami; návrh váže výjimku na území vymezené v územně plánovací dokumentaci v souladu se stanoviskem orgánu ochrany přírody. Tím se rozsah výjimky mění; z poskytnutého textu nelze obecně určit, zda se pro bydlení zvětšuje, nebo zmenšuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-2",
+                "relevant": true,
+                "reasonCz": "Mění postupy orgánů ochrany přírody při povolování staveb, tedy část administrativních podmínek, které mohou bytovou výstavbu zpomalovat.",
+                "effectCz": "Dříve se některé souhlasy a povolení řešily samostatně; návrh přesouvá část posuzování do řízení stavebního úřadu a mění, které orgány úkony vydávají. Jde hlavně o sjednocení postupu, nikoli o zřejmé snížení hmotných limitů pro bytovou výstavbu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-4",
+                "relevant": false,
+                "reasonCz": "Změny účasti veřejnosti v řízeních ochrany přírody nejsou podle poskytnutých ustanovení přímo opatřením, které by rozšiřovalo bytovou nabídku.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-5",
+                "relevant": false,
+                "reasonCz": "Přesun některých úkonů ochrany přírody mezi úřady sám o sobě nedokládá změnu množství či dostupnosti bytové výstavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Mění podmínky odnětí půdy a výslovně zavádí výjimku z odvodů pro stavby pro bydlení v prolukách.",
+                "effectCz": "Dříve se ochrana zemědělské půdy a souhlasy u staveb řešily podle samostatných ustanovení, přičemž odvod se u bydlení v prolukách běžně platil; schválené znění zavádí výjimku z odvodů pro bydlení v prolukách a přesouvá některé úkony do stavebního povolení. To zmenšuje náklad a bariéru pro část nové bytové výstavby."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-10",
+                "relevant": false,
+                "reasonCz": "Poskytnutá změna osvobození od daně z pozemků pouze nahrazuje pojem zastavěného území pojmem zastavitelného území; nedokládá přímé opatření na podporu výstavby bytů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-11",
+                "relevant": false,
+                "reasonCz": "Přidané ustanovení se týká oznámení disciplinárních rozhodnutí o autorizaci a nepodporuje ani neomezuje bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-12",
+                "relevant": false,
+                "reasonCz": "Text týkající se sloučené změny zákona o dráhách není poskytnut, takže nelze doložit konkrétní dopad na bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-13",
+                "relevant": false,
+                "reasonCz": "Text týkající se změny zákona o vnitrozemské plavbě není poskytnut a jeho dopad na nabídku bytů nelze určit.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-14",
+                "relevant": false,
+                "reasonCz": "Relevantní znění změny lesního zákona není doloženo, a proto nelze určit věcný vztah k tomuto slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-15",
+                "relevant": false,
+                "reasonCz": "Text změny zákona o pozemních komunikacích není poskytnut, takže nelze doložit přímou souvislost s nabídkou bytů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-16",
+                "relevant": false,
+                "reasonCz": "Relevantní text změny zákona o civilním letectví chybí a nelze určit, zda zasahuje do podmínek bytové výstavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-17",
+                "relevant": false,
+                "reasonCz": "Poskytnutá část neobsahuje změny, z nichž by bylo možné doložit podstatný dopad na bytovou nabídku.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-18",
+                "relevant": false,
+                "reasonCz": "Relevantní změny zákona o majetku státu nejsou v balíčku uvedeny, takže jejich vztah ke slibu nelze doložit.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-19",
+                "relevant": false,
+                "reasonCz": "Relevantní text změny zákona o integrovaném záchranném systému není poskytnut a nelze z něj vyvodit dopad na bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-20",
+                "relevant": true,
+                "reasonCz": "Mění způsob zapojení ochrany veřejného zdraví do povolování staveb, tedy procesní podmínky bytové výstavby.",
+                "effectCz": "Dříve se k některým záměrům vyžadovalo samostatné stanovisko hygienické služby a zvláštní posouzení hluku; návrh převádí příslušné úkony do rozhodnutí stavebního úřadu. Jde o sloučení řízení, avšak předchozí text neposkytuje základ pro závěr, že se hygienické limity nebo jiné hmotné podmínky uvolňují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": false,
+                "reasonCz": "Text změny energetického zákona není poskytnut; nelze proto doložit přímý materiální dopad na nabídku bytů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": false,
+                "reasonCz": "Relevantní ustanovení změny zákona o posuzování vlivů na životní prostředí nejsou poskytnuta, takže nelze posoudit jejich konkrétní dopad na bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": false,
+                "reasonCz": "Relevantní text změny vodního zákona není doložen a nelze určit její vztah k nabídce bytů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-24",
+                "relevant": false,
+                "reasonCz": "Relevantní text změny zákona o pohřebnictví není poskytnut a nelze doložit přímý dopad na výstavbu bytů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-25",
+                "relevant": false,
+                "reasonCz": "Relevantní text změny zákona o myslivosti není poskytnut; věcný dopad na nabídku bydlení nelze doložit.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-26",
+                "relevant": false,
+                "reasonCz": "Text změny zákona o pozemkových úpravách není poskytnut, takže nelze určit její materiální vztah k bytové výstavbě.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-27",
+                "relevant": false,
+                "reasonCz": "Text změny soudního řádu správního není poskytnut a nelze doložit přímou souvislost s opatřeními na nabídkové straně bytové výstavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-28",
+                "relevant": false,
+                "reasonCz": "Změna pouze upravuje pojmenování území v definici stavebního pozemku pro DPH; poskytnutý text nedokládá přímé opatření na podporu nové bytové výstavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-29",
+                "relevant": false,
+                "reasonCz": "Relevantní text změny zákona o vyvlastnění není poskytnut, takže nelze doložit její dopad na bytovou nabídku.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-30",
+                "relevant": false,
+                "reasonCz": "Relevantní text změny předpisů bezpečnosti práce není poskytnut a dopad na bytovou výstavbu nelze z balíčku určit.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-31",
+                "relevant": false,
+                "reasonCz": "Relevantní text změny trestního zákoníku není poskytnut a žádný přímý vztah k nabídce bytů není doložen.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": false,
+                "reasonCz": "Relevantní text změny zákona o strategické infrastruktuře není poskytnut, takže nelze doložit její konkrétní vztah k bytové výstavbě.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": true,
+                "reasonCz": "Mění vydávání stanovisek a povolování záměrů z hlediska ochrany ovzduší, což může ovlivnit povolovací podmínky nových bytů.",
+                "effectCz": "Dříve byla pro některé záměry nutná samostatná závazná stanoviska a při překročení imisních limitů kompenzační opatření; návrh nahrazuje část stanovisek vyjádřeními a přesouvá rozhodnutí do povolení záměru. Samotné poskytnuté změny neprokazují, že se imisní limity či nutnost kompenzací uvolňují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-34",
+                "relevant": false,
+                "reasonCz": "Relevantní text změny zákona o Státním pozemkovém úřadu není poskytnut, a proto nelze určit její vliv na bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-35",
+                "relevant": false,
+                "reasonCz": "Relevantní text změny zákona o státní službě není poskytnut a nelze doložit její přímý vliv na nabídku bytů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-36",
+                "relevant": false,
+                "reasonCz": "Relevantní text změny zákona o prevenci závažných havárií není poskytnut, takže její konkrétní dopad nelze určit.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-37",
+                "relevant": false,
+                "reasonCz": "Text změny zákona o veřejných zakázkách není poskytnut a nelze doložit přímý dopad na nabídku bytů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": false,
+                "reasonCz": "Relevantní text změny zákona o odpadech není poskytnut, takže nelze určit její materiální vztah k bytové výstavbě.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-40",
+                "relevant": false,
+                "reasonCz": "Jde o úzkou změnu pojmů v mimořádném režimu pro Ukrajinu; poskytnuté znění nedokládá dopad na běžnou bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": false,
+                "reasonCz": "Text ruší zákon o jednotném environmentálním stanovisku, ale jeho konkrétní bytově relevantní ustanovení nejsou poskytnuta; přímý účinek na nabídku bytů nelze určit.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": false,
+                "reasonCz": "Relevantní text změny zákona o obnovitelných zdrojích není poskytnut a nelze doložit přímou souvislost s bytovou výstavbou.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+                "relevant": true,
+                "reasonCz": "Mění správní poplatky při povolování staveb, což je přímá nákladová položka pro bytové projekty.",
+                "effectCz": "Předchozí sazby a přesné změny poplatků nejsou v balíčku srovnatelně doloženy; schválené znění však zavádí osvobození od poplatku při překročení zákonné lhůty úřadem. Směr změny ostatních poplatků proto nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": true,
+                "reasonCz": "Schválená část ruší předpisy o dokumentaci a požadavcích na výstavbu, které se uplatňují i na bytové stavby.",
+                "effectCz": "Předchozí znění těchto vyhlášek není v balíčku uvedeno; schválený text je ruší, ale bez jejich pravidel nelze určit, zda se povinnosti pro bytovou výstavbu po změně zpřísňují, nebo uvolňují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43202-1",
+                "relevant": true,
+                "reasonCz": "Návrh rozpočtu Státního fondu podpory investic obsahuje konkrétní financování programu dostupného nájemního bydlení a infrastruktury pro budoucí byty.",
+                "effectCz": "Jde o návrh rozpočtu bez předchozího znění; uvádí celkovou alokaci 7 mld. Kč na období 2026–2028, včetně dotace 2,2 mld. Kč na rok 2026, a podporu infrastruktury pro následnou výstavbu. To může zvýšit nabídku dostupných nájemních bytů, ale samo o sobě nezaručuje pokles cen bytů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": true,
+                "reasonCz": "Státní rozpočet na rok 2026 a jeho kapitola Ministerstva pro místní rozvoj přímo souvisejí s veřejnými výdaji na podporu bydlení.",
+                "effectCz": "Jde o rozpočet, nikoli změnu dřívějšího zákonného pravidla. Poskytnuté výňatky pouze odkazují na tabulky kapitol, neuvádějí jejich částky, takže nelze určit výši ani směr změny prostředků pro bytovou výstavbu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43356-1",
+                "relevant": false,
+                "reasonCz": "Poskytnuté změny rozšiřují autorizaci stavitelů a jejich činnosti, ale nedokládají změnu pravidel, která by sama přímo zvyšovala nabídku bytů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-97",
+                "relevant": true,
+                "reasonCz": "Vyhláška dovoluje na pozemku rodinného domu umístit další malý dům pro bydlení a upravuje požadavky pro bytovou výstavbu.",
+                "effectCz": "Jde o nový předpis bez předchozího znění v balíčku; umožňuje na pozemku rodinného domu další vymezenou stavbu pro bydlení. Tím rozšiřuje možnost přidat byty, avšak další změny parkovacích požadavků nelze přesně vyhodnotit bez úplného textu přílohy."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-11",
+                "relevant": true,
+                "reasonCz": "Usnesení ruší dřívější postup financování finančního nástroje pro dostupné bydlení a ukládá hledat jiné řešení.",
+                "effectCz": "Usnesení ruší předchozí usnesení o financování nástroje FN2 a uvádí, že 2,25 mld. Kč uložené u Národní rozvojové banky lze použít jen podle stanovených pravidel; současně ukládá prověřit alternativní financování. Ruší tedy konkrétní zamýšlenou cestu k financování bydlení, ale samo neuzavírá, že prostředky nebudou nahrazeny."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+                "relevant": true,
+                "reasonCz": "Usnesení zakládá funkci zmocněnce, jehož úkoly výslovně zahrnují implementaci stavebního práva a podporu dostupnosti bydlení.",
+                "effectCz": "Předchozí funkce nebyla doložena; usnesení ji vytváří a jmenuje zmocněnce ke koordinaci stavební legislativy a sledování jejího dopadu na dostupnost bydlení. Jde o organizační a přípravný krok, nikoli o přímé zvýšení počtu bytů."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-69",
+                "relevant": true,
+                "reasonCz": "Vládní plán legislativních prací zařazuje návrh zákona o bytových družstvech s cílem zefektivnit družstva a zavést daňové úlevy.",
+                "effectCz": "Jde o plánovaný návrh, nikoli platné pravidlo; vláda stanoví předložení návrhu v prosinci 2026 a účinnost v lednu 2028. Může připravit další nástroje pro družstevní výstavbu, zatím však nabídku bytů nemění."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+                "relevant": true,
+                "reasonCz": "Usnesení ruší část dříve schváleného záměru přímého prodeje a směny pozemků určených mimo jiné pro dostupné bydlení a navazující infrastrukturu.",
+                "effectCz": "Předchozí usnesení podporovalo státní pozemkový záměr pro dostupné bydlení a infrastrukturu; nové usnesení ruší jeho bod II/2. Tím odstraňuje konkrétní plánovaný způsob uvolnění pozemků, aniž by z poskytnutého textu bylo možné určit, zda bude projekt nahrazen."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-b47c5d9b4359--source",
+              "psp-core-2025--law-change-43174-1-1",
+              "psp-core-2025--law-change-43174-1-3",
+              "psp-core-2025--law-change-43174-1-4",
+              "psp-core-2025--law-change-43174-1-6",
+              "psp-core-2025--law-change-43174-1-7",
+              "psp-core-2025--law-change-43174-1-8",
+              "psp-core-2025--law-change-43174-4",
+              "psp-core-2025--law-change-43174-8-1",
+              "psp-core-2025--law-change-43174-8-2",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--law-change-43174-20",
+              "psp-core-2025--law-change-43174-33",
+              "psp-core-2025--law-change-43174-approved-38",
+              "psp-core-2025--law-change-43174-approved-56",
+              "psp-core-2025--law-change-43202-1",
+              "psp-core-2025--law-change-43204-1",
+              "esbirka-regulations--law-change-sb-2026-97",
+              "zvlady-resolutions--law-change-uv-2026-11",
+              "zvlady-resolutions--law-change-uv-2026-59",
+              "zvlady-resolutions--law-change-uv-2026-175-69",
+              "zvlady-resolutions--law-change-uv-2026-377",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--law-change-43174-1-8",
+              "psp-core-2025--law-change-43174-1-3",
+              "psp-core-2025--amendment-text-1187",
+              "psp-core-2025--vote-88175",
+              "psp-core-2025--amendment-text-1192",
+              "psp-core-2025--vote-88179",
+              "psp-core-2025--vote-86957",
+              "psp-core-2025--vote-86963",
+              "psp-core-2025--amendment-text-512",
+              "psp-core-2025--vote-86833",
+              "psp-core-2025--amendment-text-415",
+              "psp-core-2025--vote-86879",
+              "zvlady-resolutions--2026-11",
+              "zvlady-resolutions--2026-59",
+              "zvlady-resolutions--2026-175",
+              "zvlady-resolutions--2026-377",
+              "esbirka-regulations--2026-97"
+            ],
+            "explanationCz": "Poslanci SPD předložili spolu s poslanci dalších stran rozsáhlou novelu stavebního zákona; vláda s ní souhlasila a poslanci SPD ji nakonec podpořili i po zamítnutí Senátem. Novela zjednodušuje některé postupy a rozšiřuje možnosti bytové výstavby, mimo jiné u menších bytových domů. Současně však ruší vymezení a zvláštní povolovací režim domu pro dostupné nájemní bydlení, který umožňoval obcím spojit výstavbu s dlouhodobě dostupným nájemným. Protože přijatá novela zároveň část prostředků a nástrojů na podporu bytové výstavby rozšiřuje i část takové podpory oslabuje, dokládá jen rozporuplný posun, a to v menší části proti slibu.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Přijatá novela mění současně pravidla, která mohou usnadnit bytovou výstavbu, i nástroje pro dlouhodobě dostupné nájemní bydlení; tento protichůdný dopad je důvodem, proč nelze hodnotit její účinek jako jednoznačně příznivý.",
+              "Vláda předložila státní rozpočet a poslanci SPD jej schválili, ale poskytnutý výňatek neobsahuje částky pro podporu bydlení. Nelze proto z něj určit, zda konečný rozpočet přidal nebo ubral prostředky na bytovou výstavbu.",
+              "Vláda zrušila část předchozího plánu financování FN2 a záměru pozemků pro dostupné bydlení; podklady však neukazují, zda byly tyto projekty nahrazeny jiným financováním či postupem.",
+              "Poskytnuté podklady dokládají změny právních a rozpočtových nástrojů, nikoli výsledný počet nových bytů ani vývoj jejich cen."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-b47c5d9b4359",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Mění cíle a koordinaci územního plánování i pravidla pro dotčené orgány, což může ovlivnit povolování bytové výstavby.",
+          "effectCz": "Dosavadní účel stavebního zákona zdůrazňoval integrovanou ochranu veřejných zájmů a udržitelný rozvoj; schválené znění výslovně doplňuje bydlení a stanoví, že rozvoj sídel ani výstavbu lze znemožnit jen tehdy, nelze-li hodnoty ochránit podmínkami. Současně ukládá dotčeným orgánům postupovat co nejdříve a nejmírnějšími dostatečnými prostředky a mění koordinaci jejich stanovisek. Tyto změny mohou usnadnit a urychlit výstavbu, tedy posílit nabídku; směr je však smíšený, protože se zároveň ruší definice domu pro dostupné nájemní bydlení v § 13 písm. q), což odstraňuje zvláštní právní kategorii."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Mění cíle a úkoly územního plánování včetně rozvoje bydlení a využívání zastavitelných ploch.",
+          "effectCz": "Dosavadní územní plánování mělo komplexně řešit funkční využití území a vyhodnocovat jeho rozvojový potenciál; schválené znění výslovně zdůrazňuje bydlení, hospodárné a efektivní využití zastavitelného území a rozvoj bydlení v koncepci území. Zároveň nově klade důraz na co nejlepší využití zastavitelných ploch. Oproti předchozímu znění to posiluje plánovací oporu pro bytovou výstavbu, avšak samo neukládá vymezit konkrétní plochy ani stavět byty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Mění pravidla územního plánování a regulačních plánů, která určují, kde a za jakých podmínek lze stavět.",
+          "effectCz": "Dosavadní pravidla zpřesňovala nadřazené plány a upravovala obsah územních a regulačních plánů; schválené změny umožňují odchylku od nadřazeného plánu se souhlasy a mění obsah i podrobnost plánů. Zrušeno je také ustanovení, které u změny územního plánu vyžadovalo prokázat potřebu nových zastavitelných ploch. To oslabuje dosavadní limit rozšiřování ploch a může usnadnit nabídku pozemků pro bydlení; přesný celkový dopad všech změněných plánovacích pravidel není z textu vyčíslen."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Mění postup při změnách územních plánů a požadavky na výstavbu, tedy překážky a možnosti bytové výstavby.",
+          "effectCz": "Dosavadní pravidla vyžadovala nové projednání některých podstatných úprav a u změny územního plánu prokazování potřeby nových zastavitelných ploch; schválené znění část těchto procesních kroků zjednodušuje a ruší požadavek prokazovat potřebu dalších ploch. Změny také umožňují v určitých situacích neaplikovat vybrané požadavky na výstavbu, splnit některé společně formou příspěvku a upravují pravidla pro hustou a souvislou zástavbu. Tato pravidla uvolňují část limitů a mohou usnadnit či zrychlit bytovou výstavbu, aniž by sama zaručovala nižší ceny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Mění průběh povolování staveb, vyjádření úřadů a dokumentaci, což může ovlivnit rychlost a náklady výstavby bytů.",
+          "effectCz": "Dosavadní text vyžadoval pro různé kroky stanoviska a dokumentaci a u části jednoduchých staveb odlišoval postupy; schválené znění více úkonů koordinuje v rámci povolení, omezuje opakované posuzování některých veřejných zájmů a zavádí souhlasné vyřízení při nečinnosti některých orgánů či vlastníků infrastruktury. Změny mohou snížit procesní zátěž a urychlit výstavbu. Nově vložené pravidlo o ochraně pohody bydlení nemá v dodaném kontextu předchozí znění, takže jeho samostatný dopad na výstavbu nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Mění, jak stavební úřad posuzuje záměry v zastavitelném území a vztah povolení k územnímu plánu.",
+          "effectCz": "Dosavadní § 193 vyžadoval posoudit soulad záměru s územním plánem, právními předpisy a právy účastníků; schválené znění přidává domněnku přípustnosti záměru v zastavitelném území, pokud odpovídá plánu a požadavkům na výstavbu. Současně umožňuje za podmínek odchylku od územně plánovací dokumentace. Jde o uvolnění a zrychlení části povolovacích překážek, které může podporovat nabídku bytů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Mění kategorie staveb a zařazuje některé menší bytové domy mezi jednodušší stavby.",
+          "effectCz": "Dosavadní příloha řadila mezi jednoduché stavby pro bydlení především stavby nejvýše se dvěma nadzemními podlažími; schválené znění přidává bytové domy do 500 m² zastavěné plochy, nejvýše se čtyřmi nadzemními podlažími a výškou do 9 metrů. To rozšiřuje okruh bytových domů s jednodušším režimem a může usnadnit jejich výstavbu. Zároveň se některé hromadné bytové stavby zařazují mezi vyhrazené stavby; jejich přesný dopad na tempo povolování není z dodaných úryvků zřejmý."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": false,
+          "reasonCz": "Dodaný text upravuje především přesuny úřadů, spisů a zaměstnanců; nespojuje tyto změny přímo s konkrétním opatřením pro bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádnou relevantní změnu této části a nejsou uvedeny změny, které by přímo ovlivňovaly bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Dodané změny se týkají požární ochrany staveb, ale balíček neukazuje, že by konkrétně uvolňovaly nebo omezovaly nabídku bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "Mění povolování obnovy památek a přístup k jejich využití, včetně využití pro současné potřeby, mezi něž patří bydlení.",
+          "effectCz": "Dosavadní pravidla vyžadovala předchozí souhlas či rozhodnutí památkového orgánu pro vyjmenované práce a ochranu hodnot při realizaci záměru; schválené znění výslovněji zdůrazňuje využití památkového fondu pro současné potřeby a přenáší část ověřování podmínek do řízení o záměru. To může usnadnit obnovu a využití některých budov pro bydlení, ale přesný dopad na počet bytů není stanoven."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-5",
+          "relevant": false,
+          "reasonCz": "V dodaném výňatku není žádný text této části ani změna, kterou by bylo možné spojit s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-6",
+          "relevant": false,
+          "reasonCz": "V dodaném výňatku není žádný text této části ani relevantní pozměňovací návrh, který by přímo souvisel s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "V dodaném výňatku není žádný text této části ani relevantní pozměňovací návrh týkající se bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-1",
+          "relevant": true,
+          "reasonCz": "Mění podmínky, za nichž se při povolování záměrů posuzuje krajinný ráz, což je součástí schvalování bytových staveb.",
+          "effectCz": "Dosavadní pravidlo vylučovalo posouzení krajinného rázu v zastavěných územích a v některých zastavitelných plochách s dohodnutými podmínkami; schválené znění nahrazuje tuto hranici zastavitelným územím, koridorem či plochou těžby vymezenými v souladu se stanoviskem orgánu ochrany přírody. Rozsah výjimky se mění, ale z dodaných slov nelze určit, zda je pro všechny bytové lokality celkově širší, nebo užší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-2",
+          "relevant": true,
+          "reasonCz": "Přesouvá část úkonů ochrany přírody k stavebnímu úřadu v řízení o záměru a tím mění povolovací postupy staveb.",
+          "effectCz": "Dosavadní zákon svěřoval řadu souhlasů a povolení orgánům ochrany přírody; schválené znění umožňuje u záměrů mimo vyjmenovaná chráněná území posoudit některé z nich přímo v řízení stavebního úřadu. Jde o spojení či přesun úkonů, které může zkrátit samostatné povolovací kroky, ale neodstraňuje všechny požadavky ochrany přírody."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-4",
+          "relevant": true,
+          "reasonCz": "Mění možnost environmentálních organizací účastnit se některých řízení, což může ovlivnit průběh a délku povolování staveb.",
+          "effectCz": "Dosavadní úprava umožňovala občanským sdružením za daných podmínek vstupovat do některých řízení; schválené znění vyžaduje právnickou osobu s vymezeným předmětem činnosti a nejméně tříletou existenci nebo podporu 200 osob a omezuje okruh řízení, v nichž se účastní. Tato procesní možnost se zužuje a může snižovat některé překážky či prodlevy při povolování, aniž by měnila vlastní objem bytové výstavby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek se týká účasti veřejnosti a organizací v řízeních ochrany přírody, ale neukazuje přímou změnu podmínek pro nabídku bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Mění ochranu zemědělské půdy při změně územního plánování a povolování staveb, což může ovlivnit dostupnost pozemků pro bydlení.",
+          "effectCz": "Dosavadní pravidla vyžadovala souhlas s odnětím zemědělské půdy a ukládala zásady její ochrany; schválené znění přesouvá část rozhodování do stavebního povolení a stanoví, že se zásady plošné ochrany neposuzují v některých územích vymezených v plánovací dokumentaci. To uvolňuje některé překážky v již plánovaných územích, současně však ponechává podmínky při vymezování těchto ploch."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-10",
+          "relevant": false,
+          "reasonCz": "Změna obecního osvobození zemědělských pozemků od daně pouze upravuje odkaz na typ území a nedodané znění nespojuje s opatřením na zvýšení bytové nabídky.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-11",
+          "relevant": false,
+          "reasonCz": "Dodaný text pouze informuje o disciplinárních rozhodnutích autorizovaných osob a nemění podmínky bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-12",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny této části, které by bylo možné přímo spojit s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-13",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny této části, které by bylo možné přímo spojit s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje relevantní změnu lesního zákona, kterou by šlo vztáhnout k nabídce bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-15",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny zákona o pozemních komunikacích přímo spojené s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-16",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny, které by přímo ovlivňovaly bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny veterinárního zákona relevantní pro bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-18",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny majetkového zákona přímo související s nabídkou bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neukazuje změnu zákona o integrovaném záchranném systému, která by přímo ovlivňovala bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Mění způsob, jakým se při povolování záměru uplatňují požadavky ochrany veřejného zdraví.",
+          "effectCz": "Dosavadní úprava svěřovala orgánu ochrany veřejného zdraví samostatná stanoviska a některé úkony v řízeních; schválené znění převádí část těchto úkonů do rozhodnutí stavebního úřadu. Jde o integraci povolovacích kroků, která může snížit administrativní zátěž a urychlit povolení, aniž by sama rušila věcné zdravotní požadavky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny energetického zákona, které by přímo podpořily nebo omezily nabídku bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje znění změn zákona o posuzování vlivů na životní prostředí, které by šlo pro tento slib posoudit.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje znění změn vodního zákona, které by bylo možné přímo vztáhnout k nabídce bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny pohřebního zákona přímo související s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-25",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny zákona o myslivosti přímo související s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny pozemkových úprav, které by byly přímo spojeny s nabídkou bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-27",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny soudního řádu správního, které by přímo měnily možnost bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": false,
+          "reasonCz": "Změna odkazu v definici stavebního pozemku pro DPH nepředstavuje sama opatření na straně nabídky bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny vyvlastňovacího zákona přímo spojené s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje relevantní změnu předpisů bezpečnosti práce, která by přímo měnila nabídku bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny trestního zákoníku vztahující se k nabídce bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje znění změn předpisu o strategické infrastruktuře, které by bylo možné přímo vztáhnout k bytové výstavbě.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Mění povolování záměrů z hlediska ochrany ovzduší a nahrazuje část samostatných úkonů v řízení o stavbě.",
+          "effectCz": "Dosavadní úprava vyžadovala závazná stanoviska pro některé záměry a v určitých případech kompenzační opatření; schválené znění tyto otázky zapojuje do povolení záměru a upravuje příslušnost stavebního úřadu. Věcné požadavky a kompenzace tím nejsou obecně odstraněny, ale proces se sjednocuje, což může zjednodušit povolování bytové výstavby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny zákona o Státním pozemkovém úřadu přímo spojené s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje relevantní změnu zákona o státní službě vztahující se přímo k nabídce bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny prevence závažných havárií, které by byly přímo propojeny s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny veřejného zadávání přímo spojené s nabídkou bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny zákona o odpadech přímo související s nabídkou bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": false,
+          "reasonCz": "Jde o zvláštní postupy pro stavby spojené s ozbrojeným konfliktem na Ukrajině, nikoli o obecné opatření pro bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje znění změn zákona o jednotném environmentálním stanovisku a nelze z něj vyvodit přímý dopad na bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny předpisu o obnovitelných zdrojích, které by přímo ovlivňovaly nabídku bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": false,
+          "reasonCz": "Tato část zavádí osvobození od poplatku při nedodržení lhůty úřadem, ale nedodaný text neukazuje změnu, která by sama podpořila bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Ruší mimo jiné vyhlášky o dokumentaci staveb a požadavcích na výstavbu, tedy předpisy, které stanovují pravidla pro stavění.",
+          "effectCz": "Dodaný text uvádí, že se ruší vyhlášky č. 131/2024 Sb., č. 146/2024 Sb. a č. 149/2024 Sb.; jejich předchozí konkrétní požadavky v balíčku nejsou uvedeny. Proto nelze určit, zda a které stavební limity se po zrušení zpřísňují či uvolňují ani jaký bude čistý dopad na bytovou výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu podpory investic vyčleňuje podporu na program Dostupné nájemní bydlení, který má zvýšit nabídku bytů.",
+          "effectCz": "Jde o nový rozpočet, takže předchozí znění nemá. Návrh uvádí celkovou alokaci programu Dostupné nájemní bydlení 7 miliard Kč v období 2026–2028, z toho dotaci 2,2 miliardy Kč v roce 2026 a úvěrové financování; program je určen k navýšení nabídky nájemního bydlení. To přímo podporuje část slibu týkající se nabídky, avšak jde o návrh rozpočtu a samotné snížení cen bytů nezaručuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Návrh státního rozpočtu obsahuje změny výdajů na bydlení a pozměňovací návrhy předkládaly navýšení podpory bydlení.",
+          "effectCz": "Jde o nový roční rozpočet, takže předchozí znění není. Dodaný text schválené verze pouze odkazuje na přehled výdajů a ukazatelů v přílohách, jejich částky pro bydlení zde nejsou. Pozměňovací návrhy navrhovaly zvýšit podporu bydlení o 14 miliard Kč nebo o 3,5 miliardy Kč, ale z poskytnutého výňatku nelze zjistit, jaké částky byly v konečném rozpočtu skutečně schváleny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43356-1",
+          "relevant": true,
+          "reasonCz": "Návrh přidává autorizovaného stavitele, který může odborně vést provádění staveb a vykonávat další odborné činnosti.",
+          "effectCz": "Dosavadní zákon vymezoval autorizované architekty, inženýry a techniky; návrh přidává kategorii autorizovaného stavitele a její oprávnění, včetně vedení staveb a zastupování stavebníka. To rozšiřuje okruh odborných kapacit pro realizaci a povolování staveb a může nepřímo usnadnit bytovou výstavbu. Jde zatím o návrh a ne o pravidlo již účinné."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-97",
+          "relevant": true,
+          "reasonCz": "Vyhláška upravuje požadavky na výstavbu a výslovně umožňuje další bydlení na pozemku rodinného domu.",
+          "effectCz": "Jde o nové závazné pravidlo, u něhož balíček neposkytuje předchozí znění měněné vyhlášky pro uvedené body. Umožňuje na pozemku rodinného domu vedle něj umístit také stavby pro bydlení vymezené jako drobné a mění požadovaný počet parkovacích stání pro bydlení. Tím vytváří možnost přidat bytové jednotky a u části záměrů snižuje požadavky na parkování, což podporuje nabídku, nikoli však celé splnění cenového cíle."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-11",
+          "relevant": true,
+          "reasonCz": "Usnesení ruší dosavadní plán financování úvěrového fondu pro program Dostupné bydlení a zadává hledání alternativního financování.",
+          "effectCz": "Jde o vládní rozhodnutí, které ruší předchozí usnesení o financování úvěrového nástroje FN2 prostřednictvím projektových dluhopisů a konstatuje, že 2,25 miliardy Kč nelze použít jinak než podle stanovených pravidel. Současně ukládá předložit informace a prověřit alternativní financování, takže neruší samotný cíl podpory; odstraňuje však dosavadní finanční cestu a může ztížit či zpozdit podporu výstavby."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+          "relevant": true,
+          "reasonCz": "Usnesení zřizuje vládního zmocněnce, jehož výslovnými úkoly jsou implementace stavebního práva a sledování dopadů na dostupnost bydlení.",
+          "effectCz": "Jde o nové usnesení, které jmenuje vládního zmocněnce a ukládá mu koordinovat zavádění stavebního práva, sledovat překážky výstavby a vyhodnocovat dopad na dostupnost bydlení a náklady. Nevytváří samo nové byty ani nemění povolovací limity; zřizuje však koordinační a poradní prostředek, který může podpořit provádění opatření na straně nabídky."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-69",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací vlády počítá s návrhem zákona pro zefektivnění bytových družstev a daňovými úlevami, které mají usnadnit výstavbu.",
+          "effectCz": "Jde o plánovací usnesení, nikoli o změnu již platných pravidel. Stanoví předložit návrh zákona do prosince 2026 a počítá s účinností v lednu 2028; uvedeným cílem je zefektivnit bytová družstva včetně daňových úlev a programové priority zmiňují státní záruky pro usnadnění výstavby. Jde o budoucí návrh, který může podporovat nabídku, ale zatím ji sám nezvyšuje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Usnesení ruší část dřívějšího záměru směny a prodeje státního majetku určeného pro dostupné bydlení a navazující infrastrukturu v Praze.",
+          "effectCz": "Dodaný text uvádí, že vláda ruší bod II/2 usnesení o záměru prodeje a směny státního majetku pro výstavbu dostupného bydlení a infrastruktury. Přesné znění zrušeného bodu ani následky pro jednotlivé pozemky v balíčku nejsou, takže nelze určit rozsah zmařených bytů; jde však o odstranění části konkrétního záměru, který měl přispět k nabídce dostupného bydlení."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-b47c5d9b4359--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--law-change-43174-8-1",
+        "psp-core-2025--law-change-43174-8-2",
+        "psp-core-2025--law-change-43174-8-4",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43356-1",
+        "esbirka-regulations--law-change-sb-2026-97",
+        "zvlady-resolutions--law-change-uv-2026-11",
+        "zvlady-resolutions--law-change-uv-2026-59",
+        "zvlady-resolutions--law-change-uv-2026-175-69",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--vote-88166",
+        "psp-core-2025--vote-88167",
+        "psp-core-2025--vote-88169",
+        "psp-core-2025--vote-88172",
+        "psp-core-2025--vote-88175",
+        "psp-core-2025--vote-88178",
+        "psp-core-2025--vote-88179",
+        "psp-core-2025--vote-88194",
+        "psp-core-2025--vote-88202",
+        "psp-core-2025--vote-88204",
+        "psp-core-2025--vote-88207",
+        "psp-core-2025--vote-88208",
+        "psp-core-2025--vote-88209",
+        "psp-core-2025--vote-88210",
+        "psp-core-2025--vote-88211",
+        "psp-core-2025--vote-88213",
+        "psp-core-2025--vote-88215",
+        "psp-core-2025--vote-88216",
+        "psp-core-2025--vote-88223",
+        "psp-core-2025--vote-88224",
+        "psp-core-2025--vote-88227",
+        "psp-core-2025--vote-88233",
+        "psp-core-2025--vote-88234",
+        "psp-core-2025--vote-88236",
+        "psp-core-2025--vote-86963",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-86833",
+        "psp-core-2025--vote-86839",
+        "psp-core-2025--vote-86879",
+        "psp-core-2025--vote-86951",
+        "psp-core-2025--vote-86952",
+        "psp-core-2025--vote-86953",
+        "zvlady-resolutions--2026-11",
+        "zvlady-resolutions--2026-59",
+        "zvlady-resolutions--2026-175",
+        "zvlady-resolutions--2026-377",
+        "esbirka-regulations--2026-97",
+        "psp-core-2025--print-step-211658"
+      ],
+      "explanationCz": "Poslanci SPD předložili společně s dalšími poslanci rozsáhlou novelu stavebního zákona, kterou Poslanecká sněmovna po zamítnutí Senátem znovu schválila. Novela rozšiřuje možnosti výstavby a zjednodušuje některé kroky územního plánování a povolování, takže podporuje část slibu týkající se nabídky bytů. Vláda také přijala vyhlášku, která umožňuje další bydlení na pozemcích rodinných domů, a schválila rozpočet Státního fondu podpory investic s programem dostupného nájemního bydlení. Proti tomu stojí zrušení části dřívějšího záměru výstavby dostupných bytů v Praze a zrušení dosavadní finanční cesty pro úvěrovou podporu; konečné částky rozpočtu na podporu bydlení nejsou v dodaných výňatcích úplně doloženy.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Schválená novela zároveň ruší zvláštní definici domu pro dostupné nájemní bydlení a možnost jeho vymezení v regulačním plánu; zda tím v praxi ubude bytů nebo se pouze změní způsob jejich podpory, z dodaných podkladů určit nelze.",
+        "Vláda zrušila konkrétní plán financování úvěrového nástroje Dostupné bydlení, ale zároveň uložila prověřit jiné možnosti financování; dopad na konečný počet podpořených bytů není doložen.",
+        "U rozpočtu státu na rok 2026 nejsou ve výňatku uvedeny konečné částky pro podporu bydlení, takže nelze ověřit, zda se v něm navržené navýšení skutečně promítlo.",
+        "Usnesení vlády zrušilo bod dřívějšího záměru státní směny a prodeje pozemků pro dostupné bydlení v Praze, ale přesný obsah zrušeného bodu a následky pro konkrétní projekty nejsou doloženy."
+      ]
+    },
+    "assessor-b": null
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_04b5f1d4d6f5993b016aec5712d64087d18788454f7f42e666",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 426460,
+      "input_tokens_details": {
+        "cache_write_tokens": 420110,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 19731,
+      "output_tokens_details": {
+        "reasoning_tokens": 10946
+      },
+      "total_tokens": 446191
+    },
+    "output": {
+      "promiseId": "candidate-b47c5d9b4359",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Mění cíle a koordinaci územního plánování i pravidla pro dotčené orgány, což může ovlivnit povolování bytové výstavby.",
+          "effectCz": "Dosavadní účel stavebního zákona zdůrazňoval integrovanou ochranu veřejných zájmů a udržitelný rozvoj; schválené znění výslovně doplňuje bydlení a stanoví, že rozvoj sídel ani výstavbu lze znemožnit jen tehdy, nelze-li hodnoty ochránit podmínkami. Současně ukládá dotčeným orgánům postupovat co nejdříve a nejmírnějšími dostatečnými prostředky a mění koordinaci jejich stanovisek. Tyto změny mohou usnadnit a urychlit výstavbu, tedy posílit nabídku; směr je však smíšený, protože se zároveň ruší definice domu pro dostupné nájemní bydlení v § 13 písm. q), což odstraňuje zvláštní právní kategorii."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Mění cíle a úkoly územního plánování včetně rozvoje bydlení a využívání zastavitelných ploch.",
+          "effectCz": "Dosavadní územní plánování mělo komplexně řešit funkční využití území a vyhodnocovat jeho rozvojový potenciál; schválené znění výslovně zdůrazňuje bydlení, hospodárné a efektivní využití zastavitelného území a rozvoj bydlení v koncepci území. Zároveň nově klade důraz na co nejlepší využití zastavitelných ploch. Oproti předchozímu znění to posiluje plánovací oporu pro bytovou výstavbu, avšak samo neukládá vymezit konkrétní plochy ani stavět byty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Mění pravidla územního plánování a regulačních plánů, která určují, kde a za jakých podmínek lze stavět.",
+          "effectCz": "Dosavadní pravidla zpřesňovala nadřazené plány a upravovala obsah územních a regulačních plánů; schválené změny umožňují odchylku od nadřazeného plánu se souhlasy a mění obsah i podrobnost plánů. Zrušeno je také ustanovení, které u změny územního plánu vyžadovalo prokázat potřebu nových zastavitelných ploch. To oslabuje dosavadní limit rozšiřování ploch a může usnadnit nabídku pozemků pro bydlení; přesný celkový dopad všech změněných plánovacích pravidel není z textu vyčíslen."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Mění postup při změnách územních plánů a požadavky na výstavbu, tedy překážky a možnosti bytové výstavby.",
+          "effectCz": "Dosavadní pravidla vyžadovala nové projednání některých podstatných úprav a u změny územního plánu prokazování potřeby nových zastavitelných ploch; schválené znění část těchto procesních kroků zjednodušuje a ruší požadavek prokazovat potřebu dalších ploch. Změny také umožňují v určitých situacích neaplikovat vybrané požadavky na výstavbu, splnit některé společně formou příspěvku a upravují pravidla pro hustou a souvislou zástavbu. Tato pravidla uvolňují část limitů a mohou usnadnit či zrychlit bytovou výstavbu, aniž by sama zaručovala nižší ceny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Mění průběh povolování staveb, vyjádření úřadů a dokumentaci, což může ovlivnit rychlost a náklady výstavby bytů.",
+          "effectCz": "Dosavadní text vyžadoval pro různé kroky stanoviska a dokumentaci a u části jednoduchých staveb odlišoval postupy; schválené znění více úkonů koordinuje v rámci povolení, omezuje opakované posuzování některých veřejných zájmů a zavádí souhlasné vyřízení při nečinnosti některých orgánů či vlastníků infrastruktury. Změny mohou snížit procesní zátěž a urychlit výstavbu. Nově vložené pravidlo o ochraně pohody bydlení nemá v dodaném kontextu předchozí znění, takže jeho samostatný dopad na výstavbu nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Mění, jak stavební úřad posuzuje záměry v zastavitelném území a vztah povolení k územnímu plánu.",
+          "effectCz": "Dosavadní § 193 vyžadoval posoudit soulad záměru s územním plánem, právními předpisy a právy účastníků; schválené znění přidává domněnku přípustnosti záměru v zastavitelném území, pokud odpovídá plánu a požadavkům na výstavbu. Současně umožňuje za podmínek odchylku od územně plánovací dokumentace. Jde o uvolnění a zrychlení části povolovacích překážek, které může podporovat nabídku bytů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Mění kategorie staveb a zařazuje některé menší bytové domy mezi jednodušší stavby.",
+          "effectCz": "Dosavadní příloha řadila mezi jednoduché stavby pro bydlení především stavby nejvýše se dvěma nadzemními podlažími; schválené znění přidává bytové domy do 500 m² zastavěné plochy, nejvýše se čtyřmi nadzemními podlažími a výškou do 9 metrů. To rozšiřuje okruh bytových domů s jednodušším režimem a může usnadnit jejich výstavbu. Zároveň se některé hromadné bytové stavby zařazují mezi vyhrazené stavby; jejich přesný dopad na tempo povolování není z dodaných úryvků zřejmý."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": false,
+          "reasonCz": "Dodaný text upravuje především přesuny úřadů, spisů a zaměstnanců; nespojuje tyto změny přímo s konkrétním opatřením pro bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádnou relevantní změnu této části a nejsou uvedeny změny, které by přímo ovlivňovaly bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Dodané změny se týkají požární ochrany staveb, ale balíček neukazuje, že by konkrétně uvolňovaly nebo omezovaly nabídku bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "Mění povolování obnovy památek a přístup k jejich využití, včetně využití pro současné potřeby, mezi něž patří bydlení.",
+          "effectCz": "Dosavadní pravidla vyžadovala předchozí souhlas či rozhodnutí památkového orgánu pro vyjmenované práce a ochranu hodnot při realizaci záměru; schválené znění výslovněji zdůrazňuje využití památkového fondu pro současné potřeby a přenáší část ověřování podmínek do řízení o záměru. To může usnadnit obnovu a využití některých budov pro bydlení, ale přesný dopad na počet bytů není stanoven."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-5",
+          "relevant": false,
+          "reasonCz": "V dodaném výňatku není žádný text této části ani změna, kterou by bylo možné spojit s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-6",
+          "relevant": false,
+          "reasonCz": "V dodaném výňatku není žádný text této části ani relevantní pozměňovací návrh, který by přímo souvisel s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "V dodaném výňatku není žádný text této části ani relevantní pozměňovací návrh týkající se bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-1",
+          "relevant": true,
+          "reasonCz": "Mění podmínky, za nichž se při povolování záměrů posuzuje krajinný ráz, což je součástí schvalování bytových staveb.",
+          "effectCz": "Dosavadní pravidlo vylučovalo posouzení krajinného rázu v zastavěných územích a v některých zastavitelných plochách s dohodnutými podmínkami; schválené znění nahrazuje tuto hranici zastavitelným územím, koridorem či plochou těžby vymezenými v souladu se stanoviskem orgánu ochrany přírody. Rozsah výjimky se mění, ale z dodaných slov nelze určit, zda je pro všechny bytové lokality celkově širší, nebo užší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-2",
+          "relevant": true,
+          "reasonCz": "Přesouvá část úkonů ochrany přírody k stavebnímu úřadu v řízení o záměru a tím mění povolovací postupy staveb.",
+          "effectCz": "Dosavadní zákon svěřoval řadu souhlasů a povolení orgánům ochrany přírody; schválené znění umožňuje u záměrů mimo vyjmenovaná chráněná území posoudit některé z nich přímo v řízení stavebního úřadu. Jde o spojení či přesun úkonů, které může zkrátit samostatné povolovací kroky, ale neodstraňuje všechny požadavky ochrany přírody."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-4",
+          "relevant": true,
+          "reasonCz": "Mění možnost environmentálních organizací účastnit se některých řízení, což může ovlivnit průběh a délku povolování staveb.",
+          "effectCz": "Dosavadní úprava umožňovala občanským sdružením za daných podmínek vstupovat do některých řízení; schválené znění vyžaduje právnickou osobu s vymezeným předmětem činnosti a nejméně tříletou existenci nebo podporu 200 osob a omezuje okruh řízení, v nichž se účastní. Tato procesní možnost se zužuje a může snižovat některé překážky či prodlevy při povolování, aniž by měnila vlastní objem bytové výstavby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek se týká účasti veřejnosti a organizací v řízeních ochrany přírody, ale neukazuje přímou změnu podmínek pro nabídku bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Mění ochranu zemědělské půdy při změně územního plánování a povolování staveb, což může ovlivnit dostupnost pozemků pro bydlení.",
+          "effectCz": "Dosavadní pravidla vyžadovala souhlas s odnětím zemědělské půdy a ukládala zásady její ochrany; schválené znění přesouvá část rozhodování do stavebního povolení a stanoví, že se zásady plošné ochrany neposuzují v některých územích vymezených v plánovací dokumentaci. To uvolňuje některé překážky v již plánovaných územích, současně však ponechává podmínky při vymezování těchto ploch."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-10",
+          "relevant": false,
+          "reasonCz": "Změna obecního osvobození zemědělských pozemků od daně pouze upravuje odkaz na typ území a nedodané znění nespojuje s opatřením na zvýšení bytové nabídky.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-11",
+          "relevant": false,
+          "reasonCz": "Dodaný text pouze informuje o disciplinárních rozhodnutích autorizovaných osob a nemění podmínky bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-12",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny této části, které by bylo možné přímo spojit s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-13",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny této části, které by bylo možné přímo spojit s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje relevantní změnu lesního zákona, kterou by šlo vztáhnout k nabídce bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-15",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny zákona o pozemních komunikacích přímo spojené s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-16",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny, které by přímo ovlivňovaly bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny veterinárního zákona relevantní pro bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-18",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny majetkového zákona přímo související s nabídkou bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neukazuje změnu zákona o integrovaném záchranném systému, která by přímo ovlivňovala bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Mění způsob, jakým se při povolování záměru uplatňují požadavky ochrany veřejného zdraví.",
+          "effectCz": "Dosavadní úprava svěřovala orgánu ochrany veřejného zdraví samostatná stanoviska a některé úkony v řízeních; schválené znění převádí část těchto úkonů do rozhodnutí stavebního úřadu. Jde o integraci povolovacích kroků, která může snížit administrativní zátěž a urychlit povolení, aniž by sama rušila věcné zdravotní požadavky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny energetického zákona, které by přímo podpořily nebo omezily nabídku bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje znění změn zákona o posuzování vlivů na životní prostředí, které by šlo pro tento slib posoudit.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje znění změn vodního zákona, které by bylo možné přímo vztáhnout k nabídce bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny pohřebního zákona přímo související s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-25",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny zákona o myslivosti přímo související s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny pozemkových úprav, které by byly přímo spojeny s nabídkou bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-27",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny soudního řádu správního, které by přímo měnily možnost bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": false,
+          "reasonCz": "Změna odkazu v definici stavebního pozemku pro DPH nepředstavuje sama opatření na straně nabídky bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny vyvlastňovacího zákona přímo spojené s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje relevantní změnu předpisů bezpečnosti práce, která by přímo měnila nabídku bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny trestního zákoníku vztahující se k nabídce bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje znění změn předpisu o strategické infrastruktuře, které by bylo možné přímo vztáhnout k bytové výstavbě.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Mění povolování záměrů z hlediska ochrany ovzduší a nahrazuje část samostatných úkonů v řízení o stavbě.",
+          "effectCz": "Dosavadní úprava vyžadovala závazná stanoviska pro některé záměry a v určitých případech kompenzační opatření; schválené znění tyto otázky zapojuje do povolení záměru a upravuje příslušnost stavebního úřadu. Věcné požadavky a kompenzace tím nejsou obecně odstraněny, ale proces se sjednocuje, což může zjednodušit povolování bytové výstavby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny zákona o Státním pozemkovém úřadu přímo spojené s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje relevantní změnu zákona o státní službě vztahující se přímo k nabídce bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny prevence závažných havárií, které by byly přímo propojeny s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny veřejného zadávání přímo spojené s nabídkou bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny zákona o odpadech přímo související s nabídkou bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": false,
+          "reasonCz": "Jde o zvláštní postupy pro stavby spojené s ozbrojeným konfliktem na Ukrajině, nikoli o obecné opatření pro bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje znění změn zákona o jednotném environmentálním stanovisku a nelze z něj vyvodit přímý dopad na bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek neobsahuje změny předpisu o obnovitelných zdrojích, které by přímo ovlivňovaly nabídku bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": false,
+          "reasonCz": "Tato část zavádí osvobození od poplatku při nedodržení lhůty úřadem, ale nedodaný text neukazuje změnu, která by sama podpořila bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Ruší mimo jiné vyhlášky o dokumentaci staveb a požadavcích na výstavbu, tedy předpisy, které stanovují pravidla pro stavění.",
+          "effectCz": "Dodaný text uvádí, že se ruší vyhlášky č. 131/2024 Sb., č. 146/2024 Sb. a č. 149/2024 Sb.; jejich předchozí konkrétní požadavky v balíčku nejsou uvedeny. Proto nelze určit, zda a které stavební limity se po zrušení zpřísňují či uvolňují ani jaký bude čistý dopad na bytovou výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu podpory investic vyčleňuje podporu na program Dostupné nájemní bydlení, který má zvýšit nabídku bytů.",
+          "effectCz": "Jde o nový rozpočet, takže předchozí znění nemá. Návrh uvádí celkovou alokaci programu Dostupné nájemní bydlení 7 miliard Kč v období 2026–2028, z toho dotaci 2,2 miliardy Kč v roce 2026 a úvěrové financování; program je určen k navýšení nabídky nájemního bydlení. To přímo podporuje část slibu týkající se nabídky, avšak jde o návrh rozpočtu a samotné snížení cen bytů nezaručuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Návrh státního rozpočtu obsahuje změny výdajů na bydlení a pozměňovací návrhy předkládaly navýšení podpory bydlení.",
+          "effectCz": "Jde o nový roční rozpočet, takže předchozí znění není. Dodaný text schválené verze pouze odkazuje na přehled výdajů a ukazatelů v přílohách, jejich částky pro bydlení zde nejsou. Pozměňovací návrhy navrhovaly zvýšit podporu bydlení o 14 miliard Kč nebo o 3,5 miliardy Kč, ale z poskytnutého výňatku nelze zjistit, jaké částky byly v konečném rozpočtu skutečně schváleny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43356-1",
+          "relevant": true,
+          "reasonCz": "Návrh přidává autorizovaného stavitele, který může odborně vést provádění staveb a vykonávat další odborné činnosti.",
+          "effectCz": "Dosavadní zákon vymezoval autorizované architekty, inženýry a techniky; návrh přidává kategorii autorizovaného stavitele a její oprávnění, včetně vedení staveb a zastupování stavebníka. To rozšiřuje okruh odborných kapacit pro realizaci a povolování staveb a může nepřímo usnadnit bytovou výstavbu. Jde zatím o návrh a ne o pravidlo již účinné."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-97",
+          "relevant": true,
+          "reasonCz": "Vyhláška upravuje požadavky na výstavbu a výslovně umožňuje další bydlení na pozemku rodinného domu.",
+          "effectCz": "Jde o nové závazné pravidlo, u něhož balíček neposkytuje předchozí znění měněné vyhlášky pro uvedené body. Umožňuje na pozemku rodinného domu vedle něj umístit také stavby pro bydlení vymezené jako drobné a mění požadovaný počet parkovacích stání pro bydlení. Tím vytváří možnost přidat bytové jednotky a u části záměrů snižuje požadavky na parkování, což podporuje nabídku, nikoli však celé splnění cenového cíle."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-11",
+          "relevant": true,
+          "reasonCz": "Usnesení ruší dosavadní plán financování úvěrového fondu pro program Dostupné bydlení a zadává hledání alternativního financování.",
+          "effectCz": "Jde o vládní rozhodnutí, které ruší předchozí usnesení o financování úvěrového nástroje FN2 prostřednictvím projektových dluhopisů a konstatuje, že 2,25 miliardy Kč nelze použít jinak než podle stanovených pravidel. Současně ukládá předložit informace a prověřit alternativní financování, takže neruší samotný cíl podpory; odstraňuje však dosavadní finanční cestu a může ztížit či zpozdit podporu výstavby."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+          "relevant": true,
+          "reasonCz": "Usnesení zřizuje vládního zmocněnce, jehož výslovnými úkoly jsou implementace stavebního práva a sledování dopadů na dostupnost bydlení.",
+          "effectCz": "Jde o nové usnesení, které jmenuje vládního zmocněnce a ukládá mu koordinovat zavádění stavebního práva, sledovat překážky výstavby a vyhodnocovat dopad na dostupnost bydlení a náklady. Nevytváří samo nové byty ani nemění povolovací limity; zřizuje však koordinační a poradní prostředek, který může podpořit provádění opatření na straně nabídky."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-69",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací vlády počítá s návrhem zákona pro zefektivnění bytových družstev a daňovými úlevami, které mají usnadnit výstavbu.",
+          "effectCz": "Jde o plánovací usnesení, nikoli o změnu již platných pravidel. Stanoví předložit návrh zákona do prosince 2026 a počítá s účinností v lednu 2028; uvedeným cílem je zefektivnit bytová družstva včetně daňových úlev a programové priority zmiňují státní záruky pro usnadnění výstavby. Jde o budoucí návrh, který může podporovat nabídku, ale zatím ji sám nezvyšuje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Usnesení ruší část dřívějšího záměru směny a prodeje státního majetku určeného pro dostupné bydlení a navazující infrastrukturu v Praze.",
+          "effectCz": "Dodaný text uvádí, že vláda ruší bod II/2 usnesení o záměru prodeje a směny státního majetku pro výstavbu dostupného bydlení a infrastruktury. Přesné znění zrušeného bodu ani následky pro jednotlivé pozemky v balíčku nejsou, takže nelze určit rozsah zmařených bytů; jde však o odstranění části konkrétního záměru, který měl přispět k nabídce dostupného bydlení."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-b47c5d9b4359--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--law-change-43174-8-1",
+        "psp-core-2025--law-change-43174-8-2",
+        "psp-core-2025--law-change-43174-8-4",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43356-1",
+        "esbirka-regulations--law-change-sb-2026-97",
+        "zvlady-resolutions--law-change-uv-2026-11",
+        "zvlady-resolutions--law-change-uv-2026-59",
+        "zvlady-resolutions--law-change-uv-2026-175-69",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--vote-88166",
+        "psp-core-2025--vote-88167",
+        "psp-core-2025--vote-88169",
+        "psp-core-2025--vote-88172",
+        "psp-core-2025--vote-88175",
+        "psp-core-2025--vote-88178",
+        "psp-core-2025--vote-88179",
+        "psp-core-2025--vote-88194",
+        "psp-core-2025--vote-88202",
+        "psp-core-2025--vote-88204",
+        "psp-core-2025--vote-88207",
+        "psp-core-2025--vote-88208",
+        "psp-core-2025--vote-88209",
+        "psp-core-2025--vote-88210",
+        "psp-core-2025--vote-88211",
+        "psp-core-2025--vote-88213",
+        "psp-core-2025--vote-88215",
+        "psp-core-2025--vote-88216",
+        "psp-core-2025--vote-88223",
+        "psp-core-2025--vote-88224",
+        "psp-core-2025--vote-88227",
+        "psp-core-2025--vote-88233",
+        "psp-core-2025--vote-88234",
+        "psp-core-2025--vote-88236",
+        "psp-core-2025--vote-86963",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-86833",
+        "psp-core-2025--vote-86839",
+        "psp-core-2025--vote-86879",
+        "psp-core-2025--vote-86951",
+        "psp-core-2025--vote-86952",
+        "psp-core-2025--vote-86953",
+        "zvlady-resolutions--2026-11",
+        "zvlady-resolutions--2026-59",
+        "zvlady-resolutions--2026-175",
+        "zvlady-resolutions--2026-377",
+        "esbirka-regulations--2026-97",
+        "psp-core-2025--print-step-211658"
+      ],
+      "explanationCz": "Poslanci SPD předložili společně s dalšími poslanci rozsáhlou novelu stavebního zákona, kterou Poslanecká sněmovna po zamítnutí Senátem znovu schválila. Novela rozšiřuje možnosti výstavby a zjednodušuje některé kroky územního plánování a povolování, takže podporuje část slibu týkající se nabídky bytů. Vláda také přijala vyhlášku, která umožňuje další bydlení na pozemcích rodinných domů, a schválila rozpočet Státního fondu podpory investic s programem dostupného nájemního bydlení. Proti tomu stojí zrušení části dřívějšího záměru výstavby dostupných bytů v Praze a zrušení dosavadní finanční cesty pro úvěrovou podporu; konečné částky rozpočtu na podporu bydlení nejsou v dodaných výňatcích úplně doloženy.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Schválená novela zároveň ruší zvláštní definici domu pro dostupné nájemní bydlení a možnost jeho vymezení v regulačním plánu; zda tím v praxi ubude bytů nebo se pouze změní způsob jejich podpory, z dodaných podkladů určit nelze.",
+        "Vláda zrušila konkrétní plán financování úvěrového nástroje Dostupné bydlení, ale zároveň uložila prověřit jiné možnosti financování; dopad na konečný počet podpořených bytů není doložen.",
+        "U rozpočtu státu na rok 2026 nejsou ve výňatku uvedeny konečné částky pro podporu bydlení, takže nelze ověřit, zda se v něm navržené navýšení skutečně promítlo.",
+        "Usnesení vlády zrušilo bod dřívějšího záměru státní směny a prodeje pozemků pro dostupné bydlení v Praze, ale přesný obsah zrušeného bodu a následky pro konkrétní projekty nejsou doloženy."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0a038a29f48c5b77016aec5967a81087d1adb7f8388ab0c30b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 426460,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 426457
+      },
+      "output_tokens": 20294,
+      "output_tokens_details": {
+        "reasoning_tokens": 11700
+      },
+      "total_tokens": 446754
+    },
+    "output": {
+      "promiseId": "candidate-b47c5d9b4359",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Mění základní pravidla stavebního zákona tak, že výslovně zahrnuje bydlení mezi cíle a upravuje postup při povolování záměrů.",
+          "effectCz": "Dosavadní účel zahrnoval udržitelný rozvoj a kvalitu prostředí, ale výslovně neuváděl bydlení; schválené znění bydlení doplňuje a stanoví, že rozvoj sídel či výstavbu lze znemožnit jen tehdy, nelze-li hodnoty ochránit mírnějšími podmínkami. Uplatňování stanovisek dotčených orgánů nově zdůrazňuje nejmírnější dostatečné prostředky a stanoví souhlas při neomluvené neúčasti na společném jednání. Tato pravidla snižují některé překážky a rozšiřují možnosti výstavby, tedy směřují k větší nabídce bytů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Mění cíle a úkoly územního plánování včetně pravidel pro rozvoj bydlení a využití zastavitelných ploch.",
+          "effectCz": "Dosavadní úprava žádala vyhodnocovat potenciál území a podporovala hospodárné využívání již zastavěných ploch; schválené znění zdůrazňuje rozvoj bydlení a co nejlepší využití zastavitelného území a rozšiřuje podmínky pro jeho využívání. To uvolňuje prostor pro bytovou výstavbu, ačkoli samo nezaručuje pokles cen."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Mění územní plánování a regulační plány, které stanovují, kde a za jakých podmínek lze stavět.",
+          "effectCz": "Změny umožňují v omezeném rozsahu odchylky od nadřazené územně plánovací dokumentace a mění obsah regulačních plánů; současně ruší dosavadní možnost výslovně vymezit dům pro dostupné nájemní bydlení v regulačním plánu. První změny usnadňují či rozšiřují výstavbu, zatímco zrušení zvláštního nástroje pro dostupné nájemní bydlení oslabuje jednu konkrétní možnost jeho podpory; výsledný dopad je proto smíšený."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Mění pravidla pořizování územních plánů a jejich změn, včetně podmínek pro zastavitelné území.",
+          "effectCz": "Dosavadní text vyžadoval nové projednání některých změn plánů a pro rozšíření zastavitelných ploch prokázání jejich potřeby. Schválené znění zavádí rychlejší režim pro vybrané nepodstatné změny a ruší požadavek prokazovat potřebu dalších zastavitelných ploch; tím uvolňuje a zrychluje některé cesty k výstavbě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Mění požadavky a procesy vztahující se k povolování a provádění obytných staveb.",
+          "effectCz": "Přidané ustanovení o pohodě bydlení upřednostňuje podmínky a zmírňující opatření před nepovolením záměru; další části upravují dokumentaci a postup při povolování. U dostupného nájemního bydlení však související změny odstraňují zvláštní právní režim, jehož předchozí znění ukládalo dlouhodobé závazky k dostupnému nájemnému. Změny tedy některé překážky zmírňují, ale ruší i konkrétní nástroj pro dostupné bydlení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Mění posuzování a povolování záměrů, tedy postup přímo rozhodující o možnosti a rychlosti bytové výstavby.",
+          "effectCz": "Dosavadní stavební úřad posuzoval soulad záměru s územní dokumentací, stavebními a dalšími předpisy i právy účastníků. Schválené změny umožňují za stanovených podmínek odchýlit se od územní dokumentace a pokládají záměr v zastavitelném území za přípustný, pokud splní požadavky na výstavbu a odpovídá charakteru okolí. To v těchto případech uvolňuje povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Zařazuje menší bytové domy do kategorie jednoduchých staveb a hromadné bydlení mezi vyhrazené stavby.",
+          "effectCz": "Dříve dostupný text přílohy zahrnoval bydlení v kategorii jednoduchých staveb s limitem nejvýše dvou nadzemních podlaží. Schválené znění nově zahrnuje do této kategorie bytové domy do 500 m², nejvýše čtyř podlaží a výšky 9 metrů, což rozšiřuje okruh bytových staveb s jednodušším režimem. Hromadné bydlení se současně zařazuje mezi vyhrazené stavby; dopad této klasifikace nelze z dodaného předchozího znění určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení určují, kdy se u stavebních záměrů uplatní nové požadavky a jak se naloží s dříve připravenou dokumentací.",
+          "effectCz": "Jde o přechodná ustanovení bez dodaného předchozího znění pro toto srovnání. Schválený text stanoví, že některé nové požadavky se použijí okamžitě, ale u již zahájených řízení postačí požadavky příznivější pro stavebníka; směr celkového dopadu přechodných pravidel nelze z balíčku úplně určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": false,
+          "reasonCz": "V balíčku je uvedeno pouze to, že se tato část posuzuje prostřednictvím pozměňovacích návrhů; její vlastní text ani konkrétní změna související s bytovou výstavbou zde doloženy nejsou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": true,
+          "reasonCz": "Mění pravidla požární ochrany staveb a určuje, kdo stanoví jejich technické podmínky.",
+          "effectCz": "Dříve stanovovalo technické podmínky požární ochrany ministerstvo; návrh převádí jejich stanovení na vládu a zachovává, že jde o podmínky pro navrhování, výstavbu či užívání staveb. Samotné nové požární limity dodány nejsou, takže nelze určit, zda se povinnosti stavebníků zpřísní či zmírní."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "Upravuje památkovou ochranu a posuzování stavebních záměrů v památkově chráněných územích, což může ovlivnit obytnou výstavbu a obnovu budov.",
+          "effectCz": "Dosavadní úprava vyžadovala předchozí úkon památkové péče pro řadu zásahů; schválené znění některé záměry přesouvá k posouzení stavebním úřadem a výslovně zmiňuje současné potřeby včetně bydlení. Uvolňuje tak některé postupy, ale podmínky ochrany památek zůstávají zachovány."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-5",
+          "relevant": false,
+          "reasonCz": "Text této části zákona o ochraně a využití nerostného bohatství není v balíčku obsažen; z dostupných podkladů nelze zjistit přímý dopad na slib.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-6",
+          "relevant": false,
+          "reasonCz": "V dodaném textu nejsou obsaženy konkrétní změny hornického zákona, které by bylo možné spojit s nabídkou bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Dodaný text neuvádí konkrétní změny zákona o geologických pracích s přímým dopadem na bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-1",
+          "relevant": true,
+          "reasonCz": "Mění podmínky, za nichž se v územích určených k výstavbě posuzuje krajinný ráz.",
+          "effectCz": "Předchozí znění vylučovalo posuzování krajinného rázu v zastavěném území a v plochách, kde byl stanoven podrobný režim a dohodnuty podmínky ochrany. Nové znění váže výjimku na zastavitelné území, koridor či plochu vymezenou v územním plánu v souladu se stanoviskem orgánu ochrany přírody; může tedy zjednodušit povolování v takto plánovaných lokalitách."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-2",
+          "relevant": true,
+          "reasonCz": "Převádí část posuzování zájmů ochrany přírody do řízení o povolení stavby.",
+          "effectCz": "Dříve se pro některé záměry vyžadovala samostatná souhlasná rozhodnutí orgánů ochrany přírody. Schválené znění svěřuje vybraná posouzení stavebním úřadům a začleňuje je do povolení záměru; postup se tím zjednodušuje, ale z dodaného textu nelze dovodit změnu samotných podmínek ochrany."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-4",
+          "relevant": true,
+          "reasonCz": "Mění účast veřejnosti v řízeních souvisejících se zásahy do přírody, což může ovlivnit průběh povolování staveb.",
+          "effectCz": "Předchozí úprava umožňovala za stanovených podmínek účast občanských sdružení; nové znění ji podmiňuje mimo jiné tříletou existencí právnické osoby nebo podporou nejméně 200 osob a v některých řízeních ji vylučuje. Procesní možnost účasti je tak užší, což může zkrátit některé povolovací postupy, samo však nezakládá nárok na výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Převádí některé úkony ochrany přírody do stavebního řízení a mění požadavky na podklady pro jejich posouzení.",
+          "effectCz": "Předchozí úprava u části stavebních záměrů vyžadovala samostatné souhlasy či rozhodnutí ochrany přírody. Nové znění některá posouzení začleňuje do rozhodnutí stavebního úřadu a omezuje požadované podklady na nezbytný rozsah. Jde o zjednodušení postupu, nikoli o doložené zrušení věcných ekologických limitů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Mění ochranu zemědělské půdy při povolování výstavby a obsahuje zvláštní pravidla pro zastavitelná území.",
+          "effectCz": "Dosavadní znění požadovalo souhlas s odnětím zemědělské půdy a posuzování ochranných zásad. Schválený text začleňuje souhlas do rozhodnutí stavebního úřadu a stanoví, že zásady plošné ochrany se neposuzují v zastavitelných územích, koridorech a plochách předem vymezených v souladu se stanoviskem příslušného orgánu. Tím uvolňuje povolování v těchto plánovaných lokalitách."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-10",
+          "relevant": false,
+          "reasonCz": "Dodaný text mění daňové osvobození zemědělských pozemků, nikoli pravidla nabídky či povolování bytové výstavby; přímý vliv na tento slib doložen není.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-11",
+          "relevant": false,
+          "reasonCz": "Doložená změna pouze upravuje informování o disciplinárních opatřeních architektů a inženýrů; přímou vazbu na bytovou výstavbu nemá.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-12",
+          "relevant": false,
+          "reasonCz": "V balíčku není uveden konkrétní obsah změn zákona o dráhách, který by bylo možné vztáhnout k bytové výstavbě.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-13",
+          "relevant": false,
+          "reasonCz": "Dodaný balíček neobsahuje konkrétní změny zákona o vnitrozemské plavbě s přímým vztahem k bytové nabídce.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": false,
+          "reasonCz": "Konkrétní změny lesního zákona nejsou v dodaném textu obsaženy a jejich vztah k bytové výstavbě nelze odvozovat z názvu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-15",
+          "relevant": false,
+          "reasonCz": "V dodaném textu nejsou konkrétní změny zákona o pozemních komunikacích, které by přímo podporovaly bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-16",
+          "relevant": false,
+          "reasonCz": "Dodaný text neobsahuje konkrétní změny zákona o civilním letectví s přímým vztahem k bytové výstavbě.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": false,
+          "reasonCz": "Konkrétní změny veterinárního zákona, které by měly přímý dopad na bytovou nabídku, doloženy nejsou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-18",
+          "relevant": false,
+          "reasonCz": "V balíčku nejsou uvedeny konkrétní změny majetkového zákona, které by přímo měnily nabídku bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Dodaný text neukazuje konkrétní změnu zákona o integrovaném záchranném systému s materiálním vztahem k tomuto slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Mění způsob posuzování veřejného zdraví u stavebních záměrů a začleňuje některé úkony do stavebního povolení.",
+          "effectCz": "Dosavadní text vyžadoval stanoviska orgánu ochrany veřejného zdraví pro některé stavební záměry; nové znění část úkonů převádí do rozhodnutí stavebního úřadu a stanoví, že jeho rozhodnutí může tyto úkony nahrazovat. Mění se hlavně proces, nikoli doložené zdravotní limity; postup může být jednodušší, jeho věcný dopad na výstavbu nelze vyčíslit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Pro tuto část energetického zákona je doloženo pouze to, že se řeší prostřednictvím pozměňovacích návrhů; konkrétní bytově relevantní obsah chybí.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Dodaný text neobsahuje konkrétní změny zákona o posuzování vlivů na životní prostředí, z nichž by bylo možné určit dopad na bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "V dodaném textu nejsou konkrétní změny vodního zákona přímo spojené s bytovou nabídkou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": false,
+          "reasonCz": "Konkrétní změny zákona o pohřebnictví s přímým dopadem na bytovou výstavbu nejsou doloženy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-25",
+          "relevant": false,
+          "reasonCz": "Dodaný text neobsahuje konkrétní změny zákona o myslivosti, které by materiálně ovlivňovaly tento slib.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "V balíčku nejsou doloženy konkrétní změny zákona o pozemkových úpravách s přímým dopadem na nabídku bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-27",
+          "relevant": false,
+          "reasonCz": "Dodaný text neukazuje konkrétní změnu soudního řádu správního materiálně spojenou s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": false,
+          "reasonCz": "Doložená změna DPH pouze nahrazuje pojem „zastavěné“ pojmem „zastavitelné“; přímý dopad na nabídku bytové výstavby nebo její cenu z balíčku nevyplývá.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": false,
+          "reasonCz": "Konkrétní změny zákona o vyvlastnění nejsou v dodaném textu obsaženy a přímý dopad na bytovou nabídku nelze dovozovat z názvu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": false,
+          "reasonCz": "V balíčku nejsou uvedeny konkrétní změny pracovněbezpečnostních předpisů s materiálním vztahem k bytové výstavbě.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": false,
+          "reasonCz": "Dodaný text neobsahuje konkrétní změny trestního zákoníku, které by přímo ovlivňovaly nabídku bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Konkrétní obsah této části není v balíčku uveden; její vztah k bytové výstavbě nelze odvozovat z názvu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Mění postup při posuzování vlivů stavebních záměrů na ovzduší a pravidla pro rozhodování o jejich povolení.",
+          "effectCz": "Dříve bylo pro některé záměry nutné závazné stanovisko orgánu ochrany ovzduší a kompenzační opatření se stanovovala v něm. Nové znění přesouvá některé úkony do vyjádření či rozhodnutí o povolení záměru; požadavek na kompenzace při překročení imisních limitů zůstává. Mění tedy hlavně proces a z dodaného textu nelze určit celkové uvolnění či zpřísnění bytové výstavby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": false,
+          "reasonCz": "Konkrétní změny zákona o Státním pozemkovém úřadu nejsou v balíčku doloženy jako přímo související s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": false,
+          "reasonCz": "Dodaný text neobsahuje konkrétní změny zákona o státní službě, které by přímo měnily nabídku bytů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": false,
+          "reasonCz": "Konkrétní změny předpisů o prevenci závažných havárií nejsou v balíčku uvedeny v přímé vazbě na bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "V dodaném textu nejsou konkrétní změny zákona o zadávání veřejných zakázek, které by přímo podporovaly bytovou nabídku.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Konkrétní změny zákona o odpadech s přímým dopadem na bytovou výstavbu nejsou doloženy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": false,
+          "reasonCz": "Doložená změna se vztahuje ke zvláštním postupům spojeným s ozbrojeným konfliktem na Ukrajině; slib se týká obecné nabídky bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Text této části o jednotném environmentálním stanovisku v balíčku obsažen není, takže z něj nelze doložit konkrétní vliv na bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": false,
+          "reasonCz": "Dodaný text neobsahuje konkrétní změny pravidel pro obnovitelné zdroje s přímým materiálním vztahem k bytové výstavbě.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": true,
+          "reasonCz": "Mění správní poplatky za stavební povolení a kolaudaci, tedy náklady a procesní podmínky výstavby.",
+          "effectCz": "Schválené znění osvobozuje od poplatku za povolení záměru a kolaudaci, pokud úřad nerozhodne ve stavebních lhůtách; jde o novou výjimku, která snižuje poplatek v těchto případech. Předchozí výši poplatků pro srovnání dodaný text neuvádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Ruší vyhlášky o dokumentaci staveb a požadavcích na výstavbu, které přímo stanovují podmínky pro stavební záměry.",
+          "effectCz": "Schválené znění ruší uvedené vyhlášky, ale jejich dosavadní pravidla ani náhradní úprava nejsou v balíčku dodány. Nelze proto určit, zda se konkrétní povinnosti pro bytovou výstavbu zpřísňují, zmírňují či zůstávají obdobné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet Státního fondu podpory investic financuje program Dostupné nájemní bydlení a také podporu technické infrastruktury pro budoucí obytnou výstavbu.",
+          "effectCz": "Jde o rozpočtový návrh bez předchozího znění. Text uvádí celkovou alokaci 7 mld. Kč pro program Dostupné nájemní bydlení v letech 2026–2028, z toho 2,2 mld. Kč nové dotace pro rok 2026, a dotace na technickou infrastrukturu připravující pozemky pro bytové a rodinné domy. To podporuje dílčí rozšiřování nabídky, nikoli však samo o sobě pokles cen bytů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet na rok 2026 obsahuje výdaje ministerstva pro místní rozvoj a podpory bydlení, k nimž se vztahují dodané návrhy změn.",
+          "effectCz": "Jde o nový rozpočet bez předchozího znění; dodaný výřez uvádí pouze, že celkové výdaje a ukazatele jsou v přílohách, nikoli jejich částky pro bydlení. Nelze proto určit schválenou výši podpory z tohoto textu; samostatné rozpočtové pozměňovací návrhy navrhovaly další navýšení, ale některé SPD nepodpořila."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43356-1",
+          "relevant": true,
+          "reasonCz": "Vládní návrh zavádí novou kategorii autorizovaných stavitelů s pravomocí odborně vést stavby a zastupovat stavebníka.",
+          "effectCz": "Dosavadní zákon uváděl jako autorizované osoby architekta, inženýra a technika. Návrh doplňuje autorizovaného stavitele a přiděluje mu oprávnění vést provádění staveb, vykonávat technický dozor a zastupovat stavebníka. Rozšiřuje tak okruh odborníků pro stavební činnosti, což může přispět ke kapacitě výstavby, ale jde zatím pouze o návrh."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-97",
+          "relevant": true,
+          "reasonCz": "Vyhláška upravuje podmínky pro umístění staveb rodinného a dostupného nájemního bydlení.",
+          "effectCz": "Vyhláška nově výslovně umožňuje na pozemku rodinného domu umístit také malou stavbu pro bydlení a stanoví parkovací normy pro dostupné nájemní bydlení. Předchozí znění těchto pravidel v balíčku není uvedeno, takže nelze srovnat celkovou přísnost; samotné doplnění možnosti dalšího bydlení rozšiřuje možnosti využití pozemku."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-11",
+          "relevant": true,
+          "reasonCz": "Usnesení se přímo týká financování úvěrového nástroje FN2 pro dostupné bydlení.",
+          "effectCz": "Jde o vládní rozhodnutí bez dodaného předchozího znění. Ruší dřívější usnesení o financování prostřednictvím projektových dluhopisů, uvádí, že 2,25 mld. Kč uložené u Národní rozvojové banky lze použít jen podle stanovených pravidel, a ukládá prověřit alternativní financování. Ruší tedy konkrétní zamýšlenou finanční cestu, ale samo nerozhoduje o konečném zrušení podpory bydlení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+          "relevant": true,
+          "reasonCz": "Usnesení jmenuje vládního zmocněnce, jehož úkoly výslovně zahrnují implementaci stavebního práva a dostupnost bydlení.",
+          "effectCz": "Vláda vytváří koordinační funkci a jmenuje zmocněnkyni pro implementaci stavebního práva; její úkoly zahrnují sledovat dostupnost bydlení a navrhovat zlepšení. Jde o organizační krok, který může podpořit provedení změn, ale sám nezvyšuje počet bytů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-69",
+          "relevant": true,
+          "reasonCz": "Vládní legislativní plán počítá s úpravou bytových družstev a výslovně zmiňuje státní záruky, investiční pobídky a daňové úlevy pro bydlení.",
+          "effectCz": "Vláda schválila plán, který předpokládá předložení návrhu zákona v prosinci 2026 a účinnost v lednu 2028; deklarovaným cílem je zefektivnit bytová družstva a zavést garance, pobídky a úlevy. Jde o návrh další legislativy, nikoli o již účinnou změnu, a může přispět k bytové výstavbě jen pokud bude uskutečněn."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Usnesení ruší část záměru přímého prodeje a směny státních pozemků pro dostupné bydlení a navázanou infrastrukturu.",
+          "effectCz": "Dřívější usnesení počítalo s využitím vybraného státního majetku a směnou pozemků pro dostupné bydlení; nové rozhodnutí ruší jeho bod II/2. Tím se ruší jeden konkrétní nástroj pro přípravu pozemků a infrastruktury pro bydlení, tedy omezuje tato dílčí cesta k rozšíření nabídky."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-b47c5d9b4359--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88172",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--amendment-text-1242",
+        "psp-core-2025--vote-88166",
+        "psp-core-2025--amendment-text-1243",
+        "psp-core-2025--vote-88167",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86833",
+        "psp-core-2025--vote-86839",
+        "psp-core-2025--vote-86879",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--amendment-text-560",
+        "psp-core-2025--vote-86953",
+        "zvlady-resolutions--law-change-uv-2026-11",
+        "zvlady-resolutions--2026-11",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "zvlady-resolutions--2026-377",
+        "zvlady-resolutions--law-change-uv-2026-59",
+        "zvlady-resolutions--2026-59",
+        "zvlady-resolutions--law-change-uv-2026-175-69",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--law-change-43174-approved-38",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43174-3",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--law-change-43174-8-1",
+        "psp-core-2025--law-change-43174-8-2",
+        "psp-core-2025--law-change-43174-8-4",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43356-1",
+        "psp-core-2025--print-step-211658",
+        "esbirka-regulations--law-change-sb-2026-97",
+        "esbirka-regulations--2026-97",
+        "psp-core-2025--amendment-text-512",
+        "psp-core-2025--vote-86833",
+        "psp-core-2025--amendment-text-415",
+        "psp-core-2025--vote-86879",
+        "psp-core-2025--amendment-text-560",
+        "psp-core-2025--vote-86953"
+      ],
+      "explanationCz": "Poslanci SPD předložili spolu s dalšími poslanci návrh změn stavebního zákona a vláda s ním souhlasila. Posléze poslanci SPD podpořili změny, které rozšiřují možnosti bytové výstavby a zjednodušují některé povolovací postupy; Poslanecká sněmovna návrh po zamítnutí Senátem znovu schválila. To podporuje část slibu o rozšíření nabídky, ale samo nedokládá pokles cen bytů. Proti tomuto směru působí i zrušení zamýšleného využití pozemků pro dostupné bydlení a nepodpora některých návrhů na navýšení výdajů na bydlení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z dodaných podkladů nelze doložit, že se ceny bytů skutečně snížily nebo že se zastavil jejich růst; zákonné změny jsou převážně budoucí a týkají se jen části slibu.",
+        "U státního rozpočtu na rok 2026 nejsou v dodaném výřezu uvedeny konečné částky na podporu bydlení. SPD nepodpořila některé pozměňovací návrhy na její navýšení, včetně návrhu na 7 miliard Kč, ale podpořila závěrečné schválení rozpočtu.",
+        "Vláda zrušila konkrétní záměr využít státní pozemky pro dostupné bydlení a zrušila původní plán financování úvěrového nástroje FN2; současně u FN2 uložila prověřit alternativní financování. Tyto kroky jsou v napětí s podporou nabídky, ale samy nedokládají definitivní zánik programů.",
+        "Rozsáhlá změna stavebního zákona současně usnadňuje část bytové výstavby a ruší zvláštní právní režim dostupného nájemního bydlení. Výsledný přínos této části pro nabídku a cenovou dostupnost nelze z balíčku plně vyčíslit."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0852475ab754714f016aec5a46351087d19196773f160044e0",
+    "model": "gpt-6-luna",
+    "reasoningEffort": "max",
+    "usage": {
+      "input_tokens": 433307,
+      "input_tokens_details": {
+        "cache_write_tokens": 428894,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 26583,
+      "output_tokens_details": {
+        "reasoning_tokens": 26210
+      },
+      "total_tokens": 459890
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "candidate-b47c5d9b4359--source",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "zvlady-resolutions--law-change-uv-2026-11",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Volím hodnotitele A, protože jeho hlavní závěr potvrzují podklady: poslanci SPD spolu s dalšími poslanci předložili rozsáhlé změny stavebních pravidel a poslanci ve Sněmovně je znovu schválili poté, co je Senát odmítl. Změny usnadňují plánování a povolování bytových staveb, takže podporují část slibu o větší nabídce, ale samy nezaručují nižší ceny. A správně upozorňuje na nejistotu kolem zrušení zvláštních pravidel pro dostupné nájemní bydlení a dalšího financování. Její tvrzení o schváleném rozpočtu fondu však není podloženo konečným rozhodnutím: záznam zachycuje jen předběžné hlasování. Druhé posouzení chybí."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-confirmed-single-assessor",
+    "status": "moving-towards",
+    "selectedReview": "assessor-a"
+  }
+}

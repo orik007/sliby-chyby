@@ -1,0 +1,234 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-34-29-592Z--2dfd901c55b8",
+  "evaluatedAt": "2026-10-02T05:34:29.592Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-fd61cfd63a87/2dfd901c55b847a3c3be3eb95fad3894a4ca458547b68af635ce2cea6b04efad.json",
+  "packageHash": "2dfd901c55b847a3c3be3eb95fad3894a4ca458547b68af635ce2cea6b04efad",
+  "assessmentContentHash": "a82d089c9145dc8432b868f36f36c0e4bb0d63398d41547fe77dac65d8cafb27",
+  "assessmentFingerprint": "ad87964f47f6c9506179a81a45710ee9462ff7fce739ce6c4ff4405b99ae14e9",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-fd61cfd63a87",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-fd61cfd63a87",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválená verze svěřuje Energetickému regulačnímu úřadu regulaci ceny za kapacitní mechanismus a váže ji na ekonomicky oprávněné náklady, což se slibu týká dílčím způsobem; navržená verze takovou změnu neobsahuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text ruší část dřívější novely energetického zákona, ale její obsah není doložen, takže z dodaných podkladů nelze prokázat materiální vztah ke slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43284-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje vládní regulaci cen pohonných hmot, nikoli cenotvorbu elektřiny či plynu pod Energetickým regulačním úřadem."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-fd61cfd63a87--source",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "SPD slíbila usilovat o převedení cenotvorby energií zpět pod Energetický regulační úřad. Poslanci SPD spolupředložili původní návrh, jehož tehdejší změna energetického zákona cenotvorbu neupravovala. Při hlasování o schválené verzi a později i po zamítnutí návrhu Senátem poslanci SPD hlasovali pro; schválený text svěřuje úřadu regulaci ceny za kapacitní mechanismus podle ekonomicky oprávněných nákladů. Jde o dílčí posun, nikoli o převedení obecné tvorby cen dodávek elektřiny a plynu zpět pod úřad.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Jedna část schváleného zákona ruší část dřívější novely energetického zákona, ale podklady neuvádějí její obsah; nelze proto ověřit, zda toto zrušení mění cenotvorbu relevantní pro slib."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-fd61cfd63a87",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválená verze ukládá ERÚ regulovat cenu za kapacitní mechanismus alespoň na úrovni ekonomicky oprávněných nákladů, což je omezená část cenové regulace energií, nikoli návrat obecné tvorby cen pod ERÚ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Část novely ruší konkrétní část dřívější novely energetického zákona, ale bez jejího znění nelze určit, zda a jak se rušení dotýká cenotvorby energií."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43284-2",
+          "relevant": false,
+          "reasonCz": "Text upravuje postup vlády při cenové regulaci pohonných hmot, nikoli pravomoc ERÚ při tvorbě cen energií."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-fd61cfd63a87--source",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci SPD předložili novelu stavebního zákona a dalších předpisů; její původní znění tvorbu cen energií neměnilo. Později poslanci SPD hlasovali pro schválení upravené novely, která svěřuje ERÚ regulaci ceny za kapacitní mechanismus tak, aby pokryla alespoň oprávněné náklady. Senát návrh zamítl, ale poslanci SPD pak hlasovali také pro to, aby na něm Sněmovna setrvala. Jde o dílčí rozšíření cenové regulace ERÚ, nikoli o převedení obecné tvorby cen energií zpět pod úřad; navíc není doloženo, jaký cenový účinek má rušená část starší novely energetického zákona.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Schválená novela ruší část dřívější novely energetického zákona, avšak podklady neobsahují její znění. Nelze proto ověřit, zda toto rušení cenovou pravomoc ERÚ dále rozšiřuje, omezuje, nebo se slibu netýká.",
+        "Ustanovení o ceně kapacitního mechanismu se týká jen této konkrétní regulované ceny; samo nedokládá návrat širší tvorby cen energií pod ERÚ ani to, že ceny budou odrážet náklady místo burzovních spekulací."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_00b73de5403358d5016abf4232836487d18f7cd99f93075daf",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 74820,
+      "input_tokens_details": {
+        "cache_write_tokens": 71496,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 4237,
+      "output_tokens_details": {
+        "reasoning_tokens": 3624
+      },
+      "total_tokens": 79057
+    },
+    "output": {
+      "promiseId": "candidate-fd61cfd63a87",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválená verze svěřuje Energetickému regulačnímu úřadu regulaci ceny za kapacitní mechanismus a váže ji na ekonomicky oprávněné náklady, což se slibu týká dílčím způsobem; navržená verze takovou změnu neobsahuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text ruší část dřívější novely energetického zákona, ale její obsah není doložen, takže z dodaných podkladů nelze prokázat materiální vztah ke slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43284-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje vládní regulaci cen pohonných hmot, nikoli cenotvorbu elektřiny či plynu pod Energetickým regulačním úřadem."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-fd61cfd63a87--source",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "SPD slíbila usilovat o převedení cenotvorby energií zpět pod Energetický regulační úřad. Poslanci SPD spolupředložili původní návrh, jehož tehdejší změna energetického zákona cenotvorbu neupravovala. Při hlasování o schválené verzi a později i po zamítnutí návrhu Senátem poslanci SPD hlasovali pro; schválený text svěřuje úřadu regulaci ceny za kapacitní mechanismus podle ekonomicky oprávněných nákladů. Jde o dílčí posun, nikoli o převedení obecné tvorby cen dodávek elektřiny a plynu zpět pod úřad.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Jedna část schváleného zákona ruší část dřívější novely energetického zákona, ale podklady neuvádějí její obsah; nelze proto ověřit, zda toto zrušení mění cenotvorbu relevantní pro slib."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_089dc0762670fd2d016abf424b66e887d1af3830a3a076b513",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 74820,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 74817
+      },
+      "output_tokens": 4324,
+      "output_tokens_details": {
+        "reasoning_tokens": 3624
+      },
+      "total_tokens": 79144
+    },
+    "output": {
+      "promiseId": "candidate-fd61cfd63a87",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválená verze ukládá ERÚ regulovat cenu za kapacitní mechanismus alespoň na úrovni ekonomicky oprávněných nákladů, což je omezená část cenové regulace energií, nikoli návrat obecné tvorby cen pod ERÚ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Část novely ruší konkrétní část dřívější novely energetického zákona, ale bez jejího znění nelze určit, zda a jak se rušení dotýká cenotvorby energií."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43284-2",
+          "relevant": false,
+          "reasonCz": "Text upravuje postup vlády při cenové regulaci pohonných hmot, nikoli pravomoc ERÚ při tvorbě cen energií."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-fd61cfd63a87--source",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci SPD předložili novelu stavebního zákona a dalších předpisů; její původní znění tvorbu cen energií neměnilo. Později poslanci SPD hlasovali pro schválení upravené novely, která svěřuje ERÚ regulaci ceny za kapacitní mechanismus tak, aby pokryla alespoň oprávněné náklady. Senát návrh zamítl, ale poslanci SPD pak hlasovali také pro to, aby na něm Sněmovna setrvala. Jde o dílčí rozšíření cenové regulace ERÚ, nikoli o převedení obecné tvorby cen energií zpět pod úřad; navíc není doloženo, jaký cenový účinek má rušená část starší novely energetického zákona.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Schválená novela ruší část dřívější novely energetického zákona, avšak podklady neobsahují její znění. Nelze proto ověřit, zda toto rušení cenovou pravomoc ERÚ dále rozšiřuje, omezuje, nebo se slibu netýká.",
+        "Ustanovení o ceně kapacitního mechanismu se týká jen této konkrétní regulované ceny; samo nedokládá návrat širší tvorby cen energií pod ERÚ ani to, že ceny budou odrážet náklady místo burzovních spekulací."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

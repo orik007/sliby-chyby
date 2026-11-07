@@ -1,0 +1,237 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-47-44-301Z--7eb11592a98f",
+  "evaluatedAt": "2026-10-02T01:47:44.301Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-5b340f1aec26/7eb11592a98f7add7735e950188d6b70d10dd8f3bd8a3963eb35d2b87a6ed976.json",
+  "packageHash": "7eb11592a98f7add7735e950188d6b70d10dd8f3bd8a3963eb35d2b87a6ed976",
+  "assessmentContentHash": "d9ad75ad589669abff2218b551af5debba157bfd70815e0f9432988c43b2b468",
+  "assessmentFingerprint": "a656073241305680e28c5be1871caa6cfc8a2b85c5be778ac7178988c0b76842",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-5b340f1aec26",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-5b340f1aec26",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Navržené i schválené znění stanoví, že při výjimce povolené právem EU se příslušné české stavební požadavky považují za směrné, což může představovat dílčí možnost jejich neuplatnění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Tato část ruší jiné předpisy a jejich části, ale její text neupravuje požadavky na bezemisní budovy ani odklad či výjimku z implementace směrnic EPBD."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-5b340f1aec26--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Motoristé spolu s dalšími poslanci předložili novelu stavebního zákona, která počítá s tím, že při výjimce povolené právem EU budou některé české stavební požadavky pouze směrné. Poslanci Motoristů návrh podpořili při schvalování ve Sněmovně a po jeho zamítnutí Senátem, tedy horní komorou Parlamentu, hlasovali pro setrvání Sněmovny na návrhu. Jde o dílčí posun k možnosti neuplatnit některé požadavky, nikoli o doložený opt-out nebo odklad implementace EPBD jako celku.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela neuvádí směrnici EPBD ani požadavek na budovy s nulovými emisemi výslovně; z dostupného znění proto nelze určit, zda a v jakém rozsahu se její podmíněná možnost neuplatnění požadavků vztahuje právě na tyto požadavky."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-5b340f1aec26",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Novela stavebního zákona upravuje řadu pravidel pro výstavbu, ale její znění nestanoví opt-out ani odklad implementace směrnic EPBD či požadavků na bezemisní budovy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Tato část pouze ruší vyjmenované předpisy a jejich části, mezi nimiž není opatření týkající se opt-outu nebo odkladu směrnic EPBD o bezemisních budovách."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-5b340f1aec26--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Motoristé předložili a ve Sněmovně podpořili novelu stavebního zákona, tedy pravidel pro povolování a výstavbu budov. Její schválené znění však nestanoví opt-out ani odklad implementace směrnic EPBD nebo požadavků na bezemisní budovy; další zachycená změna pouze ruší části jiných předpisů. Tyto doložené kroky proto nejsou ověřeným posunem v tomto konkrétním slibu. Předložené záznamy neukazují, zda strana požadovala výjimku či odklad jiným způsobem.",
+      "confidence": "medium",
+      "uncertainties": [
+        "V poskytnutých podkladech není zachycena relevantní změna předpisů pro opt-out nebo odklad směrnic EPBD o bezemisních budovách; nelze z nich proto určit, zda Motoristé požadovali takovou výjimku či odklad jiným způsobem."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0995b17d8d33d80e016abf0ce6ba9887d1adf4001346e3dc76",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 286623,
+      "input_tokens_details": {
+        "cache_write_tokens": 283299,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 3024,
+      "output_tokens_details": {
+        "reasoning_tokens": 2495
+      },
+      "total_tokens": 289647
+    },
+    "output": {
+      "promiseId": "candidate-5b340f1aec26",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Navržené i schválené znění stanoví, že při výjimce povolené právem EU se příslušné české stavební požadavky považují za směrné, což může představovat dílčí možnost jejich neuplatnění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Tato část ruší jiné předpisy a jejich části, ale její text neupravuje požadavky na bezemisní budovy ani odklad či výjimku z implementace směrnic EPBD."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-5b340f1aec26--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Motoristé spolu s dalšími poslanci předložili novelu stavebního zákona, která počítá s tím, že při výjimce povolené právem EU budou některé české stavební požadavky pouze směrné. Poslanci Motoristů návrh podpořili při schvalování ve Sněmovně a po jeho zamítnutí Senátem, tedy horní komorou Parlamentu, hlasovali pro setrvání Sněmovny na návrhu. Jde o dílčí posun k možnosti neuplatnit některé požadavky, nikoli o doložený opt-out nebo odklad implementace EPBD jako celku.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela neuvádí směrnici EPBD ani požadavek na budovy s nulovými emisemi výslovně; z dostupného znění proto nelze určit, zda a v jakém rozsahu se její podmíněná možnost neuplatnění požadavků vztahuje právě na tyto požadavky."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0c1f4b1db12035fc016abf0d22b96c87d1a4b8e73ee2cbf651",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 286623,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 286620
+      },
+      "output_tokens": 2699,
+      "output_tokens_details": {
+        "reasoning_tokens": 2183
+      },
+      "total_tokens": 289322
+    },
+    "output": {
+      "promiseId": "candidate-5b340f1aec26",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Novela stavebního zákona upravuje řadu pravidel pro výstavbu, ale její znění nestanoví opt-out ani odklad implementace směrnic EPBD či požadavků na bezemisní budovy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Tato část pouze ruší vyjmenované předpisy a jejich části, mezi nimiž není opatření týkající se opt-outu nebo odkladu směrnic EPBD o bezemisních budovách."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-5b340f1aec26--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Motoristé předložili a ve Sněmovně podpořili novelu stavebního zákona, tedy pravidel pro povolování a výstavbu budov. Její schválené znění však nestanoví opt-out ani odklad implementace směrnic EPBD nebo požadavků na bezemisní budovy; další zachycená změna pouze ruší části jiných předpisů. Tyto doložené kroky proto nejsou ověřeným posunem v tomto konkrétním slibu. Předložené záznamy neukazují, zda strana požadovala výjimku či odklad jiným způsobem.",
+      "confidence": "medium",
+      "uncertainties": [
+        "V poskytnutých podkladech není zachycena relevantní změna předpisů pro opt-out nebo odklad směrnic EPBD o bezemisních budovách; nelze z nich proto určit, zda Motoristé požadovali takovou výjimku či odklad jiným způsobem."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_09ac3d749056f2ee016abf0d36f3d487d1a5b68162f1cacafe",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 286811,
+      "input_tokens_details": {
+        "cache_write_tokens": 284329,
+        "cached_tokens": 2479
+      },
+      "output_tokens": 341,
+      "output_tokens_details": {
+        "reasoning_tokens": 66
+      },
+      "total_tokens": 287152
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "candidate-5b340f1aec26--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Volím druhé hodnocení, protože rozlišuje obecné úlevy při stavění od slíbeného požadavku na výjimku nebo odklad evropských pravidel pro bezemisní budovy. Poslanci Motoristů spolu s dalšími poslanci předložili novelu stavebního zákona a později ji podpořili. Návrh umožňuje využít výjimky, které evropská pravidla už připouštějí, ale nedokládá požadavek na slíbenou výjimku či odklad. První hodnocení proto přiznává posun bez doložené souvislosti s konkrétním slibem; dodané podklady ovšem nevylučují, že strana takový požadavek vznesla jiným způsobem."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-b"
+  }
+}

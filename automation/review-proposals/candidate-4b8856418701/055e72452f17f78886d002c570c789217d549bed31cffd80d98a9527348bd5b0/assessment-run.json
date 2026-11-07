@@ -1,0 +1,596 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T09-45-06-309Z--6ec9835fa9f3",
+  "evaluatedAt": "2026-11-05T09:45:06.309Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-4b8856418701/6ec9835fa9f34157f9ab3b507ae7dc4b922a19a790f810297fce26a7c825477c.json",
+  "packageHash": "6ec9835fa9f34157f9ab3b507ae7dc4b922a19a790f810297fce26a7c825477c",
+  "assessmentContentHash": "434ec897e3c04e5ef6e2f5af22ba0e4860c2067aa5b304ff5c7bb637a9e2b202",
+  "assessmentFingerprint": "055e72452f17f78886d002c570c789217d549bed31cffd80d98a9527348bd5b0",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-4b8856418701",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-4b8856418701",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro veřejnou infrastrukturu může usnadnit výstavbu elektrické sítě, kterou slib výslovně zmiňuje.",
+          "effectCz": "Dosavadní účel stavebního zákona obecně zahrnoval udržitelný rozvoj; návrh zakazuje znemožnit rozvoj veřejné infrastruktury, pokud lze jiné hodnoty dostatečně chránit podmínkami či opatřeními. Tím se omezuje možnost výstavbu infrastruktury zablokovat a její povolování se uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Schválená verze umožňuje ve vymezeném území povolovat stavby pro energetickou bezpečnost, tedy opatření přímo související s energetickou soustavou.",
+          "effectCz": "Dosavadní pravidlo dovolovalo v nezastavěném území jen vyjmenované záměry a jen pokud je územní dokumentace nevylučovala z důvodu veřejného zájmu. Nově lze v nezastavitelném území povolovat stavby pro energetickou bezpečnost a považovat je za souladné s charakterem území; možnost výstavby se rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Tato část upravuje jak povolování instalací využívajících obnovitelné zdroje, tak lhůty a souhlasy vlastníků technické infrastruktury, což se dotýká výslovně zmíněného rizika i výstavby sítí.",
+          "effectCz": "Dříve bylo umístění fotovoltaické výrobny na existující stavbu možné, pokud je nevylučoval regulační plán; nově se rozšiřuje zjednodušený režim na stavební úpravy pro obnovitelné zdroje. U vyjádření vlastníka infrastruktury se běžná lhůta 30 dnů zachovává, ale zvlášť složitá lhůta 60 dnů se nahrazuje možností prodloužení o 15 dnů u energetické infrastruktury; nevyjádření se nově považuje za souhlas bez podmínek. Změny tedy usnadňují povolování OZE a uvolňují podmínky souhlasu, zatímco lhůtu pro energetickou infrastrukturu zkracují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Nově vložený mechanismus může urychlit povolení staveb sítí technické infrastruktury, a tím i rozvoj elektrické sítě.",
+          "effectCz": "Předchozí text upravoval zrychlené řízení, ale zde uvedený nový § 212a stanoví, že za určitých podmínek se jednoduchá stavba nebo stavba sítě technické infrastruktury považuje za povolenou, pokud úřad včas nerozhodne. Jde o uvolnění povolovacího omezení; předchozí znění tohoto nového ustanovení neexistovalo."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Výňatky výslovně mění pravidla pro navyšování kapacity sítí technické infrastruktury a další stavby související s energetickou sítí.",
+          "effectCz": "Dosavadní pravidla pro některé výměny a navýšení kapacity sítí vyžadovala splnění podmínek ohledně ochranných pásem a smlouvy o věcném břemeni; schválený text rozšiřuje okruh drobných staveb a u některých zásahů nahrazuje smlouvu souhlasem vlastníka. U elektrických přípojek se v dodaném znění mění limit délky z 25 na 100 metrů. Celkově se příslušná povolovací omezení uvolňují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Část mění pravidla pro odnětí půdy a výslovně zahrnuje energetická zařízení a jejich přípojná vedení, což může ovlivnit výstavbu sítě.",
+          "effectCz": "Dosavadní pravidla chránila půdu I. a II. třídy před odnětím pro solární energetická zařízení, s výjimkou agrovoltaiky; schválený text připouští dočasné odnětí v uvedené situaci, kdy je zemědělské obhospodařování ztíženo. Schválený výňatek také zahrnuje související elektrická a přípojná vedení do výjimek pro některá zařízení do 100 m². Tyto konkrétní omezení tedy uvolňuje, ale balíček obsahuje i další pravidla ochrany půdy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Změna energetického zákona upravuje dostupnost výkonu v soustavě a právní podmínky pro energetická zařízení a vývodová vedení.",
+          "effectCz": "Schválený text podrobněji upravuje kapacitní mechanismus, včetně zajišťování potřebné dostupnosti výkonu výroben nebo jiných zařízení, a rozšiřuje právní nástroje pro výstavbu některých energetických zařízení a vedení. Tím posiluje možnosti zajištění provozní kapacity, ale dodaný text nestanoví konkrétní rozsah fyzického posílení sítě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Schválený výňatek výslovně mění práh v posuzování nadzemního přenosového vedení, takže se týká povolování elektrické sítě.",
+          "effectCz": "Schválený text mění číslo v příloze u nadzemního přenosového vedení z 2 na 10. Předchozí znění příslušné položky ani význam této hodnoty však balíček nedodává, takže nelze určit, zda se tím posuzování zpřísňuje, nebo uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje zvláštní povolovací a majetkoprávní postupy na energetickou infrastrukturu a výňatek uvádí konkrétní vedení 400 kV.",
+          "effectCz": "Předchozí zákon už obsahoval zvláštní postup pro některé energetické stavby, ale schválený text rozšiřuje jeho použití na další kategorie energetické infrastruktury a upravuje postup pro vyvlastňovací řízení. U vedení 400 kV se mění pravidlo umístění v zastavitelném území tak, aby stavebník mohl navrhnout jiné řešení než nadzemní vedení; tento dílčí směr nelze pokládat za jednoznačné uvolnění možnosti výstavby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Vlastní text této části chybí, ale předložená změna k ní navrhuje doplnit dvě konkrétní vedení přenosové soustavy 400 kV.",
+          "effectCz": "Změna je relevantní pouze prostřednictvím pozměňovacího návrhu, který doplňuje vedení 400 kV Slavětice–Prosenice a Čechy Střed–Malešice do seznamu strategicky významné infrastruktury. Návrh tak rozšiřuje okruh projektů se zvláštním statusem; výchozí seznam mimo text návrhu není v balíčku zachycen."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-104",
+          "relevant": true,
+          "reasonCz": "Vyhláška upravuje dispečerské řízení, pokyny k výkonu a ověřování flexibility, tedy provozní nástroje důležité pro stabilitu elektrické soustavy.",
+          "effectCz": "Text zavádí či mění pravidla pro pokyny k omezeným změnám výkonu a pro ověřování flexibility. Předchozí znění měněných ustanovení vyhlášky však balíček neobsahuje, takže směr změny vůči předchozím pravidlům nelze určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-506",
+          "relevant": true,
+          "reasonCz": "Usnesení převádí prostředky výslovně určené mimo jiné na infrastrukturu pro obnovitelné zdroje a elektrizační soustavu.",
+          "effectCz": "Usnesení ukládá převést 10 160 830 520,85 Kč organizačním složkám státu podle skutečně vynaložených výdajů; v příloze je pro infrastrukturu OZE a elektrizační soustavu uvedeno 381 900 139,79 Kč a další řádek s rozdílem k dokrytí 969 930 657,93 Kč. Jde o konkrétní finanční podporu části energetické infrastruktury, nikoli o důkaz, že je síť jako celek posílena nebo že je riziko blackoutů minimalizováno."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": false,
+          "reasonCz": "Dodaný úryvek dohody se týká energetické infrastruktury Uzbekistánu, nikoli posílení české elektrické sítě.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4b8856418701--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-41",
+        "esbirka-regulations--law-change-sb-2026-104",
+        "zvlady-resolutions--law-change-uv-2026-506",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1172",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--amendment-text-1164",
+        "psp-core-2025--vote-88171",
+        "psp-core-2025--amendment-text-1148",
+        "psp-core-2025--vote-88194",
+        "psp-core-2025--amendment-text-1274",
+        "psp-core-2025--vote-88195",
+        "psp-core-2025--amendment-text-1230",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--amendment-text-1368",
+        "psp-core-2025--vote-88234",
+        "psp-core-2025--amendment-text-1054",
+        "psp-core-2025--vote-88235",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "esbirka-regulations--2026-104",
+        "zvlady-resolutions--2026-506"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili se svými koaličními partnery novelu stavebního zákona a vláda s ní souhlasila. Návrh i následné hlasování podpořily rychlejší povolování některých sítí a zvláštní status dvou vedení 400 kV, ale zároveň usnadnily povolování některých instalací obnovitelných zdrojů. Po zamítnutí Senátem Motoristé hlasovali pro setrvání na návrhu; protože jeho části zároveň podporují síť a uvolňují povolování OZE, které slib sám označuje za riziko blackoutů, převažuje dílčí rozpor se slibem. Vláda také schválila převod prostředků, včetně peněz určených na infrastrukturu elektrizační soustavy, což je podpůrný, nikoli úplný výsledek slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček nedokládá, zda změny povolování OZE skutečně zvýší riziko blackoutů ani zda uvedené stavební a provozní změny toto riziko sníží; závěr o částečném rozporu vychází z toho, že slib výslovně označuje překotné povolování OZE za jednu z hrozeb.",
+        "U změny prahu pro posuzování nadzemního přenosového vedení a u změn vyhlášky o dispečerském řízení chybí předchozí úplné znění, takže jejich přesný účinek vůči původním pravidlům nelze z balíčku určit."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-4b8856418701",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Změna označuje veřejnou infrastrukturu za veřejný zájem a omezuje možnost bránit jejímu rozvoji, což se může týkat i elektrické sítě.",
+          "effectCz": "Dříve stavební zákon uváděl jako účel udržitelný rozvoj a ochranu veřejných zájmů; návrh přidává pravidlo, že rozvoj veřejné infrastruktury lze znemožnit jen tehdy, nelze-li jiné hodnoty ochránit podmínkami či zmírňujícími opatřeními, a výslovně označuje výstavbu veřejné infrastruktury za veřejný zájem. Tím se odstraňují některé překážky pro infrastrukturní stavby, ale výňatek neukazuje zvláštní pravidlo přímo pro elektrickou síť."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně umožňuje povolovat stavby pro energetickou bezpečnost i v nezastavitelném území.",
+          "effectCz": "Dříve bylo možné povolit vyjmenované stavby v nezastavěném území jen v souladu s jeho charakterem a pokud je územní plán výslovně nevylučoval. Nově se stavby pro energetickou bezpečnost mohou povolovat v nezastavitelném území a považují se za souladné s jeho charakterem; pro tuto skupinu se tedy možnost výstavby rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Změny upravují jak povolování fotovoltaických zařízení, jejichž rychlé povolování slib výslovně zmiňuje, tak vyjadřování vlastníků technické infrastruktury k záměrům.",
+          "effectCz": "Dříve bylo možné umístit výrobnu elektřiny ze slunce na stávající stavbu, pokud to nevylučoval regulační plán; nově se rozšiřuje domněnka, že určité stavební úpravy pro obnovitelné zdroje nejsou v rozporu s charakterem území ani památkovou péčí. U vyjádření vlastníků veřejné infrastruktury se původní lhůta 30 dnů, ve zvlášť složitých případech 60 dnů, mění na 30 dnů s možností prodloužení o 15 dnů pro energetickou technickou infrastrukturu; při nečinnosti se nově vyjádření považuje za souhlas bez podmínek. Jde tedy současně o urychlení některých postupů a o oslabení možnosti stanovit podmínky; změny mohou usnadnit stavby, ale část k OZE také usnadňuje jejich povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Schválený text zavádí fikci povolení také pro stavby sítí technické infrastruktury, a tím se může týkat výstavby elektrické sítě.",
+          "effectCz": "Dříve dodaný text zákona neobsahuje povolení záměru samotným uplynutím lhůty. Nově se jednoduchá stavba nebo stavba sítě technické infrastruktury v urychleném řízení považuje za povolenou, pokud úřad včas nerozhodne; jde o nové oprávnění, které může povolení sítí urychlit, ale současně omezuje předchozí individuální rozhodování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Výňatky se týkají výjimek z povolování pro změny kapacity technické infrastruktury a ukládání nízkonapěťového vedení pod zem.",
+          "effectCz": "Předchozí příloha stavebního zákona umožňovala u některých výměn nebo navýšení kapacity sítí technické infrastruktury režim drobných staveb za stanovených podmínek. Schválená změna v dotčeném bodě vypouští slova o výměně a navýšení kapacity, což tuto cestu v daném případě zužuje; zároveň nově mezi drobné stavby řadí uložení stávajícího nadzemního vedení nízkého napětí pod zem, pokud souhlasí vlastník pozemků. Účinek na síť je tedy smíšený."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Změna výslovně upravuje podmínky pro zařízení přenosové a distribuční soustavy i jejich přípojná vedení.",
+          "effectCz": "Dřívější výjimky z nutnosti souhlasu s odnětím půdy ze zemědělského půdního fondu neuváděly v dodaném znění výslovně zařízení přenosové a distribuční soustavy s jejich přípojnými vedeními. Schválený text je nově zahrnuje mezi zařízení, pro něž lze souhlas vynechat při ploše do 100 m², čímž se tyto menší stavby usnadňují. Změna zároveň upravuje ochranu půdy u solárních zařízení; příslušný výňatek ukazuje výjimku pro dočasné záměry na půdě I. a II. třídy, nikoli obecné uvolnění pro všechny takové projekty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Novela energetického zákona upravuje dostupnost výkonu, kapacitní mechanismus a stavby energetické infrastruktury, tedy nástroje související se spolehlivostí elektrizační soustavy.",
+          "effectCz": "Předchozí znění už umožňovalo zavést kapacitní mechanismus a stanovovalo některé úkoly provozovatele přenosové soustavy; schválený text podrobněji upravuje zajištění potřebné dostupnosti výkonu, aukce a smlouvy o této dostupnosti. Zároveň mění pravidla pro stavby energetické infrastruktury. Nová úprava může posílit dostupnost výkonu a usnadnit některé infrastrukturní stavby, avšak sama nedokládá fyzické posílení sítě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Schválený výňatek mění posuzování vlivů u nadzemního přenosového vedení, které je přímo součástí elektrické sítě.",
+          "effectCz": "Schválený text mění u přílohy č. 1 bodu 85 hranici z 2 na 10, avšak balíček neuvádí předchozí znění dotčené položky ani její přesné znění po změně. Zda se tím posuzování zpřísňuje, nebo uvolňuje, proto z dodaných podkladů nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změna zahrnuje přenosová vedení do pravidel pro strategicky významnou infrastrukturu a výslovně přidává dvě vedení 400 kV.",
+          "effectCz": "Dříve zákon vyjmenovával jiná vedení 400 kV a umožňoval zvláštní postupy pro některé energetické stavby. Schválené znění doplňuje vedení 400 kV Slavětice–Prosenice a Čechy Střed–Malešice do seznamu a rozšiřuje použití postupů pro energetickou infrastrukturu. Tím se zvyšuje právní podpora a usnadňuje příprava těchto konkrétních částí sítě; pravidlo pro vedení 400 kV v zastavěném území navíc nově výslovně mluví o vedeních přenosové soustavy a připouští jiné řešení navržené stavebníkem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Tato změna nemá vlastní dodaný text, ale pozměňovací návrh k ní přidává do seznamu strategické infrastruktury dvě konkrétní vedení 400 kV.",
+          "effectCz": "Vlastní znění této části není dodáno; relevantní pozměňovací návrh doplňuje vedení Slavětice–Prosenice a Čechy Střed–Malešice do seznamu elektroenergetických vedení. Tím se posiluje jejich postavení jako strategických staveb, avšak bez vlastního textu této části nelze určit další dopad jejího původního návrhu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": false,
+          "reasonCz": "Dodaný odstavec dohody se týká energetické infrastruktury v rámci spolupráce s Uzbekistánem, nikoli posilování elektrické sítě v České republice.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-104",
+          "relevant": true,
+          "reasonCz": "Vyhláška upravuje dispečerské pokyny a využití flexibility, tedy provozní nástroje, které mohou přispět ke stabilitě elektrizační soustavy.",
+          "effectCz": "Vyhláška mění pravidla dispečerského řízení: v některých ustanoveních nahrazuje minutový údaj pěti minutami a zavádí barevné pokyny a předávání informací o možnosti využití změn výkonu či příkonu. Jde o nové provozní postupy, které mohou pomoci řídit soustavu, ale samy nepřidávají fyzickou kapacitu elektrické sítě."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-506",
+          "relevant": true,
+          "reasonCz": "Usnesení výslovně uvádí prostředky pro program „Infrastruktura pro obnovitelné zdroje energie a elektrizační soustava“.",
+          "effectCz": "Usnesení ukládá převést 10 160 830 520,85 Kč organizačním složkám státu podle přílohy; tabulka uvádí u programu infrastruktury pro obnovitelné zdroje a elektrizační soustavu 381 900 139,79 Kč skutečných výdajů za období od ledna do května 2026. Jde o rozdělení prostředků a vykázání výdajů, ne o důkaz, že z nich již bylo konkrétně vybudováno či posíleno vedení."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4b8856418701--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-41",
+        "esbirka-regulations--law-change-sb-2026-104",
+        "zvlady-resolutions--law-change-uv-2026-506",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1172",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--amendment-text-1164",
+        "psp-core-2025--vote-88171",
+        "psp-core-2025--amendment-text-1148",
+        "psp-core-2025--vote-88194",
+        "psp-core-2025--amendment-text-1274",
+        "psp-core-2025--vote-88195",
+        "psp-core-2025--amendment-text-1230",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--amendment-text-1368",
+        "psp-core-2025--vote-88234",
+        "psp-core-2025--amendment-text-1054",
+        "psp-core-2025--vote-88235",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "esbirka-regulations--2026-104",
+        "zvlady-resolutions--2026-506"
+      ],
+      "explanationCz": "Motoristé předložili novelu stavebního zákona a poslanci strany ji po zamítnutí Senátem znovu podpořili. Schválený zákon usnadňuje některé stavby energetické infrastruktury a přidává dvě vedení 400 kV mezi strategické projekty, zároveň ale zjednodušuje některé postupy pro obnovitelné zdroje, jejichž rychlé povolování slib označuje za jedno z rizik blackoutů. Vláda také rozhodla o převodu prostředků, přičemž část výdajů je vedena u programu pro infrastrukturu obnovitelných zdrojů a elektrizační soustavu; vyhláška upravila provozní řízení a využívání flexibility. Výsledné rozhodnutí o novele má tedy pro slib protichůdné dopady a jeho část usnadňující povolování OZE působí proti cíli slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U změny posuzování nadzemního přenosového vedení není v podkladech uvedeno předchozí úplné znění ani přesný obsah nové hranice 10, takže její směr nelze určit.",
+        "Podklady dokládají právní změny a rozdělení prostředků, nikoli konkrétní rozsah již fyzicky posílené sítě ani změnu rizika blackoutu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0f7de2a9ee45bfe3016aec4ee8b16887d1985e65e1ead89f26",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 154945,
+      "input_tokens_details": {
+        "cache_write_tokens": 148595,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 9809,
+      "output_tokens_details": {
+        "reasoning_tokens": 6633
+      },
+      "total_tokens": 164754
+    },
+    "output": {
+      "promiseId": "candidate-4b8856418701",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro veřejnou infrastrukturu může usnadnit výstavbu elektrické sítě, kterou slib výslovně zmiňuje.",
+          "effectCz": "Dosavadní účel stavebního zákona obecně zahrnoval udržitelný rozvoj; návrh zakazuje znemožnit rozvoj veřejné infrastruktury, pokud lze jiné hodnoty dostatečně chránit podmínkami či opatřeními. Tím se omezuje možnost výstavbu infrastruktury zablokovat a její povolování se uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Schválená verze umožňuje ve vymezeném území povolovat stavby pro energetickou bezpečnost, tedy opatření přímo související s energetickou soustavou.",
+          "effectCz": "Dosavadní pravidlo dovolovalo v nezastavěném území jen vyjmenované záměry a jen pokud je územní dokumentace nevylučovala z důvodu veřejného zájmu. Nově lze v nezastavitelném území povolovat stavby pro energetickou bezpečnost a považovat je za souladné s charakterem území; možnost výstavby se rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Tato část upravuje jak povolování instalací využívajících obnovitelné zdroje, tak lhůty a souhlasy vlastníků technické infrastruktury, což se dotýká výslovně zmíněného rizika i výstavby sítí.",
+          "effectCz": "Dříve bylo umístění fotovoltaické výrobny na existující stavbu možné, pokud je nevylučoval regulační plán; nově se rozšiřuje zjednodušený režim na stavební úpravy pro obnovitelné zdroje. U vyjádření vlastníka infrastruktury se běžná lhůta 30 dnů zachovává, ale zvlášť složitá lhůta 60 dnů se nahrazuje možností prodloužení o 15 dnů u energetické infrastruktury; nevyjádření se nově považuje za souhlas bez podmínek. Změny tedy usnadňují povolování OZE a uvolňují podmínky souhlasu, zatímco lhůtu pro energetickou infrastrukturu zkracují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Nově vložený mechanismus může urychlit povolení staveb sítí technické infrastruktury, a tím i rozvoj elektrické sítě.",
+          "effectCz": "Předchozí text upravoval zrychlené řízení, ale zde uvedený nový § 212a stanoví, že za určitých podmínek se jednoduchá stavba nebo stavba sítě technické infrastruktury považuje za povolenou, pokud úřad včas nerozhodne. Jde o uvolnění povolovacího omezení; předchozí znění tohoto nového ustanovení neexistovalo."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Výňatky výslovně mění pravidla pro navyšování kapacity sítí technické infrastruktury a další stavby související s energetickou sítí.",
+          "effectCz": "Dosavadní pravidla pro některé výměny a navýšení kapacity sítí vyžadovala splnění podmínek ohledně ochranných pásem a smlouvy o věcném břemeni; schválený text rozšiřuje okruh drobných staveb a u některých zásahů nahrazuje smlouvu souhlasem vlastníka. U elektrických přípojek se v dodaném znění mění limit délky z 25 na 100 metrů. Celkově se příslušná povolovací omezení uvolňují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Část mění pravidla pro odnětí půdy a výslovně zahrnuje energetická zařízení a jejich přípojná vedení, což může ovlivnit výstavbu sítě.",
+          "effectCz": "Dosavadní pravidla chránila půdu I. a II. třídy před odnětím pro solární energetická zařízení, s výjimkou agrovoltaiky; schválený text připouští dočasné odnětí v uvedené situaci, kdy je zemědělské obhospodařování ztíženo. Schválený výňatek také zahrnuje související elektrická a přípojná vedení do výjimek pro některá zařízení do 100 m². Tyto konkrétní omezení tedy uvolňuje, ale balíček obsahuje i další pravidla ochrany půdy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Změna energetického zákona upravuje dostupnost výkonu v soustavě a právní podmínky pro energetická zařízení a vývodová vedení.",
+          "effectCz": "Schválený text podrobněji upravuje kapacitní mechanismus, včetně zajišťování potřebné dostupnosti výkonu výroben nebo jiných zařízení, a rozšiřuje právní nástroje pro výstavbu některých energetických zařízení a vedení. Tím posiluje možnosti zajištění provozní kapacity, ale dodaný text nestanoví konkrétní rozsah fyzického posílení sítě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Schválený výňatek výslovně mění práh v posuzování nadzemního přenosového vedení, takže se týká povolování elektrické sítě.",
+          "effectCz": "Schválený text mění číslo v příloze u nadzemního přenosového vedení z 2 na 10. Předchozí znění příslušné položky ani význam této hodnoty však balíček nedodává, takže nelze určit, zda se tím posuzování zpřísňuje, nebo uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje zvláštní povolovací a majetkoprávní postupy na energetickou infrastrukturu a výňatek uvádí konkrétní vedení 400 kV.",
+          "effectCz": "Předchozí zákon už obsahoval zvláštní postup pro některé energetické stavby, ale schválený text rozšiřuje jeho použití na další kategorie energetické infrastruktury a upravuje postup pro vyvlastňovací řízení. U vedení 400 kV se mění pravidlo umístění v zastavitelném území tak, aby stavebník mohl navrhnout jiné řešení než nadzemní vedení; tento dílčí směr nelze pokládat za jednoznačné uvolnění možnosti výstavby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Vlastní text této části chybí, ale předložená změna k ní navrhuje doplnit dvě konkrétní vedení přenosové soustavy 400 kV.",
+          "effectCz": "Změna je relevantní pouze prostřednictvím pozměňovacího návrhu, který doplňuje vedení 400 kV Slavětice–Prosenice a Čechy Střed–Malešice do seznamu strategicky významné infrastruktury. Návrh tak rozšiřuje okruh projektů se zvláštním statusem; výchozí seznam mimo text návrhu není v balíčku zachycen."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-104",
+          "relevant": true,
+          "reasonCz": "Vyhláška upravuje dispečerské řízení, pokyny k výkonu a ověřování flexibility, tedy provozní nástroje důležité pro stabilitu elektrické soustavy.",
+          "effectCz": "Text zavádí či mění pravidla pro pokyny k omezeným změnám výkonu a pro ověřování flexibility. Předchozí znění měněných ustanovení vyhlášky však balíček neobsahuje, takže směr změny vůči předchozím pravidlům nelze určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-506",
+          "relevant": true,
+          "reasonCz": "Usnesení převádí prostředky výslovně určené mimo jiné na infrastrukturu pro obnovitelné zdroje a elektrizační soustavu.",
+          "effectCz": "Usnesení ukládá převést 10 160 830 520,85 Kč organizačním složkám státu podle skutečně vynaložených výdajů; v příloze je pro infrastrukturu OZE a elektrizační soustavu uvedeno 381 900 139,79 Kč a další řádek s rozdílem k dokrytí 969 930 657,93 Kč. Jde o konkrétní finanční podporu části energetické infrastruktury, nikoli o důkaz, že je síť jako celek posílena nebo že je riziko blackoutů minimalizováno."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": false,
+          "reasonCz": "Dodaný úryvek dohody se týká energetické infrastruktury Uzbekistánu, nikoli posílení české elektrické sítě.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4b8856418701--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-41",
+        "esbirka-regulations--law-change-sb-2026-104",
+        "zvlady-resolutions--law-change-uv-2026-506",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1172",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--amendment-text-1164",
+        "psp-core-2025--vote-88171",
+        "psp-core-2025--amendment-text-1148",
+        "psp-core-2025--vote-88194",
+        "psp-core-2025--amendment-text-1274",
+        "psp-core-2025--vote-88195",
+        "psp-core-2025--amendment-text-1230",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--amendment-text-1368",
+        "psp-core-2025--vote-88234",
+        "psp-core-2025--amendment-text-1054",
+        "psp-core-2025--vote-88235",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "esbirka-regulations--2026-104",
+        "zvlady-resolutions--2026-506"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili se svými koaličními partnery novelu stavebního zákona a vláda s ní souhlasila. Návrh i následné hlasování podpořily rychlejší povolování některých sítí a zvláštní status dvou vedení 400 kV, ale zároveň usnadnily povolování některých instalací obnovitelných zdrojů. Po zamítnutí Senátem Motoristé hlasovali pro setrvání na návrhu; protože jeho části zároveň podporují síť a uvolňují povolování OZE, které slib sám označuje za riziko blackoutů, převažuje dílčí rozpor se slibem. Vláda také schválila převod prostředků, včetně peněz určených na infrastrukturu elektrizační soustavy, což je podpůrný, nikoli úplný výsledek slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček nedokládá, zda změny povolování OZE skutečně zvýší riziko blackoutů ani zda uvedené stavební a provozní změny toto riziko sníží; závěr o částečném rozporu vychází z toho, že slib výslovně označuje překotné povolování OZE za jednu z hrozeb.",
+        "U změny prahu pro posuzování nadzemního přenosového vedení a u změn vyhlášky o dispečerském řízení chybí předchozí úplné znění, takže jejich přesný účinek vůči původním pravidlům nelze z balíčku určit."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0220eefa5198b54e016aec4f7c02f087d1b5f6101ac7157f88",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 154945,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 154942
+      },
+      "output_tokens": 12361,
+      "output_tokens_details": {
+        "reasoning_tokens": 8711
+      },
+      "total_tokens": 167306
+    },
+    "output": {
+      "promiseId": "candidate-4b8856418701",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Změna označuje veřejnou infrastrukturu za veřejný zájem a omezuje možnost bránit jejímu rozvoji, což se může týkat i elektrické sítě.",
+          "effectCz": "Dříve stavební zákon uváděl jako účel udržitelný rozvoj a ochranu veřejných zájmů; návrh přidává pravidlo, že rozvoj veřejné infrastruktury lze znemožnit jen tehdy, nelze-li jiné hodnoty ochránit podmínkami či zmírňujícími opatřeními, a výslovně označuje výstavbu veřejné infrastruktury za veřejný zájem. Tím se odstraňují některé překážky pro infrastrukturní stavby, ale výňatek neukazuje zvláštní pravidlo přímo pro elektrickou síť."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně umožňuje povolovat stavby pro energetickou bezpečnost i v nezastavitelném území.",
+          "effectCz": "Dříve bylo možné povolit vyjmenované stavby v nezastavěném území jen v souladu s jeho charakterem a pokud je územní plán výslovně nevylučoval. Nově se stavby pro energetickou bezpečnost mohou povolovat v nezastavitelném území a považují se za souladné s jeho charakterem; pro tuto skupinu se tedy možnost výstavby rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Změny upravují jak povolování fotovoltaických zařízení, jejichž rychlé povolování slib výslovně zmiňuje, tak vyjadřování vlastníků technické infrastruktury k záměrům.",
+          "effectCz": "Dříve bylo možné umístit výrobnu elektřiny ze slunce na stávající stavbu, pokud to nevylučoval regulační plán; nově se rozšiřuje domněnka, že určité stavební úpravy pro obnovitelné zdroje nejsou v rozporu s charakterem území ani památkovou péčí. U vyjádření vlastníků veřejné infrastruktury se původní lhůta 30 dnů, ve zvlášť složitých případech 60 dnů, mění na 30 dnů s možností prodloužení o 15 dnů pro energetickou technickou infrastrukturu; při nečinnosti se nově vyjádření považuje za souhlas bez podmínek. Jde tedy současně o urychlení některých postupů a o oslabení možnosti stanovit podmínky; změny mohou usnadnit stavby, ale část k OZE také usnadňuje jejich povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Schválený text zavádí fikci povolení také pro stavby sítí technické infrastruktury, a tím se může týkat výstavby elektrické sítě.",
+          "effectCz": "Dříve dodaný text zákona neobsahuje povolení záměru samotným uplynutím lhůty. Nově se jednoduchá stavba nebo stavba sítě technické infrastruktury v urychleném řízení považuje za povolenou, pokud úřad včas nerozhodne; jde o nové oprávnění, které může povolení sítí urychlit, ale současně omezuje předchozí individuální rozhodování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Výňatky se týkají výjimek z povolování pro změny kapacity technické infrastruktury a ukládání nízkonapěťového vedení pod zem.",
+          "effectCz": "Předchozí příloha stavebního zákona umožňovala u některých výměn nebo navýšení kapacity sítí technické infrastruktury režim drobných staveb za stanovených podmínek. Schválená změna v dotčeném bodě vypouští slova o výměně a navýšení kapacity, což tuto cestu v daném případě zužuje; zároveň nově mezi drobné stavby řadí uložení stávajícího nadzemního vedení nízkého napětí pod zem, pokud souhlasí vlastník pozemků. Účinek na síť je tedy smíšený."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Změna výslovně upravuje podmínky pro zařízení přenosové a distribuční soustavy i jejich přípojná vedení.",
+          "effectCz": "Dřívější výjimky z nutnosti souhlasu s odnětím půdy ze zemědělského půdního fondu neuváděly v dodaném znění výslovně zařízení přenosové a distribuční soustavy s jejich přípojnými vedeními. Schválený text je nově zahrnuje mezi zařízení, pro něž lze souhlas vynechat při ploše do 100 m², čímž se tyto menší stavby usnadňují. Změna zároveň upravuje ochranu půdy u solárních zařízení; příslušný výňatek ukazuje výjimku pro dočasné záměry na půdě I. a II. třídy, nikoli obecné uvolnění pro všechny takové projekty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Novela energetického zákona upravuje dostupnost výkonu, kapacitní mechanismus a stavby energetické infrastruktury, tedy nástroje související se spolehlivostí elektrizační soustavy.",
+          "effectCz": "Předchozí znění už umožňovalo zavést kapacitní mechanismus a stanovovalo některé úkoly provozovatele přenosové soustavy; schválený text podrobněji upravuje zajištění potřebné dostupnosti výkonu, aukce a smlouvy o této dostupnosti. Zároveň mění pravidla pro stavby energetické infrastruktury. Nová úprava může posílit dostupnost výkonu a usnadnit některé infrastrukturní stavby, avšak sama nedokládá fyzické posílení sítě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Schválený výňatek mění posuzování vlivů u nadzemního přenosového vedení, které je přímo součástí elektrické sítě.",
+          "effectCz": "Schválený text mění u přílohy č. 1 bodu 85 hranici z 2 na 10, avšak balíček neuvádí předchozí znění dotčené položky ani její přesné znění po změně. Zda se tím posuzování zpřísňuje, nebo uvolňuje, proto z dodaných podkladů nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změna zahrnuje přenosová vedení do pravidel pro strategicky významnou infrastrukturu a výslovně přidává dvě vedení 400 kV.",
+          "effectCz": "Dříve zákon vyjmenovával jiná vedení 400 kV a umožňoval zvláštní postupy pro některé energetické stavby. Schválené znění doplňuje vedení 400 kV Slavětice–Prosenice a Čechy Střed–Malešice do seznamu a rozšiřuje použití postupů pro energetickou infrastrukturu. Tím se zvyšuje právní podpora a usnadňuje příprava těchto konkrétních částí sítě; pravidlo pro vedení 400 kV v zastavěném území navíc nově výslovně mluví o vedeních přenosové soustavy a připouští jiné řešení navržené stavebníkem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Tato změna nemá vlastní dodaný text, ale pozměňovací návrh k ní přidává do seznamu strategické infrastruktury dvě konkrétní vedení 400 kV.",
+          "effectCz": "Vlastní znění této části není dodáno; relevantní pozměňovací návrh doplňuje vedení Slavětice–Prosenice a Čechy Střed–Malešice do seznamu elektroenergetických vedení. Tím se posiluje jejich postavení jako strategických staveb, avšak bez vlastního textu této části nelze určit další dopad jejího původního návrhu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": false,
+          "reasonCz": "Dodaný odstavec dohody se týká energetické infrastruktury v rámci spolupráce s Uzbekistánem, nikoli posilování elektrické sítě v České republice.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-104",
+          "relevant": true,
+          "reasonCz": "Vyhláška upravuje dispečerské pokyny a využití flexibility, tedy provozní nástroje, které mohou přispět ke stabilitě elektrizační soustavy.",
+          "effectCz": "Vyhláška mění pravidla dispečerského řízení: v některých ustanoveních nahrazuje minutový údaj pěti minutami a zavádí barevné pokyny a předávání informací o možnosti využití změn výkonu či příkonu. Jde o nové provozní postupy, které mohou pomoci řídit soustavu, ale samy nepřidávají fyzickou kapacitu elektrické sítě."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-506",
+          "relevant": true,
+          "reasonCz": "Usnesení výslovně uvádí prostředky pro program „Infrastruktura pro obnovitelné zdroje energie a elektrizační soustava“.",
+          "effectCz": "Usnesení ukládá převést 10 160 830 520,85 Kč organizačním složkám státu podle přílohy; tabulka uvádí u programu infrastruktury pro obnovitelné zdroje a elektrizační soustavu 381 900 139,79 Kč skutečných výdajů za období od ledna do května 2026. Jde o rozdělení prostředků a vykázání výdajů, ne o důkaz, že z nich již bylo konkrétně vybudováno či posíleno vedení."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4b8856418701--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-41",
+        "esbirka-regulations--law-change-sb-2026-104",
+        "zvlady-resolutions--law-change-uv-2026-506",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1172",
+        "psp-core-2025--vote-88143",
+        "psp-core-2025--amendment-text-1164",
+        "psp-core-2025--vote-88171",
+        "psp-core-2025--amendment-text-1148",
+        "psp-core-2025--vote-88194",
+        "psp-core-2025--amendment-text-1274",
+        "psp-core-2025--vote-88195",
+        "psp-core-2025--amendment-text-1230",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--amendment-text-1368",
+        "psp-core-2025--vote-88234",
+        "psp-core-2025--amendment-text-1054",
+        "psp-core-2025--vote-88235",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "esbirka-regulations--2026-104",
+        "zvlady-resolutions--2026-506"
+      ],
+      "explanationCz": "Motoristé předložili novelu stavebního zákona a poslanci strany ji po zamítnutí Senátem znovu podpořili. Schválený zákon usnadňuje některé stavby energetické infrastruktury a přidává dvě vedení 400 kV mezi strategické projekty, zároveň ale zjednodušuje některé postupy pro obnovitelné zdroje, jejichž rychlé povolování slib označuje za jedno z rizik blackoutů. Vláda také rozhodla o převodu prostředků, přičemž část výdajů je vedena u programu pro infrastrukturu obnovitelných zdrojů a elektrizační soustavu; vyhláška upravila provozní řízení a využívání flexibility. Výsledné rozhodnutí o novele má tedy pro slib protichůdné dopady a jeho část usnadňující povolování OZE působí proti cíli slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U změny posuzování nadzemního přenosového vedení není v podkladech uvedeno předchozí úplné znění ani přesný obsah nové hranice 10, takže její směr nelze určit.",
+        "Podklady dokládají právní změny a rozdělení prostředků, nikoli konkrétní rozsah již fyzicky posílené sítě ani změnu rizika blackoutu."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

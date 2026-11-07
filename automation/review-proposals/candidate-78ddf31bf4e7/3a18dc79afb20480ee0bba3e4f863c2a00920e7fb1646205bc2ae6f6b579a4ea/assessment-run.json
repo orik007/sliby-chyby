@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T02-27-34-470Z--dbe975e46489",
+  "evaluatedAt": "2026-11-04T02:27:34.470Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-78ddf31bf4e7/dbe975e46489296aeb717ec130c840fad5a9f78998a2fe37f2a50a2fd878c2c4.json",
+  "packageHash": "dbe975e46489296aeb717ec130c840fad5a9f78998a2fe37f2a50a2fd878c2c4",
+  "assessmentContentHash": "da67b12a957c22894e465a41eb667cc7848cd43a6508688c62c8ea5e69b4607e",
+  "assessmentFingerprint": "3a18dc79afb20480ee0bba3e4f863c2a00920e7fb1646205bc2ae6f6b579a4ea",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-78ddf31bf4e7",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-78ddf31bf4e7",
+      "changeRelevance": [
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+          "relevant": false,
+          "reasonCz": "Ustanovení zakazuje v určených obdobích aplikaci přípravků na ochranu rostlin na nektarodárném a zeleném úhoru, ale text neuvádí zákaz granulí proti hrabošům ani neprokazuje, že toto omezení vede k následkům popsaným ve slibu.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-78ddf31bf4e7--source",
+        "esbirka-regulations--law-change-sb-2026-45",
+        "esbirka-regulations--2026-45"
+      ],
+      "explanationCz": "Vláda přijala nařízení, které pro nektarodárný a zelený úhor stanoví od 1. února do 15. srpna zákaz aplikace přípravků na ochranu rostlin, s výjimkou mimořádných rostlinolékařských opatření. Dodané znění ale neříká, že zákaz zahrnuje granule proti hrabošům, ani že toto omezení způsobuje škody popsané ve slibu. Proto z něj nelze doložit postup proti slibu ani jeho naplňování; v dodaných důkazech není jiný věcně relevantní postup.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Není doloženo, zda se zákaz aplikace přípravků na ochranu rostlin vztahuje také na granule proti hrabošům nebo zda vede k devastaci úrody či ztrátám biodiverzity způsobeným přemnožením."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-78ddf31bf4e7",
+      "changeRelevance": [
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+          "relevant": true,
+          "reasonCz": "Ustanovení zakazuje po určitou dobu aplikaci přípravků na ochranu rostlin na vybraných úhorech, což může omezit i použití granulí proti hrabošům, na něž se slib vztahuje.",
+          "effectCz": "Předchozí znění dotčeného ustanovení balíček neuvádí, takže nelze určit, jak se pravidlo oproti dřívějšku změnilo. Přijaté nařízení stanoví od 1. února do 15. srpna zákaz aplikace přípravků na ochranu rostlin na nektarodárném a zeleném úhoru, s výjimkou postupu podle mimořádných rostlinolékařských opatření; jde o omezení, jehož dopad na granule proti hrabošům závisí na tom, zda spadají pod tento zákaz a výjimku."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-78ddf31bf4e7--source",
+        "esbirka-regulations--law-change-sb-2026-45",
+        "esbirka-regulations--2026-45"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působili, přijala nařízení, které na vybraných úhorech zakazuje od 1. února do 15. srpna aplikaci přípravků na ochranu rostlin, s výjimkou mimořádných rostlinolékařských opatření. Toto omezení může zasáhnout i granule proti hrabošům, jejichž zákaz slib odmítá, a proto nejpravděpodobněji působí proti části slibu. Podklady ale neumožňují ověřit, zda granule spadají do zákazu ani zda se na ně vztahuje výjimka, takže závěr není jistý.",
+      "confidence": "low",
+      "uncertainties": [
+        "Z podkladů nelze zjistit, zda granule proti hrabošům právně spadají mezi zakázané přípravky na ochranu rostlin ani zda je lze použít v rámci výjimky pro mimořádná rostlinolékařská opatření.",
+        "Balíček neobsahuje předchozí znění dotčeného ustanovení, takže nelze porovnat, zda nařízení pravidlo zpřísnilo, zmírnilo, nebo pouze zachovalo."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0dca103a59b232c6016aea97cce8f887d1841f932ab8e3930a",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8453,
+      "input_tokens_details": {
+        "cache_write_tokens": 2103,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 1958,
+      "output_tokens_details": {
+        "reasoning_tokens": 1552
+      },
+      "total_tokens": 10411
+    },
+    "output": {
+      "promiseId": "candidate-78ddf31bf4e7",
+      "changeRelevance": [
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+          "relevant": false,
+          "reasonCz": "Ustanovení zakazuje v určených obdobích aplikaci přípravků na ochranu rostlin na nektarodárném a zeleném úhoru, ale text neuvádí zákaz granulí proti hrabošům ani neprokazuje, že toto omezení vede k následkům popsaným ve slibu.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-78ddf31bf4e7--source",
+        "esbirka-regulations--law-change-sb-2026-45",
+        "esbirka-regulations--2026-45"
+      ],
+      "explanationCz": "Vláda přijala nařízení, které pro nektarodárný a zelený úhor stanoví od 1. února do 15. srpna zákaz aplikace přípravků na ochranu rostlin, s výjimkou mimořádných rostlinolékařských opatření. Dodané znění ale neříká, že zákaz zahrnuje granule proti hrabošům, ani že toto omezení způsobuje škody popsané ve slibu. Proto z něj nelze doložit postup proti slibu ani jeho naplňování; v dodaných důkazech není jiný věcně relevantní postup.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Není doloženo, zda se zákaz aplikace přípravků na ochranu rostlin vztahuje také na granule proti hrabošům nebo zda vede k devastaci úrody či ztrátám biodiverzity způsobeným přemnožením."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_01eb3921c4ae7e38016aea97f7149087d1a109ac5144cb8789",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8453,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8450
+      },
+      "output_tokens": 2659,
+      "output_tokens_details": {
+        "reasoning_tokens": 2063
+      },
+      "total_tokens": 11112
+    },
+    "output": {
+      "promiseId": "candidate-78ddf31bf4e7",
+      "changeRelevance": [
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+          "relevant": true,
+          "reasonCz": "Ustanovení zakazuje po určitou dobu aplikaci přípravků na ochranu rostlin na vybraných úhorech, což může omezit i použití granulí proti hrabošům, na něž se slib vztahuje.",
+          "effectCz": "Předchozí znění dotčeného ustanovení balíček neuvádí, takže nelze určit, jak se pravidlo oproti dřívějšku změnilo. Přijaté nařízení stanoví od 1. února do 15. srpna zákaz aplikace přípravků na ochranu rostlin na nektarodárném a zeleném úhoru, s výjimkou postupu podle mimořádných rostlinolékařských opatření; jde o omezení, jehož dopad na granule proti hrabošům závisí na tom, zda spadají pod tento zákaz a výjimku."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-78ddf31bf4e7--source",
+        "esbirka-regulations--law-change-sb-2026-45",
+        "esbirka-regulations--2026-45"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působili, přijala nařízení, které na vybraných úhorech zakazuje od 1. února do 15. srpna aplikaci přípravků na ochranu rostlin, s výjimkou mimořádných rostlinolékařských opatření. Toto omezení může zasáhnout i granule proti hrabošům, jejichž zákaz slib odmítá, a proto nejpravděpodobněji působí proti části slibu. Podklady ale neumožňují ověřit, zda granule spadají do zákazu ani zda se na ně vztahuje výjimka, takže závěr není jistý.",
+      "confidence": "low",
+      "uncertainties": [
+        "Z podkladů nelze zjistit, zda granule proti hrabošům právně spadají mezi zakázané přípravky na ochranu rostlin ani zda je lze použít v rámci výjimky pro mimořádná rostlinolékařská opatření.",
+        "Balíček neobsahuje předchozí znění dotčeného ustanovení, takže nelze porovnat, zda nařízení pravidlo zpřísnilo, zmírnilo, nebo pouze zachovalo."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_01db3bb78c4b7ef5016aea9809964c87d18c2e51fbaa835feb",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 7503,
+      "input_tokens_details": {
+        "cache_write_tokens": 3090,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 297,
+      "output_tokens_details": {
+        "reasoning_tokens": 71
+      },
+      "total_tokens": 7800
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "candidate-78ddf31bf4e7--source",
+        "esbirka-regulations--law-change-sb-2026-45",
+        "esbirka-regulations--2026-45"
+      ],
+      "explanationCz": "Vláda s účastí Motoristů sobě přijala nařízení, které na vybraných úhorech omezuje používání přípravků na ochranu rostlin a připouští výjimku pro mimořádná opatření. Podklady však neukazují, zda toto omezení zahrnuje granule proti hrabošům, ani zda oproti dřívějším pravidlům něco zpřísňuje. Druhý posudek přesto hodnotí nařízení jako krok proti slibu jen na základě možného dopadu. První posudek správně uzavírá, že dodané podklady nedokládají ani naplňování slibu, ani postup proti němu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

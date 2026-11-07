@@ -1,0 +1,118 @@
+# Obranné systémy, protivzdušná obrana a ochrana kybernetického prostoru
+
+> Nezveřejněný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
+
+## Návrh pro veřejný web
+
+Toto je jediná část dokumentu určená jako kandidát veřejného textu. Musí být srozumitelná bez znalosti projektu, práva nebo fungování Poslanecké sněmovny.
+
+### Hodnocení
+
+**Směřuje ke splnění (+1)**
+
+### Vysvětlení
+
+Vláda, v níž Motoristé sobě působí, vyčlenila na program zahrnující informační a kybernetické síly armády až 81,5 miliardy korun do roku 2034. Schválila také plán kybernetické bezpečnosti a kroky k přípravě dalších bezpečnostních opatření, což posouvá alespoň část slibu. Poslanci Motoristů však nepodpořili několik návrhů na zvýšení výdajů na protivzdušnou obranu a kybernetickou bezpečnost. Rozpočtové údaje v dodaném výňatku nejsou rozepsány podle těchto oblastí, ale samostatné vládní rozhodnutí o financování kybernetických a informačních sil dokládá dílčí posun.
+
+## Co má zkontrolovat reviewer
+
+- Odpovídá navržené hodnocení metodice SLAVA Indexu?
+- Je jednání správně připsáno sledované straně?
+- Je veřejné vysvětlení pochopitelné samo o sobě a říká, kdo co udělal a jak to souvisí se slibem?
+- Jsou zkratky, právní pojmy a úřední označení při prvním použití vysvětlené?
+- Dokládají uvedené zdroje všechna podstatná tvrzení a nechybí rozporný podklad?
+
+## Technické podklady pro reviewera
+
+- Výsledek automatického procesu: oba automatické posudky daly stejné hodnocení, jen jeden z nich považuje podklady za dostatečné
+- Interní stav: `moving-towards`
+- Důvod výsledku: `assessor-consensus-one-sufficient`
+- Úplný strojový audit: `assessment-run.json`
+- Přesný balíček posuzovaných podkladů: `evidence-package.json`
+
+### Stejné hodnocení, rozdílný názor na podklady
+
+Oba nezávislí hodnotitelé dali stejné hodnocení: **Směřuje ke splnění (+1)**. Za dostatečné ale podklady považuje jen jeden z nich a návrh nese jeho posudek.
+
+#### První posudek: podklady nestačí
+
+Vláda schválila až 81,5 miliardy korun pro program zahrnující informační a kybernetické síly armády a přijala také opatření pro koordinaci kybernetické bezpečnosti. Pověřila rovněž ředitele Národního úřadu pro kybernetickou a informační bezpečnost podpisem smlouvy o vládním bezpečnostním programu. Poslanci Motoristů však nepodpořili několik pozměňovacích návrhů ke státnímu rozpočtu, které navrhovaly navýšit prostředky na kybernetickou obranu, protivzdušnou obranu nebo prostředky proti dronům. Z dodaného výňatku rozpočtu nelze zjistit konečné částky pro tyto oblasti, proto není možné účinek schváleného rozpočtu spolehlivě vyhodnotit.
+
+Co zůstává nejisté:
+
+- Dodaný výňatek státního rozpočtu odkazuje na přílohy s výdaji podle kapitol, ale neobsahuje jejich částky. Nelze proto určit, zda schválený rozpočet zvýšil, zachoval, nebo snížil prostředky pro protivzdušnou obranu a kybernetickou ochranu.
+- Vláda schválila financování programu informačních a kybernetických sil až do výše 81 504,139 mil. Kč, ale text neuvádí, kolik z této částky půjde na konkrétní kybernetické ochranné schopnosti ani na protivzdušnou obranu.
+- Poslanci Motoristů nepodpořili několik návrhů na navýšení rozpočtu pro obranu a kybernetickou bezpečnost; tyto návrhy však byly pozměňovacími návrhy, nikoli konečným rozhodnutím o rozpočtu.
+
+#### Druhý posudek: podklady stačí
+
+Vláda, v níž Motoristé sobě působí, vyčlenila na program zahrnující informační a kybernetické síly armády až 81,5 miliardy korun do roku 2034. Schválila také plán kybernetické bezpečnosti a kroky k přípravě dalších bezpečnostních opatření, což posouvá alespoň část slibu. Poslanci Motoristů však nepodpořili několik návrhů na zvýšení výdajů na protivzdušnou obranu a kybernetickou bezpečnost. Rozpočtové údaje v dodaném výňatku nejsou rozepsány podle těchto oblastí, ale samostatné vládní rozhodnutí o financování kybernetických a informačních sil dokládá dílčí posun.
+
+Co zůstává nejisté:
+
+- V dodaném výňatku státního rozpočtu chybějí konkrétní částky pro obranu a kybernetickou bezpečnost; nelze proto posoudit jejich výši ani dopad hlasování pro rozpočet.
+- Poslanci Motoristů nepodpořili návrhy na navýšení prostředků pro protivzdušnou obranu, kybernetickou obranu a kybernetický úřad. Jde o protichůdné návrhové jednání, zatímco pozdější vládní rozhodnutí o financování programu informačních a kybernetických sil je dílčím posunem.
+- Obsah smlouvy o Vládním bezpečnostním programu se společností Microsoft ani podrobnosti úkolů v akčním plánu kybernetické bezpečnosti nejsou v dodaných textech uvedeny.
+
+### Souvisí změny zákonů se slibem?
+
+| Změna zákona | První posudek | Druhý posudek |
+| --- | --- | --- |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Vládní návrh zákona o státním rozpočtu České republiky na rok 2026](https://e-sbirka.gov.cz/sb/2026/38/0000-00-00) | ano: Státní rozpočet určuje výdaje na obranu i kybernetickou bezpečnost, ale dodaný výňatek ukazuje jen odkazy na přílohy s jejich částkami.<br>Dopad: Jde o nový státní rozpočet, nikoli změnu dřívějšího znění; výňatek pouze uvádí, že celkové výdaje a ukazatele podle kapitol jsou v přílohách č. 3 a 4. Konkrétní částky pro obranu, protivzdušnou obranu ani kybernetickou bezpečnost nejsou dodány, takže směr účinku vůči slibu nelze z balíčku určit. | ano: Státní rozpočet přímo určuje výdaje na obranu a kybernetickou bezpečnost, ale poskytnutý výňatek konkrétní částky neobsahuje.<br>Dopad: Jde o rozpočet bez předchozího znění; dodaný text pouze uvádí, že celkové výdaje podle kapitol a jejich ukazatele jsou v přílohách 3 a 4. Konkrétní výdaje na obranu ani kybernetickou ochranu a jejich změnu proto z balíčku nelze určit. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Vládní návrh, kterým se předkládá Parlamentu České republiky k vyslovení souhlasu s ratifikací Smlouva mezi Českou republikou a Mongolskem o policejní spolupráci, podepsaná v Praze dne 10. března 2025](https://www.psp.cz/sqw/text/orig2.sqw?idd=269491) | ano: Smluvní spolupráce při výměně informací o kriminalitě v kyberprostoru může přispět k ochraně českého kybernetického prostoru.<br>Dopad: Jde o předloženou část nové mezinárodní smlouvy, takže předchozí znění není. Ustanovení počítá s koordinací a pomocí včetně výměny informací o kyberkriminalitě; tím rozvíjí část slibu týkající se kybernetické ochrany, nikoli však protivzdušnou obranu. | ano: Navrhovaná smlouva se týká spolupráce při získávání digitálních stop a potírání počítačové kriminality, tedy části ochrany kyberprostoru.<br>Dopad: Jde o novou smluvní úpravu bez předchozího znění: orgány smluvních stran mají podle potřeby koordinovat činnost a pomáhat si, mimo jiné při práci s digitálními stopami a elektronickými komunikacemi a při potírání kyberkriminality. To může podpořit část kybernetické ochrany, ale text nestanoví konkrétní české obranné schopnosti ani protivzdušnou obranu. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona, kterým se mění zákon o poštovních službách](https://www.psp.cz/sqw/text/orig2.sqw?idd=280625) | ne: Dodané znění upravuje přechodná pravidla pro nároky držitelů poštovní licence, nikoli obranné systémy ani ochranu kyberprostoru. | ne: Dodané znění mění pouze přechodná ustanovení poštovního zákona a s protivzdušnou obranou ani ochranou kyberprostoru věcně nesouvisí. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: SVOBODA, BEZPEČNOST A PRÁVO](https://www.psp.cz/sqw/text/orig2.sqw?idd=281029) | ano: Dohoda počítá se spoluprací při prevenci a potírání kyberkriminality, což může být součástí ochrany kyberprostoru.<br>Dopad: Jde o část nové mezinárodní dohody, takže předchozí znění není. Ustanovení předpokládá posílení spolupráce, výměnu informací a zkušeností a podporu ochrany kritické infrastruktury; přispívá tak k dílčí části slibu o kybernetické ochraně, nikoli k protivzdušné obraně. | ano: Navržená smluvní kapitola obsahuje ustanovení o kyberkriminalitě, výměně informací a ochraně kritické infrastruktury, což se týká části kybernetické ochrany.<br>Dopad: Jde o novou smluvní úpravu bez předchozího znění: strany mají posílit spolupráci při prevenci a potírání kyberkriminality a sdílet informace a zkušenosti, včetně ochrany kritické infrastruktury. Může přispět k části kybernetické ochrany, ale nestanoví konkrétní domácí obranné schopnosti ani protivzdušnou obranu. |
+| [Text usnesení vlády: Usnesení vlády č. 22/2026, Vytvoření funkce a jmenování vládního zmocněnce pro digitalizaci a strategickou bezpečnost](https://odok.gov.cz/portal/zvlady/usneseni/2026/22/) | ano: Usnesení pověřuje vládního zmocněnce koordinací strategické bezpečnosti a přípravou koncepcí, mimo jiné pro kybernetickou bezpečnost.<br>Dopad: Usnesení vytváří funkci zmocněnce a ukládá koordinaci a přípravu koncepcí, včetně národní bezpečné sítě a ochrany před kybernetickými útoky. Předchozí stav takové funkce v balíčku popsán není; opatření rozvíjí přípravu ochrany kyberprostoru, ale samo nezajišťuje její vybudování. | ano: Usnesení vytváří koordinační funkci pro strategickou bezpečnost a ukládá přípravu koncepcí zahrnujících kybernetické útoky a ochranu kritické infrastruktury.<br>Dopad: Jde o novou organizační úpravu bez předchozího znění: vláda zřizuje funkci zmocněnce, který má koordinovat bezpečnostní činnost a připravovat koncepce, mimo jiné národní bezpečné sítě a hybridní obrany. Podporuje přípravu části slibu, ale samo ještě nevybudovává protivzdušnou obranu ani nezajišťuje kybernetickou ochranu. |
+| [Text usnesení vlády: Usnesení vlády č. 175/2026, Návrh Plánu legislativních prací vlády na zbývající část roku 2026 a návrh Výhledu legislativních prací vlády na léta 2027 až 2029 – Příloha č. 1, 1. místopředseda vlády a ministr průmyslu a obchodu, úkol č. 7: Návrh zákona o požadavcích na kybernetickou bezpečnost výrobků s digitálními prvky](https://odok.gov.cz/portal/zvlady/usneseni/2026/175/) | ano: Vládní plán zařazuje přípravu zákona o požadavcích na kybernetickou bezpečnost digitálních výrobků.<br>Dopad: Usnesení jako plánovací dokument ukládá připravit návrh zákona k provedení evropských požadavků na kybernetickou odolnost výrobků s digitálními prvky. Nejde o již platnou bezpečnostní povinnost; plán představuje návrhový krok k dílčí části kybernetické ochrany. | ano: Vládní plán počítá s návrhem zákona na kybernetické požadavky pro výrobky s digitálními prvky, což se přímo týká kybernetické odolnosti.<br>Dopad: Jde o plánovací úkol bez předchozího právního znění: vláda plánuje připravit zákon k provedení evropského aktu o kybernetické odolnosti výrobků. Jde o návrh budoucí úpravy, který může podpořit část kybernetické ochrany, nikoli o již účinné bezpečnostní pravidlo. |
+| [Text usnesení vlády: Usnesení vlády č. 175/2026, Návrh Plánu legislativních prací vlády na zbývající část roku 2026 a návrh Výhledu legislativních prací vlády na léta 2027 až 2029 – Příloha č. 2, Místopředseda vlády a ministr obrany, úkol č. 1: Návrh zákona, kterým se mění zákon č. 219/1999 Sb., o ozbrojených silách České republiky, ve znění pozdějších předpisů](https://odok.gov.cz/portal/zvlady/usneseni/2026/175/) | ano: Plán legislativních prací výslovně spojuje změnu zákona o ozbrojených silách s připraveností armády a posílením protivzdušné obrany.<br>Dopad: Usnesení plánuje návrh novely zákona o ozbrojených silách s cílem zajistit podmínky pro provoz a připravenost armády; mezi související priority uvádí posílení protivzdušné obrany. Změna zákona zatím není předložena ani účinná, takže jde o plánovaný krok k dílčí části slibu. | ano: Plán vlády zahrnuje změnu zákona o ozbrojených silách a výslovně ji spojuje s prioritou posílit protivzdušnou obranu státu.<br>Dopad: Jde o plán budoucího návrhu zákona bez předchozího znění změny: vláda plánuje novelizaci zákona o ozbrojených silách pro nové bezpečnostní podmínky a uvádí souvislost s posílením protivzdušné obrany. Směr ani konkrétní dopad budoucí novely zatím z dodaného textu určit nelze. |
+| [Text usnesení vlády: Usnesení vlády č. 175/2026, Návrh Plánu legislativních prací vlády na zbývající část roku 2026 a návrh Výhledu legislativních prací vlády na léta 2027 až 2029 – Příloha č. 3: PŘEHLED IMPLEMENTAČNÍCH PRACÍ VLÁDY NA ZBÝVAJÍCÍ ČÁST ROKU 2026](https://odok.gov.cz/portal/zvlady/usneseni/2026/175/) | ano: Přehled implementačních prací zahrnuje přípravu zákona k evropským požadavkům na kybernetickou bezpečnost digitálních výrobků.<br>Dopad: Dodaná část přehledu uvádí implementaci evropského aktu o kybernetické odolnosti prostřednictvím návrhu zákona. Nejde o účinné pravidlo ani přímé zabezpečení kyberprostoru; je to plánovaný krok k jeho dílčí ochraně. | ano: Příloha plánu uvádí implementační práci související s návrhem zákona o kybernetických požadavcích na digitální výrobky.<br>Dopad: Jde o plánovací přehled bez předchozího znění právního pravidla: uvádí návrh zákona k provedení evropského aktu o kybernetické odolnosti. Samotný přehled ukládá ani neprokazuje zavedení konkrétní ochrany; jde o přípravu budoucí úpravy. |
+| [Text usnesení vlády: Usnesení vlády č. 197/2026, Stanovení výše účasti státního rozpočtu na financování programu reprodukce majetku 107V470 „Spojovací vojsko AČR, informatizace MO a informační a kybernetické síly AČR“](https://odok.gov.cz/portal/zvlady/usneseni/2026/197/) | ano: Vláda schválila financování programu zahrnujícího informační a kybernetické síly armády.<br>Dopad: Usnesení stanoví účast státního rozpočtu na programu spojovacího vojska, informatizace ministerstva obrany a informačních a kybernetických sil AČR až do výše 81 504,139 mil. Kč, s realizací do 31. prosince 2034. Jde o financování kapacit, které mohou podporovat kybernetickou ochranu; text ale nespecifikuje protivzdušnou obranu ani rozlišení obranných a útočných systémů. | ano: Usnesení stanoví financování programu, jehož výslovnou součástí jsou informační a kybernetické síly Armády a informatizace ministerstva obrany.<br>Dopad: Jde o nové rozhodnutí o financování bez předchozího znění: vláda stanoví účast státního rozpočtu na programu do výše 81 504,139 mil. Kč do 31. prosince 2034. Program zahrnuje spojovací vojsko, informatizaci ministerstva obrany a informační a kybernetické síly; konkrétní rozdělení částky mezi tyto oblasti dodaný text neuvádí. Financování může podpořit část slibu týkající se kybernetické ochrany, ale samo nedokládá protivzdušné schopnosti ani převahu obranného rozvoje nad útočným. |
+| [Text usnesení vlády: Usnesení vlády č. 314/2026, Systém řízení strategických programů a projektů z oblasti informačních a komunikačních technologií vyplývajících z programového prohlášení vlády a programů a projektů s legislativním termínem a k pověření jejich odpovědných manažerů](https://odok.gov.cz/portal/zvlady/usneseni/2026/314/) | ano: Usnesení zavádí koordinaci strategických projektů, mezi nimi systém evidence kybernetických incidentů a program kybernetické bezpečnosti.<br>Dopad: Usnesení stanoví odpovědné manažery a rámec pro koordinaci a řízení projektů, včetně systému evidence a investigace kybernetických incidentů a programu kybernetické bezpečnosti. Předchozí znění takového rámce balíček neuvádí; rozhodnutí podporuje přípravu a řízení kybernetické ochrany, nikoli samo o sobě její úplné vybudování. | ano: Usnesení zavádí řízení strategických projektů a výslovně uvádí systém evidence kybernetických incidentů a Program kybernetické bezpečnosti.<br>Dopad: Jde o novou organizační úpravu bez předchozího znění: vláda svěřuje odpovědným manažerům koordinaci projektů a stanoví mimo jiné systém evidence kybernetických incidentů a Program kybernetické bezpečnosti s uvedenými termíny. Zlepšuje podmínky pro koordinaci kybernetické ochrany, ale samo nedokládá, že již byla ochrana vybudována. |
+| [Text usnesení vlády: Usnesení vlády č. 526/2026, Akční plán k Národní strategii kybernetické bezpečnosti na období let 2026–2030](https://odok.gov.cz/portal/zvlady/usneseni/2026/526/) | ano: Akční plán stanoví úkoly k národní strategii kybernetické bezpečnosti na období 2026–2030.<br>Dopad: Vláda schválila akční plán pro roky 2026–2030, uložila jeho úkoly příslušným orgánům a určila koordinaci i každoroční vyhodnocování. Předchozí plán pro roky 2021–2025 ruší; konkrétní obsah jednotlivých úkolů není v dodaném textu, ale plánování a koordinace směřují k dílčí části slibu o kybernetické ochraně. | ano: Usnesení schvaluje akční plán národní kybernetické bezpečnosti na období 2026–2030 a ukládá státním orgánům plnit stanovené úkoly.<br>Dopad: Jde o nový plán bez předchozího znění v dodaném textu: vláda schvaluje akční plán na roky 2026–2030 a ukládá jeho úkoly příslušným orgánům, jejichž plnění má být vyhodnocováno. To posouvá přípravu a koordinaci kybernetické ochrany, ale konkrétní obsah úkolů v dodaném usnesení není uveden. |
+| [Text usnesení vlády: Usnesení vlády č. 618/2026, Pověření ředitele Národního úřadu pro kybernetickou a informační bezpečnost k podpisu smlouvy o Vládním bezpečnostním programu se společností Microsoft](https://odok.gov.cz/portal/zvlady/usneseni/2026/618/) | ano: Usnesení pověřuje ředitele NÚKIB podpisem smlouvy o vládním bezpečnostním programu.<br>Dopad: Usnesení pověřuje ředitele NÚKIB podpisem smlouvy se společností Microsoft o Vládním bezpečnostním programu. Předchozí stav ani obsah smlouvy balíček neuvádí, takže nelze posoudit rozsah ochrany; pověření je konkrétním krokem souvisejícím s kybernetickou bezpečností. | ano: Usnesení pověřuje ředitele kybernetického úřadu podpisem smlouvy o vládním bezpečnostním programu, ale samotný obsah programu není dodán.<br>Dopad: Jde o nové pověření bez předchozího znění: vláda umožňuje řediteli NÚKIB podepsat smlouvu o Vládním bezpečnostním programu se společností Microsoft. Bez textu smlouvy nelze určit, jakou ochranu program zavádí ani jak významně by slib naplňoval. |
+
+Oba hodnotitelé tyto změny shodně označili za nesouvisející, proto je další balíčky tohoto slibu vynechají, dokud se nezmění jejich text, kontext, znění slibu nebo pokyny hodnotitelů:
+
+- Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona, kterým se mění zákon o poštovních službách
+
+### Zdroje použité při hodnocení
+
+- [Původní volební slib](https://motoristesobe.cz/wp-content/uploads/Volebni_program-2025_MOTORISTE-SOBE.pdf)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Vládní návrh zákona o státním rozpočtu České republiky na rok 2026](https://e-sbirka.gov.cz/sb/2026/38/0000-00-00)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Vládní návrh, kterým se předkládá Parlamentu České republiky k vyslovení souhlasu s ratifikací Smlouva mezi Českou republikou a Mongolskem o policejní spolupráci, podepsaná v Praze dne 10. března 2025](https://www.psp.cz/sqw/text/orig2.sqw?idd=269491)
+- [Změna zákona v návrhu projednávaném Sněmovnou: SVOBODA, BEZPEČNOST A PRÁVO](https://www.psp.cz/sqw/text/orig2.sqw?idd=281029)
+- [Text usnesení vlády: Usnesení vlády č. 22/2026, Vytvoření funkce a jmenování vládního zmocněnce pro digitalizaci a strategickou bezpečnost](https://odok.gov.cz/portal/zvlady/usneseni/2026/22/)
+- [Text usnesení vlády: Usnesení vlády č. 175/2026, Návrh Plánu legislativních prací vlády na zbývající část roku 2026 a návrh Výhledu legislativních prací vlády na léta 2027 až 2029 – Příloha č. 1, 1. místopředseda vlády a ministr průmyslu a obchodu, úkol č. 7: Návrh zákona o požadavcích na kybernetickou bezpečnost výrobků s digitálními prvky](https://odok.gov.cz/portal/zvlady/usneseni/2026/175/)
+- [Text usnesení vlády: Usnesení vlády č. 175/2026, Návrh Plánu legislativních prací vlády na zbývající část roku 2026 a návrh Výhledu legislativních prací vlády na léta 2027 až 2029 – Příloha č. 2, Místopředseda vlády a ministr obrany, úkol č. 1: Návrh zákona, kterým se mění zákon č. 219/1999 Sb., o ozbrojených silách České republiky, ve znění pozdějších předpisů](https://odok.gov.cz/portal/zvlady/usneseni/2026/175/)
+- [Text usnesení vlády: Usnesení vlády č. 175/2026, Návrh Plánu legislativních prací vlády na zbývající část roku 2026 a návrh Výhledu legislativních prací vlády na léta 2027 až 2029 – Příloha č. 3: PŘEHLED IMPLEMENTAČNÍCH PRACÍ VLÁDY NA ZBÝVAJÍCÍ ČÁST ROKU 2026](https://odok.gov.cz/portal/zvlady/usneseni/2026/175/)
+- [Text usnesení vlády: Usnesení vlády č. 197/2026, Stanovení výše účasti státního rozpočtu na financování programu reprodukce majetku 107V470 „Spojovací vojsko AČR, informatizace MO a informační a kybernetické síly AČR“](https://odok.gov.cz/portal/zvlady/usneseni/2026/197/)
+- [Text usnesení vlády: Usnesení vlády č. 314/2026, Systém řízení strategických programů a projektů z oblasti informačních a komunikačních technologií vyplývajících z programového prohlášení vlády a programů a projektů s legislativním termínem a k pověření jejich odpovědných manažerů](https://odok.gov.cz/portal/zvlady/usneseni/2026/314/)
+- [Text usnesení vlády: Usnesení vlády č. 526/2026, Akční plán k Národní strategii kybernetické bezpečnosti na období let 2026–2030](https://odok.gov.cz/portal/zvlady/usneseni/2026/526/)
+- [Text usnesení vlády: Usnesení vlády č. 618/2026, Pověření ředitele Národního úřadu pro kybernetickou a informační bezpečnost k podpisu smlouvy o Vládním bezpečnostním programu se společností Microsoft](https://odok.gov.cz/portal/zvlady/usneseni/2026/618/)
+- [Text pozměňovacího návrhu 7 (sněmovní dokument 523)](https://www.psp.cz/sqw/text/orig2.sqw?idd=268131)
+- [Text pozměňovacího návrhu 34 (sněmovní dokument 360)](https://www.psp.cz/sqw/text/orig2.sqw?idd=267639)
+- [Text pozměňovacího návrhu 65 (sněmovní dokument 526)](https://www.psp.cz/sqw/text/orig2.sqw?idd=268139)
+- [Text pozměňovacího návrhu 81 (sněmovní dokument 551)](https://www.psp.cz/sqw/text/orig2.sqw?idd=268197)
+- [Text pozměňovacího návrhu 82 (sněmovní dokument 552)](https://www.psp.cz/sqw/text/orig2.sqw?idd=268199)
+- [Text pozměňovacího návrhu 95 (sněmovní dokument 454)](https://www.psp.cz/sqw/text/orig2.sqw?idd=267979)
+- [Text pozměňovacího návrhu 107 (sněmovní dokument 520)](https://www.psp.cz/sqw/text/orig2.sqw?idd=268125)
+- [Přijetí usnesení vládou](https://odok.gov.cz/portal/zvlady/usneseni/2026/22/)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=94)
+- [Hlasování Poslanecké sněmovny o pozměňovacím návrhu 7](https://public.psp.cz/sqw/hlasy.sqw?g=86842)
+- [Hlasování Poslanecké sněmovny o pozměňovacím návrhu 34](https://public.psp.cz/sqw/hlasy.sqw?g=86873)
+- [Hlasování Poslanecké sněmovny o pozměňovacím návrhu 65](https://public.psp.cz/sqw/hlasy.sqw?g=86904)
+- [Hlasování Poslanecké sněmovny o pozměňovacím návrhu 81](https://public.psp.cz/sqw/hlasy.sqw?g=86921)
+- [Hlasování Poslanecké sněmovny o pozměňovacím návrhu 82](https://public.psp.cz/sqw/hlasy.sqw?g=86922)
+- [Hlasování Poslanecké sněmovny o pozměňovacím návrhu 95](https://public.psp.cz/sqw/hlasy.sqw?g=86935)
+- [Hlasování Poslanecké sněmovny o pozměňovacím návrhu 107](https://public.psp.cz/sqw/hlasy.sqw?g=86947)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=86957)
+- [Přijetí usnesení vládou](https://odok.gov.cz/portal/zvlady/usneseni/2026/175/)
+- [Přijetí usnesení vládou](https://odok.gov.cz/portal/zvlady/usneseni/2026/197/)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=169)
+- [Přijetí usnesení vládou](https://odok.gov.cz/portal/zvlady/usneseni/2026/314/)
+- [Přijetí usnesení vládou](https://odok.gov.cz/portal/zvlady/usneseni/2026/526/)
+- [Přijetí usnesení vládou](https://odok.gov.cz/portal/zvlady/usneseni/2026/618/)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=331)
+
+Tento návrh nahrazuje starší automatický posudek, který zůstává zachovaný v auditní historii.
+

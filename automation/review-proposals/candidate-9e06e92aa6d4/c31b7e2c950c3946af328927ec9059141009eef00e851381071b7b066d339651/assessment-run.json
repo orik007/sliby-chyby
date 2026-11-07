@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-52-27-697Z--f8a59f164cf8",
+  "evaluatedAt": "2026-10-02T01:52:27.697Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-9e06e92aa6d4/f8a59f164cf8bf22bc725b1439792648eb5bee0903e7f5ce3b728525451cb83d.json",
+  "packageHash": "f8a59f164cf8bf22bc725b1439792648eb5bee0903e7f5ce3b728525451cb83d",
+  "assessmentContentHash": "eb1d4492b5f30702a2e082655fa7c73c2148cc2c5ff682cd2f85a9e7a21094f5",
+  "assessmentFingerprint": "c31b7e2c950c3946af328927ec9059141009eef00e851381071b7b066d339651",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-9e06e92aa6d4",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-9e06e92aa6d4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválené znění ruší výjimku pro školní a vysokoškolský sport z pravidel státní podpory, což může rozšířit podporu i na část univerzitního sportu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-9e06e92aa6d4--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro změnu zákona o podpoře sportu, která mimo jiné ruší výjimku pro školní a vysokoškolský sport z pravidel státní podpory. Po zamítnutí návrhu Senátem hlasovali také pro to, aby na něm Sněmovna setrvala. Tato změna může přispět k podpoře univerzitního sportu, ale výslovně nezavádí podporu univerzitních týmů a lig ani jejich propojení se vzděláváním. Původně předložená část návrhu se týkala vedení Národní sportovní agentury, nikoli takové podpory.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Změna rozšiřuje pravidla podpory sportu, ale z předložených textů nelze doložit, že by přímo zajišťovala podporu univerzitních týmů či lig nebo lepší propojení sportu a vzdělávání."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-9e06e92aa6d4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená verze rozšiřuje pravidla státní podpory sportu tak, že již výslovně nevylučují školní a vysokoškolský sport, což může podpořit část slibu, ačkoli přímo nezmiňuje univerzitní týmy ani ligy."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-9e06e92aa6d4--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro novelu zákona o podpoře sportu ve třetím čtení a po jejím zamítnutí Senátem také pro to, aby na ní Sněmovna setrvala. Schválený text mění pravidla státní podpory tak, že už výslovně nevylučují školní a vysokoškolský sport, čímž otevírá prostor pro podporu vysokoškolského sportu. Nezavádí však výslovnou podporu univerzitních týmů a lig ani jejich propojení se vzděláváním, jde proto o dílčí posun. Původně předložená část novely se týkala vedení Národní sportovní agentury, nikoli tohoto slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text rozšiřuje obecný rámec podpory, ale nedokládá, zda změna konkrétně povede k podpoře univerzitních týmů či lig nebo k lepšímu propojení sportu se vzděláváním."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0c9b71fe26453766016abf0e3ef0cc87d1a1ffd57e066b5952",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12457,
+      "input_tokens_details": {
+        "cache_write_tokens": 9133,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1492,
+      "output_tokens_details": {
+        "reasoning_tokens": 1008
+      },
+      "total_tokens": 13949
+    },
+    "output": {
+      "promiseId": "candidate-9e06e92aa6d4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválené znění ruší výjimku pro školní a vysokoškolský sport z pravidel státní podpory, což může rozšířit podporu i na část univerzitního sportu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-9e06e92aa6d4--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro změnu zákona o podpoře sportu, která mimo jiné ruší výjimku pro školní a vysokoškolský sport z pravidel státní podpory. Po zamítnutí návrhu Senátem hlasovali také pro to, aby na něm Sněmovna setrvala. Tato změna může přispět k podpoře univerzitního sportu, ale výslovně nezavádí podporu univerzitních týmů a lig ani jejich propojení se vzděláváním. Původně předložená část návrhu se týkala vedení Národní sportovní agentury, nikoli takové podpory.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Změna rozšiřuje pravidla podpory sportu, ale z předložených textů nelze doložit, že by přímo zajišťovala podporu univerzitních týmů či lig nebo lepší propojení sportu a vzdělávání."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0f7cd3eaa46dbe78016abf0e4ae90487d1a3fd95532baeb70d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12457,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 12454
+      },
+      "output_tokens": 2320,
+      "output_tokens_details": {
+        "reasoning_tokens": 1796
+      },
+      "total_tokens": 14777
+    },
+    "output": {
+      "promiseId": "candidate-9e06e92aa6d4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená verze rozšiřuje pravidla státní podpory sportu tak, že již výslovně nevylučují školní a vysokoškolský sport, což může podpořit část slibu, ačkoli přímo nezmiňuje univerzitní týmy ani ligy."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-9e06e92aa6d4--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro novelu zákona o podpoře sportu ve třetím čtení a po jejím zamítnutí Senátem také pro to, aby na ní Sněmovna setrvala. Schválený text mění pravidla státní podpory tak, že už výslovně nevylučují školní a vysokoškolský sport, čímž otevírá prostor pro podporu vysokoškolského sportu. Nezavádí však výslovnou podporu univerzitních týmů a lig ani jejich propojení se vzděláváním, jde proto o dílčí posun. Původně předložená část novely se týkala vedení Národní sportovní agentury, nikoli tohoto slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text rozšiřuje obecný rámec podpory, ale nedokládá, zda změna konkrétně povede k podpoře univerzitních týmů či lig nebo k lepšímu propojení sportu se vzděláváním."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

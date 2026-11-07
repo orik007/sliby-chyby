@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T17-49-42-423Z--9cdb00116147",
+  "evaluatedAt": "2026-10-06T17:49:42.423Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-521c93a433/9cdb0011614771d451a616986a03a30629d760a8f94fd51cf3f3ce8a234d16ad.json",
+  "packageHash": "9cdb0011614771d451a616986a03a30629d760a8f94fd51cf3f3ce8a234d16ad",
+  "assessmentContentHash": "f6fbec8f3575403790fa7943d513dcb93a6d4215eb912e8b70cf4b406bb11d3f",
+  "assessmentFingerprint": "a555865f0be2a1f938d060a3e02045bbbdb7c2f952efd1c6192067bc5406c500",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-521c93a433",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-521c93a433",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text vypočítává rušené části několika předpisů, ale neuvádí žádné konkrétní ustanovení o regulaci přeshraničních přetoků a obsah rušené části energetické novely zde chybí.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-521c93a433--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "ANO slíbilo opatření pro spolehlivou regulaci přetoků elektřiny z obnovitelných zdrojů ze sousedních zemí. Jeho poslanci hlasovali pro novelu stavebního zákona v červenci a v září také pro její přijetí poté, co ji Senát, druhá komora Parlamentu, zamítl. Posuzovaná část novely ruší mimo jiné část dřívější změny energetického zákona, ale podklady neuvádějí, jaká pravidla tato část obsahovala ani zda se týkala přeshraničních přetoků. Proto nelze doložit, že hlasování slib posunulo nebo mu odporovalo; podstatný posun ve slibu není ověřen.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují znění rušené části novely energetického zákona, takže nelze zjistit, zda upravovala regulaci přeshraničních přetoků elektřiny; bez této informace nelze hlasování o novele spolehlivě vztáhnout ke slibu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-521c93a433",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Schválený text ruší mimo jiné celou část zákona č. 223/2025 Sb., ale dodané podklady neuvádějí její obsah ani spojení s regulací přeshraničních přetoků, takže nelze doložit víc než obecnou tematickou souvislost.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-521c93a433--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh stavebního zákona a po jeho zamítnutí Senátem také pro setrvání Poslanecké sněmovny na návrhu. V posuzované části zákon ruší mimo jiné celou část zákona č. 223/2025 Sb., ale její obsah v podkladech chybí. Nelze proto ověřit, zda hlasování ANO jakkoli změnilo regulaci přetoků elektřiny ze sousedních zemí. Podstatný posun ve slibu tedy není doložen.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují znění ani předchozí úpravu rušené části zákona č. 223/2025 Sb.; nelze proto určit, zda se týkala přeshraničních přetoků elektřiny a jaký by její zrušení mělo účinek."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0b3c8f68387ea172016ac5347cd80487d2820feb55fece5374",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9274,
+      "input_tokens_details": {
+        "cache_write_tokens": 5304,
+        "cached_tokens": 3967
+      },
+      "output_tokens": 2181,
+      "output_tokens_details": {
+        "reasoning_tokens": 1671
+      },
+      "total_tokens": 11455
+    },
+    "output": {
+      "promiseId": "ano-2025-521c93a433",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text vypočítává rušené části několika předpisů, ale neuvádí žádné konkrétní ustanovení o regulaci přeshraničních přetoků a obsah rušené části energetické novely zde chybí.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-521c93a433--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "ANO slíbilo opatření pro spolehlivou regulaci přetoků elektřiny z obnovitelných zdrojů ze sousedních zemí. Jeho poslanci hlasovali pro novelu stavebního zákona v červenci a v září také pro její přijetí poté, co ji Senát, druhá komora Parlamentu, zamítl. Posuzovaná část novely ruší mimo jiné část dřívější změny energetického zákona, ale podklady neuvádějí, jaká pravidla tato část obsahovala ani zda se týkala přeshraničních přetoků. Proto nelze doložit, že hlasování slib posunulo nebo mu odporovalo; podstatný posun ve slibu není ověřen.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují znění rušené části novely energetického zákona, takže nelze zjistit, zda upravovala regulaci přeshraničních přetoků elektřiny; bez této informace nelze hlasování o novele spolehlivě vztáhnout ke slibu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0710468bbe037976016ac53499db0487d293476451c697e58f",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9274,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 9271
+      },
+      "output_tokens": 1933,
+      "output_tokens_details": {
+        "reasoning_tokens": 1506
+      },
+      "total_tokens": 11207
+    },
+    "output": {
+      "promiseId": "ano-2025-521c93a433",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Schválený text ruší mimo jiné celou část zákona č. 223/2025 Sb., ale dodané podklady neuvádějí její obsah ani spojení s regulací přeshraničních přetoků, takže nelze doložit víc než obecnou tematickou souvislost.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-521c93a433--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh stavebního zákona a po jeho zamítnutí Senátem také pro setrvání Poslanecké sněmovny na návrhu. V posuzované části zákon ruší mimo jiné celou část zákona č. 223/2025 Sb., ale její obsah v podkladech chybí. Nelze proto ověřit, zda hlasování ANO jakkoli změnilo regulaci přetoků elektřiny ze sousedních zemí. Podstatný posun ve slibu tedy není doložen.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují znění ani předchozí úpravu rušené části zákona č. 223/2025 Sb.; nelze proto určit, zda se týkala přeshraničních přetoků elektřiny a jaký by její zrušení mělo účinek."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

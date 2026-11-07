@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T13-48-55-910Z--b752fd69ae2d",
+  "evaluatedAt": "2026-11-05T13:48:55.910Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-e2f4f9f711/b752fd69ae2d71e2352ea661c1b2baa22f4c5ad94b34421f6d6930822e70eae5.json",
+  "packageHash": "b752fd69ae2d71e2352ea661c1b2baa22f4c5ad94b34421f6d6930822e70eae5",
+  "assessmentContentHash": "06e4b8bb5bac987cd26850c533693c6be13cc67a79efac5a994157c072bfe5e2",
+  "assessmentFingerprint": "728d4379fc09c432a1d810891dfdd488ed6bcd2fad83b9be1a76d73646cd148f",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-e2f4f9f711",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-e2f4f9f711",
+      "changeRelevance": [
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-137",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví školné pro studenty dvou vyšších odborných programů škol zřizovaných ministerstvem vnitra, takže se týká i zahraničních studentů, kteří v těchto programech studují.",
+          "effectCz": "Vyhláška zavádí nejvyšší školné 3 000 Kč za školní rok v jednom programu a 2 500 Kč v druhém; ředitel může školné u druhého programu ve výjimečných případech snížit až o polovinu a stanoví také osvobození pro vymezené skupiny. Protože jde o novou vyhlášku, předchozí znění pravidla v balíčku není; pravidlo zpoplatňuje studium i části zahraničních studentů, ale jen v uvedených programech a školách, takže naplňuje pouze část slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-e2f4f9f711--source",
+        "esbirka-regulations--law-change-sb-2026-137",
+        "esbirka-regulations--2026-137"
+      ],
+      "explanationCz": "SPD ve vládě přijalo prostřednictvím ministerstva vnitra vyhlášku č. 137/2026 Sb., která stanoví školné ve dvou vyšších odborných programech škol zřizovaných tímto ministerstvem. Poplatek se vztahuje na studenty těchto programů, tedy i na zahraniční studenty, s uvedenými výjimkami. Jde o zpoplatnění jen v omezeném okruhu škol a programů, nikoli o zpoplatnění studia zahraničních studentů obecně, proto jde o částečný posun ke slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček nedokládá zpoplatnění zahraničních studentů mimo dva uvedené programy škol zřizovaných ministerstvem vnitra."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-e2f4f9f711",
+      "changeRelevance": [
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-137",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví školné pro dva konkrétní akreditované programy vyšších odborných škol, které se vztahuje i na zahraniční studenty.",
+          "effectCz": "Vyhláška nepřepisuje dřívější znění zákona; stanoví nejvyšší školné 3 000 Kč za školní rok u oboru Požární ochrana a bezpečnost práce a 2 500 Kč u oboru Bezpečnostně právní činnost. Ředitel může školné u druhého oboru ve výjimečných případech snížit až o polovinu a některé skupiny studentů jsou od něj osvobozeny. Jde o dílčí zavedení školného, které se týká i zahraničních studentů, nikoli o obecné zpoplatnění studia zahraničních studentů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-e2f4f9f711--source",
+        "esbirka-regulations--law-change-sb-2026-137",
+        "esbirka-regulations--2026-137"
+      ],
+      "explanationCz": "Ministerstvo vnitra vydalo vyhlášku, která stanoví školné v některých vyšších odborných programech škol zřizovaných ministerstvem. Nejvyšší částky jsou 3 000 Kč a 2 500 Kč za školní rok a pravidla se vztahují i na zahraniční studenty. Jde o dílčí posun ke zpoplatnění jejich studia, protože vyhláška se týká jen dvou programů a nezavádí poplatek pro zahraniční studenty obecně.",
+      "confidence": "medium",
+      "uncertainties": []
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_08dde02fc2362c28016aec8913e57c87d1b5c452f142fb72dd",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8515,
+      "input_tokens_details": {
+        "cache_write_tokens": 2165,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 1227,
+      "output_tokens_details": {
+        "reasoning_tokens": 724
+      },
+      "total_tokens": 9742
+    },
+    "output": {
+      "promiseId": "spd-2025-e2f4f9f711",
+      "changeRelevance": [
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-137",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví školné pro studenty dvou vyšších odborných programů škol zřizovaných ministerstvem vnitra, takže se týká i zahraničních studentů, kteří v těchto programech studují.",
+          "effectCz": "Vyhláška zavádí nejvyšší školné 3 000 Kč za školní rok v jednom programu a 2 500 Kč v druhém; ředitel může školné u druhého programu ve výjimečných případech snížit až o polovinu a stanoví také osvobození pro vymezené skupiny. Protože jde o novou vyhlášku, předchozí znění pravidla v balíčku není; pravidlo zpoplatňuje studium i části zahraničních studentů, ale jen v uvedených programech a školách, takže naplňuje pouze část slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-e2f4f9f711--source",
+        "esbirka-regulations--law-change-sb-2026-137",
+        "esbirka-regulations--2026-137"
+      ],
+      "explanationCz": "SPD ve vládě přijalo prostřednictvím ministerstva vnitra vyhlášku č. 137/2026 Sb., která stanoví školné ve dvou vyšších odborných programech škol zřizovaných tímto ministerstvem. Poplatek se vztahuje na studenty těchto programů, tedy i na zahraniční studenty, s uvedenými výjimkami. Jde o zpoplatnění jen v omezeném okruhu škol a programů, nikoli o zpoplatnění studia zahraničních studentů obecně, proto jde o částečný posun ke slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček nedokládá zpoplatnění zahraničních studentů mimo dva uvedené programy škol zřizovaných ministerstvem vnitra."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_01c30553c8be2b5a016aec892e7f1c87d1a483ca14e6958be7",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8515,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8512
+      },
+      "output_tokens": 1167,
+      "output_tokens_details": {
+        "reasoning_tokens": 677
+      },
+      "total_tokens": 9682
+    },
+    "output": {
+      "promiseId": "spd-2025-e2f4f9f711",
+      "changeRelevance": [
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-137",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví školné pro dva konkrétní akreditované programy vyšších odborných škol, které se vztahuje i na zahraniční studenty.",
+          "effectCz": "Vyhláška nepřepisuje dřívější znění zákona; stanoví nejvyšší školné 3 000 Kč za školní rok u oboru Požární ochrana a bezpečnost práce a 2 500 Kč u oboru Bezpečnostně právní činnost. Ředitel může školné u druhého oboru ve výjimečných případech snížit až o polovinu a některé skupiny studentů jsou od něj osvobozeny. Jde o dílčí zavedení školného, které se týká i zahraničních studentů, nikoli o obecné zpoplatnění studia zahraničních studentů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-e2f4f9f711--source",
+        "esbirka-regulations--law-change-sb-2026-137",
+        "esbirka-regulations--2026-137"
+      ],
+      "explanationCz": "Ministerstvo vnitra vydalo vyhlášku, která stanoví školné v některých vyšších odborných programech škol zřizovaných ministerstvem. Nejvyšší částky jsou 3 000 Kč a 2 500 Kč za školní rok a pravidla se vztahují i na zahraniční studenty. Jde o dílčí posun ke zpoplatnění jejich studia, protože vyhláška se týká jen dvou programů a nezavádí poplatek pro zahraniční studenty obecně.",
+      "confidence": "medium",
+      "uncertainties": []
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

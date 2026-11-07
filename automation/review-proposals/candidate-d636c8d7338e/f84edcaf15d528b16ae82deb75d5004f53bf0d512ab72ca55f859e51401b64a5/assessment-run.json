@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-24-49-368Z--c8047c1da5eb",
+  "evaluatedAt": "2026-11-05T10:24:49.368Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-d636c8d7338e/c8047c1da5eb0415eb9e9176b7c390c7dfa7623819eed94b7bad919cb318366b.json",
+  "packageHash": "c8047c1da5eb0415eb9e9176b7c390c7dfa7623819eed94b7bad919cb318366b",
+  "assessmentContentHash": "07f24f521dedf85992c1045a4c3d830f0c2edc6305ef5d8c7709c1924c5e7614",
+  "assessmentFingerprint": "f84edcaf15d528b16ae82deb75d5004f53bf0d512ab72ca55f859e51401b64a5",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-d636c8d7338e",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-d636c8d7338e",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-157",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací výslovně počítá s návrhem zákona, jehož součástí má být úprava dostupnosti léků včetně vytvoření robustních rezervních zásob.",
+          "effectCz": "Usnesení nemění žádný platný zákon ani samo nevytváří zásoby; zařazuje na rok 2027 legislativní úkol připravit návrh zákona o humánních léčivých přípravcích a předložit jej vládě v lednu 2028. Návrh má zahrnout pravidla dostupnosti léků včetně robustních rezervních zásob, což směřuje k naplnění slibu, ale konkrétní zásoby ani jejich rozsah zatím nestanoví."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-d636c8d7338e--source",
+        "zvlady-resolutions--law-change-uv-2026-175-157",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda zařadila do plánu legislativních prací přípravu návrhu zákona o humánních léčivých přípravcích. Plán výslovně uvádí, že návrh má řešit dostupnost léků včetně vytvoření robustních rezervních zásob, což odpovídá prostředku uvedenému ve slibu ANO. Jde však zatím o plán budoucí legislativní práce, nikoli o vytvoření zásob nebo přijatá závazná pravidla.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady dokládají plán přípravy zákona, ale nedokládají, že byly rezervní zásoby léků skutečně vytvořeny nebo že návrh zákona byl následně předložen či přijat."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-d636c8d7338e",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-157",
+          "relevant": true,
+          "reasonCz": "Plánovaný návrh zákona výslovně počítá s úpravou dostupnosti léků včetně vytvoření rezervních zásob, tedy s částí slibu.",
+          "effectCz": "Usnesení nemění dosavadní zákonné pravidlo ani samo rezervní zásoby nezřizuje; zařazuje do legislativního plánu přípravu návrhu zákona, jehož popis výslovně zahrnuje vytvoření robustních rezervních zásob. Jde o přípravný krok směrem ke slibu, nikoli o uskutečnění samotného závazku."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-d636c8d7338e--source",
+        "zvlady-resolutions--law-change-uv-2026-175-157",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda zařadila do legislativního plánu přípravu návrhu zákona o humánních léčivých přípravcích. V popisu úkolu výslovně uvádí, že návrh má upravit dostupnost léků včetně vytvoření robustních rezervních zásob. Usnesení vlády je plánovací krok: zásoby samo nezřizuje, ale příprava návrhu posouvá slibovanou změnu vpřed.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_00676112684bc5a3016aec5958dec887d19df582a2714b4a5f",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8252,
+      "input_tokens_details": {
+        "cache_write_tokens": 1902,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 817,
+      "output_tokens_details": {
+        "reasoning_tokens": 306
+      },
+      "total_tokens": 9069
+    },
+    "output": {
+      "promiseId": "candidate-d636c8d7338e",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-157",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací výslovně počítá s návrhem zákona, jehož součástí má být úprava dostupnosti léků včetně vytvoření robustních rezervních zásob.",
+          "effectCz": "Usnesení nemění žádný platný zákon ani samo nevytváří zásoby; zařazuje na rok 2027 legislativní úkol připravit návrh zákona o humánních léčivých přípravcích a předložit jej vládě v lednu 2028. Návrh má zahrnout pravidla dostupnosti léků včetně robustních rezervních zásob, což směřuje k naplnění slibu, ale konkrétní zásoby ani jejich rozsah zatím nestanoví."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-d636c8d7338e--source",
+        "zvlady-resolutions--law-change-uv-2026-175-157",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda zařadila do plánu legislativních prací přípravu návrhu zákona o humánních léčivých přípravcích. Plán výslovně uvádí, že návrh má řešit dostupnost léků včetně vytvoření robustních rezervních zásob, což odpovídá prostředku uvedenému ve slibu ANO. Jde však zatím o plán budoucí legislativní práce, nikoli o vytvoření zásob nebo přijatá závazná pravidla.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady dokládají plán přípravy zákona, ale nedokládají, že byly rezervní zásoby léků skutečně vytvořeny nebo že návrh zákona byl následně předložen či přijat."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_01af6648b4a292b5016aec596307f887d1b659ab419b9141b4",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8252,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8249
+      },
+      "output_tokens": 1239,
+      "output_tokens_details": {
+        "reasoning_tokens": 825
+      },
+      "total_tokens": 9491
+    },
+    "output": {
+      "promiseId": "candidate-d636c8d7338e",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-157",
+          "relevant": true,
+          "reasonCz": "Plánovaný návrh zákona výslovně počítá s úpravou dostupnosti léků včetně vytvoření rezervních zásob, tedy s částí slibu.",
+          "effectCz": "Usnesení nemění dosavadní zákonné pravidlo ani samo rezervní zásoby nezřizuje; zařazuje do legislativního plánu přípravu návrhu zákona, jehož popis výslovně zahrnuje vytvoření robustních rezervních zásob. Jde o přípravný krok směrem ke slibu, nikoli o uskutečnění samotného závazku."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-d636c8d7338e--source",
+        "zvlady-resolutions--law-change-uv-2026-175-157",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda zařadila do legislativního plánu přípravu návrhu zákona o humánních léčivých přípravcích. V popisu úkolu výslovně uvádí, že návrh má upravit dostupnost léků včetně vytvoření robustních rezervních zásob. Usnesení vlády je plánovací krok: zásoby samo nezřizuje, ale příprava návrhu posouvá slibovanou změnu vpřed.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

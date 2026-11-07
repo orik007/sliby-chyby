@@ -1,0 +1,470 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T13-50-30-339Z--9b40df9e43b1",
+  "evaluatedAt": "2026-11-05T13:50:30.339Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-df82846cc1/9b40df9e43b16249b95381fb2de6b3d6c3362e9cdd51ed8aff3218ad17190ef7.json",
+  "packageHash": "9b40df9e43b16249b95381fb2de6b3d6c3362e9cdd51ed8aff3218ad17190ef7",
+  "assessmentContentHash": "f9685729d39d68b061e414d18be45733f3499ef1fe9716612e1f945ba55873c6",
+  "assessmentFingerprint": "9b69112171fa6af5a64bf1de507dd2b720e8949536fa1f9bfb51e9394ffae593",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-df82846cc1",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment cites law change psp-core-2025--law-change-43453-30 it found not relevant",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_07de0f791509b97e016aec8921937c87d1b4697b111900f7f5",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 29323,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 29320
+            },
+            "output_tokens": 5046,
+            "output_tokens_details": {
+              "reasoning_tokens": 3093
+            },
+            "total_tokens": 34369
+          },
+          "output": {
+            "promiseId": "spd-2025-df82846cc1",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43203-3",
+                "relevant": true,
+                "reasonCz": "Ustanovení výslovně stanoví jako cíl účinné a vzájemné otevírání trhů s veřejnými zakázkami, což se přímo týká slibu upřednostnit české podniky v zakázkách.",
+                "effectCz": "Dohoda nově stanoví cíl vzájemného otevírání trhů s veřejnými zakázkami; balíček neobsahuje předchozí znění, s nímž by šlo změnu porovnat. Směr otevření trhu je v napětí s předností českých podniků, ale samotný úryvek neukazuje konkrétní závazné pravidlo ani přesný rozsah omezení této přednosti."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43203-10",
+                "relevant": true,
+                "reasonCz": "Text upravuje obchodní činnost státních podniků a jejich zacházení s podniky druhé strany, což může zasáhnout do přednosti českých podniků při nákupech těchto podniků.",
+                "effectCz": "Dohoda nově požaduje, aby státní podniky při obchodních činnostech jednaly podle obchodních úvah a při nákupech poskytovaly podnikům druhé strany zacházení nejméně stejně příznivé jako vlastním podnikům. Předchozí znění v balíčku není; pravidlo se týká jen vymezené obchodní činnosti státních podniků, ale v tomto rozsahu zužuje možnost dávat přednost podle českého vlastnictví."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43203-11",
+                "relevant": true,
+                "reasonCz": "Text stanoví nediskriminační zacházení pro zahraniční dodavatele u veřejných zakázek, na které se dohoda vztahuje, a přímo se tak dotýká slibu o přednosti českých podniků v zakázkách.",
+                "effectCz": "Dohoda nově požaduje, aby u zahrnutých zakázek dostali dodavatelé druhé strany zacházení nejméně stejně příznivé jako domácí dodavatelé, a zakazuje diskriminaci podle zahraniční příslušnosti či vlastnictví. Předchozí znění v balíčku není; v rozsahu zakázek, na něž se pravidlo vztahuje, omezuje možnost přednosti založené na českém vlastnictví."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-30",
+                "relevant": false,
+                "reasonCz": "Ustanovení o finančních službách výslovně vylučuje veřejné zakázky na tyto služby z působnosti kapitoly o zakázkách, samo však přednost českých podniků nezavádí ani neomezuje.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-33",
+                "relevant": true,
+                "reasonCz": "Kapitola o zadávání veřejných zakázek dává podnikům druhé strany přístup za stejných podmínek a zakazuje méně příznivé zacházení podle zahraniční příslušnosti či vlastnictví.",
+                "effectCz": "Dohoda nově umožňuje podnikům druhé strany, které jsou usazeny na území druhé strany, účastnit se zahrnutých zakázek za stejných podmínek a vyžaduje nejméně stejně příznivé zacházení s jejich zbožím, službami a dodavateli jako s domácími. Předchozí znění v balíčku není; v rozsahu zahrnutých zakázek pravidla omezují možnost upřednostnit podniky podle českého vlastnictví."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-34",
+                "relevant": true,
+                "reasonCz": "Text ukládá státním podnikům při obchodních činnostech nediskriminační zacházení s podniky druhé strany, což se částečně překrývá s předností českých podniků v zakázkách.",
+                "effectCz": "Dohoda nově požaduje, aby státní podniky při obchodních činnostech při nákupu i prodeji poskytovaly podnikům druhé strany nejméně stejně příznivé zacházení jako vlastním podnikům. Předchozí znění v balíčku není; pravidlo se týká jen vymezených obchodních činností státních podniků a v tomto rozsahu zužuje možnost zvýhodnění podle českého vlastnictví."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-75",
+                "relevant": true,
+                "reasonCz": "Příloha určuje, na které české veřejné zadavatele a zakázky se vztahuje kapitola obsahující pravidla nediskriminace, a tím vymezuje část zakázek dotčených slibem.",
+                "effectCz": "Dohoda nově zahrnuje mimo jiné vyjmenované české ústřední orgány a stanoví limity 130 000 SDR pro zboží a služby a 5 000 000 SDR pro stavební služby; pro zakázky na nižší než ústřední úrovni uvádí limity 200 000 SDR a 5 000 000 SDR. Předchozí znění v balíčku není; příloha sama přednost neupravuje, ale vymezuje zakázky, na něž se podle kapitoly o zakázkách vztahují pravidla omezující takové zvýhodnění."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-84",
+                "relevant": false,
+                "reasonCz": "Předložené výhrady se týkají opatření Mexika, nikoli přednosti českých podniků v českých zakázkách nebo českých investičních pobídkách.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "spd-2025-df82846cc1--source",
+              "psp-core-2025--law-change-43203-3",
+              "psp-core-2025--law-change-43203-10",
+              "psp-core-2025--law-change-43203-11",
+              "psp-core-2025--law-change-43453-33",
+              "psp-core-2025--law-change-43453-34",
+              "psp-core-2025--law-change-43453-75",
+              "psp-core-2025--print-step-210760",
+              "psp-core-2025--law-change-43453-30",
+              "psp-core-2025--print-step-212285"
+            ],
+            "explanationCz": "Vláda předložila Parlamentu dvě mezinárodní dohody, jednu s Uzbekistánem a druhou s Mexikem. Jejich navržená pravidla pro část veřejných zakázek vyžadují nediskriminační zacházení se zahraničními dodavateli, a tím omezují možnost dát v těchto zakázkách přednost podnikům podle českého vlastnictví. Jde o návrhy, nikoli o doložené konečné rozhodnutí; pro slíbenou přednost v investičních pobídkách předložené části konkrétní změnu nedokládají. Proto návrhy představují posun proti části slibu.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Balíček dokládá předložení dohod, nikoli jejich konečné schválení ani to, zda se stanou účinnými.",
+              "Předložené části se týkají jen určitých pravidel a okruhů veřejných zakázek; změnu přednosti v investičních pobídkách nedokládají."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-df82846cc1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-3",
+          "relevant": false,
+          "reasonCz": "Kapitola stanoví obecný cíl otevírat trhy veřejných zakázek, ale v poskytnutém textu sama neurčuje pravidlo, které by měnilo možnost upřednostnit české vlastnictví.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-10",
+          "relevant": true,
+          "reasonCz": "Ustanovení o obchodních činnostech státních podniků se týkají zacházení s dodavateli při nákupu, a proto mohou omezit přednost českých podniků v části zakázek.",
+          "effectCz": "Dohoda by státním podnikům a určeným monopolům při obchodních nákupech ukládala poskytovat podnikům druhé strany v příslušných případech zacházení nejméně stejně příznivé jako s domácími podniky a jednat podle obchodních úvah; u některých zakázek stanoví výjimku. Jde o novou smluvní úpravu, takže balíček neposkytuje předchozí znění, s nímž by šlo změnu porovnat. V rozsahu, v němž se pravidla uplatní na nákupy státních podniků, zužují prostor pro přednost založenou na českém vlastnictví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-11",
+          "relevant": true,
+          "reasonCz": "Pravidla pro veřejné zakázky výslovně vyžadují nediskriminaci dodavatelů a zboží či služeb druhé smluvní strany v zakázkách, na něž se dohoda vztahuje.",
+          "effectCz": "Dohoda by pro pokryté veřejné zakázky vyžadovala, aby dodavatelé, zboží a služby druhé strany nebyli znevýhodněni oproti domácím, a zakazovala by některé rozdíly podle zahraničního vlastnictví či původu nabídky. Jde o novou smluvní úpravu bez předchozího znění v balíčku; ve vymezeném okruhu zakázek by tak omezila možnost slíbené přednosti českým podnikům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-30",
+          "relevant": false,
+          "reasonCz": "Poskytnutá ustanovení se týkají finančních služeb a výslovně vyjímají veřejné zakázky na finanční služby; nedokládají pravidlo o přednosti českých podniků v zakázkách ani investičních pobídkách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-33",
+          "relevant": true,
+          "reasonCz": "Kapitola o veřejných zakázkách stanoví rovné zacházení a zákaz diskriminace podle zahraničního vlastnictví u zakázek, na něž se vztahuje dohoda.",
+          "effectCz": "Dohoda by u pokrytých zakázek umožnila podnikům druhé strany účast za stejných podmínek jako domácím podnikům a zakázala by méně příznivé zacházení založené na zahraniční příslušnosti či vlastnictví nebo původu nabízeného zboží a služeb. Jde o novou smluvní úpravu bez předchozího znění v balíčku; pro zakázky v jejím rozsahu by omezila přednost podniků v českém vlastnictví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-34",
+          "relevant": true,
+          "reasonCz": "Pravidla pro státní podniky upravují jejich obchodní nákupy a zacházení s podniky druhé strany, což se může dotknout části smluvních příležitostí pro české podniky.",
+          "effectCz": "Dohoda by státním podnikům, podnikům se zvláštními právy a monopolům při obchodních nákupech ukládala dodržovat obchodní úvahy a v určených případech poskytovat podnikům druhé strany zacházení nejméně stejně příznivé jako domácím podnikům; zároveň obsahuje výjimky a pravidla se nevztahují na některé zakázky pokryté kapitolou o veřejných zakázkách. Jde o novou smluvní úpravu bez předchozího znění v balíčku. V rozsahu, v němž se uplatní na nákupy těchto podniků, omezuje možnost zvýhodnit podniky podle českého vlastnictví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-75",
+          "relevant": true,
+          "reasonCz": "Příloha vymezuje české zadavatele a prahové hodnoty, od nichž se na jejich zakázky uplatní pravidla dohody o nediskriminačním zadávání.",
+          "effectCz": "Příloha zahrnuje mimo jiné vyjmenované české ústřední orgány a stanoví pro jejich zakázky prahy 130 000 SDR pro zboží a služby a 5 000 000 SDR pro stavební služby; pro další okruhy zadavatelů uvádí také vlastní prahy. Jako součást nové smlouvy nemá v balíčku předchozí znění k porovnání. Vymezuje konkrétní české zakázky, u nichž by se uplatnila pravidla nediskriminace, a tím omezuje slíbenou přednost v těchto zakázkách."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-84",
+          "relevant": false,
+          "reasonCz": "Poskytnutá část přílohy uvádí výhrady a opatření Mexika, nikoli pravidla pro české podniky nebo české zakázky či investiční pobídky.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-df82846cc1--source",
+        "psp-core-2025--law-change-43203-10",
+        "psp-core-2025--law-change-43203-11",
+        "psp-core-2025--law-change-43453-33",
+        "psp-core-2025--law-change-43453-34",
+        "psp-core-2025--law-change-43453-75",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--print-step-212285"
+      ],
+      "explanationCz": "Vláda, v níž je SPD zastoupena, předložila do Poslanecké sněmovny dohodu s Uzbekistánem a dohodu s Mexikem. Jejich pravidla by u části veřejných zakázek vyžadovala nediskriminaci zahraničních dodavatelů a omezila přednost založenou na českém vlastnictví. Jde o návrhy dohod, nikoli o doložené konečné rozhodnutí, ale jejich předložení jde proti části slibu týkající se zakázek. Předložené texty se nevěnují investičním pobídkám, takže o této části slibu nic nedokládají.",
+      "confidence": "high",
+      "uncertainties": [
+        "Dohody jsou v balíčku doloženy jako předložené návrhy; není doloženo jejich konečné přijetí.",
+        "Poskytnuté části dohod se týkají zakázek, nikoli investičních pobídek, takže nelze z nich posoudit postup strany v této části slibu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-df82846cc1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-3",
+          "relevant": true,
+          "reasonCz": "Dohoda výslovně uvádí jako cíl účinné a oboustranné otevírání trhů veřejných zakázek, což se týká možnosti dávat přednost domácím podnikům.",
+          "effectCz": "Jde o ustanovení dohody, nikoli o změnu českého zákona, a předchozí znění proto není uvedeno. Stanoví cíl vzájemného otevírání trhů veřejných zakázek, ale samo zde nepředepisuje konkrétní pravidlo přednosti ani neumožňuje určit přesný dopad na její rozsah."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-10",
+          "relevant": true,
+          "reasonCz": "Ustanovení se týkají obchodních činností státních podniků a zacházení při nákupu zboží a služeb, tedy části veřejných nákupů.",
+          "effectCz": "Dohoda nově stanoví, že dotčené státní podniky mají při obchodních nákupech poskytovat podnikům druhé strany zacházení nejméně stejně příznivé jako domácím podnikům; vztahuje se jen na obchodní činnosti a vymezené nákupy, s uvedenými výjimkami. Předchozí právní úprava v balíčku chybí, takže její změnu vůči dosavadnímu stavu nelze určit; nová povinnost však v tomto okruhu omezuje možnost zvýhodňovat domácí podniky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-11",
+          "relevant": true,
+          "reasonCz": "Pravidla pro zakázky, na které se dohoda vztahuje, přímo řeší rovné zacházení s domácími a zahraničními dodavateli.",
+          "effectCz": "Dohoda nově požaduje, aby u zahrnutých zakázek dostali dodavatelé a zboží či služby druhé strany zacházení nejméně stejně příznivé jako domácí; zakazuje také některé diskriminační rozdíly mezi dodavateli. Předchozí právní úprava není uvedena, takže změnu vůči dosavadnímu stavu nelze určit; nové pravidlo ale omezuje přednost domácích dodavatelů u zakázek, na které dopadá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-30",
+          "relevant": false,
+          "reasonCz": "Text vyjímá veřejné zakázky na finanční služby z působnosti této kapitoly, a sám tedy neurčuje přednost podniků v zakázkách ani investičních pobídkách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-33",
+          "relevant": true,
+          "reasonCz": "Kapitola stanoví rovné zacházení v zahrnutých veřejných zakázkách a zákaz některých forem diskriminace dodavatelů podle zahraničního vlastnictví.",
+          "effectCz": "Dohoda nově stanoví, že v zahrnutých zakázkách nesmějí být dodavatelé, zboží ani služby z druhé strany znevýhodněni vůči domácím a že nelze rozlišovat podle zahraniční příslušnosti či vlastnictví. Předchozí právní úprava není uvedena, takže změnu vůči dosavadnímu stavu nelze určit; pravidlo nicméně omezuje možnost upřednostnit české vlastnictví u zakázek, které do jeho působnosti spadají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-34",
+          "relevant": true,
+          "reasonCz": "Ustanovení o obchodních nákupech státních podniků požadují nediskriminační zacházení s podniky druhé strany, a mohou se tak dotýkat části nákupů.",
+          "effectCz": "Dohoda nově požaduje, aby státní podniky při obchodních činnostech při nákupu a prodeji poskytovaly podnikům druhé strany v uvedených případech zacházení nejméně stejně příznivé jako domácím podnikům; stanoví také výjimky a nevztahuje tuto kapitolu na některé veřejné zakázky zahrnuté do kapitoly o zadávání zakázek. Předchozí právní úprava v balíčku chybí, takže změnu vůči dosavadnímu stavu nelze určit; nová pravidla mohou omezit zvýhodňování domácích podniků v dotčených obchodních nákupech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-75",
+          "relevant": true,
+          "reasonCz": "Příloha určuje české zadavatele a hodnotové limity, nad nimiž se na jejich zakázky vztahují pravidla nediskriminace z dohody.",
+          "effectCz": "Dohoda nově zahrnuje mimo jiné česká ministerstva a další uvedené zadavatele; limity pro ústřední orgány jsou 130 000 SDR pro zboží a služby a 5 000 000 SDR pro stavební služby, pro nižší než ústřední úroveň 200 000 a 5 000 000 SDR a pro jiné uvedené subjekty 400 000 a 5 000 000 SDR. Předchozí rozsah pravidel není v balíčku uveden, takže změnu vůči dosavadnímu stavu nelze určit; příloha však vymezuje zakázky, u nichž mohou pravidla rovného zacházení omezit přednost českých podniků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-84",
+          "relevant": false,
+          "reasonCz": "Výňatek popisuje výhrady Mexika k jeho energetickým opatřením a místnímu obsahu, nikoli pravidla pro přednost českých podniků v českých zakázkách nebo pobídkách.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-df82846cc1--source",
+        "psp-core-2025--law-change-43203-3",
+        "psp-core-2025--law-change-43203-10",
+        "psp-core-2025--law-change-43203-11",
+        "psp-core-2025--law-change-43453-33",
+        "psp-core-2025--law-change-43453-34",
+        "psp-core-2025--law-change-43453-75",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--print-step-212285"
+      ],
+      "explanationCz": "Vláda, v níž SPD působí, předložila k ratifikaci dohodu s Uzbekistánem a později také dohodu s Mexikem. Jejich ustanovení o zahrnutých veřejných zakázkách požadují, aby dodavatelé druhé strany nebyli znevýhodněni vůči domácím, a omezují tak možnost dát českým podnikům přednost u části zakázek. Dohody rovněž stanoví některá pravidla rovného zacházení pro obchodní nákupy státních podniků a vymezují okruh zakázek, na které se pravidla vztahují. Předložení je návrhovým krokem, nikoli doloženým konečným schválením; jde však o postup proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček dokládá předložení dohod vládou, nikoli jejich konečné schválení. Není proto doloženo, zda se popsaná pravidla stanou závaznými.",
+        "Ustanovení se vztahují jen na vymezené zakázky a obchodní činnosti; balíček neuvádí, jak velkou část českých zakázek a investičních pobídek pokrývají."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_006fe296cc8e3488016aec88bcac5087d1bbc8e759de60b44a",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 29323,
+      "input_tokens_details": {
+        "cache_write_tokens": 22973,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 4884,
+      "output_tokens_details": {
+        "reasoning_tokens": 3106
+      },
+      "total_tokens": 34207
+    },
+    "output": {
+      "promiseId": "spd-2025-df82846cc1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-3",
+          "relevant": false,
+          "reasonCz": "Kapitola stanoví obecný cíl otevírat trhy veřejných zakázek, ale v poskytnutém textu sama neurčuje pravidlo, které by měnilo možnost upřednostnit české vlastnictví.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-10",
+          "relevant": true,
+          "reasonCz": "Ustanovení o obchodních činnostech státních podniků se týkají zacházení s dodavateli při nákupu, a proto mohou omezit přednost českých podniků v části zakázek.",
+          "effectCz": "Dohoda by státním podnikům a určeným monopolům při obchodních nákupech ukládala poskytovat podnikům druhé strany v příslušných případech zacházení nejméně stejně příznivé jako s domácími podniky a jednat podle obchodních úvah; u některých zakázek stanoví výjimku. Jde o novou smluvní úpravu, takže balíček neposkytuje předchozí znění, s nímž by šlo změnu porovnat. V rozsahu, v němž se pravidla uplatní na nákupy státních podniků, zužují prostor pro přednost založenou na českém vlastnictví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-11",
+          "relevant": true,
+          "reasonCz": "Pravidla pro veřejné zakázky výslovně vyžadují nediskriminaci dodavatelů a zboží či služeb druhé smluvní strany v zakázkách, na něž se dohoda vztahuje.",
+          "effectCz": "Dohoda by pro pokryté veřejné zakázky vyžadovala, aby dodavatelé, zboží a služby druhé strany nebyli znevýhodněni oproti domácím, a zakazovala by některé rozdíly podle zahraničního vlastnictví či původu nabídky. Jde o novou smluvní úpravu bez předchozího znění v balíčku; ve vymezeném okruhu zakázek by tak omezila možnost slíbené přednosti českým podnikům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-30",
+          "relevant": false,
+          "reasonCz": "Poskytnutá ustanovení se týkají finančních služeb a výslovně vyjímají veřejné zakázky na finanční služby; nedokládají pravidlo o přednosti českých podniků v zakázkách ani investičních pobídkách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-33",
+          "relevant": true,
+          "reasonCz": "Kapitola o veřejných zakázkách stanoví rovné zacházení a zákaz diskriminace podle zahraničního vlastnictví u zakázek, na něž se vztahuje dohoda.",
+          "effectCz": "Dohoda by u pokrytých zakázek umožnila podnikům druhé strany účast za stejných podmínek jako domácím podnikům a zakázala by méně příznivé zacházení založené na zahraniční příslušnosti či vlastnictví nebo původu nabízeného zboží a služeb. Jde o novou smluvní úpravu bez předchozího znění v balíčku; pro zakázky v jejím rozsahu by omezila přednost podniků v českém vlastnictví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-34",
+          "relevant": true,
+          "reasonCz": "Pravidla pro státní podniky upravují jejich obchodní nákupy a zacházení s podniky druhé strany, což se může dotknout části smluvních příležitostí pro české podniky.",
+          "effectCz": "Dohoda by státním podnikům, podnikům se zvláštními právy a monopolům při obchodních nákupech ukládala dodržovat obchodní úvahy a v určených případech poskytovat podnikům druhé strany zacházení nejméně stejně příznivé jako domácím podnikům; zároveň obsahuje výjimky a pravidla se nevztahují na některé zakázky pokryté kapitolou o veřejných zakázkách. Jde o novou smluvní úpravu bez předchozího znění v balíčku. V rozsahu, v němž se uplatní na nákupy těchto podniků, omezuje možnost zvýhodnit podniky podle českého vlastnictví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-75",
+          "relevant": true,
+          "reasonCz": "Příloha vymezuje české zadavatele a prahové hodnoty, od nichž se na jejich zakázky uplatní pravidla dohody o nediskriminačním zadávání.",
+          "effectCz": "Příloha zahrnuje mimo jiné vyjmenované české ústřední orgány a stanoví pro jejich zakázky prahy 130 000 SDR pro zboží a služby a 5 000 000 SDR pro stavební služby; pro další okruhy zadavatelů uvádí také vlastní prahy. Jako součást nové smlouvy nemá v balíčku předchozí znění k porovnání. Vymezuje konkrétní české zakázky, u nichž by se uplatnila pravidla nediskriminace, a tím omezuje slíbenou přednost v těchto zakázkách."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-84",
+          "relevant": false,
+          "reasonCz": "Poskytnutá část přílohy uvádí výhrady a opatření Mexika, nikoli pravidla pro české podniky nebo české zakázky či investiční pobídky.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-df82846cc1--source",
+        "psp-core-2025--law-change-43203-10",
+        "psp-core-2025--law-change-43203-11",
+        "psp-core-2025--law-change-43453-33",
+        "psp-core-2025--law-change-43453-34",
+        "psp-core-2025--law-change-43453-75",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--print-step-212285"
+      ],
+      "explanationCz": "Vláda, v níž je SPD zastoupena, předložila do Poslanecké sněmovny dohodu s Uzbekistánem a dohodu s Mexikem. Jejich pravidla by u části veřejných zakázek vyžadovala nediskriminaci zahraničních dodavatelů a omezila přednost založenou na českém vlastnictví. Jde o návrhy dohod, nikoli o doložené konečné rozhodnutí, ale jejich předložení jde proti části slibu týkající se zakázek. Předložené texty se nevěnují investičním pobídkám, takže o této části slibu nic nedokládají.",
+      "confidence": "high",
+      "uncertainties": [
+        "Dohody jsou v balíčku doloženy jako předložené návrhy; není doloženo jejich konečné přijetí.",
+        "Poskytnuté části dohod se týkají zakázek, nikoli investičních pobídek, takže nelze z nich posoudit postup strany v této části slibu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0534683c3f8a3b45016aec8979220c87d1ad93e98c58aaeb71",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 29323,
+      "input_tokens_details": {
+        "cached_tokens": 29320,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 4535,
+      "output_tokens_details": {
+        "reasoning_tokens": 2521
+      },
+      "total_tokens": 33858
+    },
+    "output": {
+      "promiseId": "spd-2025-df82846cc1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-3",
+          "relevant": true,
+          "reasonCz": "Dohoda výslovně uvádí jako cíl účinné a oboustranné otevírání trhů veřejných zakázek, což se týká možnosti dávat přednost domácím podnikům.",
+          "effectCz": "Jde o ustanovení dohody, nikoli o změnu českého zákona, a předchozí znění proto není uvedeno. Stanoví cíl vzájemného otevírání trhů veřejných zakázek, ale samo zde nepředepisuje konkrétní pravidlo přednosti ani neumožňuje určit přesný dopad na její rozsah."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-10",
+          "relevant": true,
+          "reasonCz": "Ustanovení se týkají obchodních činností státních podniků a zacházení při nákupu zboží a služeb, tedy části veřejných nákupů.",
+          "effectCz": "Dohoda nově stanoví, že dotčené státní podniky mají při obchodních nákupech poskytovat podnikům druhé strany zacházení nejméně stejně příznivé jako domácím podnikům; vztahuje se jen na obchodní činnosti a vymezené nákupy, s uvedenými výjimkami. Předchozí právní úprava v balíčku chybí, takže její změnu vůči dosavadnímu stavu nelze určit; nová povinnost však v tomto okruhu omezuje možnost zvýhodňovat domácí podniky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-11",
+          "relevant": true,
+          "reasonCz": "Pravidla pro zakázky, na které se dohoda vztahuje, přímo řeší rovné zacházení s domácími a zahraničními dodavateli.",
+          "effectCz": "Dohoda nově požaduje, aby u zahrnutých zakázek dostali dodavatelé a zboží či služby druhé strany zacházení nejméně stejně příznivé jako domácí; zakazuje také některé diskriminační rozdíly mezi dodavateli. Předchozí právní úprava není uvedena, takže změnu vůči dosavadnímu stavu nelze určit; nové pravidlo ale omezuje přednost domácích dodavatelů u zakázek, na které dopadá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-30",
+          "relevant": false,
+          "reasonCz": "Text vyjímá veřejné zakázky na finanční služby z působnosti této kapitoly, a sám tedy neurčuje přednost podniků v zakázkách ani investičních pobídkách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-33",
+          "relevant": true,
+          "reasonCz": "Kapitola stanoví rovné zacházení v zahrnutých veřejných zakázkách a zákaz některých forem diskriminace dodavatelů podle zahraničního vlastnictví.",
+          "effectCz": "Dohoda nově stanoví, že v zahrnutých zakázkách nesmějí být dodavatelé, zboží ani služby z druhé strany znevýhodněni vůči domácím a že nelze rozlišovat podle zahraniční příslušnosti či vlastnictví. Předchozí právní úprava není uvedena, takže změnu vůči dosavadnímu stavu nelze určit; pravidlo nicméně omezuje možnost upřednostnit české vlastnictví u zakázek, které do jeho působnosti spadají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-34",
+          "relevant": true,
+          "reasonCz": "Ustanovení o obchodních nákupech státních podniků požadují nediskriminační zacházení s podniky druhé strany, a mohou se tak dotýkat části nákupů.",
+          "effectCz": "Dohoda nově požaduje, aby státní podniky při obchodních činnostech při nákupu a prodeji poskytovaly podnikům druhé strany v uvedených případech zacházení nejméně stejně příznivé jako domácím podnikům; stanoví také výjimky a nevztahuje tuto kapitolu na některé veřejné zakázky zahrnuté do kapitoly o zadávání zakázek. Předchozí právní úprava v balíčku chybí, takže změnu vůči dosavadnímu stavu nelze určit; nová pravidla mohou omezit zvýhodňování domácích podniků v dotčených obchodních nákupech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-75",
+          "relevant": true,
+          "reasonCz": "Příloha určuje české zadavatele a hodnotové limity, nad nimiž se na jejich zakázky vztahují pravidla nediskriminace z dohody.",
+          "effectCz": "Dohoda nově zahrnuje mimo jiné česká ministerstva a další uvedené zadavatele; limity pro ústřední orgány jsou 130 000 SDR pro zboží a služby a 5 000 000 SDR pro stavební služby, pro nižší než ústřední úroveň 200 000 a 5 000 000 SDR a pro jiné uvedené subjekty 400 000 a 5 000 000 SDR. Předchozí rozsah pravidel není v balíčku uveden, takže změnu vůči dosavadnímu stavu nelze určit; příloha však vymezuje zakázky, u nichž mohou pravidla rovného zacházení omezit přednost českých podniků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-84",
+          "relevant": false,
+          "reasonCz": "Výňatek popisuje výhrady Mexika k jeho energetickým opatřením a místnímu obsahu, nikoli pravidla pro přednost českých podniků v českých zakázkách nebo pobídkách.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-df82846cc1--source",
+        "psp-core-2025--law-change-43203-3",
+        "psp-core-2025--law-change-43203-10",
+        "psp-core-2025--law-change-43203-11",
+        "psp-core-2025--law-change-43453-33",
+        "psp-core-2025--law-change-43453-34",
+        "psp-core-2025--law-change-43453-75",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--print-step-212285"
+      ],
+      "explanationCz": "Vláda, v níž SPD působí, předložila k ratifikaci dohodu s Uzbekistánem a později také dohodu s Mexikem. Jejich ustanovení o zahrnutých veřejných zakázkách požadují, aby dodavatelé druhé strany nebyli znevýhodněni vůči domácím, a omezují tak možnost dát českým podnikům přednost u části zakázek. Dohody rovněž stanoví některá pravidla rovného zacházení pro obchodní nákupy státních podniků a vymezují okruh zakázek, na které se pravidla vztahují. Předložení je návrhovým krokem, nikoli doloženým konečným schválením; jde však o postup proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček dokládá předložení dohod vládou, nikoli jejich konečné schválení. Není proto doloženo, zda se popsaná pravidla stanou závaznými.",
+        "Ustanovení se vztahují jen na vymezené zakázky a obchodní činnosti; balíček neuvádí, jak velkou část českých zakázek a investičních pobídek pokrývají."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

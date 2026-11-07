@@ -1,0 +1,1118 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T21-10-21-179Z--b8fa181f595f",
+  "evaluatedAt": "2026-10-06T21:10:21.179Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-5dfff68841/b8fa181f595f523580679ac4fa3414c5c3965d984e53c1ac13480db2adf825c1.json",
+  "packageHash": "b8fa181f595f523580679ac4fa3414c5c3965d984e53c1ac13480db2adf825c1",
+  "assessmentContentHash": "c47e35d476180b1511af06b1a416839d1c19534e49c6a1aaae7603cabac3f184",
+  "assessmentFingerprint": "09bd2f70dcd647d007f1f5bbca77bb628e4931a9cbfb8dc4d0b8573d662eec46",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-5dfff68841",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment gives a law change more than one relevance verdict",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0014548983ffa429016ac5612a8d1c87d2b710f876bf9d5136",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 274068,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 274065
+            },
+            "output_tokens": 13413,
+            "output_tokens_details": {
+              "reasoning_tokens": 9540
+            },
+            "total_tokens": 287481
+          },
+          "output": {
+            "promiseId": "motoriste-2025-5dfff68841",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43195-1",
+                "relevant": true,
+                "reasonCz": "Změna výslovně upravuje, jak se dávky státní sociální pomoci započítávají při posuzování příjmů, a může tak ovlivnit adresnost i rozsah nároků.",
+                "effectCz": "Dosud § 7 odst. 2 písm. h) zákona o životním a existenčním minimu mezi výjimkami uváděl body 1 až 11; nově přibývá bod 12, který z výpočtu příjmů vylučuje dávku státní sociální pomoci. Tím se může snížit započítaný příjem a rozšířit nárok na pomoc; pravidlo je v tomto ohledu volnější, nikoli úspornější."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43195-2",
+                "relevant": true,
+                "reasonCz": "Mění povinnost hlásit příjmy pro zvýšení příspěvku na péči a zasahuje tak do odstraňování duplicit v sociálních agendách.",
+                "effectCz": "Před změnou mohl příjemce povinnost písemného hlášení splnit také sdělením, že ve stanovené lhůtě doložil tytéž příjmy pro přídavek na dítě a že okruh společně posuzovaných osob je stejný. Novela tuto možnost ruší, takže povinnost se zpřísňuje a možnost vyhnout se opakovanému dokládání se zmenšuje; směr změny jde proti odstraňování duplicit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43195-3",
+                "relevant": true,
+                "reasonCz": "Mění termíny účinnosti vybraných částí již přijaté sociální reformy až na 1. června 2028, a tedy může ovlivnit její uskutečnění v roce, k němuž se slib vztahuje.",
+                "effectCz": "Text posouvá účinnost uvedených částí na 1. června 2028, ale kontext neobsahuje znění ustanovení, jejichž termín mění. Lze určit posun termínu, nikoli to, zda odkládaná pravidla zpřísňují či uvolňují nároky nebo výdaje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43198-1",
+                "relevant": true,
+                "reasonCz": "Posouvá zahájení nároku a lhůty pro vyřizování nové dávky státní sociální pomoci, takže mění načasování sociální reformy.",
+                "effectCz": "Dosavadní znění počítalo u dotčených příjemců s nárokem nejdříve od 1. dubna 2026 a navazovalo na období duben až červen; novela tyto termíny posouvá na červenec a červenec až září 2026 a stanoví lhůtu pro rozhodnutí nejpozději do 31. července. Nový nárok se tedy odkládá, ale z balíčku nelze určit čistý dopad na výdaje, protože související přechodná pravidla prodlužují také dosavadní dávky."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43198-2",
+                "relevant": true,
+                "reasonCz": "Mění započítávání nové dávky při posuzování příjmů pro životní minimum, a tím může změnit rozsah sociálních nároků.",
+                "effectCz": "Dosavadní § 7 odst. 2 písm. h) neuváděl dávku státní sociální pomoci jako samostatnou výjimku; nově se mezi výjimky doplňuje. Dávka se proto nebude započítávat do příjmů, což může rozšířit nárok na pomoc a je volnějším, nikoli úspornějším nastavením."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43198-4",
+                "relevant": true,
+                "reasonCz": "Prodlužuje přechodná období pro výplatu dosavadních sociálních dávek při zavádění nové dávky, a tím se dotýká načasování i nákladů reformy.",
+                "effectCz": "Dosavadní úprava zachovávala některé přídavky a příspěvek na bydlení do 31. března 2026 a příspěvek na živobytí či doplatek na bydlení do 30. dubna 2026; novela první termín posouvá na 30. června a druhý na 31. července 2026. Zároveň mění účinnost vybraných souvisejících ustanovení. Přechod dosavadních dávek se prodlužuje, což může znamenat jejich delší výplatu; celkový dopad na výdaje ale z textu nelze spočítat."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-8",
+                "relevant": true,
+                "reasonCz": "Mění pravidla rozpočtové odpovědnosti a zavádí závazný výdajový rámec, což se týká rozpočtových pravidel uvedených ve slibu.",
+                "effectCz": "Předchozí úprava odvozovala celkové výdaje sektoru veřejných institucí zejména od příjmů, hospodářského cyklu a limitu nejvýše 1 % prognózovaného HDP, s dalšími korekcemi. Nová úprava odvozuje výdajový rámec od primárního strukturálního salda a pravidel čistých výdajů EU a zachovává závazný maximální rámec konsolidovaných výdajů státu a státních fondů. Jde o změnu mechanismu, ale z předložených údajů nelze určit, zda je celkový limit přísnější; novela sama nestanoví konkrétní snížení mandatorních výdajů ani deficit 85 miliard."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43239-1",
+                "relevant": true,
+                "reasonCz": "Zahrnuje změny rodičovského příspěvku i elektronického vyřizování části dávek, tedy sociální agendu a dílčí zjednodušení, které slib výslovně zmiňuje.",
+                "effectCz": "Návrh zavádí rodičovský příspěvek před porodem ve výši 15 000 Kč měsíčně a upravuje žádosti a řízení elektronickou cestou. Kontext nepodává předchozí znění dotčených ustanovení § 30d a § 68, takže směr změny samotného nároku na příspěvek před porodem nelze porovnat; elektronické podání však představuje dílčí zjednodušení agendy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43239-2",
+                "relevant": true,
+                "reasonCz": "Ruší plánovaná ustanovení o elektronickém podávání, doručování a vedení spisů u dávek státní sociální podpory, což přímo souvisí s elektronizací slíbenou stranou.",
+                "effectCz": "Předchozí úprava zákona č. 152/2025 Sb. plánovala elektronické podávání, doručování prostřednictvím informačního systému a elektronické vedení spisu. Novela ruší vybrané body této úpravy a jejich uvedení v seznamu ustanovení nabývajících účinnosti. Tím se plánované elektronické nástroje omezují nebo odkládají, což jde proti slíbené elektronizaci."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43319-1",
+                "relevant": true,
+                "reasonCz": "Zvyšuje rodičovský příspěvek, tedy mění mandatorní sociální výdaj přímo opačným směrem než slibované další omezení těchto výdajů.",
+                "effectCz": "Před změnou činila celková částka rodičovského příspěvku 350 000 Kč, u vícerčat její dvojnásobek; návrh částky zvyšuje na 400 000 Kč, u vícerčat tedy na dvojnásobek této částky. Nárok se zvětšuje a výdaj státu roste, což je v rozporu s dalším omezováním mandatorních výdajů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+                "relevant": true,
+                "reasonCz": "Mění výpočet uznatelných nákladů na bydlení u dávky státní sociální pomoci, což může změnit výši sociálních nároků a jejich adresnost.",
+                "effectCz": "Před změnou se normativní nájemné členilo podle počtu obyvatel obce; nově se má členit podle okresů. Konkrétní změnu částek mezi obcemi a okresy nelze z balíčku určit. Novela však nově stanoví, že pokud je normativní nájemné pro početnější domácnost nižší než pro domácnost o jednoho člena menší ve stejném okrese, použije se vyšší částka té menší domácnosti; v takových případech se uznatelná částka a případný nárok zvětšují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+                "relevant": false,
+                "reasonCz": "Ruší oznámení o normativním nájemném pouze pro rok 2026, aniž by měnilo závazek k reformám nebo cílový schodek v roce 2028.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-2",
+                "relevant": false,
+                "reasonCz": "Mění zvláštní humanitární dávku pro cizince s dočasnou ochranou, nikoli sociální a dotační reformy ani rozpočtový cíl slíbený pro rok 2028.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-14",
+                "relevant": false,
+                "reasonCz": "Upravuje evidenci zaměstnanců a pravidla nehlášené práce, ale text ji nespojuje s dávkovými reformami, omezením mandatorních výdajů ani schodkem pro rok 2028.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-17",
+                "relevant": false,
+                "reasonCz": "Mění pravidla nemocenského pojištění a vymáhání přeplatků, nikoli závazek týkající se dávek státní sociální podpory, jejich duplicit či cílového schodku.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43195-1",
+                "relevant": true,
+                "reasonCz": "Změna ovlivňuje výpočet příjmů u sociální pomoci a může rozšířit nárok.",
+                "effectCz": "Viz výše."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43195-2",
+                "relevant": true,
+                "reasonCz": "Změna zasahuje do možnosti nezdvojovat dokládání příjmů při vyřizování sociálních nároků.",
+                "effectCz": "Viz výše."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43195-3",
+                "relevant": true,
+                "reasonCz": "Mění časový plán části sociální reformy na rok 2028.",
+                "effectCz": "Viz výše."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43198-1",
+                "relevant": true,
+                "reasonCz": "Odkládá termíny přechodu na novou dávku státní sociální pomoci.",
+                "effectCz": "Viz výše."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43198-2",
+                "relevant": true,
+                "reasonCz": "Mění posuzování příjmů pro sociální pomoc.",
+                "effectCz": "Viz výše."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43198-4",
+                "relevant": true,
+                "reasonCz": "Prodlužuje přechodné výplaty dosavadních dávek.",
+                "effectCz": "Viz výše."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "motoriste-2025-5dfff68841--source",
+              "psp-core-2025--law-change-43195-1",
+              "psp-core-2025--law-change-43195-2",
+              "psp-core-2025--law-change-43195-3",
+              "psp-core-2025--law-change-43198-1",
+              "psp-core-2025--law-change-43198-2",
+              "psp-core-2025--law-change-43198-4",
+              "psp-core-2025--law-change-43200-8",
+              "psp-core-2025--law-change-43239-1",
+              "psp-core-2025--law-change-43239-2",
+              "psp-core-2025--law-change-43319-1",
+              "psp-core-2025--law-change-43319-approved-2",
+              "psp-core-2025--print-step-210731",
+              "psp-core-2025--vote-87430",
+              "psp-core-2025--vote-88105",
+              "psp-core-2025--vote-88416",
+              "psp-core-2025--vote-86695",
+              "psp-core-2025--vote-87038",
+              "psp-core-2025--senate-resolution-43195-3",
+              "psp-core-2025--vote-86697",
+              "psp-core-2025--vote-87387",
+              "psp-core-2025--print-step-211452",
+              "psp-core-2025--vote-88130"
+            ],
+            "explanationCz": "Vláda předložila změnu rozpočtových pravidel, která zavádí závazný výdajový rámec, ale podklady neukazují, že by byl přísnější než dosavadní pravidla nebo snižoval konkrétní mandatorní výdaje. Naopak vláda navrhla zvýšit rodičovský příspěvek z 350 000 na 400 000 Kč a poslanci Motoristů návrh podpořili. To jde proti části slibu o dalším omezování mandatorních výdajů, nikoli však samo o sobě proti celému slibu. Schodek 85 miliard v roce 2028 zatím z předložených podkladů ověřit nelze.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Podklady neobsahují státní rozpočet na rok 2028, takže nelze ověřit dosažení schodku 85 miliard Kč.",
+              "U nového výdajového rámce nelze z předchozího a nového znění určit, zda je celkově přísnější; nezavádí výslovné snížení konkrétních mandatorních výdajů.",
+              "U přesunu některých ustanovení sociální reformy na 1. června 2028 není v kontextu uvedeno jejich úplné znění, a proto nelze určit věcný dopad tohoto odkladu."
+            ]
+          }
+        }
+      },
+      {
+        "error": "Assessment gives a law change more than one relevance verdict",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_09a61f2236294224016ac562063dd087d281c368e202c8813f",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 274068,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 274065
+            },
+            "output_tokens": 14287,
+            "output_tokens_details": {
+              "reasoning_tokens": 10301
+            },
+            "total_tokens": 288355
+          },
+          "output": {
+            "promiseId": "motoriste-2025-5dfff68841",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43195-1",
+                "relevant": true,
+                "reasonCz": "Započítání dávky státní sociální pomoci mezi příjmy může zpřesnit cílení sociálních dávek a změnit nárok na ně.",
+                "effectCz": "Před změnou § 7 odst. 2 písm. h) vyjmenovával započitatelné příjmy, aniž obsahoval nový bod pro dávku státní sociální pomoci; po změně se tato dávka výslovně započítává, což může snížit nárok na další podporu a zpřísňuje posuzování příjmů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43195-2",
+                "relevant": true,
+                "reasonCz": "Změna povinnosti dokládat příjem u příspěvku na péči se dotýká administrace sociální dávky, tedy části reformy dávek a agend.",
+                "effectCz": "Před změnou mohl příjemce splnit ohlašovací povinnost i oznámením, že příjmy doložil pro přídavek na dítě a že okruh společně posuzovaných osob je stejný; změna tuto možnost ruší, takže povinnost hlásit příjem je přísnější a administrativně náročnější."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43195-3",
+                "relevant": true,
+                "reasonCz": "Změna termínů účinnosti ustanovení souvisejících s dávkou státní sociální pomoci může ovlivnit načasování reformy dávek do roku 2028.",
+                "effectCz": "Text přesouvá účinnost vyjmenovaných ustanovení na 1. června 2028, ale balíček neuvádí jejich předchozí znění ani obsah, takže nelze určit, zda a jak mění nároky či výdaje; lze doložit pouze posun termínu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43198-1",
+                "relevant": true,
+                "reasonCz": "Posun zavádění nové dávky státní sociální pomoci přímo ovlivňuje načasování sociální reformy.",
+                "effectCz": "Před změnou měl nárok na novou dávku vznikat nejdříve od dubna 2026 a navazující žádosti a rozhodování se vztahovaly k dubnu; po změně se tyto termíny posouvají na červenec 2026 a příslušné rozhodnutí může být vydáno do 31. července. Změna tedy odkládá přechod na novou dávku; její čistý rozpočtový dopad nelze z textu určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43198-2",
+                "relevant": true,
+                "reasonCz": "Započítání nové dávky mezi příjmy je změnou pravidel pro posuzování sociální podpory a cílení dalších dávek.",
+                "effectCz": "Před změnou seznam započitatelných příjmů v § 7 odst. 2 písm. h) nový bod pro dávku státní sociální pomoci neobsahoval; po změně se dávka výslovně započítává, což může snížit nárok na další podporu a zpřísňuje posuzování příjmů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43198-4",
+                "relevant": true,
+                "reasonCz": "Prodloužení přechodných termínů mezi dosavadními dávkami a novou dávkou přímo mění časový průběh sociální reformy.",
+                "effectCz": "Před změnou měly některé dosavadní přídavky a příspěvky pokračovat do 31. března, respektive do 30. dubna 2026; po změně pokračují do 30. června, respektive do 31. července. Změna prodlužuje souběh dosavadního systému s přechodem na nový, ale balíček neumožňuje určit čistý dopad na celkové výdaje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-8",
+                "relevant": true,
+                "reasonCz": "Novela pravidel rozpočtové odpovědnosti mění rámec pro plánování veřejných výdajů a salda, tedy část slibu týkající se rozpočtových pravidel.",
+                "effectCz": "Dosavadní § 10 odvozoval celkové výdaje sektoru veřejných institucí od prognózovaných příjmů a limitu nejvýše 1 % HDP, upraveného mimo jiné o cyklus a nápravnou složku; nový systém odvozuje rámec od primárního strukturálního salda a růstu čistých výdajů podle evropského fiskálně-strukturálního plánu a § 12 stanoví závazný maximální rámec výdajů státního rozpočtu a fondů. Protože konkrétní plánované hodnoty ani srovnatelný limit pro rok 2028 nejsou uvedeny, nelze určit, zda je nový rámec přísnější, nebo volnější, ani zda podporuje schodek 85 miliard."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43239-1",
+                "relevant": true,
+                "reasonCz": "Novela mění podmínky a správu rodičovského příspěvku a zavádí jeho výplatu před porodem, současně upravuje elektronické vyřizování dávek.",
+                "effectCz": "Změna stanoví rodičovský příspěvek před porodem ve výši 15 000 Kč měsíčně a zavádí elektronické podání a doručování u digitalizované dávky; kontext u těchto nových ustanovení předchozí znění neuvádí, takže nelze určit čistý rozpočtový dopad ani úplný směr změny nároků. Elektronické vyřizování naplňuje část slibu o zjednodušení agend, zatímco nová platba zakládá konkrétní výdaj."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43239-2",
+                "relevant": true,
+                "reasonCz": "Ruší části dříve přijaté digitalizace státní sociální podpory, což přímo souvisí se slibovanými prvními efekty elektronizace a zjednodušením agend.",
+                "effectCz": "Dříve přijaté změny měly zavést elektronické podávání, doručování a vedení spisu u dávek; tato novela vyjmenované body ruší, takže jejich zavedení odkládá či odstraňuje a postup k elektronizaci oslabuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-8",
+                "relevant": true,
+                "reasonCz": "Novela pravidel rozpočtové odpovědnosti mění rámec pro plánování veřejných výdajů a salda, tedy část slibu týkající se rozpočtových pravidel.",
+                "effectCz": "Dosavadní § 10 odvozoval celkové výdaje sektoru veřejných institucí od prognózovaných příjmů a limitu nejvýše 1 % HDP, upraveného mimo jiné o cyklus a nápravnou složku; nový systém odvozuje rámec od primárního strukturálního salda a růstu čistých výdajů podle evropského fiskálně-strukturálního plánu a § 12 stanoví závazný maximální rámec výdajů státního rozpočtu a fondů. Protože konkrétní plánované hodnoty ani srovnatelný limit pro rok 2028 nejsou uvedeny, nelze určit, zda je nový rámec přísnější, nebo volnější, ani zda podporuje schodek 85 miliard."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43240-1",
+                "relevant": false,
+                "reasonCz": "Mění především postupy u příspěvku na péči a působnost úřadů, ale balíček neukazuje přímou vazbu na cílení dávek, omezení jejich výdajů ani elektronizaci slibovanou pro rok 2028.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43240-2",
+                "relevant": true,
+                "reasonCz": "Zvyšuje konkrétní sociální dávku, a tím přímo souvisí se slibovaným omezením mandatorních výdajů na dávky.",
+                "effectCz": "Před změnou činil příspěvek na mobilitu pro osoby využívající po celý měsíc domácí kyslíkovou terapii nebo plicní ventilaci 2 900 Kč měsíčně; schválená změna částku zvyšuje na 3 000 Kč, tedy zvětšuje nárok i související mandatorní výdaj."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43240-4",
+                "relevant": false,
+                "reasonCz": "Upravuje přechodná ustanovení a účinnost změn v sociálních službách, ale poskytnutý text neprokazuje přímý dopad na slibované cílení sociálních dávek nebo rozpočtové úspory.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43240-5",
+                "relevant": false,
+                "reasonCz": "Posouvá termín změn v zákoně o dávkách pro osoby se zdravotním postižením, ale obsah odložených bodů z balíčku neprokazuje přímý vztah k reformám slibovaným pro rok 2028.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-4",
+                "relevant": false,
+                "reasonCz": "Upravuje pravidla pobytu cizinců a jejich garantů, nikoli závazek k sociálním a dotačním reformám či schodku pro rok 2028.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43319-1",
+                "relevant": true,
+                "reasonCz": "Zvyšuje celkový rodičovský příspěvek, tedy konkrétní sociální nárok a mandatorní výdaj.",
+                "effectCz": "Před změnou činil celkový rodičovský příspěvek 350 000 Kč, u vícerčat dvojnásobek; návrh zvyšuje částky na 400 000 Kč a 800 000 Kč. Nárok se tedy zvětšuje, což jde proti dalšímu omezení mandatorních výdajů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+                "relevant": true,
+                "reasonCz": "Mění výpočet normativního nájemného a okruh zranitelných osob u dávky státní sociální pomoci, což může změnit počet příjemců i výši podpory.",
+                "effectCz": "Před změnou se částky odvozovaly od kategorií obcí a početních kategorií domácností; nově se obce nahrazují okresy, osamělému rodiči se rozšiřuje věková hranice dítěte ze 7 na 15 let pro příslušné zařazení a stanoví se, že normativní nájemné pro větší domácnost nesmí být nižší než pro domácnost s bezprostředně menším počtem členů. Tato pravidla mohou některým domácnostem zvýšit podporu, ale kvůli změně územního členění nelze určit celkový dopad."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+                "relevant": false,
+                "reasonCz": "Ruší sdělení o normativním nájemném pouze pro rok 2026; nejde o rozpočtový cíl ani reformu slíbenou pro rok 2028.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-2",
+                "relevant": true,
+                "reasonCz": "Zpřísňuje podmínky humanitární dávky pro část dospělých příjemců s dočasnou ochranou, což je konkrétní změna cílení sociální podpory.",
+                "effectCz": "Před změnou mohl příjemce při splnění příjmových a majetkových podmínek žádat o dávku bez obecného požadavku na pracovní aktivitu; návrh pro většinu dospělých zavádí podmínku evidence uchazeče o zaměstnání nebo pracovního příjmu a při nesplnění stanoví dávku na nulu. Nárok se tak zužuje a podpora více cílí na vymezené skupiny, což může omezit výdaje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-14",
+                "relevant": true,
+                "reasonCz": "Mění pravidla podpory v nezaměstnanosti, tedy sociální dávku a výdaj, který může spadat do slibované reformy dávek.",
+                "effectCz": "Návrh mění částky a násobky pro podporu v nezaměstnanosti, mimo jiné uvádí změny 80 na 65 a 40 na 45; kontext však neobsahuje předchozí znění § 50 a § 51, takže nelze určit celkový směr dopadu na nároky ani výdaje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-17",
+                "relevant": false,
+                "reasonCz": "Upravuje nemocenské pojištění a vymáhání přeplatků, nikoli reformu sociální podpory nebo rozpočtový cíl pojmenovaný ve slibu.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "motoriste-2025-5dfff68841--source",
+              "psp-core-2025--law-change-43195-1",
+              "psp-core-2025--law-change-43195-2",
+              "psp-core-2025--law-change-43195-3",
+              "psp-core-2025--law-change-43198-1",
+              "psp-core-2025--law-change-43198-2",
+              "psp-core-2025--law-change-43198-4",
+              "psp-core-2025--law-change-43200-8",
+              "psp-core-2025--law-change-43239-1",
+              "psp-core-2025--law-change-43239-2",
+              "psp-core-2025--law-change-43240-2",
+              "psp-core-2025--law-change-43319-1",
+              "psp-core-2025--law-change-43319-approved-2",
+              "psp-core-2025--law-change-43335-2",
+              "psp-core-2025--law-change-43422-14",
+              "psp-core-2025--print-step-210731",
+              "psp-core-2025--vote-86695",
+              "psp-core-2025--vote-87038",
+              "psp-core-2025--senate-resolution-43195-3",
+              "psp-core-2025--vote-86697",
+              "psp-core-2025--vote-87430",
+              "psp-core-2025--vote-88105",
+              "psp-core-2025--senate-resolution-43200-6",
+              "psp-core-2025--vote-88416",
+              "psp-core-2025--vote-87387",
+              "psp-core-2025--vote-87394",
+              "psp-core-2025--print-step-211452",
+              "psp-core-2025--vote-88130",
+              "psp-core-2025--print-step-211537",
+              "psp-core-2025--print-step-212101"
+            ],
+            "explanationCz": "Vláda předložila změny rozpočtových pravidel a poslanci Motoristů pro ně hlasovali; ty zavádějí nový výdajový rámec, ale z podkladů nelze říci, zda je přísnější pro schodek v roce 2028. Strana také podpořila zvýšení rodičovského příspěvku z 350 na 400 tisíc korun, což jde proti slibu dál omezovat mandatorní výdaje. Podpořila rovněž změnu příspěvku na mobilitu z 2 900 na 3 000 Kč měsíčně, zatímco některé jiné návrhy zpřísňují podmínky dávek nebo měly zjednodušit jejich vyřizování. Rozhodující doložený krok tedy směřuje proti části slibu, nikoli však proti jeho celému obsahu.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Podklady neobsahují rozpočet na rok 2028 ani údaj, že schodek dosáhne 85 miliard Kč; tento měřitelný cíl proto nelze ověřit.",
+              "U nových rozpočtových pravidel nejsou pro rok 2028 srovnatelné výpočty starého a nového výdajového limitu, takže jejich skutečný dopad na schodek není jasný.",
+              "Motoristé nejprve hlasovali pro návrh sociálních změn v tisku o životním a existenčním minimu, později však hlasovali proti jeho prosazení po zamítnutí Senátem; tento protichůdný postup snižuje jistotu, jak strana podporovala konkrétní zpřísnění dávek."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-5dfff68841",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-1",
+          "relevant": true,
+          "reasonCz": "Změna určuje, zda se nová dávka státní sociální pomoci započítá mezi příjmy při posuzování životního minima, a tím přímo mění pravidla sociální podpory.",
+          "effectCz": "Před změnou se mezi započitatelné příjmy zahrnovaly některé příjmy osvobozené od daně, pokud nespadaly do výjimek; nově je výslovně vyňat také příjem z dávky státní sociální pomoci. Tím se při posuzování příjmu část podpory nezapočte, což může rozšířit nárok na další pomoc; pravidlo je v tomto směru mírnější, nikoli přísnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-2",
+          "relevant": true,
+          "reasonCz": "Ruší alternativní způsob doložení příjmů při hlášení pro zvýšení příspěvku na péči, a proto se týká odstranění duplicit a administrativní zátěže při dávkových agendách.",
+          "effectCz": "Před změnou mohl příjemce splnit oznamovací povinnost také sdělením, že ve stejné lhůtě doložil příjmy pro přídavek na dítě a že okruh společně posuzovaných osob je totožný; po změně se tato alternativa ruší. Povinnost hlásit příjmy zůstává, ale její splnění je méně snadné a může vyžadovat opakované dokládání, což administrativní zjednodušení oslabuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": true,
+          "reasonCz": "Mění účinnost vybraných částí právní úpravy navazující na novou dávku státní sociální pomoci, tedy časování sociálních reforem slíbených pro rok 2028.",
+          "effectCz": "Před změnou měly vyjmenované části nastoupit v dřívějších termínech, zejména v květnu a červenci 2026; návrh část účinnosti přesouvá na říjen 2026 a další vybrané části na 1. června 2028. Obsah dotčených částí není v kontextu uveden, takže nelze určit, zda odklad konkrétní závazek slibu zpřísňuje, oslabuje, nebo nemění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-1",
+          "relevant": true,
+          "reasonCz": "Posouvá přechod k dávce státní sociální pomoci a související rozhodování úřadu práce, což se přímo týká reformy sociálních dávek a jejího zavádění.",
+          "effectCz": "Před změnou měl nárok na novou dávku vznikat nejdříve od dubna 2026 a některé žádosti měly být vyřízeny do 30. září; po změně se tyto termíny posouvají na červenec a 31. prosince, u části žádostí je nová lhůta až 31. července 2026. Změna odkládá přechod i rozhodování; sama nemění částky ani adresnost dávek, ale brzdí zavádění reformy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": true,
+          "reasonCz": "Stejně jako další úprava v balíku mění započítávání dávky státní sociální pomoci při posuzování životního minima.",
+          "effectCz": "Před změnou se příjem z nové dávky státní sociální pomoci mezi výjimkami ze započitatelných příjmů výslovně neuváděl; nově se tam doplňuje. Jeho nezapočítávání může rozšířit okruh osob, které splní příjmové podmínky další pomoci, takže posouzení je v tomto směru mírnější, nikoli přísnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": true,
+          "reasonCz": "Prodlužuje výplatu některých dosavadních dávek a posouvá účinnost částí reformy státní sociální pomoci, takže ovlivňuje tempo sociální reformy i související výdaje.",
+          "effectCz": "Dosavadní příspěvky na dítě a bydlení se při podání žádosti měly vyplácet ve stejné výši do 31. března 2026; změna prodlužuje tuto dobu do 30. června. Příspěvek na živobytí a doplatek na bydlení se měly zachovat do 30. dubna, nově až do 31. července. Změna tak prodlužuje zachování starých nároků a odkládá část nových pravidel; krátkodobě je nárok na dosavadní podporu širší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Mění pravidla pro výdajový rámec státního rozpočtu a státních fondů, což je přímo spojeno se slibovanými úpravami rozpočtových zákonů a omezením výdajů.",
+          "effectCz": "Před změnou se celkové výdaje sektoru veřejných institucí odvozovaly mimo jiné od příjmů upravených o cyklus a od limitu nejvýše 1 % prognózovaného HDP; výdajový rámec státního rozpočtu a fondů se odvozoval od celkových výdajů sektoru. Nově se rámec odvozuje od primárního strukturálního salda a plánu čistých výdajů a nadále má být závazným maximem konsolidovaných výdajů rozpočtu a fondů. Z podkladů nelze určit, zda je nový rámec přísnější než dosavadní limit, ani zda omezuje právě mandatorní výdaje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Upravuje elektronické i listinné podávání, vedení spisu a doručování u dávek státní sociální podpory, tedy přímo navazuje na slibované první účinky elektronizace a zjednodušení agend.",
+          "effectCz": "Před změnou byla žádost o dávku obecně písemná a pravidla neobsahovala tuto samostatnou úpravu elektronické dávky s elektronickým spisem a doručováním; nově se zavádějí elektronické postupy, asistované podání a elektronické doručování, přičemž některé listinné možnosti zůstávají. To usnadňuje elektronické vyřízení, ale mění proces, nikoli výši či adresnost nároků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Ruší vybrané dříve naplánované změny pravidel státní sociální podpory, včetně částí elektronizace řízení a doručování.",
+          "effectCz": "Před změnou měly nabýt účinnosti uvedené body zákona upravujícího návazné změny sociální podpory; návrh tyto body ruší. Kontext ukazuje, že mezi rušenými body byly například elektronické podávání, doručování a spis, takže jejich zavedení se oslabuje; přesný dopad na všechny rušené body nelze z dodaného znění určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-1",
+          "relevant": false,
+          "reasonCz": "Upravuje zejména organizaci posuzování příspěvku na péči a sociálních služeb, nikoli slibovanou reformu státní sociální podpory, dotací ani mandatorních výdajů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-2",
+          "relevant": true,
+          "reasonCz": "Mění částku konkrétní dávky pro osoby využívající domácí oxygenoterapii nebo plicní ventilaci, což přímo zasahuje do slibovaného nastavení sociálních dávek a mandatorních výdajů.",
+          "effectCz": "Před změnou činil příspěvek na mobilitu pro oprávněné osoby 2 900 Kč měsíčně; schválené znění jej zvyšuje na 3 000 Kč. Nárokovaná částka se tedy zvětšuje o 100 Kč měsíčně, což výdaje na tuto cílenou skupinu zvyšuje, nikoli omezuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-4",
+          "relevant": false,
+          "reasonCz": "Mění ustanovení o příspěvku na péči a sociálních službách a jejich účinnosti, ale dodané znění je nespojuje se slibovanými dávkovými a rozpočtovými reformami.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": false,
+          "reasonCz": "Posouvá účinnost změn pravidel příspěvku na mobilitu pro osoby se zdravotním postižením, ale podklady neukazují přímou vazbu na reformu dávek nebo dotací uvedenou ve slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": false,
+          "reasonCz": "Upravuje pobyt cizinců a garance jejich pobytových oprávnění, nikoli sociální dávky, dotace ani rozpočtové omezení slíbené stranou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-1",
+          "relevant": true,
+          "reasonCz": "Zvyšuje celkovou částku rodičovského příspěvku, a tím přímo mění významný sociální nárok i mandatorní výdaje.",
+          "effectCz": "Před změnou činil celkový rodičovský příspěvek 350 000 Kč, u vícerčat dvojnásobek; schválené znění nahrazuje částku 350 000 Kč částkou 400 000 Kč, tedy zvyšuje základ o 50 000 Kč a zachovává dvojnásobek pro vícerčata. Vyšší nárok zvětšuje výdaje a nejde o omezení mandatorních výdajů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "Mění výpočet normativního nájemného pro dávku státní sociální pomoci, a tedy pravidla a možné výše sociální podpory.",
+          "effectCz": "Před změnou se normativní nájemné určovalo podle počtu členů domácnosti a kategorie obce; nově se použije členění podle okresů. Doplněné pravidlo navíc stanoví, že u domácnosti s více členy se při nižší vypočtené částce použije částka pro domácnost s bezprostředně menším počtem členů. Tím se v dotčených případech zvyšuje uznatelný limit oproti samotnému výpočtu, což může rozšířit podporu; úsporu výdajů změna nezaručuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+          "relevant": true,
+          "reasonCz": "Ruší vyhlášené hodnoty normativního nájemného pro rok 2026, které se používají při výpočtu dávky státní sociální pomoci.",
+          "effectCz": "Před změnou platilo sdělení ministerstva s hodnotami normativního nájemného a normativního nájemného pro zranitelné osoby pro rok 2026; schválený text toto sdělení ruší od 1. října 2026. Podklady neuvádějí, jaké částky je nahradí, proto nelze určit, zda se limit podpory nebo výdaje zvětší, zmenší, či zůstanou obdobné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-2",
+          "relevant": true,
+          "reasonCz": "Mění podmínky humanitární dávky pro osoby s dočasnou ochranou, včetně pracovních podmínek pro uznání nákladů na bydlení a nulové dávky při některých nesplněných povinnostech.",
+          "effectCz": "Před změnou se u humanitární dávky pro osoby s dočasnou ochranou náklady na ubytování započítávaly i bez obecné pracovní podmínky pro vymezené zranitelné osoby; návrh nově u části žadatelů vyžaduje zaměstnání nebo evidenci uchazeče o zaměstnání a při nesplnění ověřovací výzvy může dávku na další tři měsíce stanovit na nulu. Pravidla jsou pro dotčené osoby přísnější a mohou zúžit výplatu, což odpovídá cílenějšímu poskytování podpory."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": true,
+          "reasonCz": "Mění výši a časování podpory v nezaměstnanosti, tedy sociální dávku a veřejné výdaje, které mohou být součástí reformy dávek.",
+          "effectCz": "Návrh upravuje procentní sazby podpory v nezaměstnanosti, mimo jiné nahrazuje některé hodnoty 80 % a 40 % hodnotami 65 % a 45 % a mění i sazby v dalších obdobích. Kontext neobsahuje úplné předchozí znění všech dotčených ustanovení, takže nelze určit celkový dopad na nárok ani na výdaje; podle samotných změn jsou některé sazby nižší a jiné vyšší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-17",
+          "relevant": false,
+          "reasonCz": "Upravuje zejména procesní a kontrolní pravidla nemocenského pojištění, nikoli slibovanou reformu sociální podpory, dotací nebo rozpočtového omezení.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-5dfff68841--source",
+        "psp-core-2025--law-change-43195-1",
+        "psp-core-2025--law-change-43195-2",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--vote-87038",
+        "psp-core-2025--law-change-43198-1",
+        "psp-core-2025--law-change-43198-2",
+        "psp-core-2025--law-change-43198-4",
+        "psp-core-2025--vote-86697",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--law-change-43240-2",
+        "psp-core-2025--vote-87394",
+        "psp-core-2025--law-change-43319-1",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--law-change-43319-approved-3",
+        "psp-core-2025--print-step-211452",
+        "psp-core-2025--vote-88130",
+        "psp-core-2025--law-change-43335-2",
+        "psp-core-2025--print-step-211537",
+        "psp-core-2025--law-change-43422-14",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě hlasovali pro zvýšení rodičovského příspěvku z 350 000 na 400 000 Kč pro děti narozené nebo převzaté do péče od ledna 2027. Podpořili také zvýšení příspěvku na mobilitu z 2 900 na 3 000 Kč pro vymezenou skupinu příjemců. Obě změny zvyšují některé sociální nároky, a tím jdou proti slíbenému dalšímu omezení mandatorních výdajů. Vláda zároveň předložila návrh přísnějších podmínek pro část humanitární dávky, ten však v dodaných podkladech zůstává návrhem. Podklady neobsahují státní rozpočet na rok 2028, takže nelze ověřit, zda schodek dosáhne 85 miliard korun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Sněmovna schválila změnu pravidel rozpočtové odpovědnosti, která nadále stanoví závazný výdajový rámec; z podkladů ale nelze určit, zda je nový rámec přísnější než dosavadní a zda omezuje právě mandatorní výdaje.",
+        "Vláda navrhla přísnější podmínky u části humanitární dávky a parlament podpořil také úpravy elektronického vyřizování dávek; tyto kroky míří k cílenější nebo jednodušší agendě, ale nevyvracejí pozdější schválené zvýšení rodičovského příspěvku a příspěvku na mobilitu.",
+        "V dodaných důkazech není státní rozpočet na rok 2028, takže samotný číselný cíl schodku 85 miliard korun nelze posoudit."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-5dfff68841",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-1",
+          "relevant": true,
+          "reasonCz": "Změna určuje, zda se nová dávka státní sociální pomoci započítá jako příjem při posuzování životního minima, a tím se přímo dotýká adresnosti a souběhu sociálních dávek.",
+          "effectCz": "Před změnou patřily mezi započitatelné příjmy zdanitelné příjmy osvobozené od daně s výjimkami uvedenými v bodech 1 až 11; nově se přidává dávka státní sociální pomoci jako další započitatelný příjem. Při posuzování nároku se tak pravidlo zpřísňuje a může zmenšit nárok na dávky odvozené od životního minima, což může omezit souběh podpor."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-2",
+          "relevant": false,
+          "reasonCz": "Ruší část povinnosti příjemce příspěvku na péči oznamovat příjmy; změna se netýká slibované reformy dávek státní sociální podpory, jejich adresnosti ani omezení mandatorních výdajů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": true,
+          "reasonCz": "Mění termíny účinnosti několika částí zákona navazujícího na zavedení dávky státní sociální pomoci, a může tak ovlivnit načasování související reformy dávek.",
+          "effectCz": "Text přesouvá vybraná ustanovení zákona č. 152/2025 Sb. do účinnosti od 1. června 2028; kontext však nedodává předchozí znění přesně měněných ustanovení ani obsah všech odkazovaných změn. Lze určit změnu termínu, nikoli z balíčku rozhodnout, zda se tím konkrétní nároky či povinnosti zpřísňují nebo uvolňují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-1",
+          "relevant": false,
+          "reasonCz": "Posouvá přechod stávajících příjemců na novou dávku z dubna na červenec 2026 a prodlužuje lhůty pro rozhodnutí; samo o sobě to neprovádí slibované omezení duplicit ani výdajů pro rok 2028.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": true,
+          "reasonCz": "Také v zákoně o životním a existenčním minimu nově započítává dávku státní sociální pomoci mezi příjmy, což se přímo týká zacílení a možného souběhu dávek.",
+          "effectCz": "Před změnou obsahoval seznam započitatelných příjmů osvobozených od daně výjimky vyjmenované v bodech 1 až 11; nově se mezi nimi výslovně uvádí dávka státní sociální pomoci jako započitatelný příjem. Pravidlo posuzování příjmů se v tomto ohledu zpřísňuje a může omezit souběh dávek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Upravuje termíny účinnosti různých částí zákona navazujícího na dávku státní sociální pomoci, ale dodaný text neukazuje vazbu těchto termínů na konkrétní slibované úspory či reformní opatření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Mění pravidla rozpočtové odpovědnosti a výdajový rámec státního rozpočtu, tedy oblast, kterou slib výslovně spojuje s omezením mandatorních výdajů a schodkem.",
+          "effectCz": "Původní pravidla odvozovala celkové výdaje veřejných institucí od příjmů, hospodářského cyklu a limitu navázaného na HDP; nová úprava staví výdajový rámec na primárním strukturálním saldu a fiskálně-strukturálním plánu EU a ukládá závazný rámec pro státní rozpočet a státní fondy. Protože výpočet i referenční plán se mění a balíček neobsahuje pro rok 2028 číselný strop ani srovnání dopadů, nelze určit, zda je nové omezení přísnější. Ostatní změny se týkají mimo jiné plánování rozpočtů, prognóz, vykazování a působnosti rozpočtových institucí; samy konkrétní snížení mandatorních výdajů nestanoví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Zavádí mimo jiné elektronické postupy pro část rodičovského příspěvku, takže se přímo dotýká slíbené elektronizace a zjednodušení agend, ale současně nově stanoví předporodní dávku.",
+          "effectCz": "U některých řízení novela rozlišuje nedigitalizovanou a digitalizovanou dávku a zavádí podání a vedení spisu prostřednictvím informačního systému, což rozšiřuje elektronické vyřizování; předchozí znění některých dotčených ustanovení v balíčku chybí, takže celkovou změnu náročnosti řízení nelze plně porovnat. Nově také stanoví předporodní rodičovský příspěvek 15 000 Kč měsíčně, pro nějž předchozí znění dodáno není; jde o nový nárok a další výdaj, nikoli o omezení výdajů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Ruší připravované změny v zákoně navazujícím na dávku státní sociální pomoci včetně některých ustanovení o elektronickém vyřizování, a tím přímo zasahuje do slíbené elektronizace.",
+          "effectCz": "Dřívější text zákona počítal s nabytím účinnosti vybraných ustanovení o elektronickém podávání, doručování a vedení spisů od července 2026. Novela tyto body ruší a mění jejich účinnostní seznam, takže zamýšlené rozšíření elektronických postupů se v této podobě neuskuteční; jde proti části slibu o elektronizaci, nikoli však přímo o změnu výše dávek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-1",
+          "relevant": false,
+          "reasonCz": "Mění postupy posuzování příspěvku na péči a příslušnost úřadů, nikoli reformu dávek státní sociální podpory nebo omezení výdajů popsané ve slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-2",
+          "relevant": true,
+          "reasonCz": "Zvyšuje částku příspěvku na mobilitu pro vymezené příjemce, a tím mění nárokové výdaje na konkrétní sociální dávku, které slib spojuje s jejich další redukcí.",
+          "effectCz": "Před změnou činil příspěvek na mobilitu pro osoby využívající po celý měsíc domácí oxygenoterapii nebo plicní ventilaci 2 900 Kč; schválený text částku zvyšuje na 3 000 Kč. Nárok i výdaj se tedy zvětšují o 100 Kč měsíčně pro tuto skupinu, což je v rozporu s omezením mandatorních výdajů, ačkoli jde o úzce vymezený okruh příjemců."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-4",
+          "relevant": false,
+          "reasonCz": "Upravuje termíny a body dřívější novely sociálních služeb, nikoli přímo slibovanou reformu dávek státní sociální podpory či výdajový cíl.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": false,
+          "reasonCz": "Odkládá změny v úpravě příspěvku na mobilitu v zákoně o dávkách pro osoby se zdravotním postižením, ale dodaný text nespojuje tyto konkrétní změny se slibovanými reformními opatřeními pro rok 2028.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": false,
+          "reasonCz": "Upravuje pobytová pravidla pro občany třetích zemí; samotná tematická souvislost s některými dávkami neukazuje, že by text realizoval slibované sociální reformy či výdajový cíl.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-1",
+          "relevant": true,
+          "reasonCz": "Zvyšuje rodičovský příspěvek, tedy zákonný nárokový výdaj, přímo relevantní k závazku dále omezovat mandatorní výdaje.",
+          "effectCz": "Před změnou činila celková částka rodičovského příspěvku 350 000 Kč, u vícerčat dvojnásobek; návrh zvyšuje částku na 400 000 Kč, u vícerčat tedy na dvojnásobek této částky. Nárok se zvětšuje o 50 000 Kč na dítě, což jde proti slíbenému omezení mandatorních výdajů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "Mění výpočet normativního nájemného a některé parametry dávky státní sociální pomoci, takže se přímo týká úpravy a zacílení dávek.",
+          "effectCz": "Před změnou se normativní nájemné odvozovalo od počtu členů domácnosti a kategorií obcí podle počtu obyvatel; schválený text přechází na rozdělení podle okresů a zavádí pravidlo, že částka pro početnější domácnost nesmí být nižší než pro bezprostředně menší domácnost. Mění také referenční období pro první výpočet a některé výdajové částky; bez údajů o nájemném v jednotlivých okresech nelze určit, zda se nárok či výše výdajů celkově zvětší, nebo zmenší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+          "relevant": false,
+          "reasonCz": "Ruší oznámení s hodnotami normativního nájemného pro rok 2026, nikoli pravidlo nebo výdajový cíl slibovaný pro rok 2028.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-2",
+          "relevant": false,
+          "reasonCz": "Mění humanitární dávku a podmínky pro osoby s dočasnou ochranou z Ukrajiny; slib takto vymezenou skupinu ani tuto dávku nejmenuje.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": true,
+          "reasonCz": "Upravuje dávky v nezaměstnanosti, včetně jejich výpočtu, a proto se přímo týká úpravy sociálních dávek a možného omezení výdajů.",
+          "effectCz": "Návrh mění několik sazeb a časových úseků podpory v nezaměstnanosti: některé výslovně uvedené násobky či procentní hodnoty snižuje, jiné zvyšuje. Předchozí znění dotčených pravidel § 50 a § 51 není v kontextu dodáno, takže nelze porovnat dopad pro jednotlivé skupiny ani určit celkový směr výdajů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-17",
+          "relevant": false,
+          "reasonCz": "Změny zákona o nemocenském pojištění se týkají pojištění, přeplatků a kontrol nelegální práce, nikoli opatření uvedených ve slibu o reformě dávek a rozpočtovém schodku.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-5dfff68841--source",
+        "psp-core-2025--law-change-43195-1",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--law-change-43198-2",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--law-change-43240-2",
+        "psp-core-2025--law-change-43319-1",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--law-change-43422-14",
+        "psp-core-2025--senate-resolution-43195-3",
+        "psp-core-2025--vote-86695",
+        "psp-core-2025--vote-87038",
+        "psp-core-2025--vote-86697",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--vote-87394",
+        "psp-core-2025--print-step-211452",
+        "psp-core-2025--vote-88130",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Motoristé hlasovali pro zvýšení rodičovského příspěvku z 350 000 na 400 000 Kč, čímž zvýšili zákonný výdaj místo jeho omezení. Podpořili také úpravu výpočtu nájemného v dávce státní sociální pomoci, jejíž celkový dopad na výdaje z podkladů nelze určit. Dřívější hlasování pro elektronické vyřizování dávek se zároveň pojilo se zrušením některých dalších připravovaných elektronických postupů. Schodek 85 miliard korun pro rok 2028 nelze ověřit: balíček neobsahuje státní rozpočet na tento rok ani výpočet, který by k této částce směřoval.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Bez státního rozpočtu na rok 2028 a odpovídajícího výpočtu nelze ověřit, zda se schodek přiblíží slíbeným 85 miliardám korun; tento podstatný cíl proto zůstává nevyhodnocen.",
+        "U změn výdajového rámce veřejných rozpočtů nelze bez číselného stropu pro rok 2028 porovnat, zda nová pravidla omezují mandatorní výdaje více než pravidla předchozí.",
+        "Zrušení některých připravovaných elektronických postupů v zákoně o dávkách státní sociální pomoci stojí proti části slibu o elektronizaci, zatímco stejný legislativní balík zaváděl elektronické postupy pro část rodičovského příspěvku.",
+        "Výpočet normativního nájemného podle okresů může nároky některých domácností zvýšit a jiných snížit; dodaná data neumožňují určit celkový dopad."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_08b6e45d5b28a080016ac55f676d8487d2b543d18518b22369",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 274068,
+      "input_tokens_details": {
+        "cache_write_tokens": 270098,
+        "cached_tokens": 3967
+      },
+      "output_tokens": 14253,
+      "output_tokens_details": {
+        "reasoning_tokens": 10091
+      },
+      "total_tokens": 288321
+    },
+    "output": {
+      "promiseId": "motoriste-2025-5dfff68841",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-1",
+          "relevant": true,
+          "reasonCz": "Změna určuje, zda se nová dávka státní sociální pomoci započítá mezi příjmy při posuzování životního minima, a tím přímo mění pravidla sociální podpory.",
+          "effectCz": "Před změnou se mezi započitatelné příjmy zahrnovaly některé příjmy osvobozené od daně, pokud nespadaly do výjimek; nově je výslovně vyňat také příjem z dávky státní sociální pomoci. Tím se při posuzování příjmu část podpory nezapočte, což může rozšířit nárok na další pomoc; pravidlo je v tomto směru mírnější, nikoli přísnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-2",
+          "relevant": true,
+          "reasonCz": "Ruší alternativní způsob doložení příjmů při hlášení pro zvýšení příspěvku na péči, a proto se týká odstranění duplicit a administrativní zátěže při dávkových agendách.",
+          "effectCz": "Před změnou mohl příjemce splnit oznamovací povinnost také sdělením, že ve stejné lhůtě doložil příjmy pro přídavek na dítě a že okruh společně posuzovaných osob je totožný; po změně se tato alternativa ruší. Povinnost hlásit příjmy zůstává, ale její splnění je méně snadné a může vyžadovat opakované dokládání, což administrativní zjednodušení oslabuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": true,
+          "reasonCz": "Mění účinnost vybraných částí právní úpravy navazující na novou dávku státní sociální pomoci, tedy časování sociálních reforem slíbených pro rok 2028.",
+          "effectCz": "Před změnou měly vyjmenované části nastoupit v dřívějších termínech, zejména v květnu a červenci 2026; návrh část účinnosti přesouvá na říjen 2026 a další vybrané části na 1. června 2028. Obsah dotčených částí není v kontextu uveden, takže nelze určit, zda odklad konkrétní závazek slibu zpřísňuje, oslabuje, nebo nemění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-1",
+          "relevant": true,
+          "reasonCz": "Posouvá přechod k dávce státní sociální pomoci a související rozhodování úřadu práce, což se přímo týká reformy sociálních dávek a jejího zavádění.",
+          "effectCz": "Před změnou měl nárok na novou dávku vznikat nejdříve od dubna 2026 a některé žádosti měly být vyřízeny do 30. září; po změně se tyto termíny posouvají na červenec a 31. prosince, u části žádostí je nová lhůta až 31. července 2026. Změna odkládá přechod i rozhodování; sama nemění částky ani adresnost dávek, ale brzdí zavádění reformy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": true,
+          "reasonCz": "Stejně jako další úprava v balíku mění započítávání dávky státní sociální pomoci při posuzování životního minima.",
+          "effectCz": "Před změnou se příjem z nové dávky státní sociální pomoci mezi výjimkami ze započitatelných příjmů výslovně neuváděl; nově se tam doplňuje. Jeho nezapočítávání může rozšířit okruh osob, které splní příjmové podmínky další pomoci, takže posouzení je v tomto směru mírnější, nikoli přísnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": true,
+          "reasonCz": "Prodlužuje výplatu některých dosavadních dávek a posouvá účinnost částí reformy státní sociální pomoci, takže ovlivňuje tempo sociální reformy i související výdaje.",
+          "effectCz": "Dosavadní příspěvky na dítě a bydlení se při podání žádosti měly vyplácet ve stejné výši do 31. března 2026; změna prodlužuje tuto dobu do 30. června. Příspěvek na živobytí a doplatek na bydlení se měly zachovat do 30. dubna, nově až do 31. července. Změna tak prodlužuje zachování starých nároků a odkládá část nových pravidel; krátkodobě je nárok na dosavadní podporu širší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Mění pravidla pro výdajový rámec státního rozpočtu a státních fondů, což je přímo spojeno se slibovanými úpravami rozpočtových zákonů a omezením výdajů.",
+          "effectCz": "Před změnou se celkové výdaje sektoru veřejných institucí odvozovaly mimo jiné od příjmů upravených o cyklus a od limitu nejvýše 1 % prognózovaného HDP; výdajový rámec státního rozpočtu a fondů se odvozoval od celkových výdajů sektoru. Nově se rámec odvozuje od primárního strukturálního salda a plánu čistých výdajů a nadále má být závazným maximem konsolidovaných výdajů rozpočtu a fondů. Z podkladů nelze určit, zda je nový rámec přísnější než dosavadní limit, ani zda omezuje právě mandatorní výdaje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Upravuje elektronické i listinné podávání, vedení spisu a doručování u dávek státní sociální podpory, tedy přímo navazuje na slibované první účinky elektronizace a zjednodušení agend.",
+          "effectCz": "Před změnou byla žádost o dávku obecně písemná a pravidla neobsahovala tuto samostatnou úpravu elektronické dávky s elektronickým spisem a doručováním; nově se zavádějí elektronické postupy, asistované podání a elektronické doručování, přičemž některé listinné možnosti zůstávají. To usnadňuje elektronické vyřízení, ale mění proces, nikoli výši či adresnost nároků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Ruší vybrané dříve naplánované změny pravidel státní sociální podpory, včetně částí elektronizace řízení a doručování.",
+          "effectCz": "Před změnou měly nabýt účinnosti uvedené body zákona upravujícího návazné změny sociální podpory; návrh tyto body ruší. Kontext ukazuje, že mezi rušenými body byly například elektronické podávání, doručování a spis, takže jejich zavedení se oslabuje; přesný dopad na všechny rušené body nelze z dodaného znění určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-1",
+          "relevant": false,
+          "reasonCz": "Upravuje zejména organizaci posuzování příspěvku na péči a sociálních služeb, nikoli slibovanou reformu státní sociální podpory, dotací ani mandatorních výdajů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-2",
+          "relevant": true,
+          "reasonCz": "Mění částku konkrétní dávky pro osoby využívající domácí oxygenoterapii nebo plicní ventilaci, což přímo zasahuje do slibovaného nastavení sociálních dávek a mandatorních výdajů.",
+          "effectCz": "Před změnou činil příspěvek na mobilitu pro oprávněné osoby 2 900 Kč měsíčně; schválené znění jej zvyšuje na 3 000 Kč. Nárokovaná částka se tedy zvětšuje o 100 Kč měsíčně, což výdaje na tuto cílenou skupinu zvyšuje, nikoli omezuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-4",
+          "relevant": false,
+          "reasonCz": "Mění ustanovení o příspěvku na péči a sociálních službách a jejich účinnosti, ale dodané znění je nespojuje se slibovanými dávkovými a rozpočtovými reformami.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": false,
+          "reasonCz": "Posouvá účinnost změn pravidel příspěvku na mobilitu pro osoby se zdravotním postižením, ale podklady neukazují přímou vazbu na reformu dávek nebo dotací uvedenou ve slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": false,
+          "reasonCz": "Upravuje pobyt cizinců a garance jejich pobytových oprávnění, nikoli sociální dávky, dotace ani rozpočtové omezení slíbené stranou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-1",
+          "relevant": true,
+          "reasonCz": "Zvyšuje celkovou částku rodičovského příspěvku, a tím přímo mění významný sociální nárok i mandatorní výdaje.",
+          "effectCz": "Před změnou činil celkový rodičovský příspěvek 350 000 Kč, u vícerčat dvojnásobek; schválené znění nahrazuje částku 350 000 Kč částkou 400 000 Kč, tedy zvyšuje základ o 50 000 Kč a zachovává dvojnásobek pro vícerčata. Vyšší nárok zvětšuje výdaje a nejde o omezení mandatorních výdajů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "Mění výpočet normativního nájemného pro dávku státní sociální pomoci, a tedy pravidla a možné výše sociální podpory.",
+          "effectCz": "Před změnou se normativní nájemné určovalo podle počtu členů domácnosti a kategorie obce; nově se použije členění podle okresů. Doplněné pravidlo navíc stanoví, že u domácnosti s více členy se při nižší vypočtené částce použije částka pro domácnost s bezprostředně menším počtem členů. Tím se v dotčených případech zvyšuje uznatelný limit oproti samotnému výpočtu, což může rozšířit podporu; úsporu výdajů změna nezaručuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+          "relevant": true,
+          "reasonCz": "Ruší vyhlášené hodnoty normativního nájemného pro rok 2026, které se používají při výpočtu dávky státní sociální pomoci.",
+          "effectCz": "Před změnou platilo sdělení ministerstva s hodnotami normativního nájemného a normativního nájemného pro zranitelné osoby pro rok 2026; schválený text toto sdělení ruší od 1. října 2026. Podklady neuvádějí, jaké částky je nahradí, proto nelze určit, zda se limit podpory nebo výdaje zvětší, zmenší, či zůstanou obdobné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-2",
+          "relevant": true,
+          "reasonCz": "Mění podmínky humanitární dávky pro osoby s dočasnou ochranou, včetně pracovních podmínek pro uznání nákladů na bydlení a nulové dávky při některých nesplněných povinnostech.",
+          "effectCz": "Před změnou se u humanitární dávky pro osoby s dočasnou ochranou náklady na ubytování započítávaly i bez obecné pracovní podmínky pro vymezené zranitelné osoby; návrh nově u části žadatelů vyžaduje zaměstnání nebo evidenci uchazeče o zaměstnání a při nesplnění ověřovací výzvy může dávku na další tři měsíce stanovit na nulu. Pravidla jsou pro dotčené osoby přísnější a mohou zúžit výplatu, což odpovídá cílenějšímu poskytování podpory."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": true,
+          "reasonCz": "Mění výši a časování podpory v nezaměstnanosti, tedy sociální dávku a veřejné výdaje, které mohou být součástí reformy dávek.",
+          "effectCz": "Návrh upravuje procentní sazby podpory v nezaměstnanosti, mimo jiné nahrazuje některé hodnoty 80 % a 40 % hodnotami 65 % a 45 % a mění i sazby v dalších obdobích. Kontext neobsahuje úplné předchozí znění všech dotčených ustanovení, takže nelze určit celkový dopad na nárok ani na výdaje; podle samotných změn jsou některé sazby nižší a jiné vyšší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-17",
+          "relevant": false,
+          "reasonCz": "Upravuje zejména procesní a kontrolní pravidla nemocenského pojištění, nikoli slibovanou reformu sociální podpory, dotací nebo rozpočtového omezení.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-5dfff68841--source",
+        "psp-core-2025--law-change-43195-1",
+        "psp-core-2025--law-change-43195-2",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--vote-87038",
+        "psp-core-2025--law-change-43198-1",
+        "psp-core-2025--law-change-43198-2",
+        "psp-core-2025--law-change-43198-4",
+        "psp-core-2025--vote-86697",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--law-change-43240-2",
+        "psp-core-2025--vote-87394",
+        "psp-core-2025--law-change-43319-1",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--law-change-43319-approved-3",
+        "psp-core-2025--print-step-211452",
+        "psp-core-2025--vote-88130",
+        "psp-core-2025--law-change-43335-2",
+        "psp-core-2025--print-step-211537",
+        "psp-core-2025--law-change-43422-14",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě hlasovali pro zvýšení rodičovského příspěvku z 350 000 na 400 000 Kč pro děti narozené nebo převzaté do péče od ledna 2027. Podpořili také zvýšení příspěvku na mobilitu z 2 900 na 3 000 Kč pro vymezenou skupinu příjemců. Obě změny zvyšují některé sociální nároky, a tím jdou proti slíbenému dalšímu omezení mandatorních výdajů. Vláda zároveň předložila návrh přísnějších podmínek pro část humanitární dávky, ten však v dodaných podkladech zůstává návrhem. Podklady neobsahují státní rozpočet na rok 2028, takže nelze ověřit, zda schodek dosáhne 85 miliard korun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Sněmovna schválila změnu pravidel rozpočtové odpovědnosti, která nadále stanoví závazný výdajový rámec; z podkladů ale nelze určit, zda je nový rámec přísnější než dosavadní a zda omezuje právě mandatorní výdaje.",
+        "Vláda navrhla přísnější podmínky u části humanitární dávky a parlament podpořil také úpravy elektronického vyřizování dávek; tyto kroky míří k cílenější nebo jednodušší agendě, ale nevyvracejí pozdější schválené zvýšení rodičovského příspěvku a příspěvku na mobilitu.",
+        "V dodaných důkazech není státní rozpočet na rok 2028, takže samotný číselný cíl schodku 85 miliard korun nelze posoudit."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0374bc480a1cb028016ac563046ba087d286b0309db81d539c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 274068,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 274065
+      },
+      "output_tokens": 12343,
+      "output_tokens_details": {
+        "reasoning_tokens": 8624
+      },
+      "total_tokens": 286411
+    },
+    "output": {
+      "promiseId": "motoriste-2025-5dfff68841",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-1",
+          "relevant": true,
+          "reasonCz": "Změna určuje, zda se nová dávka státní sociální pomoci započítá jako příjem při posuzování životního minima, a tím se přímo dotýká adresnosti a souběhu sociálních dávek.",
+          "effectCz": "Před změnou patřily mezi započitatelné příjmy zdanitelné příjmy osvobozené od daně s výjimkami uvedenými v bodech 1 až 11; nově se přidává dávka státní sociální pomoci jako další započitatelný příjem. Při posuzování nároku se tak pravidlo zpřísňuje a může zmenšit nárok na dávky odvozené od životního minima, což může omezit souběh podpor."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-2",
+          "relevant": false,
+          "reasonCz": "Ruší část povinnosti příjemce příspěvku na péči oznamovat příjmy; změna se netýká slibované reformy dávek státní sociální podpory, jejich adresnosti ani omezení mandatorních výdajů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": true,
+          "reasonCz": "Mění termíny účinnosti několika částí zákona navazujícího na zavedení dávky státní sociální pomoci, a může tak ovlivnit načasování související reformy dávek.",
+          "effectCz": "Text přesouvá vybraná ustanovení zákona č. 152/2025 Sb. do účinnosti od 1. června 2028; kontext však nedodává předchozí znění přesně měněných ustanovení ani obsah všech odkazovaných změn. Lze určit změnu termínu, nikoli z balíčku rozhodnout, zda se tím konkrétní nároky či povinnosti zpřísňují nebo uvolňují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-1",
+          "relevant": false,
+          "reasonCz": "Posouvá přechod stávajících příjemců na novou dávku z dubna na červenec 2026 a prodlužuje lhůty pro rozhodnutí; samo o sobě to neprovádí slibované omezení duplicit ani výdajů pro rok 2028.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": true,
+          "reasonCz": "Také v zákoně o životním a existenčním minimu nově započítává dávku státní sociální pomoci mezi příjmy, což se přímo týká zacílení a možného souběhu dávek.",
+          "effectCz": "Před změnou obsahoval seznam započitatelných příjmů osvobozených od daně výjimky vyjmenované v bodech 1 až 11; nově se mezi nimi výslovně uvádí dávka státní sociální pomoci jako započitatelný příjem. Pravidlo posuzování příjmů se v tomto ohledu zpřísňuje a může omezit souběh dávek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Upravuje termíny účinnosti různých částí zákona navazujícího na dávku státní sociální pomoci, ale dodaný text neukazuje vazbu těchto termínů na konkrétní slibované úspory či reformní opatření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Mění pravidla rozpočtové odpovědnosti a výdajový rámec státního rozpočtu, tedy oblast, kterou slib výslovně spojuje s omezením mandatorních výdajů a schodkem.",
+          "effectCz": "Původní pravidla odvozovala celkové výdaje veřejných institucí od příjmů, hospodářského cyklu a limitu navázaného na HDP; nová úprava staví výdajový rámec na primárním strukturálním saldu a fiskálně-strukturálním plánu EU a ukládá závazný rámec pro státní rozpočet a státní fondy. Protože výpočet i referenční plán se mění a balíček neobsahuje pro rok 2028 číselný strop ani srovnání dopadů, nelze určit, zda je nové omezení přísnější. Ostatní změny se týkají mimo jiné plánování rozpočtů, prognóz, vykazování a působnosti rozpočtových institucí; samy konkrétní snížení mandatorních výdajů nestanoví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Zavádí mimo jiné elektronické postupy pro část rodičovského příspěvku, takže se přímo dotýká slíbené elektronizace a zjednodušení agend, ale současně nově stanoví předporodní dávku.",
+          "effectCz": "U některých řízení novela rozlišuje nedigitalizovanou a digitalizovanou dávku a zavádí podání a vedení spisu prostřednictvím informačního systému, což rozšiřuje elektronické vyřizování; předchozí znění některých dotčených ustanovení v balíčku chybí, takže celkovou změnu náročnosti řízení nelze plně porovnat. Nově také stanoví předporodní rodičovský příspěvek 15 000 Kč měsíčně, pro nějž předchozí znění dodáno není; jde o nový nárok a další výdaj, nikoli o omezení výdajů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Ruší připravované změny v zákoně navazujícím na dávku státní sociální pomoci včetně některých ustanovení o elektronickém vyřizování, a tím přímo zasahuje do slíbené elektronizace.",
+          "effectCz": "Dřívější text zákona počítal s nabytím účinnosti vybraných ustanovení o elektronickém podávání, doručování a vedení spisů od července 2026. Novela tyto body ruší a mění jejich účinnostní seznam, takže zamýšlené rozšíření elektronických postupů se v této podobě neuskuteční; jde proti části slibu o elektronizaci, nikoli však přímo o změnu výše dávek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-1",
+          "relevant": false,
+          "reasonCz": "Mění postupy posuzování příspěvku na péči a příslušnost úřadů, nikoli reformu dávek státní sociální podpory nebo omezení výdajů popsané ve slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-2",
+          "relevant": true,
+          "reasonCz": "Zvyšuje částku příspěvku na mobilitu pro vymezené příjemce, a tím mění nárokové výdaje na konkrétní sociální dávku, které slib spojuje s jejich další redukcí.",
+          "effectCz": "Před změnou činil příspěvek na mobilitu pro osoby využívající po celý měsíc domácí oxygenoterapii nebo plicní ventilaci 2 900 Kč; schválený text částku zvyšuje na 3 000 Kč. Nárok i výdaj se tedy zvětšují o 100 Kč měsíčně pro tuto skupinu, což je v rozporu s omezením mandatorních výdajů, ačkoli jde o úzce vymezený okruh příjemců."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-4",
+          "relevant": false,
+          "reasonCz": "Upravuje termíny a body dřívější novely sociálních služeb, nikoli přímo slibovanou reformu dávek státní sociální podpory či výdajový cíl.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": false,
+          "reasonCz": "Odkládá změny v úpravě příspěvku na mobilitu v zákoně o dávkách pro osoby se zdravotním postižením, ale dodaný text nespojuje tyto konkrétní změny se slibovanými reformními opatřeními pro rok 2028.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": false,
+          "reasonCz": "Upravuje pobytová pravidla pro občany třetích zemí; samotná tematická souvislost s některými dávkami neukazuje, že by text realizoval slibované sociální reformy či výdajový cíl.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-1",
+          "relevant": true,
+          "reasonCz": "Zvyšuje rodičovský příspěvek, tedy zákonný nárokový výdaj, přímo relevantní k závazku dále omezovat mandatorní výdaje.",
+          "effectCz": "Před změnou činila celková částka rodičovského příspěvku 350 000 Kč, u vícerčat dvojnásobek; návrh zvyšuje částku na 400 000 Kč, u vícerčat tedy na dvojnásobek této částky. Nárok se zvětšuje o 50 000 Kč na dítě, což jde proti slíbenému omezení mandatorních výdajů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "Mění výpočet normativního nájemného a některé parametry dávky státní sociální pomoci, takže se přímo týká úpravy a zacílení dávek.",
+          "effectCz": "Před změnou se normativní nájemné odvozovalo od počtu členů domácnosti a kategorií obcí podle počtu obyvatel; schválený text přechází na rozdělení podle okresů a zavádí pravidlo, že částka pro početnější domácnost nesmí být nižší než pro bezprostředně menší domácnost. Mění také referenční období pro první výpočet a některé výdajové částky; bez údajů o nájemném v jednotlivých okresech nelze určit, zda se nárok či výše výdajů celkově zvětší, nebo zmenší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+          "relevant": false,
+          "reasonCz": "Ruší oznámení s hodnotami normativního nájemného pro rok 2026, nikoli pravidlo nebo výdajový cíl slibovaný pro rok 2028.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-2",
+          "relevant": false,
+          "reasonCz": "Mění humanitární dávku a podmínky pro osoby s dočasnou ochranou z Ukrajiny; slib takto vymezenou skupinu ani tuto dávku nejmenuje.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": true,
+          "reasonCz": "Upravuje dávky v nezaměstnanosti, včetně jejich výpočtu, a proto se přímo týká úpravy sociálních dávek a možného omezení výdajů.",
+          "effectCz": "Návrh mění několik sazeb a časových úseků podpory v nezaměstnanosti: některé výslovně uvedené násobky či procentní hodnoty snižuje, jiné zvyšuje. Předchozí znění dotčených pravidel § 50 a § 51 není v kontextu dodáno, takže nelze porovnat dopad pro jednotlivé skupiny ani určit celkový směr výdajů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-17",
+          "relevant": false,
+          "reasonCz": "Změny zákona o nemocenském pojištění se týkají pojištění, přeplatků a kontrol nelegální práce, nikoli opatření uvedených ve slibu o reformě dávek a rozpočtovém schodku.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-5dfff68841--source",
+        "psp-core-2025--law-change-43195-1",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--law-change-43198-2",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--law-change-43240-2",
+        "psp-core-2025--law-change-43319-1",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--law-change-43422-14",
+        "psp-core-2025--senate-resolution-43195-3",
+        "psp-core-2025--vote-86695",
+        "psp-core-2025--vote-87038",
+        "psp-core-2025--vote-86697",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--vote-87394",
+        "psp-core-2025--print-step-211452",
+        "psp-core-2025--vote-88130",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Motoristé hlasovali pro zvýšení rodičovského příspěvku z 350 000 na 400 000 Kč, čímž zvýšili zákonný výdaj místo jeho omezení. Podpořili také úpravu výpočtu nájemného v dávce státní sociální pomoci, jejíž celkový dopad na výdaje z podkladů nelze určit. Dřívější hlasování pro elektronické vyřizování dávek se zároveň pojilo se zrušením některých dalších připravovaných elektronických postupů. Schodek 85 miliard korun pro rok 2028 nelze ověřit: balíček neobsahuje státní rozpočet na tento rok ani výpočet, který by k této částce směřoval.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Bez státního rozpočtu na rok 2028 a odpovídajícího výpočtu nelze ověřit, zda se schodek přiblíží slíbeným 85 miliardám korun; tento podstatný cíl proto zůstává nevyhodnocen.",
+        "U změn výdajového rámce veřejných rozpočtů nelze bez číselného stropu pro rok 2028 porovnat, zda nová pravidla omezují mandatorní výdaje více než pravidla předchozí.",
+        "Zrušení některých připravovaných elektronických postupů v zákoně o dávkách státní sociální pomoci stojí proti části slibu o elektronizaci, zatímco stejný legislativní balík zaváděl elektronické postupy pro část rodičovského příspěvku.",
+        "Výpočet normativního nájemného podle okresů může nároky některých domácností zvýšit a jiných snížit; dodaná data neumožňují určit celkový dopad."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "moving-against",
+    "selectedReview": "assessor-a"
+  }
+}

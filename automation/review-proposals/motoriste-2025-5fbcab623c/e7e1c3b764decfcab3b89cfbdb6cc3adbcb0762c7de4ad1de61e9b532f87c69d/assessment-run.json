@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T20-56-32-426Z--9af437292335",
+  "evaluatedAt": "2026-10-06T20:56:32.426Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-5fbcab623c/9af437292335b179504a3fc497e467382713093e623d58e448995c2063f33a07.json",
+  "packageHash": "9af437292335b179504a3fc497e467382713093e623d58e448995c2063f33a07",
+  "assessmentContentHash": "b8b60dd85c4cb8e50c7416ca63eed786015ff03838d16bacc4a7b4e6e12a23de",
+  "assessmentFingerprint": "e7e1c3b764decfcab3b89cfbdb6cc3adbcb0762c7de4ad1de61e9b532f87c69d",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-5fbcab623c",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0054244ca92d3298016ac560078e8487d299c7859508599c72",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 75330,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 75327
+            },
+            "output_tokens": 2940,
+            "output_tokens_details": {
+              "reasoning_tokens": 2070
+            },
+            "total_tokens": 78270
+          },
+          "output": {
+            "promiseId": "motoriste-2025-5fbcab623c",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43415-1",
+                "relevant": true,
+                "reasonCz": "Návrh upravuje schvalování a provoz technicky upravených vozidel a výslovně omezuje montáž některých neschválených součástí, takže se týká možnosti upravovat auta.",
+                "effectCz": "Dosavadní znění § 36 podle dodaného kontextu zákaz montáže těchto součástí neobsahovalo; návrh nově zakazuje do vozidel kategorií M1 a N1 schválených podle unijních emisních pravidel zabudovat systém, konstrukční část nebo samostatný technický celek, jehož typ podle těchto pravidel schválen nebyl. Další bod návrhu rozšiřuje zákaz od 29. května 2028 i na kategorie M, N, O3 a O4, takže pro dotčené úpravy pravidlo zpřísňuje. Návrh zároveň dovoluje stanovit bezpečnostní či environmentální podmínky v osvědčeních o schválení typu, schválení jednotlivě vyrobeného vozidla a v rozhodnutí o výjimce; dřívější znění § 21 odst. 1 a § 31 odst. 2 takovou možnost výslovně neuvádělo a § 35a ji neobsahoval. Může to podmínky pro některé úpravy zpřísnit. Nové znění § 37 odst. 1 písm. b) nahrazuje dřívější kritérium nadměrného poškozování životního prostředí provozem v rozporu s podmínkami schválení; u úprav porušujících tyto podmínky tak zavádí jiný důvod technické nezpůsobilosti a omezení zpřísňuje v tomto směru, celkovou přísnost obou odlišných kritérií však nelze z dodaného textu srovnat. Návrh naopak ruší dosavadní § 21 odst. 2, který umožňoval omezit použití součásti, pokud splňovala technické požadavky jen ve spojení s jinou součástí; v tomto konkrétním ohledu omezení uvolňuje."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "motoriste-2025-5fbcab623c--source",
+              "psp-core-2025--law-change-43415-1",
+              "psp-core-2025--print-step-212080"
+            ],
+            "explanationCz": "Vláda, v níž Motoristé sobě působí, předložila změnu zákona o provozu vozidel (sněmovní tisk 293, tedy návrh předložený Poslanecké sněmovně). Návrh zakazuje montáž některých neschválených součástí a umožňuje stanovovat další podmínky schválení, což může upravování aut omezit a jde proti slibu usilovat o rušení zákazů tuningu. Současně ruší jedno dosavadní omezení použití součástí, takže návrh obsahuje i dílčí uvolnění. Jde zatím o vládní návrh, nikoli o přijatou změnu.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Návrh obsahuje i dílčí uvolnění: ruší dosavadní možnost omezit použití součásti, která splňuje technické požadavky jen ve spojení s jinou součástí. Přesto jeho nové zákazy a podmínky schválení omezují část úprav vozidel; posuzována je pouze předložená verze návrhu."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-5fbcab623c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně upravuje, které součásti a systémy lze montovat do vozidel, a nově stanoví i důsledky porušení podmínek jejich schválení, což se může týkat úprav aut.",
+          "effectCz": "U nového § 36 odst. 5 balíček nedokládá předchozí znění, protože toto ustanovení teprve zavádí: zakazuje montovat do vozidel systém, konstrukční část nebo samostatný technický celek, jehož typ nebyl schválen podle předpisu EU o emisích a životnosti baterie. Návrh nejprve uvádí kategorie M1 a N1 a následně rozsah rozšiřuje na M, N, O3 a O4; jde tedy o novou a širší překážku pro některé úpravy, nikoli o rušení zákazů tuningu. U § 37 odst. 1 písm. b) se dosavadní pravidlo, podle něhož je vozidlo technicky nezpůsobilé, pokud nadměrně poškozuje životní prostředí, nahrazuje pravidlem, že vozidlo nesmí být provozováno v rozporu s podmínkami uvedenými v dokladu o schválení typu, jednotlivě vyrobeného vozidla nebo dovezeného vozidla. Jde o novou podmínku způsobilosti navázanou na schvalovací dokumenty, ale balíček neuvádí jejich konkrétní obsah, takže nelze určit, jak přísně by dopadala na tuning."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-5fbcab623c--source",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--print-step-212080"
+      ],
+      "explanationCz": "Motoristé sobě jako součást vlády předložili návrh změny zákona, který upravuje podmínky provozu vozidel na silnicích. Návrh nově zakazuje montáž některých systémů a součástí vozidel, pokud jejich typ nemá příslušné schválení, a zákaz rozšiřuje na další kategorie vozidel. Tím místo rušení zákazů vytváří další omezení některých úprav aut. Jde zatím o předložený návrh, nikoli o doložené přijaté pravidlo.",
+      "confidence": "high",
+      "uncertainties": [
+        "Balíček dokládá předložení návrhu, nikoli jeho pozdější přijetí nebo konečnou podobu.",
+        "Návrh také mění pravidlo o podmínkách technické způsobilosti vozidla; konkrétní podmínky ve schvalovacích dokladech však balíček neuvádí, takže nelze přesně posoudit jejich dopad na tuning."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-5fbcab623c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí zákaz montáže některých neschválených součástí a stanoví technickou nezpůsobilost vozidla při porušení podmínek jeho schválení, což se může přímo dotknout úprav aut.",
+          "effectCz": "Nový § 36 odst. 5 dříve neměl žádné znění; návrh zakazuje do vozidel schválených podle unijního emisního předpisu zabudovat neschválené systémy, konstrukční části nebo technické celky a vztahuje zákaz na kategorie M, N, O3 a O4. Pro tyto úpravy jde o novou, přísnější překážku. Dosavadní § 37 odst. 1 písm. b) považoval vozidlo za technicky nezpůsobilé, pokud nadměrně poškozovalo životní prostředí; návrh tento důvod nahrazuje pravidlem, že nezpůsobilé je vozidlo provozované v rozporu s podmínkami uvedenými v dokladech o schválení. U úprav porušujících tyto podmínky to omezení zpřísňuje, ale celkový směr změny oproti odlišnému dosavadnímu environmentálnímu kritériu nelze přesně určit."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-5fbcab623c--source",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--print-step-212080"
+      ],
+      "explanationCz": "Vláda, v níž jsou Motoristé sobě zastoupeni, předložila návrh novely zákona o provozu vozidel. Ten pro vybraná vozidla zavádí zákaz montáže některých neschválených součástí a spojuje porušení podmínek schválení s technickou nezpůsobilostí vozidla. Tato část návrhu omezuje některé úpravy aut, a jde tedy proti části slibu o rušení zákazů tuningu. Jde zatím o předložený návrh, nikoli o doklad jeho schválení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh se týká určitých neschválených součástí a vozidel a podmínek jejich schválení; z podkladů nelze určit, jaký dopad by měl na všechny druhy tuningu. Konečné znění ani schválení návrhu zde doloženo není."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0fddec9aa4d82a84016ac55f98401c87d2a0492d10080647bf",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 75330,
+      "input_tokens_details": {
+        "cache_write_tokens": 71360,
+        "cached_tokens": 3967
+      },
+      "output_tokens": 3088,
+      "output_tokens_details": {
+        "reasoning_tokens": 2373
+      },
+      "total_tokens": 78418
+    },
+    "output": {
+      "promiseId": "motoriste-2025-5fbcab623c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně upravuje, které součásti a systémy lze montovat do vozidel, a nově stanoví i důsledky porušení podmínek jejich schválení, což se může týkat úprav aut.",
+          "effectCz": "U nového § 36 odst. 5 balíček nedokládá předchozí znění, protože toto ustanovení teprve zavádí: zakazuje montovat do vozidel systém, konstrukční část nebo samostatný technický celek, jehož typ nebyl schválen podle předpisu EU o emisích a životnosti baterie. Návrh nejprve uvádí kategorie M1 a N1 a následně rozsah rozšiřuje na M, N, O3 a O4; jde tedy o novou a širší překážku pro některé úpravy, nikoli o rušení zákazů tuningu. U § 37 odst. 1 písm. b) se dosavadní pravidlo, podle něhož je vozidlo technicky nezpůsobilé, pokud nadměrně poškozuje životní prostředí, nahrazuje pravidlem, že vozidlo nesmí být provozováno v rozporu s podmínkami uvedenými v dokladu o schválení typu, jednotlivě vyrobeného vozidla nebo dovezeného vozidla. Jde o novou podmínku způsobilosti navázanou na schvalovací dokumenty, ale balíček neuvádí jejich konkrétní obsah, takže nelze určit, jak přísně by dopadala na tuning."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-5fbcab623c--source",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--print-step-212080"
+      ],
+      "explanationCz": "Motoristé sobě jako součást vlády předložili návrh změny zákona, který upravuje podmínky provozu vozidel na silnicích. Návrh nově zakazuje montáž některých systémů a součástí vozidel, pokud jejich typ nemá příslušné schválení, a zákaz rozšiřuje na další kategorie vozidel. Tím místo rušení zákazů vytváří další omezení některých úprav aut. Jde zatím o předložený návrh, nikoli o doložené přijaté pravidlo.",
+      "confidence": "high",
+      "uncertainties": [
+        "Balíček dokládá předložení návrhu, nikoli jeho pozdější přijetí nebo konečnou podobu.",
+        "Návrh také mění pravidlo o podmínkách technické způsobilosti vozidla; konkrétní podmínky ve schvalovacích dokladech však balíček neuvádí, takže nelze přesně posoudit jejich dopad na tuning."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0383dbf88af14877016ac5606c1cc487d2bd6c7c1c081738cd",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 75330,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 75327
+      },
+      "output_tokens": 2464,
+      "output_tokens_details": {
+        "reasoning_tokens": 1776
+      },
+      "total_tokens": 77794
+    },
+    "output": {
+      "promiseId": "motoriste-2025-5fbcab623c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí zákaz montáže některých neschválených součástí a stanoví technickou nezpůsobilost vozidla při porušení podmínek jeho schválení, což se může přímo dotknout úprav aut.",
+          "effectCz": "Nový § 36 odst. 5 dříve neměl žádné znění; návrh zakazuje do vozidel schválených podle unijního emisního předpisu zabudovat neschválené systémy, konstrukční části nebo technické celky a vztahuje zákaz na kategorie M, N, O3 a O4. Pro tyto úpravy jde o novou, přísnější překážku. Dosavadní § 37 odst. 1 písm. b) považoval vozidlo za technicky nezpůsobilé, pokud nadměrně poškozovalo životní prostředí; návrh tento důvod nahrazuje pravidlem, že nezpůsobilé je vozidlo provozované v rozporu s podmínkami uvedenými v dokladech o schválení. U úprav porušujících tyto podmínky to omezení zpřísňuje, ale celkový směr změny oproti odlišnému dosavadnímu environmentálnímu kritériu nelze přesně určit."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-5fbcab623c--source",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--print-step-212080"
+      ],
+      "explanationCz": "Vláda, v níž jsou Motoristé sobě zastoupeni, předložila návrh novely zákona o provozu vozidel. Ten pro vybraná vozidla zavádí zákaz montáže některých neschválených součástí a spojuje porušení podmínek schválení s technickou nezpůsobilostí vozidla. Tato část návrhu omezuje některé úpravy aut, a jde tedy proti části slibu o rušení zákazů tuningu. Jde zatím o předložený návrh, nikoli o doklad jeho schválení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh se týká určitých neschválených součástí a vozidel a podmínek jejich schválení; z podkladů nelze určit, jaký dopad by měl na všechny druhy tuningu. Konečné znění ani schválení návrhu zde doloženo není."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

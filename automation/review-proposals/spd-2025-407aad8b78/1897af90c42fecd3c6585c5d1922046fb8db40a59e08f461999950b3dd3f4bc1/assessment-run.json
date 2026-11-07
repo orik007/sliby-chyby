@@ -1,0 +1,203 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-41-59-612Z--9c7cb7c76fb9",
+  "evaluatedAt": "2026-10-02T05:41:59.612Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-407aad8b78/9c7cb7c76fb9fd500fddf90333442caaf9248ebdf975880f9b1006eb7af673ec.json",
+  "packageHash": "9c7cb7c76fb9fd500fddf90333442caaf9248ebdf975880f9b1006eb7af673ec",
+  "assessmentContentHash": "4cb232ef08c5ef32e82bd9c07aa82aec27cc2c34fdb1b41d7abbb5e23df54489",
+  "assessmentFingerprint": "1897af90c42fecd3c6585c5d1922046fb8db40a59e08f461999950b3dd3f4bc1",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-407aad8b78",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-407aad8b78",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu počítá s příjmy z emisních povolenek a jejich využitím, ale nemění ani neruší samotný systém povolenek."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-407aad8b78--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "SPD slíbila usilovat o zrušení systému emisních povolenek. Její poslanci hlasovali pro návrh rozpočtu Státního fondu životního prostředí na rok 2026, který počítá s příjmy z povolenek a s jejich využitím, ale systém nemění. V předložených podkladech proto není doložen podstatný posun ke zrušení systému ani přímý krok proti tomuto cíli.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet potvrzuje plánované příjmy z emisních povolenek, ale sám o sobě nedokládá, že SPD podpořila zachování systému jako takového; podklady neobsahují přímé jednání o jeho zrušení."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-407aad8b78",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu výslovně počítá s příjmy z prodeje emisních povolenek a rozděluje tyto prostředky, takže se věcně týká pokračujícího využívání systému, který slib chce zrušit."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-407aad8b78--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "SPD ve svém programu slibuje usilovat o zrušení systému emisních povolenek. Poslanci SPD hlasovali pro návrh rozpočtu Státního fondu životního prostředí na rok 2026, který počítá s příjmy z prodeje povolenek ve výši přibližně 5,5 miliardy korun a s jejich využitím na vybraná opatření. Tím podpořili rozpočet, který počítá s pokračujícím využíváním výnosů ze systému, což jde proti směru slibu. Rozpočet však sám systém povolenek neruší ani přímo nemění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočtový návrh počítá s příjmy a výdaji z emisních povolenek, ale sám nemění právní pravidla systému; proto není jisté, nakolik hlasování přímo vyjadřuje postoj SPD k jeho zrušení."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_078dc9db7e4d07ae016abf440d0ecc87d1ae5263ca93e5b5fe",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 14499,
+      "input_tokens_details": {
+        "cache_write_tokens": 11175,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1361,
+      "output_tokens_details": {
+        "reasoning_tokens": 1024
+      },
+      "total_tokens": 15860
+    },
+    "output": {
+      "promiseId": "spd-2025-407aad8b78",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu počítá s příjmy z emisních povolenek a jejich využitím, ale nemění ani neruší samotný systém povolenek."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-407aad8b78--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "SPD slíbila usilovat o zrušení systému emisních povolenek. Její poslanci hlasovali pro návrh rozpočtu Státního fondu životního prostředí na rok 2026, který počítá s příjmy z povolenek a s jejich využitím, ale systém nemění. V předložených podkladech proto není doložen podstatný posun ke zrušení systému ani přímý krok proti tomuto cíli.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet potvrzuje plánované příjmy z emisních povolenek, ale sám o sobě nedokládá, že SPD podpořila zachování systému jako takového; podklady neobsahují přímé jednání o jeho zrušení."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_00f2c2909472f3d7016abf44171b4887d1a65125bda1c35350",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 14499,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 14496
+      },
+      "output_tokens": 1667,
+      "output_tokens_details": {
+        "reasoning_tokens": 1220
+      },
+      "total_tokens": 16166
+    },
+    "output": {
+      "promiseId": "spd-2025-407aad8b78",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu výslovně počítá s příjmy z prodeje emisních povolenek a rozděluje tyto prostředky, takže se věcně týká pokračujícího využívání systému, který slib chce zrušit."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-407aad8b78--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "SPD ve svém programu slibuje usilovat o zrušení systému emisních povolenek. Poslanci SPD hlasovali pro návrh rozpočtu Státního fondu životního prostředí na rok 2026, který počítá s příjmy z prodeje povolenek ve výši přibližně 5,5 miliardy korun a s jejich využitím na vybraná opatření. Tím podpořili rozpočet, který počítá s pokračujícím využíváním výnosů ze systému, což jde proti směru slibu. Rozpočet však sám systém povolenek neruší ani přímo nemění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočtový návrh počítá s příjmy a výdaji z emisních povolenek, ale sám nemění právní pravidla systému; proto není jisté, nakolik hlasování přímo vyjadřuje postoj SPD k jeho zrušení."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_078f80b440cbb4e9016abf442389fc87d1949139d6fcca50f4",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 14382,
+      "input_tokens_details": {
+        "cache_write_tokens": 11900,
+        "cached_tokens": 2479
+      },
+      "output_tokens": 225,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 14607
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "spd-2025-407aad8b78--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Volím první hodnocení, protože rozlišuje využití peněz z povolenek od změny samotného systému. Poslanci SPD podpořili rozpočet Státního fondu životního prostředí na rok 2026, který počítá s příjmy z prodeje povolenek a určuje jejich využití. Rozpočet ale systém povolenek nezavádí, nerozšiřuje ani nebrání jeho zrušení, takže samotná podpora rozpočtu nedokládá krok proti slibu. Druhé hodnocení tuto souvislost přeceňuje; dodané podklady nedokládají podstatný posun ke zrušení systému ani proti němu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

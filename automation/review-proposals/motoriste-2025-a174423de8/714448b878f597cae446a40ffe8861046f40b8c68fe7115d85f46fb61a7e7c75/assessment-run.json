@@ -1,0 +1,1376 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T21-16-49-502Z--4ae425a5bd83",
+  "evaluatedAt": "2026-10-06T21:16:49.502Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-a174423de8/4ae425a5bd8322bb546f4387e2e4304907041fd646ade590cd039f63362aa1d1.json",
+  "packageHash": "4ae425a5bd8322bb546f4387e2e4304907041fd646ade590cd039f63362aa1d1",
+  "assessmentContentHash": "235b357b7362b7b5d6755e511e7f8a3ee95be387607ba659aa78ff20c1e92100",
+  "assessmentFingerprint": "714448b878f597cae446a40ffe8861046f40b8c68fe7115d85f46fb61a7e7c75",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-a174423de8",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment cites duplicate evidence IDs",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0c632b4a9c4fc7c9016ac561cdfaac87d28c705a7f076dd4e4",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 671819,
+            "input_tokens_details": {
+              "cache_write_tokens": 667849,
+              "cached_tokens": 3967
+            },
+            "output_tokens": 14108,
+            "output_tokens_details": {
+              "reasoning_tokens": 9756
+            },
+            "total_tokens": 685927
+          },
+          "output": {
+            "promiseId": "motoriste-2025-a174423de8",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Mění přímo pravidla povolování staveb a elektronické podávání i sledování řízení, takže se týká digitalizace a funkčnosti stavebního řízení.",
+                "effectCz": "Dosavadní zákon umožňoval podat podání portálem stavebníka, ale také jinými způsoby; schválené znění u vybraných podání s dokumentací nebo od osob s automaticky zpřístupněnou datovou schránkou vyžaduje digitální úkon a nově zavádí sledování stavu řízení na portálu. To posiluje digitalizaci. Zároveň se přechodné používání jiných informačních systémů prodlužuje do roku 2030 a nové krajské úřady mají začít působit až v roce 2028, což oddaluje plné sjednocení systému; celek tedy přináší digitalizační krok, ale i významný odklad."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-3",
+                "relevant": true,
+                "reasonCz": "Upravuje podklady požární ochrany pro stavební řízení, tedy jednu z oblastí, jejíž projednávání může ovlivňovat rychlost a administrativní náročnost povolení.",
+                "effectCz": "Dříve se v některých případech vydávalo závazné stanovisko a technické podmínky stanovovalo ministerstvo; schválené znění část výstupů mění na vyjádření a technické podmínky svěřuje nařízení vlády. Jde o změnu postupu a síly stanoviska, nikoli o zrušení požadavků požární bezpečnosti; směr dopadu na rychlost řízení nelze z textu určit s jistotou."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-7",
+                "relevant": true,
+                "reasonCz": "Mění některé požadavky a podklady v postupu pro povolení staveb, včetně vztahu geologických vyjádření k povolovacímu řízení.",
+                "effectCz": "Původní § 13 odst. 3 odkazoval na územní rozhodnutí; nově odkazuje na žádost o povolení záměru, čímž terminologii přizpůsobuje novému řízení. Současně se ruší výjimka, podle níž se při záměru s jednotným environmentálním stanoviskem geologické vyjádření nevydávalo; to může přidat samostatný podklad a administrativní krok."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": true,
+                "reasonCz": "Převádí část úkonů ochrany přírody do řízení o povolení záměru, což přímo mění počet a uspořádání úkonů potřebných pro stavební povolení.",
+                "effectCz": "Dříve bylo pro řadu zásahů třeba samostatného souhlasu či povolení orgánu ochrany přírody; nově stavební úřad u vymezených záměrů posoudí podmínky a zahrne souhlas či povolení do rozhodnutí o záměru. Tím se slučuje postup a snižuje počet samostatných úkonů, aniž by text obecně rušil věcné podmínky ochrany přírody."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Mění, kdo při povolování staveb posuzuje odnětí zemědělské půdy, a přímo tak zasahuje do administrativního postupu povolení.",
+                "effectCz": "Dříve bylo k odnětí zemědělské půdy potřeba souhlasu orgánu ochrany půdního fondu; schválené znění stanoví, že u záměru vyžadujícího stavební povolení samostatný souhlas nevydává a podmínky posoudí stavební úřad v rozhodnutí. Jde o sloučení úkonů a ulehčení postupu, nikoli o obecné odstranění podmínek ochrany půdy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-14",
+                "relevant": true,
+                "reasonCz": "Začleňuje posouzení zásahů do lesních pozemků do stavebního rozhodnutí, a proto se přímo týká administrativní cesty k povolení stavby.",
+                "effectCz": "Předchozí úprava vyžadovala závazné stanovisko orgánu státní správy lesů a samostatné rozhodnutí o odnětí či omezení lesních pozemků; schválené znění stanoví, že příslušné podmínky mimo národní parky posoudí stavební úřad v rozhodnutí o záměru, přičemž si vyžádá vyjádření lesního orgánu. Slučuje rozhodování, ale zachovává odborný podklad a věcné požadavky."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-17",
+                "relevant": true,
+                "reasonCz": "Mění veterinární podklady pro povolování staveb, a tím zasahuje do administrativní náročnosti stavebního řízení.",
+                "effectCz": "Dosavadní zákon počítal u některých staveb se závazným posudkem a u dalších s vyjádřením; schválené znění odstraňuje samostatnou kategorii závazného posudku a upravuje příslušné úkony jako vyjádření. Jde o oslabení samostatné závaznosti tohoto podkladu, nikoli o úplné odstranění veterinárního posouzení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-20",
+                "relevant": true,
+                "reasonCz": "Nově svěřuje posouzení některých otázek veřejného zdraví stavebnímu úřadu v rozhodnutí o záměru.",
+                "effectCz": "Před změnou zákon upravoval samostatná stanoviska a úkony orgánů ochrany veřejného zdraví; schválené znění stanoví, že stavební úřad u záměrů povolovaných podle stavebního zákona tyto úkony nahrazuje svým rozhodnutím. To může omezit duplicitní administrativní kroky, ale věcné hygienické požadavky tím samy nezanikají."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": true,
+                "reasonCz": "Upravuje posuzování vlivů na životní prostředí a možnost, aby výsledné stanovisko nahradilo další správní úkony při povolení záměru.",
+                "effectCz": "Dosavadní znění spojovalo posouzení záměrů s jednotným environmentálním stanoviskem za stanovených podmínek; schválené znění umožňuje na žádost oznamovatele, aby stanovisko k posouzení vlivů nahradilo také vyjmenované správní úkony v oblasti životního prostředí a veřejného zdraví. To podporuje jejich soustředění do jednoho postupu, ale pouze při splnění podmínek a na žádost."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Přesouvá povolování nakládání s vodami souvisejícího se stavbou do rozhodnutí stavebního úřadu.",
+                "effectCz": "Původně vydával vodoprávní úřad samostatná povolení a souhlasy; schválené znění u záměrů povolovaných podle stavebního zákona svěřuje související povolení a vybrané úkony stavebnímu úřadu v rozhodnutí o záměru. Jde o sloučení úkonů, přičemž vodohospodářské podmínky a potřebná vyjádření zůstávají."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-26",
+                "relevant": false,
+                "reasonCz": "Změny se týkají pozemkových úprav a vymezení pozemků, nikoli elektronického podávání, informačních systémů ani obecného postupu pro získání stavebního povolení.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": true,
+                "reasonCz": "Mění úkony ochrany ovzduší spojené s povolením stavby a jejich začlenění do stavebního rozhodnutí.",
+                "effectCz": "Dosavadní zákon vyžadoval pro některé záměry závazné stanovisko orgánu ochrany ovzduší; schválené znění mění tyto podklady na vyjádření a navazuje jejich posouzení na povolení záměru. To může zjednodušit samostatné kroky, ale samo o sobě neodstraňuje požadavky ochrany ovzduší."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": true,
+                "reasonCz": "Přesouvá posouzení odpadového hospodářství při provedení záměru do rozhodnutí stavebního úřadu.",
+                "effectCz": "Před změnou obecní úřad obce s rozšířenou působností vydával k některým stavebním pracím závazná stanoviska či vyjádření; nově stavební úřad posuzuje soulad záměru s požadavky odpadového zákona a může stanovit podmínky přímo v rozhodnutí. Jde o sloučení posouzení, přičemž požadavky na odpady a ochranu zdraví a prostředí zůstávají."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": false,
+                "reasonCz": "Změny se týkají zvláštních povolovacích postupů pro obnovitelné zdroje v akceleračních oblastech a balíček je nespojuje s digitalizací stavebního řízení ani s elektronickým stavebním povolením.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+                "relevant": true,
+                "reasonCz": "Mění poplatky za stavební povolení a obsahuje opatření navázané na dodržení lhůt pro rozhodnutí.",
+                "effectCz": "Schválené znění stanoví, že poplatek za povolení záměru či kolaudační rozhodnutí se nevybere, pokud stavební úřad nerozhodne ve lhůtě podle stavebního zákona. Předchozí znění příslušné sazby není v podkladech uvedeno, takže nelze určit úplný dopad na výši poplatků; nově je však zaveden finanční důsledek nedodržení lhůty, který může podporovat rychlejší postup."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+                "relevant": true,
+                "reasonCz": "Přímo stanoví, že digitální informační kontejnery ke stavebnímu povolení a kolaudaci mají být vloženy do evidence elektronických dokumentací.",
+                "effectCz": "Zákon o správě informací o stavbě již ukládal pořízení informačních kontejnerů pro povolení a kolaudaci; nově se výslovně vyžaduje jejich vložení do elektronické evidence nejpozději spolu s příslušnou žádostí. Tím se posiluje digitální část povolování a evidence."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": true,
+                "reasonCz": "Ruší zákon o jednotném environmentálním stanovisku, který souvisí s tím, jak se při povolování staveb sdružují environmentální úkony.",
+                "effectCz": "Schválené znění ruší jednotný environmentální zákon a několik předpisů; balíček současně rozděluje některé související úkony mezi stavební úřady a další postupy. Text dřívějšího zákona ani úplný dopad tohoto zrušení na elektronické povolení zde uveden není, proto nelze určit, zda výsledkem bude méně, nebo více administrativních kroků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-1",
+                "relevant": false,
+                "reasonCz": "Návrh upravuje elektronickou identitu a důvěryhodné elektronické služby obecně, ale předložené znění jej nespojuje s elektronickým stavebním řízením.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43288-1",
+                "relevant": true,
+                "reasonCz": "Mění délku přechodného období pro používání informačních systémů ve stavebním řízení, a tím přímo ovlivňuje, kdy má být digitalizace plně zavedena.",
+                "effectCz": "Původní přechodné období pro příslušná ustanovení končilo v roce 2026; návrh mění rok 2026 na 2027, čímž umožňuje o rok déle používat přechodná řešení. To odkládá plné používání stavebních informačních systémů. Přesný text schválené verze tohoto návrhu v balíčku chybí."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-4",
+                "relevant": false,
+                "reasonCz": "Mění údaje pro elektronickou identifikaci v registru obyvatel, ale v dodaném textu není spojení s podáváním žádostí o stavební povolení.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+                "relevant": false,
+                "reasonCz": "Zavádí testovací identity a údaje pro testování základních registrů a dalších informačních systémů, nikoli funkcionalitu elektronického stavebního povolení.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-11",
+                "relevant": true,
+                "reasonCz": "Navrhuje zrušit části zákona o informacích o stavbě a vystavěném prostředí, který upravuje digitální informace a kontejnerové údaje pro stavby.",
+                "effectCz": "Návrh ruší vyjmenované části zákona, ale jejich úplný obsah ani předchozí znění nejsou v balíčku doloženy. Nelze proto určit, zda by zrušení zmenšilo, nebo jinak změnilo povinnosti digitálního stavebního řízení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43395-1",
+                "relevant": false,
+                "reasonCz": "Návrh mění organizaci zeměměřických a katastrálních orgánů; text nedokládá přímou změnu elektronického stavebního povolení ani stavebních informačních systémů.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "motoriste-2025-a174423de8--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-3",
+              "psp-core-2025--law-change-43174-7",
+              "psp-core-2025--law-change-43174-8",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--law-change-43174-14",
+              "psp-core-2025--law-change-43174-17",
+              "psp-core-2025--law-change-43174-20",
+              "psp-core-2025--law-change-43174-22",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-33",
+              "psp-core-2025--law-change-43174-39",
+              "psp-core-2025--law-change-43174-approved-38",
+              "psp-core-2025--law-change-43174-approved-55",
+              "psp-core-2025--law-change-43174-approved-56",
+              "psp-core-2025--law-change-43288-1",
+              "psp-core-2025--law-change-43372-11",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--vote-87370",
+              "psp-core-2025--vote-87370",
+              "psp-core-2025--print-step-211843"
+            ],
+            "explanationCz": "Poslanci Motoristů předložili spolu s dalšími poslanci návrh novely stavebního zákona a později hlasovali pro jeho schválení; po zamítnutí Senátem hlasovali také pro setrvání Sněmovny na její verzi. Návrh posiluje digitální podávání, sledování řízení a ukládání digitálních informací o stavbě a zároveň slučuje některé samostatné souhlasy do rozhodnutí stavebního úřadu. Současně však prodlužuje přechodné používání jiných systémů až do roku 2030 a nové krajské úřady mají začít působit až v roce 2028, což oddaluje úplnou digitalizaci, kterou slib požaduje rychle. Proto je hlasování jako celek krokem proti části slibu, přestože obsahuje i opatření, která digitalizaci posouvají.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Návrh novely zákona o informacích o stavbě, předložený poslanci v červenci, ruší části tohoto zákona, ale jejich obsah v balíčku není uveden; směr jeho dopadu na digitální stavební řízení proto nelze určit.",
+              "Motoristé hlasovali pro prodloužení přechodného období v samostatném návrhu stavebního zákona, avšak zaznamenané hlasování proběhlo při prvním čtení, nikoli při konečném rozhodnutí Sněmovny, a proto nemění hodnocení podle pravidla pro rozhodující hlasování.",
+              "Senát návrh hlavní novely zamítl, ale poslanci Motoristů následně hlasovali pro setrvání Sněmovny na schváleném znění; hodnocení vychází z textu, o němž hlasovali, nikoli z jeho pozdějšího legislativního osudu."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": [
+      {
+        "error": "Assessment uncertainty contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0f9d675d5c498251016ac5637358f487d2b44d254f917c7fcd",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 671819,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 671816
+            },
+            "output_tokens": 10826,
+            "output_tokens_details": {
+              "reasoning_tokens": 6280
+            },
+            "total_tokens": 682645
+          },
+          "output": {
+            "promiseId": "motoriste-2025-a174423de8",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Mění přímo stavební zákon, včetně pravidel pro digitální podání, portál stavebníka a přechodné používání informačních systémů.",
+                "effectCz": "Dříve bylo možné podání přes portál stavebníka, nyní je digitální úkon povinný u podání s dokumentací pro povolení a přibývá sledování stavu řízení; to rozšiřuje elektronické služby. Zároveň se přechodné období pro používání jiných systémů prodlužuje až do roku 2030, což naopak odkládá úplné sjednocení digitalizace; celkový účinek je smíšený."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-3",
+                "relevant": true,
+                "reasonCz": "Mění, jak se požární ochrana zapojuje do povolování staveb, a tím může ovlivnit počet samostatných kroků při získání povolení.",
+                "effectCz": "Dříve bylo výsledkem posouzení požární ochrany závazné stanovisko; schválený text rozlišuje závazné stanovisko a vyjádření podle druhu stavby a svěřuje část posouzení stavebnímu úřadu. Samostatné kroky se tím částečně zjednodušují, ale předchozí znění všech dotčených ustanovení není v balíčku doloženo."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-7",
+                "relevant": false,
+                "reasonCz": "Změny zákona o geologických pracích se týkají terminologie a specifického geologického postupu, nikoli digitalizace stavebního řízení ani elektronického stavebního povolení.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": true,
+                "reasonCz": "Převádí některé úkony ochrany přírody do rozhodování o stavebním záměru, což přímo souvisí s počtem kroků při povolování staveb.",
+                "effectCz": "Dříve se pro vybrané zásahy vyžadovaly samostatné souhlasy orgánu ochrany přírody; nově stavební úřad u určených záměrů posuzuje splnění příslušných podmínek a zahrne souhlas či povolení do rozhodnutí o záměru. Tím se omezuje počet oddělených úkonů, nikoli však nutně samotné věcné požadavky."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Začleňuje ochranu zemědělské půdy do povolení záměru a stanoví případy, kdy se některé podmínky znovu neposuzují.",
+                "effectCz": "Dříve bylo k odnětí zemědělské půdy nutné samostatné stanovisko či souhlas orgánu ochrany půdy; schválený text svěřuje posouzení stavebnímu úřadu v rámci rozhodnutí o povolení a v určitých již posouzených územích omezuje opakované prověřování. Jde o méně oddělených administrativních kroků a u vymezených území také o volnější posuzování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-14",
+                "relevant": true,
+                "reasonCz": "Mění samostatné posuzování zásahů do lesních pozemků a začleňuje je do stavebního povolení.",
+                "effectCz": "Dříve orgán státní správy lesů vydával závazné stanovisko a samostatně rozhodoval o odnětí či omezení lesních pozemků; nově stavební úřad příslušné podmínky posuzuje v rozhodnutí o záměru, přičemž si vyžádá vyjádření lesního orgánu. Samostatné povolovací řízení se tak slučuje s řízením stavebním."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-17",
+                "relevant": true,
+                "reasonCz": "Převádí veterinární posuzování některých staveb do stavebního řízení, což může zjednodušit získání povolení.",
+                "effectCz": "Dříve se u vybraných staveb vydával samostatný závazný posudek veterinární správy; schválená úprava tento samostatný posudek ruší a ponechává vyjádření. Tím se snižuje závaznost a oddělenost veterinárního kroku, ale balíček neukazuje úplné znění všech navazujících pravidel."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-20",
+                "relevant": true,
+                "reasonCz": "Nahrazuje některé samostatné úkony ochrany veřejného zdraví rozhodováním stavebního úřadu o záměru.",
+                "effectCz": "Dříve orgány ochrany veřejného zdraví vydávaly stanoviska a jiné úkony pro stavební záměry; nově je stavební úřad nahrazuje svým rozhodnutím v rozsahu, v němž se týkají povolované stavby. To může zmenšit počet samostatných kroků, přičemž věcné požadavky ochrany zdraví zůstávají relevantní."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": true,
+                "reasonCz": "Mění vazbu mezi posouzením vlivů na životní prostředí a povolením stavebního záměru, tedy část procesu povolování.",
+                "effectCz": "Dříve byla u záměrů podléhajících posouzení vlivů spojena možnost vydat posouzení také s jednotným environmentálním stanoviskem; schválený text umožňuje na žádost zahrnout do stanoviska i další úkony ochrany životního prostředí a zdraví. To může zjednodušit řízení, ale samostatná změna současně ruší zákon o jednotném environmentálním stanovisku a balíček nedokládá celé nové uspořádání, takže výsledný směr nelze plně určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Převádí povolování nakládání s vodami a další vodní úkony související se stavbami do rozhodnutí stavebního úřadu.",
+                "effectCz": "Dříve některá povolení či souhlasy vydával vodoprávní úřad odděleně; schválený text stanoví, že u záměrů povolovaných podle stavebního zákona příslušné úkony posoudí nebo vydá stavební úřad v rozhodnutí o záměru. Proces se tím u těchto případů slučuje, zatímco některé vodohospodářské podmínky zůstávají zachovány."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-26",
+                "relevant": false,
+                "reasonCz": "Změny pozemkových úprav upravují hlavně vymezení pozemků a náhrady, nikoli digitalizaci stavebního řízení nebo obecný postup při získání elektronického povolení.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": true,
+                "reasonCz": "Přesouvá část posuzování ochrany ovzduší při stavebních záměrech do rozhodnutí stavebního úřadu.",
+                "effectCz": "Dříve krajský úřad vydával pro některé stavby závazné stanovisko; schválený text mění příslušné stanovisko na vyjádření a navazuje jeho podmínky na povolení záměru. Tím se snižuje samostatnost tohoto kroku a rozhodování se více soustředí do stavebního povolení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": true,
+                "reasonCz": "Přesouvá posuzování požadavků odpadového hospodářství při provedení záměru do stavebního povolení.",
+                "effectCz": "Dříve obecní úřad vydával závazné stanovisko či vyjádření k vybraným stavebním pracím a zařízením; nově stavební úřad posuzuje soulad s odpadovými požadavky v rozhodnutí o záměru a může stanovit podmínky. Počet oddělených kroků se tím snižuje, samotná povinnost nakládat s odpady v souladu s předpisy však zůstává."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": false,
+                "reasonCz": "Úprava se zaměřuje na povolování obnovitelných zdrojů v akceleračních oblastech, nikoli na digitalizaci stavebního řízení jako takovou.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+                "relevant": true,
+                "reasonCz": "Do úpravy přidané ve schváleném znění zahrnuje správní poplatky za stavební povolení a osvobození při nedodržení lhůty úřadem.",
+                "effectCz": "Schválený text stanoví poplatky za různé druhy povolení a osvobozuje od poplatku při rozhodnutí vydaném po zákonné lhůtě; jde o nová pravidla v balíčku. Předchozí znění sazebníku není dodáno, takže změnu běžných poplatků nelze porovnat, ale lhůtová pobídka podporuje rychlejší vyřizování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+                "relevant": true,
+                "reasonCz": "Mění zákon o správě informací o stavbě a výslovně propojuje digitální informační kontejnery s evidencí elektronické dokumentace.",
+                "effectCz": "Předchozí znění již požadovalo informační kontejner pro povolení nejpozději při žádosti; nově výslovně ukládá jeho vložení do evidence elektronických dokumentací v této lhůtě, stejně jako kontejneru pro kolaudaci. Digitální evidence se tím zpřesňuje a propojuje s povolovacím řízením, nikoli však prokazatelně rozšiřuje samotný okruh povinných staveb."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": true,
+                "reasonCz": "Schválené znění ruší zákon o jednotném environmentálním stanovisku, který je součástí systému povolování záměrů, ale balíček neobsahuje jeho předchozí pravidla ani úplný popis náhrady.",
+                "effectCz": "Nové znění výslovně ruší zákon č. 148/2023 Sb. a několik dalších ustanovení či předpisů; jejich předchozí znění však balíček nedodává. Proto nelze určit, zda tato změna výsledný postup povolování zjednodušuje, komplikuje, nebo mění pouze jeho právní základ."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-1",
+                "relevant": false,
+                "reasonCz": "Návrh upravuje elektronické potvrzování atributů a digitální peněženku, ale balíček je nespojuje s povolováním staveb ani s portálem stavebníka.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43288-1",
+                "relevant": true,
+                "reasonCz": "Mění přechodné období informačních systémů stavební správy, a tím přímo ovlivňuje termín dokončení jejich digitalizace.",
+                "effectCz": "Dosavadní znění stanovilo pro část přechodného režimu konec v roce 2026; návrh posouvá tento konec na rok 2027. To prodlužuje možnost používat jiné systémy a oddaluje sjednocené digitální řešení o další rok."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-4",
+                "relevant": false,
+                "reasonCz": "Tato část návrhu mění údaje a elektronickou identifikaci v základních registrech, ale neposkytuje vazbu na stavební povolení nebo stavební řízení.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43288-1",
+                "relevant": true,
+                "reasonCz": "Návrh poslanců ruší části zákona o správě informací o stavbě, který přímo upravuje digitální informace o stavebních záměrech.",
+                "effectCz": "Návrh ruší části tohoto zákona označené pouze čísly; jejich obsah ani předchozí znění nejsou v balíčku uvedeny. Nelze proto určit, zda rušená ustanovení podporují digitální povolování, nebo vytvářejí požadavky, které návrh odstraňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43395-1",
+                "relevant": false,
+                "reasonCz": "Návrh upravuje zeměměřické a katastrální orgány, ale jeho text neukazuje přímou změnu digitalizace stavebního řízení nebo elektronického povolení.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+                "relevant": false,
+                "reasonCz": "Tato změna zavádí testovací identity a testovací údaje pro zkoušení informačních systémů, nikoli digitální postup pro stavební povolení.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-11",
+                "relevant": true,
+                "reasonCz": "Návrh mění zákon o správě informací o stavbě, a proto se může dotýkat digitální podpory stavebního povolování.",
+                "effectCz": "Text ruší několik bodů části zákona o správě informací o stavbě, ale jejich obsah ani původní znění nejsou v balíčku uvedeny. Nelze určit, zda se ruší prostředek potřebný k digitalizaci, nebo administrativní požadavek, který ji zatěžoval."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": false,
+            "citedEvidenceIds": [
+              "motoriste-2025-a174423de8--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-3",
+              "psp-core-2025--law-change-43174-8",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--law-change-43174-14",
+              "psp-core-2025--law-change-43174-17",
+              "psp-core-2025--law-change-43174-20",
+              "psp-core-2025--law-change-43174-22",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-33",
+              "psp-core-2025--law-change-43174-39",
+              "psp-core-2025--law-change-43174-approved-38",
+              "psp-core-2025--law-change-43174-approved-55",
+              "psp-core-2025--law-change-43174-approved-56",
+              "psp-core-2025--law-change-43288-1",
+              "psp-core-2025--law-change-43372-11",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--print-step-211843",
+              "psp-core-2025--vote-87370",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15"
+            ],
+            "explanationCz": "Poslanci Motoristů předložili rozsáhlou novelu stavebního zákona a později pro ni hlasovali; po zamítnutí Senátem ji Sněmovna znovu podpořila. Novela slučuje řadu dílčích souhlasů s rozhodnutím stavebního úřadu a zavádí digitální podání i sledování řízení, ale současně umožňuje přechodné používání jiných systémů až do roku 2030. To posouvá dokončení sjednocené digitalizace, které slib požaduje rychle, přestože některé změny směřují k jednoduššímu povolování. Úplný dopad souvisejících změn informačních pravidel nelze z podkladů určit.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Dva návrhy na změnu zákona o správě informací o stavbě ruší ustanovení označená jen čísly; jejich obsah není v balíčku uveden, takže nelze určit, zda oslabují nebo naopak zjednodušují digitální povolování.",
+              "Schválené znění ruší zákon o jednotném environmentálním stanovisku, ale balíček neobsahuje jeho úplný předchozí obsah ani celý nový režim; nelze proto zvážit přesně jeho vliv na počet a návaznost povolovacích kroků.",
+              "Hlasování Motoristů pro tisk 167 proběhlo v prvním čtení při rozhodnutí o zvláštním postupu, nikoli v závěrečném rozhodnutí o zákonu; samo o sobě proto nedokládá jeho konečné přijetí."
+            ]
+          }
+        }
+      },
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0b31095f24e7398c016ac56406f4b087d2b90bb66bfc8f5a27",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 671819,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 671816
+            },
+            "output_tokens": 12738,
+            "output_tokens_details": {
+              "reasoning_tokens": 8502
+            },
+            "total_tokens": 684557
+          },
+          "output": {
+            "promiseId": "motoriste-2025-a174423de8",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Novela přímo mění elektronické podávání a informační systémy stavebního řízení, které jsou jádrem slibu.",
+                "effectCz": "Dosud bylo podání přes portál stavebníka možné a v přechodném období se mohly používat jiné systémy; schválený text zavádí povinně digitální podání v některých případech a sledování stavu řízení na portálu, ale prodlužuje možnost používat jiné systémy až do konce roku 2030 (dříve do konce roku 2027, u části povinností do června 2027). Digitální povinnosti se tedy v některých případech zpřísňují, avšak jednotné elektronické fungování povolování se oddaluje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-3",
+                "relevant": true,
+                "reasonCz": "Změny požární ochrany určují, jak se posuzuje požární bezpečnost při povolování staveb, a zasahují tak do administrativy stavebního řízení.",
+                "effectCz": "Dosud se výsledek posouzení požární bezpečnosti vyjadřoval závazným stanoviskem; schválený text rozlišuje závazné stanovisko pro některé stavby a vyjádření pro jiné a technické podmínky přesouvá k nařízení vlády. Pro část řízení se tedy samostatná závaznost snižuje, což může zjednodušit povolování; předchozí znění všech změněných ustanovení není v balíčku uvedeno."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-7",
+                "relevant": true,
+                "reasonCz": "Změna geologického zákona upravuje podklady potřebné pro povolení staveb, a dotýká se proto jejich administrativního vyřizování.",
+                "effectCz": "Dosud se v určitých územích mohlo povolení vydat jen na základě vyjádření krajského úřadu; navržený i schválený text odkaz na toto vyjádření převádí na žádost o povolení záměru a ruší související ustanovení pro případy jednotného environmentálního stanoviska. Změna může odstranit duplicitní úkon, ale balíček neobsahuje úplné předchozí znění zrušeného ustanovení, takže celkový směr nelze určit jistě."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": true,
+                "reasonCz": "Změna pravidel ochrany přírody výslovně převádí některá posouzení stavebních záměrů do řízení stavebního úřadu.",
+                "effectCz": "Dříve se u řady dotčených zájmů vyžadovaly samostatné úkony orgánů ochrany přírody; schválený text svěřuje vyjmenovaná posouzení stavebnímu úřadu a začleňuje souhlas či povolení do rozhodnutí o záměru. Počet samostatných kroků se tím může zmenšit, ale text současně mění i podmínky ochrany a dopad těchto změn nelze celý z předchozího znění v balíčku určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Změna ochrany zemědělské půdy přesouvá posuzování některých podmínek odnětí půdy do rozhodnutí stavebního úřadu.",
+                "effectCz": "Dosud se pro odnětí půdy pro záměr vyžadoval souhlas orgánu ochrany zemědělského půdního fondu; schválený text pro záměry povolované podle stavebního zákona místo něj ukládá stavebnímu úřadu posoudit podmínky a zahrnout je do povolení. Pro určité již schválené zastavitelné plochy navíc odstraňuje další posouzení ochranných zásad, takže samostatné kroky i některé limity se zmírňují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-14",
+                "relevant": true,
+                "reasonCz": "Změna lesního zákona mění postup získávání souhlasu k záměrům dotýkajícím se lesních pozemků.",
+                "effectCz": "Dosud bylo pro dotčení lesa třeba závazné stanovisko a samostatné rozhodnutí o odnětí či omezení; schválený text u záměrů podle stavebního zákona svěřuje posouzení a rozhodnutí stavebnímu úřadu, přičemž orgán státní správy lesů mu poskytuje vyjádření. Samostatné povolovací kroky se tak slučují do stavebního řízení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-17",
+                "relevant": true,
+                "reasonCz": "Změna veterinárního zákona upravuje stanoviska potřebná pro povolení staveb a zařízení.",
+                "effectCz": "Dosud mohl být závazný posudek veterinární správy podkladem pro povolení i kolaudaci některých zařízení; schválený text závazný posudek ruší a ponechává vyjádření. Závazná síla samostatného podkladu se tedy snižuje, což může povolování zjednodušit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-20",
+                "relevant": true,
+                "reasonCz": "Změna zákona o ochraně veřejného zdraví upravuje úkony hygienických orgánů při povolování stavebních záměrů.",
+                "effectCz": "Dosud se stanoviska orgánu ochrany veřejného zdraví uplatňovala v řízeních o povolení; schválený text stanoví, že stavební úřad u záměrů podle stavebního zákona nahrazuje příslušné samostatné úkony. Administrativa se v tomto rozsahu přesouvá do jednoho povolovacího rozhodnutí."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": true,
+                "reasonCz": "Změna zákona o posuzování vlivů na životní prostředí upravuje, které další souhlasy může nahradit rozhodnutí v procesu EIA.",
+                "effectCz": "Dříve bylo stanovisko EIA u některých záměrů spojeno také s jednotným environmentálním stanoviskem; schválený text výslovně umožňuje, aby stanovisko EIA nahradilo souhlasy k zásahu do významného krajinného prvku či krajinného rázu. Tyto konkrétní úkony se mohou sloučit, ale dopad souvisejícího zrušení jiných právních úprav nelze z poskytnutého předchozího znění určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Změna vodního zákona převádí vybraná povolení a souhlasy pro vodní záměry do řízení o povolení stavby.",
+                "effectCz": "Dosud vodoprávní úřady samostatně vydávaly povolení k nakládání s vodami a některé souhlasy; schválený text ukládá stavebnímu úřadu rozhodnout o vybraných úkonech v rámci povolení záměru a upravuje související vyjádření. Uvedené úkony se tím slučují do stavebního řízení, byť některé vodohospodářské podmínky nadále zůstávají."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-26",
+                "relevant": true,
+                "reasonCz": "Změna zákona o pozemkových úpravách propojuje schválený návrh pozemkových úprav s povolením stavebních záměrů.",
+                "effectCz": "Dosud společná zařízení zahrnutá do pozemkových úprav musela splnit samostatné podmínky souhlasu a povolení; schválený text stanoví, že rozhodnutí o pozemkových úpravách může být pro některé stavby a zařízení rozhodnutím v části věci pro následné povolení záměru. Snižuje tak počet samostatných povolovacích kroků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": true,
+                "reasonCz": "Změna zákona o ochraně ovzduší mění způsob, jak se posuzují požadavky na ovzduší při povolování staveb.",
+                "effectCz": "Dosud se pro některé záměry vydávalo samostatné závazné stanovisko; schválený text nahrazuje tento úkon vyjádřením a začleňuje související podmínky a kompenzační opatření do povolení záměru. Samostatný procesní krok se tedy v tomto rozsahu zmírňuje či slučuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": true,
+                "reasonCz": "Změna zákona o odpadech převádí posouzení nakládání s odpady při stavebním záměru na stavební úřad.",
+                "effectCz": "Dříve se pro některé stavební změny či odstranění vyžadovala stanoviska nebo vyjádření orgánu odpadového hospodářství; schválený text dává stavebnímu úřadu pravomoc posuzovat soulad záměru s odpadovými předpisy a stanovit podmínky přímo v rozhodnutí. Samostatné úkony se proto omezují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": false,
+                "reasonCz": "Změny se týkají zvláštního povolování obnovitelných zdrojů energie v akceleračních oblastech, nikoli slíbené digitalizace stavebního řízení jako takové.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+                "relevant": false,
+                "reasonCz": "Změna se týká sazeb správních poplatků a osvobození od nich, nikoli zavádění elektronického stavebního povolení nebo fungování digitálního řízení.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+                "relevant": true,
+                "reasonCz": "Změna přímo propojuje digitální informační kontejnery s evidencí elektronických dokumentací používanou při povolování a kolaudaci staveb.",
+                "effectCz": "Schválený text nově požaduje vložit kontejner pro povolení stavby do elektronické evidence nejpozději při podání žádosti a kontejner pro kolaudaci při podání žádosti o kolaudační rozhodnutí. Jde o nový digitální požadavek, který podporuje elektronické zpracování; předchozí znění tohoto konkrétního ustanovení v balíčku není."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": true,
+                "reasonCz": "Zrušovací ustanovení ruší právní předpisy a vyhlášky přímo související s povolováním staveb a environmentálními úkony v tomto procesu.",
+                "effectCz": "Schválený text ruší mimo jiné zákon o jednotném environmentálním stanovisku a řadu vyhlášek k dokumentaci staveb, požadavkům na výstavbu a informačním systémům; balíček nedodává jejich předchozí znění ani úplný obsah souvisejících náhradních pravidel. Směr dopadu na počet kroků a byrokracii proto z těchto podkladů nelze spolehlivě určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-1",
+                "relevant": false,
+                "reasonCz": "Návrh se týká elektronické identity a služeb důvěry obecně, ale balíček ho nijak nespojuje s elektronickým stavebním povolením nebo stavebním řízením.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43288-1",
+                "relevant": true,
+                "reasonCz": "Návrh prodlužuje přechodné období pro informační systémy stavební správy, což přímo ovlivňuje rychlost přechodu na elektronické řízení.",
+                "effectCz": "Dosavadní přechodné období pro příslušné informační systémy končilo 30. června 2026; návrh mění konec na 30. června 2027. Umožnil by tedy o rok déle používat přechodná řešení, což je v rozporu s požadavkem, aby elektronické povolení bylo brzy realitou."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-4",
+                "relevant": false,
+                "reasonCz": "Změna základních registrů ruší údaje pro elektronickou identifikaci a autentizaci obecně, ale neposkytuje spojení s povolováním staveb.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+                "relevant": false,
+                "reasonCz": "Nová pravidla pro testovací identity v základních registrech nejsou v balíčku spojena s digitalizací stavebního řízení nebo elektronickým povolením.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-11",
+                "relevant": true,
+                "reasonCz": "Návrh ruší části zákona o správě informací o stavbě a vystavěném prostředí, který upravuje digitální informace používané při povolování staveb.",
+                "effectCz": "Návrh ruší vybrané části dřívější změny zákona č. 330/2025 Sb.; balíček neuvádí znění těchto rušených částí, takže nelze určit, které digitální povinnosti by zůstaly a zda by se tím elektronické povolování zjednodušilo, nebo oslabilo."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43395-1",
+                "relevant": false,
+                "reasonCz": "Návrh mění organizaci zeměměřických a katastrálních orgánů, ale balíček neuvádí přímou vazbu na digitální stavební řízení nebo elektronické povolení.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "motoriste-2025-a174423de8--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-3",
+              "psp-core-2025--law-change-43174-7",
+              "psp-core-2025--law-change-43174-8",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--law-change-43174-14",
+              "psp-core-2025--law-change-43174-17",
+              "psp-core-2025--law-change-43174-20",
+              "psp-core-2025--law-change-43174-22",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-26",
+              "psp-core-2025--law-change-43174-33",
+              "psp-core-2025--law-change-43174-approved-55",
+              "psp-core-2025--law-change-43174-approved-56",
+              "psp-core-2025--law-change-43288-1",
+              "psp-core-2025--law-change-43372-11",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--vote-87370",
+              "psp-core-2025--print-step-211843"
+            ],
+            "explanationCz": "Motoristé sobě se podíleli na předložení novely stavebního zákona, tedy návrhu projednávaného Sněmovnou jako tisk 67, a jejich poslanci pro ni hlasovali při schválení i při následném setrvání na návrhu po zamítnutí Senátem. Schválený text rozšiřuje digitální podávání a zavádí sledování řízení na portálu stavebníka; součástí je také elektronické předávání informačních kontejnerů. Zároveň ale prodlužuje přechodné období, v němž lze používat jiné než cílové informační systémy stavební správy, až do konce roku 2030, a tím oddaluje plné elektronické fungování. Protože rozhodnutí obsahuje posun k digitalizaci i krok proti rychlému dokončení, převažuje zde dílčí posun proti slibu.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Schválený text ruší mimo jiné zákon o jednotném environmentálním stanovisku a vybrané části pravidel pro digitální informace o stavbách, ale balíček nedodává úplná předchozí znění těchto předpisů; dopad těchto zrušení na administrativní zátěž proto nelze přesně určit.",
+              "Poslanecký návrh na změnu zákona o správě informací o stavbě ruší ustanovení, jejichž obsah balíček neuvádí, takže nelze určit, zda by jeho přijetí digitalizaci stavebního řízení podpořilo, nebo oslabilo; následná rozhodující hlasování o tisku 67 mají podle pravidla větší váhu.",
+              "Hlasování o prodloužení přechodného období u jiného návrhu na stavební zákon proběhlo v prvním čtení, nikoli jako konečné rozhodnutí Sněmovny, a proto samo o sobě skóre nemění."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-a174423de8",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Mění přímo povolovací postupy, elektronické podávání a informační systémy stavebního řízení, tedy prostředky pro elektronické stavební povolení.",
+          "effectCz": "Před změnou bylo podání přes portál stavebníka možné, nikoli obecně povinné; schválený text vyžaduje čistě digitální podání u vybraných žádostí a nově ukládá portálu nabídnout sledování stavu řízení. To digitalizaci části procesu posouvá kupředu. Zároveň se zavádění nového uspořádání a systémů rozkládá do přechodného období až do 31. prosince 2030, během něhož lze využívat i jiné systémy; to závazek rychlého dokončení oslabuje a směr v této části jde proti slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": true,
+          "reasonCz": "Mění, jak se požadavky požární ochrany uplatní při povolování staveb, což může ovlivnit počet a průběh kroků potřebných k povolení.",
+          "effectCz": "Dříve stanovoval technické podmínky požární ochrany prováděcí předpis ministerstva a výsledkem posouzení hasičů bylo závazné stanovisko; schválený text svěřuje podmínky nařízení vlády a u některých staveb rozlišuje závazné stanovisko a vyjádření. Požární požadavky tím nezanikají, ale jejich začlenění do nového povolovacího procesu může odstranit část samostatných kroků; administrativní postup se v této části zjednodušuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": true,
+          "reasonCz": "Upravuje vyjádření a podklady při povolování záměrů, takže se týká návaznosti stavebního povolení na další odborné posouzení.",
+          "effectCz": "Před změnou se pro záměr vyžadující jednotné environmentální stanovisko vyjádření podle uvedeného ustanovení nevydávalo; schválený text tuto výjimku ruší a mění související terminologii na žádost o povolení záměru. Změna může znamenat další vyjádření a směr k odstranění byrokracie proto není jednoznačně kladný; přesný rozsah dopadu nelze z poskytnutého textu určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": true,
+          "reasonCz": "Mění, zda a jak se souhlasy a výjimky podle ochrany přírody řeší při povolování staveb, tedy přímo ovlivňuje počet povolovacích úkonů.",
+          "effectCz": "Dříve bylo k řadě stavebních zásahů třeba samostatného souhlasu orgánu ochrany přírody; schválený text u řady záměrů svěřuje posouzení stavebnímu úřadu a stanoví, že potřebný souhlas či povolení bude součástí rozhodnutí o záměru. To snižuje počet oddělených úkonů a je v souladu se zjednodušením povolování, aniž by samo o sobě dokazovalo digitalizaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Převádí posuzování ochrany zemědělské půdy u stavebních záměrů do povolení záměru a mění podmínky, za nichž se půda posuzuje.",
+          "effectCz": "Před změnou bylo pro odnětí zemědělské půdy zpravidla třeba samostatného souhlasu; schválený text pro záměry podléhající stavebnímu povolení svěřuje posouzení a příslušné podmínky stavebnímu úřadu v rozhodnutí o záměru. U již vymezených zastavitelných území zároveň stanoví, že se zásady plošné ochrany půdy neposuzují, čímž se tento limit zmírňuje a postup zjednodušuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": true,
+          "reasonCz": "Začleňuje lesní souhlasy a rozhodnutí o odnětí lesních pozemků do řízení o stavebním záměru.",
+          "effectCz": "Dříve se vyžadovalo samostatné závazné stanovisko a rozhodnutí orgánu státní správy lesů; schválený text v běžných případech předává posouzení stavebnímu úřadu a stanoví, že samostatné závazné stanovisko se nevydává, ale orgán lesní správy poskytne vyjádření. To omezuje oddělené povolovací kroky a posouvá se směrem k menší byrokracii."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": true,
+          "reasonCz": "Mění způsob zapojení veterinárních orgánů do povolování staveb, a může tak ovlivnit počet potřebných samostatných úkonů.",
+          "effectCz": "Dříve veterinární správa vydávala pro některé stavby závazný posudek, který byl závazným podkladem; schválený text tento režim ruší a ponechává vyjádření, přičemž některé posuzování začleňuje do stavebního povolení. Tím se omezuje samostatný krok a postup se v této části zjednodušuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Přesouvá úkony ochrany veřejného zdraví týkající se staveb do rozhodování stavebního úřadu.",
+          "effectCz": "Dříve orgán ochrany veřejného zdraví vydával stanoviska a u některých záměrů samostatně posuzoval soulad; schválený text stanoví, že stavební úřad v rozhodnutí o záměru nahradí příslušná stanoviska, vyjádření a další úkony. To snižuje počet samostatných kroků, a tedy odpovídá části slibu o omezení zbytečné byrokracie."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Upravuje začlenění environmentálního posuzování a souvisejících úkonů do povolování staveb.",
+          "effectCz": "Před změnou mohla souhlasná stanoviska k posouzení vlivů nahrazovat jednotné environmentální stanovisko; schválený text rozšiřuje možnost, aby závazné stanovisko z posouzení vlivů nahradilo i další správní úkony z oblasti životního prostředí a veřejného zdraví. To může omezit opakované a oddělené kroky při povolení záměru, což je v souladu se zjednodušením."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Přesouvá povolení a další rozhodování o vodních otázkách souvisejících se stavbou do řízení o záměru.",
+          "effectCz": "Dříve se pro řadu zásahů vyžadovalo samostatné povolení či souhlas vodoprávního úřadu; schválený text stanoví, že u záměrů podle stavebního zákona příslušné povolení nebo posouzení vydá stavební úřad v rozhodnutí o záměru. To omezuje oddělené kroky a je v souladu se zjednodušením povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": true,
+          "reasonCz": "Stanoví, že schválené pozemkové úpravy mohou být pro některé stavby podkladem v řízení o povolení záměru.",
+          "effectCz": "Před změnou nebylo v dodaném znění uvedeno, že rozhodnutí o pozemkových úpravách může být částí řízení o stavebním povolení; schválený text zavádí takové pravidlo pro společná zařízení, která vyžadují povolení. To může odstranit opakování řízení a je dílčím zjednodušením."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Mění způsob, jak se ochrana ovzduší uplatňuje při povolování stavebních záměrů.",
+          "effectCz": "Dříve se k některým stavebním záměrům vydávalo samostatné závazné stanovisko; schválený text je nahrazuje vyjádřením a návazné podmínky či kompenzační opatření začleňuje do rozhodnutí o povolení záměru. Tím se počet oddělených úkonů snižuje a postup se zjednodušuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": true,
+          "reasonCz": "Převádí posuzování nakládání s odpady při stavebních záměrech do rozhodnutí stavebního úřadu.",
+          "effectCz": "Dříve se pro některé stavební práce vydávalo samostatné stanovisko nebo vyjádření odpadového orgánu; schválený text ukládá stavebnímu úřadu posoudit požadavky odpadového zákona v rozhodnutí o záměru. To omezuje samostatný administrativní krok a podporuje jednodušší povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Mění postup povolování obnovitelných zdrojů v akceleračních oblastech, což je část stavebního povolovacího procesu pro konkrétní typ záměrů.",
+          "effectCz": "Před změnou se podmínky k těmto záměrům připravovaly v rámci stanovisek podle environmentálních předpisů; schválený text přesouvá související stanovisko a podmínky do působnosti stavebního úřadu. To slučuje úkony do povolovacího postupu pro tyto záměry, ale samo o sobě nepředstavuje digitalizaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": true,
+          "reasonCz": "Zavádí pravidla správních poplatků za povolení a stanoví výjimku, pokud úřad nerozhodne ve lhůtě.",
+          "effectCz": "Schválený text zavádí osvobození od poplatku za povolení záměru a kolaudační rozhodnutí, pokud stavební úřad žádost nevyřídí v zákonné lhůtě. Předchozí znění sazebníku v balíčku chybí, takže změnu celkové výše či rozsahu poplatků nelze porovnat; nová výjimka ale podporuje rychlost vyřízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": true,
+          "reasonCz": "Přímo propojuje digitální informační model stavby s elektronickou evidencí stavebních dokumentů a s žádostí o povolení.",
+          "effectCz": "Dřívější znění zákona už požadovalo pořízení informačního kontejneru pro povolení stavby nejpozději při podání žádosti; schválený text navíc výslovně ukládá vložit jej do evidence elektronických dokumentací ve stejném termínu. Tím posiluje digitální předávání podkladů při povolování a jde přímo směrem ke slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Ruší zákon o jednotném environmentálním stanovisku, tedy nástroj, který dosud spojoval některé environmentální úkony související se stavebními záměry.",
+          "effectCz": "Dříve existoval samostatný režim jednotného environmentálního stanoviska; schválený text jej ruší. Směr jeho dopadu na počet kroků nelze určit izolovaně, protože související části stejného balíku převádějí mnohé úkony přímo do stavebního rozhodnutí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": false,
+          "reasonCz": "Návrh zavádí elektronická potvrzení atributů a digitální peněženku obecně, ale dodané znění je nespojuje s povolováním staveb ani s elektronickým stavebním řízením.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43288-1",
+          "relevant": true,
+          "reasonCz": "Prodlužuje přechodné období, během něhož se nemusí plně používat digitální informační systémy stavebního zákona.",
+          "effectCz": "Před změnou mělo přechodné období pro příslušná ustanovení končit 30. června 2026; navržená změna posouvá konec na 30. června 2027. Tím prodlužuje možnost nepoužívat příslušná digitální pravidla o rok a jde proti rychlému dokončení digitalizace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Ruší údaje pro elektronickou identifikaci v základním registru obyvatel, ale balíček je nespojuje s digitálním stavebním řízením ani s elektronickým povolením.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": false,
+          "reasonCz": "Zavádí testovací identity a údaje pro testování základních registrů a dalších systémů, avšak neuvádí vazbu na stavební řízení nebo jeho digitalizaci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": true,
+          "reasonCz": "Navrhuje zrušit části zákona o správě informací o stavbě, který upravuje digitální informační kontejnery používané při stavebním povolování.",
+          "effectCz": "Návrh ruší několik dříve přijatých ustanovení, ale balíček neobsahuje jejich úplné znění ani popis jejich obsahu; proto nelze určit, které digitální požadavky by odpadly ani zda by změna digitalizaci zpomalila či urychlila."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": false,
+          "reasonCz": "Mění organizaci zeměměřických a katastrálních orgánů, ale text nepropojuje změnu s elektronickým stavebním povolením ani s digitalizací stavebního řízení.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-a174423de8--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-3",
+        "psp-core-2025--law-change-43174-7",
+        "psp-core-2025--law-change-43174-8",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-14",
+        "psp-core-2025--law-change-43174-17",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-26",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-39",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-38",
+        "psp-core-2025--law-change-43174-approved-55",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43288-1",
+        "psp-core-2025--law-change-43372-11",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-87370",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-211843"
+      ],
+      "explanationCz": "Motoristé předložili návrh na změnu stavebního zákona, který zavádí digitální podání u vybraných žádostí a sledování průběhu řízení na portálu stavebníka. Poslanci strany podpořili i prodloužení přechodného období, které oddaluje používání digitálních pravidel o rok. Senát návrh rozsáhlejší novely odmítl, ale Sněmovna poté setrvala na svém textu, který přináší digitální novinky, zároveň však umožňuje využívat přechodný režim až do konce roku 2030. Protože tato rozhodující novela současně posouvá část slibu kupředu a odkládá jeho dokončení, strana nyní směřuje proti části závazku.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozsáhlá novela stavebního zákona obsahuje jak nové digitální funkce, tak přechodné období umožňující odklad jejich plného používání až do konce roku 2030; nelze proto tvrdit, že digitalizace je dokončena.",
+        "U návrhu poslanců na změnu zákona o správě informací o stavbě nejsou v balíčku uvedeny rušené části v úplném znění, takže jeho možný vliv na digitální dokumenty nelze přesně určit. Jde však o návrh, nikoli o pozdější rozhodnutí, které by převážilo hlasování o stavebním zákoně.",
+        "Předložené právní změny stanovují pravidla a povinnosti, ale samy nedokládají, zda elektronické stavební řízení v praxi funguje rychle a přehledně."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-a174423de8",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Mění přímo pravidla stavebního řízení, elektronického podávání a informačních systémů používaných pro stavební povolení.",
+          "effectCz": "Dosud bylo možné podávat dokumenty přes portál stavebníka i v listinné podobě; nové znění u podání s dokumentací pro povolení záměru a u některých podání osob s datovou schránkou vyžaduje digitální úkon a zavádí sledování stavu řízení na portálu, což rozšiřuje elektronické služby. Zároveň dosavadní přechodné období pro používání jiných informačních systémů prodlužuje do 31. prosince 2030, takže oddaluje plné sjednocení digitalizace; účinek na slib je proto smíšený."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Změny požární ochrany se týkají odborných pravidel a působnosti požárního dozoru, ale balíček je nespojuje s elektronickým stavebním povolením ani s jeho digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Změny geologických prací upravují související odborné postupy, nikoli digitalizaci stavebního řízení nebo elektronické povolení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje ochranu přírody a související povolovací pravomoci, ale nedokládá přímou změnu elektronického stavebního řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Změny ochrany zemědělské půdy upravují věcné podmínky povolení, nikoli digitální podání nebo fungování elektronického stavebního povolení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": false,
+          "reasonCz": "Změny lesního zákona se týkají povolení pro zásahy do lesních pozemků a nejsou v balíčku spojeny s digitalizací řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": false,
+          "reasonCz": "Změny veterinárního zákona upravují veterinární vyjádření a neposkytují přímý prostředek k dokončení digitalizace stavebního řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Změny ochrany veřejného zdraví se týkají stanovisek a povolovacích úkonů, nikoli elektronické podoby stavebního řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Změny posuzování vlivů na životní prostředí neřeší podle dodaných podkladů elektronické podávání ani provoz digitálního stavebního povolení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změny vodního zákona se zaměřují na vodoprávní povolení a související odborná posouzení, nikoli na digitalizaci stavebního řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "Změny pozemkových úprav upravují vymezení dotčených pozemků, ale nemění digitální stavební řízení ani elektronické povolení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Změny ochrany ovzduší upravují povolovací úkony a jejich obsah, ale nemají doloženou přímou vazbu na digitalizaci stavebního řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změny odpadového zákona upravují posuzování nakládání s odpady při záměrech, nikoli digitální fungování stavebního povolení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": false,
+          "reasonCz": "Změny pravidel pro obnovitelné zdroje se zabývají povolováním těchto záměrů, ale nedokládají přímý posun v digitalizaci stavebního řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": false,
+          "reasonCz": "Změna správních poplatků se týká úhrady a vracení poplatků, nikoli digitalizace stavebního řízení nebo elektronického povolení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": true,
+          "reasonCz": "Nově propojuje informační kontejnery pro povolení a kolaudaci s elektronickou evidencí dokumentací ve stavebním řízení.",
+          "effectCz": "Předchozí znění dotčeného ustanovení zákona o správě informací o stavbě balíček neuvádí; nově však stanoví vkládání informačního kontejneru pro povolení nejpozději s podáním žádosti a kontejneru pro kolaudaci nejpozději s žádostí o kolaudační rozhodnutí. Jde o rozšíření elektronické dokumentace a posun ke slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Tato část ruší různé předpisy a vyhlášky; dodaný text neukazuje konkrétní změnu, která by sama naplňovala digitalizaci stavebního řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": false,
+          "reasonCz": "Úprava služeb důvěry pro elektronické transakce není v balíčku spojena se stavebním řízením ani s elektronickým stavebním povolením.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43288-1",
+          "relevant": true,
+          "reasonCz": "Návrh prodlužuje přechodné období pro používání dosavadních či jiných informačních systémů ve stavebním řízení, a tím může odložit sjednocení digitalizace.",
+          "effectCz": "Znění § 334b odst. 1 v podkladu rozlišuje přechodné období do 30. června 2026 pro vyjmenovaná ustanovení; návrh posouvá příslušné datum na rok 2027. Tím prodlužuje možnost přechodného fungování mimo jednotné systémy a oddaluje dosažení plně digitalizovaného řízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Změna zákona o základních registrech se podle dodaného textu týká identifikačních údajů obyvatel, nikoli elektronického stavebního povolení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": false,
+          "reasonCz": "Nové testovací identity pro základní registry nejsou v dodaném znění spojeny se stavebním řízením nebo elektronickými stavebními povoleními.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": true,
+          "reasonCz": "Návrh ruší ustanovení zákona o správě informací o stavbě, který upravuje elektronické informační kontejnery související s povolováním staveb.",
+          "effectCz": "Text návrhu ruší některé body předchozí novely zákona o správě informací o stavbě, ale balíček neuvádí znění těchto rušených ustanovení; směr a rozsah dopadu na digitální podklady stavebního řízení proto nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje organizaci zeměměřických a katastrálních orgánů, nikoli elektronické stavební řízení nebo vydávání stavebních povolení.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-a174423de8--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-approved-55",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--law-change-43288-1",
+        "psp-core-2025--vote-87370",
+        "psp-core-2025--law-change-43372-11",
+        "psp-core-2025--print-step-211843"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili spolu s poslanci ANO a SPD novelu stavebního zákona a později pro ni hlasovali i poté, co ji Senát, horní komora Parlamentu, zamítl. Schválené znění u některých podání vyžaduje digitální úkon, zavádí sledování stavu řízení na portálu stavebníka a přidává elektronické informační kontejnery pro povolení a kolaudaci. Zároveň ale prodlužuje možnost používat jiné informační systémy v přechodném období až do roku 2030, což oddaluje úplné sjednocení digitalizovaného řízení. Protože toto rozhodnutí současně posouvá elektronické služby kupředu i odkládá dokončení digitalizace, zatím působí proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U návrhu na zrušení některých ustanovení zákona o správě informací o stavbě chybí jejich předchozí znění, takže nelze určit, zda návrh digitální povinnosti rozvolňuje, nebo mění jinak.",
+        "Motoristé podpořili také prodloužení přechodného období při hlasování v prvním čtení; toto hlasování nebylo konečným rozhodnutím Sněmovny, a proto samo o sobě skóre neurčuje."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0f14f36fbafb3a32016ac562db001087d2a332303d45df1dc8",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 671819,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 671816
+      },
+      "output_tokens": 9968,
+      "output_tokens_details": {
+        "reasoning_tokens": 5558
+      },
+      "total_tokens": 681787
+    },
+    "output": {
+      "promiseId": "motoriste-2025-a174423de8",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Mění přímo povolovací postupy, elektronické podávání a informační systémy stavebního řízení, tedy prostředky pro elektronické stavební povolení.",
+          "effectCz": "Před změnou bylo podání přes portál stavebníka možné, nikoli obecně povinné; schválený text vyžaduje čistě digitální podání u vybraných žádostí a nově ukládá portálu nabídnout sledování stavu řízení. To digitalizaci části procesu posouvá kupředu. Zároveň se zavádění nového uspořádání a systémů rozkládá do přechodného období až do 31. prosince 2030, během něhož lze využívat i jiné systémy; to závazek rychlého dokončení oslabuje a směr v této části jde proti slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": true,
+          "reasonCz": "Mění, jak se požadavky požární ochrany uplatní při povolování staveb, což může ovlivnit počet a průběh kroků potřebných k povolení.",
+          "effectCz": "Dříve stanovoval technické podmínky požární ochrany prováděcí předpis ministerstva a výsledkem posouzení hasičů bylo závazné stanovisko; schválený text svěřuje podmínky nařízení vlády a u některých staveb rozlišuje závazné stanovisko a vyjádření. Požární požadavky tím nezanikají, ale jejich začlenění do nového povolovacího procesu může odstranit část samostatných kroků; administrativní postup se v této části zjednodušuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": true,
+          "reasonCz": "Upravuje vyjádření a podklady při povolování záměrů, takže se týká návaznosti stavebního povolení na další odborné posouzení.",
+          "effectCz": "Před změnou se pro záměr vyžadující jednotné environmentální stanovisko vyjádření podle uvedeného ustanovení nevydávalo; schválený text tuto výjimku ruší a mění související terminologii na žádost o povolení záměru. Změna může znamenat další vyjádření a směr k odstranění byrokracie proto není jednoznačně kladný; přesný rozsah dopadu nelze z poskytnutého textu určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": true,
+          "reasonCz": "Mění, zda a jak se souhlasy a výjimky podle ochrany přírody řeší při povolování staveb, tedy přímo ovlivňuje počet povolovacích úkonů.",
+          "effectCz": "Dříve bylo k řadě stavebních zásahů třeba samostatného souhlasu orgánu ochrany přírody; schválený text u řady záměrů svěřuje posouzení stavebnímu úřadu a stanoví, že potřebný souhlas či povolení bude součástí rozhodnutí o záměru. To snižuje počet oddělených úkonů a je v souladu se zjednodušením povolování, aniž by samo o sobě dokazovalo digitalizaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Převádí posuzování ochrany zemědělské půdy u stavebních záměrů do povolení záměru a mění podmínky, za nichž se půda posuzuje.",
+          "effectCz": "Před změnou bylo pro odnětí zemědělské půdy zpravidla třeba samostatného souhlasu; schválený text pro záměry podléhající stavebnímu povolení svěřuje posouzení a příslušné podmínky stavebnímu úřadu v rozhodnutí o záměru. U již vymezených zastavitelných území zároveň stanoví, že se zásady plošné ochrany půdy neposuzují, čímž se tento limit zmírňuje a postup zjednodušuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": true,
+          "reasonCz": "Začleňuje lesní souhlasy a rozhodnutí o odnětí lesních pozemků do řízení o stavebním záměru.",
+          "effectCz": "Dříve se vyžadovalo samostatné závazné stanovisko a rozhodnutí orgánu státní správy lesů; schválený text v běžných případech předává posouzení stavebnímu úřadu a stanoví, že samostatné závazné stanovisko se nevydává, ale orgán lesní správy poskytne vyjádření. To omezuje oddělené povolovací kroky a posouvá se směrem k menší byrokracii."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": true,
+          "reasonCz": "Mění způsob zapojení veterinárních orgánů do povolování staveb, a může tak ovlivnit počet potřebných samostatných úkonů.",
+          "effectCz": "Dříve veterinární správa vydávala pro některé stavby závazný posudek, který byl závazným podkladem; schválený text tento režim ruší a ponechává vyjádření, přičemž některé posuzování začleňuje do stavebního povolení. Tím se omezuje samostatný krok a postup se v této části zjednodušuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Přesouvá úkony ochrany veřejného zdraví týkající se staveb do rozhodování stavebního úřadu.",
+          "effectCz": "Dříve orgán ochrany veřejného zdraví vydával stanoviska a u některých záměrů samostatně posuzoval soulad; schválený text stanoví, že stavební úřad v rozhodnutí o záměru nahradí příslušná stanoviska, vyjádření a další úkony. To snižuje počet samostatných kroků, a tedy odpovídá části slibu o omezení zbytečné byrokracie."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Upravuje začlenění environmentálního posuzování a souvisejících úkonů do povolování staveb.",
+          "effectCz": "Před změnou mohla souhlasná stanoviska k posouzení vlivů nahrazovat jednotné environmentální stanovisko; schválený text rozšiřuje možnost, aby závazné stanovisko z posouzení vlivů nahradilo i další správní úkony z oblasti životního prostředí a veřejného zdraví. To může omezit opakované a oddělené kroky při povolení záměru, což je v souladu se zjednodušením."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Přesouvá povolení a další rozhodování o vodních otázkách souvisejících se stavbou do řízení o záměru.",
+          "effectCz": "Dříve se pro řadu zásahů vyžadovalo samostatné povolení či souhlas vodoprávního úřadu; schválený text stanoví, že u záměrů podle stavebního zákona příslušné povolení nebo posouzení vydá stavební úřad v rozhodnutí o záměru. To omezuje oddělené kroky a je v souladu se zjednodušením povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": true,
+          "reasonCz": "Stanoví, že schválené pozemkové úpravy mohou být pro některé stavby podkladem v řízení o povolení záměru.",
+          "effectCz": "Před změnou nebylo v dodaném znění uvedeno, že rozhodnutí o pozemkových úpravách může být částí řízení o stavebním povolení; schválený text zavádí takové pravidlo pro společná zařízení, která vyžadují povolení. To může odstranit opakování řízení a je dílčím zjednodušením."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Mění způsob, jak se ochrana ovzduší uplatňuje při povolování stavebních záměrů.",
+          "effectCz": "Dříve se k některým stavebním záměrům vydávalo samostatné závazné stanovisko; schválený text je nahrazuje vyjádřením a návazné podmínky či kompenzační opatření začleňuje do rozhodnutí o povolení záměru. Tím se počet oddělených úkonů snižuje a postup se zjednodušuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": true,
+          "reasonCz": "Převádí posuzování nakládání s odpady při stavebních záměrech do rozhodnutí stavebního úřadu.",
+          "effectCz": "Dříve se pro některé stavební práce vydávalo samostatné stanovisko nebo vyjádření odpadového orgánu; schválený text ukládá stavebnímu úřadu posoudit požadavky odpadového zákona v rozhodnutí o záměru. To omezuje samostatný administrativní krok a podporuje jednodušší povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Mění postup povolování obnovitelných zdrojů v akceleračních oblastech, což je část stavebního povolovacího procesu pro konkrétní typ záměrů.",
+          "effectCz": "Před změnou se podmínky k těmto záměrům připravovaly v rámci stanovisek podle environmentálních předpisů; schválený text přesouvá související stanovisko a podmínky do působnosti stavebního úřadu. To slučuje úkony do povolovacího postupu pro tyto záměry, ale samo o sobě nepředstavuje digitalizaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": true,
+          "reasonCz": "Zavádí pravidla správních poplatků za povolení a stanoví výjimku, pokud úřad nerozhodne ve lhůtě.",
+          "effectCz": "Schválený text zavádí osvobození od poplatku za povolení záměru a kolaudační rozhodnutí, pokud stavební úřad žádost nevyřídí v zákonné lhůtě. Předchozí znění sazebníku v balíčku chybí, takže změnu celkové výše či rozsahu poplatků nelze porovnat; nová výjimka ale podporuje rychlost vyřízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": true,
+          "reasonCz": "Přímo propojuje digitální informační model stavby s elektronickou evidencí stavebních dokumentů a s žádostí o povolení.",
+          "effectCz": "Dřívější znění zákona už požadovalo pořízení informačního kontejneru pro povolení stavby nejpozději při podání žádosti; schválený text navíc výslovně ukládá vložit jej do evidence elektronických dokumentací ve stejném termínu. Tím posiluje digitální předávání podkladů při povolování a jde přímo směrem ke slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Ruší zákon o jednotném environmentálním stanovisku, tedy nástroj, který dosud spojoval některé environmentální úkony související se stavebními záměry.",
+          "effectCz": "Dříve existoval samostatný režim jednotného environmentálního stanoviska; schválený text jej ruší. Směr jeho dopadu na počet kroků nelze určit izolovaně, protože související části stejného balíku převádějí mnohé úkony přímo do stavebního rozhodnutí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": false,
+          "reasonCz": "Návrh zavádí elektronická potvrzení atributů a digitální peněženku obecně, ale dodané znění je nespojuje s povolováním staveb ani s elektronickým stavebním řízením.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43288-1",
+          "relevant": true,
+          "reasonCz": "Prodlužuje přechodné období, během něhož se nemusí plně používat digitální informační systémy stavebního zákona.",
+          "effectCz": "Před změnou mělo přechodné období pro příslušná ustanovení končit 30. června 2026; navržená změna posouvá konec na 30. června 2027. Tím prodlužuje možnost nepoužívat příslušná digitální pravidla o rok a jde proti rychlému dokončení digitalizace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Ruší údaje pro elektronickou identifikaci v základním registru obyvatel, ale balíček je nespojuje s digitálním stavebním řízením ani s elektronickým povolením.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": false,
+          "reasonCz": "Zavádí testovací identity a údaje pro testování základních registrů a dalších systémů, avšak neuvádí vazbu na stavební řízení nebo jeho digitalizaci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": true,
+          "reasonCz": "Navrhuje zrušit části zákona o správě informací o stavbě, který upravuje digitální informační kontejnery používané při stavebním povolování.",
+          "effectCz": "Návrh ruší několik dříve přijatých ustanovení, ale balíček neobsahuje jejich úplné znění ani popis jejich obsahu; proto nelze určit, které digitální požadavky by odpadly ani zda by změna digitalizaci zpomalila či urychlila."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": false,
+          "reasonCz": "Mění organizaci zeměměřických a katastrálních orgánů, ale text nepropojuje změnu s elektronickým stavebním povolením ani s digitalizací stavebního řízení.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-a174423de8--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-3",
+        "psp-core-2025--law-change-43174-7",
+        "psp-core-2025--law-change-43174-8",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-14",
+        "psp-core-2025--law-change-43174-17",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-26",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-39",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-38",
+        "psp-core-2025--law-change-43174-approved-55",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43288-1",
+        "psp-core-2025--law-change-43372-11",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-87370",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-211843"
+      ],
+      "explanationCz": "Motoristé předložili návrh na změnu stavebního zákona, který zavádí digitální podání u vybraných žádostí a sledování průběhu řízení na portálu stavebníka. Poslanci strany podpořili i prodloužení přechodného období, které oddaluje používání digitálních pravidel o rok. Senát návrh rozsáhlejší novely odmítl, ale Sněmovna poté setrvala na svém textu, který přináší digitální novinky, zároveň však umožňuje využívat přechodný režim až do konce roku 2030. Protože tato rozhodující novela současně posouvá část slibu kupředu a odkládá jeho dokončení, strana nyní směřuje proti části závazku.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozsáhlá novela stavebního zákona obsahuje jak nové digitální funkce, tak přechodné období umožňující odklad jejich plného používání až do konce roku 2030; nelze proto tvrdit, že digitalizace je dokončena.",
+        "U návrhu poslanců na změnu zákona o správě informací o stavbě nejsou v balíčku uvedeny rušené části v úplném znění, takže jeho možný vliv na digitální dokumenty nelze přesně určit. Jde však o návrh, nikoli o pozdější rozhodnutí, které by převážilo hlasování o stavebním zákoně.",
+        "Předložené právní změny stanovují pravidla a povinnosti, ale samy nedokládají, zda elektronické stavební řízení v praxi funguje rychle a přehledně."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0c1622da2a355625016ac564bd732c87d2b644fa308a73ea8b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 671819,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 671816
+      },
+      "output_tokens": 10074,
+      "output_tokens_details": {
+        "reasoning_tokens": 7104
+      },
+      "total_tokens": 681893
+    },
+    "output": {
+      "promiseId": "motoriste-2025-a174423de8",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Mění přímo pravidla stavebního řízení, elektronického podávání a informačních systémů používaných pro stavební povolení.",
+          "effectCz": "Dosud bylo možné podávat dokumenty přes portál stavebníka i v listinné podobě; nové znění u podání s dokumentací pro povolení záměru a u některých podání osob s datovou schránkou vyžaduje digitální úkon a zavádí sledování stavu řízení na portálu, což rozšiřuje elektronické služby. Zároveň dosavadní přechodné období pro používání jiných informačních systémů prodlužuje do 31. prosince 2030, takže oddaluje plné sjednocení digitalizace; účinek na slib je proto smíšený."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Změny požární ochrany se týkají odborných pravidel a působnosti požárního dozoru, ale balíček je nespojuje s elektronickým stavebním povolením ani s jeho digitalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Změny geologických prací upravují související odborné postupy, nikoli digitalizaci stavebního řízení nebo elektronické povolení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje ochranu přírody a související povolovací pravomoci, ale nedokládá přímou změnu elektronického stavebního řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Změny ochrany zemědělské půdy upravují věcné podmínky povolení, nikoli digitální podání nebo fungování elektronického stavebního povolení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": false,
+          "reasonCz": "Změny lesního zákona se týkají povolení pro zásahy do lesních pozemků a nejsou v balíčku spojeny s digitalizací řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": false,
+          "reasonCz": "Změny veterinárního zákona upravují veterinární vyjádření a neposkytují přímý prostředek k dokončení digitalizace stavebního řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Změny ochrany veřejného zdraví se týkají stanovisek a povolovacích úkonů, nikoli elektronické podoby stavebního řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Změny posuzování vlivů na životní prostředí neřeší podle dodaných podkladů elektronické podávání ani provoz digitálního stavebního povolení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změny vodního zákona se zaměřují na vodoprávní povolení a související odborná posouzení, nikoli na digitalizaci stavebního řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "Změny pozemkových úprav upravují vymezení dotčených pozemků, ale nemění digitální stavební řízení ani elektronické povolení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Změny ochrany ovzduší upravují povolovací úkony a jejich obsah, ale nemají doloženou přímou vazbu na digitalizaci stavebního řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změny odpadového zákona upravují posuzování nakládání s odpady při záměrech, nikoli digitální fungování stavebního povolení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": false,
+          "reasonCz": "Změny pravidel pro obnovitelné zdroje se zabývají povolováním těchto záměrů, ale nedokládají přímý posun v digitalizaci stavebního řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": false,
+          "reasonCz": "Změna správních poplatků se týká úhrady a vracení poplatků, nikoli digitalizace stavebního řízení nebo elektronického povolení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": true,
+          "reasonCz": "Nově propojuje informační kontejnery pro povolení a kolaudaci s elektronickou evidencí dokumentací ve stavebním řízení.",
+          "effectCz": "Předchozí znění dotčeného ustanovení zákona o správě informací o stavbě balíček neuvádí; nově však stanoví vkládání informačního kontejneru pro povolení nejpozději s podáním žádosti a kontejneru pro kolaudaci nejpozději s žádostí o kolaudační rozhodnutí. Jde o rozšíření elektronické dokumentace a posun ke slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Tato část ruší různé předpisy a vyhlášky; dodaný text neukazuje konkrétní změnu, která by sama naplňovala digitalizaci stavebního řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": false,
+          "reasonCz": "Úprava služeb důvěry pro elektronické transakce není v balíčku spojena se stavebním řízením ani s elektronickým stavebním povolením.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43288-1",
+          "relevant": true,
+          "reasonCz": "Návrh prodlužuje přechodné období pro používání dosavadních či jiných informačních systémů ve stavebním řízení, a tím může odložit sjednocení digitalizace.",
+          "effectCz": "Znění § 334b odst. 1 v podkladu rozlišuje přechodné období do 30. června 2026 pro vyjmenovaná ustanovení; návrh posouvá příslušné datum na rok 2027. Tím prodlužuje možnost přechodného fungování mimo jednotné systémy a oddaluje dosažení plně digitalizovaného řízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Změna zákona o základních registrech se podle dodaného textu týká identifikačních údajů obyvatel, nikoli elektronického stavebního povolení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": false,
+          "reasonCz": "Nové testovací identity pro základní registry nejsou v dodaném znění spojeny se stavebním řízením nebo elektronickými stavebními povoleními.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": true,
+          "reasonCz": "Návrh ruší ustanovení zákona o správě informací o stavbě, který upravuje elektronické informační kontejnery související s povolováním staveb.",
+          "effectCz": "Text návrhu ruší některé body předchozí novely zákona o správě informací o stavbě, ale balíček neuvádí znění těchto rušených ustanovení; směr a rozsah dopadu na digitální podklady stavebního řízení proto nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje organizaci zeměměřických a katastrálních orgánů, nikoli elektronické stavební řízení nebo vydávání stavebních povolení.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-a174423de8--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-approved-55",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--law-change-43288-1",
+        "psp-core-2025--vote-87370",
+        "psp-core-2025--law-change-43372-11",
+        "psp-core-2025--print-step-211843"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili spolu s poslanci ANO a SPD novelu stavebního zákona a později pro ni hlasovali i poté, co ji Senát, horní komora Parlamentu, zamítl. Schválené znění u některých podání vyžaduje digitální úkon, zavádí sledování stavu řízení na portálu stavebníka a přidává elektronické informační kontejnery pro povolení a kolaudaci. Zároveň ale prodlužuje možnost používat jiné informační systémy v přechodném období až do roku 2030, což oddaluje úplné sjednocení digitalizovaného řízení. Protože toto rozhodnutí současně posouvá elektronické služby kupředu i odkládá dokončení digitalizace, zatím působí proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U návrhu na zrušení některých ustanovení zákona o správě informací o stavbě chybí jejich předchozí znění, takže nelze určit, zda návrh digitální povinnosti rozvolňuje, nebo mění jinak.",
+        "Motoristé podpořili také prodloužení přechodného období při hlasování v prvním čtení; toto hlasování nebylo konečným rozhodnutím Sněmovny, a proto samo o sobě skóre neurčuje."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

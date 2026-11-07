@@ -1,0 +1,533 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T01-27-06-197Z--792feb0ce104",
+  "evaluatedAt": "2026-11-04T01:27:06.197Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-1dd10e5d25/792feb0ce10490e5e4fac780a113552e3df26167937841a8ab59272e0d4e2d39.json",
+  "packageHash": "792feb0ce10490e5e4fac780a113552e3df26167937841a8ab59272e0d4e2d39",
+  "assessmentContentHash": "97009fbb20b0425a193b14654dd80360a62d43fcc85d17d447913baaa8cbe23c",
+  "assessmentFingerprint": "cb204731dd79642d1b0ae3d9c398aa049cbdf05e701da893488f835a178ff76a",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-1dd10e5d25",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment omits the relevance verdict for law change psp-core-2025--law-change-43310-1",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_02093e919e2933ec016aea8957eb8c87d1b3005790126a62f5",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 50870,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 50867
+            },
+            "output_tokens": 5723,
+            "output_tokens_details": {
+              "reasoning_tokens": 3615
+            },
+            "total_tokens": 56593
+          },
+          "output": {
+            "promiseId": "ano-2025-1dd10e5d25",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": true,
+                "reasonCz": "Návrh státního rozpočtu obsahuje výdaje na zemědělství a jeho pozměňovací návrhy výslovně mění podporu agrárního sektoru.",
+                "effectCz": "Jde o rozpočet, nikoli změnu dřívějšího znění zákona; dodaný text pouze uvádí, že ukazatele podle kapitol jsou v příloze č. 4, ale její částky chybí, takže nelze určit, jakou podporu rozpočet pro pěstování stanoví ani jak se liší od předchozího stavu. Předložené pozměňovací návrhy výslovně navrhují snížit podporu agrárního sektoru, včetně dotací Státnímu zemědělskému intervenčnímu fondu, ale jejich přijetí ani dopad na konečné částky z poskytnutého textu nevyplývá."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43206-1",
+                "relevant": true,
+                "reasonCz": "Návrh stanoví zemědělské dotační programy pro rok 2026, včetně programů na podporu polních a speciálních plodin.",
+                "effectCz": "Návrh popisuje dotační programy pro rok 2026 a uvádí 528 milionů Kč pro rostlinnou výrobu, z toho však není v dodaném výňatku určena částka přímo na ovoce, zeleninu či základní plodiny. Oproti závazku podporovat jejich pěstování jde o dílčí podporu prostřednictvím programů, nikoli o doložení splnění celého slibu; předchozí znění ani srovnatelný údaj za minulý rok dodán není."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-32",
+                "relevant": true,
+                "reasonCz": "Nařízení upravuje podmínky dotací na zeleninu a byliny a stanoví pro ně limit uznatelné výměry.",
+                "effectCz": "Dodaný text stanoví, že se v žádosti o dotaci uvede nejvýše 50 ha podporované zeleniny nebo bylin; uvádí také návazné sazby pro případ nesplnění této podmínky a mění tabulky plodin. Předchozí znění těchto pravidel v balíčku chybí, takže nelze určit, zda se limit a další změny oproti dřívějšku zpřísňují, nebo uvolňují."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-34",
+                "relevant": true,
+                "reasonCz": "Nařízení mění dotační podmínky pro integrovanou produkci ovoce, zeleniny, brambor a dalších plodin.",
+                "effectCz": "Nařízení mění povinnosti při pěstování a podmínky čerpání dotací, včetně seče v sadech, používání přípravků na ochranu rostlin a sankcí za nesplnění podmínek; předchozí znění těchto pravidel není v balíčku, takže směr většiny změn nelze určit. U ekologicky hospodařících žadatelů ale výslovně stanoví snížení sazby dotace o 10 EUR na hektar, což tuto část podpory zmenšuje."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+                "relevant": true,
+                "reasonCz": "Nařízení mění pravidla přímých plateb a podmínky vztahující se k pěstovaným plodinám, včetně druhů zeleniny.",
+                "effectCz": "Dodaný text mění pravidla pro plodiny a některé hodnoty v tabulkách, například nahrazuje některé číselné údaje nižšími, a doplňuje další plodiny. Předchozí znění příslušných podmínek ani úplné souvislosti těchto hodnot nejsou dodány, proto nelze určit, zda změny podporu pěstování zpřísňují, uvolňují, nebo jinak mění."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-187",
+                "relevant": true,
+                "reasonCz": "Nařízení zavádí mimořádnou finanční podporu zemědělcům na půdě vedené mimo jiné jako orná půda či trvalá kultura.",
+                "effectCz": "Nařízení stanoví podmínky mimořádné podpory pro zemědělce obhospodařující alespoň 1 ha půdy a umožňuje ji poskytnout na příslušné zemědělské plochy. Jde o novou finanční pomoc, která může podpořit část zemědělské činnosti, ale její konkrétní sazby mají být zveřejněny později a nejsou v balíčku uvedeny."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": false,
+            "citedEvidenceIds": [
+              "ano-2025-1dd10e5d25--source",
+              "psp-core-2025--law-change-43204-1",
+              "psp-core-2025--law-change-43206-1",
+              "esbirka-regulations--law-change-sb-2026-32",
+              "esbirka-regulations--law-change-sb-2026-34",
+              "esbirka-regulations--law-change-sb-2026-45",
+              "esbirka-regulations--law-change-sb-2026-187",
+              "psp-core-2025--print-step-210761",
+              "psp-core-2025--amendment-text-382",
+              "psp-core-2025--vote-86865",
+              "psp-core-2025--amendment-text-360",
+              "psp-core-2025--vote-86873",
+              "psp-core-2025--amendment-text-574",
+              "psp-core-2025--vote-86891",
+              "psp-core-2025--amendment-text-526",
+              "psp-core-2025--vote-86904",
+              "psp-core-2025--amendment-text-579",
+              "psp-core-2025--vote-86910",
+              "psp-core-2025--amendment-text-509",
+              "psp-core-2025--vote-86918",
+              "psp-core-2025--amendment-text-560",
+              "psp-core-2025--vote-86953",
+              "psp-core-2025--vote-86957",
+              "psp-core-2025--vote-86965",
+              "esbirka-regulations--2026-32",
+              "esbirka-regulations--2026-34",
+              "esbirka-regulations--2026-45",
+              "esbirka-regulations--2026-187"
+            ],
+            "explanationCz": "Vláda předložila a Sněmovna schválila dotační programy zemědělství pro rok 2026; návrh uvádí 528 milionů Kč pro rostlinnou výrobu, což představuje dílčí podporu, nikoli doložení podpory konkrétních slíbených plodin. Vláda také přijala mimořádnou finanční podporu pro zemědělce, zatímco jiné její nařízení snížilo jednu sazbu dotace o 10 eur na hektar. ANO hlasovalo pro rozpočet na rok 2026, ale nepodpořilo pozměňovací návrhy, které navrhovaly snížit zemědělské dotace. Z dodaných podkladů nelze zjistit konečné rozpočtové částky určené na slíbené plodiny ani u většiny změněných dotačních podmínek porovnat nové pravidlo s předchozím.",
+            "confidence": "low",
+            "uncertainties": [
+              "U rozpočtu na rok 2026 chybí příslušné částky z přílohy č. 4, takže nelze vyhodnotit celkovou změnu výdajů na pěstování slíbených plodin.",
+              "U většiny změn dotačních pravidel chybí jejich předchozí znění; zejména u limitu 50 ha a změn přímých plateb proto není možné určit směr dopadu.",
+              "Konkrétní sazby mimořádné podpory zavedené nařízením pro zemědělce postižené krizí na Blízkém východě nejsou v podkladech uvedeny."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-1dd10e5d25",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o rozpočet na rok 2026 a součástí podkladů jsou návrhy i hlasování o změnách zemědělských dotací, které se týkají podpory pěstování.",
+          "effectCz": "Jde o nový státní rozpočet, takže nemá předchozí znění k porovnání. Dodaný výňatek pouze uvádí, že ukazatele kapitol jsou v příloze č. 4, ale neobsahuje její část týkající se zemědělství ani konkrétní částky; dopad rozpočtu na podporu pěstování proto z balíčku nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Návrh zemědělských dotačních programů na rok 2026 výslovně zahrnuje podporu polních a speciálních plodin i opatření pro ovocné sady.",
+          "effectCz": "Jde o návrh programů, nikoli o změnu dřívějšího právního znění. Pro rok 2026 uvádí podporu rostlinné výroby ve výši 528 mil. Kč a zmiňuje například prevenci chorob plodin, kapkovou závlahu a restrukturalizaci ovocných sadů; jde o konkrétní, ale jen částečný příspěvek k podpoře pěstování."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-32",
+          "relevant": true,
+          "reasonCz": "Nařízení upravuje dotační podmínky pro pěstování zeleniny a bylin, tedy plodin přímo spadajících do slibu.",
+          "effectCz": "Text nově uvádí nejvýše 50 ha pro žádost o dotaci na podporované druhy zeleniny či bylin a stanoví související výpočet sazby při nesplnění podmínky; mění také tabulku druhů zeleniny a výsevních či výsadbových údajů. Předchozí znění těchto pravidel balíček neobsahuje, takže nelze určit, zda se podmínky nebo nárok na podporu zpřísnily, nebo uvolnily."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-34",
+          "relevant": true,
+          "reasonCz": "Nařízení přímo upravuje podporu integrované produkce ovoce, zeleniny a brambor.",
+          "effectCz": "Upravené části stanoví mimo jiné pravidla seče a ponechávání části plochy bez zásahu, limity a podmínky použití přípravků na ochranu rostlin, sankce a seznam podporovaných druhů zeleniny. Předchozí znění dotčených pravidel není v balíčku uvedeno, takže směr změny podmínek a případné výše podpory nelze určit."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+          "relevant": true,
+          "reasonCz": "Nařízení mění pravidla přímých plateb zemědělcům a uvádí změny týkající se pěstovaných plodin a údajů pro jejich výsev či výsadbu.",
+          "effectCz": "Nařízení doplňuje nebo mění podmínky pro některé plodiny a v tabulkách uvádí například změny hodnot 11,00 na 8,50, 2,20 na 1,50 a 16,00 na 12,00; další hodnoty mění ze 150,00 na 110,00 a ze 75,00 na 50,00. Protože chybí záhlaví a předchozí znění dotčených tabulek, nelze z balíčku určit, co tyto hodnoty znamenají pro nárok na platbu ani zda změna podporu zpřísňuje, či uvolňuje."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-187",
+          "relevant": true,
+          "reasonCz": "Nařízení umožňuje mimořádnou finanční podporu také hospodářům s ornou půdou a trvalými kulturami, mezi něž mohou patřit pěstitelé plodin uvedených ve slibu.",
+          "effectCz": "Nařízení zavádí mimořádnou podporu pro oprávněné zemědělce postižené zvláštními problémy souvisejícími s krizí na Blízkém východě; žadatel musí obhospodařovat alespoň 1 ha určených druhů zemědělské půdy a v roce 2026 požádat o některou z vyjmenovaných podpor. Sazby se mají zveřejnit později a částky ani podpora jednotlivých plodin zde uvedeny nejsou; jde proto o omezenou možnost podpory, nikoli o doložené zvýšení podpory konkrétním plodinám."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": false,
+          "reasonCz": "Dodané znění se v části týkající se výjimek z evidence tržeb vztahuje na prodej sladkovodních ryb v předvánočním období, nikoli na podporu pěstování ovoce, zeleniny nebo základních plodin.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-1dd10e5d25--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43206-1",
+        "esbirka-regulations--law-change-sb-2026-32",
+        "esbirka-regulations--law-change-sb-2026-34",
+        "esbirka-regulations--law-change-sb-2026-45",
+        "esbirka-regulations--law-change-sb-2026-187",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-86965",
+        "psp-core-2025--amendment-text-382",
+        "psp-core-2025--vote-86865",
+        "psp-core-2025--amendment-text-360",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--amendment-text-574",
+        "psp-core-2025--vote-86891",
+        "psp-core-2025--amendment-text-526",
+        "psp-core-2025--vote-86904",
+        "psp-core-2025--amendment-text-579",
+        "psp-core-2025--vote-86910",
+        "psp-core-2025--amendment-text-509",
+        "psp-core-2025--vote-86918",
+        "psp-core-2025--amendment-text-560",
+        "psp-core-2025--vote-86953",
+        "esbirka-regulations--2026-32",
+        "esbirka-regulations--2026-34",
+        "esbirka-regulations--2026-45",
+        "esbirka-regulations--2026-187"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro dotační programy zemědělství na rok 2026, které vyčleňují 528 milionů Kč na rostlinnou výrobu a zahrnují také opatření pro ovocné sady a plodiny. Vláda rovněž přijala nařízení upravující dotační podmínky pro zeleninu, ovoce a přímé platby zemědělcům, ale dodané podklady neukazují, zda tyto změny podporu zvyšují, nebo snižují. Poslanci ANO hlasovali proti návrhům na snížení zemědělských dotací, avšak schválený státní rozpočet odkazuje na přílohu s částkami, která zde není obsažena. Doložená podpora programů je dílčím posunem, ale dopad rozpočtu a změněných dotačních podmínek nelze úplně vyhodnotit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek schváleného státního rozpočtu odkazuje na přílohu č. 4 s ukazateli kapitol, ale neobsahuje příslušné zemědělské částky. Nelze proto určit, zda konečný rozpočet podporu pěstování posílil, nebo omezil.",
+        "U přijatých nařízení o podmínkách ekologického zemědělství, agroenvironmentálních opatřeních a přímých platbách chybí předchozí znění některých dotčených pravidel. Jejich změny proto nelze spolehlivě označit za zpřísnění, uvolnění ani zvýšení či snížení podpory.",
+        "U mimořádné podpory pro zemědělce nejsou uvedeny konkrétní sazby ani částky pro pěstitele ovoce, zeleniny nebo základních plodin."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-1dd10e5d25",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet přímo stanoví výdaje ministerstva zemědělství a jeho fondu, přičemž předložené pozměňovací návrhy se výslovně týkají zemědělských dotací.",
+          "effectCz": "Jde o nový státní rozpočet; dodaný výňatek pouze odkazuje na ukazatele kapitol v příloze č. 4, ale neuvádí částky pro zemědělství. Nelze proto z poskytnutého znění určit, zda výsledný rozpočet podporu pěstování zvyšuje, snižuje, nebo ponechává stejnou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Dotační programy výslovně zahrnují podporu rostlinné výroby a ozdravování polních i speciálních plodin.",
+          "effectCz": "Nový soubor zemědělských dotačních programů pro rok 2026 zahrnuje mimo jiné prevenci chorob plodin, šlechtění, kapkovou závlahu v sadech a obnovu sadů; na rostlinnou výrobu připadá 528 mil. Kč. Jde o konkrétní, ale jen dílčí podporu pěstování, kterou slib předpokládá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": false,
+          "reasonCz": "Předložený výňatek se týká evidence tržeb a výjimky pro prodej sladkovodních ryb, nikoli podpory pěstování ovoce, zeleniny nebo plodin.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-32",
+          "relevant": true,
+          "reasonCz": "Ustanovení upravují podmínky zemědělských dotací pro pěstování podporovaných druhů zeleniny a bylin.",
+          "effectCz": "Dodaný text stanoví, že o dotaci lze žádat nejvýše na 50 hektarů podporované zeleniny či bylin, a upravuje osevní a sadbové normy i sazby při nesplnění této podmínky. Předchozí znění těchto ustanovení není doloženo, takže nelze určit, zda se přístup k podpoře oproti dřívějšku zpřísnil, nebo uvolnil."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-34",
+          "relevant": true,
+          "reasonCz": "Nařízení mění podmínky agroenvironmentálních dotací pro integrovanou produkci ovoce, zeleniny, brambor a dalších plodin.",
+          "effectCz": "Z dodaného znění vyplývají mimo jiné podmínky sečení a mulčování v sadech, limity ošetření proti mandelince bramborové a snížení některých sazeb dotace o 10 eur na hektar. Předchozí znění chybí, a proto nelze určit, zda tyto změny podporu nebo podmínky jejího získání zpřísňují či uvolňují."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+          "relevant": true,
+          "reasonCz": "Změny podmínek přímých plateb upravují způsobilost ploch a pravidla pro pěstování některých plodin.",
+          "effectCz": "Dodaný text například upravuje podmínky pro plodiny včetně vojtěšky a jetele a mění některé normy v tabulkách pro zeleninu. Protože předchozí znění těchto pravidel není v balíčku uvedeno, nelze určit, zda se nárok na podporu rozšířil, omezil, nebo zůstal obdobný."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-187",
+          "relevant": true,
+          "reasonCz": "Nařízení zavádí mimořádnou finanční podporu zemědělcům a mezi způsobilé plochy řadí také ornou půdu a trvalé kultury.",
+          "effectCz": "Nové nařízení zavádí mimořádnou podporu pro zemědělce, kteří obhospodařují nejméně 1 hektar způsobilé půdy a splnili další podmínky; sazby podpory však dodaný výňatek neuvádí. Jde o dílčí podporu zemědělské činnosti, včetně hospodaření na orné půdě a trvalých kulturách, nikoli o samostatně vyčíslenou podporu konkrétních druhů ovoce či zeleniny."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-1dd10e5d25--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-382",
+        "psp-core-2025--vote-86865",
+        "psp-core-2025--amendment-text-360",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--amendment-text-574",
+        "psp-core-2025--vote-86891",
+        "psp-core-2025--amendment-text-526",
+        "psp-core-2025--vote-86904",
+        "psp-core-2025--amendment-text-579",
+        "psp-core-2025--vote-86910",
+        "psp-core-2025--amendment-text-509",
+        "psp-core-2025--vote-86918",
+        "psp-core-2025--amendment-text-560",
+        "psp-core-2025--vote-86953",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965",
+        "esbirka-regulations--law-change-sb-2026-32",
+        "esbirka-regulations--2026-32",
+        "esbirka-regulations--law-change-sb-2026-34",
+        "esbirka-regulations--2026-34",
+        "esbirka-regulations--law-change-sb-2026-45",
+        "esbirka-regulations--2026-45",
+        "esbirka-regulations--law-change-sb-2026-187",
+        "esbirka-regulations--2026-187"
+      ],
+      "explanationCz": "Vláda předložila rozpočet na rok 2026 a poslanci ANO jej schválili, ale dostupný výňatek neukazuje konkrétní zemědělské částky. Poslanci ANO zároveň nepodpořili několik návrhů na snížení zemědělských dotací. Sněmovna také schválila dotační programy zemědělství pro rok 2026, které na rostlinnou výrobu vyčleňují 528 milionů korun a zahrnují podporu plodin a sadů. Vláda přijala i další pravidla pro zemědělské dotace a mimořádnou podporu zemědělcům; ty představují dílčí podporu, ale některé jejich změny nelze bez předchozího znění přesně porovnat.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek ze schváleného státního rozpočtu uvádí pouze odkaz na přílohu s ukazateli, nikoli konkrétní částky pro zemědělství; proto nelze určit, jak výsledný rozpočet ovlivnil podporu pěstování.",
+        "U změn dotačních pravidel v nařízeních č. 32/2026 Sb., č. 34/2026 Sb. a č. 45/2026 Sb. není doloženo předchozí znění dotčených ustanovení, takže nelze spolehlivě určit směr změn podmínek."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0a4c4bfca95804f4016aea88fe2a7087d18f068e0cf92570cf",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 50870,
+      "input_tokens_details": {
+        "cache_write_tokens": 44520,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 6707,
+      "output_tokens_details": {
+        "reasoning_tokens": 4445
+      },
+      "total_tokens": 57577
+    },
+    "output": {
+      "promiseId": "ano-2025-1dd10e5d25",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o rozpočet na rok 2026 a součástí podkladů jsou návrhy i hlasování o změnách zemědělských dotací, které se týkají podpory pěstování.",
+          "effectCz": "Jde o nový státní rozpočet, takže nemá předchozí znění k porovnání. Dodaný výňatek pouze uvádí, že ukazatele kapitol jsou v příloze č. 4, ale neobsahuje její část týkající se zemědělství ani konkrétní částky; dopad rozpočtu na podporu pěstování proto z balíčku nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Návrh zemědělských dotačních programů na rok 2026 výslovně zahrnuje podporu polních a speciálních plodin i opatření pro ovocné sady.",
+          "effectCz": "Jde o návrh programů, nikoli o změnu dřívějšího právního znění. Pro rok 2026 uvádí podporu rostlinné výroby ve výši 528 mil. Kč a zmiňuje například prevenci chorob plodin, kapkovou závlahu a restrukturalizaci ovocných sadů; jde o konkrétní, ale jen částečný příspěvek k podpoře pěstování."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-32",
+          "relevant": true,
+          "reasonCz": "Nařízení upravuje dotační podmínky pro pěstování zeleniny a bylin, tedy plodin přímo spadajících do slibu.",
+          "effectCz": "Text nově uvádí nejvýše 50 ha pro žádost o dotaci na podporované druhy zeleniny či bylin a stanoví související výpočet sazby při nesplnění podmínky; mění také tabulku druhů zeleniny a výsevních či výsadbových údajů. Předchozí znění těchto pravidel balíček neobsahuje, takže nelze určit, zda se podmínky nebo nárok na podporu zpřísnily, nebo uvolnily."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-34",
+          "relevant": true,
+          "reasonCz": "Nařízení přímo upravuje podporu integrované produkce ovoce, zeleniny a brambor.",
+          "effectCz": "Upravené části stanoví mimo jiné pravidla seče a ponechávání části plochy bez zásahu, limity a podmínky použití přípravků na ochranu rostlin, sankce a seznam podporovaných druhů zeleniny. Předchozí znění dotčených pravidel není v balíčku uvedeno, takže směr změny podmínek a případné výše podpory nelze určit."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+          "relevant": true,
+          "reasonCz": "Nařízení mění pravidla přímých plateb zemědělcům a uvádí změny týkající se pěstovaných plodin a údajů pro jejich výsev či výsadbu.",
+          "effectCz": "Nařízení doplňuje nebo mění podmínky pro některé plodiny a v tabulkách uvádí například změny hodnot 11,00 na 8,50, 2,20 na 1,50 a 16,00 na 12,00; další hodnoty mění ze 150,00 na 110,00 a ze 75,00 na 50,00. Protože chybí záhlaví a předchozí znění dotčených tabulek, nelze z balíčku určit, co tyto hodnoty znamenají pro nárok na platbu ani zda změna podporu zpřísňuje, či uvolňuje."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-187",
+          "relevant": true,
+          "reasonCz": "Nařízení umožňuje mimořádnou finanční podporu také hospodářům s ornou půdou a trvalými kulturami, mezi něž mohou patřit pěstitelé plodin uvedených ve slibu.",
+          "effectCz": "Nařízení zavádí mimořádnou podporu pro oprávněné zemědělce postižené zvláštními problémy souvisejícími s krizí na Blízkém východě; žadatel musí obhospodařovat alespoň 1 ha určených druhů zemědělské půdy a v roce 2026 požádat o některou z vyjmenovaných podpor. Sazby se mají zveřejnit později a částky ani podpora jednotlivých plodin zde uvedeny nejsou; jde proto o omezenou možnost podpory, nikoli o doložené zvýšení podpory konkrétním plodinám."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": false,
+          "reasonCz": "Dodané znění se v části týkající se výjimek z evidence tržeb vztahuje na prodej sladkovodních ryb v předvánočním období, nikoli na podporu pěstování ovoce, zeleniny nebo základních plodin.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-1dd10e5d25--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43206-1",
+        "esbirka-regulations--law-change-sb-2026-32",
+        "esbirka-regulations--law-change-sb-2026-34",
+        "esbirka-regulations--law-change-sb-2026-45",
+        "esbirka-regulations--law-change-sb-2026-187",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-86965",
+        "psp-core-2025--amendment-text-382",
+        "psp-core-2025--vote-86865",
+        "psp-core-2025--amendment-text-360",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--amendment-text-574",
+        "psp-core-2025--vote-86891",
+        "psp-core-2025--amendment-text-526",
+        "psp-core-2025--vote-86904",
+        "psp-core-2025--amendment-text-579",
+        "psp-core-2025--vote-86910",
+        "psp-core-2025--amendment-text-509",
+        "psp-core-2025--vote-86918",
+        "psp-core-2025--amendment-text-560",
+        "psp-core-2025--vote-86953",
+        "esbirka-regulations--2026-32",
+        "esbirka-regulations--2026-34",
+        "esbirka-regulations--2026-45",
+        "esbirka-regulations--2026-187"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro dotační programy zemědělství na rok 2026, které vyčleňují 528 milionů Kč na rostlinnou výrobu a zahrnují také opatření pro ovocné sady a plodiny. Vláda rovněž přijala nařízení upravující dotační podmínky pro zeleninu, ovoce a přímé platby zemědělcům, ale dodané podklady neukazují, zda tyto změny podporu zvyšují, nebo snižují. Poslanci ANO hlasovali proti návrhům na snížení zemědělských dotací, avšak schválený státní rozpočet odkazuje na přílohu s částkami, která zde není obsažena. Doložená podpora programů je dílčím posunem, ale dopad rozpočtu a změněných dotačních podmínek nelze úplně vyhodnotit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek schváleného státního rozpočtu odkazuje na přílohu č. 4 s ukazateli kapitol, ale neobsahuje příslušné zemědělské částky. Nelze proto určit, zda konečný rozpočet podporu pěstování posílil, nebo omezil.",
+        "U přijatých nařízení o podmínkách ekologického zemědělství, agroenvironmentálních opatřeních a přímých platbách chybí předchozí znění některých dotčených pravidel. Jejich změny proto nelze spolehlivě označit za zpřísnění, uvolnění ani zvýšení či snížení podpory.",
+        "U mimořádné podpory pro zemědělce nejsou uvedeny konkrétní sazby ani částky pro pěstitele ovoce, zeleniny nebo základních plodin."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_050a2f17c92f21f8016aea89a72a5087d190268f50f7fdbb51",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 50870,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 50867
+      },
+      "output_tokens": 4960,
+      "output_tokens_details": {
+        "reasoning_tokens": 3101
+      },
+      "total_tokens": 55830
+    },
+    "output": {
+      "promiseId": "ano-2025-1dd10e5d25",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet přímo stanoví výdaje ministerstva zemědělství a jeho fondu, přičemž předložené pozměňovací návrhy se výslovně týkají zemědělských dotací.",
+          "effectCz": "Jde o nový státní rozpočet; dodaný výňatek pouze odkazuje na ukazatele kapitol v příloze č. 4, ale neuvádí částky pro zemědělství. Nelze proto z poskytnutého znění určit, zda výsledný rozpočet podporu pěstování zvyšuje, snižuje, nebo ponechává stejnou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Dotační programy výslovně zahrnují podporu rostlinné výroby a ozdravování polních i speciálních plodin.",
+          "effectCz": "Nový soubor zemědělských dotačních programů pro rok 2026 zahrnuje mimo jiné prevenci chorob plodin, šlechtění, kapkovou závlahu v sadech a obnovu sadů; na rostlinnou výrobu připadá 528 mil. Kč. Jde o konkrétní, ale jen dílčí podporu pěstování, kterou slib předpokládá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": false,
+          "reasonCz": "Předložený výňatek se týká evidence tržeb a výjimky pro prodej sladkovodních ryb, nikoli podpory pěstování ovoce, zeleniny nebo plodin.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-32",
+          "relevant": true,
+          "reasonCz": "Ustanovení upravují podmínky zemědělských dotací pro pěstování podporovaných druhů zeleniny a bylin.",
+          "effectCz": "Dodaný text stanoví, že o dotaci lze žádat nejvýše na 50 hektarů podporované zeleniny či bylin, a upravuje osevní a sadbové normy i sazby při nesplnění této podmínky. Předchozí znění těchto ustanovení není doloženo, takže nelze určit, zda se přístup k podpoře oproti dřívějšku zpřísnil, nebo uvolnil."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-34",
+          "relevant": true,
+          "reasonCz": "Nařízení mění podmínky agroenvironmentálních dotací pro integrovanou produkci ovoce, zeleniny, brambor a dalších plodin.",
+          "effectCz": "Z dodaného znění vyplývají mimo jiné podmínky sečení a mulčování v sadech, limity ošetření proti mandelince bramborové a snížení některých sazeb dotace o 10 eur na hektar. Předchozí znění chybí, a proto nelze určit, zda tyto změny podporu nebo podmínky jejího získání zpřísňují či uvolňují."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+          "relevant": true,
+          "reasonCz": "Změny podmínek přímých plateb upravují způsobilost ploch a pravidla pro pěstování některých plodin.",
+          "effectCz": "Dodaný text například upravuje podmínky pro plodiny včetně vojtěšky a jetele a mění některé normy v tabulkách pro zeleninu. Protože předchozí znění těchto pravidel není v balíčku uvedeno, nelze určit, zda se nárok na podporu rozšířil, omezil, nebo zůstal obdobný."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-187",
+          "relevant": true,
+          "reasonCz": "Nařízení zavádí mimořádnou finanční podporu zemědělcům a mezi způsobilé plochy řadí také ornou půdu a trvalé kultury.",
+          "effectCz": "Nové nařízení zavádí mimořádnou podporu pro zemědělce, kteří obhospodařují nejméně 1 hektar způsobilé půdy a splnili další podmínky; sazby podpory však dodaný výňatek neuvádí. Jde o dílčí podporu zemědělské činnosti, včetně hospodaření na orné půdě a trvalých kulturách, nikoli o samostatně vyčíslenou podporu konkrétních druhů ovoce či zeleniny."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-1dd10e5d25--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-382",
+        "psp-core-2025--vote-86865",
+        "psp-core-2025--amendment-text-360",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--amendment-text-574",
+        "psp-core-2025--vote-86891",
+        "psp-core-2025--amendment-text-526",
+        "psp-core-2025--vote-86904",
+        "psp-core-2025--amendment-text-579",
+        "psp-core-2025--vote-86910",
+        "psp-core-2025--amendment-text-509",
+        "psp-core-2025--vote-86918",
+        "psp-core-2025--amendment-text-560",
+        "psp-core-2025--vote-86953",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965",
+        "esbirka-regulations--law-change-sb-2026-32",
+        "esbirka-regulations--2026-32",
+        "esbirka-regulations--law-change-sb-2026-34",
+        "esbirka-regulations--2026-34",
+        "esbirka-regulations--law-change-sb-2026-45",
+        "esbirka-regulations--2026-45",
+        "esbirka-regulations--law-change-sb-2026-187",
+        "esbirka-regulations--2026-187"
+      ],
+      "explanationCz": "Vláda předložila rozpočet na rok 2026 a poslanci ANO jej schválili, ale dostupný výňatek neukazuje konkrétní zemědělské částky. Poslanci ANO zároveň nepodpořili několik návrhů na snížení zemědělských dotací. Sněmovna také schválila dotační programy zemědělství pro rok 2026, které na rostlinnou výrobu vyčleňují 528 milionů korun a zahrnují podporu plodin a sadů. Vláda přijala i další pravidla pro zemědělské dotace a mimořádnou podporu zemědělcům; ty představují dílčí podporu, ale některé jejich změny nelze bez předchozího znění přesně porovnat.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek ze schváleného státního rozpočtu uvádí pouze odkaz na přílohu s ukazateli, nikoli konkrétní částky pro zemědělství; proto nelze určit, jak výsledný rozpočet ovlivnil podporu pěstování.",
+        "U změn dotačních pravidel v nařízeních č. 32/2026 Sb., č. 34/2026 Sb. a č. 45/2026 Sb. není doloženo předchozí znění dotčených ustanovení, takže nelze spolehlivě určit směr změn podmínek."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

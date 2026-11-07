@@ -1,0 +1,354 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T02-26-55-487Z--20dd12bf712c",
+  "evaluatedAt": "2026-11-04T02:26:55.487Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-6db31904d0a5/20dd12bf712ca56d1f6d61877d3247c3c2100b3eabbdbc74845df7db73a68056.json",
+  "packageHash": "20dd12bf712ca56d1f6d61877d3247c3c2100b3eabbdbc74845df7db73a68056",
+  "assessmentContentHash": "aa9b4b6bce7416ca03514e617cc7c2d3657670d60b5fdedc0e604269bb12a149",
+  "assessmentFingerprint": "7449d4bebf089881faf2639dcce54cd0524eaefc5fe7447ec3527203729c8c87",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-6db31904d0a5",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_00e8d5acab189475016aea96ea5bc487d1a703eede1f490ff7",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 32326,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 32323
+            },
+            "output_tokens": 5862,
+            "output_tokens_details": {
+              "reasoning_tokens": 4752
+            },
+            "total_tokens": 38188
+          },
+          "output": {
+            "promiseId": "candidate-6db31904d0a5",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": true,
+                "reasonCz": "Rozpočtové pozměňovací návrhy výslovně navyšují prostředky na sociální služby a mzdové náklady, i když dodaný výňatek samotného rozpočtu konkrétní částky neukazuje.",
+                "effectCz": "Výňatky návrhu i schváleného rozpočtu pouze odkazují na přílohy č. 3 a 4, kde mají být uvedeny výdaje a ukazatele podle kapitol; rozhodné částky z těchto příloh nejsou dodány. Nelze proto z textu rozpočtu určit, zda schválené výdaje na sociální služby či platy vzrostly, klesly, nebo zůstaly stejné. Pozměňovací návrhy samostatně navrhovaly navýšení o 2,8 miliardy Kč, 1,5 miliardy Kč a 614 milionů Kč, ale z dodaného výňatku rozpočtu nelze ověřit, zda se tyto částky promítly do schváleného znění."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-1",
+                "relevant": false,
+                "reasonCz": "Dodané změny zákoníku práce upravují obecná pravidla platových tarifů, ale neukládají zvýšení platů sociálních pracovníků ani neprokazují, že se jejich konkrétní platy zvýší.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-16",
+                "relevant": true,
+                "reasonCz": "Nařízení stanoví platové tabulky pro zaměstnance ve veřejných službách a správě, mezi něž mohou spadat sociální pracovníci.",
+                "effectCz": "Nařízení stanoví konkrétní tarifní částky v platových tabulkách, například 14 760 Kč pro první platovou třídu a první stupeň v příloze č. 1; předchozí znění tabulek však v balíčku není. Nelze proto podle dodaných znění určit, zda jde o zvýšení tarifů, ani o kolik; nařízení také neřeší odměny pěstounů."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": false,
+            "citedEvidenceIds": [
+              "candidate-6db31904d0a5--source",
+              "psp-core-2025--law-change-43204-1",
+              "psp-core-2025--print-step-210761",
+              "psp-core-2025--vote-86835",
+              "psp-core-2025--vote-86847",
+              "psp-core-2025--vote-86848",
+              "psp-core-2025--vote-86902",
+              "psp-core-2025--vote-86915",
+              "psp-core-2025--vote-86957",
+              "psp-core-2025--amendment-text-432",
+              "psp-core-2025--amendment-text-525",
+              "psp-core-2025--amendment-text-504",
+              "psp-core-2025--amendment-text-577",
+              "esbirka-regulations--law-change-sb-2026-16",
+              "esbirka-regulations--2026-16"
+            ],
+            "explanationCz": "Vláda předložila návrh státního rozpočtu na rok 2026, tedy sněmovní tisk 94. Poslanci SPD nepodpořili několik pozměňovacích návrhů, které měly přidat peníze na sociální služby a jejich mzdové náklady; tím nepodpořili dílčí prostředky související se zvýšením platů sociálních pracovníků. Vláda zároveň přijala nařízení s novými platovými tabulkami, ale dodané podklady neobsahují předchozí tarify, takže nelze ověřit, zda a o kolik se zvýšily; SPD také hlasovala pro schválený rozpočet, jehož konkrétní částky v poskytnutém výňatku chybí. O odměnách pěstounů balíček nepřináší podklady, proto nelze spolehlivě posoudit celý slib.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Výňatek schváleného rozpočtu neobsahuje konkrétní částky na sociální služby ani neukazuje, zda se navržená navýšení promítla do konečného rozpočtu.",
+              "U platových tabulek přijatých vládním nařízením chybí jejich předchozí znění, takže nelze ověřit, zda skutečně došlo ke zvýšení platů sociálních pracovníků.",
+              "V balíčku nejsou podklady o změnách odměn pěstounů, které jsou druhou částí slibu."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-6db31904d0a5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet obsahuje výdajové kapitoly, jejichž navýšení pozměňovací návrhy výslovně spojovaly s financováním platů v sociálních službách, avšak dodaný text rozpočtu uvádí jen odkazy na přílohy.",
+          "effectCz": "Jde o nový státní rozpočet, nikoli změnu dřívějšího zákona. Dodaný text říká, že přehled výdajů a ukazatele jsou v přílohách č. 3 a 4, ale jejich částky zde chybějí; z poskytnutého znění proto nelze určit, zda rozpočet financování platů sociálních pracovníků zvyšuje nebo snižuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění pravidla pro platové tarify zaměstnanců ve veřejných službách, a může tak zasahovat do platů části sociálních pracovníků.",
+          "effectCz": "Dříve § 123 odst. 6 obsahoval zvláštní pravidla pro vyjmenované skupiny zaměstnanců a minimální tarify v jednotlivých třídách; návrh přidává mezi skupiny zaměstnance od 11. třídy a mění úpravu tarifních stupnic tak, že výslovně zaručuje nejméně tarif odpovídající minimální mzdě jen pro 1. třídu a 1. stupeň. To samo o sobě nezvyšuje platy sociálních pracovníků a oproti dřívějším minimům může uvolnit omezení pro ostatní třídy; dopad vloženého pravidla o nejméně čtyřprocentním rozdílu mezi třídami nelze porovnat, protože předchozí znění § 123 odst. 5 není dodáno. U některých nově zahrnutých zaměstnanců návrh zajišťuje, že zvláštním způsobem určený tarif nebude nižší než běžný tarif; příslušná ustanovení § 109a a část dalších změn nelze posoudit, protože jejich text je vynechán."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-16",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví nové platové tabulky pro státní zaměstnance a zaměstnance ve veřejných službách a správě, mezi nimiž mohou být sociální pracovníci.",
+          "effectCz": "Nařízení nahrazuje tabulky tarifů obsažené v přílohách č. 1 až 3 nařízení č. 341/2017 Sb. a v příloze č. 1 nařízení č. 304/2014 Sb.; dodaný text uvádí nové částky, například v tabulkách pro zaměstnance ve veřejných službách, ale neobsahuje dosavadní tabulky. Samotné srovnání výše tarifů před změnou a po ní proto z balíčku nelze provést ani potvrdit směr změny."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-6db31904d0a5--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43422-1",
+        "esbirka-regulations--law-change-sb-2026-16",
+        "psp-core-2025--amendment-text-432",
+        "psp-core-2025--amendment-text-525",
+        "psp-core-2025--amendment-text-504",
+        "psp-core-2025--amendment-text-577",
+        "esbirka-regulations--2026-16",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86835",
+        "psp-core-2025--vote-86847",
+        "psp-core-2025--vote-86848",
+        "psp-core-2025--vote-86902",
+        "psp-core-2025--vote-86915",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda, v níž SPD působila, přijala nařízení s novými tarifními tabulkami pro zaměstnance ve veřejných službách a správě; podklady ale neobsahují starší tabulky, takže samotné zvýšení nelze ověřit jejich přímým srovnáním. Poslanci SPD zároveň nepodpořili pozměňovací návrhy k rozpočtu, které navrhovaly další prostředky na sociální služby a výslovně je spojovaly s financováním platů. SPD také hlasovala pro státní rozpočet, jehož konkrétní částky pro tyto služby v dodaném výňatku nejsou. Doložen je tedy možný posun v části týkající se platů, nikoli zvýšení odměn pěstounů; úplný závěr omezuje chybějící srovnání tarifů a rozpočtových částek.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný text nařízení neobsahuje starší platové tabulky, takže není možné ověřit, o kolik se tarify sociálních pracovníků skutečně změnily ani zda se změna vztahuje na všechny sociální pracovníky.",
+        "Výňatek ze státního rozpočtu odkazuje na přílohy s částkami, ale jejich obsah zde chybí; nelze proto určit, jaké prostředky rozpočet pro sociální služby skutečně schválil.",
+        "Balíček nedokládá žádné rozhodnutí o zvýšení odměn pěstounů."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-6db31904d0a5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o státní rozpočet na rok 2026 a pozměňovací návrhy k této předloze výslovně mířily na financování zvýšených platů a sociálních služeb.",
+          "effectCz": "Jde o nový státní rozpočet, nikoli o změnu dřívějšího zákona; dodaný výňatek pouze odkazuje na přehledy výdajů v přílohách a neuvádí částky pro sociální služby ani platy. Konkrétní dopad schváleného rozpočtu na financování zvýšených platů proto z podkladů nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": false,
+          "reasonCz": "Uvedené změny upravují obecná pravidla platových tarifů a zvláštní způsob jejich určení, ale text ani dodané podklady je přímo nespojují s platy sociálních pracovníků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-16",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví nové platové tabulky pro zaměstnance veřejných služeb a podklady výslovně spojují jejich zvýšení také se sociálními pracovníky.",
+          "effectCz": "Nařízení stanoví nové měsíční platové tarify v tabulkách pro zaměstnance veřejných služeb a správu. Předchozí znění těchto tabulek není u nařízení v balíčku uvedeno, takže samotné srovnání starých a nových částek a směr změny nelze z jeho textu ověřit; podklady k rozpočtovému pozměňovacímu návrhu však uvádějí zvýšení tabulek o 9 % a 5 %."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-6db31904d0a5--source",
+        "psp-core-2025--law-change-43204-1",
+        "esbirka-regulations--law-change-sb-2026-16",
+        "esbirka-regulations--2026-16",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-432",
+        "psp-core-2025--vote-86835",
+        "psp-core-2025--vote-86847",
+        "psp-core-2025--amendment-text-525",
+        "psp-core-2025--vote-86848",
+        "psp-core-2025--amendment-text-504",
+        "psp-core-2025--vote-86902",
+        "psp-core-2025--vote-86957"
+      ],
+      "explanationCz": "Vláda přijala nařízení, které stanoví nové platové tabulky pro zaměstnance veřejných služeb; podklady k rozpočtovým návrhům výslovně uvádějí, že se zvýšení týká také sociálních pracovníků. To představuje posun v platové části slibu, ale nedokládá zvýšení odměn pěstounů. Poslanci SPD nepodpořili několik návrhů na dodatečné financování sociálních služeb a poté hlasovali pro státní rozpočet na rok 2026. Dodaný výňatek rozpočtu však neuvádí příslušné částky, a proto nelze ověřit, zda schválený rozpočet tyto zvýšené platy dostatečně financuje.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek schváleného státního rozpočtu uvádí jen odkazy na přílohy, nikoli částky určené na sociální služby a související zvýšení platů. Proto nelze posoudit dopad hlasování SPD pro rozpočet na financování této části slibu.",
+        "Předchozí znění platových tabulek k nařízení není v balíčku uvedeno; tvrzení o zvýšení o 9 % a 5 % je obsaženo v odůvodnění rozpočtového pozměňovacího návrhu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_09a89ded9633dcf2016aea967f163087d18ecd3cc14f0610e3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 32326,
+      "input_tokens_details": {
+        "cache_write_tokens": 25976,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 5221,
+      "output_tokens_details": {
+        "reasoning_tokens": 3869
+      },
+      "total_tokens": 37547
+    },
+    "output": {
+      "promiseId": "candidate-6db31904d0a5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet obsahuje výdajové kapitoly, jejichž navýšení pozměňovací návrhy výslovně spojovaly s financováním platů v sociálních službách, avšak dodaný text rozpočtu uvádí jen odkazy na přílohy.",
+          "effectCz": "Jde o nový státní rozpočet, nikoli změnu dřívějšího zákona. Dodaný text říká, že přehled výdajů a ukazatele jsou v přílohách č. 3 a 4, ale jejich částky zde chybějí; z poskytnutého znění proto nelze určit, zda rozpočet financování platů sociálních pracovníků zvyšuje nebo snižuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění pravidla pro platové tarify zaměstnanců ve veřejných službách, a může tak zasahovat do platů části sociálních pracovníků.",
+          "effectCz": "Dříve § 123 odst. 6 obsahoval zvláštní pravidla pro vyjmenované skupiny zaměstnanců a minimální tarify v jednotlivých třídách; návrh přidává mezi skupiny zaměstnance od 11. třídy a mění úpravu tarifních stupnic tak, že výslovně zaručuje nejméně tarif odpovídající minimální mzdě jen pro 1. třídu a 1. stupeň. To samo o sobě nezvyšuje platy sociálních pracovníků a oproti dřívějším minimům může uvolnit omezení pro ostatní třídy; dopad vloženého pravidla o nejméně čtyřprocentním rozdílu mezi třídami nelze porovnat, protože předchozí znění § 123 odst. 5 není dodáno. U některých nově zahrnutých zaměstnanců návrh zajišťuje, že zvláštním způsobem určený tarif nebude nižší než běžný tarif; příslušná ustanovení § 109a a část dalších změn nelze posoudit, protože jejich text je vynechán."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-16",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví nové platové tabulky pro státní zaměstnance a zaměstnance ve veřejných službách a správě, mezi nimiž mohou být sociální pracovníci.",
+          "effectCz": "Nařízení nahrazuje tabulky tarifů obsažené v přílohách č. 1 až 3 nařízení č. 341/2017 Sb. a v příloze č. 1 nařízení č. 304/2014 Sb.; dodaný text uvádí nové částky, například v tabulkách pro zaměstnance ve veřejných službách, ale neobsahuje dosavadní tabulky. Samotné srovnání výše tarifů před změnou a po ní proto z balíčku nelze provést ani potvrdit směr změny."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-6db31904d0a5--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43422-1",
+        "esbirka-regulations--law-change-sb-2026-16",
+        "psp-core-2025--amendment-text-432",
+        "psp-core-2025--amendment-text-525",
+        "psp-core-2025--amendment-text-504",
+        "psp-core-2025--amendment-text-577",
+        "esbirka-regulations--2026-16",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86835",
+        "psp-core-2025--vote-86847",
+        "psp-core-2025--vote-86848",
+        "psp-core-2025--vote-86902",
+        "psp-core-2025--vote-86915",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda, v níž SPD působila, přijala nařízení s novými tarifními tabulkami pro zaměstnance ve veřejných službách a správě; podklady ale neobsahují starší tabulky, takže samotné zvýšení nelze ověřit jejich přímým srovnáním. Poslanci SPD zároveň nepodpořili pozměňovací návrhy k rozpočtu, které navrhovaly další prostředky na sociální služby a výslovně je spojovaly s financováním platů. SPD také hlasovala pro státní rozpočet, jehož konkrétní částky pro tyto služby v dodaném výňatku nejsou. Doložen je tedy možný posun v části týkající se platů, nikoli zvýšení odměn pěstounů; úplný závěr omezuje chybějící srovnání tarifů a rozpočtových částek.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný text nařízení neobsahuje starší platové tabulky, takže není možné ověřit, o kolik se tarify sociálních pracovníků skutečně změnily ani zda se změna vztahuje na všechny sociální pracovníky.",
+        "Výňatek ze státního rozpočtu odkazuje na přílohy s částkami, ale jejich obsah zde chybí; nelze proto určit, jaké prostředky rozpočet pro sociální služby skutečně schválil.",
+        "Balíček nedokládá žádné rozhodnutí o zvýšení odměn pěstounů."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0e9e4731b2098fb2016aea9767c9ac87d1bfe65bdc22daa78f",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 32326,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 32323
+      },
+      "output_tokens": 6361,
+      "output_tokens_details": {
+        "reasoning_tokens": 5298
+      },
+      "total_tokens": 38687
+    },
+    "output": {
+      "promiseId": "candidate-6db31904d0a5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o státní rozpočet na rok 2026 a pozměňovací návrhy k této předloze výslovně mířily na financování zvýšených platů a sociálních služeb.",
+          "effectCz": "Jde o nový státní rozpočet, nikoli o změnu dřívějšího zákona; dodaný výňatek pouze odkazuje na přehledy výdajů v přílohách a neuvádí částky pro sociální služby ani platy. Konkrétní dopad schváleného rozpočtu na financování zvýšených platů proto z podkladů nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": false,
+          "reasonCz": "Uvedené změny upravují obecná pravidla platových tarifů a zvláštní způsob jejich určení, ale text ani dodané podklady je přímo nespojují s platy sociálních pracovníků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-16",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví nové platové tabulky pro zaměstnance veřejných služeb a podklady výslovně spojují jejich zvýšení také se sociálními pracovníky.",
+          "effectCz": "Nařízení stanoví nové měsíční platové tarify v tabulkách pro zaměstnance veřejných služeb a správu. Předchozí znění těchto tabulek není u nařízení v balíčku uvedeno, takže samotné srovnání starých a nových částek a směr změny nelze z jeho textu ověřit; podklady k rozpočtovému pozměňovacímu návrhu však uvádějí zvýšení tabulek o 9 % a 5 %."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-6db31904d0a5--source",
+        "psp-core-2025--law-change-43204-1",
+        "esbirka-regulations--law-change-sb-2026-16",
+        "esbirka-regulations--2026-16",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-432",
+        "psp-core-2025--vote-86835",
+        "psp-core-2025--vote-86847",
+        "psp-core-2025--amendment-text-525",
+        "psp-core-2025--vote-86848",
+        "psp-core-2025--amendment-text-504",
+        "psp-core-2025--vote-86902",
+        "psp-core-2025--vote-86957"
+      ],
+      "explanationCz": "Vláda přijala nařízení, které stanoví nové platové tabulky pro zaměstnance veřejných služeb; podklady k rozpočtovým návrhům výslovně uvádějí, že se zvýšení týká také sociálních pracovníků. To představuje posun v platové části slibu, ale nedokládá zvýšení odměn pěstounů. Poslanci SPD nepodpořili několik návrhů na dodatečné financování sociálních služeb a poté hlasovali pro státní rozpočet na rok 2026. Dodaný výňatek rozpočtu však neuvádí příslušné částky, a proto nelze ověřit, zda schválený rozpočet tyto zvýšené platy dostatečně financuje.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek schváleného státního rozpočtu uvádí jen odkazy na přílohy, nikoli částky určené na sociální služby a související zvýšení platů. Proto nelze posoudit dopad hlasování SPD pro rozpočet na financování této části slibu.",
+        "Předchozí znění platových tabulek k nařízení není v balíčku uvedeno; tvrzení o zvýšení o 9 % a 5 % je obsaženo v odůvodnění rozpočtového pozměňovacího návrhu."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

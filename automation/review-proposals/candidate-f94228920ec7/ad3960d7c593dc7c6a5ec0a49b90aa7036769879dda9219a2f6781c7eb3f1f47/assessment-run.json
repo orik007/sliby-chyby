@@ -1,0 +1,421 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-37-23-430Z--5ce1976cb04b",
+  "evaluatedAt": "2026-11-05T10:37:23.430Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-f94228920ec7/5ce1976cb04b7e81a272f54dfc51d4825c7a6f71dc6a3504c82ba33ff7011b6f.json",
+  "packageHash": "5ce1976cb04b7e81a272f54dfc51d4825c7a6f71dc6a3504c82ba33ff7011b6f",
+  "assessmentContentHash": "3028cb40d563955fce42fed099227b0448adf0300a3ae4e2200ccf8d7a73f960",
+  "assessmentFingerprint": "ad3960d7c593dc7c6a5ec0a49b90aa7036769879dda9219a2f6781c7eb3f1f47",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-f94228920ec7",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment cites duplicate evidence IDs",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0a1b53f3a4303a94016aec5b5c5f8887d1a26389b3d73c11e8",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 54198,
+            "input_tokens_details": {
+              "cache_write_tokens": 47848,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 7749,
+            "output_tokens_details": {
+              "reasoning_tokens": 6010
+            },
+            "total_tokens": 61947
+          },
+          "output": {
+            "promiseId": "candidate-f94228920ec7",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43194-1",
+                "relevant": false,
+                "reasonCz": "Ustanovení smlouvy jen říká, že Tanzanie nemusí přiznávat svým rezidentům osobní daňové úlevy dostupné českým rezidentům; nemění nárok českých pečujících domácností.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-1",
+                "relevant": true,
+                "reasonCz": "Část nemá vlastní dodaný text, ale související pozměňovací návrhy G1 a G2 se týkají rozšíření školkovného daňovým bonusem pro pracující rodiče s nízkou daňovou povinností.",
+                "effectCz": "Vlastní znění této části ani předchozí znění dotčeného pravidla nejsou v balíčku uvedeny. Související návrhy G1 a G2 by umožnily vyplatit nevyužitou část slevy za umístění dítěte jako daňový bonus, nejvýše do zákonného limitu; návrhy tedy rozšiřují praktickou dostupnost podpory, ale samy jsou pouze návrhy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-2",
+                "relevant": true,
+                "reasonCz": "Změna přímo zavádí zpět slevu za umístění dítěte a její ustanovení jsou předmětem rozhodujícího hlasování Poslanecké sněmovny.",
+                "effectCz": "Před změnou nebyla v dodaném znění zákona ustanovení § 35bc až 35be; nově návrh zavádí slevu za prokazatelné výdaje na předškolní zařízení, nejvýše do výše minimální mzdy na dítě, a její použití omezuje mimo jiné na dítě ve společně hospodařící domácnosti. Nárok na slevu na manžela či manželku podle dosavadního § 35bb činil 24 840 Kč, případně dvojnásobek při průkazu ZTP/P, ale jen při společné domácnosti s vyživovaným dítětem mladším tří let a při příjmu manžela či manželky nejvýše 68 000 Kč; dodaný text § 35bb nemění, takže jeho omezení nerozšiřuje. Nová sleva za umístění dítěte podporu pro část rodin obnovuje, avšak její rozsah je omezený a text sám nezaručuje její plné využití rodinám s nízkou daňovou povinností."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-3",
+                "relevant": true,
+                "reasonCz": "Část nemá vlastní dodaný text, ale související pozměňovací návrhy G1 a G2 se týkají rozšíření školkovného daňovým bonusem pro pracující rodiče s nízkou daňovou povinností.",
+                "effectCz": "Vlastní znění této části ani předchozí znění dotčeného pravidla nejsou v balíčku uvedeny. Související návrhy G1 a G2 by umožnily vyplatit nevyužitou část slevy za umístění dítěte jako daňový bonus, nejvýše do zákonného limitu; návrhy tedy rozšiřují praktickou dostupnost podpory, ale samy jsou pouze návrhy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43366-1",
+                "relevant": true,
+                "reasonCz": "Návrh výslovně ruší slevu na manžela či manželku, kterou slib požaduje obnovit a rozšířit na pečující domácnosti.",
+                "effectCz": "Před změnou činila sleva 24 840 Kč, při průkazu ZTP/P dvojnásobek, a byla podmíněna společnou domácností s dítětem mladším tří let a příjmem manžela či manželky nejvýše 68 000 Kč. Návrh ruší § 35bb i položku slevy na manžela v § 35ba, takže nárok na tuto slevu by zanikl; jde o úplné zúžení opačným směrem než slib."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-f94228920ec7--source",
+              "psp-core-2025--law-change-43310-1",
+              "psp-core-2025--law-change-43310-2",
+              "psp-core-2025--law-change-43310-3",
+              "psp-core-2025--law-change-43366-1",
+              "psp-core-2025--amendment-text-1400",
+              "psp-core-2025--amendment-text-1531",
+              "psp-core-2025--amendment-text-1533",
+              "psp-core-2025--amendment-text-1560",
+              "psp-core-2025--amendment-text-1557",
+              "psp-core-2025--vote-88294",
+              "psp-core-2025--vote-88295",
+              "psp-core-2025--vote-88296",
+              "psp-core-2025--vote-88299",
+              "psp-core-2025--vote-88312",
+              "psp-core-2025--print-step-211390",
+              "psp-core-2025--vote-88356",
+              "psp-core-2025--senate-resolution-43310-6",
+              "psp-core-2025--government-opinion-43366-1",
+              "psp-core-2025--law-change-43366-1"
+            ],
+            "explanationCz": "Vláda předložila návrh zákona, který obnovuje slevu za umístění dítěte; poslanci SPD pak hlasovali pro jeho schválení i poté, co jej Senát vrátil s pozměňovacími návrhy. Tím se obnovuje jedna část slibu, ale sleva je omezena nejvýše výší minimální mzdy na dítě a návrh nerozšiřuje dosavadní úzké podmínky slevy na manžela či manželku. Vláda také nesouhlasila s poslaneckým návrhem, který chtěl slevu na manžela či manželku zrušit. Celý slib tím splněn není, ale je doložen částečný posun.",
+            "confidence": "medium",
+            "uncertainties": [
+              "SPD nepodpořila pozměňovací návrhy, které by umožnily vyplatit nevyužitou část školkovného nízkopříjmovým rodičům jako daňový bonus; zároveň nepodpořila návrhy na zrušení školkovného ani slevy na manžela či manželku. Tyto protichůdné postoje jsou návrhová hlasování a nemění skutečnost, že strana podpořila konečné schválení pouze částečné podpory."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-f94228920ec7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43194-1",
+          "relevant": false,
+          "reasonCz": "Ustanovení smlouvy se týká osobních daňových úlev pro rezidenty druhého smluvního státu, nikoli nároku domácností v Česku na školkovné nebo slevu na manžela či manželku.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": false,
+          "reasonCz": "Dodané záznamy neukazují, že by změny části o evidenci tržeb měnily školkovné nebo slevu na manžela či manželku; text pozměňovacích návrhů se týká daňových ustanovení v jiné části návrhu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Návrh znovu zavádí slevu za umístění dítěte, což naplňuje část slibu o školkovném, ale nárok na slevu na manžela či manželku nerozšiřuje.",
+          "effectCz": "Dřívější § 35bb přiznával slevu 24 840 Kč, případně dvojnásobnou při průkazu ZTP/P, jen při společné domácnosti s manželem a vyživovaným dítětem mladším tří let a při vlastním příjmu manžela nejvýše 68 000 Kč; tato pravidla návrh nemění. Nově zavádí slevu za skutečné výdaje za předškolní zařízení, nejvýše do výše minimální mzdy na dítě, a stanoví související podmínky a postupy pro její uplatnění. Protože jde o nové ustanovení, balíček neukazuje jeho předchozí znění; sleva na manžela zůstává omezená dosavadními podmínkami a slib její rozšíření nesplňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": false,
+          "reasonCz": "Dodané záznamy neukazují, že by změny zákona o dani z přidané hodnoty měnily školkovné nebo slevu na manžela či manželku; text souvisejícího pozměňovacího návrhu míří na jiné daňové ustanovení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43366-1",
+          "relevant": true,
+          "reasonCz": "Návrh ruší slevu na manžela či manželku, tedy přímo mění nástroj, jehož obnovení a rozšíření slib požaduje.",
+          "effectCz": "Před změnou činila sleva na manžela 24 840 Kč, při průkazu ZTP/P dvojnásobek, a byla podmíněna společnou domácností s dítětem mladším tří let a příjmem manžela nejvýše 68 000 Kč. Návrh ruší § 35bb i ustanovení, která slevu umožňují uplatnit a prokazovat, takže tento nárok odstraňuje; jde o zásadní zúžení až zrušení existující úlevy, nikoli o její rozšíření pro pečující domácnosti."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-f94228920ec7--source",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88294",
+        "psp-core-2025--vote-88295",
+        "psp-core-2025--vote-88296",
+        "psp-core-2025--vote-88299",
+        "psp-core-2025--vote-88312",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--amendment-text-1400",
+        "psp-core-2025--amendment-text-1531",
+        "psp-core-2025--amendment-text-1533",
+        "psp-core-2025--amendment-text-1560",
+        "psp-core-2025--amendment-text-1557",
+        "psp-core-2025--law-change-43366-1",
+        "psp-core-2025--government-opinion-43366-1"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona, který znovu zavádí slevu za umístění dítěte v předškolním zařízení, omezenou skutečnými výdaji a stropem ve výši minimální mzdy na dítě. Poslanci SPD návrh ve třetím čtení podpořili, takže jde o dílčí posun ke splnění slibu. Návrh ale ponechává slevu na manžela či manželku jen za dosavadních podmínek a nerozšiřuje ji na všechny pečující domácnosti. Vláda zároveň nesouhlasila s jiným návrhem, který by slevu na manžela zrušil.",
+      "confidence": "high",
+      "uncertainties": [
+        "Poslanci SPD nepodpořili pozměňovací návrhy, které by školkovné doplnily o vratný daňový bonus, ale následně hlasovali pro návrh zákona obnovující samotnou nevratnou slevu. Konečný rozhodovací hlas proto dokládá dílčí posun, zatímco dřívější hlasování ukazují rozdílný postoj k rozsahu podpory."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-f94228920ec7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43194-1",
+          "relevant": false,
+          "reasonCz": "Ustanovení smlouvy pouze říká, že smlouva nezavazuje přiznat daňovým rezidentům Tanzanie osobní a rodinné daňové úlevy; samo ale nemění ani nebrání zavedení slíbené podpory pro domácnosti v Česku.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Část o evidenci tržeb sama v dodaném textu slib neřeší, ale její souvislost se slibem plyne z pozměňovacích návrhů G1 a G2 týkajících se školkovného.",
+          "effectCz": "Text této části není dodán; relevantní návrhy G1 a G2 by u školkovného zavedly vratný daňový bonus na nevyužitou část slevy a umožnily uplatnění za rok 2026. Oproti samotné slevě na školkovné v návrhu zákona by tak podporu rozšířily i na část domácností, které ji kvůli nízké dani nemohou plně využít. Předchozí znění ustanovení této části nelze z balíčku porovnat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Návrh znovu zavádí slevu za umístění dítěte v předškolním zařízení, tedy školkovné, což je jedna z výslovných částí slibu.",
+          "effectCz": "Návrh i schválený text zavádějí slevu ve výši doložených výdajů za předškolní zařízení, nejvýše do výše minimální mzdy na dítě, s omezením při rozdělení péče mezi domácnosti a s možností uplatnění jen jedním poplatníkem v domácnosti. Ustanovení § 35bd je podle kontextu nové a předchozí znění tohoto pravidla balíček nedodává, takže přesný směr změny vůči dřívější úpravě nelze z kontextu porovnat; text však zavádí slíbené školkovné, nikoli vratnou podporu, která by zajistila využití celé slevy i při nízké daňové povinnosti. Kontext zároveň popisuje dosavadní slevu na manžela ve výši 24 840 Kč, případně dvojnásobné částky při průkazu ZTP/P, podmíněnou společnou domácností s dítětem do tří let a příjmem manžela do 68 000 Kč; v dodaných ustanoveních není její rozšíření na všechny pečující domácnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": false,
+          "reasonCz": "Dodaný text této části neobsahuje ustanovení o školkovném ani slevě na manžela; poskytnuté pasáže pozměňovacích návrhů týkající se slibu upravují daň z příjmů, nikoli daň z přidané hodnoty.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43366-1",
+          "relevant": true,
+          "reasonCz": "Poslanecký návrh ruší slevu na manžela, a přímo tak zasahuje do části slibu o daňové podpoře pečujících domácností.",
+          "effectCz": "Dosavadní § 35bb umožňuje slevu na manžela ve výši 24 840 Kč, případně dvojnásobné částky při průkazu ZTP/P, pokud poplatník žije s manželem a dítětem do tří let ve společné domácnosti a příjem manžela nepřesahuje 68 000 Kč. Návrh ruší § 35bb i odpovídající písmeno v § 35ba, takže tento nárok zcela odstraňuje. Jde o zmenšení nároku a o krok proti části slibu týkající se slevy na manžela."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-f94228920ec7--source",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--law-change-43366-1",
+        "psp-core-2025--amendment-text-1400",
+        "psp-core-2025--amendment-text-1531",
+        "psp-core-2025--amendment-text-1533",
+        "psp-core-2025--amendment-text-1560",
+        "psp-core-2025--amendment-text-1557",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88294",
+        "psp-core-2025--vote-88295",
+        "psp-core-2025--vote-88296",
+        "psp-core-2025--vote-88299",
+        "psp-core-2025--vote-88312",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--government-opinion-43366-1"
+      ],
+      "explanationCz": "Vláda SPD předložila návrh zákona o evidenci tržeb, který znovu zavádí slevu za umístění dítěte ve školce, a poslanci SPD podpořili jeho schválené znění i po vrácení Senátem. Sleva má limit do výše minimální mzdy na dítě a schválený text nedokládá obnovení slevy na manžela pro všechny pečující domácnosti, takže návrh naplňuje jen část slibu. Vláda také nesouhlasila s jiným návrhem, který by slevu na manžela zrušil. Poslanci SPD však nepodpořili pozměňovací návrhy, které by školkovné rozšířily o vratný bonus nebo umožnily jeho uplatnění už za rok 2026.",
+      "confidence": "high",
+      "uncertainties": [
+        "Poslanci SPD hlasovali proti návrhům G1 a G2, které by rozšířily školkovné o vratný bonus a jeho uplatnění za rok 2026; jde o protichůdný signál. Pozdější rozhodující hlasování pro schválené znění však podpořilo zavedení samotné slevy za umístění dítěte."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0eeb2399279b3391016aec5bbb48f487d183dd0bc710ad9764",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 54198,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 54195
+      },
+      "output_tokens": 4508,
+      "output_tokens_details": {
+        "reasoning_tokens": 3185
+      },
+      "total_tokens": 58706
+    },
+    "output": {
+      "promiseId": "candidate-f94228920ec7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43194-1",
+          "relevant": false,
+          "reasonCz": "Ustanovení smlouvy se týká osobních daňových úlev pro rezidenty druhého smluvního státu, nikoli nároku domácností v Česku na školkovné nebo slevu na manžela či manželku.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": false,
+          "reasonCz": "Dodané záznamy neukazují, že by změny části o evidenci tržeb měnily školkovné nebo slevu na manžela či manželku; text pozměňovacích návrhů se týká daňových ustanovení v jiné části návrhu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Návrh znovu zavádí slevu za umístění dítěte, což naplňuje část slibu o školkovném, ale nárok na slevu na manžela či manželku nerozšiřuje.",
+          "effectCz": "Dřívější § 35bb přiznával slevu 24 840 Kč, případně dvojnásobnou při průkazu ZTP/P, jen při společné domácnosti s manželem a vyživovaným dítětem mladším tří let a při vlastním příjmu manžela nejvýše 68 000 Kč; tato pravidla návrh nemění. Nově zavádí slevu za skutečné výdaje za předškolní zařízení, nejvýše do výše minimální mzdy na dítě, a stanoví související podmínky a postupy pro její uplatnění. Protože jde o nové ustanovení, balíček neukazuje jeho předchozí znění; sleva na manžela zůstává omezená dosavadními podmínkami a slib její rozšíření nesplňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": false,
+          "reasonCz": "Dodané záznamy neukazují, že by změny zákona o dani z přidané hodnoty měnily školkovné nebo slevu na manžela či manželku; text souvisejícího pozměňovacího návrhu míří na jiné daňové ustanovení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43366-1",
+          "relevant": true,
+          "reasonCz": "Návrh ruší slevu na manžela či manželku, tedy přímo mění nástroj, jehož obnovení a rozšíření slib požaduje.",
+          "effectCz": "Před změnou činila sleva na manžela 24 840 Kč, při průkazu ZTP/P dvojnásobek, a byla podmíněna společnou domácností s dítětem mladším tří let a příjmem manžela nejvýše 68 000 Kč. Návrh ruší § 35bb i ustanovení, která slevu umožňují uplatnit a prokazovat, takže tento nárok odstraňuje; jde o zásadní zúžení až zrušení existující úlevy, nikoli o její rozšíření pro pečující domácnosti."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-f94228920ec7--source",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88294",
+        "psp-core-2025--vote-88295",
+        "psp-core-2025--vote-88296",
+        "psp-core-2025--vote-88299",
+        "psp-core-2025--vote-88312",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--amendment-text-1400",
+        "psp-core-2025--amendment-text-1531",
+        "psp-core-2025--amendment-text-1533",
+        "psp-core-2025--amendment-text-1560",
+        "psp-core-2025--amendment-text-1557",
+        "psp-core-2025--law-change-43366-1",
+        "psp-core-2025--government-opinion-43366-1"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona, který znovu zavádí slevu za umístění dítěte v předškolním zařízení, omezenou skutečnými výdaji a stropem ve výši minimální mzdy na dítě. Poslanci SPD návrh ve třetím čtení podpořili, takže jde o dílčí posun ke splnění slibu. Návrh ale ponechává slevu na manžela či manželku jen za dosavadních podmínek a nerozšiřuje ji na všechny pečující domácnosti. Vláda zároveň nesouhlasila s jiným návrhem, který by slevu na manžela zrušil.",
+      "confidence": "high",
+      "uncertainties": [
+        "Poslanci SPD nepodpořili pozměňovací návrhy, které by školkovné doplnily o vratný daňový bonus, ale následně hlasovali pro návrh zákona obnovující samotnou nevratnou slevu. Konečný rozhodovací hlas proto dokládá dílčí posun, zatímco dřívější hlasování ukazují rozdílný postoj k rozsahu podpory."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_03ab8ca0db6816d8016aec5bf0ea8887d19b5153d9c07f7a2c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 54198,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 54195
+      },
+      "output_tokens": 10580,
+      "output_tokens_details": {
+        "reasoning_tokens": 8897
+      },
+      "total_tokens": 64778
+    },
+    "output": {
+      "promiseId": "candidate-f94228920ec7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43194-1",
+          "relevant": false,
+          "reasonCz": "Ustanovení smlouvy pouze říká, že smlouva nezavazuje přiznat daňovým rezidentům Tanzanie osobní a rodinné daňové úlevy; samo ale nemění ani nebrání zavedení slíbené podpory pro domácnosti v Česku.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Část o evidenci tržeb sama v dodaném textu slib neřeší, ale její souvislost se slibem plyne z pozměňovacích návrhů G1 a G2 týkajících se školkovného.",
+          "effectCz": "Text této části není dodán; relevantní návrhy G1 a G2 by u školkovného zavedly vratný daňový bonus na nevyužitou část slevy a umožnily uplatnění za rok 2026. Oproti samotné slevě na školkovné v návrhu zákona by tak podporu rozšířily i na část domácností, které ji kvůli nízké dani nemohou plně využít. Předchozí znění ustanovení této části nelze z balíčku porovnat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Návrh znovu zavádí slevu za umístění dítěte v předškolním zařízení, tedy školkovné, což je jedna z výslovných částí slibu.",
+          "effectCz": "Návrh i schválený text zavádějí slevu ve výši doložených výdajů za předškolní zařízení, nejvýše do výše minimální mzdy na dítě, s omezením při rozdělení péče mezi domácnosti a s možností uplatnění jen jedním poplatníkem v domácnosti. Ustanovení § 35bd je podle kontextu nové a předchozí znění tohoto pravidla balíček nedodává, takže přesný směr změny vůči dřívější úpravě nelze z kontextu porovnat; text však zavádí slíbené školkovné, nikoli vratnou podporu, která by zajistila využití celé slevy i při nízké daňové povinnosti. Kontext zároveň popisuje dosavadní slevu na manžela ve výši 24 840 Kč, případně dvojnásobné částky při průkazu ZTP/P, podmíněnou společnou domácností s dítětem do tří let a příjmem manžela do 68 000 Kč; v dodaných ustanoveních není její rozšíření na všechny pečující domácnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": false,
+          "reasonCz": "Dodaný text této části neobsahuje ustanovení o školkovném ani slevě na manžela; poskytnuté pasáže pozměňovacích návrhů týkající se slibu upravují daň z příjmů, nikoli daň z přidané hodnoty.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43366-1",
+          "relevant": true,
+          "reasonCz": "Poslanecký návrh ruší slevu na manžela, a přímo tak zasahuje do části slibu o daňové podpoře pečujících domácností.",
+          "effectCz": "Dosavadní § 35bb umožňuje slevu na manžela ve výši 24 840 Kč, případně dvojnásobné částky při průkazu ZTP/P, pokud poplatník žije s manželem a dítětem do tří let ve společné domácnosti a příjem manžela nepřesahuje 68 000 Kč. Návrh ruší § 35bb i odpovídající písmeno v § 35ba, takže tento nárok zcela odstraňuje. Jde o zmenšení nároku a o krok proti části slibu týkající se slevy na manžela."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-f94228920ec7--source",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--law-change-43366-1",
+        "psp-core-2025--amendment-text-1400",
+        "psp-core-2025--amendment-text-1531",
+        "psp-core-2025--amendment-text-1533",
+        "psp-core-2025--amendment-text-1560",
+        "psp-core-2025--amendment-text-1557",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88294",
+        "psp-core-2025--vote-88295",
+        "psp-core-2025--vote-88296",
+        "psp-core-2025--vote-88299",
+        "psp-core-2025--vote-88312",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--government-opinion-43366-1"
+      ],
+      "explanationCz": "Vláda SPD předložila návrh zákona o evidenci tržeb, který znovu zavádí slevu za umístění dítěte ve školce, a poslanci SPD podpořili jeho schválené znění i po vrácení Senátem. Sleva má limit do výše minimální mzdy na dítě a schválený text nedokládá obnovení slevy na manžela pro všechny pečující domácnosti, takže návrh naplňuje jen část slibu. Vláda také nesouhlasila s jiným návrhem, který by slevu na manžela zrušil. Poslanci SPD však nepodpořili pozměňovací návrhy, které by školkovné rozšířily o vratný bonus nebo umožnily jeho uplatnění už za rok 2026.",
+      "confidence": "high",
+      "uncertainties": [
+        "Poslanci SPD hlasovali proti návrhům G1 a G2, které by rozšířily školkovné o vratný bonus a jeho uplatnění za rok 2026; jde o protichůdný signál. Pozdější rozhodující hlasování pro schválené znění však podpořilo zavedení samotné slevy za umístění dítěte."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

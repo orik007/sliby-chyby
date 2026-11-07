@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-47-48-555Z--f21419c96ea0",
+  "evaluatedAt": "2026-10-02T01:47:48.555Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-67aacd075478/f21419c96ea089e8c2c95aeb9985ecf1cf9b565283946a8c90d3235983cc814e.json",
+  "packageHash": "f21419c96ea089e8c2c95aeb9985ecf1cf9b565283946a8c90d3235983cc814e",
+  "assessmentContentHash": "661e3be9a3468009ffe8273a4643b07d6468366c38c2276112c96c0b2f125a60",
+  "assessmentFingerprint": "6d7ae6f9a30c40e23c4b0613338729aafd72537f9d4a2729f5d62c8af656bb7a",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-67aacd075478",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-67aacd075478",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+          "relevant": true,
+          "reasonCz": "Změna přejmenovává pozemky, na něž se vztahuje zákaz aplikace některých přípravků, a může tak ovlivnit rozsah pesticidních omezení, avšak podklady neumožňují určit směr této změny."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-67aacd075478--source",
+        "psp-core-2025--law-change-43174-approved-36",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě většinově hlasovali pro novelu, která v zákoně o rostlinolékařské péči mění označení pozemků, na nichž platí zákaz aplikace některých přípravků. Po zamítnutí návrhu Senátem hlasovali také pro to, aby na něm Poslanecká sněmovna setrvala. Z dostupného znění ale nelze zjistit, zda nová formulace okruh dotčených pozemků rozšiřuje, nebo zužuje, a novela neřeší zákaz účinných látek u dovážených komodit. Proto nelze doložit, zda tyto hlasy slib posouvaly, nebo mu odporovaly.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neuvádějí obsah pojmu „pozemky zázemí stavby“ podle citovaného stavebního zákona, takže nelze určit, zda se zákaz aplikace přípravků rozšířil, nebo zúžil.",
+        "Předložené důkazy nedokládají postup Motoristů sobě k prosazování stejného zacházení se zákazem účinných látek u dovážených a domácích komodit."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-67aacd075478",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+          "relevant": true,
+          "reasonCz": "Změna přepisuje, na jakých pozemcích platí zákaz aplikace vybraných přípravků na ochranu rostlin, a může tak měnit rozsah pesticidního omezení, i když se netýká dovozu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-67aacd075478--source",
+        "psp-core-2025--law-change-43174-approved-36",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě hlasovali pro novelu stavebního zákona, která mění také zákon o rostlinolékařské péči. Ta nahrazuje „zastavěné stavební pozemky“ jiným vymezením pozemků, na něž se vztahuje zákaz aplikace některých přípravků. Strana také hlasovala pro setrvání Sněmovny na návrhu poté, co jej Senát zamítl. Z podkladů ale nelze zjistit, zda nové vymezení zákaz rozšiřuje, nebo zužuje, a proto nelze určit, zda hlasování naplňuje slib odmítat další restrikce.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neuvádějí znění ustanovení stavebního zákona, na které nové vymezení odkazuje; nelze proto porovnat, zda se okruh pozemků se zákazem aplikace přípravků rozšiřuje, nebo zužuje."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_09d03cab0e6bd2ac016abf0d26d87087d19c6ac741cabb8c3d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8355,
+      "input_tokens_details": {
+        "cache_write_tokens": 5031,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1869,
+      "output_tokens_details": {
+        "reasoning_tokens": 1336
+      },
+      "total_tokens": 10224
+    },
+    "output": {
+      "promiseId": "candidate-67aacd075478",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+          "relevant": true,
+          "reasonCz": "Změna přejmenovává pozemky, na něž se vztahuje zákaz aplikace některých přípravků, a může tak ovlivnit rozsah pesticidních omezení, avšak podklady neumožňují určit směr této změny."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-67aacd075478--source",
+        "psp-core-2025--law-change-43174-approved-36",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě většinově hlasovali pro novelu, která v zákoně o rostlinolékařské péči mění označení pozemků, na nichž platí zákaz aplikace některých přípravků. Po zamítnutí návrhu Senátem hlasovali také pro to, aby na něm Poslanecká sněmovna setrvala. Z dostupného znění ale nelze zjistit, zda nová formulace okruh dotčených pozemků rozšiřuje, nebo zužuje, a novela neřeší zákaz účinných látek u dovážených komodit. Proto nelze doložit, zda tyto hlasy slib posouvaly, nebo mu odporovaly.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neuvádějí obsah pojmu „pozemky zázemí stavby“ podle citovaného stavebního zákona, takže nelze určit, zda se zákaz aplikace přípravků rozšířil, nebo zúžil.",
+        "Předložené důkazy nedokládají postup Motoristů sobě k prosazování stejného zacházení se zákazem účinných látek u dovážených a domácích komodit."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0e357bbb3dffb392016abf0d343d9087d19f21fd8085bf1e9d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8355,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8352
+      },
+      "output_tokens": 1785,
+      "output_tokens_details": {
+        "reasoning_tokens": 1309
+      },
+      "total_tokens": 10140
+    },
+    "output": {
+      "promiseId": "candidate-67aacd075478",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+          "relevant": true,
+          "reasonCz": "Změna přepisuje, na jakých pozemcích platí zákaz aplikace vybraných přípravků na ochranu rostlin, a může tak měnit rozsah pesticidního omezení, i když se netýká dovozu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-67aacd075478--source",
+        "psp-core-2025--law-change-43174-approved-36",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě hlasovali pro novelu stavebního zákona, která mění také zákon o rostlinolékařské péči. Ta nahrazuje „zastavěné stavební pozemky“ jiným vymezením pozemků, na něž se vztahuje zákaz aplikace některých přípravků. Strana také hlasovala pro setrvání Sněmovny na návrhu poté, co jej Senát zamítl. Z podkladů ale nelze zjistit, zda nové vymezení zákaz rozšiřuje, nebo zužuje, a proto nelze určit, zda hlasování naplňuje slib odmítat další restrikce.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neuvádějí znění ustanovení stavebního zákona, na které nové vymezení odkazuje; nelze proto porovnat, zda se okruh pozemků se zákazem aplikace přípravků rozšiřuje, nebo zužuje."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

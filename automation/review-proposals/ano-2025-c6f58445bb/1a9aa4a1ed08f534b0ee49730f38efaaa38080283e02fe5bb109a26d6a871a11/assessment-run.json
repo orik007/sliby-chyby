@@ -1,0 +1,302 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T09-21-37-851Z--0cf48dde1d59",
+  "evaluatedAt": "2026-11-05T09:21:37.851Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-c6f58445bb/0cf48dde1d597c6effff4e6a671ca9b292f3f06b091f7520ac69b46520aae20e.json",
+  "packageHash": "0cf48dde1d597c6effff4e6a671ca9b292f3f06b091f7520ac69b46520aae20e",
+  "assessmentContentHash": "399a809b4b9e705da54ebb88456b8f94c997a29306fa142851fccffa39c7a1e8",
+  "assessmentFingerprint": "1a9aa4a1ed08f534b0ee49730f38efaaa38080283e02fe5bb109a26d6a871a11",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-c6f58445bb",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0728fc82ba542038016aec4a0875a887d1bf3c368c536317d7",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 44451,
+            "input_tokens_details": {
+              "cache_write_tokens": 38101,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 5616,
+            "output_tokens_details": {
+              "reasoning_tokens": 4421
+            },
+            "total_tokens": 50067
+          },
+          "output": {
+            "promiseId": "ano-2025-c6f58445bb",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Schválená verze přidává osvobození staveb pro bydlení ve stavební proluce od odvodů za odnětí zemědělské půdy, což může snížit náklady na výstavbu služebních bytů, ačkoli je výslovně nezmiňuje.",
+                "effectCz": "Před změnou § 11a osvobozoval odvod od vyjmenovaných druhů staveb, nikoli obecně od staveb pro bydlení ve stavební proluce. Schválená verze přidává tuto kategorii jako nové písmeno s), takže u takové stavby odvod odpadá; jde o snížení nákladů, které může být výhodou i pro firmu stavějící služební byty. Text ale nestanoví, že se úleva vztahuje právě na služební byty nebo jejich zaměstnavatele."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-2",
+                "relevant": true,
+                "reasonCz": "Při projednávání novely byl předložen pozměňovací návrh, který by výslovně zavedl daňové zvýhodnění služebních bytů; samotné zveřejněné verze novely toto opatření neobsahují.",
+                "effectCz": "Zveřejněná navržená verze mění osvobození některých zaměstnaneckých nepeněžních plnění a schválená verze v poskytnutém výňatku mění ocenění užívání zařízení péče o děti; tyto změny služební byty neupravují. Pozměňovací návrh L4 by oproti dosavadnímu osvobození přechodného ubytování zaměstnance, omezenému na 3 500 Kč měsíčně, osvobodil hodnotu užívání služebního bytu či domu. Navrhoval také daňovou uznatelnost nákladů na nájem nebo odpisy služebního bytu či domu, ale předchozí znění příslušných ustanovení § 24 a § 25 v podkladech chybí, takže směr změny u těchto nákladů nelze z balíčku ověřit."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-c6f58445bb--source",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--law-change-43310-2",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--senate-resolution-43310-6",
+              "psp-core-2025--amendment-text-1477",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--print-step-211390",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88308",
+              "psp-core-2025--vote-88356",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--vote-88456"
+            ],
+            "explanationCz": "Poslanci ANO nepodpořili pozměňovací návrh k vládní novele zákona o daních z příjmů (sněmovní tisk 189), který by osvobodil užívání služebního bytu od daně a firmám umožnil odečítat náklady na jeho nájem či odpisy. Šlo o návrh na uskutečnění části slibu, takže jeho nepodpoření působí proti slibu. ANO zároveň podpořilo novelu stavebního zákona (sněmovní tisk 67), která osvobozuje od odvodů některé stavby pro bydlení ve stavebních prolukách; tato obecná úleva však služební byty výslovně nezmiňuje. Podklady nedokládají zavedení slíbených zvýhodněných úvěrů ani investičních pobídek pro služební byty.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Osvobození od odvodů pro stavby pro bydlení ve stavebních prolukách může snížit náklady i u služebních bytů, ale schválený text neuvádí, zda a za jakých podmínek se na ně vztahuje.",
+              "Pozměňovací návrh navrhoval daňovou uznatelnost nákladů na pronájem či odpisy služebních bytů; znění ustanovení, které měl měnit, v podkladech chybí."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-c6f58445bb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Změny ochrany zemědělské půdy a výjimka pro stavby pro bydlení ve stavební proluce se nevztahují konkrétně k služebním bytům ani k podpoře firem při jejich výstavbě.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "K této novele byl předložen pozměňovací návrh, který přímo navrhoval daňové zvýhodnění služebních bytů a nákladů firem na ně.",
+          "effectCz": "Dosavadní § 6 odst. 9 písm. i) osvobozoval nepeněžní přechodné ubytování zaměstnanců nejvýše do 3 500 Kč měsíčně. Pozměňovací návrh chtěl toto ustanovení nahradit osvobozením hodnoty užívání služebního bytu či domu bez uvedeného peněžního limitu, což by pro služební byty rozšířilo daňové zvýhodnění; navrhoval také daňově uznat nájemné či odpisy služebního bytu. Předchozí znění ustanovení o uznatelnosti těchto nákladů balíček nedokládá, takže u této části nelze směr změny porovnat. Jde o obsah pozměňovacího návrhu, nikoli o změnu obsaženou v předloženém znění novely."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-c6f58445bb--source",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--amendment-text-1477",
+        "psp-core-2025--vote-88308"
+      ],
+      "explanationCz": "Poslanci ANO nepodpořili pozměňovací návrh, který navrhoval osvobodit užívání služebního bytu či domu zaměstnancem od daně a umožnit firmám daňově uplatnit nájemné nebo odpisy. Dosavadní osvobození přechodného ubytování bylo omezeno na 3 500 Kč měsíčně. Návrh by tak rozšířil daňovou podporu služebních bytů, ale poslanci ANO hlasovali proti němu. Jde o doložený krok proti části slibu, nikoli o rozhodnutí o celém slibu.",
+      "confidence": "high",
+      "uncertainties": []
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-c6f58445bb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Schválené znění přidává úlevu na odvodech pro stavby pro bydlení ve stavební proluce, což může zahrnout i služební byty.",
+          "effectCz": "Dosavadní výčet případů, kdy se odvody za trvalé odnětí zemědělské půdy nestanoví, stavby pro bydlení ve stavební proluce neobsahoval; schválené znění je do výjimky doplňuje. Firmám stavějícím tam služební byty tak může snížit náklad, jde ale jen o omezenou úlevu na odvodech, nikoli o slíbené investiční pobídky či zvýhodněné úvěry."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "K návrhu této novely byl předložen pozměňovací návrh týkající se přímo daňového zacházení se služebními byty, přestože jej samotná dodaná znění novely neobsahují.",
+          "effectCz": "Dodané výňatky navrženého ani schváleného znění nemění pravidla pro služební byty. Pozměňovací návrh k této novele navrhoval osvobodit nepeněžní užívání služebního bytu či domu zaměstnancem a uznat nájemné nebo daňové odpisy jako náklad zaměstnavatele. Přesné dosavadní znění dotčených ustanovení § 6, § 24 a § 25 balíček neuvádí; návrh však výslovně popisuje rozšíření podpory oproti dosavadní úpravě přechodného ubytování."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-c6f58445bb--source",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--amendment-text-1477",
+        "psp-core-2025--vote-88308"
+      ],
+      "explanationCz": "Poslanci ANO podpořili zákon, který nově osvobozuje stavby pro bydlení ve stavební proluce od odvodů za trvalé odnětí zemědělské půdy; to může snížit část nákladů na služební byty, ale jen v tomto omezeném případě. Zákon poslanci schválili znovu poté, co jej Senát zamítl. V jiné novele byl navržen daňový odpočet nákladů na služební byty a osvobození jejich užívání zaměstnancem od daně, ale poslanci ANO tento pozměňovací návrh nepodpořili. Zatím je proto doložena dílčí úleva, nikoli celý slib daňových úlev, investičních pobídek a zvýhodněných úvěrů.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Pozměňovací návrh na širší daňovou podporu služebních bytů ANO nepodpořilo; jeho navržené úlevy se tak nestaly součástí schváleného znění této novely.",
+        "Doložená úleva se vztahuje na stavby pro bydlení ve stavební proluce. Balíček neukazuje, zda ji konkrétní firmy využily ani zda byly zavedeny investiční pobídky nebo zvýhodněné úvěry pro služební byty."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_09750efc1f6226b3016aec4a3c943487d1a92294596bdca5d9",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 44451,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 44448
+      },
+      "output_tokens": 5620,
+      "output_tokens_details": {
+        "reasoning_tokens": 4924
+      },
+      "total_tokens": 50071
+    },
+    "output": {
+      "promiseId": "ano-2025-c6f58445bb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Změny ochrany zemědělské půdy a výjimka pro stavby pro bydlení ve stavební proluce se nevztahují konkrétně k služebním bytům ani k podpoře firem při jejich výstavbě.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "K této novele byl předložen pozměňovací návrh, který přímo navrhoval daňové zvýhodnění služebních bytů a nákladů firem na ně.",
+          "effectCz": "Dosavadní § 6 odst. 9 písm. i) osvobozoval nepeněžní přechodné ubytování zaměstnanců nejvýše do 3 500 Kč měsíčně. Pozměňovací návrh chtěl toto ustanovení nahradit osvobozením hodnoty užívání služebního bytu či domu bez uvedeného peněžního limitu, což by pro služební byty rozšířilo daňové zvýhodnění; navrhoval také daňově uznat nájemné či odpisy služebního bytu. Předchozí znění ustanovení o uznatelnosti těchto nákladů balíček nedokládá, takže u této části nelze směr změny porovnat. Jde o obsah pozměňovacího návrhu, nikoli o změnu obsaženou v předloženém znění novely."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-c6f58445bb--source",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--amendment-text-1477",
+        "psp-core-2025--vote-88308"
+      ],
+      "explanationCz": "Poslanci ANO nepodpořili pozměňovací návrh, který navrhoval osvobodit užívání služebního bytu či domu zaměstnancem od daně a umožnit firmám daňově uplatnit nájemné nebo odpisy. Dosavadní osvobození přechodného ubytování bylo omezeno na 3 500 Kč měsíčně. Návrh by tak rozšířil daňovou podporu služebních bytů, ale poslanci ANO hlasovali proti němu. Jde o doložený krok proti části slibu, nikoli o rozhodnutí o celém slibu.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_02af9a8aa9e7627b016aec4a6eff6487d1886eaf94037753d9",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 44451,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 44448
+      },
+      "output_tokens": 4556,
+      "output_tokens_details": {
+        "reasoning_tokens": 3577
+      },
+      "total_tokens": 49007
+    },
+    "output": {
+      "promiseId": "ano-2025-c6f58445bb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Schválené znění přidává úlevu na odvodech pro stavby pro bydlení ve stavební proluce, což může zahrnout i služební byty.",
+          "effectCz": "Dosavadní výčet případů, kdy se odvody za trvalé odnětí zemědělské půdy nestanoví, stavby pro bydlení ve stavební proluce neobsahoval; schválené znění je do výjimky doplňuje. Firmám stavějícím tam služební byty tak může snížit náklad, jde ale jen o omezenou úlevu na odvodech, nikoli o slíbené investiční pobídky či zvýhodněné úvěry."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "K návrhu této novely byl předložen pozměňovací návrh týkající se přímo daňového zacházení se služebními byty, přestože jej samotná dodaná znění novely neobsahují.",
+          "effectCz": "Dodané výňatky navrženého ani schváleného znění nemění pravidla pro služební byty. Pozměňovací návrh k této novele navrhoval osvobodit nepeněžní užívání služebního bytu či domu zaměstnancem a uznat nájemné nebo daňové odpisy jako náklad zaměstnavatele. Přesné dosavadní znění dotčených ustanovení § 6, § 24 a § 25 balíček neuvádí; návrh však výslovně popisuje rozšíření podpory oproti dosavadní úpravě přechodného ubytování."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-c6f58445bb--source",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--amendment-text-1477",
+        "psp-core-2025--vote-88308"
+      ],
+      "explanationCz": "Poslanci ANO podpořili zákon, který nově osvobozuje stavby pro bydlení ve stavební proluce od odvodů za trvalé odnětí zemědělské půdy; to může snížit část nákladů na služební byty, ale jen v tomto omezeném případě. Zákon poslanci schválili znovu poté, co jej Senát zamítl. V jiné novele byl navržen daňový odpočet nákladů na služební byty a osvobození jejich užívání zaměstnancem od daně, ale poslanci ANO tento pozměňovací návrh nepodpořili. Zatím je proto doložena dílčí úleva, nikoli celý slib daňových úlev, investičních pobídek a zvýhodněných úvěrů.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Pozměňovací návrh na širší daňovou podporu služebních bytů ANO nepodpořilo; jeho navržené úlevy se tak nestaly součástí schváleného znění této novely.",
+        "Doložená úleva se vztahuje na stavby pro bydlení ve stavební proluce. Balíček neukazuje, zda ji konkrétní firmy využily ani zda byly zavedeny investiční pobídky nebo zvýhodněné úvěry pro služební byty."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0119e234095fc800016aec4a9b7dec87d1afd26618c90010d9",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 44041,
+      "input_tokens_details": {
+        "cache_write_tokens": 39628,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 298,
+      "output_tokens_details": {
+        "reasoning_tokens": 47
+      },
+      "total_tokens": 44339
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "ano-2025-c6f58445bb--source",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--amendment-text-1477",
+        "psp-core-2025--vote-88308"
+      ],
+      "explanationCz": "Volím hodnocení A, protože správně rozlišuje obecnou úlevu pro bytovou výstavbu od slíbené podpory firemních služebních bytů. Osvobození staveb pro bydlení v prolukách od odvodů může takovou výstavbu zlevnit, ale samo nezavádí slíbenou podporu firem stavějících byty pro zaměstnance. Poslanci ANO naopak nepodpořili návrh, který přímo navrhoval daňové zvýhodnění služebních bytů a uznání nájemného či odpisů jako nákladů firmy. Toto hlasování je podle pravidel krokem proti části slibu, nikoli rozhodnutím proti celému slibu."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-against",
+    "selectedReview": "assessor-a"
+  }
+}

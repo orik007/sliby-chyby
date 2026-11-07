@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-11-44-605Z--961cca63f732",
+  "evaluatedAt": "2026-11-05T10:11:44.605Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-aac806f10dbc/961cca63f7320151b3a8d3706d53d3f2b2aa8824e89418b135779bba1f579946.json",
+  "packageHash": "961cca63f7320151b3a8d3706d53d3f2b2aa8824e89418b135779bba1f579946",
+  "assessmentContentHash": "1febb97863df297d83bbfffb55a53d714e50844193291763a3b9e860835245ef",
+  "assessmentFingerprint": "6d2d7b8657a8dddcf30423a89d8a6a614bdae16f0ebe7c34dcd9dcfa3f2d774e",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-aac806f10dbc",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-aac806f10dbc",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-167",
+          "relevant": true,
+          "reasonCz": "Úkol v plánu legislativních prací výslovně počítá s návrhem zákona, jehož cílem je zavést doplňkový režim flotilových dálničních známek, tedy přímo postupuje k části slibu.",
+          "effectCz": "Usnesení nemění žádný zákon; stanoví legislativní úkol připravit návrh zákona k zavedení doplňkového režimu flotilových dálničních známek. V plánu je uvedeno zavedení ve 2. čtvrtletí 2028 a předložení vládě v lednu 2029. Jde o plán přípravy návrhu, nikoli o právní úpravu, která by už umožňovala sdílení známky mezi vozidly nebo její flexibilní přiřazování; konkrétní pravidla ani míru naplnění těchto detailů proto z podkladů nelze určit."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-aac806f10dbc--source",
+        "zvlady-resolutions--law-change-uv-2026-175-167",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení č. 175/2026, kterým schválila plán legislativních prací; ten ukládá připravit návrh zákona zavádějící doplňkový režim flotilových dálničních známek. Jde o návrh dalšího postupu, nikoli o pravidlo, které by už sdílení známek umožňovalo. Plán uvádí zavedení ve 2. čtvrtletí 2028 a předložení návrhu vládě v lednu 2029, takže podniká krok směrem ke slibu, ale konkrétní sdílení mezi vozidly ani flexibilní přiřazování zatím nedokládá.",
+      "confidence": "high",
+      "uncertainties": [
+        "Plán neuvádí, zda připravovaná právní úprava umožní sdílení jedné známky mezi vozidly domácnosti či firmy ani její flexibilní přiřazování podle potřeby."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-aac806f10dbc",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-167",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně ukládá připravit návrh zákona, jehož cílem je zavést doplňkový režim flotilových dálničních známek, tedy téma přímo obsažené ve slibu.",
+          "effectCz": "Usnesení nemění dosavadní právní úpravu, ale plánuje přípravu zákona, který má zavést doplňkový režim flotilových dálničních známek; jde o návrhový krok směrem ke slibu, avšak text neupřesňuje sdílení známky mezi vozidly domácnosti či firmy ani její flexibilní přiřazování."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-aac806f10dbc--source",
+        "zvlady-resolutions--law-change-uv-2026-175-167",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení č. 175/2026, kterým schválila plán legislativních prací. Ten ukládá ministrovi dopravy připravit návrh zákona zavádějící doplňkový režim flotilových dálničních známek. Jde o návrhový krok, nikoli o již zavedenou možnost sdílení známky. Protože plán odpovídá hlavnímu směru slibu, posouvá jej k naplnění.",
+      "confidence": "high",
+      "uncertainties": [
+        "Plán neuvádí, zda návrh umožní sdílet jednu známku mezi vozidly v rámci domácnosti či firmy ani jak bude možné známku flexibilně přiřazovat; tyto podrobnosti zatím nelze ověřit."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0a3fc19f2d4b3eca016aec563218cc87d19835978123a782a7",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8439,
+      "input_tokens_details": {
+        "cache_write_tokens": 2089,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 927,
+      "output_tokens_details": {
+        "reasoning_tokens": 380
+      },
+      "total_tokens": 9366
+    },
+    "output": {
+      "promiseId": "candidate-aac806f10dbc",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-167",
+          "relevant": true,
+          "reasonCz": "Úkol v plánu legislativních prací výslovně počítá s návrhem zákona, jehož cílem je zavést doplňkový režim flotilových dálničních známek, tedy přímo postupuje k části slibu.",
+          "effectCz": "Usnesení nemění žádný zákon; stanoví legislativní úkol připravit návrh zákona k zavedení doplňkového režimu flotilových dálničních známek. V plánu je uvedeno zavedení ve 2. čtvrtletí 2028 a předložení vládě v lednu 2029. Jde o plán přípravy návrhu, nikoli o právní úpravu, která by už umožňovala sdílení známky mezi vozidly nebo její flexibilní přiřazování; konkrétní pravidla ani míru naplnění těchto detailů proto z podkladů nelze určit."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-aac806f10dbc--source",
+        "zvlady-resolutions--law-change-uv-2026-175-167",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení č. 175/2026, kterým schválila plán legislativních prací; ten ukládá připravit návrh zákona zavádějící doplňkový režim flotilových dálničních známek. Jde o návrh dalšího postupu, nikoli o pravidlo, které by už sdílení známek umožňovalo. Plán uvádí zavedení ve 2. čtvrtletí 2028 a předložení návrhu vládě v lednu 2029, takže podniká krok směrem ke slibu, ale konkrétní sdílení mezi vozidly ani flexibilní přiřazování zatím nedokládá.",
+      "confidence": "high",
+      "uncertainties": [
+        "Plán neuvádí, zda připravovaná právní úprava umožní sdílení jedné známky mezi vozidly domácnosti či firmy ani její flexibilní přiřazování podle potřeby."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_04cf6d8cdcf0fe86016aec564a30ac87d1aa37ccd3e801ea22",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8439,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8436
+      },
+      "output_tokens": 1251,
+      "output_tokens_details": {
+        "reasoning_tokens": 759
+      },
+      "total_tokens": 9690
+    },
+    "output": {
+      "promiseId": "candidate-aac806f10dbc",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-167",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně ukládá připravit návrh zákona, jehož cílem je zavést doplňkový režim flotilových dálničních známek, tedy téma přímo obsažené ve slibu.",
+          "effectCz": "Usnesení nemění dosavadní právní úpravu, ale plánuje přípravu zákona, který má zavést doplňkový režim flotilových dálničních známek; jde o návrhový krok směrem ke slibu, avšak text neupřesňuje sdílení známky mezi vozidly domácnosti či firmy ani její flexibilní přiřazování."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-aac806f10dbc--source",
+        "zvlady-resolutions--law-change-uv-2026-175-167",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení č. 175/2026, kterým schválila plán legislativních prací. Ten ukládá ministrovi dopravy připravit návrh zákona zavádějící doplňkový režim flotilových dálničních známek. Jde o návrhový krok, nikoli o již zavedenou možnost sdílení známky. Protože plán odpovídá hlavnímu směru slibu, posouvá jej k naplnění.",
+      "confidence": "high",
+      "uncertainties": [
+        "Plán neuvádí, zda návrh umožní sdílet jednu známku mezi vozidly v rámci domácnosti či firmy ani jak bude možné známku flexibilně přiřazovat; tyto podrobnosti zatím nelze ověřit."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

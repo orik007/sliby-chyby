@@ -1,0 +1,570 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-53-22-225Z--6d34f3c941be",
+  "evaluatedAt": "2026-10-02T01:53:22.225Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-8fe3b522f153/6d34f3c941beea8db7cc713df1f55cf9ba508af4c025864f13e57dd1150eb91c.json",
+  "packageHash": "6d34f3c941beea8db7cc713df1f55cf9ba508af4c025864f13e57dd1150eb91c",
+  "assessmentContentHash": "c70e99e240913224b05673f11bfe7eb6b2d94b8087c805d5e2a66e7da080e6a9",
+  "assessmentFingerprint": "b5fdd1efa9744efea604baa47aacd2fa1ec663d39f06d4d090d4321a7a13db7d",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-8fe3b522f153",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0b26775696cfacd8016abf0e236d9887d182936ba5a67fe46f",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 646640,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 646637
+            },
+            "output_tokens": 5491,
+            "output_tokens_details": {
+              "reasoning_tokens": 4009
+            },
+            "total_tokens": 652131
+          },
+          "output": {
+            "promiseId": "candidate-8fe3b522f153",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Novela umožňuje splnit některé požadavky na výstavbu, včetně nakládání s odpady, příspěvkem na jejich společné řešení, což může část povolovacích povinností zmírnit, ale není to úleva výslovně určená menším provozům."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": false,
+                "reasonCz": "Změny zákona o ochraně přírody upravují ochranu přírody a povolování staveb obecně, nikoli regulaci menších recyklačních a odpadových provozů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": false,
+                "reasonCz": "Změny ochrany zemědělské půdy se týkají odnímání půdy a povolování záměrů, ne regulace menších odpadových či recyklačních provozů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": false,
+                "reasonCz": "Změny posuzování vlivů na životní prostředí upravují obecný proces povolování záměrů, ale text je nevztahuje na regulaci menších odpadových provozů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": false,
+                "reasonCz": "Změny vodního zákona se týkají povolování nakládání s vodami a vodních děl, nikoli regulace menších recyklačních a odpadových provozů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": false,
+                "reasonCz": "Změny ochrany ovzduší upravují postup při povolování záměrů a podmínky pro zdroje znečištění, ne konkrétní regulaci menších odpadových provozů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": true,
+                "reasonCz": "Novela zákona o odpadech přesouvá posuzování některých požadavků na odpady při povolování záměru do rozhodnutí stavebního úřadu, což může zjednodušit povolovací postup odpadových zařízení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": false,
+                "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku bylo z finálního znění odstraněno a samo o sobě se netýká specificky menších odpadových provozů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+                "relevant": false,
+                "reasonCz": "Tato část prodlužuje lhůtu pro vložení havarijních plánů do informačního systému, nikoli regulaci menších recyklačních nebo odpadových provozů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": false,
+                "reasonCz": "Zrušovací ustanovení se týká souvisejících předpisů a vyhlášek, ale v této části nepřináší konkrétní úlevu menším odpadovým provozům."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43223-1",
+                "relevant": false,
+                "reasonCz": "Návrh upravuje ekodesign výrobků a nestanoví změny regulace recyklačních nebo odpadových provozů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43329-1",
+                "relevant": false,
+                "reasonCz": "Návrh zpřísňuje a doplňuje trestněprávní postihy za vybrané činy proti životnímu prostředí, nikoli odstraňuje regulaci odpadových provozů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43398-1",
+                "relevant": false,
+                "reasonCz": "Návrh řeší především přeshraniční přepravu odpadů a související administrativní postupy, nikoli regulaci menších místních recyklačních a odpadových provozů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43398-2",
+                "relevant": false,
+                "reasonCz": "Změna správních poplatků se týká přeshraniční přepravy odpadů, nikoli regulace menších místních recyklačních a odpadových provozů."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-8fe3b522f153--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-39",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454"
+            ],
+            "explanationCz": "Poslanci Motoristů předložili novelu stavebního zákona a souvisejících předpisů (sněmovní tisk 67) a jejich klub hlasoval pro její schválení. Novela umožňuje splnit některé požadavky na výstavbu související s nakládáním s odpady příspěvkem na jejich společné řešení a přesouvá posuzování některých odpadových požadavků do rozhodnutí stavebního úřadu. Po zamítnutí návrhu Senátem poslanci Motoristů znovu podpořili setrvání na návrhu. Jde o dílčí zjednodušení, nikoli o úplné splnění slibu: úpravy nezavádějí zvláštní úlevy výslovně pro menší provozy.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Předložené a schválené změny mohou zjednodušit některé povolovací kroky, ale podklady nedokládají zvláštní úlevy pro menší recyklační a odpadové provozy ani odstranění jejich konkrétních provozních povinností."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-8fe3b522f153",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela výslovně řeší plochy pro nakládání s odpady a umožňuje některé požadavky na výstavbu, včetně nakládání s odpady, splnit společně s obcí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla ochrany přírody a působnost příslušných úřadů, ale nedokládá změnu regulace menších recyklačních či odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje ochranu zemědělské půdy a povolování staveb na ní, nikoli regulaci menších odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje posuzování vlivů na životní prostředí, ale nedokládá konkrétní změnu regulace menších recyklačních či odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla pro vodní hospodářství a povolování souvisejících záměrů, nikoli doloženou regulaci menších odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje povolování z hlediska ochrany ovzduší, ale text nedokládá zvláštní změnu regulace menších recyklačních či odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": true,
+          "reasonCz": "Novela výslovně začleňuje posouzení požadavků na nakládání s odpady při stavebním záměru do rozhodnutí stavebního úřadu, čímž může odstranit samostatný povolovací krok."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Předložená verze navrhovala zrušit zákon o jednotném environmentálním stanovisku, tedy měnit uspořádání environmentálního povolování; konkrétní dopad na odpadové provozy však text nedokládá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Tato část prodlužuje lhůtu pro aktualizaci havarijního plánu podle vodního zákona a netýká se regulace menších odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Schválené zrušovací ustanovení ruší zákon o jednotném environmentálním stanovisku, což se týká uspořádání povolovacích postupů relevantních i pro odpadové provozy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43223-1",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje ekodesign výrobků a dozor nad ním, nikoli regulaci provozů zabývajících se recyklací nebo odpady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-1",
+          "relevant": false,
+          "reasonCz": "Tato část zavádí a upravuje trestné činy proti životnímu prostředí, ale nemění povolovací pravidla pro menší odpadové provozy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43398-1",
+          "relevant": false,
+          "reasonCz": "Tato část řeší hlavně přeshraniční přepravu odpadu a předchozí souhlas pro její využití, nikoli místní menší provozy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43398-2",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje správní poplatky spojené s přeshraniční přepravou odpadu, nikoli regulaci místních menších provozů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-8fe3b522f153--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-39",
+        "psp-core-2025--law-change-43174-41",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě spolu s dalšími poslanci předložili novelu stavebního zákona a souvisejících předpisů (sněmovní tisk, tedy návrh projednávaný Poslaneckou sněmovnou, číslo 67). Návrh počítá s plánováním ploch pro nakládání s odpady, společným řešením některých stavebních požadavků a posouzením odpadových podmínek v rozhodnutí stavebního úřadu. Poslanci strany hlasovali pro schválení návrhu a po jeho zamítnutí Senátem také pro setrvání Sněmovny na návrhu. Změny mohou zjednodušit část povolování, ale neruší obecné požadavky na nakládání s odpady ani výslovně nezaměřují úlevy na menší provozy, proto jde o dílčí posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložená verze navrhovala zrušit zákon o jednotném environmentálním stanovisku a schválený text takové zrušení rovněž obsahuje; související změny zároveň přesouvají řadu posouzení do rozhodování o stavebním záměru. Podklady ale neukazují, jak se tím prakticky změní zátěž konkrétních menších odpadových provozů."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-8fe3b522f153",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změny stavebního zákona mimo jiné umožňují některé požadavky na výstavbu, včetně nakládání s odpady, řešit společně s obcí, a mohou tak zjednodušit povolování odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Změny ochrany přírody upravují především ochranu druhů a postupy orgánů, nikoli konkrétní regulaci menších recyklačních či odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Změny ochrany zemědělského půdního fondu řeší podmínky odnímání půdy, nikoli podstatné požadavky na provoz menších recyklačních či odpadových zařízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Změny posuzování vlivů na životní prostředí upravují obecné postupy pro záměry, ale text neukazuje materiální úlevu vztahující se k menším odpadovým provozům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změny vodního zákona upravují povolování nakládání s vodami a vodních děl, nikoli regulaci menších recyklačních či odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Změny zákona o ochraně ovzduší převádějí některé úkony do povolování záměrů obecně, ale nepředstavují doloženou úlevu pro menší odpadové provozy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": true,
+          "reasonCz": "Novela zákona o odpadech převádí část posuzování při povolování staveb na stavební úřad a může tak zjednodušit některé související administrativní kroky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku bylo v textu schváleném Sněmovnou odstraněno, takže se nestalo součástí rozhodované úpravy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Tato doplněná část pouze prodlužuje lhůtu pro vložení havarijního plánu a nemění regulaci menších recyklačních ani odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Rušící ustanovení se týká jiných právních předpisů a samo o sobě nedokládá změnu regulace menších recyklačních či odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43223-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje ekodesign výrobků a výkon státní správy v této oblasti, nikoli regulaci odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-1",
+          "relevant": false,
+          "reasonCz": "Změny trestního zákoníku stanovují trestní odpovědnost za poškozování životního prostředí a neřeší běžné regulační požadavky na menší odpadové provozy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43398-1",
+          "relevant": false,
+          "reasonCz": "Návrh se soustředí na přeshraniční přepravu odpadů a její souhlasové postupy, nikoli na místní cirkulární hospodářství nebo regulaci menších provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43398-2",
+          "relevant": false,
+          "reasonCz": "Změna správních poplatků se vztahuje k řízením o přeshraniční přepravě odpadů, nikoli k regulaci menších místních provozů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-8fe3b522f153--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-39",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci Motoristů spolu s dalšími poslanci předložili novelu stavebního zákona a dalších předpisů; její text umožňuje některé požadavky na výstavbu, včetně nakládání s odpady, řešit příspěvkem obci a mění některé kroky při povolování odpadových zařízení. Poslanci Motoristů hlasovali pro schválení návrhu a po jeho zamítnutí Senátem také pro setrvání Sněmovny na návrhu. Jde o dílčí změny, které mohou zjednodušit povolování staveb souvisejících s odpady, nikoli o doložené odstranění provozních povinností menších recyklačních zařízení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložené změny se týkají hlavně povolování staveb a související administrativy; důkazy neukazují, že by přímo rušily provozní povinnosti menších recyklačních a odpadových provozů."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0538ba4078100731016abf0dce9f4c87d19c7f3837d82fd4d8",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 646640,
+      "input_tokens_details": {
+        "cache_write_tokens": 643316,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 8746,
+      "output_tokens_details": {
+        "reasoning_tokens": 7022
+      },
+      "total_tokens": 655386
+    },
+    "output": {
+      "promiseId": "candidate-8fe3b522f153",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela výslovně řeší plochy pro nakládání s odpady a umožňuje některé požadavky na výstavbu, včetně nakládání s odpady, splnit společně s obcí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla ochrany přírody a působnost příslušných úřadů, ale nedokládá změnu regulace menších recyklačních či odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje ochranu zemědělské půdy a povolování staveb na ní, nikoli regulaci menších odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje posuzování vlivů na životní prostředí, ale nedokládá konkrétní změnu regulace menších recyklačních či odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla pro vodní hospodářství a povolování souvisejících záměrů, nikoli doloženou regulaci menších odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje povolování z hlediska ochrany ovzduší, ale text nedokládá zvláštní změnu regulace menších recyklačních či odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": true,
+          "reasonCz": "Novela výslovně začleňuje posouzení požadavků na nakládání s odpady při stavebním záměru do rozhodnutí stavebního úřadu, čímž může odstranit samostatný povolovací krok."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Předložená verze navrhovala zrušit zákon o jednotném environmentálním stanovisku, tedy měnit uspořádání environmentálního povolování; konkrétní dopad na odpadové provozy však text nedokládá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Tato část prodlužuje lhůtu pro aktualizaci havarijního plánu podle vodního zákona a netýká se regulace menších odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Schválené zrušovací ustanovení ruší zákon o jednotném environmentálním stanovisku, což se týká uspořádání povolovacích postupů relevantních i pro odpadové provozy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43223-1",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje ekodesign výrobků a dozor nad ním, nikoli regulaci provozů zabývajících se recyklací nebo odpady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-1",
+          "relevant": false,
+          "reasonCz": "Tato část zavádí a upravuje trestné činy proti životnímu prostředí, ale nemění povolovací pravidla pro menší odpadové provozy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43398-1",
+          "relevant": false,
+          "reasonCz": "Tato část řeší hlavně přeshraniční přepravu odpadu a předchozí souhlas pro její využití, nikoli místní menší provozy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43398-2",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje správní poplatky spojené s přeshraniční přepravou odpadu, nikoli regulaci místních menších provozů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-8fe3b522f153--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-39",
+        "psp-core-2025--law-change-43174-41",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě spolu s dalšími poslanci předložili novelu stavebního zákona a souvisejících předpisů (sněmovní tisk, tedy návrh projednávaný Poslaneckou sněmovnou, číslo 67). Návrh počítá s plánováním ploch pro nakládání s odpady, společným řešením některých stavebních požadavků a posouzením odpadových podmínek v rozhodnutí stavebního úřadu. Poslanci strany hlasovali pro schválení návrhu a po jeho zamítnutí Senátem také pro setrvání Sněmovny na návrhu. Změny mohou zjednodušit část povolování, ale neruší obecné požadavky na nakládání s odpady ani výslovně nezaměřují úlevy na menší provozy, proto jde o dílčí posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložená verze navrhovala zrušit zákon o jednotném environmentálním stanovisku a schválený text takové zrušení rovněž obsahuje; související změny zároveň přesouvají řadu posouzení do rozhodování o stavebním záměru. Podklady ale neukazují, jak se tím prakticky změní zátěž konkrétních menších odpadových provozů."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_043266feaea03557016abf0e5f3bac87d19b5f999cd81a89e4",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 646640,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 646637
+      },
+      "output_tokens": 6541,
+      "output_tokens_details": {
+        "reasoning_tokens": 4900
+      },
+      "total_tokens": 653181
+    },
+    "output": {
+      "promiseId": "candidate-8fe3b522f153",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změny stavebního zákona mimo jiné umožňují některé požadavky na výstavbu, včetně nakládání s odpady, řešit společně s obcí, a mohou tak zjednodušit povolování odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Změny ochrany přírody upravují především ochranu druhů a postupy orgánů, nikoli konkrétní regulaci menších recyklačních či odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Změny ochrany zemědělského půdního fondu řeší podmínky odnímání půdy, nikoli podstatné požadavky na provoz menších recyklačních či odpadových zařízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Změny posuzování vlivů na životní prostředí upravují obecné postupy pro záměry, ale text neukazuje materiální úlevu vztahující se k menším odpadovým provozům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změny vodního zákona upravují povolování nakládání s vodami a vodních děl, nikoli regulaci menších recyklačních či odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Změny zákona o ochraně ovzduší převádějí některé úkony do povolování záměrů obecně, ale nepředstavují doloženou úlevu pro menší odpadové provozy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": true,
+          "reasonCz": "Novela zákona o odpadech převádí část posuzování při povolování staveb na stavební úřad a může tak zjednodušit některé související administrativní kroky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku bylo v textu schváleném Sněmovnou odstraněno, takže se nestalo součástí rozhodované úpravy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Tato doplněná část pouze prodlužuje lhůtu pro vložení havarijního plánu a nemění regulaci menších recyklačních ani odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Rušící ustanovení se týká jiných právních předpisů a samo o sobě nedokládá změnu regulace menších recyklačních či odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43223-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje ekodesign výrobků a výkon státní správy v této oblasti, nikoli regulaci odpadových provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-1",
+          "relevant": false,
+          "reasonCz": "Změny trestního zákoníku stanovují trestní odpovědnost za poškozování životního prostředí a neřeší běžné regulační požadavky na menší odpadové provozy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43398-1",
+          "relevant": false,
+          "reasonCz": "Návrh se soustředí na přeshraniční přepravu odpadů a její souhlasové postupy, nikoli na místní cirkulární hospodářství nebo regulaci menších provozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43398-2",
+          "relevant": false,
+          "reasonCz": "Změna správních poplatků se vztahuje k řízením o přeshraniční přepravě odpadů, nikoli k regulaci menších místních provozů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-8fe3b522f153--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-39",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci Motoristů spolu s dalšími poslanci předložili novelu stavebního zákona a dalších předpisů; její text umožňuje některé požadavky na výstavbu, včetně nakládání s odpady, řešit příspěvkem obci a mění některé kroky při povolování odpadových zařízení. Poslanci Motoristů hlasovali pro schválení návrhu a po jeho zamítnutí Senátem také pro setrvání Sněmovny na návrhu. Jde o dílčí změny, které mohou zjednodušit povolování staveb souvisejících s odpady, nikoli o doložené odstranění provozních povinností menších recyklačních zařízení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložené změny se týkají hlavně povolování staveb a související administrativy; důkazy neukazují, že by přímo rušily provozní povinnosti menších recyklačních a odpadových provozů."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

@@ -1,0 +1,281 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T13-49-58-470Z--f14fe7085831",
+  "evaluatedAt": "2026-11-05T13:49:58.470Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-e2ed1a37a3/f14fe70858316dea4d1f22d0cd2d270c6e975ced68d826b51ea2b1a7c0234086.json",
+  "packageHash": "f14fe70858316dea4d1f22d0cd2d270c6e975ced68d826b51ea2b1a7c0234086",
+  "assessmentContentHash": "b614b2343aa0522be76ca37060eed86d45f5bb801b9d083828323d219322b4db",
+  "assessmentFingerprint": "8882571cbeec87302eb84cbb701ffcbaee1538658cedcfe5ba798d52389cc02b",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-e2ed1a37a3",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_06c577c102dedf55016aec88d3789887d18bb38765207e09ed",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 22460,
+            "input_tokens_details": {
+              "cache_write_tokens": 16110,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 3348,
+            "output_tokens_details": {
+              "reasoning_tokens": 2506
+            },
+            "total_tokens": 25808
+          },
+          "output": {
+            "promiseId": "spd-2025-e2ed1a37a3",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": true,
+                "reasonCz": "Státní rozpočet stanoví výdaje podle kapitol a může ovlivnit financování platů sociálních pracovníků, avšak předložený výňatek samotné částky ani jejich rozdělení neukazuje.",
+                "effectCz": "Návrh i schválené znění uvádějí, že celkový přehled výdajů a ukazatele rozpočtu podle kapitol jsou v přílohách; částky z těchto příloh zde chybějí. Jde o nový státní rozpočet, nikoli změnu dřívějšího znění zákona, a proto není k dispozici předchozí rozpočtové znění pro srovnání. Z poskytnutého textu nelze zjistit, kolik rozpočet nakonec vyčlenil na sociální služby ani zda tím odměny pěstounů či platy sociálních pracovníků zvýšil, snížil, nebo nezměnil."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": false,
+            "citedEvidenceIds": [
+              "spd-2025-e2ed1a37a3--source",
+              "psp-core-2025--law-change-43204-1",
+              "psp-core-2025--print-step-210761",
+              "psp-core-2025--amendment-text-432",
+              "psp-core-2025--vote-86835",
+              "psp-core-2025--vote-86847",
+              "psp-core-2025--amendment-text-525",
+              "psp-core-2025--vote-86848",
+              "psp-core-2025--amendment-text-504",
+              "psp-core-2025--vote-86902",
+              "psp-core-2025--amendment-text-577",
+              "psp-core-2025--vote-86915",
+              "psp-core-2025--vote-86957"
+            ],
+            "explanationCz": "Vláda předložila návrh státního rozpočtu na rok 2026, tedy sněmovní tisk 94, a poslanci SPD jej v závěrečném hlasování podpořili. Rozpočtový výňatek ale neobsahuje částky pro sociální služby, takže z něj nelze určit, co rozpočet pro platy sociálních pracovníků skutečně znamená. Poslanci SPD zároveň nepodpořili čtyři návrhy na navýšení prostředků pro sociální služby a pracovníky péče o děti; tyto návrhy se týkaly jen části slibu a nebyly přijaty. To ukazuje postup proti části slibu, ale dostupné podklady neprokazují výsledné změny platů sociálních pracovníků ani odměn pěstounů.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Výňatek schváleného rozpočtu neobsahuje příslušné rozpočtové částky, takže nelze posoudit účinek rozpočtu, který SPD podpořilo, na financování sociálních služeb.",
+              "Podklady zachycují návrhy na financování sociálních služeb, nikoli doklad o skutečném zvýšení či snížení platů sociálních pracovníků nebo odměn pěstounů; o odměnách pěstounů neobsahují konkrétní opatření."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-e2ed1a37a3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet na rok 2026 rozděluje výdaje mezi kapitoly a ukazatele, což se může týkat financování platů sociálních pracovníků; dodaný text ale neobsahuje konkrétní částky.",
+          "effectCz": "Nejde o změnu dřívějšího znění jiného zákona, nýbrž o rozpočet na rok 2026, který určuje výdaje kapitol a ukazatele podle příloh č. 3 a 4. V dodaných výňatcích nejsou částky pro sociální služby, odměny pěstounů ani platy sociálních pracovníků, takže nelze určit, zda rozpočet jejich zvýšení podporuje, omezuje, nebo na ně nemá podstatný vliv."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-e2ed1a37a3--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-432",
+        "psp-core-2025--amendment-text-525",
+        "psp-core-2025--amendment-text-504",
+        "psp-core-2025--amendment-text-577",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86835",
+        "psp-core-2025--vote-86847",
+        "psp-core-2025--vote-86848",
+        "psp-core-2025--vote-86902",
+        "psp-core-2025--vote-86915",
+        "psp-core-2025--vote-86957"
+      ],
+      "explanationCz": "Vláda, v níž SPD působila, předložila státní rozpočet na rok 2026. Při jeho projednávání poslanci SPD nepodpořili návrhy na navýšení prostředků na sociální služby a jejich zaměstnance, včetně sociálních pracovníků; návrhy počítaly mimo jiné s částkami 2,8 miliardy, 1,5 miliardy a 614 milionů korun. SPD pak hlasovala pro schválení rozpočtu, ale poskytnuté výňatky neuvádějí konkrétní rozpočtové částky pro tyto účely ani pro odměny pěstounů. Proto je nejlépe doloženým směrem odpor klubu k dílčímu zvýšení financování sociálních pracovníků, zatímco dopad schváleného rozpočtu nelze z podkladů spolehlivě určit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný text rozpočtu odkazuje na přílohy s výdaji a ukazateli, ale jejich konkrétní částky pro sociální služby a odměny pěstounů nejsou v podkladech uvedeny. Nelze proto posoudit, zda schválený rozpočet, pro který SPD hlasovala, tyto části slibu podporuje, nebo jim odporuje.",
+        "Doložené návrhy a hlasování se týkají především financování platů sociálních pracovníků; podklady neukazují konkrétní opatření ke zvýšení odměn pěstounů."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-e2ed1a37a3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o návrh státního rozpočtu, jehož výdaje podle kapitol mohou ovlivnit financování mezd sociálních pracovníků, ale dodaný výňatek neukazuje konkrétní rozpočtové částky.",
+          "effectCz": "Návrh i schválené znění uvádějí, že celkový přehled výdajů podle kapitol a rozpočtové ukazatele jsou v přílohách č. 3 a 4. Jde o nový státní rozpočet, nikoli změnu dřívějšího znění zákona; konkrétní částky z příloh v dodaném výňatku nejsou, takže nelze určit, zda a o kolik rozpočet zvyšuje prostředky na odměny pěstounů nebo platy sociálních pracovníků."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-e2ed1a37a3--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-432",
+        "psp-core-2025--amendment-text-525",
+        "psp-core-2025--amendment-text-504",
+        "psp-core-2025--amendment-text-577",
+        "psp-core-2025--vote-86835",
+        "psp-core-2025--vote-86847",
+        "psp-core-2025--vote-86848",
+        "psp-core-2025--vote-86902",
+        "psp-core-2025--vote-86915",
+        "psp-core-2025--vote-86957"
+      ],
+      "explanationCz": "Vláda předložila návrh státního rozpočtu na rok 2026 a poslanci SPD jej v závěrečném hlasování podpořili. SPD ale nepodpořila pozměňovací návrhy, které měly přidat prostředky na financování mezd v sociálních službách, včetně návrhu na přesun 2,8 miliardy korun. To je doložený krok proti části slibu týkající se sociálních pracovníků, nikoli důkaz o změně odměn pěstounů. Konkrétní částky schváleného rozpočtu v dodaném výňatku chybí, takže nelze posoudit celý dopad rozpočtu ani oba cíle slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Dodaný výňatek rozpočtu odkazuje na přílohy s výdaji a ukazateli, ale jejich konkrétní částky neobsahuje; nelze proto určit, jaké prostředky schválený rozpočet skutečně vyčlenil na uvedené oblasti.",
+        "Podklady dokládají návrhy na financování mezd v sociálních službách, ale neukazují, zda byly zvýšeny odměny pěstounů ani jak se vyvíjely platy sociálních pracovníků mimo uvedené rozpočtové návrhy."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0c3fea2660f73552016aec891a738087d19e8dc09c81054607",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 22460,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 22457
+      },
+      "output_tokens": 3418,
+      "output_tokens_details": {
+        "reasoning_tokens": 2572
+      },
+      "total_tokens": 25878
+    },
+    "output": {
+      "promiseId": "spd-2025-e2ed1a37a3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet na rok 2026 rozděluje výdaje mezi kapitoly a ukazatele, což se může týkat financování platů sociálních pracovníků; dodaný text ale neobsahuje konkrétní částky.",
+          "effectCz": "Nejde o změnu dřívějšího znění jiného zákona, nýbrž o rozpočet na rok 2026, který určuje výdaje kapitol a ukazatele podle příloh č. 3 a 4. V dodaných výňatcích nejsou částky pro sociální služby, odměny pěstounů ani platy sociálních pracovníků, takže nelze určit, zda rozpočet jejich zvýšení podporuje, omezuje, nebo na ně nemá podstatný vliv."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-e2ed1a37a3--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-432",
+        "psp-core-2025--amendment-text-525",
+        "psp-core-2025--amendment-text-504",
+        "psp-core-2025--amendment-text-577",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86835",
+        "psp-core-2025--vote-86847",
+        "psp-core-2025--vote-86848",
+        "psp-core-2025--vote-86902",
+        "psp-core-2025--vote-86915",
+        "psp-core-2025--vote-86957"
+      ],
+      "explanationCz": "Vláda, v níž SPD působila, předložila státní rozpočet na rok 2026. Při jeho projednávání poslanci SPD nepodpořili návrhy na navýšení prostředků na sociální služby a jejich zaměstnance, včetně sociálních pracovníků; návrhy počítaly mimo jiné s částkami 2,8 miliardy, 1,5 miliardy a 614 milionů korun. SPD pak hlasovala pro schválení rozpočtu, ale poskytnuté výňatky neuvádějí konkrétní rozpočtové částky pro tyto účely ani pro odměny pěstounů. Proto je nejlépe doloženým směrem odpor klubu k dílčímu zvýšení financování sociálních pracovníků, zatímco dopad schváleného rozpočtu nelze z podkladů spolehlivě určit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný text rozpočtu odkazuje na přílohy s výdaji a ukazateli, ale jejich konkrétní částky pro sociální služby a odměny pěstounů nejsou v podkladech uvedeny. Nelze proto posoudit, zda schválený rozpočet, pro který SPD hlasovala, tyto části slibu podporuje, nebo jim odporuje.",
+        "Doložené návrhy a hlasování se týkají především financování platů sociálních pracovníků; podklady neukazují konkrétní opatření ke zvýšení odměn pěstounů."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_09ac5652fd3e8161016aec896017dc87d1858de01f15670ad4",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 22460,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 22457
+      },
+      "output_tokens": 2687,
+      "output_tokens_details": {
+        "reasoning_tokens": 1945
+      },
+      "total_tokens": 25147
+    },
+    "output": {
+      "promiseId": "spd-2025-e2ed1a37a3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o návrh státního rozpočtu, jehož výdaje podle kapitol mohou ovlivnit financování mezd sociálních pracovníků, ale dodaný výňatek neukazuje konkrétní rozpočtové částky.",
+          "effectCz": "Návrh i schválené znění uvádějí, že celkový přehled výdajů podle kapitol a rozpočtové ukazatele jsou v přílohách č. 3 a 4. Jde o nový státní rozpočet, nikoli změnu dřívějšího znění zákona; konkrétní částky z příloh v dodaném výňatku nejsou, takže nelze určit, zda a o kolik rozpočet zvyšuje prostředky na odměny pěstounů nebo platy sociálních pracovníků."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-e2ed1a37a3--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-432",
+        "psp-core-2025--amendment-text-525",
+        "psp-core-2025--amendment-text-504",
+        "psp-core-2025--amendment-text-577",
+        "psp-core-2025--vote-86835",
+        "psp-core-2025--vote-86847",
+        "psp-core-2025--vote-86848",
+        "psp-core-2025--vote-86902",
+        "psp-core-2025--vote-86915",
+        "psp-core-2025--vote-86957"
+      ],
+      "explanationCz": "Vláda předložila návrh státního rozpočtu na rok 2026 a poslanci SPD jej v závěrečném hlasování podpořili. SPD ale nepodpořila pozměňovací návrhy, které měly přidat prostředky na financování mezd v sociálních službách, včetně návrhu na přesun 2,8 miliardy korun. To je doložený krok proti části slibu týkající se sociálních pracovníků, nikoli důkaz o změně odměn pěstounů. Konkrétní částky schváleného rozpočtu v dodaném výňatku chybí, takže nelze posoudit celý dopad rozpočtu ani oba cíle slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Dodaný výňatek rozpočtu odkazuje na přílohy s výdaji a ukazateli, ale jejich konkrétní částky neobsahuje; nelze proto určit, jaké prostředky schválený rozpočet skutečně vyčlenil na uvedené oblasti.",
+        "Podklady dokládají návrhy na financování mezd v sociálních službách, ale neukazují, zda byly zvýšeny odměny pěstounů ani jak se vyvíjely platy sociálních pracovníků mimo uvedené rozpočtové návrhy."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

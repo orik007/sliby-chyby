@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-56-53-813Z--e9c28a9dab80",
+  "evaluatedAt": "2026-10-02T01:56:53.813Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-c2a228bbbedd/e9c28a9dab800851f213d6429d7dacb414936d67a25e95c455d7a9661e01f19f.json",
+  "packageHash": "e9c28a9dab800851f213d6429d7dacb414936d67a25e95c455d7a9661e01f19f",
+  "assessmentContentHash": "167d61dae84cf4f52f34de87087b33cc0196f513fa0d865789e7c1c1a7faf9e4",
+  "assessmentFingerprint": "3340f2f80b3fa2cbd44a7f9aa5c2bc83b16dc0a4eda6948073ce77dc198b911c",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-c2a228bbbedd",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-c2a228bbbedd",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": false,
+          "reasonCz": "Změna rozpočtových pravidel umožňuje zvýšit výdaje na obranu, ale nevyčleňuje prostředky na inovace, autonomní systémy ani robotizaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43286-1",
+          "relevant": true,
+          "reasonCz": "Dohoda výslovně zahrnuje spolupráci v obranném výzkumu a vývoji, což může podporovat část slibu týkající se inovací v obraně."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-c2a228bbbedd--source",
+        "psp-core-2025--law-change-43286-1",
+        "psp-core-2025--print-step-211172"
+      ],
+      "explanationCz": "Vláda, v níž působí ANO 2011, předložila dohodu o obranné spolupráci s Keňou. Dohoda počítá mimo jiné se spoluprací v obranném výzkumu a vývoji, což může podpořit inovace v obraně. Jde o návrh, nikoli doklad uskutečněné spolupráce, a text neslibuje konkrétní autonomní systémy ani robotizaci. Proto jde o částečný posun směrem ke slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dohoda zmiňuje obranný výzkum a vývoj obecně, ale neurčuje konkrétní podporu autonomních systémů nebo robotizace.",
+        "Předložení dohody dokládá návrh vlády, nikoli její schválení nebo uskutečnění spolupráce."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-c2a228bbbedd",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": false,
+          "reasonCz": "Změny rozpočtových pravidel upravují rozpočtové výdaje včetně výdajů na obranu, ale žádná verze je nesměřuje na inovace, autonomní systémy ani robotizaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43286-1",
+          "relevant": true,
+          "reasonCz": "Navržená dohoda výslovně zahrnuje spolupráci v obranném výzkumu a vývoji, což představuje konkrétní, byť obecnou podporu inovací v oblasti obrany."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-c2a228bbbedd--source",
+        "psp-core-2025--law-change-43286-1",
+        "psp-core-2025--print-step-211172"
+      ],
+      "explanationCz": "Vláda ANO předložila Parlamentu k ratifikaci dohodu o obranné spolupráci s Keňou. Dohoda počítá mimo jiné se spoluprací v obranném výzkumu a vývoji, což posouvá slib podpory inovací v oblasti obrany. Neuvádí ale konkrétně autonomní systémy ani robotizaci a v podkladech není doloženo, že by dohoda již byla schválena. Jde proto o návrh, který podporuje jen část slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dohoda zmiňuje obranný výzkum a vývoj obecně, ale dostupné znění neukazuje, zda by spolupráce zahrnovala autonomní systémy nebo robotizaci."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0f48326b3999caa9016abf0f501de487d1a2cb63244f0fbd68",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 43289,
+      "input_tokens_details": {
+        "cache_write_tokens": 39965,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1902,
+      "output_tokens_details": {
+        "reasoning_tokens": 1417
+      },
+      "total_tokens": 45191
+    },
+    "output": {
+      "promiseId": "candidate-c2a228bbbedd",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": false,
+          "reasonCz": "Změna rozpočtových pravidel umožňuje zvýšit výdaje na obranu, ale nevyčleňuje prostředky na inovace, autonomní systémy ani robotizaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43286-1",
+          "relevant": true,
+          "reasonCz": "Dohoda výslovně zahrnuje spolupráci v obranném výzkumu a vývoji, což může podporovat část slibu týkající se inovací v obraně."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-c2a228bbbedd--source",
+        "psp-core-2025--law-change-43286-1",
+        "psp-core-2025--print-step-211172"
+      ],
+      "explanationCz": "Vláda, v níž působí ANO 2011, předložila dohodu o obranné spolupráci s Keňou. Dohoda počítá mimo jiné se spoluprací v obranném výzkumu a vývoji, což může podpořit inovace v obraně. Jde o návrh, nikoli doklad uskutečněné spolupráce, a text neslibuje konkrétní autonomní systémy ani robotizaci. Proto jde o částečný posun směrem ke slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dohoda zmiňuje obranný výzkum a vývoj obecně, ale neurčuje konkrétní podporu autonomních systémů nebo robotizace.",
+        "Předložení dohody dokládá návrh vlády, nikoli její schválení nebo uskutečnění spolupráce."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_02ce8e1c97025eb7016abf0f5e85ec87d183401fe407448363",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 43289,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 43286
+      },
+      "output_tokens": 939,
+      "output_tokens_details": {
+        "reasoning_tokens": 516
+      },
+      "total_tokens": 44228
+    },
+    "output": {
+      "promiseId": "candidate-c2a228bbbedd",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": false,
+          "reasonCz": "Změny rozpočtových pravidel upravují rozpočtové výdaje včetně výdajů na obranu, ale žádná verze je nesměřuje na inovace, autonomní systémy ani robotizaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43286-1",
+          "relevant": true,
+          "reasonCz": "Navržená dohoda výslovně zahrnuje spolupráci v obranném výzkumu a vývoji, což představuje konkrétní, byť obecnou podporu inovací v oblasti obrany."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-c2a228bbbedd--source",
+        "psp-core-2025--law-change-43286-1",
+        "psp-core-2025--print-step-211172"
+      ],
+      "explanationCz": "Vláda ANO předložila Parlamentu k ratifikaci dohodu o obranné spolupráci s Keňou. Dohoda počítá mimo jiné se spoluprací v obranném výzkumu a vývoji, což posouvá slib podpory inovací v oblasti obrany. Neuvádí ale konkrétně autonomní systémy ani robotizaci a v podkladech není doloženo, že by dohoda již byla schválena. Jde proto o návrh, který podporuje jen část slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dohoda zmiňuje obranný výzkum a vývoj obecně, ale dostupné znění neukazuje, zda by spolupráce zahrnovala autonomní systémy nebo robotizaci."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

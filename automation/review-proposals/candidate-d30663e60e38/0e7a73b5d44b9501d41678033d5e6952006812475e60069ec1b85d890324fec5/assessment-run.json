@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-58-15-339Z--5535d309640d",
+  "evaluatedAt": "2026-10-02T01:58:15.339Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-d30663e60e38/5535d309640dc22e3e08596271286f01d7eb8cb531a8509055f5cf156c9d7b1d.json",
+  "packageHash": "5535d309640dc22e3e08596271286f01d7eb8cb531a8509055f5cf156c9d7b1d",
+  "assessmentContentHash": "3709dce59777e51f10e449d245a5725d9bb567a31a1bfd8ba8f4d7f640977353",
+  "assessmentFingerprint": "0e7a73b5d44b9501d41678033d5e6952006812475e60069ec1b85d890324fec5",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-d30663e60e38",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-d30663e60e38",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": true,
+          "reasonCz": "Návrh související s nařízením EU umožňuje policii za stanovených podmínek získat přístup k informacím v zařízení cizince, což se dotýká slibu odmítat evropské šmírovací aktivity."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-d30663e60e38--source",
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522"
+      ],
+      "explanationCz": "Vláda předložila návrh nového cizineckého zákona a poslanci ANO v Poslanecké sněmovně pro něj hlasovali. Návrh policii za úzce stanovených podmínek umožňuje zpřístupnit informace z elektronického zařízení cizince, pokud je to nutné ke zjištění jeho totožnosti; text tuto úpravu spojuje s pravidly EU. Jde o částečný rozpor se slibem odmítat evropské šmírovací aktivity, nikoli o úpravu „chat control“ nebo regulaci sociálních sítí. Protože poslanci podpořili schválené znění, které tuto pravomoc obsahuje, jde o posun proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají jen tento cizinecký zákon: neukazují, jak ANO postupovalo při rozhodování o „chat control“ ani při regulaci sociálních sítí. Ustanovení o přístupu k zařízení se vztahuje na zjišťování totožnosti cizince, nikoli na kontrolu jeho komunikace."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-d30663e60e38",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": true,
+          "reasonCz": "Návrh svěřuje policii správu osobních údajů v několika unijních informačních systémech a za určitých podmínek jí umožňuje zpřístupnit si údaje z elektronického zařízení cizince, takže se týká části slibu odmítající evropské šmírovací aktivity."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-d30663e60e38--source",
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522"
+      ],
+      "explanationCz": "Vláda předložila návrh nového cizineckého zákona, který policii mimo jiné umožňuje za stanovených podmínek získat z elektronického zařízení cizince údaje potřebné ke zjištění jeho totožnosti a svěřuje jí správu údajů v unijních informačních systémech. Poslanci ANO pak v hlasování o návrhu jako celku většinově hlasovali pro. Tím podpořili rozšíření některých kontrolních a datových pravomocí, což jde proti části slibu odmítající evropské šmírovací aktivity. Návrh se však netýká DSA ani „chat control“.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Ustanovení o přístupu k údajům z elektronického zařízení se vztahuje na zjišťování totožnosti cizince a samo o sobě není návrhem EU; jeho zahrnutí pod slib o evropských šmírovacích aktivitách je proto nejisté.",
+        "V dodaných podkladech nejsou doloženy kroky ANO týkající se DSA ani návrhu „chat control“; závěr se opírá pouze o částečný rozpor v cizineckém zákoně."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0f244711ce637891016abf0f9abbec87d19096d99f35e1f504",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 26179,
+      "input_tokens_details": {
+        "cache_write_tokens": 22855,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1589,
+      "output_tokens_details": {
+        "reasoning_tokens": 1141
+      },
+      "total_tokens": 27768
+    },
+    "output": {
+      "promiseId": "candidate-d30663e60e38",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": true,
+          "reasonCz": "Návrh související s nařízením EU umožňuje policii za stanovených podmínek získat přístup k informacím v zařízení cizince, což se dotýká slibu odmítat evropské šmírovací aktivity."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-d30663e60e38--source",
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522"
+      ],
+      "explanationCz": "Vláda předložila návrh nového cizineckého zákona a poslanci ANO v Poslanecké sněmovně pro něj hlasovali. Návrh policii za úzce stanovených podmínek umožňuje zpřístupnit informace z elektronického zařízení cizince, pokud je to nutné ke zjištění jeho totožnosti; text tuto úpravu spojuje s pravidly EU. Jde o částečný rozpor se slibem odmítat evropské šmírovací aktivity, nikoli o úpravu „chat control“ nebo regulaci sociálních sítí. Protože poslanci podpořili schválené znění, které tuto pravomoc obsahuje, jde o posun proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají jen tento cizinecký zákon: neukazují, jak ANO postupovalo při rozhodování o „chat control“ ani při regulaci sociálních sítí. Ustanovení o přístupu k zařízení se vztahuje na zjišťování totožnosti cizince, nikoli na kontrolu jeho komunikace."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_04131c2b0ce1b290016abf0fa691cc87d18234a2e82318c85a",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 26179,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 26176
+      },
+      "output_tokens": 2187,
+      "output_tokens_details": {
+        "reasoning_tokens": 1702
+      },
+      "total_tokens": 28366
+    },
+    "output": {
+      "promiseId": "candidate-d30663e60e38",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": true,
+          "reasonCz": "Návrh svěřuje policii správu osobních údajů v několika unijních informačních systémech a za určitých podmínek jí umožňuje zpřístupnit si údaje z elektronického zařízení cizince, takže se týká části slibu odmítající evropské šmírovací aktivity."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-d30663e60e38--source",
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522"
+      ],
+      "explanationCz": "Vláda předložila návrh nového cizineckého zákona, který policii mimo jiné umožňuje za stanovených podmínek získat z elektronického zařízení cizince údaje potřebné ke zjištění jeho totožnosti a svěřuje jí správu údajů v unijních informačních systémech. Poslanci ANO pak v hlasování o návrhu jako celku většinově hlasovali pro. Tím podpořili rozšíření některých kontrolních a datových pravomocí, což jde proti části slibu odmítající evropské šmírovací aktivity. Návrh se však netýká DSA ani „chat control“.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Ustanovení o přístupu k údajům z elektronického zařízení se vztahuje na zjišťování totožnosti cizince a samo o sobě není návrhem EU; jeho zahrnutí pod slib o evropských šmírovacích aktivitách je proto nejisté.",
+        "V dodaných podkladech nejsou doloženy kroky ANO týkající se DSA ani návrhu „chat control“; závěr se opírá pouze o částečný rozpor v cizineckém zákoně."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

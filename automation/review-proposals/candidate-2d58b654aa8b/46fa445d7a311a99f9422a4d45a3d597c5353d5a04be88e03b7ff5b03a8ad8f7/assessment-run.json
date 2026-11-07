@@ -1,0 +1,268 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T02-02-58-478Z--83a175e74add",
+  "evaluatedAt": "2026-11-04T02:02:58.478Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-2d58b654aa8b/83a175e74added532db82a7b8cd1bd401ef2f7eaa4f47d0089d85760c2b6f455.json",
+  "packageHash": "83a175e74added532db82a7b8cd1bd401ef2f7eaa4f47d0089d85760c2b6f455",
+  "assessmentContentHash": "beb9e584a2a280112145ed8b4212946004635aae371b539d98e533e4e2060258",
+  "assessmentFingerprint": "46fa445d7a311a99f9422a4d45a3d597c5353d5a04be88e03b7ff5b03a8ad8f7",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-2d58b654aa8b",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-2d58b654aa8b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet SFPI popisuje dotační a úvěrovou podporu stavebních úprav bytových domů, která může naplnit část slibu o revitalizacích.",
+          "effectCz": "Text popisuje dotaci 600 tisíc Kč na výtah a bezbariérový vstup a úvěr až do 90 % nákladů; u výměny výtahu uvádí úvěr při stáří výtahu nad 10 let. Jde o podporu části obnovy bytových domů, avšak dodaný text neuvádí srovnatelné předchozí znění ani konkrétní rozpočtovou částku SFPI pro rok 2026, takže změnu rozsahu financování nelze určit. Podpora navíc není v textu výslovně zaměřena na strukturálně postižené kraje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet obsahuje výdaje Ministerstva pro místní rozvoj a k jeho návrhu byly předloženy konkrétní změny financování podpory bydlení včetně rekonstrukcí nájemních bytů.",
+          "effectCz": "Dodaný text návrhu i schváleného rozpočtu pouze odkazuje na přílohy s přehledem výdajů a ukazatelů; neuvádí částky pro podporu bydlení, takže nelze určit, jaké financování rozpočet skutečně stanovil ani jak se změnilo. Samostatné pozměňovací návrhy požadovaly navýšit podporu bydlení o 3,5 miliardy Kč, respektive 7 miliard Kč, včetně podpory výstavby a rekonstrukcí dostupných nájemních bytů. Tyto návrhy by rozšířily prostředky na část slibu, ale dodaný výňatek neukazuje, zda se jejich obsah dostal do schváleného rozpočtu."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-2d58b654aa8b--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-415",
+        "psp-core-2025--amendment-text-560",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86879",
+        "psp-core-2025--vote-86953",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Vláda předložila státní rozpočet na rok 2026 a poslanci Motoristů sobě podpořili jeho schválení i rozpočet SFPI. Zároveň však jejich klub hlasoval proti dvěma návrhům na navýšení podpory bydlení o 3,5 a 7 miliard Kč; ty počítaly také s rekonstrukcemi nájemních bytů, a mohly tak naplnit část slibu o revitalizacích. Proto je doložený směr těchto hlasování proti části slibu. Dodané výňatky ale neukazují částky na podporu bydlení ve schválených rozpočtech, takže nelze posoudit, zda tyto rozpočty hlasování proti návrhům vyvážily.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek ze schváleného státního rozpočtu obsahuje jen odkazy na přílohy s výdaji, nikoli částky pro podporu bydlení; nelze proto určit, zda závěrečné hlasování Motoristů sobě pro rozpočet jejich hlasování proti pozměňovacím návrhům vyvážilo.",
+        "U rozpočtu SFPI je popsán program podpory, ale dodaný text neuvádí konkrétní částku pro rok 2026; nelze určit, zda hlas pro tento rozpočet financování podpory revitalizací zvýšil, zachoval, nebo omezil.",
+        "Pozměňovací návrhy se týkaly dostupného nájemního bydlení obecně a dodaný text nedokládá cílené zaměření jejich prostředků na Ústecký či Karlovarský kraj."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-2d58b654aa8b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet fondu obsahuje podporu úprav bytových domů a bytového fondu, což se částečně týká revitalizací slíbených stranou.",
+          "effectCz": "Jde o návrh rozpočtu, nikoli změnu dřívějšího znění; poskytnutý výňatek popisuje program podpory bydlení a u programu „Bytové domy bez bariér“ uvádí dotaci 600 tisíc Kč na výtah a bezbariérový vstup a úvěr až do 90 % nákladů. Jde o dílčí podporu úprav bytových domů, ale výňatek neuvádí celkovou alokaci fondu pro rok 2026 ani zvláštní podporu Ústeckého či Karlovarského kraje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet stanovuje výdaje, k nimž se vztahují pozměňovací návrhy na navýšení podpory bydlení a rekonstrukcí bytů.",
+          "effectCz": "Jde o nový státní rozpočet, takže nemá předchozí znění, s nímž by bylo možné porovnat změnu. Poskytnuté části návrhu i schváleného znění pouze odkazují na přílohy s přehledem výdajů a ukazateli; neuvádějí příslušnou částku na revitalizace bytů, takže směr změny z těchto částí nelze určit."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-2d58b654aa8b--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-415",
+        "psp-core-2025--amendment-text-560",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86879",
+        "psp-core-2025--vote-86953",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Poslanci Motoristů podpořili rozpočet Státního fondu podpory investic, který zahrnuje podporu úprav bytových domů pro odstranění bariér; to je dílčí forma revitalizace. Vláda také předložila státní rozpočet na rok 2026, ale poskytnuté znění jen odkazuje na přílohy s výdaji a neukazuje částky určené na revitalizace bytů. Poslanci Motoristů nepodpořili dva pozměňovací návrhy k tomuto rozpočtu, které navrhovaly navýšit podporu bydlení o 3,5 a 7 miliard Kč a zahrnovaly také rekonstrukce nájemních bytů. Doložená podpora rozpočtu fondu je dílčím posunem, byť hlasování proti dalšímu navýšení představuje protichůdný krok.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Poskytnutý výňatek z rozpočtu fondu neuvádí jeho celkovou alokaci na rok 2026 ani zvláštní zaměření podpory na strukturálně postižené regiony, takže nelze ověřit rozsah pomoci v Ústeckém a Karlovarském kraji.",
+        "Části státního rozpočtu k přílohám s výdaji neobsahují příslušné částky; proto nelze určit, jak se schválený rozpočet promítl do podpory revitalizací."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_07b3f01e634a05e0016aea91c2379087d19a633ce9032a49aa",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 19665,
+      "input_tokens_details": {
+        "cache_write_tokens": 13315,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 4730,
+      "output_tokens_details": {
+        "reasoning_tokens": 3620
+      },
+      "total_tokens": 24395
+    },
+    "output": {
+      "promiseId": "candidate-2d58b654aa8b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet SFPI popisuje dotační a úvěrovou podporu stavebních úprav bytových domů, která může naplnit část slibu o revitalizacích.",
+          "effectCz": "Text popisuje dotaci 600 tisíc Kč na výtah a bezbariérový vstup a úvěr až do 90 % nákladů; u výměny výtahu uvádí úvěr při stáří výtahu nad 10 let. Jde o podporu části obnovy bytových domů, avšak dodaný text neuvádí srovnatelné předchozí znění ani konkrétní rozpočtovou částku SFPI pro rok 2026, takže změnu rozsahu financování nelze určit. Podpora navíc není v textu výslovně zaměřena na strukturálně postižené kraje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet obsahuje výdaje Ministerstva pro místní rozvoj a k jeho návrhu byly předloženy konkrétní změny financování podpory bydlení včetně rekonstrukcí nájemních bytů.",
+          "effectCz": "Dodaný text návrhu i schváleného rozpočtu pouze odkazuje na přílohy s přehledem výdajů a ukazatelů; neuvádí částky pro podporu bydlení, takže nelze určit, jaké financování rozpočet skutečně stanovil ani jak se změnilo. Samostatné pozměňovací návrhy požadovaly navýšit podporu bydlení o 3,5 miliardy Kč, respektive 7 miliard Kč, včetně podpory výstavby a rekonstrukcí dostupných nájemních bytů. Tyto návrhy by rozšířily prostředky na část slibu, ale dodaný výňatek neukazuje, zda se jejich obsah dostal do schváleného rozpočtu."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-2d58b654aa8b--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-415",
+        "psp-core-2025--amendment-text-560",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86879",
+        "psp-core-2025--vote-86953",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Vláda předložila státní rozpočet na rok 2026 a poslanci Motoristů sobě podpořili jeho schválení i rozpočet SFPI. Zároveň však jejich klub hlasoval proti dvěma návrhům na navýšení podpory bydlení o 3,5 a 7 miliard Kč; ty počítaly také s rekonstrukcemi nájemních bytů, a mohly tak naplnit část slibu o revitalizacích. Proto je doložený směr těchto hlasování proti části slibu. Dodané výňatky ale neukazují částky na podporu bydlení ve schválených rozpočtech, takže nelze posoudit, zda tyto rozpočty hlasování proti návrhům vyvážily.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek ze schváleného státního rozpočtu obsahuje jen odkazy na přílohy s výdaji, nikoli částky pro podporu bydlení; nelze proto určit, zda závěrečné hlasování Motoristů sobě pro rozpočet jejich hlasování proti pozměňovacím návrhům vyvážilo.",
+        "U rozpočtu SFPI je popsán program podpory, ale dodaný text neuvádí konkrétní částku pro rok 2026; nelze určit, zda hlas pro tento rozpočet financování podpory revitalizací zvýšil, zachoval, nebo omezil.",
+        "Pozměňovací návrhy se týkaly dostupného nájemního bydlení obecně a dodaný text nedokládá cílené zaměření jejich prostředků na Ústecký či Karlovarský kraj."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_043902f7ea9cbfb0016aea91fa4e5c87d18a4fbaf9f997ecd5",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 19665,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 19662
+      },
+      "output_tokens": 6036,
+      "output_tokens_details": {
+        "reasoning_tokens": 5044
+      },
+      "total_tokens": 25701
+    },
+    "output": {
+      "promiseId": "candidate-2d58b654aa8b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet fondu obsahuje podporu úprav bytových domů a bytového fondu, což se částečně týká revitalizací slíbených stranou.",
+          "effectCz": "Jde o návrh rozpočtu, nikoli změnu dřívějšího znění; poskytnutý výňatek popisuje program podpory bydlení a u programu „Bytové domy bez bariér“ uvádí dotaci 600 tisíc Kč na výtah a bezbariérový vstup a úvěr až do 90 % nákladů. Jde o dílčí podporu úprav bytových domů, ale výňatek neuvádí celkovou alokaci fondu pro rok 2026 ani zvláštní podporu Ústeckého či Karlovarského kraje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet stanovuje výdaje, k nimž se vztahují pozměňovací návrhy na navýšení podpory bydlení a rekonstrukcí bytů.",
+          "effectCz": "Jde o nový státní rozpočet, takže nemá předchozí znění, s nímž by bylo možné porovnat změnu. Poskytnuté části návrhu i schváleného znění pouze odkazují na přílohy s přehledem výdajů a ukazateli; neuvádějí příslušnou částku na revitalizace bytů, takže směr změny z těchto částí nelze určit."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-2d58b654aa8b--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-415",
+        "psp-core-2025--amendment-text-560",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86879",
+        "psp-core-2025--vote-86953",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Poslanci Motoristů podpořili rozpočet Státního fondu podpory investic, který zahrnuje podporu úprav bytových domů pro odstranění bariér; to je dílčí forma revitalizace. Vláda také předložila státní rozpočet na rok 2026, ale poskytnuté znění jen odkazuje na přílohy s výdaji a neukazuje částky určené na revitalizace bytů. Poslanci Motoristů nepodpořili dva pozměňovací návrhy k tomuto rozpočtu, které navrhovaly navýšit podporu bydlení o 3,5 a 7 miliard Kč a zahrnovaly také rekonstrukce nájemních bytů. Doložená podpora rozpočtu fondu je dílčím posunem, byť hlasování proti dalšímu navýšení představuje protichůdný krok.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Poskytnutý výňatek z rozpočtu fondu neuvádí jeho celkovou alokaci na rok 2026 ani zvláštní zaměření podpory na strukturálně postižené regiony, takže nelze ověřit rozsah pomoci v Ústeckém a Karlovarském kraji.",
+        "Části státního rozpočtu k přílohám s výdaji neobsahují příslušné částky; proto nelze určit, jak se schválený rozpočet promítl do podpory revitalizací."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_05f4af1f8b9ae33d016aea92474d0087d1af74b2be319b4f2f",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 19659,
+      "input_tokens_details": {
+        "cache_write_tokens": 15246,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 528,
+      "output_tokens_details": {
+        "reasoning_tokens": 218
+      },
+      "total_tokens": 20187
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963",
+        "psp-core-2025--amendment-text-415",
+        "psp-core-2025--amendment-text-560",
+        "psp-core-2025--vote-86879",
+        "psp-core-2025--vote-86953"
+      ],
+      "explanationCz": "Volím druhé hodnocení, protože správně dává větší váhu schválenému rozpočtu fondu než hlasování o navrhovaných změnách. Poslanci Motoristů podpořili rozpočet Státního fondu podpory investic, který zahrnuje dotace na výtahy a bezbariérové vstupy, tedy dílčí podporu obnovy bytových domů. Zároveň hlasovali proti dvěma návrhům na zvýšení podpory bydlení, včetně rekonstrukcí, což jde proti části slibu, ale nepřevažuje doložené rozhodnutí o rozpočtu fondu. Podklady neukazují celkovou částku této podpory pro rok 2026 ani zvláštní zaměření na postižené kraje, proto dokládají jen částečný posun, nikoli splnění celého slibu."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-towards",
+    "selectedReview": "assessor-b"
+  }
+}

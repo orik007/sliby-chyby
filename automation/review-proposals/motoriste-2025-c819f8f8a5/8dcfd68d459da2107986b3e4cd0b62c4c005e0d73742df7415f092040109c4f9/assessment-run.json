@@ -1,0 +1,1176 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T13-39-04-825Z--218a03110ebe",
+  "evaluatedAt": "2026-11-05T13:39:04.825Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-c819f8f8a5/218a03110ebe407767f09b910fc165d8ffee69fb1b3b8f7ea9035083a0a2b38e.json",
+  "packageHash": "218a03110ebe407767f09b910fc165d8ffee69fb1b3b8f7ea9035083a0a2b38e",
+  "assessmentContentHash": "ae2953c97095494d8cb1107e61ab8c200211fb1f0a58e492b8b92f24f77a5bcb",
+  "assessmentFingerprint": "8dcfd68d459da2107986b3e4cd0b62c4c005e0d73742df7415f092040109c4f9",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-c819f8f8a5",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment cites duplicate evidence IDs",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_01622f46fe06d2c5016aec5e4d457c87d19c43d81e37f4e477",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 228756,
+            "input_tokens_details": {
+              "cache_write_tokens": 222406,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 10367,
+            "output_tokens_details": {
+              "reasoning_tokens": 5565
+            },
+            "total_tokens": 239123
+          },
+          "output": {
+            "promiseId": "motoriste-2025-c819f8f8a5",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": false,
+                "reasonCz": "Dodané změny stavebního zákona se týkají územního plánování a výstavby, ale v poskytnutém textu nejsou spojeny s podporou obnovitelných zdrojů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-5",
+                "relevant": true,
+                "reasonCz": "Schválené znění výslovně usnadňuje umísťování fotovoltaických zařízení a stavebních úprav využívajících obnovitelné zdroje.",
+                "effectCz": "Předchozí znění § 144a dovolovalo umístit fotovoltaickou výrobnu na stávající stavbu, pokud tomu nebránil regulační plán; schválené znění rozšiřuje domněnku souladu s charakterem území a památkovou péčí také na stavební úpravy pro obnovitelné zdroje. Jde o širší usnadnění instalací, tedy o podporu obnovitelných zdrojů, nikoli o její ukončení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-4",
+                "relevant": false,
+                "reasonCz": "Dodané změny památkové péče stanoví obecný rámec péče a rozvoje památkových území, ale samy v tomto znění obnovitelné zdroje ani jejich podporu neupravují.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-5",
+                "relevant": true,
+                "reasonCz": "Schválené znění ruší výjimku pro nové obnovitelné zdroje využívající energii vodního toku, takže se přímo dotýká jejich zvláštního režimu.",
+                "effectCz": "Předchozí § 82a odst. 3 stanovoval, že se odstavec 1 nepoužije při plánování a výstavbě nových obnovitelných zdrojů využívajících energii vodního toku; schválená novela tento odstavec ruší. Výjimka se tím zužuje, což může být v souladu s omezením podpory těchto zdrojů, ale text odstavce 1 není v balíčku uveden, takže konkrétní dopad nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Změny zákona o ochraně zemědělského půdního fondu výslovně upravují povolování agrovoltaiky a zařízení využívajících sluneční energii.",
+                "effectCz": "Předchozí § 4 odst. 4 obecně zakazoval odnětí půdy I. a II. třídy pro solární energetická zařízení s výjimkou agrovoltaiky podle § 8a; schválené znění doplňuje výjimku například pro záměry do 500 metrů od dopravní infrastruktury a zachovává výjimku pro agrovoltaiku. Zákaz se tedy u části solárních projektů zmírňuje. Změny § 8a zároveň přesouvají posouzení agrovoltaiky do stavebního řízení; samy o sobě její podporu neukončují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": true,
+                "reasonCz": "Schválené změny energetického zákona výslovně mění práva spojená s obnovitelnými výrobními zdroji a jejich vývodovým vedením.",
+                "effectCz": "Předchozí § 97b umožňoval věcné břemeno pro stavbu výrobny elektřiny z obnovitelných zdrojů ve veřejném zájmu; schválené znění nahrazuje výrobnu v příslušných ustanoveních jejím vývodovým vedením a ruší samostatné ustanovení o oprávnění pro obnovitelnou výrobnu. Přímé oprávnění pro samotnou výrobnu se tím zužuje, zatímco právo pro její vývodové vedení zůstává; změna tedy omezuje část právního usnadnění pro obnovitelné zdroje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Schválená změna vodního zákona ruší výjimku, která se výslovně vztahovala na nové obnovitelné zdroje využívající energii vodního toku.",
+                "effectCz": "Předchozí § 23b odst. 2 vylučoval použití odstavce 1 pro plánování a výstavbu nových obnovitelných zdrojů využívajících energii vodního toku; schválené znění tuto výjimku ruší. Výjimka se zužuje, ale znění odstavce 1 není dodáno, takže nelze určit, jaké konkrétní povinnosti se na tyto zdroje nově vztáhnou."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": false,
+                "reasonCz": "Text rozšiřuje zrychlené vyvlastňovací postupy na energetickou infrastrukturu obecně, ale výslovně nespojuje toto opatření s obnovitelnými zdroji; obecná možnost jejich výstavby sama nestačí k závěru o vlivu na tento slib.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": true,
+                "reasonCz": "Schválené znění stanoví závazné podíly obnovitelných paliv a povinnosti snižování emisí u dodavatelů pohonných hmot.",
+                "effectCz": "Předchozí § 19f ukládal pro roky 2027–2029 minimální podíly pokročilých biopaliv či obnovitelných paliv nebiologického původu 1,5 %, 2,5 % a 3,75 %; schválené znění je snižuje na 1,25 %, 2 % a 3,50 %. Povinné podíly jsou tedy mírnější, ale zůstávají v platnosti a obnovitelná paliva jsou nadále povinně podporována. Obdobně se snižují, ale neruší cíle snižování emisí podle § 20."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": false,
+                "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku bylo v textu schváleném Poslaneckou sněmovnou odstraněno; dodaná schválená verze proto žádnou takovou změnu neobsahuje.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": true,
+                "reasonCz": "Změny zákona o urychlení využívání obnovitelných zdrojů výslovně upravují akcelerační oblasti a povolování záměrů pro využití obnovitelné energie.",
+                "effectCz": "Předchozí úprava stanovila postup pro vymezování akceleračních oblastí a jejich povolování; schválené znění přesouvá související stanoviska a posuzování do stavebního řízení a zachovává zvláštní režim pro projekty obnovitelné energie. Tím se mění a zjednodušuje povolovací postup, nikoli ruší podpora těchto projektů; z poskytnutého znění nelze vyvodit, že by se její rozsah snižoval."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+                "relevant": true,
+                "reasonCz": "Schválená část mění pravidla vyplácení dotací na podporu elektřiny, tepla a biometanu, tedy finanční podpory zahrnující obnovitelné zdroje.",
+                "effectCz": "Předchozí § 29 upravoval čtvrtletní převod dotace operátorovi trhu; schválené znění mění výpočet a periodicitu plateb na měsíční podle skutečných nákladů. Tato změna upravuje financování a jeho načasování, neukončuje nárok ani nestanoví snížení celkové podpory; její dopad na celkovou výši nelze z dodaných údajů určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-52",
+                "relevant": false,
+                "reasonCz": "Dodaná část upravuje platnost posouzení vlivů pro speciální dráhy, nikoli podporu obnovitelných zdrojů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": false,
+                "reasonCz": "Dodané znění pouze ruší část zákona č. 249/2025 Sb.; její obsah ani dopad na podporu obnovitelných zdrojů v balíčku uvedeny nejsou a ze samotného odkazu je nelze dovodit.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43203-16",
+                "relevant": true,
+                "reasonCz": "Navržená dohoda obsahuje závazky spolupracovat na zavádění a využívání obnovitelných zdrojů energie.",
+                "effectCz": "Jde o novou mezinárodní dohodu, nikoli změnu dřívějšího českého zákona. Navržená dohoda předpokládá spolupráci na zavádění a využívání obnovitelných zdrojů a jejich hospodárném rozvoji, což je s ukončením podpory v napětí; ustanovení se týká mezinárodní spolupráce a samo neurčuje českou dotační částku."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": true,
+                "reasonCz": "Státní rozpočet může stanovit výdaje na podporu obnovitelných zdrojů, ale dodané části neuvádějí konkrétní položku ani její částku.",
+                "effectCz": "Jde o nový státní rozpočet bez předchozího znění, které by bylo možné porovnat. Dodané pasáže pouze odkazují na přehled výdajů a ukazatele podle kapitol; konkrétní výši podpory obnovitelných zdrojů z nich nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43207-1",
+                "relevant": true,
+                "reasonCz": "Návrh rozpočtu Státního fondu životního prostředí výslovně počítá s výdaji na budování nových obnovitelných zdrojů energie.",
+                "effectCz": "Jde o nový rozpočet bez předchozího znění k porovnání. Návrh uvádí pro Modernizační fond přibližně 29,633 miliardy Kč výdajů v roce 2026 a popisuje financování projektů včetně nových obnovitelných zdrojů; nejde tedy o ukončení podpory, ale dodané pasáže neumožňují určit celkovou částku určenou přímo těmto zdrojům."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-8",
+                "relevant": true,
+                "reasonCz": "Navržená dohoda výslovně podporuje obnovitelnou energii a investice do obnovitelných zdrojů.",
+                "effectCz": "Jde o novou mezinárodní dohodu, nikoli změnu českého zákona. Text počítá se spoluprací na rozvoji obnovitelné energie a podporou politik a investic v této oblasti, což je v rozporu se široce formulovaným ukončením podpory; jde však o rámec mezinárodní spolupráce, ne o přímou českou dotaci."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-38",
+                "relevant": true,
+                "reasonCz": "Navržená dohoda výslovně podporuje obchod a investice do obnovitelných zdrojů energie.",
+                "effectCz": "Jde o novou mezinárodní dohodu, nikoli změnu českého zákona. Navržené závazky podporují obchod a investice do obnovitelných zdrojů, takže představují další podporu této oblasti, ale nestanoví českou výši dotací."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-144",
+                "relevant": true,
+                "reasonCz": "Nařízení umožňuje příjemcům kompenzací investovat část prostředků mimo jiné do kapacity pro výrobu energie z obnovitelných zdrojů.",
+                "effectCz": "Nařízení zavádí podmínky pro kompenzace nepřímých nákladů: příjemce může například splnit podmínky investicí alespoň 50 % předchozí kompenzace do způsobilých technologií, mezi něž patří i rozvoj výroby energie z obnovitelných zdrojů. Předchozí znění tohoto předpisu v balíčku není, takže nelze určit změnu celkového objemu podpory; přijaté pravidlo však umožňuje část kompenzací použít na obnovitelné zdroje."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2025-1022",
+                "relevant": true,
+                "reasonCz": "Usnesení zvyšuje prostředky státního rozpočtu na podporu podle zákona o podporovaných zdrojích energie.",
+                "effectCz": "Vláda zvýšila stanovenou částku pro podporu v roce 2026 z 24,6 na 41,734 miliardy Kč. Jde o výrazné zvýšení finanční podpory, tedy o přímý krok opačný k jejímu ukončení."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+                "relevant": true,
+                "reasonCz": "Usnesení ruší akční plány zaměřené na využívání obnovitelného a odpadního tepla a na biometan.",
+                "effectCz": "Vláda ruší dva již přijaté akční plány týkající se obnovitelného a odpadního tepla a biometanu. Tím odstraňuje část plánovací a politické podpory těchto oblastí, což směřuje k omezení podpory, avšak text neuvádí její finanční rozsah ani jiné konkrétní následky."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-506",
+                "relevant": true,
+                "reasonCz": "Usnesení převádí prostředky na projekty Národního plánu obnovy, mezi nimiž jsou výslovně uvedeny infrastruktura pro obnovitelné zdroje a vymezování oblastí pro jejich rozvoj.",
+                "effectCz": "Jde o nové rozhodnutí o převodu prostředků, bez předchozího znění k porovnání. Dodané řádky uvádějí například výdaj 381 900 139,79 Kč na infrastrukturu pro obnovitelné zdroje a elektrizační soustavu a další částky na související úkoly; jde o pokračující financování podpůrných činností, nikoli o ukončení podpory."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-606",
+                "relevant": true,
+                "reasonCz": "Usnesení stanoví prostředky státního rozpočtu na podporu elektřiny, tepla a biometanu pro rok 2027 a mění částku podpory pro rok 2026.",
+                "effectCz": "Vláda stanovila pro rok 2027 prostředky ve výši 41,284 miliardy Kč a zároveň snížila částku pro rok 2026 z 41,734 na 39,034 miliardy Kč. Snížení pro rok 2026 omezuje část dřívějšího navýšení, ale vysokou podporu neruší a stanovení prostředků pro rok 2027 je přímým pokračováním podpory."
+              }
+            ],
+            "status": "acting-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "motoriste-2025-c819f8f8a5--source",
+              "zvlady-resolutions--law-change-uv-2026-606",
+              "zvlady-resolutions--2026-606",
+              "zvlady-resolutions--law-change-uv-2025-1022",
+              "zvlady-resolutions--2025-1022",
+              "psp-core-2025--law-change-43174-1-5",
+              "psp-core-2025--law-change-43174-8-5",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--law-change-43174-21",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-33",
+              "psp-core-2025--law-change-43174-42",
+              "psp-core-2025--law-change-43174-approved-43",
+              "psp-core-2025--law-change-43203-16",
+              "psp-core-2025--law-change-43204-1",
+              "psp-core-2025--law-change-43207-1",
+              "psp-core-2025--law-change-43453-8",
+              "psp-core-2025--law-change-43453-38",
+              "esbirka-regulations--law-change-sb-2026-144",
+              "esbirka-regulations--2026-144",
+              "zvlady-resolutions--law-change-uv-2026-377",
+              "zvlady-resolutions--2026-377",
+              "zvlady-resolutions--law-change-uv-2026-506",
+              "zvlady-resolutions--2026-506",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--print-step-210760",
+              "psp-core-2025--print-step-210761",
+              "psp-core-2025--vote-86957",
+              "psp-core-2025--vote-86833",
+              "psp-core-2025--amendment-text-512",
+              "psp-core-2025--vote-86858",
+              "psp-core-2025--amendment-text-475",
+              "psp-core-2025--vote-86873",
+              "psp-core-2025--amendment-text-360",
+              "psp-core-2025--vote-86879",
+              "psp-core-2025--amendment-text-415",
+              "psp-core-2025--vote-86910",
+              "psp-core-2025--amendment-text-579",
+              "psp-core-2025--vote-86953",
+              "psp-core-2025--amendment-text-560",
+              "psp-core-2025--vote-88196",
+              "psp-core-2025--amendment-text-1133",
+              "zvlady-resolutions--2026-606"
+            ],
+            "explanationCz": "Motoristé spolu s dalšími poslanci předložili návrh stavebního zákona, který usnadňuje některé fotovoltaické instalace, a jejich poslanci jej podpořili i po zamítnutí Senátem. Vláda navýšila prostředky na podporu obnovitelných zdrojů pro rok 2026 na 41,734 miliardy Kč a později stanovila 41,284 miliardy Kč pro rok 2027; zároveň snížila částku pro rok 2026 na 39,034 miliardy Kč. Poslanci Motoristů také nepodpořili několik návrhů na snížení rozpočtových dotací na obnovitelné zdroje. Přetrvávající vysoké financování podpory proto představuje zásadní rozpor se slibem jejího ukončení, i když vláda zrušila některé akční plány a snížila část původně schválené částky.",
+            "confidence": "high",
+            "uncertainties": [
+              "Vláda snížila prostředky na podporu pro rok 2026 z 41,734 na 39,034 miliardy Kč a zrušila akční plány pro obnovitelné teplo a biometan; tyto kroky míří k omezení části podpory, ale usnesení pro rok 2027 současně stanoví dalších 41,284 miliardy Kč na podporu.",
+              "U schváleném státním rozpočtu na rok 2026 nejsou v dodaných výňatcích uvedeny konkrétní konečné výdaje na obnovitelné zdroje. Poslanci Motoristů však hlasovali proti několika návrhům, které chtěly rozpočtové dotace na tyto zdroje snížit."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-c819f8f8a5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": false,
+          "reasonCz": "Dodané změny stavebního zákona v této části upravují územní plánování a povolování výstavby, ale žádná z uvedených ustanovení se věcně netýká podpory obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Uvedená ustanovení výslovně mění pravidla pro fotovoltaiku a další instalace využívající obnovitelné zdroje.",
+          "effectCz": "Dosavadní § 144a umožňoval umístit fotovoltaiku na existující stavby, pokud tomu nebránil regulační plán; schválené znění zavádí obecnější režim pro stavební úpravy využívající obnovitelné zdroje a předpoklad jejich souladu s charakterem území. Tím se instalace těchto zdrojů usnadňuje. Změny svépomocného provádění rozšiřují možnosti pro stavby využívající obnovitelné zdroje, avšak přesné srovnání všech dotčených kategorií nelze z dodaného kontextu určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Dodané změny památkové péče obecně upravují plány ochrany, péče a rozvoje, ale neukazují konkrétní změnu podpory obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Schválené znění ruší výjimku vztahující se na plánování a výstavbu nových obnovitelných zdrojů využívajících energii vodního toku.",
+          "effectCz": "Dříve se odstavec 1 § 82a nevztahoval na plánování a výstavbu nových vodních obnovitelných zdrojů; schválená novela tuto výjimku ruší. Tím se zúží jejich výjimka z pravidla odstavce 1, takže povolení či výstavba mohou být přísnější; obsah samotného odstavce 1 dodaný kontext neuvádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Změny zákona o ochraně zemědělského půdního fondu se výslovně týkají agrovoltaiky a zařízení vyrábějících elektřinu ze sluneční energie.",
+          "effectCz": "Předchozí § 4 odst. 4 obecně zakazoval odnětí půdy I. a II. třídy pro solární energetická zařízení s výjimkou agrovoltaiky; schválené znění přidává výjimky mimo jiné pro projekty do 500 metrů od vyjmenované infrastruktury a pro některé dočasné stavby, čímž možnost využití půdy rozšiřuje. U agrovoltaiky zůstává povinnost souhlasu, ale její posouzení se přesouvá do povolovacího řízení stavebním úřadem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválená část energetického zákona upravuje také věcné břemeno pro vývodová vedení výroben elektřiny z obnovitelných zdrojů.",
+          "effectCz": "Původní § 97b spojoval věcné břemeno s umístěním stavby nebo zařízení obnovitelné výrobny a souvisejících staveb; schválené znění tento případ přesměrovává na vývodové vedení výrobny. Oproti dřívější širší možnosti se tím usnadnění pro samotnou výrobnu zužuje, zatímco usnadnění pro její vývodové vedení zůstává."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Schválená změna vodního zákona ruší výjimku z pravidla pro plánování a výstavbu nových obnovitelných zdrojů využívajících energii vodního toku.",
+          "effectCz": "Před změnou se § 23b odst. 1 neuplatňoval na plánování a výstavbu nových vodních obnovitelných zdrojů; schválené znění tuto výjimku ruší. Uplatnění pravidla odstavce 1 se tím rozšiřuje na tyto zdroje, tedy se jim výjimka zužuje; obsah samotného odstavce 1 dodaný kontext neuvádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Dodané body rozšiřují pravidla pro vyvlastňovací řízení u energetické infrastruktury obecně a neukazují konkrétní vazbu na podporu obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Schválené změny stanovují závazné podíly obnovitelných paliv a požadavky na snižování emisí u dodavatelů paliv.",
+          "effectCz": "Dosavadní znění stanovovalo pro roky 2027–2029 minimální podíly obnovitelných paliv 1,5 %, 2,5 % a 3,75 %; schválené znění je snižuje na 1,25 %, 2 % a 3,5 %. Také požadavky na snížení emisí klesají z 6,75 %, 7,5 % a 8,75 % na 6,5 %, 7 % a 8 %. Povinnosti se tedy oproti předchozímu znění zmírňují, ale nekončí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku bylo ve schváleném znění odstraněno a dodaný text neukazuje specifickou vazbu této části na závazek ukončit podporu obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Změna zákona o urychlení využívání obnovitelných zdrojů přímo upravuje povolování projektů těchto zdrojů.",
+          "effectCz": "Před změnou se projekty v akceleračních oblastech posuzovaly přes stanoviska různých orgánů včetně samostatného stanoviska vodoprávního úřadu; schválené znění převádí hlavní roli na stavební úřad a ruší samostatné stanovisko podle § 14. Umožňuje tak rychlejší a jednodušší povolování, tedy usnadňuje výstavbu obnovitelných zdrojů, ačkoli část environmentálních podmínek zůstává."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Schválená část mění pravidla státní podpory biometanu a vyplácení dotací na podporované zdroje energie.",
+          "effectCz": "Dříve se dotace operátorovi trhu poukazovala ve čtvrtletních splátkách; schválené znění přechází na měsíční výplaty, což mění načasování, nikoli celkovou výši podpory. U biometanu stanoví schválené znění, že při vyšším skutečném výkonu je podpora omezena původně identifikovaným výkonem; oproti dřívějšímu znění se tím nárok ve vyšším výkonu zužuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-52",
+          "relevant": false,
+          "reasonCz": "Dodaná část prodlužuje možnost prodloužit platnost stanoviska k posouzení vlivů pro zvláštní dráhu, nikoli podporu obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší část jiného zákona, ale neuvádí její obsah; z dodaného znění proto nelze doložit, že tato změna věcně ovlivňuje podporu obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": true,
+          "reasonCz": "Navržená dohoda výslovně počítá se spoluprací na zavádění a využívání obnovitelných zdrojů energie.",
+          "effectCz": "Jde o novou dohodu bez předchozího českého znění, takže srovnání před a po není možné. Návrh vytváří rámec spolupráce podporující zavádění a využívání obnovitelných zdrojů; neukončuje jejich podporu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Návrh státního rozpočtu na rok 2026 je posuzován spolu s pozměňovacími návrhy, které přímo mění výdaje na dotace obnovitelným zdrojům.",
+          "effectCz": "Dodané znění rozpočtu pouze odkazuje na přílohy s výdaji podle kapitol a neobsahuje částku ani konkrétní ukazatel dotací na obnovitelné zdroje; směr změny rozpočtové podpory proto z tohoto textu nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu životního prostředí výslovně financuje nové obnovitelné zdroje a jejich infrastrukturu.",
+          "effectCz": "Jde o nový rozpočet bez předchozího znění; uvádí 29 633 429 000 Kč pro Modernizační fond a počítá s financováním projektů nových obnovitelných zdrojů a energetických úspor. Celá částka není určena jen obnovitelným zdrojům, ale návrh zachovává jejich financování, místo aby podporu ukončil."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-8",
+          "relevant": true,
+          "reasonCz": "Navržená dohoda obsahuje spolupráci na rozvoji obnovitelné energie a podporu obnovitelných zdrojů.",
+          "effectCz": "Jde o novou dohodu bez předchozího znění, takže změnu proti dřívějšímu stavu nelze určit. Navržená ustanovení počítají s podporou obnovitelné energie a jejího rozvoje, což není ukončení podpory."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-38",
+          "relevant": true,
+          "reasonCz": "Navržená dohoda výslovně zmiňuje usnadňování obchodu a investic do obnovitelných zdrojů energie.",
+          "effectCz": "Jde o novou dohodu bez předchozího znění. Ustanovení o obchodu a investicích podporujících udržitelný rozvoj výslovně počítají s usnadňováním investic do obnovitelných zdrojů; směřují tedy k jejich podpoře, nikoli k jejímu ukončení."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-144",
+          "relevant": true,
+          "reasonCz": "Nařízení mezi podmínkami pro kompenzaci nepřímých nákladů výslovně uvádí investice do výroby obnovitelné energie.",
+          "effectCz": "Dodaný text nařízení umožňuje splnit jednu z podmínek kompenzace investicí nejméně 50 % poslední kompenzace do zařízení a technologií, mezi nimiž jsou výslovně obnovitelné zdroje. Předchozí znění nařízení v balíčku chybí, takže nelze určit, zda a jak se tím celková dostupnost kompenzací mění."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1022",
+          "relevant": true,
+          "reasonCz": "Usnesení stanovuje konkrétní částku státního rozpočtu určenou na dotace podle zákona o podporovaných zdrojích energie.",
+          "effectCz": "Vláda zvýšila prostředky pro podporu v roce 2026 z 24,6 miliardy Kč na 41,734 miliardy Kč. Jde o výrazné zvýšení financování podpory, tedy o opačný směr než její ukončení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Usnesení ruší akční plány zaměřené na rozvoj využití obnovitelného tepla a biometanu.",
+          "effectCz": "Usnesení ruší dva vládní akční plány pro obnovitelné teplo a biometan. Jejich obsah v balíčku není, a proto nelze určit, jaké konkrétní nástroje či závazky tím zanikají; zrušení plánů samo o sobě nedokazuje konec finanční podpory."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-506",
+          "relevant": true,
+          "reasonCz": "Usnesení převádí prostředky na projekty Národního plánu obnovy, včetně infrastruktury pro obnovitelné zdroje a zjednodušování jejich povolování.",
+          "effectCz": "Usnesení rozděluje a ukládá převést 10 160 830 520,85 Kč z prostředků Nástroje pro oživení a odolnost. V dodaném přehledu jsou mimo jiné uvedeny výdaje na infrastrukturu pro obnovitelné zdroje ve výši 381 900 139,79 Kč a položky pro zjednodušení povolování; jde o pokračující financování, nikoli o jeho ukončení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-606",
+          "relevant": true,
+          "reasonCz": "Usnesení přímo stanovuje státní prostředky na podporu elektřiny, tepla a biometanu pro rok 2027 a mění částku podpory pro rok 2026.",
+          "effectCz": "Vláda stanovila pro rok 2027 podporu ve výši 41 284 133 333 Kč, z toho 1,4 miliardy Kč tvoří výnosy z dražeb povolenek. Zároveň snížila částku pro rok 2026 z 41,734 na 39,034 miliardy Kč, ale podporu neukončila; pro následující rok ji naopak stanovila ve vysoké částce."
+        }
+      ],
+      "status": "acting-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-c819f8f8a5--source",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--law-change-43203-16",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--law-change-43453-8",
+        "psp-core-2025--law-change-43453-38",
+        "esbirka-regulations--law-change-sb-2026-144",
+        "zvlady-resolutions--law-change-uv-2025-1022",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "zvlady-resolutions--law-change-uv-2026-506",
+        "zvlady-resolutions--law-change-uv-2026-606",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88196",
+        "psp-core-2025--vote-88235",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--amendment-text-475",
+        "psp-core-2025--vote-86858",
+        "psp-core-2025--amendment-text-360",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--print-step-212285",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-86968",
+        "zvlady-resolutions--2025-1022",
+        "zvlady-resolutions--2026-377",
+        "zvlady-resolutions--2026-506",
+        "zvlady-resolutions--2026-606",
+        "esbirka-regulations--2026-144"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působí, nejprve zvýšila prostředky na podporované zdroje energie pro rok 2026 z 24,6 na 41,734 miliardy Kč. Později sice snížila částku pro rok 2026 na 39,034 miliardy Kč, zároveň ale stanovila 41,284 miliardy Kč na podporu v roce 2027. Poslanci Motoristů také hlasovali proti pozměňovacím návrhům, které měly výdaje na dotace obnovitelným zdrojům snížit, včetně návrhu na snížení o 17 miliard Kč. Strana současně předložila a podpořila novelu stavebního zákona, která usnadňuje některé fotovoltaické instalace a povolování projektů obnovitelných zdrojů. Rozsah přijatých opatření proto jde proti závazku podporu obnovitelných zdrojů ukončit.",
+      "confidence": "high",
+      "uncertainties": [
+        "Usnesení vlády z června 2026 zrušilo akční plány pro obnovitelné teplo a biometan, ale jejich obsah není v balíčku uveden; nelze proto určit, jaké konkrétní nástroje podpory zanikly.",
+        "Některé přijaté změny přísněji upravují výjimky pro vodní obnovitelné zdroje a snižují plánované minimální podíly obnovitelných paliv. Tyto dílčí kroky ukazují opačný směr, neruší však samotné financování podpory.",
+        "Dodané výňatky státního rozpočtu na rok 2026 neobsahují celkovou částku dotací na obnovitelné zdroje; doložená vládní usnesení nicméně potvrzují pokračování této podpory ve vysokém objemu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-c819f8f8a5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": false,
+          "reasonCz": "Dodané změny stavebního zákona upravují územní plánování a požadavky na výstavbu, ale v předložených odstavcích se netýkají podpory obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Ustanovení výslovně upravují fotovoltaiku a stavební úpravy pro využití obnovitelných zdrojů, a mohou tak jejich rozvoj usnadnit.",
+          "effectCz": "Dosavadní § 144a umožňoval umístit solární výrobnu na stávající stavbu, pokud tomu nebránil regulační plán; schválené znění se vztahuje také na stavební úpravy pro instalaci využívající obnovitelný zdroj a předpokládá, že nejsou v rozporu s charakterem území ani památkovou péčí. Omezení možnosti instalací se tím uvolňuje, což rozvoj obnovitelných zdrojů usnadňuje, nikoli omezuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Dodané změny plánů ochrany památkových území neukazují konkrétní pravidlo o podpoře obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": false,
+          "reasonCz": "Předložené změny rozdělují působnost orgánů ochrany přírody a neupravují samotnou podporu obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Změny se týkají agrovoltaických výroben a solárních zařízení, tedy konkrétních obnovitelných zdrojů.",
+          "effectCz": "Dosavadní § 8a vyžadoval pro agrovoltaickou výrobnu souhlas orgánu ochrany zemědělského půdního fondu; navržený text tuto formulaci odstraňuje a začleňuje posuzování do povolování záměru. Schválené znění navíc rozšiřuje výjimku pro solární zařízení na některých půdách I. a II. třídy ochrany v blízkosti dopravních staveb. Jde o uvolnění části povolovacích a půdních omezení pro solární výrobu, nikoli o ukončení její podpory."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválená změna energetického zákona upravuje věcná břemena pro stavby vývodových vedení výroben elektřiny z obnovitelných zdrojů.",
+          "effectCz": "Podle dodaného předchozího znění vznikalo oprávnění k věcnému břemeni také držiteli licence provozujícímu veřejně prospěšnou výrobnu elektřiny z obnovitelných zdrojů; schválené znění tuto konkrétní možnost nahrazuje oprávněním stavebníka vedení vyvedení výkonu. Pro samotnou výrobnu se tedy příslušný nárok zužuje, zatímco povolenému vývodovému vedení se přístup k pozemkům usnadňuje. Celkový směr této dílčí změny pro podporu výroben nelze z jedné úpravy odvodit jako její ukončení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Předložené změny vodního zákona upravují hlavně povolovací postupy a nepropojují je v dodaném textu konkrétně s podporou obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změna zahrnuje obecnou energetickou infrastrukturu, ale dodané odstavce ji nespojují konkrétně s obnovitelnými zdroji ani s jejich podporou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Schválené znění stanoví povinné minimální podíly obnovitelných paliv a přímo mění rozsah této podpory.",
+          "effectCz": "Dosavadní minimální podíl činil v letech 2027–2029 postupně 1,5 %, 2,5 % a 3,75 % energetického obsahu; schválené znění jej snižuje na 1,25 %, 2 % a 3,5 %. Povinnost tedy v těchto letech částečně slábne, ale zůstává v platnosti, takže nejde o ukončení podpory obnovitelných paliv."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku bylo v textu schváleném Sněmovnou odstraněno; dodaný text nezakládá změnu podpory obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Změny zákona o urychlení využívání obnovitelných zdrojů upravují povolování a podmínky pro záměry v akceleračních oblastech.",
+          "effectCz": "Předchozí znění svěřovalo stanovisko k akcelerační oblasti krajskému úřadu a zahrnovalo samostatné stanovisko vodoprávního úřadu; navržené znění přesouvá tuto úlohu ke stavebnímu úřadu a vypouští samostatný vodoprávní postup. Schválené znění dál mění příslušnost a spojuje některé podmínky s povolením záměru. Tím se povolovací rámec pro obnovitelné zdroje mění a v některých ohledech zjednodušuje; nejde o omezení, které by samo ukončovalo jejich podporu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Změna zákona o podporovaných zdrojích energie upravuje výplatu dotací na podporu elektřiny, tepla a biometanu.",
+          "effectCz": "Předchozí znění počítalo se čtvrtletními splátkami dotace; schválené znění je mění na měsíční platby vypočítávané podle skutečných nákladů. Změna upravuje načasování a způsob financování, nikoli nárok či celkový objem podpory; ten se podle dodaného znění nesnižuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-52",
+          "relevant": false,
+          "reasonCz": "Dodané ustanovení prodlužuje možnost platnosti stanoviska k posouzení vlivů u speciální dráhy, nikoli podporu obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Schválené znění ruší část zákona o urychlení využívání obnovitelných zdrojů, ale její obsah není v balíčku uveden, takže její vztah ke slibu nelze bezpečně vyloučit.",
+          "effectCz": "Dodaný text uvádí pouze zrušení části šesté zákona č. 249/2025 Sb.; její předchozí obsah ani jeho přesné následky balíček neobsahuje. Směr ani rozsah dopadu na podporu obnovitelných zdrojů proto nelze z podkladů určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": true,
+          "reasonCz": "Dohoda výslovně počítá s podporou zavádění a využívání obnovitelných zdrojů energie.",
+          "effectCz": "Jde o mezinárodní dohodu bez předchozího domácího znění k porovnání; dodané znění zakládá spolupráci s cílem podporovat zavádění a využívání obnovitelných zdrojů energie. Je to směr opačný k závazku jejich podporu ukončit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet a související hlasování se přímo dotýkají výdajů na podporované zdroje energie, ale vybrané rozpočtové pasáže neobsahují konkrétní částky pro tuto položku.",
+          "effectCz": "Rozpočet stanoví výdaje podle kapitol v přílohách, avšak dodané pasáže žádnou částku pro podporu obnovitelných zdrojů neuvádějí. Rozsah podpory ani její změnu proto nelze z tohoto textu samostatně určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu SFŽP výslovně počítá s financováním projektů nových obnovitelných zdrojů energie.",
+          "effectCz": "Jde o rozpočtový návrh bez předchozího znění k porovnání. Uvádí 29 633 429 000 Kč z Modernizačního fondu a přibližně 29 633,4 mil. Kč výdajů na rok 2026, včetně financování projektů ve výzvách na nové obnovitelné zdroje; souhrnná alokace výzev přesahuje 90 000 mil. Kč. Návrh tedy počítá s pokračováním významného financování, nikoli s ukončením podpory."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-8",
+          "relevant": true,
+          "reasonCz": "Navržená dohoda výslovně zahrnuje podporu obnovitelné energie a spolupráci v energetice.",
+          "effectCz": "Mezinárodní dohoda nemá v dodaném balíčku předchozí znění k porovnání. Navržený text počítá s podporou obnovitelné energie, jejího rozvoje a energetické účinnosti; tento závazek je v napětí se slibem podporu obnovitelných zdrojů ukončit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-38",
+          "relevant": true,
+          "reasonCz": "Navržená obchodní dohoda výslovně podporuje obchod a investice do obnovitelných zdrojů energie.",
+          "effectCz": "Dodaný návrh mezinárodní dohody bez předchozího znění stanoví podporu obchodu a investic do environmentálního zboží a služeb, včetně obnovitelných zdrojů. Jde o podporu jejich rozvoje, nikoli o její ukončení."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-144",
+          "relevant": true,
+          "reasonCz": "Nařízení výslovně zahrnuje rozvoj kapacity obnovitelných zdrojů mezi investice, které mohou průmyslové podniky použít při splnění podmínek kompenzace.",
+          "effectCz": "Předchozí znění dotčeného ustanovení nařízení v balíčku chybí, takže změnu oproti dosavadnímu pravidlu nelze určit. Přijatý text stanoví, že podmínky kompenzace lze splnit mimo jiné investicí alespoň 50 % poslední kompenzace do zařízení, včetně rozvoje kapacity obnovitelných zdrojů; celkové financování kompenzací ani podpory obnovitelných zdrojů ale dodaný text neukončuje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1022",
+          "relevant": true,
+          "reasonCz": "Usnesení vlády přímo zvyšuje rozpočtové prostředky určené na podporované zdroje energie pro rok 2026.",
+          "effectCz": "Jde o rozhodnutí vlády bez předchozího znění zákona k porovnání: částka určená pro podporu v roce 2026 se zvýšila z 24,6 mld. Kč na 41,734 mld. Kč. Rozhodnutí tedy výrazně rozšiřuje státní financování podpory místo jeho ukončení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Usnesení ruší vládní akční plány pro rozvoj využití obnovitelného tepla a biometanu, takže se přímo dotýká části podpory obnovitelných zdrojů.",
+          "effectCz": "Původní obsah akčních plánů v balíčku není, a proto nelze vyčíslit dopad jejich zrušení. Samotné zrušení plánů ukončuje dva konkrétní programové nástroje pro obnovitelné teplo a biometan, tedy dílčí podporu omezuje, ale nedokládá konec podpory OZE jako celku."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-506",
+          "relevant": true,
+          "reasonCz": "Usnesení rozděluje prostředky na projekty Národního plánu obnovy včetně projektů zaměřených na obnovitelné zdroje a jejich infrastrukturu.",
+          "effectCz": "Usnesení rozhoduje o převodu celkem 10 160 830 520,85 Kč na příslušné organizační složky státu. V dodaných řádcích jsou mimo jiné částky 8 396 747 Kč a 620 633 Kč pro projekty spojené s povolováním či rozvojem OZE a 381 900 139,79 Kč na infrastrukturu OZE a elektrizační soustavu. Bez předchozího rozpočtového znění nelze určit čistou změnu, ale rozhodnutí financuje konkrétní projekty podporující obnovitelné zdroje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-606",
+          "relevant": true,
+          "reasonCz": "Usnesení stanoví podporu podporovaných zdrojů energie pro rok 2027 a mění částku podpory pro rok 2026.",
+          "effectCz": "Vláda stanovila pro rok 2027 prostředky ve výši 41 284 133 333 Kč a částku pro rok 2026 snížila z 41,734 mld. Kč na 39,034 mld. Kč. Snížení pro rok 2026 je dílčím omezením, ale vysoká podpora pro oba roky zůstává; rozhodnutí tedy podporu neukončuje."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-c819f8f8a5--source",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43203-16",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--law-change-43453-8",
+        "psp-core-2025--law-change-43453-38",
+        "esbirka-regulations--law-change-sb-2026-144",
+        "zvlady-resolutions--law-change-uv-2025-1022",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "zvlady-resolutions--law-change-uv-2026-506",
+        "zvlady-resolutions--law-change-uv-2026-606",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88196",
+        "psp-core-2025--vote-88235",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--amendment-text-1133",
+        "psp-core-2025--amendment-text-1054",
+        "psp-core-2025--vote-86833",
+        "psp-core-2025--vote-86850",
+        "psp-core-2025--vote-86858",
+        "psp-core-2025--vote-86863",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--vote-86879",
+        "psp-core-2025--vote-86898",
+        "psp-core-2025--vote-86899",
+        "psp-core-2025--vote-86901",
+        "psp-core-2025--vote-86902",
+        "psp-core-2025--vote-86903",
+        "psp-core-2025--vote-86904",
+        "psp-core-2025--vote-86910",
+        "psp-core-2025--vote-86916",
+        "psp-core-2025--vote-86918",
+        "psp-core-2025--vote-86921",
+        "psp-core-2025--vote-86936",
+        "psp-core-2025--vote-86951",
+        "psp-core-2025--vote-86953",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-86968",
+        "zvlady-resolutions--2025-1022",
+        "zvlady-resolutions--2026-377",
+        "zvlady-resolutions--2026-506",
+        "zvlady-resolutions--2026-606",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--print-step-212285",
+        "esbirka-regulations--2026-144"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili a následně podpořili novelu stavebního zákona, která v některých bodech usnadňuje povolování solárních a dalších obnovitelných zdrojů; novela také snižuje některé povinné podíly obnovitelných paliv, ale neruší je. Vláda Motoristů v prosinci 2025 zvýšila prostředky na podporované zdroje energie pro rok 2026 na 41,734 miliardy korun a později stanovila 41,284 miliardy pro rok 2027. V září 2026 částku pro rok 2026 snížila na 39,034 miliardy, takže podporu omezila jen částečně. Některé návrhy na snížení rozpočtových dotací na obnovitelné zdroje Motoristé nepodpořili; jejich pozdější rozhodnutí o pokračujícím financování je však významnější než tyto neúspěšné návrhy.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U rozpočtu na rok 2026 dodané pasáže neuvádějí konkrétní částku v položce podpory obnovitelných zdrojů; výši financování dokládají samostatná vládní usnesení.",
+        "U zrušené části šesté zákona o urychlení využívání obnovitelných zdrojů není v balíčku uveden její obsah, takže nelze určit směr ani rozsah dopadu.",
+        "Některá rozhodnutí a návrhy podporu omezují, například zrušení akčních plánů a snížení částky pro rok 2026; současně ale zůstává schválené významné financování a další kroky usnadňují rozvoj OZE."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0e825361dce8ae59016aec5e9fa4c487d1aebe6ced2798b370",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 228756,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 228753
+      },
+      "output_tokens": 14138,
+      "output_tokens_details": {
+        "reasoning_tokens": 9094
+      },
+      "total_tokens": 242894
+    },
+    "output": {
+      "promiseId": "motoriste-2025-c819f8f8a5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": false,
+          "reasonCz": "Dodané změny stavebního zákona v této části upravují územní plánování a povolování výstavby, ale žádná z uvedených ustanovení se věcně netýká podpory obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Uvedená ustanovení výslovně mění pravidla pro fotovoltaiku a další instalace využívající obnovitelné zdroje.",
+          "effectCz": "Dosavadní § 144a umožňoval umístit fotovoltaiku na existující stavby, pokud tomu nebránil regulační plán; schválené znění zavádí obecnější režim pro stavební úpravy využívající obnovitelné zdroje a předpoklad jejich souladu s charakterem území. Tím se instalace těchto zdrojů usnadňuje. Změny svépomocného provádění rozšiřují možnosti pro stavby využívající obnovitelné zdroje, avšak přesné srovnání všech dotčených kategorií nelze z dodaného kontextu určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Dodané změny památkové péče obecně upravují plány ochrany, péče a rozvoje, ale neukazují konkrétní změnu podpory obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Schválené znění ruší výjimku vztahující se na plánování a výstavbu nových obnovitelných zdrojů využívajících energii vodního toku.",
+          "effectCz": "Dříve se odstavec 1 § 82a nevztahoval na plánování a výstavbu nových vodních obnovitelných zdrojů; schválená novela tuto výjimku ruší. Tím se zúží jejich výjimka z pravidla odstavce 1, takže povolení či výstavba mohou být přísnější; obsah samotného odstavce 1 dodaný kontext neuvádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Změny zákona o ochraně zemědělského půdního fondu se výslovně týkají agrovoltaiky a zařízení vyrábějících elektřinu ze sluneční energie.",
+          "effectCz": "Předchozí § 4 odst. 4 obecně zakazoval odnětí půdy I. a II. třídy pro solární energetická zařízení s výjimkou agrovoltaiky; schválené znění přidává výjimky mimo jiné pro projekty do 500 metrů od vyjmenované infrastruktury a pro některé dočasné stavby, čímž možnost využití půdy rozšiřuje. U agrovoltaiky zůstává povinnost souhlasu, ale její posouzení se přesouvá do povolovacího řízení stavebním úřadem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválená část energetického zákona upravuje také věcné břemeno pro vývodová vedení výroben elektřiny z obnovitelných zdrojů.",
+          "effectCz": "Původní § 97b spojoval věcné břemeno s umístěním stavby nebo zařízení obnovitelné výrobny a souvisejících staveb; schválené znění tento případ přesměrovává na vývodové vedení výrobny. Oproti dřívější širší možnosti se tím usnadnění pro samotnou výrobnu zužuje, zatímco usnadnění pro její vývodové vedení zůstává."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Schválená změna vodního zákona ruší výjimku z pravidla pro plánování a výstavbu nových obnovitelných zdrojů využívajících energii vodního toku.",
+          "effectCz": "Před změnou se § 23b odst. 1 neuplatňoval na plánování a výstavbu nových vodních obnovitelných zdrojů; schválené znění tuto výjimku ruší. Uplatnění pravidla odstavce 1 se tím rozšiřuje na tyto zdroje, tedy se jim výjimka zužuje; obsah samotného odstavce 1 dodaný kontext neuvádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Dodané body rozšiřují pravidla pro vyvlastňovací řízení u energetické infrastruktury obecně a neukazují konkrétní vazbu na podporu obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Schválené změny stanovují závazné podíly obnovitelných paliv a požadavky na snižování emisí u dodavatelů paliv.",
+          "effectCz": "Dosavadní znění stanovovalo pro roky 2027–2029 minimální podíly obnovitelných paliv 1,5 %, 2,5 % a 3,75 %; schválené znění je snižuje na 1,25 %, 2 % a 3,5 %. Také požadavky na snížení emisí klesají z 6,75 %, 7,5 % a 8,75 % na 6,5 %, 7 % a 8 %. Povinnosti se tedy oproti předchozímu znění zmírňují, ale nekončí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku bylo ve schváleném znění odstraněno a dodaný text neukazuje specifickou vazbu této části na závazek ukončit podporu obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Změna zákona o urychlení využívání obnovitelných zdrojů přímo upravuje povolování projektů těchto zdrojů.",
+          "effectCz": "Před změnou se projekty v akceleračních oblastech posuzovaly přes stanoviska různých orgánů včetně samostatného stanoviska vodoprávního úřadu; schválené znění převádí hlavní roli na stavební úřad a ruší samostatné stanovisko podle § 14. Umožňuje tak rychlejší a jednodušší povolování, tedy usnadňuje výstavbu obnovitelných zdrojů, ačkoli část environmentálních podmínek zůstává."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Schválená část mění pravidla státní podpory biometanu a vyplácení dotací na podporované zdroje energie.",
+          "effectCz": "Dříve se dotace operátorovi trhu poukazovala ve čtvrtletních splátkách; schválené znění přechází na měsíční výplaty, což mění načasování, nikoli celkovou výši podpory. U biometanu stanoví schválené znění, že při vyšším skutečném výkonu je podpora omezena původně identifikovaným výkonem; oproti dřívějšímu znění se tím nárok ve vyšším výkonu zužuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-52",
+          "relevant": false,
+          "reasonCz": "Dodaná část prodlužuje možnost prodloužit platnost stanoviska k posouzení vlivů pro zvláštní dráhu, nikoli podporu obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší část jiného zákona, ale neuvádí její obsah; z dodaného znění proto nelze doložit, že tato změna věcně ovlivňuje podporu obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": true,
+          "reasonCz": "Navržená dohoda výslovně počítá se spoluprací na zavádění a využívání obnovitelných zdrojů energie.",
+          "effectCz": "Jde o novou dohodu bez předchozího českého znění, takže srovnání před a po není možné. Návrh vytváří rámec spolupráce podporující zavádění a využívání obnovitelných zdrojů; neukončuje jejich podporu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Návrh státního rozpočtu na rok 2026 je posuzován spolu s pozměňovacími návrhy, které přímo mění výdaje na dotace obnovitelným zdrojům.",
+          "effectCz": "Dodané znění rozpočtu pouze odkazuje na přílohy s výdaji podle kapitol a neobsahuje částku ani konkrétní ukazatel dotací na obnovitelné zdroje; směr změny rozpočtové podpory proto z tohoto textu nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu životního prostředí výslovně financuje nové obnovitelné zdroje a jejich infrastrukturu.",
+          "effectCz": "Jde o nový rozpočet bez předchozího znění; uvádí 29 633 429 000 Kč pro Modernizační fond a počítá s financováním projektů nových obnovitelných zdrojů a energetických úspor. Celá částka není určena jen obnovitelným zdrojům, ale návrh zachovává jejich financování, místo aby podporu ukončil."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-8",
+          "relevant": true,
+          "reasonCz": "Navržená dohoda obsahuje spolupráci na rozvoji obnovitelné energie a podporu obnovitelných zdrojů.",
+          "effectCz": "Jde o novou dohodu bez předchozího znění, takže změnu proti dřívějšímu stavu nelze určit. Navržená ustanovení počítají s podporou obnovitelné energie a jejího rozvoje, což není ukončení podpory."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-38",
+          "relevant": true,
+          "reasonCz": "Navržená dohoda výslovně zmiňuje usnadňování obchodu a investic do obnovitelných zdrojů energie.",
+          "effectCz": "Jde o novou dohodu bez předchozího znění. Ustanovení o obchodu a investicích podporujících udržitelný rozvoj výslovně počítají s usnadňováním investic do obnovitelných zdrojů; směřují tedy k jejich podpoře, nikoli k jejímu ukončení."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-144",
+          "relevant": true,
+          "reasonCz": "Nařízení mezi podmínkami pro kompenzaci nepřímých nákladů výslovně uvádí investice do výroby obnovitelné energie.",
+          "effectCz": "Dodaný text nařízení umožňuje splnit jednu z podmínek kompenzace investicí nejméně 50 % poslední kompenzace do zařízení a technologií, mezi nimiž jsou výslovně obnovitelné zdroje. Předchozí znění nařízení v balíčku chybí, takže nelze určit, zda a jak se tím celková dostupnost kompenzací mění."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1022",
+          "relevant": true,
+          "reasonCz": "Usnesení stanovuje konkrétní částku státního rozpočtu určenou na dotace podle zákona o podporovaných zdrojích energie.",
+          "effectCz": "Vláda zvýšila prostředky pro podporu v roce 2026 z 24,6 miliardy Kč na 41,734 miliardy Kč. Jde o výrazné zvýšení financování podpory, tedy o opačný směr než její ukončení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Usnesení ruší akční plány zaměřené na rozvoj využití obnovitelného tepla a biometanu.",
+          "effectCz": "Usnesení ruší dva vládní akční plány pro obnovitelné teplo a biometan. Jejich obsah v balíčku není, a proto nelze určit, jaké konkrétní nástroje či závazky tím zanikají; zrušení plánů samo o sobě nedokazuje konec finanční podpory."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-506",
+          "relevant": true,
+          "reasonCz": "Usnesení převádí prostředky na projekty Národního plánu obnovy, včetně infrastruktury pro obnovitelné zdroje a zjednodušování jejich povolování.",
+          "effectCz": "Usnesení rozděluje a ukládá převést 10 160 830 520,85 Kč z prostředků Nástroje pro oživení a odolnost. V dodaném přehledu jsou mimo jiné uvedeny výdaje na infrastrukturu pro obnovitelné zdroje ve výši 381 900 139,79 Kč a položky pro zjednodušení povolování; jde o pokračující financování, nikoli o jeho ukončení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-606",
+          "relevant": true,
+          "reasonCz": "Usnesení přímo stanovuje státní prostředky na podporu elektřiny, tepla a biometanu pro rok 2027 a mění částku podpory pro rok 2026.",
+          "effectCz": "Vláda stanovila pro rok 2027 podporu ve výši 41 284 133 333 Kč, z toho 1,4 miliardy Kč tvoří výnosy z dražeb povolenek. Zároveň snížila částku pro rok 2026 z 41,734 na 39,034 miliardy Kč, ale podporu neukončila; pro následující rok ji naopak stanovila ve vysoké částce."
+        }
+      ],
+      "status": "acting-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-c819f8f8a5--source",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--law-change-43203-16",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--law-change-43453-8",
+        "psp-core-2025--law-change-43453-38",
+        "esbirka-regulations--law-change-sb-2026-144",
+        "zvlady-resolutions--law-change-uv-2025-1022",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "zvlady-resolutions--law-change-uv-2026-506",
+        "zvlady-resolutions--law-change-uv-2026-606",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88196",
+        "psp-core-2025--vote-88235",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--amendment-text-475",
+        "psp-core-2025--vote-86858",
+        "psp-core-2025--amendment-text-360",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--print-step-212285",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-86968",
+        "zvlady-resolutions--2025-1022",
+        "zvlady-resolutions--2026-377",
+        "zvlady-resolutions--2026-506",
+        "zvlady-resolutions--2026-606",
+        "esbirka-regulations--2026-144"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působí, nejprve zvýšila prostředky na podporované zdroje energie pro rok 2026 z 24,6 na 41,734 miliardy Kč. Později sice snížila částku pro rok 2026 na 39,034 miliardy Kč, zároveň ale stanovila 41,284 miliardy Kč na podporu v roce 2027. Poslanci Motoristů také hlasovali proti pozměňovacím návrhům, které měly výdaje na dotace obnovitelným zdrojům snížit, včetně návrhu na snížení o 17 miliard Kč. Strana současně předložila a podpořila novelu stavebního zákona, která usnadňuje některé fotovoltaické instalace a povolování projektů obnovitelných zdrojů. Rozsah přijatých opatření proto jde proti závazku podporu obnovitelných zdrojů ukončit.",
+      "confidence": "high",
+      "uncertainties": [
+        "Usnesení vlády z června 2026 zrušilo akční plány pro obnovitelné teplo a biometan, ale jejich obsah není v balíčku uveden; nelze proto určit, jaké konkrétní nástroje podpory zanikly.",
+        "Některé přijaté změny přísněji upravují výjimky pro vodní obnovitelné zdroje a snižují plánované minimální podíly obnovitelných paliv. Tyto dílčí kroky ukazují opačný směr, neruší však samotné financování podpory.",
+        "Dodané výňatky státního rozpočtu na rok 2026 neobsahují celkovou částku dotací na obnovitelné zdroje; doložená vládní usnesení nicméně potvrzují pokračování této podpory ve vysokém objemu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_04a25b068f91548c016aec843364e487d1bb91825bfd1e5696",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 228756,
+      "input_tokens_details": {
+        "cache_write_tokens": 222406,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 11540,
+      "output_tokens_details": {
+        "reasoning_tokens": 6353
+      },
+      "total_tokens": 240296
+    },
+    "output": {
+      "promiseId": "motoriste-2025-c819f8f8a5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": false,
+          "reasonCz": "Dodané změny stavebního zákona upravují územní plánování a požadavky na výstavbu, ale v předložených odstavcích se netýkají podpory obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Ustanovení výslovně upravují fotovoltaiku a stavební úpravy pro využití obnovitelných zdrojů, a mohou tak jejich rozvoj usnadnit.",
+          "effectCz": "Dosavadní § 144a umožňoval umístit solární výrobnu na stávající stavbu, pokud tomu nebránil regulační plán; schválené znění se vztahuje také na stavební úpravy pro instalaci využívající obnovitelný zdroj a předpokládá, že nejsou v rozporu s charakterem území ani památkovou péčí. Omezení možnosti instalací se tím uvolňuje, což rozvoj obnovitelných zdrojů usnadňuje, nikoli omezuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Dodané změny plánů ochrany památkových území neukazují konkrétní pravidlo o podpoře obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": false,
+          "reasonCz": "Předložené změny rozdělují působnost orgánů ochrany přírody a neupravují samotnou podporu obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Změny se týkají agrovoltaických výroben a solárních zařízení, tedy konkrétních obnovitelných zdrojů.",
+          "effectCz": "Dosavadní § 8a vyžadoval pro agrovoltaickou výrobnu souhlas orgánu ochrany zemědělského půdního fondu; navržený text tuto formulaci odstraňuje a začleňuje posuzování do povolování záměru. Schválené znění navíc rozšiřuje výjimku pro solární zařízení na některých půdách I. a II. třídy ochrany v blízkosti dopravních staveb. Jde o uvolnění části povolovacích a půdních omezení pro solární výrobu, nikoli o ukončení její podpory."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválená změna energetického zákona upravuje věcná břemena pro stavby vývodových vedení výroben elektřiny z obnovitelných zdrojů.",
+          "effectCz": "Podle dodaného předchozího znění vznikalo oprávnění k věcnému břemeni také držiteli licence provozujícímu veřejně prospěšnou výrobnu elektřiny z obnovitelných zdrojů; schválené znění tuto konkrétní možnost nahrazuje oprávněním stavebníka vedení vyvedení výkonu. Pro samotnou výrobnu se tedy příslušný nárok zužuje, zatímco povolenému vývodovému vedení se přístup k pozemkům usnadňuje. Celkový směr této dílčí změny pro podporu výroben nelze z jedné úpravy odvodit jako její ukončení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Předložené změny vodního zákona upravují hlavně povolovací postupy a nepropojují je v dodaném textu konkrétně s podporou obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změna zahrnuje obecnou energetickou infrastrukturu, ale dodané odstavce ji nespojují konkrétně s obnovitelnými zdroji ani s jejich podporou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Schválené znění stanoví povinné minimální podíly obnovitelných paliv a přímo mění rozsah této podpory.",
+          "effectCz": "Dosavadní minimální podíl činil v letech 2027–2029 postupně 1,5 %, 2,5 % a 3,75 % energetického obsahu; schválené znění jej snižuje na 1,25 %, 2 % a 3,5 %. Povinnost tedy v těchto letech částečně slábne, ale zůstává v platnosti, takže nejde o ukončení podpory obnovitelných paliv."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku bylo v textu schváleném Sněmovnou odstraněno; dodaný text nezakládá změnu podpory obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Změny zákona o urychlení využívání obnovitelných zdrojů upravují povolování a podmínky pro záměry v akceleračních oblastech.",
+          "effectCz": "Předchozí znění svěřovalo stanovisko k akcelerační oblasti krajskému úřadu a zahrnovalo samostatné stanovisko vodoprávního úřadu; navržené znění přesouvá tuto úlohu ke stavebnímu úřadu a vypouští samostatný vodoprávní postup. Schválené znění dál mění příslušnost a spojuje některé podmínky s povolením záměru. Tím se povolovací rámec pro obnovitelné zdroje mění a v některých ohledech zjednodušuje; nejde o omezení, které by samo ukončovalo jejich podporu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Změna zákona o podporovaných zdrojích energie upravuje výplatu dotací na podporu elektřiny, tepla a biometanu.",
+          "effectCz": "Předchozí znění počítalo se čtvrtletními splátkami dotace; schválené znění je mění na měsíční platby vypočítávané podle skutečných nákladů. Změna upravuje načasování a způsob financování, nikoli nárok či celkový objem podpory; ten se podle dodaného znění nesnižuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-52",
+          "relevant": false,
+          "reasonCz": "Dodané ustanovení prodlužuje možnost platnosti stanoviska k posouzení vlivů u speciální dráhy, nikoli podporu obnovitelných zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Schválené znění ruší část zákona o urychlení využívání obnovitelných zdrojů, ale její obsah není v balíčku uveden, takže její vztah ke slibu nelze bezpečně vyloučit.",
+          "effectCz": "Dodaný text uvádí pouze zrušení části šesté zákona č. 249/2025 Sb.; její předchozí obsah ani jeho přesné následky balíček neobsahuje. Směr ani rozsah dopadu na podporu obnovitelných zdrojů proto nelze z podkladů určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": true,
+          "reasonCz": "Dohoda výslovně počítá s podporou zavádění a využívání obnovitelných zdrojů energie.",
+          "effectCz": "Jde o mezinárodní dohodu bez předchozího domácího znění k porovnání; dodané znění zakládá spolupráci s cílem podporovat zavádění a využívání obnovitelných zdrojů energie. Je to směr opačný k závazku jejich podporu ukončit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet a související hlasování se přímo dotýkají výdajů na podporované zdroje energie, ale vybrané rozpočtové pasáže neobsahují konkrétní částky pro tuto položku.",
+          "effectCz": "Rozpočet stanoví výdaje podle kapitol v přílohách, avšak dodané pasáže žádnou částku pro podporu obnovitelných zdrojů neuvádějí. Rozsah podpory ani její změnu proto nelze z tohoto textu samostatně určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu SFŽP výslovně počítá s financováním projektů nových obnovitelných zdrojů energie.",
+          "effectCz": "Jde o rozpočtový návrh bez předchozího znění k porovnání. Uvádí 29 633 429 000 Kč z Modernizačního fondu a přibližně 29 633,4 mil. Kč výdajů na rok 2026, včetně financování projektů ve výzvách na nové obnovitelné zdroje; souhrnná alokace výzev přesahuje 90 000 mil. Kč. Návrh tedy počítá s pokračováním významného financování, nikoli s ukončením podpory."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-8",
+          "relevant": true,
+          "reasonCz": "Navržená dohoda výslovně zahrnuje podporu obnovitelné energie a spolupráci v energetice.",
+          "effectCz": "Mezinárodní dohoda nemá v dodaném balíčku předchozí znění k porovnání. Navržený text počítá s podporou obnovitelné energie, jejího rozvoje a energetické účinnosti; tento závazek je v napětí se slibem podporu obnovitelných zdrojů ukončit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-38",
+          "relevant": true,
+          "reasonCz": "Navržená obchodní dohoda výslovně podporuje obchod a investice do obnovitelných zdrojů energie.",
+          "effectCz": "Dodaný návrh mezinárodní dohody bez předchozího znění stanoví podporu obchodu a investic do environmentálního zboží a služeb, včetně obnovitelných zdrojů. Jde o podporu jejich rozvoje, nikoli o její ukončení."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-144",
+          "relevant": true,
+          "reasonCz": "Nařízení výslovně zahrnuje rozvoj kapacity obnovitelných zdrojů mezi investice, které mohou průmyslové podniky použít při splnění podmínek kompenzace.",
+          "effectCz": "Předchozí znění dotčeného ustanovení nařízení v balíčku chybí, takže změnu oproti dosavadnímu pravidlu nelze určit. Přijatý text stanoví, že podmínky kompenzace lze splnit mimo jiné investicí alespoň 50 % poslední kompenzace do zařízení, včetně rozvoje kapacity obnovitelných zdrojů; celkové financování kompenzací ani podpory obnovitelných zdrojů ale dodaný text neukončuje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1022",
+          "relevant": true,
+          "reasonCz": "Usnesení vlády přímo zvyšuje rozpočtové prostředky určené na podporované zdroje energie pro rok 2026.",
+          "effectCz": "Jde o rozhodnutí vlády bez předchozího znění zákona k porovnání: částka určená pro podporu v roce 2026 se zvýšila z 24,6 mld. Kč na 41,734 mld. Kč. Rozhodnutí tedy výrazně rozšiřuje státní financování podpory místo jeho ukončení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Usnesení ruší vládní akční plány pro rozvoj využití obnovitelného tepla a biometanu, takže se přímo dotýká části podpory obnovitelných zdrojů.",
+          "effectCz": "Původní obsah akčních plánů v balíčku není, a proto nelze vyčíslit dopad jejich zrušení. Samotné zrušení plánů ukončuje dva konkrétní programové nástroje pro obnovitelné teplo a biometan, tedy dílčí podporu omezuje, ale nedokládá konec podpory OZE jako celku."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-506",
+          "relevant": true,
+          "reasonCz": "Usnesení rozděluje prostředky na projekty Národního plánu obnovy včetně projektů zaměřených na obnovitelné zdroje a jejich infrastrukturu.",
+          "effectCz": "Usnesení rozhoduje o převodu celkem 10 160 830 520,85 Kč na příslušné organizační složky státu. V dodaných řádcích jsou mimo jiné částky 8 396 747 Kč a 620 633 Kč pro projekty spojené s povolováním či rozvojem OZE a 381 900 139,79 Kč na infrastrukturu OZE a elektrizační soustavu. Bez předchozího rozpočtového znění nelze určit čistou změnu, ale rozhodnutí financuje konkrétní projekty podporující obnovitelné zdroje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-606",
+          "relevant": true,
+          "reasonCz": "Usnesení stanoví podporu podporovaných zdrojů energie pro rok 2027 a mění částku podpory pro rok 2026.",
+          "effectCz": "Vláda stanovila pro rok 2027 prostředky ve výši 41 284 133 333 Kč a částku pro rok 2026 snížila z 41,734 mld. Kč na 39,034 mld. Kč. Snížení pro rok 2026 je dílčím omezením, ale vysoká podpora pro oba roky zůstává; rozhodnutí tedy podporu neukončuje."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-c819f8f8a5--source",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-42",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43203-16",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--law-change-43453-8",
+        "psp-core-2025--law-change-43453-38",
+        "esbirka-regulations--law-change-sb-2026-144",
+        "zvlady-resolutions--law-change-uv-2025-1022",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "zvlady-resolutions--law-change-uv-2026-506",
+        "zvlady-resolutions--law-change-uv-2026-606",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88196",
+        "psp-core-2025--vote-88235",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--amendment-text-1133",
+        "psp-core-2025--amendment-text-1054",
+        "psp-core-2025--vote-86833",
+        "psp-core-2025--vote-86850",
+        "psp-core-2025--vote-86858",
+        "psp-core-2025--vote-86863",
+        "psp-core-2025--vote-86873",
+        "psp-core-2025--vote-86879",
+        "psp-core-2025--vote-86898",
+        "psp-core-2025--vote-86899",
+        "psp-core-2025--vote-86901",
+        "psp-core-2025--vote-86902",
+        "psp-core-2025--vote-86903",
+        "psp-core-2025--vote-86904",
+        "psp-core-2025--vote-86910",
+        "psp-core-2025--vote-86916",
+        "psp-core-2025--vote-86918",
+        "psp-core-2025--vote-86921",
+        "psp-core-2025--vote-86936",
+        "psp-core-2025--vote-86951",
+        "psp-core-2025--vote-86953",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-86968",
+        "zvlady-resolutions--2025-1022",
+        "zvlady-resolutions--2026-377",
+        "zvlady-resolutions--2026-506",
+        "zvlady-resolutions--2026-606",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--print-step-212285",
+        "esbirka-regulations--2026-144"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili a následně podpořili novelu stavebního zákona, která v některých bodech usnadňuje povolování solárních a dalších obnovitelných zdrojů; novela také snižuje některé povinné podíly obnovitelných paliv, ale neruší je. Vláda Motoristů v prosinci 2025 zvýšila prostředky na podporované zdroje energie pro rok 2026 na 41,734 miliardy korun a později stanovila 41,284 miliardy pro rok 2027. V září 2026 částku pro rok 2026 snížila na 39,034 miliardy, takže podporu omezila jen částečně. Některé návrhy na snížení rozpočtových dotací na obnovitelné zdroje Motoristé nepodpořili; jejich pozdější rozhodnutí o pokračujícím financování je však významnější než tyto neúspěšné návrhy.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U rozpočtu na rok 2026 dodané pasáže neuvádějí konkrétní částku v položce podpory obnovitelných zdrojů; výši financování dokládají samostatná vládní usnesení.",
+        "U zrušené části šesté zákona o urychlení využívání obnovitelných zdrojů není v balíčku uveden její obsah, takže nelze určit směr ani rozsah dopadu.",
+        "Některá rozhodnutí a návrhy podporu omezují, například zrušení akčních plánů a snížení částky pro rok 2026; současně ale zůstává schválené významné financování a další kroky usnadňují rozvoj OZE."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0d278f46a08c58e9016aec84ef1ea487d1ac862c288d52984a",
+    "model": "gpt-6-luna",
+    "reasoningEffort": "max",
+    "usage": {
+      "input_tokens": 236078,
+      "input_tokens_details": {
+        "cache_write_tokens": 236075,
+        "cached_tokens": 0
+      },
+      "output_tokens": 29487,
+      "output_tokens_details": {
+        "reasoning_tokens": 29096
+      },
+      "total_tokens": 265565
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "motoriste-2025-c819f8f8a5--source",
+        "zvlady-resolutions--2025-1022",
+        "zvlady-resolutions--law-change-uv-2025-1022",
+        "zvlady-resolutions--2026-606",
+        "zvlady-resolutions--law-change-uv-2026-606",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-approved-43"
+      ],
+      "explanationCz": "Volím B: podklady ukazují, že Motoristé ve vládě podporu obnovitelných zdrojů neukončili, ale nedokládají zachování všech jejích podob. Vláda nejprve zvýšila prostředky na rok 2026 z 24,6 na 41,734 miliardy korun; později je snížila na 39,034 miliardy, ale zároveň schválila 41,284 miliardy na rok 2027. To odporuje části slibu, ale A přehání, když z těchto rozhodnutí vyvozuje popření celého závazku. B však přehlíží, že změny, které Motoristé podpořili, zrušily dvě výjimky pro obnovitelné zdroje využívající vodní tok a omezily podporu některým výrobnám biometanu s vyšším výkonem. Tyto dílčí chyby nemění hlavní obraz: významná podpora pokračuje, zatímco její část byla snížena."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-against",
+    "selectedReview": "assessor-b"
+  }
+}

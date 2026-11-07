@@ -1,0 +1,971 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-09-47-764Z--fd9bf61317bc",
+  "evaluatedAt": "2026-11-05T10:09:47.764Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-9948da874546/fd9bf61317bcf67342ed3c1b0c86dd6a70bccc34b18294ecb685c9bf051422b3.json",
+  "packageHash": "fd9bf61317bcf67342ed3c1b0c86dd6a70bccc34b18294ecb685c9bf051422b3",
+  "assessmentContentHash": "9293746a6576c1787d869b3bfbcacaa464247b657e26ef0ff466c51799d41df7",
+  "assessmentFingerprint": "0f754e25541e7372ebfc06f80e4e68572d1b9efdc37424c741e9754c15912f8b",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-9948da874546",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment gives a law change more than one relevance verdict",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0c1518646a77eadc016aec54a60c3887d1bafebbe6012c5064",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 232507,
+            "input_tokens_details": {
+              "cache_write_tokens": 226157,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 11884,
+            "output_tokens_details": {
+              "reasoning_tokens": 7250
+            },
+            "total_tokens": 244391
+          },
+          "output": {
+            "promiseId": "candidate-9948da874546",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-1",
+                "relevant": true,
+                "reasonCz": "Ustanovení upravují dostupnost poradenství a podpůrných opatření pro osoby v bytové nouzi, mezi nimiž schválené znění výslovně upřednostňuje některé domácnosti s dětmi.",
+                "effectCz": "Před změnou mohl o poradenství kontaktního místa požádat kdokoli se zájmem; návrh přístup váže na stanovené pobytové, pracovní či studijní podmínky. Schválené znění zároveň nově ukládá přednostně vyřizovat některé naléhavé případy, včetně domácností s nezaopatřeným dítětem. Přístup k poradenství je tedy pro část lidí užší, zatímco naléhavá podpora vybraných rodin je cílenější; celkový směr nelze vyjádřit jako jednoznačné rozšíření."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43198-4",
+                "relevant": true,
+                "reasonCz": "Změna prodlužuje přechodné vyplácení dávek, které mohou tvořit podporu rodin, a proto se týká konkrétního způsobu podpory domácností.",
+                "effectCz": "Dříve se některé přídavky na dítě a příspěvky na bydlení zachovávaly do 31. března a nároky na příspěvek na živobytí a doplatek na bydlení do 30. dubna 2026. Návrh tyto lhůty prodlužuje do 30. června a 31. července 2026 a posouvá účinnost souvisejících ustanovení. Přechodné zachování podpory se tedy prodlužuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": true,
+                "reasonCz": "Rozpočet obsahuje výdaje na podporu rodin a prevenci a jsou k němu doloženy konkrétní návrhy na jejich změnu.",
+                "effectCz": "Nejde o novelu dosavadního zákona, ale o rozpočet na rok 2026; dodané znění odkazuje na tabulky výdajů v přílohách, jejichž konkrétní částky zde nejsou. Z podkladů proto nelze určit výši schválených výdajů na rodiny či prevenci ani jejich změnu oproti předchozímu stavu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43219-1",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje časovou podporu pečujících, což je konkrétní forma podpory rodiny při dlouhodobé péči.",
+                "effectCz": "Dosavadní podpůrčí doba dlouhodobého ošetřovného končila nejpozději po 90 kalendářních dnech. Návrh umožňuje její prodloužení až na celkem 180 dnů, po předchozím souhlasu příslušného orgánu a při stanoveném postupu. Možnost podpory pečujících rodin se tím rozšiřuje, byť za nových podmínek."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43222-1",
+                "relevant": true,
+                "reasonCz": "Návrh přímo zvyšuje rodičovský příspěvek a mění podmínky jeho čerpání, tedy konkrétní podporu rodin.",
+                "effectCz": "Před změnou činila celková částka rodičovského příspěvku 350 000 Kč; návrh ji zvyšuje na 370 000 Kč. Současně odstraňuje časový limit docházky dětí do některých zařízení a nově umožňuje vládě zvýšit příspěvek při růstu cen alespoň o 5 %. Podpora rodin se v těchto ohledech rozšiřuje; valorizace je však pouze možná, nikoli automaticky zaručená."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43233-2",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje rodičovský příspěvek a uvolňuje podmínky pro jeho čerpání, což přímo podporuje rodiny s dětmi.",
+                "effectCz": "Před změnou činil celkový rodičovský příspěvek 350 000 Kč, zatímco návrh stanoví 400 000 Kč. Návrh také zvyšuje limity měsíčního čerpání a rozšiřuje případy, kdy se péče považuje za splněnou. Podpora rodin se tím zvyšuje a možnost volby čerpání se rozšiřuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43233-3",
+                "relevant": true,
+                "reasonCz": "Návrh prodlužuje některé dávky určené rodičům a pečujícím, a tím představuje konkrétní podporu rodin v péči o děti či blízké.",
+                "effectCz": "Dosavadní ošetřovné náleželo nejdéle 9 dnů, případně 16 dnů osamělému pojištěnci s dítětem; návrh stanoví maximum 16 dnů pro všechny případy a ruší zvláštní vymezení osamělého pojištěnce. U otcovské a dalších nároků návrh prodlužuje některé lhůty z 6 týdnů na 12 měsíců. Podpora se v těchto ohledech rozšiřuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43239-1",
+                "relevant": true,
+                "reasonCz": "Upravuje rodičovský příspěvek před porodem a přechod na jeho čerpání po narození dítěte, tedy přímou podporu rodin.",
+                "effectCz": "Dřívější znění dotčených ustanovení § 30d není v dodaném kontextu k dispozici, takže směr změny těchto pravidel nelze spolehlivě porovnat. Návrh stanoví předporodní rodičovský příspěvek 15 000 Kč měsíčně, požadavek na novou žádost po jeho zániku a pravidla pro započtení vyplacených částek; přesný rozdíl oproti předchozímu právu nelze z balíčku určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-2",
+                "relevant": true,
+                "reasonCz": "Změna zavádí daňovou úlevu na výdaje spojené s umístěním dítěte v předškolním zařízení a osvobození některých příspěvků na služby péče.",
+                "effectCz": "Před změnou uvedená sleva za umístění dítěte v dodaném kontextu neexistovala. Návrh zavádí slevu ve výši prokázaných výdajů, nejvýše do výše minimální mzdy za dítě, a osvobozuje také některé příspěvky na komunitní sociální služby. Jde o rozšíření daňové podpory rodin, avšak sleva není sama o sobě cílenou podporou podle sociální potřebnosti."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43319-1",
+                "relevant": true,
+                "reasonCz": "Vládní návrh přímo zvyšuje rodičovský příspěvek pro rodiny pečující o nejmladší dítě.",
+                "effectCz": "Před změnou činila celková částka rodičovského příspěvku 350 000 Kč na dítě; návrh ji zvyšuje na 400 000 Kč, u vícerčat zachovává dvojnásobek. Nová částka se podle dodaného znění vztahuje na děti narozené či převzaté do péče od 1. ledna 2027. Podpora rodin se zvyšuje, ale jen o část celého slibu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+                "relevant": true,
+                "reasonCz": "Schválená část mění dávku státní sociální pomoci, rozšiřuje ochranu osamělých rodičů a upravuje výpočet podpory na bydlení.",
+                "effectCz": "Před změnou byli osamělí rodiče zahrnuti mezi zranitelné osoby při péči o dítě mladší 7 let; schválené znění hranici zvyšuje na 15 let. Zároveň nahrazuje členění obcí členěním podle okresů a zavádí pravidlo, že normativní nájemné pro početnější domácnost nesmí být nižší než pro domácnost s bezprostředně menším počtem členů. Podpora osamělých rodičů se rozšiřuje a výpočet podpory na bydlení se upravuje, přičemž konkrétní výsledné částky nelze z textu určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+                "relevant": true,
+                "reasonCz": "Ruší předpis stanovující normativní nájemné pro dávku státní sociální pomoci, což může ovlivnit podporu domácností s náklady na bydlení.",
+                "effectCz": "Schválené znění ruší sdělení ministerstva č. 526/2025 Sb. o normativním nájemném pro rok 2026. Předchozí hodnoty tohoto sdělení ani jejich náhrada nejsou v dodaném textu uvedeny, proto nelze určit, zda se nárok či výše podpory rodin zpřísní nebo uvolní."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43477-3",
+                "relevant": true,
+                "reasonCz": "Návrh přímo propojuje školu s odbornou poradenskou pomocí rodičům a mění podmínky, kdy ji může obecní úřad uložit.",
+                "effectCz": "Před změnou mohla být rodičům uložena povinnost využít odbornou poradenskou pomoc, pokud ji předtím doporučil příslušný obecní úřad. Návrh přidává i případ, kdy rodiče k vyhledání pomoci předtím vyzvala škola nebo školské zařízení. Rozšiřuje se tak možnost zapojení školy do včasné podpory rodin."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-142",
+                "relevant": true,
+                "reasonCz": "Vládní plán zahrnuje návrh zákona o mimořádné pomoci nízkopříjmovým rodinám a výslovně uvádí školní stravování a volnočasové aktivity dětí.",
+                "effectCz": "Jde o plán legislativní práce, nikoli o platné pravidlo: vláda zařazuje návrh zákona, který má umožnit standardní podporu nízkopříjmových rodin i pomoc při nenadálých situacích. V plánu jsou také zlevněné školní stravování a podpora kroužků, družin a volnočasových aktivit. Konkrétní nárok ani výše podpory zatím nejsou stanoveny."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43198-4",
+                "relevant": true,
+                "reasonCz": "Změna prodlužuje přechodné vyplácení dávek, které mohou tvořit podporu rodin, a proto se týká konkrétního způsobu podpory domácností.",
+                "effectCz": "Dříve se některé přídavky na dítě a příspěvky na bydlení zachovávaly do 31. března a nároky na příspěvek na živobytí a doplatek na bydlení do 30. dubna 2026. Návrh tyto lhůty prodlužuje do 30. června a 31. července 2026 a posouvá účinnost souvisejících ustanovení. Přechodné zachování podpory se tedy prodlužuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": true,
+                "reasonCz": "Rozpočet obsahuje výdaje na podporu rodin a prevenci a jsou k němu doloženy konkrétní návrhy na jejich změnu.",
+                "effectCz": "Nejde o novelu dosavadního zákona, ale o rozpočet na rok 2026; dodané znění odkazuje na tabulky výdajů v přílohách, jejichž konkrétní částky zde nejsou. Z podkladů proto nelze určit výši schválených výdajů na rodiny či prevenci ani jejich změnu oproti předchozímu stavu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43222-1",
+                "relevant": true,
+                "reasonCz": "Návrh přímo zvyšuje rodičovský příspěvek a mění podmínky jeho čerpání, tedy konkrétní podporu rodin.",
+                "effectCz": "Před změnou činila celková částka rodičovského příspěvku 350 000 Kč; návrh ji zvyšuje na 370 000 Kč. Současně odstraňuje časový limit docházky dětí do některých zařízení a nově umožňuje vládě zvýšit příspěvek při růstu cen alespoň o 5 %. Podpora rodin se v těchto ohledech rozšiřuje; valorizace je však pouze možná, nikoli automaticky zaručená."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43233-2",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje rodičovský příspěvek a uvolňuje podmínky pro jeho čerpání, což přímo podporuje rodiny s dětmi.",
+                "effectCz": "Před změnou činil celkový rodičovský příspěvek 350 000 Kč, zatímco návrh stanoví 400 000 Kč. Návrh také zvyšuje limity měsíčního čerpání a rozšiřuje případy, kdy se péče považuje za splněnou. Podpora rodin se tím zvyšuje a možnost volby čerpání se rozšiřuje."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-9948da874546--source",
+              "psp-core-2025--law-change-43189-1",
+              "psp-core-2025--print-step-210686",
+              "psp-core-2025--amendment-text-762",
+              "psp-core-2025--amendment-762",
+              "psp-core-2025--vote-87603",
+              "psp-core-2025--vote-87617",
+              "psp-core-2025--law-change-43198-4",
+              "psp-core-2025--print-step-210727",
+              "psp-core-2025--government-opinion-43198-1",
+              "psp-core-2025--vote-86697",
+              "psp-core-2025--law-change-43204-1",
+              "psp-core-2025--print-step-210761",
+              "psp-core-2025--amendment-text-481",
+              "psp-core-2025--amendment-481",
+              "psp-core-2025--vote-86896",
+              "psp-core-2025--amendment-text-482",
+              "psp-core-2025--amendment-482",
+              "psp-core-2025--vote-86897",
+              "psp-core-2025--amendment-text-516",
+              "psp-core-2025--vote-86836",
+              "psp-core-2025--amendment-text-515",
+              "psp-core-2025--vote-86936",
+              "psp-core-2025--amendment-text-522",
+              "psp-core-2025--vote-86939",
+              "psp-core-2025--amendment-text-577",
+              "psp-core-2025--vote-86915",
+              "psp-core-2025--amendment-text-510",
+              "psp-core-2025--vote-86917",
+              "psp-core-2025--amendment-text-462",
+              "psp-core-2025--vote-86859",
+              "psp-core-2025--law-change-43219-1",
+              "psp-core-2025--government-opinion-43219-1",
+              "psp-core-2025--law-change-43222-1",
+              "psp-core-2025--government-opinion-43222-1",
+              "psp-core-2025--law-change-43233-2",
+              "psp-core-2025--law-change-43233-3",
+              "psp-core-2025--government-opinion-43233-1",
+              "psp-core-2025--law-change-43239-1",
+              "psp-core-2025--print-step-210930",
+              "psp-core-2025--government-opinion-43239-1",
+              "psp-core-2025--amendment-text-1037",
+              "psp-core-2025--vote-87384",
+              "psp-core-2025--amendment-text-1038",
+              "psp-core-2025--vote-87385",
+              "psp-core-2025--vote-87387",
+              "psp-core-2025--law-change-43310-2",
+              "psp-core-2025--print-step-211390",
+              "psp-core-2025--amendment-text-1400",
+              "psp-core-2025--vote-88294",
+              "psp-core-2025--vote-88356",
+              "psp-core-2025--vote-88456",
+              "psp-core-2025--law-change-43319-1",
+              "psp-core-2025--law-change-43319-approved-2",
+              "psp-core-2025--law-change-43319-approved-3",
+              "psp-core-2025--print-step-211452",
+              "psp-core-2025--amendment-text-1487",
+              "psp-core-2025--amendment-1487",
+              "psp-core-2025--amendment-text-1507",
+              "psp-core-2025--amendment-1507",
+              "psp-core-2025--vote-88125",
+              "psp-core-2025--vote-88130",
+              "psp-core-2025--law-change-43477-3",
+              "psp-core-2025--print-step-212471",
+              "zvlady-resolutions--law-change-uv-2026-175-142",
+              "zvlady-resolutions--2026-175"
+            ],
+            "explanationCz": "Poslanci ANO podpořili zvýšení rodičovského příspěvku z 350 000 na 400 000 Kč a schválili také změny dávek, které rozšiřují podporu některých rodičů a domácností. Vláda rovněž předložila plán poradenské pomoci rodičům po podnětu školy; tento návrh ale zatím není schváleným pravidlem. U rozpočtu ANO prosadilo navýšení podpory volnočasových aktivit mládeže, zároveň však nepodpořilo některé návrhy na posílení školních podpůrných pracovníků, prorodinných služeb a sociálně-právní ochrany dětí. Doložené kroky tedy naplňují část slibu, nikoli zatím jeho celek.",
+            "confidence": "medium",
+            "uncertainties": [
+              "V dodaném výňatku rozpočtu na rok 2026 nejsou uvedeny konkrétní částky pro podporu rodin a prevenci; nelze proto porovnat celý schválený rozpočet s návrhy na jeho změnu.",
+              "ANO hlasovalo pro navýšení výdajů na činnost mládežnických organizací, ale proti několika návrhům na financování školních podpůrných pracovníků, služeb pro rodiny a ochrany dětí. Tyto protichůdné postoje zůstávají důležité, přestože později schválené zvýšení rodičovského příspěvku dokládá postup k části slibu.",
+              "U změn normativního nájemného nejsou uvedeny zrušené ani nové konkrétní částky, takže nelze posoudit jejich skutečný dopad na podporu jednotlivých rodin."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-9948da874546",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje přístup k poradenské pomoci v bytové nouzi a stanoví přednostní vyřizování některých žádostí rodin s dětmi, takže se týká cílené podpory rodin.",
+          "effectCz": "Dosavadní § 12 poskytoval poradenství každému zájemci; předložený návrh je omezuje na vymezené osoby s vazbou na území kontaktního místa. Schválený výňatek konečné znění této změny § 12 neukazuje, takže její výsledný dopad nelze z balíčku určit. Schválený text ale doplňuje přednostní postup pro naléhavé případy, mimo jiné pro domácnosti s nezaopatřeným dítětem; jde o cílenou podporu části rodin."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": true,
+          "reasonCz": "Prodlužuje přechodné vyplácení dosavadních rodinných a bytových dávek, a tím se dotýká podpory některých rodin.",
+          "effectCz": "Dosavadní lhůty pro zachování výplaty přídavku na dítě a příspěvku na bydlení se u žadatelů prodlužují z 31. března na 30. června 2026; lhůta pro příspěvek na živobytí a doplatek na bydlení z 30. dubna na 31. července 2026. Zvyšuje se tak časový rozsah přechodné ochrany, nikoli samotná výše dávek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet obsahuje návrhy na financování školní prevence, podpory dětí a mládeže a rodin, tedy opatření spadající pod části slibu.",
+          "effectCz": "Jde o státní rozpočet, takže předchozí znění právní úpravy není k porovnání. Výňatek rozpočtu pouze odkazuje na přílohy a neukazuje konečné částky; související pozměňovací návrhy navrhovaly mimo jiné 50 mil. Kč na podporu činnosti v oblasti mládeže, 1 mld. Kč na podporu škol se sociálně znevýhodněnými žáky a 36 mil. Kč na prorodinné služby. Z přiložených výsledků hlasování je doloženo přijetí návrhu na 50 mil. Kč pro mládež, nikoli návrhu na miliardu pro školy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43219-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje podporu rodinám pečujícím o blízkého tím, že umožňuje delší čerpání dlouhodobého ošetřovného.",
+          "effectCz": "Dříve podpůrčí doba dlouhodobého ošetřovného končila nejpozději po 90 dnech; návrh ji umožňuje prodloužit až na 180 dní, ovšem po předchozím souhlasu orgánu nemocenského pojištění. Zvyšuje tedy nejvyšší možnou dobu podpory, současně však prodloužení podmiňuje schválením."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43222-1",
+          "relevant": true,
+          "reasonCz": "Návrh zvyšuje rodičovský příspěvek a zavádí možnost jeho pravidelného zvyšování, což je přímá podpora rodin.",
+          "effectCz": "Dosavadní celková částka 350 000 Kč se v návrhu zvyšuje na 370 000 Kč a vláda by mohla dávku zvyšovat při splnění stanovené inflační podmínky. To rozšiřuje podporu rodin; předchozí znění ustanovení o valorizaci v balíčku uvedeno není."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43233-2",
+          "relevant": true,
+          "reasonCz": "Mění rodičovský příspěvek a pravidla péče o malé děti, tedy přímo zasahuje do podpory rodin.",
+          "effectCz": "Dosavadní celková částka rodičovského příspěvku 350 000 Kč se v návrhu zvyšuje na 400 000 Kč. U dětí mladších dvou let se dosavadní limit návštěvy zařízení 120 hodin měsíčně nahrazuje širší úpravou bez uvedeného hodinového limitu; návrh tak rozšiřuje část podpory a možnost péče."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43233-3",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje časové možnosti otcovské a ošetřovného, což jsou dávky a opatření přímo podporující rodiny s dětmi.",
+          "effectCz": "Návrh prodlužuje časové období pro nástup na otcovskou ze šesti týdnů na dvanáct měsíců, v některých případech až na dva roky, a maximální dobu ošetřovného sjednocuje na 16 dní namísto dosavadních 9 dní pro většinu pojištěnců. Tím se rozšiřuje časový rozsah rodinné podpory."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Upravuje rodičovský příspěvek před porodem a navazující pravidla, takže se týká podpory rodin s malými dětmi.",
+          "effectCz": "Návrh mění pravidla pro rodičovský příspěvek před porodem, jeho výši a navázání na dávku po narození dítěte. Předchozí znění dotčených ustanovení § 30d balíček neobsahuje, takže nelze spolehlivě určit směr změny všech těchto pravidel."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-1",
+          "relevant": false,
+          "reasonCz": "Dodané změny se týkají hlavně postupů a správy příspěvku na péči, nikoli cílené podpory rodin ani prevence ve spolupráci se školami.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Rozpočtová část se stává relevantní prostřednictvím pozměňovacích návrhů výslovně zaměřených na školní prevenci, podporu dětí a rodin.",
+          "effectCz": "Jde o státní rozpočet, proto nemá předchozí znění právního předpisu k porovnání. Rozpočtový výňatek neukazuje konečné částky; dodané návrhy usilovaly například o financování školní prevence a podpůrných pracovníků, rodinných služeb a pomoci dětem ohroženým. Přijetí návrhu na podporu mládeže je doloženo, zatímco návrh na školní podporu ve výši 1 mld. Kč nebyl podpořen většinou klubu ANO."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Zavádí daňovou úlevu za umístění dítěte v předškolním zařízení a osvobození některých příspěvků na komunitní sociální služby, což může podpořit rodiny.",
+          "effectCz": "V dodaném předchozím znění § 35ba sleva za umístění dítěte uvedena není; návrh ji zavádí ve výši prokázaných výdajů, nejvýše do minimální mzdy za dítě. Rozšiřuje také daňově osvobozené příspěvky na vybrané komunitní sociální služby. Jde o rozšíření daňového zvýhodnění rodin, přičemž sleva za předškolní péči je omezena výší daňové povinnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": false,
+          "reasonCz": "Dodané části ani související návrhy neukazují změnu pravidel DPH, která by byla spojena s podporou rodin nebo školní prevencí.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-1",
+          "relevant": true,
+          "reasonCz": "Zvyšuje celkovou částku rodičovského příspěvku, a tím přímo posiluje cílenou finanční podporu rodin.",
+          "effectCz": "Dosavadní částka 350 000 Kč se zvyšuje na 400 000 Kč; u vícerčat zůstává dvojnásobná konstrukce. Rodinám s dítětem narozeným od 1. ledna 2027 tedy náleží vyšší celková podpora, přičemž změna sama nezavádí pravidelnou valorizaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "Změny dávky státní sociální pomoci rozšiřují ochranu osamělých rodičů a upravují uznávání nákladů na bydlení domácností, tedy se týkají cílené podpory rodin.",
+          "effectCz": "Dosavadní věková hranice pro zvýšené zacházení s osamělým rodičem pečujícím o dítě se zvyšuje ze 7 na 15 let. Změna zároveň převádí členění normativního nájemného z kategorií obcí na okresy a stanoví, že pro domácnost s více členy nemůže být normativní nájemné nižší než pro bezprostředně menší domácnost ve stejném okrese. To rozšiřuje ochranu části rodin a upravuje výpočet podpory na bydlení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+          "relevant": false,
+          "reasonCz": "Zrušení sdělení o normativním nájemném samo o sobě v dodaném textu neukazuje změnu cílené podpory rodin ani školní prevence.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-2",
+          "relevant": false,
+          "reasonCz": "Změna se týká podmínek humanitární podpory cizinců s dočasnou ochranou a dodaný text ji nespojuje s cílenou podporou rodin či spoluprací se školami a sociálními pracovníky.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-3",
+          "relevant": true,
+          "reasonCz": "Výslovně zapojuje školu do upozornění rodičů na odbornou poradenskou pomoc a přímo tak odpovídá části slibu o spolupráci se školami.",
+          "effectCz": "Dosavadní pravidlo umožňovalo uložit rodičům odbornou pomoc zejména tehdy, když ji nezajistili po předchozím doporučení orgánu sociálně-právní ochrany. Návrh přidává také situaci, kdy rodiče k vyhledání pomoci předtím vyzvala škola nebo školské zařízení. Rozšiřuje se tak okruh podnětů a posiluje propojení školy se sociálně-právní ochranou; samo ustanovení však nezavádí novou povinnost státu zajistit rodině podporu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-142",
+          "relevant": true,
+          "reasonCz": "Vládní plán legislativních prací uvádí podporu nízkopříjmových rodin a školních jídel, kroužků a volnočasových aktivit dětí.",
+          "effectCz": "Usnesení samo nemění nároky ani nevyplácí podporu; plánuje návrh zákona o mimořádné okamžité pomoci, který má pomáhat nízkopříjmovým rodinám v nenadálých situacích. V textu jsou také uvedeny zlevněné školní obědy a finanční podpora kroužků a aktivit dětí, ale jde o programové záměry, jejichž uskutečnění vyžaduje další kroky."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-9948da874546--source",
+        "psp-core-2025--law-change-43189-1",
+        "psp-core-2025--print-step-210686",
+        "psp-core-2025--amendment-762",
+        "psp-core-2025--vote-87603",
+        "psp-core-2025--vote-87617",
+        "psp-core-2025--law-change-43198-4",
+        "psp-core-2025--print-step-210727",
+        "psp-core-2025--government-opinion-43198-1",
+        "psp-core-2025--vote-86697",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-481",
+        "psp-core-2025--vote-86896",
+        "psp-core-2025--amendment-text-515",
+        "psp-core-2025--vote-86936",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43219-1",
+        "psp-core-2025--government-opinion-43219-1",
+        "psp-core-2025--law-change-43222-1",
+        "psp-core-2025--government-opinion-43222-1",
+        "psp-core-2025--law-change-43233-2",
+        "psp-core-2025--law-change-43233-3",
+        "psp-core-2025--government-opinion-43233-1",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--print-step-210930",
+        "psp-core-2025--government-opinion-43239-1",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88294",
+        "psp-core-2025--vote-88295",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--law-change-43319-1",
+        "psp-core-2025--print-step-211452",
+        "psp-core-2025--vote-88130",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--law-change-43477-3",
+        "psp-core-2025--print-step-212471",
+        "zvlady-resolutions--law-change-uv-2026-175-142",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda ANO předložila návrh na zvýšení rodičovského příspěvku z 350 000 na 400 000 korun a poslanci ANO jej podpořili při konečném hlasování. Poslanci ANO také podpořili rozpočtový návrh na 50 milionů korun pro činnost v oblasti mládeže a vláda v legislativním plánu uvedla záměry podpory nízkopříjmových rodin a školních aktivit dětí. Strana však nepodpořila rozpočtový návrh na miliardu korun pro školy se sociálně znevýhodněnými žáky, včetně školních psychologů, sociálních pedagogů a prevence. Jde tedy o doložený posun v části podpory rodin, nikoli o naplnění celého slibu; další návrhy na zapojení škol a podporu rodin zatím samy o sobě nezajišťují úplné splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Poskytnutý výňatek schváleného rozpočtu neukazuje konečné částky v přílohách. Hlasování dokládá přijetí rozpočtového návrhu na podporu mládeže, ale z dodaného textu nelze určit celkový rozsah prostředků, které byly nakonec určeny na všechny části slibu.",
+        "V březnu vláda nesouhlasila s návrhy na delší ošetřovné, vyšší rodičovský příspěvek a další podporu rodin; ANO zároveň nepodpořilo návrh na miliardu korun pro školní podpůrné pracovníky a prevenci. Tyto kroky jsou v rozporu s částmi slibu, ale pozdější přijaté změny podporují rodiny alespoň v jiné části.",
+        "U změn pravidel rodičovského příspěvku před porodem nejsou v balíčku uvedena předchozí znění dotčených ustanovení, takže nelze určit směr těchto dílčích změn."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-9948da874546",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení o podpoře bydlení výslovně vymezují osoby v bytové nouzi a přednostní pomoc domácnostem s nezaopatřenými dětmi; škola může doložit potřebné skutečnosti.",
+          "effectCz": "Původní § 17 obecně vyžadoval splnění podmínek pro zápis potřeby podpůrného opatření; schválené znění výslovně přidává skupiny, které se za osoby bez vyhovujícího bydlení považují vždy, včetně lidí ohrožených domácím násilím či domácností s příjmem nejvýše na úrovni životního minima, a stanoví přednostní vyřizování některých naléhavých žádostí, včetně domácností s nezaopatřeným dítětem. Pro tyto skupiny se přístup k pomoci rozšiřuje; u ostatních změna podmínek poradenství navržená v předložené verzi oproti dosavadnímu poradenství pro kohokoli zúžila přístup, ale schválený výňatek konečné znění této části neukazuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Předložený text pouze posouvá termíny zachování a účinnosti pravidel dávek; dodaný obsah nespojuje změnu s cílenou podporou rodin ani s prevencí ve spolupráci se školami či sociálními pracovníky.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o státní rozpočet, k němuž ANO předložilo a podpořilo konkrétní návrhy na podporu činnosti pro děti a mládež a na prevenci závislostí.",
+          "effectCz": "Rozpočet je novým rozpočtovým zákonem, nikoli novelou se srovnatelným předchozím zněním. Dodaný výňatek odkazuje na výdajové přílohy, ale neobsahuje jejich konkrétní částky, takže samotnou konečnou výši prostředků pro rodinnou či preventivní podporu nelze z tohoto znění určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43219-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje dobu podpory při dlouhodobé péči o blízkého, což představuje konkrétní dílčí podporu rodinám pečujícím o své členy.",
+          "effectCz": "Dosavadní podpůrčí doba dlouhodobého ošetřovného končila nejpozději po 90 kalendářních dnech; návrh ji prodlužuje až na 180 dnů, přičemž prodloužení po 90 dnech podmiňuje souhlasem příslušného orgánu. Maximální dostupná doba podpory se tedy zvětšuje, ale její další čerpání je podmíněnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43222-1",
+          "relevant": true,
+          "reasonCz": "Návrh zvyšuje rodičovský příspěvek a upravuje podmínky péče o malé děti, tedy přímo mění podporu rodin s dětmi.",
+          "effectCz": "Původní celkový limit rodičovského příspěvku 350 000 Kč návrh zvyšuje na 370 000 Kč; zároveň navrhuje pravidelnou možnost zvýšení při růstu cen a rozšiřuje případy, kdy se osobní celodenní péče považuje za splněnou. Podpora se tak zvětšuje a podmínka péče se v uvedených situacích uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43233-2",
+          "relevant": true,
+          "reasonCz": "Návrh mění výši rodičovského příspěvku a možnost jeho čerpání, což je přímá část podpory rodin s malými dětmi.",
+          "effectCz": "Dosavadní celkový limit 350 000 Kč návrh zvyšuje na 400 000 Kč a odstraňuje dosavadní hranici 70 % u některých měsíčních limitů čerpání; také rozšiřuje případy uznané osobní péče o dítě. Podpora se zvyšuje a čerpání i uznání péče se v uvedeném rozsahu uvolňují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43233-3",
+          "relevant": true,
+          "reasonCz": "Návrh prodlužuje možnost čerpání otcovské a ošetřovného, a tím mění dostupnou podporu rodičů a rodin pečujících o děti.",
+          "effectCz": "U pravidel pro otcovskou se v dodaném kontextu šestitýdenní lhůty nahrazují lhůtami až 12 měsíců a u některých případů se možnost nástupu posouvá do dvou let věku dítěte. U ošetřovného se dosavadních nejvýše 9 dnů pro běžné případy mění na nejvýše 16 dnů; část kontextu k dalším změnám není dodána, takže jejich úplný dopad nelze posoudit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": false,
+          "reasonCz": "Dodaný text upravuje hlavně postup při rodičovském příspěvku před porodem a navazující žádost; nepřináší doloženou změnu cílené podpory rodin ani prevence ve spolupráci se školami či sociálními pracovníky.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-1",
+          "relevant": false,
+          "reasonCz": "Z dodaného schváleného výňatku vyplývá především změna procesních pravidel a odkazů v systému příspěvku na péči; konkrétní ustanovení nesměřuje k závazku tohoto slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": false,
+          "reasonCz": "Dodaný text této části zákona o evidenci tržeb neobsahuje ustanovení, které by samo o sobě měnilo podporu rodin nebo prevenci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Část návrhu zavádí daňovou slevu za umístění dítěte v předškolním zařízení a také daňové osvobození některých příspěvků na sociální služby, tedy konkrétní podporu péče o děti a rodiny.",
+          "effectCz": "V dodaném kontextu není předchozí znění nového ustanovení o slevě za umístění dítěte, takže směr této změny vůči dřívějšímu pravidlu nelze z balíčku určit. Návrh nově stanoví slevu ve výši prokazatelných výdajů za předškolní zařízení, nejvýše do výše minimální mzdy na dítě; u vyjmenovaných komunitních sociálních služeb také zavádí daňové osvobození příspěvků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek této části neobsahuje její ustanovení a není doloženo, že by sama měnila cílenou podporu rodin nebo prevenci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-1",
+          "relevant": true,
+          "reasonCz": "Vládní návrh zvyšuje rodičovský příspěvek, což je konkrétní forma podpory rodin s nejmladšími dětmi.",
+          "effectCz": "Dosavadní celková částka rodičovského příspěvku 350 000 Kč se zvyšuje na 400 000 Kč pro děti narozené nebo převzaté do péče od 1. ledna 2027. Jde o zvýšení podpory této skupině rodin; pro dříve vzniklé nároky původní návrh zvýšení nepřiznává."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "Schválená část rozšiřuje ochranu osamělých rodičů a upravuje pravidla nájemních nákladů v dávce státní sociální pomoci, čímž přímo mění podporu zranitelných rodin.",
+          "effectCz": "Dosavadní pravidlo považovalo za zranitelného rodiče pečujícího o dítě mladší 4 let, u osamělého rodiče o dítě mladší 7 let; schválené znění u osamělého rodiče posouvá hranici na 15 let. To rozšiřuje okruh osamělých rodičů se zvýšenou ochranou. U nájemních normativů se místo kategorií obcí zavádí členění podle okresů a doplňuje se pravidlo, že normativ pro větší domácnost nesmí klesnout pod normativ pro bezprostředně menší domácnost ve stejném okrese; ochrana větších domácností se tím rozšiřuje, ale přesnou změnu částek nelze z dodaného znění určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+          "relevant": true,
+          "reasonCz": "Zrušení již vyhlášených normativních nájmů přímo zasahuje do podkladů pro výpočet podpory na bydlení, která může být součástí podpory zranitelných rodin.",
+          "effectCz": "Část zákona ruší sdělení s normativními nájmy pro rok 2026. Jde o nové zrušovací ustanovení bez předchozího znění této části; náhradní hodnoty ani jejich dopad na výši podpory tato položka sama neuvádí, takže směr změny nároku nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-2",
+          "relevant": false,
+          "reasonCz": "Ustanovení upravují humanitární dávku pro osoby s dočasnou ochranou a nejsou spojena s cílenou rodinnou podporou ani se školní prevencí v rozsahu slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-3",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně propojuje školu s odbornou pomocí rodině, když umožňuje vyzvat rodiče k jejímu vyhledání.",
+          "effectCz": "Dosavadní § 12 umožňoval uložit rodičům odbornou poradenskou pomoc zejména tehdy, když ji dítě potřebovalo a úřad ji předtím doporučil. Návrh přidává situaci, kdy rodiče k vyhledání takové pomoci předtím vyzvala škola nebo školské zařízení; rozšiřuje tedy okolnosti, za nichž lze na pomoc navázat, ale povinnost úřadu zůstává formulována jako možnost, nikoli jako automatický nárok."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-142",
+          "relevant": true,
+          "reasonCz": "Vládní plán obsahuje návrh mimořádné pomoci nízkopříjmovým rodinám a uvádí školní stravování i volnočasové aktivity dětí jako oblasti podpory.",
+          "effectCz": "Usnesení samo nezavádí dávku ani financování; stanoví legislativní úkol připravit návrh zákona o mimořádné okamžité pomoci a zachycuje záměr podpory nízkopříjmových rodin, včetně zlevněného školního stravování a aktivit dětí. Jde o přípravu budoucí podpory, nikoli o již vzniklý nárok."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-9948da874546--source",
+        "psp-core-2025--law-change-43189-1",
+        "psp-core-2025--print-step-210686",
+        "psp-core-2025--amendment-text-762",
+        "psp-core-2025--amendment-762",
+        "psp-core-2025--vote-87603",
+        "psp-core-2025--vote-87617",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-481",
+        "psp-core-2025--amendment-481",
+        "psp-core-2025--vote-86896",
+        "psp-core-2025--amendment-text-482",
+        "psp-core-2025--amendment-482",
+        "psp-core-2025--vote-86897",
+        "psp-core-2025--amendment-text-515",
+        "psp-core-2025--vote-86936",
+        "psp-core-2025--amendment-text-577",
+        "psp-core-2025--vote-86915",
+        "psp-core-2025--amendment-text-522",
+        "psp-core-2025--vote-86939",
+        "psp-core-2025--law-change-43219-1",
+        "psp-core-2025--government-opinion-43219-1",
+        "psp-core-2025--law-change-43222-1",
+        "psp-core-2025--government-opinion-43222-1",
+        "psp-core-2025--law-change-43233-2",
+        "psp-core-2025--law-change-43233-3",
+        "psp-core-2025--government-opinion-43233-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--amendment-text-1400",
+        "psp-core-2025--vote-88294",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--law-change-43319-1",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--law-change-43319-approved-3",
+        "psp-core-2025--print-step-211452",
+        "psp-core-2025--amendment-1487",
+        "psp-core-2025--amendment-text-1487",
+        "psp-core-2025--vote-88130",
+        "psp-core-2025--law-change-43477-3",
+        "psp-core-2025--print-step-212471",
+        "zvlady-resolutions--law-change-uv-2026-175-142",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda předložila a poslanci ANO podpořili změny, které rozšiřují některé formy pomoci rodinám v bytové nouzi a zvyšují rodičovský příspěvek na 400 000 Kč. Poslanci ANO také schválili obnovu daňové slevy za umístění dítěte v předškolním zařízení; samostatný vládní návrh navíc počítá s tím, že škola může rodinu nasměrovat k odborné poradenské pomoci. Jde o dílčí kroky směrem k podpoře rodin a prevenci, nikoli o doložené naplnění celého slibu. Současně vláda nesouhlasila s návrhy na rozšíření podpory pečujících a poslanci ANO nepodpořili některé návrhy na financování školní prevence, ochrany dětí a prorodinných služeb.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný výňatek rozpočtu neobsahuje konkrétní konečné částky pro dotace na prevenci, školní podporu ani sociálně-právní ochranu dětí; ANO však podpořilo vlastní rozpočtové návrhy na podporu činnosti pro děti a mládež a na prevenci závislostí.",
+        "Vláda nesouhlasila s návrhem na prodloužení dlouhodobého ošetřovného a s návrhem na zvýšení rodičovského příspěvku i změnu podmínek péče; ANO také nepodpořilo některé návrhy na školní podpůrné pozice, služby pro rodiny a ochranu dětí. Tyto rozpory jsou návrhovými postoji, zatímco schválené zákony přinášejí dílčí podporu.",
+        "Návrh o školním vyzvání rodičů k odborné pomoci byl vládou předložen teprve 30. října 2026; z balíčku nelze doložit jeho schválení ani praktické uplatňování."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_02e7790ee21d1cba016aec551352ac87d1b2deb2e56322f9d3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 232507,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 232504
+      },
+      "output_tokens": 10588,
+      "output_tokens_details": {
+        "reasoning_tokens": 6595
+      },
+      "total_tokens": 243095
+    },
+    "output": {
+      "promiseId": "candidate-9948da874546",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje přístup k poradenské pomoci v bytové nouzi a stanoví přednostní vyřizování některých žádostí rodin s dětmi, takže se týká cílené podpory rodin.",
+          "effectCz": "Dosavadní § 12 poskytoval poradenství každému zájemci; předložený návrh je omezuje na vymezené osoby s vazbou na území kontaktního místa. Schválený výňatek konečné znění této změny § 12 neukazuje, takže její výsledný dopad nelze z balíčku určit. Schválený text ale doplňuje přednostní postup pro naléhavé případy, mimo jiné pro domácnosti s nezaopatřeným dítětem; jde o cílenou podporu části rodin."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": true,
+          "reasonCz": "Prodlužuje přechodné vyplácení dosavadních rodinných a bytových dávek, a tím se dotýká podpory některých rodin.",
+          "effectCz": "Dosavadní lhůty pro zachování výplaty přídavku na dítě a příspěvku na bydlení se u žadatelů prodlužují z 31. března na 30. června 2026; lhůta pro příspěvek na živobytí a doplatek na bydlení z 30. dubna na 31. července 2026. Zvyšuje se tak časový rozsah přechodné ochrany, nikoli samotná výše dávek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet obsahuje návrhy na financování školní prevence, podpory dětí a mládeže a rodin, tedy opatření spadající pod části slibu.",
+          "effectCz": "Jde o státní rozpočet, takže předchozí znění právní úpravy není k porovnání. Výňatek rozpočtu pouze odkazuje na přílohy a neukazuje konečné částky; související pozměňovací návrhy navrhovaly mimo jiné 50 mil. Kč na podporu činnosti v oblasti mládeže, 1 mld. Kč na podporu škol se sociálně znevýhodněnými žáky a 36 mil. Kč na prorodinné služby. Z přiložených výsledků hlasování je doloženo přijetí návrhu na 50 mil. Kč pro mládež, nikoli návrhu na miliardu pro školy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43219-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje podporu rodinám pečujícím o blízkého tím, že umožňuje delší čerpání dlouhodobého ošetřovného.",
+          "effectCz": "Dříve podpůrčí doba dlouhodobého ošetřovného končila nejpozději po 90 dnech; návrh ji umožňuje prodloužit až na 180 dní, ovšem po předchozím souhlasu orgánu nemocenského pojištění. Zvyšuje tedy nejvyšší možnou dobu podpory, současně však prodloužení podmiňuje schválením."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43222-1",
+          "relevant": true,
+          "reasonCz": "Návrh zvyšuje rodičovský příspěvek a zavádí možnost jeho pravidelného zvyšování, což je přímá podpora rodin.",
+          "effectCz": "Dosavadní celková částka 350 000 Kč se v návrhu zvyšuje na 370 000 Kč a vláda by mohla dávku zvyšovat při splnění stanovené inflační podmínky. To rozšiřuje podporu rodin; předchozí znění ustanovení o valorizaci v balíčku uvedeno není."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43233-2",
+          "relevant": true,
+          "reasonCz": "Mění rodičovský příspěvek a pravidla péče o malé děti, tedy přímo zasahuje do podpory rodin.",
+          "effectCz": "Dosavadní celková částka rodičovského příspěvku 350 000 Kč se v návrhu zvyšuje na 400 000 Kč. U dětí mladších dvou let se dosavadní limit návštěvy zařízení 120 hodin měsíčně nahrazuje širší úpravou bez uvedeného hodinového limitu; návrh tak rozšiřuje část podpory a možnost péče."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43233-3",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje časové možnosti otcovské a ošetřovného, což jsou dávky a opatření přímo podporující rodiny s dětmi.",
+          "effectCz": "Návrh prodlužuje časové období pro nástup na otcovskou ze šesti týdnů na dvanáct měsíců, v některých případech až na dva roky, a maximální dobu ošetřovného sjednocuje na 16 dní namísto dosavadních 9 dní pro většinu pojištěnců. Tím se rozšiřuje časový rozsah rodinné podpory."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Upravuje rodičovský příspěvek před porodem a navazující pravidla, takže se týká podpory rodin s malými dětmi.",
+          "effectCz": "Návrh mění pravidla pro rodičovský příspěvek před porodem, jeho výši a navázání na dávku po narození dítěte. Předchozí znění dotčených ustanovení § 30d balíček neobsahuje, takže nelze spolehlivě určit směr změny všech těchto pravidel."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-1",
+          "relevant": false,
+          "reasonCz": "Dodané změny se týkají hlavně postupů a správy příspěvku na péči, nikoli cílené podpory rodin ani prevence ve spolupráci se školami.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Rozpočtová část se stává relevantní prostřednictvím pozměňovacích návrhů výslovně zaměřených na školní prevenci, podporu dětí a rodin.",
+          "effectCz": "Jde o státní rozpočet, proto nemá předchozí znění právního předpisu k porovnání. Rozpočtový výňatek neukazuje konečné částky; dodané návrhy usilovaly například o financování školní prevence a podpůrných pracovníků, rodinných služeb a pomoci dětem ohroženým. Přijetí návrhu na podporu mládeže je doloženo, zatímco návrh na školní podporu ve výši 1 mld. Kč nebyl podpořen většinou klubu ANO."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Zavádí daňovou úlevu za umístění dítěte v předškolním zařízení a osvobození některých příspěvků na komunitní sociální služby, což může podpořit rodiny.",
+          "effectCz": "V dodaném předchozím znění § 35ba sleva za umístění dítěte uvedena není; návrh ji zavádí ve výši prokázaných výdajů, nejvýše do minimální mzdy za dítě. Rozšiřuje také daňově osvobozené příspěvky na vybrané komunitní sociální služby. Jde o rozšíření daňového zvýhodnění rodin, přičemž sleva za předškolní péči je omezena výší daňové povinnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": false,
+          "reasonCz": "Dodané části ani související návrhy neukazují změnu pravidel DPH, která by byla spojena s podporou rodin nebo školní prevencí.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-1",
+          "relevant": true,
+          "reasonCz": "Zvyšuje celkovou částku rodičovského příspěvku, a tím přímo posiluje cílenou finanční podporu rodin.",
+          "effectCz": "Dosavadní částka 350 000 Kč se zvyšuje na 400 000 Kč; u vícerčat zůstává dvojnásobná konstrukce. Rodinám s dítětem narozeným od 1. ledna 2027 tedy náleží vyšší celková podpora, přičemž změna sama nezavádí pravidelnou valorizaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "Změny dávky státní sociální pomoci rozšiřují ochranu osamělých rodičů a upravují uznávání nákladů na bydlení domácností, tedy se týkají cílené podpory rodin.",
+          "effectCz": "Dosavadní věková hranice pro zvýšené zacházení s osamělým rodičem pečujícím o dítě se zvyšuje ze 7 na 15 let. Změna zároveň převádí členění normativního nájemného z kategorií obcí na okresy a stanoví, že pro domácnost s více členy nemůže být normativní nájemné nižší než pro bezprostředně menší domácnost ve stejném okrese. To rozšiřuje ochranu části rodin a upravuje výpočet podpory na bydlení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+          "relevant": false,
+          "reasonCz": "Zrušení sdělení o normativním nájemném samo o sobě v dodaném textu neukazuje změnu cílené podpory rodin ani školní prevence.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-2",
+          "relevant": false,
+          "reasonCz": "Změna se týká podmínek humanitární podpory cizinců s dočasnou ochranou a dodaný text ji nespojuje s cílenou podporou rodin či spoluprací se školami a sociálními pracovníky.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-3",
+          "relevant": true,
+          "reasonCz": "Výslovně zapojuje školu do upozornění rodičů na odbornou poradenskou pomoc a přímo tak odpovídá části slibu o spolupráci se školami.",
+          "effectCz": "Dosavadní pravidlo umožňovalo uložit rodičům odbornou pomoc zejména tehdy, když ji nezajistili po předchozím doporučení orgánu sociálně-právní ochrany. Návrh přidává také situaci, kdy rodiče k vyhledání pomoci předtím vyzvala škola nebo školské zařízení. Rozšiřuje se tak okruh podnětů a posiluje propojení školy se sociálně-právní ochranou; samo ustanovení však nezavádí novou povinnost státu zajistit rodině podporu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-142",
+          "relevant": true,
+          "reasonCz": "Vládní plán legislativních prací uvádí podporu nízkopříjmových rodin a školních jídel, kroužků a volnočasových aktivit dětí.",
+          "effectCz": "Usnesení samo nemění nároky ani nevyplácí podporu; plánuje návrh zákona o mimořádné okamžité pomoci, který má pomáhat nízkopříjmovým rodinám v nenadálých situacích. V textu jsou také uvedeny zlevněné školní obědy a finanční podpora kroužků a aktivit dětí, ale jde o programové záměry, jejichž uskutečnění vyžaduje další kroky."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-9948da874546--source",
+        "psp-core-2025--law-change-43189-1",
+        "psp-core-2025--print-step-210686",
+        "psp-core-2025--amendment-762",
+        "psp-core-2025--vote-87603",
+        "psp-core-2025--vote-87617",
+        "psp-core-2025--law-change-43198-4",
+        "psp-core-2025--print-step-210727",
+        "psp-core-2025--government-opinion-43198-1",
+        "psp-core-2025--vote-86697",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-481",
+        "psp-core-2025--vote-86896",
+        "psp-core-2025--amendment-text-515",
+        "psp-core-2025--vote-86936",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43219-1",
+        "psp-core-2025--government-opinion-43219-1",
+        "psp-core-2025--law-change-43222-1",
+        "psp-core-2025--government-opinion-43222-1",
+        "psp-core-2025--law-change-43233-2",
+        "psp-core-2025--law-change-43233-3",
+        "psp-core-2025--government-opinion-43233-1",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--print-step-210930",
+        "psp-core-2025--government-opinion-43239-1",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88294",
+        "psp-core-2025--vote-88295",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--law-change-43319-1",
+        "psp-core-2025--print-step-211452",
+        "psp-core-2025--vote-88130",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--law-change-43477-3",
+        "psp-core-2025--print-step-212471",
+        "zvlady-resolutions--law-change-uv-2026-175-142",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda ANO předložila návrh na zvýšení rodičovského příspěvku z 350 000 na 400 000 korun a poslanci ANO jej podpořili při konečném hlasování. Poslanci ANO také podpořili rozpočtový návrh na 50 milionů korun pro činnost v oblasti mládeže a vláda v legislativním plánu uvedla záměry podpory nízkopříjmových rodin a školních aktivit dětí. Strana však nepodpořila rozpočtový návrh na miliardu korun pro školy se sociálně znevýhodněnými žáky, včetně školních psychologů, sociálních pedagogů a prevence. Jde tedy o doložený posun v části podpory rodin, nikoli o naplnění celého slibu; další návrhy na zapojení škol a podporu rodin zatím samy o sobě nezajišťují úplné splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Poskytnutý výňatek schváleného rozpočtu neukazuje konečné částky v přílohách. Hlasování dokládá přijetí rozpočtového návrhu na podporu mládeže, ale z dodaného textu nelze určit celkový rozsah prostředků, které byly nakonec určeny na všechny části slibu.",
+        "V březnu vláda nesouhlasila s návrhy na delší ošetřovné, vyšší rodičovský příspěvek a další podporu rodin; ANO zároveň nepodpořilo návrh na miliardu korun pro školní podpůrné pracovníky a prevenci. Tyto kroky jsou v rozporu s částmi slibu, ale pozdější přijaté změny podporují rodiny alespoň v jiné části.",
+        "U změn pravidel rodičovského příspěvku před porodem nejsou v balíčku uvedena předchozí znění dotčených ustanovení, takže nelze určit směr těchto dílčích změn."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0fd516d68ab30a7b016aec5574c09c87d18c1f9f4684ee8a1d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 232507,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 232504
+      },
+      "output_tokens": 12811,
+      "output_tokens_details": {
+        "reasoning_tokens": 8450
+      },
+      "total_tokens": 245318
+    },
+    "output": {
+      "promiseId": "candidate-9948da874546",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení o podpoře bydlení výslovně vymezují osoby v bytové nouzi a přednostní pomoc domácnostem s nezaopatřenými dětmi; škola může doložit potřebné skutečnosti.",
+          "effectCz": "Původní § 17 obecně vyžadoval splnění podmínek pro zápis potřeby podpůrného opatření; schválené znění výslovně přidává skupiny, které se za osoby bez vyhovujícího bydlení považují vždy, včetně lidí ohrožených domácím násilím či domácností s příjmem nejvýše na úrovni životního minima, a stanoví přednostní vyřizování některých naléhavých žádostí, včetně domácností s nezaopatřeným dítětem. Pro tyto skupiny se přístup k pomoci rozšiřuje; u ostatních změna podmínek poradenství navržená v předložené verzi oproti dosavadnímu poradenství pro kohokoli zúžila přístup, ale schválený výňatek konečné znění této části neukazuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Předložený text pouze posouvá termíny zachování a účinnosti pravidel dávek; dodaný obsah nespojuje změnu s cílenou podporou rodin ani s prevencí ve spolupráci se školami či sociálními pracovníky.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o státní rozpočet, k němuž ANO předložilo a podpořilo konkrétní návrhy na podporu činnosti pro děti a mládež a na prevenci závislostí.",
+          "effectCz": "Rozpočet je novým rozpočtovým zákonem, nikoli novelou se srovnatelným předchozím zněním. Dodaný výňatek odkazuje na výdajové přílohy, ale neobsahuje jejich konkrétní částky, takže samotnou konečnou výši prostředků pro rodinnou či preventivní podporu nelze z tohoto znění určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43219-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje dobu podpory při dlouhodobé péči o blízkého, což představuje konkrétní dílčí podporu rodinám pečujícím o své členy.",
+          "effectCz": "Dosavadní podpůrčí doba dlouhodobého ošetřovného končila nejpozději po 90 kalendářních dnech; návrh ji prodlužuje až na 180 dnů, přičemž prodloužení po 90 dnech podmiňuje souhlasem příslušného orgánu. Maximální dostupná doba podpory se tedy zvětšuje, ale její další čerpání je podmíněnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43222-1",
+          "relevant": true,
+          "reasonCz": "Návrh zvyšuje rodičovský příspěvek a upravuje podmínky péče o malé děti, tedy přímo mění podporu rodin s dětmi.",
+          "effectCz": "Původní celkový limit rodičovského příspěvku 350 000 Kč návrh zvyšuje na 370 000 Kč; zároveň navrhuje pravidelnou možnost zvýšení při růstu cen a rozšiřuje případy, kdy se osobní celodenní péče považuje za splněnou. Podpora se tak zvětšuje a podmínka péče se v uvedených situacích uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43233-2",
+          "relevant": true,
+          "reasonCz": "Návrh mění výši rodičovského příspěvku a možnost jeho čerpání, což je přímá část podpory rodin s malými dětmi.",
+          "effectCz": "Dosavadní celkový limit 350 000 Kč návrh zvyšuje na 400 000 Kč a odstraňuje dosavadní hranici 70 % u některých měsíčních limitů čerpání; také rozšiřuje případy uznané osobní péče o dítě. Podpora se zvyšuje a čerpání i uznání péče se v uvedeném rozsahu uvolňují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43233-3",
+          "relevant": true,
+          "reasonCz": "Návrh prodlužuje možnost čerpání otcovské a ošetřovného, a tím mění dostupnou podporu rodičů a rodin pečujících o děti.",
+          "effectCz": "U pravidel pro otcovskou se v dodaném kontextu šestitýdenní lhůty nahrazují lhůtami až 12 měsíců a u některých případů se možnost nástupu posouvá do dvou let věku dítěte. U ošetřovného se dosavadních nejvýše 9 dnů pro běžné případy mění na nejvýše 16 dnů; část kontextu k dalším změnám není dodána, takže jejich úplný dopad nelze posoudit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": false,
+          "reasonCz": "Dodaný text upravuje hlavně postup při rodičovském příspěvku před porodem a navazující žádost; nepřináší doloženou změnu cílené podpory rodin ani prevence ve spolupráci se školami či sociálními pracovníky.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-1",
+          "relevant": false,
+          "reasonCz": "Z dodaného schváleného výňatku vyplývá především změna procesních pravidel a odkazů v systému příspěvku na péči; konkrétní ustanovení nesměřuje k závazku tohoto slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": false,
+          "reasonCz": "Dodaný text této části zákona o evidenci tržeb neobsahuje ustanovení, které by samo o sobě měnilo podporu rodin nebo prevenci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Část návrhu zavádí daňovou slevu za umístění dítěte v předškolním zařízení a také daňové osvobození některých příspěvků na sociální služby, tedy konkrétní podporu péče o děti a rodiny.",
+          "effectCz": "V dodaném kontextu není předchozí znění nového ustanovení o slevě za umístění dítěte, takže směr této změny vůči dřívějšímu pravidlu nelze z balíčku určit. Návrh nově stanoví slevu ve výši prokazatelných výdajů za předškolní zařízení, nejvýše do výše minimální mzdy na dítě; u vyjmenovaných komunitních sociálních služeb také zavádí daňové osvobození příspěvků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": false,
+          "reasonCz": "Dodaný výňatek této části neobsahuje její ustanovení a není doloženo, že by sama měnila cílenou podporu rodin nebo prevenci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-1",
+          "relevant": true,
+          "reasonCz": "Vládní návrh zvyšuje rodičovský příspěvek, což je konkrétní forma podpory rodin s nejmladšími dětmi.",
+          "effectCz": "Dosavadní celková částka rodičovského příspěvku 350 000 Kč se zvyšuje na 400 000 Kč pro děti narozené nebo převzaté do péče od 1. ledna 2027. Jde o zvýšení podpory této skupině rodin; pro dříve vzniklé nároky původní návrh zvýšení nepřiznává."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "Schválená část rozšiřuje ochranu osamělých rodičů a upravuje pravidla nájemních nákladů v dávce státní sociální pomoci, čímž přímo mění podporu zranitelných rodin.",
+          "effectCz": "Dosavadní pravidlo považovalo za zranitelného rodiče pečujícího o dítě mladší 4 let, u osamělého rodiče o dítě mladší 7 let; schválené znění u osamělého rodiče posouvá hranici na 15 let. To rozšiřuje okruh osamělých rodičů se zvýšenou ochranou. U nájemních normativů se místo kategorií obcí zavádí členění podle okresů a doplňuje se pravidlo, že normativ pro větší domácnost nesmí klesnout pod normativ pro bezprostředně menší domácnost ve stejném okrese; ochrana větších domácností se tím rozšiřuje, ale přesnou změnu částek nelze z dodaného znění určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+          "relevant": true,
+          "reasonCz": "Zrušení již vyhlášených normativních nájmů přímo zasahuje do podkladů pro výpočet podpory na bydlení, která může být součástí podpory zranitelných rodin.",
+          "effectCz": "Část zákona ruší sdělení s normativními nájmy pro rok 2026. Jde o nové zrušovací ustanovení bez předchozího znění této části; náhradní hodnoty ani jejich dopad na výši podpory tato položka sama neuvádí, takže směr změny nároku nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-2",
+          "relevant": false,
+          "reasonCz": "Ustanovení upravují humanitární dávku pro osoby s dočasnou ochranou a nejsou spojena s cílenou rodinnou podporou ani se školní prevencí v rozsahu slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43477-3",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně propojuje školu s odbornou pomocí rodině, když umožňuje vyzvat rodiče k jejímu vyhledání.",
+          "effectCz": "Dosavadní § 12 umožňoval uložit rodičům odbornou poradenskou pomoc zejména tehdy, když ji dítě potřebovalo a úřad ji předtím doporučil. Návrh přidává situaci, kdy rodiče k vyhledání takové pomoci předtím vyzvala škola nebo školské zařízení; rozšiřuje tedy okolnosti, za nichž lze na pomoc navázat, ale povinnost úřadu zůstává formulována jako možnost, nikoli jako automatický nárok."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-142",
+          "relevant": true,
+          "reasonCz": "Vládní plán obsahuje návrh mimořádné pomoci nízkopříjmovým rodinám a uvádí školní stravování i volnočasové aktivity dětí jako oblasti podpory.",
+          "effectCz": "Usnesení samo nezavádí dávku ani financování; stanoví legislativní úkol připravit návrh zákona o mimořádné okamžité pomoci a zachycuje záměr podpory nízkopříjmových rodin, včetně zlevněného školního stravování a aktivit dětí. Jde o přípravu budoucí podpory, nikoli o již vzniklý nárok."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-9948da874546--source",
+        "psp-core-2025--law-change-43189-1",
+        "psp-core-2025--print-step-210686",
+        "psp-core-2025--amendment-text-762",
+        "psp-core-2025--amendment-762",
+        "psp-core-2025--vote-87603",
+        "psp-core-2025--vote-87617",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-481",
+        "psp-core-2025--amendment-481",
+        "psp-core-2025--vote-86896",
+        "psp-core-2025--amendment-text-482",
+        "psp-core-2025--amendment-482",
+        "psp-core-2025--vote-86897",
+        "psp-core-2025--amendment-text-515",
+        "psp-core-2025--vote-86936",
+        "psp-core-2025--amendment-text-577",
+        "psp-core-2025--vote-86915",
+        "psp-core-2025--amendment-text-522",
+        "psp-core-2025--vote-86939",
+        "psp-core-2025--law-change-43219-1",
+        "psp-core-2025--government-opinion-43219-1",
+        "psp-core-2025--law-change-43222-1",
+        "psp-core-2025--government-opinion-43222-1",
+        "psp-core-2025--law-change-43233-2",
+        "psp-core-2025--law-change-43233-3",
+        "psp-core-2025--government-opinion-43233-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--amendment-text-1400",
+        "psp-core-2025--vote-88294",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--law-change-43319-1",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--law-change-43319-approved-3",
+        "psp-core-2025--print-step-211452",
+        "psp-core-2025--amendment-1487",
+        "psp-core-2025--amendment-text-1487",
+        "psp-core-2025--vote-88130",
+        "psp-core-2025--law-change-43477-3",
+        "psp-core-2025--print-step-212471",
+        "zvlady-resolutions--law-change-uv-2026-175-142",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda předložila a poslanci ANO podpořili změny, které rozšiřují některé formy pomoci rodinám v bytové nouzi a zvyšují rodičovský příspěvek na 400 000 Kč. Poslanci ANO také schválili obnovu daňové slevy za umístění dítěte v předškolním zařízení; samostatný vládní návrh navíc počítá s tím, že škola může rodinu nasměrovat k odborné poradenské pomoci. Jde o dílčí kroky směrem k podpoře rodin a prevenci, nikoli o doložené naplnění celého slibu. Současně vláda nesouhlasila s návrhy na rozšíření podpory pečujících a poslanci ANO nepodpořili některé návrhy na financování školní prevence, ochrany dětí a prorodinných služeb.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný výňatek rozpočtu neobsahuje konkrétní konečné částky pro dotace na prevenci, školní podporu ani sociálně-právní ochranu dětí; ANO však podpořilo vlastní rozpočtové návrhy na podporu činnosti pro děti a mládež a na prevenci závislostí.",
+        "Vláda nesouhlasila s návrhem na prodloužení dlouhodobého ošetřovného a s návrhem na zvýšení rodičovského příspěvku i změnu podmínek péče; ANO také nepodpořilo některé návrhy na školní podpůrné pozice, služby pro rodiny a ochranu dětí. Tyto rozpory jsou návrhovými postoji, zatímco schválené zákony přinášejí dílčí podporu.",
+        "Návrh o školním vyzvání rodičů k odborné pomoci byl vládou předložen teprve 30. října 2026; z balíčku nelze doložit jeho schválení ani praktické uplatňování."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

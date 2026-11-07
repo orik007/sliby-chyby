@@ -1,0 +1,284 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-43-55-028Z--d8b682a308b3",
+  "evaluatedAt": "2026-10-02T05:43:55.028Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-be6a4abff0/d8b682a308b36146b93a422f0d8e91c627e0ebea7e67d3f879c76e277c465f31.json",
+  "packageHash": "d8b682a308b36146b93a422f0d8e91c627e0ebea7e67d3f879c76e277c465f31",
+  "assessmentContentHash": "de1b42468a0553cb5dce27d05513e08042ea0bb0ca081da676cc10227d99ade4",
+  "assessmentFingerprint": "74ce3bf36fb0e297c112a69feda8be24f69983cb9d5d6787f29c1d62067adf97",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-be6a4abff0",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-be6a4abff0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje pouze způsob dokládání příjmů pro zvýšení příspěvku a sama nemění jeho výši ani příspěvek na mobilitu či pomůcky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text pouze upravuje termíny účinnosti částí jiného zákona a z poskytnutého znění nevyplývá změna výše příspěvků uvedených ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-3",
+          "relevant": false,
+          "reasonCz": "Změna upravuje způsob dokládání příjmů, nikoli výši příspěvku na péči, mobilitu nebo pomůcky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Text posouvá termíny přechodu na jiné dávky, ale neuvádí změnu výše příspěvků na péči, mobilitu ani pomůcky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-2",
+          "relevant": true,
+          "reasonCz": "Schválené znění zvyšuje příspěvek na mobilitu pro osoby využívající dlouhodobou domácí oxygenoterapii nebo plicní ventilaci z 2 900 na 3 000 Kč."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": true,
+          "reasonCz": "Schválené znění ruší dva dříve naplánované body změny zákona o dávkách pro osoby se zdravotním postižením, ale jejich obsah není doložen, takže nelze určit dopad na příspěvky ze slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-be6a4abff0--source",
+        "psp-core-2025--law-change-43240-2",
+        "psp-core-2025--law-change-43240-5",
+        "psp-core-2025--vote-87394"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro novelu zákona o dávkách pro osoby se zdravotním postižením. Schválená úprava zvyšuje příspěvek na mobilitu z 2 900 na 3 000 Kč, ale jen pro osoby využívající domácí kyslíkovou léčbu nebo plicní ventilaci. Jde tedy o doložený posun v části slibu, který se týká mobility, nikoli o zvýšení příspěvku na péči i na speciální pomůcky. Novela zároveň ruší dva dříve naplánované body změny téhož zákona, jejichž obsah zde není uveden.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Nelze posoudit, zda zrušené body změny zákona měly zvyšovat příspěvek na péči, mobilitu nebo speciální pomůcky; jejich přesné znění není v podkladech. Tato nejasnost může ovlivnit celkové hodnocení hlasování o novele."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-be6a4abff0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje způsob dokládání příjmů pro zvýšení příspěvku podle zákona o sociálních službách, nikoli výši příspěvku na péči, mobilitu ani pomůcky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text mění termíny účinnosti ustanovení souvisejících se zavedením dávky státní sociální pomoci, nikoli výši některého z příspěvků uvedených ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-3",
+          "relevant": false,
+          "reasonCz": "Tato změna upravuje pouze způsob dokládání příjmů pro zvýšení příspěvku, nikoli jeho výši ani výši příspěvků na mobilitu či pomůcky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Text posouvá termíny přechodu na dávku státní sociální pomoci a nemění žádný z příspěvků uvedených ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-2",
+          "relevant": true,
+          "reasonCz": "Schválený text zvyšuje příspěvek na mobilitu z 2 900 na 3 000 Kč pro vymezenou skupinu osob, což naplňuje část slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": true,
+          "reasonCz": "Schválený text ruší dříve plánované změny dvou bodů zákona o dávkách pro osoby se zdravotním postižením, ale dodaný kontext neuvádí jejich obsah, takže nelze vyloučit dopad na některou část slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-be6a4abff0--source",
+        "psp-core-2025--law-change-43240-2",
+        "psp-core-2025--law-change-43240-5",
+        "psp-core-2025--vote-87394"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro novelu zákona o dávkách pro osoby se zdravotním postižením. Schválené znění zvyšuje příspěvek na mobilitu z 2 900 na 3 000 Kč, ale jen lidem využívajícím po celý měsíc domácí oxygenoterapii nebo plicní ventilaci. Jde tedy o posun pouze v části slibu; doložené znění neukazuje zvýšení příspěvku na péči ani na speciální pomůcky. Zákon zároveň ruší změny dvou bodů staršího zákona, jejichž obsah zde není uveden, takže jejich případný dopad nelze posoudit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný kontext neuvádí obsah bodů 2 a 5 změnového zákona č. 358/2022 Sb., které schválený text ruší; nelze proto určit, zda jejich vypuštění zasahuje do zvýšení některého z příspěvků slíbených SPD.",
+        "Podklady dokládají zvýšení příspěvku na mobilitu jen pro vymezenou skupinu osob, nikoli zvýšení příspěvku na péči nebo na speciální pomůcky."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0e98de75ee9a613b016abf4469a00c87d190c1004c67275cc3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 23322,
+      "input_tokens_details": {
+        "cache_write_tokens": 19998,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 3192,
+      "output_tokens_details": {
+        "reasoning_tokens": 2422
+      },
+      "total_tokens": 26514
+    },
+    "output": {
+      "promiseId": "spd-2025-be6a4abff0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje pouze způsob dokládání příjmů pro zvýšení příspěvku a sama nemění jeho výši ani příspěvek na mobilitu či pomůcky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text pouze upravuje termíny účinnosti částí jiného zákona a z poskytnutého znění nevyplývá změna výše příspěvků uvedených ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-3",
+          "relevant": false,
+          "reasonCz": "Změna upravuje způsob dokládání příjmů, nikoli výši příspěvku na péči, mobilitu nebo pomůcky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Text posouvá termíny přechodu na jiné dávky, ale neuvádí změnu výše příspěvků na péči, mobilitu ani pomůcky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-2",
+          "relevant": true,
+          "reasonCz": "Schválené znění zvyšuje příspěvek na mobilitu pro osoby využívající dlouhodobou domácí oxygenoterapii nebo plicní ventilaci z 2 900 na 3 000 Kč."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": true,
+          "reasonCz": "Schválené znění ruší dva dříve naplánované body změny zákona o dávkách pro osoby se zdravotním postižením, ale jejich obsah není doložen, takže nelze určit dopad na příspěvky ze slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-be6a4abff0--source",
+        "psp-core-2025--law-change-43240-2",
+        "psp-core-2025--law-change-43240-5",
+        "psp-core-2025--vote-87394"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro novelu zákona o dávkách pro osoby se zdravotním postižením. Schválená úprava zvyšuje příspěvek na mobilitu z 2 900 na 3 000 Kč, ale jen pro osoby využívající domácí kyslíkovou léčbu nebo plicní ventilaci. Jde tedy o doložený posun v části slibu, který se týká mobility, nikoli o zvýšení příspěvku na péči i na speciální pomůcky. Novela zároveň ruší dva dříve naplánované body změny téhož zákona, jejichž obsah zde není uveden.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Nelze posoudit, zda zrušené body změny zákona měly zvyšovat příspěvek na péči, mobilitu nebo speciální pomůcky; jejich přesné znění není v podkladech. Tato nejasnost může ovlivnit celkové hodnocení hlasování o novele."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_02b588528124f55c016abf447f8ab087d1b142a3df0015b5eb",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 23322,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 23319
+      },
+      "output_tokens": 3775,
+      "output_tokens_details": {
+        "reasoning_tokens": 2935
+      },
+      "total_tokens": 27097
+    },
+    "output": {
+      "promiseId": "spd-2025-be6a4abff0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje způsob dokládání příjmů pro zvýšení příspěvku podle zákona o sociálních službách, nikoli výši příspěvku na péči, mobilitu ani pomůcky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text mění termíny účinnosti ustanovení souvisejících se zavedením dávky státní sociální pomoci, nikoli výši některého z příspěvků uvedených ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-3",
+          "relevant": false,
+          "reasonCz": "Tato změna upravuje pouze způsob dokládání příjmů pro zvýšení příspěvku, nikoli jeho výši ani výši příspěvků na mobilitu či pomůcky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Text posouvá termíny přechodu na dávku státní sociální pomoci a nemění žádný z příspěvků uvedených ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-2",
+          "relevant": true,
+          "reasonCz": "Schválený text zvyšuje příspěvek na mobilitu z 2 900 na 3 000 Kč pro vymezenou skupinu osob, což naplňuje část slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": true,
+          "reasonCz": "Schválený text ruší dříve plánované změny dvou bodů zákona o dávkách pro osoby se zdravotním postižením, ale dodaný kontext neuvádí jejich obsah, takže nelze vyloučit dopad na některou část slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-be6a4abff0--source",
+        "psp-core-2025--law-change-43240-2",
+        "psp-core-2025--law-change-43240-5",
+        "psp-core-2025--vote-87394"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro novelu zákona o dávkách pro osoby se zdravotním postižením. Schválené znění zvyšuje příspěvek na mobilitu z 2 900 na 3 000 Kč, ale jen lidem využívajícím po celý měsíc domácí oxygenoterapii nebo plicní ventilaci. Jde tedy o posun pouze v části slibu; doložené znění neukazuje zvýšení příspěvku na péči ani na speciální pomůcky. Zákon zároveň ruší změny dvou bodů staršího zákona, jejichž obsah zde není uveden, takže jejich případný dopad nelze posoudit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný kontext neuvádí obsah bodů 2 a 5 změnového zákona č. 358/2022 Sb., které schválený text ruší; nelze proto určit, zda jejich vypuštění zasahuje do zvýšení některého z příspěvků slíbených SPD.",
+        "Podklady dokládají zvýšení příspěvku na mobilitu jen pro vymezenou skupinu osob, nikoli zvýšení příspěvku na péči nebo na speciální pomůcky."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

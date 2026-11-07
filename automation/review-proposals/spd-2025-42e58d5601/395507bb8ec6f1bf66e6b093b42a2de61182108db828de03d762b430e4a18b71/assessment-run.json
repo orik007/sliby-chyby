@@ -1,0 +1,613 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T13-43-25-760Z--c11307c3e276",
+  "evaluatedAt": "2026-11-05T13:43:25.760Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-42e58d5601/c11307c3e276d4982f52331bdd78fa53ada61b951ba9e570e4f6b527eeaaa59d.json",
+  "packageHash": "c11307c3e276d4982f52331bdd78fa53ada61b951ba9e570e4f6b527eeaaa59d",
+  "assessmentContentHash": "2e0cf4f80c1bed3aa7c8741dd4b6ba2376b0cbe897802e1c3b67b1015ca22273",
+  "assessmentFingerprint": "395507bb8ec6f1bf66e6b093b42a2de61182108db828de03d762b430e4a18b71",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-42e58d5601",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_02d96743e3a7eeef016aec86cf99f887d1964d16628d0321ad",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 46860,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 46857
+            },
+            "output_tokens": 6408,
+            "output_tokens_details": {
+              "reasoning_tokens": 4057
+            },
+            "total_tokens": 53268
+          },
+          "output": {
+            "promiseId": "spd-2025-42e58d5601",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-1",
+                "relevant": true,
+                "reasonCz": "Navrhované změny odměňování se týkají i zaměstnanců poskytovatelů zdravotních služeb, tedy části slibu o spravedlivých mzdách zdravotníků.",
+                "effectCz": "Dosavadní § 123 vyžadoval, aby zvláštní platový tarif zdravotníků nebyl nižší než tarif podle jejich platové třídy a stupně; návrh tuto minimální ochranu zachovává a přidává systém odměňování odstupňovaný podle hodnoty práce. Současně ruší § 112 o zaručeném platu, ale jeho předchozí znění zde chybí, takže dopad tohoto zrušení na dosavadní mzdové minimum nelze z podkladů určit; přechodná ustanovení zachovávají doplatek navázaný na úroveň k 31. prosinci 2026."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-2",
+                "relevant": true,
+                "reasonCz": "Návrh posiluje soudní prosazování rovného odměňování, což je konkrétní součást spravedlivých mezd a může se týkat i zdravotníků.",
+                "effectCz": "Dosavadní § 133a upravoval přesun důkazního břemene u některých případů diskriminace, nikoli výslovně u porušení povinností k odměňování; návrh doplňuje tento postup pro spory o rovné odměňování a ukládá žalovanému prokázat, že k porušení nedošlo, s výjimkou zjevně neúmyslného a málo závažného porušení. Zvyšuje tím vymahatelnost práva na spravedlivé odměňování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-11",
+                "relevant": true,
+                "reasonCz": "Nové pravomoci veřejného ochránce práv umožňují zaměstnancům uplatnit nároky na informace o odměňování a podporují rovné odměňování.",
+                "effectCz": "Dosavadní úprava ochránci práv svěřovala obecné úkoly v prosazování rovného zacházení; návrh nově umožňuje předávání údajů zaměstnancům, zastupování v soudním řízení a spolupráci při prosazování rovného odměňování. Rozšiřuje tedy dostupné prostředky k ochraně spravedlivého odměňování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-16",
+                "relevant": true,
+                "reasonCz": "Navrhované povinnosti a sankce se týkají systému odměňování, informování zaměstnanců a kontroly rovného odměňování.",
+                "effectCz": "Dosavadní úprava inspekce práce obsahovala přestupky a pokuty za jiné vyjmenované povinnosti; návrh mezi ně doplňuje porušení povinností k systémům odměňování, informování a zprávám o rozdílech v odměňování, včetně pokuty až 200 000 Kč za některé informační přestupky. Zvyšuje tak kontrolu a vymahatelnost pravidel spravedlivého odměňování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-18",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje právní nápravu při porušení zásady stejného odměňování, která souvisí se spravedlivými mzdami.",
+                "effectCz": "Dosavadní § 10 dovoloval peněžní náhradu nemajetkové újmy zejména tehdy, když jiné zadostiučinění nestačilo; návrh pro případy porušení zásady stejné odměny stanoví právo na plnou náhradu této újmy a upravuje promlčení i posuzování srovnatelných situací. Posiluje tak práva zaměstnanců domáhajících se spravedlivého odměňování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-38",
+                "relevant": false,
+                "reasonCz": "Text obecně podporuje důstojnou práci a mzdy, ale nespojuje tuto podporu se zdravotníky ani s konkrétním opatřením, které by jejich mzdy samo upravilo.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-16",
+                "relevant": true,
+                "reasonCz": "Nařízení stanoví platové tabulky zaměstnanců ve veřejných službách a správě; podklady je spojují se zákoníkem práce, který obsahuje zvláštní úpravu platů zaměstnanců poskytovatelů zdravotních služeb.",
+                "effectCz": "Nařízení stanoví měsíční platové tarify podle platové třídy a započitatelné praxe, včetně uvedených částek od 14 760 Kč v první tabulce a od 17 720 Kč ve druhé. Předchozí tabulky nejsou v balíčku, takže nelze určit, zda a o kolik se tarify zvýšily, ani zda změna posouvá mzdy zdravotníků k větší spravedlnosti."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-164",
+                "relevant": false,
+                "reasonCz": "Nařízení stanoví koeficienty pro výpočet obecné minimální mzdy, ale podklady nespojují tuto obecnou úpravu s konkrétním opatřením pro spravedlivé mzdy zdravotníků.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-56",
+                "relevant": true,
+                "reasonCz": "Vláda v legislativním plánu zařadila návrh novely zákoníku práce zaměřený na prosazování stejné odměny, což se vztahuje k části slibu o spravedlivých mzdách.",
+                "effectCz": "Usnesení samo nemění pravidla ani výši mezd; plánuje předložení návrhu zákona k provedení pravidel transparentnosti a prosazování stejné odměny. Jde o plánovaný krok, který může spravedlivé odměňování podpořit, nikoli o již zavedenou změnu."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-59",
+                "relevant": false,
+                "reasonCz": "Plánované koeficienty se týkají obecné minimální mzdy a text je neváže na mzdy zdravotníků ani na konkrétní naplnění této části slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-192",
+                "relevant": true,
+                "reasonCz": "Přehled vládních implementačních prací výslovně uvádí návrh novely zákoníku práce k prosazování stejné odměny, který se týká části slibu o spravedlivých mzdách.",
+                "effectCz": "Přehled pouze zařazuje návrh zákona k provedení evropských pravidel o stejné odměně; nestanoví žádné mzdy ani nová práva sám o sobě. Jde o plánovací krok, jehož případný účinek závisí na následném předložení a schválení zákona."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": false,
+            "citedEvidenceIds": [
+              "spd-2025-42e58d5601--source",
+              "psp-core-2025--law-change-43422-1",
+              "psp-core-2025--law-change-43422-2",
+              "psp-core-2025--law-change-43422-11",
+              "psp-core-2025--law-change-43422-16",
+              "psp-core-2025--law-change-43422-18",
+              "esbirka-regulations--law-change-sb-2026-16",
+              "zvlady-resolutions--law-change-uv-2026-175-56",
+              "zvlady-resolutions--law-change-uv-2026-175-192",
+              "esbirka-regulations--2026-16",
+              "zvlady-resolutions--2026-175",
+              "psp-core-2025--print-step-212101"
+            ],
+            "explanationCz": "Vláda, v níž SPD působí, předložila novelu zákoníku práce a souvisejících předpisů (sněmovní tisk 300, tedy číslo návrhu projednávaného Poslaneckou sněmovnou), která zavádí pravidla pro transparentnější a rovnější odměňování. To je návrhový posun k části slibu o spravedlivých mzdách, nejde však zatím o přijatý zákon. Vláda také přijala platové tabulky pro zaměstnance ve veřejných službách, ale podklady neobsahují dosavadní tarify, takže nelze ověřit, zda se platy zvýšily. Podklady nedokládají kroky k přímým platbám pacientů ani k vyvádění peněz ze zdravotního systému; pro posouzení celého slibu proto chybí důkazy.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Předchozí znění § 112 zákoníku práce o zaručeném platu není v podkladech uvedeno, takže nelze určit, jak jeho navržené zrušení ovlivní dosavadní ochranu platů zdravotníků.",
+              "U přijatých platových tabulek chybí srovnatelné předchozí sazby; nelze ověřit, zda nařízení skutečně zvýšilo platy ani jaký má dopad na spravedlivé mzdy zdravotníků.",
+              "Podklady nedokládají, zda SPD nebo vláda podnikly kroky k nezvyšování přímých plateb pacientů či k zastavení vyvádění peněz ze zdravotního systému. Návrh zákona je navíc v balíčku doložen jen jako předložený, nikoli jako konečně schválený."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-42e58d5601",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Navržené změny systému odměňování, platových pravidel pro zaměstnance poskytovatelů zdravotních služeb a prosazování rovného odměňování mohou ovlivnit část slibu o spravedlivých mzdách zdravotníků.",
+          "effectCz": "Dosavadní zákoník práce přiznával odměnu za práci a upravoval zvláštní určování platových tarifů zdravotnickým zaměstnancům; návrh nově ukládá zaměstnavatelům vytvořit systém odměňování a zachovává pro vymezené skupiny zdravotnických zaměstnanců tarif nejméně ve výši běžného tarifu. To může podpořit průhlednější a rovnější odměňování, samo o sobě však mzdy konkrétně nezvyšuje. Návrh zároveň ruší § 112 o zaručeném platu; jeho dosavadní přesné znění není v podkladech, takže změnu výše této ochrany nelze plně určit. Návrh obsahuje přechodné dorovnání do dosavadní úrovně zaručeného platu a možnost při první změně osobního příplatku započíst zvýšení tarifu proti němu. Nové povinnosti k informování o mzdách, posouzení rozdílů, nápravě neodůvodněných rozdílů a odměňování agenturních zaměstnanců rozšiřují nástroje prosazování rovného odměňování, nikoli přímo výši mezd. U některých měněných platových ustanovení předchozí znění v podkladech chybí, takže směr jejich dopadu na výši platů nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-2",
+          "relevant": true,
+          "reasonCz": "Nové pravidlo pro dokazování ve sporech o rovné odměňování může usnadnit vymáhání části slibu o spravedlivých mzdách.",
+          "effectCz": "Dosavadní § 133a občanského soudního řádu již upravoval přenesení důkazního břemene u některých diskriminačních sporů; návrh výslovně rozšiřuje toto pravidlo na spory o porušení vybraných povinností při odměňování a stanoví výjimku pro zjevně neúmyslné a málo závažné porušení. Jde o silnější procesní nástroj k prosazení rovného odměňování, nikoli o přímé zvýšení mezd."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-11",
+          "relevant": true,
+          "reasonCz": "Nové pravomoci ochránce práv týkající se informací o odměňování a zastupování zaměstnanců mohou napomoci vymáhání spravedlivých mezd.",
+          "effectCz": "Dosavadní § 21d obecně svěřoval ochránci práv úkoly při prosazování rovného zacházení; návrh přidává možnost předávat zaměstnanci informace o odměně získané prostřednictvím ochránce, převzít za určitých podmínek jeho zastupování a spolupracovat s dalšími orgány. Tím rozšiřuje možnosti pomoci při prosazování rovného odměňování, nikoli samotnou výši mezd. Změna jednoho slova v § 1a je pouze gramatická a na tento slib nemá věcný dopad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-16",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje kontrolu a sankce za porušení pravidel odměňování, což může podpořit část slibu o spravedlivých mzdách.",
+          "effectCz": "Dosavadní zákon o inspekci práce umožňoval postihovat mimo jiné nerovné zacházení v odměňování a omezování zaměstnanců při nakládání s informacemi o mzdě; návrh upravuje související skutkové podstaty a doplňuje postihy za porušení nových povinností týkajících se systémů odměňování, zpráv o rozdílech a poskytování informací. Přidává také sběr a vyhodnocování údajů o rozdílech v odměňování. To posiluje dohled a vymáhání, samo o sobě však neurčuje vyšší mzdy. U nově vkládaných ustanovení předchozí pravidla nejsou k dispozici, protože předtím neexistovala."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-18",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje právní nároky při porušení zásady stejné odměny, a proto se týká části slibu o spravedlivých mzdách.",
+          "effectCz": "Dosavadní § 10 antidiskriminačního zákona umožňoval domáhat se ukončení diskriminace, odstranění jejích následků a přiměřeného zadostiučinění; peněžní náhradu nemajetkové újmy připouštěl zejména při závažném zásahu. Návrh pro případy porušení zásady stejné odměny výslovně přiznává plnou náhradu nemajetkové újmy včetně peněz a upravuje běh promlčení při stížnosti u zaměstnavatele. Jde o silnější prostředek nápravy, nikoli o přímé zvýšení mezd."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-38",
+          "relevant": false,
+          "reasonCz": "Dodané části dohody obecně podporují důstojnou práci a mzdy, ale nevztahují se konkrétně ke mzdám zdravotníků ani přímo nezajišťují jejich zvýšení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-16",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví konkrétní platové tarify zaměstnanců ve veřejných službách a správě, které mohou zasahovat do části slibu o mzdách zdravotníků.",
+          "effectCz": "Nařízení stanoví nové částky platových tarifů v tabulkách podle platové třídy a započitatelné praxe; text obsahuje například částky od 14 760 Kč v první tabulce a od 17 720 Kč v další. Předchozí znění těchto tabulek ani podklad určující, která tabulka a částky se vztahují na zdravotníky, nejsou dodány. Nelze proto určit, zda se jejich tarif zvýšil, snížil, ani jaký je dopad na mzdy zdravotníků."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-164",
+          "relevant": false,
+          "reasonCz": "Nařízení stanoví koeficienty pro výpočet obecné minimální mzdy, ale podklady je nespojují přímo se mzdami zdravotníků ani s konkrétní změnou jejich odměňování.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-56",
+          "relevant": true,
+          "reasonCz": "Plán vlády výslovně počítá s návrhem zákona k transparentnosti a rovnému odměňování, což je součást tématu spravedlivých mezd.",
+          "effectCz": "Vláda zařadila přípravu návrhu zákona k provedení pravidel transparentnosti odměňování mezi legislativní úkoly a stanovila plánovaný termín předložení vládě v dubnu 2026 a účinnost v lednu 2027. Jde o plán přípravy návrhu, nikoli o změnu mzdy nebo platového nároku; jeho obsah sám o sobě výši mezd zdravotníků neurčuje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-59",
+          "relevant": false,
+          "reasonCz": "Plánovaný mechanismus se týká obecné minimální mzdy a jejího poměru k průměrné mzdě, nikoli konkrétně spravedlivých mezd zdravotníků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-192",
+          "relevant": true,
+          "reasonCz": "Přehled vládních implementačních prací uvádí návrh zákona o transparentnosti a rovném odměňování, který se týká části slibu o spravedlivých mzdách.",
+          "effectCz": "Přehled uvádí přípravu návrhu zákona provádějícího pravidla pro rovné odměňování jako implementační práci vlády. Jde o plánovaný legislativní postup, nikoli o přímou změnu výše nebo nároku na mzdu; konkrétní dopad na mzdy zdravotníků tento záznam nestanoví."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-42e58d5601--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--law-change-43422-2",
+        "psp-core-2025--law-change-43422-11",
+        "psp-core-2025--law-change-43422-16",
+        "psp-core-2025--law-change-43422-18",
+        "esbirka-regulations--law-change-sb-2026-16",
+        "zvlady-resolutions--law-change-uv-2026-175-56",
+        "zvlady-resolutions--law-change-uv-2026-175-192",
+        "esbirka-regulations--2026-16",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona, který zavádí nové povinnosti pro transparentnější odměňování a vymáhání rovného odměňování, ale také ruší dosavadní ustanovení o zaručeném platu. Protože přesné dosavadní znění této ochrany není v podkladech, nelze určit, jak velké omezení by její zrušení pro zdravotníky znamenalo; nejpravděpodobnější hodnocení návrhu je však jako krok proti části slibu. Vláda také přijala nové platové tabulky, ale chybí předchozí částky i údaj, které z tabulek se vztahují na zdravotníky. Podklady neukazují, zda se zvýšily přímé platby pacientů nebo zda došlo k vyvádění peněz ze systému.",
+      "confidence": "low",
+      "uncertainties": [
+        "Není doloženo předchozí přesné znění zrušeného § 112 zákoníku práce, takže nelze spolehlivě určit změnu dosavadní ochrany zaručeným platem ani její dopad na zdravotníky.",
+        "U nových platových tabulek chybí předchozí sazby a podklad neurčuje, které tabulky se vztahují na zdravotníky; nelze proto určit směr ani velikost změny jejich platů.",
+        "Záznamy o legislativním plánu a implementačních pracích popisují přípravu změn, ne jejich skutečný dopad na mzdy.",
+        "Dodané důkazy nedokládají změny přímých plateb pacientů ani vyvádění peněz ze zdravotnického systému."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-42e58d5601",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje pravidla odměňování zaměstnanců, včetně zaměstnanců poskytovatelů zdravotních služeb, a může ovlivnit spravedlivost jejich mezd.",
+          "effectCz": "Dosavadní § 30 dovoloval při náboru žádat jen údaje bezprostředně související s pracovní smlouvou; návrh výslovně zakazuje požadovat údaje o současné či dřívější mzdě a ukládá předem sdělit nabízenou minimální odměnu. Nový § 109a vyžaduje systém odměňování a skupiny prací, zatímco nový postup podle § 287a až 287e a § 306b až 306d ukládá zjišťovat a napravovat některé neodůvodněné rozdíly a rozšiřuje přístup k informacím o odměnách; jde o přísnější informační a nápravné povinnosti, nikoli samo o sobě o zvýšení mezd zdravotníků. Dosavadní § 123 odst. 6 písm. e) již požadoval, aby zvláštní tarif zdravotnických zaměstnanců nebyl nižší než jejich běžný tarif; návrh tuto nejnižší úroveň zachovává v nové úpravě. Nově se také stanoví nejméně čtyřprocentní rozdíl mezi tarify sousedních tříd a nejnižší tarif v nejnižší třídě alespoň ve výši minimální mzdy; kontext obsahuje dosavadní tarifní tabulku, ale neumožňuje srovnat budoucí částky. Návrh ruší § 112, avšak jeho předchozí znění v podkladech chybí, takže dopad tohoto zrušení na ochranu odměn nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-2",
+          "relevant": true,
+          "reasonCz": "Návrh mění dokazování ve sporech o rovné odměňování, což může pomoci prosazovat spravedlivé mzdy také u zdravotníků.",
+          "effectCz": "Dosavadní § 133a obsahoval přesun důkazního břemene pro vyjmenované případy diskriminace, nikoli zvláštní pravidlo pro tvrzené porušení povinností při odměňování. Nový odstavec 7 ukládá žalovanému prokázat, že zásadu rovného zacházení neporušil, pokud žalobce tvrdí porušení vyjmenovaných povinností zákoníku práce v oblasti odměňování; výjimkou je zjevně neúmyslné a málo závažné porušení. Jde o posílení procesní ochrany, ne o přímé stanovení vyšší mzdy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-11",
+          "relevant": true,
+          "reasonCz": "Nová pravomoc veřejného ochránce práv pomáhat při uplatňování práv na rovné odměňování může podpořit spravedlivější mzdy.",
+          "effectCz": "Dosavadní § 21d svěřoval ochránci obecné úkoly při prosazování rovného zacházení; návrh doplňuje konkrétní pomoc zaměstnancům, kteří přes ochránce žádají o informace o odměňování, možnost zastupování a spolupráci s inspekcí práce a ministerstvem. To rozšiřuje prostředky k prosazování rovného odměňování, ale nemění přímo výši mezd. Změna jednoho slova v § 1a je pouze jazyková a věcný dopad na slib nemá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-16",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje kontrolu a sankce za porušení pravidel odměňování a může tak podpořit spravedlivé mzdy zaměstnanců ve zdravotnictví.",
+          "effectCz": "Dosavadní pravidla postihovala některá porušení rovného zacházení a pracovních povinností; návrh nově postihuje mimo jiné nevytvoření systému odměňování a porušení povinností při informování či posuzování odměn a zavádí pokutu až 200 000 Kč za některá informační pochybení. Zřizuje také nové povinnosti pro sledování a vykazování rozdílů v odměňování a posiluje spolupráci kontrolních orgánů, což zpřísňuje kontrolní rámec. Současně se vykazování za rok 2026 v roce 2027 neprovede a do konce roku 2030 se do příslušných postupů nezapočítají dočasně přidělení zaměstnanci agentur práce; tyto přechodné výjimky část prosazování odkládají nebo omezují. Úprava sama nestanoví zvýšení mezd zdravotníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-18",
+          "relevant": true,
+          "reasonCz": "Návrh posiluje právní nároky při porušení práva na stejnou odměnu, což se může týkat i zdravotníků.",
+          "effectCz": "Dosavadní § 10 antidiskriminačního zákona umožňoval požadovat odstranění diskriminace a přiměřené zadostiučinění; peněžní náhrada nemajetkové újmy přicházela v úvahu, pokud jiné zadostiučinění nestačilo. Návrh pro případy porušení zásady stejné odměny výslovně přiznává plnou náhradu nemajetkové újmy včetně peněžní, prodlužuje možnost uplatnění práva po stížnosti u zaměstnavatele a rozšiřuje posouzení srovnatelných zaměstnanců. Jde o posílení nápravy diskriminace v odměňování, nikoli o přímé určení mezd."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-38",
+          "relevant": false,
+          "reasonCz": "Předložené části dohody obecně zmiňují mzdy a důstojnou práci, ale nespojují tato ustanovení s odměňováním zdravotníků v České republice.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-16",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví platové tabulky pro veřejné služby a správu, které mohou být relevantní pro část zdravotníků zaměstnaných ve veřejném sektoru.",
+          "effectCz": "Nařízení nahrazuje tři platové tabulky novými měsíčními částkami; například v první tabulce začínají uvedené tarify na 14 760 Kč a v tabulce pro nejvyšší třídy dosahují až 79 500 Kč. Podklady neobsahují předchozí tabulky ani údaje, které by umožnily určit, zda se tarify oproti dosavadnímu stavu zvýšily nebo snížily. Text navíc neurčuje, kterých zdravotnických profesí se jednotlivé tabulky týkají, takže nelze prokázat konkrétní změnu jejich mezd."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-164",
+          "relevant": true,
+          "reasonCz": "Koeficienty minimální mzdy mohou ovlivnit také zdravotnické pracovníky, jejichž odměna se odvíjí od minimální mzdy.",
+          "effectCz": "Nařízení stanoví koeficient 0,446 pro výpočet minimální mzdy v roce 2027 a 0,458 pro rok 2028. Předchozí koeficienty ani pravidla potřebná k výpočtu konkrétních částek nejsou v podkladech uvedeny, takže nelze určit směr změny ani její velikost. Slib neurčuje konkrétní minimální mzdu; tato úprava se může týkat jen té části zdravotnických pracovníků, jejichž odměna se na minimální mzdu váže."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-56",
+          "relevant": true,
+          "reasonCz": "Plán vlády počítá s návrhem zákona k prosazování stejného odměňování, což se může týkat i spravedlivých mezd zdravotníků.",
+          "effectCz": "Usnesení zařazuje přípravu zákona k provedení evropských pravidel o stejné odměně mužů a žen; uvádí předložení vládě v dubnu 2026 a plánovanou účinnost od ledna 2027. Oproti samotnému slibu nepřináší přímo vyšší mzdy, ale plánuje návrh pravidel na podporu rovného odměňování, tedy posun směrem k části závazku."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-59",
+          "relevant": true,
+          "reasonCz": "Plánovaný mechanismus minimální mzdy se může vztáhnout i na hůře placené pracovníky ve zdravotnictví, byť je neadresuje zvlášť.",
+          "effectCz": "Usnesení plánuje stanovit koeficienty pro minimální mzdu v letech 2027 a 2028 a uvádí cíl dosáhnout do roku 2029 poměru minimální a průměrné mzdy 47 %. Jde o záměr zvýšit spodní mzdovou hranici, který může mít význam pro zdravotnické pracovníky placené blízko minima, ale neřeší přímo mzdy zdravotníků jako skupiny."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-192",
+          "relevant": true,
+          "reasonCz": "Přehled implementačních prací výslovně uvádí návrh zákona k rovnému odměňování, který se může vztahovat i na zdravotníky.",
+          "effectCz": "Přehled zařazuje návrh zákona k provedení pravidel o stejné odměně mužů a žen. Neobsahuje samotná mzdová pravidla ani částky, takže sám nemění nároky zdravotníků; je pouze plánem dalšího legislativního postupu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-42e58d5601--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--law-change-43422-2",
+        "psp-core-2025--law-change-43422-11",
+        "psp-core-2025--law-change-43422-16",
+        "psp-core-2025--law-change-43422-18",
+        "esbirka-regulations--law-change-sb-2026-16",
+        "esbirka-regulations--law-change-sb-2026-164",
+        "zvlady-resolutions--law-change-uv-2026-175-56",
+        "zvlady-resolutions--law-change-uv-2026-175-59",
+        "zvlady-resolutions--law-change-uv-2026-175-192",
+        "psp-core-2025--print-step-212101",
+        "esbirka-regulations--2026-16",
+        "zvlady-resolutions--2026-175",
+        "esbirka-regulations--2026-164"
+      ],
+      "explanationCz": "Vláda předložila Poslanecké sněmovně návrh změn zákoníku práce, který zavádí větší průhlednost odměňování a pravidla pro posuzování a nápravu některých rozdílů v odměnách. To může podpořit spravedlivější mzdy, ale samo o sobě nezaručuje jejich zvýšení zdravotníkům. Vláda také schválila plán dalších pravidel pro rovné odměňování a výpočet minimální mzdy. Podklady nedokládají změnu přímých plateb pacientů ani zastavení odčerpávání peněz ze systému; u nových platových tabulek navíc neumožňují porovnat částky s předchozím stavem.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují doložené opatření, které by měnilo přímé platby pacientů nebo zastavovalo vyvádění peněz ze zdravotnictví.",
+        "U platových tabulek zavedených nařízením vlády č. 16/2026 Sb. chybí předchozí částky, a proto nelze určit, zda se mzdy podle nich zvýšily. Chybí také předchozí znění rušeného § 112 zákoníku práce, takže nelze posoudit dopad jeho zrušení."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_03ed231e2d2cc748016aec865589f087d1a39f5988e00b4da5",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 46860,
+      "input_tokens_details": {
+        "cache_write_tokens": 40510,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 6710,
+      "output_tokens_details": {
+        "reasoning_tokens": 3798
+      },
+      "total_tokens": 53570
+    },
+    "output": {
+      "promiseId": "spd-2025-42e58d5601",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Navržené změny systému odměňování, platových pravidel pro zaměstnance poskytovatelů zdravotních služeb a prosazování rovného odměňování mohou ovlivnit část slibu o spravedlivých mzdách zdravotníků.",
+          "effectCz": "Dosavadní zákoník práce přiznával odměnu za práci a upravoval zvláštní určování platových tarifů zdravotnickým zaměstnancům; návrh nově ukládá zaměstnavatelům vytvořit systém odměňování a zachovává pro vymezené skupiny zdravotnických zaměstnanců tarif nejméně ve výši běžného tarifu. To může podpořit průhlednější a rovnější odměňování, samo o sobě však mzdy konkrétně nezvyšuje. Návrh zároveň ruší § 112 o zaručeném platu; jeho dosavadní přesné znění není v podkladech, takže změnu výše této ochrany nelze plně určit. Návrh obsahuje přechodné dorovnání do dosavadní úrovně zaručeného platu a možnost při první změně osobního příplatku započíst zvýšení tarifu proti němu. Nové povinnosti k informování o mzdách, posouzení rozdílů, nápravě neodůvodněných rozdílů a odměňování agenturních zaměstnanců rozšiřují nástroje prosazování rovného odměňování, nikoli přímo výši mezd. U některých měněných platových ustanovení předchozí znění v podkladech chybí, takže směr jejich dopadu na výši platů nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-2",
+          "relevant": true,
+          "reasonCz": "Nové pravidlo pro dokazování ve sporech o rovné odměňování může usnadnit vymáhání části slibu o spravedlivých mzdách.",
+          "effectCz": "Dosavadní § 133a občanského soudního řádu již upravoval přenesení důkazního břemene u některých diskriminačních sporů; návrh výslovně rozšiřuje toto pravidlo na spory o porušení vybraných povinností při odměňování a stanoví výjimku pro zjevně neúmyslné a málo závažné porušení. Jde o silnější procesní nástroj k prosazení rovného odměňování, nikoli o přímé zvýšení mezd."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-11",
+          "relevant": true,
+          "reasonCz": "Nové pravomoci ochránce práv týkající se informací o odměňování a zastupování zaměstnanců mohou napomoci vymáhání spravedlivých mezd.",
+          "effectCz": "Dosavadní § 21d obecně svěřoval ochránci práv úkoly při prosazování rovného zacházení; návrh přidává možnost předávat zaměstnanci informace o odměně získané prostřednictvím ochránce, převzít za určitých podmínek jeho zastupování a spolupracovat s dalšími orgány. Tím rozšiřuje možnosti pomoci při prosazování rovného odměňování, nikoli samotnou výši mezd. Změna jednoho slova v § 1a je pouze gramatická a na tento slib nemá věcný dopad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-16",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje kontrolu a sankce za porušení pravidel odměňování, což může podpořit část slibu o spravedlivých mzdách.",
+          "effectCz": "Dosavadní zákon o inspekci práce umožňoval postihovat mimo jiné nerovné zacházení v odměňování a omezování zaměstnanců při nakládání s informacemi o mzdě; návrh upravuje související skutkové podstaty a doplňuje postihy za porušení nových povinností týkajících se systémů odměňování, zpráv o rozdílech a poskytování informací. Přidává také sběr a vyhodnocování údajů o rozdílech v odměňování. To posiluje dohled a vymáhání, samo o sobě však neurčuje vyšší mzdy. U nově vkládaných ustanovení předchozí pravidla nejsou k dispozici, protože předtím neexistovala."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-18",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje právní nároky při porušení zásady stejné odměny, a proto se týká části slibu o spravedlivých mzdách.",
+          "effectCz": "Dosavadní § 10 antidiskriminačního zákona umožňoval domáhat se ukončení diskriminace, odstranění jejích následků a přiměřeného zadostiučinění; peněžní náhradu nemajetkové újmy připouštěl zejména při závažném zásahu. Návrh pro případy porušení zásady stejné odměny výslovně přiznává plnou náhradu nemajetkové újmy včetně peněz a upravuje běh promlčení při stížnosti u zaměstnavatele. Jde o silnější prostředek nápravy, nikoli o přímé zvýšení mezd."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-38",
+          "relevant": false,
+          "reasonCz": "Dodané části dohody obecně podporují důstojnou práci a mzdy, ale nevztahují se konkrétně ke mzdám zdravotníků ani přímo nezajišťují jejich zvýšení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-16",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví konkrétní platové tarify zaměstnanců ve veřejných službách a správě, které mohou zasahovat do části slibu o mzdách zdravotníků.",
+          "effectCz": "Nařízení stanoví nové částky platových tarifů v tabulkách podle platové třídy a započitatelné praxe; text obsahuje například částky od 14 760 Kč v první tabulce a od 17 720 Kč v další. Předchozí znění těchto tabulek ani podklad určující, která tabulka a částky se vztahují na zdravotníky, nejsou dodány. Nelze proto určit, zda se jejich tarif zvýšil, snížil, ani jaký je dopad na mzdy zdravotníků."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-164",
+          "relevant": false,
+          "reasonCz": "Nařízení stanoví koeficienty pro výpočet obecné minimální mzdy, ale podklady je nespojují přímo se mzdami zdravotníků ani s konkrétní změnou jejich odměňování.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-56",
+          "relevant": true,
+          "reasonCz": "Plán vlády výslovně počítá s návrhem zákona k transparentnosti a rovnému odměňování, což je součást tématu spravedlivých mezd.",
+          "effectCz": "Vláda zařadila přípravu návrhu zákona k provedení pravidel transparentnosti odměňování mezi legislativní úkoly a stanovila plánovaný termín předložení vládě v dubnu 2026 a účinnost v lednu 2027. Jde o plán přípravy návrhu, nikoli o změnu mzdy nebo platového nároku; jeho obsah sám o sobě výši mezd zdravotníků neurčuje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-59",
+          "relevant": false,
+          "reasonCz": "Plánovaný mechanismus se týká obecné minimální mzdy a jejího poměru k průměrné mzdě, nikoli konkrétně spravedlivých mezd zdravotníků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-192",
+          "relevant": true,
+          "reasonCz": "Přehled vládních implementačních prací uvádí návrh zákona o transparentnosti a rovném odměňování, který se týká části slibu o spravedlivých mzdách.",
+          "effectCz": "Přehled uvádí přípravu návrhu zákona provádějícího pravidla pro rovné odměňování jako implementační práci vlády. Jde o plánovaný legislativní postup, nikoli o přímou změnu výše nebo nároku na mzdu; konkrétní dopad na mzdy zdravotníků tento záznam nestanoví."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-42e58d5601--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--law-change-43422-2",
+        "psp-core-2025--law-change-43422-11",
+        "psp-core-2025--law-change-43422-16",
+        "psp-core-2025--law-change-43422-18",
+        "esbirka-regulations--law-change-sb-2026-16",
+        "zvlady-resolutions--law-change-uv-2026-175-56",
+        "zvlady-resolutions--law-change-uv-2026-175-192",
+        "esbirka-regulations--2026-16",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona, který zavádí nové povinnosti pro transparentnější odměňování a vymáhání rovného odměňování, ale také ruší dosavadní ustanovení o zaručeném platu. Protože přesné dosavadní znění této ochrany není v podkladech, nelze určit, jak velké omezení by její zrušení pro zdravotníky znamenalo; nejpravděpodobnější hodnocení návrhu je však jako krok proti části slibu. Vláda také přijala nové platové tabulky, ale chybí předchozí částky i údaj, které z tabulek se vztahují na zdravotníky. Podklady neukazují, zda se zvýšily přímé platby pacientů nebo zda došlo k vyvádění peněz ze systému.",
+      "confidence": "low",
+      "uncertainties": [
+        "Není doloženo předchozí přesné znění zrušeného § 112 zákoníku práce, takže nelze spolehlivě určit změnu dosavadní ochrany zaručeným platem ani její dopad na zdravotníky.",
+        "U nových platových tabulek chybí předchozí sazby a podklad neurčuje, které tabulky se vztahují na zdravotníky; nelze proto určit směr ani velikost změny jejich platů.",
+        "Záznamy o legislativním plánu a implementačních pracích popisují přípravu změn, ne jejich skutečný dopad na mzdy.",
+        "Dodané důkazy nedokládají změny přímých plateb pacientů ani vyvádění peněz ze zdravotnického systému."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0fd2e1642ceec1a5016aec873c209887d1b9473cb2872cb042",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 46860,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 46857
+      },
+      "output_tokens": 9626,
+      "output_tokens_details": {
+        "reasoning_tokens": 6429
+      },
+      "total_tokens": 56486
+    },
+    "output": {
+      "promiseId": "spd-2025-42e58d5601",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje pravidla odměňování zaměstnanců, včetně zaměstnanců poskytovatelů zdravotních služeb, a může ovlivnit spravedlivost jejich mezd.",
+          "effectCz": "Dosavadní § 30 dovoloval při náboru žádat jen údaje bezprostředně související s pracovní smlouvou; návrh výslovně zakazuje požadovat údaje o současné či dřívější mzdě a ukládá předem sdělit nabízenou minimální odměnu. Nový § 109a vyžaduje systém odměňování a skupiny prací, zatímco nový postup podle § 287a až 287e a § 306b až 306d ukládá zjišťovat a napravovat některé neodůvodněné rozdíly a rozšiřuje přístup k informacím o odměnách; jde o přísnější informační a nápravné povinnosti, nikoli samo o sobě o zvýšení mezd zdravotníků. Dosavadní § 123 odst. 6 písm. e) již požadoval, aby zvláštní tarif zdravotnických zaměstnanců nebyl nižší než jejich běžný tarif; návrh tuto nejnižší úroveň zachovává v nové úpravě. Nově se také stanoví nejméně čtyřprocentní rozdíl mezi tarify sousedních tříd a nejnižší tarif v nejnižší třídě alespoň ve výši minimální mzdy; kontext obsahuje dosavadní tarifní tabulku, ale neumožňuje srovnat budoucí částky. Návrh ruší § 112, avšak jeho předchozí znění v podkladech chybí, takže dopad tohoto zrušení na ochranu odměn nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-2",
+          "relevant": true,
+          "reasonCz": "Návrh mění dokazování ve sporech o rovné odměňování, což může pomoci prosazovat spravedlivé mzdy také u zdravotníků.",
+          "effectCz": "Dosavadní § 133a obsahoval přesun důkazního břemene pro vyjmenované případy diskriminace, nikoli zvláštní pravidlo pro tvrzené porušení povinností při odměňování. Nový odstavec 7 ukládá žalovanému prokázat, že zásadu rovného zacházení neporušil, pokud žalobce tvrdí porušení vyjmenovaných povinností zákoníku práce v oblasti odměňování; výjimkou je zjevně neúmyslné a málo závažné porušení. Jde o posílení procesní ochrany, ne o přímé stanovení vyšší mzdy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-11",
+          "relevant": true,
+          "reasonCz": "Nová pravomoc veřejného ochránce práv pomáhat při uplatňování práv na rovné odměňování může podpořit spravedlivější mzdy.",
+          "effectCz": "Dosavadní § 21d svěřoval ochránci obecné úkoly při prosazování rovného zacházení; návrh doplňuje konkrétní pomoc zaměstnancům, kteří přes ochránce žádají o informace o odměňování, možnost zastupování a spolupráci s inspekcí práce a ministerstvem. To rozšiřuje prostředky k prosazování rovného odměňování, ale nemění přímo výši mezd. Změna jednoho slova v § 1a je pouze jazyková a věcný dopad na slib nemá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-16",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje kontrolu a sankce za porušení pravidel odměňování a může tak podpořit spravedlivé mzdy zaměstnanců ve zdravotnictví.",
+          "effectCz": "Dosavadní pravidla postihovala některá porušení rovného zacházení a pracovních povinností; návrh nově postihuje mimo jiné nevytvoření systému odměňování a porušení povinností při informování či posuzování odměn a zavádí pokutu až 200 000 Kč za některá informační pochybení. Zřizuje také nové povinnosti pro sledování a vykazování rozdílů v odměňování a posiluje spolupráci kontrolních orgánů, což zpřísňuje kontrolní rámec. Současně se vykazování za rok 2026 v roce 2027 neprovede a do konce roku 2030 se do příslušných postupů nezapočítají dočasně přidělení zaměstnanci agentur práce; tyto přechodné výjimky část prosazování odkládají nebo omezují. Úprava sama nestanoví zvýšení mezd zdravotníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-18",
+          "relevant": true,
+          "reasonCz": "Návrh posiluje právní nároky při porušení práva na stejnou odměnu, což se může týkat i zdravotníků.",
+          "effectCz": "Dosavadní § 10 antidiskriminačního zákona umožňoval požadovat odstranění diskriminace a přiměřené zadostiučinění; peněžní náhrada nemajetkové újmy přicházela v úvahu, pokud jiné zadostiučinění nestačilo. Návrh pro případy porušení zásady stejné odměny výslovně přiznává plnou náhradu nemajetkové újmy včetně peněžní, prodlužuje možnost uplatnění práva po stížnosti u zaměstnavatele a rozšiřuje posouzení srovnatelných zaměstnanců. Jde o posílení nápravy diskriminace v odměňování, nikoli o přímé určení mezd."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-38",
+          "relevant": false,
+          "reasonCz": "Předložené části dohody obecně zmiňují mzdy a důstojnou práci, ale nespojují tato ustanovení s odměňováním zdravotníků v České republice.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-16",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví platové tabulky pro veřejné služby a správu, které mohou být relevantní pro část zdravotníků zaměstnaných ve veřejném sektoru.",
+          "effectCz": "Nařízení nahrazuje tři platové tabulky novými měsíčními částkami; například v první tabulce začínají uvedené tarify na 14 760 Kč a v tabulce pro nejvyšší třídy dosahují až 79 500 Kč. Podklady neobsahují předchozí tabulky ani údaje, které by umožnily určit, zda se tarify oproti dosavadnímu stavu zvýšily nebo snížily. Text navíc neurčuje, kterých zdravotnických profesí se jednotlivé tabulky týkají, takže nelze prokázat konkrétní změnu jejich mezd."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-164",
+          "relevant": true,
+          "reasonCz": "Koeficienty minimální mzdy mohou ovlivnit také zdravotnické pracovníky, jejichž odměna se odvíjí od minimální mzdy.",
+          "effectCz": "Nařízení stanoví koeficient 0,446 pro výpočet minimální mzdy v roce 2027 a 0,458 pro rok 2028. Předchozí koeficienty ani pravidla potřebná k výpočtu konkrétních částek nejsou v podkladech uvedeny, takže nelze určit směr změny ani její velikost. Slib neurčuje konkrétní minimální mzdu; tato úprava se může týkat jen té části zdravotnických pracovníků, jejichž odměna se na minimální mzdu váže."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-56",
+          "relevant": true,
+          "reasonCz": "Plán vlády počítá s návrhem zákona k prosazování stejného odměňování, což se může týkat i spravedlivých mezd zdravotníků.",
+          "effectCz": "Usnesení zařazuje přípravu zákona k provedení evropských pravidel o stejné odměně mužů a žen; uvádí předložení vládě v dubnu 2026 a plánovanou účinnost od ledna 2027. Oproti samotnému slibu nepřináší přímo vyšší mzdy, ale plánuje návrh pravidel na podporu rovného odměňování, tedy posun směrem k části závazku."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-59",
+          "relevant": true,
+          "reasonCz": "Plánovaný mechanismus minimální mzdy se může vztáhnout i na hůře placené pracovníky ve zdravotnictví, byť je neadresuje zvlášť.",
+          "effectCz": "Usnesení plánuje stanovit koeficienty pro minimální mzdu v letech 2027 a 2028 a uvádí cíl dosáhnout do roku 2029 poměru minimální a průměrné mzdy 47 %. Jde o záměr zvýšit spodní mzdovou hranici, který může mít význam pro zdravotnické pracovníky placené blízko minima, ale neřeší přímo mzdy zdravotníků jako skupiny."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-192",
+          "relevant": true,
+          "reasonCz": "Přehled implementačních prací výslovně uvádí návrh zákona k rovnému odměňování, který se může vztahovat i na zdravotníky.",
+          "effectCz": "Přehled zařazuje návrh zákona k provedení pravidel o stejné odměně mužů a žen. Neobsahuje samotná mzdová pravidla ani částky, takže sám nemění nároky zdravotníků; je pouze plánem dalšího legislativního postupu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-42e58d5601--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--law-change-43422-2",
+        "psp-core-2025--law-change-43422-11",
+        "psp-core-2025--law-change-43422-16",
+        "psp-core-2025--law-change-43422-18",
+        "esbirka-regulations--law-change-sb-2026-16",
+        "esbirka-regulations--law-change-sb-2026-164",
+        "zvlady-resolutions--law-change-uv-2026-175-56",
+        "zvlady-resolutions--law-change-uv-2026-175-59",
+        "zvlady-resolutions--law-change-uv-2026-175-192",
+        "psp-core-2025--print-step-212101",
+        "esbirka-regulations--2026-16",
+        "zvlady-resolutions--2026-175",
+        "esbirka-regulations--2026-164"
+      ],
+      "explanationCz": "Vláda předložila Poslanecké sněmovně návrh změn zákoníku práce, který zavádí větší průhlednost odměňování a pravidla pro posuzování a nápravu některých rozdílů v odměnách. To může podpořit spravedlivější mzdy, ale samo o sobě nezaručuje jejich zvýšení zdravotníkům. Vláda také schválila plán dalších pravidel pro rovné odměňování a výpočet minimální mzdy. Podklady nedokládají změnu přímých plateb pacientů ani zastavení odčerpávání peněz ze systému; u nových platových tabulek navíc neumožňují porovnat částky s předchozím stavem.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují doložené opatření, které by měnilo přímé platby pacientů nebo zastavovalo vyvádění peněz ze zdravotnictví.",
+        "U platových tabulek zavedených nařízením vlády č. 16/2026 Sb. chybí předchozí částky, a proto nelze určit, zda se mzdy podle nich zvýšily. Chybí také předchozí znění rušeného § 112 zákoníku práce, takže nelze posoudit dopad jeho zrušení."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_081b4ae617c7a74b016aec87f40d8887d18077e24b3353d68a",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 50591,
+      "input_tokens_details": {
+        "cache_write_tokens": 46178,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 314,
+      "output_tokens_details": {
+        "reasoning_tokens": 62
+      },
+      "total_tokens": 50905
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--law-change-43422-18",
+        "esbirka-regulations--law-change-sb-2026-16"
+      ],
+      "explanationCz": "Volím druhé hodnocení, protože vláda s účastí SPD předložila návrh, který posiluje průhlednost odměňování a možnosti nápravy nespravedlivých rozdílů také u zdravotníků. To je doložený krok k části slibu, nikoli jeho úplné splnění. První hodnocení naopak dovozuje krok proti slibu ze zrušení pravidel o zaručeném platu, přestože jejich dosavadní znění v podkladech chybí a dopad nelze spolehlivě určit. Ani u schválených platových tabulek nelze bez předchozích částek prokázat zvýšení či snížení platů."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-towards",
+    "selectedReview": "assessor-b"
+  }
+}

@@ -1,0 +1,457 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-04-10-649Z--59133b7507b9",
+  "evaluatedAt": "2026-11-05T10:04:10.649Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-95d637e6c490/59133b7507b9f539f80809b5db5096b759c1b4ea1673be1bdfc435b10ea5b6d0.json",
+  "packageHash": "59133b7507b9f539f80809b5db5096b759c1b4ea1673be1bdfc435b10ea5b6d0",
+  "assessmentContentHash": "edb4212f3fa9109e9f837a2d19d8749462810d7f34880884deb512e30555ab42",
+  "assessmentFingerprint": "47398a871c93e6c966d06e97bb9c2ca4dbaf2f83f16517241ddaca2fefed0ab9",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-95d637e6c490",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0e512e9a21fb5d0a016aec53f7324087d1a3fa31c671bdfc48",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 37022,
+            "input_tokens_details": {
+              "cache_write_tokens": 30672,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 5497,
+            "output_tokens_details": {
+              "reasoning_tokens": 3397
+            },
+            "total_tokens": 42519
+          },
+          "output": {
+            "promiseId": "candidate-95d637e6c490",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": false,
+                "reasonCz": "Dodaná část rozpočtového návrhu pouze odkazuje na přílohu s ukazateli kapitol a neobsahuje údaje o policii, jejím personálním stavu ani administrativní zátěži.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43212-11",
+                "relevant": false,
+                "reasonCz": "Dodané změny zákona o zbraních upravují odkazy na propadnutí, zabrání a odčerpání zbraní, nikoli počet policistů, služebny, papírování nebo přímý výkon služby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43308-2",
+                "relevant": true,
+                "reasonCz": "Změna pravidel pro elektronické spisové služby bezpečnostních sborů přímo souvisí s administrativními povinnostmi policie.",
+                "effectCz": "Původní znění vyžadovalo atestaci elektronických systémů spisové služby, s výjimkami pro některé jiné uživatele. Navržená změna výslovně přidá bezpečnostní sbory a Vojenskou policii mezi subjekty, u nichž se atestace nemusí vyžadovat; schválená ukázka rovněž umožňuje, aby se požadavek na atestaci na systémy bezpečnostních sborů a Vojenské policie neuplatnil. Tato část tedy administrativní požadavek uvolňuje. U změny § 69e ve schváleném znění nejsou potřebné odstavce v dodané ukázce, takže její dopad nelze posoudit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43400-1",
+                "relevant": true,
+                "reasonCz": "Návrh ukládá policii další úkon při posuzování důvěryhodnosti žadatele v leteckém správním řízení, a týká se tak policejní administrativní agendy.",
+                "effectCz": "Návrh doplňuje povinnost Úřadu požádat policii o posouzení důvěryhodnosti, zjistí-li v řízení o žádosti, že držitel dokladu je bezúhonný. Dodané znění § 85k již počítá s žádostí policii při přezkumu, pokud okolnosti nasvědčují nedůvěryhodnosti; znění dosavadního odstavce 5, do něhož se věta vkládá, však v podkladech chybí, takže celkový směr změny oproti němu nelze určit. Navržená věta každopádně výslovně přidává policejní posouzení v uvedené situaci."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43419-1",
+                "relevant": true,
+                "reasonCz": "Návrh mění oprávnění policistů při výkonu služby a jeho dopad se vztahuje k části slibu o posílení přímého výkonu služby.",
+                "effectCz": "Nový § 41a by policistovi umožnil za stanovených podmínek dočasně uzavřít provozovnu, kde se nabízí nebo prodává výrobek představující vážné riziko pro život či zdraví; v neodkladném případě by zásah mohl trvat nejvýše 14 dnů a platila by pravidla pro jeho přezkum. Předchozí § 41 takové oprávnění v dodaném znění neobsahuje, takže návrh zakládá nové policejní oprávnění a rozšiřuje možnosti přímého zásahu. Předchozí právní úprava pro nový § 41a neexistovala."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-13",
+                "relevant": true,
+                "reasonCz": "Změna služebních pravidel bezpečnostních sborů ukládá nové informační a vykazovací povinnosti, které se týkají také administrativní práce policie.",
+                "effectCz": "Navržený nový § 77 odst. 13 ukládá bezpečnostním sborům každoročně informovat příslušníky o právu žádat údaje o odměňování; dodané znění předchozího § 77 takovou povinnost neobsahuje. Návrh také zavádí zprávy a posouzení rozdílů v odměňování, jejichž části se vztahují na bezpečnostní sbory. Tyto výslovně uvedené povinnosti zvyšují rozsah vykazování a informování; předchozí znění nahrazované hlavy VI však podklady neposkytují, takže její celkový dopad nelze určit."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-92",
+                "relevant": true,
+                "reasonCz": "Vládní plán výslovně uvádí připravovaný návrh zákona, jehož cílem je zmírnit administrativní zátěž policistů v přímém výkonu služby.",
+                "effectCz": "Usnesení samo žádné zákonné pravidlo nemění; zařazuje přípravu návrhu zákona o Policii ČR s cílem mimo jiné zmírnit administrativní zátěž policistů v přímém výkonu služby, s předložením vládě plánovaným na prosinec 2026. Jde o příslib dalšího legislativního návrhu, nikoli o již provedené snížení administrativních povinností."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-95d637e6c490--source",
+              "psp-core-2025--law-change-43308-2",
+              "psp-core-2025--print-step-211352",
+              "psp-core-2025--government-opinion-43308-1",
+              "psp-core-2025--vote-88528",
+              "psp-core-2025--law-change-43400-1",
+              "psp-core-2025--print-step-212019",
+              "psp-core-2025--law-change-43419-1",
+              "psp-core-2025--print-step-212094",
+              "psp-core-2025--government-opinion-43419-1",
+              "psp-core-2025--law-change-43422-13",
+              "psp-core-2025--print-step-212101",
+              "zvlady-resolutions--law-change-uv-2026-175-92",
+              "zvlady-resolutions--2026-175"
+            ],
+            "explanationCz": "Poslanci ANO předložili a podpořili změnu zákona o archivnictví, která bezpečnostním sborům umožňuje výjimku z atestace systémů spisové služby; pro ni také hlasovali při konečném schválení (sněmovní tisk 187, tedy číslo projednávaného návrhu). Tím se uvolňuje část administrativních povinností policie, nikoli však celý slib. Vláda také zařadila do plánu přípravu návrhu, který má snížit administrativní zátěž policistů v přímém výkonu, zatím jde ale jen o plán. Vedle toho vláda navrhla nové policejní a vykazovací úkoly a souhlasila s návrhem na rozšíření policejních oprávnění; nejde tedy o jednotný posun ve všech částech slibu.",
+            "confidence": "medium",
+            "uncertainties": [
+              "U změny zákona o civilním letectví chybí předchozí znění odstavce, do něhož návrh vkládá nový policejní úkon; nelze proto určit celkovou změnu povinností oproti dosavadnímu stavu.",
+              "U návrhu změn služebního poměru bezpečnostních sborů chybí předchozí znění nahrazované hlavy VI. Dodaná část však výslovně zavádí nové informační a vykazovací povinnosti.",
+              "Návrh na dočasné uzavírání provozoven rozšiřuje operativní oprávnění policie, ale podklady neukazují, zda by toto oprávnění samo o sobě posílilo personální kapacitu nebo přímý výkon služby."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-95d637e6c490",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Dodaná pasáž rozpočtu pouze odkazuje na přílohu s ukazateli kapitol a neukazuje konkrétní změnu prostředků ani opatření pro policii.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43212-11",
+          "relevant": false,
+          "reasonCz": "Změna upravuje postupy týkající se propadnutí, zabrání a odčerpání zbraní, nikoli personální stav, služebny nebo administrativní zátěž policistů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-2",
+          "relevant": true,
+          "reasonCz": "Změna se týká elektronické spisové služby bezpečnostních sborů a může zmírnit jejich administrativní povinnosti.",
+          "effectCz": "Dosavadní znění vyžadovalo u elektronických systémů spisové služby atestaci, s výjimkami, které bezpečnostní sbory nezahrnovaly; navržené znění rozšiřovalo výjimky také na bezpečnostní sbory a Vojenskou policii. Schválené znění výslovně dovoluje bezpečnostním sborům a Vojenské policii atestaci nepoužít, takže tuto povinnost v daném rozsahu zmírňuje a přispívá k omezení administrativní zátěže. Navržené znění rovněž rozšiřovalo výjimku ze zákazu nabízet nevyhovující systémy, ale dodaný výňatek schváleného znění neukazuje, jak se toto ustanovení změnilo; směr změny této části proto z podkladů nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43400-1",
+          "relevant": false,
+          "reasonCz": "Navržené posuzování důvěryhodnosti v civilním letectví přidává konkrétní úkol policii, ale podklady neukazují, že jde o zbytečnou agendu nebo že by změna zasahovala do slibovaného posílení přímého výkonu služby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43419-1",
+          "relevant": false,
+          "reasonCz": "Návrh přidává policii oprávnění dočasně uzavřít provozovnu při vážném riziku pro zdraví nebo život, ale podklady ho nespojují s rušením služeben, personálním stavem ani odbouráváním zbytečné administrativy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-13",
+          "relevant": false,
+          "reasonCz": "Navržené povinnosti bezpečnostních sborů se týkají vykazování rozdílů v odměňování a podklady neukazují, že jde o agendy, které slib označuje za zbytečné.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-92",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací výslovně počítá s návrhem změny zákona o policii, jehož cílem má být zmírnění administrativní zátěže policistů v přímém výkonu služby.",
+          "effectCz": "Usnesení nemění platné právní povinnosti; zařazuje do plánu přípravu návrhu zákona o policii s cílem mimo jiné zmírnit administrativní zátěž policistů v přímém výkonu služby. Plán počítá s předložením vládě v prosinci 2026 a účinností v lednu 2028, takže jde o přípravný záměr, nikoli o uskutečněné odbourání agend."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-95d637e6c490--source",
+        "psp-core-2025--law-change-43308-2",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--government-opinion-43308-1",
+        "psp-core-2025--vote-88528",
+        "zvlady-resolutions--law-change-uv-2026-175-92",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Poslanci ANO předložili a poté podpořili novelu zákona o archivnictví (sněmovní tisk č. 187), která bezpečnostním sborům umožňuje používat elektronické spisové systémy bez atestace; tím se část administrativních povinností zmírňuje. Vláda s návrhem také souhlasila. Usnesením schválila plán přípravy další změny zákona o policii, která má zmírnit administrativní zátěž policistů, ale tato změna zatím není uskutečněná. Jde tedy o doložený dílčí posun; podklady nedokládají zvýšení počtu policistů, zastavení rušení služeben ani rušení nepotřebných funkcionářských míst.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U schválené novely zákona o archivnictví dodaný výňatek neukazuje konečné znění ustanovení o zákazu nabízet nevyhovující elektronické spisové systémy, takže směr této části změny nelze určit.",
+        "Podklady nedokládají, zda se zvýšil počet policistů, přestaly se rušit služebny nebo byly zrušeny nepotřebné funkcionářské posty."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-95d637e6c490",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet může ovlivnit prostředky pro nábor policistů, ale dodaný text uvádí pouze odkaz na přílohu s rozpočtovými ukazateli.",
+          "effectCz": "Jde o rozpočet, který nemění dřívější znění zákona; dodaný text stanoví, že ukazatele podle kapitol jsou v příloze č. 4, ale tato příloha ani částky pro policii nejsou k dispozici, takže nelze určit, zda rozpočet nábor podporuje, nebo omezuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43212-11",
+          "relevant": false,
+          "reasonCz": "Změna rozšiřuje pravidla pro propadnutí, zabrání a odčerpání zbraní, ale nedotýká se náboru policistů, služeben, administrativní zátěže ani přímého výkonu služby slíbeného v programu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-2",
+          "relevant": true,
+          "reasonCz": "Změna upravuje požadavky na elektronickou spisovou službu bezpečnostních sborů, a tím se přímo dotýká papírování a administrativy policie.",
+          "effectCz": "Předchozí znění vyžadovalo atestaci elektronických systémů spisové služby, s vyjmenovanými výjimkami; navržené znění přidává bezpečnostní sbory a Vojenskou policii mezi výjimky a schválené znění pro ně stanoví, že se atestace nemusí použít. Jde tedy o uvolnění požadavku, které může administrativní zátěž policie snížit. Návrh také měnil výjimky ze zákazu dodávat nevyhovující systémy, ale příslušné odstavce schváleného textu jsou v dodaném výňatku vynechány, takže jejich konečné znění nelze posoudit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43400-1",
+          "relevant": false,
+          "reasonCz": "Předložené ustanovení ukládá leteckému úřadu vyžádat si od policie posouzení důvěryhodnosti držitele dokladu, ale z dodaného textu nelze doložit, že jde o zbytečnou agendu nebo že se tato úzce vymezená činnost týká slibu o posílení přímého výkonu služby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43419-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje oprávnění policistů při zásahu proti nebezpečným výrobkům, a tím se týká přímého výkonu policejní služby.",
+          "effectCz": "Předchozí § 41 upravoval oprávnění policisty ke vstupu do některých provozoven; nové § 41a přidává možnost provozovnu za stanovených podmínek dočasně uzavřít, nejdéle na 14 dnů, a upravuje související postup. Jde o rozšíření policejního oprávnění pro přímý výkon služby, nikoli o změnu počtu policistů, služeben nebo funkcionářských míst."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-13",
+          "relevant": true,
+          "reasonCz": "Předložený text ukládá bezpečnostním sborům nové informační a výkaznické povinnosti, které se týkají administrativní zátěže policie.",
+          "effectCz": "U nového § 77 odst. 13 dodaný kontext ukazuje, že dříve taková povinnost každoročně informovat příslušníky nebyla; návrh ji přidává, což rozšiřuje administrativní povinnost. Text zároveň nahrazuje hlavu VI a ukládá povinnosti spojené se zprávami a posuzováním rozdílů v odměňování, ale její předchozí znění v kontextu chybí, takže u této části nelze určit celkový směr změny."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-92",
+          "relevant": true,
+          "reasonCz": "Plán vlády výslovně počítá s přípravou změny policejního zákona, jejímž uvedeným cílem je zmírnit administrativní zátěž policistů v přímém výkonu služby.",
+          "effectCz": "Usnesení samo nemění právní povinnosti policistů; ukládá plánovat návrh zákona, který má mimo jiné zmírnit administrativní zátěž policistů v přímém výkonu služby. Jde o návrhový krok směrem k části slibu, nikoli o již provedené snížení zátěže."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-95d637e6c490--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43308-2",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--government-opinion-43308-1",
+        "psp-core-2025--vote-88528",
+        "psp-core-2025--law-change-43419-1",
+        "psp-core-2025--print-step-212094",
+        "psp-core-2025--government-opinion-43419-1",
+        "psp-core-2025--law-change-43422-13",
+        "psp-core-2025--print-step-212101",
+        "zvlady-resolutions--law-change-uv-2026-175-92",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Poslanci ANO podpořili zákon, který bezpečnostním sborům umožňuje výjimku z atestace elektronické spisové služby, čímž se u policie může snížit část administrativní zátěže. Vláda také zařadila do legislativního plánu přípravu změny policejního zákona zaměřené mimo jiné na omezení administrativy policistů v přímém výkonu služby. Poslanci ANO předložili návrh rozšiřující oprávnění policie uzavřít provozovnu s nebezpečnými výrobky, zatímco jiný vládní návrh ukládá bezpečnostním sborům nové informační a výkaznické povinnosti. U státního rozpočtu na rok 2026 nelze z dodaného výňatku zjistit částky pro policii, protože chybí příloha s rozpočtovými ukazateli.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Bez přílohy č. 4 státního rozpočtu nelze posoudit, zda rozpočet podporuje nábor dalších policistů; tato část podkladů proto neumožňuje úplné zhodnocení.",
+        "U návrhu měnícího služební poměr bezpečnostních sborů chybí předchozí znění nahrazované hlavy VI, takže nelze určit celkový dopad nových výkaznických povinností oproti dosavadním pravidlům.",
+        "Návrhy zákonů v podkladech nejsou samy o sobě důkazem, že jejich navržené změny již nabyly účinnosti."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0925671124e665ec016aec54294ef487d1a7d915946392bea5",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 37022,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 37019
+      },
+      "output_tokens": 5098,
+      "output_tokens_details": {
+        "reasoning_tokens": 3624
+      },
+      "total_tokens": 42120
+    },
+    "output": {
+      "promiseId": "candidate-95d637e6c490",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Dodaná pasáž rozpočtu pouze odkazuje na přílohu s ukazateli kapitol a neukazuje konkrétní změnu prostředků ani opatření pro policii.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43212-11",
+          "relevant": false,
+          "reasonCz": "Změna upravuje postupy týkající se propadnutí, zabrání a odčerpání zbraní, nikoli personální stav, služebny nebo administrativní zátěž policistů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-2",
+          "relevant": true,
+          "reasonCz": "Změna se týká elektronické spisové služby bezpečnostních sborů a může zmírnit jejich administrativní povinnosti.",
+          "effectCz": "Dosavadní znění vyžadovalo u elektronických systémů spisové služby atestaci, s výjimkami, které bezpečnostní sbory nezahrnovaly; navržené znění rozšiřovalo výjimky také na bezpečnostní sbory a Vojenskou policii. Schválené znění výslovně dovoluje bezpečnostním sborům a Vojenské policii atestaci nepoužít, takže tuto povinnost v daném rozsahu zmírňuje a přispívá k omezení administrativní zátěže. Navržené znění rovněž rozšiřovalo výjimku ze zákazu nabízet nevyhovující systémy, ale dodaný výňatek schváleného znění neukazuje, jak se toto ustanovení změnilo; směr změny této části proto z podkladů nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43400-1",
+          "relevant": false,
+          "reasonCz": "Navržené posuzování důvěryhodnosti v civilním letectví přidává konkrétní úkol policii, ale podklady neukazují, že jde o zbytečnou agendu nebo že by změna zasahovala do slibovaného posílení přímého výkonu služby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43419-1",
+          "relevant": false,
+          "reasonCz": "Návrh přidává policii oprávnění dočasně uzavřít provozovnu při vážném riziku pro zdraví nebo život, ale podklady ho nespojují s rušením služeben, personálním stavem ani odbouráváním zbytečné administrativy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-13",
+          "relevant": false,
+          "reasonCz": "Navržené povinnosti bezpečnostních sborů se týkají vykazování rozdílů v odměňování a podklady neukazují, že jde o agendy, které slib označuje za zbytečné.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-92",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací výslovně počítá s návrhem změny zákona o policii, jehož cílem má být zmírnění administrativní zátěže policistů v přímém výkonu služby.",
+          "effectCz": "Usnesení nemění platné právní povinnosti; zařazuje do plánu přípravu návrhu zákona o policii s cílem mimo jiné zmírnit administrativní zátěž policistů v přímém výkonu služby. Plán počítá s předložením vládě v prosinci 2026 a účinností v lednu 2028, takže jde o přípravný záměr, nikoli o uskutečněné odbourání agend."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-95d637e6c490--source",
+        "psp-core-2025--law-change-43308-2",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--government-opinion-43308-1",
+        "psp-core-2025--vote-88528",
+        "zvlady-resolutions--law-change-uv-2026-175-92",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Poslanci ANO předložili a poté podpořili novelu zákona o archivnictví (sněmovní tisk č. 187), která bezpečnostním sborům umožňuje používat elektronické spisové systémy bez atestace; tím se část administrativních povinností zmírňuje. Vláda s návrhem také souhlasila. Usnesením schválila plán přípravy další změny zákona o policii, která má zmírnit administrativní zátěž policistů, ale tato změna zatím není uskutečněná. Jde tedy o doložený dílčí posun; podklady nedokládají zvýšení počtu policistů, zastavení rušení služeben ani rušení nepotřebných funkcionářských míst.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U schválené novely zákona o archivnictví dodaný výňatek neukazuje konečné znění ustanovení o zákazu nabízet nevyhovující elektronické spisové systémy, takže směr této části změny nelze určit.",
+        "Podklady nedokládají, zda se zvýšil počet policistů, přestaly se rušit služebny nebo byly zrušeny nepotřebné funkcionářské posty."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_07d1d13b834e6a3a016aec5459c12487d198bc65f8b017b76e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 37022,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 37019
+      },
+      "output_tokens": 7138,
+      "output_tokens_details": {
+        "reasoning_tokens": 5178
+      },
+      "total_tokens": 44160
+    },
+    "output": {
+      "promiseId": "candidate-95d637e6c490",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet může ovlivnit prostředky pro nábor policistů, ale dodaný text uvádí pouze odkaz na přílohu s rozpočtovými ukazateli.",
+          "effectCz": "Jde o rozpočet, který nemění dřívější znění zákona; dodaný text stanoví, že ukazatele podle kapitol jsou v příloze č. 4, ale tato příloha ani částky pro policii nejsou k dispozici, takže nelze určit, zda rozpočet nábor podporuje, nebo omezuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43212-11",
+          "relevant": false,
+          "reasonCz": "Změna rozšiřuje pravidla pro propadnutí, zabrání a odčerpání zbraní, ale nedotýká se náboru policistů, služeben, administrativní zátěže ani přímého výkonu služby slíbeného v programu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-2",
+          "relevant": true,
+          "reasonCz": "Změna upravuje požadavky na elektronickou spisovou službu bezpečnostních sborů, a tím se přímo dotýká papírování a administrativy policie.",
+          "effectCz": "Předchozí znění vyžadovalo atestaci elektronických systémů spisové služby, s vyjmenovanými výjimkami; navržené znění přidává bezpečnostní sbory a Vojenskou policii mezi výjimky a schválené znění pro ně stanoví, že se atestace nemusí použít. Jde tedy o uvolnění požadavku, které může administrativní zátěž policie snížit. Návrh také měnil výjimky ze zákazu dodávat nevyhovující systémy, ale příslušné odstavce schváleného textu jsou v dodaném výňatku vynechány, takže jejich konečné znění nelze posoudit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43400-1",
+          "relevant": false,
+          "reasonCz": "Předložené ustanovení ukládá leteckému úřadu vyžádat si od policie posouzení důvěryhodnosti držitele dokladu, ale z dodaného textu nelze doložit, že jde o zbytečnou agendu nebo že se tato úzce vymezená činnost týká slibu o posílení přímého výkonu služby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43419-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje oprávnění policistů při zásahu proti nebezpečným výrobkům, a tím se týká přímého výkonu policejní služby.",
+          "effectCz": "Předchozí § 41 upravoval oprávnění policisty ke vstupu do některých provozoven; nové § 41a přidává možnost provozovnu za stanovených podmínek dočasně uzavřít, nejdéle na 14 dnů, a upravuje související postup. Jde o rozšíření policejního oprávnění pro přímý výkon služby, nikoli o změnu počtu policistů, služeben nebo funkcionářských míst."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-13",
+          "relevant": true,
+          "reasonCz": "Předložený text ukládá bezpečnostním sborům nové informační a výkaznické povinnosti, které se týkají administrativní zátěže policie.",
+          "effectCz": "U nového § 77 odst. 13 dodaný kontext ukazuje, že dříve taková povinnost každoročně informovat příslušníky nebyla; návrh ji přidává, což rozšiřuje administrativní povinnost. Text zároveň nahrazuje hlavu VI a ukládá povinnosti spojené se zprávami a posuzováním rozdílů v odměňování, ale její předchozí znění v kontextu chybí, takže u této části nelze určit celkový směr změny."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-92",
+          "relevant": true,
+          "reasonCz": "Plán vlády výslovně počítá s přípravou změny policejního zákona, jejímž uvedeným cílem je zmírnit administrativní zátěž policistů v přímém výkonu služby.",
+          "effectCz": "Usnesení samo nemění právní povinnosti policistů; ukládá plánovat návrh zákona, který má mimo jiné zmírnit administrativní zátěž policistů v přímém výkonu služby. Jde o návrhový krok směrem k části slibu, nikoli o již provedené snížení zátěže."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-95d637e6c490--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43308-2",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--government-opinion-43308-1",
+        "psp-core-2025--vote-88528",
+        "psp-core-2025--law-change-43419-1",
+        "psp-core-2025--print-step-212094",
+        "psp-core-2025--government-opinion-43419-1",
+        "psp-core-2025--law-change-43422-13",
+        "psp-core-2025--print-step-212101",
+        "zvlady-resolutions--law-change-uv-2026-175-92",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Poslanci ANO podpořili zákon, který bezpečnostním sborům umožňuje výjimku z atestace elektronické spisové služby, čímž se u policie může snížit část administrativní zátěže. Vláda také zařadila do legislativního plánu přípravu změny policejního zákona zaměřené mimo jiné na omezení administrativy policistů v přímém výkonu služby. Poslanci ANO předložili návrh rozšiřující oprávnění policie uzavřít provozovnu s nebezpečnými výrobky, zatímco jiný vládní návrh ukládá bezpečnostním sborům nové informační a výkaznické povinnosti. U státního rozpočtu na rok 2026 nelze z dodaného výňatku zjistit částky pro policii, protože chybí příloha s rozpočtovými ukazateli.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Bez přílohy č. 4 státního rozpočtu nelze posoudit, zda rozpočet podporuje nábor dalších policistů; tato část podkladů proto neumožňuje úplné zhodnocení.",
+        "U návrhu měnícího služební poměr bezpečnostních sborů chybí předchozí znění nahrazované hlavy VI, takže nelze určit celkový dopad nových výkaznických povinností oproti dosavadním pravidlům.",
+        "Návrhy zákonů v podkladech nejsou samy o sobě důkazem, že jejich navržené změny již nabyly účinnosti."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "moving-towards",
+    "selectedReview": "assessor-a"
+  }
+}
