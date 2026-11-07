@@ -1,9 +1,11 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { sha256 } from "../scripts/lib/collector-core.mjs";
 import { mkdtemp, readdir, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { createPspPageCache, describePageChange, pspPageContent, readPspPage, comparablePageContent } from "../scripts/lib/psp-page-cache.mjs";
+import { awaitsPromulgation, createPspPageCache, describePageChange, pspPageContent, readPspPage, comparablePageContent } from "../scripts/lib/psp-page-cache.mjs";
 
 const url = (number) => `https://www.psp.cz/sqw/sd.sqw?cd=${number}&o=10`;
 // A psp.cz page (its fixtures are ASCII: psp.cz pages are windows-1250), as the fetcher returns it.
@@ -139,4 +141,35 @@ test("a changed page is handed over with both versions before the check fails, a
   await createPspPageCache(directory, "2026-11-08").read({ url: "https://www.psp.cz/sqw/historie.sqw?o=10&t=77", keep: true, download: async () => page(before) });
   await createPspPageCache(directory, "2026-11-09").checkSample(async () => page(before), 1, async (change) => unchanged.push(change)).catch(() => {});
   assert.deepEqual(unchanged.filter(({ url }) => url.endsWith("t=77")), []);
+});
+
+// A page in psp.cz's windows-1250, for text with Czech letters.
+const cp1250 = { "á": 0xe1, "é": 0xe9, "í": 0xed, "ý": 0xfd, "ú": 0xfa, "ů": 0xf9, "ě": 0xec, "š": 0x9a, "č": 0xe8, "ř": 0xf8, "ž": 0x9e, "Š": 0x8a };
+const czechPage = (body) => ({ bytes: Uint8Array.from([...html(body)].map((character) => cp1250[character] ?? character.charCodeAt(0))) });
+
+test("a history page of an act sent for promulgation but not yet promulgated is neither kept nor read from the cache", async () => {
+  // Print 76 of term 10: read on 21 October 2026, and on 7 November 2026.
+  const historyUrl = "https://www.psp.cz/sqw/historie.sqw?o=10&t=76";
+  const sent = '<h1>Sněmovní tisk <a href="tisky.sqw?o=10&t=76">76</a></h1><p>Schválený zákon odeslán k publikaci ve Sbírce zákonů 20.&nbsp;10.&nbsp;2026.</p>';
+  const promulgated = `${sent}<p>Zákon vyhlášen 22.&nbsp;10.&nbsp;2026 ve Sbírce zákonů v částce 195 pod číslem <a href="sbirka.sqw?O=10&T=76">195/2026</a> Sb.</p>`;
+  assert.equal(awaitsPromulgation(historyUrl, sent), true);
+  assert.equal(awaitsPromulgation(historyUrl, promulgated), false);
+  assert.equal(awaitsPromulgation("https://www.psp.cz/sqw/text/tisk.sqw?o=10&ct=76&ct1=0", sent), false, "only a history page waits for its promulgation");
+
+  const directory = await mkdtemp(join(tmpdir(), "psp-pages-"));
+  const first = createPspPageCache(directory, "2026-10-21");
+  await first.read({ url: historyUrl, keep: true, download: async () => czechPage(sent) });
+  assert.equal(first.stats.notKept, 1);
+  assert.deepEqual(await readdir(directory), []);
+
+  // A page kept before this rule is removed when the cache is loaded, and the
+  // promulgated page is read and kept.
+  const entryId = createHash("sha256").update(historyUrl).digest("hex").slice(0, 32);
+  await writeFile(join(directory, `${entryId}.json`), JSON.stringify({ schemaVersion: "psp-page-cache-v1", id: entryId, url: historyUrl, contentSha256: sha256(sent), readOn: "2026-10-21", checkedOn: "2026-10-21", content: sent }));
+  const later = createPspPageCache(directory, "2026-11-07");
+  assert.equal(later.stats.awaitingPromulgation, 1);
+  assert.deepEqual(await readdir(directory), []);
+  const content = await later.read({ url: historyUrl, keep: true, download: async () => czechPage(promulgated) });
+  assert.match(content, /195\/2026/);
+  assert.equal(later.stats.kept, 1);
 });

@@ -27,6 +27,19 @@ const eurovocDescriptors = /<br><br><b>Deskriptory EUROVOCu:<\/b>[^<]*(?:<a [^>]
 // and these on any other page, are compared.
 const stepCommentNumbers = /<!--- \d+-->/gu;
 const historyPage = /\/historie\.sqw\?/u;
+// A bill sent for promulgation can already be in a closed state, while its
+// history page states the act's number only once it is promulgated: print 76
+// of term 10 was "odeslán k publikaci ve Sbírce zákonů" on 20 October 2026,
+// read on 21 October, and "Zákon vyhlášen 22. 10. 2026 ve Sbírce zákonů …
+// 195/2026 Sb." on 7 November (docs/evidence-pipeline.md, Closed prints).
+// Such a page is not final, so it is neither kept nor read from the cache.
+const pageText = (html) => html.replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ");
+export function awaitsPromulgation(url, content) {
+  if (!historyPage.test(url)) return false;
+  const text = pageText(content);
+  return /odeslán k publikaci ve Sbírce/u.test(text) && !/vyhlášen\p{L}* \d{1,2}\. ?\d{1,2}\. ?\d{4} ve Sbírce/u.test(text);
+}
+
 // A kept page as a check compares it: on a history page without its step
 // comment numbers, removed first so a number never hides its EUROVOC
 // descriptors, and without those descriptors.
@@ -45,8 +58,7 @@ const notFoundPattern = /okument nebyl nalezen\./u;
  * `context` characters, so a run log shows what a check found.
  */
 export function describePageChange(before, after, context = 400) {
-  const text = (html) => html.replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
-  const [left, right] = [text(before), text(after)];
+  const [left, right] = [pageText(before).trim(), pageText(after).trim()];
   let start = 0;
   while (start < left.length && start < right.length && left[start] === right[start]) start += 1;
   let end = 0;
@@ -79,7 +91,14 @@ function validEntry(entry, id) {
 export function createPspPageCache(directory, today) {
   invariant(isoDate.test(today), "The page cache needs the run date");
   const entries = loadCacheEntries(directory, /^[0-9a-f]{32}$/, validEntry, "psp.cz page cache");
-  const stats = { fromCache: 0, kept: 0, notKept: 0, open: 0, checked: 0 };
+  const stats = { fromCache: 0, kept: 0, notKept: 0, open: 0, checked: 0, awaitingPromulgation: 0 };
+  // A page kept before its act was promulgated is removed and read again.
+  for (const [id, entry] of entries) {
+    if (!awaitsPromulgation(entry.url, entry.content)) continue;
+    entries.delete(id);
+    removeCacheEntry(directory, id);
+    stats.awaitingPromulgation += 1;
+  }
   return {
     stats,
     async read({ url, keep, download, complete = () => true }) {
@@ -101,7 +120,7 @@ export function createPspPageCache(directory, today) {
       }
       // A page without its content, psp.cz's not-found page (served with HTTP
       // 200), or one whose reader found nothing in it is read again next run.
-      if (content === null || notFoundPattern.test(content) || !complete(content)) {
+      if (content === null || notFoundPattern.test(content) || !complete(content) || awaitsPromulgation(url, content)) {
         stats.notKept += 1;
         return content ?? html;
       }

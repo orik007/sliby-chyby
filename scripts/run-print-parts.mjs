@@ -300,7 +300,7 @@ try {
     const change = describePageChange(before, after ?? "");
     log(`psp.cz page of a closed print changed: ${url} (kept on ${readOn}); first difference at character ${change.at}, after "…${change.context}"; kept: "${change.before}"; now: "${change.after}"; both versions are in the run artifact (print-parts/changed-pages)`);
   });
-  log(`psp.cz page cache: ${pageCache.size()} pages of closed prints, ${pageCache.stats.fromCache} read from it, ${pageCache.stats.kept} read and kept in this run, ${pageCache.stats.notKept} of closed prints read but not kept (incomplete or not found), ${pageCache.stats.open} pages of open prints read, ${checkedPages.length} checked again and unchanged`);
+  log(`psp.cz page cache: ${pageCache.size()} pages of closed prints, ${pageCache.stats.fromCache} read from it, ${pageCache.stats.kept} read and kept in this run, ${pageCache.stats.notKept} of closed prints read but not kept (incomplete, not found, or awaiting promulgation), ${pageCache.stats.awaitingPromulgation} kept before their act was promulgated removed, ${pageCache.stats.open} pages of open prints read, ${checkedPages.length} checked again and unchanged`);
 } finally {
   await fetchPsp.close();
   pspRequests.stop();
