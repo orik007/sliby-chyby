@@ -6,9 +6,9 @@ const markerPosition = score === null ? 50 : position(score);
 const signed = (value: number) => `${value > 0 ? "+" : value < 0 ? "−" : ""}${Math.abs(value)}`;
 const label = score === null ? "SLAVA Index není dostupný" : `SLAVA Index ${score} bodů${parts ? `: ${signed(parts.positive)} za kroky ve prospěch slibů, ${signed(parts.negative)} za kroky proti nim` : ""}`;
 ---
-<div class:list={["score-bar", { "score-bar-compact": compact }]}>
+<div class:list={["score-bar", { "score-bar-compact": compact, "score-bar-parts": parts && compact }]}>
   <div class="score-row"><span>SLAVA Index</span><strong>{score === null ? "—" : `${score > 0 ? "+" : ""}${score}`}</strong></div>
-  <div class="score-track" aria-label={label} role="img"><span class="track-zero"></span>{parts && parts.negative < 0 && <span class="track-part track-part-negative" style={`left: ${position(parts.negative)}%`}></span>}{parts && parts.positive > 0 && <span class="track-part track-part-positive" style={`left: ${position(parts.positive)}%`}></span>}{score !== null && <span class="track-marker" style={`left: ${markerPosition}%`}></span>}</div>
+  <div class="score-track" aria-label={label} role="img"><span class="track-zero"></span>{parts && parts.negative < 0 && <span class="track-part track-part-negative" style={`left: ${position(parts.negative)}%`}>{compact && <span class="track-part-value" aria-hidden="true">{signed(parts.negative)}</span>}</span>}{parts && parts.positive > 0 && <span class="track-part track-part-positive" style={`left: ${position(parts.positive)}%`}>{compact && <span class="track-part-value" aria-hidden="true">{signed(parts.positive)}</span>}</span>}{score !== null && <span class="track-marker" style={`left: ${markerPosition}%`}></span>}</div>
   {compact ? <div class="score-legend score-legend-compact" aria-hidden="true"><span>−100</span><span>+100</span></div> : <div class="score-legend" aria-hidden="true"><span>−100</span><span>0</span><span>+100</span></div>}
   {parts && !compact && <p class="score-parts"><span class="score-part-negative"><span class="score-part-dot" aria-hidden="true"></span><b>{signed(parts.negative)}</b> za kroky proti slibům</span><span class="score-part-positive"><span class="score-part-dot" aria-hidden="true"></span><b>{signed(parts.positive)}</b> za kroky ve prospěch slibů</span></p>}
 </div>
