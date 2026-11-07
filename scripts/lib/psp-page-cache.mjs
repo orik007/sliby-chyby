@@ -27,6 +27,19 @@ const eurovocDescriptors = /<br><br><b>Deskriptory EUROVOCu:<\/b>[^<]*(?:<a [^>]
 // and these on any other page, are compared.
 const stepCommentNumbers = /<!--- \d+-->/gu;
 const historyPage = /\/historie\.sqw\?/u;
+// A bill sent for promulgation can already be in a closed state, while its
+// history page states the act's number only once it is promulgated: print 76
+// of term 10 was "odeslán k publikaci ve Sbírce zákonů" on 20 October 2026,
+// read on 21 October, and "Zákon vyhlášen 22. 10. 2026 ve Sbírce zákonů …
+// 195/2026 Sb." on 7 November (docs/evidence-pipeline.md, Closed prints).
+// Such a page is not final, so it is neither kept nor read from the cache.
+const pageText = (html) => html.replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ");
+export function awaitsPromulgation(url, content) {
+  if (!historyPage.test(url)) return false;
+  const text = pageText(content);
+  return /odeslán k publikaci ve Sbírce/u.test(text) && !/vyhlášen\p{L}* \d{1,2}\. ?\d{1,2}\. ?\d{4} ve Sbírce/u.test(text);
+}
+
 // A kept page as a check compares it: on a history page without its step
 // comment numbers, removed first so a number never hides its EUROVOC
 // descriptors, and without those descriptors.
@@ -38,6 +51,21 @@ export function comparablePageContent(content, url) {
 // "Sněmovní dokument nebyl nalezen.", "Dokument nebyl nalezen." (checked on
 // 19 October 2026).
 const notFoundPattern = /okument nebyl nalezen\./u;
+
+/**
+ * Where a page changed, in plain text: the text before the first difference
+ * and both versions from there to the last difference, each cut to
+ * `context` characters, so a run log shows what a check found.
+ */
+export function describePageChange(before, after, context = 400) {
+  const [left, right] = [pageText(before).trim(), pageText(after).trim()];
+  let start = 0;
+  while (start < left.length && start < right.length && left[start] === right[start]) start += 1;
+  let end = 0;
+  while (end < left.length - start && end < right.length - start && left[left.length - 1 - end] === right[right.length - 1 - end]) end += 1;
+  const cut = (value) => (value.length > context ? `${value.slice(0, context)}…` : value);
+  return { at: start, context: left.slice(Math.max(0, start - 120), start), before: cut(left.slice(start, left.length - end)), after: cut(right.slice(start, right.length - end)) };
+}
 
 function pageId(url) {
   return createHash("sha256").update(url).digest("hex").slice(0, 32);
@@ -63,7 +91,14 @@ function validEntry(entry, id) {
 export function createPspPageCache(directory, today) {
   invariant(isoDate.test(today), "The page cache needs the run date");
   const entries = loadCacheEntries(directory, /^[0-9a-f]{32}$/, validEntry, "psp.cz page cache");
-  const stats = { fromCache: 0, kept: 0, notKept: 0, open: 0, checked: 0 };
+  const stats = { fromCache: 0, kept: 0, notKept: 0, open: 0, checked: 0, awaitingPromulgation: 0 };
+  // A page kept before its act was promulgated is removed and read again.
+  for (const [id, entry] of entries) {
+    if (!awaitsPromulgation(entry.url, entry.content)) continue;
+    entries.delete(id);
+    removeCacheEntry(directory, id);
+    stats.awaitingPromulgation += 1;
+  }
   return {
     stats,
     async read({ url, keep, download, complete = () => true }) {
@@ -85,7 +120,7 @@ export function createPspPageCache(directory, today) {
       }
       // A page without its content, psp.cz's not-found page (served with HTTP
       // 200), or one whose reader found nothing in it is read again next run.
-      if (content === null || notFoundPattern.test(content) || !complete(content)) {
+      if (content === null || notFoundPattern.test(content) || !complete(content) || awaitsPromulgation(url, content)) {
         stats.notKept += 1;
         return content ?? html;
       }
@@ -95,11 +130,14 @@ export function createPspPageCache(directory, today) {
       stats.kept += 1;
       return content;
     },
-    async checkSample(download, sampleSize) {
+    // `onChange` receives a changed page's URL and both versions before the
+    // check fails, so the run can keep them for inspection.
+    async checkSample(download, sampleSize, onChange = null) {
       // A page read this day is as fresh as a check.
       const sample = oldestChecked(entries, sampleSize, ({ readOn }) => readOn < today);
       for (const entry of sample) {
         const content = pspPageContent(decodePspPage(await download(entry.url)));
+        if (onChange && (content === null || comparablePageContent(content, entry.url) !== comparablePageContent(entry.content, entry.url))) await onChange({ url: entry.url, readOn: entry.readOn, before: entry.content, after: content });
         invariant(content !== null && comparablePageContent(content, entry.url) === comparablePageContent(entry.content, entry.url), `psp.cz page of a closed print changed (${entry.url}): the rule that a closed print's pages do not change (docs/evidence-pipeline.md) no longer holds`);
         entry.checkedOn = today;
         saveCacheEntry(directory, entry);

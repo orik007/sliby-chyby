@@ -1,13 +1,13 @@
 import { appendFileSync, mkdirSync, writeFileSync } from "node:fs";
-import { readFile, writeFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { join, resolve } from "node:path";
 import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
 import { invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { createESbirkaClient, createLawContextCache, createLawContextReader, ESbirkaUnavailableError, workflowRunId } from "./lib/e-sbirka.mjs";
 import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxNumberedParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspPageOptions, pspProxyUrl } from "./lib/psp-print-documents.mjs";
 import { extractPdfOcrParagraphs } from "./lib/pdf-ocr.mjs";
 import { anyPspDocumentFileOptions, createPspDocumentCache, pspDocumentExtractions, pspDocumentFileOptions } from "./lib/psp-document-cache.mjs";
-import { createPspPageCache, readPspPage } from "./lib/psp-page-cache.mjs";
+import { createPspPageCache, describePageChange, readPspPage } from "./lib/psp-page-cache.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 import { collectPrints, governmentOpinionSectionLabels, hasDividedPart, isPdfOnlyNotice, laterTextDocxLink, laterTextLinks, lawChangesOfPrint, partedPrintKindIds, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersions, proposalBody, proposalDocumentFiles, proposalDocumentLink, readPromulgatedParagraphs, readProposalText } from "./lib/print-parts.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
@@ -289,8 +289,18 @@ try {
   log(`psp.cz document cache: ${documentCache.size()} files, ${documentCache.stats.fromCache} texts read from it, ${documentCache.stats.downloaded} downloaded in this run, ${checked.length} checked again and unchanged`);
   // The kept pages checked longest ago are downloaded again; one whose
   // content changed fails the run.
-  const checkedPages = await pageCache.checkSample((url) => fetchPsp(source, url, pspPageOptions), pageSampleSize);
-  log(`psp.cz page cache: ${pageCache.size()} pages of closed prints, ${pageCache.stats.fromCache} read from it, ${pageCache.stats.kept} read and kept in this run, ${pageCache.stats.notKept} of closed prints read but not kept (incomplete or not found), ${pageCache.stats.open} pages of open prints read, ${checkedPages.length} checked again and unchanged`);
+  // A changed page is kept in the run artifact with where it changed, so
+  // what psp.cz changed on a closed print can be read before the run fails.
+  const checkedPages = await pageCache.checkSample((url) => fetchPsp(source, url, pspPageOptions), pageSampleSize, async ({ url, readOn, before, after }) => {
+    const directory = resolve(args.output, "changed-pages");
+    await mkdir(directory, { recursive: true });
+    const name = new URL(url).search.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "");
+    await writeFile(join(directory, `${name}.cached-${readOn}.html`), before);
+    await writeFile(join(directory, `${name}.live.html`), after ?? "");
+    const change = describePageChange(before, after ?? "");
+    log(`psp.cz page of a closed print changed: ${url} (kept on ${readOn}); first difference at character ${change.at}, after "…${change.context}"; kept: "${change.before}"; now: "${change.after}"; both versions are in the run artifact (print-parts/changed-pages)`);
+  });
+  log(`psp.cz page cache: ${pageCache.size()} pages of closed prints, ${pageCache.stats.fromCache} read from it, ${pageCache.stats.kept} read and kept in this run, ${pageCache.stats.notKept} of closed prints read but not kept (incomplete, not found, or awaiting promulgation), ${pageCache.stats.awaitingPromulgation} kept before their act was promulgated removed, ${pageCache.stats.open} pages of open prints read, ${checkedPages.length} checked again and unchanged`);
 } finally {
   await fetchPsp.close();
   pspRequests.stop();
