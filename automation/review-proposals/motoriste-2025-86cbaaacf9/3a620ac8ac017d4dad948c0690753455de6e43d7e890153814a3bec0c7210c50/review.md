@@ -1,0 +1,88 @@
+# Pokračování digitalizace justice
+
+> Nezveřejněný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
+
+## Návrh pro veřejný web
+
+Toto je jediná část dokumentu určená jako kandidát veřejného textu. Musí být srozumitelná bez znalosti projektu, práva nebo fungování Poslanecké sněmovny.
+
+### Hodnocení
+
+**Směřuje proti slibu (−1)**
+
+### Vysvětlení
+
+Vláda předložila návrhy na videokonferenční výslechy, elektronické záznamy z trestního řízení a další digitální postupy; poslankyně Motoristů také navrhla doplnit pravidla pro videokonference v přeshraničních trestních věcech. Vláda zároveň zavedla řízení projektů a určila modernizaci informačních systémů Ministerstva spravedlnosti jako projekt s termínem do konce roku 2027. Při závěrečném hlasování o novém cizineckém zákoně, který umožňuje videokonferenční účast u soudního přezkumu, klub Motoristů nezískal většinu potřebnou k podpoře návrhu; šlo o dílčí opatření, takže tento zaznamenaný krok směřuje proti části slibu. Pozdější vládní pravidla pro ICT navíc vyžadují evidenci a prioritu před zahájením některých projektů, ačkoli podklad neukazuje, že by kvůli nim byl konkrétní projekt justice zastaven.
+
+## Co má zkontrolovat reviewer
+
+- Odpovídá navržené hodnocení metodice SLAVA Indexu?
+- Je jednání správně připsáno sledované straně?
+- Je veřejné vysvětlení pochopitelné samo o sobě a říká, kdo co udělal a jak to souvisí se slibem?
+- Jsou zkratky, právní pojmy a úřední označení při prvním použití vysvětlené?
+- Dokládají uvedené zdroje všechna podstatná tvrzení a nechybí rozporný podklad?
+
+## Technické podklady pro reviewera
+
+- Výsledek automatického procesu: oba automatické posudky se shodly
+- Interní stav: `moving-against`
+- Důvod výsledku: `assessor-consensus`
+- Úplný strojový audit: `assessment-run.json`
+- Přesný balíček posuzovaných podkladů: `evidence-package.json`
+
+### Shoda hodnotitelů
+
+Oba nezávislí hodnotitelé dospěli ke stejnému výsledku: **Směřuje proti slibu (−1)**.
+
+Co zůstává nejisté:
+
+- Podklad neukazuje, zda se podmínky z usnesení o řízení ICT záměrů konkrétně uplatnily na modernizaci ISVR nebo zda ji zdržely; proto nelze doložit, že tento krok sám projekt zastavil.
+- U videokonferenční úpravy v novém cizineckém zákoně není v podkladu uvedeno předchozí znění příslušného ustanovení, takže lze popsat její obsah, nikoli přesně změřit změnu oproti dosavadnímu právu.
+
+Úplné oddělené odpovědi obou hodnotitelů zůstávají v souboru `assessment-run.json`.
+
+### Souvisí změny zákonů se slibem?
+
+| Změna zákona | První posudek | Druhý posudek |
+| --- | --- | --- |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Vládní návrh zákona, kterým se mění zákon č. 104/2013 Sb., o mezinárodní justiční spolupráci ve věcech trestních, ve znění pozdějších předpisů](https://www.psp.cz/sqw/text/orig2.sqw?idd=265674) | ano: Návrh upravuje digitální komunikaci justičních orgánů a videokonferenční výslechy v přeshraniční trestní spolupráci, tedy skutečnou část digitalizace justice.<br>Dopad: U řady ustanovení se nově stanoví komunikace podle unijních pravidel pro digitální justiční spolupráci; u § 260 odst. 3 se dosavadní možnost písemného předání nebo jiného způsobu s písemným záznamem nahrazuje odkazem na tato pravidla. U nově vkládaných odstavců a § 205a předchozí znění v podkladu chybí, takže jejich směr změny nelze porovnat; zavádějí mimo jiné možnost výslechu prostřednictvím videokonference. | ano: Návrh upravuje digitální komunikaci a videokonferenční výslechy v přeshraničních trestních věcech, tedy konkrétní část digitalizace justice.<br>Dopad: Dřívější § 203 upravoval výslech při předběžném šetření a § 205 rozhodnutí o předání; nové odstavce a § 205a přidávají možnost videokonferenčního výslechu na žádost cizího orgánu. Jde o nový prostředek digitalizace pro vymezené úkony, nikoli o doloženou změnu rychlosti soudního řízení jako celku. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: SOUDNÍ PŘEZKUM](https://www.psp.cz/sqw/text/orig2.sqw?idd=280621) | ano: Ustanovení se týká účasti u soudního jednání prostřednictvím videokonference, což je dílčí digitalizace soudního řízení.<br>Dopad: Jde o novou úpravu v návrhu nového zákona; předchozí znění srovnávaného ustanovení podklad neuvádí, takže směr změny vůči dosavadnímu právu nelze určit. Návrh umožňuje videokonferenční účast u soudního přezkumu rozhodnutí podle tohoto zákona a upravuje ověření totožnosti a poučení účastníků. | ano: Ustanovení výslovně umožňuje videokonferenční účast při soudním přezkumu rozhodnutí podle cizineckého zákona.<br>Dopad: Předchozí znění tohoto nového zákona není v balíčku doloženo. Návrh zavádí možnost zajistit přítomnost cizince nebo jiné osoby u soudního jednání přes videokonferenční zařízení; schválené znění tuto možnost zachovává, takže jde o dílčí nástroj digitalizace. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o službách vytvářejících důvěru pro elektronické transakce](https://www.psp.cz/sqw/text/orig2.sqw?idd=268960) | ne: Dodané ustanovení upravuje digitální peněženku a prokazování skutečností vůči orgánům veřejné moci, ale podklad je nespojuje s digitalizací justice ani s konkrétním soudním projektem. | ne: Změna se týká digitální peněženky a prokazování údajů vůči orgánům veřejné moci, ale dodané části ji nespojují s digitalizací justice ani s konkrétním justičním projektem. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o mezinárodní justiční spolupráci ve věcech trestních](https://www.psp.cz/sqw/text/orig2.sqw?idd=270350) | ano: Návrh zavádí videokonferenční výslechy v řízení o předání osoby do jiného státu, což je konkrétní digitální nástroj v trestním řízení.<br>Dopad: Nové odstavce § 203 a § 205a nemají v podkladu předchozí znění, takže směr změny oproti dosavadní úpravě nelze porovnat. Návrh nově umožňuje, aby se na žádost zahraničního orgánu výslech uskutečnil prostřednictvím videokonference. | ano: Návrh zavádí videokonferenční výslechy osob v řízeních o předání do jiného státu, což je konkrétní digitální nástroj pro justiční úkony.<br>Dopad: Předchozí znění § 203 upravovalo výslech při předběžném šetření, ale dodaný kontext neobsahuje předchozí úpravu nového odstavce 8 ani § 205a. Návrh nově dovoluje výslech prostřednictvím videokonference na žádost příslušného orgánu; rozšiřuje tím možnosti digitálního provedení těchto úkonů. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o pobytu cizinců na území České republiky](https://www.psp.cz/sqw/text/orig2.sqw?idd=271313) | ano: Návrh se týká soudního řízení a zavádí využití elektronických nástrojů pro překlad listinných důkazů.<br>Dopad: Nový § 172b nemá v podkladu předchozí znění, takže směr změny nelze porovnat. Návrh stanoví, že pokud listinný důkaz nemá úřední překlad do češtiny, soud může opatřit pouze strojový překlad; jde o nový způsob využití elektronických nástrojů, nikoli o doložené rozšíření či zúžení dosavadního nároku. | ano: Nové ustanovení dovoluje soudu v řízení o žalobě podle cizineckého zákona pořídit strojový překlad listinného důkazu, což je konkrétní použití digitálního nástroje v soudním řízení.<br>Dopad: Předchozí znění nového § 172b kontext nedokládá. Návrh nově stanoví, že soud může u důkazu bez úředního překladu opatřit pouze strojový překlad; přináší digitální možnost, ale z dodaného textu nelze určit její praktický dopad na rychlost řízení. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Vládní návrh zákona, kterým se mění zákon č. 141/1961 Sb., o trestním řízení soudním (trestní řád), ve znění pozdějších předpisů](https://www.psp.cz/sqw/text/orig2.sqw?idd=281922) | ano: Návrh mění záznamy o trestním řízení, elektronické ukládání záznamů a dálkový přístup k nim.<br>Dopad: Dosavadní § 55a umožňoval pro záznam využít mimo jiné zvukový či obrazový záznam; návrh výslovně upravuje technická zařízení, přepis a elektronické úložiště a zachovává povinný záznam při videokonferenci. U § 55b umožňuje používat zjednodušený přepis a odstraňuje potřebu stručného záznamu, je-li přepis pořízen. Elektronické podání zůstává možné, ale nově je vymezeno prostřednictvím datové schránky nebo podpisu uznaného jiným předpisem; nový § 62 odst. 4 uznává doručení převedené elektronické písemnosti. Novela také výslovně umožňuje časově omezený dálkový přístup k uloženým záznamům a přepisům, což rozšiřuje elektronický přístup k části soudních spisů. | ano: Návrh trestního řádu upravuje elektronické záznamy, přepisy, ukládání záznamů a vzdálený přístup ke spisu, tedy přímo digitalizaci soudního řízení.<br>Dopad: Předchozí § 55a již dovoloval zvukový či obrazový záznam a vyžadoval jej při videokonferenci; návrh doplňuje možnost elektronického úložiště a přepisů. Předchozí § 65 umožňoval nahlížení do spisu, zatímco návrh výslovně přidává časově omezený vzdálený přístup k záznamům. U § 59 návrh oproti dřívější možnosti podat věc také obecně elektronicky vyžaduje datovou schránku nebo elektronický podpis s účinky vlastnoručního podpisu, takže tuto formu podání zpřesňuje a zužuje. |
+| [Předpis ve Sbírce zákonů: Vyhláška č. 116/2026 Sb., Vyhláška, kterou se mění vyhláška č. 213/2019 Sb., o náležitostech generátoru přidělování zajišťujících přidělování insolvenčních věcí náhodným výběrem, způsobu provozování generátoru přidělování a obsahu rozvrhu práce a způsobu jeho sestavení za účelem použití generátoru přidělování (vyhláška o generátoru přidělování), ve znění pozdějších předpisů](https://e-sbirka.gov.cz/sb/2026/116/0000-00-00) | ano: Vyhláška mění pravidla digitálního generátoru přidělování insolvenčních věcí, tedy nástroj používaný v justici.<br>Dopad: Vyhláška nově umožňuje, aby rozvrh práce stanovil další atributy, parametry a jejich zohlednění v algoritmu generátoru, a upravuje některá pravidla jeho provozu. Předchozí znění vyhlášky v podkladu chybí, takže nelze spolehlivě určit, zda se tím pravidla zpřísňují či uvolňují; text však přímo mění nastavení digitálního nástroje pro přidělování věcí. | ano: Vyhláška upravuje generátor náhodného přidělování insolvenčních věcí soudům, tedy IT nástroj v justici.<br>Dopad: Vyhláška nově umožňuje, aby úplné znění rozvrhu práce stanovilo další atributy a parametry, které generátor přidělování zohlední. Předchozí znění měněné vyhlášky v balíčku není uvedeno, takže přesný rozdíl oproti dřívějším pravidlům nelze ověřit; text ale rozšiřuje možnosti nastavení digitálního přidělování věcí. |
+| [Text usnesení vlády: Usnesení vlády č. 314/2026, Systém řízení strategických programů a projektů z oblasti informačních a komunikačních technologií vyplývajících z programového prohlášení vlády a programů a projektů s legislativním termínem a k pověření jejich odpovědných manažerů](https://odok.gov.cz/portal/zvlady/usneseni/2026/314/) | ano: Usnesení výslovně zahrnuje modernizaci informačních systémů resortu spravedlnosti mezi projekty s odpovědným manažerem a termínem.<br>Dopad: Jde o nové usnesení, k němuž podklad neposkytuje předchozí znění. Zřizuje řízení, průběžné vykazování a odpovědnost za strategické projekty; v seznamu uvádí modernizaci ISVR včetně ESM, ESF a JAAS pod Ministerstvem spravedlnosti s termínem 31. prosince 2027. Tím vytváří konkrétní organizační krok k pokračování tohoto projektu, ale samo jeho dokončení nezajišťuje. | ano: Usnesení výslovně zařazuje projekt modernizace informačního systému Ministerstva spravedlnosti mezi prioritní projekty a určuje jeho manažera i termín.<br>Dopad: Usnesení stanoví systém řízení, koordinace a pravidelného reportování strategických IT projektů a v příloze uvádí projekt „Upgrade a modernizace ISVR, včetně ESM, ESF a JAAS“ u Ministerstva spravedlnosti, odpovědného manažera a termín 31. 12. 2027. Neprokazuje dokončení modernizace, ale pro tento konkrétní projekt zavádí odpovědnost a sledování postupu, což je dílčí krok proti stagnaci. |
+| [Text usnesení vlády: Usnesení vlády č. 506/2026, XI. zpráva o realizaci Národního plánu obnovy](https://odok.gov.cz/portal/zvlady/usneseni/2026/506/) | ne: Usnesení uvádí prostředky přidělené Ministerstvu spravedlnosti na obecné digitální služby a systémy, ale podklad je nespojuje s digitalizací soudů ani s konkrétním projektem uvedeným ve slibu. | ano: Usnesení rozděluje prostředky Národního plánu obnovy také Ministerstvu spravedlnosti v programech výslovně zaměřených na digitální služby a systémy.<br>Dopad: Usnesení nařizuje převést celkem 10 160 830 520,85 Kč příslušným organizačním složkám státu; tabulka uvádí u Ministerstva spravedlnosti 29 590 391,34 Kč na grant Digitální služby občanům a firmám a 10 066 367,52 Kč na grant Digitální systémy veřejné správy. Jde o konkrétní financování digitálních služeb a systémů u resortu spravedlnosti, ale text nedokládá, jaká část je určena na konkrétní justiční projekt ani jeho dokončení. |
+| [Text usnesení vlády: Usnesení vlády č. 589/2026, Řízení výdajů v oblasti informačních a komunikačních technologií a umělé inteligence](https://odok.gov.cz/portal/zvlady/usneseni/2026/589/) | ano: Usnesení zavádí podmínky evidence, prioritizace a financování ICT záměrů, které se mohou vztahovat i na digitální projekty justice.<br>Dopad: Usnesení nově podmiňuje zahájení realizace a čerpání prostředků evidovanou prioritou a stanoví další kontrolní postup pro ICT zakázky. Pro již probíhající záměry stanoví přechodné doplnění údajů; současně obsahuje výjimky pro zákonné povinnosti, bezpečnostní incidenty a kontinuitu provozu. Jde tedy o přísnější procesní podmínky, které mohou projekty zdržet, ale podklad nedokládá, že by byl konkrétní projekt justice skutečně pozastaven. | ano: Usnesení nastavuje pravidla pro ICT záměry a jejich financování; jde o rámec relevantní i pro justiční IT projekty uvedené v předchozím usnesení.<br>Dopad: Usnesení nově vyžaduje evidenci ICT záměrů a jejich prioritu; bez evidované priority nelze zahájit realizaci ani čerpat státní či unijní prostředky, s uvedenými výjimkami. U dříve zahájených projektů stanoví lhůtu pro dodání údajů. Balíček neuvádí, jakou prioritu má projekt modernizace ISVR ani zda jej tato podmínka zdržela, takže dopad na jeho postup nelze určit. |
+
+Oba hodnotitelé tyto změny shodně označili za nesouvisející, proto je další balíčky tohoto slibu vynechají, dokud se nezmění jejich text, kontext, znění slibu nebo pokyny hodnotitelů:
+
+- Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o službách vytvářejících důvěru pro elektronické transakce
+
+### Zdroje použité při hodnocení
+
+- [Původní volební slib](https://motoristesobe.cz/wp-content/uploads/Volebni_program-2025_MOTORISTE-SOBE.pdf)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Vládní návrh zákona, kterým se mění zákon č. 104/2013 Sb., o mezinárodní justiční spolupráci ve věcech trestních, ve znění pozdějších předpisů](https://www.psp.cz/sqw/text/orig2.sqw?idd=265674)
+- [Změna zákona v návrhu projednávaném Sněmovnou: SOUDNÍ PŘEZKUM](https://www.psp.cz/sqw/text/orig2.sqw?idd=280621)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o mezinárodní justiční spolupráci ve věcech trestních](https://www.psp.cz/sqw/text/orig2.sqw?idd=270350)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o pobytu cizinců na území České republiky](https://www.psp.cz/sqw/text/orig2.sqw?idd=271313)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Vládní návrh zákona, kterým se mění zákon č. 141/1961 Sb., o trestním řízení soudním (trestní řád), ve znění pozdějších předpisů](https://www.psp.cz/sqw/text/orig2.sqw?idd=281922)
+- [Předpis ve Sbírce zákonů: Vyhláška č. 116/2026 Sb., Vyhláška, kterou se mění vyhláška č. 213/2019 Sb., o náležitostech generátoru přidělování zajišťujících přidělování insolvenčních věcí náhodným výběrem, způsobu provozování generátoru přidělování a obsahu rozvrhu práce a způsobu jeho sestavení za účelem použití generátoru přidělování (vyhláška o generátoru přidělování), ve znění pozdějších předpisů](https://e-sbirka.gov.cz/sb/2026/116/0000-00-00)
+- [Text usnesení vlády: Usnesení vlády č. 314/2026, Systém řízení strategických programů a projektů z oblasti informačních a komunikačních technologií vyplývajících z programového prohlášení vlády a programů a projektů s legislativním termínem a k pověření jejich odpovědných manažerů](https://odok.gov.cz/portal/zvlady/usneseni/2026/314/)
+- [Text usnesení vlády: Usnesení vlády č. 506/2026, XI. zpráva o realizaci Národního plánu obnovy](https://odok.gov.cz/portal/zvlady/usneseni/2026/506/)
+- [Text usnesení vlády: Usnesení vlády č. 589/2026, Řízení výdajů v oblasti informačních a komunikačních technologií a umělé inteligence](https://odok.gov.cz/portal/zvlady/usneseni/2026/589/)
+- [Text pozměňovacího návrhu A1 (sněmovní dokument 1153)](https://www.psp.cz/sqw/text/orig2.sqw?idd=270635)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=144)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=196)
+- [Přijetí usnesení vládou](https://odok.gov.cz/portal/zvlady/usneseni/2026/314/)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=213)
+- [Vydání vyhlášky: Ministerstvo spravedlnosti](https://e-sbirka.gov.cz/sb/2026/116/0000-00-00)
+- [Přijetí usnesení vládou](https://odok.gov.cz/portal/zvlady/usneseni/2026/506/)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=88522)
+- [Přijetí usnesení vládou](https://odok.gov.cz/portal/zvlady/usneseni/2026/589/)
+- [Pozměňovací návrh poslanců A1 ve druhém čtení](https://www.psp.cz/sqw/sd.sqw?cd=1153&o=10)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=355)
+
+Tento návrh nahrazuje starší automatický posudek, který zůstává zachovaný v auditní historii.
+

@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-58-25-394Z--6fc9c8f110ff",
+  "evaluatedAt": "2026-10-02T01:58:25.394Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-d3c3342e9cfd/6fc9c8f110ff5e6118d44ec339fbbe02e773d439a1d6f42e2c259ffd63918d17.json",
+  "packageHash": "6fc9c8f110ff5e6118d44ec339fbbe02e773d439a1d6f42e2c259ffd63918d17",
+  "assessmentContentHash": "516229281610bff2128aeff68dd9a6bca23f8ecf35c80be946b1f6561a90d745",
+  "assessmentFingerprint": "ffb448c472fdf76b473ad27935aafa876285af82e769ae2742b0f84d8f3e9b15",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-d3c3342e9cfd",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-d3c3342e9cfd",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-12",
+          "relevant": true,
+          "reasonCz": "Návrh ruší část zákona o další elektronizaci veřejné správy, která by mohla souviset s povinnými datovými schránkami, avšak její obsah v podkladech není uveden."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-6",
+          "relevant": false,
+          "reasonCz": "Návrh ukládá zpřístupnit datovou schránku zahraničnímu zprostředkovateli taxislužby bez sídla či pobytu v ČR, nikoli OSVČ obecně."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-d3c3342e9cfd--source",
+        "psp-core-2025--law-change-43372-12",
+        "psp-core-2025--print-step-211843"
+      ],
+      "explanationCz": "Poslanci strany předložili návrh zákona o standardizaci, který mimo jiné ruší část zákona o další elektronizaci veřejné správy. Podklady ale neobsahují znění rušené části ani neukazují, zda zavedla povinnost datových schránek pro OSVČ. Nelze proto ověřit, zda návrh tuto povinnost skutečně ruší; doložený posun ke slibu zatím není.",
+      "confidence": "low",
+      "uncertainties": [
+        "Není doloženo, co obsahovala rušená část zákona o další elektronizaci veřejné správy, ani zda se týká povinných datových schránek pro OSVČ; účinek návrhu na slib proto nelze určit."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-d3c3342e9cfd",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-12",
+          "relevant": true,
+          "reasonCz": "Návrh ruší část zákona č. 261/2021 Sb. o elektronizaci veřejné moci, což by mohlo zasáhnout do povinnosti datových schránek, ale dodané znění neuvádí, co tato část upravuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-6",
+          "relevant": false,
+          "reasonCz": "Návrh ukládá povinnost mít datovou schránku zahraničnímu zprostředkovateli taxislužby, nikoli osobám samostatně výdělečně činným."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-d3c3342e9cfd--source",
+        "psp-core-2025--law-change-43372-12",
+        "psp-core-2025--print-step-211843"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě spolu s poslanci ANO předložili návrh, který ruší část zákona č. 261/2021 Sb. o elektronizaci veřejné moci. Z dodaného znění ale není patrné, zda tato část obsahuje povinnost datové schránky pro OSVČ, protože její konkrétní ustanovení chybí. Nelze proto ověřit, že návrh slib skutečně posouvá, a zatím není doložen podstatný posun.",
+      "confidence": "low",
+      "uncertainties": [
+        "Konkrétní ustanovení rušené části zákona č. 261/2021 Sb. v podkladech chybí, takže nelze potvrdit, zda návrh odstraňuje povinnost datové schránky pro OSVČ."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_04dd3a1ce16feb0f016abf0fa46a9087d1bb55c1c4a8427463",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8197,
+      "input_tokens_details": {
+        "cache_write_tokens": 4873,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2334,
+      "output_tokens_details": {
+        "reasoning_tokens": 1916
+      },
+      "total_tokens": 10531
+    },
+    "output": {
+      "promiseId": "candidate-d3c3342e9cfd",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-12",
+          "relevant": true,
+          "reasonCz": "Návrh ruší část zákona o další elektronizaci veřejné správy, která by mohla souviset s povinnými datovými schránkami, avšak její obsah v podkladech není uveden."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-6",
+          "relevant": false,
+          "reasonCz": "Návrh ukládá zpřístupnit datovou schránku zahraničnímu zprostředkovateli taxislužby bez sídla či pobytu v ČR, nikoli OSVČ obecně."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-d3c3342e9cfd--source",
+        "psp-core-2025--law-change-43372-12",
+        "psp-core-2025--print-step-211843"
+      ],
+      "explanationCz": "Poslanci strany předložili návrh zákona o standardizaci, který mimo jiné ruší část zákona o další elektronizaci veřejné správy. Podklady ale neobsahují znění rušené části ani neukazují, zda zavedla povinnost datových schránek pro OSVČ. Nelze proto ověřit, zda návrh tuto povinnost skutečně ruší; doložený posun ke slibu zatím není.",
+      "confidence": "low",
+      "uncertainties": [
+        "Není doloženo, co obsahovala rušená část zákona o další elektronizaci veřejné správy, ani zda se týká povinných datových schránek pro OSVČ; účinek návrhu na slib proto nelze určit."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0b165c565fda7974016abf0fb50b6487d1b97c763736254a21",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8197,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8194
+      },
+      "output_tokens": 1770,
+      "output_tokens_details": {
+        "reasoning_tokens": 1330
+      },
+      "total_tokens": 9967
+    },
+    "output": {
+      "promiseId": "candidate-d3c3342e9cfd",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-12",
+          "relevant": true,
+          "reasonCz": "Návrh ruší část zákona č. 261/2021 Sb. o elektronizaci veřejné moci, což by mohlo zasáhnout do povinnosti datových schránek, ale dodané znění neuvádí, co tato část upravuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-6",
+          "relevant": false,
+          "reasonCz": "Návrh ukládá povinnost mít datovou schránku zahraničnímu zprostředkovateli taxislužby, nikoli osobám samostatně výdělečně činným."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-d3c3342e9cfd--source",
+        "psp-core-2025--law-change-43372-12",
+        "psp-core-2025--print-step-211843"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě spolu s poslanci ANO předložili návrh, který ruší část zákona č. 261/2021 Sb. o elektronizaci veřejné moci. Z dodaného znění ale není patrné, zda tato část obsahuje povinnost datové schránky pro OSVČ, protože její konkrétní ustanovení chybí. Nelze proto ověřit, že návrh slib skutečně posouvá, a zatím není doložen podstatný posun.",
+      "confidence": "low",
+      "uncertainties": [
+        "Konkrétní ustanovení rušené části zákona č. 261/2021 Sb. v podkladech chybí, takže nelze potvrdit, zda návrh odstraňuje povinnost datové schránky pro OSVČ."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

@@ -1,0 +1,276 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T01-51-24-618Z--41f5e017038a",
+  "evaluatedAt": "2026-11-04T01:51:24.618Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-de5403db68/41f5e017038af120fa3f6e03f06b5fd646db9338c2371b16602b2569e88c03c6.json",
+  "packageHash": "41f5e017038af120fa3f6e03f06b5fd646db9338c2371b16602b2569e88c03c6",
+  "assessmentContentHash": "9ae66a2ed670be030ca98341db9de89d70fde817a8ff37463b91a18a27254f07",
+  "assessmentFingerprint": "756e8e03056e923a85ffcfb13bbfdd8491ddf7c73099762fa60b4f0f05b0f36f",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-de5403db68",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0667b694cc504713016aea8f3b281487d19d39a4882c10756a",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 16288,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 16285
+            },
+            "output_tokens": 4049,
+            "output_tokens_details": {
+              "reasoning_tokens": 3384
+            },
+            "total_tokens": 20337
+          },
+          "output": {
+            "promiseId": "ano-2025-de5403db68",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43319-1",
+                "relevant": false,
+                "reasonCz": "Dodaná ustanovení mění pouze výši rodičovského příspěvku z 350 000 Kč na 400 000 Kč; zpracování exekucí zaměstnavateli neřeší.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+                "relevant": true,
+                "reasonCz": "Tato část novely se vztahuje k potvrzování příjmů domácnosti a předložené pozměňovací návrhy výslovně řeší údaje zaměstnavatele o exekučních srážkách.",
+                "effectCz": "Dodaná verze schválené části neobsahuje vlastní operativní ustanovení, pouze úvodní pasáže, a není k ní dodán text předchozího znění měněných ustanovení. Z podkladů proto nelze určit, jaká pravidla byla před změnou a jaká po ní ani zda se povinnosti zaměstnavatelů zpřísnily či zmírnily."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": false,
+            "citedEvidenceIds": [
+              "ano-2025-de5403db68--source",
+              "psp-core-2025--law-change-43319-approved-2",
+              "psp-core-2025--amendment-text-1480",
+              "psp-core-2025--vote-88118",
+              "psp-core-2025--amendment-text-1494",
+              "psp-core-2025--vote-88119",
+              "psp-core-2025--vote-88130"
+            ],
+            "explanationCz": "Vláda předložila novelu zákona o státní sociální podpoře (sněmovní tisk 198), jejíž schválená část se týká také potvrzování příjmů domácnosti. Poslanci ANO nepodpořili pozměňovací návrhy, které by zaměstnavatelům ukládaly uvádět v potvrzení také výši exekučních srážek; odmítnutí takové dodatečné povinnosti směřuje ke slibu. ANO pak hlasovalo pro celý návrh novely. V podkladech ale chybí vlastní znění příslušných ustanovení schválené části, takže nelze posoudit, co výsledný zákon zaměstnavatelům skutečně ukládá.",
+            "confidence": "low",
+            "uncertainties": [
+              "Text schválené části novely, která se týká dávky státní sociální pomoci, neobsahuje její operativní ustanovení ani předchozí znění dotčených pravidel. Proto nelze určit dopad hlasování ANO pro celý návrh na povinnosti zaměstnavatelů; tento nedostatek může změnit výsledné hodnocení."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-de5403db68",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-1",
+          "relevant": false,
+          "reasonCz": "Tato část mění výši rodičovského příspěvku, nikoli povinnosti zaměstnavatelů při srážkách ze mzdy nebo při exekuci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "Jde o část novely zákona o dávce státní sociální pomoci; související pozměňovací návrhy výslovně řeší potvrzení zaměstnavatele o srážkách z důvodu exekuce, ale rozhodující ustanovení schválené části nejsou v podkladu uvedena.",
+          "effectCz": "Předchozí znění dotčeného ustanovení ani konkrétní schválené změny nejsou v podkladu uvedeny, takže nelze určit, co se po změně mění ani zda se povinnosti zaměstnavatele zpřísňují, nebo zmírňují."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-de5403db68--source",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--amendment-text-1480",
+        "psp-core-2025--amendment-text-1494",
+        "psp-core-2025--vote-88118",
+        "psp-core-2025--vote-88119",
+        "psp-core-2025--vote-88130"
+      ],
+      "explanationCz": "Poslanci ANO nepodpořili dva pozměňovací návrhy k novele zákona o dávce státní sociální pomoci, které by zaměstnavatelům ukládaly uvádět v potvrzení také částky sražené kvůli exekuci. Tím odmítli návrhy, jež by přidávaly zaměstnavatelům související povinnost, což je krok ve směru slibu. Při závěrečném hlasování však poslanci ANO podpořili celý návrh zákona. Podklad neuvádí konkrétní znění dotčených ustanovení ve schválené části, takže nelze posoudit, jak tato konečná podoba ovlivňuje povinnosti zaměstnavatelů.",
+      "confidence": "low",
+      "uncertainties": [
+        "Znění ustanovení, která se ve schválené části novely mohou týkat zaměstnavatelů a exekucí, v podkladu chybí; proto nelze vyhodnotit dopad závěrečného hlasování ANO pro celý návrh."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-de5403db68",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-1",
+          "relevant": false,
+          "reasonCz": "Tato část zvyšuje celkovou částku rodičovského příspěvku, nikoli povinnosti zaměstnavatelů při zpracování exekucí.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "K této části návrhu se vztahují pozměňovací návrhy o potvrzování exekučních srážek zaměstnavatelem, tedy o povinnostech, které slib výslovně zmiňuje.",
+          "effectCz": "Dodané schválené znění vynechává vlastní relevantní ustanovení a neposkytuje předchozí znění dotčeného pravidla; proto nelze z balíčku určit, co tato část stanovila po změně ani zda povinnost zaměstnavatelů zpřísnila, nebo zmírnila."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-de5403db68--source",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--amendment-text-1480",
+        "psp-core-2025--amendment-text-1494",
+        "psp-core-2025--vote-88118",
+        "psp-core-2025--vote-88119",
+        "psp-core-2025--vote-88130"
+      ],
+      "explanationCz": "Program slibuje zjednodušit zaměstnavatelům zpracování exekucí. Poslanci ANO nepodpořili dva pozměňovací návrhy, které by zaměstnavatelům uložily uvádět v potvrzení o dávce také částky sražené z příjmu; odmítnutí takových dalších povinností jde směrem ke slibu. ANO ale hlasovalo pro konečné schválení návrhu zákona, jehož relevantní část o dávce státní sociální pomoci není v dodaném výňatku obsahově uvedena. Nelze proto ověřit, zda konečný zákon povinnosti zaměstnavatelů zjednodušil, nebo naopak rozšířil.",
+      "confidence": "low",
+      "uncertainties": [
+        "Konečný hlas zákon schválil, ale dodané znění relevantní části neuvádí její vlastní ustanovení ani předchozí pravidlo; nelze tedy určit, zda konečný zákon přinesl zaměstnavatelům jednodušší, nebo náročnější povinnosti."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0edd6513b910fa98016aea8f1368ac87d190fe53e8094137fd",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 16288,
+      "input_tokens_details": {
+        "cache_write_tokens": 9938,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 3217,
+      "output_tokens_details": {
+        "reasoning_tokens": 2519
+      },
+      "total_tokens": 19505
+    },
+    "output": {
+      "promiseId": "ano-2025-de5403db68",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-1",
+          "relevant": false,
+          "reasonCz": "Tato část mění výši rodičovského příspěvku, nikoli povinnosti zaměstnavatelů při srážkách ze mzdy nebo při exekuci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "Jde o část novely zákona o dávce státní sociální pomoci; související pozměňovací návrhy výslovně řeší potvrzení zaměstnavatele o srážkách z důvodu exekuce, ale rozhodující ustanovení schválené části nejsou v podkladu uvedena.",
+          "effectCz": "Předchozí znění dotčeného ustanovení ani konkrétní schválené změny nejsou v podkladu uvedeny, takže nelze určit, co se po změně mění ani zda se povinnosti zaměstnavatele zpřísňují, nebo zmírňují."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-de5403db68--source",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--amendment-text-1480",
+        "psp-core-2025--amendment-text-1494",
+        "psp-core-2025--vote-88118",
+        "psp-core-2025--vote-88119",
+        "psp-core-2025--vote-88130"
+      ],
+      "explanationCz": "Poslanci ANO nepodpořili dva pozměňovací návrhy k novele zákona o dávce státní sociální pomoci, které by zaměstnavatelům ukládaly uvádět v potvrzení také částky sražené kvůli exekuci. Tím odmítli návrhy, jež by přidávaly zaměstnavatelům související povinnost, což je krok ve směru slibu. Při závěrečném hlasování však poslanci ANO podpořili celý návrh zákona. Podklad neuvádí konkrétní znění dotčených ustanovení ve schválené části, takže nelze posoudit, jak tato konečná podoba ovlivňuje povinnosti zaměstnavatelů.",
+      "confidence": "low",
+      "uncertainties": [
+        "Znění ustanovení, která se ve schválené části novely mohou týkat zaměstnavatelů a exekucí, v podkladu chybí; proto nelze vyhodnotit dopad závěrečného hlasování ANO pro celý návrh."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0d6d3c3b1d91ae3c016aea8f6d02b087d19ee1a6386b7fd5e3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 16288,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 16285
+      },
+      "output_tokens": 3742,
+      "output_tokens_details": {
+        "reasoning_tokens": 3064
+      },
+      "total_tokens": 20030
+    },
+    "output": {
+      "promiseId": "ano-2025-de5403db68",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-1",
+          "relevant": false,
+          "reasonCz": "Tato část zvyšuje celkovou částku rodičovského příspěvku, nikoli povinnosti zaměstnavatelů při zpracování exekucí.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "K této části návrhu se vztahují pozměňovací návrhy o potvrzování exekučních srážek zaměstnavatelem, tedy o povinnostech, které slib výslovně zmiňuje.",
+          "effectCz": "Dodané schválené znění vynechává vlastní relevantní ustanovení a neposkytuje předchozí znění dotčeného pravidla; proto nelze z balíčku určit, co tato část stanovila po změně ani zda povinnost zaměstnavatelů zpřísnila, nebo zmírnila."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-de5403db68--source",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--amendment-text-1480",
+        "psp-core-2025--amendment-text-1494",
+        "psp-core-2025--vote-88118",
+        "psp-core-2025--vote-88119",
+        "psp-core-2025--vote-88130"
+      ],
+      "explanationCz": "Program slibuje zjednodušit zaměstnavatelům zpracování exekucí. Poslanci ANO nepodpořili dva pozměňovací návrhy, které by zaměstnavatelům uložily uvádět v potvrzení o dávce také částky sražené z příjmu; odmítnutí takových dalších povinností jde směrem ke slibu. ANO ale hlasovalo pro konečné schválení návrhu zákona, jehož relevantní část o dávce státní sociální pomoci není v dodaném výňatku obsahově uvedena. Nelze proto ověřit, zda konečný zákon povinnosti zaměstnavatelů zjednodušil, nebo naopak rozšířil.",
+      "confidence": "low",
+      "uncertainties": [
+        "Konečný hlas zákon schválil, ale dodané znění relevantní části neuvádí její vlastní ustanovení ani předchozí pravidlo; nelze tedy určit, zda konečný zákon přinesl zaměstnavatelům jednodušší, nebo náročnější povinnosti."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

@@ -1,0 +1,254 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-45-51-319Z--8c7a27246b37",
+  "evaluatedAt": "2026-10-02T01:45:51.319Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-4d7caeaa1c74/8c7a27246b37917b71c6e72c9b06be87995b23cb5478d0aa309de795b4b7302b.json",
+  "packageHash": "8c7a27246b37917b71c6e72c9b06be87995b23cb5478d0aa309de795b4b7302b",
+  "assessmentContentHash": "2e2070385d62d89c6fcba6a47f3aec29dd7a69ac88c87c60efcf58f55126cacc",
+  "assessmentFingerprint": "b67f8ff9a99d3955e07f4d9bcaea9bec1b9e9005ddd3dd3a82557c1fe7a92cf9",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-4d7caeaa1c74",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_093fa0cca8b849d0016abf0cb0b20087d18cca48099bb6dff6",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 42729,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 42726
+            },
+            "output_tokens": 1811,
+            "output_tokens_details": {
+              "reasoning_tokens": 1264
+            },
+            "total_tokens": 44540
+          },
+          "output": {
+            "promiseId": "candidate-4d7caeaa1c74",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43164-1",
+                "relevant": true,
+                "reasonCz": "Novela zavádí hlášení hrozícího přerušení dodávek zdravotnických prostředků a umožňuje úřadům dočasně upravit jejich dodávání či používání, takže se přímo týká části slibu o zdravotnických prostředcích."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43320-1",
+                "relevant": false,
+                "reasonCz": "Návrh upravuje oznamování a dokládání výroby či dovozu zubního amalgámu podle chemického zákona, ale jeho text nestanoví opatření pro spolehlivost dodávek léčiv ani zdravotnických prostředků."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-4d7caeaa1c74--source",
+              "psp-core-2025--law-change-43164-1",
+              "psp-core-2025--senate-resolution-43164-2",
+              "psp-core-2025--vote-87045",
+              "psp-core-2025--vote-87487"
+            ],
+            "explanationCz": "Poslanci ANO hlasovali pro novelu zákona o zdravotnických prostředcích, projednávanou jako sněmovní tisk 57. Novela zavádí hlášení očekávaného přerušení dodávek a umožňuje úřadům při ohrožení dostupnosti dočasně upravit podmínky pro dodávání či používání prostředku. Senátní úpravy změnily některé podrobnosti, ale zachovaly mechanismy pro sledování dostupnosti a reakci na její ohrožení. Jde o posun u zdravotnických prostředků, nikoli o zajištění dodávek léčiv ani o záruku, že k výpadkům nedojde.",
+            "confidence": "high",
+            "uncertainties": [
+              "Přesné znění, o němž Sněmovna hlasovala po vrácení návrhu Senátem, není zveřejněno; senátní usnesení však popisuje změny a ukazuje, že klíčové mechanismy pro řešení nedostupnosti zdravotnických prostředků zůstaly zachovány."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-4d7caeaa1c74",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43164-1",
+          "relevant": true,
+          "reasonCz": "Novela zdravotnických prostředků zavádí hlášení hrozícího přerušení dodávek, šetření jejich dostupnosti a možnost dočasně upravit podmínky jejich dodávání, takže přispívá k části slibu týkající se zdravotnických prostředků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43320-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje pravidla pro chemické látky a dokládání využití zubního amalgámu, nikoli zajištění dodávek léčiv nebo zdravotnických prostředků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4d7caeaa1c74--source",
+        "psp-core-2025--law-change-43164-1",
+        "psp-core-2025--senate-resolution-43164-2",
+        "psp-core-2025--vote-87045",
+        "psp-core-2025--vote-87487"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro novelu zákona o zdravotnických prostředcích, která zavádí hlášení očekávaných přerušení dodávek a jejich sledování; při pozdějším hlasování podpořili také senátní úpravy. Pokud je dostupnost důležitého prostředku ohrožena, může ministerstvo dočasně upravit podmínky jeho uvádění na trh, předepisování nebo používání. Jde o konkrétní krok k omezení výpadků zdravotnických prostředků, ale novela nezahrnuje léčiva a jejich dodávky ani obecně nezaručuje bezvýpadkovou dostupnost.",
+      "confidence": "high",
+      "uncertainties": []
+    },
+    "assessor-b": {
+      "promiseId": "candidate-4d7caeaa1c74",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43164-1",
+          "relevant": true,
+          "reasonCz": "Novela zavádí hlášení očekávaných přerušení dodávek zdravotnických prostředků, sledování jejich dostupnosti a možnost dočasně upravit podmínky jejich dodávání či používání."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43320-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje pravidla pro zubní amalgám a rtuť, nikoli dostupnost dodávek léčiv nebo zdravotnických prostředků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4d7caeaa1c74--source",
+        "psp-core-2025--law-change-43164-1",
+        "psp-core-2025--senate-resolution-43164-2",
+        "psp-core-2025--vote-87045",
+        "psp-core-2025--vote-87487"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro novelu zákona o zdravotnických prostředcích a následně také pro senátní pozměňovací návrhy. Novela zavádí hlášení očekávaných přerušení dodávek a umožňuje úřadům prověřovat dostupnost prostředků a dočasně upravovat jejich dodávání či používání. Jde o posun v části slibu týkající se zdravotnických prostředků, nikoli však léčiv, a podklady neprokazují, že výpadky skutečně přestaly.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Přesné znění textu, o němž se hlasovalo po vrácení návrhu Senátem, v podkladech chybí; senátní usnesení ale uvádí pozměňovací návrhy, včetně vypuštění jednoho bodu.",
+        "Podklady popisují přijatá pravidla, nikoli jejich praktický účinek na dostupnost léčiv nebo zdravotnických prostředků."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_00db43793beed1d1016abf0ca56cd087d19861c122aa362aeb",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 42729,
+      "input_tokens_details": {
+        "cache_write_tokens": 39405,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1542,
+      "output_tokens_details": {
+        "reasoning_tokens": 1034
+      },
+      "total_tokens": 44271
+    },
+    "output": {
+      "promiseId": "candidate-4d7caeaa1c74",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43164-1",
+          "relevant": true,
+          "reasonCz": "Novela zdravotnických prostředků zavádí hlášení hrozícího přerušení dodávek, šetření jejich dostupnosti a možnost dočasně upravit podmínky jejich dodávání, takže přispívá k části slibu týkající se zdravotnických prostředků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43320-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje pravidla pro chemické látky a dokládání využití zubního amalgámu, nikoli zajištění dodávek léčiv nebo zdravotnických prostředků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4d7caeaa1c74--source",
+        "psp-core-2025--law-change-43164-1",
+        "psp-core-2025--senate-resolution-43164-2",
+        "psp-core-2025--vote-87045",
+        "psp-core-2025--vote-87487"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro novelu zákona o zdravotnických prostředcích, která zavádí hlášení očekávaných přerušení dodávek a jejich sledování; při pozdějším hlasování podpořili také senátní úpravy. Pokud je dostupnost důležitého prostředku ohrožena, může ministerstvo dočasně upravit podmínky jeho uvádění na trh, předepisování nebo používání. Jde o konkrétní krok k omezení výpadků zdravotnických prostředků, ale novela nezahrnuje léčiva a jejich dodávky ani obecně nezaručuje bezvýpadkovou dostupnost.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_026ac683e202e6d0016abf0cc08f6087d1a87f4c2b756d2597",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 42729,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 42726
+      },
+      "output_tokens": 2237,
+      "output_tokens_details": {
+        "reasoning_tokens": 1681
+      },
+      "total_tokens": 44966
+    },
+    "output": {
+      "promiseId": "candidate-4d7caeaa1c74",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43164-1",
+          "relevant": true,
+          "reasonCz": "Novela zavádí hlášení očekávaných přerušení dodávek zdravotnických prostředků, sledování jejich dostupnosti a možnost dočasně upravit podmínky jejich dodávání či používání."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43320-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje pravidla pro zubní amalgám a rtuť, nikoli dostupnost dodávek léčiv nebo zdravotnických prostředků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4d7caeaa1c74--source",
+        "psp-core-2025--law-change-43164-1",
+        "psp-core-2025--senate-resolution-43164-2",
+        "psp-core-2025--vote-87045",
+        "psp-core-2025--vote-87487"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro novelu zákona o zdravotnických prostředcích a následně také pro senátní pozměňovací návrhy. Novela zavádí hlášení očekávaných přerušení dodávek a umožňuje úřadům prověřovat dostupnost prostředků a dočasně upravovat jejich dodávání či používání. Jde o posun v části slibu týkající se zdravotnických prostředků, nikoli však léčiv, a podklady neprokazují, že výpadky skutečně přestaly.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Přesné znění textu, o němž se hlasovalo po vrácení návrhu Senátem, v podkladech chybí; senátní usnesení ale uvádí pozměňovací návrhy, včetně vypuštění jednoho bodu.",
+        "Podklady popisují přijatá pravidla, nikoli jejich praktický účinek na dostupnost léčiv nebo zdravotnických prostředků."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

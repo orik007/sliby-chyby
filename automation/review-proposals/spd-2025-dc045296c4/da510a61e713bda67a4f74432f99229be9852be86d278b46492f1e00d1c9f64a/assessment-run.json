@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T13-46-36-316Z--2a2145a5306a",
+  "evaluatedAt": "2026-11-05T13:46:36.316Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-dc045296c4/2a2145a5306aca5abb24ad4aff8207a6005040d4dfa6ddd149ed3d8c371c5a9b.json",
+  "packageHash": "2a2145a5306aca5abb24ad4aff8207a6005040d4dfa6ddd149ed3d8c371c5a9b",
+  "assessmentContentHash": "dde6108e5c416fa4ba7a118e3e84c9897639c046fa679c3a10475113fa5d9622",
+  "assessmentFingerprint": "da510a61e713bda67a4f74432f99229be9852be86d278b46492f1e00d1c9f64a",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-dc045296c4",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-dc045296c4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43478-1",
+          "relevant": true,
+          "reasonCz": "Novela se týká zveřejňování údajů o státní příslušnosti osob, proti nimž se vede trestní řízení, tedy omezené části informací podle národnosti pachatelů.",
+          "effectCz": "Dosavadní § 8a odst. 1 trestního řádu zakazuje zveřejnit údaje o účastnících řízení, které přímo nesouvisejí s trestnou činností; navržené znění z tohoto zákazu vyjímá údaj o státní příslušnosti stíhané osoby, pokud je zveřejnění nezbytné k uvedeným účelům. Omezení zveřejňování je v tomto úzkém případě mírnější, ale návrh neukládá zveřejňovat údaje ani nezavádí aktuální přehled podle okresů a obcí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-dc045296c4--source",
+        "psp-core-2025--law-change-43478-1",
+        "psp-core-2025--print-step-212473"
+      ],
+      "explanationCz": "Vláda, v níž je SPD zastoupena, předložila novelu trestního řádu, tedy zákona upravujícího trestní řízení. Návrh by za určitých podmínek dovolil zveřejnit státní příslušnost osoby, proti níž se vede trestní řízení. Tím může zpřístupnit část informací podle národnosti, ale nezavádí průběžný monitor kriminality podle okresů a obcí. Jde proto o omezený krok směrem k části slibu, nikoli o jeho splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh pracuje se státní příslušností osoby, proti níž se vede trestní řízení; z podkladů nelze dovodit, že jde o totožný údaj jako národnost pachatelů ve slibu.",
+        "Zveřejnění by bylo možné jen při nezbytnosti pro vyjmenované účely. Podklady neukazují, zda by se výjimka v praxi využila k pravidelným údajům podle okresů a obcí."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-dc045296c4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43478-1",
+          "relevant": true,
+          "reasonCz": "Návrh se přímo týká zveřejňování státní příslušnosti osob, proti nimž se vede trestní řízení, a může tak podpořit část slibu o informacích o kriminalitě podle národnosti pachatelů.",
+          "effectCz": "Dosavadní § 8a odst. 1 ukládá orgánům činným v trestním řízení nezveřejňovat údaje o zúčastněných osobách, které přímo nesouvisejí s trestnou činností. Návrh tuto zásadu zachovává, ale připouští výjimku pro údaj o státní příslušnosti, pokud je jeho zveřejnění nezbytné z uvedených důvodů; omezení je tedy v tomto úzkém případě mírnější. Návrh však nezavádí aktuální monitor ani zveřejňování údajů po okresech, obcích a městech."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-dc045296c4--source",
+        "psp-core-2025--law-change-43478-1",
+        "psp-core-2025--print-step-212473"
+      ],
+      "explanationCz": "Vláda předložila Poslanecké sněmovně návrh novely trestního řádu. Ten zachovává obecné omezení zveřejňování údajů o osobách v trestním řízení, ale za určitých podmínek umožňuje zveřejnit jejich státní příslušnost. Jde o dílčí krok k informacím o kriminalitě podle národnosti, nikoli o zavedení aktuálního monitoru po okresech, obcích a městech.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0d0d7a20cd224fa0016aec88874c1c87d1af246f412915161d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9010,
+      "input_tokens_details": {
+        "cache_write_tokens": 2660,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 1370,
+      "output_tokens_details": {
+        "reasoning_tokens": 759
+      },
+      "total_tokens": 10380
+    },
+    "output": {
+      "promiseId": "spd-2025-dc045296c4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43478-1",
+          "relevant": true,
+          "reasonCz": "Novela se týká zveřejňování údajů o státní příslušnosti osob, proti nimž se vede trestní řízení, tedy omezené části informací podle národnosti pachatelů.",
+          "effectCz": "Dosavadní § 8a odst. 1 trestního řádu zakazuje zveřejnit údaje o účastnících řízení, které přímo nesouvisejí s trestnou činností; navržené znění z tohoto zákazu vyjímá údaj o státní příslušnosti stíhané osoby, pokud je zveřejnění nezbytné k uvedeným účelům. Omezení zveřejňování je v tomto úzkém případě mírnější, ale návrh neukládá zveřejňovat údaje ani nezavádí aktuální přehled podle okresů a obcí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-dc045296c4--source",
+        "psp-core-2025--law-change-43478-1",
+        "psp-core-2025--print-step-212473"
+      ],
+      "explanationCz": "Vláda, v níž je SPD zastoupena, předložila novelu trestního řádu, tedy zákona upravujícího trestní řízení. Návrh by za určitých podmínek dovolil zveřejnit státní příslušnost osoby, proti níž se vede trestní řízení. Tím může zpřístupnit část informací podle národnosti, ale nezavádí průběžný monitor kriminality podle okresů a obcí. Jde proto o omezený krok směrem k části slibu, nikoli o jeho splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh pracuje se státní příslušností osoby, proti níž se vede trestní řízení; z podkladů nelze dovodit, že jde o totožný údaj jako národnost pachatelů ve slibu.",
+        "Zveřejnění by bylo možné jen při nezbytnosti pro vyjmenované účely. Podklady neukazují, zda by se výjimka v praxi využila k pravidelným údajům podle okresů a obcí."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0cdf2c5ba222506b016aec88a4260087d1941c7ecfa43d751d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9010,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 9007
+      },
+      "output_tokens": 1019,
+      "output_tokens_details": {
+        "reasoning_tokens": 516
+      },
+      "total_tokens": 10029
+    },
+    "output": {
+      "promiseId": "spd-2025-dc045296c4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43478-1",
+          "relevant": true,
+          "reasonCz": "Návrh se přímo týká zveřejňování státní příslušnosti osob, proti nimž se vede trestní řízení, a může tak podpořit část slibu o informacích o kriminalitě podle národnosti pachatelů.",
+          "effectCz": "Dosavadní § 8a odst. 1 ukládá orgánům činným v trestním řízení nezveřejňovat údaje o zúčastněných osobách, které přímo nesouvisejí s trestnou činností. Návrh tuto zásadu zachovává, ale připouští výjimku pro údaj o státní příslušnosti, pokud je jeho zveřejnění nezbytné z uvedených důvodů; omezení je tedy v tomto úzkém případě mírnější. Návrh však nezavádí aktuální monitor ani zveřejňování údajů po okresech, obcích a městech."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-dc045296c4--source",
+        "psp-core-2025--law-change-43478-1",
+        "psp-core-2025--print-step-212473"
+      ],
+      "explanationCz": "Vláda předložila Poslanecké sněmovně návrh novely trestního řádu. Ten zachovává obecné omezení zveřejňování údajů o osobách v trestním řízení, ale za určitých podmínek umožňuje zveřejnit jejich státní příslušnost. Jde o dílčí krok k informacím o kriminalitě podle národnosti, nikoli o zavedení aktuálního monitoru po okresech, obcích a městech.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

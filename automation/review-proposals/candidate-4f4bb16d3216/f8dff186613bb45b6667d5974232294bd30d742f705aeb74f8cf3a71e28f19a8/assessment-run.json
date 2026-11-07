@@ -1,0 +1,702 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T02-15-27-196Z--4ae810a228c3",
+  "evaluatedAt": "2026-11-04T02:15:27.196Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-4f4bb16d3216/4ae810a228c36b6d664be2beeb08492bc0eb565bf34438e45c63197eb6ca531e.json",
+  "packageHash": "4ae810a228c36b6d664be2beeb08492bc0eb565bf34438e45c63197eb6ca531e",
+  "assessmentContentHash": "8cb422ca4de7de80376bffe9df902dae3e13cef2f918a5cd5dbf6583d227a937",
+  "assessmentFingerprint": "f8dff186613bb45b6667d5974232294bd30d742f705aeb74f8cf3a71e28f19a8",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-4f4bb16d3216",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment cites duplicate evidence IDs",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0bc25a62662bd3d9016aea943e7b5487d19d94b70168e01b3f",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 132814,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 132811
+            },
+            "output_tokens": 8524,
+            "output_tokens_details": {
+              "reasoning_tokens": 5403
+            },
+            "total_tokens": 141338
+          },
+          "output": {
+            "promiseId": "candidate-4f4bb16d3216",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-2",
+                "relevant": true,
+                "reasonCz": "Upravená pravidla územního plánování výslovně pracují s kulturními hodnotami, dědictvím a identitou sídel, a mohou tak ovlivnit uchovávání historie a tradic.",
+                "effectCz": "Dosavadní úprava spojovala ochranu kulturních hodnot s vyváženým udržitelným rozvojem; schválený text nově výslovně požaduje zvyšovat kvalitu a krásu prostředí sídel a rozvíjet jejich identitu a zachovává ochranu kulturních hodnot. Nový strategický dokument má být kritériem pro posuzování chráněných hodnot. Ochrana kulturních hodnot se tedy v některých bodech výslovně posiluje, avšak změny současně kladou důraz na využití a rozvoj území; celkovou míru ochrany nelze označit za jednoznačně přísnější."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-7",
+                "relevant": true,
+                "reasonCz": "Změny obsahu územních a regulačních plánů se přímo dotýkají zachování charakteru území a ochrany jeho hodnot.",
+                "effectCz": "Příloha č. 8 nově požaduje, aby územní plán uváděl požadavky na rozvoj, zachování nebo změnu charakteru území. V příloze č. 9 se však dosavadní povinné podmínky regulačních plánů pro umístění staveb a ochranu hodnot přesouvají z povinné části mezi obsah, který se uvádí jen tehdy, je-li to účelné. Jde tedy o smíšenou změnu: nové požadavky na charakter území přibývají, zatímco některé dosavadní povinné náležitosti ochrany se oslabují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-4",
+                "relevant": true,
+                "reasonCz": "Novela zákona o památkové péči mění ochranu kulturních památek, historických hodnot i postupy při jejich obnově.",
+                "effectCz": "Dosavadní zákon zdůrazňoval kulturní dědictví, svědectví dějin, tradice a zachování památek; schválené znění nově staví do popředí také současný život a udržitelné využívání a výslovně podporuje identitu a kontext místa. Zároveň zužuje některé povinnosti předchozího památkového schvalování u nemovitostí v památkových zónách a ochranných pásmech a přesouvá část posuzování na stavební úřady, což ochranu v těchto případech uvolňuje. Nově zdůrazněná ochrana identity a hodnot a současné uvolnění některých omezení působí různými směry; souhrnný účinek na zachování historie není jednoznačný."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": true,
+                "reasonCz": "Státní rozpočet obsahuje kapitolu Ministerstva kultury a pozměňovací návrhy výslovně navrhovaly prostředky na ochranu kulturních statků a obnovu památek.",
+                "effectCz": "Jde o rozpočet, nikoli novelu s předchozím zněním; dodané části pouze odkazují na přílohy s výdaji a ukazateli podle kapitol, ale neobsahují jejich částky. Z těchto částí proto nelze určit, jaké prostředky na kulturní dědictví byly schváleny ani zda se podpora oproti návrhům zvýšila či snížila."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-1",
+                "relevant": true,
+                "reasonCz": "Při projednávání tohoto návrhu byly předloženy návrhy na vyjmutí knihoven, archivů, muzeí a provozování památek z evidence tržeb, tedy na zmírnění regulace činností spojených s kulturním dědictvím.",
+                "effectCz": "Jde o nový zákon bez předchozího znění; dodaný výňatek stanoví některé výjimky z evidence tržeb, ale neukazuje pravidla týkající se kulturních zařízení. Směr a rozsah dopadu schváleného zákona na tyto instituce proto nelze z balíčku určit; návrhy kulturních výjimek jsou samostatně zachyceny v pozměňovacím návrhu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43313-1",
+                "relevant": true,
+                "reasonCz": "Novela knihovního zákona výslovně zavádí uchovávání a zpřístupňování informací s historickou a kulturní hodnotou.",
+                "effectCz": "Dosavadní úprava stanovila obecné úkoly Národní knihovny a výslovně jí svěřovala trvalé uchovávání konzervačního a historického fondu. Nově jí ukládá také shromažďovat, uchovávat a zpřístupňovat vybrané digitálně dostupné informace s trvalou historickou, kulturní a další hodnotou a vytvářet příslušné databáze. Povinnost uchovávat a zpřístupňovat kulturně a historicky významné materiály se tím rozšiřuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-11",
+                "relevant": true,
+                "reasonCz": "Navrhovaná dohoda stanoví spolupráci zaměřenou mimo jiné na ochranu kulturního dědictví.",
+                "effectCz": "Jde o návrh mezinárodní dohody bez předchozího znění; stanoví spolupráci v cestovním ruchu s cílem chránit a využívat potenciál kulturního dědictví. Neurčuje částku ani podporu konkrétních projektů, ale vytváří závazek spolupracovat na části cíle slibu."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-115",
+                "relevant": true,
+                "reasonCz": "Nařízení upravuje dotace na zachování a rozvoj kultur, tradic, jazyků a historického poznání národnostních menšin.",
+                "effectCz": "Jde o nové nařízení bez předchozího znění; zavádí pravidla pro poskytování státních dotací na kulturní, vzdělávací a jiné činnosti zaměřené na zachování a rozvoj kultur, tradic a jazyků menšin a na poznávání jejich historie. Umožňuje tedy podporu konkrétní části projektů, které slib zmiňuje, ale dodaný text neurčuje celkovou výši dotací."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-179",
+                "relevant": true,
+                "reasonCz": "Nařízení stanoví ochranu historických, architektonických a kulturních hodnot památkové rezervace Holašovice.",
+                "effectCz": "Jde o novou úpravu bez předchozího znění; vymezuje kulturní hodnoty Holašovic a stanoví, že změny území, staveb a jejich obnovy mají respektovat historickou urbanistickou strukturu, lidovou architekturu, panorama a další místní hodnoty. Ochranná pravidla pro toto konkrétní historické místo se tím zpřesňují a posilují."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-50",
+                "relevant": true,
+                "reasonCz": "Plán legislativních prací ukládá připravit návrh na dlouhodobé uchovávání elektronických publikací jako kulturního a vědeckého dědictví.",
+                "effectCz": "Jde o vládní návrh legislativního úkolu, nikoli o změnu existujícího pravidla. Stanoví záměr připravit systém elektronických povinných výtisků a jejich uchovávání a zpřístupňování knihovnami; jde o návrh, který může podpořit uchování kulturního dědictví, ale sám ještě žádnou novou povinnost nevytváří."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-508",
+                "relevant": true,
+                "reasonCz": "Usnesení schvaluje peněžní dary na rekonstrukci, výstavbu a údržbu českých válečných hrobů a pietních míst v zahraničí.",
+                "effectCz": "Jde o rozhodnutí vlády bez předchozího znění; schvaluje dary v celkové výši 5,42 milionu Kč na péči o české válečné hroby, včetně rekonstrukcí, výstavby a údržby pietních míst. Přímo podporuje část projektů uchovávajících historii, ale nepokrývá celý slib."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-4f4bb16d3216--source",
+              "psp-core-2025--law-change-43174-1-2",
+              "psp-core-2025--law-change-43174-1-7",
+              "psp-core-2025--law-change-43174-4",
+              "psp-core-2025--law-change-43204-1",
+              "psp-core-2025--law-change-43310-1",
+              "psp-core-2025--law-change-43313-1",
+              "psp-core-2025--law-change-43453-11",
+              "esbirka-regulations--law-change-sb-2026-115",
+              "esbirka-regulations--law-change-sb-2026-179",
+              "zvlady-resolutions--law-change-uv-2026-175-50",
+              "zvlady-resolutions--law-change-uv-2026-508",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--vote-88456",
+              "psp-core-2025--print-step-211405",
+              "zvlady-resolutions--2026-175",
+              "psp-core-2025--print-step-212285",
+              "esbirka-regulations--2026-115",
+              "esbirka-regulations--2026-179",
+              "zvlady-resolutions--2026-508",
+              "psp-core-2025--print-step-211390",
+              "psp-core-2025--vote-88315",
+              "psp-core-2025--vote-88356",
+              "psp-core-2025--amendment-text-485",
+              "psp-core-2025--amendment-text-486",
+              "psp-core-2025--amendment-text-484",
+              "psp-core-2025--vote-86883",
+              "psp-core-2025--vote-86884",
+              "psp-core-2025--vote-86885",
+              "psp-core-2025--amendment-1179",
+              "psp-core-2025--amendment-1334",
+              "psp-core-2025--vote-88145",
+              "psp-core-2025--vote-88149",
+              "psp-core-2025--vote-88155",
+              "psp-core-2025--vote-88159",
+              "psp-core-2025--vote-88213",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--vote-88456"
+            ],
+            "explanationCz": "Vláda zavedla dotační pravidla pro projekty zachovávající kulturu, tradice a historii národnostních menšin a schválila 5,42 milionu korun na péči o české válečné hroby. Dále přijala nařízení, které chrání historické a architektonické hodnoty Holašovic. Poslanci Motoristů také podpořili novelu stavebního zákona, která výslovně chrání kulturní hodnoty a identitu sídel, a hlasovali pro její prosazení po zamítnutí Senátem. Tyto kroky naplňují část slibu, ale jiné změny památkové péče některá omezení ochrany uvolňují a předložený rozpočet neposkytuje v dodaném výňatku částky na kulturní dědictví.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Schválený státní rozpočet uvádí pouze odkazy na přílohy s kapitolami a výdaji, nikoli částky na kulturní dědictví. Poslanci Motoristů nepodpořili pozměňovací návrhy na zvýšení některých výdajů Ministerstva kultury, ale následně hlasovali pro celý rozpočet; z dodaných údajů nelze posoudit, jaké prostředky nakonec byly schváleny.",
+              "Novela památkové péče současně nově zdůrazňuje ochranu identity a kulturních hodnot a uvolňuje některé dosavadní podmínky obnovy a stavebních zásahů. Proto nelze její celkový dopad na zachování historie vyložit jako jednoznačně příznivý.",
+              "Vláda předložila návrh evidence tržeb a poslanci Motoristů nepodpořili návrhy na výjimky pro kulturní zařízení, knihovny, archivy, muzea a provozovatele památek. Dodaný výňatek schváleného zákona však neukazuje, jaká pravidla se na tyto instituce nakonec vztahují."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-4f4bb16d3216",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Upravuje cíle územního plánování a výslovně se dotýká ochrany kulturních hodnot, dědictví a identity sídel.",
+          "effectCz": "Dříve zákon výslovně ukládal chránit a rozvíjet kulturní a civilizační hodnoty včetně architektonického a archeologického dědictví; schválené znění ochranu kulturních hodnot a dědictví zachovává, nově zdůrazňuje také kvalitu a identitu sídel a zavádí celostátní politiku architektury jako kritérium. Zároveň se ruší jeden dosavadní úkol plánování posuzovat změny s ohledem na stávající charakter a hodnoty území. Celkový směr ochrany kulturních hodnot je zachován, ale z dodaného textu nelze dovodit jednoznačné celkové zpřísnění či uvolnění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Mění požadavky územních a regulačních plánů na zachování charakteru území a ochranu jeho hodnot.",
+          "effectCz": "Před změnou obsah územního plánu výslovně nevyžadoval uvádět požadavky na zachování či změnu charakteru území; nově je má obsahovat. U regulačního plánu však byly podrobné podmínky umístění staveb a ochrany hodnot v povinné části, zatímco schválené znění je přesouvá do části, kterou plán obsahuje jen tehdy, je-li to účelné. Změna tedy nový požadavek na charakter území přidává, ale v jiné části omezuje povinnost uvádět podrobné ochranné podmínky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "Mění pravidla státní památkové péče, která určují, jak lze obnovovat a využívat kulturní památky a historická území.",
+          "effectCz": "Dosavadní znění vyžadovalo předchozí rozhodnutí či závazné stanovisko pro široký okruh prací na nemovitostech v památkových rezervacích, zónách i ochranných pásmech. Schválené znění v řadě případů zužuje tento okruh, přenáší posuzování na stavební úřady a výslovně zdůrazňuje současné potřeby, využití památek a možnost architektonického kontrastu; tím část omezení uvolňuje. Současně nově vyžaduje vyvážit ochranu památkových hodnot a jejich využití, takže nejde o úplné odstranění ochrany, ale některé dosavadní ochranné podmínky jsou méně přísné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Dodané odstavce pouze odkazují na rozpis výdajů a ukazatelů v přílohách; neobsahují žádnou částku ani konkrétní výdaj na projekty uchovávající tradice či historii.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": false,
+          "reasonCz": "Dodané znění řeší výjimky z evidence tržeb, ale nevztahuje je ke konkrétním projektům uchovávajícím tradice, historii nebo společné hodnoty.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43313-1",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá Národní knihovně uchovávat a zpřístupňovat digitální informace s historickým a kulturním významem.",
+          "effectCz": "Dosavadní § 9 výslovně stanovoval trvalé uchovávání konzervačního a historického fondu, ale neobsahoval uvedené úkoly pro digitální obsah z internetu ani databáze elektronických povinných výtisků. Návrh tyto úkoly doplňuje, včetně sběru, uchovávání a zpřístupňování historicky či kulturně významných informací. Jde o rozšíření prostředků pro uchování kulturního a historického obsahu; jde však zatím pouze o navrženou změnu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-11",
+          "relevant": true,
+          "reasonCz": "Navržená smluvní spolupráce výslovně počítá s ochranou a využitím potenciálu kulturního dědictví.",
+          "effectCz": "Jde o návrh mezinárodní dohody bez předchozího znění měněného zákona. Uvedená kapitola zavazuje strany ke spolupráci v cestovním ruchu a zaměřuje ji mimo jiné na ochranu a využití potenciálu kulturního dědictví; to odpovídá části slibu, ale samo o sobě nezajišťuje podporu konkrétního projektu."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-115",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví dotace přímo na zachování a rozvoj kultur, tradic a jazyků národnostních menšin a na poznávání jejich historie.",
+          "effectCz": "Nařízení zavádí podmínky pro poskytování dotací ze státního rozpočtu na uvedené činnosti, včetně studia, dokumentace a poznávání historie a tradic. Protože jde o nové nařízení a balíček nedodává předchozí právní úpravu, nelze porovnat, zda se dřívější nárok či rozsah podpory změnil."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-179",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví konkrétní podmínky ochrany historických, architektonických a urbanistických hodnot památkové rezervace Holašovice.",
+          "effectCz": "Nařízení nově obsahuje podrobné podmínky pro respektování historické struktury, lidové architektury, pohledů, tradičních materiálů a řemeslných postupů v Holašovicích. Předchozí znění měněného nařízení balíček nedodává, takže nelze určit, zda tyto podmínky celkovou ochranu zpřísňují oproti dosavadnímu stavu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-50",
+          "relevant": true,
+          "reasonCz": "Plán vlády obsahuje úkol připravit zákon k dlouhodobému uchovávání digitálního kulturního a vědeckého dědictví.",
+          "effectCz": "Usnesení plánuje předložit vládě návrh zákona, který má zavést digitální povinné výtisky a webový archiv Národní knihovny; jde o přípravu budoucí legislativy, nikoli o již zavedenou povinnost nebo poskytnutou podporu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-508",
+          "relevant": true,
+          "reasonCz": "Usnesení schvaluje peněžní dary na péči o české válečné hroby, včetně jejich rekonstrukce a výstavby pietních míst.",
+          "effectCz": "Usnesení schvaluje dary v celkové výši 5,42 milionu Kč na údržbu, rekonstrukci či výstavbu válečných hrobů a pietních míst v zahraničí. Jde o konkrétní podporu části slibu, zejména uchovávání historické paměti; předchozí srovnatelnou částku balíček neuvádí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4f4bb16d3216--source",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1179",
+        "psp-core-2025--amendment-1179",
+        "psp-core-2025--vote-88149",
+        "psp-core-2025--amendment-text-1334",
+        "psp-core-2025--amendment-1334",
+        "psp-core-2025--vote-88145",
+        "psp-core-2025--amendment-text-1239",
+        "psp-core-2025--vote-88155",
+        "psp-core-2025--amendment-text-1205",
+        "psp-core-2025--vote-88159",
+        "psp-core-2025--amendment-text-1270",
+        "psp-core-2025--vote-88213",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43313-1",
+        "psp-core-2025--print-step-211405",
+        "zvlady-resolutions--law-change-uv-2026-175-50",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--law-change-43453-11",
+        "psp-core-2025--print-step-212285",
+        "esbirka-regulations--law-change-sb-2026-115",
+        "esbirka-regulations--2026-115",
+        "esbirka-regulations--law-change-sb-2026-179",
+        "esbirka-regulations--2026-179",
+        "zvlady-resolutions--law-change-uv-2026-508",
+        "zvlady-resolutions--2026-508"
+      ],
+      "explanationCz": "Vláda schválila dotace na uchovávání tradic a historie národnostních menšin a 5,42 milionu korun na péči o české válečné hroby; nařízení pro Holašovice stanoví konkrétní ochranu historické architektury. Vláda také předložila návrh na digitální uchovávání historicky a kulturně významných informací a navrhla spolupráci na ochraně kulturního dědictví. Poslanci Motoristů zároveň podpořili změnu památkových pravidel, která nově zdůrazňuje kulturní hodnoty, ale některé dosavadní ochranné požadavky uvolňuje. Doložené kroky tedy naplňují jen část slibu a neprokazují, že se tradice či historie nepřepisují podle ideologií.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček neobsahuje dřívější znění nařízení o Holašovicích, takže nelze přesně porovnat rozsah ochrany před změnou a po ní.",
+        "Změna památkového zákona obsahuje současně nová vyjádření podpory kulturních hodnot i uvolnění některých ochranných pravidel; její účinky na ochranu tradic a historie proto nejsou jednotné.",
+        "Slib je obecný a dodané doklady potvrzují podporu konkrétních oblastí, nikoli všech projektů ani to, zda nedochází k přepisování tradic podle ideologií."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-4f4bb16d3216",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Změny územního plánování výslovně upravují ochranu kulturních hodnot, dědictví a identity sídel, tedy mohou ovlivnit zachování historie a tradic.",
+          "effectCz": "Dříve zákon výslovně chránil a rozvíjel kulturní a civilizační hodnoty včetně architektonického a archeologického dědictví; nově je nadále chrání a rozvíjí, ale také zdůrazňuje kvalitu a identitu sídel a zavádí celostátní politiku architektury. Ochrana tedy zůstává, avšak její celkovou míru nelze z těchto změn označit jednoznačně za přísnější či volnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Změny obsahu územních a regulačních plánů výslovně zmiňují zachování charakteru území a ochranu jeho hodnot.",
+          "effectCz": "Dosavadní obsah plánů již počítal s podmínkami využití ploch a ochranou hodnot; nově se výslovně požaduje také rozvoj, zachování nebo změna charakteru území a podrobné podmínky jeho ochrany. Posiluje se výslovné zachycení těchto hledisek v plánovací dokumentaci, ale z dodaného textu nelze určit, že by tím byla sama ochrana v praxi celkově přísnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "Novela památkové péče přímo mění ochranu kulturních památek a památkových území, a tím ovlivňuje zachování historie a kulturního dědictví.",
+          "effectCz": "Před změnou zákon zdůrazňoval zachování a ochranu památek a vyžadoval předchozí souhlas či stanovisko pro širší okruh zásahů, včetně některých udržovacích prací, úprav dřevin a nemovitostí v ochranných pásmech. Schválené znění více zdůrazňuje současné využití a rozvoj památkového fondu, ale u některých nemovitostí zužuje okruh prací či území vyžadujících předchozí památkový přezkum; v těchto ohledech ochranu uvolňuje, zatímco nové plány péče a rozvoje a důraz na kulturní hodnoty zachovávají její další prvky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Rozpočtové pozměňovací návrhy výslovně navrhují peníze na ochranu a obnovu kulturních statků a památek, takže se týkají části slibu o podpoře historického dědictví.",
+          "effectCz": "Jde o nový státní rozpočet bez předchozího znění, nikoli o změnu dosavadního zákonného pravidla. Dodané výňatky rozpočtu uvádějí jen to, že výdaje jsou rozepsány v přílohách, jejichž částky zde nejsou; pozměňovací návrhy navrhují zvýšit prostředky na ochranu a péči o kulturní statky o 60 milionů Kč a na záchranu a obnovu památek o 140 milionů Kč, ale skutečnou výslednou částku pro tyto účely z balíčku nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43313-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí uchovávání a zpřístupňování informací s historickým a kulturním významem, což přímo podporuje uchování části společné historie.",
+          "effectCz": "Dosavadní úprava svěřovala Národní knihovně uchovávání historického fondu a bibliografické činnosti; nově jí ukládá také sbírat a uchovávat vybrané digitálně dostupné informace s historickým či kulturním významem a zpřístupňovat databáze určeným knihovnám. Povinnost uchovávání se tak rozšiřuje, aniž by dodaný text ukazoval oslabení dosavadních povinností."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": false,
+          "reasonCz": "Dodané části návrhu upravují výjimky z evidence tržeb a neukazují věcnou vazbu na podporu projektů uchovávajících tradice či historii.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-11",
+          "relevant": false,
+          "reasonCz": "Uvedená část dohody upravuje mezinárodní spolupráci v cestovním ruchu a ochranu kulturního dědictví, nikoli podporu projektů uchovávajících tradice a historii v rozsahu tohoto slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-115",
+          "relevant": true,
+          "reasonCz": "Nařízení upravuje státní dotace na zachování a rozvoj kultur, tradic a jazyků národnostních menšin a jejich historické poznání.",
+          "effectCz": "Jde o nové dotační pravidlo, nikoli změnu dřívějšího znění uvedeného v balíčku. Umožňuje poskytovat dotace mimo jiné na kulturní, vzdělávací a jiné činnosti a dokumentaci tradic a historie národnostních menšin, takže vytváří konkrétní nástroj podpory části slibu."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-179",
+          "relevant": true,
+          "reasonCz": "Nařízení výslovně stanovuje ochranu historické urbanistické struktury, lidové architektury a kulturních hodnot památkové rezervace Holašovice.",
+          "effectCz": "Jde o novou, místně vymezenou závaznou úpravu bez předchozího znění uvedeného v balíčku. Stanoví respektování historické struktury, tradiční architektury, měřítka zástavby a kulturních hodnot při změnách území a obnově staveb, čímž ochranu konkrétních historických hodnot přímo zakotvuje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-50",
+          "relevant": true,
+          "reasonCz": "Úkol v plánu legislativních prací výslovně navrhuje právní nástroj pro dlouhodobé uchovávání digitálního kulturního a vědeckého dědictví.",
+          "effectCz": "Jde o návrh budoucí legislativní práce, nikoli o změnu zákona. Stanoví záměr připravit povinné odevzdávání elektronických publikací a jejich uchovávání a zpřístupňování knihovnami; ve vztahu ke slibu jde o návrh na podporu uchování kulturního dědictví, nikoli o již platnou povinnost."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-508",
+          "relevant": true,
+          "reasonCz": "Usnesení schvaluje konkrétní peněžní dary na údržbu, rekonstrukci a výstavbu českých válečných hrobů a pietních míst.",
+          "effectCz": "Jde o nové rozhodnutí bez předchozího znění, které schvaluje dary v celkové výši 5,42 milionu Kč na údržbu, rekonstrukci a výstavbu válečných hrobů či pietních míst. Jde o konkrétní podporu části historie a jejího připomínání."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4f4bb16d3216--source",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43313-1",
+        "esbirka-regulations--law-change-sb-2026-115",
+        "esbirka-regulations--law-change-sb-2026-179",
+        "zvlady-resolutions--law-change-uv-2026-175-50",
+        "zvlady-resolutions--law-change-uv-2026-508",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1179",
+        "psp-core-2025--amendment-1179",
+        "psp-core-2025--vote-88149",
+        "psp-core-2025--amendment-text-1334",
+        "psp-core-2025--amendment-1334",
+        "psp-core-2025--vote-88145",
+        "psp-core-2025--vote-88155",
+        "psp-core-2025--amendment-text-1205",
+        "psp-core-2025--vote-88159",
+        "psp-core-2025--amendment-text-1270",
+        "psp-core-2025--vote-88213",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-485",
+        "psp-core-2025--amendment-text-486",
+        "psp-core-2025--amendment-text-484",
+        "psp-core-2025--vote-86883",
+        "psp-core-2025--vote-86884",
+        "psp-core-2025--vote-86885",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--print-step-211405",
+        "zvlady-resolutions--2026-175",
+        "esbirka-regulations--2026-115",
+        "psp-core-2025--vote-88454",
+        "esbirka-regulations--2026-179",
+        "zvlady-resolutions--2026-508"
+      ],
+      "explanationCz": "Vláda zavedla dotace na kulturní tradice a historii národnostních menšin a schválila 5,42 milionu Kč na péči o české válečné hroby a pietní místa. Přijala také pravidla chránící historickou strukturu a lidovou architekturu Holašovic, což podporuje konkrétní části slibu. Zároveň vláda podpořila novelu památkové péče, která některé dosavadní povinnosti a kontroly uvolňuje, a Motoristé nepodpořili návrhy na zvýšení výdajů na obnovu památek. Rozpočtové výňatky neukazují konečné částky pro památkovou péči; doložená konkrétní podpora však představuje posun pouze v části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela památkové péče zachovává ochranu kulturních hodnot, ale současně omezuje některé předchozí kontroly; její účinek na konkrétní projekty uchovávající historii proto není ve všech ohledech jednoznačný.",
+        "Dodané rozpočtové výňatky neobsahují konečné částky na ochranu a obnovu památek. Strana nepodpořila tři pozměňovací návrhy, které navrhovaly jejich navýšení celkem o 200 milionů Kč, ale konečné rozpočtové dopady nelze z těchto výňatků určit."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0f05f974d8b95351016aea93ad6fb487d18f2bb87933d9ca12",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 132814,
+      "input_tokens_details": {
+        "cache_write_tokens": 126464,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 8981,
+      "output_tokens_details": {
+        "reasoning_tokens": 6058
+      },
+      "total_tokens": 141795
+    },
+    "output": {
+      "promiseId": "candidate-4f4bb16d3216",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Upravuje cíle územního plánování a výslovně se dotýká ochrany kulturních hodnot, dědictví a identity sídel.",
+          "effectCz": "Dříve zákon výslovně ukládal chránit a rozvíjet kulturní a civilizační hodnoty včetně architektonického a archeologického dědictví; schválené znění ochranu kulturních hodnot a dědictví zachovává, nově zdůrazňuje také kvalitu a identitu sídel a zavádí celostátní politiku architektury jako kritérium. Zároveň se ruší jeden dosavadní úkol plánování posuzovat změny s ohledem na stávající charakter a hodnoty území. Celkový směr ochrany kulturních hodnot je zachován, ale z dodaného textu nelze dovodit jednoznačné celkové zpřísnění či uvolnění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Mění požadavky územních a regulačních plánů na zachování charakteru území a ochranu jeho hodnot.",
+          "effectCz": "Před změnou obsah územního plánu výslovně nevyžadoval uvádět požadavky na zachování či změnu charakteru území; nově je má obsahovat. U regulačního plánu však byly podrobné podmínky umístění staveb a ochrany hodnot v povinné části, zatímco schválené znění je přesouvá do části, kterou plán obsahuje jen tehdy, je-li to účelné. Změna tedy nový požadavek na charakter území přidává, ale v jiné části omezuje povinnost uvádět podrobné ochranné podmínky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "Mění pravidla státní památkové péče, která určují, jak lze obnovovat a využívat kulturní památky a historická území.",
+          "effectCz": "Dosavadní znění vyžadovalo předchozí rozhodnutí či závazné stanovisko pro široký okruh prací na nemovitostech v památkových rezervacích, zónách i ochranných pásmech. Schválené znění v řadě případů zužuje tento okruh, přenáší posuzování na stavební úřady a výslovně zdůrazňuje současné potřeby, využití památek a možnost architektonického kontrastu; tím část omezení uvolňuje. Současně nově vyžaduje vyvážit ochranu památkových hodnot a jejich využití, takže nejde o úplné odstranění ochrany, ale některé dosavadní ochranné podmínky jsou méně přísné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Dodané odstavce pouze odkazují na rozpis výdajů a ukazatelů v přílohách; neobsahují žádnou částku ani konkrétní výdaj na projekty uchovávající tradice či historii.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": false,
+          "reasonCz": "Dodané znění řeší výjimky z evidence tržeb, ale nevztahuje je ke konkrétním projektům uchovávajícím tradice, historii nebo společné hodnoty.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43313-1",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá Národní knihovně uchovávat a zpřístupňovat digitální informace s historickým a kulturním významem.",
+          "effectCz": "Dosavadní § 9 výslovně stanovoval trvalé uchovávání konzervačního a historického fondu, ale neobsahoval uvedené úkoly pro digitální obsah z internetu ani databáze elektronických povinných výtisků. Návrh tyto úkoly doplňuje, včetně sběru, uchovávání a zpřístupňování historicky či kulturně významných informací. Jde o rozšíření prostředků pro uchování kulturního a historického obsahu; jde však zatím pouze o navrženou změnu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-11",
+          "relevant": true,
+          "reasonCz": "Navržená smluvní spolupráce výslovně počítá s ochranou a využitím potenciálu kulturního dědictví.",
+          "effectCz": "Jde o návrh mezinárodní dohody bez předchozího znění měněného zákona. Uvedená kapitola zavazuje strany ke spolupráci v cestovním ruchu a zaměřuje ji mimo jiné na ochranu a využití potenciálu kulturního dědictví; to odpovídá části slibu, ale samo o sobě nezajišťuje podporu konkrétního projektu."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-115",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví dotace přímo na zachování a rozvoj kultur, tradic a jazyků národnostních menšin a na poznávání jejich historie.",
+          "effectCz": "Nařízení zavádí podmínky pro poskytování dotací ze státního rozpočtu na uvedené činnosti, včetně studia, dokumentace a poznávání historie a tradic. Protože jde o nové nařízení a balíček nedodává předchozí právní úpravu, nelze porovnat, zda se dřívější nárok či rozsah podpory změnil."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-179",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví konkrétní podmínky ochrany historických, architektonických a urbanistických hodnot památkové rezervace Holašovice.",
+          "effectCz": "Nařízení nově obsahuje podrobné podmínky pro respektování historické struktury, lidové architektury, pohledů, tradičních materiálů a řemeslných postupů v Holašovicích. Předchozí znění měněného nařízení balíček nedodává, takže nelze určit, zda tyto podmínky celkovou ochranu zpřísňují oproti dosavadnímu stavu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-50",
+          "relevant": true,
+          "reasonCz": "Plán vlády obsahuje úkol připravit zákon k dlouhodobému uchovávání digitálního kulturního a vědeckého dědictví.",
+          "effectCz": "Usnesení plánuje předložit vládě návrh zákona, který má zavést digitální povinné výtisky a webový archiv Národní knihovny; jde o přípravu budoucí legislativy, nikoli o již zavedenou povinnost nebo poskytnutou podporu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-508",
+          "relevant": true,
+          "reasonCz": "Usnesení schvaluje peněžní dary na péči o české válečné hroby, včetně jejich rekonstrukce a výstavby pietních míst.",
+          "effectCz": "Usnesení schvaluje dary v celkové výši 5,42 milionu Kč na údržbu, rekonstrukci či výstavbu válečných hrobů a pietních míst v zahraničí. Jde o konkrétní podporu části slibu, zejména uchovávání historické paměti; předchozí srovnatelnou částku balíček neuvádí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4f4bb16d3216--source",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1179",
+        "psp-core-2025--amendment-1179",
+        "psp-core-2025--vote-88149",
+        "psp-core-2025--amendment-text-1334",
+        "psp-core-2025--amendment-1334",
+        "psp-core-2025--vote-88145",
+        "psp-core-2025--amendment-text-1239",
+        "psp-core-2025--vote-88155",
+        "psp-core-2025--amendment-text-1205",
+        "psp-core-2025--vote-88159",
+        "psp-core-2025--amendment-text-1270",
+        "psp-core-2025--vote-88213",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43313-1",
+        "psp-core-2025--print-step-211405",
+        "zvlady-resolutions--law-change-uv-2026-175-50",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--law-change-43453-11",
+        "psp-core-2025--print-step-212285",
+        "esbirka-regulations--law-change-sb-2026-115",
+        "esbirka-regulations--2026-115",
+        "esbirka-regulations--law-change-sb-2026-179",
+        "esbirka-regulations--2026-179",
+        "zvlady-resolutions--law-change-uv-2026-508",
+        "zvlady-resolutions--2026-508"
+      ],
+      "explanationCz": "Vláda schválila dotace na uchovávání tradic a historie národnostních menšin a 5,42 milionu korun na péči o české válečné hroby; nařízení pro Holašovice stanoví konkrétní ochranu historické architektury. Vláda také předložila návrh na digitální uchovávání historicky a kulturně významných informací a navrhla spolupráci na ochraně kulturního dědictví. Poslanci Motoristů zároveň podpořili změnu památkových pravidel, která nově zdůrazňuje kulturní hodnoty, ale některé dosavadní ochranné požadavky uvolňuje. Doložené kroky tedy naplňují jen část slibu a neprokazují, že se tradice či historie nepřepisují podle ideologií.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček neobsahuje dřívější znění nařízení o Holašovicích, takže nelze přesně porovnat rozsah ochrany před změnou a po ní.",
+        "Změna památkového zákona obsahuje současně nová vyjádření podpory kulturních hodnot i uvolnění některých ochranných pravidel; její účinky na ochranu tradic a historie proto nejsou jednotné.",
+        "Slib je obecný a dodané doklady potvrzují podporu konkrétních oblastí, nikoli všech projektů ani to, zda nedochází k přepisování tradic podle ideologií."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_09c1d8f99ee90240016aea94bfef9087d19db233fd6eb39a61",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 132814,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 132811
+      },
+      "output_tokens": 8234,
+      "output_tokens_details": {
+        "reasoning_tokens": 5260
+      },
+      "total_tokens": 141048
+    },
+    "output": {
+      "promiseId": "candidate-4f4bb16d3216",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Změny územního plánování výslovně upravují ochranu kulturních hodnot, dědictví a identity sídel, tedy mohou ovlivnit zachování historie a tradic.",
+          "effectCz": "Dříve zákon výslovně chránil a rozvíjel kulturní a civilizační hodnoty včetně architektonického a archeologického dědictví; nově je nadále chrání a rozvíjí, ale také zdůrazňuje kvalitu a identitu sídel a zavádí celostátní politiku architektury. Ochrana tedy zůstává, avšak její celkovou míru nelze z těchto změn označit jednoznačně za přísnější či volnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Změny obsahu územních a regulačních plánů výslovně zmiňují zachování charakteru území a ochranu jeho hodnot.",
+          "effectCz": "Dosavadní obsah plánů již počítal s podmínkami využití ploch a ochranou hodnot; nově se výslovně požaduje také rozvoj, zachování nebo změna charakteru území a podrobné podmínky jeho ochrany. Posiluje se výslovné zachycení těchto hledisek v plánovací dokumentaci, ale z dodaného textu nelze určit, že by tím byla sama ochrana v praxi celkově přísnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "Novela památkové péče přímo mění ochranu kulturních památek a památkových území, a tím ovlivňuje zachování historie a kulturního dědictví.",
+          "effectCz": "Před změnou zákon zdůrazňoval zachování a ochranu památek a vyžadoval předchozí souhlas či stanovisko pro širší okruh zásahů, včetně některých udržovacích prací, úprav dřevin a nemovitostí v ochranných pásmech. Schválené znění více zdůrazňuje současné využití a rozvoj památkového fondu, ale u některých nemovitostí zužuje okruh prací či území vyžadujících předchozí památkový přezkum; v těchto ohledech ochranu uvolňuje, zatímco nové plány péče a rozvoje a důraz na kulturní hodnoty zachovávají její další prvky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Rozpočtové pozměňovací návrhy výslovně navrhují peníze na ochranu a obnovu kulturních statků a památek, takže se týkají části slibu o podpoře historického dědictví.",
+          "effectCz": "Jde o nový státní rozpočet bez předchozího znění, nikoli o změnu dosavadního zákonného pravidla. Dodané výňatky rozpočtu uvádějí jen to, že výdaje jsou rozepsány v přílohách, jejichž částky zde nejsou; pozměňovací návrhy navrhují zvýšit prostředky na ochranu a péči o kulturní statky o 60 milionů Kč a na záchranu a obnovu památek o 140 milionů Kč, ale skutečnou výslednou částku pro tyto účely z balíčku nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43313-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí uchovávání a zpřístupňování informací s historickým a kulturním významem, což přímo podporuje uchování části společné historie.",
+          "effectCz": "Dosavadní úprava svěřovala Národní knihovně uchovávání historického fondu a bibliografické činnosti; nově jí ukládá také sbírat a uchovávat vybrané digitálně dostupné informace s historickým či kulturním významem a zpřístupňovat databáze určeným knihovnám. Povinnost uchovávání se tak rozšiřuje, aniž by dodaný text ukazoval oslabení dosavadních povinností."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": false,
+          "reasonCz": "Dodané části návrhu upravují výjimky z evidence tržeb a neukazují věcnou vazbu na podporu projektů uchovávajících tradice či historii.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-11",
+          "relevant": false,
+          "reasonCz": "Uvedená část dohody upravuje mezinárodní spolupráci v cestovním ruchu a ochranu kulturního dědictví, nikoli podporu projektů uchovávajících tradice a historii v rozsahu tohoto slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-115",
+          "relevant": true,
+          "reasonCz": "Nařízení upravuje státní dotace na zachování a rozvoj kultur, tradic a jazyků národnostních menšin a jejich historické poznání.",
+          "effectCz": "Jde o nové dotační pravidlo, nikoli změnu dřívějšího znění uvedeného v balíčku. Umožňuje poskytovat dotace mimo jiné na kulturní, vzdělávací a jiné činnosti a dokumentaci tradic a historie národnostních menšin, takže vytváří konkrétní nástroj podpory části slibu."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-179",
+          "relevant": true,
+          "reasonCz": "Nařízení výslovně stanovuje ochranu historické urbanistické struktury, lidové architektury a kulturních hodnot památkové rezervace Holašovice.",
+          "effectCz": "Jde o novou, místně vymezenou závaznou úpravu bez předchozího znění uvedeného v balíčku. Stanoví respektování historické struktury, tradiční architektury, měřítka zástavby a kulturních hodnot při změnách území a obnově staveb, čímž ochranu konkrétních historických hodnot přímo zakotvuje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-50",
+          "relevant": true,
+          "reasonCz": "Úkol v plánu legislativních prací výslovně navrhuje právní nástroj pro dlouhodobé uchovávání digitálního kulturního a vědeckého dědictví.",
+          "effectCz": "Jde o návrh budoucí legislativní práce, nikoli o změnu zákona. Stanoví záměr připravit povinné odevzdávání elektronických publikací a jejich uchovávání a zpřístupňování knihovnami; ve vztahu ke slibu jde o návrh na podporu uchování kulturního dědictví, nikoli o již platnou povinnost."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-508",
+          "relevant": true,
+          "reasonCz": "Usnesení schvaluje konkrétní peněžní dary na údržbu, rekonstrukci a výstavbu českých válečných hrobů a pietních míst.",
+          "effectCz": "Jde o nové rozhodnutí bez předchozího znění, které schvaluje dary v celkové výši 5,42 milionu Kč na údržbu, rekonstrukci a výstavbu válečných hrobů či pietních míst. Jde o konkrétní podporu části historie a jejího připomínání."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4f4bb16d3216--source",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43313-1",
+        "esbirka-regulations--law-change-sb-2026-115",
+        "esbirka-regulations--law-change-sb-2026-179",
+        "zvlady-resolutions--law-change-uv-2026-175-50",
+        "zvlady-resolutions--law-change-uv-2026-508",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1179",
+        "psp-core-2025--amendment-1179",
+        "psp-core-2025--vote-88149",
+        "psp-core-2025--amendment-text-1334",
+        "psp-core-2025--amendment-1334",
+        "psp-core-2025--vote-88145",
+        "psp-core-2025--vote-88155",
+        "psp-core-2025--amendment-text-1205",
+        "psp-core-2025--vote-88159",
+        "psp-core-2025--amendment-text-1270",
+        "psp-core-2025--vote-88213",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-485",
+        "psp-core-2025--amendment-text-486",
+        "psp-core-2025--amendment-text-484",
+        "psp-core-2025--vote-86883",
+        "psp-core-2025--vote-86884",
+        "psp-core-2025--vote-86885",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--print-step-211405",
+        "zvlady-resolutions--2026-175",
+        "esbirka-regulations--2026-115",
+        "psp-core-2025--vote-88454",
+        "esbirka-regulations--2026-179",
+        "zvlady-resolutions--2026-508"
+      ],
+      "explanationCz": "Vláda zavedla dotace na kulturní tradice a historii národnostních menšin a schválila 5,42 milionu Kč na péči o české válečné hroby a pietní místa. Přijala také pravidla chránící historickou strukturu a lidovou architekturu Holašovic, což podporuje konkrétní části slibu. Zároveň vláda podpořila novelu památkové péče, která některé dosavadní povinnosti a kontroly uvolňuje, a Motoristé nepodpořili návrhy na zvýšení výdajů na obnovu památek. Rozpočtové výňatky neukazují konečné částky pro památkovou péči; doložená konkrétní podpora však představuje posun pouze v části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela památkové péče zachovává ochranu kulturních hodnot, ale současně omezuje některé předchozí kontroly; její účinek na konkrétní projekty uchovávající historii proto není ve všech ohledech jednoznačný.",
+        "Dodané rozpočtové výňatky neobsahují konečné částky na ochranu a obnovu památek. Strana nepodpořila tři pozměňovací návrhy, které navrhovaly jejich navýšení celkem o 200 milionů Kč, ale konečné rozpočtové dopady nelze z těchto výňatků určit."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

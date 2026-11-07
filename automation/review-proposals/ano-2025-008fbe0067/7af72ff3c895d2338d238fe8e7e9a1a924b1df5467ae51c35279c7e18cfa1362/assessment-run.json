@@ -1,0 +1,258 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T01-24-55-961Z--1a79454d0cb2",
+  "evaluatedAt": "2026-11-04T01:24:55.961Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-008fbe0067/1a79454d0cb2b4f86a34937f42cce10317531ceb69809830916b76ef922cb53b.json",
+  "packageHash": "1a79454d0cb2b4f86a34937f42cce10317531ceb69809830916b76ef922cb53b",
+  "assessmentContentHash": "89524467853b4e8729a3a96ceed576dab6f3153eaa0c56d22d712380ee075c41",
+  "assessmentFingerprint": "7af72ff3c895d2338d238fe8e7e9a1a924b1df5467ae51c35279c7e18cfa1362",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-008fbe0067",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0eff33e8d7f39909016aea88b4873487d191a6d22933307660",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 33750,
+            "input_tokens_details": {
+              "cache_write_tokens": 33747,
+              "cached_tokens": 0
+            },
+            "output_tokens": 4083,
+            "output_tokens_details": {
+              "reasoning_tokens": 3426
+            },
+            "total_tokens": 37833
+          },
+          "output": {
+            "promiseId": "ano-2025-008fbe0067",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-2",
+                "relevant": false,
+                "reasonCz": "V dodaných odstavcích návrh zavádí slevu na studenta a za umístění dítěte a upravuje související odkazy, ale podmínky slevy na manžela nemění, takže nejde o věcný zásah do tohoto konkrétního slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43366-1",
+                "relevant": true,
+                "reasonCz": "Návrh přímo ruší slevu na manžela, jejíž původní podobu slib požaduje obnovit.",
+                "effectCz": "Dosavadní § 35ba odst. 1 písm. b) a § 35bb umožňují uplatnit slevu na manžela ve výši 24 840 Kč, případně dvojnásobné při průkazu ZTP/P; podmínkou je společná domácnost s vyživovaným dítětem mladším tří let a vlastní příjem manžela nejvýše 68 000 Kč. Návrh ruší písmeno b) i celý § 35bb, takže nárok na tuto slevu zaniká; související úpravy dalších ustanovení pouze odstraňují nebo přečíslovávají odkazy. Jde o úplné zmenšení tohoto daňového nároku, tedy o změnu opačnou k jeho obnovení."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-008fbe0067--source",
+              "psp-core-2025--law-change-43366-1",
+              "psp-core-2025--government-opinion-43366-1"
+            ],
+            "explanationCz": "Volební program slibuje obnovit původní podobu slevy na druhého z manželů. Poslanecký návrh projednávaný jako sněmovní tisk 244 by slevu na manžela zrušil úplně, místo ní navrhuje vyšší daňové zvýhodnění na malé dítě. Vláda s tímto návrhem nesouhlasila a výslovně uvedla, že má být zachována, respektive obnovena původní podoba slevy. Jde o doložený krok proti návrhu, který by slib přímo popřel, nikoli však o samotné obnovení slevy.",
+            "confidence": "high",
+            "uncertainties": [
+              "Dodaný balíček dokládá vládní nesouhlas s poslaneckým návrhem, ale neuvádí jeho konečný osud; hodnocení proto vychází z tohoto doloženého stanoviska."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-008fbe0067",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Samotný vládní návrh slevu na manžela nemění, ale pozměňovací návrh H k této předloze navrhl její zrušení.",
+          "effectCz": "Dosavadní znění umožňuje uplatnit slevu na manžela ve výši 24 840 Kč, při splnění podmínek včetně společné domácnosti s dítětem mladším tří let a příjmového limitu manžela; samotný vládní návrh tuto úpravu v dodaných ustanoveních nemění, takže ji ani neobnovuje v původní podobě, ani dále neomezuje. Pozměňovací návrh H by naproti tomu slevu zrušil, a tím nárok zmenšil až na nulu; tento návrh však nebyl přijat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43366-1",
+          "relevant": true,
+          "reasonCz": "Předloha přímo ruší slevu na manžela, jejíž obnovení slib požaduje.",
+          "effectCz": "Dosavadní úprava přiznává slevu na manžela ve výši 24 840 Kč za stanovených podmínek; návrh ruší ustanovení § 35bb i písmeno, které slevu uvádí, a tím nárok zcela odstraňuje. Jde tedy o výrazné zmenšení nároku, nikoli o jeho obnovení."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-008fbe0067--source",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--amendment-text-1560",
+        "psp-core-2025--vote-88299",
+        "psp-core-2025--law-change-43366-1",
+        "psp-core-2025--government-opinion-43366-1"
+      ],
+      "explanationCz": "Vláda nesouhlasila s poslaneckou předlohou, která by slevu na manžela zrušila, a uvedla, že její obnovení patří k vládnímu závazku vůči rodinám. Tím odmítla návrh, který by šel proti slibu. Poslanci ANO také nepodpořili pozměňovací návrh k vládnímu návrhu zákona o evidenci tržeb, který by slevu na manžela zrušil. Samotný vládní návrh tuto slevu neobnovil, takže doložené kroky směřují k ochraně slíbené podpory, nikoli k jejímu úplnému splnění.",
+      "confidence": "high",
+      "uncertainties": []
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-008fbe0067",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": false,
+          "reasonCz": "Dodané části návrhu vracejí slevu na studenta a slevu za umístění dítěte a upravují související odkazy; nárok ani podmínky slevy na manžela v nich změněny nejsou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43366-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně ruší slevu na manžela, tedy mění právě daňovou úlevu, jejíž obnovení slib požaduje.",
+          "effectCz": "Dosavadní znění přiznává slevu na manžela ve výši 24 840 Kč, případně dvojnásobné při průkazu ZTP/P, pokud poplatník žije s manželem a vyživovaným dítětem mladším tří let ve společné domácnosti a příjem manžela nepřesahuje 68 000 Kč. Návrh ruší písmeno o slevě na manžela v § 35ba i celý § 35bb, který stanoví její výši a podmínky; při přijetí by tedy tento nárok zcela zanikl. Související úpravy dalších paragrafů odstraňují nebo přečíslovávají odkazy na zrušenou slevu. Jde o zásadní zúžení až zrušení nároku, a tedy změnu proti slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-008fbe0067--source",
+        "psp-core-2025--law-change-43366-1",
+        "psp-core-2025--government-opinion-43366-1"
+      ],
+      "explanationCz": "Vláda nesouhlasila s poslaneckým návrhem zákona, který by zrušil slevu na manžela; návrh zároveň výslovně označila za neslučitelný se závazkem tuto slevu zachovat, respektive obnovit. Tím vláda podpořila slib proti návrhu, který by jej přímo mařil. Doklady ale potvrzují jen tento nesouhlas, nikoli skutečné obnovení původní podoby slevy.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Vláda nesouhlasila s návrhem na zrušení slevy, ale poskytnuté důkazy nedokládají, že byla původní podoba slevy skutečně obnovena."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0ab5948db85b5dba016aea88eff23c87d18ab67772d311e329",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 33750,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 33747
+      },
+      "output_tokens": 4140,
+      "output_tokens_details": {
+        "reasoning_tokens": 3466
+      },
+      "total_tokens": 37890
+    },
+    "output": {
+      "promiseId": "ano-2025-008fbe0067",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Samotný vládní návrh slevu na manžela nemění, ale pozměňovací návrh H k této předloze navrhl její zrušení.",
+          "effectCz": "Dosavadní znění umožňuje uplatnit slevu na manžela ve výši 24 840 Kč, při splnění podmínek včetně společné domácnosti s dítětem mladším tří let a příjmového limitu manžela; samotný vládní návrh tuto úpravu v dodaných ustanoveních nemění, takže ji ani neobnovuje v původní podobě, ani dále neomezuje. Pozměňovací návrh H by naproti tomu slevu zrušil, a tím nárok zmenšil až na nulu; tento návrh však nebyl přijat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43366-1",
+          "relevant": true,
+          "reasonCz": "Předloha přímo ruší slevu na manžela, jejíž obnovení slib požaduje.",
+          "effectCz": "Dosavadní úprava přiznává slevu na manžela ve výši 24 840 Kč za stanovených podmínek; návrh ruší ustanovení § 35bb i písmeno, které slevu uvádí, a tím nárok zcela odstraňuje. Jde tedy o výrazné zmenšení nároku, nikoli o jeho obnovení."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-008fbe0067--source",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--amendment-text-1560",
+        "psp-core-2025--vote-88299",
+        "psp-core-2025--law-change-43366-1",
+        "psp-core-2025--government-opinion-43366-1"
+      ],
+      "explanationCz": "Vláda nesouhlasila s poslaneckou předlohou, která by slevu na manžela zrušila, a uvedla, že její obnovení patří k vládnímu závazku vůči rodinám. Tím odmítla návrh, který by šel proti slibu. Poslanci ANO také nepodpořili pozměňovací návrh k vládnímu návrhu zákona o evidenci tržeb, který by slevu na manžela zrušil. Samotný vládní návrh tuto slevu neobnovil, takže doložené kroky směřují k ochraně slíbené podpory, nikoli k jejímu úplnému splnění.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0a1235cadb25e763016aea892ef34c87d1af57a419a9fb488d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 33750,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 33747
+      },
+      "output_tokens": 4191,
+      "output_tokens_details": {
+        "reasoning_tokens": 3500
+      },
+      "total_tokens": 37941
+    },
+    "output": {
+      "promiseId": "ano-2025-008fbe0067",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": false,
+          "reasonCz": "Dodané části návrhu vracejí slevu na studenta a slevu za umístění dítěte a upravují související odkazy; nárok ani podmínky slevy na manžela v nich změněny nejsou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43366-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně ruší slevu na manžela, tedy mění právě daňovou úlevu, jejíž obnovení slib požaduje.",
+          "effectCz": "Dosavadní znění přiznává slevu na manžela ve výši 24 840 Kč, případně dvojnásobné při průkazu ZTP/P, pokud poplatník žije s manželem a vyživovaným dítětem mladším tří let ve společné domácnosti a příjem manžela nepřesahuje 68 000 Kč. Návrh ruší písmeno o slevě na manžela v § 35ba i celý § 35bb, který stanoví její výši a podmínky; při přijetí by tedy tento nárok zcela zanikl. Související úpravy dalších paragrafů odstraňují nebo přečíslovávají odkazy na zrušenou slevu. Jde o zásadní zúžení až zrušení nároku, a tedy změnu proti slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-008fbe0067--source",
+        "psp-core-2025--law-change-43366-1",
+        "psp-core-2025--government-opinion-43366-1"
+      ],
+      "explanationCz": "Vláda nesouhlasila s poslaneckým návrhem zákona, který by zrušil slevu na manžela; návrh zároveň výslovně označila za neslučitelný se závazkem tuto slevu zachovat, respektive obnovit. Tím vláda podpořila slib proti návrhu, který by jej přímo mařil. Doklady ale potvrzují jen tento nesouhlas, nikoli skutečné obnovení původní podoby slevy.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Vláda nesouhlasila s návrhem na zrušení slevy, ale poskytnuté důkazy nedokládají, že byla původní podoba slevy skutečně obnovena."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

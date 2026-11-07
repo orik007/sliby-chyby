@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-31-33-253Z--b3bab7042be8",
+  "evaluatedAt": "2026-10-02T05:31:33.253Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-df047189db55/b3bab7042be872879fae2df07c46adc1f79e3b67f59afcdeb0b50d110c63a83a.json",
+  "packageHash": "b3bab7042be872879fae2df07c46adc1f79e3b67f59afcdeb0b50d110c63a83a",
+  "assessmentContentHash": "0609fe6a091872775e7483ae8fcae11ab67b8afbdf1c77df4f4dba145b51359e",
+  "assessmentFingerprint": "25e84c74edf371f9203f2f555a29763814dfc9a407976c6ba32e05127ede1708",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-df047189db55",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-df047189db55",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí nejméně 1 500 Kč měsíčně navíc pro některé pedagogické pracovníky vykonávající činnost třídního učitele nebo obdobné funkce, takže přináší konkrétní zvýšení platu části slíbené skupiny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-16",
+          "relevant": false,
+          "reasonCz": "Tato část návrhu upravuje zejména kontrolu a vykazování rozdílů v odměňování, nikoli zvýšení platů pedagogických či nepedagogických pracovníků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-df047189db55--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda, v níž je ANO, předložila návrh změny zákoníku práce. Návrh přiznává nejméně 1 500 Kč měsíčně navíc některým pedagogickým pracovníkům, například třídním učitelům. Jde o konkrétní posun pro část pedagogických pracovníků, nikoli o zvýšení platů všech pedagogických i nepedagogických pracovníků. Návrh zatím není dokladem, že se toto zvýšení skutečně uskutečnilo.",
+      "confidence": "high",
+      "uncertainties": [
+        "Návrh byl pouze předložen; z dodaných podkladů není doloženo jeho schválení ani to, že by se příplatek již vyplácel.",
+        "Návrh se týká jen vymezených pedagogických pracovníků a nedokládá zvýšení platů nepedagogických pracovníků ani celkové zvýšení platů obou slíbených skupin."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-df047189db55",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí příplatek nejméně 1 500 Kč měsíčně pro pedagogické pracovníky vykonávající vybrané třídnické a obdobné funkce, což zvyšuje odměnu části pedagogických pracovníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-16",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje zejména kontrolu a vykazování rozdílů v odměňování, ale nestanoví zvýšení platů pedagogických ani nepedagogických pracovníků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-df047189db55--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda předložila Poslanecké sněmovně návrh zákona, který mimo jiné zavádí příplatek nejméně 1 500 Kč měsíčně pro pedagogické pracovníky vykonávající funkci třídního učitele a některé obdobné činnosti. Tím návrh zvyšuje odměnu části pedagogických pracovníků, takže směřuje k části slibu. Neřeší však plošné zvýšení platů pedagogických i nepedagogických pracovníků na úroveň odpovídající jejich významu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Jde o předložený návrh; dodané podklady nedokládají jeho přijetí ani to, že se navržený příplatek skutečně začne vyplácet."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0af7b34f0772817a016abf41a58f8887d194330f2c8519d9c2",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 42641,
+      "input_tokens_details": {
+        "cache_write_tokens": 39317,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1179,
+      "output_tokens_details": {
+        "reasoning_tokens": 654
+      },
+      "total_tokens": 43820
+    },
+    "output": {
+      "promiseId": "candidate-df047189db55",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí nejméně 1 500 Kč měsíčně navíc pro některé pedagogické pracovníky vykonávající činnost třídního učitele nebo obdobné funkce, takže přináší konkrétní zvýšení platu části slíbené skupiny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-16",
+          "relevant": false,
+          "reasonCz": "Tato část návrhu upravuje zejména kontrolu a vykazování rozdílů v odměňování, nikoli zvýšení platů pedagogických či nepedagogických pracovníků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-df047189db55--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda, v níž je ANO, předložila návrh změny zákoníku práce. Návrh přiznává nejméně 1 500 Kč měsíčně navíc některým pedagogickým pracovníkům, například třídním učitelům. Jde o konkrétní posun pro část pedagogických pracovníků, nikoli o zvýšení platů všech pedagogických i nepedagogických pracovníků. Návrh zatím není dokladem, že se toto zvýšení skutečně uskutečnilo.",
+      "confidence": "high",
+      "uncertainties": [
+        "Návrh byl pouze předložen; z dodaných podkladů není doloženo jeho schválení ani to, že by se příplatek již vyplácel.",
+        "Návrh se týká jen vymezených pedagogických pracovníků a nedokládá zvýšení platů nepedagogických pracovníků ani celkové zvýšení platů obou slíbených skupin."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0ce5e2bfb60c1cfc016abf41acfc1087d19a3594ee930f66d9",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 42641,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 42638
+      },
+      "output_tokens": 1251,
+      "output_tokens_details": {
+        "reasoning_tokens": 830
+      },
+      "total_tokens": 43892
+    },
+    "output": {
+      "promiseId": "candidate-df047189db55",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí příplatek nejméně 1 500 Kč měsíčně pro pedagogické pracovníky vykonávající vybrané třídnické a obdobné funkce, což zvyšuje odměnu části pedagogických pracovníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-16",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje zejména kontrolu a vykazování rozdílů v odměňování, ale nestanoví zvýšení platů pedagogických ani nepedagogických pracovníků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-df047189db55--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda předložila Poslanecké sněmovně návrh zákona, který mimo jiné zavádí příplatek nejméně 1 500 Kč měsíčně pro pedagogické pracovníky vykonávající funkci třídního učitele a některé obdobné činnosti. Tím návrh zvyšuje odměnu části pedagogických pracovníků, takže směřuje k části slibu. Neřeší však plošné zvýšení platů pedagogických i nepedagogických pracovníků na úroveň odpovídající jejich významu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Jde o předložený návrh; dodané podklady nedokládají jeho přijetí ani to, že se navržený příplatek skutečně začne vyplácet."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

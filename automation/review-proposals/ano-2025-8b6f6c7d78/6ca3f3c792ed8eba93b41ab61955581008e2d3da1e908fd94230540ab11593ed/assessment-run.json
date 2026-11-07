@@ -1,0 +1,247 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-35-05-165Z--b0bbb286d7ce",
+  "evaluatedAt": "2026-10-02T01:35:05.165Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-8b6f6c7d78/b0bbb286d7ceb7d30f2f91a30fa9e2c507187248f053bb9b6818b1c8aa44aef9.json",
+  "packageHash": "b0bbb286d7ceb7d30f2f91a30fa9e2c507187248f053bb9b6818b1c8aa44aef9",
+  "assessmentContentHash": "7c306a12147d732658f7f079820118b38a6c6ffd6c2227eece02182602d24de3",
+  "assessmentFingerprint": "6ca3f3c792ed8eba93b41ab61955581008e2d3da1e908fd94230540ab11593ed",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-8b6f6c7d78",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-8b6f6c7d78",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-72",
+          "relevant": false,
+          "reasonCz": "Změny řízení o volbách zástupců zaměstnanců pouze vypouštějí odkazy na státní službu a nepřevádějí soudní agendu na jiné instituce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43283-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje prohlášení v dědických věcech a výslovně uvádí okresní soud, tedy oblast soudní agendy, kterou by slib mohl zahrnovat, ale text sám převod k jiné instituci nestanoví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-6",
+          "relevant": false,
+          "reasonCz": "Text pouze posouvá datum účinnosti vybraných ustanovení jiného zákona a neuvádí jejich obsah, takže z něj nelze dovodit dopad na převod soudních agend."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-8b6f6c7d78--source",
+        "psp-core-2025--law-change-43283-1",
+        "psp-core-2025--print-step-211167",
+        "psp-core-2025--law-change-43308-6",
+        "psp-core-2025--law-change-43184-approved-72"
+      ],
+      "explanationCz": "Vláda předložila návrh změny občanského soudního řádu, který by umožnil učinit některá prohlášení v dědických věcech u okresního soudu. Návrh ale nepřevádí tuto agendu k notářům ani jiným institucím. Z podkladů nelze zjistit, zda jde o novou doplňkovou možnost, nebo o zachování dosavadní soudní role, takže nelze spolehlivě určit jeho dopad na slib. Podstatný posun ke slibu proto zatím doložen není.",
+      "confidence": "low",
+      "uncertainties": [
+        "U dědických prohlášení návrh výslovně uvádí okresní soud, ale podklady neobsahují dosavadní právní úpravu ani informace o tom, zda mohou prohlášení přijímat také notáři či jiné instituce; proto není jasné, zda návrh soudní agendu zachovává, nebo pouze doplňuje její výkon."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-8b6f6c7d78",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-72",
+          "relevant": false,
+          "reasonCz": "Změna upravuje soudní řízení o volbách zaměstnaneckých a bezpečnostních zástupců, ale žádnou agendu nepřevádí ze soudů na jiné instituce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43283-1",
+          "relevant": true,
+          "reasonCz": "Nově umožňuje učinit některá prohlášení v dědických věcech před okresním soudem, což se týká bezesporné agendy, kterou slib míří převádět mimo soudy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-6",
+          "relevant": false,
+          "reasonCz": "Text pouze posouvá datum účinnosti dřívějších ustanovení, ale jejich obsah ani případný vztah k převádění agend nejsou v podkladu uvedeny."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-8b6f6c7d78--source",
+        "psp-core-2025--law-change-43283-1",
+        "psp-core-2025--print-step-211167"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona, který nově umožňuje učinit některá prohlášení v dědických věcech před okresním soudem. Jde o bezespornou agendu, takže tento návrh působí proti záměru přesouvat takové úkoly od soudů k notářům a jiným institucím. Jde zatím o předložený návrh; podklady nedokládají, že by převod agendy skutečně znemožňoval.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh výslovně připouští prohlášení před okresním soudem, ale podklady neukazují, zda je tato možnost výlučná nebo zda mohou stejnou agendu vykonávat také notáři či jiné instituce."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0013a6bb74a66789016abf09efaed087d19d0349611b232c52",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 21687,
+      "input_tokens_details": {
+        "cache_write_tokens": 18363,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 4222,
+      "output_tokens_details": {
+        "reasoning_tokens": 3624
+      },
+      "total_tokens": 25909
+    },
+    "output": {
+      "promiseId": "ano-2025-8b6f6c7d78",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-72",
+          "relevant": false,
+          "reasonCz": "Změny řízení o volbách zástupců zaměstnanců pouze vypouštějí odkazy na státní službu a nepřevádějí soudní agendu na jiné instituce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43283-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje prohlášení v dědických věcech a výslovně uvádí okresní soud, tedy oblast soudní agendy, kterou by slib mohl zahrnovat, ale text sám převod k jiné instituci nestanoví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-6",
+          "relevant": false,
+          "reasonCz": "Text pouze posouvá datum účinnosti vybraných ustanovení jiného zákona a neuvádí jejich obsah, takže z něj nelze dovodit dopad na převod soudních agend."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-8b6f6c7d78--source",
+        "psp-core-2025--law-change-43283-1",
+        "psp-core-2025--print-step-211167",
+        "psp-core-2025--law-change-43308-6",
+        "psp-core-2025--law-change-43184-approved-72"
+      ],
+      "explanationCz": "Vláda předložila návrh změny občanského soudního řádu, který by umožnil učinit některá prohlášení v dědických věcech u okresního soudu. Návrh ale nepřevádí tuto agendu k notářům ani jiným institucím. Z podkladů nelze zjistit, zda jde o novou doplňkovou možnost, nebo o zachování dosavadní soudní role, takže nelze spolehlivě určit jeho dopad na slib. Podstatný posun ke slibu proto zatím doložen není.",
+      "confidence": "low",
+      "uncertainties": [
+        "U dědických prohlášení návrh výslovně uvádí okresní soud, ale podklady neobsahují dosavadní právní úpravu ani informace o tom, zda mohou prohlášení přijímat také notáři či jiné instituce; proto není jasné, zda návrh soudní agendu zachovává, nebo pouze doplňuje její výkon."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_02660c22ead8f482016abf0a1e4e8c87d1b6deace20a8d1911",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 21687,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 21684
+      },
+      "output_tokens": 3234,
+      "output_tokens_details": {
+        "reasoning_tokens": 2721
+      },
+      "total_tokens": 24921
+    },
+    "output": {
+      "promiseId": "ano-2025-8b6f6c7d78",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-72",
+          "relevant": false,
+          "reasonCz": "Změna upravuje soudní řízení o volbách zaměstnaneckých a bezpečnostních zástupců, ale žádnou agendu nepřevádí ze soudů na jiné instituce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43283-1",
+          "relevant": true,
+          "reasonCz": "Nově umožňuje učinit některá prohlášení v dědických věcech před okresním soudem, což se týká bezesporné agendy, kterou slib míří převádět mimo soudy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-6",
+          "relevant": false,
+          "reasonCz": "Text pouze posouvá datum účinnosti dřívějších ustanovení, ale jejich obsah ani případný vztah k převádění agend nejsou v podkladu uvedeny."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-8b6f6c7d78--source",
+        "psp-core-2025--law-change-43283-1",
+        "psp-core-2025--print-step-211167"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona, který nově umožňuje učinit některá prohlášení v dědických věcech před okresním soudem. Jde o bezespornou agendu, takže tento návrh působí proti záměru přesouvat takové úkoly od soudů k notářům a jiným institucím. Jde zatím o předložený návrh; podklady nedokládají, že by převod agendy skutečně znemožňoval.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh výslovně připouští prohlášení před okresním soudem, ale podklady neukazují, zda je tato možnost výlučná nebo zda mohou stejnou agendu vykonávat také notáři či jiné instituce."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0679ccfde4695b87016abf0a4184d887d18c91c58a04a5fd0f",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 21941,
+      "input_tokens_details": {
+        "cache_write_tokens": 19459,
+        "cached_tokens": 2479
+      },
+      "output_tokens": 441,
+      "output_tokens_details": {
+        "reasoning_tokens": 194
+      },
+      "total_tokens": 22382
+    },
+    "output": {
+      "choice": "cannot-decide",
+      "citedEvidenceIds": [
+        "ano-2025-8b6f6c7d78--source",
+        "psp-core-2025--law-change-43283-1",
+        "psp-core-2025--print-step-211167"
+      ],
+      "explanationCz": "ANO slíbilo převést některé agendy ze soudů na notáře a jiné instituce, nikoli všechny bezesporné případy. Vláda s účastí ANO předložila návrh, který umožňuje podávat některá dědická prohlášení u okresního soudu, ale podklady nedokládají, že tím brání slíbenému převodu. Druhý posudek proto nemá dostatečný důvod označit návrh za krok proti slibu. První posudek je správně opatrný, ale také považuje návrh za související se slibem jen kvůli tématu, což podle pravidel nestačí. Ani jeden posudek tak pravidla neuplatňuje dostatečně přesně."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-cannot-decide",
+    "status": null,
+    "selectedReview": null
+  }
+}

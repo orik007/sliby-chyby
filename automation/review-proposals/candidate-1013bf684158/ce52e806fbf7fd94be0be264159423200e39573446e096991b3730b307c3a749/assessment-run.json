@@ -1,0 +1,625 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T02-01-43-632Z--eb65e070334d",
+  "evaluatedAt": "2026-11-04T02:01:43.632Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-1013bf684158/eb65e070334d56be31503a4f7d6747c1e8b9ed3b9ea36b415fb157414a8b7207.json",
+  "packageHash": "eb65e070334d56be31503a4f7d6747c1e8b9ed3b9ea36b415fb157414a8b7207",
+  "assessmentContentHash": "5d89feb48d0a44f77b11ca00d673e0410076272424635648d1c078345c608c69",
+  "assessmentFingerprint": "ce52e806fbf7fd94be0be264159423200e39573446e096991b3730b307c3a749",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-1013bf684158",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0f4d6fb3acb0ded4016aea9114dd9c87d1b2ce3cb061b2e9d0",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 117628,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 117625
+            },
+            "output_tokens": 10138,
+            "output_tokens_details": {
+              "reasoning_tokens": 7156
+            },
+            "total_tokens": 127766
+          },
+          "output": {
+            "promiseId": "candidate-1013bf684158",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-2",
+                "relevant": true,
+                "reasonCz": "Ustanovení upravuje, jak mají územní plány vymezovat plochy pro výrobu, skladování a distribuci energie včetně tepla, a tím se přímo dotýká podmínek pro teplárenské zdroje.",
+                "effectCz": "Dříve se vhodné plochy pro výrobu vyhodnocovaly a vymezovaly jen tehdy, bylo-li to účelné, a energetické plochy se měly posuzovat také podle energetické koncepce a klimatických cílů státu. Nové znění vypouští podmínku účelnosti a výslovně zahrnuje skladování a distribuci; v tomto směru rozšiřuje prostor pro plánování, ale zároveň odstraňuje povinnost zohlednit energetickou koncepci a klimatické cíle. Výsledný účinek na modernizaci teplárenství není jednoznačný."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": false,
+                "reasonCz": "Dodané znění se týká převážně územního plánování a výstavby; jediná zachycená nová možnost se vztahuje obecně k energetické bezpečnosti a není doloženo, že se týká závazku modernizovat teplárenství.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-7",
+                "relevant": true,
+                "reasonCz": "Schválené znění nově zařazuje tepelnou přípojku do 100 metrů mezi drobné stavby, což se přímo týká připojování odběratelů k soustavám zásobování teplem.",
+                "effectCz": "Předchozí příloha přípojku tepla mezi uvedenými drobnými stavbami neobsahovala; nové znění ji zařazuje, pokud je do 100 metrů od rozvodného tepelného zařízení a zřizuje ji držitel licence. Jde o rozšíření možnosti využít tuto klasifikaci, která může usnadnit připojení; dodané znění samo nepopisuje všechny procesní důsledky této klasifikace."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": true,
+                "reasonCz": "Změny energetického zákona upravují regulaci cen tepelné energie i právní režim tepelných sítí, a proto se přímo týkají dostupnosti a ceny tepla a infrastruktury teplárenství.",
+                "effectCz": "Dosavadní znění § 19a vyžadovalo stanovení limitní ceny prováděcím předpisem a při jejím určení počítalo s úplnými náklady srovnatelného konkurenčního zdroje; nové znění umožňuje Energetickému regulačnímu úřadu limitní cenu stanovit cenovým výměrem a ukládá zohlednit náklady na teplo z jiného zdroje vytápění. Protože nové znění používá „může“ místo dosavadního „stanoví“ a dodané podklady neukazují výši limitu ani následné cenové dopady, nelze spolehlivě určit, zda se cenová ochrana pro odběratele zpřísní, nebo oslabí. U § 79 se dříve jako samostatné věci uváděly tepelná přípojka a předávací stanice; nově se tak výslovně uvádí i tepelná síť nebo její oddělená část, což právně rozšiřuje vymezení teplárenské infrastruktury, aniž by samo měnilo cenové limity."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": false,
+                "reasonCz": "Změna upravuje zrychlené postupy a vyvlastňování pro energetickou a další infrastrukturu obecně, ale dodané znění ji nespojuje s teplárenskými soustavami ani se zdroji uvedenými ve slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": false,
+                "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku se týká obecného povolování staveb a dodané důkazy neukazují konkrétní vazbu na teplárenské projekty; schválené znění tuto část navíc odstranilo.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+                "relevant": true,
+                "reasonCz": "Změna stanoví, jak se posuzuje účinná soustava zásobování teplem podle podílu obnovitelného tepla, odpadního tepla a kombinované výroby, tedy výslovně zahrnuje technologie podporované slibem.",
+                "effectCz": "Dosavadní pravidlo vztahovalo emisní ukazatel na jednotku tepla dodaného zákazníkům; nové znění jej váže na jednotku tepla vstupující ze zdrojů do soustavy a stanoví, že způsob výpočtu určí prováděcí předpis. Změna mění základ výpočtu a může ovlivnit, které soustavy splní kritéria účinné soustavy zásobování teplem, ale bez nové výpočtové metodiky nelze určit směr ani rozsah tohoto účinku."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43207-1",
+                "relevant": true,
+                "reasonCz": "Návrh rozpočtu výslovně uvádí podporu projektů v teplárenství mezi financovanými oblastmi, a proto se věcně vztahuje k podpoře modernizace tepla.",
+                "effectCz": "Jde o návrh rozpočtu, takže zde není předchozí znění měněného zákona k porovnání. Text uvádí, že celková alokace výzev z roku 2024 a nových výzev v roce 2025 přesahuje 90 miliard Kč a že se pro rok 2026 předpokládají výdaje přibližně 29,6334 miliardy Kč včetně půjček 2 miliardy Kč; teplárenství je jednou z více podporovaných oblastí, ale konkrétní částka pro slíbené technologie uvedena není."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2025-1018",
+                "relevant": true,
+                "reasonCz": "Usnesení výslovně zahrnuje spalování paliv při vytápění budov, takže se může dotknout cenových podmínek pro plynovou kogeneraci a dostupnosti tepla.",
+                "effectCz": "Vláda stanovila, že do českého práva nebudou převedena ustanovení systému ETS2, která by zatížila emisními povolenkami spalování fosilních paliv mimo jiné při vytápění budov, a zároveň uložila hledat podporu pro zrušení systému na úrovni EU. Tím se pro vytápění odstraňuje zamýšlená povinnost spojená s povolenkami; dodané znění nevyčísluje dopad na ceny tepla ani na konkrétní zdroje, takže rozsah přínosu pro cenovou dostupnost nelze určit."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2025-1022",
+                "relevant": true,
+                "reasonCz": "Usnesení zvyšuje státní prostředky na podporu podle zákona o podporovaných zdrojích energie, který zahrnuje také provozní a transformační podporu tepla.",
+                "effectCz": "Vláda změnila částku pro rok 2026 z 24,6 miliardy Kč na 41,734 miliardy Kč. Jde o navýšení celkového objemu prostředků, nikoli o částku výslovně určenou pro plynovou kogeneraci, odpadní teplo nebo jiné konkrétní technologie ze slibu."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+                "relevant": true,
+                "reasonCz": "Usnesení ruší akční plán rozvoje využití obnovitelného a odpadního tepla, tedy plán zaměřený přímo na jednu z oblastí, které slib výslovně podporuje.",
+                "effectCz": "Vláda zrušila usnesení, kterým byl přijat akční plán rozvoje využití nízkopotenciálního obnovitelného a odpadního tepla. Předchozí plánovací rámec tak přestal platit; jde o oslabení prostředku pro přípravu podmínek a podporu odpadního tepla, aniž by samotný text dokládal zrušení jednotlivých projektů či podpor."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-1013bf684158--source",
+              "psp-core-2025--law-change-43174-1-2",
+              "psp-core-2025--law-change-43174-1-7",
+              "psp-core-2025--law-change-43174-21",
+              "psp-core-2025--law-change-43174-approved-43",
+              "psp-core-2025--law-change-43207-1",
+              "zvlady-resolutions--law-change-uv-2025-1018",
+              "zvlady-resolutions--law-change-uv-2025-1022",
+              "zvlady-resolutions--law-change-uv-2026-377",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--amendment-text-1164",
+              "psp-core-2025--amendment-1164",
+              "psp-core-2025--vote-88171",
+              "psp-core-2025--vote-86968",
+              "zvlady-resolutions--2025-1018",
+              "zvlady-resolutions--2025-1022",
+              "zvlady-resolutions--2026-377",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454"
+            ],
+            "explanationCz": "Poslanci ANO se podíleli na předložení novely stavebního zákona (sněmovní tisk 67) a vláda k ní dala souhlas; novela nově řadí tepelnou přípojku do 100 metrů mezi drobné stavby. ANO tento konkrétní pozměňovací návrh nejprve nepodpořilo, ale při závěrečném hlasování ve Sněmovně a po zamítnutí návrhu Senátem hlasovalo pro přijetí novely. To usnadňuje jednu část rozvoje teplárenské infrastruktury, nikoli celý slib. Proti tomu stojí rozhodnutí vlády zrušit akční plán pro obnovitelné a odpadní teplo; směr cenových změn a rozdělení navýšených podpor mezi jednotlivé technologie nejsou z podkladů jasné.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Vláda zrušila akční plán pro obnovitelné a odpadní teplo, zatímco pozdější novela usnadňuje výstavbu tepelných přípojek. Jde o protichůdné kroky; přípojky podporují jen část závazku a samy neobnovují zrušený plán.",
+              "Nová pravidla pro limitní cenu tepla mění způsob jejího stanovení, ale podklady neukazují konkrétní limit ani výsledný vliv na účty odběratelů.",
+              "Navýšení podpory pro rok 2026 není rozděleno podle technologií. Hlasování ANO o návrhu rozpočtu Státního fondu životního prostředí proběhlo v prvním čtení, nikoli jako závěrečné rozhodnutí Sněmovny."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-1013bf684158",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Upravuje územní plánování ploch pro výrobu a distribuci tepla, tedy podmínky pro rozvoj teplárenské infrastruktury.",
+          "effectCz": "Dosud mělo územní plánování plochy pro výrobu vyhodnocovat a vymezovat jen tehdy, bylo-li to účelné; u výroby elektřiny, plynu a tepla mělo přihlížet k energetické koncepci a klimatickým cílům. Nové znění vypouští podmínku účelnosti a mezi činnosti výslovně zahrnuje také skladování a distribuci; schválené znění navíc nakládání s odpady. Rozšiřuje a zpřísňuje úkoly územního plánování, ale samo nezavádí konkrétní podporu ani cenové opatření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": false,
+          "reasonCz": "Dodané znění se týká zejména změn postupů územního plánování a možnosti stavět v nezastavitelném území stavby pro energetickou bezpečnost; balíček je nespojuje konkrétně s teplárenstvím, kogenerací ani odpadním teplem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Schválené znění nově řadí tepelnou přípojku do 100 metrů mezi drobné stavby, což se přímo týká napojování na teplárenskou síť.",
+          "effectCz": "Předchozí znění přílohy takovou kategorii tepelné přípojky neobsahovalo; schválené znění nově uvádí přípojku do 100 metrů od rozvodného tepelného zařízení jako drobnou stavbu. Tím rozšiřuje právní kategorii použitelnou pro napojení na teplo, ale dodané podklady neumožňují přesně určit, jak se tím mění povolovací povinnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválené znění mění pravidla regulace cen tepla a výslovně upravuje tepelnou síť, takže se týká dostupnosti tepla i podmínek modernizace soustav.",
+          "effectCz": "Dosavadní § 19a ukládal Energetickému regulačnímu úřadu stanovit limitní cenu tepla prováděcím předpisem a při jejím určení zohlednit úplné náklady srovnatelného konkurenčního zdroje. Nové znění říká, že úřad může limitní cenu a podmínky jejího použití stanovit cenovým výměrem a zohlední náklady na teplo z jiného zdroje; povinnost a metodika jsou tedy méně pevně vymezené, ale skutečný dopad na výši cen z textu určit nelze. Dříve § 79 upravoval přípojku a předávací stanici, nově mezi samostatné věci výslovně přidává také tepelnou síť a její oddělenou část; rozšiřuje tak právní vymezení vlastnictví síťové infrastruktury, nikoli přímo povinnost ji modernizovat. Změna § 98a vypouští výslovnou zmínku o stanovení limitní ceny z výčtu pravomocí pro prováděcí předpis; její výsledný cenový účinek nelze z dodaného textu určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změny rozšiřují postupy pro vyvlastňování a povolování obecně vymezené energetické infrastruktury, ale dodaný text ani další podklady je nespojují konkrétně s teplárenskými soustavami, kogenerací či odpadním teplem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku bylo ve schváleném znění odstraněno a dodané podklady neukazují konkrétní vazbu tohoto obecného postupu na slibované změny v teplárenství.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Schválené změny výslovně zahrnují odpadní teplo a kombinovanou výrobu tepla a elektřiny při posuzování účinných soustav zásobování teplem.",
+          "effectCz": "Před změnou se emisní limit pro účinnou soustavu vztahoval k množství emisí na jednotku tepla dodaného zákazníkům; limity činily 150 g/kWh od roku 2028, 100 od roku 2035, 50 od roku 2045 a 0 od roku 2050. Nové znění přesouvá měření na teplo vstupující ze zdrojů do soustavy a stanoví, že způsob výpočtu podílu obnovitelného tepla, odpadního tepla, kogenerace a vysokoúčinné kogenerace i emisí určí prováděcí předpis. Pravidla výslovně zahrnují slibované zdroje, ale bez prováděcího předpisu nelze určit, zda se podmínky pro soustavu zpřísní, nebo zmírní."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu životního prostředí výslovně zahrnuje výzvy pro teplárenství a jeho modernizaci.",
+          "effectCz": "Jde o návrh rozpočtu, takže nemá předchozí znění pravidla k porovnání. Uvádí celkovou alokaci dobíhajících a nových výzev přes 90 miliard Kč, včetně teplárenství, modernizace průmyslu, nových obnovitelných zdrojů a dalších oblastí; pro rok 2026 předpokládá výdaje přibližně 29,6334 miliardy Kč, z toho 2 miliardy Kč půjček v programu Oprav dům po babičce. Je to rozpočtový rámec pro část slibu, nikoli vyčíslení prostředků určených konkrétně na teplárenství."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1018",
+          "relevant": true,
+          "reasonCz": "Vládní usnesení se výslovně týká emisního obchodování pro vytápění budov a uvádí obavy z dopadu ceny povolenky na domácnosti a podniky.",
+          "effectCz": "Usnesení nemění zákon, proto nemá předchozí znění předpisu k porovnání. Vláda stanovila, že nechce do českého práva převést ustanovení zatěžující povolenkou spalování fosilních paliv při vytápění budov, a uložila ministrům hledat podporu pro zrušení systému a prosazovat ochranu před vysokou cenou povolenky. Jde o krok zaměřený na dostupnost tepla, nikoli o opatření na modernizaci nebo přechod k alternativním zdrojům."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1022",
+          "relevant": true,
+          "reasonCz": "Usnesení navyšuje státní prostředky podle zákona o podporovaných zdrojích energie; tato oblast zahrnuje i podporu tepla, ale usnesení nerozepisuje její podíl.",
+          "effectCz": "Usnesení nemění zákon a nemá předchozí znění předpisu k porovnání. Zvyšuje stanovenou částku pro rok 2026 z 24,6 miliardy Kč na 41,734 miliardy Kč. Zvyšuje tak celkový objem prostředků na podporované zdroje energie, ale z dodaného textu nelze určit, kolik připadne na podporu tepla ani zda konkrétně pomůže slibovaným zdrojům."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Usnesení ruší vládní akční plán rozvoje využití nízkopotenciálního obnovitelného a odpadního tepla, což přímo zasahuje do části slibu o podpoře odpadního tepla.",
+          "effectCz": "Usnesení ruší dřívější akční plán pro nízkopotenciální obnovitelné a odpadní teplo, takže odstraňuje vládní plánovací rámec přímo související se slibovanou podporou odpadního tepla. Obsah rušeného plánu v balíčku není uveden, a proto nelze určit, která konkrétní opatření nebo podpora tím zanikla."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-1013bf684158--source",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--law-change-43207-1",
+        "zvlady-resolutions--law-change-uv-2025-1018",
+        "zvlady-resolutions--law-change-uv-2025-1022",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-86968",
+        "psp-core-2025--amendment-text-1164",
+        "psp-core-2025--amendment-1164",
+        "psp-core-2025--vote-88171",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "zvlady-resolutions--2025-1018",
+        "zvlady-resolutions--2025-1022",
+        "zvlady-resolutions--2026-377"
+      ],
+      "explanationCz": "Poslanci ANO předložili novelu stavebního zákona a vláda s ní souhlasila; její schválené znění mimo jiné rozšiřuje územní plánování energetické infrastruktury a zahrnuje tepelné přípojky do 100 metrů mezi drobné stavby. Poslanci ANO podpořili novelu také při závěrečném hlasování po jejím zamítnutí Senátem, čímž prosadili dílčí změny týkající se teplárenství a posuzování kogenerace i odpadního tepla. Vláda zároveň zvýšila celkový rozpočet podpory energetických zdrojů a přijala stanovisko proti povolenkovým nákladům na vytápění, avšak podíl prostředků určený na teplo není znám. Proti tomu vláda zrušila akční plán pro využití odpadního tepla; obsah plánu v podkladech chybí, takže rozsah této ztráty nelze určit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Obsah zrušeného akčního plánu pro nízkopotenciální obnovitelné a odpadní teplo není v balíčku, takže lze potvrdit jeho zrušení, nikoli určit konkrétní zrušená opatření.",
+        "Usnesení o navýšení rozpočtu podpory nestanoví částku určenou na teplo ani na kogeneraci či odpadní teplo.",
+        "Nové znění pravidel cenové regulace mění povinnost a způsob stanovení limitní ceny tepla; bez konkrétního cenového výměru nelze určit dopad na ceny pro odběratele.",
+        "Poslankyně ANO navrhla zařadit tepelnou přípojku do 100 metrů mezi drobné stavby, ale klub ANO její pozměňovací návrh většinově nepodpořil; klub později podpořil celý návrh zákona, jehož schválené znění tuto kategorii obsahuje."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-1013bf684158",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Změna povinností územního plánování výslovně zahrnuje plochy pro výrobu tepla i distribuci energie, a může tak přispět k podmínkám pro teplárenské zdroje a sítě.",
+          "effectCz": "Dříve se vhodné plochy pro výrobu vyhodnocovaly a vymezovaly jen tehdy, bylo-li to účelné; pro výrobu elektřiny, plynu a tepla se už zohledňovaly energetické a klimatické cíle. Nové znění ruší podmínku účelnosti a výslovně přidává skladování a distribuci. Povinnost vymezovat plochy je tedy širší a přísnější, i když text nepředepisuje konkrétní plochy pro teplárny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": false,
+          "reasonCz": "Dodané znění se týká převážně územního plánování a výstavby obecně; ustanovení o energetické bezpečnosti v nezastavitelném území nemá v balíčku doloženou konkrétní vazbu na teplárenství nebo slibované zdroje.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně zařazuje tepelné přípojky do 100 metrů mezi drobné stavby, což se týká rozvoje teplárenských sítí.",
+          "effectCz": "Dřívější výčet drobných staveb tepelné přípojky výslovně neobsahoval; vodovodní a kanalizační přípojky byly vymezeny délkou do 25 metrů. Schválené znění nově zahrnuje licencované tepelné přípojky do 100 metrů. Rozšiřuje tak okruh tepelných přípojek spadajících do této kategorie; samotné důsledky této kategorie pro povolování ale dodaný text neuvádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Změny energetického zákona se přímo týkají ceny tepelné energie i vlastnictví tepelných sítí.",
+          "effectCz": "Dosavadní pravidlo umožňovalo Energetickému regulačnímu úřadu stanovit limitní cenu tepla prováděcím předpisem a při jejím stanovení zohledňovalo úplné náklady konkurenčního zdroje včetně nákladů na kapitál. Nové znění umožňuje stanovit limitní cenu cenovým výměrem a požaduje zohlednění nákladů na teplo z jiného zdroje; z poskytnutého textu nelze určit, zda to ochranu dostupnosti tepla celkově posiluje, nebo oslabuje. Dříve byly samostatnými věcmi tepelná přípojka a předávací stanice, nově je takto výslovně vymezena i tepelná síť a její vlastník; to rozšiřuje právní úpravu vlastnictví sítí, samo o sobě však nestanoví podporu jejich výstavby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro energetickou infrastrukturu a vyvlastňovací řízení může ovlivnit uskutečňování teplárenských staveb, ačkoliv dodaný text nespecifikuje teplárenské projekty.",
+          "effectCz": "Před změnou se mezitímní rozhodnutí o vyvlastnění uplatňovalo u vyjmenované infrastruktury a zvláštní § 4b je rozšiřoval na další energetickou infrastrukturu. Schválené znění mění vymezení infrastruktury v § 4a, ruší § 4b a upravuje také § 4d. Rozsah a dopad změny na konkrétní teplárenské stavby nelze z dodaných ustanovení spolehlivě určit, takže nelze uzavřít, zda se možnost získat potřebné pozemky pro ně rozšiřuje, nebo zužuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku se týká povolování obecně, ale balíček ho nespojuje konkrétně s modernizací teplárenství; tato část navíc ve schváleném znění odpadla.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Změna upravuje posuzování účinných soustav zásobování teplem a výslovně zahrnuje obnovitelné zdroje, odpadní teplo a kombinovanou výrobu elektřiny a tepla.",
+          "effectCz": "Dosavadní pravidlo posuzovalo emisní množství na jednotku tepla dodaného zákazníkům. Nové znění přesouvá výpočet na teplo vstupující ze zdrojů do soustavy a zahrnuje také podíl obnovitelných zdrojů, odpadního tepla a kombinované výroby. Jde o změnu způsobu vyhodnocování soustavy, nikoli o doložené zvýšení či snížení podpory; dodaný text neuvádí nové prahové hodnoty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu výslovně uvádí výzvy pro teplárenství, modernizaci průmyslu a nové obnovitelné zdroje energie.",
+          "effectCz": "Jde o návrh rozpočtu, nikoli o změnu dřívějšího zákonného pravidla. Uvádí celkovou alokaci přes 90 miliard Kč pro soubor výzev z let 2024 a 2025 a očekávané výdaje fondu v roce 2026 přibližně 29,6334 miliardy Kč, z toho 2 miliardy Kč v půjčkách na výzvu Oprav dům po babičce. Konkrétní částka určená na teplárenství, kogeneraci nebo odpadní teplo uvedena není."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1018",
+          "relevant": true,
+          "reasonCz": "Usnesení se výslovně zabývá emisním obchodováním pro paliva používaná k vytápění budov, a tedy i dostupností vytápění.",
+          "effectCz": "Usnesení neustanovuje cenovou regulaci ani podporu konkrétních technologií. Vláda deklaruje, že neprovede do českého práva pravidla zatěžující emisní povolenkou fosilní paliva pro vytápění budov, a ukládá hledat podporu pro zrušení systému a ochranu před vysokou cenou povolenky. To může podpořit cenovou dostupnost vytápění; nejde však o přímé zavedení slibovaných zdrojů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1022",
+          "relevant": true,
+          "reasonCz": "Usnesení navyšuje prostředky na podporu energie, jejíž součástí je také provozní a transformační podpora tepla.",
+          "effectCz": "Vláda zvýšila částku stanovenou pro podporované zdroje energie v roce 2026 z 24,6 na 41,734 miliardy Kč. Jde o navýšení celkového rozpočtu pro podporu elektřiny, provozní a transformační podporu tepla a podporu biometanu; rozdělení částky mezi tyto účely dodáno není. Změna tedy rozšiřuje dostupné prostředky pro celek, ale její konkrétní přínos teplárenství nelze vyčíslit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Vláda zrušila akční plán k rozvoji využití odpadního tepla, což se přímo týká jedné ze slíbených možností přechodu v teplárenství.",
+          "effectCz": "Před usnesením platil vládní akční plán rozvoje využití nízkopotenciálního obnovitelného a odpadního tepla. Vláda jej usnesením zrušila, takže tento plánovací nástroj již není v platnosti. Jde o omezení institucionální podpory odpadního tepla, tedy o krok proti části slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-1013bf684158--source",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--law-change-43207-1",
+        "zvlady-resolutions--law-change-uv-2025-1018",
+        "zvlady-resolutions--law-change-uv-2025-1022",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-86968",
+        "zvlady-resolutions--2025-1018",
+        "zvlady-resolutions--2025-1022",
+        "psp-core-2025--amendment-text-1164",
+        "psp-core-2025--amendment-1164",
+        "psp-core-2025--vote-88171",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "zvlady-resolutions--2026-377"
+      ],
+      "explanationCz": "Poslanci ANO předložili spolu s dalšími poslanci novelu stavebního zákona a vláda k ní zaujala souhlasné stanovisko. Sněmovna následně novelu schválila a po jejím odmítnutí Senátem na ní setrvala; obsahuje mimo jiné pravidla pro tepelné přípojky, tepelné sítě a posuzování odpadního tepla a kogenerace. Vláda také navýšila prostředky na podporované zdroje energie, ale zrušila akční plán pro využití odpadního tepla. Celkově doložené kroky přinášejí dílčí posun v podmínkách pro teplárenství, nikoli splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Vláda zrušila akční plán pro nízkopotenciální obnovitelné a odpadní teplo, přestože pozdější schválená novela obsahuje dílčí opatření související s tepelnými sítěmi a odpadním teplem.",
+        "Klub ANO nepodpořil pozměňovací návrh Barbory Rázgy, který výslovně zařazoval tepelné přípojky do 100 metrů mezi drobné stavby; následně však hlasoval pro schválené znění zákona, které tepelnou přípojku do této kategorie zahrnuje.",
+        "Rozpočtové podklady a zvýšení podpory energetických zdrojů neuvádějí, jaká část prostředků připadne konkrétně na kogeneraci, odpadní teplo nebo jiné alternativní zdroje tepla."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0555f5c97f1d792f016aea90a2b56087d19a5b53be41a2afd9",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 117628,
+      "input_tokens_details": {
+        "cache_write_tokens": 111278,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 12626,
+      "output_tokens_details": {
+        "reasoning_tokens": 9462
+      },
+      "total_tokens": 130254
+    },
+    "output": {
+      "promiseId": "candidate-1013bf684158",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Upravuje územní plánování ploch pro výrobu a distribuci tepla, tedy podmínky pro rozvoj teplárenské infrastruktury.",
+          "effectCz": "Dosud mělo územní plánování plochy pro výrobu vyhodnocovat a vymezovat jen tehdy, bylo-li to účelné; u výroby elektřiny, plynu a tepla mělo přihlížet k energetické koncepci a klimatickým cílům. Nové znění vypouští podmínku účelnosti a mezi činnosti výslovně zahrnuje také skladování a distribuci; schválené znění navíc nakládání s odpady. Rozšiřuje a zpřísňuje úkoly územního plánování, ale samo nezavádí konkrétní podporu ani cenové opatření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": false,
+          "reasonCz": "Dodané znění se týká zejména změn postupů územního plánování a možnosti stavět v nezastavitelném území stavby pro energetickou bezpečnost; balíček je nespojuje konkrétně s teplárenstvím, kogenerací ani odpadním teplem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Schválené znění nově řadí tepelnou přípojku do 100 metrů mezi drobné stavby, což se přímo týká napojování na teplárenskou síť.",
+          "effectCz": "Předchozí znění přílohy takovou kategorii tepelné přípojky neobsahovalo; schválené znění nově uvádí přípojku do 100 metrů od rozvodného tepelného zařízení jako drobnou stavbu. Tím rozšiřuje právní kategorii použitelnou pro napojení na teplo, ale dodané podklady neumožňují přesně určit, jak se tím mění povolovací povinnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválené znění mění pravidla regulace cen tepla a výslovně upravuje tepelnou síť, takže se týká dostupnosti tepla i podmínek modernizace soustav.",
+          "effectCz": "Dosavadní § 19a ukládal Energetickému regulačnímu úřadu stanovit limitní cenu tepla prováděcím předpisem a při jejím určení zohlednit úplné náklady srovnatelného konkurenčního zdroje. Nové znění říká, že úřad může limitní cenu a podmínky jejího použití stanovit cenovým výměrem a zohlední náklady na teplo z jiného zdroje; povinnost a metodika jsou tedy méně pevně vymezené, ale skutečný dopad na výši cen z textu určit nelze. Dříve § 79 upravoval přípojku a předávací stanici, nově mezi samostatné věci výslovně přidává také tepelnou síť a její oddělenou část; rozšiřuje tak právní vymezení vlastnictví síťové infrastruktury, nikoli přímo povinnost ji modernizovat. Změna § 98a vypouští výslovnou zmínku o stanovení limitní ceny z výčtu pravomocí pro prováděcí předpis; její výsledný cenový účinek nelze z dodaného textu určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změny rozšiřují postupy pro vyvlastňování a povolování obecně vymezené energetické infrastruktury, ale dodaný text ani další podklady je nespojují konkrétně s teplárenskými soustavami, kogenerací či odpadním teplem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku bylo ve schváleném znění odstraněno a dodané podklady neukazují konkrétní vazbu tohoto obecného postupu na slibované změny v teplárenství.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Schválené změny výslovně zahrnují odpadní teplo a kombinovanou výrobu tepla a elektřiny při posuzování účinných soustav zásobování teplem.",
+          "effectCz": "Před změnou se emisní limit pro účinnou soustavu vztahoval k množství emisí na jednotku tepla dodaného zákazníkům; limity činily 150 g/kWh od roku 2028, 100 od roku 2035, 50 od roku 2045 a 0 od roku 2050. Nové znění přesouvá měření na teplo vstupující ze zdrojů do soustavy a stanoví, že způsob výpočtu podílu obnovitelného tepla, odpadního tepla, kogenerace a vysokoúčinné kogenerace i emisí určí prováděcí předpis. Pravidla výslovně zahrnují slibované zdroje, ale bez prováděcího předpisu nelze určit, zda se podmínky pro soustavu zpřísní, nebo zmírní."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu životního prostředí výslovně zahrnuje výzvy pro teplárenství a jeho modernizaci.",
+          "effectCz": "Jde o návrh rozpočtu, takže nemá předchozí znění pravidla k porovnání. Uvádí celkovou alokaci dobíhajících a nových výzev přes 90 miliard Kč, včetně teplárenství, modernizace průmyslu, nových obnovitelných zdrojů a dalších oblastí; pro rok 2026 předpokládá výdaje přibližně 29,6334 miliardy Kč, z toho 2 miliardy Kč půjček v programu Oprav dům po babičce. Je to rozpočtový rámec pro část slibu, nikoli vyčíslení prostředků určených konkrétně na teplárenství."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1018",
+          "relevant": true,
+          "reasonCz": "Vládní usnesení se výslovně týká emisního obchodování pro vytápění budov a uvádí obavy z dopadu ceny povolenky na domácnosti a podniky.",
+          "effectCz": "Usnesení nemění zákon, proto nemá předchozí znění předpisu k porovnání. Vláda stanovila, že nechce do českého práva převést ustanovení zatěžující povolenkou spalování fosilních paliv při vytápění budov, a uložila ministrům hledat podporu pro zrušení systému a prosazovat ochranu před vysokou cenou povolenky. Jde o krok zaměřený na dostupnost tepla, nikoli o opatření na modernizaci nebo přechod k alternativním zdrojům."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1022",
+          "relevant": true,
+          "reasonCz": "Usnesení navyšuje státní prostředky podle zákona o podporovaných zdrojích energie; tato oblast zahrnuje i podporu tepla, ale usnesení nerozepisuje její podíl.",
+          "effectCz": "Usnesení nemění zákon a nemá předchozí znění předpisu k porovnání. Zvyšuje stanovenou částku pro rok 2026 z 24,6 miliardy Kč na 41,734 miliardy Kč. Zvyšuje tak celkový objem prostředků na podporované zdroje energie, ale z dodaného textu nelze určit, kolik připadne na podporu tepla ani zda konkrétně pomůže slibovaným zdrojům."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Usnesení ruší vládní akční plán rozvoje využití nízkopotenciálního obnovitelného a odpadního tepla, což přímo zasahuje do části slibu o podpoře odpadního tepla.",
+          "effectCz": "Usnesení ruší dřívější akční plán pro nízkopotenciální obnovitelné a odpadní teplo, takže odstraňuje vládní plánovací rámec přímo související se slibovanou podporou odpadního tepla. Obsah rušeného plánu v balíčku není uveden, a proto nelze určit, která konkrétní opatření nebo podpora tím zanikla."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-1013bf684158--source",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--law-change-43207-1",
+        "zvlady-resolutions--law-change-uv-2025-1018",
+        "zvlady-resolutions--law-change-uv-2025-1022",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-86968",
+        "psp-core-2025--amendment-text-1164",
+        "psp-core-2025--amendment-1164",
+        "psp-core-2025--vote-88171",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "zvlady-resolutions--2025-1018",
+        "zvlady-resolutions--2025-1022",
+        "zvlady-resolutions--2026-377"
+      ],
+      "explanationCz": "Poslanci ANO předložili novelu stavebního zákona a vláda s ní souhlasila; její schválené znění mimo jiné rozšiřuje územní plánování energetické infrastruktury a zahrnuje tepelné přípojky do 100 metrů mezi drobné stavby. Poslanci ANO podpořili novelu také při závěrečném hlasování po jejím zamítnutí Senátem, čímž prosadili dílčí změny týkající se teplárenství a posuzování kogenerace i odpadního tepla. Vláda zároveň zvýšila celkový rozpočet podpory energetických zdrojů a přijala stanovisko proti povolenkovým nákladům na vytápění, avšak podíl prostředků určený na teplo není znám. Proti tomu vláda zrušila akční plán pro využití odpadního tepla; obsah plánu v podkladech chybí, takže rozsah této ztráty nelze určit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Obsah zrušeného akčního plánu pro nízkopotenciální obnovitelné a odpadní teplo není v balíčku, takže lze potvrdit jeho zrušení, nikoli určit konkrétní zrušená opatření.",
+        "Usnesení o navýšení rozpočtu podpory nestanoví částku určenou na teplo ani na kogeneraci či odpadní teplo.",
+        "Nové znění pravidel cenové regulace mění povinnost a způsob stanovení limitní ceny tepla; bez konkrétního cenového výměru nelze určit dopad na ceny pro odběratele.",
+        "Poslankyně ANO navrhla zařadit tepelnou přípojku do 100 metrů mezi drobné stavby, ale klub ANO její pozměňovací návrh většinově nepodpořil; klub později podpořil celý návrh zákona, jehož schválené znění tuto kategorii obsahuje."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0af9df13c0da76ea016aea919141c887d1a746868679219b0c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 117628,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 117625
+      },
+      "output_tokens": 11881,
+      "output_tokens_details": {
+        "reasoning_tokens": 8850
+      },
+      "total_tokens": 129509
+    },
+    "output": {
+      "promiseId": "candidate-1013bf684158",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Změna povinností územního plánování výslovně zahrnuje plochy pro výrobu tepla i distribuci energie, a může tak přispět k podmínkám pro teplárenské zdroje a sítě.",
+          "effectCz": "Dříve se vhodné plochy pro výrobu vyhodnocovaly a vymezovaly jen tehdy, bylo-li to účelné; pro výrobu elektřiny, plynu a tepla se už zohledňovaly energetické a klimatické cíle. Nové znění ruší podmínku účelnosti a výslovně přidává skladování a distribuci. Povinnost vymezovat plochy je tedy širší a přísnější, i když text nepředepisuje konkrétní plochy pro teplárny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": false,
+          "reasonCz": "Dodané znění se týká převážně územního plánování a výstavby obecně; ustanovení o energetické bezpečnosti v nezastavitelném území nemá v balíčku doloženou konkrétní vazbu na teplárenství nebo slibované zdroje.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně zařazuje tepelné přípojky do 100 metrů mezi drobné stavby, což se týká rozvoje teplárenských sítí.",
+          "effectCz": "Dřívější výčet drobných staveb tepelné přípojky výslovně neobsahoval; vodovodní a kanalizační přípojky byly vymezeny délkou do 25 metrů. Schválené znění nově zahrnuje licencované tepelné přípojky do 100 metrů. Rozšiřuje tak okruh tepelných přípojek spadajících do této kategorie; samotné důsledky této kategorie pro povolování ale dodaný text neuvádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Změny energetického zákona se přímo týkají ceny tepelné energie i vlastnictví tepelných sítí.",
+          "effectCz": "Dosavadní pravidlo umožňovalo Energetickému regulačnímu úřadu stanovit limitní cenu tepla prováděcím předpisem a při jejím stanovení zohledňovalo úplné náklady konkurenčního zdroje včetně nákladů na kapitál. Nové znění umožňuje stanovit limitní cenu cenovým výměrem a požaduje zohlednění nákladů na teplo z jiného zdroje; z poskytnutého textu nelze určit, zda to ochranu dostupnosti tepla celkově posiluje, nebo oslabuje. Dříve byly samostatnými věcmi tepelná přípojka a předávací stanice, nově je takto výslovně vymezena i tepelná síť a její vlastník; to rozšiřuje právní úpravu vlastnictví sítí, samo o sobě však nestanoví podporu jejich výstavby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro energetickou infrastrukturu a vyvlastňovací řízení může ovlivnit uskutečňování teplárenských staveb, ačkoliv dodaný text nespecifikuje teplárenské projekty.",
+          "effectCz": "Před změnou se mezitímní rozhodnutí o vyvlastnění uplatňovalo u vyjmenované infrastruktury a zvláštní § 4b je rozšiřoval na další energetickou infrastrukturu. Schválené znění mění vymezení infrastruktury v § 4a, ruší § 4b a upravuje také § 4d. Rozsah a dopad změny na konkrétní teplárenské stavby nelze z dodaných ustanovení spolehlivě určit, takže nelze uzavřít, zda se možnost získat potřebné pozemky pro ně rozšiřuje, nebo zužuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navržené zrušení zákona o jednotném environmentálním stanovisku se týká povolování obecně, ale balíček ho nespojuje konkrétně s modernizací teplárenství; tato část navíc ve schváleném znění odpadla.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Změna upravuje posuzování účinných soustav zásobování teplem a výslovně zahrnuje obnovitelné zdroje, odpadní teplo a kombinovanou výrobu elektřiny a tepla.",
+          "effectCz": "Dosavadní pravidlo posuzovalo emisní množství na jednotku tepla dodaného zákazníkům. Nové znění přesouvá výpočet na teplo vstupující ze zdrojů do soustavy a zahrnuje také podíl obnovitelných zdrojů, odpadního tepla a kombinované výroby. Jde o změnu způsobu vyhodnocování soustavy, nikoli o doložené zvýšení či snížení podpory; dodaný text neuvádí nové prahové hodnoty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu výslovně uvádí výzvy pro teplárenství, modernizaci průmyslu a nové obnovitelné zdroje energie.",
+          "effectCz": "Jde o návrh rozpočtu, nikoli o změnu dřívějšího zákonného pravidla. Uvádí celkovou alokaci přes 90 miliard Kč pro soubor výzev z let 2024 a 2025 a očekávané výdaje fondu v roce 2026 přibližně 29,6334 miliardy Kč, z toho 2 miliardy Kč v půjčkách na výzvu Oprav dům po babičce. Konkrétní částka určená na teplárenství, kogeneraci nebo odpadní teplo uvedena není."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1018",
+          "relevant": true,
+          "reasonCz": "Usnesení se výslovně zabývá emisním obchodováním pro paliva používaná k vytápění budov, a tedy i dostupností vytápění.",
+          "effectCz": "Usnesení neustanovuje cenovou regulaci ani podporu konkrétních technologií. Vláda deklaruje, že neprovede do českého práva pravidla zatěžující emisní povolenkou fosilní paliva pro vytápění budov, a ukládá hledat podporu pro zrušení systému a ochranu před vysokou cenou povolenky. To může podpořit cenovou dostupnost vytápění; nejde však o přímé zavedení slibovaných zdrojů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1022",
+          "relevant": true,
+          "reasonCz": "Usnesení navyšuje prostředky na podporu energie, jejíž součástí je také provozní a transformační podpora tepla.",
+          "effectCz": "Vláda zvýšila částku stanovenou pro podporované zdroje energie v roce 2026 z 24,6 na 41,734 miliardy Kč. Jde o navýšení celkového rozpočtu pro podporu elektřiny, provozní a transformační podporu tepla a podporu biometanu; rozdělení částky mezi tyto účely dodáno není. Změna tedy rozšiřuje dostupné prostředky pro celek, ale její konkrétní přínos teplárenství nelze vyčíslit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-377",
+          "relevant": true,
+          "reasonCz": "Vláda zrušila akční plán k rozvoji využití odpadního tepla, což se přímo týká jedné ze slíbených možností přechodu v teplárenství.",
+          "effectCz": "Před usnesením platil vládní akční plán rozvoje využití nízkopotenciálního obnovitelného a odpadního tepla. Vláda jej usnesením zrušila, takže tento plánovací nástroj již není v platnosti. Jde o omezení institucionální podpory odpadního tepla, tedy o krok proti části slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-1013bf684158--source",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--law-change-43207-1",
+        "zvlady-resolutions--law-change-uv-2025-1018",
+        "zvlady-resolutions--law-change-uv-2025-1022",
+        "zvlady-resolutions--law-change-uv-2026-377",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-86968",
+        "zvlady-resolutions--2025-1018",
+        "zvlady-resolutions--2025-1022",
+        "psp-core-2025--amendment-text-1164",
+        "psp-core-2025--amendment-1164",
+        "psp-core-2025--vote-88171",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "zvlady-resolutions--2026-377"
+      ],
+      "explanationCz": "Poslanci ANO předložili spolu s dalšími poslanci novelu stavebního zákona a vláda k ní zaujala souhlasné stanovisko. Sněmovna následně novelu schválila a po jejím odmítnutí Senátem na ní setrvala; obsahuje mimo jiné pravidla pro tepelné přípojky, tepelné sítě a posuzování odpadního tepla a kogenerace. Vláda také navýšila prostředky na podporované zdroje energie, ale zrušila akční plán pro využití odpadního tepla. Celkově doložené kroky přinášejí dílčí posun v podmínkách pro teplárenství, nikoli splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Vláda zrušila akční plán pro nízkopotenciální obnovitelné a odpadní teplo, přestože pozdější schválená novela obsahuje dílčí opatření související s tepelnými sítěmi a odpadním teplem.",
+        "Klub ANO nepodpořil pozměňovací návrh Barbory Rázgy, který výslovně zařazoval tepelné přípojky do 100 metrů mezi drobné stavby; následně však hlasoval pro schválené znění zákona, které tepelnou přípojku do této kategorie zahrnuje.",
+        "Rozpočtové podklady a zvýšení podpory energetických zdrojů neuvádějí, jaká část prostředků připadne konkrétně na kogeneraci, odpadní teplo nebo jiné alternativní zdroje tepla."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-44-08-962Z--f67fb92d6da9",
+  "evaluatedAt": "2026-10-02T01:44:08.962Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-352907b18a62/f67fb92d6da939985ed48dfb9675842b5a2a81ca48f6eed029eadd30306261a3.json",
+  "packageHash": "f67fb92d6da939985ed48dfb9675842b5a2a81ca48f6eed029eadd30306261a3",
+  "assessmentContentHash": "b415c8070abe00d90def2355ccd536095df79622dfff977082d2ea5a0151bb07",
+  "assessmentFingerprint": "ffdfc71c61d04d2cac3c59c48536b42fa5f99a4d162a1d56cf931b9debe854ab",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-352907b18a62",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-352907b18a62",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Text výslovně zahrnuje dotační program Podpora včelařství a uvádí vyšší celkový rámec zemědělských podpor, může tedy zasáhnout část slibu, ačkoli nevyčísluje podporu včelařů ani obnovu včelstev."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-352907b18a62--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro sněmovní materiál schvalující zemědělské dotační programy na rok 2026. Ten zahrnuje podporu včelařství a navrhuje celkový rámec zemědělských dotací o 250 milionů korun vyšší než pro rok 2025. Jde o dílčí posun směrem k vyšší finanční podpoře. Materiál však neuvádí, kolik peněz připadne včelařům ani zda budou určeny právě na obnovu včelstev.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z materiálu nelze určit konkrétní výši podpory včelařů ani to, zda se případné navýšení týká obnovy včelstev; nejde proto doložit splnění celého slibu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-352907b18a62",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Materiál zahrnuje dotační program na podporu včelařství a zvyšuje celkový rámec zemědělských dotací, ale neuvádí, zda se zvyšuje částka pro včelaře nebo na obnovu včelstev."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-352907b18a62--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci ANO většinově podpořili materiál Poslanecké sněmovny o dotačních programech zemědělství na rok 2026. Ten zahrnuje podporu včelařství a zvyšuje celkový rámec zemědělských dotací o 250 milionů korun. Z textu však není možné zjistit, zda se navýšila podpora včelařů, natož podpora určená na obnovu včelstev. Proto nelze doložit podstatný posun ke splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Materiál neuvádí konkrétní částku pro podporu včelařství ani její případné navýšení; není tedy doloženo, zda vyšší celkový rozpočet znamená více peněz pro včelaře nebo na obnovu včelstev."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_02ad1628481e66f8016abf0c45089c87d1a02b8ce978a18983",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 7698,
+      "input_tokens_details": {
+        "cache_write_tokens": 4374,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2182,
+      "output_tokens_details": {
+        "reasoning_tokens": 1799
+      },
+      "total_tokens": 9880
+    },
+    "output": {
+      "promiseId": "candidate-352907b18a62",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Text výslovně zahrnuje dotační program Podpora včelařství a uvádí vyšší celkový rámec zemědělských podpor, může tedy zasáhnout část slibu, ačkoli nevyčísluje podporu včelařů ani obnovu včelstev."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-352907b18a62--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro sněmovní materiál schvalující zemědělské dotační programy na rok 2026. Ten zahrnuje podporu včelařství a navrhuje celkový rámec zemědělských dotací o 250 milionů korun vyšší než pro rok 2025. Jde o dílčí posun směrem k vyšší finanční podpoře. Materiál však neuvádí, kolik peněz připadne včelařům ani zda budou určeny právě na obnovu včelstev.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z materiálu nelze určit konkrétní výši podpory včelařů ani to, zda se případné navýšení týká obnovy včelstev; nejde proto doložit splnění celého slibu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0a7bf0b0b290d605016abf0c53306887d1a09d21e46993c095",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 7698,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 7695
+      },
+      "output_tokens": 2443,
+      "output_tokens_details": {
+        "reasoning_tokens": 2059
+      },
+      "total_tokens": 10141
+    },
+    "output": {
+      "promiseId": "candidate-352907b18a62",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Materiál zahrnuje dotační program na podporu včelařství a zvyšuje celkový rámec zemědělských dotací, ale neuvádí, zda se zvyšuje částka pro včelaře nebo na obnovu včelstev."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-352907b18a62--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci ANO většinově podpořili materiál Poslanecké sněmovny o dotačních programech zemědělství na rok 2026. Ten zahrnuje podporu včelařství a zvyšuje celkový rámec zemědělských dotací o 250 milionů korun. Z textu však není možné zjistit, zda se navýšila podpora včelařů, natož podpora určená na obnovu včelstev. Proto nelze doložit podstatný posun ke splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Materiál neuvádí konkrétní částku pro podporu včelařství ani její případné navýšení; není tedy doloženo, zda vyšší celkový rozpočet znamená více peněz pro včelaře nebo na obnovu včelstev."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_050b9bc4a327ab5f016abf0c6422e887d1bae32f7246d86c4e",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 7608,
+      "input_tokens_details": {
+        "cache_write_tokens": 5126,
+        "cached_tokens": 2479
+      },
+      "output_tokens": 280,
+      "output_tokens_details": {
+        "reasoning_tokens": 61
+      },
+      "total_tokens": 7888
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "candidate-352907b18a62--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "ANO slíbilo zvýšit finanční podporu včelařům na obnovu včelstev. Jeho poslanci schválili zemědělské dotační programy pro rok 2026, které zahrnují podporu včelařství a celkově počítají s vyšší částkou než v roce 2025. Z dodaného textu ale nevyplývá, že více peněz dostanou právě včelaři na obnovu včelstev. Proto volím druhé hodnocení: samotné zvýšení celkových zemědělských dotací nestačí k doložení posunu v tomto konkrétním slibu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-b"
+  }
+}

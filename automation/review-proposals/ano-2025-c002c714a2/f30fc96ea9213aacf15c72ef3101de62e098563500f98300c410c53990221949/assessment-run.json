@@ -1,0 +1,1085 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T09-23-39-177Z--2464d1107e91",
+  "evaluatedAt": "2026-11-05T09:23:39.177Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-c002c714a2/2464d1107e91a30b82f5d05a4b1bd5ea3c463dcd1a4e5f40dbdd945d59027d6f.json",
+  "packageHash": "2464d1107e91a30b82f5d05a4b1bd5ea3c463dcd1a4e5f40dbdd945d59027d6f",
+  "assessmentContentHash": "6acd12ec32cbbff08ddc7c8e7a23bb8a04b9d64f2985bfdbea4b1a89cd3cf480",
+  "assessmentFingerprint": "f30fc96ea9213aacf15c72ef3101de62e098563500f98300c410c53990221949",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-c002c714a2",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment cites duplicate evidence IDs",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_09a5b55da8c01e62016aec4a47cfb887d1a7b76f5ba19e3d37",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 255889,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 255886
+            },
+            "output_tokens": 11870,
+            "output_tokens_details": {
+              "reasoning_tokens": 6446
+            },
+            "total_tokens": 267759
+          },
+          "output": {
+            "promiseId": "ano-2025-c002c714a2",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-41",
+                "relevant": true,
+                "reasonCz": "Upravuje daň z elektřiny pro provozovatele zařízení na ukládání elektřiny, tedy konkrétní daňová pravidla a související povinnosti podnikatelů.",
+                "effectCz": "Před změnou byla ekologicky šetrná elektřina osvobozena při výkonu výrobny nejvýše 50 kW; limit se zvyšuje na 100 kW. Provozovatelé menších zařízení pro ukládání elektřiny nově za stanovených podmínek mohou nabývat elektřinu bez daně a nemusejí vést evidenci, což tyto úlevy rozšiřuje a administrativu snižuje. Současně se pro některé provozovatele zavádějí nové doklady o licenci a další pravidla; u těchto povinností je změna přísnější."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43208-1-2",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje daňové informační povinnosti na provozovatele kryptoslužeb a může tak zvýšit jejich administrativní zátěž.",
+                "effectCz": "U stávajících platforem se rozšiřují údaje, které se uvádějí v daňových hlášeních, a nově vznikají pravidla pro oznamování transakcí s kryptoaktivy, registraci a uchovávání dokladů. Předešlé znění nových povinností pro kryptoaktiva v kontextu chybí, takže jejich přesný rozsah oproti předchozímu stavu nelze určit; návrh však nové daňové povinnosti zavádí."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43208-1-3",
+                "relevant": true,
+                "reasonCz": "Mění daňové informační a evidenční povinnosti, včetně zvláštní záznamní povinnosti a vyšších pokut za porušení některých povinností.",
+                "effectCz": "Nová záznamní povinnost umožňuje správci daně požadovat další záznamy a jejich desetileté uchovávání; její dřívější úprava v kontextu chybí. Pokuta za porušení oznamovací povinnosti finančních institucí se zvyšuje z 500 000 Kč na 1 500 000 Kč, tedy se zpřísňuje. Ostatní dodané změny upravují rozsah daňových informací a jejich vykazování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43208-1-4",
+                "relevant": true,
+                "reasonCz": "Rozšiřuje definice a postupy, které určují, které finanční instituce a poskytovatelé kryptoaktiv mají daňové oznamovací a kontrolní povinnosti.",
+                "effectCz": "Dříve definice depozitní instituce nezahrnovala držení elektronických peněz pro zákazníky a depozitní účet výslovně nezahrnoval elektronické peníze ani digitální měny centrální banky; návrh tyto případy doplňuje a zahrnuje také oznamovaná kryptoaktiva do dalších definic. Rozšíření okruhu zahrnutých aktiv a subjektů může rozšířit oznamovací povinnosti; u nových pravidel pro kryptoaktiva není předchozí znění v kontextu doloženo."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43208-1-5",
+                "relevant": true,
+                "reasonCz": "Stanoví přechodná pravidla k novým daňovým oznamovacím povinnostem a určuje jejich počátek.",
+                "effectCz": "Návrh stanoví, že první oznamované období pro poskytovatele služeb s kryptoaktivy bude rok 2026 a že finanční instituce začnou plnit nové povinnosti prověřování, zjišťování a oznamování za rok 2026. Předchozí přechodné znění není v kontextu uvedeno; ustanovení tak stanoví začátek nových povinností, nikoli jejich zmírnění."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43216-2",
+                "relevant": true,
+                "reasonCz": "Zvyšuje zákonný strop místního poplatku z pobytu, a tím přímo mění daňové zatížení podnikání v cestovním ruchu.",
+                "effectCz": "Před změnou činil nejvyšší poplatek z pobytu 50 Kč; návrh jej zvyšuje na 100 Kč. Zvyšuje tedy maximální možnou povinnost poplatníků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-1",
+                "relevant": true,
+                "reasonCz": "Zavádí evidenci tržeb pro podnikatele a povinné elektronické zasílání údajů o jejich platbách, což přímo zasahuje do daňové administrativy.",
+                "effectCz": "Jde o novou úpravu bez předchozího znění, které by bylo možné porovnat. Zavádí evidenci tržeb pro poplatníky daně z příjmů z podnikání, zasílání údajů správci daně nejpozději při uskutečnění evidované tržby a povinnosti týkající se certifikátů a evidenčních jednotek. Uložené povinnosti rozšiřuje; současně obsahuje některá vynětí z evidence."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-2",
+                "relevant": true,
+                "reasonCz": "Mění daň z příjmů a zavádí související pravidla pro evidenci tržeb, příplatky i daňové úlevy.",
+                "effectCz": "Předchozí úprava přirážku za osvobození od evidence tržeb neznala; návrh stanoví přirážku 1 400 Kč měsíčně pro část poplatníků v paušálním režimu. Zároveň zavádí nové daňové slevy a mění osvobození některých zaměstnaneckých plnění, včetně spropitného, a další související pravidla. Jde o nové daňové zásahy, jejichž výsledný dopad je smíšený: některé snižují daň, jiné vytvářejí nová pravidla a povinnosti."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-3",
+                "relevant": true,
+                "reasonCz": "Mění pravidla DPH včetně sazby na podávání nealkoholických nápojů a omezení pro odpočty či opravy daně.",
+                "effectCz": "Před změnou bylo možné opravit základ daně u nedobytné pohledávky jen při pohledávce do 10 000 Kč, po šesti měsících po splatnosti a do ročního souhrnu 20 000 Kč; návrh hranice mění na 20 000 Kč, tři měsíce a 100 000 Kč, takže nárok rozšiřuje. Změny u osobních automobilů ruší omezení odpočtu, a tím uvolňují dosavadní limit. U stravovacích služeb návrh zahrnuje do snížené sazby širší okruh nealkoholických nápojů než dosavadní úprava. Jde o změny daňových pravidel, jejichž účinek na povinnosti je v dodaných ustanoveních převážně uvolňující."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-4",
+                "relevant": true,
+                "reasonCz": "Rozšiřuje oprávnění finanční správy provádět kontrolní nákupy a zpracovávat údaje získané při evidenci tržeb.",
+                "effectCz": "Dříve se kontrolní nákup vztahoval na prověřování povinností podle zákona o mezinárodní spolupráci při správě daní; návrh jej rozšiřuje také na evidenci tržeb a další daňové či účetní předpisy. Záznamy získané od daňového subjektu při plnění povinností evidence tržeb nově zahrnuje do daňové analytické evidence. Rozsah kontrolních a evidenčních postupů se tím rozšiřuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-5",
+                "relevant": true,
+                "reasonCz": "Zavádí nové povinnosti zaměstnavatelů předávat údaje o zaměstnání a zdanění cizinců, čímž zasahuje do administrativy podnikatelů.",
+                "effectCz": "Dřívější § 107 takovou povinnost zaměstnavatele neobsahoval; návrh nově vyžaduje předávání údajů přes jednotné měsíční hlášení, mimo jiné o zaměstnanci, příjmech, daňových zálohách a slevách. Jde o novou evidenční povinnost a administrativu zvyšuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43378-1",
+                "relevant": true,
+                "reasonCz": "Smlouva mění pravidla zdanění licenčních poplatků, která mohou přímo ovlivňovat daňové podmínky přeshraničního investování.",
+                "effectCz": "Smlouva stanoví nejvyšší zdanění licenčních poplatků u zdroje v rozsahu 5 % nebo 10 % hrubé částky; v Argentině může být při nesplnění registrační podmínky sazba až 15 %. Předchozí smluvní úprava není v balíčku doložena, proto nelze určit, zda jsou limity oproti dosavadnímu stavu nižší či vyšší. Jde o nová pravidla pro přeshraniční zdanění investorů a příjmů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-4",
+                "relevant": true,
+                "reasonCz": "Zavádí elektronické oznamování dalších údajů správci daně, včetně údajů o úvěrech, spoření a předškolních zařízeních.",
+                "effectCz": "Návrh stanoví poskytovatelům úvěrů a produktů spoření a předškolním zařízením povinnost elektronicky oznamovat identifikační a částkové údaje. Dřívější znění těchto konkrétních odstavců v kontextu není uvedeno, takže rozsah změny oproti dřívější úpravě nelze z balíčku přesně porovnat; návrh však tyto ohlašovací povinnosti výslovně stanoví."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43423-1",
+                "relevant": true,
+                "reasonCz": "Pro případ, že je platformový pracovník pravomocně uznán za zaměstnance zprostředkovatele, ukládá platformě zajistit plnění daňových povinností zaměstnavatele.",
+                "effectCz": "Jde o novou úpravu bez předchozího znění k porovnání. Při pravomocném určení pracovněprávního vztahu musí platforma zajistit, aby zprostředkovatel plnil povinnosti zaměstnavatele při správě daně z příjmů a pojistného. Zavádí novou povinnost pro dotčené platformy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43443-5",
+                "relevant": true,
+                "reasonCz": "Zavádí novou spotřební daň z kratomu a s ní spojené povinnosti pro jeho výrobce a prodejce.",
+                "effectCz": "Předchozí seznam spotřebních daní kratom neobsahoval; návrh zavádí daň se sazbami 2 Kč, 10 Kč nebo 20 Kč za gram, případně mililitr, podle typu a koncentrace výrobku. Stanoví také povinnosti evidence, skladování, označování a pokuty. Daňové zatížení i související administrativu tedy nově zavádí a zvyšuje."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-68",
+                "relevant": true,
+                "reasonCz": "Stanoví formulářovou podobu daňových podání k dorovnávacím daním pro velké skupiny, včetně elektronického formátu.",
+                "effectCz": "Vyhláška nově stanoví obsahovou strukturu daňového přiznání a informačního přehledu a vyžaduje podání ve formátu XML. Předchozí znění těchto formulářových požadavků v balíčku není; vyhláška tedy zavádí konkrétní formální a elektronické požadavky na podání."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-39",
+                "relevant": true,
+                "reasonCz": "Vláda plánuje pro nadnárodní firmy povinnou předem deklarovanou dokumentaci k metodě stanovení obvyklých cen, což přímo souvisí s daňovou administrativou investorů.",
+                "effectCz": "Usnesení navrhuje připravit povinnou dokumentaci o cenách obvyklých; starší úprava ani přesné budoucí znění nejsou doloženy. Jde o plán nové informační povinnosti, která by mohla administrativu dotčených firem zvýšit."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+                "relevant": true,
+                "reasonCz": "Vládní plán výslovně počítá se zavedením evidence tržeb a s navazujícími změnami daní, daňových úlev a sazeb DPH.",
+                "effectCz": "Usnesení navrhuje připravit systém evidence tržeb EET 2.0 a související daňové změny; jde o plán, nikoli o již účinné pravidlo. Předchozí znění budoucích opatření není doloženo, ale plán zahrnuje nové povinnosti evidence i změny daňových úlev a sazeb."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43415-1",
+                "relevant": false,
+                "reasonCz": "Dodané ustanovení řeší zápis změny vlastníka diplomatického vozidla při nevrácení DPH; nedokládá podstatnou vazbu na investory ani na obecnou daňovou administrativu podnikatelů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-31",
+                "relevant": false,
+                "reasonCz": "Dodané články upravují digitální obchod, elektronické smlouvy a cla, ale výslovně ponechávají vnitřní daně nedotčené; změnu daňových pravidel ani daňové administrativy zde balíček nedokládá.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-c002c714a2--source",
+              "psp-core-2025--law-change-43174-approved-41",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--law-change-43208-1-2",
+              "psp-core-2025--law-change-43208-1-3",
+              "psp-core-2025--law-change-43208-1-4",
+              "psp-core-2025--law-change-43208-1-5",
+              "psp-core-2025--print-step-210766",
+              "psp-core-2025--law-change-43216-2",
+              "psp-core-2025--government-opinion-43216-1",
+              "psp-core-2025--law-change-43310-1",
+              "psp-core-2025--law-change-43310-2",
+              "psp-core-2025--law-change-43310-3",
+              "psp-core-2025--law-change-43310-4",
+              "psp-core-2025--print-step-211390",
+              "psp-core-2025--amendment-text-1547",
+              "psp-core-2025--amendment-1547",
+              "psp-core-2025--amendment-text-1561",
+              "psp-core-2025--amendment-1561",
+              "psp-core-2025--amendment-text-1403",
+              "psp-core-2025--vote-88086",
+              "psp-core-2025--vote-88281",
+              "psp-core-2025--vote-88282",
+              "psp-core-2025--vote-88289",
+              "psp-core-2025--vote-88290",
+              "psp-core-2025--amendment-text-1537",
+              "psp-core-2025--vote-88291",
+              "psp-core-2025--amendment-text-1380",
+              "psp-core-2025--vote-88292",
+              "psp-core-2025--amendment-text-1400",
+              "psp-core-2025--vote-88294",
+              "psp-core-2025--amendment-text-1531",
+              "psp-core-2025--vote-88295",
+              "psp-core-2025--amendment-text-1533",
+              "psp-core-2025--vote-88296",
+              "psp-core-2025--amendment-text-1564",
+              "psp-core-2025--vote-88297",
+              "psp-core-2025--amendment-text-1565",
+              "psp-core-2025--vote-88298",
+              "psp-core-2025--amendment-text-1560",
+              "psp-core-2025--vote-88299",
+              "psp-core-2025--amendment-text-1473",
+              "psp-core-2025--vote-88300",
+              "psp-core-2025--vote-88304",
+              "psp-core-2025--amendment-text-1475",
+              "psp-core-2025--vote-88306",
+              "psp-core-2025--amendment-text-1557",
+              "psp-core-2025--vote-88312",
+              "psp-core-2025--amendment-text-1559",
+              "psp-core-2025--vote-88314",
+              "psp-core-2025--amendment-text-1566",
+              "psp-core-2025--vote-88315",
+              "psp-core-2025--vote-88316",
+              "psp-core-2025--vote-88317",
+              "psp-core-2025--vote-88318",
+              "psp-core-2025--vote-88319",
+              "psp-core-2025--vote-88320",
+              "psp-core-2025--vote-88321",
+              "psp-core-2025--vote-88322",
+              "psp-core-2025--vote-88323",
+              "psp-core-2025--vote-88324",
+              "psp-core-2025--vote-88325",
+              "psp-core-2025--vote-88326",
+              "psp-core-2025--vote-88327",
+              "psp-core-2025--vote-88328",
+              "psp-core-2025--vote-88329",
+              "psp-core-2025--vote-88330",
+              "psp-core-2025--vote-88331",
+              "psp-core-2025--vote-88332",
+              "psp-core-2025--vote-88333",
+              "psp-core-2025--vote-88334",
+              "psp-core-2025--vote-88335",
+              "psp-core-2025--vote-88336",
+              "psp-core-2025--vote-88337",
+              "psp-core-2025--vote-88338",
+              "psp-core-2025--vote-88339",
+              "psp-core-2025--vote-88340",
+              "psp-core-2025--vote-88341",
+              "psp-core-2025--vote-88342",
+              "psp-core-2025--vote-88343",
+              "psp-core-2025--vote-88344",
+              "psp-core-2025--vote-88345",
+              "psp-core-2025--vote-88346",
+              "psp-core-2025--vote-88347",
+              "psp-core-2025--vote-88348",
+              "psp-core-2025--vote-88349",
+              "psp-core-2025--vote-88350",
+              "psp-core-2025--vote-88351",
+              "psp-core-2025--vote-88353",
+              "psp-core-2025--vote-88354",
+              "psp-core-2025--vote-88355",
+              "psp-core-2025--senate-resolution-43310-6",
+              "psp-core-2025--vote-88356",
+              "psp-core-2025--amendment-text-1561",
+              "psp-core-2025--amendment-text-1547",
+              "psp-core-2025--vote-88290",
+              "psp-core-2025--vote-88282",
+              "psp-core-2025--vote-88281",
+              "psp-core-2025--vote-88289",
+              "psp-core-2025--vote-88294",
+              "psp-core-2025--vote-88306",
+              "psp-core-2025--vote-88312",
+              "psp-core-2025--vote-88314",
+              "psp-core-2025--vote-88353",
+              "psp-core-2025--vote-88354",
+              "psp-core-2025--vote-88355",
+              "psp-core-2025--print-step-211537",
+              "psp-core-2025--law-change-43378-1",
+              "psp-core-2025--print-step-211887",
+              "psp-core-2025--law-change-43422-4",
+              "psp-core-2025--print-step-212101",
+              "psp-core-2025--law-change-43423-1",
+              "psp-core-2025--print-step-212103",
+              "psp-core-2025--law-change-43443-5",
+              "psp-core-2025--print-step-212242",
+              "esbirka-regulations--law-change-sb-2026-68",
+              "esbirka-regulations--2026-68",
+              "zvlady-resolutions--law-change-uv-2026-175-39",
+              "zvlady-resolutions--law-change-uv-2026-175-117",
+              "zvlady-resolutions--2026-175"
+            ],
+            "explanationCz": "Vláda ANO předložila a poslanci ANO následně podpořili obnovení evidence tržeb, která podnikatelům ukládá elektronicky hlásit platby a plnit navazující evidenční povinnosti. Po vrácení návrhu Senátem poslanci ANO znovu podpořili sněmovní znění, takže tento zásah se stal hlavním dokladem postupu proti části slibu týkající se administrativní zátěže. V návrhu jsou i úlevy, například zvýšení hranic pro podání daňového přiznání, a ANO podpořilo také úpravu pravidel pro spropitné. Tyto kroky ale neodstraňují nové povinnosti evidence tržeb ani nemění skutečnost, že strana prosadila změnu, která podnikatelům přidává administrativu.",
+            "confidence": "high",
+            "uncertainties": [
+              "Návrh evidence tržeb obsahuje současně daňové úlevy a nové evidenční povinnosti; hodnocení proti slibu se proto týká části o administrativní zátěži, nikoli celého jeho obsahu.",
+              "Poslanci ANO podpořili zvýšení některých hranic pro povinné podání daňového přiznání, které administrativu snižuje. Tento podpůrný krok je v rozporu s negativním dopadem nových povinností evidence tržeb, ale váží méně než přijaté znění zákona."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-c002c714a2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-41",
+          "relevant": true,
+          "reasonCz": "Změna upravuje pravidla daně z elektřiny pro provozovatele zařízení pro ukládání elektřiny, tedy daňový režim vztahující se k podnikatelským investicím i administrativním povinnostem.",
+          "effectCz": "Předchozí znění vymezovalo dodavatele a osvobození od daně bez zvláštní úpravy pro provozovatele úložišť; schválené znění je zahrnuje do některých daňových pravidel, zvyšuje hranici pro osvobození ekologicky šetrné elektřiny z 50 na 100 kW a umožňuje malým provozovatelům do 100 kW nabývat elektřinu bez daně bez povolení a nevézt určitou evidenci. Současně zavádí u části provozovatelů požadavek na doklad o licenci. Pro malé provozovatele se daňové a evidenční povinnosti uvolňují, zatímco u části ostatních přibývá administrativní požadavek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1-2",
+          "relevant": true,
+          "reasonCz": "Text zavádí daňové oznamování informací o kryptoaktivech a související povinnosti, které mohou zvyšovat administrativní zátěž podnikatelů.",
+          "effectCz": "Návrh zavádí oznamovací režim pro kryptoaktiva a rozšiřuje údaje předávané správci daně; u nově vložených ustanovení není jejich předchozí znění v balíčku doloženo, takže směr změny vůči dosavadní úpravě nelze plně určit. Z dodaného textu je však patrné, že návrh ukládá dotčeným poskytovatelům nové oznamovací a evidenční povinnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1-3",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje daňové výkaznictví a evidenční povinnosti finančních institucí a dalších oznamujících subjektů.",
+          "effectCz": "Dosavadní pravidla vyžadovala užší okruh údajů a u pořádkové pokuty za porušení oznamování stanovila strop 500 000 Kč; návrh rozšiřuje oznamované údaje, ukládá zvláštní záznamní povinnost a zvyšuje tento strop na 1 500 000 Kč. Daňová a administrativní povinnost je tedy přísnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1-4",
+          "relevant": true,
+          "reasonCz": "Doplněné definice a postupy náležité péče tvoří součást nového daňového oznamování a vyžadují další zjišťování a dokumentaci.",
+          "effectCz": "Předchozí text obsahoval užší definice finančních účtů a postupů; návrh je rozšiřuje o digitální měny a kryptoaktiva a přidává postupy pro zjišťování a ověřování údajů o uživatelích kryptoaktiv. Tím se rozšiřuje okruh informací a administrativních úkonů; u nově vložených postupů není předchozí znění doloženo."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1-5",
+          "relevant": true,
+          "reasonCz": "Tato část stanoví podrobnosti čestných prohlášení, náležité péče a souvisejících povinností v novém daňovém režimu pro kryptoaktiva.",
+          "effectCz": "Návrh stanoví požadované údaje v prohlášeních, možnosti spolehnout se na třetí osoby a další pravidla pro zařazení subjektů. Předchozí znění těchto nových pravidel není v balíčku doloženo, takže směr změny proti dosavadní právní úpravě nelze určit; návrh ale vytváří konkrétní administrativní povinnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-2",
+          "relevant": true,
+          "reasonCz": "Návrh zvyšuje zákonný strop poplatku z pobytu, a tím umožňuje zvýšit daňové zatížení podnikání v cestovním ruchu.",
+          "effectCz": "Dosavadní zákon stanovil nejvyšší sazbu poplatku z pobytu na 50 Kč; návrh ji zvyšuje na 100 Kč. Zvyšuje se tedy maximální možné zatížení, nikoli automaticky skutečně vybíraný poplatek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Nový zákon obnovuje rozsáhlou evidenci tržeb a stanoví povinnosti podnikatelů evidovat a elektronicky předávat údaje o platbách.",
+          "effectCz": "Jde o nový zákon, nikoli novelu se starším zněním uvedeným v kontextu. Návrh podrobuje evidenci tržeb poplatníky daně z příjmů z podnikání, vymezuje evidované platby a ukládá elektronické zasílání jejich údajů správci daně; ve srovnání s absencí tohoto nového režimu se daňová administrativa rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Část zavádí nové daňové režimy spojené s evidencí tržeb, včetně zvláštní přirážky, osvobození spropitného a dalších slev a oznamovacích povinností.",
+          "effectCz": "Dosavadní znění zákona o daních z příjmů neobsahovalo přirážku 1 400 Kč měsíčně za vyjmutí z evidence tržeb ani navržené nové daňové úlevy a související oznamovací pravidla. Některým poplatníkům návrh snižuje daň, jiným ukládá další daňovou platbu a předškolním zařízením přidává elektronické oznamování; výsledkem je více zvláštních režimů a administrativních úkonů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Tato část mění několik pravidel DPH ovlivňujících daňové zatížení a administrativu podnikatelů.",
+          "effectCz": "Ve srovnání s předchozím zněním se u nedobytných pohledávek zvyšuje limit z 10 000 na 20 000 Kč, zkracuje se čekání ze šesti na tři měsíce a roční limit se zvyšuje z 20 000 na 100 000 Kč, což uvolňuje podmínky pro opravu daně. Současně se mění pravidla odpočtu DPH u vybraných osobních automobilů a zařazení nápojů do snížené sazby. Celkový účinek je smíšený: některé daňové limity se uvolňují, zatímco pravidla a jejich rozsah se dále mění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": true,
+          "reasonCz": "Část rozšiřuje kontrolní nákupy finanční správy na povinnosti evidence tržeb a umožňuje zpracovávat údaje získané při jejich plnění.",
+          "effectCz": "Předchozí znění umožňovalo kontrolní nákupy při prověřování mezinárodní spolupráce v oblasti daní; návrh tuto pravomoc rozšiřuje také na evidenci tržeb a další daňové či účetní předpisy. Rozšiřuje se tedy kontrolní působnost státu a s ní i rozsah daňové regulace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-5",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá zaměstnavatelům nové podrobné měsíční oznamování údajů o zaměstnávání cizinců včetně daňových údajů.",
+          "effectCz": "Dosavadní § 107 zákona o pobytu cizinců takovou povinnost neobsahoval; návrh přidává rozsáhlé údaje o zaměstnavateli, pracovním vztahu, příjmech, zálohách a slevách, které se mají předávat prostřednictvím jednotného měsíčního hlášení. Uvedená administrativní povinnost se zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": true,
+          "reasonCz": "Smlouva stanoví limity zdanění licenčních poplatků mezi Českem a Argentinou, tedy daňová pravidla přímo relevantní pro přeshraniční investice.",
+          "effectCz": "Předložený text stanoví strop srážkové daně 5 % u některých licenčních poplatků a 10 % u ostatních, přičemž při nesplnění argentinských registračních požadavků může být limit 15 %. Předchozí smluvní režim ani dosavadní zdanění nejsou v balíčku doloženy, takže nelze určit, zda tato pravidla zdanění zpřísňují, nebo uvolňují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-4",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje elektronické oznamování daňových údajů poskytovateli úvěrů, produktů spoření a předškolními zařízeními.",
+          "effectCz": "Návrh stanoví nové každoroční elektronické hlášení o klientech, smlouvách, úrocích či příspěvcích a o výdajích za umístění dětí. Předchozí znění odstavců 7 a 8 § 38t není v balíčku uvedeno, takže směr změny proti dosavadní úpravě nelze přesně porovnat; text však ukládá popsaným subjektům konkrétní oznamovací povinnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43423-1",
+          "relevant": true,
+          "reasonCz": "Nový zákon ukládá platformě zajistit plnění daňových povinností zprostředkovatele, pokud je pravomocně určeno, že platformový pracovník je jeho zaměstnancem.",
+          "effectCz": "Jde o nové ustanovení bez předchozího znění v kontextu. Při uvedené podmínce ukládá platformě zajistit, aby zprostředkovatel plnil povinnosti zaměstnavatele při správě daně ze závislé činnosti; jde o novou podmíněnou povinnost."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-5",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí novou spotřební daň z kratomu a související povolení, značení, evidenci a sankce pro jeho výrobce a prodejce.",
+          "effectCz": "Předchozí zákon daň z kratomu neobsahoval. Návrh stanoví sazby 2, 10 nebo 20 Kč za gram či mililitr podle druhu a koncentrace, doplňuje povinnosti spojené s daňovým skladem, značením a evidencí a zavádí pokuty. Daňové i administrativní zatížení dotčených podnikatelů se zvyšuje."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-68",
+          "relevant": true,
+          "reasonCz": "Vyhláška upravuje obsah a elektronický formát formulářových podání k dorovnávacím daním, tedy praktické daňové povinnosti dotčených skupin.",
+          "effectCz": "Vyhláška stanoví strukturu přiznání a informačního přehledu a požaduje podání ve formátu XML. Předchozí formuláře ani jejich formát balíček neuvádí, takže nelze určit, zda se administrativní požadavky oproti předchozímu stavu zpřísnily."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-39",
+          "relevant": true,
+          "reasonCz": "Vládní plán počítá s návrhem, který má nadnárodním firmám uložit povinnost předem deklarovat dokumentaci k tvorbě obvyklých cen.",
+          "effectCz": "Usnesení samo stanoví legislativní záměr, nikoli již účinné pravidlo. Zamýšlená povinnost předem připravovat a deklarovat dokumentaci k převodním cenám by zvýšila daňovou administrativu; dosavadní právní úprava ani její změna zde doloženy nejsou."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně počítá se zavedením evidence tržeb a souvisejícími daňovými změnami.",
+          "effectCz": "Usnesení pouze plánuje návrh zákona, nikoli samo účinné daňové pravidlo. Plánovaný režim evidence tržeb by ukládal nové povinnosti evidovat platby; současně plán uvádí daňové úlevy a další změny DPH, takže jeho celkový dopad je smíšený."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Dodaný odstavec řeší pouze zápis změny vlastníka diplomatického vozidla při nevrácení DPH a nedokládá dopad na investory ani širší daňovou administrativu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-31",
+          "relevant": false,
+          "reasonCz": "Dodaný text upravuje digitální obchod a výslovně ponechává možnost vnitřních daní, sám však žádné daňové pravidlo ani povinnost nemění.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-c002c714a2--source",
+        "psp-core-2025--law-change-43174-approved-41",
+        "psp-core-2025--law-change-43208-1-2",
+        "psp-core-2025--law-change-43208-1-3",
+        "psp-core-2025--law-change-43208-1-4",
+        "psp-core-2025--law-change-43208-1-5",
+        "psp-core-2025--law-change-43216-2",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--law-change-43310-3",
+        "psp-core-2025--law-change-43310-4",
+        "psp-core-2025--law-change-43335-5",
+        "psp-core-2025--law-change-43378-1",
+        "psp-core-2025--law-change-43422-4",
+        "psp-core-2025--law-change-43423-1",
+        "psp-core-2025--law-change-43443-5",
+        "esbirka-regulations--law-change-sb-2026-68",
+        "zvlady-resolutions--law-change-uv-2026-175-39",
+        "zvlady-resolutions--law-change-uv-2026-175-117",
+        "psp-core-2025--print-step-210766",
+        "psp-core-2025--government-opinion-43216-1",
+        "zvlady-resolutions--2026-175",
+        "esbirka-regulations--2026-68",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--print-step-211537",
+        "psp-core-2025--amendment-1547",
+        "psp-core-2025--amendment-text-1547",
+        "psp-core-2025--amendment-1561",
+        "psp-core-2025--amendment-text-1561",
+        "psp-core-2025--vote-88086",
+        "psp-core-2025--vote-88281",
+        "psp-core-2025--vote-88282",
+        "psp-core-2025--vote-88289",
+        "psp-core-2025--vote-88291",
+        "psp-core-2025--vote-88292",
+        "psp-core-2025--vote-88297",
+        "psp-core-2025--vote-88298",
+        "psp-core-2025--vote-88353",
+        "psp-core-2025--vote-88355",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-211887",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--print-step-212103",
+        "psp-core-2025--print-step-212242"
+      ],
+      "explanationCz": "Vláda ANO předložila návrh na obnovení evidence tržeb a poslanci ANO jej podpořili i po vrácení Senátem, horní komorou Parlamentu. Nový režim ukládá podnikatelům evidovat široký okruh plateb a elektronicky předávat údaje správci daně, takže zvyšuje administrativní povinnosti. ANO zároveň podpořilo některé úlevy, například změnu pro malé provozovatele úložišť elektřiny, a navrhlo zvýšit hranici příjmů pro povinnost podat daňové přiznání. Celkově však rozhodnutí o evidenci tržeb představuje posun proti části slibu; podklady nedokládají, že by každá z uvedených změn skutečně odrazovala investory.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají nové evidenční a oznamovací povinnosti, ale neprokazují, zda tyto změny skutečně odradí investory; proto je závěr omezen na část slibu týkající se administrativní zátěže.",
+        "U pozměňovacího návrhu na vypuštění části daňových změn ANO jednou hlasovalo pro a později proti; tento rozpor nemění skutečnost, že následně podpořilo celý návrh evidence tržeb."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-c002c714a2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-41",
+          "relevant": true,
+          "reasonCz": "Změna daňového režimu elektřiny pro provozovatele úložišť přímo rozšiřuje daňové výjimky a mění jejich povinnosti.",
+          "effectCz": "Dosavadní osvobození elektřiny z ekologických zdrojů v odběrném místě se vztahovalo na výkon nejvýše 50 kW, nově se hranice zvyšuje na 100 kW. Provozovatelé úložišť se nově zahrnují mezi osoby oprávněné nabývat elektřinu bez daně, u malých zařízení do 100 kW se zároveň zavádí výjimka z povinnosti vést evidenci; u licencovaných provozovatelů se naopak požaduje doklad o licenci. Jde tedy o kombinaci rozšíření daňových úlev a nových či upravených požadavků, přičemž administrativní povinnost u menších zařízení se snižuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1-2",
+          "relevant": true,
+          "reasonCz": "Návrh zahrnuje nové daňové oznamování kryptoaktiv a doplňuje údaje, které mají podniky oznamovat při správě daní.",
+          "effectCz": "Návrh doplňuje údaje o identifikační službě do hlášení provozovatelů platforem a vytváří novou úpravu automatické výměny informací o kryptoaktivech. Pro nově vloženou úpravu kryptoaktiv předchozí znění v podkladech chybí; dodaný kontext uvádí jen dosavadní pravidlo, že oznamující provozovatelé platforem mají postavení daňového subjektu. Nová úprava rozšiřuje rozsah oznamování, a tedy i administrativních povinností."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1-3",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje daňové výkaznictví a evidenční povinnosti finančních institucí a dalších subjektů.",
+          "effectCz": "Dosavadní pravidla automatické výměny zahrnovala vymezené kategorie informací, například údaje finančních institucí, nadnárodních skupin a provozovatelů platforem; návrh k nim přidává informace o kryptoaktivech a dorovnávacích daních. U některých povinností nově dovoluje správci daně uložit zvláštní záznamy uchovávané deset let a zvyšuje horní hranici některých pokut z 500 000 Kč na 1 500 000 Kč. Rozsah daňových oznamovacích a evidenčních povinností i sankční tlak se tím zvětšují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1-4",
+          "relevant": true,
+          "reasonCz": "Nové definice a postupy náležité péče pro kryptoaktiva rozšiřují povinnosti finančních a krypto-subjektů při daňovém oznamování.",
+          "effectCz": "Dosavadní definice depozitních a investičních institucí a finančního majetku v dodaném kontextu kryptoaktiva výslovně nezahrnovaly; návrh je do definic doplňuje a přidává rozsáhlé postupy náležité péče pro oznamovatele kryptoaktiv. U nově vložených pravidel není v balíčku k dispozici předchozí znění. Změna rozšiřuje okruh údajů a prověřování, které musí dotčené subjekty provádět."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1-5",
+          "relevant": true,
+          "reasonCz": "Navržené související články stanovují nové náležitosti daňových prohlášení a podklady k daňovému oznamování kryptoaktiv.",
+          "effectCz": "U nových požadavků na obsah čestných prohlášení, možnost využít třetí stranu při náležité péči a definice aktivních entit balíček neuvádí předchozí znění, takže přesný rozdíl proti dosavadním povinnostem nelze určit. Návrh však stanoví konkrétní další údaje a postupy pro daňové oznamovatele kryptoaktiv, čímž ukládá nové administrativní požadavky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-2",
+          "relevant": false,
+          "reasonCz": "Návrh pouze zvyšuje maximální sazbu poplatku z pobytu z 50 na 100 Kč; podklady nedokládají, že by tento poplatek zvyšoval daňovou administrativu nebo zatěžoval investory ve smyslu slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Nový systém evidence tržeb ukládá podnikatelům plošné povinnosti evidovat a elektronicky oznamovat tržby.",
+          "effectCz": "Jde o nový zákon, takže nemá předchozí znění, které by bylo možné porovnat. Zavádí povinnost evidovat široce vymezené podnikatelské tržby, získat certifikát, oznamovat údaje o evidenčních jednotkách a posílat finanční správě údaje o transakcích; v některých případech stanoví pokuty až 500 000 Kč. Výjimky se týkají vymezených činností a osob, ale základní administrativní povinnost pro dotčené podnikatele vzniká nově."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Část návrhu mění daň z příjmů, zavádí zvláštní režim pro vyhnutí se evidenci tržeb a přidává související daňové povinnosti.",
+          "effectCz": "Dosavadní znění zákona o daních z příjmů neobsahovalo přirážku za vyjmutí z evidence tržeb ani související režim; návrh zavádí přirážku 1 400 Kč měsíčně pro vymezené poplatníky v prvním pásmu paušálního režimu. Zároveň zavádí nové slevy na studenta a za umístění dítěte a upravuje osvobození spropitného, přičemž pro jejich uplatnění stanoví podmínky a doklady; u předškolních zařízení nově ukládá každoroční elektronické oznamování údajů o dětech a platbách. Některé změny daňovou povinnost snižují, ale vzniká také další členění režimů a administrativních úkonů; přesný rozsah všech nových ustanovení vůči dřívější úpravě nelze u částí, které kontext označuje jako nově vložené, předem porovnat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Návrh mění pravidla DPH pro podniky, včetně odpočtů, nedobytných pohledávek a sazby na nápoje ve stravovacích službách.",
+          "effectCz": "U nedobytných pohledávek se hranice jedné pohledávky zvyšuje z 10 000 na 20 000 Kč a souhrnný roční limit z 20 000 na 100 000 Kč, zatímco doba splatnosti se zkracuje ze šesti na tři měsíce. U vybraných osobních automobilů se ruší dosavadní omezení odpočtu DPH včetně limitu 420 000 Kč; tím se možnost odpočtu rozšiřuje. U stravovacích služeb se snížená sazba rozšiřuje z pitné vody a vybraných nápojů na podávání jiných než alkoholických nápojů. Jde o kombinaci rozšíření nároků a změn povinností; část pravidel se uvolňuje, část se mění směrem k rychlejší povinné opravě odpočtu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": true,
+          "reasonCz": "Část rozšiřuje kontrolní nákupy finanční správy na povinnosti při evidenci tržeb a upravuje zpracování údajů k této kontrole.",
+          "effectCz": "Dosud mohl orgán finanční správy provádět kontrolní nákup při prověřování povinností podle zákona o mezinárodní spolupráci při správě daní; návrh tuto pravomoc rozšiřuje také na evidenci tržeb a další daňové či účetní předpisy. Do analytické evidence se nově výslovně zahrnují údaje od daňového subjektu při plnění povinností evidence tržeb. Rozšiřuje se tak dosah kontrolního a datového režimu, nikoli samotná daňová sazba."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-5",
+          "relevant": false,
+          "reasonCz": "Nová povinnost zaměstnavatelů předávat údaje o cizincích slouží k pobytové agendě a podklady neukazují, že by měnila daňové pravidlo nebo daňovou administrativu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": true,
+          "reasonCz": "Navržená smlouva upravuje zdanění licenčních poplatků mezi Českem a Argentinou, tedy pravidla důležitá pro přeshraniční investice a podnikání.",
+          "effectCz": "Jde o novou smlouvu, nikoli změnu již uvedeného českého ustanovení, a předchozí smluvní znění v balíčku chybí. U licenčních poplatků stanoví daň v zemi zdroje nejvýše 5 % u vymezených autorských práv a 10 % v ostatních případech; při nesplnění argentinského požadavku na registraci smlouvy může být argentinská daň až 15 %. Uvedené limity mohou snížit daňové zatížení některých přeshraničních příjmů, přičemž celkový dopad bez předchozího smluvního znění nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Nové pravidlo pouze brání převodu vlastnictví diplomatického vozidla při nevrácené DPH; neukládá obecnou daňovou změnu investorům ani podnikatelům.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-4",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá poskytovatelům úvěrů a produktů spoření a předškolním zařízením nová elektronická daňová hlášení s údaji o klientech a platbách.",
+          "effectCz": "Nové odstavce § 38t ukládají roční elektronické oznamování údajů o klientech, smlouvách, úrocích či příspěvcích a o výdajích za předškolní zařízení. Pro tyto nově doplněné povinnosti balíček nepřináší jejich předchozí znění, takže přesný rozdíl v administrativě proti případným dosavadním povinnostem nelze z něj určit. Návrh však stanoví konkrétní další daňové údaje a termín jejich předání správci daně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43423-1",
+          "relevant": true,
+          "reasonCz": "Návrh o platformové práci určuje, že při zjištění pracovněprávního vztahu musí být plněny zaměstnavatelské daňové a pojistné povinnosti.",
+          "effectCz": "Jde o nový zákon a předchozí znění v balíčku chybí. Při pravomocném určení pracovněprávního vztahu ukládá platformě zajistit, aby zprostředkovatel plnil povinnosti zaměstnavatele při správě daně z příjmů ze závislé činnosti a pojistného. Rozšiřuje tak povinnosti pro dotčené platformy a zprostředkovatele, avšak jde o podmíněný režim pro konkrétní postavení pracovníka."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-5",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí novou spotřební daň z kratomu a s ní související evidenci, značení, povolení a sankce.",
+          "effectCz": "Jde o novou daňovou úpravu bez předchozího znění v balíčku. Zavádí daň z kratomu ve výši 2, 10 nebo 20 Kč za gram či mililitr podle koncentrace a druhu výrobku; současně stanoví daňové sklady, značení, evidenci uchovávanou deset let a pokuty až 10 milionů Kč. Zvyšuje tedy daňové zatížení i administrativní a provozní požadavky v dotčeném odvětví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-31",
+          "relevant": true,
+          "reasonCz": "Navržená dohoda upravuje cla na elektronické přenosy a výslovně zachovává možnost vnitrostátních daní, což se přímo týká daňových pravidel digitálního obchodu.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího znění v balíčku. Strany se zavazují neukládat cla na elektronické přenosy mezi osobami z obou stran, ale mohou nadále ukládat vnitrostátní daně, poplatky a jiné platby v souladu s dohodou. Uvedené pravidlo odstraňuje jednu možnou celní zátěž, ale samo nesnižuje domácí daně."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-68",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví elektronickou podobu formulářů k dorovnávacím daním pro velké skupiny, tedy další konkrétní daňové administrativní požadavky.",
+          "effectCz": "Vyhláška stanoví strukturu daňového přiznání a informačního přehledu k dorovnávacím daním a požaduje elektronické podání ve formátu XML. Jde o formulářová pravidla vydaná podle daňového řádu; předchozí formulářový režim v balíčku uveden není, takže změnu proti němu nelze porovnat. Pro dotčené velké skupiny stanoví konkrétní formát a strukturu podání."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-39",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací počítá s povinnou předem připravenou dokumentací nadnárodních firem k určování obvyklých cen.",
+          "effectCz": "Jde o plánovaný návrh zákona, nikoli o platnou změnu; předchozí pravidlo v balíčku chybí. Plán předpokládá povinnou předem deklarovanou dokumentaci k cenám obvyklým, což by rozšířilo daňovou evidenci nadnárodních firem. Návrh by tedy zvýšil jejich administrativní povinnost, pokud by byl přijat."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+          "relevant": true,
+          "reasonCz": "Vláda zařadila do legislativního plánu nový systém evidence tržeb a související daňové změny.",
+          "effectCz": "Usnesení plánuje předložit návrh evidence tržeb, který má zavést elektronické zaznamenávání tržeb, a související změny daně z příjmů a DPH včetně úlev a osvobození. Jde o návrh do budoucna, nikoli o účinnou povinnost; plánovaný systém rozšiřuje evidenční režim, zatímco některé doprovodné změny snižují daňové zatížení."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-c002c714a2--source",
+        "psp-core-2025--law-change-43174-approved-41",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43208-1-2",
+        "psp-core-2025--law-change-43208-1-3",
+        "psp-core-2025--law-change-43208-1-4",
+        "psp-core-2025--law-change-43208-1-5",
+        "psp-core-2025--print-step-210766",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--law-change-43310-3",
+        "psp-core-2025--law-change-43310-4",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--amendment-text-1547",
+        "psp-core-2025--amendment-1547",
+        "psp-core-2025--vote-88086",
+        "psp-core-2025--vote-88281",
+        "psp-core-2025--vote-88282",
+        "psp-core-2025--amendment-text-1561",
+        "psp-core-2025--amendment-1561",
+        "psp-core-2025--amendment-text-1551",
+        "psp-core-2025--vote-88289",
+        "psp-core-2025--vote-88290",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--law-change-43378-1",
+        "psp-core-2025--print-step-211887",
+        "psp-core-2025--law-change-43422-4",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--law-change-43423-1",
+        "psp-core-2025--print-step-212103",
+        "psp-core-2025--law-change-43443-5",
+        "psp-core-2025--print-step-212242",
+        "psp-core-2025--law-change-43453-31",
+        "psp-core-2025--print-step-212285",
+        "esbirka-regulations--law-change-sb-2026-68",
+        "esbirka-regulations--2026-68",
+        "zvlady-resolutions--law-change-uv-2026-175-39",
+        "zvlady-resolutions--law-change-uv-2026-175-117",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda ANO předložila návrh nového systému evidence tržeb a poslanci ANO jej po úpravách v Senátu znovu podpořili; zákon ukládá podnikatelům elektronicky evidovat a oznamovat tržby. To představuje konkrétní rozšíření daňové administrativy, které jde proti části slibu odmítající takovou zátěž. Návrh obsahuje i daňové úlevy a výjimky, například pro malé provozovatele úložišť elektřiny, ty však neruší hlavní nově zavedenou evidenční povinnost. Protože jde o dílčí rozpor se slibem, nikoli o jeho úplné popření, hodnocení zůstává na částečně záporné úrovni.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady nevyčíslují, nakolik evidence tržeb skutečně odradí investory; doložena je především nová administrativní povinnost pro podnikatele.",
+        "Návrh evidence tržeb současně obsahuje daňové úlevy a výjimky a vláda předložila i další změny, které některé daňové povinnosti zmírňují. Tyto protichůdné kroky jsou v hodnocení zachovány, ale nezvracejí pozdější rozhodnutí Sněmovny o evidenci tržeb."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_010ed078ef2fa8bf016aec49dac64887d18cdc5a1aba5930e2",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 255889,
+      "input_tokens_details": {
+        "cache_write_tokens": 249539,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 12037,
+      "output_tokens_details": {
+        "reasoning_tokens": 7287
+      },
+      "total_tokens": 267926
+    },
+    "output": {
+      "promiseId": "ano-2025-c002c714a2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-41",
+          "relevant": true,
+          "reasonCz": "Změna upravuje pravidla daně z elektřiny pro provozovatele zařízení pro ukládání elektřiny, tedy daňový režim vztahující se k podnikatelským investicím i administrativním povinnostem.",
+          "effectCz": "Předchozí znění vymezovalo dodavatele a osvobození od daně bez zvláštní úpravy pro provozovatele úložišť; schválené znění je zahrnuje do některých daňových pravidel, zvyšuje hranici pro osvobození ekologicky šetrné elektřiny z 50 na 100 kW a umožňuje malým provozovatelům do 100 kW nabývat elektřinu bez daně bez povolení a nevézt určitou evidenci. Současně zavádí u části provozovatelů požadavek na doklad o licenci. Pro malé provozovatele se daňové a evidenční povinnosti uvolňují, zatímco u části ostatních přibývá administrativní požadavek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1-2",
+          "relevant": true,
+          "reasonCz": "Text zavádí daňové oznamování informací o kryptoaktivech a související povinnosti, které mohou zvyšovat administrativní zátěž podnikatelů.",
+          "effectCz": "Návrh zavádí oznamovací režim pro kryptoaktiva a rozšiřuje údaje předávané správci daně; u nově vložených ustanovení není jejich předchozí znění v balíčku doloženo, takže směr změny vůči dosavadní úpravě nelze plně určit. Z dodaného textu je však patrné, že návrh ukládá dotčeným poskytovatelům nové oznamovací a evidenční povinnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1-3",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje daňové výkaznictví a evidenční povinnosti finančních institucí a dalších oznamujících subjektů.",
+          "effectCz": "Dosavadní pravidla vyžadovala užší okruh údajů a u pořádkové pokuty za porušení oznamování stanovila strop 500 000 Kč; návrh rozšiřuje oznamované údaje, ukládá zvláštní záznamní povinnost a zvyšuje tento strop na 1 500 000 Kč. Daňová a administrativní povinnost je tedy přísnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1-4",
+          "relevant": true,
+          "reasonCz": "Doplněné definice a postupy náležité péče tvoří součást nového daňového oznamování a vyžadují další zjišťování a dokumentaci.",
+          "effectCz": "Předchozí text obsahoval užší definice finančních účtů a postupů; návrh je rozšiřuje o digitální měny a kryptoaktiva a přidává postupy pro zjišťování a ověřování údajů o uživatelích kryptoaktiv. Tím se rozšiřuje okruh informací a administrativních úkonů; u nově vložených postupů není předchozí znění doloženo."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1-5",
+          "relevant": true,
+          "reasonCz": "Tato část stanoví podrobnosti čestných prohlášení, náležité péče a souvisejících povinností v novém daňovém režimu pro kryptoaktiva.",
+          "effectCz": "Návrh stanoví požadované údaje v prohlášeních, možnosti spolehnout se na třetí osoby a další pravidla pro zařazení subjektů. Předchozí znění těchto nových pravidel není v balíčku doloženo, takže směr změny proti dosavadní právní úpravě nelze určit; návrh ale vytváří konkrétní administrativní povinnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-2",
+          "relevant": true,
+          "reasonCz": "Návrh zvyšuje zákonný strop poplatku z pobytu, a tím umožňuje zvýšit daňové zatížení podnikání v cestovním ruchu.",
+          "effectCz": "Dosavadní zákon stanovil nejvyšší sazbu poplatku z pobytu na 50 Kč; návrh ji zvyšuje na 100 Kč. Zvyšuje se tedy maximální možné zatížení, nikoli automaticky skutečně vybíraný poplatek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Nový zákon obnovuje rozsáhlou evidenci tržeb a stanoví povinnosti podnikatelů evidovat a elektronicky předávat údaje o platbách.",
+          "effectCz": "Jde o nový zákon, nikoli novelu se starším zněním uvedeným v kontextu. Návrh podrobuje evidenci tržeb poplatníky daně z příjmů z podnikání, vymezuje evidované platby a ukládá elektronické zasílání jejich údajů správci daně; ve srovnání s absencí tohoto nového režimu se daňová administrativa rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Část zavádí nové daňové režimy spojené s evidencí tržeb, včetně zvláštní přirážky, osvobození spropitného a dalších slev a oznamovacích povinností.",
+          "effectCz": "Dosavadní znění zákona o daních z příjmů neobsahovalo přirážku 1 400 Kč měsíčně za vyjmutí z evidence tržeb ani navržené nové daňové úlevy a související oznamovací pravidla. Některým poplatníkům návrh snižuje daň, jiným ukládá další daňovou platbu a předškolním zařízením přidává elektronické oznamování; výsledkem je více zvláštních režimů a administrativních úkonů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Tato část mění několik pravidel DPH ovlivňujících daňové zatížení a administrativu podnikatelů.",
+          "effectCz": "Ve srovnání s předchozím zněním se u nedobytných pohledávek zvyšuje limit z 10 000 na 20 000 Kč, zkracuje se čekání ze šesti na tři měsíce a roční limit se zvyšuje z 20 000 na 100 000 Kč, což uvolňuje podmínky pro opravu daně. Současně se mění pravidla odpočtu DPH u vybraných osobních automobilů a zařazení nápojů do snížené sazby. Celkový účinek je smíšený: některé daňové limity se uvolňují, zatímco pravidla a jejich rozsah se dále mění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": true,
+          "reasonCz": "Část rozšiřuje kontrolní nákupy finanční správy na povinnosti evidence tržeb a umožňuje zpracovávat údaje získané při jejich plnění.",
+          "effectCz": "Předchozí znění umožňovalo kontrolní nákupy při prověřování mezinárodní spolupráce v oblasti daní; návrh tuto pravomoc rozšiřuje také na evidenci tržeb a další daňové či účetní předpisy. Rozšiřuje se tedy kontrolní působnost státu a s ní i rozsah daňové regulace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-5",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá zaměstnavatelům nové podrobné měsíční oznamování údajů o zaměstnávání cizinců včetně daňových údajů.",
+          "effectCz": "Dosavadní § 107 zákona o pobytu cizinců takovou povinnost neobsahoval; návrh přidává rozsáhlé údaje o zaměstnavateli, pracovním vztahu, příjmech, zálohách a slevách, které se mají předávat prostřednictvím jednotného měsíčního hlášení. Uvedená administrativní povinnost se zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": true,
+          "reasonCz": "Smlouva stanoví limity zdanění licenčních poplatků mezi Českem a Argentinou, tedy daňová pravidla přímo relevantní pro přeshraniční investice.",
+          "effectCz": "Předložený text stanoví strop srážkové daně 5 % u některých licenčních poplatků a 10 % u ostatních, přičemž při nesplnění argentinských registračních požadavků může být limit 15 %. Předchozí smluvní režim ani dosavadní zdanění nejsou v balíčku doloženy, takže nelze určit, zda tato pravidla zdanění zpřísňují, nebo uvolňují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-4",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje elektronické oznamování daňových údajů poskytovateli úvěrů, produktů spoření a předškolními zařízeními.",
+          "effectCz": "Návrh stanoví nové každoroční elektronické hlášení o klientech, smlouvách, úrocích či příspěvcích a o výdajích za umístění dětí. Předchozí znění odstavců 7 a 8 § 38t není v balíčku uvedeno, takže směr změny proti dosavadní úpravě nelze přesně porovnat; text však ukládá popsaným subjektům konkrétní oznamovací povinnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43423-1",
+          "relevant": true,
+          "reasonCz": "Nový zákon ukládá platformě zajistit plnění daňových povinností zprostředkovatele, pokud je pravomocně určeno, že platformový pracovník je jeho zaměstnancem.",
+          "effectCz": "Jde o nové ustanovení bez předchozího znění v kontextu. Při uvedené podmínce ukládá platformě zajistit, aby zprostředkovatel plnil povinnosti zaměstnavatele při správě daně ze závislé činnosti; jde o novou podmíněnou povinnost."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-5",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí novou spotřební daň z kratomu a související povolení, značení, evidenci a sankce pro jeho výrobce a prodejce.",
+          "effectCz": "Předchozí zákon daň z kratomu neobsahoval. Návrh stanoví sazby 2, 10 nebo 20 Kč za gram či mililitr podle druhu a koncentrace, doplňuje povinnosti spojené s daňovým skladem, značením a evidencí a zavádí pokuty. Daňové i administrativní zatížení dotčených podnikatelů se zvyšuje."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-68",
+          "relevant": true,
+          "reasonCz": "Vyhláška upravuje obsah a elektronický formát formulářových podání k dorovnávacím daním, tedy praktické daňové povinnosti dotčených skupin.",
+          "effectCz": "Vyhláška stanoví strukturu přiznání a informačního přehledu a požaduje podání ve formátu XML. Předchozí formuláře ani jejich formát balíček neuvádí, takže nelze určit, zda se administrativní požadavky oproti předchozímu stavu zpřísnily."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-39",
+          "relevant": true,
+          "reasonCz": "Vládní plán počítá s návrhem, který má nadnárodním firmám uložit povinnost předem deklarovat dokumentaci k tvorbě obvyklých cen.",
+          "effectCz": "Usnesení samo stanoví legislativní záměr, nikoli již účinné pravidlo. Zamýšlená povinnost předem připravovat a deklarovat dokumentaci k převodním cenám by zvýšila daňovou administrativu; dosavadní právní úprava ani její změna zde doloženy nejsou."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně počítá se zavedením evidence tržeb a souvisejícími daňovými změnami.",
+          "effectCz": "Usnesení pouze plánuje návrh zákona, nikoli samo účinné daňové pravidlo. Plánovaný režim evidence tržeb by ukládal nové povinnosti evidovat platby; současně plán uvádí daňové úlevy a další změny DPH, takže jeho celkový dopad je smíšený."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Dodaný odstavec řeší pouze zápis změny vlastníka diplomatického vozidla při nevrácení DPH a nedokládá dopad na investory ani širší daňovou administrativu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-31",
+          "relevant": false,
+          "reasonCz": "Dodaný text upravuje digitální obchod a výslovně ponechává možnost vnitřních daní, sám však žádné daňové pravidlo ani povinnost nemění.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-c002c714a2--source",
+        "psp-core-2025--law-change-43174-approved-41",
+        "psp-core-2025--law-change-43208-1-2",
+        "psp-core-2025--law-change-43208-1-3",
+        "psp-core-2025--law-change-43208-1-4",
+        "psp-core-2025--law-change-43208-1-5",
+        "psp-core-2025--law-change-43216-2",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--law-change-43310-3",
+        "psp-core-2025--law-change-43310-4",
+        "psp-core-2025--law-change-43335-5",
+        "psp-core-2025--law-change-43378-1",
+        "psp-core-2025--law-change-43422-4",
+        "psp-core-2025--law-change-43423-1",
+        "psp-core-2025--law-change-43443-5",
+        "esbirka-regulations--law-change-sb-2026-68",
+        "zvlady-resolutions--law-change-uv-2026-175-39",
+        "zvlady-resolutions--law-change-uv-2026-175-117",
+        "psp-core-2025--print-step-210766",
+        "psp-core-2025--government-opinion-43216-1",
+        "zvlady-resolutions--2026-175",
+        "esbirka-regulations--2026-68",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--print-step-211537",
+        "psp-core-2025--amendment-1547",
+        "psp-core-2025--amendment-text-1547",
+        "psp-core-2025--amendment-1561",
+        "psp-core-2025--amendment-text-1561",
+        "psp-core-2025--vote-88086",
+        "psp-core-2025--vote-88281",
+        "psp-core-2025--vote-88282",
+        "psp-core-2025--vote-88289",
+        "psp-core-2025--vote-88291",
+        "psp-core-2025--vote-88292",
+        "psp-core-2025--vote-88297",
+        "psp-core-2025--vote-88298",
+        "psp-core-2025--vote-88353",
+        "psp-core-2025--vote-88355",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-211887",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--print-step-212103",
+        "psp-core-2025--print-step-212242"
+      ],
+      "explanationCz": "Vláda ANO předložila návrh na obnovení evidence tržeb a poslanci ANO jej podpořili i po vrácení Senátem, horní komorou Parlamentu. Nový režim ukládá podnikatelům evidovat široký okruh plateb a elektronicky předávat údaje správci daně, takže zvyšuje administrativní povinnosti. ANO zároveň podpořilo některé úlevy, například změnu pro malé provozovatele úložišť elektřiny, a navrhlo zvýšit hranici příjmů pro povinnost podat daňové přiznání. Celkově však rozhodnutí o evidenci tržeb představuje posun proti části slibu; podklady nedokládají, že by každá z uvedených změn skutečně odrazovala investory.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají nové evidenční a oznamovací povinnosti, ale neprokazují, zda tyto změny skutečně odradí investory; proto je závěr omezen na část slibu týkající se administrativní zátěže.",
+        "U pozměňovacího návrhu na vypuštění části daňových změn ANO jednou hlasovalo pro a později proti; tento rozpor nemění skutečnost, že následně podpořilo celý návrh evidence tržeb."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0545df6178dd7c34016aec4aaf229487d19efef226b09bc348",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 255889,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 255886
+      },
+      "output_tokens": 10876,
+      "output_tokens_details": {
+        "reasoning_tokens": 5675
+      },
+      "total_tokens": 266765
+    },
+    "output": {
+      "promiseId": "ano-2025-c002c714a2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-41",
+          "relevant": true,
+          "reasonCz": "Změna daňového režimu elektřiny pro provozovatele úložišť přímo rozšiřuje daňové výjimky a mění jejich povinnosti.",
+          "effectCz": "Dosavadní osvobození elektřiny z ekologických zdrojů v odběrném místě se vztahovalo na výkon nejvýše 50 kW, nově se hranice zvyšuje na 100 kW. Provozovatelé úložišť se nově zahrnují mezi osoby oprávněné nabývat elektřinu bez daně, u malých zařízení do 100 kW se zároveň zavádí výjimka z povinnosti vést evidenci; u licencovaných provozovatelů se naopak požaduje doklad o licenci. Jde tedy o kombinaci rozšíření daňových úlev a nových či upravených požadavků, přičemž administrativní povinnost u menších zařízení se snižuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1-2",
+          "relevant": true,
+          "reasonCz": "Návrh zahrnuje nové daňové oznamování kryptoaktiv a doplňuje údaje, které mají podniky oznamovat při správě daní.",
+          "effectCz": "Návrh doplňuje údaje o identifikační službě do hlášení provozovatelů platforem a vytváří novou úpravu automatické výměny informací o kryptoaktivech. Pro nově vloženou úpravu kryptoaktiv předchozí znění v podkladech chybí; dodaný kontext uvádí jen dosavadní pravidlo, že oznamující provozovatelé platforem mají postavení daňového subjektu. Nová úprava rozšiřuje rozsah oznamování, a tedy i administrativních povinností."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1-3",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje daňové výkaznictví a evidenční povinnosti finančních institucí a dalších subjektů.",
+          "effectCz": "Dosavadní pravidla automatické výměny zahrnovala vymezené kategorie informací, například údaje finančních institucí, nadnárodních skupin a provozovatelů platforem; návrh k nim přidává informace o kryptoaktivech a dorovnávacích daních. U některých povinností nově dovoluje správci daně uložit zvláštní záznamy uchovávané deset let a zvyšuje horní hranici některých pokut z 500 000 Kč na 1 500 000 Kč. Rozsah daňových oznamovacích a evidenčních povinností i sankční tlak se tím zvětšují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1-4",
+          "relevant": true,
+          "reasonCz": "Nové definice a postupy náležité péče pro kryptoaktiva rozšiřují povinnosti finančních a krypto-subjektů při daňovém oznamování.",
+          "effectCz": "Dosavadní definice depozitních a investičních institucí a finančního majetku v dodaném kontextu kryptoaktiva výslovně nezahrnovaly; návrh je do definic doplňuje a přidává rozsáhlé postupy náležité péče pro oznamovatele kryptoaktiv. U nově vložených pravidel není v balíčku k dispozici předchozí znění. Změna rozšiřuje okruh údajů a prověřování, které musí dotčené subjekty provádět."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1-5",
+          "relevant": true,
+          "reasonCz": "Navržené související články stanovují nové náležitosti daňových prohlášení a podklady k daňovému oznamování kryptoaktiv.",
+          "effectCz": "U nových požadavků na obsah čestných prohlášení, možnost využít třetí stranu při náležité péči a definice aktivních entit balíček neuvádí předchozí znění, takže přesný rozdíl proti dosavadním povinnostem nelze určit. Návrh však stanoví konkrétní další údaje a postupy pro daňové oznamovatele kryptoaktiv, čímž ukládá nové administrativní požadavky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43216-2",
+          "relevant": false,
+          "reasonCz": "Návrh pouze zvyšuje maximální sazbu poplatku z pobytu z 50 na 100 Kč; podklady nedokládají, že by tento poplatek zvyšoval daňovou administrativu nebo zatěžoval investory ve smyslu slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Nový systém evidence tržeb ukládá podnikatelům plošné povinnosti evidovat a elektronicky oznamovat tržby.",
+          "effectCz": "Jde o nový zákon, takže nemá předchozí znění, které by bylo možné porovnat. Zavádí povinnost evidovat široce vymezené podnikatelské tržby, získat certifikát, oznamovat údaje o evidenčních jednotkách a posílat finanční správě údaje o transakcích; v některých případech stanoví pokuty až 500 000 Kč. Výjimky se týkají vymezených činností a osob, ale základní administrativní povinnost pro dotčené podnikatele vzniká nově."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Část návrhu mění daň z příjmů, zavádí zvláštní režim pro vyhnutí se evidenci tržeb a přidává související daňové povinnosti.",
+          "effectCz": "Dosavadní znění zákona o daních z příjmů neobsahovalo přirážku za vyjmutí z evidence tržeb ani související režim; návrh zavádí přirážku 1 400 Kč měsíčně pro vymezené poplatníky v prvním pásmu paušálního režimu. Zároveň zavádí nové slevy na studenta a za umístění dítěte a upravuje osvobození spropitného, přičemž pro jejich uplatnění stanoví podmínky a doklady; u předškolních zařízení nově ukládá každoroční elektronické oznamování údajů o dětech a platbách. Některé změny daňovou povinnost snižují, ale vzniká také další členění režimů a administrativních úkonů; přesný rozsah všech nových ustanovení vůči dřívější úpravě nelze u částí, které kontext označuje jako nově vložené, předem porovnat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Návrh mění pravidla DPH pro podniky, včetně odpočtů, nedobytných pohledávek a sazby na nápoje ve stravovacích službách.",
+          "effectCz": "U nedobytných pohledávek se hranice jedné pohledávky zvyšuje z 10 000 na 20 000 Kč a souhrnný roční limit z 20 000 na 100 000 Kč, zatímco doba splatnosti se zkracuje ze šesti na tři měsíce. U vybraných osobních automobilů se ruší dosavadní omezení odpočtu DPH včetně limitu 420 000 Kč; tím se možnost odpočtu rozšiřuje. U stravovacích služeb se snížená sazba rozšiřuje z pitné vody a vybraných nápojů na podávání jiných než alkoholických nápojů. Jde o kombinaci rozšíření nároků a změn povinností; část pravidel se uvolňuje, část se mění směrem k rychlejší povinné opravě odpočtu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": true,
+          "reasonCz": "Část rozšiřuje kontrolní nákupy finanční správy na povinnosti při evidenci tržeb a upravuje zpracování údajů k této kontrole.",
+          "effectCz": "Dosud mohl orgán finanční správy provádět kontrolní nákup při prověřování povinností podle zákona o mezinárodní spolupráci při správě daní; návrh tuto pravomoc rozšiřuje také na evidenci tržeb a další daňové či účetní předpisy. Do analytické evidence se nově výslovně zahrnují údaje od daňového subjektu při plnění povinností evidence tržeb. Rozšiřuje se tak dosah kontrolního a datového režimu, nikoli samotná daňová sazba."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-5",
+          "relevant": false,
+          "reasonCz": "Nová povinnost zaměstnavatelů předávat údaje o cizincích slouží k pobytové agendě a podklady neukazují, že by měnila daňové pravidlo nebo daňovou administrativu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": true,
+          "reasonCz": "Navržená smlouva upravuje zdanění licenčních poplatků mezi Českem a Argentinou, tedy pravidla důležitá pro přeshraniční investice a podnikání.",
+          "effectCz": "Jde o novou smlouvu, nikoli změnu již uvedeného českého ustanovení, a předchozí smluvní znění v balíčku chybí. U licenčních poplatků stanoví daň v zemi zdroje nejvýše 5 % u vymezených autorských práv a 10 % v ostatních případech; při nesplnění argentinského požadavku na registraci smlouvy může být argentinská daň až 15 %. Uvedené limity mohou snížit daňové zatížení některých přeshraničních příjmů, přičemž celkový dopad bez předchozího smluvního znění nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Nové pravidlo pouze brání převodu vlastnictví diplomatického vozidla při nevrácené DPH; neukládá obecnou daňovou změnu investorům ani podnikatelům.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-4",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá poskytovatelům úvěrů a produktů spoření a předškolním zařízením nová elektronická daňová hlášení s údaji o klientech a platbách.",
+          "effectCz": "Nové odstavce § 38t ukládají roční elektronické oznamování údajů o klientech, smlouvách, úrocích či příspěvcích a o výdajích za předškolní zařízení. Pro tyto nově doplněné povinnosti balíček nepřináší jejich předchozí znění, takže přesný rozdíl v administrativě proti případným dosavadním povinnostem nelze z něj určit. Návrh však stanoví konkrétní další daňové údaje a termín jejich předání správci daně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43423-1",
+          "relevant": true,
+          "reasonCz": "Návrh o platformové práci určuje, že při zjištění pracovněprávního vztahu musí být plněny zaměstnavatelské daňové a pojistné povinnosti.",
+          "effectCz": "Jde o nový zákon a předchozí znění v balíčku chybí. Při pravomocném určení pracovněprávního vztahu ukládá platformě zajistit, aby zprostředkovatel plnil povinnosti zaměstnavatele při správě daně z příjmů ze závislé činnosti a pojistného. Rozšiřuje tak povinnosti pro dotčené platformy a zprostředkovatele, avšak jde o podmíněný režim pro konkrétní postavení pracovníka."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-5",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí novou spotřební daň z kratomu a s ní související evidenci, značení, povolení a sankce.",
+          "effectCz": "Jde o novou daňovou úpravu bez předchozího znění v balíčku. Zavádí daň z kratomu ve výši 2, 10 nebo 20 Kč za gram či mililitr podle koncentrace a druhu výrobku; současně stanoví daňové sklady, značení, evidenci uchovávanou deset let a pokuty až 10 milionů Kč. Zvyšuje tedy daňové zatížení i administrativní a provozní požadavky v dotčeném odvětví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-31",
+          "relevant": true,
+          "reasonCz": "Navržená dohoda upravuje cla na elektronické přenosy a výslovně zachovává možnost vnitrostátních daní, což se přímo týká daňových pravidel digitálního obchodu.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího znění v balíčku. Strany se zavazují neukládat cla na elektronické přenosy mezi osobami z obou stran, ale mohou nadále ukládat vnitrostátní daně, poplatky a jiné platby v souladu s dohodou. Uvedené pravidlo odstraňuje jednu možnou celní zátěž, ale samo nesnižuje domácí daně."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-68",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví elektronickou podobu formulářů k dorovnávacím daním pro velké skupiny, tedy další konkrétní daňové administrativní požadavky.",
+          "effectCz": "Vyhláška stanoví strukturu daňového přiznání a informačního přehledu k dorovnávacím daním a požaduje elektronické podání ve formátu XML. Jde o formulářová pravidla vydaná podle daňového řádu; předchozí formulářový režim v balíčku uveden není, takže změnu proti němu nelze porovnat. Pro dotčené velké skupiny stanoví konkrétní formát a strukturu podání."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-39",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací počítá s povinnou předem připravenou dokumentací nadnárodních firem k určování obvyklých cen.",
+          "effectCz": "Jde o plánovaný návrh zákona, nikoli o platnou změnu; předchozí pravidlo v balíčku chybí. Plán předpokládá povinnou předem deklarovanou dokumentaci k cenám obvyklým, což by rozšířilo daňovou evidenci nadnárodních firem. Návrh by tedy zvýšil jejich administrativní povinnost, pokud by byl přijat."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+          "relevant": true,
+          "reasonCz": "Vláda zařadila do legislativního plánu nový systém evidence tržeb a související daňové změny.",
+          "effectCz": "Usnesení plánuje předložit návrh evidence tržeb, který má zavést elektronické zaznamenávání tržeb, a související změny daně z příjmů a DPH včetně úlev a osvobození. Jde o návrh do budoucna, nikoli o účinnou povinnost; plánovaný systém rozšiřuje evidenční režim, zatímco některé doprovodné změny snižují daňové zatížení."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-c002c714a2--source",
+        "psp-core-2025--law-change-43174-approved-41",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43208-1-2",
+        "psp-core-2025--law-change-43208-1-3",
+        "psp-core-2025--law-change-43208-1-4",
+        "psp-core-2025--law-change-43208-1-5",
+        "psp-core-2025--print-step-210766",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--law-change-43310-3",
+        "psp-core-2025--law-change-43310-4",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--amendment-text-1547",
+        "psp-core-2025--amendment-1547",
+        "psp-core-2025--vote-88086",
+        "psp-core-2025--vote-88281",
+        "psp-core-2025--vote-88282",
+        "psp-core-2025--amendment-text-1561",
+        "psp-core-2025--amendment-1561",
+        "psp-core-2025--amendment-text-1551",
+        "psp-core-2025--vote-88289",
+        "psp-core-2025--vote-88290",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--law-change-43378-1",
+        "psp-core-2025--print-step-211887",
+        "psp-core-2025--law-change-43422-4",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--law-change-43423-1",
+        "psp-core-2025--print-step-212103",
+        "psp-core-2025--law-change-43443-5",
+        "psp-core-2025--print-step-212242",
+        "psp-core-2025--law-change-43453-31",
+        "psp-core-2025--print-step-212285",
+        "esbirka-regulations--law-change-sb-2026-68",
+        "esbirka-regulations--2026-68",
+        "zvlady-resolutions--law-change-uv-2026-175-39",
+        "zvlady-resolutions--law-change-uv-2026-175-117",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda ANO předložila návrh nového systému evidence tržeb a poslanci ANO jej po úpravách v Senátu znovu podpořili; zákon ukládá podnikatelům elektronicky evidovat a oznamovat tržby. To představuje konkrétní rozšíření daňové administrativy, které jde proti části slibu odmítající takovou zátěž. Návrh obsahuje i daňové úlevy a výjimky, například pro malé provozovatele úložišť elektřiny, ty však neruší hlavní nově zavedenou evidenční povinnost. Protože jde o dílčí rozpor se slibem, nikoli o jeho úplné popření, hodnocení zůstává na částečně záporné úrovni.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady nevyčíslují, nakolik evidence tržeb skutečně odradí investory; doložena je především nová administrativní povinnost pro podnikatele.",
+        "Návrh evidence tržeb současně obsahuje daňové úlevy a výjimky a vláda předložila i další změny, které některé daňové povinnosti zmírňují. Tyto protichůdné kroky jsou v hodnocení zachovány, ale nezvracejí pozdější rozhodnutí Sněmovny o evidenci tržeb."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

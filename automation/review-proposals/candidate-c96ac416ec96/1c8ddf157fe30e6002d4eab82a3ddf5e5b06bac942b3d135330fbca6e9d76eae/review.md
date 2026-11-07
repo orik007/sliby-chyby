@@ -1,0 +1,93 @@
+# Dostupná péče hrazená ze zdravotního pojištění
+
+> Nezveřejněný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
+
+## Návrh pro veřejný web
+
+Toto je jediná část dokumentu určená jako kandidát veřejného textu. Musí být srozumitelná bez znalosti projektu, práva nebo fungování Poslanecké sněmovny.
+
+### Hodnocení
+
+**Směřuje ke splnění (+1)**
+
+### Vysvětlení
+
+SPD se ve volebním programu zavázala hájit dostupnou zdravotní péči hrazenou ze zdravotního pojištění. Poslanci SPD podpořili změnu zákona o zajišťování obrany, která umožňuje Ministerstvu obrany zřídit státní organizaci poskytující zdravotní služby vojákům a případně i dalším lidem; jde však jen o možnost rozšířit nabídku, nikoli o záruku péče hrazené pojištěním. Vláda, v níž SPD působí, také navrhla zvýšit měsíční základ státních plateb za pojištěnce z 14 074 na 18 362 Kč od roku 2027 a poslanci SPD podpořili pravidla, která umožňují lépe reagovat na nedostupnost zdravotnických prostředků. Strana zároveň hlasovala pro pravidlo vážící úhrady péče na finanční saldo pojišťoven, což může jejich prostor pro financování omezit. Dosavadní kroky proto přinášejí jen dílčí možnost posunu, nikoli jistotu dostupné pojištěné péče.
+
+## Co má zkontrolovat reviewer
+
+- Odpovídá navržené hodnocení metodice SLAVA Indexu?
+- Je jednání správně připsáno sledované straně?
+- Je veřejné vysvětlení pochopitelné samo o sobě a říká, kdo co udělal a jak to souvisí se slibem?
+- Jsou zkratky, právní pojmy a úřední označení při prvním použití vysvětlené?
+- Dokládají uvedené zdroje všechna podstatná tvrzení a nechybí rozporný podklad?
+
+## Technické podklady pro reviewera
+
+- Výsledek automatického procesu: oba automatické posudky se shodly
+- Interní stav: `moving-towards`
+- Důvod výsledku: `assessor-consensus`
+- Úplný strojový audit: `assessment-run.json`
+- Přesný balíček posuzovaných podkladů: `evidence-package.json`
+
+### Shoda hodnotitelů
+
+Oba nezávislí hodnotitelé dospěli ke stejnému výsledku: **Směřuje ke splnění (+1)**.
+
+Co zůstává nejisté:
+
+- Text samotné česko-slovenské smlouvy o spolupráci záchranných služeb v podkladech chybí, takže nelze posoudit konkrétní nároky pacientů ani úhradu péče; SPD ji přesto podpořila.
+- Možnost zřídit zdravotnickou organizaci Ministerstva obrany nezaručuje její vznik, otevření péče dalším osobám ani úhradu těchto služeb ze zdravotního pojištění.
+- Dopad vazby úhrad na saldo pojišťoven závisí na jejich skutečné finanční situaci; podklady nedokládají, zda tato pravidla povedou ke snížení nebo zvýšení konkrétních úhrad.
+- SPD nejprve nezískala většinovou podporu svých poslanců pro první hlasování o pravidlech dostupnosti zdravotnických prostředků, později však většinově podpořila senátní úpravy. Pozdější hlasování je příznivější, ale výsledný zákon sám nezaručuje dostupnost všech prostředků.
+
+Úplné oddělené odpovědi obou hodnotitelů zůstávají v souboru `assessment-run.json`.
+
+### Souvisí změny zákonů se slibem?
+
+| Změna zákona | První posudek | Druhý posudek |
+| --- | --- | --- |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Vládní návrh, kterým se předkládá Parlamentu České republiky k vyslovení souhlasu s ratifikací Rámcová smlouva mezi Českou republikou a Slovenskou republikou o přeshraniční spolupráci v oblasti zdravotnické záchranné služby podepsaná v Praze dne 4. července 2025](https://www.psp.cz/sqw/text/orig2.sqw?idd=265023) | ano: Smlouva o přeshraniční spolupráci záchranných služeb může přímo souviset s dostupností urgentní péče, ale její konkrétní ustanovení v podkladech chybí.<br>Dopad: Jde o novou smlouvu, takže nemá předchozí znění měněného zákona; podle dodaného textu stanoví rámec přeshraniční spolupráce české a slovenské záchranné služby. Její konkrétní pravidla ani případné hrazení péče z pojištění podklady neuvádějí, a proto nelze určit, zda a jak mění dostupnost pojištěné péče. | ano: Smlouva se výslovně týká přeshraniční spolupráce zdravotnických záchranných služeb, tedy dostupnosti alespoň části zdravotní péče.<br>Dopad: Jde o novou mezinárodní smlouvu, nikoli změnu dřívějšího českého zákonného pravidla; předložený text uvádí pouze její název a sděluje, že úplný text je dostupný v nepřiloženém souboru. Z podkladů proto lze určit jen to, že vytváří rámec přeshraniční spolupráce záchranných služeb, nikoli její konkrétní povinnosti, dopad na hrazení péče z pojištění ani rozsah, v němž dostupnost zvyšuje. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Vládní návrh zákona, kterým se mění zákon č. 375/2022 Sb., o zdravotnických prostředcích a diagnostických zdravotnických prostředcích in vitro, ve znění pozdějších předpisů](https://www.psp.cz/sqw/text/orig2.sqw?idd=269524) | ano: Změna vytváří pravidla pro sledování nedostupnosti zdravotnických prostředků a pro zásah státu, což může ovlivnit dostupnost péče.<br>Dopad: Dosavadní znění uvedených ustanovení zákona nemělo nově vkládané povinnosti hlásit hrozící výpadky ani zvláštní postup pro šetření dostupnosti prostředků. Nově se zavádí hlášení a poskytování údajů a ministerstvo může dočasně upravit podmínky dodávání, předepisování, výdeje či používání prostředku. Rozšiřují se tak nástroje k předcházení nedostupnosti, ale případné omezení používání nebo výdeje může dostupnost konkrétního prostředku také omezit. | ano: Novela vytváří postupy pro řešení hrozící nedostupnosti zdravotnických prostředků, což může ovlivnit dostupnost zdravotní péče.<br>Dopad: Předchozí znění zákona podle dodaného kontextu neobsahovalo zvláštní oznamovací a šetřicí postupy ani nové § 53a pro nedostupnost prostředků. Návrh zavádí hlášení očekávaného přerušení dodávek, povinnost poskytovat údaje a možnost ministerstva dočasně upravit podmínky uvádění, předepisování, výdeje či používání prostředku; přidává také sankce za porušení těchto povinností. Tím posiluje možnosti předcházet nedostupnosti prostředků, zároveň ale umožňuje dočasné omezení jejich používání či dodávání; nemění přímo nárok pacientů na péči hrazenou pojištěním. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o urychlení výstavby strategicky významné infrastruktury](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389) | ne: Tato část mění pravidla pro výstavbu energetické a jiné strategické infrastruktury, nikoli dostupnost zdravotní péče hrazené z pojištění. | ano: Schválená verze zahrnuje některé veřejné nemocnice mezi strategické stavby a otevírá jim zvláštní povolovací režim, což může podpořit dostupnost péče.<br>Dopad: Předchozí znění zákona nemělo kategorii strategické stavby zdravotnické infrastruktury; schválená verze ji zavádí pro fakultní nemocnice včetně nových areálů, podstatného rozšíření či komplexní obnovy a pro vymezená lůžková zařízení s investicí nad 1 miliardu Kč. Tato zařízení tak mohou využít zvláštní režim zákona o urychlení výstavby strategicky významné infrastruktury a snáze projít povolováním. Navržená verze této části upravovala pravidla pro jiné druhy infrastruktury a nemocnice do ní ještě nezařazovala; dopad na skutečný vznik služeb ani jejich hrazení pojištěním není doložen. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o zajišťování obrany České republiky](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389) | ano: Nové ustanovení umožňuje zřídit státní organizaci poskytující zdravotní služby vojákům a za určitých podmínek i dalším osobám.<br>Dopad: Předchozí znění § 6 zákona o zajišťování obrany takovou výslovnou možnost zřízení zdravotnické státní organizace neobsahovalo. Nově ji Ministerstvo obrany získává a organizace může poskytovat péči také dalším osobám, pokud tím neomezí péči o vojáky. Rozšiřuje se tedy možnost zajistit kapacitu péče, ale text nezaručuje její zřízení ani úhradu ze zdravotního pojištění. | ano: Nové ustanovení umožňuje zřídit poskytovatele zdravotních služeb pro vojáky a za podmínek také léčit další osoby.<br>Dopad: Předchozí znění zákona podle kontextu zvláštní státní příspěvkovou organizaci pro zajišťování obrany neupravovalo. Nové § 6a umožňuje ministerstvu obrany takovou organizaci zřídit; pokud poskytuje zdravotní služby vojákům, může léčit i další osoby, nesmí-li tím být omezena péče o vojáky. Jde o omezenou možnost rozšířit okruh poskytovatelů, nikoli o záruku dostupnosti hrazené péče pro občany obecně. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Návrh poslance Adama Vojtěcha na vydání zákona, kterým se mění zákon č. 592/1992 Sb., o pojistném na veřejné zdravotní pojištění, ve znění pozdějších předpisů](https://www.psp.cz/sqw/text/orig2.sqw?idd=269526) | ano: Změna přímo upravuje rozdělení prostředků systému veřejného zdravotního pojištění mezi zdravotní pojišťovny.<br>Dopad: Dosavadní § 21b upravoval běžné měsíční vyrovnávání plateb mezi pojišťovnami; nové odstavce stanoví jednorázové přerozdělení 7,879 miliardy Kč v roce 2026. VZP má dostat o tuto částku méně a zaměstnanecké pojišťovny více, podle počtu standardizovaných pojištěnců; schválené znění přesouvá platbu z března na červen. Celkový objem prostředků se tím nezvyšuje, pouze se přerozděluje, takže dopad na dostupnost péče nelze z textu určit. | ne: Návrh pouze přerozděluje 7,879 miliardy Kč mezi Všeobecnou zdravotní pojišťovnu a zaměstnanecké pojišťovny, ale nemění celkový objem prostředků ani nárok občanů na dostupnou péči. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o pravidlech rozpočtové odpovědnosti](https://e-sbirka.gov.cz/sb/2026/155/0000-00-00) | ano: Nová pravidla výslovně vážou výši úhrad zdravotní péče na schválené saldo zdravotních pojišťoven, a mohou tak ovlivnit prostředky dostupné na hrazenou péči.<br>Dopad: Předchozí znění zákona o rozpočtové odpovědnosti zdravotním pojišťovnám ukládalo rozpočtové povinnosti, ale neobsahovalo nově zavedené pravidlo, že jejich saldo je závazné pro stanovení hodnoty bodu, úhrad hrazených služeb, záloh a regulačních omezení. Nově se tyto parametry musí řídit schváleným saldem, s výjimkou mimořádné události vážně ohrožující životy nebo zdraví. Jde o přísnější vazbu úhrad na finanční bilanci pojišťoven, která může při nepříznivém saldu omezit prostor pro financování péče. | ano: Novela váže hospodaření zdravotních pojišťoven na určování úhrad za hrazené služby, a tím může ovlivnit jejich dostupnost.<br>Dopad: Předchozí pravidla odvozovala výdajový rámec státního rozpočtu a státních fondů z celkových výdajů veřejných institucí, ale nečinila saldo zdravotních pojišťoven závazným pro stanovení úhrad za zdravotní služby. Schválená a následně přijatá verze stanoví, že vláda schvaluje saldo pojišťoven spolu s návrhem státního rozpočtu a že toto saldo je pro Ministerstvo zdravotnictví závazné při stanovení hodnoty bodu, úhrad hrazených služeb, záloh a regulačních omezení; výjimkou je mimořádná událost ve značném rozsahu ohrožující životy či zdraví. Tím zavádí přísnější finanční omezení rozhodování o úhradách, které může dostupnost hrazené péče limitovat; konkrétní snížení úhrad ale text nestanoví. Ostatní změny upravují zejména pravidla rozpočtové odpovědnosti, prognózy a působnost rozpočtových institucí a samy o sobě pravidla přístupu k péči nemění. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Vládní návrh zákona, kterým se mění zákon č. 592/1992 Sb., o pojistném na veřejné zdravotní pojištění, ve znění pozdějších předpisů](https://www.psp.cz/sqw/text/orig2.sqw?idd=277512) | ano: Návrh přímo zvyšuje základ, z něhož se počítají platby státu do veřejného zdravotního pojištění.<br>Dopad: Dosavadní § 3c stanoví vyměřovací základ státní platby na 14 074 Kč měsíčně; návrh jej zvyšuje na 18 362 Kč, tedy o 4 288 Kč, přibližně o 30,5 %, a počítá s účinností od 1. ledna 2027. Vyšší základ zvětšuje zdroj prostředků určených na pojištění, a může tak podpořit financování hrazené péče. Návrh zároveň posouvá první použití pravidelného přepočtu z roku 2024 na rok 2029. | ano: Návrh zvyšuje vyměřovací základ pro pojistné hrazené státem, což může posílit financování péče z veřejného zdravotního pojištění.<br>Dopad: Dosavadní § 3c odst. 1 stanoví vyměřovací základ pro státem hrazené pojistné na 14 074 Kč měsíčně; návrh jej zvyšuje na 18 362 Kč. Dosavadní § 3c odst. 2 počítá s každoročním zvyšováním a uvádí první použití od roku 2024, zatímco návrh posouvá tento údaj na rok 2029; přechodné ustanovení stanoví první použití nového postupu pro rok 2029. Vyšší základ může zvýšit platby státu do systému, ale odklad automatického přepočtu může působit opačně a celkový čistý dopad oproti budoucímu vývoji nelze z podkladů určit; jde zatím pouze o vládní návrh. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o veřejném zdravotním pojištění](https://www.psp.cz/sqw/text/orig2.sqw?idd=279436) | ne: Změna se týká vynětí z pojištění u vymezených případů nelegální práce cizinců, nikoli závazku dostupné péče hrazené pojištěním pro občany ČR. | ne: Změna se týká vynětí zahraničních pracovníků pracujících nelegálně, nikoli dostupnosti pojištěné péče pro občany České republiky. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o zaměstnanosti](https://www.psp.cz/sqw/text/orig2.sqw?idd=279436) | ano: Návrh upravuje povinnost odvádět pojistné na veřejné zdravotní pojištění při nehlášené práci, a tím se přímo dotýká financování pojištění.<br>Dopad: Ustanovení § 141c, které návrh nově vkládá, dosud v dodaném kontextu nemá předchozí znění. Návrh ukládá osobě umožňující nehlášenou práci uhradit částku odpovídající mimo jiné pojistnému na veřejné zdravotní pojištění, které by jinak odvedla jako zaměstnavatel. Tím se rozšiřuje možnost vymáhat pojistné v těchto případech, ale podklady nevyčíslují dopad na příjmy systému ani na dostupnost péče. | ne: Změny zákona o zaměstnanosti se slibu o dostupné zdravotní péči hrazené ze zdravotního pojištění věcně netýkají. |
+
+Oba hodnotitelé tyto změny shodně označili za nesouvisející, proto je další balíčky tohoto slibu vynechají, dokud se nezmění jejich text, kontext, znění slibu nebo pokyny hodnotitelů:
+
+- Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o veřejném zdravotním pojištění
+
+### Zdroje použité při hodnocení
+
+- [Původní volební slib](https://spd.cz/wp-content/uploads/2025/09/Program-SPD-pro-volby-do-Poslanecke-snemovny-2025.pdf)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Vládní návrh, kterým se předkládá Parlamentu České republiky k vyslovení souhlasu s ratifikací Rámcová smlouva mezi Českou republikou a Slovenskou republikou o přeshraniční spolupráci v oblasti zdravotnické záchranné služby podepsaná v Praze dne 4. července 2025](https://www.psp.cz/sqw/text/orig2.sqw?idd=265023)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Vládní návrh zákona, kterým se mění zákon č. 375/2022 Sb., o zdravotnických prostředcích a diagnostických zdravotnických prostředcích in vitro, ve znění pozdějších předpisů](https://www.psp.cz/sqw/text/orig2.sqw?idd=269524)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o urychlení výstavby strategicky významné infrastruktury](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o zajišťování obrany České republiky](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Návrh poslance Adama Vojtěcha na vydání zákona, kterým se mění zákon č. 592/1992 Sb., o pojistném na veřejné zdravotní pojištění, ve znění pozdějších předpisů](https://www.psp.cz/sqw/text/orig2.sqw?idd=269526)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o pravidlech rozpočtové odpovědnosti](https://e-sbirka.gov.cz/sb/2026/155/0000-00-00)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Vládní návrh zákona, kterým se mění zákon č. 592/1992 Sb., o pojistném na veřejné zdravotní pojištění, ve znění pozdějších předpisů](https://www.psp.cz/sqw/text/orig2.sqw?idd=277512)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o zaměstnanosti](https://www.psp.cz/sqw/text/orig2.sqw?idd=279436)
+- [Usnesení Senátu, kterým vrátil návrh Sněmovně](https://www.psp.cz/sqw/text/orig2.sqw?idd=270080)
+- [Usnesení Senátu, kterým vrátil návrh Sněmovně](https://www.psp.cz/sqw/text/orig2.sqw?idd=277454)
+- [Usnesení Senátu, kterým vrátil návrh Sněmovně](https://www.psp.cz/sqw/text/orig2.sqw?idd=279114)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=67)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=90)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=87045)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=87078)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=87271)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=87430)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=87487)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=235)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=88105)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=88252)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=88416)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=300)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=88454)
+
+Tento návrh nahrazuje starší automatický posudek, který zůstává zachovaný v auditní historii.
+

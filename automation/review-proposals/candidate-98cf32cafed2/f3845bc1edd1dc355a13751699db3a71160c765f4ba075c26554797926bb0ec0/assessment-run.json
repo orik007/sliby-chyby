@@ -1,0 +1,256 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-05-22-443Z--cf803aea7225",
+  "evaluatedAt": "2026-11-05T10:05:22.443Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-98cf32cafed2/cf803aea7225789e7c2057b941873d975f39c45bdcc4ce3e3aaaf26ccce94aff.json",
+  "packageHash": "cf803aea7225789e7c2057b941873d975f39c45bdcc4ce3e3aaaf26ccce94aff",
+  "assessmentContentHash": "8f875a1b4f6f72717b7e1a199364a7eba655bd30c67fbb0b394d31698a442d27",
+  "assessmentFingerprint": "f3845bc1edd1dc355a13751699db3a71160c765f4ba075c26554797926bb0ec0",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-98cf32cafed2",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-98cf32cafed2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o státní rozpočet a předložené pozměňovací návrhy k němu výslovně počítají s výdaji na obranu proti dronům, tedy s prostředky souvisejícími s částí slibu.",
+          "effectCz": "Rozpočtový návrh uvádí, že celkový přehled výdajů a ukazatele podle kapitol jsou v přílohách č. 3 a 4; konkrétní rozpočtové položky ani částky v poskytnutém výňatku nejsou, takže nelze určit, zda schválený rozpočet financování systému detekce či ochrany kritických objektů zvyšuje nebo snižuje."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-122",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví bezpečnostní opatření pro subjekty kritické infrastruktury a výslovně uvádí detekční systémy cizích dronů.",
+          "effectCz": "Vyhláška ukládá subjektům kritické infrastruktury v rámci fyzické bezpečnosti předcházet narušení a stanovovat systém fyzické ochrany; jako technická opatření uvádí, pokud je to technicky možné nebo účelné, také bezpečnostní bezpilotní systémy k monitoringu chráněných prostor a detekční systémy cizích bezpilotních systémů. Protože jde o novou vyhlášku a balíček neobsahuje předchozí znění těchto pravidel, nelze určit změnu oproti dřívějšímu stavu; její obsah ale zavádí opatření odpovídající části slibu, nikoli doložený jednotný systém pro všechny kritické objekty."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-22",
+          "relevant": true,
+          "reasonCz": "Usnesení vlády výslovně zadává přípravu koncepce systému dronové detekce a posílení odolnosti kritických objektů.",
+          "effectCz": "Usnesení pověřuje vládního zmocněnce zpracovat a předložit vládě koncepci systému dronové detekce a posílení odolnosti kritických objektů. Jde o přípravu návrhu, nikoli o zavedení systému; přímo posouvá práci ke slibu, ale samo ještě nezajišťuje jeho uskutečnění."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-98cf32cafed2--source",
+        "psp-core-2025--law-change-43204-1",
+        "esbirka-regulations--law-change-sb-2026-122",
+        "zvlady-resolutions--law-change-uv-2026-22",
+        "zvlady-resolutions--2026-22",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86842",
+        "psp-core-2025--vote-86904",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--amendment-text-523",
+        "psp-core-2025--amendment-text-526",
+        "esbirka-regulations--2026-122"
+      ],
+      "explanationCz": "Vláda usnesením pověřila svého zmocněnce přípravou koncepce systému detekce dronů a ochrany kritických objektů, takže jde o krok k naplnění slibu, ne o zavedení systému. Ministerstvo vnitra poté vydalo vyhlášku o odolnosti kritické infrastruktury, která mezi možná technická opatření výslovně řadí detekční systémy cizích dronů a bezpečnostní bezpilotní systémy. To naplňuje část slibu, ale nedokládá, že už funguje jednotný systém pro všechny kritické objekty. Poslanci ANO nepodpořili dva rozpočtové návrhy na financování obrany proti dronům; schválený rozpočet však v poskytnutém výňatku neukazuje konkrétní související částky.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek státního rozpočtu neobsahuje konkrétní položky ani částky související s detekcí dronů a ochranou kritických objektů, takže nelze posoudit dopad schváleného rozpočtu na tuto část slibu.",
+        "Podklady potvrzují přípravu koncepce a pravidla pro vybraná opatření u kritické infrastruktury, nikoli dokončené zavedení jednotného systému; rozsah uskutečnění slibu proto není doložen."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-98cf32cafed2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Dodané části rozpočtu pouze odkazují na přehledy výdajů a ukazatele v přílohách; neukazují opatření ani výdaje, které by bylo možné spojit se systémem detekce dronů a ochranou kritických objektů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-122",
+          "relevant": true,
+          "reasonCz": "Vyhláška upravuje fyzickou bezpečnost subjektů kritické infrastruktury a výslovně zmiňuje detekční systémy cizích bezpilotních prostředků.",
+          "effectCz": "Jde o novou vyhlášku, takže balíček neobsahuje předchozí znění, s nímž by šlo změnu porovnat. Stanoví fyzická bezpečnostní opatření subjektů kritické infrastruktury, pokud jsou technicky možné nebo účelné, a mezi technickými prostředky uvádí systémy detekce cizích bezpilotních prostředků; jde o dílčí rámec ochrany, nikoli o zavedení celého systému ani o povinnost každého subjektu pořídit právě takový detektor."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-22",
+          "relevant": true,
+          "reasonCz": "Usnesení ukládá připravit koncepci systému detekce dronů a posílení odolnosti kritických objektů, tedy přímo odpovídá tématu slibu.",
+          "effectCz": "Jde o nové usnesení, nikoli změnu dřívějšího právního znění. Ukládá vládnímu zmocněnci zpracovat a předložit koncepci dronové detekce a odolnosti kritických objektů; posouvá přípravu slibovaného řešení, ale samo systém nezavádí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-98cf32cafed2--source",
+        "esbirka-regulations--law-change-sb-2026-122",
+        "zvlady-resolutions--law-change-uv-2026-22",
+        "esbirka-regulations--2026-122",
+        "zvlady-resolutions--2026-22"
+      ],
+      "explanationCz": "Vláda ANO přijala usnesení, které ukládá připravit koncepci systému detekce dronů a posílení odolnosti kritických objektů; jde zatím o přípravný krok, ne o zavedení systému. Ministerstvo vnitra vydalo vyhlášku pro subjekty kritické infrastruktury, která mezi možnými technickými opatřeními uvádí detekční systémy cizích dronů. Vyhláška tak vytváří dílčí rámec ochrany, ale konkrétní detektory požaduje jen tehdy, jsou-li technicky možné nebo účelné. Doklady proto ukazují posun k části slibu, nikoli jeho úplné splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček nedokládá, že systém detekce dronů byl skutečně zaveden nebo že se ochranná opatření u kritických objektů začala prakticky používat.",
+        "Vyhláška zmiňuje detekční systémy jako jednu z možností technických opatření a jejich použití podmiňuje technickou možností nebo účelností; nedokládá plošnou povinnost jejich pořízení."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0a3c4e920ba0ec7b016aec5464afd887d1b3043f0c884a68f3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 19305,
+      "input_tokens_details": {
+        "cache_write_tokens": 12955,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 3326,
+      "output_tokens_details": {
+        "reasoning_tokens": 2212
+      },
+      "total_tokens": 22631
+    },
+    "output": {
+      "promiseId": "candidate-98cf32cafed2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o státní rozpočet a předložené pozměňovací návrhy k němu výslovně počítají s výdaji na obranu proti dronům, tedy s prostředky souvisejícími s částí slibu.",
+          "effectCz": "Rozpočtový návrh uvádí, že celkový přehled výdajů a ukazatele podle kapitol jsou v přílohách č. 3 a 4; konkrétní rozpočtové položky ani částky v poskytnutém výňatku nejsou, takže nelze určit, zda schválený rozpočet financování systému detekce či ochrany kritických objektů zvyšuje nebo snižuje."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-122",
+          "relevant": true,
+          "reasonCz": "Vyhláška stanoví bezpečnostní opatření pro subjekty kritické infrastruktury a výslovně uvádí detekční systémy cizích dronů.",
+          "effectCz": "Vyhláška ukládá subjektům kritické infrastruktury v rámci fyzické bezpečnosti předcházet narušení a stanovovat systém fyzické ochrany; jako technická opatření uvádí, pokud je to technicky možné nebo účelné, také bezpečnostní bezpilotní systémy k monitoringu chráněných prostor a detekční systémy cizích bezpilotních systémů. Protože jde o novou vyhlášku a balíček neobsahuje předchozí znění těchto pravidel, nelze určit změnu oproti dřívějšímu stavu; její obsah ale zavádí opatření odpovídající části slibu, nikoli doložený jednotný systém pro všechny kritické objekty."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-22",
+          "relevant": true,
+          "reasonCz": "Usnesení vlády výslovně zadává přípravu koncepce systému dronové detekce a posílení odolnosti kritických objektů.",
+          "effectCz": "Usnesení pověřuje vládního zmocněnce zpracovat a předložit vládě koncepci systému dronové detekce a posílení odolnosti kritických objektů. Jde o přípravu návrhu, nikoli o zavedení systému; přímo posouvá práci ke slibu, ale samo ještě nezajišťuje jeho uskutečnění."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-98cf32cafed2--source",
+        "psp-core-2025--law-change-43204-1",
+        "esbirka-regulations--law-change-sb-2026-122",
+        "zvlady-resolutions--law-change-uv-2026-22",
+        "zvlady-resolutions--2026-22",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86842",
+        "psp-core-2025--vote-86904",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--amendment-text-523",
+        "psp-core-2025--amendment-text-526",
+        "esbirka-regulations--2026-122"
+      ],
+      "explanationCz": "Vláda usnesením pověřila svého zmocněnce přípravou koncepce systému detekce dronů a ochrany kritických objektů, takže jde o krok k naplnění slibu, ne o zavedení systému. Ministerstvo vnitra poté vydalo vyhlášku o odolnosti kritické infrastruktury, která mezi možná technická opatření výslovně řadí detekční systémy cizích dronů a bezpečnostní bezpilotní systémy. To naplňuje část slibu, ale nedokládá, že už funguje jednotný systém pro všechny kritické objekty. Poslanci ANO nepodpořili dva rozpočtové návrhy na financování obrany proti dronům; schválený rozpočet však v poskytnutém výňatku neukazuje konkrétní související částky.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek státního rozpočtu neobsahuje konkrétní položky ani částky související s detekcí dronů a ochranou kritických objektů, takže nelze posoudit dopad schváleného rozpočtu na tuto část slibu.",
+        "Podklady potvrzují přípravu koncepce a pravidla pro vybraná opatření u kritické infrastruktury, nikoli dokončené zavedení jednotného systému; rozsah uskutečnění slibu proto není doložen."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0be8c6d3d4b03dc0016aec5493b91087d181aaf02f1d59f4d1",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 19305,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 19302
+      },
+      "output_tokens": 4124,
+      "output_tokens_details": {
+        "reasoning_tokens": 3288
+      },
+      "total_tokens": 23429
+    },
+    "output": {
+      "promiseId": "candidate-98cf32cafed2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Dodané části rozpočtu pouze odkazují na přehledy výdajů a ukazatele v přílohách; neukazují opatření ani výdaje, které by bylo možné spojit se systémem detekce dronů a ochranou kritických objektů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-122",
+          "relevant": true,
+          "reasonCz": "Vyhláška upravuje fyzickou bezpečnost subjektů kritické infrastruktury a výslovně zmiňuje detekční systémy cizích bezpilotních prostředků.",
+          "effectCz": "Jde o novou vyhlášku, takže balíček neobsahuje předchozí znění, s nímž by šlo změnu porovnat. Stanoví fyzická bezpečnostní opatření subjektů kritické infrastruktury, pokud jsou technicky možné nebo účelné, a mezi technickými prostředky uvádí systémy detekce cizích bezpilotních prostředků; jde o dílčí rámec ochrany, nikoli o zavedení celého systému ani o povinnost každého subjektu pořídit právě takový detektor."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-22",
+          "relevant": true,
+          "reasonCz": "Usnesení ukládá připravit koncepci systému detekce dronů a posílení odolnosti kritických objektů, tedy přímo odpovídá tématu slibu.",
+          "effectCz": "Jde o nové usnesení, nikoli změnu dřívějšího právního znění. Ukládá vládnímu zmocněnci zpracovat a předložit koncepci dronové detekce a odolnosti kritických objektů; posouvá přípravu slibovaného řešení, ale samo systém nezavádí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-98cf32cafed2--source",
+        "esbirka-regulations--law-change-sb-2026-122",
+        "zvlady-resolutions--law-change-uv-2026-22",
+        "esbirka-regulations--2026-122",
+        "zvlady-resolutions--2026-22"
+      ],
+      "explanationCz": "Vláda ANO přijala usnesení, které ukládá připravit koncepci systému detekce dronů a posílení odolnosti kritických objektů; jde zatím o přípravný krok, ne o zavedení systému. Ministerstvo vnitra vydalo vyhlášku pro subjekty kritické infrastruktury, která mezi možnými technickými opatřeními uvádí detekční systémy cizích dronů. Vyhláška tak vytváří dílčí rámec ochrany, ale konkrétní detektory požaduje jen tehdy, jsou-li technicky možné nebo účelné. Doklady proto ukazují posun k části slibu, nikoli jeho úplné splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček nedokládá, že systém detekce dronů byl skutečně zaveden nebo že se ochranná opatření u kritických objektů začala prakticky používat.",
+        "Vyhláška zmiňuje detekční systémy jako jednu z možností technických opatření a jejich použití podmiňuje technickou možností nebo účelností; nedokládá plošnou povinnost jejich pořízení."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T18-44-16-586Z--bf076fd40a79",
+  "evaluatedAt": "2026-10-06T18:44:16.586Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-4ff3e1ff0f3e/bf076fd40a791eb635cdf97f57493bcc0dbb3e246111d492b935be41bc29cb4a.json",
+  "packageHash": "bf076fd40a791eb635cdf97f57493bcc0dbb3e246111d492b935be41bc29cb4a",
+  "assessmentContentHash": "4b61d1544f785f31e54cc03a5950b40e6379ce14a1bdeff823b0bf432b8e63bd",
+  "assessmentFingerprint": "0d57909c8fc37f6344f2a783a55efae314340168bdae94f41b754b046ac0ea17",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-4ff3e1ff0f3e",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-4ff3e1ff0f3e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": false,
+          "reasonCz": "Změny se týkají hlavně elektronické identifikace a digitálních peněženek; balíček je nespojuje s ochranou kritických systémů před hybridními útoky.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": true,
+          "reasonCz": "Změna výslovně zavádí testování bezpečnosti základních registrů a agendových informačních systémů, což může přispět k ochraně systémů, byť se nezaměřuje přímo na hybridní útoky.",
+          "effectCz": "Dosavadní § 4 zákona o základních registrech uváděl mezi obsahem registrů provozní údaje, nikoli testovací údaje; nově výslovně zahrnuje i testovací údaje. Dosavadní § 4a obecně vymezoval údaje agendových informačních systémů, zatímco nový § 4b umožňuje a upravuje vytváření testovacích identit a údajů výhradně pro testování dostupnosti, funkčnosti, bezpečnosti a interoperability; ukládá také jejich vytvoření na žádost vyjmenovaných institucí. Jde o rozšíření nástrojů pro testování bezpečnosti, nikoli o přímou povinnost zabránit hybridním útokům nebo zajistit ochranu všech kritických systémů. Změna § 7 pouze zkracuje označení Digitální a informační agentury na „Agentura“ a věcnou ochranu nemění."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4ff3e1ff0f3e--source",
+        "psp-core-2025--law-change-43308-approved-10",
+        "psp-core-2025--vote-88528"
+      ],
+      "explanationCz": "Návrh změny zákona o základních registrech zavádí testovací identity a údaje pro ověřování bezpečnosti a dalších vlastností registrů a informačních systémů. Při závěrečném hlasování o návrhu klub Motoristů sobě neměl většinovou volbu pro jeho podporu: pro hlasovalo pět z třinácti členů. Testování bezpečnosti může přispět k ochraně systémů, ale návrh neřeší přímo obranu před hybridními útoky ani ochranu všech kritických systémů. Nepodpora takové dílčí možnosti posouvá stranu proti slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček nedokládá, zda testované základní registry a agendové informační systémy patří mezi kritické systémy ani zda navržené testování konkrétně míří na hybridní útoky; proto jde jen o možnou dílčí souvislost se slibem."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-4ff3e1ff0f3e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje elektronickou identifikaci a digitální peněženky, ale podklady je nespojují s ochranou kritických systémů proti hybridním útokům.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": true,
+          "reasonCz": "Ustanovení o testování bezpečnosti základních registrů a agendových informačních systémů představují konkrétní, byť jen dílčí prostředek k posílení ochrany informačních systémů.",
+          "effectCz": "Před změnou § 4 zahrnoval v základních registrech mimo jiné provozní údaje a jiné zákonem stanovené údaje; změna výslovně doplňuje testovací údaje. § 4a již upravoval údaje agendových informačních systémů a nově výslovně zahrne také testovací údaje. Nový § 4b umožňuje a v popsaných případech ukládá vytvářet testovací identity a údaje pro testování dostupnosti, funkčnosti, bezpečnosti a interoperability; některým orgánům, včetně Bezpečnostní informační služby a Vojenského zpravodajství, dává možnost jejich vytvoření požadovat. Oproti předchozímu stavu tak rozšiřuje možnosti bezpečnostního testování, ale nestanoví přímou povinnost zabránit hybridním útokům ani konkrétní úroveň ochrany. Změna § 7 odst. 1 pouze zkracuje označení Digitální a informační agentury zavedením zkráceného označení „Agentura“; věcný rozsah její role se podle dodaných znění nemění."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4ff3e1ff0f3e--source",
+        "psp-core-2025--law-change-43308-approved-10",
+        "psp-core-2025--vote-88528"
+      ],
+      "explanationCz": "Poslanci schválili část návrhu, která zavádí testovací identity a údaje pro zkoušení bezpečnosti základních registrů a dalších informačních systémů veřejné správy. Tím návrh rozšiřuje možnosti bezpečnostního testování, ale sám nezaručuje ochranu kritických systémů před hybridními útoky. Klub Motoristů neměl při závěrečném hlasování většinové stanovisko: pro hlasovalo 5 z 13 členů, méně než potřebných 7. Jde tedy o nepodpoření opatření, které může naplnit jen část slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neuvádějí, zda systémy, kterých se bezpečnostní testování týká, jsou výslovně považovány za kritické, ani zda testování míří konkrétně na hybridní útoky; souvislost se slibem je proto jen dílčí."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_02e90f4a94f454c4016ac5413fff2487d2bee0b74de5a2e2ec",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 24319,
+      "input_tokens_details": {
+        "cache_write_tokens": 20349,
+        "cached_tokens": 3967
+      },
+      "output_tokens": 2623,
+      "output_tokens_details": {
+        "reasoning_tokens": 1927
+      },
+      "total_tokens": 26942
+    },
+    "output": {
+      "promiseId": "candidate-4ff3e1ff0f3e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": false,
+          "reasonCz": "Změny se týkají hlavně elektronické identifikace a digitálních peněženek; balíček je nespojuje s ochranou kritických systémů před hybridními útoky.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": true,
+          "reasonCz": "Změna výslovně zavádí testování bezpečnosti základních registrů a agendových informačních systémů, což může přispět k ochraně systémů, byť se nezaměřuje přímo na hybridní útoky.",
+          "effectCz": "Dosavadní § 4 zákona o základních registrech uváděl mezi obsahem registrů provozní údaje, nikoli testovací údaje; nově výslovně zahrnuje i testovací údaje. Dosavadní § 4a obecně vymezoval údaje agendových informačních systémů, zatímco nový § 4b umožňuje a upravuje vytváření testovacích identit a údajů výhradně pro testování dostupnosti, funkčnosti, bezpečnosti a interoperability; ukládá také jejich vytvoření na žádost vyjmenovaných institucí. Jde o rozšíření nástrojů pro testování bezpečnosti, nikoli o přímou povinnost zabránit hybridním útokům nebo zajistit ochranu všech kritických systémů. Změna § 7 pouze zkracuje označení Digitální a informační agentury na „Agentura“ a věcnou ochranu nemění."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4ff3e1ff0f3e--source",
+        "psp-core-2025--law-change-43308-approved-10",
+        "psp-core-2025--vote-88528"
+      ],
+      "explanationCz": "Návrh změny zákona o základních registrech zavádí testovací identity a údaje pro ověřování bezpečnosti a dalších vlastností registrů a informačních systémů. Při závěrečném hlasování o návrhu klub Motoristů sobě neměl většinovou volbu pro jeho podporu: pro hlasovalo pět z třinácti členů. Testování bezpečnosti může přispět k ochraně systémů, ale návrh neřeší přímo obranu před hybridními útoky ani ochranu všech kritických systémů. Nepodpora takové dílčí možnosti posouvá stranu proti slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček nedokládá, zda testované základní registry a agendové informační systémy patří mezi kritické systémy ani zda navržené testování konkrétně míří na hybridní útoky; proto jde jen o možnou dílčí souvislost se slibem."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0b266840ca7c1f28016ac5416383c887d2a55aceb1c55c6279",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 24319,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 24316
+      },
+      "output_tokens": 2250,
+      "output_tokens_details": {
+        "reasoning_tokens": 1512
+      },
+      "total_tokens": 26569
+    },
+    "output": {
+      "promiseId": "candidate-4ff3e1ff0f3e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje elektronickou identifikaci a digitální peněženky, ale podklady je nespojují s ochranou kritických systémů proti hybridním útokům.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": true,
+          "reasonCz": "Ustanovení o testování bezpečnosti základních registrů a agendových informačních systémů představují konkrétní, byť jen dílčí prostředek k posílení ochrany informačních systémů.",
+          "effectCz": "Před změnou § 4 zahrnoval v základních registrech mimo jiné provozní údaje a jiné zákonem stanovené údaje; změna výslovně doplňuje testovací údaje. § 4a již upravoval údaje agendových informačních systémů a nově výslovně zahrne také testovací údaje. Nový § 4b umožňuje a v popsaných případech ukládá vytvářet testovací identity a údaje pro testování dostupnosti, funkčnosti, bezpečnosti a interoperability; některým orgánům, včetně Bezpečnostní informační služby a Vojenského zpravodajství, dává možnost jejich vytvoření požadovat. Oproti předchozímu stavu tak rozšiřuje možnosti bezpečnostního testování, ale nestanoví přímou povinnost zabránit hybridním útokům ani konkrétní úroveň ochrany. Změna § 7 odst. 1 pouze zkracuje označení Digitální a informační agentury zavedením zkráceného označení „Agentura“; věcný rozsah její role se podle dodaných znění nemění."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4ff3e1ff0f3e--source",
+        "psp-core-2025--law-change-43308-approved-10",
+        "psp-core-2025--vote-88528"
+      ],
+      "explanationCz": "Poslanci schválili část návrhu, která zavádí testovací identity a údaje pro zkoušení bezpečnosti základních registrů a dalších informačních systémů veřejné správy. Tím návrh rozšiřuje možnosti bezpečnostního testování, ale sám nezaručuje ochranu kritických systémů před hybridními útoky. Klub Motoristů neměl při závěrečném hlasování většinové stanovisko: pro hlasovalo 5 z 13 členů, méně než potřebných 7. Jde tedy o nepodpoření opatření, které může naplnit jen část slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neuvádějí, zda systémy, kterých se bezpečnostní testování týká, jsou výslovně považovány za kritické, ani zda testování míří konkrétně na hybridní útoky; souvislost se slibem je proto jen dílčí."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

@@ -1,0 +1,261 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T02-00-33-896Z--4c5d1c4691c9",
+  "evaluatedAt": "2026-11-04T02:00:33.896Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-2151b449f3b4/4c5d1c4691c9c90a007b1253f5517320e0e9b11ac5e63f81dc02db5deda7c428.json",
+  "packageHash": "4c5d1c4691c9c90a007b1253f5517320e0e9b11ac5e63f81dc02db5deda7c428",
+  "assessmentContentHash": "050fb896203a46af91cdff483050da67a9fb5f11595121a1a9d8b052c5a166b8",
+  "assessmentFingerprint": "bcd81f15f39d854eb7e9d2b56db046b89a00af5d42206c2b88635fdac1ce7b5b",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-2151b449f3b4",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_058afe45db2fb22d016aea91666cc087d18353c3210fe493e9",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 24832,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 24829
+            },
+            "output_tokens": 3347,
+            "output_tokens_details": {
+              "reasoning_tokens": 2575
+            },
+            "total_tokens": 28179
+          },
+          "output": {
+            "promiseId": "candidate-2151b449f3b4",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-7",
+                "relevant": true,
+                "reasonCz": "Změna rozšiřuje okruh konstrukcí dopravního značení a zařízení provozních informací na pozemních komunikacích i drahách, takže se týká technického vybavení pro bezpečnost dopravy.",
+                "effectCz": "Před změnou byly mezi drobné stavby zařazeny jen podpěrné konstrukce dopravního značení a zařízení provozních informací na pozemních komunikacích, s výjimkou portálových konstrukcí. Nově jde o konstrukce dopravního značení a zařízení provozních informací na pozemních komunikacích i drahách bez uvedeného omezení na podpěrné konstrukce a bez výjimky pro portály. Okruh takto zařazených konstrukcí se rozšiřuje; jde o usnadňující, nikoli povinnost ukládající krok pro slib, ale podklady neukazují, že by nařizoval instalaci bezpečnostních zařízení nebo sám zvyšoval bezpečnost."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-2151b449f3b4--source",
+              "psp-core-2025--law-change-43174-1-7",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--amendment-text-1208",
+              "psp-core-2025--vote-88181",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454"
+            ],
+            "explanationCz": "Poslanci ANO předložili návrh novely stavebního zákona (sněmovní tisk 67) a vláda s ním souhlasila. Návrh rozšiřuje kategorii drobných staveb o další konstrukce dopravního značení a zařízení provozních informací, včetně těch na železnici, což může jejich umístění usnadnit, ale instalaci neukládá. Poslanci ANO hlasovali proti pozměňovacímu návrhu, který měl mezi drobné stavby zařadit také některé sloupky a další úpravy komunikací; pro návrh novely jako celek hlasovali a po jeho zamítnutí Senátem Sněmovna na návrhu setrvala. Jde tedy o dílčí posun k usnadnění bezpečnostních opatření, nikoli o doklad, že byla skutečně instalována nebo že se bezpečnost zvýšila.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Podklady neprokazují, zda byla díky změně skutečně instalována bezpečnostní zařízení u škol, na rizikových místech nebo na železničních přejezdech, ani zda se bezpečnost zvýšila.",
+              "ANO nepodpořelo pozměňovací návrh k některým úpravám komunikací včetně sloupků a zábradlí; tento hlas je v napětí s podporou novely jako celku, která rovněž usnadňuje zařazení některých konstrukcí do kategorie drobných staveb."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-2151b449f3b4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Změna se týká zařazení dopravního značení a provozních informačních zařízení mezi drobné stavby, a může tak usnadnit využití technických prostředků pro bezpečnost provozu.",
+          "effectCz": "Navržená verze mění dřívější pravidlo, podle něhož šlo o podpěrné konstrukce dopravního značení a zařízení pro provozní informace na pozemních komunikacích, s výjimkou portálových konstrukcí: vypouští omezení na podpěrné konstrukce, ruší výjimku pro portály a rozšiřuje vymezení také na dráhy. Tím se rozšiřuje okruh zařízení zařazených mezi drobné stavby, což může usnadnit jejich zřízení. Schválená verze ale odkazuje na bod 16, zatímco dodaný předchozí text bodu 16 upravuje sjezdy a nájezdy a neobsahuje slova, která se mají měnit; z dodaného kontextu proto nelze spolehlivě určit účinek této verze."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-2151b449f3b4--source",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1208",
+        "psp-core-2025--vote-88181",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci hnutí ANO předložili návrh novely stavebního zákona, který měl usnadnit zařazení konstrukcí dopravního značení a informačních zařízení na silnicích a drahách mezi drobné stavby. Vláda s návrhem souhlasila a poslanci ANO pro něj hlasovali, včetně hlasování po jeho zamítnutí Senátem. To může usnadnit zavádění technických opatření pro bezpečnost, ale samo nedokládá zvýšení bezpečnosti u škol či přejezdů. Poslanci ANO zároveň nepodpořili pozměňovací návrh, který by mezi drobné stavby zařadil také některé úpravy ulic a prvky jako sloupky či zábradlí. Schválené znění novely odkazuje na jiné číslo bodu, než odpovídá dodanému předchozímu znění, takže jeho přesný účinek nelze z balíčku ověřit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Schválená verze novely mění bod 16, ale dodaný předchozí text bodu 16 upravuje sjezdy a nájezdy a neobsahuje měněná slova. Nelze proto ověřit, zda a jak schválené ustanovení skutečně rozšířilo možnosti pro dopravní značení a informační zařízení."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-2151b449f3b4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Ustanovení se týká konstrukcí dopravního značení a provozních informací na silnicích i železnicích, tedy infrastruktury, která může souviset s technickými prostředky pro dopravní bezpečnost.",
+          "effectCz": "Před změnou patřily mezi drobné stavby pouze podpěrné konstrukce dopravního značení a zařízení pro provozní informace na pozemních komunikacích, s výjimkou portálových konstrukcí. Návrh vypouští omezení na podpěrné konstrukce i výjimku pro portálové konstrukce a zahrnuje také konstrukce na drahách, takže rozšiřuje okruh takto klasifikovaných zařízení. Samotný dodaný text ale neuvádí, jaké konkrétní povolovací důsledky tato klasifikace pro ně má, ani nestanoví povinnost bezpečnostní zařízení instalovat."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-2151b449f3b4--source",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1208",
+        "psp-core-2025--vote-88181",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili novelu stavebního zákona, která rozšiřuje okruh konstrukcí dopravního značení a provozních informací považovaných za drobné stavby, včetně zařízení na železnicích; vláda návrh podpořila. Poslanci ANO pak hlasovali pro jeho schválení a po zamítnutí Senátem také pro setrvání Sněmovny na návrhu. To je dílčí právní posun, který může usnadnit využití technických prostředků pro bezpečnost, ale sám nezajišťuje jejich instalaci. ANO nepodpořilo samostatný pozměňovací návrh, který by mezi drobné stavby zařadil také některé úpravy komunikací a instalaci či odstranění sloupků.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodané podklady nedokládají, zda byly na základě této změny skutečně instalovány technické prostředky u škol, rizikových míst nebo železničních přejezdů.",
+        "U rozšíření kategorie drobných staveb podklady neuvádějí konkrétní povolovací důsledky; nelze proto doložit, nakolik samo o sobě zjednodušuje realizaci bezpečnostních opatření.",
+        "Pozměňovací návrh, který ANO nepodpořilo, se týkal úprav komunikací a sloupků, ale podklady jej nespojují přímo s konkrétními školami či železničními přejezdy."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0ef6809b951b7085016aea912ce83887d1a65d4a9851e80c90",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 24832,
+      "input_tokens_details": {
+        "cache_write_tokens": 18482,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 4349,
+      "output_tokens_details": {
+        "reasoning_tokens": 3511
+      },
+      "total_tokens": 29181
+    },
+    "output": {
+      "promiseId": "candidate-2151b449f3b4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Změna se týká zařazení dopravního značení a provozních informačních zařízení mezi drobné stavby, a může tak usnadnit využití technických prostředků pro bezpečnost provozu.",
+          "effectCz": "Navržená verze mění dřívější pravidlo, podle něhož šlo o podpěrné konstrukce dopravního značení a zařízení pro provozní informace na pozemních komunikacích, s výjimkou portálových konstrukcí: vypouští omezení na podpěrné konstrukce, ruší výjimku pro portály a rozšiřuje vymezení také na dráhy. Tím se rozšiřuje okruh zařízení zařazených mezi drobné stavby, což může usnadnit jejich zřízení. Schválená verze ale odkazuje na bod 16, zatímco dodaný předchozí text bodu 16 upravuje sjezdy a nájezdy a neobsahuje slova, která se mají měnit; z dodaného kontextu proto nelze spolehlivě určit účinek této verze."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-2151b449f3b4--source",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1208",
+        "psp-core-2025--vote-88181",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci hnutí ANO předložili návrh novely stavebního zákona, který měl usnadnit zařazení konstrukcí dopravního značení a informačních zařízení na silnicích a drahách mezi drobné stavby. Vláda s návrhem souhlasila a poslanci ANO pro něj hlasovali, včetně hlasování po jeho zamítnutí Senátem. To může usnadnit zavádění technických opatření pro bezpečnost, ale samo nedokládá zvýšení bezpečnosti u škol či přejezdů. Poslanci ANO zároveň nepodpořili pozměňovací návrh, který by mezi drobné stavby zařadil také některé úpravy ulic a prvky jako sloupky či zábradlí. Schválené znění novely odkazuje na jiné číslo bodu, než odpovídá dodanému předchozímu znění, takže jeho přesný účinek nelze z balíčku ověřit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Schválená verze novely mění bod 16, ale dodaný předchozí text bodu 16 upravuje sjezdy a nájezdy a neobsahuje měněná slova. Nelze proto ověřit, zda a jak schválené ustanovení skutečně rozšířilo možnosti pro dopravní značení a informační zařízení."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_016c1356dc6a00bc016aea9193c47087d18c7cd03dee49b522",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 24832,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 24829
+      },
+      "output_tokens": 3556,
+      "output_tokens_details": {
+        "reasoning_tokens": 2734
+      },
+      "total_tokens": 28388
+    },
+    "output": {
+      "promiseId": "candidate-2151b449f3b4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Ustanovení se týká konstrukcí dopravního značení a provozních informací na silnicích i železnicích, tedy infrastruktury, která může souviset s technickými prostředky pro dopravní bezpečnost.",
+          "effectCz": "Před změnou patřily mezi drobné stavby pouze podpěrné konstrukce dopravního značení a zařízení pro provozní informace na pozemních komunikacích, s výjimkou portálových konstrukcí. Návrh vypouští omezení na podpěrné konstrukce i výjimku pro portálové konstrukce a zahrnuje také konstrukce na drahách, takže rozšiřuje okruh takto klasifikovaných zařízení. Samotný dodaný text ale neuvádí, jaké konkrétní povolovací důsledky tato klasifikace pro ně má, ani nestanoví povinnost bezpečnostní zařízení instalovat."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-2151b449f3b4--source",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1208",
+        "psp-core-2025--vote-88181",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili novelu stavebního zákona, která rozšiřuje okruh konstrukcí dopravního značení a provozních informací považovaných za drobné stavby, včetně zařízení na železnicích; vláda návrh podpořila. Poslanci ANO pak hlasovali pro jeho schválení a po zamítnutí Senátem také pro setrvání Sněmovny na návrhu. To je dílčí právní posun, který může usnadnit využití technických prostředků pro bezpečnost, ale sám nezajišťuje jejich instalaci. ANO nepodpořilo samostatný pozměňovací návrh, který by mezi drobné stavby zařadil také některé úpravy komunikací a instalaci či odstranění sloupků.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodané podklady nedokládají, zda byly na základě této změny skutečně instalovány technické prostředky u škol, rizikových míst nebo železničních přejezdů.",
+        "U rozšíření kategorie drobných staveb podklady neuvádějí konkrétní povolovací důsledky; nelze proto doložit, nakolik samo o sobě zjednodušuje realizaci bezpečnostních opatření.",
+        "Pozměňovací návrh, který ANO nepodpořilo, se týkal úprav komunikací a sloupků, ale podklady jej nespojují přímo s konkrétními školami či železničními přejezdy."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "moving-towards",
+    "selectedReview": "assessor-b"
+  }
+}

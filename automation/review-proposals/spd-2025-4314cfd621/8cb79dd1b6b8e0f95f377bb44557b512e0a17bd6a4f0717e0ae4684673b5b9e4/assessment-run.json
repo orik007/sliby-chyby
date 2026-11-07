@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T13-37-32-253Z--449de67c117b",
+  "evaluatedAt": "2026-11-05T13:37:32.253Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-4314cfd621/449de67c117bbd26e3f664fcf06eb45e0dd8558aac5a238020338734acd505a4.json",
+  "packageHash": "449de67c117bbd26e3f664fcf06eb45e0dd8558aac5a238020338734acd505a4",
+  "assessmentContentHash": "d476659629c3726ffbbdd93625d121e09e024b563f62e18ede9c4de5c9ad178d",
+  "assessmentFingerprint": "8cb79dd1b6b8e0f95f377bb44557b512e0a17bd6a4f0717e0ae4684673b5b9e4",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-4314cfd621",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-4314cfd621",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-285",
+          "relevant": true,
+          "reasonCz": "Usnesení přímo upravuje postup české delegace při jednání o příloze mezinárodní dohody o prevenci pandemií a připravenosti na ně, k níž se slib vztahuje.",
+          "effectCz": "Usnesení nemění dosavadní znění zákona; stanoví postup delegace a umožňuje jí za uvedených podmínek vyslovit souhlas s přijetím přílohy dohody. Pokud Světové zdravotnické shromáždění přílohu schválí, bude podle usnesení v českém právním řádu podléhat ratifikaci. Jde tedy o návrh umožňující krok směrem k přijetí části dohody, což je v rozporu se závazkem, že se ČR k dohodě nepřipojí; samotné usnesení však připojení ani ratifikaci neprovádí."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-4314cfd621--source",
+        "zvlady-resolutions--law-change-uv-2026-285",
+        "zvlady-resolutions--2026-285"
+      ],
+      "explanationCz": "Vláda, v níž je zastoupena SPD, přijala usnesení o postupu české delegace na zasedání Světového zdravotnického shromáždění. Delegace podle něj může za stanovených podmínek souhlasit s přijetím přílohy mezinárodní dohody o prevenci pandemií; případná příloha by pak v ČR podléhala ratifikaci. Usnesení samo ČR k dohodě nepřipojuje, ale jako vládní návrh umožňuje postup směrem k přijetí části dohody, a proto jde proti slibu nepřipojit se.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, zda Světové zdravotnické shromáždění přílohu skutečně schválilo ani zda následovala ratifikace; usnesení zachycuje pouze navržený postup."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-4314cfd621",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-285",
+          "relevant": true,
+          "reasonCz": "Usnesení se přímo týká pandemické dohody WHO, protože umožňuje české delegaci souhlasit s přijetím její přílohy.",
+          "effectCz": "Usnesení nemění zákon ani samo nepřipojuje Českou republiku k dohodě; navrhuje, aby delegace mohla souhlasit s přijetím přílohy pandemické dohody za stanovených podmínek. Pokud shromáždění přílohu schválí, dokument by následně podléhal ratifikaci jako prezidentská smlouva. Oproti závazku nepřipojit se k dohodě jde o krok, který otevírá cestu k jejímu přijetí, nikoli však o dokončené připojení."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-4314cfd621--source",
+        "zvlady-resolutions--law-change-uv-2026-285",
+        "zvlady-resolutions--2026-285"
+      ],
+      "explanationCz": "Vláda, v níž byla zastoupena i SPD, přijala usnesení k účasti české delegace na 79. Světovém zdravotnickém shromáždění. Delegaci umožnilo za stanovených podmínek souhlasit s přijetím přílohy pandemické dohody WHO. Nejde ještě o připojení České republiky: případné přijetí přílohy by následně vyžadovalo ratifikaci. Usnesení však navrhuje postup, který je v rozporu se slibem dohodu nepřijmout.",
+      "confidence": "high",
+      "uncertainties": [
+        "Z předložených podkladů není doloženo, zda shromáždění přílohu schválilo ani zda následně proběhla ratifikace; samotné usnesení připojení České republiky nedokončuje."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0d18b01f9bf84fd4016aec866d216087d19d90fa772741408c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8621,
+      "input_tokens_details": {
+        "cache_write_tokens": 2271,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 1224,
+      "output_tokens_details": {
+        "reasoning_tokens": 654
+      },
+      "total_tokens": 9845
+    },
+    "output": {
+      "promiseId": "spd-2025-4314cfd621",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-285",
+          "relevant": true,
+          "reasonCz": "Usnesení přímo upravuje postup české delegace při jednání o příloze mezinárodní dohody o prevenci pandemií a připravenosti na ně, k níž se slib vztahuje.",
+          "effectCz": "Usnesení nemění dosavadní znění zákona; stanoví postup delegace a umožňuje jí za uvedených podmínek vyslovit souhlas s přijetím přílohy dohody. Pokud Světové zdravotnické shromáždění přílohu schválí, bude podle usnesení v českém právním řádu podléhat ratifikaci. Jde tedy o návrh umožňující krok směrem k přijetí části dohody, což je v rozporu se závazkem, že se ČR k dohodě nepřipojí; samotné usnesení však připojení ani ratifikaci neprovádí."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-4314cfd621--source",
+        "zvlady-resolutions--law-change-uv-2026-285",
+        "zvlady-resolutions--2026-285"
+      ],
+      "explanationCz": "Vláda, v níž je zastoupena SPD, přijala usnesení o postupu české delegace na zasedání Světového zdravotnického shromáždění. Delegace podle něj může za stanovených podmínek souhlasit s přijetím přílohy mezinárodní dohody o prevenci pandemií; případná příloha by pak v ČR podléhala ratifikaci. Usnesení samo ČR k dohodě nepřipojuje, ale jako vládní návrh umožňuje postup směrem k přijetí části dohody, a proto jde proti slibu nepřipojit se.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, zda Světové zdravotnické shromáždění přílohu skutečně schválilo ani zda následovala ratifikace; usnesení zachycuje pouze navržený postup."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0a9e15c54380e971016aec8686501487d1b17cf29e5bc0383e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8621,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8618
+      },
+      "output_tokens": 958,
+      "output_tokens_details": {
+        "reasoning_tokens": 470
+      },
+      "total_tokens": 9579
+    },
+    "output": {
+      "promiseId": "spd-2025-4314cfd621",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-285",
+          "relevant": true,
+          "reasonCz": "Usnesení se přímo týká pandemické dohody WHO, protože umožňuje české delegaci souhlasit s přijetím její přílohy.",
+          "effectCz": "Usnesení nemění zákon ani samo nepřipojuje Českou republiku k dohodě; navrhuje, aby delegace mohla souhlasit s přijetím přílohy pandemické dohody za stanovených podmínek. Pokud shromáždění přílohu schválí, dokument by následně podléhal ratifikaci jako prezidentská smlouva. Oproti závazku nepřipojit se k dohodě jde o krok, který otevírá cestu k jejímu přijetí, nikoli však o dokončené připojení."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-4314cfd621--source",
+        "zvlady-resolutions--law-change-uv-2026-285",
+        "zvlady-resolutions--2026-285"
+      ],
+      "explanationCz": "Vláda, v níž byla zastoupena i SPD, přijala usnesení k účasti české delegace na 79. Světovém zdravotnickém shromáždění. Delegaci umožnilo za stanovených podmínek souhlasit s přijetím přílohy pandemické dohody WHO. Nejde ještě o připojení České republiky: případné přijetí přílohy by následně vyžadovalo ratifikaci. Usnesení však navrhuje postup, který je v rozporu se slibem dohodu nepřijmout.",
+      "confidence": "high",
+      "uncertainties": [
+        "Z předložených podkladů není doloženo, zda shromáždění přílohu schválilo ani zda následně proběhla ratifikace; samotné usnesení připojení České republiky nedokončuje."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

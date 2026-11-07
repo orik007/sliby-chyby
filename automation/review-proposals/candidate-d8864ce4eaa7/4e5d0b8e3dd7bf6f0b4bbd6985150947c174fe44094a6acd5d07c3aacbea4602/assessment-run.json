@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-31-21-884Z--f823c6199add",
+  "evaluatedAt": "2026-10-02T05:31:21.884Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-d8864ce4eaa7/f823c6199addf80b841c097dbceceb4140e066874d824b6f4cc24469a8f6ad64.json",
+  "packageHash": "f823c6199addf80b841c097dbceceb4140e066874d824b6f4cc24469a8f6ad64",
+  "assessmentContentHash": "c15d255e8b34e4af1d03a1decdbe6106d4d5264dcf202ebb76a563ae4353c515",
+  "assessmentFingerprint": "4e5d0b8e3dd7bf6f0b4bbd6985150947c174fe44094a6acd5d07c3aacbea4602",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-d8864ce4eaa7",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-d8864ce4eaa7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-1",
+          "relevant": true,
+          "reasonCz": "Návrh smlouvy umožňuje společné policejní hlídky a upravuje spolupráci při zajišťování bezpečnosti v železniční dopravě, což se může týkat části slibu o přítomnosti policistů ve veřejné dopravě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-2",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje možnost zřizovat obecní policii pro více obcí, ale neřeší posílení přítomnosti policistů na nádražích, v dopravě ani v problémových lokalitách."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-d8864ce4eaa7--source",
+        "psp-core-2025--law-change-43228-1",
+        "psp-core-2025--print-step-210866"
+      ],
+      "explanationCz": "Vláda ANO předložila Parlamentu návrh smlouvy se Slovenskem o policejní spolupráci. Smlouva umožňuje společné hlídky a stanoví spolupráci při zajišťování bezpečnosti v železniční dopravě, což může podpořit část slibu týkající se veřejné dopravy. Návrh ale nezavazuje k navýšení počtu policistů ani k trvalým hlídkám na nádražích či v problémových lokalitách. Jde proto o dílčí posun, nikoli o splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh smlouvy umožňuje policejní spolupráci v železniční dopravě, ale z předložených podkladů nevyplývá, že by už vedl k většímu počtu policistů nebo k jejich častějšímu nasazení na nádražích či ve veřejné dopravě."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-d8864ce4eaa7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-1",
+          "relevant": true,
+          "reasonCz": "Navržená smlouva umožňuje společné policejní hlídky a stanoví spolupráci při zajišťování bezpečnosti v železniční dopravě, což může přispět k přítomnosti policistů ve veřejné dopravě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-2",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje možnost společné obecní policie společenství obcí, nikoli posílení policistů v problémových lokalitách, na nádražích či ve veřejné dopravě."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-d8864ce4eaa7--source",
+        "psp-core-2025--law-change-43228-1",
+        "psp-core-2025--print-step-210866"
+      ],
+      "explanationCz": "Vláda, v níž je ANO, předložila Parlamentu smlouvu s Slovenskem o policejní spolupráci. Návrh umožňuje například společné policejní hlídky a spolupráci při zajištění bezpečnosti v železniční dopravě. To může podpořit přítomnost policistů ve veřejné dopravě, a proto jde o dílčí posun ke slibu. Samotná smlouva ale nezavádí konkrétní navýšení počtu policistů ani jejich nasazení na nádražích.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Smlouva vytváří rámec pro spolupráci, ale z předloženého textu nelze doložit, zda a v jakém rozsahu budou policisté skutečně nasazeni v dopravě nebo na nádražích."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0ed28faed69872a9016abf41948bf487d1900783ca6f451a08",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 29094,
+      "input_tokens_details": {
+        "cache_write_tokens": 25770,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2349,
+      "output_tokens_details": {
+        "reasoning_tokens": 1858
+      },
+      "total_tokens": 31443
+    },
+    "output": {
+      "promiseId": "candidate-d8864ce4eaa7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-1",
+          "relevant": true,
+          "reasonCz": "Návrh smlouvy umožňuje společné policejní hlídky a upravuje spolupráci při zajišťování bezpečnosti v železniční dopravě, což se může týkat části slibu o přítomnosti policistů ve veřejné dopravě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-2",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje možnost zřizovat obecní policii pro více obcí, ale neřeší posílení přítomnosti policistů na nádražích, v dopravě ani v problémových lokalitách."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-d8864ce4eaa7--source",
+        "psp-core-2025--law-change-43228-1",
+        "psp-core-2025--print-step-210866"
+      ],
+      "explanationCz": "Vláda ANO předložila Parlamentu návrh smlouvy se Slovenskem o policejní spolupráci. Smlouva umožňuje společné hlídky a stanoví spolupráci při zajišťování bezpečnosti v železniční dopravě, což může podpořit část slibu týkající se veřejné dopravy. Návrh ale nezavazuje k navýšení počtu policistů ani k trvalým hlídkám na nádražích či v problémových lokalitách. Jde proto o dílčí posun, nikoli o splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh smlouvy umožňuje policejní spolupráci v železniční dopravě, ale z předložených podkladů nevyplývá, že by už vedl k většímu počtu policistů nebo k jejich častějšímu nasazení na nádražích či ve veřejné dopravě."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_002101bf4631f63d016abf41a2cdd487d18ab76d8992aea414",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 29094,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 29091
+      },
+      "output_tokens": 1178,
+      "output_tokens_details": {
+        "reasoning_tokens": 669
+      },
+      "total_tokens": 30272
+    },
+    "output": {
+      "promiseId": "candidate-d8864ce4eaa7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-1",
+          "relevant": true,
+          "reasonCz": "Navržená smlouva umožňuje společné policejní hlídky a stanoví spolupráci při zajišťování bezpečnosti v železniční dopravě, což může přispět k přítomnosti policistů ve veřejné dopravě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-2",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje možnost společné obecní policie společenství obcí, nikoli posílení policistů v problémových lokalitách, na nádražích či ve veřejné dopravě."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-d8864ce4eaa7--source",
+        "psp-core-2025--law-change-43228-1",
+        "psp-core-2025--print-step-210866"
+      ],
+      "explanationCz": "Vláda, v níž je ANO, předložila Parlamentu smlouvu s Slovenskem o policejní spolupráci. Návrh umožňuje například společné policejní hlídky a spolupráci při zajištění bezpečnosti v železniční dopravě. To může podpořit přítomnost policistů ve veřejné dopravě, a proto jde o dílčí posun ke slibu. Samotná smlouva ale nezavádí konkrétní navýšení počtu policistů ani jejich nasazení na nádražích.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Smlouva vytváří rámec pro spolupráci, ale z předloženého textu nelze doložit, zda a v jakém rozsahu budou policisté skutečně nasazeni v dopravě nebo na nádražích."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

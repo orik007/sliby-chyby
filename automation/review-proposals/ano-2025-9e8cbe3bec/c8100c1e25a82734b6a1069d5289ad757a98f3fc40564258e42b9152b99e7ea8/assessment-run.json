@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-34-50-727Z--484c4026474b",
+  "evaluatedAt": "2026-10-02T01:34:50.727Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-9e8cbe3bec/484c4026474b572d2a2191b441418ad0c8717ca9aacebcd1e70edd7e35eede56.json",
+  "packageHash": "484c4026474b572d2a2191b441418ad0c8717ca9aacebcd1e70edd7e35eede56",
+  "assessmentContentHash": "b685785c705fbac6fc507677eed3d9987675c0cdeabd8c110b9ae29e4fdb5b85",
+  "assessmentFingerprint": "c8100c1e25a82734b6a1069d5289ad757a98f3fc40564258e42b9152b99e7ea8",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-9e8cbe3bec",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-9e8cbe3bec",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text mění pouze termíny účinnosti odkazovaných ustanovení zákona o dávce státní sociální pomoci a jejich obsah není doložen, takže nelze prokázat souvislost s rodičovským režimem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Text odkládá účinnost ustanovení a prodlužuje přechodné zachování některých sociálních dávek, nikoli volbu rodičovské dovolené a režimu sjednávaného se zaměstnavatelem."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-9e8cbe3bec--source",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--law-change-43198-4"
+      ],
+      "explanationCz": "Program ANO slibuje rodičům dětí do tří let volbu mezi klasickou rodičovskou dovolenou a režimem dohodnutým se zaměstnavatelem. Předložené změny se týkají termínů účinnosti a přechodného zachování sociálních dávek; nedokládají zavedení této volby ani změnu pravidel rodičovské dovolené. U jedné změny navíc chybí obsah ustanovení, jejichž účinnost se posouvá, takže nelze její možnou souvislost s tímto slibem ověřit. Proto zatím není doložen podstatný posun, ale posouzení je omezené neúplnými podklady.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U změny zákona č. 152/2025 Sb. z předloženého textu nelze rozpoznat obsah některých ustanovení, jejichž účinnost se mění; nelze proto ověřit, zda se jakkoli dotýkají rodičovského režimu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-9e8cbe3bec",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text pouze mění termíny účinnosti ustanovení, jejichž obsah dodaný kontext nerozpoznává, a nedokládá souvislost s rodičovským režimem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Změna upravuje termíny přechodu na dávku státní sociální pomoci a účinnost dalších ustanovení, ale její text nedokládá dopad na volbu rodičovského režimu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-9e8cbe3bec--source",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--law-change-43198-4"
+      ],
+      "explanationCz": "Program ANO slibuje rodičům dětí do tří let volbu mezi klasickou rodičovskou dovolenou a rodičovským režimem. Dodané legislativní texty upravují hlavně termíny účinnosti jiných ustanovení a nedokládají zavedení této volby ani změnu dohody rodiče se zaměstnavatelem. Proto zatím není ověřen podstatný posun ke slibu. Podklady ale neuvádějí obsah některých ustanovení, jejichž účinnost se mění, takže jejich případnou souvislost nelze vyloučit.",
+      "confidence": "low",
+      "uncertainties": [
+        "U některých ustanovení, jejichž termíny účinnosti se mění, podklady neuvádějí jejich obsah; nelze proto spolehlivě vyloučit, že s rodičovským režimem souvisejí."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_070534c7389bd6a1016abf0a0a4fec87d1a641cc9aafc8bf58",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 14021,
+      "input_tokens_details": {
+        "cache_write_tokens": 10697,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1538,
+      "output_tokens_details": {
+        "reasoning_tokens": 1034
+      },
+      "total_tokens": 15559
+    },
+    "output": {
+      "promiseId": "ano-2025-9e8cbe3bec",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text mění pouze termíny účinnosti odkazovaných ustanovení zákona o dávce státní sociální pomoci a jejich obsah není doložen, takže nelze prokázat souvislost s rodičovským režimem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Text odkládá účinnost ustanovení a prodlužuje přechodné zachování některých sociálních dávek, nikoli volbu rodičovské dovolené a režimu sjednávaného se zaměstnavatelem."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-9e8cbe3bec--source",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--law-change-43198-4"
+      ],
+      "explanationCz": "Program ANO slibuje rodičům dětí do tří let volbu mezi klasickou rodičovskou dovolenou a režimem dohodnutým se zaměstnavatelem. Předložené změny se týkají termínů účinnosti a přechodného zachování sociálních dávek; nedokládají zavedení této volby ani změnu pravidel rodičovské dovolené. U jedné změny navíc chybí obsah ustanovení, jejichž účinnost se posouvá, takže nelze její možnou souvislost s tímto slibem ověřit. Proto zatím není doložen podstatný posun, ale posouzení je omezené neúplnými podklady.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U změny zákona č. 152/2025 Sb. z předloženého textu nelze rozpoznat obsah některých ustanovení, jejichž účinnost se mění; nelze proto ověřit, zda se jakkoli dotýkají rodičovského režimu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0033ccf9b1063702016abf0a1b7fac87d183932e75262c1156",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 14021,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 14018
+      },
+      "output_tokens": 2919,
+      "output_tokens_details": {
+        "reasoning_tokens": 2461
+      },
+      "total_tokens": 16940
+    },
+    "output": {
+      "promiseId": "ano-2025-9e8cbe3bec",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text pouze mění termíny účinnosti ustanovení, jejichž obsah dodaný kontext nerozpoznává, a nedokládá souvislost s rodičovským režimem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Změna upravuje termíny přechodu na dávku státní sociální pomoci a účinnost dalších ustanovení, ale její text nedokládá dopad na volbu rodičovského režimu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-9e8cbe3bec--source",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--law-change-43198-4"
+      ],
+      "explanationCz": "Program ANO slibuje rodičům dětí do tří let volbu mezi klasickou rodičovskou dovolenou a rodičovským režimem. Dodané legislativní texty upravují hlavně termíny účinnosti jiných ustanovení a nedokládají zavedení této volby ani změnu dohody rodiče se zaměstnavatelem. Proto zatím není ověřen podstatný posun ke slibu. Podklady ale neuvádějí obsah některých ustanovení, jejichž účinnost se mění, takže jejich případnou souvislost nelze vyloučit.",
+      "confidence": "low",
+      "uncertainties": [
+        "U některých ustanovení, jejichž termíny účinnosti se mění, podklady neuvádějí jejich obsah; nelze proto spolehlivě vyloučit, že s rodičovským režimem souvisejí."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

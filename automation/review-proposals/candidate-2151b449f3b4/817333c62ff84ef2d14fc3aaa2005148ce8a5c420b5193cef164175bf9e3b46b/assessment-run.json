@@ -1,0 +1,247 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-43-12-296Z--ccea7faa1f89",
+  "evaluatedAt": "2026-10-02T01:43:12.296Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-2151b449f3b4/ccea7faa1f89c3b665a64de6c7a6b0db780357dfebe3723cbf5d1f1a17f8c45a.json",
+  "packageHash": "ccea7faa1f89c3b665a64de6c7a6b0db780357dfebe3723cbf5d1f1a17f8c45a",
+  "assessmentContentHash": "ec2850ca3da9b4ff18e9d495d1023175de50e22012f78f1367d4b7ec867fbfa9",
+  "assessmentFingerprint": "817333c62ff84ef2d14fc3aaa2005148ce8a5c420b5193cef164175bf9e3b46b",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-2151b449f3b4",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-2151b449f3b4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43193-1",
+          "relevant": false,
+          "reasonCz": "Novela mění správu a zveřejňování dopravního informačního systému, ale nestanoví zavedení bezpečnostních technických prostředků v rizikových lokalitách, u škol nebo na přejezdech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": false,
+          "reasonCz": "Text upravuje zejména pobytová pravidla a provoz či registraci vozidel s ukrajinskou registrační značkou, nikoli technická bezpečnostní opatření na rizikových místech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Novela se týká převážně registrace, schvalování a technických kontrol vozidel a její text nezavádí prostředky ani opatření pro bezpečnost okolí škol či železničních přejezdů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-2151b449f3b4--source",
+        "psp-core-2025--law-change-43193-1",
+        "psp-core-2025--law-change-43335-1",
+        "psp-core-2025--law-change-43415-1"
+      ],
+      "explanationCz": "Slib se týká zvýšení bezpečnosti pomocí technických prostředků, zejména u škol a železničních přejezdů. Předložené změny zákonů se věnují dopravnímu informačnímu systému a pravidlům pro vozidla, ale nedokládají zavedení takových opatření v uvedených lokalitách. Proto z těchto podkladů nelze ověřit podstatný posun ve slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dopravní informační systém může mít širší bezpečnostní využití, ale předložený text nespojuje jeho změny s konkrétními opatřeními u škol, na přejezdech ani v jiných rizikových lokalitách."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-2151b449f3b4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43193-1",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje technický systém pro sběr a zveřejňování aktuálních dopravních informací, což může přispět k obecné bezpečnosti, ačkoli neřeší vybavení okolí škol ani železničních přejezdů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": false,
+          "reasonCz": "Ustanovení o ukrajinských vozidlech a pobytových pravidlech neřeší dopravní bezpečnost ani technické prostředky v rizikových lokalitách."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Novela upravuje především schvalování vozidel, registraci a technické kontroly, ale nezavádí technické prostředky pro zvýšení bezpečnosti v okolí škol či železničních přejezdů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-2151b449f3b4--source",
+        "psp-core-2025--law-change-43193-1",
+        "psp-core-2025--print-step-210709",
+        "psp-core-2025--vote-88548"
+      ],
+      "explanationCz": "Vláda předložila novelu zákona o silničním provozu, která svěřuje Ředitelství silnic a dálnic správu celostátního systému dopravních informací a stanoví povinnost poskytovat mu aktuální údaje. Poslanci ANO pak při závěrečném hlasování podpořili schválení této novely. Systém může dopravní bezpečnost podpořit lepšími informacemi o provozu, jde však jen o obecný dílčí krok; novela nedokládá zavedení konkrétních zařízení u škol nebo železničních přejezdů.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z podkladů není doloženo, že by se systém zaměřil právě na riziková místa, okolí škol nebo železniční přejezdy, ani že už byl v těchto místech zaveden; podpořený krok proto dokládá pouze dílčí posun."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0093837661b9805f016abf0c03003487d18cce2def616fc04f",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 104984,
+      "input_tokens_details": {
+        "cache_write_tokens": 101660,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2439,
+      "output_tokens_details": {
+        "reasoning_tokens": 1927
+      },
+      "total_tokens": 107423
+    },
+    "output": {
+      "promiseId": "candidate-2151b449f3b4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43193-1",
+          "relevant": false,
+          "reasonCz": "Novela mění správu a zveřejňování dopravního informačního systému, ale nestanoví zavedení bezpečnostních technických prostředků v rizikových lokalitách, u škol nebo na přejezdech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": false,
+          "reasonCz": "Text upravuje zejména pobytová pravidla a provoz či registraci vozidel s ukrajinskou registrační značkou, nikoli technická bezpečnostní opatření na rizikových místech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Novela se týká převážně registrace, schvalování a technických kontrol vozidel a její text nezavádí prostředky ani opatření pro bezpečnost okolí škol či železničních přejezdů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-2151b449f3b4--source",
+        "psp-core-2025--law-change-43193-1",
+        "psp-core-2025--law-change-43335-1",
+        "psp-core-2025--law-change-43415-1"
+      ],
+      "explanationCz": "Slib se týká zvýšení bezpečnosti pomocí technických prostředků, zejména u škol a železničních přejezdů. Předložené změny zákonů se věnují dopravnímu informačnímu systému a pravidlům pro vozidla, ale nedokládají zavedení takových opatření v uvedených lokalitách. Proto z těchto podkladů nelze ověřit podstatný posun ve slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dopravní informační systém může mít širší bezpečnostní využití, ale předložený text nespojuje jeho změny s konkrétními opatřeními u škol, na přejezdech ani v jiných rizikových lokalitách."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0bd9bf501cdb3746016abf0c13f38487d18c28cd4aceb1d56a",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 104984,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 104981
+      },
+      "output_tokens": 2242,
+      "output_tokens_details": {
+        "reasoning_tokens": 1686
+      },
+      "total_tokens": 107226
+    },
+    "output": {
+      "promiseId": "candidate-2151b449f3b4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43193-1",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje technický systém pro sběr a zveřejňování aktuálních dopravních informací, což může přispět k obecné bezpečnosti, ačkoli neřeší vybavení okolí škol ani železničních přejezdů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": false,
+          "reasonCz": "Ustanovení o ukrajinských vozidlech a pobytových pravidlech neřeší dopravní bezpečnost ani technické prostředky v rizikových lokalitách."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Novela upravuje především schvalování vozidel, registraci a technické kontroly, ale nezavádí technické prostředky pro zvýšení bezpečnosti v okolí škol či železničních přejezdů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-2151b449f3b4--source",
+        "psp-core-2025--law-change-43193-1",
+        "psp-core-2025--print-step-210709",
+        "psp-core-2025--vote-88548"
+      ],
+      "explanationCz": "Vláda předložila novelu zákona o silničním provozu, která svěřuje Ředitelství silnic a dálnic správu celostátního systému dopravních informací a stanoví povinnost poskytovat mu aktuální údaje. Poslanci ANO pak při závěrečném hlasování podpořili schválení této novely. Systém může dopravní bezpečnost podpořit lepšími informacemi o provozu, jde však jen o obecný dílčí krok; novela nedokládá zavedení konkrétních zařízení u škol nebo železničních přejezdů.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z podkladů není doloženo, že by se systém zaměřil právě na riziková místa, okolí škol nebo železniční přejezdy, ani že už byl v těchto místech zaveden; podpořený krok proto dokládá pouze dílčí posun."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0b5c12a4727669b9016abf0c29c56c87d1b3b13750ae3e6948",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 105195,
+      "input_tokens_details": {
+        "cache_write_tokens": 102713,
+        "cached_tokens": 2479
+      },
+      "output_tokens": 320,
+      "output_tokens_details": {
+        "reasoning_tokens": 89
+      },
+      "total_tokens": 105515
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "candidate-2151b449f3b4--source",
+        "psp-core-2025--law-change-43193-1",
+        "psp-core-2025--vote-88548"
+      ],
+      "explanationCz": "Volím druhé hodnocení, protože slib zahrnuje dopravní bezpečnost obecně, nejen okolí škol a železniční přejezdy. Poslanci ANO podpořili novelu o dopravním informačním systému, vedenou ve Sněmovně jako tisk č. 83, která rozšiřuje poskytované údaje a posiluje povinnost předávat je bez prodlení. Lepší aktuální informace o provozu mohou pomocí technického systému přispět k bezpečnosti, takže jde o dílčí krok ke splnění slibu. Opatření přímo u škol a přejezdů však doložena nejsou, a proto nelze slib označit za zcela splněný."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-towards",
+    "selectedReview": "assessor-b"
+  }
+}

@@ -1,0 +1,419 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T09-34-16-215Z--abcea1f344ef",
+  "evaluatedAt": "2026-11-05T09:34:16.215Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-0efdfb61f0e2/abcea1f344efcd2305acb2f14f86f4ad1a330cc3403f53b3f29853e35eb568f5.json",
+  "packageHash": "abcea1f344efcd2305acb2f14f86f4ad1a330cc3403f53b3f29853e35eb568f5",
+  "assessmentContentHash": "fbde50bf57098d799cdf1ad3578b26dbbd78d3de2513bad375ea07a5f24c610b",
+  "assessmentFingerprint": "6c813b0672831c20a5a8a5b1b83b85cfa04c68b2f6a00d8c5031401845b5cbde",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-0efdfb61f0e2",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment cites duplicate evidence IDs",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_092d45247e911502016aec4cac278087d1b0282aeac68d4c7f",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 58369,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 58366
+            },
+            "output_tokens": 4878,
+            "output_tokens_details": {
+              "reasoning_tokens": 3223
+            },
+            "total_tokens": 63247
+          },
+          "output": {
+            "promiseId": "candidate-0efdfb61f0e2",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-7",
+                "relevant": true,
+                "reasonCz": "Schválené znění novely stavebního zákona výslovně zařazuje venkovní sportoviště do kategorií drobných a jednoduchých staveb, což může usnadnit budování sportovišť u škol.",
+                "effectCz": "Dosavadní dodané znění příloh č. 1 a 2 zvláštní kategorii venkovních sportovišť neuvádí; schválený text zařazuje sportoviště a zařízení pro sport do 300 m² mezi drobné stavby a venkovní sportoviště do 3 000 m² mezi jednoduché stavby. Tím se zavádí snazší stavební režim pro část sportovní infrastruktury, a tedy se její výstavba usnadňuje; dodané znění neprokazuje konkrétní výstavbu ani její dostupnost u škol."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-14",
+                "relevant": true,
+                "reasonCz": "Schválené znění mění priority sportovní politiky a pravidla podpory tak, že výslovně zahrnuje rozvoj sportovní infrastruktury i školní sport.",
+                "effectCz": "Předchozí znění § 1a kladlo důraz na sport dětí a mládeže, jejich trenéry a sportovní reprezentanty; schválené znění mezi priority výslovně přidává rozvoj sportovní infrastruktury a podporu pohybových aktivit, zejména dětí a mládeže. U podpory podle § 6b schválený text odstraňuje výjimku pro školní a vysokoškolský sport, čímž školní sport nově zahrnuje do okruhu podporovaných aktivit; přesné předchozí znění § 6b dodaný kontext neobsahuje, ale samotná vypouštěná výjimka je v textu doložena."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": true,
+                "reasonCz": "Zákon o státním rozpočtu se v dodaných důkazech pojí s návrhem na navýšení investičních dotací na sportovní infrastrukturu, výslovně včetně školní.",
+                "effectCz": "Jde o nový státní rozpočet, nikoli změnu dřívějšího pravidla; dodaný výňatek pouze uvádí, že přehled výdajů a ukazatele jsou v přílohách, jejich částky však neobsahuje. Pozměňovací návrh k rozpočtu navrhl zvýšit výdaje Národní sportovní agentury a dotace na rozvoj a podporu sportu o 800 milionů Kč, s uvedeným zaměřením také na školní sportovní infrastrukturu; z dodaného rozpočtového výňatku nelze ověřit, zda tato částka byla v konečném rozpočtu schválena."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-137",
+                "relevant": true,
+                "reasonCz": "Vyhláška výslovně upravuje sportovní kurzy a mimoškolní aktivní vyžití žáků škol zřizovaných Ministerstvem vnitra, a proto se týká části školního sportu.",
+                "effectCz": "Vyhláška stanoví, že střední školy zřizované Ministerstvem vnitra mohou pořádat sportovní a turistické kurzy a nabízet žákům mimoškolní činnost zaměřenou mimo jiné na aktivní odpočinek. Předchozí znění pravidel dodaný balíček neobsahuje, takže nelze určit, zda se tím dostupnost těchto aktivit oproti dřívějšku rozšířila; ustanovení se navíc týká jen části škol."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-0efdfb61f0e2--source",
+              "psp-core-2025--law-change-43174-1-7",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--amendment-text-1164",
+              "psp-core-2025--amendment-1164",
+              "psp-core-2025--vote-88026",
+              "psp-core-2025--vote-88171",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--law-change-43184-14",
+              "psp-core-2025--print-step-210648",
+              "psp-core-2025--government-opinion-43184-1",
+              "psp-core-2025--vote-88026",
+              "psp-core-2025--vote-88450",
+              "psp-core-2025--senate-resolution-43184-7",
+              "psp-core-2025--law-change-43204-1",
+              "psp-core-2025--print-step-210761",
+              "psp-core-2025--amendment-text-478",
+              "psp-core-2025--amendment-478",
+              "psp-core-2025--vote-86894",
+              "psp-core-2025--vote-86957",
+              "esbirka-regulations--law-change-sb-2026-137",
+              "esbirka-regulations--2026-137"
+            ],
+            "explanationCz": "Poslanci ANO prosadili změnu stavebního zákona, která usnadňuje povolování části venkovních sportovišť, a podpořili změnu zákona o podpoře sportu, jež zahrnuje školní sport a rozvoj infrastruktury mezi podporované priority. Ministerstvo vnitra také vydalo vyhlášku umožňující sportovní kurzy a aktivní mimoškolní činnost na školách, které zřizuje. Tyto kroky podporují části slibu, ale samy nezajišťují moderní sportovní infrastrukturu u škol ani rovný přístup všech dětí. ANO také navrhlo a podpořilo rozpočtové navýšení o 800 milionů korun na sportovní infrastrukturu; z dodaného textu rozpočtu však nelze ověřit, zda se částka dostala do konečné podoby.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Poslanci ANO většinově nepodpořili pozměňovací návrh vlastní poslankyně, který zařazoval sportoviště do kategorie drobných staveb; následně ale hlasovali pro schválený zákon obsahující obdobné zařazení.",
+              "Konečný výňatek státního rozpočtu neobsahuje částky z příloh, takže nelze potvrdit, zda navržené navýšení o 800 milionů korun na sportovní infrastrukturu bylo v rozpočtu schváleno. Vyhláška se týká jen škol zřizovaných Ministerstvem vnitra a dodané podklady neukazují, zda oproti předchozím pravidlům skutečně rozšířila nabídku sportu."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-0efdfb61f0e2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně zařazuje venkovní hřiště a sportoviště do kategorií staveb s mírnějším povolovacím režimem, což může usnadnit výstavbu sportovní infrastruktury u škol, ačkoli školy výslovně nezmiňuje.",
+          "effectCz": "Předchozí znění přílohy výslovně uvádělo jako drobné stavby jen dočasná sportovní zařízení s umístěním nejvýše na 30 po sobě jdoucích dnů; schválené znění nově řadí venkovní hřiště a sportoviště do 300 m² mezi drobné stavby a venkovní sportoviště do 3 000 m² mezi jednoduché stavby, včetně vymezeného zázemí. Tím se pro tyto druhy staveb snižuje procesní náročnost, avšak text nespojuje změnu přímo se školami."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválené znění mění zákonné priority sportu a ustanovení o podpoře sportovních organizací tak, že se přímo týká školního sportu a rozvoje sportovní infrastruktury.",
+          "effectCz": "Předchozí § 1a uváděl jako priority podporu sportu dětí a mládeže, jejich trenérů a sportovních reprezentantů; nové znění zahrnuje podporu sportu a pohybových aktivit všech generací, zvláště dětí a mládeže, a výslovně přidává rozvoj sportovní infrastruktury, takže priority rozšiřuje. Změna také vypouští slova, která v § 6b výslovně vyjímala školní a vysokoškolský sport; předchozí úplné znění § 6b však v podkladu chybí, takže přesný účinek této části nelze z dodaného znění plně ověřit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet na rok 2026 rozhoduje o prostředcích na sport, přičemž předložený pozměňovací návrh výslovně směřoval investice také do školní sportovní infrastruktury.",
+          "effectCz": "Jde o státní rozpočet, který stanoví výdaje a jejich ukazatele; dodaný výňatek pouze odkazuje na rozpočtové přílohy a neuvádí částky pro sport ani pro školní sportovní infrastrukturu. Z dodaného znění proto nelze určit, zda schválené rozpočtové prostředky tuto oblast zvětšily, nebo zmenšily."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-137",
+          "relevant": true,
+          "reasonCz": "Vyhláška upravuje sportovní kurzy a mimoškolní aktivity ve školách zřizovaných Ministerstvem vnitra, a tím se dotýká dostupnosti školního sportu, byť nikoli výstavby infrastruktury.",
+          "effectCz": "Vyhláška stanoví, že střední školy zřizované Ministerstvem vnitra mohou pořádat sportovní kurzy a nabízet mimoškolní činnost zaměřenou mimo jiné na aktivní odpočinek. Protože jde o celý nový předpis bez předchozího znění v podkladu, nelze určit, jak se tato možnost změnila oproti dřívějším pravidlům; vyhláška sama neukládá výstavbu sportovní infrastruktury."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-0efdfb61f0e2--source",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--amendment-text-1164",
+        "psp-core-2025--amendment-1164",
+        "psp-core-2025--vote-88171",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-478",
+        "psp-core-2025--amendment-478",
+        "psp-core-2025--vote-86894",
+        "psp-core-2025--vote-86957",
+        "esbirka-regulations--law-change-sb-2026-137",
+        "esbirka-regulations--2026-137"
+      ],
+      "explanationCz": "Poslanci ANO podpořili novelu zákona o podpoře sportu a po jejím zamítnutí Senátem (horní komorou Parlamentu) na ní Sněmovna setrvala; novela rozšířila priority o rozvoj sportovní infrastruktury a změnila pravidla podpory sportovních organizací. Poslanci ANO také podpořili pozměňovací návrh ke státnímu rozpočtu na rok 2026, který navrhoval přidat 800 milionů korun na sportovní infrastrukturu včetně školní; dodaný výňatek schváleného rozpočtu ale neukazuje konečnou částku pro tuto oblast. Další schválené změny usnadňují zařazení některých sportovišť do stavebních kategorií s mírnějším povolovacím režimem a vyhláška umožňuje sportovní kurzy na školách zřizovaných Ministerstvem vnitra, ale samy nezajišťují výstavbu moderních sportovišť u škol. Doložené kroky proto představují dílčí posun, nikoli splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek schváleného státního rozpočtu uvádí pouze odkazy na rozpočtové přílohy, nikoli konečnou částku pro sportovní nebo školní sportovní infrastrukturu; nelze proto ověřit konečný účinek rozpočtového hlasování.",
+        "Poslanci ANO nepodpořili pozměňovací návrh Barbory Rázgy, který do stavebního zákona doplňoval venkovní hřiště a sportoviště, ale následně hlasovali pro celý zákon včetně ustanovení o sportovištích. Výsledný zákon tedy obsahoval dílčí usnadnění, zatímco dřívější hlasování proti návrhu směřovalo opačně.",
+        "Podklady nedokládají, že už byla vybudována moderní sportovní infrastruktura u škol; přijaté změny stanoví priority, podporu nebo pravidla, nikoli konkrétní dokončené stavby."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-0efdfb61f0e2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Schválené znění doplňuje kategorie venkovních sportovišť a zařízení pro sport, což se týká výstavby sportovní infrastruktury, kterou slib zmiňuje u škol.",
+          "effectCz": "Schválené znění nově řadí venkovní dětská hřiště, sportoviště a sportovní zařízení do 300 m² mezi drobné stavby a venkovní sportoviště do 3 000 m² se zázemím do jednoduchých staveb. Dodaný kontext neukazuje předchozí pravidla pro tyto stavby, takže nelze určit, zda se jejich povolování oproti dřívějšku uvolňuje, zpřísňuje, nebo zůstává stejné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně zařazuje rozvoj sportovní infrastruktury mezi priority a upravuje podporu sportu tak, že už z ní nevylučuje školní sport.",
+          "effectCz": "Předchozí znění § 1a odst. 2 označovalo za priority sport dětí a mládeže, jejich trenéry a sportovní reprezentanty; nové znění uvádí podporu sportu a pohybových aktivit všech generací, zejména dětí a mládeže, a výslovně také rozvoj sportovní infrastruktury. Tím se rozšiřuje okruh deklarovaných priorit, ale nevzniká povinnost postavit sportoviště ani konkrétní nárok na podporu. Schválené znění zároveň odstraňuje výjimku pro školní a vysokoškolský sport v pravidle o dotacích; předchozí znění tohoto ustanovení však v kontextu chybí, takže přesnou změnu nároku či objemu podpory nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet může obsahovat výdaje na sportovní infrastrukturu a doložený pozměňovací návrh výslovně uvádí investice včetně školní sportovní infrastruktury.",
+          "effectCz": "Jde o nový státní rozpočet, nikoli změnu dřívějšího ustanovení. Dodané části rozpočtu pouze odkazují na přílohy s výdaji a ukazateli, jejichž částky zde nejsou, proto z nich nelze určit skutečné rozpočtové prostředky pro školní sport. Samostatný pozměňovací návrh navrhl zvýšit výdaje Národní sportovní agentury na sportovní dotace, včetně investiční podpory rozvoje sportu, o 800 milionů Kč a výslovně zmínil školní sportovní infrastrukturu."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-137",
+          "relevant": true,
+          "reasonCz": "Vyhláška pro školy zřizované Ministerstvem vnitra upravuje sportovní kurzy a mimoškolní činnost, tedy část dostupnosti školního sportu.",
+          "effectCz": "Vyhláška stanoví, že střední školy zřizované Ministerstvem vnitra mohou pořádat sportovní a turistické kurzy a nabízet žákům mimoškolní činnost zaměřenou mimo jiné na aktivní odpočinek. Jde o vymezení možnosti pro omezený okruh škol, nikoli o příkaz zajistit sportovní nabídku nebo postavit infrastrukturu; předchozí stav srovnatelných pravidel balíček nedokládá."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-0efdfb61f0e2--source",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--law-change-43204-1",
+        "esbirka-regulations--law-change-sb-2026-137",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--amendment-text-478",
+        "psp-core-2025--amendment-text-1164",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--government-opinion-43184-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-478",
+        "psp-core-2025--vote-86894",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--amendment-1164",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88171",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88450",
+        "esbirka-regulations--2026-137",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili a podpořili pozměňovací návrh ke státnímu rozpočtu na rok 2026, který navrhoval přidat 800 milionů Kč na sportovní dotace a výslovně počítal i se školní sportovní infrastrukturou. ANO také hlasovalo pro změnu zákona o podpoře sportu, která mezi priority nově řadí sportovní infrastrukturu a odstraňuje výjimku pro školní sport z pravidel o dotacích. U změny stavebního zákona ANO při hlasování o návrhu na zařazení sportovišť mezi drobné stavby většinově nehlasovalo pro, později však hlasovalo pro celý zákon, který tuto úpravu obsahoval. Jde o kroky směrem k části slibu, ale podklady nedokládají, že už vznikla nová školní sportoviště nebo že se sport stal dostupnější pro všechny děti.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočtový pozměňovací návrh navrhl zvýšení o 800 milionů Kč a ANO jej podpořilo, ale dodané části schváleného rozpočtu neobsahují příslušné částky; nelze proto ověřit konečnou výši podpory ani to, zda byly prostředky skutečně použity na školní sportovní infrastrukturu.",
+        "U změny stavebního zákona nejsou v dodaném kontextu uvedena předchozí pravidla pro nově vyjmenované kategorie sportovišť, takže nelze určit, jak výrazně se jejich povolování změnilo. ANO navíc návrh na zařazení těchto staveb mezi drobné stavby většinově nepodpořilo, ačkoli následně hlasovalo pro celý zákon. Doložené kroky samy o sobě neprokazují vznik sportovišť ani skutečné zvýšení dostupnosti školního sportu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0c950c76b22b58fa016aec4b9fd04887d1b91091db92e1c874",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 58369,
+      "input_tokens_details": {
+        "cache_write_tokens": 52019,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 9456,
+      "output_tokens_details": {
+        "reasoning_tokens": 7788
+      },
+      "total_tokens": 67825
+    },
+    "output": {
+      "promiseId": "candidate-0efdfb61f0e2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně zařazuje venkovní hřiště a sportoviště do kategorií staveb s mírnějším povolovacím režimem, což může usnadnit výstavbu sportovní infrastruktury u škol, ačkoli školy výslovně nezmiňuje.",
+          "effectCz": "Předchozí znění přílohy výslovně uvádělo jako drobné stavby jen dočasná sportovní zařízení s umístěním nejvýše na 30 po sobě jdoucích dnů; schválené znění nově řadí venkovní hřiště a sportoviště do 300 m² mezi drobné stavby a venkovní sportoviště do 3 000 m² mezi jednoduché stavby, včetně vymezeného zázemí. Tím se pro tyto druhy staveb snižuje procesní náročnost, avšak text nespojuje změnu přímo se školami."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválené znění mění zákonné priority sportu a ustanovení o podpoře sportovních organizací tak, že se přímo týká školního sportu a rozvoje sportovní infrastruktury.",
+          "effectCz": "Předchozí § 1a uváděl jako priority podporu sportu dětí a mládeže, jejich trenérů a sportovních reprezentantů; nové znění zahrnuje podporu sportu a pohybových aktivit všech generací, zvláště dětí a mládeže, a výslovně přidává rozvoj sportovní infrastruktury, takže priority rozšiřuje. Změna také vypouští slova, která v § 6b výslovně vyjímala školní a vysokoškolský sport; předchozí úplné znění § 6b však v podkladu chybí, takže přesný účinek této části nelze z dodaného znění plně ověřit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet na rok 2026 rozhoduje o prostředcích na sport, přičemž předložený pozměňovací návrh výslovně směřoval investice také do školní sportovní infrastruktury.",
+          "effectCz": "Jde o státní rozpočet, který stanoví výdaje a jejich ukazatele; dodaný výňatek pouze odkazuje na rozpočtové přílohy a neuvádí částky pro sport ani pro školní sportovní infrastrukturu. Z dodaného znění proto nelze určit, zda schválené rozpočtové prostředky tuto oblast zvětšily, nebo zmenšily."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-137",
+          "relevant": true,
+          "reasonCz": "Vyhláška upravuje sportovní kurzy a mimoškolní aktivity ve školách zřizovaných Ministerstvem vnitra, a tím se dotýká dostupnosti školního sportu, byť nikoli výstavby infrastruktury.",
+          "effectCz": "Vyhláška stanoví, že střední školy zřizované Ministerstvem vnitra mohou pořádat sportovní kurzy a nabízet mimoškolní činnost zaměřenou mimo jiné na aktivní odpočinek. Protože jde o celý nový předpis bez předchozího znění v podkladu, nelze určit, jak se tato možnost změnila oproti dřívějším pravidlům; vyhláška sama neukládá výstavbu sportovní infrastruktury."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-0efdfb61f0e2--source",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--amendment-text-1164",
+        "psp-core-2025--amendment-1164",
+        "psp-core-2025--vote-88171",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-478",
+        "psp-core-2025--amendment-478",
+        "psp-core-2025--vote-86894",
+        "psp-core-2025--vote-86957",
+        "esbirka-regulations--law-change-sb-2026-137",
+        "esbirka-regulations--2026-137"
+      ],
+      "explanationCz": "Poslanci ANO podpořili novelu zákona o podpoře sportu a po jejím zamítnutí Senátem (horní komorou Parlamentu) na ní Sněmovna setrvala; novela rozšířila priority o rozvoj sportovní infrastruktury a změnila pravidla podpory sportovních organizací. Poslanci ANO také podpořili pozměňovací návrh ke státnímu rozpočtu na rok 2026, který navrhoval přidat 800 milionů korun na sportovní infrastrukturu včetně školní; dodaný výňatek schváleného rozpočtu ale neukazuje konečnou částku pro tuto oblast. Další schválené změny usnadňují zařazení některých sportovišť do stavebních kategorií s mírnějším povolovacím režimem a vyhláška umožňuje sportovní kurzy na školách zřizovaných Ministerstvem vnitra, ale samy nezajišťují výstavbu moderních sportovišť u škol. Doložené kroky proto představují dílčí posun, nikoli splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek schváleného státního rozpočtu uvádí pouze odkazy na rozpočtové přílohy, nikoli konečnou částku pro sportovní nebo školní sportovní infrastrukturu; nelze proto ověřit konečný účinek rozpočtového hlasování.",
+        "Poslanci ANO nepodpořili pozměňovací návrh Barbory Rázgy, který do stavebního zákona doplňoval venkovní hřiště a sportoviště, ale následně hlasovali pro celý zákon včetně ustanovení o sportovištích. Výsledný zákon tedy obsahoval dílčí usnadnění, zatímco dřívější hlasování proti návrhu směřovalo opačně.",
+        "Podklady nedokládají, že už byla vybudována moderní sportovní infrastruktura u škol; přijaté změny stanoví priority, podporu nebo pravidla, nikoli konkrétní dokončené stavby."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_09366cf779abfab9016aec4cf0634c87d1b096d8f347a5889b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 58369,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 58366
+      },
+      "output_tokens": 6852,
+      "output_tokens_details": {
+        "reasoning_tokens": 5178
+      },
+      "total_tokens": 65221
+    },
+    "output": {
+      "promiseId": "candidate-0efdfb61f0e2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Schválené znění doplňuje kategorie venkovních sportovišť a zařízení pro sport, což se týká výstavby sportovní infrastruktury, kterou slib zmiňuje u škol.",
+          "effectCz": "Schválené znění nově řadí venkovní dětská hřiště, sportoviště a sportovní zařízení do 300 m² mezi drobné stavby a venkovní sportoviště do 3 000 m² se zázemím do jednoduchých staveb. Dodaný kontext neukazuje předchozí pravidla pro tyto stavby, takže nelze určit, zda se jejich povolování oproti dřívějšku uvolňuje, zpřísňuje, nebo zůstává stejné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně zařazuje rozvoj sportovní infrastruktury mezi priority a upravuje podporu sportu tak, že už z ní nevylučuje školní sport.",
+          "effectCz": "Předchozí znění § 1a odst. 2 označovalo za priority sport dětí a mládeže, jejich trenéry a sportovní reprezentanty; nové znění uvádí podporu sportu a pohybových aktivit všech generací, zejména dětí a mládeže, a výslovně také rozvoj sportovní infrastruktury. Tím se rozšiřuje okruh deklarovaných priorit, ale nevzniká povinnost postavit sportoviště ani konkrétní nárok na podporu. Schválené znění zároveň odstraňuje výjimku pro školní a vysokoškolský sport v pravidle o dotacích; předchozí znění tohoto ustanovení však v kontextu chybí, takže přesnou změnu nároku či objemu podpory nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet může obsahovat výdaje na sportovní infrastrukturu a doložený pozměňovací návrh výslovně uvádí investice včetně školní sportovní infrastruktury.",
+          "effectCz": "Jde o nový státní rozpočet, nikoli změnu dřívějšího ustanovení. Dodané části rozpočtu pouze odkazují na přílohy s výdaji a ukazateli, jejichž částky zde nejsou, proto z nich nelze určit skutečné rozpočtové prostředky pro školní sport. Samostatný pozměňovací návrh navrhl zvýšit výdaje Národní sportovní agentury na sportovní dotace, včetně investiční podpory rozvoje sportu, o 800 milionů Kč a výslovně zmínil školní sportovní infrastrukturu."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-137",
+          "relevant": true,
+          "reasonCz": "Vyhláška pro školy zřizované Ministerstvem vnitra upravuje sportovní kurzy a mimoškolní činnost, tedy část dostupnosti školního sportu.",
+          "effectCz": "Vyhláška stanoví, že střední školy zřizované Ministerstvem vnitra mohou pořádat sportovní a turistické kurzy a nabízet žákům mimoškolní činnost zaměřenou mimo jiné na aktivní odpočinek. Jde o vymezení možnosti pro omezený okruh škol, nikoli o příkaz zajistit sportovní nabídku nebo postavit infrastrukturu; předchozí stav srovnatelných pravidel balíček nedokládá."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-0efdfb61f0e2--source",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--law-change-43204-1",
+        "esbirka-regulations--law-change-sb-2026-137",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--amendment-text-478",
+        "psp-core-2025--amendment-text-1164",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--government-opinion-43184-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-478",
+        "psp-core-2025--vote-86894",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--amendment-1164",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88171",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88450",
+        "esbirka-regulations--2026-137",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili a podpořili pozměňovací návrh ke státnímu rozpočtu na rok 2026, který navrhoval přidat 800 milionů Kč na sportovní dotace a výslovně počítal i se školní sportovní infrastrukturou. ANO také hlasovalo pro změnu zákona o podpoře sportu, která mezi priority nově řadí sportovní infrastrukturu a odstraňuje výjimku pro školní sport z pravidel o dotacích. U změny stavebního zákona ANO při hlasování o návrhu na zařazení sportovišť mezi drobné stavby většinově nehlasovalo pro, později však hlasovalo pro celý zákon, který tuto úpravu obsahoval. Jde o kroky směrem k části slibu, ale podklady nedokládají, že už vznikla nová školní sportoviště nebo že se sport stal dostupnější pro všechny děti.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočtový pozměňovací návrh navrhl zvýšení o 800 milionů Kč a ANO jej podpořilo, ale dodané části schváleného rozpočtu neobsahují příslušné částky; nelze proto ověřit konečnou výši podpory ani to, zda byly prostředky skutečně použity na školní sportovní infrastrukturu.",
+        "U změny stavebního zákona nejsou v dodaném kontextu uvedena předchozí pravidla pro nově vyjmenované kategorie sportovišť, takže nelze určit, jak výrazně se jejich povolování změnilo. ANO navíc návrh na zařazení těchto staveb mezi drobné stavby většinově nepodpořilo, ačkoli následně hlasovalo pro celý zákon. Doložené kroky samy o sobě neprokazují vznik sportovišť ani skutečné zvýšení dostupnosti školního sportu."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "moving-towards",
+    "selectedReview": "assessor-b"
+  }
+}

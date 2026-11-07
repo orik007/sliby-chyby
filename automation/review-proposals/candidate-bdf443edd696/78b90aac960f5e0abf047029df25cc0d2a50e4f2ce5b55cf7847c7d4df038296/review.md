@@ -1,0 +1,136 @@
+# Předávání informací mezi úřady bez nošení dokladů a potvrzení
+
+> Nezveřejněný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
+
+## Návrh pro veřejný web
+
+*Nevznikl žádný návrh veřejného hodnocení ani vysvětlení.*
+
+## Co má zkontrolovat reviewer
+
+- Odpovídá navržené hodnocení metodice SLAVA Indexu?
+- Je jednání správně připsáno sledované straně?
+- Je veřejné vysvětlení pochopitelné samo o sobě a říká, kdo co udělal a jak to souvisí se slibem?
+- Jsou zkratky, právní pojmy a úřední označení při prvním použití vysvětlené?
+- Dokládají uvedené zdroje všechna podstatná tvrzení a nechybí rozporný podklad?
+
+## Technické podklady pro reviewera
+
+- Výsledek automatického procesu: třetí hodnotitel nedokázal spor rozhodnout
+- Interní stav: bez kandidátního stavu
+- Důvod výsledku: `arbiter-cannot-decide`
+- Úplný strojový audit: `assessment-run.json`
+- Přesný balíček posuzovaných podkladů: `evidence-package.json`
+
+### Jediný použitelný posudek
+
+#### První posudek: Směřuje proti slibu (−1)
+
+Poslanci ANO navrhli a podpořili změny, které zavádějí elektronické předávání stavebních spisů, digitální doručování a další sdílení údajů mezi úřady. Zároveň ale podpořili změny v cizinecké agendě, které u některých žádostí nadále vyžadují osobní předložení originálů dokladů, a také přidání dalších dokladů, jež musí řidič vozit při zkušební jízdě. Tyto změny zasahují jen část slibu, ale jsou v ní v rozporu s příslibem, že lidé nebudou muset doklady nosit. Protože vedle toho existují i konkrétní kroky k digitálnímu sdílení a oznamování, jde o smíšený výsledek s doloženým posunem proti části slibu, nikoli o jeho úplné popření.
+
+Co zůstává nejisté:
+
+- Část změn podporuje elektronické předávání spisů a doručování, zatímco cizinecká úprava a pravidla pro zkušební jízdy zachovávají nebo přidávají povinnost předložit či mít u sebe doklady; výsledné hodnocení proto závisí na tom, že slib zahrnuje také tyto konkrétní situace.
+- Záznamy dokládají schválení některých zákonů, ale neprokazují, že nové informační systémy již fungují v praxi nebo že lidé díky nim skutečně přestali doklady nosit.
+
+### Rozhodnutí třetího hodnotitele
+
+Jediné dostupné hodnocení nemohu potvrdit. Pravidlo Ministerstva vnitra pro portál kritické infrastruktury říká, že úřady a další oprávnění uživatelé do něj vkládají informace a mohou přes něj spolupracovat se správcem i mezi sebou; ministerstvo ho vydalo 23. září a podklady toto opatření připisují i ANO. Jde o pozdější krok, který může naplňovat část slibu o předávání informací, takže ho nelze bez dalšího označit za nesouvisející. Hodnocení navíc tvrdí, že stavební novela zachovala možnost úřadů spojit svá vyjádření, ale její schválený text původní pravidlo nahrazuje jinou úpravou.
+
+### Souvisí změny zákonů se slibem?
+
+| Změna zákona | První posudek |
+| --- | --- |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna stavebního zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389) | ano: Změna upravuje zveřejňování informací a fungování národního geoportálu územního plánování, tedy přístup k úředním informacím.<br>Dopad: Dříve § 43 vyžadoval možnost seznámit se s návrhy a nyní ukládá informovat veřejnost a zpřístupnit jí informace v geoportálu, přičemž lidem, kteří jej nemohou využít, zachovává možnost nahlížení. Digitální zpřístupnění se tím posiluje; ostatní dodané změny především přerozdělují pravomoci a jejich dopad na předávání dokladů z textu nevyplývá. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna stavebního zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389) | ano: Upravuje digitální podobu a zpřístupňování územních podkladů i to, jaké údaje do společného geoportálu poskytují jednotliví správci.<br>Dopad: Dříve se dokumenty zpracovávaly elektronicky a jejich vybrané části ve společném standardu; schválená verze ukládá jednotný standard pro digitální textová a prostorová data a stanoví, že údaje o území vkládají poskytovatelé do jednotné databáze v geoportálu. Jde o posílení standardizace a sdílené dostupnosti těchto informací. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna stavebního zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389) | ano: Změny stanoví, jak si pořizovatelé a dotčené orgány předávají stanoviska a jak se oznamují a zveřejňují územní dokumenty.<br>Dopad: Původní úprava už stanovila lhůty pro doručování stanovisek a společné pořizování návazných dokumentů; návrh stanoviska rozesílá určeným orgánům a výslovně umožňuje sdružit podklady, návrhy a úkony. V tomto rozsahu je spolupráce orgánů o něco přímější, ale změna nedokládá obecné odstranění povinnosti občanů nosit doklady. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna stavebního zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389) | ano: Upravuje digitální podávání a koordinaci vyjádření dotčených orgánů ve stavebních řízeních.<br>Dopad: Dříve bylo možné některá podání učinit přes portál stavebníka nebo na papíře a tentýž orgán vydával koordinované vyjádření namísto jednotlivých stanovisek; schválená verze pro část podání stanoví digitální úkon a koordinaci vyjádření ponechává. Digitální a koordinované vyřizování se tak posiluje, ale schválený text zachovává výjimky a některé doklady vyžaduje i nadále. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna stavebního zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389) | ano: Upravuje informační systémy stavební správy a přidává sledování stavu řízení na portálu stavebníka.<br>Dopad: Dříve portál umožňoval digitální úkony a vkládání či poskytování údajů a dokumentů, ale neposkytoval popsanou službu sledování řízení; schválená verze tuto službu výslovně přidává. Zlepšuje se přehled o průběhu řízení, nikoli však samo o sobě sdílení všech dokladů mezi úřady. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna stavebního zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389) | ano: Schválená verze výslovně stanoví, že elektronický spis se předává všem orgánům výhradně elektronicky.<br>Dopad: Dříve se spisy předávaly podle obecné úpravy; nové ustanovení pro spis vedený elektronicky výslovně nařizuje elektronické předání všem orgánům. Tím se posiluje právě předávání informací mezi úřady bez papírového přenosu. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna stavebního zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389) | ano: Přechodná ustanovení upravují předávání spisů, archivů a informačních systémů mezi úřady a dočasné používání starších systémů.<br>Dopad: Dříve nebylo v dodaném kontextu stanoveno předání těchto spisů a systémů při vzniku nových úřadů; návrh jejich předání výslovně ukládá, schválená verze ale současně až do konce přechodného období připouští dosavadní systémy, datové schránky i jiné způsoby komunikace. Předání se posiluje, zatímco souběžné používání různých systémů může jednotné a jednoduché sdílení dočasně brzdit. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o požární ochraně](https://www.psp.cz/sqw/text/orig2.sqw?idd=266187) | ne: V dodaném výňatku není žádný text této části, který by šel spojit s předáváním informací mezi úřady nebo s předkládáním dokladů. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o ochraně přírody a krajiny](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389) | ano: Upravuje sdílení a zpřístupňování údajů a rozhodnutí v informačním systému ochrany přírody a v registru krajiny.<br>Dopad: Dříve informační systém obsahoval databázi nálezů a evidenci ochrany druhů s užším výčtem údajů; schválená verze rozšiřuje evidenci rozhodnutí a registr krajiny výslovně určuje k shromažďování a zpřístupňování informací. Orgánům i uživatelům se tak rozšiřuje přístup k relevantním údajům. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o ochraně přírody a krajiny](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389) | ano: Přechodné ustanovení ukládá předání starší dokumentace ochrany přírody do nového registru krajiny.<br>Dopad: Před změnou nebylo pro tuto starší dokumentaci v dodaném kontextu stanoveno předání do registru krajiny; schválená verze ukládá její předání do 31. prosince 2027. Jde o rozšíření sdílení informací, ovšem až v přechodné lhůtě. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o dráhách](https://www.psp.cz/sqw/text/orig2.sqw?idd=266187) | ne: Dodaný výňatek neukazuje žádné ustanovení o sdílení informací ani o dokladech, které by se týkalo slibu. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna veterinárního zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=266187) | ne: Dodaný výňatek neobsahuje ustanovení této části, které by bylo možné věcně spojit se slibem. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o majetku České republiky](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389) | ne: Změna se týká převodu pozemků podle územního určení, nikoli předávání potřebných informací mezi úřady nebo dokladů občanů. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o pozemkových úpravách](https://www.psp.cz/sqw/text/orig2.sqw?idd=266187) | ne: Dodaný výňatek neukazuje ustanovení této části, které by se týkalo předávání informací či dokladů ve smyslu slibu. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o vyvlastnění](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389) | ne: Změna upravuje příslušnost a postupy vyvlastňovacích úřadů, nikoli předávání potřebných informací nebo doklady občanů. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o zajištění dalších podmínek bezpečnosti a ochrany zdraví při práci](https://www.psp.cz/sqw/text/orig2.sqw?idd=266187) | ne: V dodaném výňatku není žádná část textu, která by materiálně souvisela se slibem. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Zrušení zákona o jednotném environmentálním stanovisku](https://www.psp.cz/sqw/text/orig2.sqw?idd=266187) | ne: Dodaný výňatek neobsahuje ustanovení, podle něhož by se tato část dotýkala předávání informací mezi úřady nebo dokladů. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o podpoře bydlení](https://www.psp.cz/sqw/text/orig2.sqw?idd=271821) | ano: Zavádí elektronické doručování písemností v řízení o digitalizované dávce a upozornění na vloženou zprávu.<br>Dopad: Před změnou nebyl v dodaném znění zákona o státní sociální podpoře tento režim elektronického doručování; návrh a schválená verze stanoví doručení přes informační systém, s upozorněním e-mailem nebo telefonem a možností vyloučit elektronický způsob. Elektronické doručování a oznamování se tím zavádí jako nová možnost, čímž se naplňuje část slibu o přehledném oznamování. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o Úřadu práce České republiky](https://www.psp.cz/sqw/text/orig2.sqw?idd=271821) | ne: Změny pouze doplňují podporu bydlení mezi úkoly Úřadu práce a do jeho informačního systému; dodaný text neukazuje předávání údajů mezi úřady ani omezení dokladů občanů. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o některých podmínkách podnikání a o výkonu některých činností v oblasti cestovního ruchu](https://www.psp.cz/sqw/text/orig2.sqw?idd=267575) | ano: Navrhuje registr ubytovacích zařízení s přístupem pro několik veřejných orgánů, tedy konkrétní sdílení údajů mezi úřady.<br>Dopad: Dříve podle dodaného kontextu takový registr a vymezený přístup uvedených orgánů nebyly; návrh nově přiznává přístup ministerstvu, správci místního poplatku, policii a dalším uvedeným orgánům. Umožňuje sdílení těchto údajů a může omezit jejich opakované vyžadování, avšak pouze pro tuto konkrétní agendu. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o státní sociální podpoře](https://www.psp.cz/sqw/text/orig2.sqw?idd=270375) | ano: Schválená úprava zavádí elektronické doručování písemností občanům v řízení o dávkách státní sociální podpory.<br>Dopad: Před změnou nebyla v dodaném znění tohoto zákona úprava § 69a; schválený text zavádí elektronické doručování přes informační systém, upozornění e-mailem nebo telefonem a po deseti dnech fikci doručení. Jde o nový a přehlednější způsob oznámení, který podporuje část slibu. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona č. 152/2025 Sb.](https://www.psp.cz/sqw/text/orig2.sqw?idd=270375) | ano: Ruší skupinu ustanovení, která měla zavést digitální podání, elektronické spisy a elektronické doručování v související agendě.<br>Dopad: Dřívější znění zákona č. 152/2025 Sb. obsahovalo ustanovení o elektronickém podávání, vedení spisu a doručování přes informační systém; navržená i schválená změna ruší body, které tato pravidla zaváděly. Tím se omezuje plánované elektronické vyřizování a sdílení, tedy prostředek, který mohl přispět k omezení papírových dokladů. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona č. 300/2025 Sb., kterým se mění zákon č. 108/2006 Sb., o sociálních službách, ve znění pozdějších předpisů, zákon č. 329/2011 Sb., o poskytování dávek osobám se zdravotním postižením a o změně souvisejících zákonů, ve znění pozdějších předpisů, a další související zákony](https://www.psp.cz/sqw/text/orig2.sqw?idd=270377) | ne: Dodaný text mění související zákon a termíny účinnosti, ale neukazuje pravidlo o předávání údajů mezi úřady nebo o nepředkládání dokladů. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: ZVLÁŠTNÍ PRAVIDLA PRO ŘÍZENÍ](https://www.psp.cz/sqw/text/orig2.sqw?idd=280621) | ano: Zavádí cizinecký účet a elektronické úkony, ale současně u některých žádostí zachovává osobní předkládání originálů dokladů.<br>Dopad: Dřívější znění v dodaném kontextu neobsahuje tento systém cizineckých účtů; návrh i schválená verze umožňují elektronické úkony a přístup k elektronickému spisu, ale u některých podání vyžadují osobní návštěvu a předložení originálu cestovního nebo matričního dokladu. Elektronický přístup se rozšiřuje, avšak povinnost fyzicky dodat doklady v těchto případech přetrvává, takže změna současně podporuje i omezuje různé části slibu. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: INFORMAČNÍ SYSTÉMY A ZPRACOVÁNÍ ÚDAJŮ](https://www.psp.cz/sqw/text/orig2.sqw?idd=280621) | ano: Vytváří integrovaný informační systém cizinecké agendy a stanoví dálkový přístup a výměnu údajů mezi uvedenými orgány.<br>Dopad: Dříve takový integrovaný systém a popsaný dálkový přístup v dodaném kontextu nebyly; návrh i schválená verze je zavádějí a upravují poskytování údajů mezi ministerstvy a dalšími orgány pro konkrétní úkoly. Zvyšuje se možnost sdílet informace, nikoli však obecně pro všechny úřady. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o službách vytvářejících důvěru pro elektronické transakce](https://www.psp.cz/sqw/text/orig2.sqw?idd=268960) | ano: Navrhuje, aby bylo možné prokázat skutečnost úřadu elektronickým potvrzením v digitální peněžence.<br>Dopad: Před změnou § 12 upravoval ověřování elektronických podpisů a pečetí; návrh jej nahrazuje možností prokazovat skutečnosti elektronickými potvrzeními atributů a ukládá orgánům veřejné moci takové prokázání umožnit. Zavádí nový digitální způsob prokazování, který může snížit nutnost přinášet papírová potvrzení, přestože jeho povinné použití nastupuje postupně. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o elektronické identifikaci](https://www.psp.cz/sqw/text/orig2.sqw?idd=268960) | ano: Rozšiřuje elektronickou identifikaci o evropskou digitální peněženku a ukládá příslušným osobám umožnit její použití.<br>Dopad: Dříve bylo možné elektronickou identitu prokazovat pouze kvalifikovaným systémem; návrh nově připouští také digitální peněženku a ukládá osobám, které ověřují totožnost, umožnit její použití. Rozšiřuje se možnost digitálního prokazování, i když neznamená automatické odstranění všech listinných dokladů. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o cestovních dokladech](https://www.psp.cz/sqw/text/orig2.sqw?idd=269547) | ano: Umožňuje použít biometrické údaje pořízené při žádosti o občanský průkaz také při souběžné žádosti o cestovní doklad.<br>Dopad: Dříve se při žádosti o cestovní doklad pořizovaly biometrické údaje v samostatném postupu; návrh stanoví, že při souběžné žádosti o občanský průkaz se použijí již pořízené údaje. Jde o dílčí opětovné využití údajů mezi agendami, které může omezit opakování úkonu, ale neruší povinnost předložit předepsané doklady. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o základních registrech](https://www.psp.cz/sqw/text/orig2.sqw?idd=269547) | ne: Změna odstraňuje údaje pro elektronickou identifikaci a autentizaci z registru obyvatel; dodaný text ji ale nespojuje s předáváním informací potřebných pro vyřízení úřední záležitosti ani s předkládáním dokladů. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona, kterým se mění zákon o matrikách, jménu a příjmení](https://www.psp.cz/sqw/text/orig2.sqw?idd=280625) | ano: Posouvá termíny předávání a převodu matričních údajů do připravovaného matričního informačního systému.<br>Dopad: Předchozí přechodná úprava počítala s převodem údajů a účinností příslušných ustanovení v letech 2026–2027; schválená verze tyto termíny posouvá, včetně převodu údajů do června 2028 a účinnosti některých ustanovení do července 2028. Přechod k jednotnému systému se tím odkládá, takže předání údajů není tak rychlé, jak stanovovala původní časová úprava. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o některých opatřeních v souvislosti s ozbrojeným konfliktem na území Ukrajiny vyvolaným invazí vojsk Ruské federace](https://www.psp.cz/sqw/text/orig2.sqw?idd=271313) | ano: Mění způsob, jímž jsou cizincům potvrzovány registrace a další úkony, a přesouvá potvrzení do jejich uživatelského účtu.<br>Dopad: Dříve se potvrzení o registraci zasílalo na e-mail; návrh je nahrazuje automaticky vytvořeným potvrzením v uživatelském účtu na informačním portálu pro cizince. U jedné konkrétní agendy se mění způsob informování; účinek závisí na tom, zda má uživatel k účtu snadný přístup. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Vládní návrh zákona, kterým se mění zákon č. 37/2021 Sb., o evidenci skutečných majitelů, ve znění pozdějších předpisů](https://www.psp.cz/sqw/text/orig2.sqw?idd=278412) | ano: Navrhuje zpřístupnění údajů z evidence skutečných majitelů dalším veřejným orgánům a jejich propojení s evropským systémem evidencí.<br>Dopad: Dřívější znění umožňovalo dálkový přístup vyjmenovaným orgánům a subjektům; návrh rozšiřuje okruh oprávněných příjemců například o orgány práce, sankční orgány a některé evropské instituce a přidává systém propojení evidencí. Rozšiřuje se dostupnost údajů pro úřední účely, ale jen v této konkrétní oblasti. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o elektronických úkonech a autorizované konverzi dokumentů](https://www.psp.cz/sqw/text/orig2.sqw?idd=278932) | ano: Rozšiřuje možnost používat datové schránky při elektronických úkonech mezi orgány veřejné moci a společenstvími obcí.<br>Dopad: Dříve výčet zahrnoval státní orgány a územní samosprávné celky, nikoli společenství obcí; návrh tato společenství doplňuje mezi oprávněné uživatele. Rozšiřuje se elektronický komunikační kanál pro další veřejné subjekty, ale jen v tomto institucionálním rozsahu. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o podmínkách provozu vozidel na pozemních komunikacích](https://www.psp.cz/sqw/text/orig2.sqw?idd=279232) | ano: Upravuje dálkový přístup celních orgánů k údajům registru vozidel a zjednodušuje přikládání některých dokladů při elektronickém podání.<br>Dopad: Dřívější úprava umožňovala vybrané orgány získávat údaje z registru vozidel, ale v dodaném znění neobsahovala přístup celní správy k evidenci celního propuštění vozidla; návrh jej výslovně doplňuje. U elektronických žádostí navíc některé elektronicky vydané doklady není třeba přikládat a další lze přiložit jako kopie, což podporuje sdílení údajů a omezuje část papírování. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o silničním provozu](https://www.psp.cz/sqw/text/orig2.sqw?idd=279232) | ano: Navrhuje, aby řidič při zkušebním nebo manipulačním provozu vozil doklad o přidělení zvláštní registrační značky a knihu jízd.<br>Dopad: Dřívější text § 6 odst. 7 takový doklad a knihu jízd v seznamu povinně převážených dokladů neuváděl; návrh je přidává. Pro dotčené jízdy se tím povinnost mít doklady u sebe rozšiřuje, což jde proti části slibu. |
+| [Předpis ve Sbírce zákonů: Vyhláška č. 178/2026 Sb., Vyhláška o portálu kritické infrastruktury](https://e-sbirka.gov.cz/sb/2026/178/0000-00-00) | ne: Vyhláška se týká specializovaného portálu kritické infrastruktury a dodaný výňatek neukazuje spojení s obecně slibovaným předáváním běžných údajů mezi úřady. |
+
+### Zdroje použité při hodnocení
+
+- [Původní volební slib](https://www.anobudelip.cz/file/edee/ke-stazeni/volebni-program-2025.pdf)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna stavebního zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna stavebního zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna stavebního zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna stavebního zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna stavebního zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna stavebního zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna stavebního zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o ochraně přírody a krajiny](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o ochraně přírody a krajiny](https://www.psp.cz/sqw/text/orig2.sqw?idd=280389)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o podpoře bydlení](https://www.psp.cz/sqw/text/orig2.sqw?idd=271821)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o některých podmínkách podnikání a o výkonu některých činností v oblasti cestovního ruchu](https://www.psp.cz/sqw/text/orig2.sqw?idd=267575)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o státní sociální podpoře](https://www.psp.cz/sqw/text/orig2.sqw?idd=270375)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona č. 152/2025 Sb.](https://www.psp.cz/sqw/text/orig2.sqw?idd=270375)
+- [Změna zákona v návrhu projednávaném Sněmovnou: ZVLÁŠTNÍ PRAVIDLA PRO ŘÍZENÍ](https://www.psp.cz/sqw/text/orig2.sqw?idd=280621)
+- [Změna zákona v návrhu projednávaném Sněmovnou: INFORMAČNÍ SYSTÉMY A ZPRACOVÁNÍ ÚDAJŮ](https://www.psp.cz/sqw/text/orig2.sqw?idd=280621)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o službách vytvářejících důvěru pro elektronické transakce](https://www.psp.cz/sqw/text/orig2.sqw?idd=268960)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o elektronické identifikaci](https://www.psp.cz/sqw/text/orig2.sqw?idd=268960)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o cestovních dokladech](https://www.psp.cz/sqw/text/orig2.sqw?idd=269547)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona, kterým se mění zákon o matrikách, jménu a příjmení](https://www.psp.cz/sqw/text/orig2.sqw?idd=280625)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o některých opatřeních v souvislosti s ozbrojeným konfliktem na území Ukrajiny vyvolaným invazí vojsk Ruské federace](https://www.psp.cz/sqw/text/orig2.sqw?idd=271313)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Vládní návrh zákona, kterým se mění zákon č. 37/2021 Sb., o evidenci skutečných majitelů, ve znění pozdějších předpisů](https://www.psp.cz/sqw/text/orig2.sqw?idd=278412)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o elektronických úkonech a autorizované konverzi dokumentů](https://www.psp.cz/sqw/text/orig2.sqw?idd=278932)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o podmínkách provozu vozidel na pozemních komunikacích](https://www.psp.cz/sqw/text/orig2.sqw?idd=279232)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o silničním provozu](https://www.psp.cz/sqw/text/orig2.sqw?idd=279232)
+- [Předpis ve Sbírce zákonů: Vyhláška č. 178/2026 Sb., Vyhláška o portálu kritické infrastruktury](https://e-sbirka.gov.cz/sb/2026/178/0000-00-00)
+- [Text pozměňovacího návrhu B (sněmovní dokument 762)](https://www.psp.cz/sqw/text/orig2.sqw?idd=269125)
+- [Text pozměňovacího návrhu P1 (sněmovní dokument 1172)](https://www.psp.cz/sqw/text/orig2.sqw?idd=270687)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=67)
+- [Stanovisko vlády k návrhu zákona, který nepředložila (souhlas)](https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=67&CT1=1)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=82)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=124)
+- [Stanovisko vlády k návrhu zákona, který nepředložila (nesouhlas)](https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=106&CT1=1)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=144)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=154)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=172)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=187)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=87387)
+- [Stanovisko vlády k návrhu zákona, který nepředložila (souhlas)](https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=187&CT1=1)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=213)
+- [Hlasování Poslanecké sněmovny o pozměňovacím návrhu B](https://public.psp.cz/sqw/hlasy.sqw?g=87603)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=87617)
+- [Hlasování Poslanecké sněmovny o pozměňovacím návrhu P1](https://public.psp.cz/sqw/hlasy.sqw?g=88143)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=88252)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=260)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=277)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=293)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=88454)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=88522)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=88528)
+- [Vydání vyhlášky: Ministerstvo vnitra](https://e-sbirka.gov.cz/sb/2026/178/0000-00-00)
+
+Tento návrh nahrazuje starší automatický posudek, který zůstává zachovaný v auditní historii.
+

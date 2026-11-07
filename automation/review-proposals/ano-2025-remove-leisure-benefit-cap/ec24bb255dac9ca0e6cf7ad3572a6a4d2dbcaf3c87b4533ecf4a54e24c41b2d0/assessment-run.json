@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T09-25-13-404Z--6110a533650b",
+  "evaluatedAt": "2026-11-05T09:25:13.404Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-remove-leisure-benefit-cap/6110a533650b9ff5c7f957340b0b67e47dc46c35a04c6454c246e1d9c3d8d5a4.json",
+  "packageHash": "6110a533650b9ff5c7f957340b0b67e47dc46c35a04c6454c246e1d9c3d8d5a4",
+  "assessmentContentHash": "76958cc4aec07c41107b7a36479f5a25194130fa7a3eeabcb45ab7b4ac0f572d",
+  "assessmentFingerprint": "ec24bb255dac9ca0e6cf7ad3572a6a4d2dbcaf3c87b4533ecf4a54e24c41b2d0",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-remove-leisure-benefit-cap",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-remove-leisure-benefit-cap",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Změna přímo upravuje daňové osvobození zaměstnaneckých volnočasových benefitů a jejich limity.",
+          "effectCz": "Dosavadní znění osvobozovalo vyjmenované nepeněžní benefity, včetně rekreace a zájezdů, společně do poloviny průměrné mzdy za zdaňovací období. Nové znění rekreaci a zájezdy vyjímá do samostatného bodu s limitem 20 000 Kč ročně a u některých akcí a příspěvků nahrazuje společný peněžní limit podmínkou obvyklosti a přiměřenosti; tím se limit pro část benefitů uvolňuje, ale strop pro rekreaci a zájezdy zůstává. Z dodaného kontextu nelze číselně porovnat 20 000 Kč s dřívější polovinou průměrné mzdy."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-remove-leisure-benefit-cap--source",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--amendment-text-1400",
+        "psp-core-2025--vote-88294",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona o evidenci tržeb, který mění i zákon o daních z příjmů: u části zaměstnaneckých benefitů uvolňuje dosavadní limit, ale rekreaci a zájezdy dál omezuje na 20 000 Kč ročně. Poslanci ANO návrh schválili a po vrácení Senátem hlasovali pro setrvání na původním znění; nepodpořili také pozměňovací návrh na vypuštění změn týkajících se rekreací. Jde tedy o dílčí posun ke zrušení zastropování, nikoli o úplné odstranění limitu. Dodané podklady neumožňují ověřit druhou část slibu, tedy snížení daně z příjmů firem z 21 % na 19 %.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují text ani rozhodnutí, podle kterých by bylo možné ověřit, zda ANO prosadilo snížení daně z příjmů firem z 21 % na 19 %.",
+        "Rekreace a zájezdy mají nově limit 20 000 Kč; dodaný kontext neuvádí částku odpovídající dřívější polovině průměrné mzdy, takže jejich limity nelze číselně porovnat."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-remove-leisure-benefit-cap",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Upravuje daňové osvobození zaměstnaneckých volnočasových benefitů, tedy část výslovného slibu zrušit jejich zastropování.",
+          "effectCz": "Dosud se rekreace a zájezdy spolu s dalšími vyjmenovanými benefity osvobozovaly od daně v souhrnu nejvýše do poloviny průměrné mzdy za zdaňovací období. Návrh rekreaci a zájezdy z tohoto společného limitu vyjímá, ale zavádí pro ně samostatný limit 20 000 Kč; u části ostatních benefitů nahrazuje společný strop podmínkou obvyklosti a přiměřenosti, takže se jejich osvobození uvolňuje. U rekreace tedy strop nezaniká, ale mění se na samostatný limit; zda je tento limit vyšší či nižší než dosavadní, dodané znění neumožňuje určit. Dodané výňatky neukazují změnu sazby daně z příjmů firem."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-remove-leisure-benefit-cap--source",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--amendment-text-1400",
+        "psp-core-2025--vote-88294",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona, který uvolňuje společný limit pro část zaměstnaneckých benefitů, ale pro rekreaci a zájezdy stanoví samostatný strop 20 000 Kč. Poslanci ANO následně návrh ve třetím čtení podpořili a po vrácení Senátem hlasovali také pro setrvání na tomto znění. Tím se slib v části benefitů naplňuje jen částečně a zavedení samostatného stropu působí proti jeho úplnému zrušení. ANO také nepodpořilo pozměňovací návrh, který by změny daňového režimu rekreace vypustil; dodané výňatky však neukazují, zda zákon snižuje firemní daň z 21 % na 19 %.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodané výňatky neobsahují znění případné změny sazby daně z příjmů právnických osob, takže nelze ověřit druhou část slibu o snížení sazby z 21 % na 19 %.",
+        "Dosavadní limit pro rekreaci a zájezdy závisel na polovině průměrné mzdy; podklady neuvádějí její hodnotu pro příslušné zdaňovací období, a proto nelze porovnat jeho výši s novým limitem 20 000 Kč."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0edaaf4cc7b9ef53016aec4b1b824487d183073c1f8c559f0f",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 24805,
+      "input_tokens_details": {
+        "cache_write_tokens": 18455,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 4339,
+      "output_tokens_details": {
+        "reasoning_tokens": 3568
+      },
+      "total_tokens": 29144
+    },
+    "output": {
+      "promiseId": "ano-2025-remove-leisure-benefit-cap",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Změna přímo upravuje daňové osvobození zaměstnaneckých volnočasových benefitů a jejich limity.",
+          "effectCz": "Dosavadní znění osvobozovalo vyjmenované nepeněžní benefity, včetně rekreace a zájezdů, společně do poloviny průměrné mzdy za zdaňovací období. Nové znění rekreaci a zájezdy vyjímá do samostatného bodu s limitem 20 000 Kč ročně a u některých akcí a příspěvků nahrazuje společný peněžní limit podmínkou obvyklosti a přiměřenosti; tím se limit pro část benefitů uvolňuje, ale strop pro rekreaci a zájezdy zůstává. Z dodaného kontextu nelze číselně porovnat 20 000 Kč s dřívější polovinou průměrné mzdy."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-remove-leisure-benefit-cap--source",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--amendment-text-1400",
+        "psp-core-2025--vote-88294",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona o evidenci tržeb, který mění i zákon o daních z příjmů: u části zaměstnaneckých benefitů uvolňuje dosavadní limit, ale rekreaci a zájezdy dál omezuje na 20 000 Kč ročně. Poslanci ANO návrh schválili a po vrácení Senátem hlasovali pro setrvání na původním znění; nepodpořili také pozměňovací návrh na vypuštění změn týkajících se rekreací. Jde tedy o dílčí posun ke zrušení zastropování, nikoli o úplné odstranění limitu. Dodané podklady neumožňují ověřit druhou část slibu, tedy snížení daně z příjmů firem z 21 % na 19 %.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují text ani rozhodnutí, podle kterých by bylo možné ověřit, zda ANO prosadilo snížení daně z příjmů firem z 21 % na 19 %.",
+        "Rekreace a zájezdy mají nově limit 20 000 Kč; dodaný kontext neuvádí částku odpovídající dřívější polovině průměrné mzdy, takže jejich limity nelze číselně porovnat."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_07bd6d35f0899932016aec4b4cf5bc87d19cf705c1ac82e20d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 24805,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 24802
+      },
+      "output_tokens": 2903,
+      "output_tokens_details": {
+        "reasoning_tokens": 2090
+      },
+      "total_tokens": 27708
+    },
+    "output": {
+      "promiseId": "ano-2025-remove-leisure-benefit-cap",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Upravuje daňové osvobození zaměstnaneckých volnočasových benefitů, tedy část výslovného slibu zrušit jejich zastropování.",
+          "effectCz": "Dosud se rekreace a zájezdy spolu s dalšími vyjmenovanými benefity osvobozovaly od daně v souhrnu nejvýše do poloviny průměrné mzdy za zdaňovací období. Návrh rekreaci a zájezdy z tohoto společného limitu vyjímá, ale zavádí pro ně samostatný limit 20 000 Kč; u části ostatních benefitů nahrazuje společný strop podmínkou obvyklosti a přiměřenosti, takže se jejich osvobození uvolňuje. U rekreace tedy strop nezaniká, ale mění se na samostatný limit; zda je tento limit vyšší či nižší než dosavadní, dodané znění neumožňuje určit. Dodané výňatky neukazují změnu sazby daně z příjmů firem."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-remove-leisure-benefit-cap--source",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--amendment-text-1400",
+        "psp-core-2025--vote-88294",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona, který uvolňuje společný limit pro část zaměstnaneckých benefitů, ale pro rekreaci a zájezdy stanoví samostatný strop 20 000 Kč. Poslanci ANO následně návrh ve třetím čtení podpořili a po vrácení Senátem hlasovali také pro setrvání na tomto znění. Tím se slib v části benefitů naplňuje jen částečně a zavedení samostatného stropu působí proti jeho úplnému zrušení. ANO také nepodpořilo pozměňovací návrh, který by změny daňového režimu rekreace vypustil; dodané výňatky však neukazují, zda zákon snižuje firemní daň z 21 % na 19 %.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodané výňatky neobsahují znění případné změny sazby daně z příjmů právnických osob, takže nelze ověřit druhou část slibu o snížení sazby z 21 % na 19 %.",
+        "Dosavadní limit pro rekreaci a zájezdy závisel na polovině průměrné mzdy; podklady neuvádějí její hodnotu pro příslušné zdaňovací období, a proto nelze porovnat jeho výši s novým limitem 20 000 Kč."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_084e5b3536cf5f9a016aec4b73bbbc87d1a509d1cb4a3a6fcf",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 24319,
+      "input_tokens_details": {
+        "cache_write_tokens": 19906,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 286,
+      "output_tokens_details": {
+        "reasoning_tokens": 59
+      },
+      "total_tokens": 24605
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "ano-2025-remove-leisure-benefit-cap--source",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Volím hodnocení A, protože správně rozlišuje částečné rušení stropů od kroku proti slibu. Poslanci ANO schválili změnu, která u části volnočasových benefitů odstraňuje společný peněžní limit, ale pro rekreaci a zájezdy ponechává samostatný strop 20 000 Kč ročně. Podklady neumožňují určit, zda je tento strop přísnější než dosavadní omezení, takže samotné jeho zachování nedokládá zhoršení. Jde proto o částečný posun ke splnění, nikoli o úplné splnění ani o prokázaný krok proti slibu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

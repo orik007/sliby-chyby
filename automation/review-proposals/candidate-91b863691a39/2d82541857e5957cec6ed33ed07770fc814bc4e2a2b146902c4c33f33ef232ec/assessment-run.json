@@ -1,0 +1,2652 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-07-58-856Z--173fca38e104",
+  "evaluatedAt": "2026-11-05T10:07:58.856Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-91b863691a39/173fca38e104e0d9694c519d3f5a2fd68e8add481ca5bc2ea7eaae0647845410.json",
+  "packageHash": "173fca38e104e0d9694c519d3f5a2fd68e8add481ca5bc2ea7eaae0647845410",
+  "assessmentContentHash": "bc8ebee19396a5d816fd1fd6f0fb15007ac779d264cc94f0a42fd31763dbdf2c",
+  "assessmentFingerprint": "2d82541857e5957cec6ed33ed07770fc814bc4e2a2b146902c4c33f33ef232ec",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-91b863691a39",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment invented evidence ID: psp-core-2025--law-change-uv-2026-175-168",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_08fc9e77defe9204016aec52bfcdf087d1add6758a8104aca0",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 434660,
+            "input_tokens_details": {
+              "cache_write_tokens": 428310,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 13122,
+            "output_tokens_details": {
+              "reasoning_tokens": 3620
+            },
+            "total_tokens": 447782
+          },
+          "output": {
+            "promiseId": "candidate-91b863691a39",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-1",
+                "relevant": true,
+                "reasonCz": "Upravuje zásady povolování a koordinaci veřejných zájmů, tedy pravidla, která mohou ovlivnit průchodnost infrastrukturních záměrů.",
+                "effectCz": "Původní § 1 odst. 3 sledoval integrovanou ochranu veřejných zájmů a udržitelný rozvoj; návrh doplňuje, že rozvoj veřejné infrastruktury lze znemožnit jen tehdy, když ochranu jiných hodnot nelze zajistit podmínkami či kompenzacemi. Nově se také koordinují stanoviska a veřejná infrastruktura je výslovně ve veřejném zájmu. To může povolování infrastruktury usnadnit, ale samo nezajišťuje výstavbu konkrétních projektů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-2",
+                "relevant": true,
+                "reasonCz": "Mění organizaci a příslušnost stavebních úřadů, které povolují významné a dopravní stavby.",
+                "effectCz": "Dosavadní stavební úřady zahrnovaly ministerstva, krajské a obecní úřady; návrh nahrazuje strukturu úřady rozvoje území a přiděluje jim příslušnost pro různé stavby. Z textu nelze určit, zda se tím konkrétní povolovací lhůty nebo možnost uskutečnění projektů zkracují; změna může být organizačním prostředkem, nikoli sama výstavbou."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-3",
+                "relevant": true,
+                "reasonCz": "Upravuje územní plánování a vymezení koridorů pro záměry celostátního či nadmístního významu.",
+                "effectCz": "Předchozí text dovoloval, aby celostátní záležitosti byly součástí krajských zásad územního rozvoje, ale nově se zavádí možnost převzít některé již vymezené plochy a koridory do nadřazeného plánu bez obvyklého řízení a posouzení. Schválené znění také uvádí koridory pro strategické investiční stavby. To může u části záměrů usnadnit plánovací postup, ale neznamená samo povolení ani realizaci stavby."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-5",
+                "relevant": true,
+                "reasonCz": "Mění přípravu a povolování záměrů, včetně požadavků na vyjádření a souhlasy potřebné při stavbách.",
+                "effectCz": "Předchozí pravidla vyžadovala různá stanoviska a dokumenty; návrh některé souhlasy či stanoviska koordinuje do rozhodnutí stavebního úřadu a stanoví lhůty i fikci souhlasu, pokud se vlastník veřejné infrastruktury včas nevyjádří. To může zmenšit procesní překážky pro část staveb, včetně dopravních, ale neprokazuje jejich skutečnou výstavbu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "Upravuje posuzování a povolení staveb, platnost povolení i možnost jejich předčasného užívání.",
+                "effectCz": "Dosavadní stavební zákon vyžadoval posouzení souladu záměru s územním plánováním, infrastrukturou a veřejnými zájmy; změna zavádí některé zjednodušené postupy a v schváleném znění prodlužuje platnost povolení dopravní a technické infrastruktury na čtyři roky. To může usnadnit pokračování přípravy a realizace, ale nedokládá posun konkrétního dopravního projektu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-7",
+                "relevant": true,
+                "reasonCz": "Mění soudní přezkum stavebních povolení a omezuje některé možnosti zdržení jejich účinků.",
+                "effectCz": "Předchozí úprava umožňovala širší soudní přezkum a podání návrhu na odkladný účinek; návrh přidává procesní omezení a zvláštní lhůtu pro rozhodování o žalobách u vyhrazených staveb. Může tím usnadnit pokračování části strategických staveb, ale současně nejde o přímou výstavbu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-3",
+                "relevant": false,
+                "reasonCz": "V předložených odstavcích nejsou ustanovení, která by věcně ovlivňovala výstavbu dopravní infrastruktury.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-6",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek neobsahuje žádnou věcnou změnu týkající se dopravních projektů; samotný odkaz na novelu stavebního zákona k relevanci nestačí.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-7",
+                "relevant": false,
+                "reasonCz": "Změny geologických postupů ve výňatku neprokazují přímý dopad na výstavbu konkrétní dopravní infrastruktury.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-1",
+                "relevant": true,
+                "reasonCz": "Mění, kdy se u některých záměrů posuzuje krajinný ráz, což může ovlivnit povolování infrastrukturních staveb.",
+                "effectCz": "Předchozí úprava vylučovala posouzení krajinného rázu v zastavěném území a v některých zastavitelných plochách; změna váže výluku na území vymezená v souladu se stanoviskem orgánu ochrany přírody a rozšiřuje ji na další územní kategorie. U záměrů v takto vymezených územích může omezit jedno z posouzení, ale její dopad na konkrétní dopravní stavby nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-3",
+                "relevant": false,
+                "reasonCz": "Upravené podmínky ochrany druhů a jejich populací nejsou v předloženém textu spojeny s konkrétním dopravním projektem ani nevytvářejí přímý prostředek k jeho výstavbě.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-5",
+                "relevant": true,
+                "reasonCz": "Přenáší posuzování některých zájmů ochrany přírody do stavebního řízení, což může změnit povolování dopravních záměrů.",
+                "effectCz": "Předchozí právní úprava vyžadovala samostatné úkony orgánů ochrany přírody; změna pro část záměrů svěřuje jejich posouzení stavebním úřadům a začleňuje je do rozhodnutí o povolení. Tím se může proces u dopravních staveb zjednodušit, ale obsahová ochrana veřejných zájmů zůstává součástí rozhodování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Mění postup pro odnětí zemědělské půdy, které může být potřebné při dopravní výstavbě.",
+                "effectCz": "Dosud bylo k odnětí zemědělské půdy obecně třeba samostatného souhlasu orgánu ochrany půdy; návrh začleňuje jeho vydání do rozhodnutí stavebního úřadu a u některých území ruší posouzení plošných zásad ochrany půdy. To může usnadnit povolovací postup části dopravních projektů, aniž by výňatek prokazoval konkrétní realizaci."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-10",
+                "relevant": false,
+                "reasonCz": "Změna osvobození od daně z pozemků souvisí s definicí zastavitelných území, ale nedodává ani neodstraňuje přímý prostředek k výstavbě dopravních projektů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-11",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek neobsahuje ustanovení věcně ovlivňující dopravní infrastrukturu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-12",
+                "relevant": false,
+                "reasonCz": "Změna pouze nahrazuje název příslušného úřadu v zákoně o dráhách; poskytnutý text nedokládá změnu pravidel výstavby ani povolování.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-13",
+                "relevant": false,
+                "reasonCz": "V poskytnutém výňatku nejsou ustanovení, která by materiálně ovlivnila dopravní stavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-14",
+                "relevant": true,
+                "reasonCz": "Upravuje povolení zásahů do lesních pozemků, které mohou být potřebné pro infrastrukturu.",
+                "effectCz": "Předchozí zákon vyžadoval stanoviska lesních orgánů a samostatná rozhodnutí o odnětí či omezení lesních pozemků; schválený text u stavebních záměrů mimo národní parky přesouvá posouzení a rozhodnutí do stavebního řízení. To může snížit počet samostatných řízení pro infrastrukturní stavby, ale nemění samotnou povinnost získat povolení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-15",
+                "relevant": false,
+                "reasonCz": "Předložené změny zákona o pozemních komunikacích převážně mění vymezení zastavěného a zastavitelného území; text neukazuje, že by tím doprava nebo povolování konkrétních projektů získaly nový prostředek k rychlejší výstavbě.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-16",
+                "relevant": true,
+                "reasonCz": "Upravuje povolování a posuzování leteckých staveb, které jsou součástí dopravní infrastruktury.",
+                "effectCz": "Předchozí text svěřoval posouzení kolaudace leteckých staveb Dopravnímu a energetickému stavebnímu úřadu; změna přesouvá příslušnost na nový úřad rozvoje území a upravuje související územní postupy. Změna příslušnosti sama o sobě nezmění podmínky výstavby ani neprokazuje rychlejší postup."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-17",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek neobsahuje konkrétní změnu relevantní pro dopravní infrastrukturu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-18",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek neobsahuje konkrétní změnu relevantní pro dopravní infrastrukturu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-19",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek neobsahuje konkrétní změnu relevantní pro dopravní infrastrukturu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-20",
+                "relevant": true,
+                "reasonCz": "Mění, jak se při povolování staveb uplatňují stanoviska z oblasti ochrany veřejného zdraví.",
+                "effectCz": "Předchozí pravidla vyžadovala stanoviska hygienických orgánů a u některých projektů samostatné posouzení hluku; změna jejich úkony u stavebních záměrů převádí do rozhodování stavebního úřadu. To může zjednodušit řízení, ale text neodstraňuje povinnost posoudit zdravotní podmínky."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek neobsahuje vlastní text změny energetického zákona, který by prokazoval přímý dopad na dopravní projekty.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": true,
+                "reasonCz": "Mění rozsah a platnost posouzení vlivů na životní prostředí, které je důležité pro velké dopravní stavby.",
+                "effectCz": "Předchozí úprava stanovila platnost stanoviska EIA na sedm let a možnost jednoho prodloužení o pět let; schválené znění prodlužuje tyto doby na deset a sedm let a zvyšuje řadu limitů, od nichž záměry podléhají posouzení. To může zabránit opakování části posuzování u infrastrukturních záměrů, zároveň však u některých záměrů může EIA odpadnout; jde o usnadnění přípravy, nikoli o dokončenou výstavbu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": false,
+                "reasonCz": "Text této části nebyl poskytnut a jeho vlastní obsah nelze z názvu ani z tématu dovozovat.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-24",
+                "relevant": false,
+                "reasonCz": "Text této části nebyl poskytnut a jeho vlastní obsah nelze z názvu ani z tématu dovozovat.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-25",
+                "relevant": false,
+                "reasonCz": "Změna byla z textu schváleného Poslaneckou sněmovnou odstraněna, a proto její navržený obsah není součástí rozhodnutého opatření.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-26",
+                "relevant": true,
+                "reasonCz": "Upravuje využití schválených pozemkových úprav pro umístění a povolování společných zařízení, včetně cest.",
+                "effectCz": "Předchozí § 12 odst. 3 umožňoval u některých společných zařízení upustit od souhlasu s odnětím půdy a nevyžadoval povolení záměru; změna výslovně umožňuje, aby rozhodnutí o pozemkových úpravách plnilo funkci části povolení a vymezilo pozemky i podmínky umístění. To může zjednodušit povolení související infrastruktury, avšak dopad na konkrétní dopravní stavbu není doložen."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-27",
+                "relevant": true,
+                "reasonCz": "Mění soudní přezkum rozhodnutí souvisejících se stavebními záměry a může ovlivnit pokračování strategických staveb.",
+                "effectCz": "Předchozí pravidla umožňovala soudu zrušit opatření obecné povahy a přezkoumat je při přezkumu navazujících rozhodnutí; návrh mění rozsah takového přezkumu a některá procesní pravidla. Tyto změny mohou ovlivnit délku či účinky sporů o infrastrukturu, ale směr jejich praktického dopadu nelze z výňatku pro konkrétní projekt určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-28",
+                "relevant": false,
+                "reasonCz": "Změna definice stavebního pozemku pro účely DPH sama nepředstavuje prostředek k výstavbě dopravní infrastruktury.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-29",
+                "relevant": true,
+                "reasonCz": "Mění příslušnost vyvlastňovacích úřadů u vyhrazených staveb, mezi něž patří významné dopravní stavby.",
+                "effectCz": "Předchozí zákon svěřoval vyvlastnění více druhům úřadů a rozlišoval jejich příslušnost podle stavby; schválený text převádí působnost na úřady rozvoje území krajů a celostátní úřad, přičemž druhý rozhoduje u vyhrazených staveb. To mění institucionální postup potřebný k získání pozemků, ale směr vlivu na jeho rychlost nelze z textu určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-30",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek neobsahuje konkrétní změnu, která by ovlivňovala dopravní stavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-31",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek neobsahuje konkrétní ustanovení relevantní pro dopravní infrastrukturu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": true,
+                "reasonCz": "Mění pravidla pro urychlení strategicky významné infrastruktury a výslovně uvádí dopravní i vodní stavby.",
+                "effectCz": "Předchozí zákon upravoval zvláštní postupy hlavně pro vymezené dopravní stavby; schválený text rozšiřuje některé postupy na další vyhrazené, energetické a těžební projekty a obsahuje položky plavebních stupňů Děčín a Přelouč. Jde o legislativní zjednodušení pro část infrastruktury, nikoli o rozhodnutí uskutečnit konkrétní dopravní projekt."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": true,
+                "reasonCz": "Mění pravidla ochrany ovzduší při povolování komunikací a dalších staveb.",
+                "effectCz": "Předchozí úprava vyžadovala pro některé komunikace závazné stanovisko a ukládala kompenzační opatření; návrh převádí úkony do povolení záměru a mění roli orgánů. To může zjednodušit proces, ale poskytnutý text neukazuje, že by se kompenzační povinnosti pro konkrétní projekt zmenšily."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-34",
+                "relevant": true,
+                "reasonCz": "Mění převody pozemků určených pro veřejně prospěšné a dopravní stavby, což může ovlivnit dostupnost pozemků pro infrastrukturu.",
+                "effectCz": "Předchozí pravidla umožňovala převádět státní zemědělské pozemky obcím či krajům pro veřejně prospěšné stavby v zastavěných územích, zastavitelných plochách nebo na základě rozhodnutí o umístění; změny nahrazují staré pojmy a některé kategorie zrušují či přečíslovávají. Bez úplného znění dotčených ustanovení nelze určit, zda se nárok na převod nebo dostupnost pozemků pro dopravu rozšiřuje či zužuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-35",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek neobsahuje věcnou změnu související s dopravními projekty.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-36",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek neobsahuje věcnou změnu související s dopravními projekty.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-37",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek neobsahuje věcnou změnu související s dopravními projekty.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek neobsahuje věcnou změnu související s dopravními projekty.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-40",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek neobsahuje věcnou změnu související s dopravními projekty.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek neobsahuje znění změny zákona o jednotném environmentálním stanovisku, z něhož by šlo posoudit její dopad na dopravní výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": false,
+                "reasonCz": "Změna se týká urychlování obnovitelných zdrojů energie, nikoli dopravních projektů, které slib výslovně jmenuje jen obecně jako dopravní infrastrukturu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-12",
+                "relevant": false,
+                "reasonCz": "Upřesnění dokumentace pro zápis dokončené stavby do digitální technické mapy samo neurychluje ani nebrání výstavbě dopravní infrastruktury.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-18",
+                "relevant": false,
+                "reasonCz": "Ustanovení o náhradě škody v souvislosti se soudním přezkumem není přímým prostředkem k výstavbě dopravní infrastruktury.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-21",
+                "relevant": false,
+                "reasonCz": "Upravená ustanovení o převodu silničních pozemků se týkají konkrétních právních vztahů k již existujícím komunikacím, nikoli výstavby klíčových nových projektů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-22",
+                "relevant": false,
+                "reasonCz": "Upravená pravidla o pozemcích se týkají převodu majetku státu na správce již realizované veřejně prospěšné stavby, nikoli její výstavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-23",
+                "relevant": false,
+                "reasonCz": "Upravené ustanovení se týká převodu silničních pozemků u již realizovaných veřejně prospěšných staveb a nedokládá změnu výstavby nových projektů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-27",
+                "relevant": false,
+                "reasonCz": "Změna určuje úřad, který uplatňuje stanovisko k územním plánům; z předloženého textu nelze vyvodit přímý dopad na konkrétní dopravní projekty.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+                "relevant": false,
+                "reasonCz": "Upravený ochranný režim vodovodů a kanalizací nemá v poskytnutém textu přímou vazbu na klíčový dopravní projekt.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-39",
+                "relevant": false,
+                "reasonCz": "Převedení působnosti za územní plánování na nový úřad je organizační změna; předložený text nedokládá, že by samo měnilo podmínky nebo rychlost dopravních staveb.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-41",
+                "relevant": false,
+                "reasonCz": "Výňatek neobsahuje vlastní ustanovení s přímým vlivem na dopravní výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-51",
+                "relevant": false,
+                "reasonCz": "Přechodné ustanovení pro opětovné posuzování EIA po zrušení stanoviska samo nevymezuje konkrétní dopravní stavbu ani nezajišťuje její realizaci.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-52",
+                "relevant": true,
+                "reasonCz": "Výslovně umožňuje opakovaně prodlužovat platnost EIA pro speciální dráhy, což se týká významné železniční infrastruktury.",
+                "effectCz": "Předchozí přechodné pravidlo opakované prodlužování výslovně umožňovalo pro dálnice, některé silnice a celostátní či regionální dráhy; změna doplňuje speciální dráhy a jejich stanoviska do stejného režimu. Tím se prodlužuje doba, po kterou lze na stanovisko spoléhat, a může se usnadnit pokračování přípravy těchto železničních záměrů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+                "relevant": false,
+                "reasonCz": "Prodlužuje lhůtu pro vložení havarijního plánu do informačního systému, což nemění výstavbu dopravních staveb.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": false,
+                "reasonCz": "Předložená zrušovací položka se týká předchozího zákona, ale bez jeho textu nelze prokázat materiální dopad na slib.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-1",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek změny zákona o Nejvyšším kontrolním úřadu neobsahuje žádné ustanovení o dopravní výstavbě.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-2",
+                "relevant": true,
+                "reasonCz": "Povoluje nad rámec výdajového rámce výdaje na vyjmenovanou dopravní infrastrukturu v letech 2026 až 2036.",
+                "effectCz": "Předchozí pravidlo stanovovalo celkové výdaje podle výdajového rámce; schválená změna umožňuje zvýšit je o výdaje na výstavbu dálnic, silnic, drah, vodní dopravy a vodní infrastruktury. Neuvádí konkrétní částku navýšení, ale vytváří fiskální možnost financovat část dopravních projektů nad rámec dřívějšího limitu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-3",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek změny rozpočtového určení daní neobsahuje ustanovení, které by bylo možné věcně posoudit ve vztahu k dopravní výstavbě.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-4",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek změny pravidel územních rozpočtů neobsahuje ustanovení o výstavbě konkrétní dopravní infrastruktury.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-5",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek změny zákona o střetu zájmů neobsahuje ustanovení o dopravních projektech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-6",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek změny zákoníku práce neobsahuje ustanovení o dopravní výstavbě.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-7",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek změny zákona o Sbírce zákonů neobsahuje ustanovení o dopravních projektech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-8",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek změny rozpočtové odpovědnosti neobsahuje vlastní ustanovení, z něhož by šel vyvodit vliv na dopravní infrastrukturu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-9",
+                "relevant": false,
+                "reasonCz": "Předložený výňatek změny financování obrany neobsahuje ustanovení související s dopravní výstavbou.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-10",
+                "relevant": false,
+                "reasonCz": "Text zrušovacích ustanovení nebyl poskytnut a jejich obsah nelze dovodit z názvu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43201-1",
+                "relevant": true,
+                "reasonCz": "Rozpočet Státního fondu dopravní infrastruktury přímo financuje dopravní stavby a uvádí konkrétní přesuny i odklady projektů.",
+                "effectCz": "Jde o nový rozpočet, nikoli změnu dřívějšího zákonného pravidla. Návrh uvádí výdaje fondu 169,3 mld. Kč pro rok 2026, 76,6 mld. Kč pro rok 2027 a 79,9 mld. Kč pro rok 2028; současně zmiňuje odklady několika projektů, včetně odkladu modernizace trati Nemanice I–Ševětín o dva roky a odsun některých silnic I. třídy. Celkové výdaje zajišťují financování staveb a přípravy, ale prioritizace zároveň zpomaluje některé dílčí projekty."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": true,
+                "reasonCz": "Státní rozpočet na rok 2026 obsahuje kapitolu dopravy, ale předložené odstavce jen odkazují na přílohy s výdaji.",
+                "effectCz": "Jde o nový státní rozpočet, který má stanovit kapitoly a jejich výdaje; v předloženém výňatku nejsou částky ani rozdělení výdajů na dopravní infrastrukturu. Proto nelze z balíčku určit, zda rozpočet pro rok 2026 rozšiřuje či omezuje zdroje pro dopravní projekty."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-168",
+                "relevant": true,
+                "reasonCz": "Vládní plán legislativních prací stanoví úkol připravit novelu zákona o urychlení strategické infrastruktury s cílem urychlit dopravní stavby.",
+                "effectCz": "Jde o plánovaný návrh zákona, nikoli platné pravidlo; vláda plánuje předložení ve 2. čtvrtletí 2028. Zatím tedy pouze navrhuje budoucí opatření k urychlení dopravních staveb a žádnou konkrétní povinnost ani povolení nemění."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-207",
+                "relevant": true,
+                "reasonCz": "Usnesení výslovně schvaluje kroky k realizaci podnikatelského parku Cheb a uvádí pozemky určené pro dopravní infrastrukturu.",
+                "effectCz": "Jde o vládní rozhodnutí o majetkových a organizačních krocích, nikoli o rozpočtovou částku. V příloze jsou uvedeny pozemky o výměře nejméně 15 493 m² určené k umístění dopravní infrastruktury; jejich převod připravuje zázemí pro tento související projekt, ale neusvědčuje dokončení stavby."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-217",
+                "relevant": true,
+                "reasonCz": "Vláda schválila sjednání smlouvy o výstavbě a údržbě mostů a společných úseků silnic na česko-polské hranici.",
+                "effectCz": "Usnesení samo schvaluje návrh smlouvy, ale podpis s výhradou ratifikace a následný souhlas Parlamentu ještě musí následovat. Jde tedy o návrh umožňující výstavbu či údržbu přeshraničních silničních mostů, nikoli o dokončené rozhodnutí o jejich realizaci."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-375",
+                "relevant": true,
+                "reasonCz": "Usnesení zmiňuje financování projektu duální dopravní infrastruktury z evropského úvěrového nástroje.",
+                "effectCz": "Vláda souhlasila se závazným zapojením Česka do úvěru SAFE ve výši 2,06 mld. eur a uložila ministrovi dopravy implementovat kroky pro zařazení projektu duální dopravní infrastruktury. Protože podrobnosti projektu nejsou v poskytnutém textu, nelze určit jeho rozsah ani to, jakou část výstavby úvěr zajistí."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-520",
+                "relevant": true,
+                "reasonCz": "Vláda schválila územní rozvojový plán pro vysokorychlostní trať Praha, což je přímý krok k přípravě klíčové železniční infrastruktury.",
+                "effectCz": "Usnesení samo schvaluje a vydává dílčí územní rozvojový plán VRT Praha jako opatření obecné povahy a ukládá jeho zveřejnění. Jde o rozhodnutí, které posouvá územní přípravu konkrétní vysokorychlostní trati, ale samo o sobě neznamená zahájení ani dokončení její výstavby."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-691",
+                "relevant": true,
+                "reasonCz": "Vláda schválila koncesionářskou smlouvu na dálnici D35 mezi Opatovcem a Mohelnicí.",
+                "effectCz": "Vláda schválila smlouvu pro projektování, výstavbu, financování, provozování a údržbu úseku D35, ale její uzavření podmínila souhlasem Poslanecké sněmovny s finančními závazky. Jde tedy o významný návrhový krok pro konkrétní dálnici, nikoli ještě o uzavřenou smlouvu či hotovou stavbu."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-91b863691a39--source",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--law-change-43174-1-1",
+              "psp-core-2025--law-change-43174-1-3",
+              "psp-core-2025--law-change-43174-1-5",
+              "psp-core-2025--law-change-43174-1-6",
+              "psp-core-2025--law-change-43174-1-7",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--law-change-43174-14",
+              "psp-core-2025--law-change-43174-20",
+              "psp-core-2025--law-change-43174-22",
+              "psp-core-2025--law-change-43174-29",
+              "psp-core-2025--law-change-43174-32",
+              "psp-core-2025--law-change-43174-33",
+              "psp-core-2025--law-change-43174-approved-52",
+              "psp-core-2025--law-change-43200-2",
+              "psp-core-2025--print-step-210731",
+              "psp-core-2025--law-change-43201-1",
+              "psp-core-2025--vote-86962",
+              "psp-core-2025--law-change-43204-1",
+              "psp-core-2025--print-step-210761",
+              "psp-core-2025--vote-86957",
+              "psp-core-2025--law-change-uv-2026-175-168",
+              "zvlady-resolutions--2026-175",
+              "psp-core-2025--law-change-uv-2026-207",
+              "zvlady-resolutions--2026-207",
+              "psp-core-2025--law-change-uv-2026-217",
+              "zvlady-resolutions--2026-217",
+              "psp-core-2025--law-change-uv-2026-375",
+              "zvlady-resolutions--2026-375",
+              "psp-core-2025--law-change-uv-2026-520",
+              "zvlady-resolutions--2026-520",
+              "psp-core-2025--law-change-uv-2026-691",
+              "zvlady-resolutions--2026-691",
+              "psp-core-2025--law-change-43174-1-2",
+              "psp-core-2025--law-change-43174-1-3",
+              "psp-core-2025--law-change-43174-1-5",
+              "psp-core-2025--law-change-43174-1-6",
+              "psp-core-2025--law-change-43174-1-7",
+              "psp-core-2025--law-change-43174-14",
+              "psp-core-2025--law-change-43174-15",
+              "psp-core-2025--law-change-43174-16",
+              "psp-core-2025--law-change-43174-22",
+              "psp-core-2025--law-change-43174-32",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--vote-88454"
+            ],
+            "explanationCz": "Poslanci SPD předložili společně s koaličními partnery novelu stavebního zákona, která mění povolování a plánování infrastrukturních záměrů; strana ji podpořila i při konečném hlasování po vrácení Senátem. Vláda také schválila územní rozvojový plán VRT Praha a připravila koncesní smlouvu pro dálnici D35, čímž posunula přípravu konkrétních dopravních projektů. Rozpočet Státního fondu dopravní infrastruktury uvádí 169,3 miliardy korun na rok 2026, ale zároveň odkládá některé stavby, včetně modernizace trati Nemanice–Ševětín. Zatím jde o dílčí posuny v přípravě a financování, nikoli o doložený výrazný pokrok ve výstavbě jako celku.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Rozpočet Státního fondu dopravní infrastruktury uvádí vysoké celkové výdaje, ale zároveň zmiňuje odklady některých silničních a železničních akcí; u konkrétních odložených staveb jde o protichůdný signál.",
+              "U schválených změn povolovacích pravidel nelze z předložených textů doložit, že se díky nim některý konkrétní dopravní projekt už začal stavět nebo dokončil.",
+              "Výňatek státního rozpočtu na rok 2026 obsahuje jen odkazy na přílohy s rozdělením výdajů, nikoli částky pro dopravní stavby."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-91b863691a39",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Navržené a schválené změny stavebního zákona upravují koordinaci dotčených zájmů a povolování veřejné infrastruktury, tedy postupy, které mohou urychlit její výstavbu.",
+          "effectCz": "Předchozí znění stanovilo integrovanou ochranu veřejných zájmů a obecnější postup dotčených orgánů; návrh jim ukládá rychlejší a koordinovanější postup a veřejnou infrastrukturu výslovně označuje za veřejný zájem. To může povolování infrastruktury usnadnit, ale samo o sobě nestanoví výstavbu konkrétního projektu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Změny rozdělení působnosti stavebních úřadů se týkají povolování infrastrukturních staveb, včetně vyhrazených dopravních staveb.",
+          "effectCz": "Předchozí znění rozdělovalo pravomoci mezi ministerstva, krajské a obecní stavební úřady a zvláštní dopravní a energetický úřad; schválené znění je soustřeďuje do nových úřadů rozvoje území a přiděluje jim příslušnost pro vyhrazené stavby. Směr změny pro rychlost konkrétních projektů z těchto ustanovení nelze s jistotou určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Změny územního plánování upravují vymezování ploch a koridorů pro strategické a celostátní záměry, včetně infrastruktury.",
+          "effectCz": "Předchozí znění umožňovalo vymezovat dopravní a technickou infrastrukturu mezinárodního či celostátního významu v územním rozvojovém plánu; schválené znění upravuje strategické investiční stavby a za stanovených podmínek umožňuje převzít některé již vymezené plochy a koridory bez opakovaného posuzování. Může tím zjednodušit přípravu části projektů, ale rozsah účinku na jednotlivé stavby nelze z výňatku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Změny řízení o povolení záměru se přímo týkají podkladů, stanovisek a lhůt při povolování staveb.",
+          "effectCz": "Předchozí znění vyžadovalo pro řadu úkonů samostatná stanoviska, podklady a postupy; změny je v některých případech koordinují nebo nahrazují a zavádějí časové lhůty. Některé kroky se tím zjednodušují, ale bez úplného srovnání všech ustanovení nelze určit čistý účinek na konkrétní dopravní projekty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Úprava posuzování záměrů, platnosti povolení a uvádění staveb do užívání může ovlivnit realizaci a dokončování infrastrukturních staveb.",
+          "effectCz": "Předchozí znění stanovilo posuzování záměrů a platnost povolení podle jednotlivých pravidel; schválené změny mimo jiné prodlužují platnost povolení pro dopravní a technickou infrastrukturu na čtyři roky a u některých vyhrazených staveb zachovávají platnost po zahájení výstavby. To rozšiřuje časový prostor pro realizaci, ale další změny v povolování nelze z výňatků vyhodnotit jako celek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Ustanovení o vyhrazených stavbách a jejich soudním přezkumu se týkají významných dopravních projektů.",
+          "effectCz": "Předchozí pravidla soudního přezkumu byla obecná; schválené změny některé postupy pro vyhrazené stavby upravují a mezi vyhrazené stavby výslovně řadí například dopravní infrastrukturu. Směr dopadu na dobu konkrétní výstavby nelze z poskytnutých ustanovení jednoznačně určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-6",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Změny zákona o geologických pracích v dodaném znění neposkytují konkrétní vazbu na posun výstavby dopravních projektů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-1",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro posuzování krajinného rázu v územích vymezených pro záměry může ovlivnit povolování infrastrukturních staveb.",
+          "effectCz": "Předchozí výjimka z posuzování krajinného rázu platila pro zastavěná území a některé zastavitelné plochy; schválené znění ji váže na zastavitelná území, koridory a plochy vymezené v územně plánovací dokumentaci. Rozsah výjimky se tím mění, ale z dodaného textu nelze určit, zda se pro konkrétní dopravní stavby rozšiřuje či zužuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-3",
+          "relevant": true,
+          "reasonCz": "Změny ochrany přírody včetně pravidel pro záměry v dopravních koridorech mohou ovlivnit povolování infrastrukturních projektů.",
+          "effectCz": "Předchozí znění obsahovalo obecná pravidla ochrany druhů a výjimek; schválené znění mimo jiné stanoví, že v koridoru veřejné dopravní či technické infrastruktury nelze povolit vypouštění nebo vysazování některých chráněných druhů. To může odstranit jeden možný střet při realizaci koridoru, ale jiné změny ochrany přírody mohou působit odlišně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Změny přesouvají část úkonů ochrany přírody do stavebního řízení, které se týká povolování infrastrukturních záměrů.",
+          "effectCz": "Předchozí znění svěřovalo vyjmenované souhlasy a povolení samostatným orgánům ochrany přírody; návrh u části záměrů počítá s jejich posouzením stavebními úřady a začleněním do rozhodnutí o povolení. Může to omezit počet samostatných úkonů, ale u některých území a záměrů zůstávají zvláštní postupy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Změny ochrany zemědělské půdy upravují souhlas s jejím odnětím u záměrů povolovaných podle stavebního zákona.",
+          "effectCz": "Předchozí znění vyžadovalo samostatný souhlas orgánu ochrany zemědělské půdy; schválené znění jej začleňuje do rozhodnutí stavebního úřadu a u některých ploch stanoví, že se zásady ochrany půdy znovu neposuzují. To může zjednodušit část povolovacího procesu, ale zároveň mění rozsah ochranného posouzení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-10",
+          "relevant": false,
+          "reasonCz": "Dodané změny daně z nemovitých věcí pouze upravují odkaz na druh území a nedokládají podstatný dopad na výstavbu dopravních projektů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-11",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-12",
+          "relevant": true,
+          "reasonCz": "Změna zákona o dráhách upravuje pravomoc úřadu, který posuzuje bezpečnost a kolaudaci železničních staveb.",
+          "effectCz": "Předchozí znění svěřovalo posouzení bezpečnosti železniční stavby Dopravnímu a energetickému stavebnímu úřadu; schválené znění tuto pravomoc přesouvá na Úřad rozvoje území České republiky. Jde o změnu příslušného úřadu, nikoli o doložené zkrácení nebo prodloužení povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-13",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": true,
+          "reasonCz": "Změny lesního zákona upravují povolení záměrů, které zasahují do lesních pozemků, což může být relevantní pro dopravní trasy.",
+          "effectCz": "Předchozí znění vyžadovalo samostatné rozhodování a závazné stanovisko orgánů státní správy lesů; schválené znění u některých záměrů přesouvá posouzení do rozhodnutí stavebního úřadu, přičemž zachovává vyjádření lesních orgánů. Může to spojit část řízení, avšak ochranné podmínky a souhlasy zcela neodstraňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-15",
+          "relevant": true,
+          "reasonCz": "Změny zákona o pozemních komunikacích se výslovně týkají dálnic, silnic a jejich ochranných pásem.",
+          "effectCz": "Předchozí ustanovení pracovala mimo jiné s pojmem zastavěného území a zastavitelných ploch; nové znění mění část těchto odkazů na zastavitelné území a vymezuje ochranné pásmo komunikací mimo zastavěné území. Účinek na možnost či rychlost výstavby konkrétní komunikace z dodaných úryvků nelze jednoznačně určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-16",
+          "relevant": true,
+          "reasonCz": "Změny zákona o civilním letectví se vztahují k povolování a kolaudaci leteckých staveb, které patří mezi dopravní infrastrukturu.",
+          "effectCz": "Předchozí znění svěřovalo některé úkony Dopravnímu a energetickému stavebnímu úřadu; schválené znění jeho název nahrazuje Úřadem rozvoje území České republiky a mění i některé související odkazy. Z dodaného textu nelze určit, že by se tím změnila náročnost nebo rychlost povolení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-18",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Změny předpisů ochrany veřejného zdraví začleňují některá stanoviska do řízení o povolení stavebního záměru.",
+          "effectCz": "Předchozí znění vyžadovalo některá samostatná stanoviska orgánu ochrany veřejného zdraví; schválené znění je v případech stavebních záměrů převádí do rozhodování stavebního úřadu. To může zjednodušit část řízení, ale z výňatku nelze posoudit dopad na každý projekt."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Změny zákona o posuzování vlivů na životní prostředí se výslovně dotýkají posuzování a povolování záměrů včetně dopravních staveb.",
+          "effectCz": "Předchozí znění pro některé záměry spojovalo posouzení EIA s jednotným environmentálním stanoviskem; schválené znění umožňuje, na žádost oznamovatele, aby závazné stanovisko EIA nahradilo některé další správní úkony, a mění také prahové hodnoty pro vybrané kategorie záměrů. To může některé postupy zjednodušit, zatímco zvýšení některých prahů může zmenšit počet záměrů podléhajících posouzení; přesný dopad na jednotlivé dopravní projekty z úryvku nevyplývá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Dodané znění změn vodního zákona neobsahuje vybrané ustanovení propojené se slíbeným posunem dopravních projektů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-25",
+          "relevant": false,
+          "reasonCz": "Navržená změna mysliveckého zákona byla v textu schváleném Sněmovnou odstraněna a dodané ustanovení se netýká dopravních projektů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": true,
+          "reasonCz": "Změna zákona o pozemkových úpravách stanoví, kdy mohou schválené pozemkové úpravy obsahovat stavby a zařízení vyžadující stavební povolení.",
+          "effectCz": "Předchozí znění umožňovalo u některých společných zařízení upustit od samostatného povolení; schválené znění stanoví, že rozhodnutí o schválení pozemkových úprav může u některých staveb tvořit část rozhodnutí o povolení záměru a vymezit pozemky pro jeho realizaci. Může tím zjednodušit přípravu některých staveb, ale neprokazuje realizaci konkrétní dopravní stavby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-27",
+          "relevant": true,
+          "reasonCz": "Změny soudního řádu správního se týkají soudního přezkumu rozhodnutí a plánů, které mohou být podkladem pro dopravní stavby.",
+          "effectCz": "Předchozí znění umožňovalo samostatný přezkum opatření obecné povahy; schválené znění upravuje jeho přezkum jako podkladu a stanoví zvláštní postup po uplynutí lhůty. Směr dopadu na dobu konkrétní výstavby nelze z dodaného výňatku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": false,
+          "reasonCz": "Změna daňového pojmu zastavitelného území v dodaném znění neukazuje podstatný dopad na výstavbu dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": true,
+          "reasonCz": "Změna zákona o vyvlastnění přesouvá pravomoci související se získáním pozemků pro vyhrazené stavby, mezi něž patří významná dopravní infrastruktura.",
+          "effectCz": "Předchozí znění rozdělovalo působnost mezi obecní úřady, magistráty a dopravní úřad; schválené znění svěřuje vyvlastňování novým úřadům rozvoje území a jejich krajským úřadům. Změna organizuje příslušnost, ale sama neprokazuje rychlejší získání pozemků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změny zákona o urychlení výstavby strategicky významné infrastruktury přímo upravují postupy pro dopravní a další infrastrukturní stavby.",
+          "effectCz": "Předchozí znění umožňovalo zvláštní postupy pro užší okruh dopravních staveb; schválené znění rozšiřuje některé mechanismy na vyhrazené, energetické a další strategické stavby a mění způsob souvisejícího povolování. To může urychlit část projektů, ale konkrétní dopad je závislý na jednotlivých stavbách."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Změny zákona o ochraně ovzduší nahrazují některé úkony při povolování staveb rozhodnutím o záměru.",
+          "effectCz": "Předchozí znění vyžadovalo samostatná závazná stanoviska k některým komunikacím a záměrům; schválené znění část těchto úkonů převádí na vyjádření a rozhodnutí stavebního úřadu a ruší pravidlo vyžadující stanovisko jako podmínku povolení. To může zjednodušit a spojit část povolovacího procesu, ale nezbavuje záměry všech podmínek ochrany ovzduší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": true,
+          "reasonCz": "Změny zákona o Státním pozemkovém úřadu upravují bezúplatné převody pozemků pro veřejně prospěšné a dopravní stavby.",
+          "effectCz": "Předchozí pravidla umožňovala převádět obcím pozemky v zastavěných územích a zastavitelných plochách určené pro veřejně prospěšné stavby; schválené znění odstraňuje samostatnou kategorii zastavitelných ploch a mění některé odkazy na povolení záměru. Dopad na rozsah dostupných pozemků nelze z dodaného znění určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje vybrané ustanovení propojené se slíbeným posunem výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": false,
+          "reasonCz": "Změna pravidel pro akcelerační oblasti obnovitelných zdrojů energie se v dodaném znění nevztahuje na slíbený posun dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-12",
+          "relevant": false,
+          "reasonCz": "Dodané ustanovení stanoví podklad pro zápis dokončené stavby do digitální technické mapy; nedokládá podstatný dopad na posun dopravních staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-18",
+          "relevant": false,
+          "reasonCz": "Dodané ustanovení upravuje náhradu škody v souvislosti se soudním přezkumem, nikoli vlastní postup výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-21",
+          "relevant": false,
+          "reasonCz": "Dodaná změna se týká převodu pozemků pro silniční stavby, ale neukazuje podstatnou změnu, která by sama posunula jejich výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-22",
+          "relevant": false,
+          "reasonCz": "Dodaná změna se týká převodů pozemků pro silniční stavby a jejich zázemí; její vliv na vlastní výstavbu není v poskytnutém textu doložen.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-23",
+          "relevant": false,
+          "reasonCz": "Dodaná změna se týká převodů pozemků pro silniční stavby v Praze; její vliv na vlastní výstavbu není v poskytnutém textu doložen.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-27",
+          "relevant": false,
+          "reasonCz": "Dodaná změna pouze přesouvá působnost k uplatňování stanoviska k územním plánům a nevykazuje podstatný účinek na slíbenou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": false,
+          "reasonCz": "Dodaná změna ochranných pásem vodovodů a kanalizací neprokazuje podstatný účinek na slíbený posun dopravních staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-39",
+          "relevant": false,
+          "reasonCz": "Dodaná změna upravuje přiřazení gesce za kvalifikace a obory a nedotýká se výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-41",
+          "relevant": false,
+          "reasonCz": "Vybrané odstavce této změny podle dodaného výňatku nesouvisejí se slíbeným posunem dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-51",
+          "relevant": false,
+          "reasonCz": "Dodaná přechodná změna pravidel posuzování vlivů se netýká doloženého konkrétního dopravního projektu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-52",
+          "relevant": true,
+          "reasonCz": "Změna prodlužuje možnost obnovit platnost posouzení vlivů pro speciální dráhy, tedy pro část dopravní infrastruktury.",
+          "effectCz": "Předchozí pravidlo umožňovalo opakované prodlužování pro vyjmenované dálnice, silnice I. třídy a celostátní a regionální dráhy; doplnění zahrnuje také speciální dráhy a navazující přechodné pravidlo. Tím se rozšiřuje možnost zachovat platnost posouzení pro tuto kategorii staveb, což může odstranit nutnost opakovaného posouzení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Dodaný text prodlužuje lhůtu k vložení havarijního plánu a nijak nedokládá dopad na dopravní projekty.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Dodané ustanovení pouze ruší neidentifikovanou část dřívějšího zákona a z poskytnutého textu nelze dovodit vazbu na dopravní výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-1",
+          "relevant": false,
+          "reasonCz": "Dodané znění změny zákona o Nejvyšším kontrolním úřadu neobsahuje relevantní ustanovení pro dopravní projekty.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválená změna rozpočtových pravidel přímo umožňuje zvýšit výdajový rámec pro financování vybraných silničních, železničních a vodních staveb v letech 2026 až 2036.",
+          "effectCz": "Předchozí znění § 8 odst. 3 umožňovalo zvýšení výdajů pouze pro financování obrany nad stanovenou hranici; schválené a vyhlášené znění přidává také vyjmenované infrastrukturní výdaje, včetně PPP plateb, pro roky 2026 až 2036. Zvyšuje tak možnost vyčlenit na tyto stavby peníze nad běžný rámec, ale samo neurčuje konkrétní částky ani nezajišťuje jejich skutečné utracení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-3",
+          "relevant": false,
+          "reasonCz": "Dodané znění změny rozpočtového určení daní nemá vybrané ustanovení vztahující se k dopravní infrastruktuře.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-4",
+          "relevant": false,
+          "reasonCz": "Dodané znění změny pravidel územních rozpočtů neobsahuje vybrané ustanovení vztahující se k dopravní infrastruktuře.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-5",
+          "relevant": false,
+          "reasonCz": "Dodané znění změny zákona o střetu zájmů neobsahuje vybrané ustanovení vztahující se k dopravní infrastruktuře.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-6",
+          "relevant": false,
+          "reasonCz": "Dodané znění změny zákoníku práce neobsahuje vybrané ustanovení vztahující se k dopravní infrastruktuře.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-7",
+          "relevant": false,
+          "reasonCz": "Dodané znění změny zákona o Sbírce zákonů neobsahuje vybrané ustanovení vztahující se k dopravní infrastruktuře.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": false,
+          "reasonCz": "Dodané znění změny zákona o rozpočtové odpovědnosti neobsahuje žádný vybraný odstavec propojený se slíbeným posunem dopravních staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-9",
+          "relevant": false,
+          "reasonCz": "Dodané znění změny zákona o financování obrany neobsahuje relevantní ustanovení pro slíbenou dopravní výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-10",
+          "relevant": false,
+          "reasonCz": "Dodané znění zrušovacích ustanovení neobsahuje vybrané ustanovení propojené se slíbeným posunem dopravních staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43201-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu dopravní infrastruktury uvádí výdaje na roky 2026 až 2028 a konkrétní posuny některých dopravních staveb.",
+          "effectCz": "Předchozí rozpočtový stav není v dodaném textu uveden. Návrh počítá s výdaji 169,3 mld. Kč v roce 2026, 76,6 mld. Kč v roce 2027 a 79,9 mld. Kč v roce 2028; současně popisuje odklad některých staveb, včetně posunu zahájení modernizace trati Nemanice I–Ševětín na rok 2028 a některých silničních akcí. Rozpočet tedy poskytuje významné financování, ale současně část výstavby odsouvá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet na rok 2026 se vztahuje k financování infrastruktury, ale dodaný výňatek pouze odkazuje na přílohy s výdaji.",
+          "effectCz": "Jde o nový státní rozpočet, pro který předchozí znění není použitelné. Dodaný text neobsahuje přílohy s částkami pro dopravní infrastrukturu, takže nelze určit její rozpočtové navýšení ani to, zda rozpočet sám posouvá výstavbu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-168",
+          "relevant": true,
+          "reasonCz": "Usnesení zařazuje přípravu změny liniového zákona s cílem urychlit dopravní stavby do vládního legislativního plánu.",
+          "effectCz": "Usnesení samo nemění právní pravidla ani nerozhoduje o výstavbě; ukládá připravit návrh zákona k pozdějšímu projednání. Jde o příslib dalšího legislativního kroku, nikoli o již uskutečněné urychlení konkrétních staveb."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-207",
+          "relevant": true,
+          "reasonCz": "Usnesení schvaluje převod pozemků, u nichž výňatek výslovně uvádí umístění dopravní infrastruktury, pro realizaci parku Cheb.",
+          "effectCz": "Předchozí stav převodu těchto pozemků není v balíčku popsán. Usnesení schvaluje změnu příslušnosti hospodařit s pozemky a následný převod společnosti, která má projekt realizovat; pro uvedené parcely uvádí účel dopravní infrastruktury. Tím přímo připravuje pozemkové zázemí části infrastrukturního projektu, ale nedokládá jeho dokončení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-217",
+          "relevant": true,
+          "reasonCz": "Usnesení schvaluje smlouvu o výstavbě a údržbě mostů a společných silničních úseků na česko-polské hranici.",
+          "effectCz": "Předchozí stav projektu není v dodaném textu popsán. Usnesení schvaluje sjednání smlouvy, ale její podpis s výhradou ratifikace, souhlas Parlamentu a ratifikace prezidentem jsou další nutné kroky; jde proto o návrh směřující k části dopravní infrastruktury, nikoli o dokončenou výstavbu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-375",
+          "relevant": true,
+          "reasonCz": "Usnesení zahrnuje do evropského úvěrového nástroje projekt duální dopravní infrastruktury a pověřuje ministra dopravy jeho implementací.",
+          "effectCz": "Předchozí stav financování projektu není v balíčku uveden. Vláda souhlasí se závazným zapojením do půjčky SAFE ve výši 2,06 mld. EUR pro projekty uvedené v podkladové informaci a ukládá ministrovi dopravy kroky k zařazení duální dopravní infrastruktury; konkrétní dopravní projekt ani jeho částka zde uvedeny nejsou. Usnesení tak připravuje financování části infrastruktury, nikoli její výstavbu samo."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-520",
+          "relevant": true,
+          "reasonCz": "Usnesení schvaluje dílčí územní rozvojový plán VRT Praha, který přímo souvisí s vysokorychlostní železnicí.",
+          "effectCz": "Předchozí stav plánu není v balíčku popsán. Vláda plán schvaluje a ukládá jeho zveřejnění; tím přijímá rozhodnutí v plánovací fázi pro vysokorychlostní trať, avšak samotná výstavba vyžaduje další kroky."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-691",
+          "relevant": true,
+          "reasonCz": "Usnesení se výslovně týká koncesionářské smlouvy na projektování, výstavbu a údržbu úseků dálnice D35.",
+          "effectCz": "Předchozí stav projektu není v dodaném textu popsán. Vláda smlouvu schvaluje, ale ministr ji smí uzavřít až po souhlasu Poslanecké sněmovny s finančními závazky státu; jde proto o návrh k realizaci konkrétní dálnice, nikoli o dokončené rozhodnutí o její výstavbě."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-91b863691a39--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-15",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--law-change-43201-1",
+        "psp-core-2025--vote-86962",
+        "zvlady-resolutions--law-change-uv-2026-520",
+        "zvlady-resolutions--2026-520",
+        "zvlady-resolutions--law-change-uv-2026-691",
+        "zvlady-resolutions--2026-691",
+        "zvlady-resolutions--law-change-uv-2026-207",
+        "zvlady-resolutions--2026-207",
+        "psp-core-2025--amendment-text-1213",
+        "psp-core-2025--amendment-1213"
+      ],
+      "explanationCz": "Poslanci SPD předložili spolu s dalšími poslanci novelu stavebního zákona a později hlasovali pro její přijetí poté, co ji Senát odmítl. Změny upravují povolování a plánování infrastruktury; samostatně vláda schválila dílčí územní plán pro vysokorychlostní trať Praha a připravila převody pozemků pro dopravní infrastrukturu u Chebu. Vláda také schválila přípravu koncesní smlouvy pro úseky dálnice D35, ta ale ještě vyžaduje souhlas Sněmovny. Rozpočet dopravního fondu počítá s vysokými výdaji, současně však výslovně odkládá některé stavby, takže doložené kroky znamenají posun v přípravě jen části slíbených projektů, nikoli splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný rozpočtový výňatek uvádí plánované výdaje fondu ve výši 169,3 mld. Kč pro rok 2026 a současně zmiňuje odklady některých projektů; neukazuje konečné výdaje ani skutečný průběh jejich stavby.",
+        "Usnesení o D35 schvaluje koncesní smlouvu, ale její uzavření podmiňuje souhlasem Poslanecké sněmovny. Balíček nedokládá, že tato další podmínka byla splněna.",
+        "Usnesení o plánu VRT Praha dokládá plánovací rozhodnutí, nikoli zahájení stavebních prací nebo posun všech klíčových dopravních projektů."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-91b863691a39",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Mění zásady stavebního zákona tak, že rozvoj veřejné infrastruktury nelze znemožnit, pokud lze veřejné zájmy chránit podmínkami.",
+          "effectCz": "Dříve § 1 vymezoval ochranu veřejných zájmů a udržitelný rozvoj bez této výslovné ochrany rozvoje infrastruktury; návrh omezuje možnost tento rozvoj znemožnit a koordinuje posuzování zájmů. V tomto směru je překážka pro výstavbu volnější, ale ustanovení samo konkrétní stavbu nezajišťuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Mění organizaci a působnost stavebních úřadů, které povolují stavby včetně dopravní infrastruktury.",
+          "effectCz": "Dříve stavební řád vykonávaly ministerské, krajské, obecní a další stavební úřady; schválené znění soustředí působnost do úřadu a krajských úřadů rozvoje území a mění příslušnost pro vyhrazené a další stavby. Jde o institucionální změnu; z poskytnutých znění nelze určit, zda bude povolování konkrétních dopravních staveb rychlejší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Mění pravidla územního plánování a koridorů pro strategické a celostátní záměry, což může zahrnovat dopravní infrastrukturu.",
+          "effectCz": "Dříve mohly být koridory dopravní infrastruktury mezinárodního či celostátního významu vymezovány v územním rozvojovém plánu; schválené znění upravuje plochy a koridory pro strategické investiční stavby a za určitých podmínek umožňuje převzetí některých koridorů do vyšší územně plánovací dokumentace bez dalšího posuzování. To může zjednodušit část plánování, nikoli samo povolit či postavit stavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Mění postupy pro povolení záměrů a dokládání souhlasů, včetně připojení na dopravní infrastrukturu.",
+          "effectCz": "Dříve bylo třeba zvlášť zajistit souhlasy, vyjádření a některé podklady pro povolení; návrh zavádí koordinaci a lhůty, omezuje opakované posuzování a u některých vyjádření infrastruktury považuje nečinnost za souhlas. Současně některé procesní podmínky zůstávají; změny celkově mohou zjednodušit část povolování, ale samy stavby nedodávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Upravuje posuzování a povolování staveb, včetně pravidel důležitých pro dopravní projekty.",
+          "effectCz": "Dříve stavební úřad posuzoval soulad záměru s územní dokumentací, veřejnými zájmy, infrastrukturou a právy účastníků; návrh některá posouzení omezuje, soustřeďuje je do dřívější fáze a mění pravidla pro změny či platnost povolení. Část postupů se tím zjednodušuje, avšak znění neukládá uskutečnění konkrétních dopravních staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Mění soudní přezkum stavebních rozhodnutí, který může ovlivnit délku povolování infrastrukturních staveb.",
+          "effectCz": "Dříve soudy přezkoumávaly žaloby a opatření obecné povahy podle dosavadních pravidel; návrh upravuje přípustnost žalobních bodů, lhůty a některé účinky soudního přezkumu. Dopad na rychlost dopravních projektů nelze přesně určit z vybraných ustanovení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text této části zákona ani příslušných pozměňovacích návrhů není v balíčku dostupný; nelze porovnat dřívější a navržené znění ani určit směr dopadu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-6",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text této části zákona ani příslušných pozměňovacích návrhů není v balíčku dostupný; nelze porovnat dřívější a navržené znění ani určit směr dopadu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není k dispozici, a proto nelze určit, jak se mění pravidla ani jejich dopad na dopravní projekty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-1",
+          "relevant": true,
+          "reasonCz": "Mění, kdy se při povolování v území posuzuje krajinný ráz, a výslovně se dotýká územních koridorů.",
+          "effectCz": "Dříve se krajinný ráz neposuzoval v zastavěném území a ve vybraných zastavitelných plochách s dohodnutou ochranou; návrh nově vymezuje zastavitelná území, koridory a plochy těžby podle stanoviska orgánu ochrany přírody. Rozsah výjimky se mění, ale bez úplného srovnání navazujících pravidel nelze určit její celkový účinek na výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-3",
+          "relevant": true,
+          "reasonCz": "Upravuje ochranu přírody a výjimky včetně zvláštního pravidla pro plochy a koridory veřejné dopravní infrastruktury.",
+          "effectCz": "Dříve měla výjimka pro zásah do ochrany zvláště chráněných druhů jiné podmínky; návrh některé podmínky rozšiřuje a současně stanoví, že orgán ochrany přírody nemá souhlasit s vypouštěním či výsadbou v koridoru veřejné dopravní infrastruktury. Dopad je smíšený: omezuje překážku v koridoru, ale mění také ochranná pravidla."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Převádí některé úkony ochrany přírody do řízení o stavebním povolení.",
+          "effectCz": "Dříve se příslušné souhlasy a povolení ochrany přírody vydávaly samostatně nebo v odděleném řízení; návrh u vybraných záměrů svěřuje jejich posouzení stavebnímu úřadu a včleňuje je do rozhodnutí o záměru. Snižuje počet oddělených úkonů, nikoli nutně nároky na ochranu přírody."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Mění souhlas s odnětím zemědělské půdy pro stavební záměry a jeho posouzení v povolovacím řízení.",
+          "effectCz": "Dříve byl pro odnětí zemědělské půdy zpravidla třeba samostatný souhlas orgánu ochrany půdy; návrh začleňuje tento souhlas do rozhodnutí stavebního úřadu a v některých územích již podmínky odnětí neposuzuje. Tím se může zmenšit počet samostatných kroků, avšak vlastní podmínky pro povolení zůstávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-10",
+          "relevant": false,
+          "reasonCz": "Dodané znění upravuje osvobození zemědělských pozemků od daně, nikoli postup či realizaci dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-11",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není k dispozici, takže nelze porovnat pravidla ani stanovit směr dopadu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-12",
+          "relevant": false,
+          "reasonCz": "Dodané znění pouze nahrazuje název stavebního úřadu v zákoně o dráhách; nedokládá změnu podmínek výstavby ani jejího průběhu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-13",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není dostupný; nelze určit změnu pravidel ani její směr."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": true,
+          "reasonCz": "Přesouvá některá lesní stanoviska a rozhodnutí pro stavební záměry do povolování podle stavebního zákona.",
+          "effectCz": "Dříve se pro zásahy do lesních pozemků a jejich odnětí vydávala samostatná stanoviska či rozhodnutí orgánů státní správy lesů; návrh tato posouzení u stavebních záměrů zpravidla začleňuje do rozhodnutí stavebního úřadu. Snižuje počet samostatných rozhodnutí, ale nemění samotné požadavky ochrany lesa."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-15",
+          "relevant": true,
+          "reasonCz": "Mění zákon o pozemních komunikacích, včetně pravidel, kde mohou vést dálnice a silnice.",
+          "effectCz": "Dříve mohly dálnice a silnice vést zastavěným územím nebo zastavitelnými plochami; návrh mění tyto pojmy na zastavitelné území a upravuje také silniční ochranná pásma. Protože nové a dřívější územní kategorie nejsou totožné a všechny změněné definice nejsou doloženy, celkový směr pro možnosti výstavby nelze spolehlivě určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-16",
+          "relevant": false,
+          "reasonCz": "Přestože se týká civilního letectví, dodané změny převážně přejmenovávají či nahrazují správní orgány a neukazují změnu podmínek výstavby letištní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není k dispozici, takže nelze určit změnu ani její dopad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-18",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není dostupný; dřívější a navržené znění ani směr dopadu nelze zjistit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není k dispozici, takže nelze stanovit, jak se mění pravidla ani jejich dopad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Mění hygienická stanoviska pro stavební záměry a jejich začlenění do rozhodování podle stavebního zákona.",
+          "effectCz": "Dříve se pro některé záměry vyžadovalo samostatné posouzení orgánem ochrany veřejného zdraví; návrh některé stanoviskové úkony nahrazuje rozhodnutím stavebního úřadu. To může zkrátit počet procesních kroků, ale z dodaného znění nelze dovodit, že se ruší ochrana před hlukem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není dostupný, a proto nelze posoudit změnu ani její směr."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Mění posuzování vlivů na životní prostředí a výslovně mění limit pro posuzování nových pozemních komunikací.",
+          "effectCz": "Návrh zvyšuje některé limity, při jejichž dosažení se vyžaduje posouzení vlivů, a umožňuje, aby stanovisko k posouzení nahradilo některé další správní úkony. Pro pozemní komunikace je v dodaném textu uveden limit 3 km; předchozí odpovídající limit není v kontextu doložen, takže jeho směr nelze porovnat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není k dispozici; nelze určit změnu vodních pravidel ani její dopad na dopravní stavby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není dostupný, takže nelze určit jeho obsah ani směr dopadu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-25",
+          "relevant": false,
+          "reasonCz": "Navržená změna zákona o myslivosti byla v textu schváleném Sněmovnou odstraněna.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "Mění pozemkové úpravy a pravidla pro společná zařízení, ale dodané znění neprokazuje vazbu na konkrétní klíčovou dopravní stavbu ani její urychlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-27",
+          "relevant": true,
+          "reasonCz": "Mění soudní přezkum stavebních rozhodnutí a opatření obecné povahy, která mohou být součástí přípravy dopravních projektů.",
+          "effectCz": "Dříve mohl soud při splnění zákonných podmínek opatření obecné povahy zrušit; návrh mimo jiné umožňuje přezkum zákonnosti opatření jako podkladu rozhodnutí a upravuje postup po uplynutí lhůty pro návrh. Může změnit či zrychlit část soudního přezkumu, ale směr praktického dopadu na konkrétní stavby nelze z textu určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": false,
+          "reasonCz": "Mění pravidla DPH při dodání stavebních pozemků, nikoli povolování či realizaci dopravních projektů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": true,
+          "reasonCz": "Mění příslušnost vyvlastňovacích úřadů pro vyhrazené stavby, které mohou zahrnovat hlavní dopravní infrastrukturu.",
+          "effectCz": "Dříve vyvlastňování příslušelo obecním, městským či zvláštním úřadům podle druhu záměru; návrh svěřuje tuto pravomoc úřadům rozvoje území a rozděluje příslušnost mezi celostátní a krajský úřad. Změna může sjednotit postup, ale sama o sobě nezvyšuje ani nesnižuje právní možnost vyvlastnění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není dostupný; nelze určit předchozí a nové znění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není k dispozici, a proto nelze určit změnu ani její dopad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Mění zákon o urychlení výstavby strategicky významné infrastruktury a jeho povolovací postupy.",
+          "effectCz": "Dříve se některé zvláštní postupy týkaly užšího okruhu dopravních staveb; schválené znění rozšiřuje jejich použití také na vyhrazené stavby a další druhy infrastruktury a mění postupy u některých souvisejících žádostí. Změny mohou urychlit určité povolovací kroky, ale nejsou důkazem realizace konkrétních staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Mění povolování silnic a parkovišť z hlediska ochrany ovzduší.",
+          "effectCz": "Dříve se pro některé silnice a parkoviště vyžadovala samostatná závazná stanoviska; návrh převádí část úkonů do řízení o povolení záměru. Zmenšuje počet oddělených kroků, avšak povinnost posoudit vliv záměru na ovzduší sama nezaniká."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": true,
+          "reasonCz": "Mění bezúplatné převody pozemků určených pro veřejně prospěšné a dopravní stavby.",
+          "effectCz": "Dříve zákon upravoval bezúplatné převody některých zemědělských pozemků obcím a krajům podle dosavadních územních kategorií; návrh přizpůsobuje převody novým kategoriím a pojmům povolení záměru. Zda se tím zvětšuje dostupnost pozemků pro dopravní stavby, nelze z dodaných změn spolehlivě určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není dostupný; nelze zjistit, jaká pravidla se mění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není k dispozici, takže nelze určit předchozí a navržené znění ani jeho dopad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není dostupný; směr a význam změny nelze posoudit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není dostupný, proto nelze určit, zda mění pravidla důležitá pro dopravní výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není v balíčku, takže nelze určit konkrétní změnu ani její směr."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není dostupný; nelze porovnat pravidla před změnou a po ní."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": false,
+          "reasonCz": "Upravuje pravidla pro povolování obnovitelných zdrojů energie, nikoli výstavbu dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-12",
+          "relevant": false,
+          "reasonCz": "Upravuje dokumentaci a zaměřování dokončených infrastrukturních staveb, nikoli jejich výstavbu či povolování.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-18",
+          "relevant": false,
+          "reasonCz": "Upravuje náhradu škody při soudním přezkumu opatření obecné povahy, nikoli postup výstavby dopravních projektů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-21",
+          "relevant": false,
+          "reasonCz": "Mění převody pozemků mezi státem a obcemi či kraji; dodané znění neukazuje změnu pravidel realizace dopravních staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-22",
+          "relevant": false,
+          "reasonCz": "Upravuje převody majetku mezi státem a kraji, nikoli přípravu nebo povolování dopravních staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-23",
+          "relevant": false,
+          "reasonCz": "Upravuje převody majetku hlavního města Prahy, nikoli pravidla výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-27",
+          "relevant": false,
+          "reasonCz": "Mění působnost úřadu pro územní plánování v energetickém zákoně; dodané znění se netýká dopravních projektů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": false,
+          "reasonCz": "Mění dílčí pravidla vodovodů a kanalizací, ale nedokládá přímý dopad na klíčové dopravní stavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-39",
+          "relevant": false,
+          "reasonCz": "Mění rozdělení působnosti mezi úřady pro uznávání dalšího vzdělávání, což výstavbu dopravní infrastruktury neovlivňuje.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-41",
+          "relevant": false,
+          "reasonCz": "Dodané odstavce neobsahují žádné znění, podle něhož by bylo možné prokázat dopad na dopravní výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-51",
+          "relevant": false,
+          "reasonCz": "Upravuje přechodná pravidla pro posuzování vlivů na životní prostředí, ale dodané ustanovení neprokazuje dopad na konkrétní dopravní stavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-52",
+          "relevant": true,
+          "reasonCz": "Výslovně zahrnuje speciální dráhu do možnosti opakovaně prodlužovat platnost jejích stanovisek EIA.",
+          "effectCz": "Dřívější přechodné pravidlo dovolovalo opakované prodloužení stanovisek pro vyjmenované dálnice a železniční tratě, nikoli speciální dráhy; návrh tuto možnost rozšiřuje i na speciální dráhy a stanoví jejich platnost do konce roku 2026. Pro tento druh dopravní stavby je překážka časové platnosti volnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Prodlužuje lhůtu pro vložení havarijního plánu do systému hlášení, což se nedotýká výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Ruší část zákona o liniové výstavbě, ale její obsah v balíčku není rozpoznán, takže nelze vyloučit dopad na dopravní projekty.",
+          "effectCz": "Znění rušené části zákona ani její předchozí pravidla nejsou v balíčku dostupná; směr a rozsah dopadu nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-1",
+          "relevant": false,
+          "reasonCz": "Z dodaného záznamu vyplývá, že text této části nebyl vybrán, a není doloženo, že by měnil pravidla dopravních projektů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Umožňuje navýšit výdaje státního rozpočtu na financování výstavby dálnic, silnic, drah a vodní infrastruktury.",
+          "effectCz": "Dříve zákon o rozpočtových pravidlech takovou výjimku z výdajového rámce pro dopravní a vodní infrastrukturu neobsahoval; schválené znění dovoluje pro roky 2026–2036 zvýšit výdaje o příslušné infrastrukturní výdaje, včetně některých plateb za partnerství veřejného a soukromého sektoru. Zvyšuje možnost financování, ale samo neurčuje částku pro jednotlivé stavby ani nezaručuje jejich výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-3",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text části ani pozměňovacích návrhů není dostupný; nelze určit, co se mění a jaký je dopad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-4",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text části ani pozměňovacích návrhů není k dispozici; nelze porovnat dřívější a nové znění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-5",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text části ani pozměňovacích návrhů není dostupný, takže nelze určit dopad na slib."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-6",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text části ani pozměňovacích návrhů není k dispozici; nelze určit předchozí a navržené pravidlo."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-7",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text části ani souvisejících pozměňovacích návrhů není dostupný, proto nelze stanovit směr dopadu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text části ani souvisejících pozměňovacích návrhů není k dispozici; účinek na financování infrastruktury nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-9",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text části ani pozměňovacích návrhů není dostupný; nelze určit změnu ani její dopad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-10",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text rušících ustanovení ani jejich kontext není dostupný; nelze posoudit jejich vztah k infrastrukturnímu slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43201-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu dopravní infrastruktury přímo financuje dopravní výstavbu a uvádí konkrétní výdaje i odklady projektů.",
+          "effectCz": "Jako rozpočtový návrh nemá předchozí znění, s nímž by šlo porovnat změnu zákona. Uvádí výdaje 169,3 mld. Kč pro rok 2026, 76,6 mld. Kč pro rok 2027 a 79,9 mld. Kč pro rok 2028; zároveň popisuje odklady některých silničních a železničních akcí a prioritizaci prostředků. Jde o smíšený obraz, nikoli o důkaz, že se všechny klíčové projekty posunou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet obsahuje výdaje na dopravní infrastrukturu, ale dodaný výňatek neuvádí jejich částky.",
+          "effectCz": "Jde o nový státní rozpočet, takže nemá předchozí znění; dodaný text odkazuje na rozpis výdajů a ukazatele v přílohách, jejich částky však chybí. Z balíčku proto nelze zjistit, zda rozpočet zvyšuje či snižuje prostředky na dopravní projekty."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-168",
+          "relevant": false,
+          "reasonCz": "Jde o návrh budoucí změny liniového zákona, nikoli o rozhodnutí o konkrétním dopravním projektu; samotný záměr zákona projekt neposouvá.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-207",
+          "relevant": true,
+          "reasonCz": "Usnesení zahrnuje převod pozemků potřebných pro dopravní infrastrukturu v souvislosti s podnikatelským parkem Cheb.",
+          "effectCz": "Nové usnesení souhlasí s převodem státních pozemků, z nichž některé mají být použity pro dopravní infrastrukturu; předchozí znění není, protože jde o nové rozhodnutí. Připravuje půdu pro související infrastrukturu, ale text neprokazuje, že jde o klíčový dopravní projekt ve smyslu slibu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-217",
+          "relevant": true,
+          "reasonCz": "Schvaluje sjednání smlouvy o výstavbě a údržbě mostů a společných úseků silnic na česko-polské hranici.",
+          "effectCz": "Jde o novou smlouvu, takže nemá předchozí znění k porovnání. Usnesení pouze schvaluje její sjednání a vyžaduje další souhlas Parlamentu a ratifikaci; předpokládá tedy postup k výstavbě a údržbě, ale samo ji plně nedodává."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-375",
+          "relevant": false,
+          "reasonCz": "Usnesení se týká obranné půjčky SAFE a pouze zmiňuje blíže neurčený projekt duální dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-520",
+          "relevant": true,
+          "reasonCz": "Schvaluje dílčí územní rozvojový plán pro vysokorychlostní trať Praha, tedy konkrétní železniční infrastrukturu.",
+          "effectCz": "Jde o nově schválený územní plán, bez předchozího znění k porovnání; usnesení jej vydává formou opatření obecné povahy. Posouvá plánovací přípravu konkrétní železniční stavby, ale samo neznamená, že je trať postavena."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-691",
+          "relevant": true,
+          "reasonCz": "Schvaluje koncesionářskou smlouvu pro výstavbu a provoz dálnice D35 v úseku Opatovec–Mohelnice.",
+          "effectCz": "Jde o novou smlouvu, takže nemá předchozí znění k porovnání. Vláda ji schvaluje, ale ministerstvo ji může uzavřít až po souhlasu Poslanecké sněmovny s finančními závazky; jde tedy o konkrétní přípravný krok, nikoli o dokončenou výstavbu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-91b863691a39--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-8-1",
+        "psp-core-2025--law-change-43174-8-3",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-14",
+        "psp-core-2025--law-change-43174-15",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-27",
+        "psp-core-2025--law-change-43174-29",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-34",
+        "psp-core-2025--law-change-43174-approved-52",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--law-change-43201-1",
+        "psp-core-2025--law-change-43204-1",
+        "zvlady-resolutions--law-change-uv-2026-207",
+        "zvlady-resolutions--law-change-uv-2026-217",
+        "zvlady-resolutions--law-change-uv-2026-520",
+        "zvlady-resolutions--law-change-uv-2026-691",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86962",
+        "psp-core-2025--amendment-text-1213",
+        "psp-core-2025--vote-88184",
+        "zvlady-resolutions--2026-207",
+        "zvlady-resolutions--2026-217",
+        "zvlady-resolutions--2026-520",
+        "zvlady-resolutions--2026-691"
+      ],
+      "explanationCz": "Poslanci SPD předložili se svými koaličními partnery návrh rozsáhlé novely stavebního zákona a vláda k němu vyslovila souhlas. Novela mění plánování a povolování infrastruktury a některé postupy může zjednodušit, ale sama nezajišťuje výstavbu konkrétních staveb. Po zamítnutí návrhu Senátem pro něj poslanci SPD hlasovali znovu a Sněmovna jej schválila. Vláda navíc schválila plánovací dokumentaci pro vysokorychlostní trať Praha a podmíněně schválila koncesní smlouvu pro úsek dálnice D35, což jsou další přípravné kroky.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U několika částí novely stavebního zákona a rozpočtového zákona balíček uvádí, že jsou relevantní pouze prostřednictvím pozměňovacích návrhů, jejichž text zde chybí; jejich skutečný dopad proto nelze posoudit.",
+        "Výňatek ze státního rozpočtu neobsahuje částky pro dopravní infrastrukturu. Návrh rozpočtu Státního fondu dopravní infrastruktury uvádí celkové výdaje, ale také odklady některých staveb; doložené hlasování o něm je pouze z prvního čtení.",
+        "Usnesení o dálnici D35 vyžaduje před podpisem smlouvy další souhlas Poslanecké sněmovny, takže nejde o dokončenou výstavbu. Usnesení o převodu pozemků v Chebu samo neprokazuje, že příslušná infrastruktura patří mezi klíčové dopravní projekty slíbené stranou."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_07ead31f1e13ec35016aec5371fc9087d1803ce7cbdd9d0957",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 434660,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 434657
+      },
+      "output_tokens": 15179,
+      "output_tokens_details": {
+        "reasoning_tokens": 5676
+      },
+      "total_tokens": 449839
+    },
+    "output": {
+      "promiseId": "candidate-91b863691a39",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Navržené a schválené změny stavebního zákona upravují koordinaci dotčených zájmů a povolování veřejné infrastruktury, tedy postupy, které mohou urychlit její výstavbu.",
+          "effectCz": "Předchozí znění stanovilo integrovanou ochranu veřejných zájmů a obecnější postup dotčených orgánů; návrh jim ukládá rychlejší a koordinovanější postup a veřejnou infrastrukturu výslovně označuje za veřejný zájem. To může povolování infrastruktury usnadnit, ale samo o sobě nestanoví výstavbu konkrétního projektu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Změny rozdělení působnosti stavebních úřadů se týkají povolování infrastrukturních staveb, včetně vyhrazených dopravních staveb.",
+          "effectCz": "Předchozí znění rozdělovalo pravomoci mezi ministerstva, krajské a obecní stavební úřady a zvláštní dopravní a energetický úřad; schválené znění je soustřeďuje do nových úřadů rozvoje území a přiděluje jim příslušnost pro vyhrazené stavby. Směr změny pro rychlost konkrétních projektů z těchto ustanovení nelze s jistotou určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Změny územního plánování upravují vymezování ploch a koridorů pro strategické a celostátní záměry, včetně infrastruktury.",
+          "effectCz": "Předchozí znění umožňovalo vymezovat dopravní a technickou infrastrukturu mezinárodního či celostátního významu v územním rozvojovém plánu; schválené znění upravuje strategické investiční stavby a za stanovených podmínek umožňuje převzít některé již vymezené plochy a koridory bez opakovaného posuzování. Může tím zjednodušit přípravu části projektů, ale rozsah účinku na jednotlivé stavby nelze z výňatku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Změny řízení o povolení záměru se přímo týkají podkladů, stanovisek a lhůt při povolování staveb.",
+          "effectCz": "Předchozí znění vyžadovalo pro řadu úkonů samostatná stanoviska, podklady a postupy; změny je v některých případech koordinují nebo nahrazují a zavádějí časové lhůty. Některé kroky se tím zjednodušují, ale bez úplného srovnání všech ustanovení nelze určit čistý účinek na konkrétní dopravní projekty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Úprava posuzování záměrů, platnosti povolení a uvádění staveb do užívání může ovlivnit realizaci a dokončování infrastrukturních staveb.",
+          "effectCz": "Předchozí znění stanovilo posuzování záměrů a platnost povolení podle jednotlivých pravidel; schválené změny mimo jiné prodlužují platnost povolení pro dopravní a technickou infrastrukturu na čtyři roky a u některých vyhrazených staveb zachovávají platnost po zahájení výstavby. To rozšiřuje časový prostor pro realizaci, ale další změny v povolování nelze z výňatků vyhodnotit jako celek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Ustanovení o vyhrazených stavbách a jejich soudním přezkumu se týkají významných dopravních projektů.",
+          "effectCz": "Předchozí pravidla soudního přezkumu byla obecná; schválené změny některé postupy pro vyhrazené stavby upravují a mezi vyhrazené stavby výslovně řadí například dopravní infrastrukturu. Směr dopadu na dobu konkrétní výstavby nelze z poskytnutých ustanovení jednoznačně určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-6",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Změny zákona o geologických pracích v dodaném znění neposkytují konkrétní vazbu na posun výstavby dopravních projektů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-1",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro posuzování krajinného rázu v územích vymezených pro záměry může ovlivnit povolování infrastrukturních staveb.",
+          "effectCz": "Předchozí výjimka z posuzování krajinného rázu platila pro zastavěná území a některé zastavitelné plochy; schválené znění ji váže na zastavitelná území, koridory a plochy vymezené v územně plánovací dokumentaci. Rozsah výjimky se tím mění, ale z dodaného textu nelze určit, zda se pro konkrétní dopravní stavby rozšiřuje či zužuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-3",
+          "relevant": true,
+          "reasonCz": "Změny ochrany přírody včetně pravidel pro záměry v dopravních koridorech mohou ovlivnit povolování infrastrukturních projektů.",
+          "effectCz": "Předchozí znění obsahovalo obecná pravidla ochrany druhů a výjimek; schválené znění mimo jiné stanoví, že v koridoru veřejné dopravní či technické infrastruktury nelze povolit vypouštění nebo vysazování některých chráněných druhů. To může odstranit jeden možný střet při realizaci koridoru, ale jiné změny ochrany přírody mohou působit odlišně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Změny přesouvají část úkonů ochrany přírody do stavebního řízení, které se týká povolování infrastrukturních záměrů.",
+          "effectCz": "Předchozí znění svěřovalo vyjmenované souhlasy a povolení samostatným orgánům ochrany přírody; návrh u části záměrů počítá s jejich posouzením stavebními úřady a začleněním do rozhodnutí o povolení. Může to omezit počet samostatných úkonů, ale u některých území a záměrů zůstávají zvláštní postupy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Změny ochrany zemědělské půdy upravují souhlas s jejím odnětím u záměrů povolovaných podle stavebního zákona.",
+          "effectCz": "Předchozí znění vyžadovalo samostatný souhlas orgánu ochrany zemědělské půdy; schválené znění jej začleňuje do rozhodnutí stavebního úřadu a u některých ploch stanoví, že se zásady ochrany půdy znovu neposuzují. To může zjednodušit část povolovacího procesu, ale zároveň mění rozsah ochranného posouzení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-10",
+          "relevant": false,
+          "reasonCz": "Dodané změny daně z nemovitých věcí pouze upravují odkaz na druh území a nedokládají podstatný dopad na výstavbu dopravních projektů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-11",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-12",
+          "relevant": true,
+          "reasonCz": "Změna zákona o dráhách upravuje pravomoc úřadu, který posuzuje bezpečnost a kolaudaci železničních staveb.",
+          "effectCz": "Předchozí znění svěřovalo posouzení bezpečnosti železniční stavby Dopravnímu a energetickému stavebnímu úřadu; schválené znění tuto pravomoc přesouvá na Úřad rozvoje území České republiky. Jde o změnu příslušného úřadu, nikoli o doložené zkrácení nebo prodloužení povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-13",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": true,
+          "reasonCz": "Změny lesního zákona upravují povolení záměrů, které zasahují do lesních pozemků, což může být relevantní pro dopravní trasy.",
+          "effectCz": "Předchozí znění vyžadovalo samostatné rozhodování a závazné stanovisko orgánů státní správy lesů; schválené znění u některých záměrů přesouvá posouzení do rozhodnutí stavebního úřadu, přičemž zachovává vyjádření lesních orgánů. Může to spojit část řízení, avšak ochranné podmínky a souhlasy zcela neodstraňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-15",
+          "relevant": true,
+          "reasonCz": "Změny zákona o pozemních komunikacích se výslovně týkají dálnic, silnic a jejich ochranných pásem.",
+          "effectCz": "Předchozí ustanovení pracovala mimo jiné s pojmem zastavěného území a zastavitelných ploch; nové znění mění část těchto odkazů na zastavitelné území a vymezuje ochranné pásmo komunikací mimo zastavěné území. Účinek na možnost či rychlost výstavby konkrétní komunikace z dodaných úryvků nelze jednoznačně určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-16",
+          "relevant": true,
+          "reasonCz": "Změny zákona o civilním letectví se vztahují k povolování a kolaudaci leteckých staveb, které patří mezi dopravní infrastrukturu.",
+          "effectCz": "Předchozí znění svěřovalo některé úkony Dopravnímu a energetickému stavebnímu úřadu; schválené znění jeho název nahrazuje Úřadem rozvoje území České republiky a mění i některé související odkazy. Z dodaného textu nelze určit, že by se tím změnila náročnost nebo rychlost povolení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-18",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Změny předpisů ochrany veřejného zdraví začleňují některá stanoviska do řízení o povolení stavebního záměru.",
+          "effectCz": "Předchozí znění vyžadovalo některá samostatná stanoviska orgánu ochrany veřejného zdraví; schválené znění je v případech stavebních záměrů převádí do rozhodování stavebního úřadu. To může zjednodušit část řízení, ale z výňatku nelze posoudit dopad na každý projekt."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Změny zákona o posuzování vlivů na životní prostředí se výslovně dotýkají posuzování a povolování záměrů včetně dopravních staveb.",
+          "effectCz": "Předchozí znění pro některé záměry spojovalo posouzení EIA s jednotným environmentálním stanoviskem; schválené znění umožňuje, na žádost oznamovatele, aby závazné stanovisko EIA nahradilo některé další správní úkony, a mění také prahové hodnoty pro vybrané kategorie záměrů. To může některé postupy zjednodušit, zatímco zvýšení některých prahů může zmenšit počet záměrů podléhajících posouzení; přesný dopad na jednotlivé dopravní projekty z úryvku nevyplývá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Dodané znění změn vodního zákona neobsahuje vybrané ustanovení propojené se slíbeným posunem dopravních projektů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-25",
+          "relevant": false,
+          "reasonCz": "Navržená změna mysliveckého zákona byla v textu schváleném Sněmovnou odstraněna a dodané ustanovení se netýká dopravních projektů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": true,
+          "reasonCz": "Změna zákona o pozemkových úpravách stanoví, kdy mohou schválené pozemkové úpravy obsahovat stavby a zařízení vyžadující stavební povolení.",
+          "effectCz": "Předchozí znění umožňovalo u některých společných zařízení upustit od samostatného povolení; schválené znění stanoví, že rozhodnutí o schválení pozemkových úprav může u některých staveb tvořit část rozhodnutí o povolení záměru a vymezit pozemky pro jeho realizaci. Může tím zjednodušit přípravu některých staveb, ale neprokazuje realizaci konkrétní dopravní stavby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-27",
+          "relevant": true,
+          "reasonCz": "Změny soudního řádu správního se týkají soudního přezkumu rozhodnutí a plánů, které mohou být podkladem pro dopravní stavby.",
+          "effectCz": "Předchozí znění umožňovalo samostatný přezkum opatření obecné povahy; schválené znění upravuje jeho přezkum jako podkladu a stanoví zvláštní postup po uplynutí lhůty. Směr dopadu na dobu konkrétní výstavby nelze z dodaného výňatku určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": false,
+          "reasonCz": "Změna daňového pojmu zastavitelného území v dodaném znění neukazuje podstatný dopad na výstavbu dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": true,
+          "reasonCz": "Změna zákona o vyvlastnění přesouvá pravomoci související se získáním pozemků pro vyhrazené stavby, mezi něž patří významná dopravní infrastruktura.",
+          "effectCz": "Předchozí znění rozdělovalo působnost mezi obecní úřady, magistráty a dopravní úřad; schválené znění svěřuje vyvlastňování novým úřadům rozvoje území a jejich krajským úřadům. Změna organizuje příslušnost, ale sama neprokazuje rychlejší získání pozemků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změny zákona o urychlení výstavby strategicky významné infrastruktury přímo upravují postupy pro dopravní a další infrastrukturní stavby.",
+          "effectCz": "Předchozí znění umožňovalo zvláštní postupy pro užší okruh dopravních staveb; schválené znění rozšiřuje některé mechanismy na vyhrazené, energetické a další strategické stavby a mění způsob souvisejícího povolování. To může urychlit část projektů, ale konkrétní dopad je závislý na jednotlivých stavbách."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Změny zákona o ochraně ovzduší nahrazují některé úkony při povolování staveb rozhodnutím o záměru.",
+          "effectCz": "Předchozí znění vyžadovalo samostatná závazná stanoviska k některým komunikacím a záměrům; schválené znění část těchto úkonů převádí na vyjádření a rozhodnutí stavebního úřadu a ruší pravidlo vyžadující stanovisko jako podmínku povolení. To může zjednodušit a spojit část povolovacího procesu, ale nezbavuje záměry všech podmínek ochrany ovzduší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": true,
+          "reasonCz": "Změny zákona o Státním pozemkovém úřadu upravují bezúplatné převody pozemků pro veřejně prospěšné a dopravní stavby.",
+          "effectCz": "Předchozí pravidla umožňovala převádět obcím pozemky v zastavěných územích a zastavitelných plochách určené pro veřejně prospěšné stavby; schválené znění odstraňuje samostatnou kategorii zastavitelných ploch a mění některé odkazy na povolení záměru. Dopad na rozsah dostupných pozemků nelze z dodaného znění určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje žádné vybrané ustanovení, které by se týkalo slíbeného posunu výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Dodané znění neobsahuje vybrané ustanovení propojené se slíbeným posunem výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": false,
+          "reasonCz": "Změna pravidel pro akcelerační oblasti obnovitelných zdrojů energie se v dodaném znění nevztahuje na slíbený posun dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-12",
+          "relevant": false,
+          "reasonCz": "Dodané ustanovení stanoví podklad pro zápis dokončené stavby do digitální technické mapy; nedokládá podstatný dopad na posun dopravních staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-18",
+          "relevant": false,
+          "reasonCz": "Dodané ustanovení upravuje náhradu škody v souvislosti se soudním přezkumem, nikoli vlastní postup výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-21",
+          "relevant": false,
+          "reasonCz": "Dodaná změna se týká převodu pozemků pro silniční stavby, ale neukazuje podstatnou změnu, která by sama posunula jejich výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-22",
+          "relevant": false,
+          "reasonCz": "Dodaná změna se týká převodů pozemků pro silniční stavby a jejich zázemí; její vliv na vlastní výstavbu není v poskytnutém textu doložen.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-23",
+          "relevant": false,
+          "reasonCz": "Dodaná změna se týká převodů pozemků pro silniční stavby v Praze; její vliv na vlastní výstavbu není v poskytnutém textu doložen.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-27",
+          "relevant": false,
+          "reasonCz": "Dodaná změna pouze přesouvá působnost k uplatňování stanoviska k územním plánům a nevykazuje podstatný účinek na slíbenou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": false,
+          "reasonCz": "Dodaná změna ochranných pásem vodovodů a kanalizací neprokazuje podstatný účinek na slíbený posun dopravních staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-39",
+          "relevant": false,
+          "reasonCz": "Dodaná změna upravuje přiřazení gesce za kvalifikace a obory a nedotýká se výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-41",
+          "relevant": false,
+          "reasonCz": "Vybrané odstavce této změny podle dodaného výňatku nesouvisejí se slíbeným posunem dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-51",
+          "relevant": false,
+          "reasonCz": "Dodaná přechodná změna pravidel posuzování vlivů se netýká doloženého konkrétního dopravního projektu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-52",
+          "relevant": true,
+          "reasonCz": "Změna prodlužuje možnost obnovit platnost posouzení vlivů pro speciální dráhy, tedy pro část dopravní infrastruktury.",
+          "effectCz": "Předchozí pravidlo umožňovalo opakované prodlužování pro vyjmenované dálnice, silnice I. třídy a celostátní a regionální dráhy; doplnění zahrnuje také speciální dráhy a navazující přechodné pravidlo. Tím se rozšiřuje možnost zachovat platnost posouzení pro tuto kategorii staveb, což může odstranit nutnost opakovaného posouzení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Dodaný text prodlužuje lhůtu k vložení havarijního plánu a nijak nedokládá dopad na dopravní projekty.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Dodané ustanovení pouze ruší neidentifikovanou část dřívějšího zákona a z poskytnutého textu nelze dovodit vazbu na dopravní výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-1",
+          "relevant": false,
+          "reasonCz": "Dodané znění změny zákona o Nejvyšším kontrolním úřadu neobsahuje relevantní ustanovení pro dopravní projekty.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválená změna rozpočtových pravidel přímo umožňuje zvýšit výdajový rámec pro financování vybraných silničních, železničních a vodních staveb v letech 2026 až 2036.",
+          "effectCz": "Předchozí znění § 8 odst. 3 umožňovalo zvýšení výdajů pouze pro financování obrany nad stanovenou hranici; schválené a vyhlášené znění přidává také vyjmenované infrastrukturní výdaje, včetně PPP plateb, pro roky 2026 až 2036. Zvyšuje tak možnost vyčlenit na tyto stavby peníze nad běžný rámec, ale samo neurčuje konkrétní částky ani nezajišťuje jejich skutečné utracení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-3",
+          "relevant": false,
+          "reasonCz": "Dodané znění změny rozpočtového určení daní nemá vybrané ustanovení vztahující se k dopravní infrastruktuře.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-4",
+          "relevant": false,
+          "reasonCz": "Dodané znění změny pravidel územních rozpočtů neobsahuje vybrané ustanovení vztahující se k dopravní infrastruktuře.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-5",
+          "relevant": false,
+          "reasonCz": "Dodané znění změny zákona o střetu zájmů neobsahuje vybrané ustanovení vztahující se k dopravní infrastruktuře.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-6",
+          "relevant": false,
+          "reasonCz": "Dodané znění změny zákoníku práce neobsahuje vybrané ustanovení vztahující se k dopravní infrastruktuře.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-7",
+          "relevant": false,
+          "reasonCz": "Dodané znění změny zákona o Sbírce zákonů neobsahuje vybrané ustanovení vztahující se k dopravní infrastruktuře.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": false,
+          "reasonCz": "Dodané znění změny zákona o rozpočtové odpovědnosti neobsahuje žádný vybraný odstavec propojený se slíbeným posunem dopravních staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-9",
+          "relevant": false,
+          "reasonCz": "Dodané znění změny zákona o financování obrany neobsahuje relevantní ustanovení pro slíbenou dopravní výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-10",
+          "relevant": false,
+          "reasonCz": "Dodané znění zrušovacích ustanovení neobsahuje vybrané ustanovení propojené se slíbeným posunem dopravních staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43201-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu dopravní infrastruktury uvádí výdaje na roky 2026 až 2028 a konkrétní posuny některých dopravních staveb.",
+          "effectCz": "Předchozí rozpočtový stav není v dodaném textu uveden. Návrh počítá s výdaji 169,3 mld. Kč v roce 2026, 76,6 mld. Kč v roce 2027 a 79,9 mld. Kč v roce 2028; současně popisuje odklad některých staveb, včetně posunu zahájení modernizace trati Nemanice I–Ševětín na rok 2028 a některých silničních akcí. Rozpočet tedy poskytuje významné financování, ale současně část výstavby odsouvá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet na rok 2026 se vztahuje k financování infrastruktury, ale dodaný výňatek pouze odkazuje na přílohy s výdaji.",
+          "effectCz": "Jde o nový státní rozpočet, pro který předchozí znění není použitelné. Dodaný text neobsahuje přílohy s částkami pro dopravní infrastrukturu, takže nelze určit její rozpočtové navýšení ani to, zda rozpočet sám posouvá výstavbu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-168",
+          "relevant": true,
+          "reasonCz": "Usnesení zařazuje přípravu změny liniového zákona s cílem urychlit dopravní stavby do vládního legislativního plánu.",
+          "effectCz": "Usnesení samo nemění právní pravidla ani nerozhoduje o výstavbě; ukládá připravit návrh zákona k pozdějšímu projednání. Jde o příslib dalšího legislativního kroku, nikoli o již uskutečněné urychlení konkrétních staveb."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-207",
+          "relevant": true,
+          "reasonCz": "Usnesení schvaluje převod pozemků, u nichž výňatek výslovně uvádí umístění dopravní infrastruktury, pro realizaci parku Cheb.",
+          "effectCz": "Předchozí stav převodu těchto pozemků není v balíčku popsán. Usnesení schvaluje změnu příslušnosti hospodařit s pozemky a následný převod společnosti, která má projekt realizovat; pro uvedené parcely uvádí účel dopravní infrastruktury. Tím přímo připravuje pozemkové zázemí části infrastrukturního projektu, ale nedokládá jeho dokončení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-217",
+          "relevant": true,
+          "reasonCz": "Usnesení schvaluje smlouvu o výstavbě a údržbě mostů a společných silničních úseků na česko-polské hranici.",
+          "effectCz": "Předchozí stav projektu není v dodaném textu popsán. Usnesení schvaluje sjednání smlouvy, ale její podpis s výhradou ratifikace, souhlas Parlamentu a ratifikace prezidentem jsou další nutné kroky; jde proto o návrh směřující k části dopravní infrastruktury, nikoli o dokončenou výstavbu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-375",
+          "relevant": true,
+          "reasonCz": "Usnesení zahrnuje do evropského úvěrového nástroje projekt duální dopravní infrastruktury a pověřuje ministra dopravy jeho implementací.",
+          "effectCz": "Předchozí stav financování projektu není v balíčku uveden. Vláda souhlasí se závazným zapojením do půjčky SAFE ve výši 2,06 mld. EUR pro projekty uvedené v podkladové informaci a ukládá ministrovi dopravy kroky k zařazení duální dopravní infrastruktury; konkrétní dopravní projekt ani jeho částka zde uvedeny nejsou. Usnesení tak připravuje financování části infrastruktury, nikoli její výstavbu samo."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-520",
+          "relevant": true,
+          "reasonCz": "Usnesení schvaluje dílčí územní rozvojový plán VRT Praha, který přímo souvisí s vysokorychlostní železnicí.",
+          "effectCz": "Předchozí stav plánu není v balíčku popsán. Vláda plán schvaluje a ukládá jeho zveřejnění; tím přijímá rozhodnutí v plánovací fázi pro vysokorychlostní trať, avšak samotná výstavba vyžaduje další kroky."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-691",
+          "relevant": true,
+          "reasonCz": "Usnesení se výslovně týká koncesionářské smlouvy na projektování, výstavbu a údržbu úseků dálnice D35.",
+          "effectCz": "Předchozí stav projektu není v dodaném textu popsán. Vláda smlouvu schvaluje, ale ministr ji smí uzavřít až po souhlasu Poslanecké sněmovny s finančními závazky státu; jde proto o návrh k realizaci konkrétní dálnice, nikoli o dokončené rozhodnutí o její výstavbě."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-91b863691a39--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-15",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--law-change-43201-1",
+        "psp-core-2025--vote-86962",
+        "zvlady-resolutions--law-change-uv-2026-520",
+        "zvlady-resolutions--2026-520",
+        "zvlady-resolutions--law-change-uv-2026-691",
+        "zvlady-resolutions--2026-691",
+        "zvlady-resolutions--law-change-uv-2026-207",
+        "zvlady-resolutions--2026-207",
+        "psp-core-2025--amendment-text-1213",
+        "psp-core-2025--amendment-1213"
+      ],
+      "explanationCz": "Poslanci SPD předložili spolu s dalšími poslanci novelu stavebního zákona a později hlasovali pro její přijetí poté, co ji Senát odmítl. Změny upravují povolování a plánování infrastruktury; samostatně vláda schválila dílčí územní plán pro vysokorychlostní trať Praha a připravila převody pozemků pro dopravní infrastrukturu u Chebu. Vláda také schválila přípravu koncesní smlouvy pro úseky dálnice D35, ta ale ještě vyžaduje souhlas Sněmovny. Rozpočet dopravního fondu počítá s vysokými výdaji, současně však výslovně odkládá některé stavby, takže doložené kroky znamenají posun v přípravě jen části slíbených projektů, nikoli splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný rozpočtový výňatek uvádí plánované výdaje fondu ve výši 169,3 mld. Kč pro rok 2026 a současně zmiňuje odklady některých projektů; neukazuje konečné výdaje ani skutečný průběh jejich stavby.",
+        "Usnesení o D35 schvaluje koncesní smlouvu, ale její uzavření podmiňuje souhlasem Poslanecké sněmovny. Balíček nedokládá, že tato další podmínka byla splněna.",
+        "Usnesení o plánu VRT Praha dokládá plánovací rozhodnutí, nikoli zahájení stavebních prací nebo posun všech klíčových dopravních projektů."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_08f5a6e46091b63b016aec5490651487d1bee48d737832c336",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 434660,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 434657
+      },
+      "output_tokens": 19148,
+      "output_tokens_details": {
+        "reasoning_tokens": 8136
+      },
+      "total_tokens": 453808
+    },
+    "output": {
+      "promiseId": "candidate-91b863691a39",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Mění zásady stavebního zákona tak, že rozvoj veřejné infrastruktury nelze znemožnit, pokud lze veřejné zájmy chránit podmínkami.",
+          "effectCz": "Dříve § 1 vymezoval ochranu veřejných zájmů a udržitelný rozvoj bez této výslovné ochrany rozvoje infrastruktury; návrh omezuje možnost tento rozvoj znemožnit a koordinuje posuzování zájmů. V tomto směru je překážka pro výstavbu volnější, ale ustanovení samo konkrétní stavbu nezajišťuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-2",
+          "relevant": true,
+          "reasonCz": "Mění organizaci a působnost stavebních úřadů, které povolují stavby včetně dopravní infrastruktury.",
+          "effectCz": "Dříve stavební řád vykonávaly ministerské, krajské, obecní a další stavební úřady; schválené znění soustředí působnost do úřadu a krajských úřadů rozvoje území a mění příslušnost pro vyhrazené a další stavby. Jde o institucionální změnu; z poskytnutých znění nelze určit, zda bude povolování konkrétních dopravních staveb rychlejší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-3",
+          "relevant": true,
+          "reasonCz": "Mění pravidla územního plánování a koridorů pro strategické a celostátní záměry, což může zahrnovat dopravní infrastrukturu.",
+          "effectCz": "Dříve mohly být koridory dopravní infrastruktury mezinárodního či celostátního významu vymezovány v územním rozvojovém plánu; schválené znění upravuje plochy a koridory pro strategické investiční stavby a za určitých podmínek umožňuje převzetí některých koridorů do vyšší územně plánovací dokumentace bez dalšího posuzování. To může zjednodušit část plánování, nikoli samo povolit či postavit stavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Mění postupy pro povolení záměrů a dokládání souhlasů, včetně připojení na dopravní infrastrukturu.",
+          "effectCz": "Dříve bylo třeba zvlášť zajistit souhlasy, vyjádření a některé podklady pro povolení; návrh zavádí koordinaci a lhůty, omezuje opakované posuzování a u některých vyjádření infrastruktury považuje nečinnost za souhlas. Současně některé procesní podmínky zůstávají; změny celkově mohou zjednodušit část povolování, ale samy stavby nedodávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Upravuje posuzování a povolování staveb, včetně pravidel důležitých pro dopravní projekty.",
+          "effectCz": "Dříve stavební úřad posuzoval soulad záměru s územní dokumentací, veřejnými zájmy, infrastrukturou a právy účastníků; návrh některá posouzení omezuje, soustřeďuje je do dřívější fáze a mění pravidla pro změny či platnost povolení. Část postupů se tím zjednodušuje, avšak znění neukládá uskutečnění konkrétních dopravních staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Mění soudní přezkum stavebních rozhodnutí, který může ovlivnit délku povolování infrastrukturních staveb.",
+          "effectCz": "Dříve soudy přezkoumávaly žaloby a opatření obecné povahy podle dosavadních pravidel; návrh upravuje přípustnost žalobních bodů, lhůty a některé účinky soudního přezkumu. Dopad na rychlost dopravních projektů nelze přesně určit z vybraných ustanovení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text této části zákona ani příslušných pozměňovacích návrhů není v balíčku dostupný; nelze porovnat dřívější a navržené znění ani určit směr dopadu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-6",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text této části zákona ani příslušných pozměňovacích návrhů není v balíčku dostupný; nelze porovnat dřívější a navržené znění ani určit směr dopadu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není k dispozici, a proto nelze určit, jak se mění pravidla ani jejich dopad na dopravní projekty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-1",
+          "relevant": true,
+          "reasonCz": "Mění, kdy se při povolování v území posuzuje krajinný ráz, a výslovně se dotýká územních koridorů.",
+          "effectCz": "Dříve se krajinný ráz neposuzoval v zastavěném území a ve vybraných zastavitelných plochách s dohodnutou ochranou; návrh nově vymezuje zastavitelná území, koridory a plochy těžby podle stanoviska orgánu ochrany přírody. Rozsah výjimky se mění, ale bez úplného srovnání navazujících pravidel nelze určit její celkový účinek na výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-3",
+          "relevant": true,
+          "reasonCz": "Upravuje ochranu přírody a výjimky včetně zvláštního pravidla pro plochy a koridory veřejné dopravní infrastruktury.",
+          "effectCz": "Dříve měla výjimka pro zásah do ochrany zvláště chráněných druhů jiné podmínky; návrh některé podmínky rozšiřuje a současně stanoví, že orgán ochrany přírody nemá souhlasit s vypouštěním či výsadbou v koridoru veřejné dopravní infrastruktury. Dopad je smíšený: omezuje překážku v koridoru, ale mění také ochranná pravidla."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Převádí některé úkony ochrany přírody do řízení o stavebním povolení.",
+          "effectCz": "Dříve se příslušné souhlasy a povolení ochrany přírody vydávaly samostatně nebo v odděleném řízení; návrh u vybraných záměrů svěřuje jejich posouzení stavebnímu úřadu a včleňuje je do rozhodnutí o záměru. Snižuje počet oddělených úkonů, nikoli nutně nároky na ochranu přírody."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Mění souhlas s odnětím zemědělské půdy pro stavební záměry a jeho posouzení v povolovacím řízení.",
+          "effectCz": "Dříve byl pro odnětí zemědělské půdy zpravidla třeba samostatný souhlas orgánu ochrany půdy; návrh začleňuje tento souhlas do rozhodnutí stavebního úřadu a v některých územích již podmínky odnětí neposuzuje. Tím se může zmenšit počet samostatných kroků, avšak vlastní podmínky pro povolení zůstávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-10",
+          "relevant": false,
+          "reasonCz": "Dodané znění upravuje osvobození zemědělských pozemků od daně, nikoli postup či realizaci dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-11",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není k dispozici, takže nelze porovnat pravidla ani stanovit směr dopadu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-12",
+          "relevant": false,
+          "reasonCz": "Dodané znění pouze nahrazuje název stavebního úřadu v zákoně o dráhách; nedokládá změnu podmínek výstavby ani jejího průběhu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-13",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není dostupný; nelze určit změnu pravidel ani její směr."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": true,
+          "reasonCz": "Přesouvá některá lesní stanoviska a rozhodnutí pro stavební záměry do povolování podle stavebního zákona.",
+          "effectCz": "Dříve se pro zásahy do lesních pozemků a jejich odnětí vydávala samostatná stanoviska či rozhodnutí orgánů státní správy lesů; návrh tato posouzení u stavebních záměrů zpravidla začleňuje do rozhodnutí stavebního úřadu. Snižuje počet samostatných rozhodnutí, ale nemění samotné požadavky ochrany lesa."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-15",
+          "relevant": true,
+          "reasonCz": "Mění zákon o pozemních komunikacích, včetně pravidel, kde mohou vést dálnice a silnice.",
+          "effectCz": "Dříve mohly dálnice a silnice vést zastavěným územím nebo zastavitelnými plochami; návrh mění tyto pojmy na zastavitelné území a upravuje také silniční ochranná pásma. Protože nové a dřívější územní kategorie nejsou totožné a všechny změněné definice nejsou doloženy, celkový směr pro možnosti výstavby nelze spolehlivě určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-16",
+          "relevant": false,
+          "reasonCz": "Přestože se týká civilního letectví, dodané změny převážně přejmenovávají či nahrazují správní orgány a neukazují změnu podmínek výstavby letištní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není k dispozici, takže nelze určit změnu ani její dopad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-18",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není dostupný; dřívější a navržené znění ani směr dopadu nelze zjistit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není k dispozici, takže nelze stanovit, jak se mění pravidla ani jejich dopad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Mění hygienická stanoviska pro stavební záměry a jejich začlenění do rozhodování podle stavebního zákona.",
+          "effectCz": "Dříve se pro některé záměry vyžadovalo samostatné posouzení orgánem ochrany veřejného zdraví; návrh některé stanoviskové úkony nahrazuje rozhodnutím stavebního úřadu. To může zkrátit počet procesních kroků, ale z dodaného znění nelze dovodit, že se ruší ochrana před hlukem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není dostupný, a proto nelze posoudit změnu ani její směr."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Mění posuzování vlivů na životní prostředí a výslovně mění limit pro posuzování nových pozemních komunikací.",
+          "effectCz": "Návrh zvyšuje některé limity, při jejichž dosažení se vyžaduje posouzení vlivů, a umožňuje, aby stanovisko k posouzení nahradilo některé další správní úkony. Pro pozemní komunikace je v dodaném textu uveden limit 3 km; předchozí odpovídající limit není v kontextu doložen, takže jeho směr nelze porovnat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není k dispozici; nelze určit změnu vodních pravidel ani její dopad na dopravní stavby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není dostupný, takže nelze určit jeho obsah ani směr dopadu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-25",
+          "relevant": false,
+          "reasonCz": "Navržená změna zákona o myslivosti byla v textu schváleném Sněmovnou odstraněna.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "Mění pozemkové úpravy a pravidla pro společná zařízení, ale dodané znění neprokazuje vazbu na konkrétní klíčovou dopravní stavbu ani její urychlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-27",
+          "relevant": true,
+          "reasonCz": "Mění soudní přezkum stavebních rozhodnutí a opatření obecné povahy, která mohou být součástí přípravy dopravních projektů.",
+          "effectCz": "Dříve mohl soud při splnění zákonných podmínek opatření obecné povahy zrušit; návrh mimo jiné umožňuje přezkum zákonnosti opatření jako podkladu rozhodnutí a upravuje postup po uplynutí lhůty pro návrh. Může změnit či zrychlit část soudního přezkumu, ale směr praktického dopadu na konkrétní stavby nelze z textu určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": false,
+          "reasonCz": "Mění pravidla DPH při dodání stavebních pozemků, nikoli povolování či realizaci dopravních projektů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": true,
+          "reasonCz": "Mění příslušnost vyvlastňovacích úřadů pro vyhrazené stavby, které mohou zahrnovat hlavní dopravní infrastrukturu.",
+          "effectCz": "Dříve vyvlastňování příslušelo obecním, městským či zvláštním úřadům podle druhu záměru; návrh svěřuje tuto pravomoc úřadům rozvoje území a rozděluje příslušnost mezi celostátní a krajský úřad. Změna může sjednotit postup, ale sama o sobě nezvyšuje ani nesnižuje právní možnost vyvlastnění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-30",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není dostupný; nelze určit předchozí a nové znění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-31",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není k dispozici, a proto nelze určit změnu ani její dopad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Mění zákon o urychlení výstavby strategicky významné infrastruktury a jeho povolovací postupy.",
+          "effectCz": "Dříve se některé zvláštní postupy týkaly užšího okruhu dopravních staveb; schválené znění rozšiřuje jejich použití také na vyhrazené stavby a další druhy infrastruktury a mění postupy u některých souvisejících žádostí. Změny mohou urychlit určité povolovací kroky, ale nejsou důkazem realizace konkrétních staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Mění povolování silnic a parkovišť z hlediska ochrany ovzduší.",
+          "effectCz": "Dříve se pro některé silnice a parkoviště vyžadovala samostatná závazná stanoviska; návrh převádí část úkonů do řízení o povolení záměru. Zmenšuje počet oddělených kroků, avšak povinnost posoudit vliv záměru na ovzduší sama nezaniká."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": true,
+          "reasonCz": "Mění bezúplatné převody pozemků určených pro veřejně prospěšné a dopravní stavby.",
+          "effectCz": "Dříve zákon upravoval bezúplatné převody některých zemědělských pozemků obcím a krajům podle dosavadních územních kategorií; návrh přizpůsobuje převody novým kategoriím a pojmům povolení záměru. Zda se tím zvětšuje dostupnost pozemků pro dopravní stavby, nelze z dodaných změn spolehlivě určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-35",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není dostupný; nelze zjistit, jaká pravidla se mění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není k dispozici, takže nelze určit předchozí a navržené znění ani jeho dopad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není dostupný; směr a význam změny nelze posoudit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není dostupný, proto nelze určit, zda mění pravidla důležitá pro dopravní výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není v balíčku, takže nelze určit konkrétní změnu ani její směr."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím souvisejících pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text příslušného pozměňovacího návrhu není dostupný; nelze porovnat pravidla před změnou a po ní."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": false,
+          "reasonCz": "Upravuje pravidla pro povolování obnovitelných zdrojů energie, nikoli výstavbu dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-12",
+          "relevant": false,
+          "reasonCz": "Upravuje dokumentaci a zaměřování dokončených infrastrukturních staveb, nikoli jejich výstavbu či povolování.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-18",
+          "relevant": false,
+          "reasonCz": "Upravuje náhradu škody při soudním přezkumu opatření obecné povahy, nikoli postup výstavby dopravních projektů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-21",
+          "relevant": false,
+          "reasonCz": "Mění převody pozemků mezi státem a obcemi či kraji; dodané znění neukazuje změnu pravidel realizace dopravních staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-22",
+          "relevant": false,
+          "reasonCz": "Upravuje převody majetku mezi státem a kraji, nikoli přípravu nebo povolování dopravních staveb.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-23",
+          "relevant": false,
+          "reasonCz": "Upravuje převody majetku hlavního města Prahy, nikoli pravidla výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-27",
+          "relevant": false,
+          "reasonCz": "Mění působnost úřadu pro územní plánování v energetickém zákoně; dodané znění se netýká dopravních projektů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": false,
+          "reasonCz": "Mění dílčí pravidla vodovodů a kanalizací, ale nedokládá přímý dopad na klíčové dopravní stavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-39",
+          "relevant": false,
+          "reasonCz": "Mění rozdělení působnosti mezi úřady pro uznávání dalšího vzdělávání, což výstavbu dopravní infrastruktury neovlivňuje.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-41",
+          "relevant": false,
+          "reasonCz": "Dodané odstavce neobsahují žádné znění, podle něhož by bylo možné prokázat dopad na dopravní výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-51",
+          "relevant": false,
+          "reasonCz": "Upravuje přechodná pravidla pro posuzování vlivů na životní prostředí, ale dodané ustanovení neprokazuje dopad na konkrétní dopravní stavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-52",
+          "relevant": true,
+          "reasonCz": "Výslovně zahrnuje speciální dráhu do možnosti opakovaně prodlužovat platnost jejích stanovisek EIA.",
+          "effectCz": "Dřívější přechodné pravidlo dovolovalo opakované prodloužení stanovisek pro vyjmenované dálnice a železniční tratě, nikoli speciální dráhy; návrh tuto možnost rozšiřuje i na speciální dráhy a stanoví jejich platnost do konce roku 2026. Pro tento druh dopravní stavby je překážka časové platnosti volnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Prodlužuje lhůtu pro vložení havarijního plánu do systému hlášení, což se nedotýká výstavby dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Ruší část zákona o liniové výstavbě, ale její obsah v balíčku není rozpoznán, takže nelze vyloučit dopad na dopravní projekty.",
+          "effectCz": "Znění rušené části zákona ani její předchozí pravidla nejsou v balíčku dostupná; směr a rozsah dopadu nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-1",
+          "relevant": false,
+          "reasonCz": "Z dodaného záznamu vyplývá, že text této části nebyl vybrán, a není doloženo, že by měnil pravidla dopravních projektů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Umožňuje navýšit výdaje státního rozpočtu na financování výstavby dálnic, silnic, drah a vodní infrastruktury.",
+          "effectCz": "Dříve zákon o rozpočtových pravidlech takovou výjimku z výdajového rámce pro dopravní a vodní infrastrukturu neobsahoval; schválené znění dovoluje pro roky 2026–2036 zvýšit výdaje o příslušné infrastrukturní výdaje, včetně některých plateb za partnerství veřejného a soukromého sektoru. Zvyšuje možnost financování, ale samo neurčuje částku pro jednotlivé stavby ani nezaručuje jejich výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-3",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text části ani pozměňovacích návrhů není dostupný; nelze určit, co se mění a jaký je dopad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-4",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text části ani pozměňovacích návrhů není k dispozici; nelze porovnat dřívější a nové znění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-5",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text části ani pozměňovacích návrhů není dostupný, takže nelze určit dopad na slib."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-6",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text části ani pozměňovacích návrhů není k dispozici; nelze určit předchozí a navržené pravidlo."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-7",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text části ani souvisejících pozměňovacích návrhů není dostupný, proto nelze stanovit směr dopadu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text části ani souvisejících pozměňovacích návrhů není k dispozici; účinek na financování infrastruktury nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-9",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text části ani pozměňovacích návrhů není dostupný; nelze určit změnu ani její dopad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-10",
+          "relevant": true,
+          "reasonCz": "Balíček jej označuje za relevantní pouze prostřednictvím pozměňovacích návrhů, jejichž text zde není uveden.",
+          "effectCz": "Text rušících ustanovení ani jejich kontext není dostupný; nelze posoudit jejich vztah k infrastrukturnímu slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43201-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu dopravní infrastruktury přímo financuje dopravní výstavbu a uvádí konkrétní výdaje i odklady projektů.",
+          "effectCz": "Jako rozpočtový návrh nemá předchozí znění, s nímž by šlo porovnat změnu zákona. Uvádí výdaje 169,3 mld. Kč pro rok 2026, 76,6 mld. Kč pro rok 2027 a 79,9 mld. Kč pro rok 2028; zároveň popisuje odklady některých silničních a železničních akcí a prioritizaci prostředků. Jde o smíšený obraz, nikoli o důkaz, že se všechny klíčové projekty posunou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet obsahuje výdaje na dopravní infrastrukturu, ale dodaný výňatek neuvádí jejich částky.",
+          "effectCz": "Jde o nový státní rozpočet, takže nemá předchozí znění; dodaný text odkazuje na rozpis výdajů a ukazatele v přílohách, jejich částky však chybí. Z balíčku proto nelze zjistit, zda rozpočet zvyšuje či snižuje prostředky na dopravní projekty."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-168",
+          "relevant": false,
+          "reasonCz": "Jde o návrh budoucí změny liniového zákona, nikoli o rozhodnutí o konkrétním dopravním projektu; samotný záměr zákona projekt neposouvá.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-207",
+          "relevant": true,
+          "reasonCz": "Usnesení zahrnuje převod pozemků potřebných pro dopravní infrastrukturu v souvislosti s podnikatelským parkem Cheb.",
+          "effectCz": "Nové usnesení souhlasí s převodem státních pozemků, z nichž některé mají být použity pro dopravní infrastrukturu; předchozí znění není, protože jde o nové rozhodnutí. Připravuje půdu pro související infrastrukturu, ale text neprokazuje, že jde o klíčový dopravní projekt ve smyslu slibu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-217",
+          "relevant": true,
+          "reasonCz": "Schvaluje sjednání smlouvy o výstavbě a údržbě mostů a společných úseků silnic na česko-polské hranici.",
+          "effectCz": "Jde o novou smlouvu, takže nemá předchozí znění k porovnání. Usnesení pouze schvaluje její sjednání a vyžaduje další souhlas Parlamentu a ratifikaci; předpokládá tedy postup k výstavbě a údržbě, ale samo ji plně nedodává."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-375",
+          "relevant": false,
+          "reasonCz": "Usnesení se týká obranné půjčky SAFE a pouze zmiňuje blíže neurčený projekt duální dopravní infrastruktury.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-520",
+          "relevant": true,
+          "reasonCz": "Schvaluje dílčí územní rozvojový plán pro vysokorychlostní trať Praha, tedy konkrétní železniční infrastrukturu.",
+          "effectCz": "Jde o nově schválený územní plán, bez předchozího znění k porovnání; usnesení jej vydává formou opatření obecné povahy. Posouvá plánovací přípravu konkrétní železniční stavby, ale samo neznamená, že je trať postavena."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-691",
+          "relevant": true,
+          "reasonCz": "Schvaluje koncesionářskou smlouvu pro výstavbu a provoz dálnice D35 v úseku Opatovec–Mohelnice.",
+          "effectCz": "Jde o novou smlouvu, takže nemá předchozí znění k porovnání. Vláda ji schvaluje, ale ministerstvo ji může uzavřít až po souhlasu Poslanecké sněmovny s finančními závazky; jde tedy o konkrétní přípravný krok, nikoli o dokončenou výstavbu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-91b863691a39--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-2",
+        "psp-core-2025--law-change-43174-1-3",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-8-1",
+        "psp-core-2025--law-change-43174-8-3",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-14",
+        "psp-core-2025--law-change-43174-15",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-27",
+        "psp-core-2025--law-change-43174-29",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-34",
+        "psp-core-2025--law-change-43174-approved-52",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--law-change-43201-1",
+        "psp-core-2025--law-change-43204-1",
+        "zvlady-resolutions--law-change-uv-2026-207",
+        "zvlady-resolutions--law-change-uv-2026-217",
+        "zvlady-resolutions--law-change-uv-2026-520",
+        "zvlady-resolutions--law-change-uv-2026-691",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86962",
+        "psp-core-2025--amendment-text-1213",
+        "psp-core-2025--vote-88184",
+        "zvlady-resolutions--2026-207",
+        "zvlady-resolutions--2026-217",
+        "zvlady-resolutions--2026-520",
+        "zvlady-resolutions--2026-691"
+      ],
+      "explanationCz": "Poslanci SPD předložili se svými koaličními partnery návrh rozsáhlé novely stavebního zákona a vláda k němu vyslovila souhlas. Novela mění plánování a povolování infrastruktury a některé postupy může zjednodušit, ale sama nezajišťuje výstavbu konkrétních staveb. Po zamítnutí návrhu Senátem pro něj poslanci SPD hlasovali znovu a Sněmovna jej schválila. Vláda navíc schválila plánovací dokumentaci pro vysokorychlostní trať Praha a podmíněně schválila koncesní smlouvu pro úsek dálnice D35, což jsou další přípravné kroky.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U několika částí novely stavebního zákona a rozpočtového zákona balíček uvádí, že jsou relevantní pouze prostřednictvím pozměňovacích návrhů, jejichž text zde chybí; jejich skutečný dopad proto nelze posoudit.",
+        "Výňatek ze státního rozpočtu neobsahuje částky pro dopravní infrastrukturu. Návrh rozpočtu Státního fondu dopravní infrastruktury uvádí celkové výdaje, ale také odklady některých staveb; doložené hlasování o něm je pouze z prvního čtení.",
+        "Usnesení o dálnici D35 vyžaduje před podpisem smlouvy další souhlas Poslanecké sněmovny, takže nejde o dokončenou výstavbu. Usnesení o převodu pozemků v Chebu samo neprokazuje, že příslušná infrastruktura patří mezi klíčové dopravní projekty slíbené stranou."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "moving-towards",
+    "selectedReview": "assessor-a"
+  }
+}

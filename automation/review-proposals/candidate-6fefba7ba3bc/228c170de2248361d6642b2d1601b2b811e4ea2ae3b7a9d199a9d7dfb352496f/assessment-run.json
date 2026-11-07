@@ -1,0 +1,272 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T02-26-20-588Z--05825e187e7d",
+  "evaluatedAt": "2026-11-04T02:26:20.588Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-6fefba7ba3bc/05825e187e7dfca84d706279cf5cc3e3f1bd3c554d6c78c4b9776f1014bc6010.json",
+  "packageHash": "05825e187e7dfca84d706279cf5cc3e3f1bd3c554d6c78c4b9776f1014bc6010",
+  "assessmentContentHash": "5409d57d2dfd24ec78f19a71b64d62d723396e755b3f90b0eb3c5dc79f2a0356",
+  "assessmentFingerprint": "228c170de2248361d6642b2d1601b2b811e4ea2ae3b7a9d199a9d7dfb352496f",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-6fefba7ba3bc",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-6fefba7ba3bc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43191-1",
+          "relevant": false,
+          "reasonCz": "Dodané části mění podmínky nároku na starobní důchod a související odkazy, nikoli slíbenou výši přírůstku za odpracovaný rok ani každoroční automatický přepočet.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-1",
+          "relevant": true,
+          "reasonCz": "Návrh přímo zavádí každoroční zvýšení důchodu za výdělečnou činnost po vzniku nároku na důchod.",
+          "effectCz": "Dosavadní § 67ab upravoval zvýšení při dosažení věku 85 a 100 let; nový § 67ac nemá v dodaném kontextu předchozí znění a zavádí od ledna každoroční zvýšení pro lidi, kteří pracují a současně pobírají důchod v plné výši. Výpočet používá součin koeficientu 1,5 a podílu dnů práce v určeném období, nikoli výslovně 1,5 % vyměřovacího základu za každý celý odpracovaný rok; u samostatné výdělečné činnosti je navíc nutná písemná žádost. Návrh tedy přibližuje každoroční zvýšení, ale nepokrývá celý slib a jeho pravidla jsou užší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": true,
+          "reasonCz": "Změna upravuje administrativní postup pro zvýšení podle nového § 67ac, které návrh počítá provádět každoročně.",
+          "effectCz": "Dosavadní § 86 odst. 2 vylučoval písemné rozhodnutí při hromadném zvyšování důchodů a § 86a upravoval oznamování těchto zvýšení. Návrh výslovně zahrnuje zvýšení podle § 67ac do tohoto postupu a upravuje návazné ustanovení o oznámení; jde o rozšíření administrativního režimu, nikoli o změnu výše přírůstku. Samotná změna neodstraňuje požadavek písemné žádosti pro samostatně výdělečně činné osoby podle navrženého § 67ac."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-57",
+          "relevant": true,
+          "reasonCz": "Vládní legislativní plán výslovně počítá s návrhem na posílení příjmů starobních důchodců, kteří po přiznání důchodu dále pracují.",
+          "effectCz": "Jde o plánovaný návrh zákona, nikoli o změnu již platného pravidla; předchozí znění proto není. Text uvádí záměr posílit příjmy pracujících důchodců, ale nestanoví slíbených 1,5 % vyměřovacího základu za každý rok ani každoroční přepočet bez žádosti."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6fefba7ba3bc--source",
+        "psp-core-2025--law-change-43392-1",
+        "psp-core-2025--law-change-43392-2",
+        "zvlady-resolutions--law-change-uv-2026-175-57",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211955"
+      ],
+      "explanationCz": "Vláda v březnu zařadila do legislativního plánu přípravu zákona na podporu příjmů důchodců, kteří dál pracují. V červenci pak předložila návrh zákona, který počítá s každoročním zvýšením důchodu podle doby výdělečné činnosti. Jde o dílčí posun: návrh nezakládá výslovně slíbených 1,5 % vyměřovacího základu za každý celý odpracovaný rok a osoby samostatně výdělečně činné mají o zvýšení žádat. V dodaných podkladech jde zatím o návrh, nikoli o přijaté pravidlo.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady zachycují legislativní návrh, ale neukazují, zda byl později schválen nebo zda se podle něj zvýšení skutečně provádí."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-6fefba7ba3bc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43191-1",
+          "relevant": true,
+          "reasonCz": "Mění podmínky nároku na starobní důchod a odkazy na ně v pravidlech pro zvýšení důchodu při práci po vzniku nároku, takže se může dotknout okruhu příjemců zvýšení.",
+          "effectCz": "Dosavadní znění § 34 přiznávalo při splnění stanovených podmínek zvýšení o 1,5 % výpočtového základu za každých 90 či 180 dnů, případně za celý rok; návrh sazbu v předložených odstavcích nemění, ale mění nárokové cesty podle § 29 a odstraňuje či upravuje odkazy na některé z nich. Z poskytnutých znění nelze určit, zda se tím okruh osob s nárokem na zvýšení rozšíří, nebo zúží; návrh také nezavádí každoroční automatický přepočet bez žádosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-1",
+          "relevant": true,
+          "reasonCz": "Navrhuje nové zvýšení důchodu za výdělečnou činnost po vzniku nároku na důchod, což přímo odpovídá části slibu o navyšování důchodu za práci ve stáří.",
+          "effectCz": "Nové pravidlo by od ledna každého roku zvýšilo procentní výměru u osoby, která pracuje po vzniku nároku na výplatu důchodu a pobírá plný starobní důchod; výše se vypočte koeficientem 1,5 násobeným podílem odpracovaných dnů v rozhodném období. Jde o zvýšení odpovídající 1,5 % za celý rok práce, ale jen pro vymezenou skupinu; u samostatné výdělečné činnosti návrh vyžaduje písemnou žádost. Návrh tedy část slibu uskutečňuje, ale nepokrývá jeho úplný rozsah a v případě žádosti OSVČ odporuje slibu automatického přepočtu bez žádosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": true,
+          "reasonCz": "Upravuje správní postup pro zvýšení podle nově navrženého pravidla, a tím se týká slibovaného pravidelného přepočtu.",
+          "effectCz": "Dosavadní úprava umožňovala nezasílat písemné rozhodnutí při hromadném zvyšování důchodů a stanovila způsob informování; návrh rozšiřuje tento postup také na zvýšení podle nového § 67ac a upravuje tomu odpovídající oznamování. Rozšiřuje tak administrativní cestu pro automatické zpracování zvýšení, samo ustanovení však nezaručuje přepočet pro všechny pracující seniory ani neodstraňuje zvláštní žádost OSVČ."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-57",
+          "relevant": true,
+          "reasonCz": "Plán vlády výslovně počítá s návrhem zákona zaměřeným mimo jiné na zvýšení příjmů starobních důchodců, kteří zůstávají výdělečně činní.",
+          "effectCz": "Usnesení nestanoví nové pravidlo ani částku; plánuje přípravu návrhu zákona s cílem posílit příjmy důchodců, kteří po přiznání důchodu dále pracují. Téma se částečně shoduje se slibem, ale plán neobsahuje závazek zvýšení o 1,5 % za každý rok ani automatického přepočtu bez žádosti."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6fefba7ba3bc--source",
+        "psp-core-2025--law-change-43191-1",
+        "psp-core-2025--government-opinion-43191-1",
+        "psp-core-2025--law-change-43392-1",
+        "psp-core-2025--law-change-43392-2",
+        "zvlady-resolutions--law-change-uv-2026-175-57",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211955"
+      ],
+      "explanationCz": "V březnu vláda zařadila do plánu přípravu novely, která má mimo jiné posílit příjmy důchodců, kteří dál pracují; šlo o plán, nikoli o zavedené zvýšení. V červenci vláda předložila návrh zákona, podle něhož by se důchod pracujícím příjemcům plného starobního důchodu zvyšoval každý rok podle odpracovaných dnů. Návrh však omezuje zvýšení na vymezenou skupinu a u samostatně výdělečných osob vyžaduje žádost, takže nesplňuje celý slib automatického přepočtu bez žádosti. Návrh zároveň rozšiřuje správní postup pro automatické zpracování zvýšení. Z podkladů není doloženo, že by byl návrh přijat.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Vláda nesouhlasila s jiným návrhem, který měnil také podmínky nároku na zvýšení důchodu při práci; z poskytnutých znění nelze určit, zda by tyto změny okruh příjemců rozšířily, nebo zúžily.",
+        "Předložená novela je pouze návrhem; podklady nedokládají její následné schválení ani konečné znění."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0ac0f5c891f367de016aea96c6c64487d1891efae542b298a4",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 18368,
+      "input_tokens_details": {
+        "cache_write_tokens": 12018,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 5444,
+      "output_tokens_details": {
+        "reasoning_tokens": 4279
+      },
+      "total_tokens": 23812
+    },
+    "output": {
+      "promiseId": "candidate-6fefba7ba3bc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43191-1",
+          "relevant": false,
+          "reasonCz": "Dodané části mění podmínky nároku na starobní důchod a související odkazy, nikoli slíbenou výši přírůstku za odpracovaný rok ani každoroční automatický přepočet.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-1",
+          "relevant": true,
+          "reasonCz": "Návrh přímo zavádí každoroční zvýšení důchodu za výdělečnou činnost po vzniku nároku na důchod.",
+          "effectCz": "Dosavadní § 67ab upravoval zvýšení při dosažení věku 85 a 100 let; nový § 67ac nemá v dodaném kontextu předchozí znění a zavádí od ledna každoroční zvýšení pro lidi, kteří pracují a současně pobírají důchod v plné výši. Výpočet používá součin koeficientu 1,5 a podílu dnů práce v určeném období, nikoli výslovně 1,5 % vyměřovacího základu za každý celý odpracovaný rok; u samostatné výdělečné činnosti je navíc nutná písemná žádost. Návrh tedy přibližuje každoroční zvýšení, ale nepokrývá celý slib a jeho pravidla jsou užší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": true,
+          "reasonCz": "Změna upravuje administrativní postup pro zvýšení podle nového § 67ac, které návrh počítá provádět každoročně.",
+          "effectCz": "Dosavadní § 86 odst. 2 vylučoval písemné rozhodnutí při hromadném zvyšování důchodů a § 86a upravoval oznamování těchto zvýšení. Návrh výslovně zahrnuje zvýšení podle § 67ac do tohoto postupu a upravuje návazné ustanovení o oznámení; jde o rozšíření administrativního režimu, nikoli o změnu výše přírůstku. Samotná změna neodstraňuje požadavek písemné žádosti pro samostatně výdělečně činné osoby podle navrženého § 67ac."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-57",
+          "relevant": true,
+          "reasonCz": "Vládní legislativní plán výslovně počítá s návrhem na posílení příjmů starobních důchodců, kteří po přiznání důchodu dále pracují.",
+          "effectCz": "Jde o plánovaný návrh zákona, nikoli o změnu již platného pravidla; předchozí znění proto není. Text uvádí záměr posílit příjmy pracujících důchodců, ale nestanoví slíbených 1,5 % vyměřovacího základu za každý rok ani každoroční přepočet bez žádosti."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6fefba7ba3bc--source",
+        "psp-core-2025--law-change-43392-1",
+        "psp-core-2025--law-change-43392-2",
+        "zvlady-resolutions--law-change-uv-2026-175-57",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211955"
+      ],
+      "explanationCz": "Vláda v březnu zařadila do legislativního plánu přípravu zákona na podporu příjmů důchodců, kteří dál pracují. V červenci pak předložila návrh zákona, který počítá s každoročním zvýšením důchodu podle doby výdělečné činnosti. Jde o dílčí posun: návrh nezakládá výslovně slíbených 1,5 % vyměřovacího základu za každý celý odpracovaný rok a osoby samostatně výdělečně činné mají o zvýšení žádat. V dodaných podkladech jde zatím o návrh, nikoli o přijaté pravidlo.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady zachycují legislativní návrh, ale neukazují, zda byl později schválen nebo zda se podle něj zvýšení skutečně provádí."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_048553e34908ccc8016aea9730fc5c87d19712771e8a660d16",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 18368,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 18365
+      },
+      "output_tokens": 8077,
+      "output_tokens_details": {
+        "reasoning_tokens": 6644
+      },
+      "total_tokens": 26445
+    },
+    "output": {
+      "promiseId": "candidate-6fefba7ba3bc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43191-1",
+          "relevant": true,
+          "reasonCz": "Mění podmínky nároku na starobní důchod a odkazy na ně v pravidlech pro zvýšení důchodu při práci po vzniku nároku, takže se může dotknout okruhu příjemců zvýšení.",
+          "effectCz": "Dosavadní znění § 34 přiznávalo při splnění stanovených podmínek zvýšení o 1,5 % výpočtového základu za každých 90 či 180 dnů, případně za celý rok; návrh sazbu v předložených odstavcích nemění, ale mění nárokové cesty podle § 29 a odstraňuje či upravuje odkazy na některé z nich. Z poskytnutých znění nelze určit, zda se tím okruh osob s nárokem na zvýšení rozšíří, nebo zúží; návrh také nezavádí každoroční automatický přepočet bez žádosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-1",
+          "relevant": true,
+          "reasonCz": "Navrhuje nové zvýšení důchodu za výdělečnou činnost po vzniku nároku na důchod, což přímo odpovídá části slibu o navyšování důchodu za práci ve stáří.",
+          "effectCz": "Nové pravidlo by od ledna každého roku zvýšilo procentní výměru u osoby, která pracuje po vzniku nároku na výplatu důchodu a pobírá plný starobní důchod; výše se vypočte koeficientem 1,5 násobeným podílem odpracovaných dnů v rozhodném období. Jde o zvýšení odpovídající 1,5 % za celý rok práce, ale jen pro vymezenou skupinu; u samostatné výdělečné činnosti návrh vyžaduje písemnou žádost. Návrh tedy část slibu uskutečňuje, ale nepokrývá jeho úplný rozsah a v případě žádosti OSVČ odporuje slibu automatického přepočtu bez žádosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": true,
+          "reasonCz": "Upravuje správní postup pro zvýšení podle nově navrženého pravidla, a tím se týká slibovaného pravidelného přepočtu.",
+          "effectCz": "Dosavadní úprava umožňovala nezasílat písemné rozhodnutí při hromadném zvyšování důchodů a stanovila způsob informování; návrh rozšiřuje tento postup také na zvýšení podle nového § 67ac a upravuje tomu odpovídající oznamování. Rozšiřuje tak administrativní cestu pro automatické zpracování zvýšení, samo ustanovení však nezaručuje přepočet pro všechny pracující seniory ani neodstraňuje zvláštní žádost OSVČ."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-57",
+          "relevant": true,
+          "reasonCz": "Plán vlády výslovně počítá s návrhem zákona zaměřeným mimo jiné na zvýšení příjmů starobních důchodců, kteří zůstávají výdělečně činní.",
+          "effectCz": "Usnesení nestanoví nové pravidlo ani částku; plánuje přípravu návrhu zákona s cílem posílit příjmy důchodců, kteří po přiznání důchodu dále pracují. Téma se částečně shoduje se slibem, ale plán neobsahuje závazek zvýšení o 1,5 % za každý rok ani automatického přepočtu bez žádosti."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6fefba7ba3bc--source",
+        "psp-core-2025--law-change-43191-1",
+        "psp-core-2025--government-opinion-43191-1",
+        "psp-core-2025--law-change-43392-1",
+        "psp-core-2025--law-change-43392-2",
+        "zvlady-resolutions--law-change-uv-2026-175-57",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211955"
+      ],
+      "explanationCz": "V březnu vláda zařadila do plánu přípravu novely, která má mimo jiné posílit příjmy důchodců, kteří dál pracují; šlo o plán, nikoli o zavedené zvýšení. V červenci vláda předložila návrh zákona, podle něhož by se důchod pracujícím příjemcům plného starobního důchodu zvyšoval každý rok podle odpracovaných dnů. Návrh však omezuje zvýšení na vymezenou skupinu a u samostatně výdělečných osob vyžaduje žádost, takže nesplňuje celý slib automatického přepočtu bez žádosti. Návrh zároveň rozšiřuje správní postup pro automatické zpracování zvýšení. Z podkladů není doloženo, že by byl návrh přijat.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Vláda nesouhlasila s jiným návrhem, který měnil také podmínky nároku na zvýšení důchodu při práci; z poskytnutých znění nelze určit, zda by tyto změny okruh příjemců rozšířily, nebo zúžily.",
+        "Předložená novela je pouze návrhem; podklady nedokládají její následné schválení ani konečné znění."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

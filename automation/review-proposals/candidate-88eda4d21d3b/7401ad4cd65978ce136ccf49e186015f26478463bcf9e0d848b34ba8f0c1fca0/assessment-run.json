@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-50-18-958Z--ef0be41c6381",
+  "evaluatedAt": "2026-10-02T01:50:18.958Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-88eda4d21d3b/ef0be41c6381afa36aae6ab651276534c9c8289d49bbbe6b51a13d7e1b233bd6.json",
+  "packageHash": "ef0be41c6381afa36aae6ab651276534c9c8289d49bbbe6b51a13d7e1b233bd6",
+  "assessmentContentHash": "d473086f75bfee625a2a211056adcb6d46b6d1184cd92632325673ea6d2c0ad6",
+  "assessmentFingerprint": "7401ad4cd65978ce136ccf49e186015f26478463bcf9e0d848b34ba8f0c1fca0",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-88eda4d21d3b",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-88eda4d21d3b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Změna stanoví, že finanční saldo zdravotních pojišťoven bude závazné při určování úhrad hrazených služeb a regulačních omezení, a tím se přímo dotýká financování hrazené péče, byť sama výslovně nemění její rozsah ani limity spoluúčasti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": false,
+          "reasonCz": "Ustanovení se týkají zdravotních služeb a jejich úhrady pro zajištěné cizince, nikoli zachování rozsahu běžně hrazené péče nebo limitů spoluúčasti chronicky nemocných, dětí a seniorů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-88eda4d21d3b--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Vláda předložila návrh změny rozpočtových pravidel a poslanci Motoristů jej při hlasování ve třetím čtení podpořili; ustanovení váže rozhodování o úhradách zdravotních služeb na finanční saldo pojišťoven. Text ale výslovně nemění rozsah plně hrazené péče ani ochranné limity spoluúčasti, takže z něj nelze doložit posun ke splnění slibu ani jeho porušení. Při pozdějším hlasování po vrácení zákona prezidentem Motoristé rovněž hlasovali pro jeho setrvání, přesné znění tehdy rozhodované verze však v podkladech chybí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Přesné znění textu, o němž se hlasovalo po vrácení zákona prezidentem, není zveřejněno v dodaných podkladech. Nelze proto ověřit, zda se tehdy změnila ustanovení o úhradách zdravotních služeb; dostupný text a senátní pozměňovací návrhy takovou změnu nedokládají."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-88eda4d21d3b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Změna stanoví, že saldo zdravotních pojišťoven bude závazné pro ministerstvo při určování úhrad hrazených služeb, a tím se přímo dotýká podmínek financování hrazené péče, přestože sama nemění její rozsah ani limity spoluúčasti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": false,
+          "reasonCz": "Ustanovení o zdravotních službách se týkají cizinců v konkrétních situacích zajištění či vycestování, nikoli rozsahu péče hrazené z veřejného zdravotního pojištění ani limitů spoluúčasti pro skupiny uvedené ve slibu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-88eda4d21d3b--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Vláda předložila změnu pravidel rozpočtové odpovědnosti, podle níž bude saldo zdravotních pojišťoven závazné pro ministerstvo při určování úhrad hrazených služeb. Poslanci Motoristů sobě návrh podpořili při schválení i při pozdějších hlasováních o jeho osudu. Předložené znění však samo nemění rozsah plně hrazené péče ani ochranné limity spoluúčasti, takže doložený posun ve slibu zatím není. Návrh nového cizineckého zákona upravuje zdravotní služby pro cizince v odlišných situacích, a proto se tohoto slibu netýká.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z podkladů nelze určit, zda závaznost salda zdravotních pojišťoven později ovlivní dostupnost konkrétních hrazených služeb, jejich úhrady nebo spoluúčast pacientů."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0d7ca948c6111420016abf0dadf45487d186535a41cf3c4503",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 104047,
+      "input_tokens_details": {
+        "cache_write_tokens": 100723,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 3044,
+      "output_tokens_details": {
+        "reasoning_tokens": 2455
+      },
+      "total_tokens": 107091
+    },
+    "output": {
+      "promiseId": "candidate-88eda4d21d3b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Změna stanoví, že finanční saldo zdravotních pojišťoven bude závazné při určování úhrad hrazených služeb a regulačních omezení, a tím se přímo dotýká financování hrazené péče, byť sama výslovně nemění její rozsah ani limity spoluúčasti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": false,
+          "reasonCz": "Ustanovení se týkají zdravotních služeb a jejich úhrady pro zajištěné cizince, nikoli zachování rozsahu běžně hrazené péče nebo limitů spoluúčasti chronicky nemocných, dětí a seniorů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-88eda4d21d3b--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Vláda předložila návrh změny rozpočtových pravidel a poslanci Motoristů jej při hlasování ve třetím čtení podpořili; ustanovení váže rozhodování o úhradách zdravotních služeb na finanční saldo pojišťoven. Text ale výslovně nemění rozsah plně hrazené péče ani ochranné limity spoluúčasti, takže z něj nelze doložit posun ke splnění slibu ani jeho porušení. Při pozdějším hlasování po vrácení zákona prezidentem Motoristé rovněž hlasovali pro jeho setrvání, přesné znění tehdy rozhodované verze však v podkladech chybí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Přesné znění textu, o němž se hlasovalo po vrácení zákona prezidentem, není zveřejněno v dodaných podkladech. Nelze proto ověřit, zda se tehdy změnila ustanovení o úhradách zdravotních služeb; dostupný text a senátní pozměňovací návrhy takovou změnu nedokládají."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_07b1a6c04b37ce0b016abf0dc5415887d19d58ce724bad7f48",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 104047,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 104044
+      },
+      "output_tokens": 2930,
+      "output_tokens_details": {
+        "reasoning_tokens": 2305
+      },
+      "total_tokens": 106977
+    },
+    "output": {
+      "promiseId": "candidate-88eda4d21d3b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Změna stanoví, že saldo zdravotních pojišťoven bude závazné pro ministerstvo při určování úhrad hrazených služeb, a tím se přímo dotýká podmínek financování hrazené péče, přestože sama nemění její rozsah ani limity spoluúčasti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": false,
+          "reasonCz": "Ustanovení o zdravotních službách se týkají cizinců v konkrétních situacích zajištění či vycestování, nikoli rozsahu péče hrazené z veřejného zdravotního pojištění ani limitů spoluúčasti pro skupiny uvedené ve slibu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-88eda4d21d3b--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Vláda předložila změnu pravidel rozpočtové odpovědnosti, podle níž bude saldo zdravotních pojišťoven závazné pro ministerstvo při určování úhrad hrazených služeb. Poslanci Motoristů sobě návrh podpořili při schválení i při pozdějších hlasováních o jeho osudu. Předložené znění však samo nemění rozsah plně hrazené péče ani ochranné limity spoluúčasti, takže doložený posun ve slibu zatím není. Návrh nového cizineckého zákona upravuje zdravotní služby pro cizince v odlišných situacích, a proto se tohoto slibu netýká.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z podkladů nelze určit, zda závaznost salda zdravotních pojišťoven později ovlivní dostupnost konkrétních hrazených služeb, jejich úhrady nebo spoluúčast pacientů."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "no-progress",
+    "selectedReview": "assessor-b"
+  }
+}

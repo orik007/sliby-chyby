@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T01-57-29-596Z--c0ccb6f42184",
+  "evaluatedAt": "2026-11-04T01:57:29.596Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-1566af24f982/c0ccb6f42184fa82d9241311e50c3bc0479f1d68e5885c9011f960e03b0ba016.json",
+  "packageHash": "c0ccb6f42184fa82d9241311e50c3bc0479f1d68e5885c9011f960e03b0ba016",
+  "assessmentContentHash": "a38ec1c88941b4cbceb188d622c42e92d0b0a7e99a87903561390f8f9a2fc342",
+  "assessmentFingerprint": "31c9dc8b0feb8547cef4ece1ce37ffbd11c404b2aa8436fceed2fcc7e5d8be02",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-1566af24f982",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-1566af24f982",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-41",
+          "relevant": true,
+          "reasonCz": "Úkol se týká návrhu zákona o bankách a směrnice EU měnící rozsah ochrany vkladů, tedy oblasti přímo spojené s pojištěním vkladů slíbeným stranou.",
+          "effectCz": "Usnesení nestanoví nové znění zákona ani nemění dosavadní pravidla; zadává úkol připravit návrh zákona o bankách a transponovat směrnici týkající se mimo jiné rozsahu ochrany vkladů. Neurčuje, zda se ochrana rozšíří ani zda bude pro mimořádné situace bez horního limitu, takže směr změny oproti dosavadnímu stavu nelze z balíčku určit."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-1566af24f982--source",
+        "zvlady-resolutions--law-change-uv-2026-175-41",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Volební program ANO slibuje větší ochranu úschovních účtů a pojištění prostředků na běžných účtech bez horního limitu pro zákonem předvídané mimořádné situace. Vláda přijala usnesení, jehož plán legislativních prací ukládá připravit návrh zákona o bankách a transponovat směrnici týkající se mimo jiné rozsahu ochrany vkladů. Samotné usnesení ale neříká, zda se ochrana rozšíří nebo zda vznikne pojištění bez horního limitu, a proto nelze doložit posun ke splnění slibu. Balíček neobsahuje konkrétní návrh právní úpravy ani podrobnosti směrnice, takže její zamýšlený účinek zůstává nejasný.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Plán legislativních prací uvádí směrnici týkající se rozsahu ochrany vkladů, ale balíček neobsahuje její konkrétní obsah ani návrh zákona; nelze proto zjistit, zda připravované změny slibované pojištění rozšíří, omezí, nebo ponechají beze změny."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-1566af24f982",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-41",
+          "relevant": true,
+          "reasonCz": "Plán výslovně počítá s návrhem nového zákona o bankách a s převzetím unijní úpravy, která se týká rozsahu ochrany vkladů, tedy oblasti slibu.",
+          "effectCz": "Usnesení nemění platná pravidla pojištění vkladů; ukládá jako budoucí legislativní úkol připravit nový zákon o bankách a transponovat unijní směrnici týkající se mimo jiné rozsahu ochrany vkladů. Nezakládá pojištění bez horního limitu ani neurčuje, zda se ochrana rozšíří či zúží."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-1566af24f982--source",
+        "zvlady-resolutions--law-change-uv-2026-175-41",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení č. 175/2026, kterým zařadila přípravu nového zákona o bankách mezi legislativní úkoly. Plán uvádí také převzetí unijní směrnice týkající se rozsahu ochrany vkladů. Jde o přípravu budoucí právní úpravy, nikoli o změnu pojištění vkladů; usnesení neslibuje neomezené krytí mimořádných situací ani neříká, že se ochrana rozšíří. Proto zatím není doložen podstatný posun k tomuto slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z plánu nelze zjistit, jaká pravidla připravovaný zákon nakonec navrhne ani zda rozšíří pojištění vkladů bez horního limitu pro mimořádné situace."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0adbae683dede2b0016aea90dc7f8487d186a7547e878969bf",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8345,
+      "input_tokens_details": {
+        "cache_write_tokens": 1995,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 1646,
+      "output_tokens_details": {
+        "reasoning_tokens": 1034
+      },
+      "total_tokens": 9991
+    },
+    "output": {
+      "promiseId": "candidate-1566af24f982",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-41",
+          "relevant": true,
+          "reasonCz": "Úkol se týká návrhu zákona o bankách a směrnice EU měnící rozsah ochrany vkladů, tedy oblasti přímo spojené s pojištěním vkladů slíbeným stranou.",
+          "effectCz": "Usnesení nestanoví nové znění zákona ani nemění dosavadní pravidla; zadává úkol připravit návrh zákona o bankách a transponovat směrnici týkající se mimo jiné rozsahu ochrany vkladů. Neurčuje, zda se ochrana rozšíří ani zda bude pro mimořádné situace bez horního limitu, takže směr změny oproti dosavadnímu stavu nelze z balíčku určit."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-1566af24f982--source",
+        "zvlady-resolutions--law-change-uv-2026-175-41",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Volební program ANO slibuje větší ochranu úschovních účtů a pojištění prostředků na běžných účtech bez horního limitu pro zákonem předvídané mimořádné situace. Vláda přijala usnesení, jehož plán legislativních prací ukládá připravit návrh zákona o bankách a transponovat směrnici týkající se mimo jiné rozsahu ochrany vkladů. Samotné usnesení ale neříká, zda se ochrana rozšíří nebo zda vznikne pojištění bez horního limitu, a proto nelze doložit posun ke splnění slibu. Balíček neobsahuje konkrétní návrh právní úpravy ani podrobnosti směrnice, takže její zamýšlený účinek zůstává nejasný.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Plán legislativních prací uvádí směrnici týkající se rozsahu ochrany vkladů, ale balíček neobsahuje její konkrétní obsah ani návrh zákona; nelze proto zjistit, zda připravované změny slibované pojištění rozšíří, omezí, nebo ponechají beze změny."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0f52b383c0ac3bf3016aea90f1d7b487d1b1d8ebd89fc8f811",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8345,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8342
+      },
+      "output_tokens": 1815,
+      "output_tokens_details": {
+        "reasoning_tokens": 1300
+      },
+      "total_tokens": 10160
+    },
+    "output": {
+      "promiseId": "candidate-1566af24f982",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-41",
+          "relevant": true,
+          "reasonCz": "Plán výslovně počítá s návrhem nového zákona o bankách a s převzetím unijní úpravy, která se týká rozsahu ochrany vkladů, tedy oblasti slibu.",
+          "effectCz": "Usnesení nemění platná pravidla pojištění vkladů; ukládá jako budoucí legislativní úkol připravit nový zákon o bankách a transponovat unijní směrnici týkající se mimo jiné rozsahu ochrany vkladů. Nezakládá pojištění bez horního limitu ani neurčuje, zda se ochrana rozšíří či zúží."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-1566af24f982--source",
+        "zvlady-resolutions--law-change-uv-2026-175-41",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení č. 175/2026, kterým zařadila přípravu nového zákona o bankách mezi legislativní úkoly. Plán uvádí také převzetí unijní směrnice týkající se rozsahu ochrany vkladů. Jde o přípravu budoucí právní úpravy, nikoli o změnu pojištění vkladů; usnesení neslibuje neomezené krytí mimořádných situací ani neříká, že se ochrana rozšíří. Proto zatím není doložen podstatný posun k tomuto slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z plánu nelze zjistit, jaká pravidla připravovaný zákon nakonec navrhne ani zda rozšíří pojištění vkladů bez horního limitu pro mimořádné situace."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "no-progress",
+    "selectedReview": "assessor-b"
+  }
+}

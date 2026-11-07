@@ -1,0 +1,440 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-30-02-888Z--a8d01f92cc1c",
+  "evaluatedAt": "2026-11-05T10:30:02.888Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-dde88f17fe50/a8d01f92cc1c4a36d810abec7ad0b682749c89543257b5a75b2d937669dec7a5.json",
+  "packageHash": "a8d01f92cc1c4a36d810abec7ad0b682749c89543257b5a75b2d937669dec7a5",
+  "assessmentContentHash": "145b09276a6ee8ca5a3d38636e9c178d409a2fab6785f4db17e8ce5c58cf143c",
+  "assessmentFingerprint": "68841299747f8f22db32e9c80728973b2e7dbc1ea36da11652e9e13732db4ad3",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-dde88f17fe50",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_000a9a29be40f3fc016aec5a1c8ce087d1a5b863a7c556b9fe",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 56532,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 56529
+            },
+            "output_tokens": 7212,
+            "output_tokens_details": {
+              "reasoning_tokens": 5416
+            },
+            "total_tokens": 63744
+          },
+          "output": {
+            "promiseId": "candidate-dde88f17fe50",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-6",
+                "relevant": true,
+                "reasonCz": "V obou verzích mění posuzování staveb v území předem určeném k zástavbě, včetně posuzování podmínek odnětí zemědělské půdy.",
+                "effectCz": "Dosavadní § 193 stavebního zákona vyžadoval celkové posouzení souladu záměru, mimo jiné s požadavky jiných zákonů chránících veřejné zájmy; původní znění § 194 v podkladu chybí. Navržený § 193a odst. 4 by v již vymezeném zastavitelném území vyloučil posuzování podmínek odnětí půdy. Schválené znění jde dále: u záměrů v zastavitelném území či koridoru zavádí domněnku přípustnosti a v územích vymezených se souhlasem orgánu ochrany půdy vylučuje posuzování zásad plošné ochrany podle zákona o ochraně zemědělského půdního fondu. Oproti obecnému posuzování podle § 193 jde o uvolnění ochrany a snazší odnímání půdy; směr změny dřívějšího § 194 nelze z balíčku ověřit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Mění přímo podmínky ochrany půdy, souhlasy a výjimky při jejím odnímání ze zemědělského půdního fondu.",
+                "effectCz": "Dřívější § 4 odst. 1 dovoloval změnu využití nebo odnětí půdy jen v nezbytném odůvodněném případě a stanovil zásady její ochrany; u nejkvalitnější půdy § 4 odst. 3 vyžadoval výrazně převažující jiný veřejný zájem. Schválené znění zachovává některá omezení, ale rozšiřuje výjimky z ochrany, mimo jiné pro záměry u vybraných dopravních staveb a dočasné solární záměry, a v územích předem vymezených se stanoviskem orgánu ochrany půdy vylučuje posuzování zásad plošné ochrany. Rozšiřuje také případy, kdy není třeba souhlasu, a u povolovaných staveb přesouvá jeho posouzení do rozhodnutí stavebního úřadu. Současně některé části ochranu zpřísňují nebo zachovávají, například omezení výjimky pro strategické investice; nové osvobození staveb v prolukách od odvodů však snižuje finanční překážku odnětí. Celkový směr relevantních změn je smíšený, s významným uvolněním pravidel pro část záměrů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": true,
+                "reasonCz": "Mění, kdo navrhuje podmínky pro odnětí zemědělské půdy v akceleračních oblastech pro obnovitelné zdroje.",
+                "effectCz": "Předchozí § 13 svěřoval návrh podmínek pro případné odnětí příslušnému krajskému orgánu; schválené znění v případech, kdy akcelerační oblast zahrnuje zemědělskou půdu, svěřuje návrh podmínek stavebnímu úřadu. Text neurčuje přísnější ani mírnější věcné standardy, takže z balíčku nelze určit, zda se samotná ochrana půdy zpřísňuje, nebo oslabuje."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-162",
+                "relevant": true,
+                "reasonCz": "Plán výslovně stanoví přípravu právní úpravy, jejímž cílem je zavést přísnější pravidla pro odnímání zemědělské půdy, tedy přesně směřuje k příslibu.",
+                "effectCz": "Nejde o změnu existujícího zákona, ale o plán přípravy nové právní úpravy. Vláda stanovila cíl zavést přísnější pravidla a předložení návrhu vládě ve 4. čtvrtletí 2027; samotný plán však nová pravidla nezavádí."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-dde88f17fe50--source",
+              "psp-core-2025--law-change-43174-1-6",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--law-change-43174-42",
+              "zvlady-resolutions--law-change-uv-2026-175-162",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "zvlady-resolutions--2026-175",
+              "psp-core-2025--amendment-1173",
+              "psp-core-2025--amendment-text-1173",
+              "psp-core-2025--amendment-1174",
+              "psp-core-2025--amendment-text-1174",
+              "psp-core-2025--amendment-1175",
+              "psp-core-2025--amendment-text-1175",
+              "psp-core-2025--amendment-1290",
+              "psp-core-2025--amendment-text-1290",
+              "psp-core-2025--amendment-text-1243",
+              "psp-core-2025--amendment-text-1234",
+              "psp-core-2025--vote-88144",
+              "psp-core-2025--vote-88150",
+              "psp-core-2025--vote-88167",
+              "psp-core-2025--vote-88210",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454"
+            ],
+            "explanationCz": "Poslanci ANO předložili návrh na změnu stavebního zákona a dalších zákonů (sněmovní tisk 67), který v některých případech usnadňuje odnímání zemědělské půdy a omezuje posuzování její ochrany. Vláda s návrhem souhlasila a poslanci ANO jej ve Sněmovně podpořili; po zamítnutí Senátem hlasovali také pro to, aby Sněmovna na návrhu setrvala. Některé části návrhu ochranu zpřísňují a ANO podpořilo i návrhy na omezení některých výjimek, celkově však schválená podoba obsahuje významná uvolnění pravidel. Vláda zároveň naplánovala přípravu nové úpravy, která má přísnější pravidla zavést, ale jde zatím jen o budoucí návrh.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Návrh obsahuje zároveň změny ochranu půdy zpřísňující i změny, které ji oslabují; konečné hodnocení proto vychází z toho, že uvolnění pravidel zasahuje přímo do příslibu, ale nejde o jednoznačně stejný účinek každého ustanovení.",
+              "U změny pravidel pro akcelerační oblasti se mění orgán navrhující podmínky, avšak poskytnutý text neukazuje, zda se tím faktická přísnost podmínek mění."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-dde88f17fe50",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Schválené znění přímo mění posuzování ochrany zemědělské půdy při povolování záměrů v územích určených k zástavbě.",
+          "effectCz": "Předchozí § 193 stavebního zákona vyžadoval celkové posouzení souladu záměru mimo jiné s požadavky jiných zákonů chránících veřejné zájmy. Nový § 194 naopak předpokládá přípustnost záměru v zastavitelném území či koridoru a stanoví, že se tam neposuzují zásady plošné ochrany zemědělského půdního fondu. Tím se posuzování půdy při povolování uvolňuje, nikoli zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Mění přímo pravidla a výjimky pro ochranu půdy a její odnětí ze zemědělského půdního fondu.",
+          "effectCz": "Dříve § 4 odst. 4 zakazoval odnětí půdy I. a II. třídy ochrany pro rozsáhlejší obchodní či skladovací záměry a pro solární energetická zařízení s výjimkou agrovoltaiky; schválené znění přidává výjimky pro záměry u dopravních staveb a další možnost dočasného odnětí pro solární zařízení. Dosavadní § 9 vyžadoval souhlas s odnětím, s vyjmenovanými výjimkami; schválené změny rozšiřují některé výjimky a dovolují neposuzovat zásady plošné ochrany v již vymezených zastavitelných územích, koridorech a plochách těžby. Současně se ruší faktor E přílohy, který zvyšoval odvod při odnětí půdy nenavazující na zastavěné území pro obchod, výrobu či skladování. Některé postupy se nově výslovně vážou na rozhodnutí stavebního úřadu, ale uvedené výjimky a zrušení faktoru celkově snižují ochranná omezení a náklady spojené s odnětím; pravidla tedy nejsou přísnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Text přímo upravuje navrhování podmínek pro odnětí zemědělské půdy v akceleračních oblastech pro obnovitelné zdroje energie.",
+          "effectCz": "Původní § 13 odst. 4 ukládal příslušnému orgánu navrhnout podmínky, pokud provedení záměru vyžadovalo souhlas či rozhodnutí o odnětí půdy. Schválené znění nově ukládá stavebnímu úřadu navrhnout takové podmínky, pokud akcelerační oblast zahrnuje zemědělskou půdu. Povinnost navrhnout podmínky se tak váže na jinou situaci a jiný orgán; text však neurčuje jejich obsah ani přísnost, takže z něj nelze dovodit, že se samotné podmínky pro odnětí zpřísňují."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-162",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně počítá s právní úpravou, jejímž cílem je zavést přísnější pravidla pro odnímání zemědělské půdy.",
+          "effectCz": "Jde o plán legislativního úkolu, nikoli o změnu zákona: vláda plánuje předložit právní úpravu s cílem zavést přísnější pravidla, a to ve čtvrtém čtvrtletí roku 2027, s nabytím účinnosti plánovaným na leden 2029. Jako návrhový plán směřuje k závazku slibu, ale sám pravidla nemění."
+        }
+      ],
+      "status": "acting-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-dde88f17fe50--source",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-42",
+        "zvlady-resolutions--law-change-uv-2026-175-162",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--amendment-1175",
+        "psp-core-2025--amendment-text-1175",
+        "psp-core-2025--amendment-1290",
+        "psp-core-2025--amendment-text-1290",
+        "psp-core-2025--vote-88150",
+        "psp-core-2025--amendment-text-1234",
+        "psp-core-2025--vote-88210",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh novely a vláda s ním vyslovila souhlas; schválené změny mimo jiné rozšiřují výjimky z ochrany zemědělské půdy a ruší jeden z faktorů zvyšujících odvody za její odnětí. Vláda zároveň zařadila do plánu na rok 2027 návrh právní úpravy, který má pravidla zpřísnit, a poslanci ANO navrhli i některé změny zachovávající nebo posilující ochranu půdy. Senát novelu zamítl, ale poslanci ANO pak hlasovali pro setrvání na schváleném znění, které ochranná omezení v podstatných částech uvolňuje. Tento rozhodující krok je v rozporu s celým závazkem zavést přísnější pravidla.",
+      "confidence": "high",
+      "uncertainties": [
+        "Plán vlády na pozdější zpřísnění a některé návrhy poslanců ANO směřovaly opačným směrem než schválená novela; plán sám zákonná pravidla nemění a návrhy na změnu byly návrhovým, nikoli rozhodujícím jednáním."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-dde88f17fe50",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Nová pravidla pro povolování staveb v zastavitelných územích výslovně omezují posuzování ochrany zemědělské půdy při jejím odnětí.",
+          "effectCz": "Dosavadní § 193 stavebního zákona ukládal stavebnímu úřadu posuzovat soulad záměru mimo jiné s požadavky jiných zákonů; novela v této části zavádí nové pravidlo pro zastavitelná území. Schválené znění předpokládá přípustnost některých záměrů a stanoví, že se v územích vymezených se souhlasem orgánu ochrany půdy neposuzují zásady plošné ochrany zemědělského půdního fondu. Oproti dosavadnímu obecnému posuzování je to pro tyto případy volnější pravidlo, které ochranu půdy oslabuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Mění přímo pravidla a podmínky pro odnímání zemědělské půdy, včetně rozsahu výjimek a finančních odvodů.",
+          "effectCz": "Dosavadní úprava vyžadovala souhlas s odnětím a stanovila výjimky; u nejkvalitnější půdy zakazovala odnětí pro rozsáhlejší obchodní a skladovací záměry a pro solární energetiku. Schválené znění zavádí výjimky z tohoto zákazu například pro záměry do 500 metrů od vybraných dopravních staveb a umožňuje také dočasné odnětí pro některá solární zařízení; zároveň rozšiřuje výjimky z nutnosti souhlasu a v již vymezených zastavitelných územích vyjímá zásady plošné ochrany z posuzování. Ruší také ekologický faktor E, který zvyšoval odvody u některých záměrů na půdě nenavazující na zastavěné území. Tyto změny pravidla pro odnímání půdy a jeho finanční důsledky celkově uvolňují. U některých dalších změn, například nahrazení výrazů v § 4 odst. 1, nelze z dodaného znění bezpečně určit samostatný směr účinku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Upravuje, kdo a za jakých podmínek navrhuje podmínky pro odnětí zemědělské půdy v akceleračních oblastech pro obnovitelné zdroje.",
+          "effectCz": "Dosavadní § 13 odst. 4 počítal s tím, že podmínky pro vyhovění žádosti o odnětí navrhne příslušný orgán, pokud záměr vyžaduje souhlas. Schválené znění nově ukládá stavebnímu úřadu navrhnout podmínky také tehdy, když akcelerační oblast zahrnuje zemědělskou půdu, a navazující ustanovení jeho roli rozšiřují. Text popisuje změnu postupu a odpovědného orgánu, ale neříká, zda budou podmínky přísnější nebo mírnější; směr věcného účinku proto z balíčku nelze určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-162",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně zařazuje přípravu právní úpravy, která má zpřísnit pravidla pro odnímání zemědělské půdy, jak slib požaduje.",
+          "effectCz": "Nejde o změnu dosavadního zákona, ale o plán předložit vládě návrh právní úpravy s přísnějšími pravidly pro odnímání zemědělské půdy; plánovaný termín předložení je čtvrté čtvrtletí roku 2027 a účinnost leden 2029. Jde o návrhový krok směrem ke slibu, nikoli o zavedení nových pravidel."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-dde88f17fe50--source",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-42",
+        "zvlady-resolutions--law-change-uv-2026-175-162",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--amendment-1173",
+        "psp-core-2025--amendment-text-1173",
+        "psp-core-2025--amendment-1174",
+        "psp-core-2025--amendment-text-1174",
+        "psp-core-2025--amendment-1175",
+        "psp-core-2025--amendment-text-1175",
+        "psp-core-2025--amendment-1290",
+        "psp-core-2025--amendment-text-1290",
+        "psp-core-2025--amendment-text-1243",
+        "psp-core-2025--amendment-text-1234",
+        "psp-core-2025--vote-88144",
+        "psp-core-2025--vote-88150",
+        "psp-core-2025--vote-88167",
+        "psp-core-2025--vote-88210",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili novelu stavebního zákona a souvisejících předpisů jako sněmovní tisk č. 67 a vláda s ní vyjádřila souhlas. Poslanecká sněmovna návrh schválila a po jeho zamítnutí Senátem na něm setrvala; schválená pravidla v některých případech rozšiřují výjimky z ochrany půdy a usnadňují její odnímání. ANO zároveň podpořilo návrh na zúžení jedné výjimky a jeho poslanci navrhli zachovat dosavadní zákaz pro nejkvalitnější půdu. Vláda také naplánovala návrh zákona s přísnějšími pravidly, ale jde zatím o přípravu budoucí úpravy. Rozhodující přijaté změny tak působí proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U změny pravidel pro akcelerační oblasti je doložena změna orgánu a postupu při navrhování podmínek pro odnětí půdy, nikoli to, zda budou samotné podmínky přísnější nebo mírnější.",
+        "Proti přijatému uvolnění pravidel působí návrhy poslanců ANO na zachování dosavadního zákazu a na zúžení jedné výjimky; tyto návrhy však nemění účinek konečného hlasování o schváleném návrhu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0e9f348f5afb0885016aec59e306b087d19799e5f192724f34",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 56532,
+      "input_tokens_details": {
+        "cache_write_tokens": 50182,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 6226,
+      "output_tokens_details": {
+        "reasoning_tokens": 4660
+      },
+      "total_tokens": 62758
+    },
+    "output": {
+      "promiseId": "candidate-dde88f17fe50",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Schválené znění přímo mění posuzování ochrany zemědělské půdy při povolování záměrů v územích určených k zástavbě.",
+          "effectCz": "Předchozí § 193 stavebního zákona vyžadoval celkové posouzení souladu záměru mimo jiné s požadavky jiných zákonů chránících veřejné zájmy. Nový § 194 naopak předpokládá přípustnost záměru v zastavitelném území či koridoru a stanoví, že se tam neposuzují zásady plošné ochrany zemědělského půdního fondu. Tím se posuzování půdy při povolování uvolňuje, nikoli zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Mění přímo pravidla a výjimky pro ochranu půdy a její odnětí ze zemědělského půdního fondu.",
+          "effectCz": "Dříve § 4 odst. 4 zakazoval odnětí půdy I. a II. třídy ochrany pro rozsáhlejší obchodní či skladovací záměry a pro solární energetická zařízení s výjimkou agrovoltaiky; schválené znění přidává výjimky pro záměry u dopravních staveb a další možnost dočasného odnětí pro solární zařízení. Dosavadní § 9 vyžadoval souhlas s odnětím, s vyjmenovanými výjimkami; schválené změny rozšiřují některé výjimky a dovolují neposuzovat zásady plošné ochrany v již vymezených zastavitelných územích, koridorech a plochách těžby. Současně se ruší faktor E přílohy, který zvyšoval odvod při odnětí půdy nenavazující na zastavěné území pro obchod, výrobu či skladování. Některé postupy se nově výslovně vážou na rozhodnutí stavebního úřadu, ale uvedené výjimky a zrušení faktoru celkově snižují ochranná omezení a náklady spojené s odnětím; pravidla tedy nejsou přísnější."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Text přímo upravuje navrhování podmínek pro odnětí zemědělské půdy v akceleračních oblastech pro obnovitelné zdroje energie.",
+          "effectCz": "Původní § 13 odst. 4 ukládal příslušnému orgánu navrhnout podmínky, pokud provedení záměru vyžadovalo souhlas či rozhodnutí o odnětí půdy. Schválené znění nově ukládá stavebnímu úřadu navrhnout takové podmínky, pokud akcelerační oblast zahrnuje zemědělskou půdu. Povinnost navrhnout podmínky se tak váže na jinou situaci a jiný orgán; text však neurčuje jejich obsah ani přísnost, takže z něj nelze dovodit, že se samotné podmínky pro odnětí zpřísňují."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-162",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně počítá s právní úpravou, jejímž cílem je zavést přísnější pravidla pro odnímání zemědělské půdy.",
+          "effectCz": "Jde o plán legislativního úkolu, nikoli o změnu zákona: vláda plánuje předložit právní úpravu s cílem zavést přísnější pravidla, a to ve čtvrtém čtvrtletí roku 2027, s nabytím účinnosti plánovaným na leden 2029. Jako návrhový plán směřuje k závazku slibu, ale sám pravidla nemění."
+        }
+      ],
+      "status": "acting-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-dde88f17fe50--source",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-42",
+        "zvlady-resolutions--law-change-uv-2026-175-162",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--amendment-1175",
+        "psp-core-2025--amendment-text-1175",
+        "psp-core-2025--amendment-1290",
+        "psp-core-2025--amendment-text-1290",
+        "psp-core-2025--vote-88150",
+        "psp-core-2025--amendment-text-1234",
+        "psp-core-2025--vote-88210",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh novely a vláda s ním vyslovila souhlas; schválené změny mimo jiné rozšiřují výjimky z ochrany zemědělské půdy a ruší jeden z faktorů zvyšujících odvody za její odnětí. Vláda zároveň zařadila do plánu na rok 2027 návrh právní úpravy, který má pravidla zpřísnit, a poslanci ANO navrhli i některé změny zachovávající nebo posilující ochranu půdy. Senát novelu zamítl, ale poslanci ANO pak hlasovali pro setrvání na schváleném znění, které ochranná omezení v podstatných částech uvolňuje. Tento rozhodující krok je v rozporu s celým závazkem zavést přísnější pravidla.",
+      "confidence": "high",
+      "uncertainties": [
+        "Plán vlády na pozdější zpřísnění a některé návrhy poslanců ANO směřovaly opačným směrem než schválená novela; plán sám zákonná pravidla nemění a návrhy na změnu byly návrhovým, nikoli rozhodujícím jednáním."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_03dfadd46365d785016aec5a5fa31887d19952d79d0a62c3ae",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 56532,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 56529
+      },
+      "output_tokens": 6821,
+      "output_tokens_details": {
+        "reasoning_tokens": 4949
+      },
+      "total_tokens": 63353
+    },
+    "output": {
+      "promiseId": "candidate-dde88f17fe50",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-6",
+          "relevant": true,
+          "reasonCz": "Nová pravidla pro povolování staveb v zastavitelných územích výslovně omezují posuzování ochrany zemědělské půdy při jejím odnětí.",
+          "effectCz": "Dosavadní § 193 stavebního zákona ukládal stavebnímu úřadu posuzovat soulad záměru mimo jiné s požadavky jiných zákonů; novela v této části zavádí nové pravidlo pro zastavitelná území. Schválené znění předpokládá přípustnost některých záměrů a stanoví, že se v územích vymezených se souhlasem orgánu ochrany půdy neposuzují zásady plošné ochrany zemědělského půdního fondu. Oproti dosavadnímu obecnému posuzování je to pro tyto případy volnější pravidlo, které ochranu půdy oslabuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Mění přímo pravidla a podmínky pro odnímání zemědělské půdy, včetně rozsahu výjimek a finančních odvodů.",
+          "effectCz": "Dosavadní úprava vyžadovala souhlas s odnětím a stanovila výjimky; u nejkvalitnější půdy zakazovala odnětí pro rozsáhlejší obchodní a skladovací záměry a pro solární energetiku. Schválené znění zavádí výjimky z tohoto zákazu například pro záměry do 500 metrů od vybraných dopravních staveb a umožňuje také dočasné odnětí pro některá solární zařízení; zároveň rozšiřuje výjimky z nutnosti souhlasu a v již vymezených zastavitelných územích vyjímá zásady plošné ochrany z posuzování. Ruší také ekologický faktor E, který zvyšoval odvody u některých záměrů na půdě nenavazující na zastavěné území. Tyto změny pravidla pro odnímání půdy a jeho finanční důsledky celkově uvolňují. U některých dalších změn, například nahrazení výrazů v § 4 odst. 1, nelze z dodaného znění bezpečně určit samostatný směr účinku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": true,
+          "reasonCz": "Upravuje, kdo a za jakých podmínek navrhuje podmínky pro odnětí zemědělské půdy v akceleračních oblastech pro obnovitelné zdroje.",
+          "effectCz": "Dosavadní § 13 odst. 4 počítal s tím, že podmínky pro vyhovění žádosti o odnětí navrhne příslušný orgán, pokud záměr vyžaduje souhlas. Schválené znění nově ukládá stavebnímu úřadu navrhnout podmínky také tehdy, když akcelerační oblast zahrnuje zemědělskou půdu, a navazující ustanovení jeho roli rozšiřují. Text popisuje změnu postupu a odpovědného orgánu, ale neříká, zda budou podmínky přísnější nebo mírnější; směr věcného účinku proto z balíčku nelze určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-162",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně zařazuje přípravu právní úpravy, která má zpřísnit pravidla pro odnímání zemědělské půdy, jak slib požaduje.",
+          "effectCz": "Nejde o změnu dosavadního zákona, ale o plán předložit vládě návrh právní úpravy s přísnějšími pravidly pro odnímání zemědělské půdy; plánovaný termín předložení je čtvrté čtvrtletí roku 2027 a účinnost leden 2029. Jde o návrhový krok směrem ke slibu, nikoli o zavedení nových pravidel."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-dde88f17fe50--source",
+        "psp-core-2025--law-change-43174-1-6",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-42",
+        "zvlady-resolutions--law-change-uv-2026-175-162",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--amendment-1173",
+        "psp-core-2025--amendment-text-1173",
+        "psp-core-2025--amendment-1174",
+        "psp-core-2025--amendment-text-1174",
+        "psp-core-2025--amendment-1175",
+        "psp-core-2025--amendment-text-1175",
+        "psp-core-2025--amendment-1290",
+        "psp-core-2025--amendment-text-1290",
+        "psp-core-2025--amendment-text-1243",
+        "psp-core-2025--amendment-text-1234",
+        "psp-core-2025--vote-88144",
+        "psp-core-2025--vote-88150",
+        "psp-core-2025--vote-88167",
+        "psp-core-2025--vote-88210",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili novelu stavebního zákona a souvisejících předpisů jako sněmovní tisk č. 67 a vláda s ní vyjádřila souhlas. Poslanecká sněmovna návrh schválila a po jeho zamítnutí Senátem na něm setrvala; schválená pravidla v některých případech rozšiřují výjimky z ochrany půdy a usnadňují její odnímání. ANO zároveň podpořilo návrh na zúžení jedné výjimky a jeho poslanci navrhli zachovat dosavadní zákaz pro nejkvalitnější půdu. Vláda také naplánovala návrh zákona s přísnějšími pravidly, ale jde zatím o přípravu budoucí úpravy. Rozhodující přijaté změny tak působí proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U změny pravidel pro akcelerační oblasti je doložena změna orgánu a postupu při navrhování podmínek pro odnětí půdy, nikoli to, zda budou samotné podmínky přísnější nebo mírnější.",
+        "Proti přijatému uvolnění pravidel působí návrhy poslanců ANO na zachování dosavadního zákazu a na zúžení jedné výjimky; tyto návrhy však nemění účinek konečného hlasování o schváleném návrhu."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_02f4bc4b0d94092b016aec5aa1e90487d1929e2d5004fa63c6",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 57883,
+      "input_tokens_details": {
+        "cache_write_tokens": 53470,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 336,
+      "output_tokens_details": {
+        "reasoning_tokens": 74
+      },
+      "total_tokens": 58219
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--vote-88454",
+        "zvlady-resolutions--law-change-uv-2026-175-162"
+      ],
+      "explanationCz": "Volím druhé hodnocení, protože správně rozlišuje mezi oslabením části ochrany půdy a jednáním proti celému slibu. Poslanci ANO po zamítnutí Senátem znovu podpořili novelu stavebního zákona a souvisejících předpisů, která rozšiřuje některé výjimky pro odnímání půdy a snižuje některé platby za ně. Tyto změny odporují slíbenému zpřísnění, ale týkají se vybraných případů, což neodůvodňuje přísnější závěr prvního hodnocení. Vládní plán budoucího zpřísnění tento výsledek nepřebíjí, protože sám pravidla nemění a schválená změna má při hodnocení větší váhu než plán."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-against",
+    "selectedReview": "assessor-b"
+  }
+}

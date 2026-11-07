@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-01-45-186Z--ba6b4308ccc1",
+  "evaluatedAt": "2026-11-05T10:01:45.186Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-959f9a8d0efe/ba6b4308ccc1348ebe790644ef763c3a9bf6251da9c000ab9db819a7805d2b9c.json",
+  "packageHash": "ba6b4308ccc1348ebe790644ef763c3a9bf6251da9c000ab9db819a7805d2b9c",
+  "assessmentContentHash": "1ab4b19970feac76a316717f099ea59ee612acf71091979aa9b81553cd58e0c7",
+  "assessmentFingerprint": "0e4f3a254c87e5ab026aba65141137f5d5fb2c8f4709069adf04726d2c0efae6",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-959f9a8d0efe",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-959f9a8d0efe",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Z dodaných částí rozpočtového zákona vyplývá jen to, že ukazatele podle kapitol jsou uvedeny v příloze; žádné částky ani pravidla pro financování bezplatného právního poradenství zde nejsou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43225-2",
+          "relevant": true,
+          "reasonCz": "Změna upravuje nárok na bezplatnou odbornou pomoc obětem trestných činů, a proto se dotýká dostupnosti bezplatné právní pomoci.",
+          "effectCz": "Před změnou musely registrované subjekty bezplatnou odbornou pomoc bez zbytečného odkladu poskytnout zvlášť zranitelné oběti, která ji potřebovala. Nově tato povinnost neplatí, jde-li o oběť trestného činu zanedbání povinné výživy podle § 196 odst. 1 trestního zákoníku. Garantovaný okruh příjemců bezplatné pomoci se tím zužuje, tedy jde proti části slibu."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-959f9a8d0efe--source",
+        "psp-core-2025--law-change-43225-2",
+        "psp-core-2025--print-step-210844",
+        "psp-core-2025--government-opinion-43225-1"
+      ],
+      "explanationCz": "ANO předložilo návrh, který mění zákon o obětech trestných činů, a vláda k němu vyslovila souhlas. Návrh by odebral některým zvlášť zranitelným obětem trestného činu zanedbání povinné výživy dosavadní záruku bezplatné odborné pomoci, a tím oslaboval část slibu. Jde o návrh, nikoli o doložené konečné rozhodnutí, proto hodnocení zachycuje směr předloženého opatření. Dodané podklady neukazují, jak návrh dopadl při dalším projednávání.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady zachycují předložení návrhu a souhlasné stanovisko vlády, ale nedokládají jeho další projednání ani konečné rozhodnutí; případný pozdější výsledek proto nelze z tohoto balíčku posoudit."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-959f9a8d0efe",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet může rozhodovat o financování bezplatného právního poradenství, které slib výslovně zahrnuje.",
+          "effectCz": "Jde o nový státní rozpočet, nikoli novelu s předchozím zněním. Dodaný výňatek pouze uvádí, že ukazatele výdajů podle kapitol jsou v příloze č. 4; konkrétní částky pro právní poradenství ani příslušné rozpočtové položky v něm nejsou, takže z balíčku nelze určit, zda rozpočet dostupnost poradenství rozšiřuje, nebo omezuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43225-2",
+          "relevant": true,
+          "reasonCz": "Změna se týká nároku na bezplatnou odbornou pomoc obětem trestných činů, a tedy části slibu poskytovat bezplatné právní konzultace.",
+          "effectCz": "Dosavadní § 5 odst. 1 ukládal registrovaným poskytovatelům povinnost bezplatně a bez zbytečného odkladu pomoci zvlášť zranitelné oběti, která pomoc potřebuje; novela z této povinnosti vyjímá oběť zanedbání povinné výživy podle § 196 odst. 1 trestního zákoníku. Povinný nárok se tím pro tuto skupinu zužuje, tedy mění se směrem proti části slibu o bezplatné právní pomoci každému."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-959f9a8d0efe--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-578",
+        "psp-core-2025--vote-86909",
+        "psp-core-2025--amendment-text-562",
+        "psp-core-2025--vote-86911",
+        "psp-core-2025--amendment-text-358",
+        "psp-core-2025--vote-86950",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43225-2",
+        "psp-core-2025--print-step-210844",
+        "psp-core-2025--government-opinion-43225-1"
+      ],
+      "explanationCz": "Vláda předložila státní rozpočet na rok 2026 a poslanci ANO jej v závěrečném hlasování podpořili. Poskytnutý výňatek rozpočtu ale neukazuje konkrétní částky na bezplatné právní poradenství, takže dopad tohoto rozhodnutí nelze ověřit. Poslanci ANO nepodpořili návrhy na navýšení prostředků pro spotřebitelské poradenství a právní pomoc obětem trestné činnosti. Poslanci ANO také navrhli změnu zákona o obětech trestných činů, k níž vláda dala souhlas; ta by odebrala povinný nárok na bezplatnou odbornou pomoc obětem zanedbání povinné výživy, a proto jde proti části slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Ve výňatku státního rozpočtu chybějí konkrétní rozpočtové částky a položky pro právní poradenství. Bez nich nelze určit, zda rozpočet, který ANO podpořilo, poradenství financuje, nebo jeho dostupnost omezuje."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0cdf4f79827cf83c016aec5388a7ec87d19ec08740daf3cbd9",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 25097,
+      "input_tokens_details": {
+        "cache_write_tokens": 18747,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 3714,
+      "output_tokens_details": {
+        "reasoning_tokens": 3106
+      },
+      "total_tokens": 28811
+    },
+    "output": {
+      "promiseId": "candidate-959f9a8d0efe",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Z dodaných částí rozpočtového zákona vyplývá jen to, že ukazatele podle kapitol jsou uvedeny v příloze; žádné částky ani pravidla pro financování bezplatného právního poradenství zde nejsou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43225-2",
+          "relevant": true,
+          "reasonCz": "Změna upravuje nárok na bezplatnou odbornou pomoc obětem trestných činů, a proto se dotýká dostupnosti bezplatné právní pomoci.",
+          "effectCz": "Před změnou musely registrované subjekty bezplatnou odbornou pomoc bez zbytečného odkladu poskytnout zvlášť zranitelné oběti, která ji potřebovala. Nově tato povinnost neplatí, jde-li o oběť trestného činu zanedbání povinné výživy podle § 196 odst. 1 trestního zákoníku. Garantovaný okruh příjemců bezplatné pomoci se tím zužuje, tedy jde proti části slibu."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-959f9a8d0efe--source",
+        "psp-core-2025--law-change-43225-2",
+        "psp-core-2025--print-step-210844",
+        "psp-core-2025--government-opinion-43225-1"
+      ],
+      "explanationCz": "ANO předložilo návrh, který mění zákon o obětech trestných činů, a vláda k němu vyslovila souhlas. Návrh by odebral některým zvlášť zranitelným obětem trestného činu zanedbání povinné výživy dosavadní záruku bezplatné odborné pomoci, a tím oslaboval část slibu. Jde o návrh, nikoli o doložené konečné rozhodnutí, proto hodnocení zachycuje směr předloženého opatření. Dodané podklady neukazují, jak návrh dopadl při dalším projednávání.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady zachycují předložení návrhu a souhlasné stanovisko vlády, ale nedokládají jeho další projednání ani konečné rozhodnutí; případný pozdější výsledek proto nelze z tohoto balíčku posoudit."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_06001fe1c4ffa115016aec53c0cb3487d185fad110957b17f2",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 25097,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 25094
+      },
+      "output_tokens": 3291,
+      "output_tokens_details": {
+        "reasoning_tokens": 2340
+      },
+      "total_tokens": 28388
+    },
+    "output": {
+      "promiseId": "candidate-959f9a8d0efe",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet může rozhodovat o financování bezplatného právního poradenství, které slib výslovně zahrnuje.",
+          "effectCz": "Jde o nový státní rozpočet, nikoli novelu s předchozím zněním. Dodaný výňatek pouze uvádí, že ukazatele výdajů podle kapitol jsou v příloze č. 4; konkrétní částky pro právní poradenství ani příslušné rozpočtové položky v něm nejsou, takže z balíčku nelze určit, zda rozpočet dostupnost poradenství rozšiřuje, nebo omezuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43225-2",
+          "relevant": true,
+          "reasonCz": "Změna se týká nároku na bezplatnou odbornou pomoc obětem trestných činů, a tedy části slibu poskytovat bezplatné právní konzultace.",
+          "effectCz": "Dosavadní § 5 odst. 1 ukládal registrovaným poskytovatelům povinnost bezplatně a bez zbytečného odkladu pomoci zvlášť zranitelné oběti, která pomoc potřebuje; novela z této povinnosti vyjímá oběť zanedbání povinné výživy podle § 196 odst. 1 trestního zákoníku. Povinný nárok se tím pro tuto skupinu zužuje, tedy mění se směrem proti části slibu o bezplatné právní pomoci každému."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-959f9a8d0efe--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-578",
+        "psp-core-2025--vote-86909",
+        "psp-core-2025--amendment-text-562",
+        "psp-core-2025--vote-86911",
+        "psp-core-2025--amendment-text-358",
+        "psp-core-2025--vote-86950",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43225-2",
+        "psp-core-2025--print-step-210844",
+        "psp-core-2025--government-opinion-43225-1"
+      ],
+      "explanationCz": "Vláda předložila státní rozpočet na rok 2026 a poslanci ANO jej v závěrečném hlasování podpořili. Poskytnutý výňatek rozpočtu ale neukazuje konkrétní částky na bezplatné právní poradenství, takže dopad tohoto rozhodnutí nelze ověřit. Poslanci ANO nepodpořili návrhy na navýšení prostředků pro spotřebitelské poradenství a právní pomoc obětem trestné činnosti. Poslanci ANO také navrhli změnu zákona o obětech trestných činů, k níž vláda dala souhlas; ta by odebrala povinný nárok na bezplatnou odbornou pomoc obětem zanedbání povinné výživy, a proto jde proti části slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Ve výňatku státního rozpočtu chybějí konkrétní rozpočtové částky a položky pro právní poradenství. Bez nich nelze určit, zda rozpočet, který ANO podpořilo, poradenství financuje, nebo jeho dostupnost omezuje."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

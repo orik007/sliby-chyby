@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T02-16-21-692Z--ef33a70cbc77",
+  "evaluatedAt": "2026-11-04T02:16:21.692Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-65bdafb11df1/ef33a70cbc77b66774ac11f9be23f6506f42f25821925dd055be48c73e638bf0.json",
+  "packageHash": "ef33a70cbc77b66774ac11f9be23f6506f42f25821925dd055be48c73e638bf0",
+  "assessmentContentHash": "9ab7a1ce5a9010b0c7ed584a22cb61d756d89708506f2488f9b7cee08cd6752d",
+  "assessmentFingerprint": "a9bf1aeb1416e665c0ce7d1d0b2e816adb3a75270e23ae563632d68b14590a48",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-65bdafb11df1",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-65bdafb11df1",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-126",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací výslovně počítá s návrhem ústavní změny, která má zakotvit českou korunu v Ústavě, a proto přímo souvisí se slibem.",
+          "effectCz": "Usnesení samo Ústavu nemění; předchozí znění článku 98 tedy nemá co porovnávat. Plánuje návrh ústavní změny, jejímž cílem je zakotvit českou korunu v Ústavě, což slib posouvá směrem k ústavnímu zakotvení koruny, ale text konkrétní věty „Národní měnou je koruna česká.“ nestanoví."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-65bdafb11df1--source",
+        "zvlady-resolutions--law-change-uv-2026-175-126",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda 23. března 2026 přijala usnesení, kterým schválila plán legislativních prací. Ten počítá s přípravou návrhu ústavní změny, jejímž cílem je zakotvit českou korunu v Ústavě. Jde o vládní plán, nikoli o změnu Ústavy, a proto slib posouvá jen jako návrh. Plán ale neuvádí, zda bude do Ústavy doplněna přesně požadovaná věta.",
+      "confidence": "high",
+      "uncertainties": [
+        "Plán stanoví cíl zakotvit českou korunu v Ústavě, ale neobsahuje znění návrhu ústavní změny; nelze proto ověřit, zda návrh použije přesnou větu požadovanou ve slibu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-65bdafb11df1",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-126",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně zařazuje přípravu ústavního zákona, jehož cílem je zakotvit českou korunu v Ústavě.",
+          "effectCz": "Nejde o změnu zákona, takže balíček neuvádí předchozí ani nové znění článku 98. Usnesení zařazuje do legislativního plánu přípravu návrhu ústavního zákona s cílem zakotvit českou korunu v Ústavě a právo držet a používat hotovost jako zákonné platidlo; samo však tuto ústavní změnu neprovádí. Jde o návrhový krok směrem ke slibu, ale podklad nepotvrzuje, že návrh doplní právě článek 98 ani přesnou větu požadovanou ve slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-65bdafb11df1--source",
+        "zvlady-resolutions--law-change-uv-2026-175-126",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení, kterým zařadila do legislativního plánu přípravu ústavního zákona o zakotvení české koruny v Ústavě. To je návrhový krok, který směřuje k cíli slibu, ale sám Ústavu nemění. Podklady nepotvrzují, zda návrh doplní právě článek 98 a zda použije požadovanou přesnou větu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Z plánu není doloženo, zda připravovaný návrh změní konkrétně článek 98 Ústavy ani zda bude obsahovat přesnou větu uvedenou ve slibu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0cdef990b2683a4f016aea95585d9c87d1b34cbd05b0ed1090",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8561,
+      "input_tokens_details": {
+        "cache_write_tokens": 2211,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 809,
+      "output_tokens_details": {
+        "reasoning_tokens": 339
+      },
+      "total_tokens": 9370
+    },
+    "output": {
+      "promiseId": "candidate-65bdafb11df1",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-126",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací výslovně počítá s návrhem ústavní změny, která má zakotvit českou korunu v Ústavě, a proto přímo souvisí se slibem.",
+          "effectCz": "Usnesení samo Ústavu nemění; předchozí znění článku 98 tedy nemá co porovnávat. Plánuje návrh ústavní změny, jejímž cílem je zakotvit českou korunu v Ústavě, což slib posouvá směrem k ústavnímu zakotvení koruny, ale text konkrétní věty „Národní měnou je koruna česká.“ nestanoví."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-65bdafb11df1--source",
+        "zvlady-resolutions--law-change-uv-2026-175-126",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda 23. března 2026 přijala usnesení, kterým schválila plán legislativních prací. Ten počítá s přípravou návrhu ústavní změny, jejímž cílem je zakotvit českou korunu v Ústavě. Jde o vládní plán, nikoli o změnu Ústavy, a proto slib posouvá jen jako návrh. Plán ale neuvádí, zda bude do Ústavy doplněna přesně požadovaná věta.",
+      "confidence": "high",
+      "uncertainties": [
+        "Plán stanoví cíl zakotvit českou korunu v Ústavě, ale neobsahuje znění návrhu ústavní změny; nelze proto ověřit, zda návrh použije přesnou větu požadovanou ve slibu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0da7a94948a46ba9016aea9563068c87d18b542388350afc90",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8561,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8558
+      },
+      "output_tokens": 1101,
+      "output_tokens_details": {
+        "reasoning_tokens": 593
+      },
+      "total_tokens": 9662
+    },
+    "output": {
+      "promiseId": "candidate-65bdafb11df1",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-126",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně zařazuje přípravu ústavního zákona, jehož cílem je zakotvit českou korunu v Ústavě.",
+          "effectCz": "Nejde o změnu zákona, takže balíček neuvádí předchozí ani nové znění článku 98. Usnesení zařazuje do legislativního plánu přípravu návrhu ústavního zákona s cílem zakotvit českou korunu v Ústavě a právo držet a používat hotovost jako zákonné platidlo; samo však tuto ústavní změnu neprovádí. Jde o návrhový krok směrem ke slibu, ale podklad nepotvrzuje, že návrh doplní právě článek 98 ani přesnou větu požadovanou ve slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-65bdafb11df1--source",
+        "zvlady-resolutions--law-change-uv-2026-175-126",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení, kterým zařadila do legislativního plánu přípravu ústavního zákona o zakotvení české koruny v Ústavě. To je návrhový krok, který směřuje k cíli slibu, ale sám Ústavu nemění. Podklady nepotvrzují, zda návrh doplní právě článek 98 a zda použije požadovanou přesnou větu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Z plánu není doloženo, zda připravovaný návrh změní konkrétně článek 98 Ústavy ani zda bude obsahovat přesnou větu uvedenou ve slibu."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

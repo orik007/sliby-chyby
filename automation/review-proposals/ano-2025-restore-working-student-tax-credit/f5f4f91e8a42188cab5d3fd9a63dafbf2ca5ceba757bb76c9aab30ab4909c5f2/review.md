@@ -1,0 +1,68 @@
+# Obnovení daňové slevy pro pracující studenty
+
+> Nezveřejněný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
+
+## Návrh pro veřejný web
+
+Toto je jediná část dokumentu určená jako kandidát veřejného textu. Musí být srozumitelná bez znalosti projektu, práva nebo fungování Poslanecké sněmovny.
+
+### Hodnocení
+
+**Splněno (+2)**
+
+### Vysvětlení
+
+Vláda naplánovala a následně předložila návrh zákona, který obnovuje slevu na studenta ve výši 4 020 Kč. Poslanci ANO nepodpořili pozměňovací návrhy, jež by obnovení slevy vypustily, a ve třetím čtení hlasovali pro zákon. Po vrácení zákona Senátem Sněmovna 9. září 2026 setrvala na původním znění, které slevu obsahuje. Tím byla přijata legislativní změna naplňující slib.
+
+## Co má zkontrolovat reviewer
+
+- Odpovídá navržené hodnocení metodice SLAVA Indexu?
+- Je jednání správně připsáno sledované straně?
+- Je veřejné vysvětlení pochopitelné samo o sobě a říká, kdo co udělal a jak to souvisí se slibem?
+- Jsou zkratky, právní pojmy a úřední označení při prvním použití vysvětlené?
+- Dokládají uvedené zdroje všechna podstatná tvrzení a nechybí rozporný podklad?
+
+## Technické podklady pro reviewera
+
+- Výsledek automatického procesu: oba automatické posudky se shodly
+- Interní stav: `fulfilled`
+- Důvod výsledku: `assessor-consensus`
+- Úplný strojový audit: `assessment-run.json`
+- Přesný balíček posuzovaných podkladů: `evidence-package.json`
+
+### Shoda hodnotitelů
+
+Oba nezávislí hodnotitelé dospěli ke stejnému výsledku: **Splněno (+2)**.
+
+Úplné oddělené odpovědi obou hodnotitelů zůstávají v souboru `assessment-run.json`.
+
+### Souvisí změny zákonů se slibem?
+
+| Změna zákona | První posudek | Druhý posudek |
+| --- | --- | --- |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o daních z příjmů](https://www.psp.cz/sqw/text/orig2.sqw?idd=278478) | ano: Změna přímo zavádí zpět daňovou slevu na studenta, kterou slib požaduje obnovit.<br>Dopad: Dosavadní § 35ba zákona o daních z příjmů slevu na studenta neobsahoval; návrh zavádí slevu 4 020 Kč pro studenty soustavně se připravující na povolání do 26 let a pro studenty prezenčního doktorského studia do 28 let. Nárok tedy nově vzniká a odpovídá směru slibu; další uvedené úpravy upravují uplatnění a dokládání nároku. | ano: Tato část návrhu přímo zavádí daňovou slevu na studenta, kterou slib požaduje obnovit.<br>Dopad: Před změnou § 35ba mezi slevami na dani slevu na studenta neuváděl a § 35bc ještě neexistoval. Nově se zavádí sleva 4 020 Kč pro studující do 26 let, případně do 28 let při prezenčním doktorském studiu; jde o nové daňové zvýhodnění, tedy o rozšíření nároku. Související odkazy v § 35ba, § 35d a § 38l umožňují slevu uplatnit při výpočtu daně či záloh a dokládat ji potvrzením školy. Změna § 38k odstraňuje zvláštní pravidlo, podle něhož se doklady o studiu zohlednily už v měsíci předložení, takže měsíční uplatnění může být méně bezprostřední; samotný roční nárok na novou slevu však zůstává. Kontext neuvádí dřívější znění nových § 35bc až 35be, protože předtím neexistovaly. |
+| [Text usnesení vlády: Usnesení vlády č. 175/2026, Návrh Plánu legislativních prací vlády na zbývající část roku 2026 a návrh Výhledu legislativních prací vlády na léta 2027 až 2029 – Příloha č. 1, Místopředsedkyně vlády a ministryně financí, úkol č. 5: Návrh zákona o evidenci tržeb a o změně některých dalších zákonů](https://odok.gov.cz/portal/zvlady/usneseni/2026/175/) | ano: Usnesení vlády zařazuje do legislativního plánu návrat slevy na dani na studenta.<br>Dopad: Nejde o změnu platného zákona, ale o plán připravit návrh, který má znovu zavést slevu na studenta. Samo usnesení nárok nevytváří; pouze navrhuje krok směřující k naplnění slibu. | ano: Plán legislativních prací vlády výslovně počítá s opětovným zavedením slevy na dani na studenta.<br>Dopad: Usnesení samo daňová pravidla nemění; jako součást plánu vládních legislativních prací stanoví záměr předložit návrh zákona, který má mimo jiné obnovit studentskou slevu. Je to návrh dalšího kroku směrem ke slibu, nikoli ještě vznik nároku. |
+| [Text usnesení vlády: Usnesení vlády č. 175/2026, Návrh Plánu legislativních prací vlády na zbývající část roku 2026 a návrh Výhledu legislativních prací vlády na léta 2027 až 2029 – Příloha č. 1, květen 2026, úkol č. 1: Návrh zákona o evidenci tržeb a o změně některých dalších zákonů](https://odok.gov.cz/portal/zvlady/usneseni/2026/175/) | ano: Tato položka legislativního plánu výslovně počítá s opětovným zavedením slevy na studenta.<br>Dopad: Jde o plán předložit vládě návrh zákona, který má slevu na studenta znovu zavést, nikoli o účinnou změnu zákona. Nárok tím zatím nevzniká, ale plánovaný návrh sleduje směr slibu. | ano: Plán pro květen 2026 uvádí návrh zákona, jehož součástí má být znovuzavedení studentské daňové slevy.<br>Dopad: Usnesení samo daňová pravidla nemění; v plánu legislativních prací uvádí návrh zákona se záměrem znovu zavést slevu na studenta. Jde o plánovaný návrh, který slib posouvá, ale sám slevu nezřizuje. |
+
+### Zdroje použité při hodnocení
+
+- [Původní volební slib](https://www.anobudelip.cz/file/edee/ke-stazeni/volebni-program-2025.pdf)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o daních z příjmů](https://www.psp.cz/sqw/text/orig2.sqw?idd=278478)
+- [Text usnesení vlády: Usnesení vlády č. 175/2026, Návrh Plánu legislativních prací vlády na zbývající část roku 2026 a návrh Výhledu legislativních prací vlády na léta 2027 až 2029 – Příloha č. 1, Místopředsedkyně vlády a ministryně financí, úkol č. 5: Návrh zákona o evidenci tržeb a o změně některých dalších zákonů](https://odok.gov.cz/portal/zvlady/usneseni/2026/175/)
+- [Text usnesení vlády: Usnesení vlády č. 175/2026, Návrh Plánu legislativních prací vlády na zbývající část roku 2026 a návrh Výhledu legislativních prací vlády na léta 2027 až 2029 – Příloha č. 1, květen 2026, úkol č. 1: Návrh zákona o evidenci tržeb a o změně některých dalších zákonů](https://odok.gov.cz/portal/zvlady/usneseni/2026/175/)
+- [Usnesení Senátu, kterým vrátil návrh Sněmovně](https://www.psp.cz/sqw/text/orig2.sqw?idd=279108)
+- [Text pozměňovacího návrhu O2 (sněmovní dokument 1400)](https://www.psp.cz/sqw/text/orig2.sqw?idd=277346)
+- [Text pozměňovacího návrhu L1 (sněmovní dokument 1474)](https://www.psp.cz/sqw/text/orig2.sqw?idd=277738)
+- [Text pozměňovacího návrhu L7 (sněmovní dokument 1556)](https://www.psp.cz/sqw/text/orig2.sqw?idd=277997)
+- [Text pozměňovacího návrhu L9 (sněmovní dokument 1558)](https://www.psp.cz/sqw/text/orig2.sqw?idd=278001)
+- [Přijetí usnesení vládou](https://odok.gov.cz/portal/zvlady/usneseni/2026/175/)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=189)
+- [Hlasování Poslanecké sněmovny o pozměňovacím návrhu O2](https://public.psp.cz/sqw/hlasy.sqw?g=88294)
+- [Hlasování Poslanecké sněmovny o pozměňovacím návrhu L1](https://public.psp.cz/sqw/hlasy.sqw?g=88305)
+- [Hlasování Poslanecké sněmovny o pozměňovacím návrhu L7](https://public.psp.cz/sqw/hlasy.sqw?g=88311)
+- [Hlasování Poslanecké sněmovny o pozměňovacím návrhu L9](https://public.psp.cz/sqw/hlasy.sqw?g=88313)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=88356)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=88456)
+
+Tento návrh nahrazuje starší automatický posudek, který zůstává zachovaný v auditní historii.
+

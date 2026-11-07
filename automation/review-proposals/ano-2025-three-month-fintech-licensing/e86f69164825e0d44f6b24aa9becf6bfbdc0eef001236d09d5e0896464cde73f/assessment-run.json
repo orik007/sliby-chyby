@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T01-55-02-358Z--31753035baed",
+  "evaluatedAt": "2026-11-04T01:55:02.358Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-three-month-fintech-licensing/31753035baed8e3e6ac4685843a9a69b465d1d7f381a13e58bb12ee2ce982f02.json",
+  "packageHash": "31753035baed8e3e6ac4685843a9a69b465d1d7f381a13e58bb12ee2ce982f02",
+  "assessmentContentHash": "8ba5e0864f9e2dbe6a7eab2fd1f751a76cdb6761d300471a779062841c9c40cb",
+  "assessmentFingerprint": "e86f69164825e0d44f6b24aa9becf6bfbdc0eef001236d09d5e0896464cde73f",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-three-month-fintech-licensing",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-three-month-fintech-licensing",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-1-3",
+          "relevant": false,
+          "reasonCz": "Ustanovení řeší přechodné oprávnění a lhůtu ČNB pro žádosti některých nebankovních poskytovatelů spotřebitelských úvěrů, ale dodané znění neukazuje, že jde o licence fintechových či kryptoměnových firem, kterých se týká slib.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-three-month-fintech-licensing--source",
+        "psp-core-2025--law-change-43266-1-3"
+      ],
+      "explanationCz": "Slib se týká tříměsíční lhůty pro licence fintechových a kryptoměnových firem. Dodané ustanovení novely zákona o spotřebitelském úvěru stanoví pro určité žádosti o oprávnění nebankovních poskytovatelů lhůtu až 12 měsíců, ale podklady neprokazují, že jde o firmy zahrnuté ve slibu. Proto nelze tuto změnu započítat jako posun ke slibu ani jako jeho porušení a zůstává bez ověřeného podstatného posunu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobjasňují, zda některé firmy, na které se vztahuje přechodné oprávnění podle novely, patří mezi fintechové firmy zahrnuté ve slibu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-three-month-fintech-licensing",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-1-3",
+          "relevant": true,
+          "reasonCz": "Ustanovení řeší lhůtu České národní banky pro rozhodnutí o oprávnění nebankovních poskytovatelů spotřebitelského úvěru, což může zasahovat do části fintechových licencí, o nichž slib mluví.",
+          "effectCz": "Schválené znění stanoví pro uvedené žádosti lhůtu 12 měsíců od zahájení řízení, zatímco slibuje tříměsíční lhůtu; jde tedy o delší dobu pro tuto část žádostí. Předchozí znění měněného ustanovení v podkladech chybí, takže nelze určit, zda novela tuto lhůtu zkracuje, prodlužuje, nebo ponechává beze změny."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-three-month-fintech-licensing--source",
+        "psp-core-2025--law-change-43266-1-3",
+        "psp-core-2025--print-step-211051",
+        "psp-core-2025--vote-88519"
+      ],
+      "explanationCz": "Vláda předložila návrh novely zákona o spotřebitelském úvěru a poslanci ANO ji ve třetím čtení podpořili. Schválené znění stanoví až dvanáct měsíců na rozhodnutí České národní banky o některých oprávněních, což je delší než slibované tři měsíce a působí proti němu v části oblasti fintechových licencí. Návrh se netýká kryptofirem a podklady neukazují, jaké znění uvedené ustanovení nahrazuje.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují předchozí znění ustanovení o spotřebitelském úvěru, takže nelze určit, zda novela lhůtu 12 měsíců oproti dosavadnímu stavu mění.",
+        "Není doloženo, jak velká část nebankovních poskytovatelů spotřebitelského úvěru spadá mezi fintechové firmy; proto se závěr vztahuje jen na možný překryv této kategorie se slibem."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_054a631940b0791c016aea903ad03c87d19432dac00ee76074",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10931,
+      "input_tokens_details": {
+        "cache_write_tokens": 4581,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 1522,
+      "output_tokens_details": {
+        "reasoning_tokens": 1142
+      },
+      "total_tokens": 12453
+    },
+    "output": {
+      "promiseId": "ano-2025-three-month-fintech-licensing",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-1-3",
+          "relevant": false,
+          "reasonCz": "Ustanovení řeší přechodné oprávnění a lhůtu ČNB pro žádosti některých nebankovních poskytovatelů spotřebitelských úvěrů, ale dodané znění neukazuje, že jde o licence fintechových či kryptoměnových firem, kterých se týká slib.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-three-month-fintech-licensing--source",
+        "psp-core-2025--law-change-43266-1-3"
+      ],
+      "explanationCz": "Slib se týká tříměsíční lhůty pro licence fintechových a kryptoměnových firem. Dodané ustanovení novely zákona o spotřebitelském úvěru stanoví pro určité žádosti o oprávnění nebankovních poskytovatelů lhůtu až 12 měsíců, ale podklady neprokazují, že jde o firmy zahrnuté ve slibu. Proto nelze tuto změnu započítat jako posun ke slibu ani jako jeho porušení a zůstává bez ověřeného podstatného posunu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobjasňují, zda některé firmy, na které se vztahuje přechodné oprávnění podle novely, patří mezi fintechové firmy zahrnuté ve slibu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_083ff0eb1f51a499016aea90518b6887d1b9441996976eb3ba",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10931,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 10928
+      },
+      "output_tokens": 2343,
+      "output_tokens_details": {
+        "reasoning_tokens": 1730
+      },
+      "total_tokens": 13274
+    },
+    "output": {
+      "promiseId": "ano-2025-three-month-fintech-licensing",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-1-3",
+          "relevant": true,
+          "reasonCz": "Ustanovení řeší lhůtu České národní banky pro rozhodnutí o oprávnění nebankovních poskytovatelů spotřebitelského úvěru, což může zasahovat do části fintechových licencí, o nichž slib mluví.",
+          "effectCz": "Schválené znění stanoví pro uvedené žádosti lhůtu 12 měsíců od zahájení řízení, zatímco slibuje tříměsíční lhůtu; jde tedy o delší dobu pro tuto část žádostí. Předchozí znění měněného ustanovení v podkladech chybí, takže nelze určit, zda novela tuto lhůtu zkracuje, prodlužuje, nebo ponechává beze změny."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-three-month-fintech-licensing--source",
+        "psp-core-2025--law-change-43266-1-3",
+        "psp-core-2025--print-step-211051",
+        "psp-core-2025--vote-88519"
+      ],
+      "explanationCz": "Vláda předložila návrh novely zákona o spotřebitelském úvěru a poslanci ANO ji ve třetím čtení podpořili. Schválené znění stanoví až dvanáct měsíců na rozhodnutí České národní banky o některých oprávněních, což je delší než slibované tři měsíce a působí proti němu v části oblasti fintechových licencí. Návrh se netýká kryptofirem a podklady neukazují, jaké znění uvedené ustanovení nahrazuje.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují předchozí znění ustanovení o spotřebitelském úvěru, takže nelze určit, zda novela lhůtu 12 měsíců oproti dosavadnímu stavu mění.",
+        "Není doloženo, jak velká část nebankovních poskytovatelů spotřebitelského úvěru spadá mezi fintechové firmy; proto se závěr vztahuje jen na možný překryv této kategorie se slibem."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_063a41afeb4bf5df016aea906f9b4c87d1b91df6a031adf413",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 9921,
+      "input_tokens_details": {
+        "cache_write_tokens": 5508,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 342,
+      "output_tokens_details": {
+        "reasoning_tokens": 116
+      },
+      "total_tokens": 10263
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "ano-2025-three-month-fintech-licensing--source",
+        "psp-core-2025--law-change-43266-1-3",
+        "psp-core-2025--vote-88519"
+      ],
+      "explanationCz": "Přesvědčivější je první posouzení, protože druhé staví závěr na nedoloženém překryvu nebankovních poskytovatelů úvěrů s fintechovými firmami. Poslanci ANO podpořili novelu zákona o spotřebitelském úvěru, která pro některé žádosti stanoví dvanáctiměsíční lhůtu. Podklady ale neukazují, že se tato lhůta týká firem zahrnutých ve slibu. Samotná delší lhůta proto nestačí k závěru, že ANO jednalo proti slibu; doložen není ani posun k jeho splnění."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

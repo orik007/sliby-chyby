@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T01-44-03-889Z--49aa35e3c852",
+  "evaluatedAt": "2026-11-04T01:44:03.889Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-b32021afae/49aa35e3c8527e8abd54e66791c70fae8389f11f08cf9709c110e36677616a74.json",
+  "packageHash": "49aa35e3c8527e8abd54e66791c70fae8389f11f08cf9709c110e36677616a74",
+  "assessmentContentHash": "e102820a8df689a5a8e1519a1f8bc87a403ac3caaee1aba98a2c701aabc90cd7",
+  "assessmentFingerprint": "f7a0c4ccea416db6c8ca4da76b5772eff6460a397418464b7262fe802b8f183a",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-b32021afae",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-b32021afae",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+          "relevant": false,
+          "reasonCz": "Příloha pouze uvádí návrh unijní směrnice o nejvyšších přípustných hmotnostech a novelu zákona o pozemních komunikacích, ale nedokládá, že se plánované práce týkají právě hmotnostních limitů na nápravu.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-b32021afae--source",
+        "zvlady-resolutions--law-change-uv-2026-175-193",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení k plánu legislativních prací a jeho příloha uvádí návrh unijní směrnice o nejvyšších přípustných hmotnostech vozidel i novelu zákona o pozemních komunikacích. Samotné uvedení těchto položek ale nedokládá, že vláda plánuje revidovat právě limity maximální hmotnosti na nápravu, ani jak by je změnila. Proto z předložených podkladů nelze potvrdit podstatný posun ve slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neuvádějí obsah plánované novely ani podrobnosti o směrnici ve vztahu k limitům na nápravu; nelze proto rozhodnout, zda vládní plán tento slib skutečně posouvá."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-b32021afae",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+          "relevant": true,
+          "reasonCz": "Výhled výslovně uvádí návrh změny unijních pravidel o maximálních hmotnostech vozidel i novelu zákona o pozemních komunikacích, takže se týká oblasti slibu.",
+          "effectCz": "Usnesení nemění dosavadní právní limity; zařazuje do výhledu implementačních prací návrh změny směrnice o maximálních přípustných hmotnostech a novelu zákona o pozemních komunikacích. Neuvádí však konkrétní změnu limitů, jejich hodnoty ani to, zda by byly přísnější či mírnější, takže směr a rozsah změny nelze z balíčku určit."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-b32021afae--source",
+        "zvlady-resolutions--law-change-uv-2026-175-193",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení, jehož výhled legislativních prací uvádí změnu unijních pravidel o maximálních hmotnostech vozidel a novelu zákona o pozemních komunikacích. Tím vláda zařadila příslušnou oblast do plánovaných legislativních prací, což představuje krok směrem k revizi limitů na nápravu. Usnesení ale samo limity nemění a neříká, jaké konkrétní hodnoty nebo pravidla se mají změnit. Jde proto o dílčí posun, nikoli o splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výhled neupřesňuje, zda připravované změny přímo upraví limity maximální hmotnosti na nápravu, ani zda je zpřísní či zmírní; jejich konkrétní obsah z dodaných podkladů nelze určit."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0b595b3bda65a9da016aea8dadacbc87d19f6fd3d9b48bfa63",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8080,
+      "input_tokens_details": {
+        "cache_write_tokens": 1730,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 1462,
+      "output_tokens_details": {
+        "reasoning_tokens": 1034
+      },
+      "total_tokens": 9542
+    },
+    "output": {
+      "promiseId": "ano-2025-b32021afae",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+          "relevant": false,
+          "reasonCz": "Příloha pouze uvádí návrh unijní směrnice o nejvyšších přípustných hmotnostech a novelu zákona o pozemních komunikacích, ale nedokládá, že se plánované práce týkají právě hmotnostních limitů na nápravu.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-b32021afae--source",
+        "zvlady-resolutions--law-change-uv-2026-175-193",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení k plánu legislativních prací a jeho příloha uvádí návrh unijní směrnice o nejvyšších přípustných hmotnostech vozidel i novelu zákona o pozemních komunikacích. Samotné uvedení těchto položek ale nedokládá, že vláda plánuje revidovat právě limity maximální hmotnosti na nápravu, ani jak by je změnila. Proto z předložených podkladů nelze potvrdit podstatný posun ve slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neuvádějí obsah plánované novely ani podrobnosti o směrnici ve vztahu k limitům na nápravu; nelze proto rozhodnout, zda vládní plán tento slib skutečně posouvá."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_010a9d3d28ffb2c3016aea8dc9e46c87d1ac7e7365857153c3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8080,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8077
+      },
+      "output_tokens": 1450,
+      "output_tokens_details": {
+        "reasoning_tokens": 960
+      },
+      "total_tokens": 9530
+    },
+    "output": {
+      "promiseId": "ano-2025-b32021afae",
+      "changeRelevance": [
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+          "relevant": true,
+          "reasonCz": "Výhled výslovně uvádí návrh změny unijních pravidel o maximálních hmotnostech vozidel i novelu zákona o pozemních komunikacích, takže se týká oblasti slibu.",
+          "effectCz": "Usnesení nemění dosavadní právní limity; zařazuje do výhledu implementačních prací návrh změny směrnice o maximálních přípustných hmotnostech a novelu zákona o pozemních komunikacích. Neuvádí však konkrétní změnu limitů, jejich hodnoty ani to, zda by byly přísnější či mírnější, takže směr a rozsah změny nelze z balíčku určit."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-b32021afae--source",
+        "zvlady-resolutions--law-change-uv-2026-175-193",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Vláda přijala usnesení, jehož výhled legislativních prací uvádí změnu unijních pravidel o maximálních hmotnostech vozidel a novelu zákona o pozemních komunikacích. Tím vláda zařadila příslušnou oblast do plánovaných legislativních prací, což představuje krok směrem k revizi limitů na nápravu. Usnesení ale samo limity nemění a neříká, jaké konkrétní hodnoty nebo pravidla se mají změnit. Jde proto o dílčí posun, nikoli o splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výhled neupřesňuje, zda připravované změny přímo upraví limity maximální hmotnosti na nápravu, ani zda je zpřísní či zmírní; jejich konkrétní obsah z dodaných podkladů nelze určit."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_022e3c9cea6b4a72016aea8de00a2c87d19480966830f4d465",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 7001,
+      "input_tokens_details": {
+        "cache_write_tokens": 2588,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 229,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 7230
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "ano-2025-b32021afae--source",
+        "zvlady-resolutions--law-change-uv-2026-175-193",
+        "zvlady-resolutions--2026-175"
+      ],
+      "explanationCz": "Přesvědčivější je první hodnocení, protože rozlišuje obecný plán změn od konkrétního slibu upravit hmotnostní limity na nápravu. Vláda s účastí ANO schválila výhled prací, který zmiňuje evropská pravidla pro hmotnost vozidel a novelu zákona o pozemních komunikacích. Dodaný text ale neříká, zda se mají měnit právě limity na nápravu ani jak má změna omezit ničení silnic. Druhé hodnocení tak uznává posun jen na základě příbuzného tématu, což pro doložení kroku ke splnění slibu nestačí."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

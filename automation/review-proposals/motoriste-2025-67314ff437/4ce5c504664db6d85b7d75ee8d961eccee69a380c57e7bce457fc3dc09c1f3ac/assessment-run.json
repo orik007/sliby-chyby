@@ -1,0 +1,638 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-43-50-011Z--2f1cd36277fd",
+  "evaluatedAt": "2026-11-05T10:43:50.011Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-67314ff437/2f1cd36277fd561dda7e1c669cb57a3b004292cc40d98b8954144d88184cb84d.json",
+  "packageHash": "2f1cd36277fd561dda7e1c669cb57a3b004292cc40d98b8954144d88184cb84d",
+  "assessmentContentHash": "0ac39f146dc1d16b69c7298f68b8bb686c4b217cef18d195704137c1fd24837a",
+  "assessmentFingerprint": "4ce5c504664db6d85b7d75ee8d961eccee69a380c57e7bce457fc3dc09c1f3ac",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-67314ff437",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Relevance verdict names something other than a law change in the package: psp-core-2025--law-change-sb-2026-23",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_050473123a718988016aec5d38534887d1af489a6615f31f1f",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 93868,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 93865
+            },
+            "output_tokens": 10813,
+            "output_tokens_details": {
+              "reasoning_tokens": 8011
+            },
+            "total_tokens": 104681
+          },
+          "output": {
+            "promiseId": "motoriste-2025-67314ff437",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-7",
+                "relevant": true,
+                "reasonCz": "Změny stavebních příloh se týkají zařazení terénních úprav pro zadržování vody a úprav pozemků podporujících vsakování, tedy skutečných retenčních opatření.",
+                "effectCz": "Dosavadní zařazení terénních úprav pro zadržování vody v krajině do jednoduchých staveb se vztahovalo na nezastavěné území; návrh nahrazuje tento výraz „nezastavitelným“ územím a schválené znění doplňuje také pravidla pro některé úpravy vodního toku a pozemků podporujících vsakování. Změna tak upravuje, kde a jak se tyto úpravy stavebně zařazují, ale z dodaného znění nelze určit, zda jejich povolování jako celek usnadňuje nebo zpřísňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-5",
+                "relevant": true,
+                "reasonCz": "Změna dává orgánům ochrany přírody možnost uzavírat dohody o péči o pozemky a provádět zásahy ke zlepšení krajiny, což může být prostředkem dobrovolných opatření.",
+                "effectCz": "Krajské úřady ani Agentura dříve neměly v uvedených výčtech výslovně uvedeno uzavírání dohod podle § 68 odst. 2; schválené znění jim tuto působnost doplňuje a přidává provádění zásahů ke zlepšení přírodního a krajinného prostředí. Dohody vytvářejí cestu pro spolupráci, ale znění § 68 ani konkrétní pravidla státní podpory v balíčku nejsou, takže jejich rozsah a finanční účinek nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-10",
+                "relevant": true,
+                "reasonCz": "Daňová novela se týká obecního osvobození zemědělských pozemků a předložený pozměňovací návrh navíc výslovně řeší daňovou úlevu pro meze, mokřady a zeleň.",
+                "effectCz": "Dosavadní znění umožňovalo obci vyloučit z osvobození zemědělské pozemky v zastavěném území i v zastavitelné ploše; návrh mění označení první oblasti a vypouští druhou část formulace. Z poskytnutého znění nelze určit dopad na konkrétní krajinné prvky; samostatný návrh na daňové osvobození těchto prvků nebyl součástí popsané změny."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Vodní novela výslovně zavádí povolení pro vsakování a akumulaci srážkové vody a zároveň upravuje možnost zelené infrastruktury v aktivních záplavových zónách.",
+                "effectCz": "Před změnou nebylo vsakování a akumulování srážkové vody uvedeno mezi způsoby nakládání s vodami vyžadujícími povolení podle § 8 odst. 1; schválené znění je do výčtu doplňuje, což pro tyto činnosti zavádí povolovací povinnost. Současně dřívější zákaz staveb v aktivní zóně záplavového území dostává výjimku pro zelenou infrastrukturu a některé odstranitelné drobné stavby; jde tedy o kombinaci nového omezení pro vodní opatření a dílčího rozšíření možností v záplavových územích."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": true,
+                "reasonCz": "Státní rozpočet může rozhodovat o státní finanční podpoře opatření, kterou slib výslovně požaduje, a pozměňovací návrhy k němu navrhují peníze na obnovu krajiny a zadržování vody.",
+                "effectCz": "Jde o nový státní rozpočet, nikoli změnu dosavadního zákona. Dodané části pouze odkazují na rozpočtové přílohy a neobsahují částky pro příslušné programy, takže z balíčku nelze určit, jakou podporu rozpočet skutečně stanoví ani jak se srovnává se slibem."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-sb-2026-23",
+                "relevant": true,
+                "reasonCz": "Nařízení zavádí pro zemědělce čerpající platby podmínky hospodaření proti erozi, včetně půdoochranných pásů a dalších opatření souvisejících se zadržováním vody.",
+                "effectCz": "Nařízení stanoví, že žadatel musí na vybraných erozně ohrožených plochách zajistit konkrétní postupy pěstování nebo půdoochranné technologie; mezi nimi jsou i pásy a jiné ochranné postupy. Předchozí znění nahrazovaného pravidla v balíčku chybí, takže nelze určit celkovou změnu přísnosti oproti dřívějšku, ale nově popsané podmínky jsou pro žadatele závazné, nikoli dobrovolné."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-25",
+                "relevant": true,
+                "reasonCz": "Nařízení upravuje dotace na agrolesnické systémy a výslovně vyjímá plochu ekologicky významného prvku z ploch, na které se dotace poskytne.",
+                "effectCz": "Nařízení výslovně stanoví, že dotace na založení a péči o agrolesnický systém se neposkytne na výměru ekologicky významného prvku. Předchozí pravidla způsobilosti nejsou dodána, proto nelze porovnat celkový rozsah podpory před změnou a po ní."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+                "relevant": true,
+                "reasonCz": "Nařízení upravuje ekoplatby na údržbu krajinných prvků, takže se přímo dotýká státní podpory péče o krajinu.",
+                "effectCz": "Nařízení stanoví, že ekoplatba na údržbu krajinných prvků nebude poskytnuta na plochu, na niž byla podána žádost o prémiovou celofaremní ekoplatbu. Jde o výslovné omezení souběhu těchto plateb, ale protože předchozí pravidla nejsou v balíčku, nelze určit celkovou změnu dostupnosti podpory."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-167",
+                "relevant": true,
+                "reasonCz": "Nařízení doplňuje krajinný prvek do výčtu podmínek v pravidlech přímých plateb, a proto se může týkat podpory krajinných prvků.",
+                "effectCz": "Dodané znění doplňuje do § 13 odst. 4 písmeno f) „krajinného prvku“. Předchozí znění ani okolní ustanovení nejsou k dispozici, takže nelze určit, zda doplnění rozšiřuje, nebo omezuje nárok na platbu."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": false,
+            "citedEvidenceIds": [
+              "motoriste-2025-67314ff437--source",
+              "psp-core-2025--law-change-43174-1-7",
+              "psp-core-2025--law-change-43174-8-5",
+              "psp-core-2025--law-change-43174-10",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43204-1",
+              "esbirka-regulations--law-change-sb-2026-23",
+              "esbirka-regulations--law-change-sb-2026-25",
+              "esbirka-regulations--law-change-sb-2026-45",
+              "esbirka-regulations--law-change-sb-2026-167",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88192",
+              "psp-core-2025--amendment-text-1252",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--print-step-210761",
+              "psp-core-2025--amendment-text-495",
+              "psp-core-2025--vote-86854",
+              "psp-core-2025--amendment-text-381",
+              "psp-core-2025--vote-86864",
+              "psp-core-2025--vote-86957",
+              "esbirka-regulations--2026-23",
+              "esbirka-regulations--2026-25",
+              "esbirka-regulations--2026-45",
+              "esbirka-regulations--2026-167"
+            ],
+            "explanationCz": "Poslanci Motoristů předložili novelu, která rozšiřuje možnost uzavírat dohody o péči o pozemky a některé retenční úpravy stavebně upravuje příznivěji. Zároveň však novela vodního zákona nově vyžaduje povolení pro vsakování a akumulaci srážkové vody; poslanci Motoristů návrh po zamítnutí Senátem podpořili, a tím prosadili i tuto překážku dobrovolných retenčních opatření. Vláda navíc přijala nařízení s povinnými půdoochrannými podmínkami pro žadatele o zemědělské platby, což jde proti části slibu o dobrovolnosti. U rozpočtu Motoristé nepodpořili návrhy na 300 milionů korun pro obnovu přírody, ale skutečné částky v přijatém rozpočtu z dodaných částí nelze ověřit.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Přijaté části státního rozpočtu neuvádějí konkrétní částky pro podporu adaptačních a retenčních opatření. Nelze proto ověřit, jaký objem této podpory schválený rozpočet skutečně zajistil.",
+              "U nařízení č. 167/2026 Sb. chybí předchozí znění i okolí doplněného ustanovení; nelze určit, zda doplnění krajinného prvku nárok na platbu rozšiřuje, nebo omezuje.",
+              "U nařízení o agrolesnictví a ekoplatbách chybí předchozí pravidla způsobilosti, takže přesný čistý dopad omezení podpory nelze porovnat.",
+              "Důkazy ukazují rozporné kroky: novela schválená Sněmovnou usnadňuje některé retenční a krajinné postupy, zatímco nové povolovací a dotační podmínky je mohou omezovat."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-67314ff437",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Schválené změny stavebního zákona se týkají podmínek pro terénní úpravy zadržující vodu a pro úpravy pozemků podporující vsakování.",
+          "effectCz": "Dosavadní jednoduchou stavbou byla terénní úprava sloužící k zadržování vody do hloubky 1,5 m a na ploše nad 300 až 20 000 m² v nezastavěném území; schválený text místo toho uvádí území nezastavitelné a zachovává uvedené rozměrové meze. Z textu samotného nelze určit, zda změna pojmu rozšiřuje, nebo zužuje okruh pozemků, protože jeho vymezení zde není doloženo. Schválený text navíc řadí mezi drobné stavby některé úpravy přirozeného koryta a úpravy podporující vsakování na pozemcích u bydlení, čímž pro tyto případy zmírňuje stavební režim; nejde však přímo o podporu hospodářů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Změna výslovně rozšiřuje působnost orgánů ochrany přírody o dohody a zásahy ke zlepšení krajinného prostředí, což může umožnit dobrovolná opatření.",
+          "effectCz": "Krajské úřady a Agentura nově výslovně získávají působnost uzavírat dohody o péči o pozemek a provádět zásahy ke zlepšení přírodního a krajinného prostředí; u Agentury se tato působnost doplňuje také k ustanovení o finančních příspěvcích. Rozšiřují se tedy dostupné správní nástroje pro péči o krajinu, ale z dodaného textu nelze určit výši podpory ani podmínky dohod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-10",
+          "relevant": false,
+          "reasonCz": "Dodaný návrh mění výjimku obce z daně pro zemědělské pozemky obecně, ale nepropojuje ji s podporou ani zachováním slibovaných retenčních opatření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Schválené změny vodního zákona usnadňují vsakování a akumulaci srážkové vody a mění omezení pro některé stavby v aktivních záplavových zónách.",
+          "effectCz": "Dosavadní výčet případů, kdy nebylo třeba povolení k nakládání s vodami, se rozšiřuje o vsakování srážkové vody a její akumulaci s následným využitím nebo řízeným odvedením do kanalizace, takže se pro tyto činnosti povolovací povinnost zmírňuje. Dosavadní zákaz staveb v aktivní záplavové zóně se rozšiřuje o výjimky pro zelenou infrastrukturu a určité odstranitelné stavby pro volnočasové aktivity; to může usnadnit některé krajinné úpravy, ale nejde o přímou podporu hospodářů ani o výslovné povolení všech slibovaných opatření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet určuje prostředky, z nichž může být krajinná péče podporována, a předložené pozměňovací návrhy výslovně mířily na obnovu přírody a zadržování vody.",
+          "effectCz": "Rozpočet stanoví příjmy a výdaje státu pro rok 2026, ale dodaný výňatek uvádí pouze to, že výdaje podle kapitol jsou v příloze, a neobsahuje příslušné částky. Z balíčku proto nelze zjistit, kolik rozpočet skutečně vyčlenil na slibovaná opatření ani jak se to srovnává s návrhy na navýšení podpory."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": false,
+          "reasonCz": "Dodaný popis zemědělských dotačních programů uvádí obecné agroenvironmentální cíle, ale neukazuje podporu konkrétních opatření uvedených ve slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-23",
+          "relevant": true,
+          "reasonCz": "Nařízení obsahuje povinné podmínky hospodaření na erozně ohrožené půdě včetně pásů chránících půdu, což se dotýká dobrovolnosti krajinných a retenčních opatření.",
+          "effectCz": "Nařízení stanoví pro žadatele o platby povinné podmínky hospodaření na silně i mírně erozně ohrožené půdě, včetně limitů pro pěstování plodin a požadavků na půdoochranné technologie. Mezi možnými technologiemi jsou také zasakovací, ochranné a předělovací pásy. Jde o povinné podmínky pro dotčené žadatele, tedy o zpřísnění povinností; nařízení však nepřikazuje právě všechny konkrétní prvky vyjmenované ve slibu."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-25",
+          "relevant": true,
+          "reasonCz": "Nařízení upravuje dotace na založení a péči o agrolesnické systémy, tedy podporu krajinných prvků se stromy na zemědělské půdě.",
+          "effectCz": "Nařízení stanoví, že dotace na založení ani péči o agrolesnický systém nebudou poskytnuty na výměru ekologicky významného prvku, čímž podporu pro tuto část území omezuje. Uvádí také, že se určitý požadavek nepoužije při výsadbě nejvýše 110 dřevin na hektar, ale bez znění dotčeného ustanovení nelze určit, jakou povinnost tato výjimka mění."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+          "relevant": true,
+          "reasonCz": "Nařízení se výslovně týká ekoplatby na údržbu krajinných prvků včetně mokřadů a skalek.",
+          "effectCz": "Text upravuje podmínky ekoplatby na údržbu krajinných prvků a umožňuje, aby se povinnost seče nebo pastvy změnila na základě stanoviska orgánu ochrany přírody. Současně stanoví, že fond platbu neposkytne na plochu, na kterou byla podána žádost o prémiovou celofaremní ekoplatbu, čímž v této překrývající se části podporu omezuje. Předchozí úplné znění ustanovení není dodáno, takže nelze posoudit celkovou změnu rozsahu podpory."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-167",
+          "relevant": true,
+          "reasonCz": "Dodaná změna výslovně přidává krajinný prvek do pravidla týkajícího se přímých plateb zemědělcům.",
+          "effectCz": "Dodaný text pouze přidává „krajinný prvek“ do výčtu v ustanovení o přímých platbách. Protože není uvedeno okolní ani předchozí znění tohoto ustanovení, nelze z balíčku určit, zda změna platby usnadňuje, omezuje, nebo mění jiným způsobem."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-67314ff437--source",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43204-1",
+        "esbirka-regulations--law-change-sb-2026-23",
+        "esbirka-regulations--law-change-sb-2026-25",
+        "esbirka-regulations--law-change-sb-2026-45",
+        "esbirka-regulations--law-change-sb-2026-167",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-495",
+        "psp-core-2025--vote-86854",
+        "psp-core-2025--amendment-text-381",
+        "psp-core-2025--vote-86864",
+        "psp-core-2025--vote-86957",
+        "esbirka-regulations--2026-23",
+        "esbirka-regulations--2026-25",
+        "esbirka-regulations--2026-45",
+        "esbirka-regulations--2026-167"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili novelu, která rozšířila působnost orgánů ochrany přírody uzavírat dohody o péči o pozemky, a později hlasovali pro její schválení; změny vodního zákona také zjednodušují některé způsoby zadržování srážkové vody. Vláda přijala pravidla pro dotace na agrolesnictví a údržbu krajinných prvků, ta ale podporu v některých případech zároveň omezují. Při schvalování rozpočtu poslanci Motoristů nepodpořili dva návrhy na navýšení prostředků na obnovu přírody a zadržování vody, ačkoli následně hlasovali pro rozpočet jako celek. Dodaný výňatek rozpočtu neuvádí částky pro příslušné kapitoly a u pozdější změny přímých plateb chybí okolní znění, takže její účinek nelze spolehlivě určit. Doložené kroky tak posouvají část slibu, ale celý obraz státní podpory z dostupných podkladů ověřit nelze.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek ze státního rozpočtu neobsahuje částky pro kapitoly, které by umožnily zjistit, zda schválený rozpočet skutečně financuje slibovaná opatření.",
+        "U pozdější změny přímých plateb je dodán jen nový výraz „krajinný prvek“, nikoli okolní ustanovení; nelze určit, zda změna podporu rozšiřuje, nebo omezuje.",
+        "Povinné protierozní podmínky se týkají erozně ohrožené půdy a zahrnují ochranné pásy, ale balíček nedokládá, že přímo nařizují právě remízky, větrolamy, meze nebo malé vodní nádrže.",
+        "Schválený rozpočet a některá dotační pravidla tak mohou výsledek dále ovlivnit, ale dodané znění neumožňuje jejich plný dopad posoudit."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-67314ff437",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Změna se týká podmínek, za nichž lze jako jednoduché stavby provádět terénní úpravy sloužící k zadržování vody v krajině.",
+          "effectCz": "Předchozí znění řadilo tyto úpravy mezi jednoduché stavby v nezastavěném území; schválené znění používá užší pojem nezastavitelné území. Tím se v některých místech zužuje možnost využít tento jednodušší režim, takže změna může zadržovací opatření ztížit. Schválený text zároveň upravuje vztah této kategorie k drobným stavbám; jeho samostatný dopad nelze z dodaného výřezu bezpečně určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Změna výslovně rozšiřuje působnost orgánů ochrany přírody o uzavírání dohod o péči o pozemky a o státní finanční příspěvky na ochranu přírody a krajiny.",
+          "effectCz": "Dříve uvedené kompetence krajských úřadů a Agentury tyto dohody výslovně nezahrnovaly; schválené znění jim je svěřuje a výslovně připojuje uzavírání dohod také k poskytování finančních příspěvků ze státního rozpočtu. Vzniká tak výslovnější cesta pro dobrovolnou péči a státní podporu, což je vůči slibu posunem k jeho části."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-10",
+          "relevant": true,
+          "reasonCz": "Změna pravidel osvobození zemědělských pozemků od daně může ovlivnit daňové zacházení se zemědělskou půdou; k témuž tisku byl předložen i návrh daňového zvýhodnění mezí, zamokřených ploch a zeleně.",
+          "effectCz": "Dosavadní úprava dovolovala obci omezit osvobození zemědělských pozemků mimo jiné v zastavěném území a zastavitelné ploše; návrh mění označení první oblasti na zastavitelné území a vypouští výslovnou zmínku o zastavitelné ploše. Z dodaného znění nelze určit celkový dopad této změny na daňové zacházení s konkrétními opatřeními; zvláštní návrh na daňové zvýhodnění krajinných prvků je obsažen v pozměňovacím návrhu, nikoli v předloženém znění této části zákona."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Schválená část vodního zákona obsahuje pravidla přímo týkající se vsakování a akumulace srážkové vody i zelené infrastruktury v záplavových územích.",
+          "effectCz": "Dosavadní výjimky z povolení k nakládání s vodami neuváděly vsakování a akumulaci srážkové vody; schválený text je přidává, čímž u těchto činností povolovací povinnost uvolňuje. Zároveň připouští některé drobné a jednoduché stavby zelené infrastruktury v aktivních zónách záplavových území za stanovených podmínek. Jde o usnadnění části vodohospodářských a adaptačních opatření, nikoli o ustanovení státní podpory."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet může určit prostředky na státní podporu krajinných opatření a předložené pozměňovací návrhy se výslovně týkají financování obnovy přírody a zadržování vody.",
+          "effectCz": "Státní rozpočet nemá předchozí znění, které by se dalo porovnat; dodaný výřez uvádí jen odkazy na rozpočtové přílohy, nikoli příslušné částky. Pozměňovací návrhy navrhovaly přidat 300 milionů Kč na ochranu přírody a krajiny, včetně programu obnovy krajiny a zadržování vody, ale skutečné konečné rozpočtové přidělení z balíčku nelze zjistit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": false,
+          "reasonCz": "Dodaný výřez popisuje obecné zemědělské a agroenvironmentální dotační programy, ale neukazuje podporu remízků, větrolamů, mezí ani malých vodních nádrží.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-23",
+          "relevant": true,
+          "reasonCz": "Nařízení zavádí povinné postupy hospodaření na erozně ohrožené půdě, včetně pásů a dalších půdoochranných technologií, což se dotýká slibu o dobrovolnosti opatření.",
+          "effectCz": "Nařízení ukládá žadatelům o platby povinnost dodržet stanovené postupy hospodaření, případně použít půdoochranné technologie včetně zasakovacích a ochranných pásů. Jde o přísnější povinnosti pro část zemědělců, a tedy o rozpor s dobrovolností tam, kde se tyto pásy překrývají se slibovanými opatřeními; text však nedokládá povinné zakládání přímo vyjmenovaných remízků, větrolamů, mezí či nádrží."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-25",
+          "relevant": true,
+          "reasonCz": "Nařízení výslovně řeší dotace na agrolesnické systémy a ekologicky významné krajinné prvky, tedy oblast státní podpory krajinných opatření.",
+          "effectCz": "Nařízení stanoví, že dotace na založení a péči o agrolesnický systém nebude poskytnuta na výměru ekologicky významného prvku. Tím se pro dotčenou plochu zmenšuje možnost získat tuto podporu; dodané znění ale neumožňuje určit, zda se pravidlo vztahuje na některé konkrétní prvky vyjmenované ve slibu."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+          "relevant": true,
+          "reasonCz": "Nařízení upravuje ekoplatby za údržbu krajinných prvků, tedy přímo státní podporu jejich zachování.",
+          "effectCz": "Nařízení výslovně vylučuje ekoplatbu za údržbu krajinných prvků na ploše, na kterou byla podána žádost o prémiovou celofaremní ekoplatbu, což omezuje souběh podpory a zmenšuje nárok v dotčených případech. Současně rozšiřuje úpravu seče či pastvy na další krajinný prvek a dovoluje změny podle stanoviska orgánu ochrany přírody; celkový dopad na podporu všech slibovaných opatření proto nelze vyjádřit jedním směrem."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-167",
+          "relevant": true,
+          "reasonCz": "Nařízení mění podmínky přímých plateb a výslovně přidává krajinný prvek do jednoho z ustanovení o jejich podmínkách.",
+          "effectCz": "Dodaný text stanoví pouze doplnění slov „krajinného prvku“ do § 13 odst. 4, ale neobsahuje dosavadní znění tohoto ustanovení. Nelze proto určit, zda se tím nárok na podporu rozšiřuje, omezuje, nebo mění jiným způsobem."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-67314ff437--source",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-10",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43204-1",
+        "esbirka-regulations--law-change-sb-2026-23",
+        "esbirka-regulations--law-change-sb-2026-25",
+        "esbirka-regulations--law-change-sb-2026-45",
+        "esbirka-regulations--law-change-sb-2026-167",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88192",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--amendment-text-1252",
+        "psp-core-2025--vote-86854",
+        "psp-core-2025--amendment-text-381",
+        "psp-core-2025--vote-86864",
+        "psp-core-2025--amendment-text-495",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "esbirka-regulations--2026-23",
+        "esbirka-regulations--2026-25",
+        "esbirka-regulations--2026-45",
+        "esbirka-regulations--2026-167"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili se svými partnery návrh, který umožňuje dohodami zajišťovat péči o pozemky a státní příspěvky na ochranu přírody; při závěrečném hlasování jej podpořili. Vláda zároveň přijala pravidla, která u části krajinných prvků omezují souběh ekoplateb, a pravidla podmiňující platby povinnými půdoochrannými postupy. Poslanci Motoristů také nepodpořili dva návrhy na navýšení financování obnovy přírody a zadržování vody o 300 milionů korun. Tyto kroky jsou v rozporu s částí slibu, která zdůrazňuje dobrovolnost a státní podporu, ačkoli jiné přijaté změny zadržování vody usnadňují. Dodané podklady neukazují konečné rozpočtové částky ani dosavadní znění jednoho pravidla přímých plateb, proto nelze závěr považovat za úplný.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výřez státního rozpočtu neobsahuje příslušné rozpočtové položky ani konečné částky, takže nelze ověřit, zda schválený rozpočet financuje slibovaná opatření. Poslanci Motoristů však hlasovali proti dvěma návrhům, které navrhovaly přidat 300 milionů Kč na obnovu přírody a zadržování vody.",
+        "U změny nařízení o přímých platbách není dodáno dosavadní znění § 13 odst. 4, takže směr jejího dopadu na nárok na podporu nelze určit.",
+        "Některé změny podporují dohody o péči a usnadňují vsakování či akumulaci vody; proti nim stojí povinné půdoochranné postupy a omezení souběhu ekoplateb. Tyto protichůdné kroky jsou zohledněny v celkovém hodnocení."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_07142fe9c009674f016aec5cda8a4487d1b2c617e2da470861",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 93868,
+      "input_tokens_details": {
+        "cache_write_tokens": 87518,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 12739,
+      "output_tokens_details": {
+        "reasoning_tokens": 9840
+      },
+      "total_tokens": 106607
+    },
+    "output": {
+      "promiseId": "motoriste-2025-67314ff437",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Schválené změny stavebního zákona se týkají podmínek pro terénní úpravy zadržující vodu a pro úpravy pozemků podporující vsakování.",
+          "effectCz": "Dosavadní jednoduchou stavbou byla terénní úprava sloužící k zadržování vody do hloubky 1,5 m a na ploše nad 300 až 20 000 m² v nezastavěném území; schválený text místo toho uvádí území nezastavitelné a zachovává uvedené rozměrové meze. Z textu samotného nelze určit, zda změna pojmu rozšiřuje, nebo zužuje okruh pozemků, protože jeho vymezení zde není doloženo. Schválený text navíc řadí mezi drobné stavby některé úpravy přirozeného koryta a úpravy podporující vsakování na pozemcích u bydlení, čímž pro tyto případy zmírňuje stavební režim; nejde však přímo o podporu hospodářů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Změna výslovně rozšiřuje působnost orgánů ochrany přírody o dohody a zásahy ke zlepšení krajinného prostředí, což může umožnit dobrovolná opatření.",
+          "effectCz": "Krajské úřady a Agentura nově výslovně získávají působnost uzavírat dohody o péči o pozemek a provádět zásahy ke zlepšení přírodního a krajinného prostředí; u Agentury se tato působnost doplňuje také k ustanovení o finančních příspěvcích. Rozšiřují se tedy dostupné správní nástroje pro péči o krajinu, ale z dodaného textu nelze určit výši podpory ani podmínky dohod."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-10",
+          "relevant": false,
+          "reasonCz": "Dodaný návrh mění výjimku obce z daně pro zemědělské pozemky obecně, ale nepropojuje ji s podporou ani zachováním slibovaných retenčních opatření.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Schválené změny vodního zákona usnadňují vsakování a akumulaci srážkové vody a mění omezení pro některé stavby v aktivních záplavových zónách.",
+          "effectCz": "Dosavadní výčet případů, kdy nebylo třeba povolení k nakládání s vodami, se rozšiřuje o vsakování srážkové vody a její akumulaci s následným využitím nebo řízeným odvedením do kanalizace, takže se pro tyto činnosti povolovací povinnost zmírňuje. Dosavadní zákaz staveb v aktivní záplavové zóně se rozšiřuje o výjimky pro zelenou infrastrukturu a určité odstranitelné stavby pro volnočasové aktivity; to může usnadnit některé krajinné úpravy, ale nejde o přímou podporu hospodářů ani o výslovné povolení všech slibovaných opatření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet určuje prostředky, z nichž může být krajinná péče podporována, a předložené pozměňovací návrhy výslovně mířily na obnovu přírody a zadržování vody.",
+          "effectCz": "Rozpočet stanoví příjmy a výdaje státu pro rok 2026, ale dodaný výňatek uvádí pouze to, že výdaje podle kapitol jsou v příloze, a neobsahuje příslušné částky. Z balíčku proto nelze zjistit, kolik rozpočet skutečně vyčlenil na slibovaná opatření ani jak se to srovnává s návrhy na navýšení podpory."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": false,
+          "reasonCz": "Dodaný popis zemědělských dotačních programů uvádí obecné agroenvironmentální cíle, ale neukazuje podporu konkrétních opatření uvedených ve slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-23",
+          "relevant": true,
+          "reasonCz": "Nařízení obsahuje povinné podmínky hospodaření na erozně ohrožené půdě včetně pásů chránících půdu, což se dotýká dobrovolnosti krajinných a retenčních opatření.",
+          "effectCz": "Nařízení stanoví pro žadatele o platby povinné podmínky hospodaření na silně i mírně erozně ohrožené půdě, včetně limitů pro pěstování plodin a požadavků na půdoochranné technologie. Mezi možnými technologiemi jsou také zasakovací, ochranné a předělovací pásy. Jde o povinné podmínky pro dotčené žadatele, tedy o zpřísnění povinností; nařízení však nepřikazuje právě všechny konkrétní prvky vyjmenované ve slibu."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-25",
+          "relevant": true,
+          "reasonCz": "Nařízení upravuje dotace na založení a péči o agrolesnické systémy, tedy podporu krajinných prvků se stromy na zemědělské půdě.",
+          "effectCz": "Nařízení stanoví, že dotace na založení ani péči o agrolesnický systém nebudou poskytnuty na výměru ekologicky významného prvku, čímž podporu pro tuto část území omezuje. Uvádí také, že se určitý požadavek nepoužije při výsadbě nejvýše 110 dřevin na hektar, ale bez znění dotčeného ustanovení nelze určit, jakou povinnost tato výjimka mění."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+          "relevant": true,
+          "reasonCz": "Nařízení se výslovně týká ekoplatby na údržbu krajinných prvků včetně mokřadů a skalek.",
+          "effectCz": "Text upravuje podmínky ekoplatby na údržbu krajinných prvků a umožňuje, aby se povinnost seče nebo pastvy změnila na základě stanoviska orgánu ochrany přírody. Současně stanoví, že fond platbu neposkytne na plochu, na kterou byla podána žádost o prémiovou celofaremní ekoplatbu, čímž v této překrývající se části podporu omezuje. Předchozí úplné znění ustanovení není dodáno, takže nelze posoudit celkovou změnu rozsahu podpory."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-167",
+          "relevant": true,
+          "reasonCz": "Dodaná změna výslovně přidává krajinný prvek do pravidla týkajícího se přímých plateb zemědělcům.",
+          "effectCz": "Dodaný text pouze přidává „krajinný prvek“ do výčtu v ustanovení o přímých platbách. Protože není uvedeno okolní ani předchozí znění tohoto ustanovení, nelze z balíčku určit, zda změna platby usnadňuje, omezuje, nebo mění jiným způsobem."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-67314ff437--source",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43204-1",
+        "esbirka-regulations--law-change-sb-2026-23",
+        "esbirka-regulations--law-change-sb-2026-25",
+        "esbirka-regulations--law-change-sb-2026-45",
+        "esbirka-regulations--law-change-sb-2026-167",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--amendment-text-495",
+        "psp-core-2025--vote-86854",
+        "psp-core-2025--amendment-text-381",
+        "psp-core-2025--vote-86864",
+        "psp-core-2025--vote-86957",
+        "esbirka-regulations--2026-23",
+        "esbirka-regulations--2026-25",
+        "esbirka-regulations--2026-45",
+        "esbirka-regulations--2026-167"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili novelu, která rozšířila působnost orgánů ochrany přírody uzavírat dohody o péči o pozemky, a později hlasovali pro její schválení; změny vodního zákona také zjednodušují některé způsoby zadržování srážkové vody. Vláda přijala pravidla pro dotace na agrolesnictví a údržbu krajinných prvků, ta ale podporu v některých případech zároveň omezují. Při schvalování rozpočtu poslanci Motoristů nepodpořili dva návrhy na navýšení prostředků na obnovu přírody a zadržování vody, ačkoli následně hlasovali pro rozpočet jako celek. Dodaný výňatek rozpočtu neuvádí částky pro příslušné kapitoly a u pozdější změny přímých plateb chybí okolní znění, takže její účinek nelze spolehlivě určit. Doložené kroky tak posouvají část slibu, ale celý obraz státní podpory z dostupných podkladů ověřit nelze.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek ze státního rozpočtu neobsahuje částky pro kapitoly, které by umožnily zjistit, zda schválený rozpočet skutečně financuje slibovaná opatření.",
+        "U pozdější změny přímých plateb je dodán jen nový výraz „krajinný prvek“, nikoli okolní ustanovení; nelze určit, zda změna podporu rozšiřuje, nebo omezuje.",
+        "Povinné protierozní podmínky se týkají erozně ohrožené půdy a zahrnují ochranné pásy, ale balíček nedokládá, že přímo nařizují právě remízky, větrolamy, meze nebo malé vodní nádrže.",
+        "Schválený rozpočet a některá dotační pravidla tak mohou výsledek dále ovlivnit, ale dodané znění neumožňuje jejich plný dopad posoudit."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0e6bf44a6b57a7ae016aec5d88522887d19c66682490f9ed92",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 93868,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 93865
+      },
+      "output_tokens": 10114,
+      "output_tokens_details": {
+        "reasoning_tokens": 7134
+      },
+      "total_tokens": 103982
+    },
+    "output": {
+      "promiseId": "motoriste-2025-67314ff437",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-7",
+          "relevant": true,
+          "reasonCz": "Změna se týká podmínek, za nichž lze jako jednoduché stavby provádět terénní úpravy sloužící k zadržování vody v krajině.",
+          "effectCz": "Předchozí znění řadilo tyto úpravy mezi jednoduché stavby v nezastavěném území; schválené znění používá užší pojem nezastavitelné území. Tím se v některých místech zužuje možnost využít tento jednodušší režim, takže změna může zadržovací opatření ztížit. Schválený text zároveň upravuje vztah této kategorie k drobným stavbám; jeho samostatný dopad nelze z dodaného výřezu bezpečně určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-5",
+          "relevant": true,
+          "reasonCz": "Změna výslovně rozšiřuje působnost orgánů ochrany přírody o uzavírání dohod o péči o pozemky a o státní finanční příspěvky na ochranu přírody a krajiny.",
+          "effectCz": "Dříve uvedené kompetence krajských úřadů a Agentury tyto dohody výslovně nezahrnovaly; schválené znění jim je svěřuje a výslovně připojuje uzavírání dohod také k poskytování finančních příspěvků ze státního rozpočtu. Vzniká tak výslovnější cesta pro dobrovolnou péči a státní podporu, což je vůči slibu posunem k jeho části."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-10",
+          "relevant": true,
+          "reasonCz": "Změna pravidel osvobození zemědělských pozemků od daně může ovlivnit daňové zacházení se zemědělskou půdou; k témuž tisku byl předložen i návrh daňového zvýhodnění mezí, zamokřených ploch a zeleně.",
+          "effectCz": "Dosavadní úprava dovolovala obci omezit osvobození zemědělských pozemků mimo jiné v zastavěném území a zastavitelné ploše; návrh mění označení první oblasti na zastavitelné území a vypouští výslovnou zmínku o zastavitelné ploše. Z dodaného znění nelze určit celkový dopad této změny na daňové zacházení s konkrétními opatřeními; zvláštní návrh na daňové zvýhodnění krajinných prvků je obsažen v pozměňovacím návrhu, nikoli v předloženém znění této části zákona."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Schválená část vodního zákona obsahuje pravidla přímo týkající se vsakování a akumulace srážkové vody i zelené infrastruktury v záplavových územích.",
+          "effectCz": "Dosavadní výjimky z povolení k nakládání s vodami neuváděly vsakování a akumulaci srážkové vody; schválený text je přidává, čímž u těchto činností povolovací povinnost uvolňuje. Zároveň připouští některé drobné a jednoduché stavby zelené infrastruktury v aktivních zónách záplavových území za stanovených podmínek. Jde o usnadnění části vodohospodářských a adaptačních opatření, nikoli o ustanovení státní podpory."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Státní rozpočet může určit prostředky na státní podporu krajinných opatření a předložené pozměňovací návrhy se výslovně týkají financování obnovy přírody a zadržování vody.",
+          "effectCz": "Státní rozpočet nemá předchozí znění, které by se dalo porovnat; dodaný výřez uvádí jen odkazy na rozpočtové přílohy, nikoli příslušné částky. Pozměňovací návrhy navrhovaly přidat 300 milionů Kč na ochranu přírody a krajiny, včetně programu obnovy krajiny a zadržování vody, ale skutečné konečné rozpočtové přidělení z balíčku nelze zjistit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": false,
+          "reasonCz": "Dodaný výřez popisuje obecné zemědělské a agroenvironmentální dotační programy, ale neukazuje podporu remízků, větrolamů, mezí ani malých vodních nádrží.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-23",
+          "relevant": true,
+          "reasonCz": "Nařízení zavádí povinné postupy hospodaření na erozně ohrožené půdě, včetně pásů a dalších půdoochranných technologií, což se dotýká slibu o dobrovolnosti opatření.",
+          "effectCz": "Nařízení ukládá žadatelům o platby povinnost dodržet stanovené postupy hospodaření, případně použít půdoochranné technologie včetně zasakovacích a ochranných pásů. Jde o přísnější povinnosti pro část zemědělců, a tedy o rozpor s dobrovolností tam, kde se tyto pásy překrývají se slibovanými opatřeními; text však nedokládá povinné zakládání přímo vyjmenovaných remízků, větrolamů, mezí či nádrží."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-25",
+          "relevant": true,
+          "reasonCz": "Nařízení výslovně řeší dotace na agrolesnické systémy a ekologicky významné krajinné prvky, tedy oblast státní podpory krajinných opatření.",
+          "effectCz": "Nařízení stanoví, že dotace na založení a péči o agrolesnický systém nebude poskytnuta na výměru ekologicky významného prvku. Tím se pro dotčenou plochu zmenšuje možnost získat tuto podporu; dodané znění ale neumožňuje určit, zda se pravidlo vztahuje na některé konkrétní prvky vyjmenované ve slibu."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-45",
+          "relevant": true,
+          "reasonCz": "Nařízení upravuje ekoplatby za údržbu krajinných prvků, tedy přímo státní podporu jejich zachování.",
+          "effectCz": "Nařízení výslovně vylučuje ekoplatbu za údržbu krajinných prvků na ploše, na kterou byla podána žádost o prémiovou celofaremní ekoplatbu, což omezuje souběh podpory a zmenšuje nárok v dotčených případech. Současně rozšiřuje úpravu seče či pastvy na další krajinný prvek a dovoluje změny podle stanoviska orgánu ochrany přírody; celkový dopad na podporu všech slibovaných opatření proto nelze vyjádřit jedním směrem."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-167",
+          "relevant": true,
+          "reasonCz": "Nařízení mění podmínky přímých plateb a výslovně přidává krajinný prvek do jednoho z ustanovení o jejich podmínkách.",
+          "effectCz": "Dodaný text stanoví pouze doplnění slov „krajinného prvku“ do § 13 odst. 4, ale neobsahuje dosavadní znění tohoto ustanovení. Nelze proto určit, zda se tím nárok na podporu rozšiřuje, omezuje, nebo mění jiným způsobem."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-67314ff437--source",
+        "psp-core-2025--law-change-43174-1-7",
+        "psp-core-2025--law-change-43174-8-5",
+        "psp-core-2025--law-change-43174-10",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43204-1",
+        "esbirka-regulations--law-change-sb-2026-23",
+        "esbirka-regulations--law-change-sb-2026-25",
+        "esbirka-regulations--law-change-sb-2026-45",
+        "esbirka-regulations--law-change-sb-2026-167",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88192",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--amendment-text-1252",
+        "psp-core-2025--vote-86854",
+        "psp-core-2025--amendment-text-381",
+        "psp-core-2025--vote-86864",
+        "psp-core-2025--amendment-text-495",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "esbirka-regulations--2026-23",
+        "esbirka-regulations--2026-25",
+        "esbirka-regulations--2026-45",
+        "esbirka-regulations--2026-167"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili se svými partnery návrh, který umožňuje dohodami zajišťovat péči o pozemky a státní příspěvky na ochranu přírody; při závěrečném hlasování jej podpořili. Vláda zároveň přijala pravidla, která u části krajinných prvků omezují souběh ekoplateb, a pravidla podmiňující platby povinnými půdoochrannými postupy. Poslanci Motoristů také nepodpořili dva návrhy na navýšení financování obnovy přírody a zadržování vody o 300 milionů korun. Tyto kroky jsou v rozporu s částí slibu, která zdůrazňuje dobrovolnost a státní podporu, ačkoli jiné přijaté změny zadržování vody usnadňují. Dodané podklady neukazují konečné rozpočtové částky ani dosavadní znění jednoho pravidla přímých plateb, proto nelze závěr považovat za úplný.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výřez státního rozpočtu neobsahuje příslušné rozpočtové položky ani konečné částky, takže nelze ověřit, zda schválený rozpočet financuje slibovaná opatření. Poslanci Motoristů však hlasovali proti dvěma návrhům, které navrhovaly přidat 300 milionů Kč na obnovu přírody a zadržování vody.",
+        "U změny nařízení o přímých platbách není dodáno dosavadní znění § 13 odst. 4, takže směr jejího dopadu na nárok na podporu nelze určit.",
+        "Některé změny podporují dohody o péči a usnadňují vsakování či akumulaci vody; proti nim stojí povinné půdoochranné postupy a omezení souběhu ekoplateb. Tyto protichůdné kroky jsou zohledněny v celkovém hodnocení."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0b1e7d7d29fc9502016aec5dd8fcd487d1aee2a76807ccf128",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 97356,
+      "input_tokens_details": {
+        "cache_write_tokens": 92943,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 576,
+      "output_tokens_details": {
+        "reasoning_tokens": 305
+      },
+      "total_tokens": 97932
+    },
+    "output": {
+      "choice": "cannot-decide",
+      "citedEvidenceIds": [
+        "psp-core-2025--law-change-43174-1-7",
+        "esbirka-regulations--law-change-sb-2026-23",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Ani jeden posudek dostatečně neopírá svůj závěr o doložené změny pravidel. První připisuje schválené novele změnu podmínek pro terénní úpravy zadržující vodu, kterou dodaný výňatek takto neuvádí. Druhý navíc bez doloženého vysvětlení územních pojmů tvrdí, že novela tato opatření ztěžuje; poslanci Motoristů přitom podpořili právě schválené znění, takže na jeho obsahu záleží. Oba posudky také označují protierozní podmínky přijaté vládou za zpřísnění, přestože chybí předchozí pravidla pro srovnání. Tyto nedostatky brání spolehlivě vybrat jeden z opačných závěrů."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-cannot-decide",
+    "status": null,
+    "selectedReview": null
+  }
+}

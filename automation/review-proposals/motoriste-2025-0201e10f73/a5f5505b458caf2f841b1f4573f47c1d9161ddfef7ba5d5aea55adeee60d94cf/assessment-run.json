@@ -1,0 +1,813 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T21-01-08-019Z--508cca1e9e6d",
+  "evaluatedAt": "2026-10-06T21:01:08.019Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-0201e10f73/508cca1e9e6df9051bf29f7503a6971e69b4478bfb22432d29e480255a35ed05.json",
+  "packageHash": "508cca1e9e6df9051bf29f7503a6971e69b4478bfb22432d29e480255a35ed05",
+  "assessmentContentHash": "b206af1e130b59d94a8696fb09fbf61116eac34ddd257c768fc6f03e991bfb9a",
+  "assessmentFingerprint": "a5f5505b458caf2f841b1f4573f47c1d9161ddfef7ba5d5aea55adeee60d94cf",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-0201e10f73",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment omits the relevance verdict for law change psp-core-2025--law-change-43264-14",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0843e39587f79416016ac55c59036087d2972ad920ab0cb564",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 664043,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 664040
+            },
+            "output_tokens": 12748,
+            "output_tokens_details": {
+              "reasoning_tokens": 10186
+            },
+            "total_tokens": 676791
+          },
+          "output": {
+            "promiseId": "motoriste-2025-0201e10f73",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Novela zavádí u některých stavebních podání digitální úkon a sledování řízení, takže přímo rozšiřuje možnost vyřídit jednu oblast státu online.",
+                "effectCz": "Dosavadní § 172 dovoloval podání přes Portál stavebníka i v listinné podobě; nově se některá podání musí učinit digitálně. Nová služba Portálu stavebníka umožňuje sledovat stav řízení a zákon dovoluje informační systémy sdružit; jde tedy o rozšíření digitálního vyřizování stavebních věcí, nikoli o doložené propojení s Portálem občana."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": false,
+                "reasonCz": "Změny pravidel pro odpady upravují nakládání se stavebním odpadem, nikoli online vyřizování služeb přes Portál občana.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-1",
+                "relevant": true,
+                "reasonCz": "Novela stanoví pro některá podání v oblasti podpory bydlení využití informačního systému, což se týká online vyřizování konkrétní životní situace.",
+                "effectCz": "Dříve kontaktní místo poskytovalo poradenství každému, kdo o něj projevil zájem; schválený text omezuje toto poradenství na osoby splňující určené podmínky pobytu a bytové nouze. Pro žádost o podpůrné opatření nově počítá s elektronickým informačním systémem, ale zachovává také asistované podání; jde o dílčí online kanál, nikoli o povinnost vyřídit vše přes Portál občana."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43239-1",
+                "relevant": true,
+                "reasonCz": "Novela zavádí elektronické vyřizování části rodičovského příspěvku, a tím se týká další konkrétní životní situace, kterou slib předpokládá řešit online.",
+                "effectCz": "Dosavadní úprava zahajovala řízení písemnou žádostí a elektronické úkony upravovala obecně; schválený text zavádí pro rodičovský příspěvek před porodem zvláštní elektronické řízení prostřednictvím informačního systému, s možností asistovaného podání. Pro tuto dávku se online cesta rozšiřuje, ale změna sama nedokládá její začlenění do Portálu občana."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43239-2",
+                "relevant": true,
+                "reasonCz": "Tato část novely ruší již přijatá pravidla pro digitalizaci některých dávek, a může tak oslabit online vyřizování veřejné služby.",
+                "effectCz": "Původní úprava měla zavést od 1. července 2026 elektronická podání, doručování přes informační systém dávek a vedení elektronického spisu. Schválený text ruší ustanovení, která tato řešení zaváděla; dostupnost uvedených digitálních kroků se tím zmenšuje a změna působí proti online vyřizování části sociálních dávek."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-1",
+                "relevant": true,
+                "reasonCz": "Novela vytváří pravidla pro digitální peněženku a elektronická potvrzení atributů, která mohou pomoci prokazovat údaje při online jednání se státem.",
+                "effectCz": "Dříve zákon tato potvrzení atributů a jejich použití v peněžence neupravoval. Nově zavádí pravidla pro jejich vydávání a použití, včetně elektronických potvrzení od veřejného sektoru; vytváří tak další možnost digitálního prokazování, ale její praktický rozsah ani napojení na Portál občana z balíčku nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-2",
+                "relevant": true,
+                "reasonCz": "Novela rozšiřuje možnosti elektronického prokazování totožnosti, které je jedním z předpokladů online využívání veřejných služeb.",
+                "effectCz": "Dosavadní § 2 umožňoval elektronické prokázání totožnosti pouze přes kvalifikovaný systém elektronické identifikace. Nově připouští také evropskou digitální peněženku, ale veřejné orgány ji nesmějí přijímat mimo kvalifikovaný systém; okruh možných digitálních prostředků se tedy rozšiřuje, aniž by vznikla povinnost využívat Portál občana."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-1",
+                "relevant": false,
+                "reasonCz": "Úprava vydávání cestovních dokladů sama nestanoví online vyřízení této služby ani její propojení s Portálem občana.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-2",
+                "relevant": false,
+                "reasonCz": "Změny u občanských průkazů upravují zejména osobní podání žádosti a převzetí průkazu, nikoli online služby Portálu občana.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-4",
+                "relevant": true,
+                "reasonCz": "Novela ruší údaje vedené v registru obyvatel pro elektronickou identifikaci a autentizaci, které souvisejí s přístupem k digitálním službám.",
+                "effectCz": "Před změnou se v registru obyvatel vedla data potřebná pro elektronickou identifikaci a autentizaci, včetně údajů o zablokování a odblokování; návrh tato ustanovení ruší a navazující odkazy odstraňuje. Jde o zúžení této evidované digitální podpory, jehož konkrétní dopad na Portál občana balíček neupřesňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-6",
+                "relevant": false,
+                "reasonCz": "Rušená pravidla se týkají doplnění osobního jednání elektronickou autentizací, nikoli vyřízení životní situace online přes Portál občana.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43311-1",
+                "relevant": true,
+                "reasonCz": "Novela ukládá vytvořit nástroj pro sestavování elektronických petic, což umožňuje online uskutečnit konkrétní občanskou činnost.",
+                "effectCz": "Dosavadní přechodná ustanovení nástroj pro sestavování elektronických petic neobsahovala. Nově má Ministerstvo vnitra takový nástroj vytvořit do 12 měsíců; jde o dílčí rozšíření online občanských služeb, nikoli o jejich sjednocení v Portálu občana."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-12",
+                "relevant": false,
+                "reasonCz": "Rozšíření okruhu uživatelů datových schránek o společenství obcí se netýká vyřizování životních situací občanů přes Portál občana.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43415-1",
+                "relevant": true,
+                "reasonCz": "Novela umožňuje dálková podání přes uživatelské rozhraní ministerstva a automatické vyřízení některých žádostí o registraci vozidel, tedy další dílčí online službu.",
+                "effectCz": "Předchozí znění § 14b neobsahovalo; návrh nově zavádí podání přes ministerské uživatelské rozhraní a automatizované vyřízení některých žádostí bez příloh. Pro uvedené úkony se rozšiřuje možnost online vyřízení, ale zákon neurčuje jejich začlenění do Portálu občana."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43415-3",
+                "relevant": false,
+                "reasonCz": "Tato část upravuje pravidla silničního provozu a předávání řidičských průkazů, nikoli online vyřizování přes Portál občana.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "motoriste-2025-0201e10f73--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--law-change-43189-1",
+              "psp-core-2025--print-step-210686",
+              "psp-core-2025--vote-87617",
+              "psp-core-2025--law-change-43239-1",
+              "psp-core-2025--law-change-43239-2",
+              "psp-core-2025--vote-87387",
+              "psp-core-2025--law-change-43275-1",
+              "psp-core-2025--law-change-43275-2",
+              "psp-core-2025--print-step-211101",
+              "psp-core-2025--law-change-43293-4",
+              "psp-core-2025--print-step-211258",
+              "psp-core-2025--law-change-43311-1",
+              "psp-core-2025--vote-87594",
+              "psp-core-2025--law-change-43415-1",
+              "psp-core-2025--print-step-212080"
+            ],
+            "explanationCz": "Poslanci Motoristů hlasovali pro novelu stavebního zákona, která u některých podání vyžaduje digitální úkon a umožňuje sledovat stav stavebního řízení. Jde o dílčí posun k online vyřizování, nikoli o důkaz, že všechny životní situace budou dostupné přes jednotný Portál občana. V květnu strana také podpořila novelu rodičovského příspěvku, která současně zaváděla elektronickou cestu pro jednu dávku a rušila jiné plánované prvky digitalizace. Nejnovější rozhodnutí posouvá online vyřízení stavebních věcí, ale splnění celého slibu balíček nedokládá.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Balíček neukazuje, zda se Portál stavebníka, systém podpory bydlení ani další uvedené elektronické služby propojí s Portálem občana; proto nelze doložit slíbené jednotné kontaktní místo ani online vyřízení všech životních situací.",
+              "Květnové hlasování spojilo dílčí elektronické vyřizování rodičovského příspěvku se zrušením plánovaných digitálních postupů u dalších dávek, takže část dřívějšího jednání strany působila proti online dostupnosti."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-0201e10f73",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změna stavebního zákona výslovně upravuje elektronická podání a Portál stavebníka, tedy online vyřizování konkrétní skupiny státních služeb.",
+          "effectCz": "Dříve bylo možné podat žádost přes Portál stavebníka, ale také listinně; schválená verze vyžaduje digitální úkon u podání s dokumentací a u osob s automaticky zpřístupněnou datovou schránkou a Portálu stavebníka přidává sledování stavu řízení. Online vyřizování stavebních věcí se tak posiluje, zatímco povinnost digitálního podání je v uvedených případech přísnější; text však nespojuje Portál stavebníka s Portálem občana ani nezajišťuje vyřízení všech životních situací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změny odpadového zákona přesouvají posuzování odpadových podmínek do stavebního rozhodování, ale nedokládají elektronické vyřizování ani spojení s Portálem občana.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": true,
+          "reasonCz": "Schválený návrh upravuje elektronické podávání a informační systém podpory bydlení pro konkrétní státní službu, což je skutečná část online vyřizování životních situací.",
+          "effectCz": "Dříve uvedené ustanovení vymezovalo účastníka řízení; schválený text stanoví elektronická podání přes informační systém podpory bydlení, datovou schránku i asistované podání a zachovává také listinnou cestu. Pro část vyřizování podpory bydlení se tím zavádí online možnost, což slib posouvá kupředu, ale systém není v textu propojen s Portálem občana a zákon současně mění kontaktní místa a rozdělení jejich agendy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Změna zavádí elektronický postup pro rodičovský příspěvek před porodem, tedy online řešení konkrétní životní situace.",
+          "effectCz": "Dříve citované ustanovení počítalo s podáním žádosti o dávku na tiskopisu; schválená úprava rozlišuje nedigitalizované dávky a digitální rodičovský příspěvek před porodem s podáváním přes informační systém. Online vyřízení této konkrétní dávky se tím umožňuje, jde však jen o dílčí službu a ne o jednotné kontaktní místo pro všechny situace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Tato část odstraňuje některé již plánované změny elektronického vyřizování dávek státní sociální podpory, a proto se přímo dotýká online dostupnosti státních služeb.",
+          "effectCz": "Předchozí novela obsahovala ustanovení pro elektronické podávání, doručování a vedení spisu u dávek; schválený text vypouští konkrétní body této novely, včetně ustanovení zavádějících elektronické řízení a doručování. Tím se část plánovaného online vyřizování ruší nebo odkládá, a působí tedy proti dílčí části slibu; vedle toho první část stejného návrhu zachovává digitální postup pro rodičovský příspěvek před porodem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": true,
+          "reasonCz": "Nový cizinecký zákon upravuje cizinecký účet pro elektronické úkony a doručování, což umožňuje online vyřizovat alespoň část pobytových záležitostí.",
+          "effectCz": "Jde o novou právní úpravu bez předchozího znění těchto pravidel; schválený text zavádí cizinecký účet, elektronické doručování a elektronické úkony v části pobytových řízení. To poskytuje online cestu pro část služeb, ale vytváří samostatný účet a systém, nikoli jednotné kontaktní místo Portálu občana."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": true,
+          "reasonCz": "Nový cizinecký zákon stanoví elektronické podávání v pobytových řízeních prostřednictvím cizineckého účtu a příslušná online hlášení.",
+          "effectCz": "Jde o nová ustanovení bez předchozího znění; schválený text ukládá u pobytových řízení elektronická podání přes cizinecký účet a upravuje související elektronické povinnosti. Pro tuto skupinu uživatelů tak rozšiřuje možnost řešit záležitosti online, zároveň jde o oddělený systém, nikoli o propojení s Portálem občana."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje používat digitální peněženku k online prokazování skutečností vůči státu, což může být součástí elektronického vyřizování služeb.",
+          "effectCz": "Dřívější úprava řešila uchovávání a ověřování elektronických podpisů a pečetí; návrh nově stanoví, že úřady musí umožnit online prokázání skutečností elektronickými potvrzeními atributů přes evropskou digitální peněženku. To rozšiřuje digitální způsob prokazování a může usnadnit online služby, avšak samo o sobě nezavádí jejich vyřízení v Portálu občana."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně umožňuje prokazování totožnosti evropskou digitální peněženkou, což je jeden z prostředků potřebných pro online využívání veřejných služeb.",
+          "effectCz": "Dříve se elektronická identita pro účely právních úkonů prokazovala prostřednictvím kvalifikovaného systému; návrh připouští také digitální peněženku a ukládá osobám ověřujícím totožnost, aby ji za stanovených podmínek přijímaly. Rozšiřuje se tak možnost elektronické identifikace, ale návrh sám nezajišťuje jednotné online vyřízení všech služeb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": false,
+          "reasonCz": "Změny pravidel pro vydávání a přebírání cestovních dokladů samy o sobě nezavádějí online službu ani napojení na Portál občana.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-2",
+          "relevant": false,
+          "reasonCz": "Změny týkající se občanských průkazů upravují jejich vydávání, předání a evidenci, nikoli online vyřizování přes Portál občana.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": true,
+          "reasonCz": "Návrh odstraňuje z registru obyvatel údaje používané pro elektronickou identifikaci a související odkazy v pravidlech pro veřejné služby, což se může dotknout online přihlašování.",
+          "effectCz": "Předchozí znění registru obyvatel obsahovalo data potřebná pro elektronickou identifikaci a autentizaci a související pravidla jejich používání; návrh tato data z ustanovení registru odstraňuje. Tím se ruší jedna dosavadní právní cesta pro elektronickou identifikaci, ale balíček neukazuje její technický dopad ani to, zda ji plně nahrazuje digitální peněženka."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": true,
+          "reasonCz": "Návrh ruší ustanovení o elektronické autentizaci při vyřizování digitálních úkonů, což se přímo týká možnosti řešit státní služby online.",
+          "effectCz": "Předchozí pravidla umožňovala uživateli požadovat autentizaci jako podmínku digitálního úkonu a upravovala související aplikaci a potvrzení; návrh tato ustanovení ruší. Odstraňuje tím dosavadní prostředek pro elektronickou obsluhu některých úkonů, což jde proti online části slibu; případná náhrada v jiném systému není v této části doložena."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43311-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí elektronické petice a online náhled hlasovacího lístku, tedy digitální vyřízení a přístup k části občanských záležitostí.",
+          "effectCz": "Dřívější pravidla nestanovovala nástroj pro sestavování elektronických petic ani grafický kód k náhledu hlasovacího lístku; návrh obojí zavádí, avšak termín vytvoření nástroje prodlužuje z 12 na 18 měsíců. Rozsah online služeb se rozšiřuje, ale jejich zavedení se časově odkládá a netýká se všech životních situací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-12",
+          "relevant": false,
+          "reasonCz": "Rozšíření okruhu uživatelů datových schránek o společenství obcí neupravuje online služby pro občany ani jejich sjednocení v Portálu občana.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Změny registru vozidel, registračních značek a jejich doručování nesouvisejí s elektronickým vyřizováním životních situací přes Portál občana.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-3",
+          "relevant": false,
+          "reasonCz": "Změny zákona o silničním provozu upravují pravidla a kontrolu provozu vozidel, nikoli online státní služby.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-0201e10f73--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43189-1",
+        "psp-core-2025--print-step-210686",
+        "psp-core-2025--vote-87617",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--law-change-43264-14",
+        "psp-core-2025--law-change-43264-16",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43293-4",
+        "psp-core-2025--law-change-43293-6",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--law-change-43311-1",
+        "psp-core-2025--vote-87594"
+      ],
+      "explanationCz": "Program Motoristů slibuje jednotné online kontaktní místo státu a možnost vyřídit všechny životní situace bez návštěv úřadů. Poslanci strany podpořili změnu stavebního zákona, která rozšiřuje online vyřizování stavebních věcí, a vláda navrhla další dílčí online služby; žádný z těchto kroků však nespojuje všechny služby s Portálem občana. U vládního návrhu nového cizineckého zákona, který zavádí elektronické podávání přes cizinecký účet, hlasovalo pro jen šest ze třinácti poslanců Motoristů, takže klub nedal většinu pro jeho přijetí, přestože návrh online vyřizování částečně rozšiřoval. Jiné vládní návrhy zároveň ruší některé dřívější možnosti elektronické autentizace a plánované digitalizace dávek; celkový zaznamenaný posun proto působí proti slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrhy digitálních peněženek mají online identifikaci usnadnit, ale jsou doloženy pouze jako vládní návrhy; balíček neukazuje, zda nakonec nahradí rušené způsoby autentizace.",
+        "Změna stavebního zákona obsahuje úpravy Portálu stavebníka, ale balíček nedokládá jeho propojení s Portálem občana ani rozsah skutečně vyříditelných služeb.",
+        "U návrhu cizineckého zákona je zaznamenáno, že šest z třinácti poslanců Motoristů hlasovalo pro; protože k většině bylo třeba sedm hlasů, jejich klub nedal většinovou podporu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-0201e10f73",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Mění digitální podávání ve stavebních řízeních, zavádí sledování jejich stavu na Portálu stavebníka a umožňuje spojovat informační systémy, takže zasahuje do online vyřizování části životních situací.",
+          "effectCz": "Dříve bylo možné podávat žádosti přes Portál stavebníka nebo listinně; schválené znění u některých podání vyžaduje digitální úkon, což rozšiřuje či posiluje online cestu, ale zároveň omezuje listinnou možnost. Dříve zákon vyjmenovával oddělené stavební informační systémy, nově je Úřad může spojit do jednoho systému; tato možnost se zvětšuje, není však povinná. Nově Portál stavebníka nabízí sledování stavu řízení, tedy přidává digitální službu; změna ale sama nezavádí Portál občana jako jednotné místo pro všechny státní služby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Upravuje pravidla nakládání s odpady při záměrech, ale nedokládá vazbu na Portál občana ani na online vyřízení životních situací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Mění podmínky poradenství v oblasti bydlení, nikoli způsob digitálního kontaktu občana se státem nebo Portál občana.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Zavádí elektronické vyřizování části rodičovského příspěvku, což je konkrétní dílčí životní situace, kterou lze řešit online.",
+          "effectCz": "Před změnou se žádost o dávku podávala písemně; schválené znění připouští u nedigitalizovaných dávek také datovou schránku a elektronickou poštu a u rodičovského příspěvku před porodem zavádí zvláštní elektronický postup. Tím se online možnost rozšiřuje, ale jen u části dávek a nikoli prostřednictvím Portálu občana. Nový rodičovský příspěvek před porodem činí 15 000 Kč měsíčně; částka sama nesouvisí s příslibem jednotného online kontaktního místa."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Ruší části dříve schválené úpravy, které měly zavést širší elektronické podávání a doručování u dávek, a tím jde proti online vyřizování dalších životních situací.",
+          "effectCz": "Dříve přijatá, avšak dosud neúčinná úprava počítala s elektronickým podáváním, doručováním a elektronickým spisem pro dávky státní sociální podpory. Schválená změna ruší vyjmenované body, které tyto postupy zaváděly, a vypouští je také z ustanovení o účinnosti; rozsah plánovaného online vyřizování dávek se tím zmenšuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": false,
+          "reasonCz": "Tato část se týká řízení a elektronického účtu pro cizince, nikoli online vyřizování životních situací občanů České republiky přes Portál občana.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": false,
+          "reasonCz": "Ukládá cizincům povinnosti spojené s jejich pobytem, ale nedokládá změnu služeb pro občany ani jejich přístup přes Portál občana.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Vytváří právní podmínky pro použití evropské digitální peněženky při prokazování skutečností vůči státu, což může usnadnit online vyřizování služeb.",
+          "effectCz": "Dříve zákon upravoval zejména ověřování elektronických podpisů; nově výslovně umožňuje prokazovat skutečnosti online peněženkou digitální identity a ukládá orgánům veřejné moci tuto možnost umožnit. Nově se také zavádí elektronická potvrzení atributů; online možnost se tedy rozšiřuje, avšak zákon nedokládá napojení těchto služeb na Portál občana."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje právní úpravu elektronické identifikace o digitální peněženku, která může sloužit jako prostředek k online přístupu ke státním službám.",
+          "effectCz": "Dříve bylo možné prokázat totožnost elektronicky jen prostřednictvím kvalifikovaného systému elektronické identifikace. Návrh přidává peněženku digitální identity jako další možnost, ale u orgánů veřejné moci ji nepřipouští mimo kvalifikovaný systém; přístupové možnosti tedy rozšiřuje, současně je omezuje na stanovený rámec. Změna sama nezavádí jednotné kontaktní místo."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": true,
+          "reasonCz": "Umožňuje ohlásit ztrátu, zničení nebo nebezpečí zneužití cestovního dokladu elektronicky, což je konkrétní úřední situace řešitelná bez návštěvy úřadu.",
+          "effectCz": "Dříve bylo nutné neprodleně ohlásit ztrátu, odcizení či zničení cestovního dokladu příslušnému orgánu nebo policii; nově lze oznámení učinit také datovou schránkou, e-mailem nebo elektronickým formulářem a přidává se i nebezpečí zneužití. Možnost online vyřízení se tedy rozšiřuje, ale změna neurčuje, že se tak děje přes Portál občana."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-2",
+          "relevant": false,
+          "reasonCz": "Upravuje zejména postup při vydávání a předávání občanských průkazů, ale zachovává osobní podání žádosti a nevytváří online kanál pro vyřízení této situace.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": true,
+          "reasonCz": "Ruší údaje a postupy pro elektronickou identifikaci vedené v základním registru obyvatel, tedy mění infrastrukturu důležitou pro digitální přístup ke státním službám.",
+          "effectCz": "Před změnou registr obsahoval data potřebná pro elektronickou identifikaci a autentizaci a související údaje o jejich zablokování; schválený návrh tyto položky ruší a ukládá jejich vymazání. Dostupnost této dosavadní autentizační cesty se tím zmenšuje, a může tak ztížit online přístup; balíček však současně zavádí peněženku digitální identity jiným zákonem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": false,
+          "reasonCz": "Ruší možnost doplnit osobní prokázání totožnosti elektronickou autentizací; jde o postup při osobním jednání, nikoli o řešení životních situací online bez návštěvy úřadu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43311-1",
+          "relevant": false,
+          "reasonCz": "Zavádí nástroj pro sestavování elektronických petic, ale petice nejsou vyřizováním životních situací přes Portál občana.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-12",
+          "relevant": false,
+          "reasonCz": "Rozšiřuje používání datových schránek na společenství obcí, nikoli online služby pro občana nebo jednotné kontaktní místo státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Zavádí možnost podávat vybrané žádosti o registraci vozidel přes online rozhraní a jejich automatizované vyřízení, což odpovídá části slibu o online řešení úředních situací.",
+          "effectCz": "Dříve v uvedeném zákoně nebyla tato možnost upravena; nově se žádosti podané přes rozhraní Ministerstva dopravy mohou vyřizovat bez účasti úřední osoby a žadatel si může zvolit doručení nebo převzetí dokladů. Tím se rozšiřuje možnost online vyřízení, ale jde o samostatné rozhraní a jen o vymezené úkony."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-3",
+          "relevant": false,
+          "reasonCz": "Upravuje pravidla provozu vozidel a doručování řidičských dokladů, ale nepřidává podstatnou možnost vyřídit životní situaci online přes Portál občana.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-0201e10f73--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43293-1",
+        "psp-core-2025--law-change-43293-4",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--print-step-212080"
+      ],
+      "explanationCz": "Motoristé hlasovali pro novelu stavebního zákona, která přidává sledování stavebních řízení na Portálu stavebníka a umožňuje spojovat informační systémy; jde o dílčí krok, nikoli o zavedení jednotného Portálu občana. Vláda, v níž Motoristé působí, navrhla také digitální peněženku pro prokazování totožnosti, elektronické ohlášení ztráty cestovního dokladu a online vyřizování některých registrací vozidel. Rozporuplný byl hlas strany pro novelu dávek: umožnila digitální žádosti v omezeném případě, ale zároveň zrušila plánované širší digitální postupy pro další dávky. Pozdější konečné hlasování Motoristů pro stavební novelu dokládá dílčí posun, nikoli splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Důkazy dokládají dílčí online služby a možnost spojovat některé informační systémy, ale neprokazují, že jsou tyto služby skutečně napojeny na Portál občana nebo že lze online vyřídit všechny životní situace.",
+        "Hlasování o novele dávek podpořilo současně omezenou digitalizaci jedné dávky i zrušení širšího plánovaného elektronického vyřizování; šlo tedy o rozporné části téhož návrhu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0965035da7ef2d85016ac55b3e132487d2a2aae962dc514758",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 664043,
+      "input_tokens_details": {
+        "cache_write_tokens": 660073,
+        "cached_tokens": 3967
+      },
+      "output_tokens": 9616,
+      "output_tokens_details": {
+        "reasoning_tokens": 6358
+      },
+      "total_tokens": 673659
+    },
+    "output": {
+      "promiseId": "motoriste-2025-0201e10f73",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změna stavebního zákona výslovně upravuje elektronická podání a Portál stavebníka, tedy online vyřizování konkrétní skupiny státních služeb.",
+          "effectCz": "Dříve bylo možné podat žádost přes Portál stavebníka, ale také listinně; schválená verze vyžaduje digitální úkon u podání s dokumentací a u osob s automaticky zpřístupněnou datovou schránkou a Portálu stavebníka přidává sledování stavu řízení. Online vyřizování stavebních věcí se tak posiluje, zatímco povinnost digitálního podání je v uvedených případech přísnější; text však nespojuje Portál stavebníka s Portálem občana ani nezajišťuje vyřízení všech životních situací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změny odpadového zákona přesouvají posuzování odpadových podmínek do stavebního rozhodování, ale nedokládají elektronické vyřizování ani spojení s Portálem občana.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": true,
+          "reasonCz": "Schválený návrh upravuje elektronické podávání a informační systém podpory bydlení pro konkrétní státní službu, což je skutečná část online vyřizování životních situací.",
+          "effectCz": "Dříve uvedené ustanovení vymezovalo účastníka řízení; schválený text stanoví elektronická podání přes informační systém podpory bydlení, datovou schránku i asistované podání a zachovává také listinnou cestu. Pro část vyřizování podpory bydlení se tím zavádí online možnost, což slib posouvá kupředu, ale systém není v textu propojen s Portálem občana a zákon současně mění kontaktní místa a rozdělení jejich agendy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Změna zavádí elektronický postup pro rodičovský příspěvek před porodem, tedy online řešení konkrétní životní situace.",
+          "effectCz": "Dříve citované ustanovení počítalo s podáním žádosti o dávku na tiskopisu; schválená úprava rozlišuje nedigitalizované dávky a digitální rodičovský příspěvek před porodem s podáváním přes informační systém. Online vyřízení této konkrétní dávky se tím umožňuje, jde však jen o dílčí službu a ne o jednotné kontaktní místo pro všechny situace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Tato část odstraňuje některé již plánované změny elektronického vyřizování dávek státní sociální podpory, a proto se přímo dotýká online dostupnosti státních služeb.",
+          "effectCz": "Předchozí novela obsahovala ustanovení pro elektronické podávání, doručování a vedení spisu u dávek; schválený text vypouští konkrétní body této novely, včetně ustanovení zavádějících elektronické řízení a doručování. Tím se část plánovaného online vyřizování ruší nebo odkládá, a působí tedy proti dílčí části slibu; vedle toho první část stejného návrhu zachovává digitální postup pro rodičovský příspěvek před porodem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": true,
+          "reasonCz": "Nový cizinecký zákon upravuje cizinecký účet pro elektronické úkony a doručování, což umožňuje online vyřizovat alespoň část pobytových záležitostí.",
+          "effectCz": "Jde o novou právní úpravu bez předchozího znění těchto pravidel; schválený text zavádí cizinecký účet, elektronické doručování a elektronické úkony v části pobytových řízení. To poskytuje online cestu pro část služeb, ale vytváří samostatný účet a systém, nikoli jednotné kontaktní místo Portálu občana."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": true,
+          "reasonCz": "Nový cizinecký zákon stanoví elektronické podávání v pobytových řízeních prostřednictvím cizineckého účtu a příslušná online hlášení.",
+          "effectCz": "Jde o nová ustanovení bez předchozího znění; schválený text ukládá u pobytových řízení elektronická podání přes cizinecký účet a upravuje související elektronické povinnosti. Pro tuto skupinu uživatelů tak rozšiřuje možnost řešit záležitosti online, zároveň jde o oddělený systém, nikoli o propojení s Portálem občana."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje používat digitální peněženku k online prokazování skutečností vůči státu, což může být součástí elektronického vyřizování služeb.",
+          "effectCz": "Dřívější úprava řešila uchovávání a ověřování elektronických podpisů a pečetí; návrh nově stanoví, že úřady musí umožnit online prokázání skutečností elektronickými potvrzeními atributů přes evropskou digitální peněženku. To rozšiřuje digitální způsob prokazování a může usnadnit online služby, avšak samo o sobě nezavádí jejich vyřízení v Portálu občana."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně umožňuje prokazování totožnosti evropskou digitální peněženkou, což je jeden z prostředků potřebných pro online využívání veřejných služeb.",
+          "effectCz": "Dříve se elektronická identita pro účely právních úkonů prokazovala prostřednictvím kvalifikovaného systému; návrh připouští také digitální peněženku a ukládá osobám ověřujícím totožnost, aby ji za stanovených podmínek přijímaly. Rozšiřuje se tak možnost elektronické identifikace, ale návrh sám nezajišťuje jednotné online vyřízení všech služeb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": false,
+          "reasonCz": "Změny pravidel pro vydávání a přebírání cestovních dokladů samy o sobě nezavádějí online službu ani napojení na Portál občana.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-2",
+          "relevant": false,
+          "reasonCz": "Změny týkající se občanských průkazů upravují jejich vydávání, předání a evidenci, nikoli online vyřizování přes Portál občana.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": true,
+          "reasonCz": "Návrh odstraňuje z registru obyvatel údaje používané pro elektronickou identifikaci a související odkazy v pravidlech pro veřejné služby, což se může dotknout online přihlašování.",
+          "effectCz": "Předchozí znění registru obyvatel obsahovalo data potřebná pro elektronickou identifikaci a autentizaci a související pravidla jejich používání; návrh tato data z ustanovení registru odstraňuje. Tím se ruší jedna dosavadní právní cesta pro elektronickou identifikaci, ale balíček neukazuje její technický dopad ani to, zda ji plně nahrazuje digitální peněženka."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": true,
+          "reasonCz": "Návrh ruší ustanovení o elektronické autentizaci při vyřizování digitálních úkonů, což se přímo týká možnosti řešit státní služby online.",
+          "effectCz": "Předchozí pravidla umožňovala uživateli požadovat autentizaci jako podmínku digitálního úkonu a upravovala související aplikaci a potvrzení; návrh tato ustanovení ruší. Odstraňuje tím dosavadní prostředek pro elektronickou obsluhu některých úkonů, což jde proti online části slibu; případná náhrada v jiném systému není v této části doložena."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43311-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí elektronické petice a online náhled hlasovacího lístku, tedy digitální vyřízení a přístup k části občanských záležitostí.",
+          "effectCz": "Dřívější pravidla nestanovovala nástroj pro sestavování elektronických petic ani grafický kód k náhledu hlasovacího lístku; návrh obojí zavádí, avšak termín vytvoření nástroje prodlužuje z 12 na 18 měsíců. Rozsah online služeb se rozšiřuje, ale jejich zavedení se časově odkládá a netýká se všech životních situací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-12",
+          "relevant": false,
+          "reasonCz": "Rozšíření okruhu uživatelů datových schránek o společenství obcí neupravuje online služby pro občany ani jejich sjednocení v Portálu občana.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Změny registru vozidel, registračních značek a jejich doručování nesouvisejí s elektronickým vyřizováním životních situací přes Portál občana.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-3",
+          "relevant": false,
+          "reasonCz": "Změny zákona o silničním provozu upravují pravidla a kontrolu provozu vozidel, nikoli online státní služby.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-0201e10f73--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43189-1",
+        "psp-core-2025--print-step-210686",
+        "psp-core-2025--vote-87617",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--law-change-43264-14",
+        "psp-core-2025--law-change-43264-16",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43293-4",
+        "psp-core-2025--law-change-43293-6",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--law-change-43311-1",
+        "psp-core-2025--vote-87594"
+      ],
+      "explanationCz": "Program Motoristů slibuje jednotné online kontaktní místo státu a možnost vyřídit všechny životní situace bez návštěv úřadů. Poslanci strany podpořili změnu stavebního zákona, která rozšiřuje online vyřizování stavebních věcí, a vláda navrhla další dílčí online služby; žádný z těchto kroků však nespojuje všechny služby s Portálem občana. U vládního návrhu nového cizineckého zákona, který zavádí elektronické podávání přes cizinecký účet, hlasovalo pro jen šest ze třinácti poslanců Motoristů, takže klub nedal většinu pro jeho přijetí, přestože návrh online vyřizování částečně rozšiřoval. Jiné vládní návrhy zároveň ruší některé dřívější možnosti elektronické autentizace a plánované digitalizace dávek; celkový zaznamenaný posun proto působí proti slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrhy digitálních peněženek mají online identifikaci usnadnit, ale jsou doloženy pouze jako vládní návrhy; balíček neukazuje, zda nakonec nahradí rušené způsoby autentizace.",
+        "Změna stavebního zákona obsahuje úpravy Portálu stavebníka, ale balíček nedokládá jeho propojení s Portálem občana ani rozsah skutečně vyříditelných služeb.",
+        "U návrhu cizineckého zákona je zaznamenáno, že šest z třinácti poslanců Motoristů hlasovalo pro; protože k většině bylo třeba sedm hlasů, jejich klub nedal většinovou podporu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_043a317bf289ce38016ac560174a4c87d28d5d49052db73b9f",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 664043,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 664040
+      },
+      "output_tokens": 10994,
+      "output_tokens_details": {
+        "reasoning_tokens": 8149
+      },
+      "total_tokens": 675037
+    },
+    "output": {
+      "promiseId": "motoriste-2025-0201e10f73",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Mění digitální podávání ve stavebních řízeních, zavádí sledování jejich stavu na Portálu stavebníka a umožňuje spojovat informační systémy, takže zasahuje do online vyřizování části životních situací.",
+          "effectCz": "Dříve bylo možné podávat žádosti přes Portál stavebníka nebo listinně; schválené znění u některých podání vyžaduje digitální úkon, což rozšiřuje či posiluje online cestu, ale zároveň omezuje listinnou možnost. Dříve zákon vyjmenovával oddělené stavební informační systémy, nově je Úřad může spojit do jednoho systému; tato možnost se zvětšuje, není však povinná. Nově Portál stavebníka nabízí sledování stavu řízení, tedy přidává digitální službu; změna ale sama nezavádí Portál občana jako jednotné místo pro všechny státní služby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Upravuje pravidla nakládání s odpady při záměrech, ale nedokládá vazbu na Portál občana ani na online vyřízení životních situací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Mění podmínky poradenství v oblasti bydlení, nikoli způsob digitálního kontaktu občana se státem nebo Portál občana.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Zavádí elektronické vyřizování části rodičovského příspěvku, což je konkrétní dílčí životní situace, kterou lze řešit online.",
+          "effectCz": "Před změnou se žádost o dávku podávala písemně; schválené znění připouští u nedigitalizovaných dávek také datovou schránku a elektronickou poštu a u rodičovského příspěvku před porodem zavádí zvláštní elektronický postup. Tím se online možnost rozšiřuje, ale jen u části dávek a nikoli prostřednictvím Portálu občana. Nový rodičovský příspěvek před porodem činí 15 000 Kč měsíčně; částka sama nesouvisí s příslibem jednotného online kontaktního místa."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Ruší části dříve schválené úpravy, které měly zavést širší elektronické podávání a doručování u dávek, a tím jde proti online vyřizování dalších životních situací.",
+          "effectCz": "Dříve přijatá, avšak dosud neúčinná úprava počítala s elektronickým podáváním, doručováním a elektronickým spisem pro dávky státní sociální podpory. Schválená změna ruší vyjmenované body, které tyto postupy zaváděly, a vypouští je také z ustanovení o účinnosti; rozsah plánovaného online vyřizování dávek se tím zmenšuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": false,
+          "reasonCz": "Tato část se týká řízení a elektronického účtu pro cizince, nikoli online vyřizování životních situací občanů České republiky přes Portál občana.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": false,
+          "reasonCz": "Ukládá cizincům povinnosti spojené s jejich pobytem, ale nedokládá změnu služeb pro občany ani jejich přístup přes Portál občana.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Vytváří právní podmínky pro použití evropské digitální peněženky při prokazování skutečností vůči státu, což může usnadnit online vyřizování služeb.",
+          "effectCz": "Dříve zákon upravoval zejména ověřování elektronických podpisů; nově výslovně umožňuje prokazovat skutečnosti online peněženkou digitální identity a ukládá orgánům veřejné moci tuto možnost umožnit. Nově se také zavádí elektronická potvrzení atributů; online možnost se tedy rozšiřuje, avšak zákon nedokládá napojení těchto služeb na Portál občana."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje právní úpravu elektronické identifikace o digitální peněženku, která může sloužit jako prostředek k online přístupu ke státním službám.",
+          "effectCz": "Dříve bylo možné prokázat totožnost elektronicky jen prostřednictvím kvalifikovaného systému elektronické identifikace. Návrh přidává peněženku digitální identity jako další možnost, ale u orgánů veřejné moci ji nepřipouští mimo kvalifikovaný systém; přístupové možnosti tedy rozšiřuje, současně je omezuje na stanovený rámec. Změna sama nezavádí jednotné kontaktní místo."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": true,
+          "reasonCz": "Umožňuje ohlásit ztrátu, zničení nebo nebezpečí zneužití cestovního dokladu elektronicky, což je konkrétní úřední situace řešitelná bez návštěvy úřadu.",
+          "effectCz": "Dříve bylo nutné neprodleně ohlásit ztrátu, odcizení či zničení cestovního dokladu příslušnému orgánu nebo policii; nově lze oznámení učinit také datovou schránkou, e-mailem nebo elektronickým formulářem a přidává se i nebezpečí zneužití. Možnost online vyřízení se tedy rozšiřuje, ale změna neurčuje, že se tak děje přes Portál občana."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-2",
+          "relevant": false,
+          "reasonCz": "Upravuje zejména postup při vydávání a předávání občanských průkazů, ale zachovává osobní podání žádosti a nevytváří online kanál pro vyřízení této situace.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": true,
+          "reasonCz": "Ruší údaje a postupy pro elektronickou identifikaci vedené v základním registru obyvatel, tedy mění infrastrukturu důležitou pro digitální přístup ke státním službám.",
+          "effectCz": "Před změnou registr obsahoval data potřebná pro elektronickou identifikaci a autentizaci a související údaje o jejich zablokování; schválený návrh tyto položky ruší a ukládá jejich vymazání. Dostupnost této dosavadní autentizační cesty se tím zmenšuje, a může tak ztížit online přístup; balíček však současně zavádí peněženku digitální identity jiným zákonem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": false,
+          "reasonCz": "Ruší možnost doplnit osobní prokázání totožnosti elektronickou autentizací; jde o postup při osobním jednání, nikoli o řešení životních situací online bez návštěvy úřadu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43311-1",
+          "relevant": false,
+          "reasonCz": "Zavádí nástroj pro sestavování elektronických petic, ale petice nejsou vyřizováním životních situací přes Portál občana.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-12",
+          "relevant": false,
+          "reasonCz": "Rozšiřuje používání datových schránek na společenství obcí, nikoli online služby pro občana nebo jednotné kontaktní místo státu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Zavádí možnost podávat vybrané žádosti o registraci vozidel přes online rozhraní a jejich automatizované vyřízení, což odpovídá části slibu o online řešení úředních situací.",
+          "effectCz": "Dříve v uvedeném zákoně nebyla tato možnost upravena; nově se žádosti podané přes rozhraní Ministerstva dopravy mohou vyřizovat bez účasti úřední osoby a žadatel si může zvolit doručení nebo převzetí dokladů. Tím se rozšiřuje možnost online vyřízení, ale jde o samostatné rozhraní a jen o vymezené úkony."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-3",
+          "relevant": false,
+          "reasonCz": "Upravuje pravidla provozu vozidel a doručování řidičských dokladů, ale nepřidává podstatnou možnost vyřídit životní situaci online přes Portál občana.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-0201e10f73--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43293-1",
+        "psp-core-2025--law-change-43293-4",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--print-step-212080"
+      ],
+      "explanationCz": "Motoristé hlasovali pro novelu stavebního zákona, která přidává sledování stavebních řízení na Portálu stavebníka a umožňuje spojovat informační systémy; jde o dílčí krok, nikoli o zavedení jednotného Portálu občana. Vláda, v níž Motoristé působí, navrhla také digitální peněženku pro prokazování totožnosti, elektronické ohlášení ztráty cestovního dokladu a online vyřizování některých registrací vozidel. Rozporuplný byl hlas strany pro novelu dávek: umožnila digitální žádosti v omezeném případě, ale zároveň zrušila plánované širší digitální postupy pro další dávky. Pozdější konečné hlasování Motoristů pro stavební novelu dokládá dílčí posun, nikoli splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Důkazy dokládají dílčí online služby a možnost spojovat některé informační systémy, ale neprokazují, že jsou tyto služby skutečně napojeny na Portál občana nebo že lze online vyřídit všechny životní situace.",
+        "Hlasování o novele dávek podpořilo současně omezenou digitalizaci jedné dávky i zrušení širšího plánovaného elektronického vyřizování; šlo tedy o rozporné části téhož návrhu."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_094274685b06306e016ac5616f996487d28e86fa5a27dba7b9",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 669072,
+      "input_tokens_details": {
+        "cache_write_tokens": 666160,
+        "cached_tokens": 2909
+      },
+      "output_tokens": 2086,
+      "output_tokens_details": {
+        "reasoning_tokens": 1848
+      },
+      "total_tokens": 671158
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "motoriste-2025-0201e10f73--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Slib Motoristů míří na jedno místo, kde lidé vyřídí všechny své záležitosti online. Při konečném hlasování o změnách stavebního zákona, vedených ve Sněmovně jako tisk č. 67, poslanci Motoristů návrh podpořili; ten například přidává možnost sledovat stav stavebního řízení online. Je to dílčí krok, ale nedokládá propojení všech služeb s Portálem občana ani vyřízení všech životních situací. Proto lépe odpovídá hodnocení, které uznává posun, ale neprohlašuje slib za splněný."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-towards",
+    "selectedReview": "assessor-b"
+  }
+}

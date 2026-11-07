@@ -1,0 +1,428 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T09-16-12-988Z--34632721acb4",
+  "evaluatedAt": "2026-11-05T09:16:12.988Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-47fc541044/34632721acb4f807787826764e84603bdb71419557e9603ad8a3c8672918e7c4.json",
+  "packageHash": "34632721acb4f807787826764e84603bdb71419557e9603ad8a3c8672918e7c4",
+  "assessmentContentHash": "5b8608057946f7f0beb96c05c514ee8bce30b8420af0709e9da2402094263159",
+  "assessmentFingerprint": "5a84dabd1d034b1a410f6d2d891db39e0a0a05aee325d5409da78088a7a2fdec",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-47fc541044",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0e225f39599bf830016aec48398c4087d1ae85a88f84441b5b",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 117738,
+            "input_tokens_details": {
+              "cache_write_tokens": 111388,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 7172,
+            "output_tokens_details": {
+              "reasoning_tokens": 5593
+            },
+            "total_tokens": 124910
+          },
+          "output": {
+            "promiseId": "ano-2025-47fc541044",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": true,
+                "reasonCz": "Schválené znění nově připouští v nezastavitelném území stavby pro energetickou bezpečnost, což může umožnit výstavbu dalších zdrojů elektřiny.",
+                "effectCz": "Dříve seznam záměrů povolovaných v nezastavitelném území stavby pro energetickou bezpečnost neobsahoval; nově je výslovně připouští a považuje za souladné s charakterem území. Tím se rozšiřuje možnost umisťovat energetické stavby, nikoli však povinnost je postavit ani zajistit jejich výkon."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": true,
+                "reasonCz": "Novela energetického zákona upravuje mechanismus, který může zajišťovat dostupný výkon elektráren a dalších energetických zařízení.",
+                "effectCz": "Předchozí § 35 umožňoval zavést kapacitní mechanismus podle unijních pravidel a určoval dostupnost regulačního výkonu; nové znění upravuje aukce a zajišťování potřebné dostupnosti výkonu výroben nebo jiných energetických zařízení, včetně smluvního placení za dostupnost. Jde o širší a konkrétnější nástroj pro zajištění výkonu, ale zákon sám nestanoví, kolik kapacity bude skutečně zajištěno."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": true,
+                "reasonCz": "Schválená změna výslovně rozšiřuje seznam strategických staveb pro energetickou bezpečnost o nové jaderné a plynové zdroje, které mohou být alternativou k uhlí.",
+                "effectCz": "Původní bod přílohy uváděl nový jaderný zdroj v Temelíně a Dukovanech; schválené znění k nim přidává jaderné zdroje v Tušimicích a Dětmarovicích a plynové zdroje v Počeradech, Mělníku, Prunéřově, Dětmarovicích a Ledvicích. Seznam možných stabilních náhradních zdrojů se tedy rozšiřuje, avšak jejich výstavbu ani dostatečnou kapacitu tato změna nezaručuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-2",
+                "relevant": true,
+                "reasonCz": "Schválené a vyhlášené znění umožňuje zvýšit výdajový rámec také o náklady na stavby pro energetickou bezpečnost, což se může týkat náhradních zdrojů elektřiny.",
+                "effectCz": "Předchozí § 8 odst. 3 dovoloval zvýšit výdaje nad rámec mimo jiné o výdaje na obranu přesahující 2 % HDP; nové znění přidává pro roky 2026–2036 také výdaje na vyjmenovanou energetickou bezpečnostní infrastrukturu. Možnost financování těchto staveb se rozšiřuje, ale ustanovení neurčuje konkrétní částku ani nezaručuje její využití."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+                "relevant": true,
+                "reasonCz": "Změna vytváří možnost financovat výstavbu nízkouhlíkové elektrárny návratnými prostředky, což může podpořit vznik dalšího zdroje elektřiny.",
+                "effectCz": "Dříve se návratná finanční výpomoc poskytovala ze státního rozpočtu; nově může ministerstvo po předchozím souhlasu vlády poskytnout návratné, úročené prostředky z mimorozpočtového účtu a úrok nevzniká před povolením provozu jaderného zařízení. Mění se zdroj a podmínky financování, ale balíček neuvádí částku ani neumožňuje určit, zda bude celková dostupnost financování větší."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-47fc541044--source",
+              "psp-core-2025--law-change-43174-1-4",
+              "psp-core-2025--law-change-43174-21",
+              "psp-core-2025--law-change-43174-32",
+              "psp-core-2025--law-change-43200-2",
+              "psp-core-2025--law-change-43200-approved-9",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--amendment-text-1230",
+              "psp-core-2025--vote-88206",
+              "psp-core-2025--amendment-text-1253",
+              "psp-core-2025--vote-88248",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--print-step-210731",
+              "psp-core-2025--vote-87430",
+              "psp-core-2025--vote-88105",
+              "psp-core-2025--vote-88416",
+              "psp-core-2025--senate-resolution-43200-6"
+            ],
+            "explanationCz": "Poslanci ANO předložili a vláda podpořila návrh novely stavebního zákona (sněmovní tisk 67), který rozšiřuje možnosti pro energetické stavby. Poslanci ANO pak hlasovali pro změnu, jež zařadila další jaderné a plynové zdroje mezi strategické stavby, a také pro pravidla kapacitního mechanismu, který může nakupovat dostupný výkon. Vláda navrhla a poslanci ANO prosadili také možnost financovat energetické bezpečnostní stavby mimo běžný výdajový rámec a návratně financovat nízkouhlíkovou elektrárnu. Tyto kroky podporují přípravu a financování náhradních zdrojů, ale samy nedokládají jejich výstavbu ani dostatečný výkon, který by umožnil bezpečně odstavovat uhelné elektrárny.",
+            "confidence": "high",
+            "uncertainties": [
+              "Balíček nedokládá, zda se uvedené zdroje skutečně postaví, kdy budou uvedeny do provozu ani zda jejich výkon bude dostatečný pro odstavování uhelných elektráren.",
+              "Z poskytnutých podkladů nelze ověřit, zda nedošlo k výpadkům dodávek elektřiny nebo zda se snížila závislost na dovozu."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-47fc541044",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Schválený text dovoluje povolovat stavby pro energetickou bezpečnost i v nezastavitelném území, což může usnadnit umístění zdrojů elektřiny potřebných jako náhrada za uhlí.",
+          "effectCz": "Podle dřívějšího znění § 122 bylo možné v nezastavitelném území povolovat jen vyjmenované záměry; stavby pro energetickou bezpečnost mezi nimi nebyly. Schválený text je nově výslovně připouští a považuje je za souladné s charakterem území, čímž rozšiřuje možnost jejich umístění, ale nezajišťuje jejich výstavbu ani dostatek výkonu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Změna zavádí pravidla pro kapacitní mechanismus, který má zajišťovat potřebnou dostupnost výkonu výroben elektřiny či jiných energetických zařízení.",
+          "effectCz": "Před změnou mohl ministr kapacitní mechanismus zavést a provozovatel přenosové soustavy určoval potřebnou dostupnost regulačního výkonu; schválené znění počítá s aukčním zajištěním potřebné dostupnosti výkonu výroben nebo jiných energetických zařízení a s regulovanou cenou mechanismu. Rozšiřuje a konkretizuje nástroj pro zajištění dostupných kapacit, ale samo nezaručuje jejich dostatečný rozsah ani zachování uhelných elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválený text zařazuje mezi stavby pro energetickou bezpečnost také konkrétní nové jaderné a plynové zdroje, tedy zdroje, které mohou představovat náhradu za uhelnou výrobu.",
+          "effectCz": "Dosavadní příloha uváděla nový jaderný zdroj v Temelíně a v Dukovanech. Schválené znění k nim přidává nový jaderný zdroj v Tušimicích a Dětmarovicích a nové plynové zdroje v Počeradech, Mělníku, Prunéřově, Dětmarovicích a Ledvicích; rozšiřuje tak seznam zdrojových projektů označených za energeticky bezpečnostní, ale neznamená, že budou postaveny nebo že zajistí potřebný výkon."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválená i vyhlášená změna umožňuje navýšit výdajový rámec na výstavbu staveb pro energetickou bezpečnost, což může usnadnit financování nových zdrojů.",
+          "effectCz": "Dosavadní § 8 odst. 3 připouštěl navýšení výdajů pro obranu; nově lze pro roky 2026 až 2036 navýšit výdaje také o částky na výstavbu staveb pro energetickou bezpečnost. Jde o rozšíření možnosti financování bez stanovení konkrétní částky či povinnosti ji skutečně vynaložit, takže to může rozvoj zdrojů usnadnit, ale samo ho nezajišťuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": true,
+          "reasonCz": "Změna upravuje financování výstavby nízkouhlíkových výroben, mezi něž patří zdroje, které mohou přispět k náhradě uhelné výroby.",
+          "effectCz": "Dříve mohla být návratná finanční výpomoc poskytnuta ze státního rozpočtu z kapitoly ministerstva; nové znění počítá s prostředky z mimorozpočtového účtu, ale až po předchozím souhlasu vlády a podle jejích podmínek. Úrok se neplatí před povolením provozu jaderného zařízení, avšak nový souhlas vlády činí přístup k financování podmíněnějším; změna tedy mění cestu financování, nikoli závazek zdroj postavit."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-47fc541044--source",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--amendment-text-1230",
+        "psp-core-2025--amendment-text-1253",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--vote-88248",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Poslanci ANO podpořili změny, které usnadňují povolování a financování některých nových zdrojů a zavádějí aukční zajištění potřebného výkonu. V novele stavebního zákona (sněmovní tisk č. 67) hlasovali pro možnost povolovat stavby pro energetickou bezpečnost i v nezastavitelném území a pro rozšíření seznamu o nové jaderné a plynové zdroje; po zamítnutí návrhu Senátem hlasovali také pro jeho schválení Sněmovnou. U změny rozpočtových pravidel (sněmovní tisk č. 90) hlasovali pro možnost navýšit výdajový rámec na energeticky bezpečnostní stavby a pro změněné financování nízkouhlíkových výroben. Tyto kroky mohou pomoci vytvořit část náhradních kapacit, ale samy nedokazují, že jich bude dost před odstavením uhlí nebo že zabrání výpadkům a závislosti na dovozu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, zda budou uvedené zdroje skutečně postaveny a uvedeny do provozu, ani zda jejich výkon postačí k náhradě uhelných elektráren.",
+        "Podklady nedokládají, zda se podaří zabránit výpadkům dodávek elektřiny nebo tomu, aby se země stala zcela závislou na dovozu.",
+        "U návrhu stavebního zákona je doloženo hlasování Sněmovny po zamítnutí Senátem, nikoli vyhlášené konečné znění; nelze tedy z těchto podkladů tvrdit, že tato novela nabyla účinnosti."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-47fc541044",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně umožňuje povolovat stavby pro energetickou bezpečnost, což může usnadnit přípravu nových zdrojů elektřiny.",
+          "effectCz": "Dříve § 122 v nezastavěném území povoloval jen vyjmenované záměry a zvláštní výjimku pro energetickou bezpečnost neobsahoval; nově takovou výjimku zavádí, takže se limit pro umístění těchto staveb uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Novela upravuje kapacitní mechanismus a dostupnost výkonu výroben elektřiny a dalších energetických zařízení, tedy přímo souvisí se zajištěním stabilních zdrojů a dodávek.",
+          "effectCz": "Dříve mohl být zaveden kapacitní mechanismus a provozovatel přenosové soustavy určoval potřebnou dostupnost regulačního výkonu výroben; nové znění vztahuje potřebnou dostupnost také na výkon výroben obecně a jiných energetických zařízení a zavádí povinnost provozovatele přenosové soustavy tuto dostupnost zajišťovat. Tím se rozšiřuje rámec pro obstarávání kapacity; u nového § 35a však balíček nedodává předchozí znění, takže směr změny této konkrétní povinnosti nelze z něj samostatně porovnat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválené znění rozšiřuje seznam strategických energetických staveb o nové jaderné a plynové zdroje, které mohou být alternativou k uhlí.",
+          "effectCz": "Předchozí znění přílohy č. 1 bodu 7 uvádělo nové jaderné zdroje v Temelíně a Dukovanech; schválené znění doplňuje jaderné zdroje v Tušimicích a Dětmarovicích a plynové zdroje v Počeradech, Mělníku, Prunéřově, Dětmarovicích a Ledvicích. Rozšiřuje se tak seznam staveb považovaných za stavby pro energetickou bezpečnost, samo zařazení však nezaručuje jejich výstavbu ani provoz."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválená a vyhlášená změna rozpočtových pravidel zahrnuje energeticky bezpečnostní stavby mezi výdaje, o které lze navýšit celkové výdaje státního rozpočtu.",
+          "effectCz": "Předchozí § 8 odst. 3 umožňoval navýšení celkových výdajů pro financování obrany; nové znění dovoluje pro roky 2026 až 2036 navýšení také o výdaje na výstavbu staveb pro energetickou bezpečnost. Rozšiřuje se tedy možnost financovat tyto stavby nad dosavadní výdajový rámec, bez stanovení konkrétní částky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": true,
+          "reasonCz": "Novela mění způsob financování výstavby nízkouhlíkových výroben, což může podpořit výstavbu zdrojů nahrazujících uhlí.",
+          "effectCz": "Dříve se návratná finanční výpomoc poskytovala ze státního rozpočtu z kapitoly ministerstva a úrok po dobu výstavby nevznikal, po získání povolení k provozu však platila sazba nejméně 2 %; nově lze prostředky poskytnout z mimorozpočtového účtu, před provozním povolením úrok nevzniká a konkrétní podmínky i výši stanoví vláda. Změna usnadňuje financování před zahájením provozu, ale prostředky zůstávají návratné."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-47fc541044--source",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--amendment-text-1230",
+        "psp-core-2025--amendment-text-1253",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--vote-88248",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Vláda předložila změnu rozpočtových pravidel a poslanci ANO ji podpořili; výsledná úprava umožňuje navýšit výdaje na energeticky bezpečnostní stavby a mění financování nízkouhlíkových výroben. Poslanci ANO také podpořili novelu stavebního zákona, která rozšiřuje seznam strategických jaderných a plynových zdrojů a upravuje zajišťování dostupného výkonu elektráren a dalších zařízení. Tyto kroky usnadňují přípravu, financování a zajištění výkonu zdrojů, ale samy nedokládají, že už je k dispozici dost stabilních zdrojů nebo že uhlí zůstane v provozu do jejich plné náhrady.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Poslanci ANO podpořili také pozměňovací návrh týkající se nových obnovitelných zdrojů využívajících energii vodního toku; návrh ruší zvláštní předpoklad převažujícího veřejného zájmu pro jejich plánování a výstavbu, což může ztížit rozvoj jedné možné výrobní alternativy. Slib ale výslovně nezavazuje k podpoře vodní energetiky a tento návrh nemění podmínku odstavení uhelných elektráren.",
+        "Balíček neuvádí, zda již nové zdroje skutečně vznikly ani zda jejich dostupný výkon dostačuje k plné náhradě uhlí; proto nelze doložit splnění celého slibu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_040fc0b404307cf0016aec489a97f087d1b5c95badc09669de",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 117738,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 117735
+      },
+      "output_tokens": 8233,
+      "output_tokens_details": {
+        "reasoning_tokens": 6572
+      },
+      "total_tokens": 125971
+    },
+    "output": {
+      "promiseId": "ano-2025-47fc541044",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Schválený text dovoluje povolovat stavby pro energetickou bezpečnost i v nezastavitelném území, což může usnadnit umístění zdrojů elektřiny potřebných jako náhrada za uhlí.",
+          "effectCz": "Podle dřívějšího znění § 122 bylo možné v nezastavitelném území povolovat jen vyjmenované záměry; stavby pro energetickou bezpečnost mezi nimi nebyly. Schválený text je nově výslovně připouští a považuje je za souladné s charakterem území, čímž rozšiřuje možnost jejich umístění, ale nezajišťuje jejich výstavbu ani dostatek výkonu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Změna zavádí pravidla pro kapacitní mechanismus, který má zajišťovat potřebnou dostupnost výkonu výroben elektřiny či jiných energetických zařízení.",
+          "effectCz": "Před změnou mohl ministr kapacitní mechanismus zavést a provozovatel přenosové soustavy určoval potřebnou dostupnost regulačního výkonu; schválené znění počítá s aukčním zajištěním potřebné dostupnosti výkonu výroben nebo jiných energetických zařízení a s regulovanou cenou mechanismu. Rozšiřuje a konkretizuje nástroj pro zajištění dostupných kapacit, ale samo nezaručuje jejich dostatečný rozsah ani zachování uhelných elektráren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválený text zařazuje mezi stavby pro energetickou bezpečnost také konkrétní nové jaderné a plynové zdroje, tedy zdroje, které mohou představovat náhradu za uhelnou výrobu.",
+          "effectCz": "Dosavadní příloha uváděla nový jaderný zdroj v Temelíně a v Dukovanech. Schválené znění k nim přidává nový jaderný zdroj v Tušimicích a Dětmarovicích a nové plynové zdroje v Počeradech, Mělníku, Prunéřově, Dětmarovicích a Ledvicích; rozšiřuje tak seznam zdrojových projektů označených za energeticky bezpečnostní, ale neznamená, že budou postaveny nebo že zajistí potřebný výkon."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválená i vyhlášená změna umožňuje navýšit výdajový rámec na výstavbu staveb pro energetickou bezpečnost, což může usnadnit financování nových zdrojů.",
+          "effectCz": "Dosavadní § 8 odst. 3 připouštěl navýšení výdajů pro obranu; nově lze pro roky 2026 až 2036 navýšit výdaje také o částky na výstavbu staveb pro energetickou bezpečnost. Jde o rozšíření možnosti financování bez stanovení konkrétní částky či povinnosti ji skutečně vynaložit, takže to může rozvoj zdrojů usnadnit, ale samo ho nezajišťuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": true,
+          "reasonCz": "Změna upravuje financování výstavby nízkouhlíkových výroben, mezi něž patří zdroje, které mohou přispět k náhradě uhelné výroby.",
+          "effectCz": "Dříve mohla být návratná finanční výpomoc poskytnuta ze státního rozpočtu z kapitoly ministerstva; nové znění počítá s prostředky z mimorozpočtového účtu, ale až po předchozím souhlasu vlády a podle jejích podmínek. Úrok se neplatí před povolením provozu jaderného zařízení, avšak nový souhlas vlády činí přístup k financování podmíněnějším; změna tedy mění cestu financování, nikoli závazek zdroj postavit."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-47fc541044--source",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--amendment-text-1230",
+        "psp-core-2025--amendment-text-1253",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--vote-88248",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Poslanci ANO podpořili změny, které usnadňují povolování a financování některých nových zdrojů a zavádějí aukční zajištění potřebného výkonu. V novele stavebního zákona (sněmovní tisk č. 67) hlasovali pro možnost povolovat stavby pro energetickou bezpečnost i v nezastavitelném území a pro rozšíření seznamu o nové jaderné a plynové zdroje; po zamítnutí návrhu Senátem hlasovali také pro jeho schválení Sněmovnou. U změny rozpočtových pravidel (sněmovní tisk č. 90) hlasovali pro možnost navýšit výdajový rámec na energeticky bezpečnostní stavby a pro změněné financování nízkouhlíkových výroben. Tyto kroky mohou pomoci vytvořit část náhradních kapacit, ale samy nedokazují, že jich bude dost před odstavením uhlí nebo že zabrání výpadkům a závislosti na dovozu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, zda budou uvedené zdroje skutečně postaveny a uvedeny do provozu, ani zda jejich výkon postačí k náhradě uhelných elektráren.",
+        "Podklady nedokládají, zda se podaří zabránit výpadkům dodávek elektřiny nebo tomu, aby se země stala zcela závislou na dovozu.",
+        "U návrhu stavebního zákona je doloženo hlasování Sněmovny po zamítnutí Senátem, nikoli vyhlášené konečné znění; nelze tedy z těchto podkladů tvrdit, že tato novela nabyla účinnosti."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_018e56ac5607a47a016aec4908b46087d19f30b3f98b05076e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 117738,
+      "input_tokens_details": {
+        "cache_write_tokens": 111388,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 8708,
+      "output_tokens_details": {
+        "reasoning_tokens": 7050
+      },
+      "total_tokens": 126446
+    },
+    "output": {
+      "promiseId": "ano-2025-47fc541044",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně umožňuje povolovat stavby pro energetickou bezpečnost, což může usnadnit přípravu nových zdrojů elektřiny.",
+          "effectCz": "Dříve § 122 v nezastavěném území povoloval jen vyjmenované záměry a zvláštní výjimku pro energetickou bezpečnost neobsahoval; nově takovou výjimku zavádí, takže se limit pro umístění těchto staveb uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Novela upravuje kapacitní mechanismus a dostupnost výkonu výroben elektřiny a dalších energetických zařízení, tedy přímo souvisí se zajištěním stabilních zdrojů a dodávek.",
+          "effectCz": "Dříve mohl být zaveden kapacitní mechanismus a provozovatel přenosové soustavy určoval potřebnou dostupnost regulačního výkonu výroben; nové znění vztahuje potřebnou dostupnost také na výkon výroben obecně a jiných energetických zařízení a zavádí povinnost provozovatele přenosové soustavy tuto dostupnost zajišťovat. Tím se rozšiřuje rámec pro obstarávání kapacity; u nového § 35a však balíček nedodává předchozí znění, takže směr změny této konkrétní povinnosti nelze z něj samostatně porovnat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválené znění rozšiřuje seznam strategických energetických staveb o nové jaderné a plynové zdroje, které mohou být alternativou k uhlí.",
+          "effectCz": "Předchozí znění přílohy č. 1 bodu 7 uvádělo nové jaderné zdroje v Temelíně a Dukovanech; schválené znění doplňuje jaderné zdroje v Tušimicích a Dětmarovicích a plynové zdroje v Počeradech, Mělníku, Prunéřově, Dětmarovicích a Ledvicích. Rozšiřuje se tak seznam staveb považovaných za stavby pro energetickou bezpečnost, samo zařazení však nezaručuje jejich výstavbu ani provoz."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválená a vyhlášená změna rozpočtových pravidel zahrnuje energeticky bezpečnostní stavby mezi výdaje, o které lze navýšit celkové výdaje státního rozpočtu.",
+          "effectCz": "Předchozí § 8 odst. 3 umožňoval navýšení celkových výdajů pro financování obrany; nové znění dovoluje pro roky 2026 až 2036 navýšení také o výdaje na výstavbu staveb pro energetickou bezpečnost. Rozšiřuje se tedy možnost financovat tyto stavby nad dosavadní výdajový rámec, bez stanovení konkrétní částky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": true,
+          "reasonCz": "Novela mění způsob financování výstavby nízkouhlíkových výroben, což může podpořit výstavbu zdrojů nahrazujících uhlí.",
+          "effectCz": "Dříve se návratná finanční výpomoc poskytovala ze státního rozpočtu z kapitoly ministerstva a úrok po dobu výstavby nevznikal, po získání povolení k provozu však platila sazba nejméně 2 %; nově lze prostředky poskytnout z mimorozpočtového účtu, před provozním povolením úrok nevzniká a konkrétní podmínky i výši stanoví vláda. Změna usnadňuje financování před zahájením provozu, ale prostředky zůstávají návratné."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-47fc541044--source",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--amendment-text-1230",
+        "psp-core-2025--amendment-text-1253",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--vote-88248",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Vláda předložila změnu rozpočtových pravidel a poslanci ANO ji podpořili; výsledná úprava umožňuje navýšit výdaje na energeticky bezpečnostní stavby a mění financování nízkouhlíkových výroben. Poslanci ANO také podpořili novelu stavebního zákona, která rozšiřuje seznam strategických jaderných a plynových zdrojů a upravuje zajišťování dostupného výkonu elektráren a dalších zařízení. Tyto kroky usnadňují přípravu, financování a zajištění výkonu zdrojů, ale samy nedokládají, že už je k dispozici dost stabilních zdrojů nebo že uhlí zůstane v provozu do jejich plné náhrady.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Poslanci ANO podpořili také pozměňovací návrh týkající se nových obnovitelných zdrojů využívajících energii vodního toku; návrh ruší zvláštní předpoklad převažujícího veřejného zájmu pro jejich plánování a výstavbu, což může ztížit rozvoj jedné možné výrobní alternativy. Slib ale výslovně nezavazuje k podpoře vodní energetiky a tento návrh nemění podmínku odstavení uhelných elektráren.",
+        "Balíček neuvádí, zda již nové zdroje skutečně vznikly ani zda jejich dostupný výkon dostačuje k plné náhradě uhlí; proto nelze doložit splnění celého slibu."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

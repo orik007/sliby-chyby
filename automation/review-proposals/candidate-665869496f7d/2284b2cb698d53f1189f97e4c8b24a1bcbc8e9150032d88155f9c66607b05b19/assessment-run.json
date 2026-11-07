@@ -1,0 +1,356 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-04T02-24-50-126Z--8310b5645807",
+  "evaluatedAt": "2026-11-04T02:24:50.126Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-665869496f7d/8310b5645807dbdacbd6086b832e2a00afb7304e9021b08601e5db038a2f438a.json",
+  "packageHash": "8310b5645807dbdacbd6086b832e2a00afb7304e9021b08601e5db038a2f438a",
+  "assessmentContentHash": "d56432f258c258adc44e754de5c84d6f5cd4f0da4a144fbf611b48eed816359c",
+  "assessmentFingerprint": "2284b2cb698d53f1189f97e4c8b24a1bcbc8e9150032d88155f9c66607b05b19",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-665869496f7d",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_01adbe50a27381b5016aea9576070c87d1bf0d4ccfb2ac4a1b",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 14707,
+            "input_tokens_details": {
+              "cache_write_tokens": 8357,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 4235,
+            "output_tokens_details": {
+              "reasoning_tokens": 2870
+            },
+            "total_tokens": 18942
+          },
+          "output": {
+            "promiseId": "candidate-665869496f7d",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-4",
+                "relevant": true,
+                "reasonCz": "Ustanovení se výslovně týkají opakovaných přestupků a mohou omezit pobyt cizinců, kteří je opakovaně páchají, což je konkrétní nástroj pro část slibu.",
+                "effectCz": "Návrh stanoví, že dlouhodobé vízum či pobyt se neudělí, zruší nebo neprodlouží při opakovaném spáchání evidovaného přestupku třikrát za sebou během 12 měsíců. Balíček neuvádí předchozí znění pravidel, takže nelze určit, zda jde oproti dosavadnímu stavu o zpřísnění; navržené pravidlo však zavádí pobytový následek pro vymezenou část recidivistů a odpovídá části slibu o ochraně veřejnosti."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43443-1",
+                "relevant": true,
+                "reasonCz": "Změna výslovně upravuje opakované přestupky a zvyšuje horní hranici pokuty, takže přímo směřuje k důslednějšímu trestání přestupkové recidivy.",
+                "effectCz": "Dosavadní § 40 odst. 12 stanovil zapisování přestupků podle § 39 odst. 2 do evidence; navržené znění rozšiřuje zápis také na přestupky podle § 36 a při opakování téhož přestupku do 12 měsíců od pravomocného rozhodnutí stanoví pokutu až do dvojnásobku horní hranice sazby. Jde o přísnější následek pro vymezené opakované přestupky a o rozšíření evidence."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2025-1017",
+                "relevant": true,
+                "reasonCz": "Usnesení ukládá připravit legislativní rámec zahrnující návraty cizinců, kteří porušují veřejný pořádek, což je návrh nástroje k ochraně veřejnosti před částí narušitelů pořádku.",
+                "effectCz": "Vláda uložila ministrovi vnitra předložit návrh legislativního rámce pro návraty cizinců páchajících trestnou činnost nebo porušujících veřejný pořádek. Usnesení samo pravidla nemění a balíček neuvádí předchozí znění; jde o přípravu návrhu, který se týká jen části slibu a nevymezuje recidivu."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-88",
+                "relevant": true,
+                "reasonCz": "Plán výslovně navazuje na úkol připravit opatření pro návraty cizinců porušujících veřejný pořádek, takže se týká navrhovaného nástroje ochrany veřejnosti uvedeného ve slibu.",
+                "effectCz": "Plán legislativních prací počítá s návrhem zákona na posílení bezpečnosti a výslovně jej spojuje s opatřeními pro návraty cizinců porušujících veřejný pořádek. Neustanovuje však sám žádnou sankci ani pravidlo pro recidivu; oproti dosavadním pravidlům proto směr změny z balíčku určit nelze a jde pouze o plán přípravy návrhu."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-665869496f7d--source",
+              "psp-core-2025--law-change-43264-4",
+              "psp-core-2025--law-change-43443-1",
+              "zvlady-resolutions--law-change-uv-2025-1017",
+              "zvlady-resolutions--law-change-uv-2026-175-88",
+              "zvlady-resolutions--2025-1017",
+              "zvlady-resolutions--2026-175",
+              "psp-core-2025--print-step-211048",
+              "psp-core-2025--vote-88522",
+              "psp-core-2025--print-step-212242"
+            ],
+            "explanationCz": "Vláda předložila návrh nového cizineckého zákona, který poslanci projednávali jako tisk 144; ten počítá s pobytovými důsledky pro cizince, kteří spáchají evidovaný přestupek třikrát za sebou během 12 měsíců. Poslanci ANO návrh ve třetím čtení podpořili, čímž podpořili nástroj pro část recidivistů. Vláda také navrhla zvýšit až na dvojnásobek horní hranici pokuty za opakování některých přestupků do 12 měsíců a uložila připravit další legislativu pro návraty cizinců porušujících veřejný pořádek. Jde o dílčí kroky směrem ke slibu; některé jsou zatím jen návrhy a předložené podklady neukazují jejich konečné provedení ani celý rozsah pravidel.",
+            "confidence": "medium",
+            "uncertainties": [
+              "U nového cizineckého zákona balíček neobsahuje předchozí znění pobytových pravidel ani konečné znění po dalších fázích projednávání; nelze proto určit, jak se ustanovení promítnou do konečné právní úpravy oproti dosavadnímu stavu.",
+              "Usnesení o návratu cizinců a plán legislativních prací nevymezují, zda opatření dopadnou právě na opakované přestupky; jejich přínos pro tuto část slibu je proto jen dílčí a nepřímý."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-665869496f7d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": true,
+          "reasonCz": "Návrh stanoví následky opakovaných evidovaných přestupků cizinců pro udělení či prodloužení pobytu, což se přímo týká ochrany veřejnosti před opakovaným porušováním pořádku.",
+          "effectCz": "Text stanoví, že při třech evidovaných přestupcích za sebou během 12 měsíců se občanovi třetí země neudělí dlouhodobé vízum ani dlouhodobý pobyt, případně se zruší či neprodlouží; jde tedy o dílčí nástroj ochrany veřejnosti. Předchozí znění příslušných pravidel balíček neobsahuje, takže nelze určit, zda se tím oproti dosavadnímu stavu povinnost či možnost postihu zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-1",
+          "relevant": true,
+          "reasonCz": "Návrh přímo zpřísňuje pokuty za opakované přestupky podle zákona o návykových látkách a rozšiřuje jejich evidenci.",
+          "effectCz": "Dosud se do evidence zapisovaly přestupky podle § 39 odst. 2; návrh zahrnuje také přestupky podle § 36 a při opakování stejného přestupku do 12 měsíců umožňuje uložit pokutu až do dvojnásobku horní hranice sazby. Evidence se tedy rozšiřuje a horní možná pokuta se zvyšuje, což zpřísňuje postih recidivy."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1017",
+          "relevant": true,
+          "reasonCz": "Usnesení ukládá připravit legislativní rámec zahrnující návraty cizinců páchajících trestnou činnost nebo porušujících veřejný pořádek, což se částečně týká ochrany veřejnosti před narušiteli pořádku.",
+          "effectCz": "Usnesení samo nemění pravidla postihování přestupků, ale ukládá ministrovi vnitra předložit vládě návrh legislativního rámce pro návraty cizinců páchajících trestnou činnost nebo porušujících veřejný pořádek. Jde o přípravný krok k části slibu; konkrétní změna pravidel ani její přísnost z usnesení nevyplývá."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-88",
+          "relevant": true,
+          "reasonCz": "Plán prací vlády výslovně zařazuje návrh bezpečnostního zákona navazující na rámec pro návraty cizinců porušujících veřejný pořádek.",
+          "effectCz": "Plán zařazuje přípravu návrhu zákona k dalšímu posílení bezpečnosti a uvádí předložení vládě v červnu 2026 a zamýšlenou účinnost v lednu 2027. Sám pravidla ani tresty nemění, ale plánuje přípravný krok, který může podpořit část slibu; konkrétní obsah zákona zatím stanoven není."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-665869496f7d--source",
+        "psp-core-2025--law-change-43264-4",
+        "psp-core-2025--law-change-43443-1",
+        "zvlady-resolutions--law-change-uv-2025-1017",
+        "zvlady-resolutions--law-change-uv-2026-175-88",
+        "zvlady-resolutions--2025-1017",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--print-step-212242"
+      ],
+      "explanationCz": "Vláda uložila ministrovi vnitra připravit legislativní rámec pro návraty cizinců, kteří páchají trestnou činnost nebo porušují veřejný pořádek, a později zařadila související bezpečnostní zákon do plánu prací. Návrh zákona o pobytu cizinců počítá s odmítnutím či zrušením pobytového oprávnění při třech evidovaných přestupcích za sebou během 12 měsíců; poslanci ANO hlasovali pro jeho schválení. Vláda také navrhla až dvojnásobnou horní hranici pokuty za opakované přestupky podle zákona o návykových látkách a rozšíření jejich evidence. Jde o kroky, které podporují některé části slibu, ale samy nedokládají jeho úplné splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U návrhu zákona o pobytu cizinců balíček neuvádí předchozí znění pobytových pravidel, takže nelze posoudit, zda nové ustanovení představuje zpřísnění oproti dosavadnímu stavu.",
+        "Příloha plánu legislativních prací spojuje úkol 6 s bezpečnostním zákonem, ale v další tabulce uvádí pod stejným číslem jiný legislativní úkol; konkrétní obsah plánovaného bezpečnostního zákona proto není z podkladů jistý."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-665869496f7d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje pobyt občanů třetích zemí při opakovaných přestupcích, a přidává tak konkrétní nástroj pro část slibu týkající se recidivy a ochrany veřejnosti.",
+          "effectCz": "Novela umožňuje neudělit nebo zrušit či neprodloužit dlouhodobé vízum nebo pobyt při třech po sobě jdoucích přestupcích evidovaných podle zákona o některých přestupcích během 12 měsíců; předchozí znění těchto ustanovení v podkladech chybí, takže nelze určit přesnou změnu oproti dosavadním pravidlům. Jde o novou či zpřesněnou pobytovou podmínku pro tuto skupinu, která zpřísňuje její postavení, nikoli však trestní sazbu za přestupek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně stanoví vyšší pokutu za opakovaný přestupek, a přímo tak souvisí s důsledným trestáním přestupkové recidivy.",
+          "effectCz": "Dosavadní § 40 odst. 12 podle kontextu stanoví zapisování přestupků do evidence, ale neukládá za opakování dvojnásobek horní hranice pokuty ani nedefinuje opakování tímto způsobem. Návrh ukládá pokutu až do dvojnásobku horní hranice, pokud se stejný přestupek opakuje do 12 měsíců od pravomocného rozhodnutí o předchozím; zpřísňuje tedy postih recidivy."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1017",
+          "relevant": true,
+          "reasonCz": "Usnesení ukládá připravit právní rámec pro návraty cizinců porušujících veřejný pořádek, což může být nástrojem ochrany veřejnosti před částí narušitelů pořádku, na něž slib míří.",
+          "effectCz": "Usnesení nemění dosavadní právní pravidla; nařizuje ministru vnitra předložit návrh nového legislativního rámce, mimo jiné pro návraty cizinců porušujících veřejný pořádek. Jde o přípravný krok, nikoli o již zavedené zpřísnění či změnu jejich právního postavení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-88",
+          "relevant": true,
+          "reasonCz": "Vládní legislativní plán počítá s návrhem bezpečnostního zákona navazujícím na úkol týkající se cizinců páchajících trestnou činnost nebo porušujících veřejný pořádek, a tedy s přípravou dalšího nástroje ochrany veřejnosti.",
+          "effectCz": "Usnesení samo nemění právní pravidla; stanoví legislativní úkol předložit vládě návrh zákona, s termínem předložení v červnu 2026 a navrhovanou účinností v lednu 2027. Jde pouze o plán přípravy, takže konkrétní dopad na přestupkovou recidivu a jeho směr nelze z podkladu určit."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-665869496f7d--source",
+        "psp-core-2025--law-change-43264-4",
+        "zvlady-resolutions--law-change-uv-2025-1017",
+        "zvlady-resolutions--law-change-uv-2026-175-88",
+        "psp-core-2025--law-change-43443-1",
+        "zvlady-resolutions--2025-1017",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--print-step-212242"
+      ],
+      "explanationCz": "Vláda předložila a poslanci ANO podpořili návrh cizineckého zákona, který umožňuje odepřít nebo odebrat dlouhodobé vízum či pobyt cizincům po opakovaných přestupcích. Jde o konkrétní nástroj pro část slibu, i když se vztahuje jen na občany třetích zemí. Vláda také uložila připravit pravidla pro návraty cizinců porušujících veřejný pořádek a předložila návrh na dvojnásobnou horní hranici pokuty za opakovaný přestupek. Doložené kroky proto směřují ke splnění části slibu, nikoli celého závazku.",
+      "confidence": "high",
+      "uncertainties": [
+        "Schválená úprava cizineckého zákona se podle dodaného textu týká občanů třetích zemí; podklady nedokládají obdobný nástroj pro všechny osoby páchající přestupkovou recidivu.",
+        "Návrh na dvojnásobnou horní hranici pokuty je v podkladech doložen jako předložený vládní návrh, nikoli jako pozdější rozhodnutí o jeho přijetí."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_05a7a4a5762ed282016aea95c83ad887d1bdc1175f03cc867b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 14707,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 14704
+      },
+      "output_tokens": 3354,
+      "output_tokens_details": {
+        "reasoning_tokens": 2070
+      },
+      "total_tokens": 18061
+    },
+    "output": {
+      "promiseId": "candidate-665869496f7d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": true,
+          "reasonCz": "Návrh stanoví následky opakovaných evidovaných přestupků cizinců pro udělení či prodloužení pobytu, což se přímo týká ochrany veřejnosti před opakovaným porušováním pořádku.",
+          "effectCz": "Text stanoví, že při třech evidovaných přestupcích za sebou během 12 měsíců se občanovi třetí země neudělí dlouhodobé vízum ani dlouhodobý pobyt, případně se zruší či neprodlouží; jde tedy o dílčí nástroj ochrany veřejnosti. Předchozí znění příslušných pravidel balíček neobsahuje, takže nelze určit, zda se tím oproti dosavadnímu stavu povinnost či možnost postihu zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-1",
+          "relevant": true,
+          "reasonCz": "Návrh přímo zpřísňuje pokuty za opakované přestupky podle zákona o návykových látkách a rozšiřuje jejich evidenci.",
+          "effectCz": "Dosud se do evidence zapisovaly přestupky podle § 39 odst. 2; návrh zahrnuje také přestupky podle § 36 a při opakování stejného přestupku do 12 měsíců umožňuje uložit pokutu až do dvojnásobku horní hranice sazby. Evidence se tedy rozšiřuje a horní možná pokuta se zvyšuje, což zpřísňuje postih recidivy."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1017",
+          "relevant": true,
+          "reasonCz": "Usnesení ukládá připravit legislativní rámec zahrnující návraty cizinců páchajících trestnou činnost nebo porušujících veřejný pořádek, což se částečně týká ochrany veřejnosti před narušiteli pořádku.",
+          "effectCz": "Usnesení samo nemění pravidla postihování přestupků, ale ukládá ministrovi vnitra předložit vládě návrh legislativního rámce pro návraty cizinců páchajících trestnou činnost nebo porušujících veřejný pořádek. Jde o přípravný krok k části slibu; konkrétní změna pravidel ani její přísnost z usnesení nevyplývá."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-88",
+          "relevant": true,
+          "reasonCz": "Plán prací vlády výslovně zařazuje návrh bezpečnostního zákona navazující na rámec pro návraty cizinců porušujících veřejný pořádek.",
+          "effectCz": "Plán zařazuje přípravu návrhu zákona k dalšímu posílení bezpečnosti a uvádí předložení vládě v červnu 2026 a zamýšlenou účinnost v lednu 2027. Sám pravidla ani tresty nemění, ale plánuje přípravný krok, který může podpořit část slibu; konkrétní obsah zákona zatím stanoven není."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-665869496f7d--source",
+        "psp-core-2025--law-change-43264-4",
+        "psp-core-2025--law-change-43443-1",
+        "zvlady-resolutions--law-change-uv-2025-1017",
+        "zvlady-resolutions--law-change-uv-2026-175-88",
+        "zvlady-resolutions--2025-1017",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--print-step-212242"
+      ],
+      "explanationCz": "Vláda uložila ministrovi vnitra připravit legislativní rámec pro návraty cizinců, kteří páchají trestnou činnost nebo porušují veřejný pořádek, a později zařadila související bezpečnostní zákon do plánu prací. Návrh zákona o pobytu cizinců počítá s odmítnutím či zrušením pobytového oprávnění při třech evidovaných přestupcích za sebou během 12 měsíců; poslanci ANO hlasovali pro jeho schválení. Vláda také navrhla až dvojnásobnou horní hranici pokuty za opakované přestupky podle zákona o návykových látkách a rozšíření jejich evidence. Jde o kroky, které podporují některé části slibu, ale samy nedokládají jeho úplné splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U návrhu zákona o pobytu cizinců balíček neuvádí předchozí znění pobytových pravidel, takže nelze posoudit, zda nové ustanovení představuje zpřísnění oproti dosavadnímu stavu.",
+        "Příloha plánu legislativních prací spojuje úkol 6 s bezpečnostním zákonem, ale v další tabulce uvádí pod stejným číslem jiný legislativní úkol; konkrétní obsah plánovaného bezpečnostního zákona proto není z podkladů jistý."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_00b1eb9a1d9b4956016aea973338b087d1bb8f9c552d33c4da",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 14707,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 14704
+      },
+      "output_tokens": 3339,
+      "output_tokens_details": {
+        "reasoning_tokens": 2057
+      },
+      "total_tokens": 18046
+    },
+    "output": {
+      "promiseId": "candidate-665869496f7d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje pobyt občanů třetích zemí při opakovaných přestupcích, a přidává tak konkrétní nástroj pro část slibu týkající se recidivy a ochrany veřejnosti.",
+          "effectCz": "Novela umožňuje neudělit nebo zrušit či neprodloužit dlouhodobé vízum nebo pobyt při třech po sobě jdoucích přestupcích evidovaných podle zákona o některých přestupcích během 12 měsíců; předchozí znění těchto ustanovení v podkladech chybí, takže nelze určit přesnou změnu oproti dosavadním pravidlům. Jde o novou či zpřesněnou pobytovou podmínku pro tuto skupinu, která zpřísňuje její postavení, nikoli však trestní sazbu za přestupek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43443-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně stanoví vyšší pokutu za opakovaný přestupek, a přímo tak souvisí s důsledným trestáním přestupkové recidivy.",
+          "effectCz": "Dosavadní § 40 odst. 12 podle kontextu stanoví zapisování přestupků do evidence, ale neukládá za opakování dvojnásobek horní hranice pokuty ani nedefinuje opakování tímto způsobem. Návrh ukládá pokutu až do dvojnásobku horní hranice, pokud se stejný přestupek opakuje do 12 měsíců od pravomocného rozhodnutí o předchozím; zpřísňuje tedy postih recidivy."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1017",
+          "relevant": true,
+          "reasonCz": "Usnesení ukládá připravit právní rámec pro návraty cizinců porušujících veřejný pořádek, což může být nástrojem ochrany veřejnosti před částí narušitelů pořádku, na něž slib míří.",
+          "effectCz": "Usnesení nemění dosavadní právní pravidla; nařizuje ministru vnitra předložit návrh nového legislativního rámce, mimo jiné pro návraty cizinců porušujících veřejný pořádek. Jde o přípravný krok, nikoli o již zavedené zpřísnění či změnu jejich právního postavení."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-88",
+          "relevant": true,
+          "reasonCz": "Vládní legislativní plán počítá s návrhem bezpečnostního zákona navazujícím na úkol týkající se cizinců páchajících trestnou činnost nebo porušujících veřejný pořádek, a tedy s přípravou dalšího nástroje ochrany veřejnosti.",
+          "effectCz": "Usnesení samo nemění právní pravidla; stanoví legislativní úkol předložit vládě návrh zákona, s termínem předložení v červnu 2026 a navrhovanou účinností v lednu 2027. Jde pouze o plán přípravy, takže konkrétní dopad na přestupkovou recidivu a jeho směr nelze z podkladu určit."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-665869496f7d--source",
+        "psp-core-2025--law-change-43264-4",
+        "zvlady-resolutions--law-change-uv-2025-1017",
+        "zvlady-resolutions--law-change-uv-2026-175-88",
+        "psp-core-2025--law-change-43443-1",
+        "zvlady-resolutions--2025-1017",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--print-step-212242"
+      ],
+      "explanationCz": "Vláda předložila a poslanci ANO podpořili návrh cizineckého zákona, který umožňuje odepřít nebo odebrat dlouhodobé vízum či pobyt cizincům po opakovaných přestupcích. Jde o konkrétní nástroj pro část slibu, i když se vztahuje jen na občany třetích zemí. Vláda také uložila připravit pravidla pro návraty cizinců porušujících veřejný pořádek a předložila návrh na dvojnásobnou horní hranici pokuty za opakovaný přestupek. Doložené kroky proto směřují ke splnění části slibu, nikoli celého závazku.",
+      "confidence": "high",
+      "uncertainties": [
+        "Schválená úprava cizineckého zákona se podle dodaného textu týká občanů třetích zemí; podklady nedokládají obdobný nástroj pro všechny osoby páchající přestupkovou recidivu.",
+        "Návrh na dvojnásobnou horní hranici pokuty je v podkladech doložen jako předložený vládní návrh, nikoli jako pozdější rozhodnutí o jeho přijetí."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

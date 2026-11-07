@@ -1,0 +1,434 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-40-50-485Z--9360e00e7863",
+  "evaluatedAt": "2026-10-02T01:40:50.485Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-d9c2bb03c3/9360e00e7863adcc2b474f7d8fa202ca173fe673c7d6e339c652f27a99acef6c.json",
+  "packageHash": "9360e00e7863adcc2b474f7d8fa202ca173fe673c7d6e339c652f27a99acef6c",
+  "assessmentContentHash": "80d1a23a0494cd0e25ef1bd68ce7ce683fb3d14028176ebdc588e68a56178c5e",
+  "assessmentFingerprint": "18fade563a739bf8e9501d55b6f82d5f1333fd3f6acaf617d26ee3c73a29f310",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-d9c2bb03c3",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_04913658383a1fc6016abf0af6b61887d199f36d849186a026",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 386869,
+            "input_tokens_details": {
+              "cache_write_tokens": 383545,
+              "cached_tokens": 3321
+            },
+            "output_tokens": 5136,
+            "output_tokens_details": {
+              "reasoning_tokens": 3973
+            },
+            "total_tokens": 392005
+          },
+          "output": {
+            "promiseId": "ano-2025-d9c2bb03c3",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Novela mění pravidla povolování staveb a výslovně řadí veřejnou infrastrukturu mezi veřejné zájmy, takže může usnadnit přípravu silničního rozšíření, byť D1 u Brna-jihu nejmenuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-15",
+                "relevant": false,
+                "reasonCz": "Změna zákona o pozemních komunikacích převážně upravuje pojmy související se zastavitelným územím a nestanoví opatření pro rozšíření D1 ani pro jeho dokončení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": false,
+                "reasonCz": "Změny pravidel posuzování vlivů na životní prostředí neuvádějí rozšíření D1 u Brna-jihu ani konkrétní postup či termín jeho realizace."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": true,
+                "reasonCz": "Novela upravuje postupy pro dopravní infrastrukturu a vyvlastnění, což může přispět k přípravě dálniční stavby, ale text neuvádí D1 u Brna-jihu ani její konkrétní harmonogram."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-22",
+                "relevant": false,
+                "reasonCz": "Tato změna krajského zákona upravuje převod pozemků související s veřejně prospěšnými stavbami, ale nedokládá souvislost s rozšířením D1 u Brna-jihu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-2",
+                "relevant": false,
+                "reasonCz": "Změny rozpočtových pravidel upravují postupy hospodaření, ale neobsahují konkrétní financování ani jiné opatření pro rozšíření D1 u Brna-jihu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43201-1",
+                "relevant": true,
+                "reasonCz": "Návrh rozpočtu dopravního fondu počítá s financováním dopravní infrastruktury a uvádí pokračování dostavby základní dálniční sítě jako cíl, ačkoli konkrétní úsek D1 nejmenuje."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-d9c2bb03c3--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-32",
+              "psp-core-2025--law-change-43201-1",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--vote-86962"
+            ],
+            "explanationCz": "Poslanci ANO předložili novelu stavebního zákona (parlamentní návrh označený jako sněmovní tisk 67), která mění pravidla povolování a přípravy veřejné infrastruktury. Po odmítnutí návrhu Senátem poslanci ANO hlasovali pro jeho prosazení; samo rozšíření D1 tím ale doloženo není. ANO také hlasovalo pro rozpočet Státního fondu dopravní infrastruktury, který počítá s pokračováním dostavby základní dálniční sítě. Jde tedy o kroky, které mohou slibu pomoci, ale žádný z podkladů neuvádí konkrétní peníze ani postup pro D1 u Brna-jihu, takže splnění slibu potvrdit nelze.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Podklady neuvádějí, zda rozpočet Státního fondu dopravní infrastruktury vyčleňuje prostředky přímo na rozšíření D1 u Brna-jihu.",
+              "Novela stavebního zákona a pravidel pro strategickou infrastrukturu mění obecné postupy; není doloženo, zda se tyto změny konkrétně vztahují na tento úsek ani zda urychlí jeho dokončení do roku 2029."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-d9c2bb03c3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela stavebního zákona mění povolování a posuzování staveb veřejné infrastruktury, což může usnadnit přípravu silniční stavby, byť rozšíření D1 u Brna-jihu nejmenuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-15",
+          "relevant": false,
+          "reasonCz": "Změny zákona o pozemních komunikacích převážně nahrazují pojmy související s vymezením zastavěného a zastavitelného území a nedokládají dopad na toto rozšíření D1."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Změny pravidel posuzování vlivů na životní prostředí mohou ovlivnit povolovací proces dopravní stavby, pokud tomuto posuzování podléhá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Novela pravidel pro strategickou infrastrukturu upravuje postupy a získávání práv potřebných pro vybrané stavby, což může být relevantní pro přípravu dopravní infrastruktury, ale konkrétní projekt neuvádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-22",
+          "relevant": false,
+          "reasonCz": "Tato část pouze upravuje vymezení pozemků v krajském zákoně a rozšíření D1 ani jeho financování neřeší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Návrh mění pravidla, která umožňují navýšit výdaje na výstavbu dálnic a dalších dopravních staveb, takže se může týkat financování slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43201-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet dopravního fondu vyčleňuje prostředky na pokračování dostavby dálniční sítě, ale konkrétní rozšíření u Brna-jihu nejmenuje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-d9c2bb03c3--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--law-change-43201-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-86962",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci ANO předložili a podpořili novelu stavebního zákona, která mění povolování staveb veřejné infrastruktury; to může usnadnit přípravu silniční stavby, ale rozšíření D1 u Brna-jihu výslovně neuvádí. Balík novel také mění posuzování vlivů na životní prostředí a pravidla pro strategickou infrastrukturu, avšak není doloženo, zda se tato ustanovení vztahují právě na tento projekt. Vláda předložila a poslanci ANO schválili změny rozpočtových pravidel umožňující navýšit výdaje na výstavbu dálnic. Poslanci ANO rovněž schválili rozpočet dopravního fondu, který počítá s pokračováním dostavby dálniční sítě, neuvádí však financování tohoto konkrétního úseku. Jde tedy o dílčí postup směrem ke slibu, nikoli o důkaz, že rozšíření bude do roku 2029 hotové.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočtové podklady neuvádějí, zda jsou prostředky určeny přímo na rozšíření D1 u Brna-jihu, ani jeho aktuální stav či harmonogram dokončení.",
+        "Není doloženo, zda se změny pravidel pro posuzování vlivů na životní prostředí a strategickou infrastrukturu vztahují právě na tento projekt. U závěrečného hlasování o rozpočtové novele není přesné znění rozhodované po vrácení prezidentem zveřejněno; senátní návrh přitom navrhoval omezit možnost navýšit výdaje na dopravní stavby."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-d9c2bb03c3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela mění povolování staveb a stanoví, že veřejná infrastruktura je ve veřejném zájmu, což může usnadnit přípravu silniční stavby, ačkoli D1 ani Brno-jih nejmenuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-15",
+          "relevant": false,
+          "reasonCz": "Změny zákona o pozemních komunikacích převážně nahrazují pojem zastavěného území pojmem zastavitelné území a nepodporují konkrétně rozšíření D1 u Brna-jihu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Novela umožňuje, aby stanovisko z posuzování vlivů na životní prostředí za určitých podmínek nahrazovalo další správní úkony, což může zjednodušit povolování dopravního záměru."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změny pravidel pro vyvlastňování a urychlení strategické infrastruktury mohou usnadnit získání práv k pozemkům potřebným pro silniční stavbu, ale konkrétní úsek D1 neuvádějí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-22",
+          "relevant": false,
+          "reasonCz": "Tato část pouze upravuje pojmy související s pozemky u veřejně prospěšných staveb a nedokládá opatření pro dokončení rozšíření D1 u Brna-jihu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Novela rozpočtových pravidel umožňuje zvýšit výdaje na výstavbu dálnic a silnic, a může tak podpořit financování části slibu, konkrétní projekt ale neurčuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43201-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet dopravního fondu počítá s výdaji na pokračování dostavby dálniční sítě, avšak rozšíření křižovatky Brno-jih ani jeho konkrétní financování neuvádí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-d9c2bb03c3--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--law-change-43201-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--vote-86962"
+      ],
+      "explanationCz": "Poslanci ANO předložili novelu stavebního zákona a hlasovali pro ni; po zamítnutí Senátem, tedy horní komorou Parlamentu, Sněmovna na návrhu setrvala. Novela upravuje povolování a získávání pozemků pro infrastrukturu, což může usnadnit přípravu rozšíření D1, ale nestanoví dokončení křižovatky Brno-jih. Vláda také předložila a poslanci ANO podpořili změnu rozpočtových pravidel, která umožňuje navýšit výdaje na stavby dálnic a silnic. ANO hlasovalo i pro rozpočet dopravního fondu, který počítá s pokračováním dostavby dálniční sítě, nikoli však s konkrétním přídělem pro Brno-jih. Jde proto o dílčí podpůrné kroky, nikoli o důkaz, že bude rozšíření do roku 2029 hotové.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neuvádějí konkrétní přidělení peněz, stavební práce ani harmonogram pro rozšíření D1 na křižovatce Brno-jih; nelze proto ověřit, zda podpůrné změny skutečně urychlují právě tento projekt.",
+        "Přesné konečné znění rozpočtové novely po posledním hlasování není v podkladech zveřejněno; záznam uvádí hlasování o setrvání na návrhu po vrácení prezidentem."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_058ddf8107eb4e1a016abf0b32b41087d1b25159584a064576",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 386869,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 386866
+      },
+      "output_tokens": 6804,
+      "output_tokens_details": {
+        "reasoning_tokens": 5608
+      },
+      "total_tokens": 393673
+    },
+    "output": {
+      "promiseId": "ano-2025-d9c2bb03c3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela stavebního zákona mění povolování a posuzování staveb veřejné infrastruktury, což může usnadnit přípravu silniční stavby, byť rozšíření D1 u Brna-jihu nejmenuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-15",
+          "relevant": false,
+          "reasonCz": "Změny zákona o pozemních komunikacích převážně nahrazují pojmy související s vymezením zastavěného a zastavitelného území a nedokládají dopad na toto rozšíření D1."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Změny pravidel posuzování vlivů na životní prostředí mohou ovlivnit povolovací proces dopravní stavby, pokud tomuto posuzování podléhá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Novela pravidel pro strategickou infrastrukturu upravuje postupy a získávání práv potřebných pro vybrané stavby, což může být relevantní pro přípravu dopravní infrastruktury, ale konkrétní projekt neuvádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-22",
+          "relevant": false,
+          "reasonCz": "Tato část pouze upravuje vymezení pozemků v krajském zákoně a rozšíření D1 ani jeho financování neřeší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Návrh mění pravidla, která umožňují navýšit výdaje na výstavbu dálnic a dalších dopravních staveb, takže se může týkat financování slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43201-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet dopravního fondu vyčleňuje prostředky na pokračování dostavby dálniční sítě, ale konkrétní rozšíření u Brna-jihu nejmenuje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-d9c2bb03c3--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--law-change-43201-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-86962",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci ANO předložili a podpořili novelu stavebního zákona, která mění povolování staveb veřejné infrastruktury; to může usnadnit přípravu silniční stavby, ale rozšíření D1 u Brna-jihu výslovně neuvádí. Balík novel také mění posuzování vlivů na životní prostředí a pravidla pro strategickou infrastrukturu, avšak není doloženo, zda se tato ustanovení vztahují právě na tento projekt. Vláda předložila a poslanci ANO schválili změny rozpočtových pravidel umožňující navýšit výdaje na výstavbu dálnic. Poslanci ANO rovněž schválili rozpočet dopravního fondu, který počítá s pokračováním dostavby dálniční sítě, neuvádí však financování tohoto konkrétního úseku. Jde tedy o dílčí postup směrem ke slibu, nikoli o důkaz, že rozšíření bude do roku 2029 hotové.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočtové podklady neuvádějí, zda jsou prostředky určeny přímo na rozšíření D1 u Brna-jihu, ani jeho aktuální stav či harmonogram dokončení.",
+        "Není doloženo, zda se změny pravidel pro posuzování vlivů na životní prostředí a strategickou infrastrukturu vztahují právě na tento projekt. U závěrečného hlasování o rozpočtové novele není přesné znění rozhodované po vrácení prezidentem zveřejněno; senátní návrh přitom navrhoval omezit možnost navýšit výdaje na dopravní stavby."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_010f50f722df4e0f016abf0b6ebb6c87d180b11cbe472be580",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 386869,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 386866
+      },
+      "output_tokens": 8453,
+      "output_tokens_details": {
+        "reasoning_tokens": 7250
+      },
+      "total_tokens": 395322
+    },
+    "output": {
+      "promiseId": "ano-2025-d9c2bb03c3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela mění povolování staveb a stanoví, že veřejná infrastruktura je ve veřejném zájmu, což může usnadnit přípravu silniční stavby, ačkoli D1 ani Brno-jih nejmenuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-15",
+          "relevant": false,
+          "reasonCz": "Změny zákona o pozemních komunikacích převážně nahrazují pojem zastavěného území pojmem zastavitelné území a nepodporují konkrétně rozšíření D1 u Brna-jihu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Novela umožňuje, aby stanovisko z posuzování vlivů na životní prostředí za určitých podmínek nahrazovalo další správní úkony, což může zjednodušit povolování dopravního záměru."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Změny pravidel pro vyvlastňování a urychlení strategické infrastruktury mohou usnadnit získání práv k pozemkům potřebným pro silniční stavbu, ale konkrétní úsek D1 neuvádějí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-22",
+          "relevant": false,
+          "reasonCz": "Tato část pouze upravuje pojmy související s pozemky u veřejně prospěšných staveb a nedokládá opatření pro dokončení rozšíření D1 u Brna-jihu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Novela rozpočtových pravidel umožňuje zvýšit výdaje na výstavbu dálnic a silnic, a může tak podpořit financování části slibu, konkrétní projekt ale neurčuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43201-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet dopravního fondu počítá s výdaji na pokračování dostavby dálniční sítě, avšak rozšíření křižovatky Brno-jih ani jeho konkrétní financování neuvádí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-d9c2bb03c3--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--law-change-43201-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--vote-86962"
+      ],
+      "explanationCz": "Poslanci ANO předložili novelu stavebního zákona a hlasovali pro ni; po zamítnutí Senátem, tedy horní komorou Parlamentu, Sněmovna na návrhu setrvala. Novela upravuje povolování a získávání pozemků pro infrastrukturu, což může usnadnit přípravu rozšíření D1, ale nestanoví dokončení křižovatky Brno-jih. Vláda také předložila a poslanci ANO podpořili změnu rozpočtových pravidel, která umožňuje navýšit výdaje na stavby dálnic a silnic. ANO hlasovalo i pro rozpočet dopravního fondu, který počítá s pokračováním dostavby dálniční sítě, nikoli však s konkrétním přídělem pro Brno-jih. Jde proto o dílčí podpůrné kroky, nikoli o důkaz, že bude rozšíření do roku 2029 hotové.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neuvádějí konkrétní přidělení peněz, stavební práce ani harmonogram pro rozšíření D1 na křižovatce Brno-jih; nelze proto ověřit, zda podpůrné změny skutečně urychlují právě tento projekt.",
+        "Přesné konečné znění rozpočtové novely po posledním hlasování není v podkladech zveřejněno; záznam uvádí hlasování o setrvání na návrhu po vrácení prezidentem."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

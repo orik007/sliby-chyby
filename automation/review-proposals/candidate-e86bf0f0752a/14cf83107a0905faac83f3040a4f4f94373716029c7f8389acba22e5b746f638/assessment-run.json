@@ -1,0 +1,351 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-31-48-416Z--c54ba0abb479",
+  "evaluatedAt": "2026-11-05T10:31:48.416Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-e86bf0f0752a/c54ba0abb47954166439e29b92098b0b6f6c347c70b7e9c9e933c0ce2e3f2757.json",
+  "packageHash": "c54ba0abb47954166439e29b92098b0b6f6c347c70b7e9c9e933c0ce2e3f2757",
+  "assessmentContentHash": "8f7ea304102d10b5beb0bab74a1b9f5dc3afc79b7d0c6492b462504c943ed5e3",
+  "assessmentFingerprint": "14cf83107a0905faac83f3040a4f4f94373716029c7f8389acba22e5b746f638",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-e86bf0f0752a",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_056c337caa2aee1d016aec5a667dc087d182c002e77b7e9872",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 16427,
+            "input_tokens_details": {
+              "cache_write_tokens": 10077,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 3527,
+            "output_tokens_details": {
+              "reasoning_tokens": 2234
+            },
+            "total_tokens": 19954
+          },
+          "output": {
+            "promiseId": "candidate-e86bf0f0752a",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43323-1",
+                "relevant": true,
+                "reasonCz": "Návrh mění výjimku z oznamovací povinnosti podnikatelů a počet zaměstnanců, při kterém se poplatky neplatí, takže se přímo týká registrace části podnikatelů.",
+                "effectCz": "Dosud podnikatelé s nejvýše 24 zaměstnanci poplatky neplatili, nově se tato hranice zvyšuje na 50 zaměstnanců; navazující změna § 8 odst. 2 rozšiřuje výjimku z oznamovací povinnosti na tyto neplátce. Zákon také počítá s výmazem údajů již evidovaných neplátců podle § 5 odst. 4. Povinnost registrace se tím u části podnikatelů zmírňuje, ale návrh ji neruší pro všechny podnikatele."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43353-3",
+                "relevant": true,
+                "reasonCz": "Přechodné ustanovení zachovává použití dosavadního zákona na dříve vzniklé poplatkové povinnosti a související povinnosti, mezi něž mohou patřit i povinnosti spojené s evidencí.",
+                "effectCz": "Nové přechodné ustanovení určuje, že poplatkové povinnosti vzniklé před účinností zákona a související práva a povinnosti se posoudí podle dosavadního zákona. Předchozí znění této přechodné úpravy není v balíčku uvedeno; ustanovení může zachovat i související registrační povinnosti u dřívějších případů, takže jejich zánik není úplný. Přesný rozsah těchto zachovaných povinností z podkladů nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43353-4",
+                "relevant": true,
+                "reasonCz": "Navržené zrušení zákona o rozhlasových a televizních poplatcích přímo odstraňuje právní rámec registrační povinnosti, kterou slib požaduje zrušit.",
+                "effectCz": "Návrh ruší zákon o rozhlasových a televizních poplatcích s účinností od 1. ledna 2027; předchozí znění rušeného zákona není v podkladech uvedeno. Pokud bude návrh přijat, registrační povinnost založená tímto zákonem pro budoucí případy odpadne, což odpovídá slibu; přechodné ustanovení však ponechává dosavadní pravidla pro dříve vzniklé poplatkové povinnosti."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-51",
+                "relevant": true,
+                "reasonCz": "Vládní plán výslovně počítá se zákonem, který zruší poplatky za veřejnoprávní média a změní způsob jejich financování, což může odstranit i registrační povinnost podnikatelů k těmto poplatkům.",
+                "effectCz": "Nejde o změnu dosavadního zákona, ale o vládní plán předložit zákon o financování médií veřejné služby; plán uvádí záměr zrušit poplatky a financovat službu přímo ze státního rozpočtu. Jde o přípravný krok, nikoli o účinné zrušení registrace."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-e86bf0f0752a--source",
+              "psp-core-2025--law-change-43323-1",
+              "psp-core-2025--law-change-43353-3",
+              "psp-core-2025--law-change-43353-4",
+              "zvlady-resolutions--law-change-uv-2026-175-51",
+              "zvlady-resolutions--2026-175",
+              "psp-core-2025--print-step-211459",
+              "psp-core-2025--print-step-211648",
+              "psp-core-2025--government-opinion-43323-1"
+            ],
+            "explanationCz": "Poslanci Motoristů předložili poslanecký návrh změny zákona o rozhlasových a televizních poplatcích (sněmovní tisk 201); ten by osvobodil od oznamovací povinnosti podniky s nejvýše 50 zaměstnanci, ale nezrušil by ji všem podnikatelům. Vláda s tímto návrhem souhlasila. Vláda také předložila návrh (sněmovní tisk 231), který má od 1. ledna 2027 zrušit celý zákon o poplatcích, přičemž pro dříve vzniklé povinnosti ponechává dosavadní pravidla. Jde zatím o návrhy, nikoli o doložené přijaté rozhodnutí, takže strana podnikla kroky směrem ke splnění slibu, ale jeho splnění zatím není prokázáno.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Návrh na zrušení zákona o poplatcích zachovává dosavadní pravidla pro dříve vzniklé poplatkové povinnosti a související povinnosti; podklady neupřesňují, zda a v jakém rozsahu to zahrnuje registraci.",
+              "Podklady dokládají předložení návrhů a souhlas vlády, nikoli jejich přijetí ani konečné znění případně přijatého zákona."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-e86bf0f0752a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43323-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění výjimku z poplatků pro podnikatele a přímo upravuje oznamovací a odhlašovací povinnosti v evidenci poplatníků.",
+          "effectCz": "Dosud podnikatelé s nejvýše 24 zaměstnanci poplatek neplatili, ale výjimka z oznamovací povinnosti v § 8 odst. 2 se vztahovala na jiné neplátce; návrh rozšiřuje osvobození od poplatků na podnikatele s nejvýše 50 zaměstnanci a výjimku z oznamování výslovně rozšiřuje i na ně. Návrh zároveň rozšiřuje povinnost odhlásit se z evidence na neplátce podle § 5 odst. 4, ale u těch, kteří už v evidenci jsou, přechodné ustanovení tuto povinnost vylučuje a správci ukládá jejich údaje vymazat do dvou měsíců. Pro podnikatele do 50 zaměstnanců tedy návrh registrační zátěž snižuje, nikoli však pro všechny podnikatele; v ostatních případech povinnost z předloženého textu nezaniká."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43353-3",
+          "relevant": true,
+          "reasonCz": "Přechodné ustanovení může zachovat povinnosti související s dříve vzniklými poplatkovými povinnostmi, a tím ovlivnit rozsah zrušení registrace pro dosavadní případy.",
+          "effectCz": "Ustanovení nově určuje, že poplatkové povinnosti vzniklé před účinností zákona a související práva a povinnosti se budou nadále posuzovat podle dosavadního zákona. Předchozí znění tohoto přechodného pravidla ani přesný obsah navazujících povinností balíček neuvádí, takže nelze určit, zda a v jakém rozsahu zachovává také registrační povinnosti; může tak omezit okamžité odstranění povinností u starších případů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43353-4",
+          "relevant": true,
+          "reasonCz": "Navrhuje zrušit zákon o rozhlasových a televizních poplatcích, který je právním základem povinné registrace podnikatelů k těmto poplatkům.",
+          "effectCz": "Návrh stanoví, že se zákon č. 348/2005 Sb. zruší s účinností od 1. ledna 2027. Jde o zrušení právního základu poplatkové evidence a registračních povinností, které slib požaduje odstranit; návrh však sám zatím není účinným rozhodnutím."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-51",
+          "relevant": true,
+          "reasonCz": "Vládní plán počítá s návrhem zákona, který má odstranit poplatky pro občany a firmy, takže může vést i k odstranění související registrace podnikatelů.",
+          "effectCz": "Usnesení stanoví legislativní úkol připravit návrh financování veřejnoprávních médií přímo ze státního rozpočtu; jako cíl uvádí snížení zátěže občanů a firem a zrušení poplatků za veřejnoprávní média. Plán počítá s předložením vládě v červnu 2026 a účinností v lednu 2027, ale sám registrační povinnost nemění; jako návrhový plán může slib posunout, nikoli jej uskutečnit."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-e86bf0f0752a--source",
+        "psp-core-2025--law-change-43323-1",
+        "psp-core-2025--law-change-43353-3",
+        "psp-core-2025--law-change-43353-4",
+        "zvlady-resolutions--law-change-uv-2026-175-51",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211459",
+        "psp-core-2025--print-step-211648",
+        "psp-core-2025--government-opinion-43323-1"
+      ],
+      "explanationCz": "Vládní plán z března 2026 počítá se změnou financování veřejnoprávních médií a se zrušením poplatků. Poslanci Motoristů sobě také předložili návrh, který by osvobodil od poplatků podnikatele s nejvýše 50 zaměstnanci a ulehčil jim registraci; vláda s tímto návrhem souhlasila. V červnu vláda navíc předložila vlastní návrh na zrušení zákona o rozhlasových a televizních poplatcích od 1. ledna 2027. Jde zatím o návrhy, nikoli o účinné změny, proto slib zatím směřuje ke splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložený vládní návrh na zrušení zákona zatím není účinný; balíček nedokládá, že byl přijat.",
+        "Přechodné ustanovení zachovává dosavadní režim pro dříve vzniklé poplatkové povinnosti, ale balíček neumožňuje určit, zda mezi souvisejícími povinnostmi zůstane i registrace."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-e86bf0f0752a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43323-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje, kdo z podnikatelů poplatek neplatí, a výslovně mění pravidla oznamování a odhlašování z evidence poplatníků.",
+          "effectCz": "Dosavadní znění osvobozovalo podnikatele s nejvýše 24 zaměstnanci; návrh hranici zvyšuje na 50 a ruší poplatkovou kategorii 25 až 49 zaměstnanců. Zároveň rozšiřuje výjimku z oznamovací povinnosti při vzniku poplatnictví na ty, kdo podle § 5 odst. 4 neplatí. To snižuje rozsah povinné registrace u podnikatelů do 50 zaměstnanců, ale neodstraňuje ji pro všechny podnikatele. Návrh také výslovně ukládá odhlášení neplatičům podle § 5 odst. 4; přechodné ustanovení však tuto povinnost vylučuje u těch, kdo už byli v evidenci před účinností, a nařizuje jejich vymazání. Jde tedy o částečné uvolnění registrační zátěže, nikoli o úplné zrušení povinnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43353-3",
+          "relevant": true,
+          "reasonCz": "Přechodné ustanovení zachovává starší pravidla pro dříve vzniklé poplatkové povinnosti a související povinnosti, takže se může týkat trvání povinností spojených s evidencí.",
+          "effectCz": "Ustanovení říká, že pro poplatkové povinnosti vzniklé před účinností nového zákona a související práva a povinnosti se použije dosavadní znění zákona. Balíček neupřesňuje, zda mezi zachované související povinnosti patří právě registrace; směr účinku této části na slib proto nelze z dodaných podkladů určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43353-4",
+          "relevant": true,
+          "reasonCz": "Navržené ustanovení ruší zákon upravující rozhlasové a televizní poplatky, a tím přímo zasahuje do právního základu registrační povinnosti.",
+          "effectCz": "Dosavadní znění zákona č. 348/2005 Sb. návrh nahrazuje jeho zrušením od 1. ledna 2027. Pokud bude ustanovení přijato, zanikne i právní základ registrace k těmto poplatkům; jde o odstranění celé poplatkové úpravy, nikoli pouze o dílčí změnu registrační povinnosti."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-51",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně ukládá připravit zákon o financování médií veřejné služby a uvádí zrušení poplatků jako vládní prioritu.",
+          "effectCz": "Usnesení samo pravidla registrace nemění. Zařazuje však mezi legislativní úkoly přípravu zákona, jehož cílem je zrušit poplatky za veřejnoprávní média, s předložením vládě plánovaným na leden 2027; jde o přípravný krok, nikoli o již účinné zrušení povinnosti."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-e86bf0f0752a--source",
+        "psp-core-2025--law-change-43323-1",
+        "psp-core-2025--law-change-43353-3",
+        "psp-core-2025--law-change-43353-4",
+        "zvlady-resolutions--law-change-uv-2026-175-51",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211459",
+        "psp-core-2025--print-step-211648",
+        "psp-core-2025--government-opinion-43323-1"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě předložili návrh, který podnikatelům s nejvýše 50 zaměstnanci rozšiřuje výjimku z poplatků i z počátečního oznámení do evidence. Vláda s tímto poslaneckým návrhem vyslovila souhlas a sama předložila návrh, který má od 1. ledna 2027 zrušit zákon o rozhlasových a televizních poplatcích. Vládní plán navíc počítá s přípravou zákona o financování médií, jehož cílem je zrušení poplatků. Jde zatím o návrhy a plán, nikoli o dokončené zrušení povinnosti; předložené změny proto představují posun ke slibu, ne jeho splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Přechodné ustanovení vládního návrhu zachovává dosavadní pravidla pro dříve vzniklé poplatkové povinnosti a související povinnosti. Podklady neukazují, zda mezi ně patří také registrační povinnost.",
+        "Návrh na zrušení poplatkového zákona a plán jeho přípravy nebyly v dodaných podkladech doloženy jako již přijaté a účinné změny."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0aa2f2793bd2aeab016aec5aa7236087d1bf620bbeb86ccc86",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 16427,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 16424
+      },
+      "output_tokens": 4057,
+      "output_tokens_details": {
+        "reasoning_tokens": 2634
+      },
+      "total_tokens": 20484
+    },
+    "output": {
+      "promiseId": "candidate-e86bf0f0752a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43323-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění výjimku z poplatků pro podnikatele a přímo upravuje oznamovací a odhlašovací povinnosti v evidenci poplatníků.",
+          "effectCz": "Dosud podnikatelé s nejvýše 24 zaměstnanci poplatek neplatili, ale výjimka z oznamovací povinnosti v § 8 odst. 2 se vztahovala na jiné neplátce; návrh rozšiřuje osvobození od poplatků na podnikatele s nejvýše 50 zaměstnanci a výjimku z oznamování výslovně rozšiřuje i na ně. Návrh zároveň rozšiřuje povinnost odhlásit se z evidence na neplátce podle § 5 odst. 4, ale u těch, kteří už v evidenci jsou, přechodné ustanovení tuto povinnost vylučuje a správci ukládá jejich údaje vymazat do dvou měsíců. Pro podnikatele do 50 zaměstnanců tedy návrh registrační zátěž snižuje, nikoli však pro všechny podnikatele; v ostatních případech povinnost z předloženého textu nezaniká."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43353-3",
+          "relevant": true,
+          "reasonCz": "Přechodné ustanovení může zachovat povinnosti související s dříve vzniklými poplatkovými povinnostmi, a tím ovlivnit rozsah zrušení registrace pro dosavadní případy.",
+          "effectCz": "Ustanovení nově určuje, že poplatkové povinnosti vzniklé před účinností zákona a související práva a povinnosti se budou nadále posuzovat podle dosavadního zákona. Předchozí znění tohoto přechodného pravidla ani přesný obsah navazujících povinností balíček neuvádí, takže nelze určit, zda a v jakém rozsahu zachovává také registrační povinnosti; může tak omezit okamžité odstranění povinností u starších případů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43353-4",
+          "relevant": true,
+          "reasonCz": "Navrhuje zrušit zákon o rozhlasových a televizních poplatcích, který je právním základem povinné registrace podnikatelů k těmto poplatkům.",
+          "effectCz": "Návrh stanoví, že se zákon č. 348/2005 Sb. zruší s účinností od 1. ledna 2027. Jde o zrušení právního základu poplatkové evidence a registračních povinností, které slib požaduje odstranit; návrh však sám zatím není účinným rozhodnutím."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-51",
+          "relevant": true,
+          "reasonCz": "Vládní plán počítá s návrhem zákona, který má odstranit poplatky pro občany a firmy, takže může vést i k odstranění související registrace podnikatelů.",
+          "effectCz": "Usnesení stanoví legislativní úkol připravit návrh financování veřejnoprávních médií přímo ze státního rozpočtu; jako cíl uvádí snížení zátěže občanů a firem a zrušení poplatků za veřejnoprávní média. Plán počítá s předložením vládě v červnu 2026 a účinností v lednu 2027, ale sám registrační povinnost nemění; jako návrhový plán může slib posunout, nikoli jej uskutečnit."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-e86bf0f0752a--source",
+        "psp-core-2025--law-change-43323-1",
+        "psp-core-2025--law-change-43353-3",
+        "psp-core-2025--law-change-43353-4",
+        "zvlady-resolutions--law-change-uv-2026-175-51",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211459",
+        "psp-core-2025--print-step-211648",
+        "psp-core-2025--government-opinion-43323-1"
+      ],
+      "explanationCz": "Vládní plán z března 2026 počítá se změnou financování veřejnoprávních médií a se zrušením poplatků. Poslanci Motoristů sobě také předložili návrh, který by osvobodil od poplatků podnikatele s nejvýše 50 zaměstnanci a ulehčil jim registraci; vláda s tímto návrhem souhlasila. V červnu vláda navíc předložila vlastní návrh na zrušení zákona o rozhlasových a televizních poplatcích od 1. ledna 2027. Jde zatím o návrhy, nikoli o účinné změny, proto slib zatím směřuje ke splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložený vládní návrh na zrušení zákona zatím není účinný; balíček nedokládá, že byl přijat.",
+        "Přechodné ustanovení zachovává dosavadní režim pro dříve vzniklé poplatkové povinnosti, ale balíček neumožňuje určit, zda mezi souvisejícími povinnostmi zůstane i registrace."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0afb633f42282727016aec5ad5ea7087d192b795938db80708",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 16427,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 16424
+      },
+      "output_tokens": 4788,
+      "output_tokens_details": {
+        "reasoning_tokens": 3501
+      },
+      "total_tokens": 21215
+    },
+    "output": {
+      "promiseId": "candidate-e86bf0f0752a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43323-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje, kdo z podnikatelů poplatek neplatí, a výslovně mění pravidla oznamování a odhlašování z evidence poplatníků.",
+          "effectCz": "Dosavadní znění osvobozovalo podnikatele s nejvýše 24 zaměstnanci; návrh hranici zvyšuje na 50 a ruší poplatkovou kategorii 25 až 49 zaměstnanců. Zároveň rozšiřuje výjimku z oznamovací povinnosti při vzniku poplatnictví na ty, kdo podle § 5 odst. 4 neplatí. To snižuje rozsah povinné registrace u podnikatelů do 50 zaměstnanců, ale neodstraňuje ji pro všechny podnikatele. Návrh také výslovně ukládá odhlášení neplatičům podle § 5 odst. 4; přechodné ustanovení však tuto povinnost vylučuje u těch, kdo už byli v evidenci před účinností, a nařizuje jejich vymazání. Jde tedy o částečné uvolnění registrační zátěže, nikoli o úplné zrušení povinnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43353-3",
+          "relevant": true,
+          "reasonCz": "Přechodné ustanovení zachovává starší pravidla pro dříve vzniklé poplatkové povinnosti a související povinnosti, takže se může týkat trvání povinností spojených s evidencí.",
+          "effectCz": "Ustanovení říká, že pro poplatkové povinnosti vzniklé před účinností nového zákona a související práva a povinnosti se použije dosavadní znění zákona. Balíček neupřesňuje, zda mezi zachované související povinnosti patří právě registrace; směr účinku této části na slib proto nelze z dodaných podkladů určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43353-4",
+          "relevant": true,
+          "reasonCz": "Navržené ustanovení ruší zákon upravující rozhlasové a televizní poplatky, a tím přímo zasahuje do právního základu registrační povinnosti.",
+          "effectCz": "Dosavadní znění zákona č. 348/2005 Sb. návrh nahrazuje jeho zrušením od 1. ledna 2027. Pokud bude ustanovení přijato, zanikne i právní základ registrace k těmto poplatkům; jde o odstranění celé poplatkové úpravy, nikoli pouze o dílčí změnu registrační povinnosti."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-51",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně ukládá připravit zákon o financování médií veřejné služby a uvádí zrušení poplatků jako vládní prioritu.",
+          "effectCz": "Usnesení samo pravidla registrace nemění. Zařazuje však mezi legislativní úkoly přípravu zákona, jehož cílem je zrušit poplatky za veřejnoprávní média, s předložením vládě plánovaným na leden 2027; jde o přípravný krok, nikoli o již účinné zrušení povinnosti."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-e86bf0f0752a--source",
+        "psp-core-2025--law-change-43323-1",
+        "psp-core-2025--law-change-43353-3",
+        "psp-core-2025--law-change-43353-4",
+        "zvlady-resolutions--law-change-uv-2026-175-51",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211459",
+        "psp-core-2025--print-step-211648",
+        "psp-core-2025--government-opinion-43323-1"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě předložili návrh, který podnikatelům s nejvýše 50 zaměstnanci rozšiřuje výjimku z poplatků i z počátečního oznámení do evidence. Vláda s tímto poslaneckým návrhem vyslovila souhlas a sama předložila návrh, který má od 1. ledna 2027 zrušit zákon o rozhlasových a televizních poplatcích. Vládní plán navíc počítá s přípravou zákona o financování médií, jehož cílem je zrušení poplatků. Jde zatím o návrhy a plán, nikoli o dokončené zrušení povinnosti; předložené změny proto představují posun ke slibu, ne jeho splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Přechodné ustanovení vládního návrhu zachovává dosavadní pravidla pro dříve vzniklé poplatkové povinnosti a související povinnosti. Podklady neukazují, zda mezi ně patří také registrační povinnost.",
+        "Návrh na zrušení poplatkového zákona a plán jeho přípravy nebyly v dodaných podkladech doloženy jako již přijaté a účinné změny."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

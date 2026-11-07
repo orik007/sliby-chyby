@@ -1,0 +1,613 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-08-43-098Z--9a7cfe99d3f3",
+  "evaluatedAt": "2026-11-05T10:08:43.098Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-98b28b105f11/9a7cfe99d3f3be4916156dbe0efff5b71e9b5794c94bb9218b335197f39e835d.json",
+  "packageHash": "9a7cfe99d3f3be4916156dbe0efff5b71e9b5794c94bb9218b335197f39e835d",
+  "assessmentContentHash": "b8868ef4805bf27b1a009d44f25a82bb0f2e327b9c5cb8532c8567cafbcc5709",
+  "assessmentFingerprint": "5316d85f2bb59d9bf96427cd27e81254e71dde5758a7e7d7807ef5eead812907",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-98b28b105f11",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment gives a law change more than one relevance verdict",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0b68b739c1a042ea016aec54d1993887d18d031e95a7a760ae",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 125393,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 125390
+            },
+            "output_tokens": 10528,
+            "output_tokens_details": {
+              "reasoning_tokens": 7753
+            },
+            "total_tokens": 135921
+          },
+          "output": {
+            "promiseId": "candidate-98b28b105f11",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-1",
+                "relevant": true,
+                "reasonCz": "Novela mění postupy stavebních úřadů a výslovně zahrnuje výrobu a hospodaření s energií mezi chráněné veřejné zájmy, takže se týká přípravy energetických staveb.",
+                "effectCz": "Předchozí § 1 vymezoval účel zákona jako integrovanou ochranu veřejných zájmů a udržitelný rozvoj; nově se výslovně doplňuje ochrana rozvoje hospodářství a veřejné infrastruktury a energetika mezi posuzované zájmy. Nová pravidla koordinace, včetně možnosti považovat nepřítomnost dotčeného orgánu na jednání za souhlas a stanovit mu lhůtu do 15 dnů, mohou povolování usnadnit; u nově vložených ustanovení § 1a a § 2 odst. 1 není předchozí znění dodáno, takže jejich celkový směr nelze ve všem určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": true,
+                "reasonCz": "Schválené znění výslovně dovoluje stavby pro energetickou bezpečnost v nezastavitelném území, což se může týkat plynových zdrojů zařazených mezi tyto stavby.",
+                "effectCz": "Předchozí § 122 připouštěl v nezastavěném území jen vyjmenované druhy záměrů a jejich povolení podmiňoval tím, že je územní plán výslovně nevylučuje; nově vložený odstavec 4 navíc dovoluje stavby pro energetickou bezpečnost a považuje je za souladné s charakterem území. Jde o rozšíření možnosti výstavby a uvolnění dosavadního omezení pro tuto kategorii staveb."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-5",
+                "relevant": true,
+                "reasonCz": "Změny pravidel povolování staveb se vztahují i na energetické projekty a mohou ovlivnit rychlost jejich přípravy.",
+                "effectCz": "Dosavadní pravidla vyžadovala povolení záměru a upravovala předběžné informace, vyjádření dotčených orgánů a lhůty; schválené znění mění jejich koordinaci, některé podklady a postup při vadách žádosti a stanoví mimo jiné fikci souhlasu při nevydání některých vyjádření ve lhůtě. Tyto procesní změny mohou zjednodušit či urychlit povolení, ale dodaný text neukazuje, že by se tím měnily věcné podmínky pro povolení plynových zdrojů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": true,
+                "reasonCz": "Schválené znění výslovně dovoluje stavby pro energetickou bezpečnost v nezastavitelném území, což se může týkat plynových zdrojů zařazených mezi tyto stavby.",
+                "effectCz": "Předchozí § 122 připouštěl v nezastavěném území jen vyjmenované druhy záměrů a jejich povolení podmiňoval tím, že je územní plán výslovně nevylučuje; nově vložený odstavec 4 navíc dovoluje stavby pro energetickou bezpečnost a považuje je za souladné s charakterem území. Jde o rozšíření možnosti výstavby a uvolnění dosavadního omezení pro tuto kategorii staveb."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-5",
+                "relevant": true,
+                "reasonCz": "Změny pravidel povolování staveb se vztahují i na energetické projekty a mohou ovlivnit rychlost jejich přípravy.",
+                "effectCz": "Dosavadní pravidla vyžadovala povolení záměru a upravovala předběžné informace, vyjádření dotčených orgánů a lhůty; schválené znění mění jejich koordinaci, některé podklady a postup při vadách žádosti a stanoví mimo jiné fikci souhlasu při nevydání některých vyjádření ve lhůtě. Tyto procesní změny mohou zjednodušit či urychlit povolení, ale dodaný text neukazuje, že by se tím měnily věcné podmínky pro povolení plynových zdrojů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8-4",
+                "relevant": false,
+                "reasonCz": "Dodané změny upravují účast občanských právnických osob v řízeních o ochraně přírody, ale text je nespojuje s přípravou nebo povolováním plynových zdrojů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-20",
+                "relevant": false,
+                "reasonCz": "Dodané změny upravují postupy orgánů ochrany veřejného zdraví, ale není doloženo, že by se týkaly konkrétního slibu výstavby plynových zdrojů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": true,
+                "reasonCz": "Schválené znění zavádí podrobný zákonný rámec kapacitního mechanismu včetně aukcí, plateb a odpovědnosti za dostupný výkon.",
+                "effectCz": "Předchozí § 35 pouze umožňoval ministerstvu zavést kapacitní mechanismus podle evropských pravidel a upravoval základní postup; nové znění stanoví podrobnosti výpočtu a aukčního zajištění potřebného výkonu, povinnost provozovatele přenosové soustavy výkon zajišťovat a placení účastníkům. Rozšiřuje tedy zákonné nástroje pro zavedení mechanismu, ale samo jej nezavádí: ministerstvo jej nadále musí zavést opatřením obecné povahy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-28",
+                "relevant": false,
+                "reasonCz": "Dodaná změna zákona o DPH pouze nahrazuje pojem zastavěného území pojmem zastavitelného území v definici stavebního pozemku; nesouvisí s kapacitním mechanismem ani výstavbou plynových zdrojů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": true,
+                "reasonCz": "Schválené znění doplňuje do seznamu strategicky významných staveb pět konkrétních plynových zdrojů, čímž přímo míří na jejich rychlejší přípravu.",
+                "effectCz": "Předchozí bod 7 přílohy uváděl dva nové jaderné zdroje; schválené znění k nim přidává plynové zdroje v Počeradech, Mělníku, Prunéřově, Dětmarovicích a Ledvicích. Rozšiřuje tak okruh konkrétních plynových projektů, na které se vztahuje režim strategicky významné infrastruktury; také upravuje některé postupy vyvlastnění a společného povolování, jejichž dopad na rychlost nelze z dodaného textu přesně vyčíslit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": true,
+                "reasonCz": "Změna pravidel ochrany ovzduší upravuje povolování stacionárních zdrojů, mezi něž mohou patřit i plynové výrobny, a přesouvá některé úkony do povolení záměru.",
+                "effectCz": "Předchozí znění požadovalo pro některé zdroje samostatná závazná stanoviska a kompenzační opatření při překročení imisních limitů; schválené znění převádí část těchto úkonů do procesu povolení záměru a mění jejich procesní formu. Z dodaných ustanovení nevyplývá zrušení limitů či kompenzačních povinností, takže věcné podmínky se zjevně neuvolňují; změna především mění správní postup."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-41",
+                "relevant": true,
+                "reasonCz": "V části zákona o strategické infrastruktuře je slibně relevantní pozměňovací návrh, který do seznamu strategických staveb doplňuje konkrétní plynové zdroje.",
+                "effectCz": "Vlastní text této části v dodaném výpisu chybí, takže jeho samostatný účinek nelze určit. Pozměňovací návrh však doplňuje pět plynových zdrojů do seznamu strategických staveb; předchozí seznam podle souvisejícího dodaného znění uváděl pouze nové jaderné zdroje, takže se rozšiřuje okruh plynových projektů se zvláštním režimem."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-98b28b105f11--source",
+              "psp-core-2025--law-change-43174-1-1",
+              "psp-core-2025--law-change-43174-1-4",
+              "psp-core-2025--law-change-43174-1-5",
+              "psp-core-2025--law-change-43174-21",
+              "psp-core-2025--law-change-43174-32",
+              "psp-core-2025--law-change-43174-33",
+              "psp-core-2025--law-change-43174-41",
+              "psp-core-2025--amendment-text-1132",
+              "psp-core-2025--amendment-text-1133",
+              "psp-core-2025--amendment-text-1274",
+              "psp-core-2025--amendment-text-1230",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--amendment-1132",
+              "psp-core-2025--amendment-1133",
+              "psp-core-2025--amendment-1274",
+              "psp-core-2025--vote-88195",
+              "psp-core-2025--vote-88196",
+              "psp-core-2025--vote-88197",
+              "psp-core-2025--vote-88206",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15"
+            ],
+            "explanationCz": "Poslanci ANO předložili novelu stavebního zákona a později podpořili její konečné schválení poté, co ji Senát odmítl. Schválený zákon vytváří podrobnější rámec kapacitního mechanismu, ale jeho spuštění vyžaduje ještě opatření ministerstva. Zákon také zařazuje pět konkrétních plynových zdrojů mezi strategické stavby a umožňuje stavby pro energetickou bezpečnost povolovat i v nezastavitelném území. Jde o dílčí posun ke slibu, nikoli o dokončené zavedení mechanismu ani o uskutečněnou výstavbu zdrojů.",
+            "confidence": "high",
+            "uncertainties": [
+              "Kapacitní mechanismus podle schválené úpravy vyžaduje další opatření ministerstva; dodané podklady nedokládají jeho přijetí ani skutečnou výstavbu uvedených plynových zdrojů."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-98b28b105f11",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Změny výslovně zahrnují výrobu a hospodaření s energií mezi chráněné veřejné zájmy a upravují, kdy lze bránit rozvoji hospodářství a veřejné infrastruktury.",
+          "effectCz": "Dosavadní účel stavebního zákona zdůrazňoval udržitelný rozvoj území; změna doplňuje ochranu energetiky a pravidlo, že rozvoj sídel, hospodářství či infrastruktury lze znemožnit jen tehdy, když ochranu jiných hodnot nelze zajistit mírnějšími opatřeními. Nově se také stanoví, že výstavba veřejné infrastruktury a vyhrazených staveb je ve veřejném zájmu, a upravuje se koordinace dotčených orgánů včetně lhůty do 15 dnů a souhlasu při jejich neomluvené neúčasti. Ve srovnání s předchozím zněním tyto změny obecně usnadňují prosazení rozvoje a koordinaci povolování, ale samy nezavádějí kapacitní mechanismus ani nezaručují rychlejší výstavbu konkrétního plynového zdroje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně umožňuje povolovat stavby pro energetickou bezpečnost i v nezastavitelném území, což může usnadnit výstavbu zdrojů zahrnutých do této kategorie.",
+          "effectCz": "Dosavadní § 122 dovoloval v nezastavěném území jen vyjmenované záměry a stavby pro energetickou bezpečnost mezi nimi nebyly. Schválené znění nově dovoluje povolit stavby pro energetickou bezpečnost v nezastavitelném území a považuje je za souladné s jeho charakterem. To rozšiřuje možnost jejich umístění; samotný text této změny však neurčuje, které plynové zdroje do kategorie spadají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": false,
+          "reasonCz": "Dodané změny upravují obecný průběh povolování a účastníků řízení, ale v poskytnutém textu není vazba na energetické nebo plynové zdroje, kterou by slib vyžadoval.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-4",
+          "relevant": false,
+          "reasonCz": "Dodané změny upravují účast veřejnosti v řízeních ochrany přírody a související postupy, ale text je nespojuje s výstavbou energetických zdrojů ani s kapacitními mechanismy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Změny převádějí některé úkony ochrany veřejného zdraví do stavebního řízení, avšak dodaný text neukazuje konkrétní vazbu na plynové či jiné flexibilní zdroje.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválené znění energetického zákona výslovně doplňuje pravidla kapacitního mechanismu, včetně aukcí, plateb za dostupnost výkonu a úlohy ministerstva.",
+          "effectCz": "Před změnou mohl ministr kapacitní mechanismus zavést za podmínek unijních pravidel a byly upraveny některé kroky k určení potřebného výkonu; nebyl však stanoven takto podrobný postup aukcí a smluv o dostupnosti výkonu. Schválené znění stanoví aukční zajišťování výkonu, povinnosti provozovatele přenosové soustavy, smluvní platby za dostupnost a jejich regulovanou cenu hrazenou účastníky trhu s elektřinou. Pravidla tedy mechanismus významně konkretizují a připravují jeho zavedení, ale sama jej nespouštějí: ministerstvo jej musí ještě zavést samostatným opatřením."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": false,
+          "reasonCz": "Změna pouze nahrazuje pojem zastavěného území zastavitelným územím v pravidle pro daň z přidané hodnoty; nedodává opatření ke kapacitním mechanismům ani k rychlejší výstavbě zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválené znění doplňuje do seznamu strategicky významných staveb konkrétní nové plynové zdroje v Počeradech, Mělníku, Prunéřově, Dětmarovicích a Ledvicích a rozšiřuje související postupy.",
+          "effectCz": "Před změnou zákonný seznam v příloze uváděl pro energetickou bezpečnost jaderné zdroje v Temelíně a Dukovanech, nikoli uvedené plynové elektrárny. Schválené znění přidává pět plynových zdrojů do seznamu strategicky významných staveb a rozšiřuje zvláštní postupy pro energetickou infrastrukturu; u vybraných energetických staveb tak lze využít postup zahrnující mezitímní rozhodnutí o omezení či odnětí práv k pozemku. Oproti předchozímu stavu tím tyto konkrétní projekty získávají širší možnost využít zrychlující postupy, což usnadňuje jejich přípravu a výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Tato část mění povolování stacionárních zdrojů znečištění ovzduší, tedy pravidla, která se mohou vztahovat i na nové plynové výrobny.",
+          "effectCz": "Před změnou bylo pro některé stacionární zdroje vyžadováno samostatné závazné stanovisko orgánu ochrany ovzduší jako podklad pro povolení záměru. Schválené znění převádí příslušné posouzení do stavebního povolení a mění závazné stanovisko na vyjádření; kompenzační opatření však zůstávají zachována a mají být zahrnuta do rozhodnutí o povolení. Postup se tím více soustřeďuje do stavebního řízení, což může povolování zdroje usnadnit, ale ochrana ovzduší ani její podmínky tím nejsou zcela odstraněny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "V dodaném textu nejsou žádné odstavce této změny zachyceny a samotné údaje o změnách její textové části neprokazují, že by měnila kapacitní mechanismy nebo urychlovala výstavbu plynových zdrojů.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-98b28b105f11--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1132",
+        "psp-core-2025--amendment-1132",
+        "psp-core-2025--vote-88197",
+        "psp-core-2025--amendment-text-1133",
+        "psp-core-2025--amendment-1133",
+        "psp-core-2025--vote-88196",
+        "psp-core-2025--amendment-text-1274",
+        "psp-core-2025--vote-88195",
+        "psp-core-2025--amendment-text-1230",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh změn stavebního zákona a vláda s ním souhlasila; návrh mimo jiné upravoval pravidla pro energetickou infrastrukturu. Poslanci ANO pak podpořili doplnění podrobného rámce kapacitního mechanismu, v němž se dostupný výkon zajišťuje aukcemi a platbami, i doplnění konkrétních plynových zdrojů do seznamu strategických staveb. Sněmovna návrh schválila a po jeho zamítnutí Senátem na něm setrvala; přijaté změny tak usnadňují přípravu některých plynových zdrojů a vytvářejí právní základ kapacitního mechanismu. Samotné spuštění mechanismu však ještě vyžaduje další opatření ministerstva.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný materiál neprokazuje, že ministerstvo již samostatným opatřením kapacitní mechanismus skutečně zavedlo; schválený zákon stanoví jeho rámec a postup, nikoli jeho automatické spuštění."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-98b28b105f11",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Nová pravidla koordinace úřadů a označení veřejné infrastruktury za veřejný zájem se mohou týkat povolování energetických staveb a jeho rychlosti.",
+          "effectCz": "Předchozí § 1 stavebního zákona stanovil obecný cíl integrované ochrany veřejných zájmů; návrh doplňuje vyvažování těchto zájmů a umožňuje zabránit rozvoji či stavbě jen tehdy, nelze-li hodnoty ochránit mírnějšími opatřeními. Nově také označuje výstavbu veřejné infrastruktury a vyhrazených staveb za veřejný zájem. V § 18 se oproti dosavadní možnosti svolat jednání nově stanoví, že neúčast dotčeného orgánu bez omluvy znamená souhlas a že lze určit lhůtu nejvýše 15 dní; tyto změny mohou povolování zrychlit. Jde o obecná pravidla, nikoli o samotné plynové zdroje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro povolování staveb v nezastavitelném území výslovně zahrnuje stavby pro energetickou bezpečnost, a může tak usnadnit výstavbu některých energetických zdrojů.",
+          "effectCz": "Dosavadní § 122 umožňoval v nezastavěném území jen vyjmenované záměry, v souladu s charakterem území a pokud je územní plán výslovně nevylučoval. Schválený text nově připouští v nezastavitelném území také stavby pro energetickou bezpečnost a stanoví, že jsou slučitelné s charakterem území; tím se povolování této kategorie staveb rozšiřuje a omezení uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Změny postupu při povolování záměrů včetně lhůt a náležitostí žádostí mohou urychlit přípravu staveb, tedy i energetických zdrojů.",
+          "effectCz": "Dodané znění mění řadu pravidel: mimo jiné omezuje požadovanou dokumentaci pro některá vyjádření, zavádí třicetidenní lhůtu pro vyjádření vlastníků infrastruktury a při jejím nedodržení předpokládá souhlas bez podmínek. To může část povolovacího procesu zjednodušit a zrychlit; u dalších změněných ustanovení, jejichž předchozí znění kontext neuvádí, nelze směr změny z balíčku určit. Nejde o zvláštní pravidla pouze pro plynové zdroje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-4",
+          "relevant": true,
+          "reasonCz": "Změny účasti environmentálních organizací v řízeních mohou ovlivnit délku povolování energetických staveb.",
+          "effectCz": "Předchozí § 70 umožňoval občanským sdružením požádat o informace o zamýšlených zásazích a za stanovených podmínek vstoupit do řízení. Schválené znění vymezuje oprávněné právnické osoby a podmiňuje účast nejméně tříletou existencí nebo podporou 200 osob; účast je navíc omezena na vyjmenované druhy řízení a lhůta k jejímu oznámení se mění z osmi na deset dnů. Tím se právo účasti zužuje v některých řízeních, což může proces zjednodušit, ale nemění přímo technické ani kapacitní podmínky plynových zdrojů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Nahrazení části samostatných úkonů hygienických orgánů rozhodnutím stavebního úřadu může zjednodušit povolování energetických staveb.",
+          "effectCz": "Předchozí úprava stanovila samostatné stanovisko orgánu ochrany veřejného zdraví a u vybraných staveb požadovala posouzení hluku. Schválené znění přenáší některé úkony do rozhodnutí stavebního úřadu a stanoví, že jím budou nahrazena související stanoviska a vyjádření; podle dodaného textu se tím mění způsob a místo posouzení, nikoli jeho věcná kritéria. Může jít o procesní zjednodušení, nikoli o odstranění zdravotních požadavků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Změna energetického zákona výslovně vytváří podrobnější právní rámec pro kapacitní mechanismus, který je přímou součástí slibu.",
+          "effectCz": "Předchozí § 35 už umožňoval ministerstvu zavést kapacitní mechanismus, ale předložené znění doplňuje jeho podrobnější provádění: určení potřebného výkonu, aukce, smlouvy a platbu za dostupnost výkonu hrazenou účastníky trhu s elektřinou. Nově také ERÚ reguluje cenu mechanismu s cílem pokrýt alespoň ekonomicky oprávněné náklady. Jde o konkrétní legislativní rámec kapacitního mechanismu, ale jeho skutečné spuštění vyžaduje další kroky, například opatření ministerstva a aukci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": false,
+          "reasonCz": "Změna pouze nahrazuje pojem „zastavěného“ území pojmem „zastavitelného“ v definici pozemku pro účely DPH; dodaný text ji s výstavbou plynových zdrojů ani kapacitním mechanismem materiálně nespojuje.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválený text výslovně doplňuje vyjmenované nové plynové zdroje mezi stavby energetické bezpečnosti, a přímo je tak spojuje s pravidly pro strategickou infrastrukturu.",
+          "effectCz": "Dosavadní bod 7 přílohy zákona o urychlení výstavby strategicky významné infrastruktury obsahoval dva nové jaderné zdroje. Schválené znění k nim přidává plynové zdroje v Počeradech, Mělníku, Prunéřově, Dětmarovicích a Ledvicích. Tím se pro tyto konkrétní projekty rozšiřuje okruh staveb označených jako energetická bezpečnost a uplatní se na ně zvláštní pravidla strategické infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Změna upravuje povolování stacionárních zdrojů znečišťování ovzduší a může se tedy týkat povolení plynových elektráren.",
+          "effectCz": "Předchozí úprava vyžadovala pro vybrané záměry samostatná závazná stanoviska a upravovala kompenzační opatření i podmínky ochrany ovzduší. Schválený text převádí část těchto úkonů do vyjádření a povolení záměru, takže procesní cesta se mění na společnější povolovací postup; dodaný text neukazuje zrušení imisních limitů ani samotných kompenzačních požadavků. Nelze proto dovodit, že by se věcné emisní limity uvolnily."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Ačkoli vlastní text této části není doložen, připojený pozměňovací návrh ji používá k rozšíření seznamu strategických energetických staveb o konkrétní plynové zdroje.",
+          "effectCz": "Vlastní text této změny není v balíčku obsažen; podle doloženého pozměňovacího návrhu se do seznamu staveb energetické bezpečnosti doplňuje pět plynových zdrojů v Počeradech, Mělníku, Prunéřově, Dětmarovicích a Ledvicích. Pro tyto projekty se tím rozšiřuje uplatnění zvláštního režimu strategické infrastruktury. U dalších změn této části nelze jejich účinek z dodaných podkladů určit."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-98b28b105f11--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-8-4",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-41",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-1132",
+        "psp-core-2025--amendment-text-1132",
+        "psp-core-2025--amendment-1133",
+        "psp-core-2025--amendment-text-1133",
+        "psp-core-2025--amendment-1274",
+        "psp-core-2025--amendment-text-1274",
+        "psp-core-2025--vote-88195",
+        "psp-core-2025--vote-88196",
+        "psp-core-2025--vote-88197",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--vote-88232",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh zákona měnící stavební zákon a související předpisy; vláda s ním také vyslovila souhlas. Návrh obsahuje podrobnější pravidla pro kapacitní mechanismus a za strategické energetické stavby výslovně označuje pět plynových zdrojů, což může usnadnit jejich povolování. Sněmovna návrh schválila a po zamítnutí Senátem na něm setrvala, takže jde o konkrétní legislativní posun. Samotné spuštění mechanismu ani výstavba zdrojů však doloženy nejsou, proto slib zatím pokročil jen zčásti.",
+      "confidence": "high",
+      "uncertainties": [
+        "Kapacitní mechanismus podle schváleného znění vyžaduje další kroky, například opatření ministerstva a aukci; balíček nedokládá, že již byl spuštěn.",
+        "Dodaný záznam ukazuje také to, že klub ANO nepodpořil pozměňovací návrh, který by krajům přiznal účast v některých povolovacích řízeních. Text nedokládá, že by toto ustanovení samo bránilo rychlejší výstavbě plynových zdrojů, a proto závěr nemění."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_020ea238726ca268016aec544e0a3c87d1856bb4a487e8a7d8",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 125393,
+      "input_tokens_details": {
+        "cache_write_tokens": 119043,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 9251,
+      "output_tokens_details": {
+        "reasoning_tokens": 6935
+      },
+      "total_tokens": 134644
+    },
+    "output": {
+      "promiseId": "candidate-98b28b105f11",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Změny výslovně zahrnují výrobu a hospodaření s energií mezi chráněné veřejné zájmy a upravují, kdy lze bránit rozvoji hospodářství a veřejné infrastruktury.",
+          "effectCz": "Dosavadní účel stavebního zákona zdůrazňoval udržitelný rozvoj území; změna doplňuje ochranu energetiky a pravidlo, že rozvoj sídel, hospodářství či infrastruktury lze znemožnit jen tehdy, když ochranu jiných hodnot nelze zajistit mírnějšími opatřeními. Nově se také stanoví, že výstavba veřejné infrastruktury a vyhrazených staveb je ve veřejném zájmu, a upravuje se koordinace dotčených orgánů včetně lhůty do 15 dnů a souhlasu při jejich neomluvené neúčasti. Ve srovnání s předchozím zněním tyto změny obecně usnadňují prosazení rozvoje a koordinaci povolování, ale samy nezavádějí kapacitní mechanismus ani nezaručují rychlejší výstavbu konkrétního plynového zdroje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně umožňuje povolovat stavby pro energetickou bezpečnost i v nezastavitelném území, což může usnadnit výstavbu zdrojů zahrnutých do této kategorie.",
+          "effectCz": "Dosavadní § 122 dovoloval v nezastavěném území jen vyjmenované záměry a stavby pro energetickou bezpečnost mezi nimi nebyly. Schválené znění nově dovoluje povolit stavby pro energetickou bezpečnost v nezastavitelném území a považuje je za souladné s jeho charakterem. To rozšiřuje možnost jejich umístění; samotný text této změny však neurčuje, které plynové zdroje do kategorie spadají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": false,
+          "reasonCz": "Dodané změny upravují obecný průběh povolování a účastníků řízení, ale v poskytnutém textu není vazba na energetické nebo plynové zdroje, kterou by slib vyžadoval.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-4",
+          "relevant": false,
+          "reasonCz": "Dodané změny upravují účast veřejnosti v řízeních ochrany přírody a související postupy, ale text je nespojuje s výstavbou energetických zdrojů ani s kapacitními mechanismy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Změny převádějí některé úkony ochrany veřejného zdraví do stavebního řízení, avšak dodaný text neukazuje konkrétní vazbu na plynové či jiné flexibilní zdroje.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválené znění energetického zákona výslovně doplňuje pravidla kapacitního mechanismu, včetně aukcí, plateb za dostupnost výkonu a úlohy ministerstva.",
+          "effectCz": "Před změnou mohl ministr kapacitní mechanismus zavést za podmínek unijních pravidel a byly upraveny některé kroky k určení potřebného výkonu; nebyl však stanoven takto podrobný postup aukcí a smluv o dostupnosti výkonu. Schválené znění stanoví aukční zajišťování výkonu, povinnosti provozovatele přenosové soustavy, smluvní platby za dostupnost a jejich regulovanou cenu hrazenou účastníky trhu s elektřinou. Pravidla tedy mechanismus významně konkretizují a připravují jeho zavedení, ale sama jej nespouštějí: ministerstvo jej musí ještě zavést samostatným opatřením."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": false,
+          "reasonCz": "Změna pouze nahrazuje pojem zastavěného území zastavitelným územím v pravidle pro daň z přidané hodnoty; nedodává opatření ke kapacitním mechanismům ani k rychlejší výstavbě zdrojů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválené znění doplňuje do seznamu strategicky významných staveb konkrétní nové plynové zdroje v Počeradech, Mělníku, Prunéřově, Dětmarovicích a Ledvicích a rozšiřuje související postupy.",
+          "effectCz": "Před změnou zákonný seznam v příloze uváděl pro energetickou bezpečnost jaderné zdroje v Temelíně a Dukovanech, nikoli uvedené plynové elektrárny. Schválené znění přidává pět plynových zdrojů do seznamu strategicky významných staveb a rozšiřuje zvláštní postupy pro energetickou infrastrukturu; u vybraných energetických staveb tak lze využít postup zahrnující mezitímní rozhodnutí o omezení či odnětí práv k pozemku. Oproti předchozímu stavu tím tyto konkrétní projekty získávají širší možnost využít zrychlující postupy, což usnadňuje jejich přípravu a výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Tato část mění povolování stacionárních zdrojů znečištění ovzduší, tedy pravidla, která se mohou vztahovat i na nové plynové výrobny.",
+          "effectCz": "Před změnou bylo pro některé stacionární zdroje vyžadováno samostatné závazné stanovisko orgánu ochrany ovzduší jako podklad pro povolení záměru. Schválené znění převádí příslušné posouzení do stavebního povolení a mění závazné stanovisko na vyjádření; kompenzační opatření však zůstávají zachována a mají být zahrnuta do rozhodnutí o povolení. Postup se tím více soustřeďuje do stavebního řízení, což může povolování zdroje usnadnit, ale ochrana ovzduší ani její podmínky tím nejsou zcela odstraněny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "V dodaném textu nejsou žádné odstavce této změny zachyceny a samotné údaje o změnách její textové části neprokazují, že by měnila kapacitní mechanismy nebo urychlovala výstavbu plynových zdrojů.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-98b28b105f11--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-text-1132",
+        "psp-core-2025--amendment-1132",
+        "psp-core-2025--vote-88197",
+        "psp-core-2025--amendment-text-1133",
+        "psp-core-2025--amendment-1133",
+        "psp-core-2025--vote-88196",
+        "psp-core-2025--amendment-text-1274",
+        "psp-core-2025--vote-88195",
+        "psp-core-2025--amendment-text-1230",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh změn stavebního zákona a vláda s ním souhlasila; návrh mimo jiné upravoval pravidla pro energetickou infrastrukturu. Poslanci ANO pak podpořili doplnění podrobného rámce kapacitního mechanismu, v němž se dostupný výkon zajišťuje aukcemi a platbami, i doplnění konkrétních plynových zdrojů do seznamu strategických staveb. Sněmovna návrh schválila a po jeho zamítnutí Senátem na něm setrvala; přijaté změny tak usnadňují přípravu některých plynových zdrojů a vytvářejí právní základ kapacitního mechanismu. Samotné spuštění mechanismu však ještě vyžaduje další opatření ministerstva.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný materiál neprokazuje, že ministerstvo již samostatným opatřením kapacitní mechanismus skutečně zavedlo; schválený zákon stanoví jeho rámec a postup, nikoli jeho automatické spuštění."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_016b2d256f20d28a016aec55622b0c87d1aea42a4db0176a61",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 125393,
+      "input_tokens_details": {
+        "cache_write_tokens": 119043,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 7887,
+      "output_tokens_details": {
+        "reasoning_tokens": 5110
+      },
+      "total_tokens": 133280
+    },
+    "output": {
+      "promiseId": "candidate-98b28b105f11",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-1",
+          "relevant": true,
+          "reasonCz": "Nová pravidla koordinace úřadů a označení veřejné infrastruktury za veřejný zájem se mohou týkat povolování energetických staveb a jeho rychlosti.",
+          "effectCz": "Předchozí § 1 stavebního zákona stanovil obecný cíl integrované ochrany veřejných zájmů; návrh doplňuje vyvažování těchto zájmů a umožňuje zabránit rozvoji či stavbě jen tehdy, nelze-li hodnoty ochránit mírnějšími opatřeními. Nově také označuje výstavbu veřejné infrastruktury a vyhrazených staveb za veřejný zájem. V § 18 se oproti dosavadní možnosti svolat jednání nově stanoví, že neúčast dotčeného orgánu bez omluvy znamená souhlas a že lze určit lhůtu nejvýše 15 dní; tyto změny mohou povolování zrychlit. Jde o obecná pravidla, nikoli o samotné plynové zdroje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro povolování staveb v nezastavitelném území výslovně zahrnuje stavby pro energetickou bezpečnost, a může tak usnadnit výstavbu některých energetických zdrojů.",
+          "effectCz": "Dosavadní § 122 umožňoval v nezastavěném území jen vyjmenované záměry, v souladu s charakterem území a pokud je územní plán výslovně nevylučoval. Schválený text nově připouští v nezastavitelném území také stavby pro energetickou bezpečnost a stanoví, že jsou slučitelné s charakterem území; tím se povolování této kategorie staveb rozšiřuje a omezení uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Změny postupu při povolování záměrů včetně lhůt a náležitostí žádostí mohou urychlit přípravu staveb, tedy i energetických zdrojů.",
+          "effectCz": "Dodané znění mění řadu pravidel: mimo jiné omezuje požadovanou dokumentaci pro některá vyjádření, zavádí třicetidenní lhůtu pro vyjádření vlastníků infrastruktury a při jejím nedodržení předpokládá souhlas bez podmínek. To může část povolovacího procesu zjednodušit a zrychlit; u dalších změněných ustanovení, jejichž předchozí znění kontext neuvádí, nelze směr změny z balíčku určit. Nejde o zvláštní pravidla pouze pro plynové zdroje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8-4",
+          "relevant": true,
+          "reasonCz": "Změny účasti environmentálních organizací v řízeních mohou ovlivnit délku povolování energetických staveb.",
+          "effectCz": "Předchozí § 70 umožňoval občanským sdružením požádat o informace o zamýšlených zásazích a za stanovených podmínek vstoupit do řízení. Schválené znění vymezuje oprávněné právnické osoby a podmiňuje účast nejméně tříletou existencí nebo podporou 200 osob; účast je navíc omezena na vyjmenované druhy řízení a lhůta k jejímu oznámení se mění z osmi na deset dnů. Tím se právo účasti zužuje v některých řízeních, což může proces zjednodušit, ale nemění přímo technické ani kapacitní podmínky plynových zdrojů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Nahrazení části samostatných úkonů hygienických orgánů rozhodnutím stavebního úřadu může zjednodušit povolování energetických staveb.",
+          "effectCz": "Předchozí úprava stanovila samostatné stanovisko orgánu ochrany veřejného zdraví a u vybraných staveb požadovala posouzení hluku. Schválené znění přenáší některé úkony do rozhodnutí stavebního úřadu a stanoví, že jím budou nahrazena související stanoviska a vyjádření; podle dodaného textu se tím mění způsob a místo posouzení, nikoli jeho věcná kritéria. Může jít o procesní zjednodušení, nikoli o odstranění zdravotních požadavků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Změna energetického zákona výslovně vytváří podrobnější právní rámec pro kapacitní mechanismus, který je přímou součástí slibu.",
+          "effectCz": "Předchozí § 35 už umožňoval ministerstvu zavést kapacitní mechanismus, ale předložené znění doplňuje jeho podrobnější provádění: určení potřebného výkonu, aukce, smlouvy a platbu za dostupnost výkonu hrazenou účastníky trhu s elektřinou. Nově také ERÚ reguluje cenu mechanismu s cílem pokrýt alespoň ekonomicky oprávněné náklady. Jde o konkrétní legislativní rámec kapacitního mechanismu, ale jeho skutečné spuštění vyžaduje další kroky, například opatření ministerstva a aukci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-28",
+          "relevant": false,
+          "reasonCz": "Změna pouze nahrazuje pojem „zastavěného“ území pojmem „zastavitelného“ v definici pozemku pro účely DPH; dodaný text ji s výstavbou plynových zdrojů ani kapacitním mechanismem materiálně nespojuje.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválený text výslovně doplňuje vyjmenované nové plynové zdroje mezi stavby energetické bezpečnosti, a přímo je tak spojuje s pravidly pro strategickou infrastrukturu.",
+          "effectCz": "Dosavadní bod 7 přílohy zákona o urychlení výstavby strategicky významné infrastruktury obsahoval dva nové jaderné zdroje. Schválené znění k nim přidává plynové zdroje v Počeradech, Mělníku, Prunéřově, Dětmarovicích a Ledvicích. Tím se pro tyto konkrétní projekty rozšiřuje okruh staveb označených jako energetická bezpečnost a uplatní se na ně zvláštní pravidla strategické infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Změna upravuje povolování stacionárních zdrojů znečišťování ovzduší a může se tedy týkat povolení plynových elektráren.",
+          "effectCz": "Předchozí úprava vyžadovala pro vybrané záměry samostatná závazná stanoviska a upravovala kompenzační opatření i podmínky ochrany ovzduší. Schválený text převádí část těchto úkonů do vyjádření a povolení záměru, takže procesní cesta se mění na společnější povolovací postup; dodaný text neukazuje zrušení imisních limitů ani samotných kompenzačních požadavků. Nelze proto dovodit, že by se věcné emisní limity uvolnily."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": true,
+          "reasonCz": "Ačkoli vlastní text této části není doložen, připojený pozměňovací návrh ji používá k rozšíření seznamu strategických energetických staveb o konkrétní plynové zdroje.",
+          "effectCz": "Vlastní text této změny není v balíčku obsažen; podle doloženého pozměňovacího návrhu se do seznamu staveb energetické bezpečnosti doplňuje pět plynových zdrojů v Počeradech, Mělníku, Prunéřově, Dětmarovicích a Ledvicích. Pro tyto projekty se tím rozšiřuje uplatnění zvláštního režimu strategické infrastruktury. U dalších změn této části nelze jejich účinek z dodaných podkladů určit."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-98b28b105f11--source",
+        "psp-core-2025--law-change-43174-1-1",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-8-4",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-41",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--amendment-1132",
+        "psp-core-2025--amendment-text-1132",
+        "psp-core-2025--amendment-1133",
+        "psp-core-2025--amendment-text-1133",
+        "psp-core-2025--amendment-1274",
+        "psp-core-2025--amendment-text-1274",
+        "psp-core-2025--vote-88195",
+        "psp-core-2025--vote-88196",
+        "psp-core-2025--vote-88197",
+        "psp-core-2025--vote-88206",
+        "psp-core-2025--vote-88232",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh zákona měnící stavební zákon a související předpisy; vláda s ním také vyslovila souhlas. Návrh obsahuje podrobnější pravidla pro kapacitní mechanismus a za strategické energetické stavby výslovně označuje pět plynových zdrojů, což může usnadnit jejich povolování. Sněmovna návrh schválila a po zamítnutí Senátem na něm setrvala, takže jde o konkrétní legislativní posun. Samotné spuštění mechanismu ani výstavba zdrojů však doloženy nejsou, proto slib zatím pokročil jen zčásti.",
+      "confidence": "high",
+      "uncertainties": [
+        "Kapacitní mechanismus podle schváleného znění vyžaduje další kroky, například opatření ministerstva a aukci; balíček nedokládá, že již byl spuštěn.",
+        "Dodaný záznam ukazuje také to, že klub ANO nepodpořil pozměňovací návrh, který by krajům přiznal účast v některých povolovacích řízeních. Text nedokládá, že by toto ustanovení samo bránilo rychlejší výstavbě plynových zdrojů, a proto závěr nemění."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

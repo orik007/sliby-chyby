@@ -1,0 +1,521 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T20-37-19-209Z--62fdc31a18a8",
+  "evaluatedAt": "2026-10-06T20:37:19.209Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-f85ff3a5c2ea/62fdc31a18a86985cd47406328d3a0a0c108f0e958b2647584daed64e4449391.json",
+  "packageHash": "62fdc31a18a86985cd47406328d3a0a0c108f0e958b2647584daed64e4449391",
+  "assessmentContentHash": "5d2f3af7e11df7e89f84d5c4e51307758623d4ab73792c8319dd23487f671fde",
+  "assessmentFingerprint": "573ba634a33904c78a263a54ff768f8c2904caaede9d9e0509405c550349163d",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-f85ff3a5c2ea",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment invented evidence ID: psp-core-2025--senate-resolution-43184-15",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0d5483fb2a5f1e09016ac55af9bc9487d2a10ace6ed59b632f",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 86826,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 86823
+            },
+            "output_tokens": 4569,
+            "output_tokens_details": {
+              "reasoning_tokens": 2294
+            },
+            "total_tokens": 91395
+          },
+          "output": {
+            "promiseId": "candidate-f85ff3a5c2ea",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": false,
+                "reasonCz": "Tato část mění pravidla pro povolování a přípravu strategické infrastruktury, nikoli občanský soudní řád ani pravidla občanského soudního řízení.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-approved-2",
+                "relevant": true,
+                "reasonCz": "Nové pravidlo v občanském soudním řádu mění rozložení důkazního břemene v určitém pracovním sporu, a tím upravuje občanské soudní řízení.",
+                "effectCz": "Dosavadní § 133a upravoval důkazní břemeno u vyjmenovaných případů diskriminace, odvety a pracovních postihů, nikoli u účelově cílených změn organizace vedoucích k propuštění vedoucího státního zaměstnance. Nový odstavec přenáší na zaměstnavatele povinnost prokázat zákonný důvod, pokud zaměstnanec uvede příslušné skutečnosti; rozšiřuje tedy ochranu žalobce a usnadňuje mu dokazování v tomto omezeném okruhu sporů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43283-1",
+                "relevant": true,
+                "reasonCz": "Návrh mění více pravidel občanského soudního řádu, včetně soudní ochrany před zneužívajícími žalobami, takže představuje konkrétní dílčí modernizaci řízení.",
+                "effectCz": "Dosavadní úprava v § 24 a § 26 vymezovala, kdo může účastníka zastupovat; návrh rozšiřuje zastupování také pro nové žaloby podle § 198 a upravuje, kdo za některé právnické osoby jedná. Doplňuje pravidlo pro počátek lhůty při doručování do ciziny, umožňuje pořádkovou pokutu i za podání sledující zjevné zneužití práva a stanoví zálohy na náklady překladu či doručování, což přidává procesní ochranu, ale u některých účastníků také nákladovou povinnost. Nové § 197 a 198 zavádějí přednostní projednání vybraných žalob, zastoupení právnickou osobou, možnost jistoty na náklady a zveřejnění rozsudku; jde o nová procesní oprávnění a záruky, přičemž požadavek jistoty může přístup k řízení zatížit. Návrh dále doplňuje možnost učinit některá dědická prohlášení u okresního soudu a informační povinnost ministerstva; k těmto novým možnostem předchozí znění v balíčku uvedeno není."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43308-6",
+                "relevant": false,
+                "reasonCz": "Návrh pouze odkládá účinnost některých změn občanského zákoníku; nemění pravidla občanského soudního řízení, která slib výslovně jmenuje.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43332-4",
+                "relevant": true,
+                "reasonCz": "Návrh doplňuje do občanského soudního řádu nové pravidlo o dokazování v konkrétních sporech, tedy mění část civilního procesu.",
+                "effectCz": "Dosavadní § 133a neobsahoval zvláštní pravidlo pro výběr členů vedoucích orgánů některých emitentů. Návrh doplňuje povinnost žalovaného prokázat řádný postup při výběru, pokud žalobce doloží alespoň srovnatelnou kvalifikaci; v tomto omezeném typu sporu rozšiřuje ochranu žalobce a usnadňuje mu dokazování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43408-2",
+                "relevant": true,
+                "reasonCz": "Návrh mění pravidla občanského soudního řádu pro vedení sporů, přístup do soudního spisu a ochranu důvěrných informací.",
+                "effectCz": "Dosavadní § 9 nesvěřoval spory o obchodní tajemství krajským soudům v prvním stupni; návrh je mezi tyto spory výslovně doplňuje. Dosavadní § 44 dával účastníkům a jejich zástupcům právo nahlížet do spisu a umožňoval za podmínek nahlédnutí i dalším osobám; návrh výslovně zahrnuje přílohy a pořizování či vyžádání kopií, ale současně zavádí pravidla pro vyloučení nebo omezení přístupu k chráněným informacím. Dosavadní § 155 odst. 4 umožňoval zveřejnění rozsudku v několika vyjmenovaných druzích věcí; návrh doplňuje ochranu obchodního tajemství a povinnost odstranit identifikační údaje dalších osob před zveřejněním. Jde o nové a rozšířené procesní možnosti, vyvážené přísnější ochranou důvěrnosti."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43408-3",
+                "relevant": false,
+                "reasonCz": "Tato část upravuje samostatný zákon o vymáhání práv z průmyslového vlastnictví a obchodním tajemství, nikoli občanský soudní řád.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43417-1",
+                "relevant": false,
+                "reasonCz": "Návrh mění občanský zákoník v otázkách odpovědnosti za vadné výrobky, nikoli pravidla občanského soudního řízení.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-2",
+                "relevant": true,
+                "reasonCz": "Návrh doplňuje do občanského soudního řádu procesní ochranu při uplatňování práv pracovníků platforem a stejné odměny.",
+                "effectCz": "Dosavadní § 26 odst. 3 umožňoval zastoupení právnickou osobou v uvedených věcech diskriminace; návrh doplňuje také veřejného ochránce práv. Dosavadní § 133a obsahoval některá pravidla přenášející důkazní břemeno; návrh přidává nová pravidla pro postih pracovníka platformy za uplatnění práv a pro spory o rovné odměňování. Tato doplnění rozšiřují procesní zastoupení a ochranu žalobců v konkrétních typech sporů."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-f85ff3a5c2ea--source",
+              "psp-core-2025--law-change-43184-approved-2",
+              "psp-core-2025--vote-88026",
+              "psp-core-2025--vote-88450",
+              "psp-core-2025--senate-resolution-43184-15",
+              "psp-core-2025--law-change-43283-1",
+              "psp-core-2025--print-step-211167",
+              "psp-core-2025--law-change-43332-4",
+              "psp-core-2025--print-step-211525",
+              "psp-core-2025--law-change-43408-2",
+              "psp-core-2025--print-step-212050",
+              "psp-core-2025--law-change-43422-2",
+              "psp-core-2025--print-step-212101"
+            ],
+            "explanationCz": "Poslanci ANO podpořili novelu občanského soudního řádu, která přesunula důkazní břemeno na zaměstnavatele v některých sporech vedoucích státních zaměstnanců. Po zamítnutí návrhu Senátem, tedy horní komorou Parlamentu, Sněmovna zákonem setrvala; toto dílčí pravidlo má podle zákona nabýt účinnosti 1. listopadu 2026. Vláda také předložila návrhy na další procesní změny, například ochranu před zneužívajícími žalobami a nová pravidla pro dokazování v některých pracovních sporech. Přijatá změna přináší jen část slibované modernizace, proto slib směřuje ke splnění, ale splněn celý není.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Přijatá změna má nabýt účinnosti až 1. listopadu 2026, takže k 2. říjnu 2026 ještě není účinná.",
+              "O dalších relevantních změnách jsou doložena pouze předložení vládních návrhů; balíček neprokazuje jejich pozdější schválení ani to, že by samy naplnily celý slib modernizace."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-f85ff3a5c2ea",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změna upravuje povolování strategické infrastruktury, nikoli trestní ani občanský soudní řád.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-2",
+          "relevant": true,
+          "reasonCz": "Novela občanského soudního řádu mění pravidla dokazování v úzce vymezených pracovních sporech, a proto modernizuje část tohoto řádu.",
+          "effectCz": "Před změnou § 133a odst. 4 neobsahoval; nový odstavec ukládá zaměstnavateli prokázat zákonný důvod výpovědi či odvolání vedoucího státního zaměstnance, pokud žalobce doloží indicie účelového postupu. Jde o dílčí posílení procesní ochrany žalobce v této konkrétní situaci, nikoli o celkovou změnu pravidel dokazování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43283-1",
+          "relevant": true,
+          "reasonCz": "Vládní návrh mění několik procesních pravidel občanského soudního řádu, včetně nových záruk pro žalované v řízeních zneužívajících žalobami proti veřejné účasti.",
+          "effectCz": "Před změnou §§ 197 a 198 neexistovaly; návrh nově stanoví přednostní projednání vymezených žalob, možnost zastoupení právnickou osobou, jistotu na náklady a zveřejnění rozsudku při zneužívajícím řízení, čímž v této oblasti rozšiřuje procesní ochranu. Návrh také rozšiřuje zastupování podle § 24, § 26 a § 26 odst. 8; upravuje běh lhůt při doručování do ciziny v § 50j, rozšiřuje možnost pořádkové pokuty v § 53 a stanoví zálohy na překlad a doručování v § 141, což mění příslušná procesní pravidla, ale může na účastníky klást nové povinnosti. V § 202 nově vylučuje odvolání proti usnesení o složení jistoty; jiné uvedené úpravy, například nahrazení staršího označení orgánů EU novým, jsou převážně terminologické. Přidává také pravidla pro prohlášení o dědictví u okresního soudu a informační povinnost ministerstva; předchozí znění těchto nových ustanovení nebylo, takže jde o nová procesní pravidla."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-6",
+          "relevant": false,
+          "reasonCz": "Změna pouze odkládá účinnost některých ustanovení občanského zákoníku a sama nemění občanský soudní řád.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43332-4",
+          "relevant": true,
+          "reasonCz": "Návrh doplňuje do občanského soudního řádu zvláštní pravidlo o dokazování v určitém typu sporů.",
+          "effectCz": "Před změnou § 133a odst. 5 neexistoval; návrh přenáší na žalovaného důkazní břemeno ohledně dodržení pravidel výběru kandidáta méně zastoupeného pohlaví, jsou-li splněny vymezené podmínky. Jde o úzké rozšíření procesní ochrany uchazeče, nikoli o obecnou změnu dokazování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43408-2",
+          "relevant": true,
+          "reasonCz": "Novela občanského soudního řádu zavádí procesní pravidla pro spory o obchodní tajemství a upravuje přístup ke spisu.",
+          "effectCz": "Před změnou nebyly spory o obchodní tajemství výslovně zařazeny mezi věci rozhodované krajskými soudy v prvním stupni; návrh je tam nově řadí. Dosavadní § 44 dovoloval účastníkům a zástupcům nahlížet do spisu a jiným osobám přístup při právním zájmu nebo vážném důvodu; nové znění zpřesňuje možnost pořizovat či žádat kopie a výslovně přihlíží k právům a chráněným zájmům účastníků. Nové §§ 44a až 44e stanoví ochranu utajovaných a jinak chráněných informací, včetně omezení přístupu a poučení nahlížejících, takže některý přístup omezuje, ale důvěrnost chrání. Změna § 155 odst. 4 rozšiřuje možnost zveřejnit rozsudek i na spory o obchodní tajemství, zároveň vyžaduje před zveřejněním odstranit údaje identifikující jiné osoby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43408-3",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje zákon o vymáhání práv z průmyslového vlastnictví a obchodním tajemství, nikoli občanský soudní řád.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43417-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění občanský zákoník v oblasti odpovědnosti za vadné výrobky, nikoli občanský soudní řád.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-2",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje v občanském soudním řádu zastupování a pravidla důkazního břemene v pracovních a souvisejících sporech.",
+          "effectCz": "Před změnou § 26 odst. 3 neumožňoval zastupování veřejným ochráncem práv; návrh tuto možnost přidává. Dosavadní § 133a neobsahoval navrhované odstavce 6 a 7; ty rozšiřují přesun důkazního břemene na žalovaného u vymezených sporů platformových pracovníků a při diskriminaci v odměňování, s výjimkou zjevně neúmyslného a málo závažného porušení. Tím se v těchto případech posiluje procesní ochrana žalobců."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-f85ff3a5c2ea--source",
+        "psp-core-2025--law-change-43184-approved-2",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--law-change-43283-1",
+        "psp-core-2025--print-step-211167",
+        "psp-core-2025--law-change-43332-4",
+        "psp-core-2025--print-step-211525",
+        "psp-core-2025--law-change-43408-2",
+        "psp-core-2025--print-step-212050",
+        "psp-core-2025--law-change-43422-2",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro novelu občanského soudního řádu, která v určitých pracovních sporech přesouvá důkazní břemeno na zaměstnavatele. Po zamítnutí návrhu Senátem poslanci ANO hlasovali znovu pro jeho přijetí. Vláda také předložila další návrhy, které zavádějí procesní ochranu v některých sporech a rozšiřují pravidla zastupování či dokazování. Jde o dílčí změny občanského soudního řádu, nikoli o nový trestní řád ani jeho celkovou modernizaci.",
+      "confidence": "high",
+      "uncertainties": [
+        "Příslib je široký, ale doložené změny jsou úzce zaměřené na jednotlivé procesní situace; z balíčku proto nelze dovodit celkovou modernizaci občanského soudního řádu ani přípravu nového trestního řádu. Některé navržené úpravy zároveň ukládají účastníkům nové povinnosti, například složit jistotu či zálohu na náklady."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-f85ff3a5c2ea",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změny upravují povolování strategické infrastruktury, nikoli občanské soudní řízení ani jinou konkrétní část tohoto slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-2",
+          "relevant": true,
+          "reasonCz": "Novela občanského soudního řádu mění důkazní pravidlo pro spory některých vedoucích státních zaměstnanců, a tím upravuje část civilního procesu.",
+          "effectCz": "Před změnou § 133a obsahoval tři případy přenesení důkazního břemene, nikoli zvláštní případ vedoucích státních zaměstnanců; nové odstavce přidávají povinnost zaměstnavatele prokázat zákonný důvod výpovědi, okamžitého zrušení pracovního poměru či odvolání při tvrzeném účelovém postupu. Jde o rozšíření procesní ochrany úzce vymezené skupiny, tedy o dílčí modernizaci a posílení možnosti domoci se spravedlivého rozhodnutí. Změna poznámky pod čarou pouze upravuje odkazy na zákon o státních zaměstnancích."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43283-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění několik procesních pravidel občanského soudního řádu, včetně ochrany před zneužívajícími žalobami.",
+          "effectCz": "Dřívější § 197 a 198 tato zvláštní pravidla pro žaloby související s veřejnou účastí neobsahovaly; návrh zavádí jejich přednostní projednání, možnost právního zastoupení určenou organizací, případnou jistotu na náklady řízení a další ochranná opatření. Rozšiřuje také pravidla o zastupování, nákladech překladu a doručování do ciziny; u těchto ustanovení kontext poskytuje předchozí znění, které návrh upravuje, nikoli zásadně ruší. Jde o dílčí změny procesních práv a postupů, některé ochranu účastníků rozšiřují a některé stanoví nové podmínky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-6",
+          "relevant": true,
+          "reasonCz": "Návrh doplňuje do občanského soudního řádu další pravidlo o důkazním břemeni při výběru členů některých vedoucích orgánů.",
+          "effectCz": "Předchozí § 133a neměl zvláštní pravidlo pro takové výběrové řízení; návrh ukládá žalovanému prokázat, že postupoval podle pravidel upřednostnění kandidáta méně zastoupeného pohlaví, jestliže žalobce doloží srovnatelnou kvalifikaci. Jde o rozšíření procesní ochrany a dílčí změnu občanského soudního řádu. Balíček obsahuje pouze navržené znění, takže účinek schváleného textu nelze potvrdit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43332-4",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje pravidla o důkazním břemeni v diskriminačních sporech, což je konkrétní procesní změna občanského soudního řádu.",
+          "effectCz": "Předchozí znění § 133a neobsahovalo uvedené pravidlo pro výběr kandidátů do vedoucích orgánů některých emitentů; návrh nově ukládá žalovanému dokazovat, že použil zákonné pravidlo upřednostnění kandidáta méně zastoupeného pohlaví. Tím rozšiřuje procesní ochranu v úzce vymezeném typu sporu a představuje dílčí změnu řízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43408-2",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje příslušnost soudů a přístup k soudním spisům, tedy konkrétní pravidla občanského soudního řízení.",
+          "effectCz": "Před změnou zákon mezi spory svěřené krajským soudům výslovně nezařazoval spory o obchodní tajemství; návrh jejich příslušnost přesouvá do prvního stupně ke krajským soudům. Dosavadní § 44 dával účastníkům obecné právo nahlížet do spisu a jiným osobám přístup při právním zájmu či vážném důvodu; návrh toto právo rozšiřuje na přílohy a možnost žádat o kopii, současně však podrobněji omezuje přístup k chráněným informacím. Návrh také rozšiřuje možnost zveřejnit rozsudek na případy ochrany obchodního tajemství; jde o konkrétní modernizaci procesních pravidel s novými zárukami i omezeními."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43408-3",
+          "relevant": false,
+          "reasonCz": "Návrh mění hlavně hmotněprávní nároky při porušení obchodního tajemství v samostatném zákoně, nikoli občanský soudní řád.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43417-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje odpovědnost za škodu způsobenou vadnými výrobky v občanském zákoníku, nikoli pravidla občanského soudního řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-2",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje procesní zastupování a přenesení důkazního břemene v pracovních sporech.",
+          "effectCz": "Dosavadní § 26 neumožňoval, aby účastníka zastupoval veřejný ochránce práv; návrh tuto možnost doplňuje. Dosavadní § 133a neobsahoval nová pravidla pro některé spory platformových pracovníků a o stejnou odměnu; návrh přidává případy, kdy žalovaný musí vyvracet tvrzené porušení práv nebo doložit jiný důvod ukončení vztahu. Jde o rozšíření procesních možností a ochrany v konkrétních pracovních sporech, tedy o dílčí změnu řízení."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-f85ff3a5c2ea--source",
+        "psp-core-2025--law-change-43184-approved-2",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--law-change-43283-1",
+        "psp-core-2025--law-change-43308-6",
+        "psp-core-2025--law-change-43332-4",
+        "psp-core-2025--law-change-43408-2",
+        "psp-core-2025--law-change-43422-2",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--print-step-211167",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--vote-88528",
+        "psp-core-2025--print-step-211525",
+        "psp-core-2025--print-step-212050",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro novelu občanského soudního řádu, která rozšířila přenesení důkazního břemene na spory některých vedoucích státních zaměstnanců; po odmítnutí Senátem Sněmovna návrh potvrdila. Vláda také předložila další návrhy procesních změn, například ochranu před zneužívajícími žalobami a úpravu přístupu k soudním spisům. Poslanci ANO podpořili i návrh měnící pravidla pro důkazní břemeno v některých dalších sporech. Jde o dílčí změny občanského soudního řízení, nikoli o doložené dokončení jeho celkové modernizace.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U návrhu předloženého poslanci ANO v květnu 2026 balíček obsahuje jen navržené znění, nikoli přesné znění schválené Sněmovnou, o němž ANO hlasovalo; nelze proto ověřit, zda se příslušná procesní změna zachovala v textu hlasování."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_01d9148467fec0fa016ac55a83b47087d2ad9a0816ac4f377e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 86826,
+      "input_tokens_details": {
+        "cache_write_tokens": 82856,
+        "cached_tokens": 3967
+      },
+      "output_tokens": 4659,
+      "output_tokens_details": {
+        "reasoning_tokens": 2652
+      },
+      "total_tokens": 91485
+    },
+    "output": {
+      "promiseId": "candidate-f85ff3a5c2ea",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změna upravuje povolování strategické infrastruktury, nikoli trestní ani občanský soudní řád.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-2",
+          "relevant": true,
+          "reasonCz": "Novela občanského soudního řádu mění pravidla dokazování v úzce vymezených pracovních sporech, a proto modernizuje část tohoto řádu.",
+          "effectCz": "Před změnou § 133a odst. 4 neobsahoval; nový odstavec ukládá zaměstnavateli prokázat zákonný důvod výpovědi či odvolání vedoucího státního zaměstnance, pokud žalobce doloží indicie účelového postupu. Jde o dílčí posílení procesní ochrany žalobce v této konkrétní situaci, nikoli o celkovou změnu pravidel dokazování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43283-1",
+          "relevant": true,
+          "reasonCz": "Vládní návrh mění několik procesních pravidel občanského soudního řádu, včetně nových záruk pro žalované v řízeních zneužívajících žalobami proti veřejné účasti.",
+          "effectCz": "Před změnou §§ 197 a 198 neexistovaly; návrh nově stanoví přednostní projednání vymezených žalob, možnost zastoupení právnickou osobou, jistotu na náklady a zveřejnění rozsudku při zneužívajícím řízení, čímž v této oblasti rozšiřuje procesní ochranu. Návrh také rozšiřuje zastupování podle § 24, § 26 a § 26 odst. 8; upravuje běh lhůt při doručování do ciziny v § 50j, rozšiřuje možnost pořádkové pokuty v § 53 a stanoví zálohy na překlad a doručování v § 141, což mění příslušná procesní pravidla, ale může na účastníky klást nové povinnosti. V § 202 nově vylučuje odvolání proti usnesení o složení jistoty; jiné uvedené úpravy, například nahrazení staršího označení orgánů EU novým, jsou převážně terminologické. Přidává také pravidla pro prohlášení o dědictví u okresního soudu a informační povinnost ministerstva; předchozí znění těchto nových ustanovení nebylo, takže jde o nová procesní pravidla."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-6",
+          "relevant": false,
+          "reasonCz": "Změna pouze odkládá účinnost některých ustanovení občanského zákoníku a sama nemění občanský soudní řád.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43332-4",
+          "relevant": true,
+          "reasonCz": "Návrh doplňuje do občanského soudního řádu zvláštní pravidlo o dokazování v určitém typu sporů.",
+          "effectCz": "Před změnou § 133a odst. 5 neexistoval; návrh přenáší na žalovaného důkazní břemeno ohledně dodržení pravidel výběru kandidáta méně zastoupeného pohlaví, jsou-li splněny vymezené podmínky. Jde o úzké rozšíření procesní ochrany uchazeče, nikoli o obecnou změnu dokazování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43408-2",
+          "relevant": true,
+          "reasonCz": "Novela občanského soudního řádu zavádí procesní pravidla pro spory o obchodní tajemství a upravuje přístup ke spisu.",
+          "effectCz": "Před změnou nebyly spory o obchodní tajemství výslovně zařazeny mezi věci rozhodované krajskými soudy v prvním stupni; návrh je tam nově řadí. Dosavadní § 44 dovoloval účastníkům a zástupcům nahlížet do spisu a jiným osobám přístup při právním zájmu nebo vážném důvodu; nové znění zpřesňuje možnost pořizovat či žádat kopie a výslovně přihlíží k právům a chráněným zájmům účastníků. Nové §§ 44a až 44e stanoví ochranu utajovaných a jinak chráněných informací, včetně omezení přístupu a poučení nahlížejících, takže některý přístup omezuje, ale důvěrnost chrání. Změna § 155 odst. 4 rozšiřuje možnost zveřejnit rozsudek i na spory o obchodní tajemství, zároveň vyžaduje před zveřejněním odstranit údaje identifikující jiné osoby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43408-3",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje zákon o vymáhání práv z průmyslového vlastnictví a obchodním tajemství, nikoli občanský soudní řád.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43417-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění občanský zákoník v oblasti odpovědnosti za vadné výrobky, nikoli občanský soudní řád.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-2",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje v občanském soudním řádu zastupování a pravidla důkazního břemene v pracovních a souvisejících sporech.",
+          "effectCz": "Před změnou § 26 odst. 3 neumožňoval zastupování veřejným ochráncem práv; návrh tuto možnost přidává. Dosavadní § 133a neobsahoval navrhované odstavce 6 a 7; ty rozšiřují přesun důkazního břemene na žalovaného u vymezených sporů platformových pracovníků a při diskriminaci v odměňování, s výjimkou zjevně neúmyslného a málo závažného porušení. Tím se v těchto případech posiluje procesní ochrana žalobců."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-f85ff3a5c2ea--source",
+        "psp-core-2025--law-change-43184-approved-2",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--law-change-43283-1",
+        "psp-core-2025--print-step-211167",
+        "psp-core-2025--law-change-43332-4",
+        "psp-core-2025--print-step-211525",
+        "psp-core-2025--law-change-43408-2",
+        "psp-core-2025--print-step-212050",
+        "psp-core-2025--law-change-43422-2",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro novelu občanského soudního řádu, která v určitých pracovních sporech přesouvá důkazní břemeno na zaměstnavatele. Po zamítnutí návrhu Senátem poslanci ANO hlasovali znovu pro jeho přijetí. Vláda také předložila další návrhy, které zavádějí procesní ochranu v některých sporech a rozšiřují pravidla zastupování či dokazování. Jde o dílčí změny občanského soudního řádu, nikoli o nový trestní řád ani jeho celkovou modernizaci.",
+      "confidence": "high",
+      "uncertainties": [
+        "Příslib je široký, ale doložené změny jsou úzce zaměřené na jednotlivé procesní situace; z balíčku proto nelze dovodit celkovou modernizaci občanského soudního řádu ani přípravu nového trestního řádu. Některé navržené úpravy zároveň ukládají účastníkům nové povinnosti, například složit jistotu či zálohu na náklady."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0100bbbd5fafb808016ac55b629c3087d2b8dac80a316ace9d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 86826,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 86823
+      },
+      "output_tokens": 5774,
+      "output_tokens_details": {
+        "reasoning_tokens": 3484
+      },
+      "total_tokens": 92600
+    },
+    "output": {
+      "promiseId": "candidate-f85ff3a5c2ea",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změny upravují povolování strategické infrastruktury, nikoli občanské soudní řízení ani jinou konkrétní část tohoto slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-2",
+          "relevant": true,
+          "reasonCz": "Novela občanského soudního řádu mění důkazní pravidlo pro spory některých vedoucích státních zaměstnanců, a tím upravuje část civilního procesu.",
+          "effectCz": "Před změnou § 133a obsahoval tři případy přenesení důkazního břemene, nikoli zvláštní případ vedoucích státních zaměstnanců; nové odstavce přidávají povinnost zaměstnavatele prokázat zákonný důvod výpovědi, okamžitého zrušení pracovního poměru či odvolání při tvrzeném účelovém postupu. Jde o rozšíření procesní ochrany úzce vymezené skupiny, tedy o dílčí modernizaci a posílení možnosti domoci se spravedlivého rozhodnutí. Změna poznámky pod čarou pouze upravuje odkazy na zákon o státních zaměstnancích."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43283-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění několik procesních pravidel občanského soudního řádu, včetně ochrany před zneužívajícími žalobami.",
+          "effectCz": "Dřívější § 197 a 198 tato zvláštní pravidla pro žaloby související s veřejnou účastí neobsahovaly; návrh zavádí jejich přednostní projednání, možnost právního zastoupení určenou organizací, případnou jistotu na náklady řízení a další ochranná opatření. Rozšiřuje také pravidla o zastupování, nákladech překladu a doručování do ciziny; u těchto ustanovení kontext poskytuje předchozí znění, které návrh upravuje, nikoli zásadně ruší. Jde o dílčí změny procesních práv a postupů, některé ochranu účastníků rozšiřují a některé stanoví nové podmínky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-6",
+          "relevant": true,
+          "reasonCz": "Návrh doplňuje do občanského soudního řádu další pravidlo o důkazním břemeni při výběru členů některých vedoucích orgánů.",
+          "effectCz": "Předchozí § 133a neměl zvláštní pravidlo pro takové výběrové řízení; návrh ukládá žalovanému prokázat, že postupoval podle pravidel upřednostnění kandidáta méně zastoupeného pohlaví, jestliže žalobce doloží srovnatelnou kvalifikaci. Jde o rozšíření procesní ochrany a dílčí změnu občanského soudního řádu. Balíček obsahuje pouze navržené znění, takže účinek schváleného textu nelze potvrdit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43332-4",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje pravidla o důkazním břemeni v diskriminačních sporech, což je konkrétní procesní změna občanského soudního řádu.",
+          "effectCz": "Předchozí znění § 133a neobsahovalo uvedené pravidlo pro výběr kandidátů do vedoucích orgánů některých emitentů; návrh nově ukládá žalovanému dokazovat, že použil zákonné pravidlo upřednostnění kandidáta méně zastoupeného pohlaví. Tím rozšiřuje procesní ochranu v úzce vymezeném typu sporu a představuje dílčí změnu řízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43408-2",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje příslušnost soudů a přístup k soudním spisům, tedy konkrétní pravidla občanského soudního řízení.",
+          "effectCz": "Před změnou zákon mezi spory svěřené krajským soudům výslovně nezařazoval spory o obchodní tajemství; návrh jejich příslušnost přesouvá do prvního stupně ke krajským soudům. Dosavadní § 44 dával účastníkům obecné právo nahlížet do spisu a jiným osobám přístup při právním zájmu či vážném důvodu; návrh toto právo rozšiřuje na přílohy a možnost žádat o kopii, současně však podrobněji omezuje přístup k chráněným informacím. Návrh také rozšiřuje možnost zveřejnit rozsudek na případy ochrany obchodního tajemství; jde o konkrétní modernizaci procesních pravidel s novými zárukami i omezeními."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43408-3",
+          "relevant": false,
+          "reasonCz": "Návrh mění hlavně hmotněprávní nároky při porušení obchodního tajemství v samostatném zákoně, nikoli občanský soudní řád.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43417-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje odpovědnost za škodu způsobenou vadnými výrobky v občanském zákoníku, nikoli pravidla občanského soudního řízení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-2",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje procesní zastupování a přenesení důkazního břemene v pracovních sporech.",
+          "effectCz": "Dosavadní § 26 neumožňoval, aby účastníka zastupoval veřejný ochránce práv; návrh tuto možnost doplňuje. Dosavadní § 133a neobsahoval nová pravidla pro některé spory platformových pracovníků a o stejnou odměnu; návrh přidává případy, kdy žalovaný musí vyvracet tvrzené porušení práv nebo doložit jiný důvod ukončení vztahu. Jde o rozšíření procesních možností a ochrany v konkrétních pracovních sporech, tedy o dílčí změnu řízení."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-f85ff3a5c2ea--source",
+        "psp-core-2025--law-change-43184-approved-2",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--law-change-43283-1",
+        "psp-core-2025--law-change-43308-6",
+        "psp-core-2025--law-change-43332-4",
+        "psp-core-2025--law-change-43408-2",
+        "psp-core-2025--law-change-43422-2",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--print-step-211167",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--vote-88528",
+        "psp-core-2025--print-step-211525",
+        "psp-core-2025--print-step-212050",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro novelu občanského soudního řádu, která rozšířila přenesení důkazního břemene na spory některých vedoucích státních zaměstnanců; po odmítnutí Senátem Sněmovna návrh potvrdila. Vláda také předložila další návrhy procesních změn, například ochranu před zneužívajícími žalobami a úpravu přístupu k soudním spisům. Poslanci ANO podpořili i návrh měnící pravidla pro důkazní břemeno v některých dalších sporech. Jde o dílčí změny občanského soudního řízení, nikoli o doložené dokončení jeho celkové modernizace.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U návrhu předloženého poslanci ANO v květnu 2026 balíček obsahuje jen navržené znění, nikoli přesné znění schválené Sněmovnou, o němž ANO hlasovalo; nelze proto ověřit, zda se příslušná procesní změna zachovala v textu hlasování."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "moving-towards",
+    "selectedReview": "assessor-a"
+  }
+}

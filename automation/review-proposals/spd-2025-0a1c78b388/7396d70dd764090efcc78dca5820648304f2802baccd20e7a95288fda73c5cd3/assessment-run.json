@@ -1,0 +1,226 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-41-04-448Z--e6d23ad5ab74",
+  "evaluatedAt": "2026-10-02T05:41:04.448Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-0a1c78b388/e6d23ad5ab74cf1ee658f8c3a328619d5dac4f7eae75d190c33755a008313762.json",
+  "packageHash": "e6d23ad5ab74cf1ee658f8c3a328619d5dac4f7eae75d190c33755a008313762",
+  "assessmentContentHash": "05b1b586c7a1a72de9bc35ab38e98941681aabff536d9a013cf8366c17b50f71",
+  "assessmentFingerprint": "7396d70dd764090efcc78dca5820648304f2802baccd20e7a95288fda73c5cd3",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-0a1c78b388",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-0a1c78b388",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text mění pouze termíny účinnosti jiných, blíže neurčených ustanovení a nedokládá změnu možnosti krátit dávky rodičům kvůli chování žáků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Text ruší vyjmenované body dřívější novely státní sociální podpory, ale žádný z doložených textů nespojuje tyto změny s postihem rodičů za chování žáků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": false,
+          "reasonCz": "Změna se týká úprav dávek pro osoby se zdravotním postižením a jejich účinnosti, nikoli krácení dávek rodičům kvůli chování žáků."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-0a1c78b388--source",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--law-change-43240-5"
+      ],
+      "explanationCz": "Slib požaduje možnost krátit sociální dávky rodičům kvůli chování jejich dětí ve škole. V předložených textech není doloženo ustanovení, které by takové krácení zavádělo nebo rušilo, takže není ověřen podstatný posun. U jedné změny jsou uvedeny jen nové termíny účinnosti jiných ustanovení, jejichž obsah zde není popsán. Proto z těchto podkladů nelze spolehlivě posoudit případný nepřímý dopad.",
+      "confidence": "low",
+      "uncertainties": [
+        "U změny zákona č. 152/2025 Sb. text pouze posouvá termíny účinnosti ustanovení, která podklady blíže nepopisují; nelze proto vyloučit ani potvrdit jejich případný vztah ke krácení dávek rodičům."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-0a1c78b388",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": true,
+          "reasonCz": "Změna posouvá účinnost částí reformy systému sociálních dávek, takže může ovlivnit, kdy se případná související úprava začne uplatňovat; obsah odkazovaných ustanovení však podklady neuvádějí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Rušené body se podle doloženého znění týkají zejména administrace dávek a podávání žádostí, nikoli možnosti krátit dávky rodičům kvůli chování žáků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": false,
+          "reasonCz": "Změna upravuje účinnost částí zákona o dávkách pro osoby se zdravotním postižením a její doložený obsah se netýká krácení sociálních dávek rodičům žáků."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-0a1c78b388--source",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--senate-resolution-43195-3",
+        "psp-core-2025--vote-86695",
+        "psp-core-2025--vote-87038"
+      ],
+      "explanationCz": "SPD slibuje možnost krátit sociální dávky rodičům nepřizpůsobivých žáků. Poslanci SPD v únoru hlasovali pro návrh, který měnil termíny účinnosti částí reformy sociálních dávek; po zamítnutí návrhu Senátem v březnu hlasovali proti jeho zamítnutí Poslaneckou sněmovnou. Z dostupného znění ale nelze zjistit, co upravují odkazované části reformy, a proto nelze ověřit, zda tato hlasování slib naplňují nebo mu odporují. Podstatný ověřený posun ke slibu tedy doložen není.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují znění ustanovení, jejichž účinnost změna upravuje, takže nelze určit, zda se týkají krácení dávek rodičům kvůli chování žáků.",
+        "Bez tohoto znění nelze věcně posoudit, jak hlasování SPD o návrhu a o jeho zamítnutí Senátem souvisela se slibem."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_01c5636f9907e34f016abf43cb91b887d1b3cde34ad8abb877",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 28132,
+      "input_tokens_details": {
+        "cache_write_tokens": 24808,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2107,
+      "output_tokens_details": {
+        "reasoning_tokens": 1496
+      },
+      "total_tokens": 30239
+    },
+    "output": {
+      "promiseId": "spd-2025-0a1c78b388",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text mění pouze termíny účinnosti jiných, blíže neurčených ustanovení a nedokládá změnu možnosti krátit dávky rodičům kvůli chování žáků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Text ruší vyjmenované body dřívější novely státní sociální podpory, ale žádný z doložených textů nespojuje tyto změny s postihem rodičů za chování žáků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": false,
+          "reasonCz": "Změna se týká úprav dávek pro osoby se zdravotním postižením a jejich účinnosti, nikoli krácení dávek rodičům kvůli chování žáků."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-0a1c78b388--source",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--law-change-43240-5"
+      ],
+      "explanationCz": "Slib požaduje možnost krátit sociální dávky rodičům kvůli chování jejich dětí ve škole. V předložených textech není doloženo ustanovení, které by takové krácení zavádělo nebo rušilo, takže není ověřen podstatný posun. U jedné změny jsou uvedeny jen nové termíny účinnosti jiných ustanovení, jejichž obsah zde není popsán. Proto z těchto podkladů nelze spolehlivě posoudit případný nepřímý dopad.",
+      "confidence": "low",
+      "uncertainties": [
+        "U změny zákona č. 152/2025 Sb. text pouze posouvá termíny účinnosti ustanovení, která podklady blíže nepopisují; nelze proto vyloučit ani potvrdit jejich případný vztah ke krácení dávek rodičům."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_098c2387b8ea85fa016abf43da792487d1947758e916041662",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 28132,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 28129
+      },
+      "output_tokens": 3270,
+      "output_tokens_details": {
+        "reasoning_tokens": 2584
+      },
+      "total_tokens": 31402
+    },
+    "output": {
+      "promiseId": "spd-2025-0a1c78b388",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": true,
+          "reasonCz": "Změna posouvá účinnost částí reformy systému sociálních dávek, takže může ovlivnit, kdy se případná související úprava začne uplatňovat; obsah odkazovaných ustanovení však podklady neuvádějí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Rušené body se podle doloženého znění týkají zejména administrace dávek a podávání žádostí, nikoli možnosti krátit dávky rodičům kvůli chování žáků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": false,
+          "reasonCz": "Změna upravuje účinnost částí zákona o dávkách pro osoby se zdravotním postižením a její doložený obsah se netýká krácení sociálních dávek rodičům žáků."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-0a1c78b388--source",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--senate-resolution-43195-3",
+        "psp-core-2025--vote-86695",
+        "psp-core-2025--vote-87038"
+      ],
+      "explanationCz": "SPD slibuje možnost krátit sociální dávky rodičům nepřizpůsobivých žáků. Poslanci SPD v únoru hlasovali pro návrh, který měnil termíny účinnosti částí reformy sociálních dávek; po zamítnutí návrhu Senátem v březnu hlasovali proti jeho zamítnutí Poslaneckou sněmovnou. Z dostupného znění ale nelze zjistit, co upravují odkazované části reformy, a proto nelze ověřit, zda tato hlasování slib naplňují nebo mu odporují. Podstatný ověřený posun ke slibu tedy doložen není.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují znění ustanovení, jejichž účinnost změna upravuje, takže nelze určit, zda se týkají krácení dávek rodičům kvůli chování žáků.",
+        "Bez tohoto znění nelze věcně posoudit, jak hlasování SPD o návrhu a o jeho zamítnutí Senátem souvisela se slibem."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

@@ -1,0 +1,596 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-06-29-393Z--64746ae162ca",
+  "evaluatedAt": "2026-11-05T10:06:29.393Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-98b2c6749599/64746ae162cae73e009001b43ab871cb810764ce703f8afa6b680e4784ff2d5e.json",
+  "packageHash": "64746ae162cae73e009001b43ab871cb810764ce703f8afa6b680e4784ff2d5e",
+  "assessmentContentHash": "a7a7b691201d7a697d9056619ecbe11a263d140701612a1ec676db8291932e9d",
+  "assessmentFingerprint": "507bc66efc8c86dd95c1505f9220a9b3b1e9cfa131e7aacc1b82bd7710a6f2d1",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-98b2c6749599",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment cites law change psp-core-2025--law-change-43310-2 it found not relevant",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_06da517697e9e2b3016aec549c990087d19c31db89a757dc10",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 77379,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 77376
+            },
+            "output_tokens": 6841,
+            "output_tokens_details": {
+              "reasoning_tokens": 4648
+            },
+            "total_tokens": 84220
+          },
+          "output": {
+            "promiseId": "candidate-98b2c6749599",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43203-16",
+                "relevant": false,
+                "reasonCz": "Dohoda popisuje spolupráci s Uzbekistánem v průmyslu a zemědělství, ale předložené pasáže nestanoví podporu českého domácího zpracovatelského průmyslu ani přímého prodeje.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43204-1",
+                "relevant": true,
+                "reasonCz": "Rozpočtový tisk zahrnuje prostředky pro zemědělství a pozměňovací návrh v něm výslovně navrhoval přesun peněz určených na podporu zpracování zemědělských produktů.",
+                "effectCz": "Dodané znění rozpočtu odkazuje na přílohy s výdaji, ale jejich konkrétní položky a částky zde nejsou; směr změny rozpočtu samotného proto nelze z dodaného textu určit. Pozměňovací návrh výslovně navrhoval snížit dotaci Státnímu zemědělskému intervenčnímu fondu o 120 mil. Kč, s odůvodněním, že prostředky budou odebrány z programu na podporu zpracování zemědělských produktů a konkurenceschopnosti českého potravinářství; strana tento návrh nepodpořila."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43206-1",
+                "relevant": true,
+                "reasonCz": "Programy zemědělských dotací zahrnují také potravinářství, tedy část domácího zpracovatelského průmyslu.",
+                "effectCz": "Návrh stanoví pro rok 2026 mezi uvedenými částkami 363 mil. Kč pro potravinářství, vedle 2 892,8 mil. Kč pro živočišnou výrobu, 528 mil. Kč pro rostlinnou výrobu a 216,2 mil. Kč pro ostatní aktivity. Proti předchozímu roku nelze změnu určit, protože jeho srovnatelné částky v balíčku nejsou; navržená podpora potravinářství odpovídá části slibu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-1",
+                "relevant": true,
+                "reasonCz": "Nový zákon o evidenci tržeb se vztahuje na prodejní transakce, včetně přímého prodeje, a Senát navrhl výjimku pro přímý prodej zemědělských produktů od výrobce konečnému spotřebiteli.",
+                "effectCz": "Jde o nový zákon, takže předchozí znění pravidel pro porovnání v balíčku není. Schválený text ukládá evidovat stanovené tržby; v usnesení Senátu je navržena výjimka pro přímý prodej zemědělských produktů z vlastní výroby přímo konečnému spotřebiteli v místě výroby. Sněmovna však při následném hlasování setrvala na svém znění bez této výjimky. Povinnost evidence tak může přímý prodej administrativně ztížit; rozsah tohoto dopadu nelze z textu přesně určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-2",
+                "relevant": false,
+                "reasonCz": "Jediný dodaný návrh vztahující se k této části mění daňové zacházení s reklamními dary v podobě tichého vína, nikoli přímý prodej, dodavatelské řetězce ani zpracovatelský průmysl.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-4",
+                "relevant": false,
+                "reasonCz": "Dodaný text této části neobsahuje žádné znění změny a přiřazené hlasování se týká výjimky z evidence tržeb pro vlastní zemědělské produkty, nikoli změny zákona o Finanční správě.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-5",
+                "relevant": false,
+                "reasonCz": "Dodaný text této části neobsahuje žádné znění změny a přiřazené hlasování se týká výjimky z evidence tržeb pro vlastní zemědělské produkty, nikoli změny zákona o Celní správě.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-9",
+                "relevant": false,
+                "reasonCz": "Dohoda s Mexikem zmiňuje spolupráci při zpracování zemědělských produktů a potravin, ale dodané pasáže nestanoví konkrétní podporu českého domácího zpracovatelského průmyslu ani přímého prodeje.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-126",
+                "relevant": true,
+                "reasonCz": "Nařízení stanoví dotace na zařízení pro zpracování a balení medu, což se týká části domácího zpracovatelského průmyslu.",
+                "effectCz": "Nařízení uvádí maximální dotace například 14 000 Kč na ruční medomet, 35 000 Kč na elektrický medomet, 14 000 Kč na plničku medu a 28 000 Kč na etiketovací či balicí zařízení pro vymezenou skupinu včelařů. Předchozí znění příloh v balíčku chybí, takže nelze určit, zda jsou tyto podpory oproti dosavadnímu stavu vyšší, nižší, nebo beze změny."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-416",
+                "relevant": true,
+                "reasonCz": "Usnesení vlády podporuje místní a regionální potraviny z krátkých dodavatelských řetězců při institucionálním stravování.",
+                "effectCz": "Usnesení schvaluje uplatňování místních potravin a ukládá členům vlády zajistit v řízených organizacích minimální výdaje na potraviny místního či regionálního původu z krátkého řetězce; obcím a krajům obdobný postup doporučuje. Jde o opatření podporující část slibu, ale konkrétní minimální částka či podíl v dodaných pasážích chybí, takže rozsah účinku nelze určit."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-98b2c6749599--source",
+              "psp-core-2025--law-change-43204-1",
+              "psp-core-2025--amendment-text-462",
+              "psp-core-2025--vote-86859",
+              "psp-core-2025--vote-86957",
+              "psp-core-2025--law-change-43206-1",
+              "psp-core-2025--vote-86965",
+              "psp-core-2025--law-change-43310-1",
+              "psp-core-2025--senate-resolution-43310-6",
+              "psp-core-2025--amendment-text-1565",
+              "psp-core-2025--vote-88298",
+              "psp-core-2025--amendment-text-1569",
+              "psp-core-2025--amendment-1569",
+              "psp-core-2025--law-change-43310-2",
+              "psp-core-2025--vote-88352",
+              "psp-core-2025--vote-88356",
+              "psp-core-2025--vote-88456",
+              "esbirka-regulations--law-change-sb-2026-126",
+              "esbirka-regulations--2026-126",
+              "zvlady-resolutions--law-change-uv-2026-416",
+              "zvlady-resolutions--2026-416"
+            ],
+            "explanationCz": "Vláda podpořila nákup místních potravin z krátkých řetězců ve státem řízených organizacích a předložila zemědělské dotace, které počítají s 363 miliony korun pro potravinářství; přijala také dotace na zařízení ke zpracování a balení medu. Poslanci SPD zároveň nepodpořili návrh na výjimku z evidence tržeb pro drobný prodej vlastní zemědělské produkce a následně hlasovali pro zachování zákona o evidenci tržeb bez výjimky pro přímý prodej zemědělských výrobků z místa výroby. Tato evidence může přímý prodej administrativně ztížit, a proto její přijetí působí proti části slibu, přestože některé jiné kroky směřují k jeho naplnění.",
+            "confidence": "high",
+            "uncertainties": [
+              "U schváleném rozpočtu nejsou v dodaném výňatku rozepsány konkrétní zemědělské položky; je proto nejisté, jaké prostředky pro potravinářství nakonec obsahuje.",
+              "U dotací na včelařské vybavení chybí předchozí znění příloh, takže nelze porovnat, zda se jejich výše nebo rozsah oproti dřívějšímu stavu změnily.",
+              "U usnesení o místních potravinách chybí konkrétní minimální částka či podíl výdajů, který mají organizace dodržet."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-98b2c6749599",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": true,
+          "reasonCz": "Text dohody výslovně počítá se spoluprací v průmyslu a při zpracování zemědělských produktů, což se týká části slibu o domácím zpracovatelském průmyslu.",
+          "effectCz": "Předchozí znění se na tento nový návrh mezinárodní dohody nevztahuje; navržená dohoda počítá se spoluprací podniků v průmyslu a se zpracováním a distribucí zemědělských produktů. Jde o dílčí podporu spolupráce, nikoli o konkrétní domácí podporu nebo závazek k přímému prodeji."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet zahrnuje prostředky na podporu agrárního sektoru a pozměňovací návrh výslovně mířil na dotaci pro zpracování zemědělských produktů a český potravinářský průmysl.",
+          "effectCz": "Rozpočtový text, který je v balíčku k této oblasti zachycen, pouze odkazuje na přílohy s výdaji a neuvádí jejich konkrétní částky, takže výsledný rozsah podpory nelze z něj určit. Pozměňovací návrh usiloval o odebrání 120 milionů Kč z plánovaných 250 milionů Kč na podporu zpracování zemědělských produktů; pokud by prošel, tuto podporu by zmenšil."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Návrh dotačních programů výslovně přiděluje prostředky potravinářství, tedy části domácího zpracovatelského průmyslu.",
+          "effectCz": "Jde o nový návrh dotačních programů, takže předchozí znění není k dispozici. Návrh vyčleňuje 363 milionů Kč na potravinářství; tím poskytuje dílčí finanční podporu zpracování potravin, ale neřeší přímý prodej ani celý domácí průmysl."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Nová pravidla evidence tržeb dopadají také na přímý prodej zemědělských produktů, přičemž senátní pozměňovací návrh výslovně navrhoval jeho vynětí.",
+          "effectCz": "Jde o nový zákon, takže předchozí znění k porovnání není. Schválené znění ukládá evidovat příslušné tržby nejpozději při jejich uskutečnění; mezi uvedenými výjimkami není obecné vynětí přímého prodeje vlastních zemědělských produktů konečným spotřebitelům. Povinná evidence tak přímý prodej administrativně zatěžuje a jde proti jeho podpoře."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": false,
+          "reasonCz": "Jediný dodaný návrh k této části se týká daňové uznatelnosti reklamních darů v podobě tichého vína, nikoli přímého prodeje ani pravidel či kapacit zpracovatelského průmyslu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": false,
+          "reasonCz": "Dodané podklady k této části neukazují změnu, která by se týkala přímého prodeje, zkrácení řetězců nebo domácího zpracování.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": false,
+          "reasonCz": "Dodané podklady k této části neukazují změnu, která by se týkala přímého prodeje, zkrácení řetězců nebo domácího zpracování.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-9",
+          "relevant": true,
+          "reasonCz": "Navržená dohoda výslovně zahrnuje spolupráci při zpracování zemědělských a potravinářských výrobků, což se týká části slibu o zpracovatelském průmyslu.",
+          "effectCz": "Jde o nový návrh dohody, takže předchozí znění neexistuje. Navrhuje spolupráci včetně zpracování zemědělských produktů a potravinářských výrobků; jde o dílčí podporu spolupráce, nikoli o konkrétní domácí podporu nebo závazek k přímému prodeji."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-126",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví dotace na zařízení pro zpracování a balení medu, což podporuje část domácího zpracovatelského průmyslu.",
+          "effectCz": "Nařízení mění přílohy dřívější úpravy, ale jejich předchozí znění v balíčku není. Nové znění stanoví maximální dotace na zařízení, mimo jiné na míchání, plnění a balení medu; jde o dílčí finanční podporu zpracování včelích produktů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-416",
+          "relevant": true,
+          "reasonCz": "Usnesení ukládá státním organizacím nakupovat potraviny místního či regionálního původu z krátkých dodavatelských řetězců, což přímo odpovídá části slibu o jejich zkracování.",
+          "effectCz": "Usnesení zavádí povinnost pro organizace řízené členy vlády a ústředními orgány zajistit stanovené minimální výdaje na místní či regionální potraviny z krátkého řetězce. Tím přímo podporuje tuto část slibu; konkrétní minimální částky nejsou v dodaném textu uvedeny."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-98b2c6749599--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-462",
+        "psp-core-2025--vote-86859",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--amendment-text-1565",
+        "psp-core-2025--vote-88298",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--law-change-43203-16",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--law-change-43453-9",
+        "psp-core-2025--print-step-212285",
+        "esbirka-regulations--law-change-sb-2026-126",
+        "esbirka-regulations--2026-126",
+        "zvlady-resolutions--law-change-uv-2026-416",
+        "zvlady-resolutions--2026-416"
+      ],
+      "explanationCz": "Vláda přijala nařízení, které poskytuje dotace na zařízení pro zpracování a balení medu, a usnesením podpořila nákup místních potravin z krátkých dodavatelských řetězců. Poslanci SPD také hlasovali pro rozpočet a dotační programy, jejichž podklady zahrnují podporu zemědělství a potravinářství. Zároveň však SPD podpořila zákon o evidenci tržeb i po návratu ze Senátu; Senát přitom navrhl výjimku pro přímý prodej zemědělských produktů konečným spotřebitelům, která ve schváleném znění není. Povinná evidence těchto tržeb přímý prodej administrativně zatěžuje, a proto převažuje tento pozdější krok proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný výřez rozpočtu neuvádí konečné částky na podporu zpracování zemědělských produktů; pozměňovací návrh k jejich snížení SPD nepodpořila.",
+        "Text usnesení vlády odkazuje na materiál, který stanoví minimální výdaje na místní potraviny, ale jeho konkrétní částky v balíčku nejsou."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-98b2c6749599",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": true,
+          "reasonCz": "Předložená dohoda výslovně počítá se spoluprací v zemědělství, zpracování a distribuci zemědělských produktů, což se týká části slibu o domácím zpracování.",
+          "effectCz": "Dohoda nemění český zákon a balíček neobsahuje předchozí znění; navrhuje spolupráci v zemědělství a zpracování či distribuci produktů, ale nestanoví konkrétní domácí podporu ani její rozsah. Jde tedy o možný dílčí příspěvek, nikoli o přímé zajištění slíbeného rozvoje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Rozpočtový tisk souvisí se slibem prostřednictvím pozměňovacího návrhu, který výslovně navrhl snížit dotaci na podporu zpracování zemědělských produktů a českého potravinářství.",
+          "effectCz": "Dodané znění rozpočtu pouze odkazuje na přílohy s výdaji a neuvádí konkrétní částky pro zpracování potravin. Pozměňovací návrh navrhoval přesunout z příslušné zemědělské dotační kapitoly 120 milionů Kč; strana jej nepodpořila, takže tento návrh sám neurčuje konečné rozpočtové výdaje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Programy obsahují výslovnou položku podpory potravinářství, která může přispět k domácímu zpracování zemědělských produktů.",
+          "effectCz": "Jde o nový dotační program, takže balíček neposkytuje předchozí znění, s nímž by šlo změnu porovnat. Návrh vyčleňuje pro potravinářství 363 milionů Kč; to podporuje část slibu, ačkoli podklady nerozdělují částku přesně na domácí zpracování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Nová evidence tržeb se vztahuje i na prodeje, které by mohly být přímým prodejem od výrobců, a Senát navrhl zvláštní výjimku právě pro přímý prodej zemědělských produktů spotřebitelům.",
+          "effectCz": "Balíček neposkytuje předchozí znění právní úpravy; návrh zavádí povinnost evidovat tržby a schválené znění ji zachovává, aniž by obecně vyňalo přímý prodej zemědělských výrobců. Evidence přidává povinnost i části přímých prodejců a může jim je ztížit; Senátem navržená výjimka se do konečné schválené úpravy neprosadila."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": false,
+          "reasonCz": "Dodané znění této části návrhu neobsahuje ustanovení, které by se věcně týkalo přímého prodeje, zkracování dodavatelských řetězců nebo zpracovatelského průmyslu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": false,
+          "reasonCz": "V dodaných podkladech není text této změny ani pozměňovací návrh, který by ji spojoval s konkrétními částmi slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": false,
+          "reasonCz": "V dodaných podkladech není text této změny ani pozměňovací návrh, který by ji spojoval s konkrétními částmi slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-9",
+          "relevant": true,
+          "reasonCz": "Předložená dohoda zmiňuje zpracování zemědělských produktů a potravinářských výrobků, tedy oblast domácího zpracovatelského průmyslu.",
+          "effectCz": "Dohoda nemění český zákon a balíček neobsahuje předchozí znění; navrhuje spolupráci mimo jiné při zpracování zemědělských produktů a potravinářských výrobků. Jde o návrh možné spolupráce, nikoli o závaznou domácí podporu konkrétního rozsahu."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-126",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví dotace na zařízení používaná při zpracování a balení medu, což je dílčí část domácího zpracování zemědělských produktů.",
+          "effectCz": "Balíček neuvádí původní dotační sazby, takže nelze určit, zda se podpora oproti předchozímu stavu zvýšila či snížila. Přijaté nařízení stanoví maximální dotace například 35 000 Kč na elektrický medomet, 14 000 Kč na plničku medu a 28 000 Kč na chladicí technologii pro skladování plástů; tím podporuje část slibu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-416",
+          "relevant": true,
+          "reasonCz": "Usnesení ukládá státním organizacím nakupovat potraviny místního či regionálního původu z krátkého dodavatelského řetězce.",
+          "effectCz": "Usnesení ukládá organizacím řízeným ústředními orgány zajistit stanovené minimální výdaje na místní či regionální potraviny z krátkého dodavatelského řetězce a biopotraviny. Tím rozhodnutí podporuje část slibu; přiložený výňatek však neobsahuje konkrétní minimální částku."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-98b2c6749599--source",
+        "psp-core-2025--law-change-43203-16",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-462",
+        "psp-core-2025--vote-86859",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--amendment-text-1537",
+        "psp-core-2025--vote-88291",
+        "psp-core-2025--amendment-text-1565",
+        "psp-core-2025--vote-88298",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--law-change-43453-9",
+        "psp-core-2025--print-step-212285",
+        "esbirka-regulations--law-change-sb-2026-126",
+        "esbirka-regulations--2026-126",
+        "zvlady-resolutions--law-change-uv-2026-416",
+        "zvlady-resolutions--2026-416"
+      ],
+      "explanationCz": "Vláda předložila dvě dohody se spoluprací v zemědělství a zpracování produktů a přijala dotace na zařízení pro zpracování medu. Usnesením také nařídila státním organizacím nakupovat stanovené minimum místních potravin z krátkých dodavatelských řetězců. Proti tomu stojí zákon o evidenci tržeb, který ukládá evidovat tržby a neobsahuje zvláštní výjimku pro přímý prodej zemědělských výrobců. Poslanci SPD při hlasování po vrácení zákona Senátem podpořili setrvání na původním znění místo senátní výjimky pro tento přímý prodej, takže jejich nejnovější rozhodnutí jde proti části slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Usnesení o místních potravinách odkazuje na další materiál, jehož konkrétní minimální částky nejsou v dodaném výňatku uvedeny.",
+        "U zemědělských dotací je známa částka 363 milionů Kč pro potravinářství, ale podklady neukazují, jaká část připadá přímo na domácí zpracování.",
+        "Dohody o spolupráci navrhují mezinárodní spolupráci, ale samy nezaručují konkrétní podporu domácímu zpracovatelskému průmyslu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_03a2f3abb7fc0fe7016aec5453df7c87d19a2c53385789ea9e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 77379,
+      "input_tokens_details": {
+        "cached_tokens": 6347,
+        "cache_write_tokens": 71029
+      },
+      "output_tokens": 7596,
+      "output_tokens_details": {
+        "reasoning_tokens": 5293
+      },
+      "total_tokens": 84975
+    },
+    "output": {
+      "promiseId": "candidate-98b2c6749599",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": true,
+          "reasonCz": "Text dohody výslovně počítá se spoluprací v průmyslu a při zpracování zemědělských produktů, což se týká části slibu o domácím zpracovatelském průmyslu.",
+          "effectCz": "Předchozí znění se na tento nový návrh mezinárodní dohody nevztahuje; navržená dohoda počítá se spoluprací podniků v průmyslu a se zpracováním a distribucí zemědělských produktů. Jde o dílčí podporu spolupráce, nikoli o konkrétní domácí podporu nebo závazek k přímému prodeji."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet zahrnuje prostředky na podporu agrárního sektoru a pozměňovací návrh výslovně mířil na dotaci pro zpracování zemědělských produktů a český potravinářský průmysl.",
+          "effectCz": "Rozpočtový text, který je v balíčku k této oblasti zachycen, pouze odkazuje na přílohy s výdaji a neuvádí jejich konkrétní částky, takže výsledný rozsah podpory nelze z něj určit. Pozměňovací návrh usiloval o odebrání 120 milionů Kč z plánovaných 250 milionů Kč na podporu zpracování zemědělských produktů; pokud by prošel, tuto podporu by zmenšil."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Návrh dotačních programů výslovně přiděluje prostředky potravinářství, tedy části domácího zpracovatelského průmyslu.",
+          "effectCz": "Jde o nový návrh dotačních programů, takže předchozí znění není k dispozici. Návrh vyčleňuje 363 milionů Kč na potravinářství; tím poskytuje dílčí finanční podporu zpracování potravin, ale neřeší přímý prodej ani celý domácí průmysl."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Nová pravidla evidence tržeb dopadají také na přímý prodej zemědělských produktů, přičemž senátní pozměňovací návrh výslovně navrhoval jeho vynětí.",
+          "effectCz": "Jde o nový zákon, takže předchozí znění k porovnání není. Schválené znění ukládá evidovat příslušné tržby nejpozději při jejich uskutečnění; mezi uvedenými výjimkami není obecné vynětí přímého prodeje vlastních zemědělských produktů konečným spotřebitelům. Povinná evidence tak přímý prodej administrativně zatěžuje a jde proti jeho podpoře."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": false,
+          "reasonCz": "Jediný dodaný návrh k této části se týká daňové uznatelnosti reklamních darů v podobě tichého vína, nikoli přímého prodeje ani pravidel či kapacit zpracovatelského průmyslu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": false,
+          "reasonCz": "Dodané podklady k této části neukazují změnu, která by se týkala přímého prodeje, zkrácení řetězců nebo domácího zpracování.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": false,
+          "reasonCz": "Dodané podklady k této části neukazují změnu, která by se týkala přímého prodeje, zkrácení řetězců nebo domácího zpracování.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-9",
+          "relevant": true,
+          "reasonCz": "Navržená dohoda výslovně zahrnuje spolupráci při zpracování zemědělských a potravinářských výrobků, což se týká části slibu o zpracovatelském průmyslu.",
+          "effectCz": "Jde o nový návrh dohody, takže předchozí znění neexistuje. Navrhuje spolupráci včetně zpracování zemědělských produktů a potravinářských výrobků; jde o dílčí podporu spolupráce, nikoli o konkrétní domácí podporu nebo závazek k přímému prodeji."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-126",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví dotace na zařízení pro zpracování a balení medu, což podporuje část domácího zpracovatelského průmyslu.",
+          "effectCz": "Nařízení mění přílohy dřívější úpravy, ale jejich předchozí znění v balíčku není. Nové znění stanoví maximální dotace na zařízení, mimo jiné na míchání, plnění a balení medu; jde o dílčí finanční podporu zpracování včelích produktů."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-416",
+          "relevant": true,
+          "reasonCz": "Usnesení ukládá státním organizacím nakupovat potraviny místního či regionálního původu z krátkých dodavatelských řetězců, což přímo odpovídá části slibu o jejich zkracování.",
+          "effectCz": "Usnesení zavádí povinnost pro organizace řízené členy vlády a ústředními orgány zajistit stanovené minimální výdaje na místní či regionální potraviny z krátkého řetězce. Tím přímo podporuje tuto část slibu; konkrétní minimální částky nejsou v dodaném textu uvedeny."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-98b2c6749599--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-462",
+        "psp-core-2025--vote-86859",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--amendment-text-1565",
+        "psp-core-2025--vote-88298",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--law-change-43203-16",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--law-change-43453-9",
+        "psp-core-2025--print-step-212285",
+        "esbirka-regulations--law-change-sb-2026-126",
+        "esbirka-regulations--2026-126",
+        "zvlady-resolutions--law-change-uv-2026-416",
+        "zvlady-resolutions--2026-416"
+      ],
+      "explanationCz": "Vláda přijala nařízení, které poskytuje dotace na zařízení pro zpracování a balení medu, a usnesením podpořila nákup místních potravin z krátkých dodavatelských řetězců. Poslanci SPD také hlasovali pro rozpočet a dotační programy, jejichž podklady zahrnují podporu zemědělství a potravinářství. Zároveň však SPD podpořila zákon o evidenci tržeb i po návratu ze Senátu; Senát přitom navrhl výjimku pro přímý prodej zemědělských produktů konečným spotřebitelům, která ve schváleném znění není. Povinná evidence těchto tržeb přímý prodej administrativně zatěžuje, a proto převažuje tento pozdější krok proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný výřez rozpočtu neuvádí konečné částky na podporu zpracování zemědělských produktů; pozměňovací návrh k jejich snížení SPD nepodpořila.",
+        "Text usnesení vlády odkazuje na materiál, který stanoví minimální výdaje na místní potraviny, ale jeho konkrétní částky v balíčku nejsou."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0b7832cc66b2987a016aec54dd49e087d19616d430dc995bc3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 77379,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 77376
+      },
+      "output_tokens": 7762,
+      "output_tokens_details": {
+        "reasoning_tokens": 5438
+      },
+      "total_tokens": 85141
+    },
+    "output": {
+      "promiseId": "candidate-98b2c6749599",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-16",
+          "relevant": true,
+          "reasonCz": "Předložená dohoda výslovně počítá se spoluprací v zemědělství, zpracování a distribuci zemědělských produktů, což se týká části slibu o domácím zpracování.",
+          "effectCz": "Dohoda nemění český zákon a balíček neobsahuje předchozí znění; navrhuje spolupráci v zemědělství a zpracování či distribuci produktů, ale nestanoví konkrétní domácí podporu ani její rozsah. Jde tedy o možný dílčí příspěvek, nikoli o přímé zajištění slíbeného rozvoje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Rozpočtový tisk souvisí se slibem prostřednictvím pozměňovacího návrhu, který výslovně navrhl snížit dotaci na podporu zpracování zemědělských produktů a českého potravinářství.",
+          "effectCz": "Dodané znění rozpočtu pouze odkazuje na přílohy s výdaji a neuvádí konkrétní částky pro zpracování potravin. Pozměňovací návrh navrhoval přesunout z příslušné zemědělské dotační kapitoly 120 milionů Kč; strana jej nepodpořila, takže tento návrh sám neurčuje konečné rozpočtové výdaje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Programy obsahují výslovnou položku podpory potravinářství, která může přispět k domácímu zpracování zemědělských produktů.",
+          "effectCz": "Jde o nový dotační program, takže balíček neposkytuje předchozí znění, s nímž by šlo změnu porovnat. Návrh vyčleňuje pro potravinářství 363 milionů Kč; to podporuje část slibu, ačkoli podklady nerozdělují částku přesně na domácí zpracování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Nová evidence tržeb se vztahuje i na prodeje, které by mohly být přímým prodejem od výrobců, a Senát navrhl zvláštní výjimku právě pro přímý prodej zemědělských produktů spotřebitelům.",
+          "effectCz": "Balíček neposkytuje předchozí znění právní úpravy; návrh zavádí povinnost evidovat tržby a schválené znění ji zachovává, aniž by obecně vyňalo přímý prodej zemědělských výrobců. Evidence přidává povinnost i části přímých prodejců a může jim je ztížit; Senátem navržená výjimka se do konečné schválené úpravy neprosadila."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": false,
+          "reasonCz": "Dodané znění této části návrhu neobsahuje ustanovení, které by se věcně týkalo přímého prodeje, zkracování dodavatelských řetězců nebo zpracovatelského průmyslu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": false,
+          "reasonCz": "V dodaných podkladech není text této změny ani pozměňovací návrh, který by ji spojoval s konkrétními částmi slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": false,
+          "reasonCz": "V dodaných podkladech není text této změny ani pozměňovací návrh, který by ji spojoval s konkrétními částmi slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-9",
+          "relevant": true,
+          "reasonCz": "Předložená dohoda zmiňuje zpracování zemědělských produktů a potravinářských výrobků, tedy oblast domácího zpracovatelského průmyslu.",
+          "effectCz": "Dohoda nemění český zákon a balíček neobsahuje předchozí znění; navrhuje spolupráci mimo jiné při zpracování zemědělských produktů a potravinářských výrobků. Jde o návrh možné spolupráce, nikoli o závaznou domácí podporu konkrétního rozsahu."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-126",
+          "relevant": true,
+          "reasonCz": "Nařízení stanoví dotace na zařízení používaná při zpracování a balení medu, což je dílčí část domácího zpracování zemědělských produktů.",
+          "effectCz": "Balíček neuvádí původní dotační sazby, takže nelze určit, zda se podpora oproti předchozímu stavu zvýšila či snížila. Přijaté nařízení stanoví maximální dotace například 35 000 Kč na elektrický medomet, 14 000 Kč na plničku medu a 28 000 Kč na chladicí technologii pro skladování plástů; tím podporuje část slibu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-416",
+          "relevant": true,
+          "reasonCz": "Usnesení ukládá státním organizacím nakupovat potraviny místního či regionálního původu z krátkého dodavatelského řetězce.",
+          "effectCz": "Usnesení ukládá organizacím řízeným ústředními orgány zajistit stanovené minimální výdaje na místní či regionální potraviny z krátkého dodavatelského řetězce a biopotraviny. Tím rozhodnutí podporuje část slibu; přiložený výňatek však neobsahuje konkrétní minimální částku."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-98b2c6749599--source",
+        "psp-core-2025--law-change-43203-16",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-462",
+        "psp-core-2025--vote-86859",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--amendment-text-1537",
+        "psp-core-2025--vote-88291",
+        "psp-core-2025--amendment-text-1565",
+        "psp-core-2025--vote-88298",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--law-change-43453-9",
+        "psp-core-2025--print-step-212285",
+        "esbirka-regulations--law-change-sb-2026-126",
+        "esbirka-regulations--2026-126",
+        "zvlady-resolutions--law-change-uv-2026-416",
+        "zvlady-resolutions--2026-416"
+      ],
+      "explanationCz": "Vláda předložila dvě dohody se spoluprací v zemědělství a zpracování produktů a přijala dotace na zařízení pro zpracování medu. Usnesením také nařídila státním organizacím nakupovat stanovené minimum místních potravin z krátkých dodavatelských řetězců. Proti tomu stojí zákon o evidenci tržeb, který ukládá evidovat tržby a neobsahuje zvláštní výjimku pro přímý prodej zemědělských výrobců. Poslanci SPD při hlasování po vrácení zákona Senátem podpořili setrvání na původním znění místo senátní výjimky pro tento přímý prodej, takže jejich nejnovější rozhodnutí jde proti části slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Usnesení o místních potravinách odkazuje na další materiál, jehož konkrétní minimální částky nejsou v dodaném výňatku uvedeny.",
+        "U zemědělských dotací je známa částka 363 milionů Kč pro potravinářství, ale podklady neukazují, jaká část připadá přímo na domácí zpracování.",
+        "Dohody o spolupráci navrhují mezinárodní spolupráci, ale samy nezaručují konkrétní podporu domácímu zpracovatelskému průmyslu."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

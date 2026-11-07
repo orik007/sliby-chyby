@@ -1,0 +1,337 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T13-38-17-953Z--683aa7eaa59e",
+  "evaluatedAt": "2026-11-05T13:38:17.953Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-2d02c36be5/683aa7eaa59e6b0efa8dda3bb8481da70e4369d1ae445f718d7c8c1f75c02bc4.json",
+  "packageHash": "683aa7eaa59e6b0efa8dda3bb8481da70e4369d1ae445f718d7c8c1f75c02bc4",
+  "assessmentContentHash": "e71b0a151f518e5ea70db7c286eab70b57b05f2a940d03f8dcc977167dbf4482",
+  "assessmentFingerprint": "90f6fbde5120aa55de578f86a995e5d430624c06daec2e97f74ae2ff9ecc30f4",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-2d02c36be5",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0cde04b430c395bd016aec85c0552c87d185b906585fee286c",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 19108,
+            "input_tokens_details": {
+              "cache_write_tokens": 12758,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 3801,
+            "output_tokens_details": {
+              "reasoning_tokens": 2501
+            },
+            "total_tokens": 22909
+          },
+          "output": {
+            "promiseId": "spd-2025-2d02c36be5",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-3",
+                "relevant": true,
+                "reasonCz": "Změna se týká daňové úpravy pohledávek z nezaplacených faktur a lhůty, po níž dlužník musí snížit uplatněný odpočet DPH, tedy části závazku platit DPH jen z uhrazených faktur.",
+                "effectCz": "Před změnou mohl věřitel uplatnit opravu u pohledávky do 10 000 Kč, alespoň 6 měsíců po splatnosti, a s ročním souhrnným limitem 20 000 Kč; návrh limity mění na 20 000 Kč, 3 měsíce a souhrnně 100 000 Kč za příslušné zdaňovací období, čímž možnost opravy rozšiřuje. Ustanovení § 46 odst. 9, které ukládalo opravu v posledním zdaňovacím období roku, se ruší, ale podklady neukazují jeho náhradní úpravu, takže dopad této změny na načasování nelze určit. U § 74b odst. 3 se naopak povinnost dlužníka snížit odpočet při neuhrazené pohledávce posouvá ze šesti na tři měsíce; to je přísnější a jde proti příslibu, protože povinnost nastupuje dříve, přestože faktura není zaplacena."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43340-1",
+                "relevant": true,
+                "reasonCz": "Změna určuje okamžik uskutečnění zdanitelného plnění u vymezených služeb, a proto se přímo dotýká toho, zda se DPH váže na úhradu faktury.",
+                "effectCz": "Dosavadní § 21 odst. 3 považoval službu za uskutečněnou dnem poskytnutí nebo vystavení daňového dokladu, podle toho, který nastal dříve. Návrh pro služby v uvedených zvláštních režimech stanoví den poskytnutí služby; pokud byl doklad vystaven dříve, může to posunout okamžik zdanění, ale pravidlo přesto není vázáno na zaplacení faktury, takže závazek platit DPH pouze z uhrazených faktur nezavádí."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+                "relevant": true,
+                "reasonCz": "Vládní plán výslovně navrhuje zkrátit lhůtu pro vrácení DPH z nezaplacených faktur, což se přímo týká části příslibu o DPH z neuhrazených faktur.",
+                "effectCz": "Usnesení samo žádné dosavadní ustanovení nemění; navrhuje připravit zkrácení lhůty pro vrácení DPH z nezaplacených faktur ze šesti na tři měsíce. Jde o dílčí přiblížení příslibu, protože navrhované vrácení DPH zkracuje čekání, ale nezavádí obecné pravidlo, že podnikatelé budou platit DPH pouze z uhrazených faktur."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "spd-2025-2d02c36be5--source",
+              "psp-core-2025--law-change-43310-3",
+              "psp-core-2025--print-step-211390",
+              "psp-core-2025--vote-88356",
+              "psp-core-2025--vote-88456",
+              "psp-core-2025--senate-resolution-43310-6",
+              "psp-core-2025--law-change-43340-1",
+              "psp-core-2025--print-step-211581",
+              "zvlady-resolutions--law-change-uv-2026-175-32",
+              "zvlady-resolutions--2026-175"
+            ],
+            "explanationCz": "Vláda předložila návrh zákona o evidenci tržeb (sněmovní tisk 189) a poslanci SPD hlasovali pro jeho schválení i po jeho vrácení Senátem. Návrh zkracuje ze šesti na tři měsíce lhůtu, po níž musí dlužník při nezaplacené faktuře snížit odpočet DPH; tato povinnost nastává dříve, než je faktura zaplacena, a jde proti části slibu. Vláda také navrhla zvláštní pravidlo pro okamžik zdanění některých služeb, které platbu faktury jako podmínku nestanoví. Vládní plán naopak navrhuje rychlejší vracení DPH z nezaplacených faktur, jde však pouze o návrh a nevyvažuje přijaté hlasovací rozhodnutí, které slib částečně ztěžuje.",
+            "confidence": "high",
+            "uncertainties": [
+              "U návrhu zákona o evidenci tržeb se ruší dosavadní pravidlo § 46 odst. 9 o období opravy základu daně, ale poskytnuté znění neukazuje náhradní úpravu, takže dopad na načasování této opravy nelze určit.",
+              "U zvláštního pravidla pro některé služby není z podkladů zřejmé, jak často bude doklad vystaven dříve než služba; pravidlo však ani tak nevyžaduje, aby byla faktura zaplacena."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-2d02c36be5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Mění pravidla pro opravu DPH u nedobytných pohledávek a pro snížení odpočtu DPH z nezaplacených faktur, což přímo souvisí s placením DPH z nezaplacených plnění.",
+          "effectCz": "Dosud bylo možné opravit základ daně u pohledávky do 10 000 Kč, která byla nejméně šest měsíců po splatnosti, při ročním souhrnném limitu 20 000 Kč; návrh limity zvyšuje na 20 000 Kč, tři měsíce a 100 000 Kč, takže věřitelům usnadňuje a urychluje opravu DPH u nezaplacených faktur. Dosavadní § 46 odst. 9 ukládal věřiteli provést opravu v posledním zdaňovacím období roku, kdy byly splněny podmínky; toto ustanovení se ruší a balíček neuvádí náhradní pravidlo, takže celkový dopad této změny na načasování nelze určit. Dlužník-plátce dosud snižoval odpočet, pokud pohledávku neuhradil do konce šestého následujícího kalendářního měsíce; nově se tato lhůta zkracuje na tři měsíce, takže omezení odpočtu u nezaplacené faktury nastává dříve. Jde o úpravy pro nedobytné pohledávky, nikoli o obecné pravidlo, že se DPH odvádí pouze z uhrazených faktur."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43340-1",
+          "relevant": false,
+          "reasonCz": "Dodává pravidlo o dni uskutečnění služby v určitých režimech jednoho správního místa, ale dodaný text jej nespojuje s úhradou faktury ani s placením DPH z nezaplacených faktur.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+          "relevant": true,
+          "reasonCz": "Vládní plán legislativních prací výslovně počítá se zkrácením lhůty pro vrácení DPH z nezaplacených faktur, tedy s opatřením přímo souvisejícím se slibem.",
+          "effectCz": "Jde o návrh vládního legislativního plánu, nikoli o změnu již platného zákona: počítá se zkrácením dosavadní šestiměsíční lhůty pro vrácení DPH z nezaplacených faktur na tři měsíce. To by věřitelům umožnilo získat DPH z nezaplacených faktur zpět dříve, ale samo o sobě nezavádí obecné placení DPH pouze z uhrazených faktur."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-2d02c36be5--source",
+        "psp-core-2025--law-change-43310-3",
+        "zvlady-resolutions--law-change-uv-2026-175-32",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona o evidenci tržeb, který mimo jiné zkracuje ze šesti na tři měsíce dobu, po níž lze za určitých podmínek řešit DPH z nezaplacených faktur. Poslanci SPD hlasovali pro jeho schválení a později také pro setrvání na znění Poslanecké sněmovny po vrácení návrhu Senátem. Vláda zároveň zařadila do plánu legislativních prací návrh na zkrácení lhůty pro vrácení DPH z nezaplacených faktur ze šesti na tři měsíce. Tyto kroky usnadňují nebo urychlují řešení DPH u části nezaplacených faktur, ale nezavádějí obecné pravidlo, že podnikatelé platí DPH pouze z faktur, které už uhradili.",
+      "confidence": "high",
+      "uncertainties": [
+        "U zrušeného § 46 odst. 9 není v dodaném znění uvedeno náhradní pravidlo, proto nelze určit celý dopad této změny na načasování opravy DPH."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-2d02c36be5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Mění pravidla DPH pro nedobytné pohledávky a povinnost upravit odpočet u nezaplacených faktur, tedy přímo zasahuje do zacházení s DPH z nezaplacených faktur.",
+          "effectCz": "Před změnou mohl věřitel podle § 46 odst. 1 písm. i) opravit základ daně u pohledávky nejvýše 10 000 Kč, splatné alespoň 6 měsíců, při ročním souhrnném limitu 20 000 Kč; nově se tyto hranice zvyšují na 20 000 Kč, zkracuje se čekání na 3 měsíce a roční souhrnný limit se zvyšuje na 100 000 Kč. Tím se rozšiřuje a urychluje možnost opravy DPH u nezaplacených pohledávek, což je dílčí posun k zacházení podle úhrady. Dosavadní § 46 odst. 9 ukládal provést opravu v posledním zdaňovacím období roku, v němž byly podmínky splněny; tento odstavec se ruší, ale dodané znění neukazuje, jaké pravidlo jej nahrazuje, takže směr této konkrétní změny nelze určit. Před změnou musel plátce-dlužník podle § 74b odst. 3 snížit uplatněný odpočet, pokud pohledávka nebyla uhrazena do konce šestého kalendářního měsíce po měsíci splatnosti; nově se lhůta zkracuje na třetí měsíc, takže povinnost vzniká dříve. To je přísnější povinnost pro kupujícího s nezaplacenou fakturou a jde proti tomu, aby DPH odváděl až z uhrazených faktur. Změny mají nabýt účinnosti 1. ledna 2027."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43340-1",
+          "relevant": false,
+          "reasonCz": "Dodaná změna upravuje pouze den uskutečnění některých služeb využívajících režim jednoho správního místa; dodaný text ji nespojuje s tím, zda byla faktura zaplacena.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně počítá se zkrácením lhůty pro vrácení DPH z nezaplacených faktur, což přímo souvisí se slibem.",
+          "effectCz": "Usnesení samo nemění zákon, ale jako plán navrhuje zkrátit lhůtu pro vrácení DPH z nezaplacených faktur ze šesti na tři měsíce. Jde o návrh, který slib částečně posouvá směrem k úpravě DPH podle úhrady, nikoli o zavedení pravidla, že podnikatelé budou odvádět DPH pouze ze všech zaplacených faktur."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-2d02c36be5--source",
+        "psp-core-2025--law-change-43310-3",
+        "zvlady-resolutions--law-change-uv-2026-175-32",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--senate-resolution-43310-6"
+      ],
+      "explanationCz": "Vláda přijala plán, podle něhož má navrhnout zkrácení lhůty pro vrácení DPH z nezaplacených faktur ze šesti na tři měsíce. Poté předložila návrh zákona o evidenci tržeb, který rozšiřuje možnost věřitelů opravit DPH u nedobytných pohledávek. SPD návrh podpořila při schválení i při následném hlasování poté, co jej Senát vrátil s pozměňovacími návrhy; zákon ale zároveň zkracuje kupujícímu lhůtu ke snížení odpočtu DPH u nezaplacené faktury ze šesti měsíců na tři. Tento protichůdný účinek jde v této části proti slibu, a proto převáží nad dílčími kroky směrem k jeho naplnění.",
+      "confidence": "high",
+      "uncertainties": [
+        "Předložené změny řeší jen vybrané případy nedobytných pohledávek a odpočtů DPH; nedokládají zavedení obecného pravidla, že se DPH odvádí až po zaplacení každé faktury."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_03b148239f19de49016aec8611a63887d18388e10aed18ee67",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 19108,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 19105
+      },
+      "output_tokens": 3000,
+      "output_tokens_details": {
+        "reasoning_tokens": 1822
+      },
+      "total_tokens": 22108
+    },
+    "output": {
+      "promiseId": "spd-2025-2d02c36be5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Mění pravidla pro opravu DPH u nedobytných pohledávek a pro snížení odpočtu DPH z nezaplacených faktur, což přímo souvisí s placením DPH z nezaplacených plnění.",
+          "effectCz": "Dosud bylo možné opravit základ daně u pohledávky do 10 000 Kč, která byla nejméně šest měsíců po splatnosti, při ročním souhrnném limitu 20 000 Kč; návrh limity zvyšuje na 20 000 Kč, tři měsíce a 100 000 Kč, takže věřitelům usnadňuje a urychluje opravu DPH u nezaplacených faktur. Dosavadní § 46 odst. 9 ukládal věřiteli provést opravu v posledním zdaňovacím období roku, kdy byly splněny podmínky; toto ustanovení se ruší a balíček neuvádí náhradní pravidlo, takže celkový dopad této změny na načasování nelze určit. Dlužník-plátce dosud snižoval odpočet, pokud pohledávku neuhradil do konce šestého následujícího kalendářního měsíce; nově se tato lhůta zkracuje na tři měsíce, takže omezení odpočtu u nezaplacené faktury nastává dříve. Jde o úpravy pro nedobytné pohledávky, nikoli o obecné pravidlo, že se DPH odvádí pouze z uhrazených faktur."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43340-1",
+          "relevant": false,
+          "reasonCz": "Dodává pravidlo o dni uskutečnění služby v určitých režimech jednoho správního místa, ale dodaný text jej nespojuje s úhradou faktury ani s placením DPH z nezaplacených faktur.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+          "relevant": true,
+          "reasonCz": "Vládní plán legislativních prací výslovně počítá se zkrácením lhůty pro vrácení DPH z nezaplacených faktur, tedy s opatřením přímo souvisejícím se slibem.",
+          "effectCz": "Jde o návrh vládního legislativního plánu, nikoli o změnu již platného zákona: počítá se zkrácením dosavadní šestiměsíční lhůty pro vrácení DPH z nezaplacených faktur na tři měsíce. To by věřitelům umožnilo získat DPH z nezaplacených faktur zpět dříve, ale samo o sobě nezavádí obecné placení DPH pouze z uhrazených faktur."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-2d02c36be5--source",
+        "psp-core-2025--law-change-43310-3",
+        "zvlady-resolutions--law-change-uv-2026-175-32",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona o evidenci tržeb, který mimo jiné zkracuje ze šesti na tři měsíce dobu, po níž lze za určitých podmínek řešit DPH z nezaplacených faktur. Poslanci SPD hlasovali pro jeho schválení a později také pro setrvání na znění Poslanecké sněmovny po vrácení návrhu Senátem. Vláda zároveň zařadila do plánu legislativních prací návrh na zkrácení lhůty pro vrácení DPH z nezaplacených faktur ze šesti na tři měsíce. Tyto kroky usnadňují nebo urychlují řešení DPH u části nezaplacených faktur, ale nezavádějí obecné pravidlo, že podnikatelé platí DPH pouze z faktur, které už uhradili.",
+      "confidence": "high",
+      "uncertainties": [
+        "U zrušeného § 46 odst. 9 není v dodaném znění uvedeno náhradní pravidlo, proto nelze určit celý dopad této změny na načasování opravy DPH."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_063ac57fd699f856016aec8653ee2087d190dc5f129a446e4b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 19108,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 19105
+      },
+      "output_tokens": 5151,
+      "output_tokens_details": {
+        "reasoning_tokens": 3974
+      },
+      "total_tokens": 24259
+    },
+    "output": {
+      "promiseId": "spd-2025-2d02c36be5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-3",
+          "relevant": true,
+          "reasonCz": "Mění pravidla DPH pro nedobytné pohledávky a povinnost upravit odpočet u nezaplacených faktur, tedy přímo zasahuje do zacházení s DPH z nezaplacených faktur.",
+          "effectCz": "Před změnou mohl věřitel podle § 46 odst. 1 písm. i) opravit základ daně u pohledávky nejvýše 10 000 Kč, splatné alespoň 6 měsíců, při ročním souhrnném limitu 20 000 Kč; nově se tyto hranice zvyšují na 20 000 Kč, zkracuje se čekání na 3 měsíce a roční souhrnný limit se zvyšuje na 100 000 Kč. Tím se rozšiřuje a urychluje možnost opravy DPH u nezaplacených pohledávek, což je dílčí posun k zacházení podle úhrady. Dosavadní § 46 odst. 9 ukládal provést opravu v posledním zdaňovacím období roku, v němž byly podmínky splněny; tento odstavec se ruší, ale dodané znění neukazuje, jaké pravidlo jej nahrazuje, takže směr této konkrétní změny nelze určit. Před změnou musel plátce-dlužník podle § 74b odst. 3 snížit uplatněný odpočet, pokud pohledávka nebyla uhrazena do konce šestého kalendářního měsíce po měsíci splatnosti; nově se lhůta zkracuje na třetí měsíc, takže povinnost vzniká dříve. To je přísnější povinnost pro kupujícího s nezaplacenou fakturou a jde proti tomu, aby DPH odváděl až z uhrazených faktur. Změny mají nabýt účinnosti 1. ledna 2027."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43340-1",
+          "relevant": false,
+          "reasonCz": "Dodaná změna upravuje pouze den uskutečnění některých služeb využívajících režim jednoho správního místa; dodaný text ji nespojuje s tím, zda byla faktura zaplacena.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+          "relevant": true,
+          "reasonCz": "Vládní plán výslovně počítá se zkrácením lhůty pro vrácení DPH z nezaplacených faktur, což přímo souvisí se slibem.",
+          "effectCz": "Usnesení samo nemění zákon, ale jako plán navrhuje zkrátit lhůtu pro vrácení DPH z nezaplacených faktur ze šesti na tři měsíce. Jde o návrh, který slib částečně posouvá směrem k úpravě DPH podle úhrady, nikoli o zavedení pravidla, že podnikatelé budou odvádět DPH pouze ze všech zaplacených faktur."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-2d02c36be5--source",
+        "psp-core-2025--law-change-43310-3",
+        "zvlady-resolutions--law-change-uv-2026-175-32",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--senate-resolution-43310-6"
+      ],
+      "explanationCz": "Vláda přijala plán, podle něhož má navrhnout zkrácení lhůty pro vrácení DPH z nezaplacených faktur ze šesti na tři měsíce. Poté předložila návrh zákona o evidenci tržeb, který rozšiřuje možnost věřitelů opravit DPH u nedobytných pohledávek. SPD návrh podpořila při schválení i při následném hlasování poté, co jej Senát vrátil s pozměňovacími návrhy; zákon ale zároveň zkracuje kupujícímu lhůtu ke snížení odpočtu DPH u nezaplacené faktury ze šesti měsíců na tři. Tento protichůdný účinek jde v této části proti slibu, a proto převáží nad dílčími kroky směrem k jeho naplnění.",
+      "confidence": "high",
+      "uncertainties": [
+        "Předložené změny řeší jen vybrané případy nedobytných pohledávek a odpočtů DPH; nedokládají zavedení obecného pravidla, že se DPH odvádí až po zaplacení každé faktury."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0dc9b79b29db70d5016aec86bb08a487d19a1417a7a060531c",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 19429,
+      "input_tokens_details": {
+        "cache_write_tokens": 15016,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 381,
+      "output_tokens_details": {
+        "reasoning_tokens": 147
+      },
+      "total_tokens": 19810
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "spd-2025-2d02c36be5--source",
+        "psp-core-2025--law-change-43310-3",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Přesvědčivější je hodnocení A, protože rozlišuje odvod DPH dodavatelem od odpočtu daně u odběratele. Poslanci SPD podpořili změnu, která u části nezaplacených faktur rozšiřuje a urychluje možnost získat odvedenou DPH zpět. Dřívější snížení odpočtu u odběratele, který fakturu nezaplatil, řeší jinou povinnost a samo o sobě neodporuje slibu odvádět DPH až po přijetí platby. Jde tedy o dílčí posun ke slibu, nikoli o jeho úplné splnění ani o krok proti němu."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-towards",
+    "selectedReview": "assessor-a"
+  }
+}

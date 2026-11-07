@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-32-51-895Z--c04c34e691f9",
+  "evaluatedAt": "2026-10-02T05:32:51.895Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-f2e67ed9d54f/c04c34e691f96caadec90c472c05e36f87570332d579b174861dcd602922cf67.json",
+  "packageHash": "c04c34e691f96caadec90c472c05e36f87570332d579b174861dcd602922cf67",
+  "assessmentContentHash": "1b885b40d5e68c41c63c804acc54067a7a9cdc19a390160bb8e87340cb884c18",
+  "assessmentFingerprint": "7829d4a3cb74df64a4063e042544cb5ac2c9ca61e267b3652fa25ffaad8555be",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-f2e67ed9d54f",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-f2e67ed9d54f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Ustanovení ruší část novely energetického zákona, což může ovlivnit právní úpravu související se státním obchodníkem, ale obsah rušené části v podkladech chybí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43284-2",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje vládní regulaci cen pohonných hmot, nikoli obchodování s elektřinou a plynem ani zřízení jejich státního obchodníka."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-f2e67ed9d54f--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "SPD hlasovala pro novelu stavebního zákona, která mimo jiné ruší část dřívější novely energetického zákona; Senát ji předtím zamítl a Sněmovna na ní poté setrvala. Podklady ale neuvádějí obsah rušené části, takže nelze posoudit, zda se změna týká zřízení státního obchodníka s elektřinou a plynem. Proto zatím nelze doložit podstatný posun ke slibu ani jednání proti němu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Není doložen obsah části energetického zákona, kterou novela stavebního zákona ruší; její vliv na zřízení státního obchodníka proto nelze určit."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-f2e67ed9d54f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text ruší část dřívější novely energetického zákona, ale neuvádí její obsah, takže samotná vazba na energetický zákon nedokládá dopad na zřízení státního obchodníka."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43284-2",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje pravomoc vlády regulovat ceny pohonných hmot, nikoli zřízení obchodníka s elektřinou a plynem ani jejich přímý nákup od výrobců."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-f2e67ed9d54f--source",
+        "psp-core-2025--law-change-43174-approved-56"
+      ],
+      "explanationCz": "Slib se týká zřízení státního obchodníka, který má nakupovat elektřinu a plyn přímo od výrobců. Jeden z dostupných textů ruší část dřívější novely energetického zákona, ale podklady neuvádějí, co tato část měnila, takže její dopad na slib nelze posoudit. Z dostupných podkladů proto nelze ověřit podstatný posun ke splnění slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Není uveden obsah rušené části dřívější novely energetického zákona, takže nelze vyloučit ani potvrdit její věcný dopad na zřízení státního obchodníka."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0b7baf4e618a689b016abf41e0dc8487d1acc161d4be825bae",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 13370,
+      "input_tokens_details": {
+        "cache_write_tokens": 10046,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2760,
+      "output_tokens_details": {
+        "reasoning_tokens": 2318
+      },
+      "total_tokens": 16130
+    },
+    "output": {
+      "promiseId": "candidate-f2e67ed9d54f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Ustanovení ruší část novely energetického zákona, což může ovlivnit právní úpravu související se státním obchodníkem, ale obsah rušené části v podkladech chybí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43284-2",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje vládní regulaci cen pohonných hmot, nikoli obchodování s elektřinou a plynem ani zřízení jejich státního obchodníka."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-f2e67ed9d54f--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "SPD hlasovala pro novelu stavebního zákona, která mimo jiné ruší část dřívější novely energetického zákona; Senát ji předtím zamítl a Sněmovna na ní poté setrvala. Podklady ale neuvádějí obsah rušené části, takže nelze posoudit, zda se změna týká zřízení státního obchodníka s elektřinou a plynem. Proto zatím nelze doložit podstatný posun ke slibu ani jednání proti němu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Není doložen obsah části energetického zákona, kterou novela stavebního zákona ruší; její vliv na zřízení státního obchodníka proto nelze určit."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_05a3526bc8b65c05016abf41f3cfb087d1b1e291a4bc4130d4",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 13370,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 13367
+      },
+      "output_tokens": 2165,
+      "output_tokens_details": {
+        "reasoning_tokens": 1712
+      },
+      "total_tokens": 15535
+    },
+    "output": {
+      "promiseId": "candidate-f2e67ed9d54f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text ruší část dřívější novely energetického zákona, ale neuvádí její obsah, takže samotná vazba na energetický zákon nedokládá dopad na zřízení státního obchodníka."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43284-2",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje pravomoc vlády regulovat ceny pohonných hmot, nikoli zřízení obchodníka s elektřinou a plynem ani jejich přímý nákup od výrobců."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-f2e67ed9d54f--source",
+        "psp-core-2025--law-change-43174-approved-56"
+      ],
+      "explanationCz": "Slib se týká zřízení státního obchodníka, který má nakupovat elektřinu a plyn přímo od výrobců. Jeden z dostupných textů ruší část dřívější novely energetického zákona, ale podklady neuvádějí, co tato část měnila, takže její dopad na slib nelze posoudit. Z dostupných podkladů proto nelze ověřit podstatný posun ke splnění slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Není uveden obsah rušené části dřívější novely energetického zákona, takže nelze vyloučit ani potvrdit její věcný dopad na zřízení státního obchodníka."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

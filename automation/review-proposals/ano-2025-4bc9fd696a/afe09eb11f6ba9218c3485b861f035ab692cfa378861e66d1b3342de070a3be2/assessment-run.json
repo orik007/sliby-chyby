@@ -1,0 +1,948 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-34-46-260Z--f2ab39610cf7",
+  "evaluatedAt": "2026-10-02T01:34:46.260Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-4bc9fd696a/f2ab39610cf7449ebb18006335c5011bfd4b7541973302c893d0e62d324d7ce5.json",
+  "packageHash": "f2ab39610cf7449ebb18006335c5011bfd4b7541973302c893d0e62d324d7ce5",
+  "assessmentContentHash": "7df53e1a33ccc28627148c92cba93f875ea75a710d2136613dc8b7a21944aed4",
+  "assessmentFingerprint": "afe09eb11f6ba9218c3485b861f035ab692cfa378861e66d1b3342de070a3be2",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-4bc9fd696a",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment gives a law change more than one relevance verdict",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0557bac4315abef1016abf09226cdc87d19e14b726f8a4f90b",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 633023,
+            "input_tokens_details": {
+              "cache_write_tokens": 629699,
+              "cached_tokens": 3321
+            },
+            "output_tokens": 11007,
+            "output_tokens_details": {
+              "reasoning_tokens": 8248
+            },
+            "total_tokens": 644030
+          },
+          "output": {
+            "promiseId": "ano-2025-4bc9fd696a",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": false,
+                "reasonCz": "Změny stavebního zákona upravují stavební řízení a jeho digitální systémy, nikoli pracovní podmínky IT specialistů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-1",
+                "relevant": true,
+                "reasonCz": "Nový rámec zaměstnávání státních zaměstnanců výslovně zahrnuje tvorbu a správu informačních systémů a upravuje také odměňování a odborný rozvoj."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-4",
+                "relevant": true,
+                "reasonCz": "Přechodná a společná ustanovení mění právní režim a podmínky zaměstnanců vykonávajících státní správu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+                "relevant": true,
+                "reasonCz": "Úřadu vlády svěřuje koordinaci personálních záležitostí, vzdělávání a rozvoje státních zaměstnanců."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-2",
+                "relevant": true,
+                "reasonCz": "Mění pracovní režim zaměstnanců Státního fondu životního prostředí, včetně těch, kteří mohou vykonávat činnosti spojené s informačními systémy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-1",
+                "relevant": true,
+                "reasonCz": "Nový rámec zaměstnávání státních zaměstnanců výslovně zahrnuje tvorbu a správu informačních systémů a upravuje také odměňování a odborný rozvoj."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-4",
+                "relevant": true,
+                "reasonCz": "Přechodná a společná ustanovení mění právní režim a podmínky zaměstnanců vykonávajících státní správu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+                "relevant": true,
+                "reasonCz": "Úřadu vlády svěřuje koordinaci personálních záležitostí, vzdělávání a rozvoje státních zaměstnanců."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-2",
+                "relevant": true,
+                "reasonCz": "Mění pracovní režim zaměstnanců Státního fondu životního prostředí, včetně těch, kteří mohou vykonávat činnosti spojené s informačními systémy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-1",
+                "relevant": true,
+                "reasonCz": "Nový rámec zaměstnávání státních zaměstnanců výslovně zahrnuje tvorbu a správu informačních systémů a upravuje také odměňování a odborný rozvoj."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-4",
+                "relevant": true,
+                "reasonCz": "Přechodná a společná ustanovení mění právní režim a podmínky zaměstnanců vykonávajících státní správu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+                "relevant": true,
+                "reasonCz": "Úřadu vlády svěřuje koordinaci personálních záležitostí, vzdělávání a rozvoje státních zaměstnanců."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-2",
+                "relevant": true,
+                "reasonCz": "Mění pracovní režim zaměstnanců Státního fondu životního prostředí, včetně těch, kteří mohou vykonávat činnosti spojené s informačními systémy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-1",
+                "relevant": true,
+                "reasonCz": "Nový rámec zaměstnávání státních zaměstnanců výslovně zahrnuje tvorbu a správu informačních systémů a upravuje také odměňování a odborný rozvoj."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-4",
+                "relevant": true,
+                "reasonCz": "Přechodná a společná ustanovení mění právní režim a podmínky zaměstnanců vykonávajících státní správu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+                "relevant": true,
+                "reasonCz": "Úřadu vlády svěřuje koordinaci personálních záležitostí, vzdělávání a rozvoje státních zaměstnanců."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-2",
+                "relevant": true,
+                "reasonCz": "Mění pracovní režim zaměstnanců Státního fondu životního prostředí, včetně těch, kteří mohou vykonávat činnosti spojené s informačními systémy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-1",
+                "relevant": true,
+                "reasonCz": "Nový rámec zaměstnávání státních zaměstnanců výslovně zahrnuje tvorbu a správu informačních systémů a upravuje také odměňování a odborný rozvoj."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-4",
+                "relevant": true,
+                "reasonCz": "Přechodná a společná ustanovení mění právní režim a podmínky zaměstnanců vykonávajících státní správu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+                "relevant": true,
+                "reasonCz": "Úřadu vlády svěřuje koordinaci personálních záležitostí, vzdělávání a rozvoje státních zaměstnanců."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-2",
+                "relevant": true,
+                "reasonCz": "Mění pracovní režim zaměstnanců Státního fondu životního prostředí, včetně těch, kteří mohou vykonávat činnosti spojené s informačními systémy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-1",
+                "relevant": true,
+                "reasonCz": "Nový rámec zaměstnávání státních zaměstnanců výslovně zahrnuje tvorbu a správu informačních systémů a upravuje také odměňování a odborný rozvoj."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-4",
+                "relevant": true,
+                "reasonCz": "Přechodná a společná ustanovení mění právní režim a podmínky zaměstnanců vykonávajících státní správu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+                "relevant": true,
+                "reasonCz": "Úřadu vlády svěřuje koordinaci personálních záležitostí, vzdělávání a rozvoje státních zaměstnanců."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-2",
+                "relevant": true,
+                "reasonCz": "Mění pracovní režim zaměstnanců Státního fondu životního prostředí, včetně těch, kteří mohou vykonávat činnosti spojené s informačními systémy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-1",
+                "relevant": true,
+                "reasonCz": "Nový rámec zaměstnávání státních zaměstnanců výslovně zahrnuje tvorbu a správu informačních systémů a upravuje také odměňování a odborný rozvoj."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-4",
+                "relevant": true,
+                "reasonCz": "Přechodná a společná ustanovení mění právní režim a podmínky zaměstnanců vykonávajících státní správu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+                "relevant": true,
+                "reasonCz": "Úřadu vlády svěřuje koordinaci personálních záležitostí, vzdělávání a rozvoje státních zaměstnanců."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-2",
+                "relevant": true,
+                "reasonCz": "Mění pracovní režim zaměstnanců Státního fondu životního prostředí, včetně těch, kteří mohou vykonávat činnosti spojené s informačními systémy."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": false,
+            "citedEvidenceIds": [
+              "ano-2025-4bc9fd696a--source",
+              "psp-core-2025--law-change-43183-1",
+              "psp-core-2025--law-change-43183-4",
+              "psp-core-2025--law-change-43183-approved-3",
+              "psp-core-2025--vote-87958",
+              "psp-core-2025--vote-88449",
+              "psp-core-2025--senate-resolution-43183-7"
+            ],
+            "explanationCz": "Poslanci ANO navrhli nový zákon o státních zaměstnancích a při závěrečném hlasování po vrácení návrhu Senátem hlasovali pro jeho přijetí. Zákon zahrnuje i tvorbu a správu informačních systémů veřejné správy a umožňuje u vysoce náročných odborných míst vyšší odměňování; upravuje také vzdělávání a profesní rozvoj. Jde proto o konkrétní krok, který může podmínky IT specialistů zlepšit, ale doklady neukazují, že se zvýšené odměny či další změny skutečně uplatnily přímo na jejich pracovních místech. Slib se tedy posouvá ke splnění, nikoli k úplnému splnění.",
+            "confidence": "low",
+            "uncertainties": [
+              "Návrh poslanců ANO na změnu postavení zaměstnanců Grantové a Technologické agentury se týká pracovního režimu, ale předložený text neukazuje, zda by podmínky IT specialistů zlepšil, nebo zhoršil.",
+              "Předložený balík obsahuje také další změny personálních pravidel jednotlivých institucí, jejichž dopad na IT specialisty není z textu samotného zřejmý."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-4bc9fd696a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění stavební řízení a uspořádání stavebních úřadů, nikoli pracovní podmínky IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": true,
+          "reasonCz": "Upravuje pracovní podmínky státních zaměstnanců, mimo jiné umožňuje za určitých podmínek vyšší platový tarif a individuální vzdělávání, což může být skutečnou částí zlepšení podmínek specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-4",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení mění a upravují právní režim stávajících státních zaměstnanců, a tím mohou ovlivnit jejich pracovní podmínky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+          "relevant": true,
+          "reasonCz": "Upravuje personální správu státních zaměstnanců a koordinaci jejich vzdělávání a rozvoje, což může podpořit profesní podmínky zaměstnanců veřejné správy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-2",
+          "relevant": false,
+          "reasonCz": "Mění pravidla pro zaměstnance Státního fondu životního prostředí, ale neobsahuje opatření zlepšující podmínky IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-4",
+          "relevant": false,
+          "reasonCz": "Mění pracovněprávní režim zaměstnanců orgánů sociálního zabezpečení, nikoli podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-5",
+          "relevant": false,
+          "reasonCz": "Upravuje postavení vedení Českého statistického úřadu a jeho zaměstnanců, nikoli pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-6",
+          "relevant": false,
+          "reasonCz": "Mění postavení vedení Úřadu pro ochranu hospodářské soutěže, ne pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-8",
+          "relevant": false,
+          "reasonCz": "Mění pracovní režim zaměstnanců Státního fondu dopravní infrastruktury, ale netýká se podmínek práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-9",
+          "relevant": false,
+          "reasonCz": "Upravuje pracovní režim zaměstnanců Centra pro regionální rozvoj, nikoli podmínky práce IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-10",
+          "relevant": false,
+          "reasonCz": "Mění pracovní režim zaměstnanců Státního zemědělského intervenčního fondu, nikoli podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-13",
+          "relevant": false,
+          "reasonCz": "Mění pracovněprávní postavení vedení Energetického regulačního úřadu, nikoli pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-15",
+          "relevant": false,
+          "reasonCz": "Mění postavení zaměstnanců Rady pro rozhlasové a televizní vysílání, ale neobsahuje opatření pro podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-18",
+          "relevant": false,
+          "reasonCz": "Mění pravidla týkající se vedení Úřadu pro ochranu osobních údajů, nikoli podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-23",
+          "relevant": false,
+          "reasonCz": "Mění pravidla pro jmenování a řízení ředitele Digitální a informační agentury, nikoli pracovní podmínky IT specialistů jako zaměstnanců."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-24",
+          "relevant": false,
+          "reasonCz": "Upravuje personální režim zaměstnanců výzkumných agentur, ale neobsahuje opatření k pracovním podmínkám IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-48",
+          "relevant": false,
+          "reasonCz": "Mění pracovní režim zaměstnanců Agentury pro podnikání a inovace, nikoli podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-53",
+          "relevant": false,
+          "reasonCz": "Upravuje plat a jazykové požadavky zaměstnanců Úřadu pro zastupování státu ve věcech majetkových, nikoli podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-59",
+          "relevant": false,
+          "reasonCz": "Mění pravidla inspekce práce ve vztahu ke státním zaměstnancům, ale ne jejich odborné či platové podmínky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-62",
+          "relevant": false,
+          "reasonCz": "Upravuje pouze odkazy v zákoníku práce související s novým režimem státních zaměstnanců, nikoli podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-69",
+          "relevant": false,
+          "reasonCz": "Upravuje organizaci a personální režim Finanční správy, ale neobsahuje opatření pro pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Mění cílové skupiny a fungování podpory bydlení, nikoli pracovní podmínky specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Mění přechodná pravidla dávkové agendy, nikoli podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": false,
+          "reasonCz": "Upravuje elektronická potvrzení atributů a digitální identitu, nikoli pracovní podmínky IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": false,
+          "reasonCz": "Mění vydávání cestovních dokladů a související postupy, nikoli pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Mění evidenci údajů v základních registrech v souvislosti s cestovními doklady, nikoli pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": false,
+          "reasonCz": "Zavádí testovací identity pro ověřování informačních systémů, ale neupravuje podmínky práce specialistů, kteří je spravují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43406-1",
+          "relevant": false,
+          "reasonCz": "Mění pravidla podpory výzkumu a výzkumných agentur, nikoli pracovní podmínky IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Mění registraci vozidel a technické kontroly, nikoli pracovní podmínky IT specialistů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-4bc9fd696a--source",
+        "psp-core-2025--law-change-43183-1",
+        "psp-core-2025--law-change-43183-4",
+        "psp-core-2025--law-change-43183-approved-3",
+        "psp-core-2025--print-step-210647",
+        "psp-core-2025--vote-87958",
+        "psp-core-2025--senate-resolution-43183-7",
+        "psp-core-2025--vote-88449"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh nového zákona o zaměstnancích státu a hlasovali pro něj i poté, co jej Senát odmítl. Schválený text mimo jiné umožňuje za určitých podmínek vyšší platový tarif pro náročné pracovní úkoly a individuální vzdělávání státních zaměstnanců. Tato ustanovení mohou zlepšit některé pracovní podmínky specialistů ve veřejné správě, ale nezaměřují se výslovně na IT odborníky ani sama nedokládají lepší digitální služby. Proto jde o posun k části slibu, nikoli o jeho úplné splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh zákona Senát odmítl; poslanci ANO následně hlasovali pro setrvání na sněmovní verzi, ale podklady nedokládají, zda se nová pravidla již v praxi uplatnila.",
+        "Opatření se týkají státních zaměstnanců obecně, nikoli výslovně špičkových IT specialistů; jejich dopad na nábor a udržení těchto odborníků ani na spolehlivost digitálních služeb zde není doložen."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-4bc9fd696a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění stavební právo, nikoli podmínky zaměstnávání IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje pracovní a platové podmínky státních zaměstnanců a obsahuje možnost vyššího tarifu pro některé odborně klíčové pracovní úkoly."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-4",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení mění, jak se dosavadní služební poměry zaměstnanců státní správy převádějí do nového pracovního režimu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+          "relevant": true,
+          "reasonCz": "Text svěřuje Úřadu vlády koordinaci personálních a organizačních záležitostí státních zaměstnanců, včetně jejich vzdělávání a rozvoje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje postavení zaměstnanců Státního fondu životního prostředí, ale nedokládá změnu podmínek IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-4",
+          "relevant": false,
+          "reasonCz": "Změna upravuje postavení zaměstnanců orgánů sociálního zabezpečení, nikoli podmínky práce IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-5",
+          "relevant": false,
+          "reasonCz": "Změna se týká postavení vedení Českého statistického úřadu, nikoli pracovních podmínek IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-6",
+          "relevant": false,
+          "reasonCz": "Změna upravuje postavení vedení Úřadu pro ochranu hospodářské soutěže, nikoli podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-8",
+          "relevant": false,
+          "reasonCz": "Změna upravuje zaměstnance Státního fondu dopravní infrastruktury, ale její text nemíří na podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-9",
+          "relevant": false,
+          "reasonCz": "Změna se týká zaměstnanců Centra pro regionální rozvoj, nikoli podmínek práce IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-10",
+          "relevant": false,
+          "reasonCz": "Změna upravuje zaměstnance Státního zemědělského intervenčního fondu, ale nedokládá zlepšení podmínek IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-13",
+          "relevant": false,
+          "reasonCz": "Změna upravuje postavení vedení Energetického regulačního úřadu, nikoli podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-15",
+          "relevant": false,
+          "reasonCz": "Změna se týká vedení Úřadu Rady pro rozhlasové a televizní vysílání, nikoli podmínek práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-18",
+          "relevant": false,
+          "reasonCz": "Změna upravuje vedení Českého telekomunikačního úřadu, ale ne pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-23",
+          "relevant": false,
+          "reasonCz": "Změna se týká vedení Digitální a informační agentury, nikoli pracovních podmínek IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-24",
+          "relevant": false,
+          "reasonCz": "Změna upravuje zaměstnance výzkumných agentur a rozpočtové a organizační otázky, nikoli podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-48",
+          "relevant": false,
+          "reasonCz": "Změna se týká zaměstnanců Agentury pro podnikání a inovace, ale její text nedokládá zlepšení podmínek IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-53",
+          "relevant": false,
+          "reasonCz": "Změna se týká odměňování a jazykových požadavků zaměstnanců Úřadu pro zastupování státu, nikoli IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-59",
+          "relevant": false,
+          "reasonCz": "Změna upravuje působnost inspekce práce ve vztahu ke státním zaměstnancům, nikoli jejich podmínky jako IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-62",
+          "relevant": false,
+          "reasonCz": "Změna zákoníku práce upravuje jednotlivá pracovněprávní pravidla, ale nedokládá zlepšení podmínek IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-69",
+          "relevant": false,
+          "reasonCz": "Změna upravuje personální poměry ve Finanční správě, ale její text nedokládá zlepšení podmínek IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Vládní návrh mění poradenství a správu bytové podpory, nikoli pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje části digitalizace dávek státní sociální podpory, ale nemění podmínky zaměstnávání IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje elektronická potvrzení a digitální identitu, nikoli podmínky práce IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje vydávání a správu cestovních dokladů, nikoli pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje údaje v základních registrech, ale nedokládá změnu podmínek práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": false,
+          "reasonCz": "Změna vytváří testovací identity a údaje pro testování systémů, nikoli lepší pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43406-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění pravidla pro výzkumné organizace a otevřenou vědu, nikoli podmínky práce IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Vládní návrh upravuje registraci a technický provoz vozidel, nikoli pracovní podmínky IT specialistů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-4bc9fd696a--source",
+        "psp-core-2025--law-change-43183-1",
+        "psp-core-2025--law-change-43183-4",
+        "psp-core-2025--law-change-43183-approved-3",
+        "psp-core-2025--print-step-210647",
+        "psp-core-2025--vote-87958",
+        "psp-core-2025--vote-88449",
+        "psp-core-2025--senate-resolution-43183-7"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh nového zákona o právních poměrech státních zaměstnanců a hlasovali pro jeho schválení. Po zamítnutí návrhu Senátem, horní komorou Parlamentu, hlasovali také pro to, aby Poslanecká sněmovna na návrhu setrvala. Schválený text upravuje platové podmínky a umožňuje vyšší tarif u některých odborně náročných a pro chod úřadu nepostradatelných míst; zároveň svěřuje Úřadu vlády koordinaci vzdělávání a rozvoje státních zaměstnanců. Jde o dílčí posun, protože není doloženo, že se tato opatření uplatní konkrétně na špičkové IT specialisty nebo že jim už podmínky skutečně zlepšila.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Úprava platových a personálních pravidel se týká státních zaměstnanců obecně; podklady nedokládají, zda budou mezi jejími příjemci také špičkoví IT specialisté ani jak se změny projeví v jejich práci."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0ea9e63f6d4ebf98016abf0997b50887d1a39778f581a503ad",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 633023,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 633020
+      },
+      "output_tokens": 6947,
+      "output_tokens_details": {
+        "reasoning_tokens": 4660
+      },
+      "total_tokens": 639970
+    },
+    "output": {
+      "promiseId": "ano-2025-4bc9fd696a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění stavební řízení a uspořádání stavebních úřadů, nikoli pracovní podmínky IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": true,
+          "reasonCz": "Upravuje pracovní podmínky státních zaměstnanců, mimo jiné umožňuje za určitých podmínek vyšší platový tarif a individuální vzdělávání, což může být skutečnou částí zlepšení podmínek specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-4",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení mění a upravují právní režim stávajících státních zaměstnanců, a tím mohou ovlivnit jejich pracovní podmínky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+          "relevant": true,
+          "reasonCz": "Upravuje personální správu státních zaměstnanců a koordinaci jejich vzdělávání a rozvoje, což může podpořit profesní podmínky zaměstnanců veřejné správy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-2",
+          "relevant": false,
+          "reasonCz": "Mění pravidla pro zaměstnance Státního fondu životního prostředí, ale neobsahuje opatření zlepšující podmínky IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-4",
+          "relevant": false,
+          "reasonCz": "Mění pracovněprávní režim zaměstnanců orgánů sociálního zabezpečení, nikoli podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-5",
+          "relevant": false,
+          "reasonCz": "Upravuje postavení vedení Českého statistického úřadu a jeho zaměstnanců, nikoli pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-6",
+          "relevant": false,
+          "reasonCz": "Mění postavení vedení Úřadu pro ochranu hospodářské soutěže, ne pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-8",
+          "relevant": false,
+          "reasonCz": "Mění pracovní režim zaměstnanců Státního fondu dopravní infrastruktury, ale netýká se podmínek práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-9",
+          "relevant": false,
+          "reasonCz": "Upravuje pracovní režim zaměstnanců Centra pro regionální rozvoj, nikoli podmínky práce IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-10",
+          "relevant": false,
+          "reasonCz": "Mění pracovní režim zaměstnanců Státního zemědělského intervenčního fondu, nikoli podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-13",
+          "relevant": false,
+          "reasonCz": "Mění pracovněprávní postavení vedení Energetického regulačního úřadu, nikoli pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-15",
+          "relevant": false,
+          "reasonCz": "Mění postavení zaměstnanců Rady pro rozhlasové a televizní vysílání, ale neobsahuje opatření pro podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-18",
+          "relevant": false,
+          "reasonCz": "Mění pravidla týkající se vedení Úřadu pro ochranu osobních údajů, nikoli podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-23",
+          "relevant": false,
+          "reasonCz": "Mění pravidla pro jmenování a řízení ředitele Digitální a informační agentury, nikoli pracovní podmínky IT specialistů jako zaměstnanců."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-24",
+          "relevant": false,
+          "reasonCz": "Upravuje personální režim zaměstnanců výzkumných agentur, ale neobsahuje opatření k pracovním podmínkám IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-48",
+          "relevant": false,
+          "reasonCz": "Mění pracovní režim zaměstnanců Agentury pro podnikání a inovace, nikoli podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-53",
+          "relevant": false,
+          "reasonCz": "Upravuje plat a jazykové požadavky zaměstnanců Úřadu pro zastupování státu ve věcech majetkových, nikoli podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-59",
+          "relevant": false,
+          "reasonCz": "Mění pravidla inspekce práce ve vztahu ke státním zaměstnancům, ale ne jejich odborné či platové podmínky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-62",
+          "relevant": false,
+          "reasonCz": "Upravuje pouze odkazy v zákoníku práce související s novým režimem státních zaměstnanců, nikoli podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-69",
+          "relevant": false,
+          "reasonCz": "Upravuje organizaci a personální režim Finanční správy, ale neobsahuje opatření pro pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Mění cílové skupiny a fungování podpory bydlení, nikoli pracovní podmínky specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Mění přechodná pravidla dávkové agendy, nikoli podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": false,
+          "reasonCz": "Upravuje elektronická potvrzení atributů a digitální identitu, nikoli pracovní podmínky IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": false,
+          "reasonCz": "Mění vydávání cestovních dokladů a související postupy, nikoli pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Mění evidenci údajů v základních registrech v souvislosti s cestovními doklady, nikoli pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": false,
+          "reasonCz": "Zavádí testovací identity pro ověřování informačních systémů, ale neupravuje podmínky práce specialistů, kteří je spravují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43406-1",
+          "relevant": false,
+          "reasonCz": "Mění pravidla podpory výzkumu a výzkumných agentur, nikoli pracovní podmínky IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Mění registraci vozidel a technické kontroly, nikoli pracovní podmínky IT specialistů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-4bc9fd696a--source",
+        "psp-core-2025--law-change-43183-1",
+        "psp-core-2025--law-change-43183-4",
+        "psp-core-2025--law-change-43183-approved-3",
+        "psp-core-2025--print-step-210647",
+        "psp-core-2025--vote-87958",
+        "psp-core-2025--senate-resolution-43183-7",
+        "psp-core-2025--vote-88449"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh nového zákona o zaměstnancích státu a hlasovali pro něj i poté, co jej Senát odmítl. Schválený text mimo jiné umožňuje za určitých podmínek vyšší platový tarif pro náročné pracovní úkoly a individuální vzdělávání státních zaměstnanců. Tato ustanovení mohou zlepšit některé pracovní podmínky specialistů ve veřejné správě, ale nezaměřují se výslovně na IT odborníky ani sama nedokládají lepší digitální služby. Proto jde o posun k části slibu, nikoli o jeho úplné splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh zákona Senát odmítl; poslanci ANO následně hlasovali pro setrvání na sněmovní verzi, ale podklady nedokládají, zda se nová pravidla již v praxi uplatnila.",
+        "Opatření se týkají státních zaměstnanců obecně, nikoli výslovně špičkových IT specialistů; jejich dopad na nábor a udržení těchto odborníků ani na spolehlivost digitálních služeb zde není doložen."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_008a94e6522c3491016abf09e03a4887d1aaf05e7dc3ab1be2",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 633023,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 633020
+      },
+      "output_tokens": 7845,
+      "output_tokens_details": {
+        "reasoning_tokens": 5584
+      },
+      "total_tokens": 640868
+    },
+    "output": {
+      "promiseId": "ano-2025-4bc9fd696a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění stavební právo, nikoli podmínky zaměstnávání IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje pracovní a platové podmínky státních zaměstnanců a obsahuje možnost vyššího tarifu pro některé odborně klíčové pracovní úkoly."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-4",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení mění, jak se dosavadní služební poměry zaměstnanců státní správy převádějí do nového pracovního režimu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+          "relevant": true,
+          "reasonCz": "Text svěřuje Úřadu vlády koordinaci personálních a organizačních záležitostí státních zaměstnanců, včetně jejich vzdělávání a rozvoje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje postavení zaměstnanců Státního fondu životního prostředí, ale nedokládá změnu podmínek IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-4",
+          "relevant": false,
+          "reasonCz": "Změna upravuje postavení zaměstnanců orgánů sociálního zabezpečení, nikoli podmínky práce IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-5",
+          "relevant": false,
+          "reasonCz": "Změna se týká postavení vedení Českého statistického úřadu, nikoli pracovních podmínek IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-6",
+          "relevant": false,
+          "reasonCz": "Změna upravuje postavení vedení Úřadu pro ochranu hospodářské soutěže, nikoli podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-8",
+          "relevant": false,
+          "reasonCz": "Změna upravuje zaměstnance Státního fondu dopravní infrastruktury, ale její text nemíří na podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-9",
+          "relevant": false,
+          "reasonCz": "Změna se týká zaměstnanců Centra pro regionální rozvoj, nikoli podmínek práce IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-10",
+          "relevant": false,
+          "reasonCz": "Změna upravuje zaměstnance Státního zemědělského intervenčního fondu, ale nedokládá zlepšení podmínek IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-13",
+          "relevant": false,
+          "reasonCz": "Změna upravuje postavení vedení Energetického regulačního úřadu, nikoli podmínky práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-15",
+          "relevant": false,
+          "reasonCz": "Změna se týká vedení Úřadu Rady pro rozhlasové a televizní vysílání, nikoli podmínek práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-18",
+          "relevant": false,
+          "reasonCz": "Změna upravuje vedení Českého telekomunikačního úřadu, ale ne pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-23",
+          "relevant": false,
+          "reasonCz": "Změna se týká vedení Digitální a informační agentury, nikoli pracovních podmínek IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-24",
+          "relevant": false,
+          "reasonCz": "Změna upravuje zaměstnance výzkumných agentur a rozpočtové a organizační otázky, nikoli podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-48",
+          "relevant": false,
+          "reasonCz": "Změna se týká zaměstnanců Agentury pro podnikání a inovace, ale její text nedokládá zlepšení podmínek IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-53",
+          "relevant": false,
+          "reasonCz": "Změna se týká odměňování a jazykových požadavků zaměstnanců Úřadu pro zastupování státu, nikoli IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-59",
+          "relevant": false,
+          "reasonCz": "Změna upravuje působnost inspekce práce ve vztahu ke státním zaměstnancům, nikoli jejich podmínky jako IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-62",
+          "relevant": false,
+          "reasonCz": "Změna zákoníku práce upravuje jednotlivá pracovněprávní pravidla, ale nedokládá zlepšení podmínek IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-69",
+          "relevant": false,
+          "reasonCz": "Změna upravuje personální poměry ve Finanční správě, ale její text nedokládá zlepšení podmínek IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Vládní návrh mění poradenství a správu bytové podpory, nikoli pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje části digitalizace dávek státní sociální podpory, ale nemění podmínky zaměstnávání IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje elektronická potvrzení a digitální identitu, nikoli podmínky práce IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje vydávání a správu cestovních dokladů, nikoli pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje údaje v základních registrech, ale nedokládá změnu podmínek práce IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": false,
+          "reasonCz": "Změna vytváří testovací identity a údaje pro testování systémů, nikoli lepší pracovní podmínky IT specialistů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43406-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění pravidla pro výzkumné organizace a otevřenou vědu, nikoli podmínky práce IT specialistů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Vládní návrh upravuje registraci a technický provoz vozidel, nikoli pracovní podmínky IT specialistů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-4bc9fd696a--source",
+        "psp-core-2025--law-change-43183-1",
+        "psp-core-2025--law-change-43183-4",
+        "psp-core-2025--law-change-43183-approved-3",
+        "psp-core-2025--print-step-210647",
+        "psp-core-2025--vote-87958",
+        "psp-core-2025--vote-88449",
+        "psp-core-2025--senate-resolution-43183-7"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh nového zákona o právních poměrech státních zaměstnanců a hlasovali pro jeho schválení. Po zamítnutí návrhu Senátem, horní komorou Parlamentu, hlasovali také pro to, aby Poslanecká sněmovna na návrhu setrvala. Schválený text upravuje platové podmínky a umožňuje vyšší tarif u některých odborně náročných a pro chod úřadu nepostradatelných míst; zároveň svěřuje Úřadu vlády koordinaci vzdělávání a rozvoje státních zaměstnanců. Jde o dílčí posun, protože není doloženo, že se tato opatření uplatní konkrétně na špičkové IT specialisty nebo že jim už podmínky skutečně zlepšila.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Úprava platových a personálních pravidel se týká státních zaměstnanců obecně; podklady nedokládají, zda budou mezi jejími příjemci také špičkoví IT specialisté ani jak se změny projeví v jejich práci."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

@@ -1,0 +1,86 @@
+# Dostupnost školních psychologů a podpůrných pozic
+
+> Nezveřejněný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
+
+## Návrh pro veřejný web
+
+Toto je jediná část dokumentu určená jako kandidát veřejného textu. Musí být srozumitelná bez znalosti projektu, práva nebo fungování Poslanecké sněmovny.
+
+### Hodnocení
+
+**Směřuje ke splnění (+1)**
+
+### Vysvětlení
+
+Vláda ANO zařadila do legislativního plánu přípravu financování asistentů a dalších podpůrných pozic, ale tento plán sám jejich dostupnost nezajišťuje. Ministerstvo školství později změnilo pravidla poradenských služeb a výslovně zahrnulo podporu duševního zdraví do úkolů školních psychologů a metodiků prevence. To představuje dílčí posun ve směru slibu. Vláda zároveň navrhla změny omezující některé dosavadní možnosti podpory asistentem pedagoga; jde však o návrh, nikoli přijaté pravidlo.
+
+## Co má zkontrolovat reviewer
+
+- Odpovídá navržené hodnocení metodice SLAVA Indexu?
+- Je jednání správně připsáno sledované straně?
+- Je veřejné vysvětlení pochopitelné samo o sobě a říká, kdo co udělal a jak to souvisí se slibem?
+- Jsou zkratky, právní pojmy a úřední označení při prvním použití vysvětlené?
+- Dokládají uvedené zdroje všechna podstatná tvrzení a nechybí rozporný podklad?
+
+## Technické podklady pro reviewera
+
+- Výsledek automatického procesu: oba automatické posudky se shodly
+- Interní stav: `moving-towards`
+- Důvod výsledku: `assessor-consensus`
+- Úplný strojový audit: `assessment-run.json`
+- Přesný balíček posuzovaných podkladů: `evidence-package.json`
+
+### Shoda hodnotitelů
+
+Oba nezávislí hodnotitelé dospěli ke stejnému výsledku: **Směřuje ke splnění (+1)**.
+
+Co zůstává nejisté:
+
+- Z dodaných částí státního rozpočtu nelze zjistit konkrétní částky určené na školní psychology, podpůrné pozice nebo programy. Poslanci ANO hlasovali pro schválení rozpočtu, ale jeho dopad na tyto oblasti z předloženého výňatku nelze věcně určit.
+- Návrh změny školského zákona předložený vládou omezuje individuální podpůrná opatření s asistentem pedagoga pro vyjmenované skupiny a ruší automatickou povinnost mít asistenta v některých prvních třídách; současně zavádí financované maximum hodin a povinnost zajistit podporu, pokud je důvodná. Návrh proto obsahuje protichůdné dopady a nebyl v balíčku doložen jako přijatý zákon.
+
+Úplné oddělené odpovědi obou hodnotitelů zůstávají v souboru `assessment-run.json`.
+
+### Souvisí změny zákonů se slibem?
+
+| Změna zákona | První posudek | Druhý posudek |
+| --- | --- | --- |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Vládní návrh zákona o státním rozpočtu České republiky na rok 2026](https://e-sbirka.gov.cz/sb/2026/38/0000-00-00) | ano: Státní rozpočet může přímo financovat školní podpůrné pozice a programy, ale dodané odstavce ukazují pouze odkazy na rozpočtové přílohy.<br>Dopad: Zákon stanoví výdaje státního rozpočtu podle kapitol; dodané části však neuvádějí jejich částky ani konkrétní výdaje na školní psychology, další podpůrné pozice nebo programy. Směr a rozsah změny dostupnosti těchto služeb proto z poskytnutého textu nelze určit. | ne: Dodané odstavce rozpočtového zákona pouze odkazují na přílohy s výdaji a ukazateli podle kapitol; neuvádějí žádné ustanovení ani částku vztahující se ke školním psychologům, podpůrným pozicím nebo duševnímu zdraví. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna školského zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=281915) | ano: Návrh přímo upravuje financování psychologů a speciálních pedagogů i poskytování podpory asistentů pedagoga.<br>Dopad: Dosavadní § 16 odst. 11 a 12 zakazovaly individuálně doporučit psychologa či speciálního pedagoga tam, kde bylo zajištěno státní financování, a ukládaly řediteli zajistit jejich práci, pokud byla nezbytná; návrh pravidla přesouvá do § 18a a práh mění na „důvodné“, což může povinnost mírně rozšířit. Nový § 18b zakazuje individuální opatření s asistentem pedagoga pro vyjmenované skupiny a místo toho ukládá řediteli zajistit jeho práci do financovaného maxima, pokud je to důvodné; dostupné znění § 16 odst. 2 písm. g) předchozí rozsah zákazu neukazuje. Zrušení dosavadního § 46 odst. 4 odstraňuje automatickou povinnost mít asistenta v prvním ročníku při nejméně 15 žácích. Návrh současně nově stanoví státem financované maximum hodin asistenta; celkově tak zavádí financovaný rámec, ale zároveň omezuje některé dosavadní způsoby přístupu k asistentům. | ano: Navržená změna školského zákona upravuje školní psychology i asistenty pedagoga, tedy přímo dostupnost podpůrných pracovníků na školách.<br>Dopad: Dosavadní zákaz poskytovat psychologa jako individuální podpůrné opatření a povinnost zajistit jeho práci se přesouvají z § 16 do nového § 18a; zákaz zůstává, zatímco podmínka pro zajištění práce se mění z nezbytnosti na důvodnost. Nový § 18b omezuje možnost poskytovat asistenta pedagoga jako individuální podpůrné opatření a nahrazuje ji zajištěním práce ředitelem jen do stanoveného finančního maxima a pokud je to důvodné; předchozí znění § 16 odst. 2 písm. g) v podkladu chybí, takže změnu oproti němu nelze přesně určit. Zrušení § 46 odst. 4 odstraňuje dosavadní povinnost mít asistenta ve třídě s alespoň 15 prvňáky, což tuto konkrétní povinnost zužuje. Nový § 161 odst. 5 zavádí vládní stanovení maximálního počtu financovaných hodin asistenta v určených školách; přesný dopad na dostupnost závisí na následném nařízení. Celkově návrh některé podpůrné pracovníky a jejich financování upravuje, ale zároveň ruší konkrétní dosavadní povinnost asistenta a omezuje individuální opatření. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o poskytování dotací soukromým školám, předškolním a školským zařízením](https://www.psp.cz/sqw/text/orig2.sqw?idd=281915) | ano: Návrh mění dotace soukromým školám tak, aby zahrnovaly také financování činnosti asistentů pedagoga.<br>Dopad: Dosavadní § 4 odst. 4 upravoval zvýšení dotace na činnost psychologa, speciálního nebo sociálního pedagoga; návrh přidává nové zvýšení dotace vázané také na asistenty pedagoga a určité žáky ve srovnatelných veřejných školách a družinách. Jde o rozšíření možnosti financovat podpůrnou pozici, ale přesnou výši změny dodaný text nestanoví. | ano: Návrh rozšiřuje dotační pravidla pro soukromé školy a školní družiny o financování činnosti asistenta pedagoga, což může podpořit dostupnost podpůrné pozice.<br>Dopad: Dosavadní § 4 odst. 4 upravoval zvýšení dotace soukromé základní škole na činnost psychologa, speciálního pedagoga nebo sociálního pedagoga. Návrh doplňuje nové odstavce 5 a 6, podle nichž se dotace zvýší také podle normativu na asistenta pedagoga pro vymezené žáky a školní družiny; jde o nové finanční zvýhodnění, jehož přesnou výši text neuvádí. Nové znění § 4 odst. 5 a 6 nemá v dodaném kontextu předchozí znění, takže jeho srovnání s dosavadním nárokem nelze určit. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o pedagogických pracovnících](https://www.psp.cz/sqw/text/orig2.sqw?idd=281915) | ano: Návrh upravuje kvalifikaci asistentů pedagoga, činnost psychologů a dalších odborníků i přípravu metodiků asistentů.<br>Dopad: Dosavadní § 20 odst. 1 vymezoval, ve kterých třídách a školách se uplatní uvedené kvalifikační cesty asistenta; návrh tuto omezující část vypouští, čímž může rozšířit okruh kvalifikovaných pracovníků. Nový § 23 odst. 5 započítává vybrané metodické a konzultační činnosti psychologů a dalších odborníků jako přímou pedagogickou činnost. Nový § 24e zavádí metodika asistentů a požadavek na studium pro tuto činnost; návrh tedy rozvíjí odborné role a přípravu, ale nezavádí výslovně programy studia školních psychologů. | ano: Návrh mění kvalifikaci asistentů pedagoga a zavádí metodika asistentů pedagoga i jeho studijní požadavky, takže se týká podpůrných pozic a jejich přípravy.<br>Dopad: Dosavadní pravidlo o odborné kvalifikaci asistenta pedagoga výslovně mířilo na asistenty v uvedených třídách a školách; návrh toto omezení z úvodní věty vypouští, a tím rozšiřuje působnost kvalifikačního pravidla, což může zpřísnit podmínky pro výkon práce v dalších prostředích. Nový § 23 odst. 5 započítává určité metodické působení psychologa a dalších odborníků jako přímou pedagogickou činnost, ale předchozí pravidlo pro tuto činnost není v podkladu uvedeno, takže směr změny nelze určit. Nový § 24e vytváří funkci metodika asistentů a vyžaduje studium do tří let; předchozí úprava této funkce v podkladu chybí, takže nelze určit, zda jde o rozšíření či zpřísnění dosavadních nároků. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona č. 267/2025 Sb.](https://www.psp.cz/sqw/text/orig2.sqw?idd=281915) | ano: Změna upravuje přechodné pravidlo přímo odkazující na poskytování psychologické nebo speciálně pedagogické podpory.<br>Dopad: Dosavadní přechodné ustanovení odkazovalo na § 16 odst. 11 a 12 ve znění účinném od ledna 2026; návrh odkaz nahrazuje § 18a ve znění účinném od září 2027. Jde o přizpůsobení odkazu novému číslování a časovému režimu, nikoli o doložené rozšíření či omezení samotného nároku na podporu. | ano: Návrh mění přechodné pravidlo pro psychologická podpůrná opatření a odkazuje je na nové ustanovení školského zákona.<br>Dopad: Dosavadní přechodné pravidlo odkazovalo u starších doporučení na § 16 odst. 11 a 12; návrh od 1. září 2027 odkazuje na § 18a. Jde o přesun odkazu na nově číslované ustanovení, nikoli o zjevné rozšíření či zúžení samotného přechodného režimu. |
+| [Předpis ve Sbírce zákonů: Vyhláška č. 111/2026 Sb., Vyhláška, kterou se mění vyhláška č. 405/2024 Sb., o vzdělávání ve středních a vyšších odborných školách a o školských zařízeních zřizovaných Ministerstvem obrany](https://e-sbirka.gov.cz/sb/2026/111/0000-00-00) | ano: Vyhláška upravuje školní poradenské služby a zapojení psychologa a dalších pracovníků v dotčených školách.<br>Dopad: Předchozí znění měněných ustanovení není v balíčku uvedeno, takže směr změny oproti dosavadní úpravě nelze určit. Přijatý text stanoví bezplatné standardní poradenské služby, odpovědnost ředitele za jejich zajištění a zapojení psychologa do poradenské práce zpravidla; tím upravuje poskytování části školní podpory, ale nedokládá její celkový rozsah. | ano: Vyhláška stanoví pravidla poradenských služeb a účasti psychologa ve školách zřizovaných Ministerstvem obrany, takže se přímo týká podpůrné pozice ve školním prostředí.<br>Dopad: Dodané znění stanoví bezplatné standardní poradenské služby a uvádí psychologa mezi pracovníky, kteří se zpravidla podílejí na jejich poskytování. Předchozí znění měněné vyhlášky není v podkladu, takže nelze určit, zda a nakolik se tím dostupnost či povinnosti oproti dosavadnímu stavu změnily. |
+| [Předpis ve Sbírce zákonů: Vyhláška č. 170/2026 Sb., Vyhláška, kterou se mění vyhláška č. 72/2005 Sb., o poskytování poradenských služeb ve školách a školských poradenských zařízeních, ve znění pozdějších předpisů](https://e-sbirka.gov.cz/sb/2026/170/0000-00-00) | ano: Vyhláška výslovně rozšiřuje úkoly školních pracovníků v oblasti prevence a podpory duševního zdraví.<br>Dopad: Předchozí znění dotčených ustanovení není dodáno, proto nelze porovnat, zda se jejich povinnosti zpřísnily nebo rozšířily oproti dřívějšku. Přijatý text výslovně zahrnuje podporu duševního zdraví do úkolů školního metodika prevence a psychologa, včetně preventivních aktivit, screeningu obtíží a podpůrných činností; jde o dílčí oporu programů duševního zdraví. | ano: Vyhláška výslovně upravuje činnosti školního metodika prevence a psychologa v oblasti duševního zdraví žáků.<br>Dopad: Dodané znění vymezuje koordinaci preventivních aktivit a podpory duševního zdraví, vyhledávání podpory, screening obtíží a aktivity pro duševní zdraví jako standardní činnosti školního metodika prevence či psychologa. Předchozí znění příslušných částí vyhlášky není dodáno, takže nelze určit, zda jde oproti dosavadnímu stavu o rozšíření povinností. |
+| [Text usnesení vlády: Usnesení vlády č. 175/2026, Návrh Plánu legislativních prací vlády na zbývající část roku 2026 a návrh Výhledu legislativních prací vlády na léta 2027 až 2029 – Příloha č. 1, Ministr školství, mládeže a tělovýchovy, úkol č. 1: Návrh zákona, kterým se mění zákon č. 561/2004 Sb., o předškolním, základním, středním, vyšším odborném a jiném vzdělávání (školský zákon), ve znění pozdějších předpisů](https://odok.gov.cz/portal/zvlady/usneseni/2026/175/) | ano: Vládní plán výslovně počítá s legislativní prací na financování asistentů a podpůrných pozic ve školách.<br>Dopad: Usnesení samo nemění pravidla ani nezajišťuje pracovní místa; stanoví plán připravit návrh jednotného financování asistentů pedagoga, jejich standardní pozice a financování psychologů, speciálních a sociálních pedagogů. Jde o plánovaný dílčí krok ve směru slibu, který však vyžaduje další legislativní rozhodnutí. | ano: Vládní plán výslovně počítá s návrhem na systém financování asistentů pedagoga a financování podpůrných pozic v mateřských a středních školách.<br>Dopad: Text plánuje návrh zákona, který má zavést financování asistentů pedagoga jako standardní pozice a ukotvit financování psychologů, speciálních pedagogů a sociálních pedagogů v mateřských a středních školách. Jde o plán budoucího návrhu, nikoli o změnu již platné povinnosti či nároku. |
+
+### Vyřazené změny zákonů
+
+Tyto změny v balíčku nebyly, protože je oba hodnotitelé dřívějšího posouzení tohoto slibu shodně označili za nesouvisející. Vrátí se, jakmile se změní jejich text, kontext, znění slibu nebo pokyny hodnotitelů.
+
+- **Usnesení vlády č. 175/2026, Návrh Plánu legislativních prací vlády na zbývající část roku 2026 a návrh Výhledu legislativních prací vlády na léta 2027 až 2029 – Příloha č. 2, Ministr školství, mládeže a tělovýchovy, úkol č. 1: Věcný záměr zákona o pedagogických pracovnících** (posouzení candidate-30eb082ce920--3c0ea10acc92): Předložený úryvek se týká obecné reformy kariérního systému a dalšího vzdělávání pedagogických pracovníků, ale konkrétně nespojuje tyto změny se školními psychology, podpůrnými pozicemi ani programy jejich studia. / Dodaná část plánu se týká obecného kariérního systému a dalšího vzdělávání pedagogických pracovníků, bez konkrétní vazby na školní psychology, podpůrné pozice nebo programy jejich studia.
+
+### Zdroje použité při hodnocení
+
+- [Původní volební slib](https://www.anobudelip.cz/file/edee/ke-stazeni/volebni-program-2025.pdf)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Vládní návrh zákona o státním rozpočtu České republiky na rok 2026](https://e-sbirka.gov.cz/sb/2026/38/0000-00-00)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna školského zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=281915)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o poskytování dotací soukromým školám, předškolním a školským zařízením](https://www.psp.cz/sqw/text/orig2.sqw?idd=281915)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o pedagogických pracovnících](https://www.psp.cz/sqw/text/orig2.sqw?idd=281915)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona č. 267/2025 Sb.](https://www.psp.cz/sqw/text/orig2.sqw?idd=281915)
+- [Předpis ve Sbírce zákonů: Vyhláška č. 111/2026 Sb., Vyhláška, kterou se mění vyhláška č. 405/2024 Sb., o vzdělávání ve středních a vyšších odborných školách a o školských zařízeních zřizovaných Ministerstvem obrany](https://e-sbirka.gov.cz/sb/2026/111/0000-00-00)
+- [Předpis ve Sbírce zákonů: Vyhláška č. 170/2026 Sb., Vyhláška, kterou se mění vyhláška č. 72/2005 Sb., o poskytování poradenských služeb ve školách a školských poradenských zařízeních, ve znění pozdějších předpisů](https://e-sbirka.gov.cz/sb/2026/170/0000-00-00)
+- [Text usnesení vlády: Usnesení vlády č. 175/2026, Návrh Plánu legislativních prací vlády na zbývající část roku 2026 a návrh Výhledu legislativních prací vlády na léta 2027 až 2029 – Příloha č. 1, Ministr školství, mládeže a tělovýchovy, úkol č. 1: Návrh zákona, kterým se mění zákon č. 561/2004 Sb., o předškolním, základním, středním, vyšším odborném a jiném vzdělávání (školský zákon), ve znění pozdějších předpisů](https://odok.gov.cz/portal/zvlady/usneseni/2026/175/)
+- [Text pozměňovacího návrhu 24 (sněmovní dokument 462)](https://www.psp.cz/sqw/text/orig2.sqw?idd=267991)
+- [Text pozměňovacího návrhu 96 (sněmovní dokument 515)](https://www.psp.cz/sqw/text/orig2.sqw?idd=268115)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=94)
+- [Hlasování Poslanecké sněmovny o pozměňovacím návrhu 24](https://public.psp.cz/sqw/hlasy.sqw?g=86859)
+- [Hlasování Poslanecké sněmovny o pozměňovacím návrhu 96](https://public.psp.cz/sqw/hlasy.sqw?g=86936)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=86957)
+- [Přijetí usnesení vládou](https://odok.gov.cz/portal/zvlady/usneseni/2026/175/)
+- [Vydání vyhlášky: Ministerstvo obrany](https://e-sbirka.gov.cz/sb/2026/111/0000-00-00)
+- [Vydání vyhlášky: Ministerstvo školství, mládeže a tělovýchovy](https://e-sbirka.gov.cz/sb/2026/170/0000-00-00)
+- [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=354)
+
+Tento návrh nahrazuje starší automatický posudek, který zůstává zachovaný v auditní historii.
+

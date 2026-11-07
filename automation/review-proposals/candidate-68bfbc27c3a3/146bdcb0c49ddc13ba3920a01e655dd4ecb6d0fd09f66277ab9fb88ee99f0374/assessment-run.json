@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-47-42-199Z--ce1eb484b152",
+  "evaluatedAt": "2026-10-02T01:47:42.199Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-68bfbc27c3a3/ce1eb484b1521be32c1f2ae20d0cd067d45ae1b7a1d9e4f02c448063ee0a9860.json",
+  "packageHash": "ce1eb484b1521be32c1f2ae20d0cd067d45ae1b7a1d9e4f02c448063ee0a9860",
+  "assessmentContentHash": "0f24ab81a52f0a86e06a06bac84ab0b6a2fd0784363317d3515bcb90a11cc24f",
+  "assessmentFingerprint": "146bdcb0c49ddc13ba3920a01e655dd4ecb6d0fd09f66277ab9fb88ee99f0374",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-68bfbc27c3a3",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-68bfbc27c3a3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-11",
+          "relevant": false,
+          "reasonCz": "Změna upravuje postavení zaměstnanců dobrovolných svazků obcí, nikoli odměňování učitelů ani jejich průměrný plat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí nejméně patnáctisetkorunový měsíční příplatek pro některé pedagogické pracovníky, a tím může zvýšit část jejich odměňování."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-68bfbc27c3a3--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda, v níž je ANO, předložila návrh změny zákoníku práce. Návrh zavádí příplatek nejméně 1 500 korun měsíčně pro třídní učitele a další vymezené pedagogické pracovníky, takže může zvýšit jejich odměnu. Jde o návrh, nikoli o schválené opatření, a sám nezaručuje průměrný plat učitelů 75 tisíc korun. Proto jde o dílčí posun směrem ke slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh je pouze předložený a podklady nedokládají, zda byl schválen ani jaký dopad by měl na průměrný plat učitelů.",
+        "Příplatek se týká jen vymezených pedagogických pracovníků a podklady neuvádějí skutečnou výši průměrného platu učitelů ani dosažení hranice 75 tisíc korun."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-68bfbc27c3a3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-11",
+          "relevant": false,
+          "reasonCz": "Navržená změna se týká zaměstnanců dobrovolných svazků obcí a jejich pracovních podmínek, nikoli platů učitelů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí příplatek nejméně 1 500 Kč měsíčně pro pedagogické pracovníky vykonávající mimo jiné činnost třídního učitele, což může zvýšit odměnu části učitelů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-68bfbc27c3a3--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda, v níž je ANO, předložila návrh novely zákoníku práce, tedy předpisu upravujícího pracovní vztahy. Návrh zavádí příplatek nejméně 1 500 Kč měsíčně pro pedagogické pracovníky vykonávající mimo jiné činnost třídního učitele. Protože může zvýšit odměnu části učitelů, posouvá slib částečně vpřed, ale jde zatím jen o návrh a neprokazuje dosažení průměrného platu 75 tisíc korun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, kolika učitelů se příplatek skutečně dotkne ani jaký bude jeho dopad na průměrný plat učitelů; samotný návrh proto nepotvrzuje dosažení slíbené částky."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0c692df5af6a93ab016abf0d2ed53087d1b902a1e8875feec1",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 27744,
+      "input_tokens_details": {
+        "cache_write_tokens": 24420,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 969,
+      "output_tokens_details": {
+        "reasoning_tokens": 512
+      },
+      "total_tokens": 28713
+    },
+    "output": {
+      "promiseId": "candidate-68bfbc27c3a3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-11",
+          "relevant": false,
+          "reasonCz": "Změna upravuje postavení zaměstnanců dobrovolných svazků obcí, nikoli odměňování učitelů ani jejich průměrný plat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí nejméně patnáctisetkorunový měsíční příplatek pro některé pedagogické pracovníky, a tím může zvýšit část jejich odměňování."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-68bfbc27c3a3--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda, v níž je ANO, předložila návrh změny zákoníku práce. Návrh zavádí příplatek nejméně 1 500 korun měsíčně pro třídní učitele a další vymezené pedagogické pracovníky, takže může zvýšit jejich odměnu. Jde o návrh, nikoli o schválené opatření, a sám nezaručuje průměrný plat učitelů 75 tisíc korun. Proto jde o dílčí posun směrem ke slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh je pouze předložený a podklady nedokládají, zda byl schválen ani jaký dopad by měl na průměrný plat učitelů.",
+        "Příplatek se týká jen vymezených pedagogických pracovníků a podklady neuvádějí skutečnou výši průměrného platu učitelů ani dosažení hranice 75 tisíc korun."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0dd2ac497f8b9945016abf0d36267487d1a90cff84f17054ca",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 27744,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 27741
+      },
+      "output_tokens": 1166,
+      "output_tokens_details": {
+        "reasoning_tokens": 675
+      },
+      "total_tokens": 28910
+    },
+    "output": {
+      "promiseId": "candidate-68bfbc27c3a3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-11",
+          "relevant": false,
+          "reasonCz": "Navržená změna se týká zaměstnanců dobrovolných svazků obcí a jejich pracovních podmínek, nikoli platů učitelů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí příplatek nejméně 1 500 Kč měsíčně pro pedagogické pracovníky vykonávající mimo jiné činnost třídního učitele, což může zvýšit odměnu části učitelů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-68bfbc27c3a3--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda, v níž je ANO, předložila návrh novely zákoníku práce, tedy předpisu upravujícího pracovní vztahy. Návrh zavádí příplatek nejméně 1 500 Kč měsíčně pro pedagogické pracovníky vykonávající mimo jiné činnost třídního učitele. Protože může zvýšit odměnu části učitelů, posouvá slib částečně vpřed, ale jde zatím jen o návrh a neprokazuje dosažení průměrného platu 75 tisíc korun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, kolika učitelů se příplatek skutečně dotkne ani jaký bude jeho dopad na průměrný plat učitelů; samotný návrh proto nepotvrzuje dosažení slíbené částky."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

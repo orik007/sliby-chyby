@@ -1,0 +1,384 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-14-42-369Z--da0344ca62e1",
+  "evaluatedAt": "2026-11-05T10:14:42.369Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-a9e240495e84/da0344ca62e12b2db286bb60966d4cc58d93585e81657ead65f8426e64b8c6bf.json",
+  "packageHash": "da0344ca62e12b2db286bb60966d4cc58d93585e81657ead65f8426e64b8c6bf",
+  "assessmentContentHash": "399172b0c771d89da9e9f238b9d3e6796421c52292c70f7d5384b242e4917636",
+  "assessmentFingerprint": "9a8a4126ccc4bf1a258346764b8f9109c8498ed8df3b6f9ce8cc6a40d663efd5",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-a9e240495e84",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_00836cf64cf1972f016aec5601cc9087d1821e46f23b0fd16e",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 28206,
+            "input_tokens_details": {
+              "cache_write_tokens": 21856,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 5669,
+            "output_tokens_details": {
+              "reasoning_tokens": 3933
+            },
+            "total_tokens": 33875
+          },
+          "output": {
+            "promiseId": "candidate-a9e240495e84",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-4",
+                "relevant": true,
+                "reasonCz": "Ustanovení mění obecná pravidla pro uplatňování požadavků na výstavbu, jejich výjimky a volbu způsobu splnění, což se může týkat povinných technologií v nových bytech.",
+                "effectCz": "Předchozí § 137 ukládal dodržovat požadavky na výstavbu a výjimku pro vyjmenované případy připouštěl, pokud jejich použití nevylučovaly závažné technické důvody či veřejný zájem. Navržené i schválené znění doplňuje ekonomickou přiměřenost a technickou, funkční a ekonomickou proveditelnost; schválené znění navíc výslovně dává stavebníkovi volbu, lze-li požadavky splnit více způsoby. Pro vyjmenované situace se tím možnost nepoužít požadavky rozšiřuje a volba technického řešení se posiluje, ale text neosvobozuje obecně nové byty od povinných technologií, pokud pro ně není vhodné řešení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-5",
+                "relevant": true,
+                "reasonCz": "Změna energetických požadavků a pravidel pro závaznost technických norem a alternativní řešení se přímo dotýká volby stavebních technologií.",
+                "effectCz": "Předchozí § 150 požadoval co nejnižší spotřebu energie s ohledem na účel stavby a místní klima a energetickou účinnost; nové znění výslovně přidává technickou, funkční a ekonomickou proveditelnost, čímž tento požadavek v těchto hlediscích uvolňuje. Předchozí § 152 svěřoval podrobné požadavky prováděcím předpisům a upravoval závazné technické normy; schválené znění nově vymezuje určování norem a připouští i jiné technické řešení, pokud splní požadavek předpisu. To rozšiřuje možnost volby řešení, ale samo o sobě neruší konkrétní povinnost instalovat fotovoltaiku či rekuperaci."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": true,
+                "reasonCz": "Schválené ustanovení ruší vyhlášku upravující požadavky na výstavbu, a proto se může dotknout povinností k technologiím v nových bytech, avšak obsah rušené vyhlášky zde chybí.",
+                "effectCz": "Text ruší vyhlášku č. 146/2024 Sb., o požadavcích na výstavbu. Balíček neuvádí její dosavadní pravidla pro fotovoltaiku či rekuperaci ani neumožňuje určit, zda jejich zrušení dané povinnosti zpřísní, zmírní, nebo ponechá beze změny."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-97",
+                "relevant": true,
+                "reasonCz": "Ustanovení nově stanoví způsoby větrání obytných místností, což souvisí s možností volby technologií místo povinné rekuperace.",
+                "effectCz": "Nové znění § 19 požaduje u obytných místností minimální intenzitu větrání 0,5 h⁻¹ nebo výměnu 25 m³ vzduchu za hodinu na osobu a výslovně připouští instalované vzduchotechnické zařízení, přirozené větrání nebo jejich kombinaci. Předchozí znění § 19 není v balíčku dodáno, takže změnu oproti dosavadnímu stavu nelze určit; nové znění ale samo o sobě rekuperaci výslovně nevyžaduje."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": false,
+            "citedEvidenceIds": [
+              "candidate-a9e240495e84--source",
+              "psp-core-2025--law-change-43174-1-4",
+              "psp-core-2025--law-change-43174-1-5",
+              "psp-core-2025--law-change-43174-approved-56",
+              "esbirka-regulations--law-change-sb-2026-97",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--amendment-text-1242",
+              "psp-core-2025--amendment-text-1195",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "esbirka-regulations--2026-97",
+              "psp-core-2025--vote-88166",
+              "psp-core-2025--vote-88226",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454"
+            ],
+            "explanationCz": "Poslanci Motoristů předložili sněmovní tisk 67, tedy návrh novely stavebního zákona, a vláda s ním souhlasila. Návrh i schválené znění zohledňují technickou, funkční a ekonomickou proveditelnost a umožňují volit mezi více způsoby splnění požadavků; poslanci Motoristů pak hlasovali pro schválení návrhu a po jeho zamítnutí Senátem pro setrvání na něm. Ministerstvo pro místní rozvoj také vydalo pravidlo, které u větrání výslovně připouští přirozené větrání, nucené větrání nebo jejich kombinaci. Nejde však o výslovné zrušení povinnosti fotovoltaiky či rekuperace v nevhodných případech a balíček neukazuje obsah rušené vyhlášky, takže míru dosažení slibu nelze spolehlivěji určit.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Balíček neuvádí obsah zrušené vyhlášky č. 146/2024 Sb.; nelze proto určit, zda její zrušení odstraňuje nebo mění povinnost instalovat fotovoltaiku či rekuperaci.",
+              "U nového znění pravidla o větrání chybí předchozí znění § 19, takže nelze porovnat, zda se povinnost nebo možnost volby oproti dřívějšku změnila.",
+              "Motoristé nepodpořili pozměňovací návrh, který by umožnil výjimku z vybraných požadavků i pro obytné stavby v zastavěné části obce, ale nepodpořili ani návrh vypouštějící ekonomickou proveditelnost; tyto hlasy na nižší úrovni ukazují rozdílné postoje k rozsahu výjimek."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-a9e240495e84",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Změny § 137 upravují, jak se uplatňují požadavky na výstavbu, a výslovně dávají stavebníkovi možnost volit mezi způsoby jejich splnění.",
+          "effectCz": "Před změnou ukládal § 137 povinnost dodržovat požadavky na výstavbu a nestanovil výslovně volbu mezi více způsoby jejich splnění. Navržená verze přidávala možnost volby a v některých případech i neuplatnění požadavků u staveb v prolukách; schválená verze výslovně váže uplatňování požadavků na jejich technickou, funkční a ekonomickou proveditelnost a přiznává stavebníkovi volbu způsobu splnění. Jde o částečné zmírnění povinnosti a rozšíření volby technického řešení, nikoli o výslovné zrušení povinnosti instalovat fotovoltaiku či rekuperaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Změny požadavků na energetickou účinnost a závaznost technických norem mohou ovlivnit, zda musí stavba použít konkrétní technologii, nebo může zvolit jiné řešení.",
+          "effectCz": "Před změnou měl být provoz stavby co nejméně energeticky náročný s ohledem na její účel a místní klima a prováděcí předpisy stanovovaly podrobné požadavky. Nový text doplňuje zohlednění technické, funkční a ekonomické proveditelnosti a umožňuje splnit požadavek i jiným technickým řešením, pokud dosáhne požadované úrovně; rozšiřuje tak volbu prostředků a může zmírnit požadavky, ale energetický cíl neruší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Schválený text ruší vyhlášku o požadavcích na výstavbu, tedy předpis přímo upravující technické povinnosti při stavění, ale balíček neuvádí její obsah.",
+          "effectCz": "Schválený text ruší vyhlášku č. 146/2024 Sb.; její předchozí pravidla nejsou v balíčku uvedena, takže nelze zjistit, zda zrušení povinnost instalovat fotovoltaiku či rekuperaci zpřísňuje, zmírňuje nebo nemění."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-97",
+          "relevant": true,
+          "reasonCz": "Ustanovení o větrání se přímo dotýká možné povinnosti použít zařízení, které může souviset s rekuperací, a uvádí i jiné způsoby zajištění větrání.",
+          "effectCz": "Nové znění § 19 vyžaduje dostatečné větrání a pro obytnou místnost stanoví minimální intenzitu nebo objem výměny vzduchu, avšak připouští vzduchotechnické zařízení, přirozené větrání i jejich kombinaci. Dřívější znění § 19 balíček neobsahuje, takže směr změny nelze určit; samotný dodaný text ale nepředepisuje rekuperaci jako jedinou možnost."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-a9e240495e84--source",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-approved-56",
+        "esbirka-regulations--law-change-sb-2026-97",
+        "psp-core-2025--amendment-text-1242",
+        "psp-core-2025--amendment-text-1195",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "esbirka-regulations--2026-97",
+        "psp-core-2025--vote-88166",
+        "psp-core-2025--vote-88226",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili návrh změny stavebního zákona a vláda s ním vyslovila souhlas; návrh rozšířil možnost volby způsobu splnění stavebních požadavků. Poslanci strany pak hlasovali pro schválení návrhu i pro setrvání na něm poté, co jej Senát zamítl; schválená pravidla počítají s ekonomickou proveditelností a s alternativním technickým řešením. Ministerstvo pro místní rozvoj také vydalo vyhlášku o větrání, která připouští přirozené větrání vedle vzduchotechniky. To je dílčí posun ke svobodě volby, nikoli doložené zrušení povinnosti konkrétní technologie; strana zároveň nepodpořila pozměňovací návrh, který by rozšířil výjimky z některých požadavků na nové bydlení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček neobsahuje text rušené vyhlášky č. 146/2024 Sb., takže nelze posoudit, jaké konkrétní povinnosti její zrušení odstraňuje nebo mění; proto závěr není úplně doložen.",
+        "Balíček neuvádí předchozí znění ustanovení o větrání nahrazeného vyhláškou č. 97/2026 Sb., takže nelze určit, zda tato pravidla oproti dřívějšku povinnost instalovat technologie zmírnila.",
+        "Motoristé nepodpořili pozměňovací návrh, který by umožnil neuplatnit některé požadavky, včetně úspory energie, u bytových staveb v zastavěné části obce; jejich další doložené kroky však posouvají stavební pravidla směrem k větší volbě technického řešení."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-a9e240495e84",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Mění pravidla pro uplatňování stavebních požadavků a volbu způsobu jejich splnění, což může ovlivnit povinné technologie v nových bytech.",
+          "effectCz": "Původní § 137 odst. 4 uplatňoval stavební požadavky také na vyjmenované změny a zvláštní typy staveb; navržená i schválená verze přidává mezi výjimky stavbu v prolukách a umožňuje požadavky neuplatnit, pokud jejich použití vylučují uvedené důvody nebo je zjevně ekonomicky nepřiměřené. Schválená verze navíc požaduje přihlížet k technické, funkční a ekonomické proveditelnosti a výslovně svěřuje stavebníkovi volbu mezi více způsoby splnění. Jde o uvolnění požadavků v určených situacích a o větší volnost při volbě řešení, nikoli však o obecné odstranění povinnosti instalovat konkrétní technologii v nových bytech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Upravuje energetické požadavky na stavby a pravidla pro závazné technické normy i alternativní technická řešení.",
+          "effectCz": "Dosavadní § 150 požadoval co nejnižší spotřebu energie s ohledem na účel užívání a místní klimatické podmínky; změna přidává hledisko technické, funkční a ekonomické proveditelnosti, takže povinnost je v těchto mezích mírnější. Dosavadní § 152 umožňoval prováděcím předpisům stanovit podrobné požadavky a za určitých podmínek také závazné technické normy; nová úprava omezuje závazné odkazy na určené normy a výslovně připouští jiné technické řešení splňující požadavek předpisu. To rozšiřuje možnost volby technického řešení, ale samo o sobě neruší energetické požadavky ani nezakazuje povinnou instalaci konkrétní technologie."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Schválené ustanovení ruší vyhlášku upravující požadavky na výstavbu, a může tedy měnit pravidla, z nichž povinnosti pro nové byty vycházejí.",
+          "effectCz": "Předchozí znění rušené vyhlášky není v balíčku uvedeno; schválený text stanoví, že vyhláška č. 146/2024 Sb. bude zrušena. Bez jejího předchozího znění nelze určit, zda zrušení povinnosti týkající se fotovoltaiky či rekuperace uvolní, zpřísní, nebo nijak nezmění."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-97",
+          "relevant": true,
+          "reasonCz": "Mění požadavky na větrání obytných místností, tedy oblast související s rekuperací a volbou větrací technologie.",
+          "effectCz": "Vyhláška stanoví pro obytnou místnost minimální intenzitu větrání nebo množství vyměňovaného vzduchu a připouští jeho zajištění vzduchotechnickým zařízením, přirozeným větráním nebo jejich kombinací. Předchozí znění měněné vyhlášky není v balíčku, takže směr změny oproti dosavadní úpravě nelze určit. Uvedené znění samo výslovně nenařizuje rekuperaci a připouští více způsobů větrání."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-a9e240495e84--source",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-approved-56",
+        "esbirka-regulations--law-change-sb-2026-97",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "esbirka-regulations--2026-97",
+        "psp-core-2025--amendment-text-1242",
+        "psp-core-2025--amendment-text-1195",
+        "psp-core-2025--vote-88166",
+        "psp-core-2025--vote-88226",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě předložili novelu stavebního zákona a vláda ji podpořila. Novela, kterou poslanci schválili a po zamítnutí Senátem na ní setrvali, zohledňuje technickou, funkční a ekonomickou proveditelnost a při více možnostech dává volbu stavebníkovi; jde ale jen o část slibu. Poslanci Motoristů sobě zároveň nepodpořili návrh, který by umožnil další výjimky pro bytové stavby v zastavěných částech obcí. Ministerstvo upravilo pravidla větrání tak, že připouštějí i přirozené větrání, ale balíček neukazuje, jaké konkrétní požadavky zruší vyhláška č. 146/2024 Sb.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček neobsahuje předchozí znění vyhlášky č. 146/2024 Sb.; nelze proto zjistit, zda její zrušení odstraní, zachová, nebo jinak změní konkrétní povinnost týkající se fotovoltaiky či rekuperace.",
+        "U vyhlášky č. 97/2026 Sb. není doloženo předchozí znění měněných pravidel větrání, takže nelze posoudit směr změny oproti dosavadní úpravě."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_03dccf8ebcb5bcd3016aec5649580c87d1b1787fe95e77ef97",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 28206,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 28203
+      },
+      "output_tokens": 5621,
+      "output_tokens_details": {
+        "reasoning_tokens": 4120
+      },
+      "total_tokens": 33827
+    },
+    "output": {
+      "promiseId": "candidate-a9e240495e84",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Změny § 137 upravují, jak se uplatňují požadavky na výstavbu, a výslovně dávají stavebníkovi možnost volit mezi způsoby jejich splnění.",
+          "effectCz": "Před změnou ukládal § 137 povinnost dodržovat požadavky na výstavbu a nestanovil výslovně volbu mezi více způsoby jejich splnění. Navržená verze přidávala možnost volby a v některých případech i neuplatnění požadavků u staveb v prolukách; schválená verze výslovně váže uplatňování požadavků na jejich technickou, funkční a ekonomickou proveditelnost a přiznává stavebníkovi volbu způsobu splnění. Jde o částečné zmírnění povinnosti a rozšíření volby technického řešení, nikoli o výslovné zrušení povinnosti instalovat fotovoltaiku či rekuperaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Změny požadavků na energetickou účinnost a závaznost technických norem mohou ovlivnit, zda musí stavba použít konkrétní technologii, nebo může zvolit jiné řešení.",
+          "effectCz": "Před změnou měl být provoz stavby co nejméně energeticky náročný s ohledem na její účel a místní klima a prováděcí předpisy stanovovaly podrobné požadavky. Nový text doplňuje zohlednění technické, funkční a ekonomické proveditelnosti a umožňuje splnit požadavek i jiným technickým řešením, pokud dosáhne požadované úrovně; rozšiřuje tak volbu prostředků a může zmírnit požadavky, ale energetický cíl neruší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Schválený text ruší vyhlášku o požadavcích na výstavbu, tedy předpis přímo upravující technické povinnosti při stavění, ale balíček neuvádí její obsah.",
+          "effectCz": "Schválený text ruší vyhlášku č. 146/2024 Sb.; její předchozí pravidla nejsou v balíčku uvedena, takže nelze zjistit, zda zrušení povinnost instalovat fotovoltaiku či rekuperaci zpřísňuje, zmírňuje nebo nemění."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-97",
+          "relevant": true,
+          "reasonCz": "Ustanovení o větrání se přímo dotýká možné povinnosti použít zařízení, které může souviset s rekuperací, a uvádí i jiné způsoby zajištění větrání.",
+          "effectCz": "Nové znění § 19 vyžaduje dostatečné větrání a pro obytnou místnost stanoví minimální intenzitu nebo objem výměny vzduchu, avšak připouští vzduchotechnické zařízení, přirozené větrání i jejich kombinaci. Dřívější znění § 19 balíček neobsahuje, takže směr změny nelze určit; samotný dodaný text ale nepředepisuje rekuperaci jako jedinou možnost."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-a9e240495e84--source",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-approved-56",
+        "esbirka-regulations--law-change-sb-2026-97",
+        "psp-core-2025--amendment-text-1242",
+        "psp-core-2025--amendment-text-1195",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "esbirka-regulations--2026-97",
+        "psp-core-2025--vote-88166",
+        "psp-core-2025--vote-88226",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili návrh změny stavebního zákona a vláda s ním vyslovila souhlas; návrh rozšířil možnost volby způsobu splnění stavebních požadavků. Poslanci strany pak hlasovali pro schválení návrhu i pro setrvání na něm poté, co jej Senát zamítl; schválená pravidla počítají s ekonomickou proveditelností a s alternativním technickým řešením. Ministerstvo pro místní rozvoj také vydalo vyhlášku o větrání, která připouští přirozené větrání vedle vzduchotechniky. To je dílčí posun ke svobodě volby, nikoli doložené zrušení povinnosti konkrétní technologie; strana zároveň nepodpořila pozměňovací návrh, který by rozšířil výjimky z některých požadavků na nové bydlení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček neobsahuje text rušené vyhlášky č. 146/2024 Sb., takže nelze posoudit, jaké konkrétní povinnosti její zrušení odstraňuje nebo mění; proto závěr není úplně doložen.",
+        "Balíček neuvádí předchozí znění ustanovení o větrání nahrazeného vyhláškou č. 97/2026 Sb., takže nelze určit, zda tato pravidla oproti dřívějšku povinnost instalovat technologie zmírnila.",
+        "Motoristé nepodpořili pozměňovací návrh, který by umožnil neuplatnit některé požadavky, včetně úspory energie, u bytových staveb v zastavěné části obce; jejich další doložené kroky však posouvají stavební pravidla směrem k větší volbě technického řešení."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_016dde91acd320bc016aec56b51cb887d1b2b3d3f402257101",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 28206,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 28203
+      },
+      "output_tokens": 5526,
+      "output_tokens_details": {
+        "reasoning_tokens": 3920
+      },
+      "total_tokens": 33732
+    },
+    "output": {
+      "promiseId": "candidate-a9e240495e84",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-4",
+          "relevant": true,
+          "reasonCz": "Mění pravidla pro uplatňování stavebních požadavků a volbu způsobu jejich splnění, což může ovlivnit povinné technologie v nových bytech.",
+          "effectCz": "Původní § 137 odst. 4 uplatňoval stavební požadavky také na vyjmenované změny a zvláštní typy staveb; navržená i schválená verze přidává mezi výjimky stavbu v prolukách a umožňuje požadavky neuplatnit, pokud jejich použití vylučují uvedené důvody nebo je zjevně ekonomicky nepřiměřené. Schválená verze navíc požaduje přihlížet k technické, funkční a ekonomické proveditelnosti a výslovně svěřuje stavebníkovi volbu mezi více způsoby splnění. Jde o uvolnění požadavků v určených situacích a o větší volnost při volbě řešení, nikoli však o obecné odstranění povinnosti instalovat konkrétní technologii v nových bytech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-5",
+          "relevant": true,
+          "reasonCz": "Upravuje energetické požadavky na stavby a pravidla pro závazné technické normy i alternativní technická řešení.",
+          "effectCz": "Dosavadní § 150 požadoval co nejnižší spotřebu energie s ohledem na účel užívání a místní klimatické podmínky; změna přidává hledisko technické, funkční a ekonomické proveditelnosti, takže povinnost je v těchto mezích mírnější. Dosavadní § 152 umožňoval prováděcím předpisům stanovit podrobné požadavky a za určitých podmínek také závazné technické normy; nová úprava omezuje závazné odkazy na určené normy a výslovně připouští jiné technické řešení splňující požadavek předpisu. To rozšiřuje možnost volby technického řešení, ale samo o sobě neruší energetické požadavky ani nezakazuje povinnou instalaci konkrétní technologie."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Schválené ustanovení ruší vyhlášku upravující požadavky na výstavbu, a může tedy měnit pravidla, z nichž povinnosti pro nové byty vycházejí.",
+          "effectCz": "Předchozí znění rušené vyhlášky není v balíčku uvedeno; schválený text stanoví, že vyhláška č. 146/2024 Sb. bude zrušena. Bez jejího předchozího znění nelze určit, zda zrušení povinnosti týkající se fotovoltaiky či rekuperace uvolní, zpřísní, nebo nijak nezmění."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-97",
+          "relevant": true,
+          "reasonCz": "Mění požadavky na větrání obytných místností, tedy oblast související s rekuperací a volbou větrací technologie.",
+          "effectCz": "Vyhláška stanoví pro obytnou místnost minimální intenzitu větrání nebo množství vyměňovaného vzduchu a připouští jeho zajištění vzduchotechnickým zařízením, přirozeným větráním nebo jejich kombinací. Předchozí znění měněné vyhlášky není v balíčku, takže směr změny oproti dosavadní úpravě nelze určit. Uvedené znění samo výslovně nenařizuje rekuperaci a připouští více způsobů větrání."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-a9e240495e84--source",
+        "psp-core-2025--law-change-43174-1-4",
+        "psp-core-2025--law-change-43174-1-5",
+        "psp-core-2025--law-change-43174-approved-56",
+        "esbirka-regulations--law-change-sb-2026-97",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "esbirka-regulations--2026-97",
+        "psp-core-2025--amendment-text-1242",
+        "psp-core-2025--amendment-text-1195",
+        "psp-core-2025--vote-88166",
+        "psp-core-2025--vote-88226",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě předložili novelu stavebního zákona a vláda ji podpořila. Novela, kterou poslanci schválili a po zamítnutí Senátem na ní setrvali, zohledňuje technickou, funkční a ekonomickou proveditelnost a při více možnostech dává volbu stavebníkovi; jde ale jen o část slibu. Poslanci Motoristů sobě zároveň nepodpořili návrh, který by umožnil další výjimky pro bytové stavby v zastavěných částech obcí. Ministerstvo upravilo pravidla větrání tak, že připouštějí i přirozené větrání, ale balíček neukazuje, jaké konkrétní požadavky zruší vyhláška č. 146/2024 Sb.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček neobsahuje předchozí znění vyhlášky č. 146/2024 Sb.; nelze proto zjistit, zda její zrušení odstraní, zachová, nebo jinak změní konkrétní povinnost týkající se fotovoltaiky či rekuperace.",
+        "U vyhlášky č. 97/2026 Sb. není doloženo předchozí znění měněných pravidel větrání, takže nelze posoudit směr změny oproti dosavadní úpravě."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

@@ -1,0 +1,242 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T09-44-28-631Z--e03aea8c6896",
+  "evaluatedAt": "2026-11-05T09:44:28.631Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-5083be2deca9/e03aea8c6896f893f011f5382f535b9091868a7f43b87fc626b8eaa95bfd80ad.json",
+  "packageHash": "e03aea8c6896f893f011f5382f535b9091868a7f43b87fc626b8eaa95bfd80ad",
+  "assessmentContentHash": "c4e5175f2210aa10e5e8df01f2e5f98b6f280a743bf75a284d3a8087f0fbf6ae",
+  "assessmentFingerprint": "b3b2c848bac6332dbf6dc27fc2446740ba3cb11c37aa6a9300055cba7f22285c",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-5083be2deca9",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-5083be2deca9",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o státní rozpočet a dodaný text uvádí, že rozpočtové ukazatele jednotlivých kapitol jsou v příloze, takže rozpočet může ovlivnit finanční prostředky pro pěstounskou péči; konkrétní částky ale nejsou v dodaném výňatku.",
+          "effectCz": "Jde o nový zákon o státním rozpočtu na rok 2026, který nemá předchozí znění. Dodaný odstavec pouze odkazuje na rozpočtové ukazatele kapitol v příloze č. 4, jejíž částky zde nejsou uvedeny; z balíčku proto nelze určit, zda se prostředky pro pěstounskou péči zvýšily, snížily, nebo zůstaly stejné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-5",
+          "relevant": false,
+          "reasonCz": "Změna upravuje okruh trestných činů, které brání zařazení žadatele do evidence, nikoli finanční zázemí pěstounů, zjednodušení adopčního procesu ani doprovodnou péči pro nové rodiny.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-5083be2deca9--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-516",
+        "psp-core-2025--vote-86836",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957"
+      ],
+      "explanationCz": "Vláda předložila návrh státního rozpočtu na rok 2026 a poslanci ANO jej v závěrečném hlasování podpořili. Dodaný text rozpočtu však pouze odkazuje na přílohu s částkami pro jednotlivé kapitoly, takže nelze ověřit, jak se změnily prostředky pro pěstounskou péči. Poslanci ANO také nepodpořili návrh na zvýšení o 1,5 miliardy korun v ukazateli zahrnujícím dávky státní sociální podpory a pěstounské péče; návrh ale částku konkrétně nevyčleňoval pro pěstouny a jeho odůvodnění se soustředilo na rodičovský příspěvek. Tento hlas proti návrhu představuje doložený krok proti části slibu, ale rozpočtové údaje nestačí k úplnému posouzení výsledku.",
+      "confidence": "low",
+      "uncertainties": [
+        "Dodaný výňatek ze schváleného rozpočtu neobsahuje částky z přílohy č. 4, a proto nelze určit, zda rozpočet pro rok 2026 finanční podporu pěstounské péče zvyšuje nebo snižuje.",
+        "Návrh na zvýšení rozpočtového ukazatele o 1,5 miliardy korun zahrnoval pěstounskou péči, ale neurčoval její konkrétní podíl; z podkladů nelze ověřit, jaký dopad by měl na finanční zázemí pěstounů."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-5083be2deca9",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Dodaná část návrhu rozpočtu pouze odkazuje na ukazatele podle kapitol v příloze, ale neuvádí žádné konkrétní výdaje na pěstounskou péči; obsah chybějících částí nelze dovozovat.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-5",
+          "relevant": true,
+          "reasonCz": "Změna upravuje trestní bezúhonnost žadatelů o zařazení do evidence, a tedy podmínky související s přijímáním žadatelů do péče o děti.",
+          "effectCz": "Před změnou se za bezúhonného nepovažoval mimo jiné člověk odsouzený za obchodování s lidmi či svěření dítěte do moci jiného. Návrh přidává odsouzení za využití služby poskytované obětí obchodování s lidmi a nahrazuje poslední uvedený trestný čin formulací o péči jiného a přijetí za odměnu. Přidání dalšího důvodu zpřísňuje podmínky pro zařazení; u nahrazené formulace nelze z dodaných podkladů určit, zda se její věcný rozsah mění."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-5083be2deca9--source",
+        "psp-core-2025--law-change-43221-5",
+        "psp-core-2025--print-step-210821"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona, který mění podmínky bezúhonnosti pro zařazení žadatelů do evidence. Návrh přidává jeden důvod, pro který žadatel nemá být považován za bezúhonného, ale nedokládá zjednodušení adopčního procesu ani změnu doprovodné péče či finanční podpory pěstounů. Z dodaných podkladů proto nelze určit, zda tato změna adopční proces skutečně zjednodušuje, nebo mu naopak brání.",
+      "confidence": "low",
+      "uncertainties": [
+        "Změna podmínek bezúhonnosti se týká evidence žadatelů o péči o děti, ale podklady neukazují, jak se promítá přímo do adopčního procesu ani zda ho činí složitějším.",
+        "Dodaná část návrhu státního rozpočtu neuvádí konkrétní částky pro pěstounskou péči, takže z ní nelze posoudit finanční podporu pěstounů."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_057f4e93a33f645c016aec4f34bd2887d1866dc099c12b218a",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 19126,
+      "input_tokens_details": {
+        "cache_write_tokens": 12776,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 3842,
+      "output_tokens_details": {
+        "reasoning_tokens": 3052
+      },
+      "total_tokens": 22968
+    },
+    "output": {
+      "promiseId": "candidate-5083be2deca9",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Jde o státní rozpočet a dodaný text uvádí, že rozpočtové ukazatele jednotlivých kapitol jsou v příloze, takže rozpočet může ovlivnit finanční prostředky pro pěstounskou péči; konkrétní částky ale nejsou v dodaném výňatku.",
+          "effectCz": "Jde o nový zákon o státním rozpočtu na rok 2026, který nemá předchozí znění. Dodaný odstavec pouze odkazuje na rozpočtové ukazatele kapitol v příloze č. 4, jejíž částky zde nejsou uvedeny; z balíčku proto nelze určit, zda se prostředky pro pěstounskou péči zvýšily, snížily, nebo zůstaly stejné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-5",
+          "relevant": false,
+          "reasonCz": "Změna upravuje okruh trestných činů, které brání zařazení žadatele do evidence, nikoli finanční zázemí pěstounů, zjednodušení adopčního procesu ani doprovodnou péči pro nové rodiny.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-5083be2deca9--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-516",
+        "psp-core-2025--vote-86836",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957"
+      ],
+      "explanationCz": "Vláda předložila návrh státního rozpočtu na rok 2026 a poslanci ANO jej v závěrečném hlasování podpořili. Dodaný text rozpočtu však pouze odkazuje na přílohu s částkami pro jednotlivé kapitoly, takže nelze ověřit, jak se změnily prostředky pro pěstounskou péči. Poslanci ANO také nepodpořili návrh na zvýšení o 1,5 miliardy korun v ukazateli zahrnujícím dávky státní sociální podpory a pěstounské péče; návrh ale částku konkrétně nevyčleňoval pro pěstouny a jeho odůvodnění se soustředilo na rodičovský příspěvek. Tento hlas proti návrhu představuje doložený krok proti části slibu, ale rozpočtové údaje nestačí k úplnému posouzení výsledku.",
+      "confidence": "low",
+      "uncertainties": [
+        "Dodaný výňatek ze schváleného rozpočtu neobsahuje částky z přílohy č. 4, a proto nelze určit, zda rozpočet pro rok 2026 finanční podporu pěstounské péče zvyšuje nebo snižuje.",
+        "Návrh na zvýšení rozpočtového ukazatele o 1,5 miliardy korun zahrnoval pěstounskou péči, ale neurčoval její konkrétní podíl; z podkladů nelze ověřit, jaký dopad by měl na finanční zázemí pěstounů."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_083b790211f2264d016aec4fa4a72087d1882f5b18653fffd4",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 19126,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 19123
+      },
+      "output_tokens": 5297,
+      "output_tokens_details": {
+        "reasoning_tokens": 4644
+      },
+      "total_tokens": 24423
+    },
+    "output": {
+      "promiseId": "candidate-5083be2deca9",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Dodaná část návrhu rozpočtu pouze odkazuje na ukazatele podle kapitol v příloze, ale neuvádí žádné konkrétní výdaje na pěstounskou péči; obsah chybějících částí nelze dovozovat.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-5",
+          "relevant": true,
+          "reasonCz": "Změna upravuje trestní bezúhonnost žadatelů o zařazení do evidence, a tedy podmínky související s přijímáním žadatelů do péče o děti.",
+          "effectCz": "Před změnou se za bezúhonného nepovažoval mimo jiné člověk odsouzený za obchodování s lidmi či svěření dítěte do moci jiného. Návrh přidává odsouzení za využití služby poskytované obětí obchodování s lidmi a nahrazuje poslední uvedený trestný čin formulací o péči jiného a přijetí za odměnu. Přidání dalšího důvodu zpřísňuje podmínky pro zařazení; u nahrazené formulace nelze z dodaných podkladů určit, zda se její věcný rozsah mění."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-5083be2deca9--source",
+        "psp-core-2025--law-change-43221-5",
+        "psp-core-2025--print-step-210821"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona, který mění podmínky bezúhonnosti pro zařazení žadatelů do evidence. Návrh přidává jeden důvod, pro který žadatel nemá být považován za bezúhonného, ale nedokládá zjednodušení adopčního procesu ani změnu doprovodné péče či finanční podpory pěstounů. Z dodaných podkladů proto nelze určit, zda tato změna adopční proces skutečně zjednodušuje, nebo mu naopak brání.",
+      "confidence": "low",
+      "uncertainties": [
+        "Změna podmínek bezúhonnosti se týká evidence žadatelů o péči o děti, ale podklady neukazují, jak se promítá přímo do adopčního procesu ani zda ho činí složitějším.",
+        "Dodaná část návrhu státního rozpočtu neuvádí konkrétní částky pro pěstounskou péči, takže z ní nelze posoudit finanční podporu pěstounů."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_04067e57f129bd36016aec4ff34e6487d18d01d302ebba1e0a",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 18617,
+      "input_tokens_details": {
+        "cache_write_tokens": 14204,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 493,
+      "output_tokens_details": {
+        "reasoning_tokens": 233
+      },
+      "total_tokens": 19110
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--amendment-text-516",
+        "psp-core-2025--vote-86836",
+        "psp-core-2025--law-change-43221-5"
+      ],
+      "explanationCz": "Druhé hodnocení lépe vystihuje, že doložené kroky neprokazují podstatný posun ve slibu ani postup proti němu. Poslanci ANO odmítli navýšení společné rozpočtové položky, ale návrh směřoval ke zvýšení rodičovského příspěvku a nevyčleňoval peníze pro pěstouny. První hodnocení proto bez dostatečné opory považuje toto hlasování za krok proti slibu. Ani vládní návrh na změnu podmínek trestní bezúhonnosti žadatelů sám nedokládá zjednodušení adopcí, lepší doprovodnou péči či stabilnější finanční podporu pěstounů."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-b"
+  }
+}

@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-38-09-558Z--a64de2daadfe",
+  "evaluatedAt": "2026-11-05T10:38:09.558Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-2407a10f90/a64de2daadfe0bb362d1e43777d73b53c767aae4d421b70cacb1bd97f598eb53.json",
+  "packageHash": "a64de2daadfe0bb362d1e43777d73b53c767aae4d421b70cacb1bd97f598eb53",
+  "assessmentContentHash": "b8df9eda0cc299b7b3b254c5fccb252d8ad52547f2f5416e45d741f8f0ba7e56",
+  "assessmentFingerprint": "04b0832561259740d497ec37b8c24e72369e5ac2e879f4ea4fbcf536df5e56c2",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-2407a10f90",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-2407a10f90",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-2",
+          "relevant": false,
+          "reasonCz": "Preambule dohody obecně podporuje občanskou společnost, ale nevztahuje se konkrétně na ukončení podpory politických neziskových organizací bez ekonomického či společenského opodstatnění.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-2407a10f90--source",
+        "psp-core-2025--law-change-43203-2",
+        "psp-core-2025--print-step-210760"
+      ],
+      "explanationCz": "Motoristé sobě slíbili ukončit podporu vymezených politických neziskových organizací. Jediným předloženým souvisejícím podkladem je vládní návrh dohody s Uzbekistánem, jehož preambule obecně zmiňuje posilování občanské společnosti, nikoli však podporu této konkrétní skupiny. Podklady proto nedokládají žádný relevantní krok strany k naplnění ani odmítnutí slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Preambule dohody se zabývá občanskou společností obecně; z poskytnutého textu nelze určit, zda se její závazky vztahují také na politické neziskové organizace popsané ve slibu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-2407a10f90",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-2",
+          "relevant": true,
+          "reasonCz": "Preambule dohody zavazuje strany k podpoře kapacit organizací občanské společnosti a jejich zapojování do tvorby politik, což se může překrývat s politickými neziskovými organizacemi, o jejichž podpoře slib mluví.",
+          "effectCz": "Předchozí znění zde není, protože jde o novou mezinárodní dohodu. Preambule stanoví spolupráci na posilování prostředí pro občanskou společnost, jejích organizací a jejich zapojení do tvorby předpisů a politik; směřuje tedy k širší podpoře občanské společnosti, ale výslovně nenařizuje finanční podporu ani nevymezuje organizace bez ekonomického či společenského opodstatnění. Její konkrétní dopad na podporu této skupiny nelze z dodaného textu určit."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-2407a10f90--source",
+        "psp-core-2025--law-change-43203-2",
+        "psp-core-2025--print-step-210760"
+      ],
+      "explanationCz": "Vláda předložila Parlamentu dohodu o partnerství a spolupráci s Uzbekistánem. Její preambule počítá s posilováním kapacit organizací občanské společnosti a s jejich zapojením do tvorby politik. To směřuje k širší podpoře občanské společnosti, a proto jde proti části slibu podporu politických neziskových organizací ukončit. Dohoda však výslovně neřeší financování ani organizace, jejichž činnost nemá opodstatnění, takže konkrétní dopad na tuto skupinu není zřejmý.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dohoda podporu organizací občanské společnosti popisuje obecně; z předloženého textu nelze zjistit, zda zahrnuje politické neziskové organizace bez ekonomického či společenského opodstatnění ani zda pro ně znamená finanční podporu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0a0a5af3954939c9016aec5c63b9bc87d1a31c4f60cdcbb4c3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8526,
+      "input_tokens_details": {
+        "cache_write_tokens": 2176,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 2048,
+      "output_tokens_details": {
+        "reasoning_tokens": 1686
+      },
+      "total_tokens": 10574
+    },
+    "output": {
+      "promiseId": "motoriste-2025-2407a10f90",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-2",
+          "relevant": false,
+          "reasonCz": "Preambule dohody obecně podporuje občanskou společnost, ale nevztahuje se konkrétně na ukončení podpory politických neziskových organizací bez ekonomického či společenského opodstatnění.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-2407a10f90--source",
+        "psp-core-2025--law-change-43203-2",
+        "psp-core-2025--print-step-210760"
+      ],
+      "explanationCz": "Motoristé sobě slíbili ukončit podporu vymezených politických neziskových organizací. Jediným předloženým souvisejícím podkladem je vládní návrh dohody s Uzbekistánem, jehož preambule obecně zmiňuje posilování občanské společnosti, nikoli však podporu této konkrétní skupiny. Podklady proto nedokládají žádný relevantní krok strany k naplnění ani odmítnutí slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Preambule dohody se zabývá občanskou společností obecně; z poskytnutého textu nelze určit, zda se její závazky vztahují také na politické neziskové organizace popsané ve slibu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_019f84e82d25bd9f016aec5c7cd53087d1aa60084bf1e8de63",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8526,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8523
+      },
+      "output_tokens": 2608,
+      "output_tokens_details": {
+        "reasoning_tokens": 2070
+      },
+      "total_tokens": 11134
+    },
+    "output": {
+      "promiseId": "motoriste-2025-2407a10f90",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-2",
+          "relevant": true,
+          "reasonCz": "Preambule dohody zavazuje strany k podpoře kapacit organizací občanské společnosti a jejich zapojování do tvorby politik, což se může překrývat s politickými neziskovými organizacemi, o jejichž podpoře slib mluví.",
+          "effectCz": "Předchozí znění zde není, protože jde o novou mezinárodní dohodu. Preambule stanoví spolupráci na posilování prostředí pro občanskou společnost, jejích organizací a jejich zapojení do tvorby předpisů a politik; směřuje tedy k širší podpoře občanské společnosti, ale výslovně nenařizuje finanční podporu ani nevymezuje organizace bez ekonomického či společenského opodstatnění. Její konkrétní dopad na podporu této skupiny nelze z dodaného textu určit."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-2407a10f90--source",
+        "psp-core-2025--law-change-43203-2",
+        "psp-core-2025--print-step-210760"
+      ],
+      "explanationCz": "Vláda předložila Parlamentu dohodu o partnerství a spolupráci s Uzbekistánem. Její preambule počítá s posilováním kapacit organizací občanské společnosti a s jejich zapojením do tvorby politik. To směřuje k širší podpoře občanské společnosti, a proto jde proti části slibu podporu politických neziskových organizací ukončit. Dohoda však výslovně neřeší financování ani organizace, jejichž činnost nemá opodstatnění, takže konkrétní dopad na tuto skupinu není zřejmý.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dohoda podporu organizací občanské společnosti popisuje obecně; z předloženého textu nelze zjistit, zda zahrnuje politické neziskové organizace bez ekonomického či společenského opodstatnění ani zda pro ně znamená finanční podporu."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0136d0858f161774016aec5c8e08ec87d1893c91814f464e81",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 7474,
+      "input_tokens_details": {
+        "cache_write_tokens": 3061,
+        "cached_tokens": 4410
+      },
+      "output_tokens": 238,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 7712
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "motoriste-2025-2407a10f90--source",
+        "psp-core-2025--law-change-43203-2",
+        "psp-core-2025--print-step-210760"
+      ],
+      "explanationCz": "Přesvědčivější je hodnocení A, protože rozlišuje obecnou podporu občanské společnosti od podpory konkrétních organizací vymezených ve slibu. Vláda, jejíž součástí jsou Motoristé sobě, předložila dohodu s Uzbekistánem, která počítá s posilováním občanské společnosti a jejím zapojením do tvorby politik. Dodaný text ale nedokládá podporu politických neziskových organizací, jejichž činnost nemá ekonomické ani společenské opodstatnění. Hodnocení B tuto souvislost pouze předpokládá, a proto z podkladů nelze doložit krok proti slibu ani k jeho splnění."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

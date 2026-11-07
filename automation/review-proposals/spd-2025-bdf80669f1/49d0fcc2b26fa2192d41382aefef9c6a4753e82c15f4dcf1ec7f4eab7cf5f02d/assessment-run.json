@@ -1,0 +1,238 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T13-45-42-812Z--c80537e60c81",
+  "evaluatedAt": "2026-11-05T13:45:42.812Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-bdf80669f1/c80537e60c816bafa1c8272070e0473da3f6d2168dfe02e8382ea773ea153add.json",
+  "packageHash": "c80537e60c816bafa1c8272070e0473da3f6d2168dfe02e8382ea773ea153add",
+  "assessmentContentHash": "3dc6c9b24ce10025e9101d57127b602316006e48ebe4dc26c218d57e91420191",
+  "assessmentFingerprint": "49d0fcc2b26fa2192d41382aefef9c6a4753e82c15f4dcf1ec7f4eab7cf5f02d",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-bdf80669f1",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-bdf80669f1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-5",
+          "relevant": false,
+          "reasonCz": "Kapitola obecně stanoví spolupráci v mezinárodních organizacích, ale WHO v ní není výslovně uvedena a text neukazuje, že by ovlivňoval vystoupení z této organizace.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-285",
+          "relevant": true,
+          "reasonCz": "Usnesení přímo schvaluje účast české delegace na zasedání Světového zdravotnického shromáždění a určuje její postup.",
+          "effectCz": "Usnesení schvaluje vyslání delegace na zasedání Světového zdravotnického shromáždění, jmenuje její členy a ukládá jim řídit se stanovenými zásadami; oproti závazku vystoupit z WHO jde o pokračující zapojení do její činnosti, ale usnesení samo členství neruší ani výslovně nerozhoduje o jeho zachování."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-596",
+          "relevant": true,
+          "reasonCz": "Usnesení svěřuje vládnímu zmocněnci koordinaci českého zastoupení zejména ve Světové zdravotnické organizaci.",
+          "effectCz": "Usnesení vytváří funkci a jmenuje zmocněnce, jehož úkoly zahrnují koordinaci zastoupení ČR zejména ve WHO; jde o institucionální zapojení odporující směru slibu vystoupit, ale text sám členství neruší. Předchozí stav této funkce balíček neuvádí, takže změnu oproti němu nelze určit."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-bdf80669f1--source",
+        "zvlady-resolutions--law-change-uv-2026-285",
+        "zvlady-resolutions--2026-285",
+        "zvlady-resolutions--law-change-uv-2026-596",
+        "zvlady-resolutions--2026-596"
+      ],
+      "explanationCz": "Vláda schválila vyslání české delegace na zasedání Světového zdravotnického shromáždění a uložila jí, jak tam postupovat. Později vytvořila funkci vládního zmocněnce, který má koordinovat české zastoupení zejména ve WHO. Tato rozhodnutí podporují pokračující zapojení Česka do činnosti WHO, tedy postup opačný ke slibu z organizace vystoupit. Žádné z nich však samo členství neruší.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček nedokládá rozhodnutí o samotném vystoupení z WHO; neukazuje proto, zda uvedená účast či koordinace vystoupení oddálila nebo znemožnila."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-bdf80669f1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-5",
+          "relevant": false,
+          "reasonCz": "Kapitola obecně podporuje spolupráci v mezinárodních organizacích a fórech, ale WHO výslovně nezmiňuje a její ustanovení nebrání ukončení členství v této organizaci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-285",
+          "relevant": true,
+          "reasonCz": "Usnesení se přímo týká Světového zdravotnického shromáždění a stanoví účast české delegace i její postup.",
+          "effectCz": "Usnesení vysílá českou delegaci na zasedání Světového zdravotnického shromáždění a stanoví její postup, včetně možnosti přijmout závěry a doporučení a za určitých podmínek souhlasit s přílohou pandemické dohody. Nejde o změnu zákona ani o výslovné rozhodnutí o členství; balíček neuvádí předchozí znění takového pravidla. Oproti závazku členství ukončit jde o pokračování aktivní účasti v orgánu WHO, tedy o postup proti praktické části slibu, nikoli o formální rozhodnutí členství zachovat."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-596",
+          "relevant": true,
+          "reasonCz": "Usnesení stanoví, že vládní zmocněnec má koordinovat české zastoupení zejména ve Světové zdravotnické organizaci.",
+          "effectCz": "Usnesení vytváří funkci vládního zmocněnce, jehož úkol zahrnuje koordinaci českého zastoupení zejména ve WHO. Jde o nové uspořádání, nikoli o změnu zákona, a balíček neuvádí předchozí znění ani stav zastupování. Zajišťování českého zastoupení ve WHO směřuje proti praktické části závazku organizaci opustit, ale samo o sobě nerozhoduje o členství."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-bdf80669f1--source",
+        "zvlady-resolutions--law-change-uv-2026-285",
+        "zvlady-resolutions--2026-285",
+        "zvlady-resolutions--law-change-uv-2026-596",
+        "zvlady-resolutions--2026-596"
+      ],
+      "explanationCz": "Vláda v květnu 2026 schválila vyslání české delegace na zasedání Světového zdravotnického shromáždění a stanovila její postup. V září pak vytvořila funkci zmocněnce, který má koordinovat české zastoupení mimo jiné ve Světové zdravotnické organizaci (WHO). Obě rozhodnutí udržují aktivní české zapojení do WHO, a proto jdou proti praktické části slibu organizaci opustit. Žádné z nich však samo nerozhoduje o setrvání Česka v členství.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají účast a koordinaci českého zastoupení, nikoli rozhodnutí o členství v WHO; závěr se proto týká jen praktického směřování proti slibu, ne formálního odmítnutí vystoupit."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_03336571b2862b2b016aec880fce4c87d1bc316e69560f4630",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12444,
+      "input_tokens_details": {
+        "cache_write_tokens": 6094,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 2620,
+      "output_tokens_details": {
+        "reasoning_tokens": 1908
+      },
+      "total_tokens": 15064
+    },
+    "output": {
+      "promiseId": "spd-2025-bdf80669f1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-5",
+          "relevant": false,
+          "reasonCz": "Kapitola obecně stanoví spolupráci v mezinárodních organizacích, ale WHO v ní není výslovně uvedena a text neukazuje, že by ovlivňoval vystoupení z této organizace.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-285",
+          "relevant": true,
+          "reasonCz": "Usnesení přímo schvaluje účast české delegace na zasedání Světového zdravotnického shromáždění a určuje její postup.",
+          "effectCz": "Usnesení schvaluje vyslání delegace na zasedání Světového zdravotnického shromáždění, jmenuje její členy a ukládá jim řídit se stanovenými zásadami; oproti závazku vystoupit z WHO jde o pokračující zapojení do její činnosti, ale usnesení samo členství neruší ani výslovně nerozhoduje o jeho zachování."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-596",
+          "relevant": true,
+          "reasonCz": "Usnesení svěřuje vládnímu zmocněnci koordinaci českého zastoupení zejména ve Světové zdravotnické organizaci.",
+          "effectCz": "Usnesení vytváří funkci a jmenuje zmocněnce, jehož úkoly zahrnují koordinaci zastoupení ČR zejména ve WHO; jde o institucionální zapojení odporující směru slibu vystoupit, ale text sám členství neruší. Předchozí stav této funkce balíček neuvádí, takže změnu oproti němu nelze určit."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-bdf80669f1--source",
+        "zvlady-resolutions--law-change-uv-2026-285",
+        "zvlady-resolutions--2026-285",
+        "zvlady-resolutions--law-change-uv-2026-596",
+        "zvlady-resolutions--2026-596"
+      ],
+      "explanationCz": "Vláda schválila vyslání české delegace na zasedání Světového zdravotnického shromáždění a uložila jí, jak tam postupovat. Později vytvořila funkci vládního zmocněnce, který má koordinovat české zastoupení zejména ve WHO. Tato rozhodnutí podporují pokračující zapojení Česka do činnosti WHO, tedy postup opačný ke slibu z organizace vystoupit. Žádné z nich však samo členství neruší.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček nedokládá rozhodnutí o samotném vystoupení z WHO; neukazuje proto, zda uvedená účast či koordinace vystoupení oddálila nebo znemožnila."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0bcf4f4df65212c8016aec884992d887d1bbc2935f1666c2e5",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12444,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 12441
+      },
+      "output_tokens": 2422,
+      "output_tokens_details": {
+        "reasoning_tokens": 1539
+      },
+      "total_tokens": 14866
+    },
+    "output": {
+      "promiseId": "spd-2025-bdf80669f1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-5",
+          "relevant": false,
+          "reasonCz": "Kapitola obecně podporuje spolupráci v mezinárodních organizacích a fórech, ale WHO výslovně nezmiňuje a její ustanovení nebrání ukončení členství v této organizaci.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-285",
+          "relevant": true,
+          "reasonCz": "Usnesení se přímo týká Světového zdravotnického shromáždění a stanoví účast české delegace i její postup.",
+          "effectCz": "Usnesení vysílá českou delegaci na zasedání Světového zdravotnického shromáždění a stanoví její postup, včetně možnosti přijmout závěry a doporučení a za určitých podmínek souhlasit s přílohou pandemické dohody. Nejde o změnu zákona ani o výslovné rozhodnutí o členství; balíček neuvádí předchozí znění takového pravidla. Oproti závazku členství ukončit jde o pokračování aktivní účasti v orgánu WHO, tedy o postup proti praktické části slibu, nikoli o formální rozhodnutí členství zachovat."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-596",
+          "relevant": true,
+          "reasonCz": "Usnesení stanoví, že vládní zmocněnec má koordinovat české zastoupení zejména ve Světové zdravotnické organizaci.",
+          "effectCz": "Usnesení vytváří funkci vládního zmocněnce, jehož úkol zahrnuje koordinaci českého zastoupení zejména ve WHO. Jde o nové uspořádání, nikoli o změnu zákona, a balíček neuvádí předchozí znění ani stav zastupování. Zajišťování českého zastoupení ve WHO směřuje proti praktické části závazku organizaci opustit, ale samo o sobě nerozhoduje o členství."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-bdf80669f1--source",
+        "zvlady-resolutions--law-change-uv-2026-285",
+        "zvlady-resolutions--2026-285",
+        "zvlady-resolutions--law-change-uv-2026-596",
+        "zvlady-resolutions--2026-596"
+      ],
+      "explanationCz": "Vláda v květnu 2026 schválila vyslání české delegace na zasedání Světového zdravotnického shromáždění a stanovila její postup. V září pak vytvořila funkci zmocněnce, který má koordinovat české zastoupení mimo jiné ve Světové zdravotnické organizaci (WHO). Obě rozhodnutí udržují aktivní české zapojení do WHO, a proto jdou proti praktické části slibu organizaci opustit. Žádné z nich však samo nerozhoduje o setrvání Česka v členství.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají účast a koordinaci českého zastoupení, nikoli rozhodnutí o členství v WHO; závěr se proto týká jen praktického směřování proti slibu, ne formálního odmítnutí vystoupit."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

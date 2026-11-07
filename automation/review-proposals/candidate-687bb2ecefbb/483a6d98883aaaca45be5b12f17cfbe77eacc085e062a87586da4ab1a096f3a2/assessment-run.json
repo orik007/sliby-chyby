@@ -1,0 +1,660 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T18-53-47-368Z--a4ff4442478f",
+  "evaluatedAt": "2026-10-06T18:53:47.368Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-687bb2ecefbb/a4ff4442478f93e9317f884ab507d6a8ccf89b8efa33b92d84404c205e26e0f9.json",
+  "packageHash": "a4ff4442478f93e9317f884ab507d6a8ccf89b8efa33b92d84404c205e26e0f9",
+  "assessmentContentHash": "8bbb22fa77de515aee577fc4a02403e52bf0733907d1ccec09156a4b84cd00f1",
+  "assessmentFingerprint": "483a6d98883aaaca45be5b12f17cfbe77eacc085e062a87586da4ab1a096f3a2",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-687bb2ecefbb",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment omits the relevance verdict for law change psp-core-2025--law-change-43264-18",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_05bb20b59e8838b9016ac54299742887d2a13dae0086ebcdf7",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 501834,
+            "input_tokens_details": {
+              "cache_write_tokens": 497864,
+              "cached_tokens": 3967
+            },
+            "output_tokens": 6169,
+            "output_tokens_details": {
+              "reasoning_tokens": 3852
+            },
+            "total_tokens": 508003
+          },
+          "output": {
+            "promiseId": "candidate-687bb2ecefbb",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43228-1",
+                "relevant": true,
+                "reasonCz": "Smlouva výslovně upravuje česko-slovenskou spolupráci v boji proti nelegální migraci a umožňuje společné hraniční kontroly.",
+                "effectCz": "Jde o novou smlouvu, takže předchozí znění takové úpravy balíček neuvádí. Zavádí sdílení informací o nelegální migraci a možnost společných kontrol při dočasném obnovení ochrany vnitřních hranic; při nich lze za stanovených podmínek odepřít vstup nebo osobu vrátit. Jde o dílčí prostředek k zabránění vstupu, nikoli o pravidlo, které by zaručilo zastavení každého nelegálního migranta."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-1",
+                "relevant": false,
+                "reasonCz": "Tato část vymezuje obecný předmět a osobní působnost cizineckého zákona, ale sama nestanoví pravidlo pro zabránění překročení hranic.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-2",
+                "relevant": true,
+                "reasonCz": "Upravuje podmínky vstupu, hraniční kontroly a neumožnění vstupu občanům třetích zemí, tedy přímo část slibu o zabránění překročení hranic.",
+                "effectCz": "Jde o novou právní úpravu a balíček neposkytuje předchozí znění těchto ustanovení. § 55 odkazuje podmínky vstupu a odepření vstupu na schengenská pravidla a vyjímá z nich některé případy předání či průvozu. § 57 stanoví neumožnění vstupu občanovi třetí země bez pobytového oprávnění při dočasně obnovené ochraně vnitřních hranic, zejména při chybějícím či padělaném dokladu nebo bezpečnostní hrozbě; § 64 a 65 upravují prvotní prověřování některých žadatelů o mezinárodní ochranu. Tato pravidla dávají policii dílčí nástroje ke kontrole a odmítnutí vstupu, ale nepokrývají každého nelegálního migranta ani každý způsob překročení hranice."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-4",
+                "relevant": false,
+                "reasonCz": "Upravuje pobytová oprávnění a jejich podmínky po vstupu, nikoli pravidla bránící překročení hranic.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-11",
+                "relevant": false,
+                "reasonCz": "Upravuje prokazování pobytových oprávnění a cestovní doklady, ale nestanoví pravidlo, které by samo bránilo nelegálnímu překročení hranice.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-13",
+                "relevant": false,
+                "reasonCz": "Upravuje návrat a vyhošťování po neoprávněném pobytu, zatímco slib se týká zabránění samotnému překročení hranice.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-14",
+                "relevant": false,
+                "reasonCz": "Tato část stanoví procesní pravidla pobytových řízení, nikoli opatření k zabránění překročení hranic.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-15",
+                "relevant": false,
+                "reasonCz": "Upravuje soudní přezkum rozhodnutí, ale sama nemění pravidla kontroly ani vstupu přes hranice.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-16",
+                "relevant": true,
+                "reasonCz": "Stanoví dopravcům zákaz přepravy některých cizinců bez dokladů na území a povinnost dopravit osoby s odepřeným vstupem zpět.",
+                "effectCz": "Jde o novou právní úpravu a balíček neposkytuje její předchozí znění. Ustanovení § 645 ukládá leteckým dopravcům a některým dalším přepravcům nepřivézt z území mimo Schengen cestující bez potřebných dokladů či víza; § 646 stanoví přepravu osoby, které byl vstup odepřen, zpět mimo území. Tato pravidla posilují prevenci vstupu na vybraných trasách, ale vztahují se jen na určité druhy dopravy a případy, takže slib v celém rozsahu nenaplňují."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-1",
+                "relevant": false,
+                "reasonCz": "Změny upravují dočasnou ochranu a zvláštní pobyt osob z Ukrajiny, ale z předloženého textu nevyplývá opatření zaměřené na zabránění vstupu nelegálních migrantů přes hranice.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-4",
+                "relevant": false,
+                "reasonCz": "Změny upravují řízení o mezinárodní ochraně a pobyt žadatelů, ale samy nestanoví překážku vstupu nelegálních migrantů přes hranice.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-5",
+                "relevant": false,
+                "reasonCz": "Ačkoli mění pravidla zpětného přemístění i některá pravidla vyhošťování, tato úprava míří na osoby již přítomné na území, nikoli na zabránění překročení hranic.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-7",
+                "relevant": true,
+                "reasonCz": "Zvyšuje tresty za násilné překročení státní hranice a za organizování či umožnění nedovoleného překročení hranice.",
+                "effectCz": "Před změnou hrozil za násilné překročení hranice podle § 339 odst. 1 trest odnětí svobody na jeden až pět let; návrh zvyšuje rozpětí na dva až osm let. Za organizování či umožnění nedovoleného překročení hranice činil základní trest podle § 340 odst. 1 nejvýše dva roky a návrh jej zvyšuje na čtyři roky; upravuje také přísnější sazby pro vymezené závažné případy. U napomáhání k neoprávněnému pobytu se základní horní hranice podle § 341 zvyšuje z jednoho roku na tři léta. Jde tedy o zpřísnění trestů za související jednání, které může podpořit část slibu, ale samo nezaručuje zabránění každému překročení hranice."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-687bb2ecefbb--source",
+              "psp-core-2025--law-change-43228-1",
+              "psp-core-2025--print-step-210866",
+              "psp-core-2025--law-change-43264-2",
+              "psp-core-2025--law-change-43264-16",
+              "psp-core-2025--print-step-211048",
+              "psp-core-2025--vote-88522",
+              "psp-core-2025--law-change-43335-7",
+              "psp-core-2025--print-step-211537"
+            ],
+            "explanationCz": "Vláda, v níž SPD působí, předložila návrh smlouvy o policejní spolupráci se Slovenskem, návrh nového cizineckého zákona i návrh na zvýšení trestů za násilné překročení hranice a převaděčství. Nový cizinecký zákon stanoví některé možnosti kontroly a odmítnutí vstupu a omezuje přepravu cestujících bez potřebných dokladů. Poslanci SPD pak hlasovali pro jeho schválení ve třetím čtení, tedy v závěrečném hlasování Poslanecké sněmovny o návrhu. Tato opatření mohou přispět k zabránění části nelegálních vstupů, ale nedokládají, že slib zabránit vstupu každému nelegálnímu migrantovi je splněn.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Předložené podklady dokládají návrhy a hlasování, nikoli praktické výsledky hraničních kontrol; schválená pravidla se navíc týkají jen vymezených případů a způsobů dopravy."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-687bb2ecefbb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-1",
+          "relevant": true,
+          "reasonCz": "Smlouva výslovně upravuje spolupráci při boji proti nelegální migraci a umožňuje koordinované hraniční kontroly i odepření vstupu.",
+          "effectCz": "Jde o novou smlouvu, takže balíček neuvádí předchozí znění, s nímž by šlo změnu porovnat. Smlouva zavádí výměnu informací, společné policejní hlídky a spolupráci při kontrolách vnitřních hranic, včetně možnosti odepřít vstup a vrátit osobu; poskytuje tak nástroje pro část slibu, ale nezaručuje zabránění vstupu každému nelegálnímu migrantovi."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-1",
+          "relevant": false,
+          "reasonCz": "Tato část vymezuje působnost cizineckého zákona a kategorie cizinců, ale sama neupravuje předcházení jejich překročení hranic.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-2",
+          "relevant": true,
+          "reasonCz": "Text stanoví pravidla vstupu a výslovně upravuje neumožnění či odepření vstupu při dočasném obnovení ochrany vnitřních hranic.",
+          "effectCz": "Jde o novou část nového cizineckého zákona; předchozí znění odpovídajících ustanovení balíček neuvádí, takže změnu proti dosavadní právní úpravě nelze určit. Nový text stanoví, že při kontrolách po dočasném obnovení ochrany vnitřních hranic policie neumožní vstup některým občanům třetích zemí bez oprávnění k pobytu, například pokud nemají platný cestovní doklad, předloží padělaný doklad nebo představují bezpečnostní hrozbu. Jde o konkrétní nástroj k zabránění části vstupů, nikoli o pravidlo, které by zamezilo vstupu každému nelegálnímu migrantovi."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje dlouhodobý pobyt občanů třetích zemí, nikoli prevenci překročení hranic.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-11",
+          "relevant": false,
+          "reasonCz": "Upravuje především průkazy, doklady a prokazování totožnosti, nikoli zabránění nelegálnímu vstupu přes hranice.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": false,
+          "reasonCz": "Upravuje návrat a vyhošťování osob, které již na území jsou, což samo o sobě nezabraňuje jejich překročení hranic.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": false,
+          "reasonCz": "Tato část stanoví procesní pravidla pobytových řízení, nikoli opatření k zabránění vstupu přes hranice.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-15",
+          "relevant": false,
+          "reasonCz": "Upravuje soudní přezkum rozhodnutí, nikoli prevenci nelegálního překročení hranic.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": false,
+          "reasonCz": "Převážně upravuje ohlašovací povinnosti a přestupky související s pobytem, nikoli zabránění vstupu přes hranice.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": true,
+          "reasonCz": "Tato část výslovně svěřuje cizinecké policii hraniční kontroly a rozhodování o neumožnění vstupu, tedy pravomoci přímo použitelné k plnění části slibu.",
+          "effectCz": "Jde o novou část nového cizineckého zákona a balíček neposkytuje předchozí znění rozdělení pravomocí, takže změnu oproti dosavadnímu stavu nelze porovnat. Text svěřuje cizinecké policii hraniční kontroly, rozhodování o neumožnění vstupu a související úkony k zajištění návratu; vytváří tak institucionální prostředky pro část slibu, nikoli záruku zabránění každému nelegálnímu překročení hranice."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": false,
+          "reasonCz": "Navrhované změny se týkají především dočasné ochrany a vozidel osob z Ukrajiny, nikoli bránění nelegálnímu překročení hranic.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-4",
+          "relevant": false,
+          "reasonCz": "Upravuje řízení o mezinárodní ochraně, tedy následný postup po podání žádosti, nikoli samotné zabránění vstupu přes hranici.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-5",
+          "relevant": false,
+          "reasonCz": "Změny se soustředí zejména na pobytová oprávnění a návrat osob již přítomných na území, nikoli na prevenci jejich překročení hranic.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-7",
+          "relevant": true,
+          "reasonCz": "Návrh zpřísňuje tresty za násilné překročení státní hranice a za organizování či umožnění nedovoleného překročení hranice, což může odrazovat od části takového jednání.",
+          "effectCz": "Dosavadní trest za násilné překročení hranice činil jeden až pět let odnětí svobody; návrh jej mění na dva až osm let, tedy zpřísňuje základní trest. U organizování či umožnění nedovoleného překročení hranice se základní sazba zvyšuje z nejvýše dvou let na nejvýše čtyři roky. Některé závažné varianty tohoto druhého trestného činu se však nově řadí do sazby tři až deset let namísto dosavadních pět až dvanácti let, takže návrh je v tomto ohledu mírnější; celkový účinek na tresty je proto smíšený."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-687bb2ecefbb--source",
+        "psp-core-2025--law-change-43228-1",
+        "psp-core-2025--print-step-210866",
+        "psp-core-2025--law-change-43264-2",
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43335-7",
+        "psp-core-2025--print-step-211537"
+      ],
+      "explanationCz": "Vláda předložila smlouvu s Českou republikou a Slovenskem, která rozšiřuje policejní spolupráci při boji proti nelegální migraci a při hraničních kontrolách. Předložila také návrh cizineckého zákona, který popisuje důvody, pro něž policie může při obnovení kontrol na vnitřních hranicích vstup neumožnit; poslanci SPD hlasovali pro jeho schválení Poslaneckou sněmovnou. Další vládní návrh zpřísňuje některé tresty za nelegální překročení hranice a jeho další části některé tresty naopak zmírňují. Jde o konkrétní nástroje k naplnění části slibu, ne však o opatření, které zaručuje zastavení každého nelegálního migranta.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložené podklady dokládají právní návrhy a hlasování, nikoli skutečný počet osob, kterým se podařilo vstup přes hranici zamezit; nelze proto doložit naplnění slibu v celém rozsahu.",
+        "Návrh trestního zákoníku zvyšuje některé trestní sazby, ale u některých závažných forem převaděčství navrhuje nižší sazby; tento návrh nebyl v balíčku doložen jako schválené rozhodnutí sněmovny."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-687bb2ecefbb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-1",
+          "relevant": true,
+          "reasonCz": "Smlouva upravuje spolupráci při boji proti nelegální migraci i kontroly a předávání osob na česko-slovenské hranici, takže může podpořit část slibu.",
+          "effectCz": "Jde o novou mezinárodní smlouvu bez předchozího znění, s nímž by ji bylo možné porovnat: upravuje výměnu informací o nelegální migraci, společné policejní postupy a spolupráci při kontrolách na vnitřních hranicích, včetně možnosti odepřít vstup a vrátit osobu. Posiluje tedy dostupné nástroje pro část slibu, ale nezavádí zákaz vstupu každému nelegálnímu migrantovi."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-1",
+          "relevant": true,
+          "reasonCz": "Nový zákon vymezuje hraniční kontrolu a nežádoucí osobu, tedy pojmy využívané při rozhodování o odepření vstupu.",
+          "effectCz": "Jde o část nového zákona, takže balíček neuvádí předchozí znění, s nímž by ji bylo možné porovnat. Ustanovení vymezují hraniční kontrolu odkazem na schengenská pravidla a nežádoucí osobu jako cizince, kterému nelze umožnit vstup z vyjmenovaných důvodů; tím vytvářejí právní rámec pro odepření vstupu, nikoli plošnou překážku pro každého nelegálního migranta."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-2",
+          "relevant": true,
+          "reasonCz": "Ustanovení o podmínkách vstupu a odepření vstupu přímo stanovují část pravidel, která mohou zabránit nelegálnímu překročení hranice.",
+          "effectCz": "Jde o část nového zákona bez předchozího znění v balíčku. Podmínky vstupu a hraniční kontroly odkazuje na schengenský hraniční kodex; při dočasném znovuzavedení kontrol na vnitřních hranicích policie neumožní vstup některým občanům třetích zemí bez pobytového oprávnění, například bez platného dokladu nebo při hrozbě pro veřejný pořádek či bezpečnost. Opatření tak umožňuje zabránit části vstupů, ale nevztahuje se na každého nelegálního migranta ani na všechny situace překročení hranice."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": false,
+          "reasonCz": "Upravuje zejména pobytová oprávnění a jejich podmínky, nikoli kontrolu hranic nebo zabránění nelegálnímu překročení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-11",
+          "relevant": false,
+          "reasonCz": "Upravuje doklady a způsob prokazování totožnosti či pobytového oprávnění, ale v předloženém znění nestanoví pravidlo, které by samo bránilo překročení hranice.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": true,
+          "reasonCz": "Nová pravidla návratu umožňují postihnout a vracet osoby, které překročily hranici mimo hraniční přechod, což může odrazovat od dalších nelegálních přechodů.",
+          "effectCz": "Jde o část nového zákona, takže předchozí znění v balíčku chybí. Stanoví postupy návratu a správního vyhoštění a dovoluje zákaz vstupu až na pět let mimo jiné při neoprávněném překročení hranice mimo hraniční přechod; při vážném ohrožení veřejného pořádku nebo bezpečnosti může jít o zákaz na pět až deset let. Jde o následky po překročení, které mohou podporovat odrazování, nikoli o záruku, že k žádnému překročení nedojde."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": true,
+          "reasonCz": "Nový procesní rámec upravuje rozhodování o neumožnění a odepření vstupu a možnost jejich nového posouzení.",
+          "effectCz": "Jde o část nového zákona bez předchozího znění uvedeného v balíčku. Stanoví, že rozhodnutí o neumožnění vstupu a odepření vstupu zahajují řízení, a upravuje nové posouzení důvodů; žádost o nové posouzení neumožnění vstupu nemá odkladný účinek. Tím umožňuje provést odepření vstupu, ale zároveň zachovává možnost následného přezkoumání jeho důvodů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-15",
+          "relevant": true,
+          "reasonCz": "Vylučuje soudní přezkum některých rozhodnutí o odepření vstupu a zpětném přemístění, což ovlivňuje konečnost části opatření na hranicích.",
+          "effectCz": "Jde o část nového zákona bez předchozího znění uvedeného v balíčku. Vylučuje soudní přezkum rozhodnutí o odepření vstupu a zpětném přemístění v uvedených případech; tím zvyšuje konečnost těchto rozhodnutí, ale samo nepřidává pravomoc vstup odepřít ani nebrání každému překročení hranice."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": true,
+          "reasonCz": "Ukládá dopravcům povinnost nepřevážet některé osoby bez potřebných dokladů a zajistit návrat osob, kterým byl vstup odepřen.",
+          "effectCz": "Jde o část nového zákona, takže balíček neposkytuje předchozí znění k porovnání. Ustanovení zakazují leteckým a za určitých podmínek vodním a mezinárodním linkovým dopravcům přepravit z nečlenských schengenských států osobu bez požadovaného dokladu či víza a stanoví povinnost dopravit osobu po odepření vstupu zpět; za porušení zákazu návrhu hrozí pokuta 100 000 až 500 000 Kč za osobu. Jde o dílčí preventivní a návratový nástroj, nikoli o obecné zabránění všem nelegálním přechodům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": true,
+          "reasonCz": "Nový zákon svěřuje policii provádění hraničních kontrol, rozhodování o vstupu a úkony zajišťující návrat, tedy výkon části opatření na hranicích.",
+          "effectCz": "Jde o část nového zákona, jejíž předchozí znění balíček neuvádí. Rozděluje působnost mezi útvary cizinecké policie a výslovně jim svěřuje hraniční kontrolu, rozhodování o odepření či neumožnění vstupu a zajišťování návratu; vymezuje tak, kdo má vykonávat nástroje pro část slibu, ale sama nestanoví, že musí být zastaven každý nelegální migrant."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje převzít zpět držitele dočasné ochrany, který se bez povolení zdržuje v jiném členském státě nebo se tam pokusil neoprávněně vstoupit, a může tak řešit část nelegálních přeshraničních pohybů.",
+          "effectCz": "Dosavadní § 3 odst. 3 upravoval oznámení Evropské komisi o riziku vyčerpání kapacit; návrh jej nahrazuje pravidlem, podle něhož se držitel dočasné ochrany převezme zpět, pokud se bez povolení zdržuje v jiném členském státě nebo se tam pokusil neoprávněně vstoupit. Změna zavádí mechanismus návratu po takovém pohybu, ale nejde o pravidlo, které by mu předem zabránilo ani se vztahuje na každého nelegálního migranta."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-4",
+          "relevant": false,
+          "reasonCz": "Upravuje řízení o mezinárodní ochraně a související procesní pravidla, nikoli opatření k zabránění překročení hranic.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-5",
+          "relevant": true,
+          "reasonCz": "Návrh zachovává policejní pravomoc zpětně přemístit osobu zadrženou na vnitřní hranici, což je konkrétní nástroj k řešení části nelegálních přeshraničních pohybů.",
+          "effectCz": "Předchozí § 12 již umožňoval za podmínek schengenských pravidel rozhodnout o zpětném přemístění a přijmout občana třetí země zpět; návrh tuto pravomoc zachovává a nově umožňuje požádat o nové posouzení důvodů. Samotná pravomoc k přemístění se tedy podle dodaného znění nezpřísňuje; přibývá možnost jejího přezkoumání. Ostatní změny v tomto rozsáhlém návrhu se týkají zejména pobytových, procesních a detenčních pravidel a z dodaných textů nevyplývá, že by samy bránily překročení hranic."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-7",
+          "relevant": true,
+          "reasonCz": "Zvyšuje trestní sazby za násilné překročení hranice a za organizování nelegálních přechodů či napomáhání neoprávněnému pobytu, což může odrazovat od těchto činů.",
+          "effectCz": "U násilného překročení hranice zůstává základní sazba podle § 339 odst. 1 stejná, jeden až pět let; pro těžkou újmu na zdraví, značnou škodu a čin za stavu ohrožení státu či války však návrh přesouvá skutky do nové sazby tři až dvanáct let oproti dosavadním třem až deseti letům. U organizování či umožnění nelegálního překročení hranice (§ 340) se základní horní hranice zvyšuje ze dvou na čtyři roky; závažné případy nově zahrnují také násilí vůči převáděné osobě, dítě bez doprovodu či osobu v bezbrannosti nebo tísni a pro některé případy stanoví až deset let namísto dosavadních dvou až osmi. U napomáhání k neoprávněnému pobytu (§ 341) se základní horní hranice zvyšuje z jednoho na tři roky a přísnější sazby se rovněž zvyšují. Vyšší tresty mohou odrazovat od nelegálních přechodů či jejich organizování, samy ale nezaručují, že žádný migrant hranici nepřekročí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-687bb2ecefbb--source",
+        "psp-core-2025--law-change-43228-1",
+        "psp-core-2025--law-change-43264-1",
+        "psp-core-2025--law-change-43264-2",
+        "psp-core-2025--law-change-43264-13",
+        "psp-core-2025--law-change-43264-14",
+        "psp-core-2025--law-change-43264-15",
+        "psp-core-2025--law-change-43264-16",
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--law-change-43335-1",
+        "psp-core-2025--law-change-43335-5",
+        "psp-core-2025--law-change-43335-7",
+        "psp-core-2025--print-step-210866",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--print-step-211537",
+        "psp-core-2025--vote-88522"
+      ],
+      "explanationCz": "Vláda předložila smlouvu o policejní spolupráci se Slovenskem a návrh nového cizineckého zákona; poslanci SPD pak hlasovali pro schválení cizineckého zákona ve třetím čtení, tedy při konečném hlasování Sněmovny o návrhu. Nový zákon upravuje odepření vstupu při některých kontrolách, návrat po nelegálním přechodu a povinnosti dopravců, kteří mohou dostat vysoké pokuty za přepravu některých osob bez potřebných dokladů. Vláda také předložila návrhy na zpětné přemístění některých osob a zvýšení trestů za násilné překročení hranice a převaděčství. Jde o konkrétní nástroje, které mohou pomoci části slibu, ale žádný z předložených textů nezaručuje, že hranici nepřekročí žádný nelegální migrant.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Slib používá absolutní formulaci „každému“, zatímco opatření v balíčku se vztahují jen na určité situace, například na některé hraniční kontroly, osoby bez potřebných dokladů nebo násilné překročení hranice.",
+        "Balíček dokládá návrhy a hlasování, nikoli počet skutečně zabráněných překročení hranic; účinnost navržených opatření v praxi proto nelze z těchto podkladů posoudit.",
+        "Návrh nového cizineckého zákona byl v době doložených podkladů schválen Sněmovnou, ale jeho budoucí účinnost a další legislativní osud tato evidence nedokládá."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0660a23e4642dbd7016ac542ed39b087d29f7e724a8d1c02d7",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 501834,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 501831
+      },
+      "output_tokens": 6137,
+      "output_tokens_details": {
+        "reasoning_tokens": 4043
+      },
+      "total_tokens": 507971
+    },
+    "output": {
+      "promiseId": "candidate-687bb2ecefbb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-1",
+          "relevant": true,
+          "reasonCz": "Smlouva výslovně upravuje spolupráci při boji proti nelegální migraci a umožňuje koordinované hraniční kontroly i odepření vstupu.",
+          "effectCz": "Jde o novou smlouvu, takže balíček neuvádí předchozí znění, s nímž by šlo změnu porovnat. Smlouva zavádí výměnu informací, společné policejní hlídky a spolupráci při kontrolách vnitřních hranic, včetně možnosti odepřít vstup a vrátit osobu; poskytuje tak nástroje pro část slibu, ale nezaručuje zabránění vstupu každému nelegálnímu migrantovi."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-1",
+          "relevant": false,
+          "reasonCz": "Tato část vymezuje působnost cizineckého zákona a kategorie cizinců, ale sama neupravuje předcházení jejich překročení hranic.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-2",
+          "relevant": true,
+          "reasonCz": "Text stanoví pravidla vstupu a výslovně upravuje neumožnění či odepření vstupu při dočasném obnovení ochrany vnitřních hranic.",
+          "effectCz": "Jde o novou část nového cizineckého zákona; předchozí znění odpovídajících ustanovení balíček neuvádí, takže změnu proti dosavadní právní úpravě nelze určit. Nový text stanoví, že při kontrolách po dočasném obnovení ochrany vnitřních hranic policie neumožní vstup některým občanům třetích zemí bez oprávnění k pobytu, například pokud nemají platný cestovní doklad, předloží padělaný doklad nebo představují bezpečnostní hrozbu. Jde o konkrétní nástroj k zabránění části vstupů, nikoli o pravidlo, které by zamezilo vstupu každému nelegálnímu migrantovi."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje dlouhodobý pobyt občanů třetích zemí, nikoli prevenci překročení hranic.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-11",
+          "relevant": false,
+          "reasonCz": "Upravuje především průkazy, doklady a prokazování totožnosti, nikoli zabránění nelegálnímu vstupu přes hranice.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": false,
+          "reasonCz": "Upravuje návrat a vyhošťování osob, které již na území jsou, což samo o sobě nezabraňuje jejich překročení hranic.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": false,
+          "reasonCz": "Tato část stanoví procesní pravidla pobytových řízení, nikoli opatření k zabránění vstupu přes hranice.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-15",
+          "relevant": false,
+          "reasonCz": "Upravuje soudní přezkum rozhodnutí, nikoli prevenci nelegálního překročení hranic.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": false,
+          "reasonCz": "Převážně upravuje ohlašovací povinnosti a přestupky související s pobytem, nikoli zabránění vstupu přes hranice.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": true,
+          "reasonCz": "Tato část výslovně svěřuje cizinecké policii hraniční kontroly a rozhodování o neumožnění vstupu, tedy pravomoci přímo použitelné k plnění části slibu.",
+          "effectCz": "Jde o novou část nového cizineckého zákona a balíček neposkytuje předchozí znění rozdělení pravomocí, takže změnu oproti dosavadnímu stavu nelze porovnat. Text svěřuje cizinecké policii hraniční kontroly, rozhodování o neumožnění vstupu a související úkony k zajištění návratu; vytváří tak institucionální prostředky pro část slibu, nikoli záruku zabránění každému nelegálnímu překročení hranice."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": false,
+          "reasonCz": "Navrhované změny se týkají především dočasné ochrany a vozidel osob z Ukrajiny, nikoli bránění nelegálnímu překročení hranic.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-4",
+          "relevant": false,
+          "reasonCz": "Upravuje řízení o mezinárodní ochraně, tedy následný postup po podání žádosti, nikoli samotné zabránění vstupu přes hranici.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-5",
+          "relevant": false,
+          "reasonCz": "Změny se soustředí zejména na pobytová oprávnění a návrat osob již přítomných na území, nikoli na prevenci jejich překročení hranic.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-7",
+          "relevant": true,
+          "reasonCz": "Návrh zpřísňuje tresty za násilné překročení státní hranice a za organizování či umožnění nedovoleného překročení hranice, což může odrazovat od části takového jednání.",
+          "effectCz": "Dosavadní trest za násilné překročení hranice činil jeden až pět let odnětí svobody; návrh jej mění na dva až osm let, tedy zpřísňuje základní trest. U organizování či umožnění nedovoleného překročení hranice se základní sazba zvyšuje z nejvýše dvou let na nejvýše čtyři roky. Některé závažné varianty tohoto druhého trestného činu se však nově řadí do sazby tři až deset let namísto dosavadních pět až dvanácti let, takže návrh je v tomto ohledu mírnější; celkový účinek na tresty je proto smíšený."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-687bb2ecefbb--source",
+        "psp-core-2025--law-change-43228-1",
+        "psp-core-2025--print-step-210866",
+        "psp-core-2025--law-change-43264-2",
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43335-7",
+        "psp-core-2025--print-step-211537"
+      ],
+      "explanationCz": "Vláda předložila smlouvu s Českou republikou a Slovenskem, která rozšiřuje policejní spolupráci při boji proti nelegální migraci a při hraničních kontrolách. Předložila také návrh cizineckého zákona, který popisuje důvody, pro něž policie může při obnovení kontrol na vnitřních hranicích vstup neumožnit; poslanci SPD hlasovali pro jeho schválení Poslaneckou sněmovnou. Další vládní návrh zpřísňuje některé tresty za nelegální překročení hranice a jeho další části některé tresty naopak zmírňují. Jde o konkrétní nástroje k naplnění části slibu, ne však o opatření, které zaručuje zastavení každého nelegálního migranta.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložené podklady dokládají právní návrhy a hlasování, nikoli skutečný počet osob, kterým se podařilo vstup přes hranici zamezit; nelze proto doložit naplnění slibu v celém rozsahu.",
+        "Návrh trestního zákoníku zvyšuje některé trestní sazby, ale u některých závažných forem převaděčství navrhuje nižší sazby; tento návrh nebyl v balíčku doložen jako schválené rozhodnutí sněmovny."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0fc31f368b183051016ac54347b91c87d281ca9ab78eb0574c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 501834,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 501831
+      },
+      "output_tokens": 8913,
+      "output_tokens_details": {
+        "reasoning_tokens": 5281
+      },
+      "total_tokens": 510747
+    },
+    "output": {
+      "promiseId": "candidate-687bb2ecefbb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-1",
+          "relevant": true,
+          "reasonCz": "Smlouva upravuje spolupráci při boji proti nelegální migraci i kontroly a předávání osob na česko-slovenské hranici, takže může podpořit část slibu.",
+          "effectCz": "Jde o novou mezinárodní smlouvu bez předchozího znění, s nímž by ji bylo možné porovnat: upravuje výměnu informací o nelegální migraci, společné policejní postupy a spolupráci při kontrolách na vnitřních hranicích, včetně možnosti odepřít vstup a vrátit osobu. Posiluje tedy dostupné nástroje pro část slibu, ale nezavádí zákaz vstupu každému nelegálnímu migrantovi."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-1",
+          "relevant": true,
+          "reasonCz": "Nový zákon vymezuje hraniční kontrolu a nežádoucí osobu, tedy pojmy využívané při rozhodování o odepření vstupu.",
+          "effectCz": "Jde o část nového zákona, takže balíček neuvádí předchozí znění, s nímž by ji bylo možné porovnat. Ustanovení vymezují hraniční kontrolu odkazem na schengenská pravidla a nežádoucí osobu jako cizince, kterému nelze umožnit vstup z vyjmenovaných důvodů; tím vytvářejí právní rámec pro odepření vstupu, nikoli plošnou překážku pro každého nelegálního migranta."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-2",
+          "relevant": true,
+          "reasonCz": "Ustanovení o podmínkách vstupu a odepření vstupu přímo stanovují část pravidel, která mohou zabránit nelegálnímu překročení hranice.",
+          "effectCz": "Jde o část nového zákona bez předchozího znění v balíčku. Podmínky vstupu a hraniční kontroly odkazuje na schengenský hraniční kodex; při dočasném znovuzavedení kontrol na vnitřních hranicích policie neumožní vstup některým občanům třetích zemí bez pobytového oprávnění, například bez platného dokladu nebo při hrozbě pro veřejný pořádek či bezpečnost. Opatření tak umožňuje zabránit části vstupů, ale nevztahuje se na každého nelegálního migranta ani na všechny situace překročení hranice."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": false,
+          "reasonCz": "Upravuje zejména pobytová oprávnění a jejich podmínky, nikoli kontrolu hranic nebo zabránění nelegálnímu překročení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-11",
+          "relevant": false,
+          "reasonCz": "Upravuje doklady a způsob prokazování totožnosti či pobytového oprávnění, ale v předloženém znění nestanoví pravidlo, které by samo bránilo překročení hranice.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": true,
+          "reasonCz": "Nová pravidla návratu umožňují postihnout a vracet osoby, které překročily hranici mimo hraniční přechod, což může odrazovat od dalších nelegálních přechodů.",
+          "effectCz": "Jde o část nového zákona, takže předchozí znění v balíčku chybí. Stanoví postupy návratu a správního vyhoštění a dovoluje zákaz vstupu až na pět let mimo jiné při neoprávněném překročení hranice mimo hraniční přechod; při vážném ohrožení veřejného pořádku nebo bezpečnosti může jít o zákaz na pět až deset let. Jde o následky po překročení, které mohou podporovat odrazování, nikoli o záruku, že k žádnému překročení nedojde."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": true,
+          "reasonCz": "Nový procesní rámec upravuje rozhodování o neumožnění a odepření vstupu a možnost jejich nového posouzení.",
+          "effectCz": "Jde o část nového zákona bez předchozího znění uvedeného v balíčku. Stanoví, že rozhodnutí o neumožnění vstupu a odepření vstupu zahajují řízení, a upravuje nové posouzení důvodů; žádost o nové posouzení neumožnění vstupu nemá odkladný účinek. Tím umožňuje provést odepření vstupu, ale zároveň zachovává možnost následného přezkoumání jeho důvodů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-15",
+          "relevant": true,
+          "reasonCz": "Vylučuje soudní přezkum některých rozhodnutí o odepření vstupu a zpětném přemístění, což ovlivňuje konečnost části opatření na hranicích.",
+          "effectCz": "Jde o část nového zákona bez předchozího znění uvedeného v balíčku. Vylučuje soudní přezkum rozhodnutí o odepření vstupu a zpětném přemístění v uvedených případech; tím zvyšuje konečnost těchto rozhodnutí, ale samo nepřidává pravomoc vstup odepřít ani nebrání každému překročení hranice."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": true,
+          "reasonCz": "Ukládá dopravcům povinnost nepřevážet některé osoby bez potřebných dokladů a zajistit návrat osob, kterým byl vstup odepřen.",
+          "effectCz": "Jde o část nového zákona, takže balíček neposkytuje předchozí znění k porovnání. Ustanovení zakazují leteckým a za určitých podmínek vodním a mezinárodním linkovým dopravcům přepravit z nečlenských schengenských států osobu bez požadovaného dokladu či víza a stanoví povinnost dopravit osobu po odepření vstupu zpět; za porušení zákazu návrhu hrozí pokuta 100 000 až 500 000 Kč za osobu. Jde o dílčí preventivní a návratový nástroj, nikoli o obecné zabránění všem nelegálním přechodům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": true,
+          "reasonCz": "Nový zákon svěřuje policii provádění hraničních kontrol, rozhodování o vstupu a úkony zajišťující návrat, tedy výkon části opatření na hranicích.",
+          "effectCz": "Jde o část nového zákona, jejíž předchozí znění balíček neuvádí. Rozděluje působnost mezi útvary cizinecké policie a výslovně jim svěřuje hraniční kontrolu, rozhodování o odepření či neumožnění vstupu a zajišťování návratu; vymezuje tak, kdo má vykonávat nástroje pro část slibu, ale sama nestanoví, že musí být zastaven každý nelegální migrant."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje převzít zpět držitele dočasné ochrany, který se bez povolení zdržuje v jiném členském státě nebo se tam pokusil neoprávněně vstoupit, a může tak řešit část nelegálních přeshraničních pohybů.",
+          "effectCz": "Dosavadní § 3 odst. 3 upravoval oznámení Evropské komisi o riziku vyčerpání kapacit; návrh jej nahrazuje pravidlem, podle něhož se držitel dočasné ochrany převezme zpět, pokud se bez povolení zdržuje v jiném členském státě nebo se tam pokusil neoprávněně vstoupit. Změna zavádí mechanismus návratu po takovém pohybu, ale nejde o pravidlo, které by mu předem zabránilo ani se vztahuje na každého nelegálního migranta."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-4",
+          "relevant": false,
+          "reasonCz": "Upravuje řízení o mezinárodní ochraně a související procesní pravidla, nikoli opatření k zabránění překročení hranic.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-5",
+          "relevant": true,
+          "reasonCz": "Návrh zachovává policejní pravomoc zpětně přemístit osobu zadrženou na vnitřní hranici, což je konkrétní nástroj k řešení části nelegálních přeshraničních pohybů.",
+          "effectCz": "Předchozí § 12 již umožňoval za podmínek schengenských pravidel rozhodnout o zpětném přemístění a přijmout občana třetí země zpět; návrh tuto pravomoc zachovává a nově umožňuje požádat o nové posouzení důvodů. Samotná pravomoc k přemístění se tedy podle dodaného znění nezpřísňuje; přibývá možnost jejího přezkoumání. Ostatní změny v tomto rozsáhlém návrhu se týkají zejména pobytových, procesních a detenčních pravidel a z dodaných textů nevyplývá, že by samy bránily překročení hranic."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-7",
+          "relevant": true,
+          "reasonCz": "Zvyšuje trestní sazby za násilné překročení hranice a za organizování nelegálních přechodů či napomáhání neoprávněnému pobytu, což může odrazovat od těchto činů.",
+          "effectCz": "U násilného překročení hranice zůstává základní sazba podle § 339 odst. 1 stejná, jeden až pět let; pro těžkou újmu na zdraví, značnou škodu a čin za stavu ohrožení státu či války však návrh přesouvá skutky do nové sazby tři až dvanáct let oproti dosavadním třem až deseti letům. U organizování či umožnění nelegálního překročení hranice (§ 340) se základní horní hranice zvyšuje ze dvou na čtyři roky; závažné případy nově zahrnují také násilí vůči převáděné osobě, dítě bez doprovodu či osobu v bezbrannosti nebo tísni a pro některé případy stanoví až deset let namísto dosavadních dvou až osmi. U napomáhání k neoprávněnému pobytu (§ 341) se základní horní hranice zvyšuje z jednoho na tři roky a přísnější sazby se rovněž zvyšují. Vyšší tresty mohou odrazovat od nelegálních přechodů či jejich organizování, samy ale nezaručují, že žádný migrant hranici nepřekročí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-687bb2ecefbb--source",
+        "psp-core-2025--law-change-43228-1",
+        "psp-core-2025--law-change-43264-1",
+        "psp-core-2025--law-change-43264-2",
+        "psp-core-2025--law-change-43264-13",
+        "psp-core-2025--law-change-43264-14",
+        "psp-core-2025--law-change-43264-15",
+        "psp-core-2025--law-change-43264-16",
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--law-change-43335-1",
+        "psp-core-2025--law-change-43335-5",
+        "psp-core-2025--law-change-43335-7",
+        "psp-core-2025--print-step-210866",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--print-step-211537",
+        "psp-core-2025--vote-88522"
+      ],
+      "explanationCz": "Vláda předložila smlouvu o policejní spolupráci se Slovenskem a návrh nového cizineckého zákona; poslanci SPD pak hlasovali pro schválení cizineckého zákona ve třetím čtení, tedy při konečném hlasování Sněmovny o návrhu. Nový zákon upravuje odepření vstupu při některých kontrolách, návrat po nelegálním přechodu a povinnosti dopravců, kteří mohou dostat vysoké pokuty za přepravu některých osob bez potřebných dokladů. Vláda také předložila návrhy na zpětné přemístění některých osob a zvýšení trestů za násilné překročení hranice a převaděčství. Jde o konkrétní nástroje, které mohou pomoci části slibu, ale žádný z předložených textů nezaručuje, že hranici nepřekročí žádný nelegální migrant.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Slib používá absolutní formulaci „každému“, zatímco opatření v balíčku se vztahují jen na určité situace, například na některé hraniční kontroly, osoby bez potřebných dokladů nebo násilné překročení hranice.",
+        "Balíček dokládá návrhy a hlasování, nikoli počet skutečně zabráněných překročení hranic; účinnost navržených opatření v praxi proto nelze z těchto podkladů posoudit.",
+        "Návrh nového cizineckého zákona byl v době doložených podkladů schválen Sněmovnou, ale jeho budoucí účinnost a další legislativní osud tato evidence nedokládá."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

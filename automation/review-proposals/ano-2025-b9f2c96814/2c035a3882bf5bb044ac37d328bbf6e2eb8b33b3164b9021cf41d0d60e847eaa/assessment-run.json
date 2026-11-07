@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-36-36-957Z--a4c3921572f0",
+  "evaluatedAt": "2026-10-02T01:36:36.957Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-b9f2c96814/a4c3921572f0a22bf33ec6fbadf81b2daf912a424cc9cabc8ed386a6750cdc74.json",
+  "packageHash": "a4c3921572f0a22bf33ec6fbadf81b2daf912a424cc9cabc8ed386a6750cdc74",
+  "assessmentContentHash": "2e899fb13ab52d7dae54b92b71da408587dc4936b5779743530787ff7c9de276",
+  "assessmentFingerprint": "2c035a3882bf5bb044ac37d328bbf6e2eb8b33b3164b9021cf41d0d60e847eaa",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-b9f2c96814",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-b9f2c96814",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválené znění nově zařazuje některé veřejné lůžkové nemocnice mezi strategické zdravotnické stavby, na které se vztahuje zákonný režim urychlující jejich přípravu a povolování, a může tak přispět k části slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-b9f2c96814--source",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Původní návrh poslanců ANO zdravotnickou infrastrukturu nezmiňoval. Při schválení novely a po jejím vrácení Senátem, tedy horní komorou Parlamentu, poslanci ANO hlasovali pro text, který některým veřejným nemocnicím přiznává postavení strategických zdravotnických staveb a umožňuje jejich přípravu a povolování ve zvláštním režimu. To může usnadnit část nemocničních staveb, ale samo o sobě nedokončuje síť urgentních příjmů. Proto jde o dílčí posun ke slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text neříká, že se tento režim vztahuje přímo na urgentní příjmy, a důkazy nedokládají, zda některá takto způsobilá nemocnice potřebuje urgentní příjem ani zda se díky změně dokončí stavby v jednotlivých regionech."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-b9f2c96814",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválená verze výslovně zařazuje některé velké nemocniční stavby mezi strategickou zdravotnickou infrastrukturu, a může tak usnadnit přípravu části nemocniční sítě, přestože urgentní příjmy ani jejich rozmístění neupravuje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-b9f2c96814--source",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO návrh novely stavebního zákona předložili; jeho původní podoba ale zvláštní režim nemocničních staveb neobsahovala. Při schvalování Sněmovna doplnila možnost považovat některé velké nemocniční stavby za strategickou zdravotnickou infrastrukturu, což jim může usnadnit přípravu. Po odmítnutí návrhu Senátem poslanci ANO hlasovali pro setrvání na sněmovním znění. Jde o dílčí krok týkající se nemocniční infrastruktury, nikoli o dokončení sítě urgentních příjmů nebo zajištění jejich dostupnosti ve všech regionech.",
+      "confidence": "medium",
+      "uncertainties": []
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_04a190449e55444f016abf0a7a2fc887d19a08cea0161440b1",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 35718,
+      "input_tokens_details": {
+        "cache_write_tokens": 32394,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1822,
+      "output_tokens_details": {
+        "reasoning_tokens": 1324
+      },
+      "total_tokens": 37540
+    },
+    "output": {
+      "promiseId": "ano-2025-b9f2c96814",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválené znění nově zařazuje některé veřejné lůžkové nemocnice mezi strategické zdravotnické stavby, na které se vztahuje zákonný režim urychlující jejich přípravu a povolování, a může tak přispět k části slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-b9f2c96814--source",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Původní návrh poslanců ANO zdravotnickou infrastrukturu nezmiňoval. Při schválení novely a po jejím vrácení Senátem, tedy horní komorou Parlamentu, poslanci ANO hlasovali pro text, který některým veřejným nemocnicím přiznává postavení strategických zdravotnických staveb a umožňuje jejich přípravu a povolování ve zvláštním režimu. To může usnadnit část nemocničních staveb, ale samo o sobě nedokončuje síť urgentních příjmů. Proto jde o dílčí posun ke slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text neříká, že se tento režim vztahuje přímo na urgentní příjmy, a důkazy nedokládají, zda některá takto způsobilá nemocnice potřebuje urgentní příjem ani zda se díky změně dokončí stavby v jednotlivých regionech."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_01dbf9045e5a4a73016abf0a8fc8ac87d1a0722fa51898272e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 35718,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 35715
+      },
+      "output_tokens": 1950,
+      "output_tokens_details": {
+        "reasoning_tokens": 1552
+      },
+      "total_tokens": 37668
+    },
+    "output": {
+      "promiseId": "ano-2025-b9f2c96814",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválená verze výslovně zařazuje některé velké nemocniční stavby mezi strategickou zdravotnickou infrastrukturu, a může tak usnadnit přípravu části nemocniční sítě, přestože urgentní příjmy ani jejich rozmístění neupravuje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-b9f2c96814--source",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO návrh novely stavebního zákona předložili; jeho původní podoba ale zvláštní režim nemocničních staveb neobsahovala. Při schvalování Sněmovna doplnila možnost považovat některé velké nemocniční stavby za strategickou zdravotnickou infrastrukturu, což jim může usnadnit přípravu. Po odmítnutí návrhu Senátem poslanci ANO hlasovali pro setrvání na sněmovním znění. Jde o dílčí krok týkající se nemocniční infrastruktury, nikoli o dokončení sítě urgentních příjmů nebo zajištění jejich dostupnosti ve všech regionech.",
+      "confidence": "medium",
+      "uncertainties": []
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

@@ -1,0 +1,345 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-33-00-025Z--5ab823d29bf5",
+  "evaluatedAt": "2026-11-05T10:33:00.025Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-efd1c999e79a/5ab823d29bf5574bf611b0fb2befd5539cbcc98e7a81280e2dd9d757ad2c26bc.json",
+  "packageHash": "5ab823d29bf5574bf611b0fb2befd5539cbcc98e7a81280e2dd9d757ad2c26bc",
+  "assessmentContentHash": "ccad23d7343ff083637e0c78a6cb9432a467cb7d0fca753aab60e687e58c720e",
+  "assessmentFingerprint": "086fce00306a84e7ba5bf22271c684e87d79d2c840b56e9136718b6ff20ebaf4",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-efd1c999e79a",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_00b71e61073241b7016aec5adc070487d1b3efb5c7014c62c8",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 19433,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 19430
+            },
+            "output_tokens": 5197,
+            "output_tokens_details": {
+              "reasoning_tokens": 3923
+            },
+            "total_tokens": 24630
+          },
+          "output": {
+            "promiseId": "candidate-efd1c999e79a",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43295-1",
+                "relevant": true,
+                "reasonCz": "K této části návrhu poslankyně Hanzlíková předložila změnu, která navrhuje zákaz lovu lišky pod zemí se psy, tedy se přímo dotýká slibu.",
+                "effectCz": "Vlastní dodaný text této části uvádí pouze změnu zákona na ochranu zvířat proti týrání, ale neukazuje konkrétní měněné ustanovení ani jeho předchozí znění. Z předložené změny D vyplývá návrh zakázat lov lišky pod zemí se psy nebo vyhrabáváním za účelem usmrcení; rozsah a účinek původně předložené části návrhu proto z balíčku nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43295-3",
+                "relevant": true,
+                "reasonCz": "Ačkoli vlastní text této části není dodán, pozměňovací návrhy k ní navrhují zákaz lovu lišky pod zemí se psem.",
+                "effectCz": "Tato část neobsahuje vlastní dodaný text; pozměňovací návrhy H2 a H3 navrhují doplnit do zákona o myslivosti zákaz lovu lišky obecné pod zemí v přírodních norách loveckým psem. Návrh H3 zároveň počítá s možností, aby orgán státní správy myslivosti v určitých rozhodnutích stanovil, že se tento zákaz neuplatní. Předchozí znění dotčeného ustanovení v balíčku chybí, takže přesnou změnu vůči dosavadnímu právu nelze určit; navrhovaná úprava by však zákaz norování lišek zavedla jen v uvedeném rozsahu a s uvedenou výjimkou."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-24",
+                "relevant": true,
+                "reasonCz": "Nařízení přímo upravuje příspěvky na pořizování umělých nor určených k lovu lišek, tedy podporuje prostředek spojený s lovem pod zemí.",
+                "effectCz": "Nařízení zavádí finanční příspěvek mimo jiné na pořízení a instalaci nových umělých nor na lov lišek; příspěvek je podmíněn limitem nejvýše jedné nory na každých započatých 250 ha honitby a poskytuje se nejvýše jednou za deset let. Dosavadní znění zde není, protože jde o nové nařízení. Podpora nor pro lov lišek je v napětí se slibem odstranit lov pod zemí, byť text výslovně neuvádí, zda se příspěvek vztahuje právě na použití loveckých psů."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-efd1c999e79a--source",
+              "psp-core-2025--law-change-43295-1",
+              "psp-core-2025--law-change-43295-3",
+              "esbirka-regulations--law-change-sb-2026-24",
+              "esbirka-regulations--2026-24",
+              "psp-core-2025--print-step-211274",
+              "psp-core-2025--government-opinion-43295-1",
+              "psp-core-2025--amendment-2053",
+              "psp-core-2025--amendment-text-2053",
+              "psp-core-2025--amendment-2057",
+              "psp-core-2025--amendment-text-2057",
+              "psp-core-2025--amendment-2084",
+              "psp-core-2025--amendment-text-2084"
+            ],
+            "explanationCz": "Vláda přijala nařízení, které poskytuje příspěvky mimo jiné na nové umělé nory pro lov lišek; to podporuje prostředky spojené s lovem pod zemí a jde proti části slibu. Poslanci ANO zároveň předložili pozměňovací návrhy k návrhu zákona projednávanému jako sněmovní tisk 174, které navrhují zákaz lovu lišek pod zemí se psy, v jednom návrhu s možností výjimky. Jde zatím o návrhy, nikoli o schválený zákaz. Nařízení je rozhodnutím vlády a jeho protichůdný účinek proto převažuje nad těmito návrhy.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Nařízení výslovně neříká, zda se příspěvek na umělé nory týká právě lovu lišek pomocí loveckých psů; jeho podpora se týká lovu lišek v norách obecně.",
+              "Dodaný výňatek původní části návrhu zákona neukazuje její konkrétní měněná ustanovení, takže účinek původního návrhu a vládního souhlasného stanoviska na zákaz norování nelze z něj samostatně posoudit."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-efd1c999e79a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43295-1",
+          "relevant": true,
+          "reasonCz": "Pozměňovací návrh k této části výslovně navrhuje zákaz lovu lišky pod zemí za použití psů, tedy část slibu; vlastní poskytnutý výňatek návrhu však neukazuje jeho původní konkrétní ustanovení.",
+          "effectCz": "Samotný výňatek ukazuje pouze úvod změny zákona, nikoli novelizované ustanovení. Předchozí ani navržené znění tohoto ustanovení proto z balíčku nelze porovnat; samostatně předložený pozměňovací návrh navrhuje zakázat lov lišky pod zemí se psy, což pokrývá jen část slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43295-3",
+          "relevant": true,
+          "reasonCz": "Tato část je relevantní prostřednictvím pozměňovacích návrhů, které navrhují zákaz lovu lišky pod zemí se psem a u jednoho znění také výjimku.",
+          "effectCz": "Vlastní text této části není poskytnut; pozměňovací návrhy navrhují doplnit do zákona o myslivosti zákaz lovit lišku pod zemí v přírodních norách s loveckým psem. Návrh H3 zároveň připouští, aby se zákaz v určitých rozhodnutích o úpravě stavu zvěře neuplatnil. Předchozí znění příslušných ustanovení chybí, takže směr změny oproti platnému právu nelze z balíčku určit; navržený zákaz se týká jen části slibu a výjimka připouští jednání, které slib zakazuje."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-24",
+          "relevant": true,
+          "reasonCz": "Nařízení zavádí příspěvek na nové umělé nory určené k lovu lišek, a proto přímo souvisí s možností lovu lišek pod zemí.",
+          "effectCz": "Nařízení nově stanoví možnost finančního příspěvku na pořízení a instalaci umělých nor na lov lišek, nejvýše v četnosti jedné nory na každých započatých 250 ha honitby, a upravuje podmínky a četnost příspěvku. Jde o nové nařízení, takže předchozí znění není k porovnání. Podpora nor může usnadňovat lov lišek pod zemí, ale text výslovně neříká, že jde o lov s loveckými psy."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-efd1c999e79a--source",
+        "psp-core-2025--law-change-43295-1",
+        "psp-core-2025--law-change-43295-3",
+        "esbirka-regulations--law-change-sb-2026-24",
+        "psp-core-2025--amendment-text-2053",
+        "psp-core-2025--amendment-text-2057",
+        "psp-core-2025--amendment-text-2084",
+        "esbirka-regulations--2026-24",
+        "psp-core-2025--print-step-211274",
+        "psp-core-2025--government-opinion-43295-1",
+        "psp-core-2025--amendment-2053",
+        "psp-core-2025--amendment-2057",
+        "psp-core-2025--amendment-2084"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrhy, které by zakázaly lov lišky pod zemí se psy; návrh H2 zákaz omezuje na přírodní nory a návrh H3 navíc připouští výjimku při některých rozhodnutích o úpravě stavu zvěře. Tyto návrhy posouvají část slibu vpřed, ale výjimka v H3 jde proti jeho úplnému zákazu. Vláda zároveň přijala nařízení umožňující příspěvky na umělé nory pro lov lišek, ačkoli nařízení výslovně nezmiňuje použití psů. Celkově tedy dostupné kroky směřují proti části slibu, nikoli proti jeho celku.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek původního návrhu zákona obsahuje jen úvod změny, takže nelze posoudit jeho další konkrétní ustanovení ani přesný obsah návrhu, se kterým vláda souhlasila.",
+        "Nařízení podporuje umělé nory pro lov lišek, ale neuvádí, zda se při lovu používají psi; jeho vztah k přesně vymezenému způsobu lovu ve slibu proto není úplně jistý.",
+        "Poskytnuté podklady neobsahují konečné hlasování o návrzích, takže dokládají předložené návrhy, nikoli přijetí úplného zákazu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-efd1c999e79a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43295-1",
+          "relevant": true,
+          "reasonCz": "K této části návrhu byly předloženy pozměňovací návrhy, které výslovně navrhují zákaz lovu lišky pod zemí za použití psa; samotný předložený text části však v balíčku neobsahuje konkrétní ustanovení o norování.",
+          "effectCz": "Předchozí znění pravidla o norování ani konkrétní věcná ustanovení předloženého textu nejsou v balíčku uvedena, takže jejich změnu nelze určit. Pozměňovací návrh D navrhuje zakázat lov pod zemí se psy vypouštěnými do nor a vyhrabávání zvěře za účelem usmrcení, jde-li o lišku obecnou; návrh H2 obdobně zakazuje lov lišky v přírodních norách se psem. Jde o navrhované, nikoli přijaté změny a vztahují se pouze na lišku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43295-3",
+          "relevant": true,
+          "reasonCz": "Tato část sama text neobsahuje, ale pozměňovací návrhy k ní vkládají změnu zákona o myslivosti, která se výslovně týká lovu lišky pod zemí se psem.",
+          "effectCz": "Vlastní text této části ani předchozí znění dotčeného ustanovení nejsou v balíčku; přesný směr změny proto nelze z této části samé určit. Návrhy H2 a H3 navrhují zákaz lovu lišky obecné pod zemí v přírodních norách za pomoci loveckého psa. Návrh H3 současně připouští, aby orgán státní správy myslivosti v určitých rozhodnutích výjimku z tohoto zákazu povolil; oba návrhy se vztahují jen na lišku a H3 tedy navrhuje zákaz s výjimkou."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-24",
+          "relevant": true,
+          "reasonCz": "Nařízení výslovně upravuje finanční příspěvky na pořizování a instalaci umělých nor k lovu lišek, tedy činnost přímo související s norováním.",
+          "effectCz": "Předchozí pravidlo o těchto příspěvcích není uvedeno, takže změnu oproti dřívějšímu stavu nelze určit. Nařízení stanoví příspěvek na nové umělé nory k lovu lišek, nejvýše jednu noru na každých započatých 250 hektarů honitby, s příspěvkem nejvýše jednou za 10 let a bez příspěvku na území národních parků. Tím poskytuje finanční podporu vybavení pro lov lišek, zatímco slib směřuje k zákazu norování; samo však zákaz ani výslovnou výjimku z něj nestanoví."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-efd1c999e79a--source",
+        "psp-core-2025--law-change-43295-1",
+        "psp-core-2025--law-change-43295-3",
+        "esbirka-regulations--law-change-sb-2026-24",
+        "esbirka-regulations--2026-24",
+        "psp-core-2025--print-step-211274",
+        "psp-core-2025--government-opinion-43295-1",
+        "psp-core-2025--amendment-text-2053",
+        "psp-core-2025--amendment-text-2057",
+        "psp-core-2025--amendment-text-2084",
+        "psp-core-2025--amendment-2053",
+        "psp-core-2025--amendment-2057",
+        "psp-core-2025--amendment-2084"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrhy, které by zakázaly norování lišek, ale zákaz by se týkal jen lišek a u jednoho návrhu by bylo možné povolit výjimku. Vláda zároveň schválila nařízení, které poskytuje příspěvky na nové umělé nory k lovu lišek; tato podpora jde proti části slibu usilující o zákaz norování. Návrhy jsou zatím jen pozměňovacími návrhy, nikoli přijatým zákazem. U původního návrhu zákona nejsou v podkladech uvedena konkrétní ustanovení, která by dovolovala posoudit jeho dopad na norování.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Nařízení podporuje umělé nory k lovu lišek, ale jeho text výslovně neříká, že jsou určeny k lovu pomocí psů; jeho rozpor se slibem proto spočívá v podpoře souvisejícího způsobu lovu, nikoli v přímém zrušení či odmítnutí zákazu.",
+        "U původního návrhu zákona jsou v podkladech uvedeny jen obecné části textu, nikoli konkrétní věcná ustanovení o norování. Nelze proto přesně určit, k čemu se vztahoval souhlas vlády ani jaký dopad by měl původní návrh samotný.",
+        "Pozměňovací návrhy navrhují jen zákaz týkající se lišek a dosud není doloženo, že by byly přijaty nebo že by zákaz norování vstoupil v platnost."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_07e36b18cc20498d016aec5a9cc20087d1a1ec2e2994ed3148",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 19433,
+      "input_tokens_details": {
+        "cache_write_tokens": 13083,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 4954,
+      "output_tokens_details": {
+        "reasoning_tokens": 3677
+      },
+      "total_tokens": 24387
+    },
+    "output": {
+      "promiseId": "candidate-efd1c999e79a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43295-1",
+          "relevant": true,
+          "reasonCz": "Pozměňovací návrh k této části výslovně navrhuje zákaz lovu lišky pod zemí za použití psů, tedy část slibu; vlastní poskytnutý výňatek návrhu však neukazuje jeho původní konkrétní ustanovení.",
+          "effectCz": "Samotný výňatek ukazuje pouze úvod změny zákona, nikoli novelizované ustanovení. Předchozí ani navržené znění tohoto ustanovení proto z balíčku nelze porovnat; samostatně předložený pozměňovací návrh navrhuje zakázat lov lišky pod zemí se psy, což pokrývá jen část slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43295-3",
+          "relevant": true,
+          "reasonCz": "Tato část je relevantní prostřednictvím pozměňovacích návrhů, které navrhují zákaz lovu lišky pod zemí se psem a u jednoho znění také výjimku.",
+          "effectCz": "Vlastní text této části není poskytnut; pozměňovací návrhy navrhují doplnit do zákona o myslivosti zákaz lovit lišku pod zemí v přírodních norách s loveckým psem. Návrh H3 zároveň připouští, aby se zákaz v určitých rozhodnutích o úpravě stavu zvěře neuplatnil. Předchozí znění příslušných ustanovení chybí, takže směr změny oproti platnému právu nelze z balíčku určit; navržený zákaz se týká jen části slibu a výjimka připouští jednání, které slib zakazuje."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-24",
+          "relevant": true,
+          "reasonCz": "Nařízení zavádí příspěvek na nové umělé nory určené k lovu lišek, a proto přímo souvisí s možností lovu lišek pod zemí.",
+          "effectCz": "Nařízení nově stanoví možnost finančního příspěvku na pořízení a instalaci umělých nor na lov lišek, nejvýše v četnosti jedné nory na každých započatých 250 ha honitby, a upravuje podmínky a četnost příspěvku. Jde o nové nařízení, takže předchozí znění není k porovnání. Podpora nor může usnadňovat lov lišek pod zemí, ale text výslovně neříká, že jde o lov s loveckými psy."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-efd1c999e79a--source",
+        "psp-core-2025--law-change-43295-1",
+        "psp-core-2025--law-change-43295-3",
+        "esbirka-regulations--law-change-sb-2026-24",
+        "psp-core-2025--amendment-text-2053",
+        "psp-core-2025--amendment-text-2057",
+        "psp-core-2025--amendment-text-2084",
+        "esbirka-regulations--2026-24",
+        "psp-core-2025--print-step-211274",
+        "psp-core-2025--government-opinion-43295-1",
+        "psp-core-2025--amendment-2053",
+        "psp-core-2025--amendment-2057",
+        "psp-core-2025--amendment-2084"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrhy, které by zakázaly lov lišky pod zemí se psy; návrh H2 zákaz omezuje na přírodní nory a návrh H3 navíc připouští výjimku při některých rozhodnutích o úpravě stavu zvěře. Tyto návrhy posouvají část slibu vpřed, ale výjimka v H3 jde proti jeho úplnému zákazu. Vláda zároveň přijala nařízení umožňující příspěvky na umělé nory pro lov lišek, ačkoli nařízení výslovně nezmiňuje použití psů. Celkově tedy dostupné kroky směřují proti části slibu, nikoli proti jeho celku.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Výňatek původního návrhu zákona obsahuje jen úvod změny, takže nelze posoudit jeho další konkrétní ustanovení ani přesný obsah návrhu, se kterým vláda souhlasila.",
+        "Nařízení podporuje umělé nory pro lov lišek, ale neuvádí, zda se při lovu používají psi; jeho vztah k přesně vymezenému způsobu lovu ve slibu proto není úplně jistý.",
+        "Poskytnuté podklady neobsahují konečné hlasování o návrzích, takže dokládají předložené návrhy, nikoli přijetí úplného zákazu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_015018a5812d5671016aec5b22e99487d1a698cfde1bd34818",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 19433,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 19430
+      },
+      "output_tokens": 3894,
+      "output_tokens_details": {
+        "reasoning_tokens": 2588
+      },
+      "total_tokens": 23327
+    },
+    "output": {
+      "promiseId": "candidate-efd1c999e79a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43295-1",
+          "relevant": true,
+          "reasonCz": "K této části návrhu byly předloženy pozměňovací návrhy, které výslovně navrhují zákaz lovu lišky pod zemí za použití psa; samotný předložený text části však v balíčku neobsahuje konkrétní ustanovení o norování.",
+          "effectCz": "Předchozí znění pravidla o norování ani konkrétní věcná ustanovení předloženého textu nejsou v balíčku uvedena, takže jejich změnu nelze určit. Pozměňovací návrh D navrhuje zakázat lov pod zemí se psy vypouštěnými do nor a vyhrabávání zvěře za účelem usmrcení, jde-li o lišku obecnou; návrh H2 obdobně zakazuje lov lišky v přírodních norách se psem. Jde o navrhované, nikoli přijaté změny a vztahují se pouze na lišku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43295-3",
+          "relevant": true,
+          "reasonCz": "Tato část sama text neobsahuje, ale pozměňovací návrhy k ní vkládají změnu zákona o myslivosti, která se výslovně týká lovu lišky pod zemí se psem.",
+          "effectCz": "Vlastní text této části ani předchozí znění dotčeného ustanovení nejsou v balíčku; přesný směr změny proto nelze z této části samé určit. Návrhy H2 a H3 navrhují zákaz lovu lišky obecné pod zemí v přírodních norách za pomoci loveckého psa. Návrh H3 současně připouští, aby orgán státní správy myslivosti v určitých rozhodnutích výjimku z tohoto zákazu povolil; oba návrhy se vztahují jen na lišku a H3 tedy navrhuje zákaz s výjimkou."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-24",
+          "relevant": true,
+          "reasonCz": "Nařízení výslovně upravuje finanční příspěvky na pořizování a instalaci umělých nor k lovu lišek, tedy činnost přímo související s norováním.",
+          "effectCz": "Předchozí pravidlo o těchto příspěvcích není uvedeno, takže změnu oproti dřívějšímu stavu nelze určit. Nařízení stanoví příspěvek na nové umělé nory k lovu lišek, nejvýše jednu noru na každých započatých 250 hektarů honitby, s příspěvkem nejvýše jednou za 10 let a bez příspěvku na území národních parků. Tím poskytuje finanční podporu vybavení pro lov lišek, zatímco slib směřuje k zákazu norování; samo však zákaz ani výslovnou výjimku z něj nestanoví."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-efd1c999e79a--source",
+        "psp-core-2025--law-change-43295-1",
+        "psp-core-2025--law-change-43295-3",
+        "esbirka-regulations--law-change-sb-2026-24",
+        "esbirka-regulations--2026-24",
+        "psp-core-2025--print-step-211274",
+        "psp-core-2025--government-opinion-43295-1",
+        "psp-core-2025--amendment-text-2053",
+        "psp-core-2025--amendment-text-2057",
+        "psp-core-2025--amendment-text-2084",
+        "psp-core-2025--amendment-2053",
+        "psp-core-2025--amendment-2057",
+        "psp-core-2025--amendment-2084"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrhy, které by zakázaly norování lišek, ale zákaz by se týkal jen lišek a u jednoho návrhu by bylo možné povolit výjimku. Vláda zároveň schválila nařízení, které poskytuje příspěvky na nové umělé nory k lovu lišek; tato podpora jde proti části slibu usilující o zákaz norování. Návrhy jsou zatím jen pozměňovacími návrhy, nikoli přijatým zákazem. U původního návrhu zákona nejsou v podkladech uvedena konkrétní ustanovení, která by dovolovala posoudit jeho dopad na norování.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Nařízení podporuje umělé nory k lovu lišek, ale jeho text výslovně neříká, že jsou určeny k lovu pomocí psů; jeho rozpor se slibem proto spočívá v podpoře souvisejícího způsobu lovu, nikoli v přímém zrušení či odmítnutí zákazu.",
+        "U původního návrhu zákona jsou v podkladech uvedeny jen obecné části textu, nikoli konkrétní věcná ustanovení o norování. Nelze proto přesně určit, k čemu se vztahoval souhlas vlády ani jaký dopad by měl původní návrh samotný.",
+        "Pozměňovací návrhy navrhují jen zákaz týkající se lišek a dosud není doloženo, že by byly přijaty nebo že by zákaz norování vstoupil v platnost."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "moving-against",
+    "selectedReview": "assessor-a"
+  }
+}

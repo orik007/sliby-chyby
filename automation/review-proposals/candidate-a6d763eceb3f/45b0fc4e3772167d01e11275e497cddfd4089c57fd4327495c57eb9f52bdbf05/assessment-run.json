@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-53-31-434Z--2f00e2dea3ea",
+  "evaluatedAt": "2026-10-02T01:53:31.434Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-a6d763eceb3f/2f00e2dea3eaa2dc3c56f1e2c2f7a038e0b4d59578908a52e9b5091f8afcdbc2.json",
+  "packageHash": "2f00e2dea3eaa2dc3c56f1e2c2f7a038e0b4d59578908a52e9b5091f8afcdbc2",
+  "assessmentContentHash": "33ce759333b9898dcb7c012aba5d04bc770d3770880a2f8fefd93935cca7e5b7",
+  "assessmentFingerprint": "45b0fc4e3772167d01e11275e497cddfd4089c57fd4327495c57eb9f52bdbf05",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-a6d763eceb3f",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-a6d763eceb3f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená a následně přijatá verze mění pravidla státní podpory sportu a výslovně uvádí sport zdravotně postižených osob, avšak dodaný kontext neukazuje, zda jde oproti předchozímu stavu o novou podporu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-a6d763eceb3f--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Původní návrh poslanců ANO měnil ustanovení o vedení Národní sportovní agentury, nikoli podporu parasportu. Poslanci ANO pak hlasovali pro upravený zákon, jehož ustanovení o státní podpoře výslovně zahrnuje sport zdravotně postižených osob; po zamítnutí Senátem hlasovali také pro setrvání na tomto znění. To může podporu parasportu posouvat kupředu, ale text nestanoví její srovnatelnost s podporou běžných sportovců. Dodaný kontext navíc neukazuje, zda výslovné zahrnutí sportu zdravotně postižených osob přináší oproti dosavadnímu právnímu stavu změnu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Kontext neobsahuje dosavadní znění ustanovení o státní podpoře sportu, takže nelze ověřit, zda schválené výslovné uvedení sportu zdravotně postižených osob znamená skutečné rozšíření podpory, nebo zachovává již existující stav."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-a6d763eceb3f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená a přijatá verze výslovně zahrnuje do podpory sportu také sport osob se zdravotním postižením, což se slibem souvisí, avšak její původně předložená verze se parasportu netýkala."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-a6d763eceb3f--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Původně předložený návrh měnil jmenování a pravomoci vedení Národní sportovní agentury, nikoli podporu parasportovců. Poslanecká sněmovna později schválila širší změnu zákona o podpoře sportu, jejíž ustanovení výslovně zahrnuje sport osob se zdravotním postižením mezi oblasti podpory; poslanci ANO hlasovali pro. Po zamítnutí Senátem poslanci ANO znovu hlasovali pro setrvání na návrhu. Jde o možný dílčí krok, ale text nezaručuje srovnatelné podmínky a z podkladů nelze ověřit, zda příslušná podpora oproti dosavadní úpravě skutečně vzrostla.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neuvádějí znění § 6b odst. 1 písm. a) před změnou, takže nelze ověřit, zda nové znění poprvé zahrnulo sport osob se zdravotním postižením, nebo pouze zachovalo dosavadní podporu. Zákon navíc nestanoví srovnatelnost podpory parasportovců s podporou běžných sportovců."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0de15ee12e33dbb2016abf0e73e50487d1a539e6ba470970d2",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12495,
+      "input_tokens_details": {
+        "cache_write_tokens": 9171,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2425,
+      "output_tokens_details": {
+        "reasoning_tokens": 1937
+      },
+      "total_tokens": 14920
+    },
+    "output": {
+      "promiseId": "candidate-a6d763eceb3f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená a následně přijatá verze mění pravidla státní podpory sportu a výslovně uvádí sport zdravotně postižených osob, avšak dodaný kontext neukazuje, zda jde oproti předchozímu stavu o novou podporu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-a6d763eceb3f--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Původní návrh poslanců ANO měnil ustanovení o vedení Národní sportovní agentury, nikoli podporu parasportu. Poslanci ANO pak hlasovali pro upravený zákon, jehož ustanovení o státní podpoře výslovně zahrnuje sport zdravotně postižených osob; po zamítnutí Senátem hlasovali také pro setrvání na tomto znění. To může podporu parasportu posouvat kupředu, ale text nestanoví její srovnatelnost s podporou běžných sportovců. Dodaný kontext navíc neukazuje, zda výslovné zahrnutí sportu zdravotně postižených osob přináší oproti dosavadnímu právnímu stavu změnu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Kontext neobsahuje dosavadní znění ustanovení o státní podpoře sportu, takže nelze ověřit, zda schválené výslovné uvedení sportu zdravotně postižených osob znamená skutečné rozšíření podpory, nebo zachovává již existující stav."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0bb5f782e515c130016abf0e878e6c87d1a7782e5e81c3b585",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12495,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 12492
+      },
+      "output_tokens": 2582,
+      "output_tokens_details": {
+        "reasoning_tokens": 2020
+      },
+      "total_tokens": 15077
+    },
+    "output": {
+      "promiseId": "candidate-a6d763eceb3f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená a přijatá verze výslovně zahrnuje do podpory sportu také sport osob se zdravotním postižením, což se slibem souvisí, avšak její původně předložená verze se parasportu netýkala."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-a6d763eceb3f--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Původně předložený návrh měnil jmenování a pravomoci vedení Národní sportovní agentury, nikoli podporu parasportovců. Poslanecká sněmovna později schválila širší změnu zákona o podpoře sportu, jejíž ustanovení výslovně zahrnuje sport osob se zdravotním postižením mezi oblasti podpory; poslanci ANO hlasovali pro. Po zamítnutí Senátem poslanci ANO znovu hlasovali pro setrvání na návrhu. Jde o možný dílčí krok, ale text nezaručuje srovnatelné podmínky a z podkladů nelze ověřit, zda příslušná podpora oproti dosavadní úpravě skutečně vzrostla.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neuvádějí znění § 6b odst. 1 písm. a) před změnou, takže nelze ověřit, zda nové znění poprvé zahrnulo sport osob se zdravotním postižením, nebo pouze zachovalo dosavadní podporu. Zákon navíc nestanoví srovnatelnost podpory parasportovců s podporou běžných sportovců."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

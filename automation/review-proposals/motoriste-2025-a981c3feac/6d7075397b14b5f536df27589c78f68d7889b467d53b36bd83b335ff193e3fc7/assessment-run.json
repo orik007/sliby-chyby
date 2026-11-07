@@ -1,0 +1,641 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T10-47-12-644Z--d37be73164b8",
+  "evaluatedAt": "2026-11-05T10:47:12.644Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-a981c3feac/d37be73164b8b6a1c1f4dbb344d961fe43b3963a221c1ad75ade9bc545820477.json",
+  "packageHash": "d37be73164b8b6a1c1f4dbb344d961fe43b3963a221c1ad75ade9bc545820477",
+  "assessmentContentHash": "5445cde0aa8cb48ec4b3ad38fc195902741deadc144a827c8bed7c1e0021d635",
+  "assessmentFingerprint": "6d7075397b14b5f536df27589c78f68d7889b467d53b36bd83b335ff193e3fc7",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-a981c3feac",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0938c37f6ed92fd6016aec5e236f9487d18f81194420705a92",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 42708,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 42705
+            },
+            "output_tokens": 9234,
+            "output_tokens_details": {
+              "reasoning_tokens": 6556
+            },
+            "total_tokens": 51942
+          },
+          "output": {
+            "promiseId": "motoriste-2025-a981c3feac",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1-8",
+                "relevant": true,
+                "reasonCz": "Schválená verze převádí pracovněprávní vztahy části zaměstnanců obcí a krajů na stát, což přímo mění, kolik lidí pracuje pro stát.",
+                "effectCz": "Předchozí znění dotčených ustanovení stavebního zákona balíček neuvádí, takže nelze porovnat jejich dřívější pravidla ani určit počet dotčených osob; schválený text ale převádí uvedené pracovníky na stát, a tím rozšiřuje okruh lidí pracujících pro stát, nikoli jej snižuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": true,
+                "reasonCz": "Schválená verze snižuje počet členů Rady Energetického regulačního úřadu z pěti na tři, tedy přímo ruší dvě státní funkce.",
+                "effectCz": "Před změnou měla rada podle dodaného znění pět členů, po změně má tři; jde o snížení počtu těchto funkcí o dvě, tedy o dílčí krok ve směru slibu. Navržená verze této části se týkala jiných pravidel a takové snížení neobsahovala."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-1",
+                "relevant": true,
+                "reasonCz": "Návrh upravuje systemizaci, která stanovuje počty pracovních míst ve správních úřadech, a podmínky jejich změn.",
+                "effectCz": "Jde o návrh nového zákona a balíček nedodává předchozí znění pravidel pro srovnání. Schválený text stanovuje počty míst a u snížení počtu míst státních zaměstnanců vyžaduje předchozí souhlas Úřadu vlády; z dodaných podkladů proto nelze určit, zda tato úprava oproti dosavadnímu stavu snižování míst celkově usnadňuje, nebo ztěžuje, a nestanoví cíl snížení o 20 %."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43439-1",
+                "relevant": true,
+                "reasonCz": "Návrh převádí zaměstnance České plemenářské inspekce do Státní veterinární správy a ruší pracovní místo ředitele inspekce.",
+                "effectCz": "Předchozí znění dotčeného zákona není dodáno, takže nelze porovnat původní pravidla ani určit čistou změnu počtu pracovníků. Návrh převádí zaměstnance do jiného státního úřadu, a tedy je ze státního zaměstnání neodebírá, ale ruší místo ředitele, což je dílčí snížení počtu míst."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2025-1013",
+                "relevant": true,
+                "reasonCz": "Usnesení jmenuje ministra bez portfeje a vymezuje jeho vládní funkci, což přímo souvisí s počtem osob působících ve státní správě.",
+                "effectCz": "Usnesení jmenuje jednoho ministra bez portfeje při Úřadu vlády; předchozí stav ani případné zrušení jiné funkce text neuvádí, takže lze doložit jmenování, nikoli čistou změnu celkového počtu osob pracujících pro stát."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2025-1035",
+                "relevant": true,
+                "reasonCz": "Usnesení schvaluje systemizaci služebních a pracovních míst pro rok 2026, tedy přímo stanovuje počty míst ve státních úřadech.",
+                "effectCz": "Usnesení schvaluje systemizaci pro rok 2026, ale dodaný text odkazuje na materiál a přílohy, jejichž počty míst v balíčku nejsou uvedeny. Nelze proto určit, zda schválené počty oproti předchozímu stavu klesly, vzrostly, ani o kolik."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-30",
+                "relevant": true,
+                "reasonCz": "Usnesení vytváří funkci vládního zmocněnce, který má být zaměstnancem ministerstva, a jmenuje konkrétní osobu.",
+                "effectCz": "Usnesení zřizuje jednu funkci a stanoví, že její držitel je zaměstnancem Ministerstva životního prostředí; oproti stavu bez této funkce jde o přírůstek jednoho zaměstnaneckého místa, bez údajů o případném zrušení jiného místa."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-56",
+                "relevant": true,
+                "reasonCz": "Usnesení ukončuje výkon státní služby nejvyššího státního tajemníka, tedy se přímo týká osoby a místa ve státní správě.",
+                "effectCz": "Usnesení stanoví, že 31. ledna 2026 skončí výkon státní služby konkrétní osoby na daném místě. Neříká však, zda místo zanikne, zda bude obsazeno náhradníkem ani zda dotyčný přestane pracovat pro stát, takže čistý dopad na počet osob nelze určit."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+                "relevant": true,
+                "reasonCz": "Usnesení zřizuje funkci vládního zmocněnce, který má být zaměstnancem Ministerstva pro místní rozvoj, a jmenuje konkrétní osobu.",
+                "effectCz": "Usnesení zřizuje jednu funkci a stanoví, že její držitel je zaměstnancem Ministerstva pro místní rozvoj; oproti stavu bez této funkce jde o přírůstek jednoho zaměstnaneckého místa, bez údajů o případném zrušení jiného místa."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-111",
+                "relevant": true,
+                "reasonCz": "Usnesení zřizuje funkci zmocněnce, který je zaměstnancem Ministerstva zdravotnictví; to přímo ovlivňuje počet osob pracujících pro stát.",
+                "effectCz": "Usnesení vytváří jednu funkci zaměstnance Ministerstva zdravotnictví. Odborný tým mají zaměstnávat dotčené nemocnice, nikoli podle dodaného textu stát; jeho počet proto nelze započítat jako státní zaměstnance. U samotné funkce zmocněnce jde o přírůstek jednoho místa, bez uvedení kompenzačního zrušení jiného."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": false,
+            "citedEvidenceIds": [
+              "motoriste-2025-a981c3feac--source",
+              "psp-core-2025--law-change-43174-1-8",
+              "psp-core-2025--law-change-43174-21",
+              "psp-core-2025--law-change-43183-1",
+              "psp-core-2025--law-change-43439-1",
+              "zvlady-resolutions--law-change-uv-2025-1013",
+              "zvlady-resolutions--law-change-uv-2025-1035",
+              "zvlady-resolutions--law-change-uv-2026-30",
+              "zvlady-resolutions--law-change-uv-2026-56",
+              "zvlady-resolutions--law-change-uv-2026-59",
+              "zvlady-resolutions--law-change-uv-2026-111",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--government-opinion-43174-1",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--print-step-210647",
+              "psp-core-2025--government-opinion-43183-1",
+              "psp-core-2025--amendment-text-830",
+              "psp-core-2025--vote-87954",
+              "psp-core-2025--vote-87958",
+              "psp-core-2025--vote-88449",
+              "psp-core-2025--senate-resolution-43183-7",
+              "psp-core-2025--government-opinion-43439-1",
+              "zvlady-resolutions--2025-1013",
+              "zvlady-resolutions--2025-1035",
+              "zvlady-resolutions--2026-30",
+              "zvlady-resolutions--2026-56",
+              "zvlady-resolutions--2026-59",
+              "zvlady-resolutions--2026-111"
+            ],
+            "explanationCz": "U novely stavebního zákona, tedy návrhu projednávaného jako sněmovní tisk 67, poslanci Motoristů hlasovali pro přesun části pracovníků obcí a krajů na stát; současně schválené znění snížilo počet členů Energetického regulačního úřadu z pěti na tři. Vláda také přijala usnesení o třech zmocněneckých funkcích, jejichž držitelé mají být zaměstnanci ministerstev, zatímco zrušení místa ředitele plemenářské inspekce a ukončení služby nejvyššího státního tajemníka působí opačným směrem. Smíšené změny v novele stavebního zákona představují jen dílčí posun proti slibu, nikoli jeho celé popření. Chybějí však číselné přílohy schválené systemizace míst pro rok 2026, takže nelze ověřit celkový dopad na počet osob ani pokrok k cíli snížit jej alespoň o 20 %.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Usnesení o systemizaci pro rok 2026 odkazuje na materiál a přílohy s počty míst, které v balíčku nejsou; nelze proto posoudit, zda systémové počty míst klesly, nebo vzrostly.",
+              "U návrhu zákona o státních zaměstnancích chybí předchozí znění pravidel, s nímž by bylo možné porovnat novou systemizaci a podmínky snižování míst.",
+              "U převodu zaměstnanců obcí a krajů na stát nejsou uvedeny počty osob, takže nelze posoudit jeho čistý dopad na celkový počet lidí pracujících pro stát."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-a981c3feac",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": true,
+          "reasonCz": "Ustanovení převádí pracovníky obecních a krajských stavebních úřadů do nových úřadů rozvoje území a může tak ovlivnit počet lidí pracujících pro stát.",
+          "effectCz": "Předchozí znění dotčených ustanovení není v balíčku uvedeno, takže změnu proti dosavadní úpravě nelze určit. Schválená verze převádí pracovněprávní vztahy dotčených zaměstnanců na stát; sama o sobě jejich počet nesnižuje a může zvýšit počet osob vedených jako zaměstnanci státu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválená verze mění počet členů Rady Energetického regulačního úřadu, tedy počet míst ve státním úřadu.",
+          "effectCz": "Dosavadní § 17b odst. 1 stanovil pět členů Rady; schválené znění stanoví tři. Jde o snížení o dvě místa, tedy o dílčí zmenšení počtu osob ve státní instituci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje systemizaci pracovních míst ve správních úřadech a podmínky, za nichž lze počet míst měnit nebo snižovat.",
+          "effectCz": "Jde o návrh nového zákona a balíček neuvádí předchozí znění těchto pravidel, takže změnu proti dosavadní úpravě nelze určit. Návrh i schválené znění stanoví postup pro určování pracovních míst; schválené znění dovoluje snížení počtu míst státních zaměstnanců jen s předchozím souhlasem Úřadu vlády a při změně působnosti úřadu nebo podstatné změně podmínek. Tato podmínka může dosažení plošného snížení ztížit, ale sama žádný počet míst nesnižuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43439-1",
+          "relevant": true,
+          "reasonCz": "Návrh převádí zaměstnance České plemenářské inspekce do Státní veterinární správy a ruší místo ředitele inspekce.",
+          "effectCz": "Balíček neuvádí předchozí znění, takže nelze porovnat změnu proti dosavadní úpravě. Návrh převádí zaměstnance mezi státními úřady, a tím jejich počet ve státě sám nesnižuje; výslovně však ruší pracovní místo ředitele inspekce, což představuje dílčí snížení počtu míst."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1013",
+          "relevant": true,
+          "reasonCz": "Usnesení jmenuje ministra bez portfeje a vymezuje jeho postavení jako člena vlády, což se týká počtu osob ve státní správě.",
+          "effectCz": "Usnesení jmenuje ministra pro sport, prevenci a zdraví a stanoví, že je členem vlády bez portfeje při Úřadu vlády. Jde o jednu funkci navíc; balíček neuvádí, že by současně zaniklo jiné místo, takže usnesení nesměřuje ke snížení počtu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1035",
+          "relevant": true,
+          "reasonCz": "Usnesení schvaluje systemizaci služebních a pracovních míst ve služebních úřadech, která přímo určuje jejich počty.",
+          "effectCz": "Usnesení schvaluje systemizaci účinnou od 1. ledna 2026, ale dodaný text neobsahuje počty míst z materiálu a příloh, které schvaluje. Směr změny počtu zaměstnanců proto z balíčku nelze určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-30",
+          "relevant": true,
+          "reasonCz": "Usnesení zřizuje funkci zmocněnce, který má být zaměstnancem ministerstva, a může tak zvýšit počet osob pracujících pro stát.",
+          "effectCz": "Usnesení vytváří funkci vládního zmocněnce pro klimatickou politiku a Green Deal a stanoví, že jde o zaměstnance Ministerstva životního prostředí. V dodaném textu není uvedeno související zrušení jiného místa, takže jde o dílčí zvýšení, nikoli snížení počtu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-56",
+          "relevant": true,
+          "reasonCz": "Usnesení oznamuje skončení státní služby jedné osoby na vrcholném služebním místě, což může počet státních zaměstnanců ovlivnit.",
+          "effectCz": "Usnesení uvádí, že 31. ledna 2026 skončí výkon služby konkrétní osoby na místě nejvyššího státního tajemníka. Neříká však, že místo zaniká nebo nebude obsazeno; dopad na celkový počet zaměstnanců proto nelze určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+          "relevant": true,
+          "reasonCz": "Usnesení zřizuje funkci zmocněnce a výslovně stanoví, že jej zaměstnává Ministerstvo pro místní rozvoj.",
+          "effectCz": "Usnesení vytváří funkci vládního zmocněnce pro implementaci stavebního práva a stanoví, že je zaměstnancem Ministerstva pro místní rozvoj. Text neuvádí zánik jiného místa, takže jde o dílčí zvýšení, nikoli snížení počtu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-111",
+          "relevant": true,
+          "reasonCz": "Usnesení zřizuje zmocněnce zaměstnaného ministerstvem a expertní tým s pracovními či smluvními vztahy, takže se může projevit v počtu osob pracujících pro stát.",
+          "effectCz": "Usnesení vytváří funkci zmocněnce, který je zaměstnancem Ministerstva zdravotnictví, a ukládá nemocnicím zajistit pracovní či smluvní vztahy a financování expertního týmu. Počet dalších osob není uveden a není doloženo rušení jiných míst; samotný text tedy nesměřuje ke snížení počtu."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-a981c3feac--source",
+        "psp-core-2025--law-change-43174-1-8",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43183-1",
+        "psp-core-2025--law-change-43439-1",
+        "zvlady-resolutions--law-change-uv-2025-1013",
+        "zvlady-resolutions--law-change-uv-2025-1035",
+        "zvlady-resolutions--law-change-uv-2026-30",
+        "zvlady-resolutions--law-change-uv-2026-56",
+        "zvlady-resolutions--law-change-uv-2026-59",
+        "zvlady-resolutions--law-change-uv-2026-111",
+        "psp-core-2025--print-step-210570",
+        "zvlady-resolutions--2025-1013",
+        "psp-core-2025--government-opinion-43174-1",
+        "zvlady-resolutions--2025-1035",
+        "psp-core-2025--print-step-210647",
+        "psp-core-2025--government-opinion-43183-1",
+        "psp-core-2025--amendment-text-830",
+        "psp-core-2025--vote-87954",
+        "psp-core-2025--vote-87958",
+        "psp-core-2025--senate-resolution-43183-7",
+        "psp-core-2025--vote-88449",
+        "zvlady-resolutions--2026-30",
+        "zvlady-resolutions--2026-56",
+        "zvlady-resolutions--2026-59",
+        "zvlady-resolutions--2026-111",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--government-opinion-43439-1"
+      ],
+      "explanationCz": "Poslanci Motoristů hlasovali pro zákon o státních zaměstnancích, který omezuje snižování počtu služebních míst a váže je na splnění stanovených podmínek. Hlasovali také pro novelu stavebního zákona: ta převádí část zaměstnanců místních stavebních úřadů pod stát, i když zároveň snižuje počet členů jedné státní rady z pěti na tři. Vláda navíc schválila systemizaci míst pro rok 2026, ale dodaný text neuvádí schválené počty. Doložené kroky proto zatím působí proti slibu, avšak bez počtů míst nelze ověřit, zda se stát celkovému snížení alespoň o 20 % přiblížil.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text usnesení o systemizaci od 1. ledna 2026 odkazuje na materiál a přílohy, ale dodaný balíček jejich počty pracovních míst neuvádí; bez nich nelze určit, zda se počet míst v roce 2026 snížil.",
+        "U převodu zaměstnanců stavebních úřadů není doloženo, zda slib počítá i pracovníky obcí a krajů, kteří se po změně stali zaměstnanci státu.",
+        "U skončení služby nejvyššího státního tajemníka není uvedeno, zda bylo jeho místo zrušeno, nebo obsazeno jinou osobou."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-a981c3feac",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": true,
+          "reasonCz": "Schválené znění převádí část dosavadních zaměstnanců obcí a krajů do státní služby, což přímo mění počet lidí pracujících pro stát.",
+          "effectCz": "Před změnou byli dotčení zaměstnanci zaměstnanci obcí či krajů; schválené znění převádí jejich pracovněprávní vztahy na stát a zařazuje je do nových úřadů. Tím se počet osob pracujících pro stát zvyšuje o převáděné zaměstnance, a jde tedy proti slibu jeho snížení; jejich počet text neuvádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválené znění mění počet členů Energetického regulačního úřadu, tedy přímo počet osob ve státním orgánu.",
+          "effectCz": "Před změnou měla Rada Energetického regulačního úřadu 5 členů; schválené znění tento počet snižuje na 3. Počet míst tím klesá o 2, což je dílčí posun ve směru slibu; navržené znění této části se týkalo jiných pravidel a počtu členů se netýkalo."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": true,
+          "reasonCz": "Nový zákon upravuje systemizaci, tedy počty pracovních míst státních i ostatních zaměstnanců správních úřadů, a podmínky jejich změn.",
+          "effectCz": "Předchozí znění příslušných pravidel není v balíčku uvedeno, protože jde o návrh nového zákona, takže směr změny vůči dosavadní právní úpravě nelze určit. Schválený text stanoví, že systemizace určuje počty míst a že snížení počtu míst státních zaměstnanců vyžaduje předchozí souhlas Úřadu vlády, který má souhlasit při změně působnosti úřadu nebo podstatné změně podmínek; dopad tohoto nového rámce na dosažení celkového snížení o 20 % nelze z textu vyčíslit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43439-1",
+          "relevant": true,
+          "reasonCz": "Návrh převádí zaměstnance České plemenářské inspekce do Státní veterinární správy a současně ruší místo ředitele inspekce.",
+          "effectCz": "Předchozí znění měněných předpisů není v balíčku uvedeno. Návrh převádí dosavadní zaměstnance inspekce do Státní veterinární správy a zachovává jejich pracovní místa, není-li v systemizaci stanoveno jinak, zatímco místo ředitele inspekce zaniká; samotné převedení počet státních zaměstnanců nesnižuje, zánik jednoho místa představuje malý dílčí pokles."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1013",
+          "relevant": true,
+          "reasonCz": "Usnesení jmenuje nového ministra bez portfeje a stanoví jeho roli ve vládě, což se přímo týká počtu osob vykonávajících státní funkci.",
+          "effectCz": "Usnesení jmenuje ministra pro sport, prevenci a zdraví jako člena vlády bez portfeje a svěřuje mu meziresortní koordinační úlohu. Předchozí stav počtu členů vlády ani zrušení jiné funkce text neuvádí; případný čistý dopad na počet osob pracujících pro stát proto nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1035",
+          "relevant": true,
+          "reasonCz": "Usnesení schvaluje systemizaci služebních a pracovních míst, která přímo určuje počty míst ve služebních úřadech.",
+          "effectCz": "Usnesení schvaluje systemizaci účinnou od 1. ledna 2026, ale odkazované materiály a přílohy s konkrétními počty míst v poskytnutém textu nejsou. Nelze proto určit, zda schválená systemizace počet míst zvyšuje, snižuje, nebo ponechává beze změny, ani jak se vztahuje k cíli snížení o 20 %."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-30",
+          "relevant": true,
+          "reasonCz": "Usnesení vytváří funkci vládního zmocněnce, který má být zaměstnancem ministerstva, a tím přímo přidává pracovní roli ve státní správě.",
+          "effectCz": "Usnesení vytváří funkci vládního zmocněnce a jmenuje do ní osobu, která má být zaměstnancem Ministerstva životního prostředí. Předchozí stav personálního obsazení není uveden; nová zaměstnanecká funkce zvyšuje počet míst či zaměstnanců přinejmenším o jednu roli, a jde tedy proti slibu v malé části."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-56",
+          "relevant": true,
+          "reasonCz": "Usnesení ukončuje výkon státní služby konkrétního nejvyššího státního tajemníka, což se přímo týká počtu osob ve státní službě.",
+          "effectCz": "Usnesení stanoví, že k 31. lednu 2026 skončí výkon státní služby dosavadního nejvyššího státního tajemníka. Neříká však, že zaniká jeho služební místo nebo že nebude obsazeno jinou osobou; snížení celkového počtu státních zaměstnanců proto nelze z balíčku potvrdit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+          "relevant": true,
+          "reasonCz": "Usnesení vytváří funkci vládního zmocněnce, který má být zaměstnancem Ministerstva pro místní rozvoj.",
+          "effectCz": "Usnesení zřizuje funkci vládního zmocněnce a jmenuje do ní osobu, která má práci vykonávat jako zaměstnanec Ministerstva pro místní rozvoj. Předchozí personální stav není uveden; nová zaměstnanecká funkce představuje přírůstek pracovní role ve státní správě a dílčí působení proti slibu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-111",
+          "relevant": true,
+          "reasonCz": "Usnesení zřizuje zmocněnce, který má být zaměstnancem Ministerstva zdravotnictví, a ukládá nemocnicím zajistit pracovněprávní či smluvní vztahy s expertním týmem.",
+          "effectCz": "Usnesení vytváří funkci vládního zmocněnce zaměstnaného Ministerstvem zdravotnictví a ukládá dotčeným nemocnicím zajistit pracovněprávní či smluvní vztahy s členy expertního týmu. Počet osob ani jejich předchozí stav text neuvádí, ale vytváří další personální role místo toho, aby doložil snížení počtu osob pracujících pro stát."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-a981c3feac--source",
+        "psp-core-2025--law-change-43174-1-8",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43183-1",
+        "psp-core-2025--law-change-43439-1",
+        "zvlady-resolutions--law-change-uv-2025-1013",
+        "zvlady-resolutions--law-change-uv-2025-1035",
+        "zvlady-resolutions--law-change-uv-2026-30",
+        "zvlady-resolutions--law-change-uv-2026-56",
+        "zvlady-resolutions--law-change-uv-2026-59",
+        "zvlady-resolutions--law-change-uv-2026-111",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210647",
+        "psp-core-2025--government-opinion-43183-1",
+        "psp-core-2025--vote-87954",
+        "psp-core-2025--amendment-text-830",
+        "psp-core-2025--vote-87958",
+        "psp-core-2025--vote-88449",
+        "psp-core-2025--senate-resolution-43183-7",
+        "psp-core-2025--government-opinion-43439-1",
+        "zvlady-resolutions--2025-1013",
+        "zvlady-resolutions--2025-1035",
+        "zvlady-resolutions--2026-30",
+        "zvlady-resolutions--2026-56",
+        "zvlady-resolutions--2026-59",
+        "zvlady-resolutions--2026-111"
+      ],
+      "explanationCz": "Poslanci Motoristů podpořili novelu stavebního zákona, která převádí část zaměstnanců obcí a krajů do státní správy, ačkoli zároveň snižuje počet členů energetické regulační rady ze pěti na tři. Sněmovna také schválila zákon o státních zaměstnancích, který upravuje počty míst a podmínky jejich snižování, ale nestanoví snížení o 20 %. Vláda navíc zřídila několik funkcí zmocněnců zaměstnávaných ministerstvy; jednotlivé převody a nové role tak působí proti slibu alespoň v části. Schválená systemizace míst pro rok 2026 však v dodaném textu neobsahuje konkrétní počty, a nelze proto ověřit její dopad ani celkový vývoj počtu osob pracujících pro stát.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Usnesení vlády o systemizaci pro rok 2026 odkazuje na přílohy s počty míst, které v dodaném textu chybějí; nelze určit, zda počet míst zvyšuje či snižuje ani zda je tato změna nejvýznamnější pro posouzení slibu.",
+        "Balíček neuvádí celkový počet osob pracujících pro stát před změnami ani po nich, takže nelze ověřit dosažení cíle snížit tento počet alespoň o 20 %.",
+        "U některých usnesení končí služba konkrétní osoby nebo vzniká nová zaměstnanecká funkce, ale text neříká, zda se místo následně zruší, obsadí jinou osobou, ani jaký je čistý dopad na celkový počet zaměstnanců."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_02092aba5d0a7119016aec5de9c62c87d1b14c33ead8cfa63c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 42708,
+      "input_tokens_details": {
+        "cache_write_tokens": 36358,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 7664,
+      "output_tokens_details": {
+        "reasoning_tokens": 5060
+      },
+      "total_tokens": 50372
+    },
+    "output": {
+      "promiseId": "motoriste-2025-a981c3feac",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": true,
+          "reasonCz": "Ustanovení převádí pracovníky obecních a krajských stavebních úřadů do nových úřadů rozvoje území a může tak ovlivnit počet lidí pracujících pro stát.",
+          "effectCz": "Předchozí znění dotčených ustanovení není v balíčku uvedeno, takže změnu proti dosavadní úpravě nelze určit. Schválená verze převádí pracovněprávní vztahy dotčených zaměstnanců na stát; sama o sobě jejich počet nesnižuje a může zvýšit počet osob vedených jako zaměstnanci státu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválená verze mění počet členů Rady Energetického regulačního úřadu, tedy počet míst ve státním úřadu.",
+          "effectCz": "Dosavadní § 17b odst. 1 stanovil pět členů Rady; schválené znění stanoví tři. Jde o snížení o dvě místa, tedy o dílčí zmenšení počtu osob ve státní instituci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje systemizaci pracovních míst ve správních úřadech a podmínky, za nichž lze počet míst měnit nebo snižovat.",
+          "effectCz": "Jde o návrh nového zákona a balíček neuvádí předchozí znění těchto pravidel, takže změnu proti dosavadní úpravě nelze určit. Návrh i schválené znění stanoví postup pro určování pracovních míst; schválené znění dovoluje snížení počtu míst státních zaměstnanců jen s předchozím souhlasem Úřadu vlády a při změně působnosti úřadu nebo podstatné změně podmínek. Tato podmínka může dosažení plošného snížení ztížit, ale sama žádný počet míst nesnižuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43439-1",
+          "relevant": true,
+          "reasonCz": "Návrh převádí zaměstnance České plemenářské inspekce do Státní veterinární správy a ruší místo ředitele inspekce.",
+          "effectCz": "Balíček neuvádí předchozí znění, takže nelze porovnat změnu proti dosavadní úpravě. Návrh převádí zaměstnance mezi státními úřady, a tím jejich počet ve státě sám nesnižuje; výslovně však ruší pracovní místo ředitele inspekce, což představuje dílčí snížení počtu míst."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1013",
+          "relevant": true,
+          "reasonCz": "Usnesení jmenuje ministra bez portfeje a vymezuje jeho postavení jako člena vlády, což se týká počtu osob ve státní správě.",
+          "effectCz": "Usnesení jmenuje ministra pro sport, prevenci a zdraví a stanoví, že je členem vlády bez portfeje při Úřadu vlády. Jde o jednu funkci navíc; balíček neuvádí, že by současně zaniklo jiné místo, takže usnesení nesměřuje ke snížení počtu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1035",
+          "relevant": true,
+          "reasonCz": "Usnesení schvaluje systemizaci služebních a pracovních míst ve služebních úřadech, která přímo určuje jejich počty.",
+          "effectCz": "Usnesení schvaluje systemizaci účinnou od 1. ledna 2026, ale dodaný text neobsahuje počty míst z materiálu a příloh, které schvaluje. Směr změny počtu zaměstnanců proto z balíčku nelze určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-30",
+          "relevant": true,
+          "reasonCz": "Usnesení zřizuje funkci zmocněnce, který má být zaměstnancem ministerstva, a může tak zvýšit počet osob pracujících pro stát.",
+          "effectCz": "Usnesení vytváří funkci vládního zmocněnce pro klimatickou politiku a Green Deal a stanoví, že jde o zaměstnance Ministerstva životního prostředí. V dodaném textu není uvedeno související zrušení jiného místa, takže jde o dílčí zvýšení, nikoli snížení počtu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-56",
+          "relevant": true,
+          "reasonCz": "Usnesení oznamuje skončení státní služby jedné osoby na vrcholném služebním místě, což může počet státních zaměstnanců ovlivnit.",
+          "effectCz": "Usnesení uvádí, že 31. ledna 2026 skončí výkon služby konkrétní osoby na místě nejvyššího státního tajemníka. Neříká však, že místo zaniká nebo nebude obsazeno; dopad na celkový počet zaměstnanců proto nelze určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+          "relevant": true,
+          "reasonCz": "Usnesení zřizuje funkci zmocněnce a výslovně stanoví, že jej zaměstnává Ministerstvo pro místní rozvoj.",
+          "effectCz": "Usnesení vytváří funkci vládního zmocněnce pro implementaci stavebního práva a stanoví, že je zaměstnancem Ministerstva pro místní rozvoj. Text neuvádí zánik jiného místa, takže jde o dílčí zvýšení, nikoli snížení počtu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-111",
+          "relevant": true,
+          "reasonCz": "Usnesení zřizuje zmocněnce zaměstnaného ministerstvem a expertní tým s pracovními či smluvními vztahy, takže se může projevit v počtu osob pracujících pro stát.",
+          "effectCz": "Usnesení vytváří funkci zmocněnce, který je zaměstnancem Ministerstva zdravotnictví, a ukládá nemocnicím zajistit pracovní či smluvní vztahy a financování expertního týmu. Počet dalších osob není uveden a není doloženo rušení jiných míst; samotný text tedy nesměřuje ke snížení počtu."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-a981c3feac--source",
+        "psp-core-2025--law-change-43174-1-8",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43183-1",
+        "psp-core-2025--law-change-43439-1",
+        "zvlady-resolutions--law-change-uv-2025-1013",
+        "zvlady-resolutions--law-change-uv-2025-1035",
+        "zvlady-resolutions--law-change-uv-2026-30",
+        "zvlady-resolutions--law-change-uv-2026-56",
+        "zvlady-resolutions--law-change-uv-2026-59",
+        "zvlady-resolutions--law-change-uv-2026-111",
+        "psp-core-2025--print-step-210570",
+        "zvlady-resolutions--2025-1013",
+        "psp-core-2025--government-opinion-43174-1",
+        "zvlady-resolutions--2025-1035",
+        "psp-core-2025--print-step-210647",
+        "psp-core-2025--government-opinion-43183-1",
+        "psp-core-2025--amendment-text-830",
+        "psp-core-2025--vote-87954",
+        "psp-core-2025--vote-87958",
+        "psp-core-2025--senate-resolution-43183-7",
+        "psp-core-2025--vote-88449",
+        "zvlady-resolutions--2026-30",
+        "zvlady-resolutions--2026-56",
+        "zvlady-resolutions--2026-59",
+        "zvlady-resolutions--2026-111",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--government-opinion-43439-1"
+      ],
+      "explanationCz": "Poslanci Motoristů hlasovali pro zákon o státních zaměstnancích, který omezuje snižování počtu služebních míst a váže je na splnění stanovených podmínek. Hlasovali také pro novelu stavebního zákona: ta převádí část zaměstnanců místních stavebních úřadů pod stát, i když zároveň snižuje počet členů jedné státní rady z pěti na tři. Vláda navíc schválila systemizaci míst pro rok 2026, ale dodaný text neuvádí schválené počty. Doložené kroky proto zatím působí proti slibu, avšak bez počtů míst nelze ověřit, zda se stát celkovému snížení alespoň o 20 % přiblížil.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text usnesení o systemizaci od 1. ledna 2026 odkazuje na materiál a přílohy, ale dodaný balíček jejich počty pracovních míst neuvádí; bez nich nelze určit, zda se počet míst v roce 2026 snížil.",
+        "U převodu zaměstnanců stavebních úřadů není doloženo, zda slib počítá i pracovníky obcí a krajů, kteří se po změně stali zaměstnanci státu.",
+        "U skončení služby nejvyššího státního tajemníka není uvedeno, zda bylo jeho místo zrušeno, nebo obsazeno jinou osobou."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0c108a4dc76edef5016aec5e6ee6b887d1b1963d25813ee8fd",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 42708,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 42705
+      },
+      "output_tokens": 7875,
+      "output_tokens_details": {
+        "reasoning_tokens": 5262
+      },
+      "total_tokens": 50583
+    },
+    "output": {
+      "promiseId": "motoriste-2025-a981c3feac",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1-8",
+          "relevant": true,
+          "reasonCz": "Schválené znění převádí část dosavadních zaměstnanců obcí a krajů do státní služby, což přímo mění počet lidí pracujících pro stát.",
+          "effectCz": "Před změnou byli dotčení zaměstnanci zaměstnanci obcí či krajů; schválené znění převádí jejich pracovněprávní vztahy na stát a zařazuje je do nových úřadů. Tím se počet osob pracujících pro stát zvyšuje o převáděné zaměstnance, a jde tedy proti slibu jeho snížení; jejich počet text neuvádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválené znění mění počet členů Energetického regulačního úřadu, tedy přímo počet osob ve státním orgánu.",
+          "effectCz": "Před změnou měla Rada Energetického regulačního úřadu 5 členů; schválené znění tento počet snižuje na 3. Počet míst tím klesá o 2, což je dílčí posun ve směru slibu; navržené znění této části se týkalo jiných pravidel a počtu členů se netýkalo."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": true,
+          "reasonCz": "Nový zákon upravuje systemizaci, tedy počty pracovních míst státních i ostatních zaměstnanců správních úřadů, a podmínky jejich změn.",
+          "effectCz": "Předchozí znění příslušných pravidel není v balíčku uvedeno, protože jde o návrh nového zákona, takže směr změny vůči dosavadní právní úpravě nelze určit. Schválený text stanoví, že systemizace určuje počty míst a že snížení počtu míst státních zaměstnanců vyžaduje předchozí souhlas Úřadu vlády, který má souhlasit při změně působnosti úřadu nebo podstatné změně podmínek; dopad tohoto nového rámce na dosažení celkového snížení o 20 % nelze z textu vyčíslit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43439-1",
+          "relevant": true,
+          "reasonCz": "Návrh převádí zaměstnance České plemenářské inspekce do Státní veterinární správy a současně ruší místo ředitele inspekce.",
+          "effectCz": "Předchozí znění měněných předpisů není v balíčku uvedeno. Návrh převádí dosavadní zaměstnance inspekce do Státní veterinární správy a zachovává jejich pracovní místa, není-li v systemizaci stanoveno jinak, zatímco místo ředitele inspekce zaniká; samotné převedení počet státních zaměstnanců nesnižuje, zánik jednoho místa představuje malý dílčí pokles."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1013",
+          "relevant": true,
+          "reasonCz": "Usnesení jmenuje nového ministra bez portfeje a stanoví jeho roli ve vládě, což se přímo týká počtu osob vykonávajících státní funkci.",
+          "effectCz": "Usnesení jmenuje ministra pro sport, prevenci a zdraví jako člena vlády bez portfeje a svěřuje mu meziresortní koordinační úlohu. Předchozí stav počtu členů vlády ani zrušení jiné funkce text neuvádí; případný čistý dopad na počet osob pracujících pro stát proto nelze z balíčku určit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1035",
+          "relevant": true,
+          "reasonCz": "Usnesení schvaluje systemizaci služebních a pracovních míst, která přímo určuje počty míst ve služebních úřadech.",
+          "effectCz": "Usnesení schvaluje systemizaci účinnou od 1. ledna 2026, ale odkazované materiály a přílohy s konkrétními počty míst v poskytnutém textu nejsou. Nelze proto určit, zda schválená systemizace počet míst zvyšuje, snižuje, nebo ponechává beze změny, ani jak se vztahuje k cíli snížení o 20 %."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-30",
+          "relevant": true,
+          "reasonCz": "Usnesení vytváří funkci vládního zmocněnce, který má být zaměstnancem ministerstva, a tím přímo přidává pracovní roli ve státní správě.",
+          "effectCz": "Usnesení vytváří funkci vládního zmocněnce a jmenuje do ní osobu, která má být zaměstnancem Ministerstva životního prostředí. Předchozí stav personálního obsazení není uveden; nová zaměstnanecká funkce zvyšuje počet míst či zaměstnanců přinejmenším o jednu roli, a jde tedy proti slibu v malé části."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-56",
+          "relevant": true,
+          "reasonCz": "Usnesení ukončuje výkon státní služby konkrétního nejvyššího státního tajemníka, což se přímo týká počtu osob ve státní službě.",
+          "effectCz": "Usnesení stanoví, že k 31. lednu 2026 skončí výkon státní služby dosavadního nejvyššího státního tajemníka. Neříká však, že zaniká jeho služební místo nebo že nebude obsazeno jinou osobou; snížení celkového počtu státních zaměstnanců proto nelze z balíčku potvrdit."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-59",
+          "relevant": true,
+          "reasonCz": "Usnesení vytváří funkci vládního zmocněnce, který má být zaměstnancem Ministerstva pro místní rozvoj.",
+          "effectCz": "Usnesení zřizuje funkci vládního zmocněnce a jmenuje do ní osobu, která má práci vykonávat jako zaměstnanec Ministerstva pro místní rozvoj. Předchozí personální stav není uveden; nová zaměstnanecká funkce představuje přírůstek pracovní role ve státní správě a dílčí působení proti slibu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-111",
+          "relevant": true,
+          "reasonCz": "Usnesení zřizuje zmocněnce, který má být zaměstnancem Ministerstva zdravotnictví, a ukládá nemocnicím zajistit pracovněprávní či smluvní vztahy s expertním týmem.",
+          "effectCz": "Usnesení vytváří funkci vládního zmocněnce zaměstnaného Ministerstvem zdravotnictví a ukládá dotčeným nemocnicím zajistit pracovněprávní či smluvní vztahy s členy expertního týmu. Počet osob ani jejich předchozí stav text neuvádí, ale vytváří další personální role místo toho, aby doložil snížení počtu osob pracujících pro stát."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-a981c3feac--source",
+        "psp-core-2025--law-change-43174-1-8",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43183-1",
+        "psp-core-2025--law-change-43439-1",
+        "zvlady-resolutions--law-change-uv-2025-1013",
+        "zvlady-resolutions--law-change-uv-2025-1035",
+        "zvlady-resolutions--law-change-uv-2026-30",
+        "zvlady-resolutions--law-change-uv-2026-56",
+        "zvlady-resolutions--law-change-uv-2026-59",
+        "zvlady-resolutions--law-change-uv-2026-111",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--government-opinion-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210647",
+        "psp-core-2025--government-opinion-43183-1",
+        "psp-core-2025--vote-87954",
+        "psp-core-2025--amendment-text-830",
+        "psp-core-2025--vote-87958",
+        "psp-core-2025--vote-88449",
+        "psp-core-2025--senate-resolution-43183-7",
+        "psp-core-2025--government-opinion-43439-1",
+        "zvlady-resolutions--2025-1013",
+        "zvlady-resolutions--2025-1035",
+        "zvlady-resolutions--2026-30",
+        "zvlady-resolutions--2026-56",
+        "zvlady-resolutions--2026-59",
+        "zvlady-resolutions--2026-111"
+      ],
+      "explanationCz": "Poslanci Motoristů podpořili novelu stavebního zákona, která převádí část zaměstnanců obcí a krajů do státní správy, ačkoli zároveň snižuje počet členů energetické regulační rady ze pěti na tři. Sněmovna také schválila zákon o státních zaměstnancích, který upravuje počty míst a podmínky jejich snižování, ale nestanoví snížení o 20 %. Vláda navíc zřídila několik funkcí zmocněnců zaměstnávaných ministerstvy; jednotlivé převody a nové role tak působí proti slibu alespoň v části. Schválená systemizace míst pro rok 2026 však v dodaném textu neobsahuje konkrétní počty, a nelze proto ověřit její dopad ani celkový vývoj počtu osob pracujících pro stát.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Usnesení vlády o systemizaci pro rok 2026 odkazuje na přílohy s počty míst, které v dodaném textu chybějí; nelze určit, zda počet míst zvyšuje či snižuje ani zda je tato změna nejvýznamnější pro posouzení slibu.",
+        "Balíček neuvádí celkový počet osob pracujících pro stát před změnami ani po nich, takže nelze ověřit dosažení cíle snížit tento počet alespoň o 20 %.",
+        "U některých usnesení končí služba konkrétní osoby nebo vzniká nová zaměstnanecká funkce, ale text neříká, zda se místo následně zruší, obsadí jinou osobou, ani jaký je čistý dopad na celkový počet zaměstnanců."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

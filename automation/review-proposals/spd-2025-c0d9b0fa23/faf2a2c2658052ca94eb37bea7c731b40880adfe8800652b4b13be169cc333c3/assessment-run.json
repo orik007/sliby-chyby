@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T13-46-36-284Z--402fdc40f402",
+  "evaluatedAt": "2026-11-05T13:46:36.284Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-c0d9b0fa23/402fdc40f402bbfcfa7e17b3cf27e54c5265bf639ad298f8cdee7aad8c4808cc.json",
+  "packageHash": "402fdc40f402bbfcfa7e17b3cf27e54c5265bf639ad298f8cdee7aad8c4808cc",
+  "assessmentContentHash": "02b99cd46bebcb64172ef9d57740ecf0769419be1c4c036e9d31beee046da8e3",
+  "assessmentFingerprint": "faf2a2c2658052ca94eb37bea7c731b40880adfe8800652b4b13be169cc333c3",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-c0d9b0fa23",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-c0d9b0fa23",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Část novely mění pravidla poplatku spojeného s výrobou elektřiny z větrných zdrojů, a proto se týká části slibu o zrušení poplatků z obnovitelných zdrojů.",
+          "effectCz": "Dříve se poplatek vztahoval na elektřinu z větrných elektráren, jejichž povolení nabylo právní moci po nabytí účinnosti příslušného zákona; nově se hranice mění na 31. prosince 2025. Z dodaného kontextu nelze určit, zda tato změna okruh zpoplatněných elektráren rozšiřuje, nebo zužuje, protože neuvádí datum účinnosti zákona, na který původní znění odkazuje. Dříve zákon umožňoval obci poplatek snížit až na nulu, ale neobsahoval uvedené snížení poplatku o peněžité plnění poskytnuté obci; nově se takové plnění odečte od poplatku, nejvýše do jeho výše, ovšem jen u vymezených plnění podle přechodného ustanovení. To poplatek pro tuto skupinu plátců zmírňuje, nikoli ruší. Změna výpočtu dílčího poplatku a rozdělování jeho výnosu mezi obce mění výpočet a rozdělení výnosu, ale z dodaných znění nelze určit její celkový dopad na povinnost poplatek platit."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-c0d9b0fa23--source",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro návrh zákona, který mění mimo jiné pravidla poplatku spojeného s výrobou elektřiny z větrných zdrojů. Změna dovoluje odečíst od tohoto poplatku některá peněžní plnění poskytnutá obcím, takže jde o částečné zmírnění poplatku, nikoli o jeho zrušení. Po zamítnutí návrhu Senátem Poslanecká sněmovna setrvala na svém znění a SPD toto setrvání podpořila. V dodaných podkladech není doložen krok k odstoupení od Lipské burzy, takže celý slib nelze posoudit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, zda SPD nebo vláda podnikly kroky k odstoupení od Lipské burzy; absence takového dokladu neprokazuje, že žádný krok nenastal.",
+        "Z dodaného kontextu nelze určit, zda změna hranice pro zpoplatnění větrných elektráren rozšiřuje, nebo zužuje okruh poplatníků, protože není uvedeno datum účinnosti zákona, na který původní znění odkazuje."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-c0d9b0fa23",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Změna se přímo týká poplatku za elektřinu z větrných elektráren a jeho snížení, tedy části slibu o poplatcích spojených s obnovitelnými zdroji.",
+          "effectCz": "Dosavadní § 22b odst. 1 vztahoval poplatek na elektřinu z větrné elektrárny, jejíž povolení nabylo právní moci po nabytí účinnosti zákona; nově se hranice stanoví na 31. prosince 2025, což okruh zpoplatněných povolení zužuje. Dosavadní § 22d stanovoval sazbu 50 Kč za MWh a umožňoval obci snížit koeficient až na nulu; nově lze poplatek navíc snížit o peněžní plnění poskytnuté obci, nejvýše do výše poplatku, ale přechodné ustanovení tuto možnost omezuje na dříve vzniklé právní vztahy. Změny § 22d odst. 6 a § 22g odst. 2 upravují výpočet a rozdělení poplatku mezi obce s ohledem na toto snížení; samy o sobě povinnost poplatek platit neruší. Změna tedy poplatek částečně zmírňuje pro některé případy, ale poplatky z OZE obecně neruší."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-c0d9b0fa23--source",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro novelu zákona, která mimo jiné mění poplatek za elektřinu z větrných elektráren. Novela zužuje okruh zpoplatněných povolení a umožňuje některým poplatníkům poplatek snížit, ale poplatky z obnovitelných zdrojů neruší. Po zamítnutí návrhu Senátem Sněmovna zákon znovu podpořila. Jde tedy o posun pouze v části slibu o poplatcích; v podkladech není doloženo, co strana udělala pro odstoupení od Lipské burzy.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají žádný krok SPD týkající se odstoupení od Lipské burzy, proto nelze posoudit tuto část slibu.",
+        "Změna se týká poplatku u větrných elektráren a omezené možnosti jeho snížení; podklady nedokládají zrušení poplatků z obnovitelných zdrojů obecně."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_03ebb8570e745208016aec8822f26887d19cde5f2b74c74be0",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12130,
+      "input_tokens_details": {
+        "cache_write_tokens": 5780,
+        "cached_tokens": 6347
+      },
+      "output_tokens": 3839,
+      "output_tokens_details": {
+        "reasoning_tokens": 2991
+      },
+      "total_tokens": 15969
+    },
+    "output": {
+      "promiseId": "spd-2025-c0d9b0fa23",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Část novely mění pravidla poplatku spojeného s výrobou elektřiny z větrných zdrojů, a proto se týká části slibu o zrušení poplatků z obnovitelných zdrojů.",
+          "effectCz": "Dříve se poplatek vztahoval na elektřinu z větrných elektráren, jejichž povolení nabylo právní moci po nabytí účinnosti příslušného zákona; nově se hranice mění na 31. prosince 2025. Z dodaného kontextu nelze určit, zda tato změna okruh zpoplatněných elektráren rozšiřuje, nebo zužuje, protože neuvádí datum účinnosti zákona, na který původní znění odkazuje. Dříve zákon umožňoval obci poplatek snížit až na nulu, ale neobsahoval uvedené snížení poplatku o peněžité plnění poskytnuté obci; nově se takové plnění odečte od poplatku, nejvýše do jeho výše, ovšem jen u vymezených plnění podle přechodného ustanovení. To poplatek pro tuto skupinu plátců zmírňuje, nikoli ruší. Změna výpočtu dílčího poplatku a rozdělování jeho výnosu mezi obce mění výpočet a rozdělení výnosu, ale z dodaných znění nelze určit její celkový dopad na povinnost poplatek platit."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-c0d9b0fa23--source",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro návrh zákona, který mění mimo jiné pravidla poplatku spojeného s výrobou elektřiny z větrných zdrojů. Změna dovoluje odečíst od tohoto poplatku některá peněžní plnění poskytnutá obcím, takže jde o částečné zmírnění poplatku, nikoli o jeho zrušení. Po zamítnutí návrhu Senátem Poslanecká sněmovna setrvala na svém znění a SPD toto setrvání podpořila. V dodaných podkladech není doložen krok k odstoupení od Lipské burzy, takže celý slib nelze posoudit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, zda SPD nebo vláda podnikly kroky k odstoupení od Lipské burzy; absence takového dokladu neprokazuje, že žádný krok nenastal.",
+        "Z dodaného kontextu nelze určit, zda změna hranice pro zpoplatnění větrných elektráren rozšiřuje, nebo zužuje okruh poplatníků, protože není uvedeno datum účinnosti zákona, na který původní znění odkazuje."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_03f052ab0b21d71c016aec88797e2087d1aaff1f06620aa83c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12130,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 12127
+      },
+      "output_tokens": 2885,
+      "output_tokens_details": {
+        "reasoning_tokens": 2159
+      },
+      "total_tokens": 15015
+    },
+    "output": {
+      "promiseId": "spd-2025-c0d9b0fa23",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Změna se přímo týká poplatku za elektřinu z větrných elektráren a jeho snížení, tedy části slibu o poplatcích spojených s obnovitelnými zdroji.",
+          "effectCz": "Dosavadní § 22b odst. 1 vztahoval poplatek na elektřinu z větrné elektrárny, jejíž povolení nabylo právní moci po nabytí účinnosti zákona; nově se hranice stanoví na 31. prosince 2025, což okruh zpoplatněných povolení zužuje. Dosavadní § 22d stanovoval sazbu 50 Kč za MWh a umožňoval obci snížit koeficient až na nulu; nově lze poplatek navíc snížit o peněžní plnění poskytnuté obci, nejvýše do výše poplatku, ale přechodné ustanovení tuto možnost omezuje na dříve vzniklé právní vztahy. Změny § 22d odst. 6 a § 22g odst. 2 upravují výpočet a rozdělení poplatku mezi obce s ohledem na toto snížení; samy o sobě povinnost poplatek platit neruší. Změna tedy poplatek částečně zmírňuje pro některé případy, ale poplatky z OZE obecně neruší."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-c0d9b0fa23--source",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro novelu zákona, která mimo jiné mění poplatek za elektřinu z větrných elektráren. Novela zužuje okruh zpoplatněných povolení a umožňuje některým poplatníkům poplatek snížit, ale poplatky z obnovitelných zdrojů neruší. Po zamítnutí návrhu Senátem Sněmovna zákon znovu podpořila. Jde tedy o posun pouze v části slibu o poplatcích; v podkladech není doloženo, co strana udělala pro odstoupení od Lipské burzy.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají žádný krok SPD týkající se odstoupení od Lipské burzy, proto nelze posoudit tuto část slibu.",
+        "Změna se týká poplatku u větrných elektráren a omezené možnosti jeho snížení; podklady nedokládají zrušení poplatků z obnovitelných zdrojů obecně."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

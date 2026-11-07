@@ -1,0 +1,362 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-33-04-396Z--c083bb5863a9",
+  "evaluatedAt": "2026-10-02T01:33:04.396Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-3945fab3a7/c083bb5863a9347aea3454ede875ca8b2b52a3806dcad6e3dcc23a77500f3465.json",
+  "packageHash": "c083bb5863a9347aea3454ede875ca8b2b52a3806dcad6e3dcc23a77500f3465",
+  "assessmentContentHash": "0f39cd42cf6aba992e6b5b380168b83603029d740ab516410b883021cb7e29d9",
+  "assessmentFingerprint": "1d1e769c8b48b08dbc8722bbebeb147812c7c6328bf0974cbb84886d0a667cf8",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-3945fab3a7",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_05749eed522e1f7f016abf0939191887d1a44e3f757855a71d",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 348746,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 348743
+            },
+            "output_tokens": 8497,
+            "output_tokens_details": {
+              "reasoning_tokens": 7393
+            },
+            "total_tokens": 357243
+          },
+          "output": {
+            "promiseId": "ano-2025-3945fab3a7",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Schválené znění mění pravidla územního plánování a povolování a označuje výstavbu veřejné infrastruktury za veřejný zájem, což může podpořit železniční infrastrukturní projekty."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": true,
+                "reasonCz": "Předložená verze umožňovala, aby posouzení vlivů na životní prostředí nahradilo některé další správní úkony, což mohlo zjednodušit povolování infrastrukturních projektů včetně železničních."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-2",
+                "relevant": true,
+                "reasonCz": "Schválené znění umožňuje navýšit výdaje na dopravní infrastrukturu včetně železnic, a tím může podpořit financování části slibu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43201-1",
+                "relevant": true,
+                "reasonCz": "Návrh rozpočtu fondu výslovně uvádí modernizaci a kapacitní posílení železnic, železničních uzlů a odstraňování úzkých míst."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-3945fab3a7--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-22",
+              "psp-core-2025--law-change-43200-2",
+              "psp-core-2025--law-change-43201-1",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--print-step-210731",
+              "psp-core-2025--vote-86962",
+              "psp-core-2025--vote-87430",
+              "psp-core-2025--vote-88105",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88416",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43200-6",
+              "psp-core-2025--senate-resolution-43174-15"
+            ],
+            "explanationCz": "Poslanci ANO předložili a později podpořili novelu stavebního zákona (sněmovní tisk 67, tedy označení návrhu v Parlamentu); schválené znění upravuje povolování a označuje výstavbu veřejné infrastruktury za veřejný zájem. ANO také hlasovalo pro rozpočet Státního fondu dopravní infrastruktury na rok 2026, jehož průvodní zpráva zmiňuje modernizaci železničních tratí a uzlů, zvyšování kapacity i odstraňování úzkých míst. Poslanci podpořili rovněž rozpočtovou novelu, která umožňuje navýšit výdaje na dopravní infrastrukturu včetně železnic. Jde o kroky podporující část slibu, nikoli o doklad, že už vznikla nová překladiště nebo byly napojeny průmyslové areály.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Podklady nedokládají, že by byla postavena konkrétní nová překladiště nebo napojeny konkrétní průmyslové areály; rozpočtová a povolovací opatření sama o sobě uskutečnění těchto staveb nepotvrzují.",
+              "Nejjasnější návrh na nahrazení některých správních úkonů posouzením vlivů na životní prostředí se v podobě schválené Sněmovnou neobjevuje, takže nelze potvrdit, že tato část návrhu skutečně zjednodušila povolování železničních projektů.",
+              "U hlasování po prezidentově vrácení rozpočtové novely není v podkladech zveřejněno přesné znění, o němž Sněmovna rozhodovala; dřívější hlasování ANO pro rozpočtovou novelu však dokládá podporu jejího schváleného znění."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-3945fab3a7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Schválený text upravuje povolování a pravidla pro dopravní infrastrukturu a její napojení, což může usnadnit přípravu železničních spojení, ale sám žádná překladiště ani napojení průmyslových areálů nestaví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Navržená změna posuzování vlivů na životní prostředí počítala s tím, že jedno stanovisko může nahradit další správní úkony, což by mohlo zrychlit povolování části železničních staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Změna rozpočtových pravidel výslovně umožňuje zvýšit výdaje na financování železnic, a může tedy podpořit část slibu týkající se železniční infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43201-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu dopravního fondu popisuje investice do modernizace a zkapacitnění železničních tratí a odstraňování úzkých míst, což může přispět k efektivnější železniční dopravě."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-3945fab3a7--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--law-change-43201-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-86962"
+      ],
+      "explanationCz": "Poslanci ANO předložili novelu stavebního zákona a následně hlasovali pro její schválení i pro setrvání na ní poté, co ji Senát odmítl. Změny povolování a pravidel pro dopravní infrastrukturu mohou přípravu železničních staveb usnadnit, ale nedokládají výstavbu nových překladišť ani napojení průmyslových areálů. ANO také podpořilo vládní změnu rozpočtových pravidel, která umožňuje vyšší výdaje na železnice, a rozpočet dopravního fondu s prostředky na železniční modernizace. Jde tedy o dílčí posun směrem ke slibu, nikoli o jeho splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "V návrhu rozpočtu dopravního fondu je zároveň uvedeno, že modernizace trati Nemanice I–Ševětín se odkládá o dva roky; materiály neukazují, zda se tento odklad týká přímo nákladní dopravy nebo plánovaných překladišť.",
+        "Předložený návrh změn posuzování vlivů obsahoval možnost nahradit jedním stanoviskem další správní úkony, tato část však ve schváleném textu není; nelze ji proto považovat za uskutečněný posun.",
+        "Podklady dokládají legislativní a rozpočtovou podporu železniční infrastruktury, nikoli uskutečněnou výstavbu nových překladišť nebo napojení konkrétních průmyslových areálů."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-3945fab3a7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Schválená změna stavebního zákona usnadňuje a mění povolování staveb a výslovně zahrnuje veřejnou infrastrukturu, mezi niž patří i železnice, takže může přispět k její výstavbě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Schválené změny pravidel posuzování vlivů v dodaném textu neobsahují konkrétní opatření pro nákladní železnici, překladiště ani napojení průmyslových areálů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválené znění umožňuje navýšit výdaje nad rámec rozpočtových pravidel také na výstavbu železnic, což je konkrétní rozpočtový nástroj pro železniční infrastrukturu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43201-1",
+          "relevant": true,
+          "reasonCz": "Předložený rozpočet dopravního fondu výslovně počítá s modernizací a zvyšováním kapacity železničních tratí, tedy s částí slibu o zlepšení nákladní železniční dopravy."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-3945fab3a7--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--law-change-43201-1",
+        "psp-core-2025--vote-86962"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh změny stavebního zákona a hlasovali pro něj; novela mění povolování staveb a výstavbu veřejné infrastruktury, kam patří i železnice. ANO hlasovalo také pro setrvání na návrhu po jeho zamítnutí Senátem. Vláda předložila a poslanci ANO podpořili změnu rozpočtových pravidel, která v přijatém znění umožňuje navýšit výdaje na výstavbu železnic. ANO podpořilo i rozpočet dopravního fondu, který počítá s modernizací a zvyšováním kapacity železničních tratí, některé stavby však odkládá. Jde o posun v širší železniční infrastruktuře; dodané podklady nedokládají postavení nových překladišť ani dokončená napojení průmyslových areálů.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Přesné znění při závěrečném hlasování o rozpočtových pravidlech po vetu prezidenta není zveřejněno; pro posouzení je k dispozici dříve schválená verze, která obsahuje možnost navýšit výdaje na železniční výstavbu.",
+        "Dodaný rozpočet dopravního fondu a změny stavebního zákona dokládají obecnější investice a podmínky pro výstavbu, nikoli dokončení nových překladišť nebo konkrétních napojení průmyslových areálů."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_02f12672ce580690016abf08e4fdac87d1a64105aae250045a",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 348746,
+      "input_tokens_details": {
+        "cache_write_tokens": 345422,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 6062,
+      "output_tokens_details": {
+        "reasoning_tokens": 4991
+      },
+      "total_tokens": 354808
+    },
+    "output": {
+      "promiseId": "ano-2025-3945fab3a7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Schválený text upravuje povolování a pravidla pro dopravní infrastrukturu a její napojení, což může usnadnit přípravu železničních spojení, ale sám žádná překladiště ani napojení průmyslových areálů nestaví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Navržená změna posuzování vlivů na životní prostředí počítala s tím, že jedno stanovisko může nahradit další správní úkony, což by mohlo zrychlit povolování části železničních staveb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Změna rozpočtových pravidel výslovně umožňuje zvýšit výdaje na financování železnic, a může tedy podpořit část slibu týkající se železniční infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43201-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu dopravního fondu popisuje investice do modernizace a zkapacitnění železničních tratí a odstraňování úzkých míst, což může přispět k efektivnější železniční dopravě."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-3945fab3a7--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--law-change-43201-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-86962"
+      ],
+      "explanationCz": "Poslanci ANO předložili novelu stavebního zákona a následně hlasovali pro její schválení i pro setrvání na ní poté, co ji Senát odmítl. Změny povolování a pravidel pro dopravní infrastrukturu mohou přípravu železničních staveb usnadnit, ale nedokládají výstavbu nových překladišť ani napojení průmyslových areálů. ANO také podpořilo vládní změnu rozpočtových pravidel, která umožňuje vyšší výdaje na železnice, a rozpočet dopravního fondu s prostředky na železniční modernizace. Jde tedy o dílčí posun směrem ke slibu, nikoli o jeho splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "V návrhu rozpočtu dopravního fondu je zároveň uvedeno, že modernizace trati Nemanice I–Ševětín se odkládá o dva roky; materiály neukazují, zda se tento odklad týká přímo nákladní dopravy nebo plánovaných překladišť.",
+        "Předložený návrh změn posuzování vlivů obsahoval možnost nahradit jedním stanoviskem další správní úkony, tato část však ve schváleném textu není; nelze ji proto považovat za uskutečněný posun.",
+        "Podklady dokládají legislativní a rozpočtovou podporu železniční infrastruktury, nikoli uskutečněnou výstavbu nových překladišť nebo napojení konkrétních průmyslových areálů."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0ae922b9b5b1ba12016abf0995394c87d1a412dcfa426e9b75",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 348746,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 348743
+      },
+      "output_tokens": 5934,
+      "output_tokens_details": {
+        "reasoning_tokens": 5005
+      },
+      "total_tokens": 354680
+    },
+    "output": {
+      "promiseId": "ano-2025-3945fab3a7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Schválená změna stavebního zákona usnadňuje a mění povolování staveb a výslovně zahrnuje veřejnou infrastrukturu, mezi niž patří i železnice, takže může přispět k její výstavbě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Schválené změny pravidel posuzování vlivů v dodaném textu neobsahují konkrétní opatření pro nákladní železnici, překladiště ani napojení průmyslových areálů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválené znění umožňuje navýšit výdaje nad rámec rozpočtových pravidel také na výstavbu železnic, což je konkrétní rozpočtový nástroj pro železniční infrastrukturu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43201-1",
+          "relevant": true,
+          "reasonCz": "Předložený rozpočet dopravního fondu výslovně počítá s modernizací a zvyšováním kapacity železničních tratí, tedy s částí slibu o zlepšení nákladní železniční dopravy."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-3945fab3a7--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--law-change-43201-1",
+        "psp-core-2025--vote-86962"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh změny stavebního zákona a hlasovali pro něj; novela mění povolování staveb a výstavbu veřejné infrastruktury, kam patří i železnice. ANO hlasovalo také pro setrvání na návrhu po jeho zamítnutí Senátem. Vláda předložila a poslanci ANO podpořili změnu rozpočtových pravidel, která v přijatém znění umožňuje navýšit výdaje na výstavbu železnic. ANO podpořilo i rozpočet dopravního fondu, který počítá s modernizací a zvyšováním kapacity železničních tratí, některé stavby však odkládá. Jde o posun v širší železniční infrastruktuře; dodané podklady nedokládají postavení nových překladišť ani dokončená napojení průmyslových areálů.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Přesné znění při závěrečném hlasování o rozpočtových pravidlech po vetu prezidenta není zveřejněno; pro posouzení je k dispozici dříve schválená verze, která obsahuje možnost navýšit výdaje na železniční výstavbu.",
+        "Dodaný rozpočet dopravního fondu a změny stavebního zákona dokládají obecnější investice a podmínky pro výstavbu, nikoli dokončení nových překladišť nebo konkrétních napojení průmyslových areálů."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

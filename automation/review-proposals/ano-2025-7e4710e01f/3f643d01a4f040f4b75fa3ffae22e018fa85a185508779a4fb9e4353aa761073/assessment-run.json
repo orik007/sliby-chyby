@@ -1,0 +1,933 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T09-19-24-798Z--3fe71677ecf4",
+  "evaluatedAt": "2026-11-05T09:19:24.798Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-7e4710e01f/3fe71677ecf474c3007a2de3837133a043818277d54a3c46e759af1aa52e002a.json",
+  "packageHash": "3fe71677ecf474c3007a2de3837133a043818277d54a3c46e759af1aa52e002a",
+  "assessmentContentHash": "151b7061b1859c13188fca5bd215764b32dd60e09e9b96a58ad35944f9fab82e",
+  "assessmentFingerprint": "3f643d01a4f040f4b75fa3ffae22e018fa85a185508779a4fb9e4353aa761073",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-7e4710e01f",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment omits the relevance verdict for law change psp-core-2025--law-change-43378-1",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_099037a8055d59e4016aec48fa326487d1a87b921c2d43a279",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 133223,
+            "input_tokens_details": {
+              "cache_write_tokens": 126873,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 10938,
+            "output_tokens_details": {
+              "reasoning_tokens": 6899
+            },
+            "total_tokens": 144161
+          },
+          "output": {
+            "promiseId": "ano-2025-7e4710e01f",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43120-2",
+                "relevant": true,
+                "reasonCz": "Změna rozšiřuje možnosti předávání informací správci daně, což může být skutečnou součástí posílení daňových kontrol.",
+                "effectCz": "Dosavadní § 26 vymezoval případy, kdy lze prolomit mlčenlivost o informacích získaných při dohledu nad kapitálovým trhem, a správce daně mezi příjemci výslovně nebyl. Nově se informace mohou použít také při komunikaci se správcem daně a správce daně se doplňuje mezi oprávněné příjemce; omezení mlčenlivosti se tedy pro správce daně uvolňuje. Z dodaného znění však neplyne, že jde konkrétně o informace využitelné při výběru DPH."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43215-1",
+                "relevant": true,
+                "reasonCz": "Smlouva výslovně počítá s výměnou daňových informací, což může být prostředkem k posílení kontroly daňových povinností.",
+                "effectCz": "Smlouva stanoví výměnu informací relevantních pro správu a vymáhání vnitrostátních předpisů o daních, včetně povinnosti opatřit si vyžádané informace i bez vlastního daňového zájmu. Nejde o změnu dřívějšího českého zákonného ustanovení, takže předchozí znění ani rozsah změny oproti němu balíček nedokládá. Dodané části neukazují, zda se tato výměna vztahuje také na českou DPH."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-1",
+                "relevant": true,
+                "reasonCz": "Nový systém elektronické evidence tržeb zavádí automatizované předávání údajů správci daně a kontroly plnění povinností, tedy konkrétní technologický a kontrolní nástroj.",
+                "effectCz": "Jde o nový zákon, takže předchozí znění neexistuje. Zavádí povinnost zasílat údaje o vybraných tržbách správci daně datovou zprávou, jejich zpracování, kontroly a sankce až 500 000 Kč; současně stanoví výjimky z evidence. Oproti slibu jde o konkrétní dílčí nástroj pro technologizaci a kontrolu, nikoli o doložené snížení ztrát z DPH ani o dosažení evropské špičky."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-2",
+                "relevant": true,
+                "reasonCz": "Tato část upravuje finanční pobídky a možnost vyhnout se evidenci v rámci nového systému, a tím ovlivňuje jeho rozsah a účast poplatníků.",
+                "effectCz": "Dodaný kontext uvádí, že příslušná ustanovení jsou nová a dřívější úprava je neobsahovala. Nově lze při splnění podmínek zvolit přirážku za osvobození od evidence; činí 1 400 Kč měsíčně, přičemž zákon zároveň zavádí slevu na evidenci až 5 000 Kč. Tím se evidování finančně podporuje, ale u oprávněných poplatníků existuje i možnost z něj vystoupit; jde o nastavení rozsahu nástroje, nikoli o doložený výsledek pro DPH."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-4",
+                "relevant": true,
+                "reasonCz": "Změna rozšiřuje oprávnění finanční správy k daňovým kontrolním nákupům a analytickému využití údajů z evidence tržeb.",
+                "effectCz": "Dosud mohl orgán finanční správy provádět kontrolní nákup při prověřování povinností podle zákona o mezinárodní spolupráci při správě daní; nově se oprávnění vztahuje také na evidenci tržeb a další daňové či účetní předpisy. Daňová analytická evidence nově smí zahrnovat i údaje získané od subjektu při plnění povinností evidence tržeb. Kontrolní oprávnění a dostupnost analytických údajů se tedy rozšiřují, což posiluje kontrolní prostředky."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43310-5",
+                "relevant": true,
+                "reasonCz": "Změna výslovně přidává evidenci tržeb mezi oblasti, v nichž může celní správa provádět kontrolní nákup.",
+                "effectCz": "Dosavadní výčet v § 11e zahrnoval jiné oblasti, například spotřební daně a hazardní hry, nikoli evidenci tržeb. Nově se evidence tržeb do výčtu doplňuje, takže se rozšiřuje oprávnění celní správy prověřovat její dodržování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43318-1",
+                "relevant": true,
+                "reasonCz": "Smlouva stanoví výměnu informací pro správu a vymáhání daňových předpisů, což může posílit přeshraniční daňovou kontrolu.",
+                "effectCz": "Smlouva zavádí výměnu informací o daních, včetně povinnosti druhého státu použít opatření k jejich získání, a stanoví pravidla mlčenlivosti a omezené výjimky. Nejde o změnu dřívějšího českého zákonného ustanovení, takže balíček nedokládá předchozí stav ani velikost změny oproti němu. Z dodaných částí nelze určit, zda se výměna týká také české DPH."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43340-1",
+                "relevant": true,
+                "reasonCz": "Změny pravidel DPH pro některé přeshraniční a elektronicky zprostředkované obchody mohou ovlivnit, zda a kde se DPH správně přizná a vybere.",
+                "effectCz": "Dosavadní úprava stanovila pravidla místa plnění a zvláštního režimu jednoho správního místa; návrh je upravuje pro elektronická rozhraní a přidává do režimu některá dodání zboží prostřednictvím sítí. V některých případech se rozhodnutí o určení místa plnění považuje také za rozhodnutí podle souvisejícího ustanovení. Jde o změnu rozsahu a koordinace pravidel pro výběr DPH u dotčených transakcí; z dodaného znění nelze určit, zda je výsledkem přísnější, nebo mírnější povinnost."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43415-1",
+                "relevant": true,
+                "reasonCz": "Nová podmínka pro převod vozidla přímo napomáhá vymáhání povinnosti vrátit již vrácenou DPH.",
+                "effectCz": "Dosavadní § 7h umožňoval za určitých okolností zamítnout žádost o zápis diplomatického vozidla a řešil také nevrácení DPH předchozím vlastníkem. Nově se zavádí další případ: při nevrácené DPH z nákupu vozidla se zamítne žádost o zápis změny vlastníka, pokud nový vlastník není diplomatická mise ani její člen. Oproti dosavadní úpravě se tedy zpřísňuje možnost převést vozidlo, dokud není povinnost vrátit DPH splněna."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-19",
+                "relevant": true,
+                "reasonCz": "Změna daňového řádu rozšiřuje nástroj správce daně při vyhledávací činnosti, který může být využit i při kontrole daňových povinností.",
+                "effectCz": "Dosavadní § 80 odst. 4 dovoloval pořizovat záznam o úkonu s předchozím uvědoměním přítomných osob; nově lze záznam pořídit i bez jejich vědomí, pokud cíle vyhledávání nelze dosáhnout jinak, což rozšiřuje kontrolní pravomoc. U úhrad pohledávek se stejným datem splatnosti se nově platba rozdělí poměrně podle jejich výše; balíček neukazuje, že by toto pravidlo samo měnilo rozsah kontroly DPH."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-16",
+                "relevant": true,
+                "reasonCz": "Dohoda stanoví elektronické celní postupy, řízení rizik a následné audity u daní vybíraných při dovozu a vývozu, což může zahrnovat kontrolu DPH při dovozu.",
+                "effectCz": "Dohoda ukládá stranám používat informační technologie, elektronické platby a řízení rizik zaměřené na rizikové zásilky a rovněž provádět rizikově orientované audity po propuštění zboží. Nejde o změnu dřívějšího českého zákonného ustanovení, takže předchozí stav nelze z balíčku porovnat. Jde o závazky pro celní postupy a daně při dovozu a vývozu; dodané znění nevyčísluje jejich konkrétní dopad na výběr DPH."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+                "relevant": true,
+                "reasonCz": "Plán vlády výslovně počítá s přípravou systému evidence tržeb s cílem zefektivnit výběr daní a omezit šedou ekonomiku.",
+                "effectCz": "Usnesení samo nemění daňové pravidlo; stanoví legislativní úkol připravit návrh evidence tržeb a související změny včetně daňových úlev. Jde o vládní plán, nikoli o účinnou povinnost nebo doložené zlepšení výběru DPH."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+                "relevant": true,
+                "reasonCz": "Položka legislativního plánu stanoví konkrétní harmonogram návrhu EET 2.0, který se týká technologického a kontrolního nástroje pro výběr daní.",
+                "effectCz": "Položka plánu stanoví přípravu návrhu zákona o evidenci tržeb, předložení vládě v lednu 2027 a předpokládanou účinnost v lednu 2027. Nejde o změnu dosavadního pravidla ani o přijatý zákon, ale o plánovaný krok k zavedení evidence."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-183",
+                "relevant": true,
+                "reasonCz": "Plánovaný návrh digitálního výkaznictví DPH přímo souvisí s využitím moderních technologií při správě DPH.",
+                "effectCz": "Usnesení samo žádnou povinnost digitálního výkaznictví nezavádí; stanoví úkol připravit návrh k implementaci unijních pravidel digitálního výkaznictví DPH, s předložením vládě plánovaným na třetí čtvrtletí roku 2029. Jde o plán, nikoli o platnou změnu pravidel či doložený výsledek."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-314",
+                "relevant": true,
+                "reasonCz": "Usnesení výslovně zařazuje EET 2.0 mezi strategické projekty a jmenuje odpovědného manažera s termínem, čímž podporuje realizaci slíbeného technologického nástroje.",
+                "effectCz": "Usnesení jmenuje odpovědného manažera pro projekt EET 2.0 s termínem 31. prosince 2026 a ukládá koordinaci, sledování milníků a součinnost dotčených organizací. Nejde o změnu daňové povinnosti ani o samotné zavedení systému; vytváří organizační rámec pro jeho přípravu."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-7e4710e01f--source",
+              "psp-core-2025--law-change-43120-2",
+              "psp-core-2025--vote-87503",
+              "psp-core-2025--law-change-43215-1",
+              "psp-core-2025--print-step-210795",
+              "psp-core-2025--law-change-43310-1",
+              "psp-core-2025--law-change-43310-2",
+              "psp-core-2025--law-change-43310-4",
+              "psp-core-2025--law-change-43310-5",
+              "psp-core-2025--print-step-211390",
+              "psp-core-2025--amendment-text-1548",
+              "psp-core-2025--vote-88293",
+              "psp-core-2025--amendment-text-1551",
+              "psp-core-2025--vote-88289",
+              "psp-core-2025--senate-resolution-43310-6",
+              "psp-core-2025--vote-88356",
+              "psp-core-2025--law-change-43318-1",
+              "psp-core-2025--print-step-211439",
+              "psp-core-2025--law-change-43340-1",
+              "psp-core-2025--print-step-211581",
+              "psp-core-2025--law-change-43415-1",
+              "psp-core-2025--print-step-212080",
+              "psp-core-2025--law-change-43422-19",
+              "psp-core-2025--print-step-212101",
+              "psp-core-2025--law-change-43453-16",
+              "psp-core-2025--print-step-212285",
+              "zvlady-resolutions--law-change-uv-2026-175-32",
+              "zvlady-resolutions--law-change-uv-2026-175-117",
+              "zvlady-resolutions--law-change-uv-2026-175-183",
+              "zvlady-resolutions--2026-175",
+              "zvlady-resolutions--law-change-uv-2026-314",
+              "zvlady-resolutions--2026-314"
+            ],
+            "explanationCz": "Vláda ANO předložila návrh na obnovení evidence tržeb; Poslanecká sněmovna po vrácení Senátem setrvala na schváleném znění a poslanci ANO hlasovali pro. Systém má elektronicky předávat údaje správci daně a umožnit kontrolu tržeb, takže představuje dílčí technologický a kontrolní krok ke snížení daňových úniků. Vláda také zařadila EET 2.0 mezi řízené projekty a plánuje digitální výkaznictví DPH, tyto kroky však samy o sobě ještě nezaručují výsledek. Balíček nedokládá skutečné snížení ztrát z DPH ani to, že Česko bude do roku 2029 mezi evropskou špičkou ve výběru DPH.",
+            "confidence": "medium",
+            "uncertainties": [
+              "U několika smluv o výměně daňových informací jsou dodány jen vybrané části; z balíčku proto nelze ověřit, zda se jejich pravidla vztahují také na českou DPH.",
+              "U novely DPH a celní dohody je spojení s výběrem DPH částečné: dodaný text upravuje vymezené přeshraniční nebo dovozní situace, ale nevyčísluje jejich dopad na ztráty z DPH.",
+              "Evidence tržeb a plánované digitální výkaznictví představují nástroje či záměry; balíček nedokládá jejich praktické výsledky ani dosažení cíle pro rok 2029."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-7e4710e01f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje mlčenlivost při dohledu nad kapitálovým trhem; dodané znění ji nespojuje s kontrolou ani výběrem DPH.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení smlouvy výslovně umožňují výměnu informací pro vyměřování a vybírání daní a jejich vymáhání, což může posílit daňové kontroly.",
+          "effectCz": "Smlouva stanoví výměnu relevantních informací o daních, jejich využití daňovými úřady a povinnost získat požadované informace i bez domácího daňového zájmu; předchozí znění pro srovnání dodáno není. Jde o posílení možností daňové kontroly, nikoli o konkrétní technologii ani doložené zvýšení výběru DPH."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Nový systém evidence tržeb zavádí automatizované zasílání údajů správci daně a prověřování plnění evidenčních povinností, tedy konkrétní technologický a kontrolní nástroj.",
+          "effectCz": "Jde o nový zákon bez předchozího znění. Zavádí zasílání údajů o vybraných tržbách správci daně datovou zprávou nejpozději při uskutečnění tržby, kontrolní pravomoci a sankce; současně stanoví výjimky a možnost části drobných podnikatelů z evidence vystoupit za měsíční přirážku 1 400 Kč. V zásadě rozšiřuje automatizované sledování a kontroly, ale výjimky omezují jeho dosah."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Úprava je přímo provázaná s novou evidencí tržeb: zavádí možnost se z ní vyvázat za přirážku a daňové pobídky při zapojení.",
+          "effectCz": "Nové odstavce a pravidla nemají v dodaném kontextu předchozí znění. Zpřístupňují některým poplatníkům v prvním pásmu paušálního režimu možnost neúčastnit se evidence za přirážku 1 400 Kč měsíčně a zavádějí slevu na evidenci tržeb až 5 000 Kč. Sleva účast podporuje, možnost přirážkou se z evidence vyvázat naopak její kontrolní dosah zmenšuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje finanční analytickou evidenci o údaje získané při evidenci tržeb a umožňuje kontrolní nákupy podle pravidel pro evidenci tržeb.",
+          "effectCz": "Dříve bylo možné kontrolní nákupy provádět při prověřování povinností podle předpisů o mezinárodní daňové spolupráci; nově se vztahují také na evidenci tržeb a další daňové či účetní předpisy. Analytická evidence dříve zahrnovala údaje z kontrolních hlášení DPH a údaje získané jinak, nově výslovně také údaje od subjektů při plnění povinností evidence tržeb. Rozšiřuje tedy možnosti kontrol i soubor údajů pro analýzu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": true,
+          "reasonCz": "Novela výslovně přidává evidenci tržeb mezi oblasti, při jejichž kontrole může celní správa provést kontrolní nákup.",
+          "effectCz": "Dříve se kontrolní nákupy celní správy vztahovaly na zákonem vyjmenované oblasti, mezi nimiž evidence tržeb nebyla; nově je doplněna. Rozšiřuje se tak kontrolní oprávnění ve vztahu k evidenci tržeb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": true,
+          "reasonCz": "Smluvní strany si mají vyměňovat informace důležité pro vyměřování, vybírání a vymáhání daní, což může přispět k daňovým kontrolám.",
+          "effectCz": "Smlouva stanoví výměnu relevantních daňových informací, jejich užití daňovými úřady a získávání informací i bez domácího daňového zájmu; předchozí znění pro srovnání dodáno není. Posiluje možnosti daňového vymáhání, ale nestanoví konkrétní technologii ani výsledek pro výběr DPH."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43340-1",
+          "relevant": false,
+          "reasonCz": "Dodané změny upravují pravidla DPH pro přeshraniční plnění a zvláštní režim jednoho správního místa, nikoli technologie či kontroly zaměřené na snižování ztrát z DPH.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": true,
+          "reasonCz": "Smlouva stanoví výměnu informací pro správu a vymáhání daní, což může být jednou z cest k posílení daňové kontroly.",
+          "effectCz": "Smlouva zavádí výměnu relevantních informací o daních a ukládá použít opatření k jejich získání; předchozí znění pro srovnání dodáno není. Může posílit daňové kontroly, ale sama nedokládá konkrétní výsledek při výběru DPH."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení brání převodu vozidla, dokud není vrácena neoprávněně nevrácená DPH, a tím zlepšuje vymáhání daňové povinnosti v konkrétním případě.",
+          "effectCz": "Předchozí § 7h umožňoval zamítnout žádost o diplomatickou registraci vozidla při nesplnění povinnosti vrátit DPH; nově se při nesplnění této povinnosti zamítne také zápis změny vlastníka vozidla v registru. Rozšiřuje se tedy překážka převodu a posiluje vymáhání vrácení DPH v této úzce vymezené situaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-19",
+          "relevant": true,
+          "reasonCz": "Změna umožňuje pořizovat záznam z daňového úkonu bez vědomí přítomné osoby, pokud jinak nelze dosáhnout účelu vyhledávání, což posiluje kontrolní nástroje.",
+          "effectCz": "Dříve musel správce daně osoby o pořizování obrazového či zvukového záznamu předem informovat; nově lze záznam pořídit bez jejich vědomí, pokud účelu vyhledávací činnosti nelze dosáhnout jinak. To rozšiřuje možnosti daňové kontroly. Změna pořadí úhrady pohledávek se stejným datem splatnosti nestanoví větší ani menší povinnost výběru DPH."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-16",
+          "relevant": true,
+          "reasonCz": "Smlouva ukládá automatizaci celních postupů a rizikově zaměřené kontroly a vztahuje elektronické platby také na daně vybírané celními orgány, což může posílit kontrolu dovozních daňových povinností.",
+          "effectCz": "Jde o smlouvu bez předchozího znění pro srovnání. Stanoví využívání informačních technologií a automatizovaného řízení rizik, elektronické platby cel a daní i kontroly zaměřené podle rizik; oproti slibu jde o podpůrné technologické a kontrolní povinnosti v celní oblasti, nikoli o doložený výsledek u výběru DPH."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+          "relevant": true,
+          "reasonCz": "Vláda v legislativním plánu výslovně uvádí EET 2.0 jako prostředek omezení šedé ekonomiky a zefektivnění výběru daní.",
+          "effectCz": "Usnesení samo daňová pravidla nemění, ale plánuje předložit návrh EET 2.0 a související daňové změny, včetně úprav DPH. Jde o plán budoucího opatření, které může podpořit cíl slibu, nikoli o již zavedené kontroly."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+          "relevant": true,
+          "reasonCz": "Řádek legislativního plánu stanoví předložení návrhu EET 2.0 v květnu 2026 a jeho účinnost od ledna 2027.",
+          "effectCz": "Usnesení nevytváří nové pravidlo; v plánu stanoví přípravu návrhu EET 2.0 a termíny předložení vládě (květen 2026) a účinnosti (leden 2027). Jde o krok k budoucímu zavedení automatizované evidence a kontrol."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-128",
+          "relevant": false,
+          "reasonCz": "Úkol se týká implementace unijních pravidel pro dovoz a elektronická rozhraní, nikoli technologie či kontrol zaměřených na snižování ztrát z DPH.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-183",
+          "relevant": true,
+          "reasonCz": "Vláda plánuje návrh digitálního vykazování DPH, tedy technologickou změnu přímo související s modernizací daňového výkaznictví.",
+          "effectCz": "Usnesení nepozměňuje platné povinnosti; plánuje návrh zákona k zavedení digitálního vykazování DPH podle unijní směrnice, s předložením vládě plánovaným na třetí čtvrtletí 2029. Jde o plánovaný technologický nástroj, nikoli o již zavedenou změnu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-314",
+          "relevant": true,
+          "reasonCz": "Usnesení jmenuje odpovědné manažery pro EET 2.0 a datový sklad pro Digitální daňovou kobru a ukládá součinnost při realizaci těchto projektů.",
+          "effectCz": "Usnesení nemění daňová pravidla; vytváří koordinační a řídicí rámec pro projekty EET 2.0 a datového skladu, s uvedenými termíny 31. 12. 2026 a 31. 12. 2027. Samo evidenci ani kontroly nezavádí, ale podporuje realizaci technologických projektů spojených se slibem."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-7e4710e01f--source",
+        "psp-core-2025--law-change-43215-1",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--law-change-43310-4",
+        "psp-core-2025--law-change-43310-5",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--law-change-43378-1",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--law-change-43422-19",
+        "psp-core-2025--law-change-43453-16",
+        "zvlady-resolutions--law-change-uv-2026-175-32",
+        "zvlady-resolutions--law-change-uv-2026-175-117",
+        "zvlady-resolutions--law-change-uv-2026-175-183",
+        "zvlady-resolutions--law-change-uv-2026-314",
+        "psp-core-2025--print-step-210795",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--print-step-211439",
+        "zvlady-resolutions--2026-314",
+        "psp-core-2025--print-step-211887",
+        "psp-core-2025--print-step-212080",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--print-step-212285",
+        "psp-core-2025--amendment-text-1548",
+        "psp-core-2025--amendment-1548",
+        "psp-core-2025--vote-88293",
+        "psp-core-2025--amendment-text-1551",
+        "psp-core-2025--vote-88289",
+        "psp-core-2025--amendment-text-1564",
+        "psp-core-2025--vote-88297",
+        "psp-core-2025--amendment-text-1565",
+        "psp-core-2025--vote-88298",
+        "psp-core-2025--amendment-text-1473",
+        "psp-core-2025--vote-88300",
+        "psp-core-2025--amendment-text-1569",
+        "psp-core-2025--vote-88304",
+        "psp-core-2025--amendment-text-1566",
+        "psp-core-2025--vote-88315",
+        "psp-core-2025--vote-88316",
+        "psp-core-2025--vote-88317",
+        "psp-core-2025--vote-88318",
+        "psp-core-2025--vote-88319",
+        "psp-core-2025--vote-88320",
+        "psp-core-2025--vote-88321",
+        "psp-core-2025--vote-88322",
+        "psp-core-2025--vote-88323",
+        "psp-core-2025--vote-88324",
+        "psp-core-2025--vote-88325",
+        "psp-core-2025--vote-88326",
+        "psp-core-2025--vote-88327",
+        "psp-core-2025--vote-88328",
+        "psp-core-2025--vote-88329",
+        "psp-core-2025--vote-88330",
+        "psp-core-2025--vote-88331",
+        "psp-core-2025--vote-88332",
+        "psp-core-2025--vote-88333",
+        "psp-core-2025--vote-88334",
+        "psp-core-2025--vote-88335",
+        "psp-core-2025--vote-88336",
+        "psp-core-2025--vote-88337",
+        "psp-core-2025--vote-88338",
+        "psp-core-2025--vote-88339",
+        "psp-core-2025--vote-88340",
+        "psp-core-2025--vote-88341",
+        "psp-core-2025--vote-88342",
+        "psp-core-2025--vote-88343",
+        "psp-core-2025--vote-88344",
+        "psp-core-2025--vote-88345",
+        "psp-core-2025--vote-88346",
+        "psp-core-2025--vote-88347",
+        "psp-core-2025--vote-88348",
+        "psp-core-2025--vote-88349",
+        "psp-core-2025--vote-88350",
+        "psp-core-2025--vote-88351",
+        "psp-core-2025--amendment-text-1399",
+        "psp-core-2025--vote-88353",
+        "psp-core-2025--amendment-text-1402",
+        "psp-core-2025--vote-88355",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda předložila zákon o evidenci tržeb, který zavádí automatické zasílání údajů o vybraných tržbách a rozšiřuje možnosti jejich kontroly; Poslanecká sněmovna zákon po vrácení Senátem znovu podpořila. Poslanci ANO také nepodpořili řadu návrhů, které by z evidence vyřadily další platby nebo činnosti, a podpořili přechodné opatření pro spuštění systému. To představuje dílčí krok ke slibu, ne důkaz, že se již snížily ztráty z DPH nebo že Česko dosáhlo evropské špičky ve výběru.",
+      "confidence": "high",
+      "uncertainties": [
+        "Evidence dokládá schválení systému a kroky k jeho zavedení, nikoli skutečný vývoj ztrát z DPH nebo srovnání výběru DPH s ostatními evropskými zeměmi; tento cíl je navíc stanoven až do roku 2029.",
+        "Výměna daňových informací a celní kontroly v navržených smlouvách mohou posílit daňovou kontrolu, ale dodané podklady neukazují jejich konkrétní dopad na výběr DPH v České republice."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-7e4710e01f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje mlčenlivost a komunikaci České národní banky při dohledu nad kapitálovým trhem, nikoli výběr DPH nebo daňové kontroly.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": true,
+          "reasonCz": "Návrh smlouvy s Keňou upravuje výměnu daňových informací a jejich získávání pro účely vyměřování, vybírání a vymáhání daní, tedy také nástroj daňové kontroly.",
+          "effectCz": "Jde o novou smlouvu bez předchozího znění, s nímž by šlo změnu porovnat. Navrhuje výměnu informací vztahujících se k daním všeho druhu a opatření k jejich získání; tím rozšiřuje dostupné prostředky daňové kontroly, ale samo o sobě nedokládá snížení ztrát z DPH."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí elektronické zasílání údajů o tržbách správci daně a automatizované zjišťování informací, což je konkrétní prostředek pro kontrolu daňových povinností.",
+          "effectCz": "Jde o nový zákon, takže balíček nedodává předchozí znění této úpravy. Stanoví evidenci vymezených tržeb, zasílání údajů datovou zprávou správci daně, automatizované zpracování a kontrolní i sankční postupy; rozšiřuje tak nástroje kontroly, které mohou přispět k plnění části slibu. Zároveň stanoví řadu výjimek z evidence, takže nepokrývá všechny tržby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje přirážku k paušální dani a daňovou slevu pro účastníky evidence, ale možnost přirážkou se z evidence vyvázat se týká poplatníků, kteří nejsou plátci DPH; dodaný text proto neukazuje podstatný dopad na ztráty z DPH.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": true,
+          "reasonCz": "Změna umožňuje finanční správě využívat kontrolní nákupy při ověřování evidence tržeb a zahrnout údaje o ní do daňové analytické evidence.",
+          "effectCz": "Před změnou mohl orgán finanční správy provádět kontrolní nákup jen při prověřování povinností podle zákona o mezinárodní spolupráci při správě daní a analytická evidence přijímala údaje z kontrolního hlášení DPH a další potřebné údaje. Návrh rozšiřuje kontrolní nákupy také na evidenci tržeb a výslovně dovoluje zařadit údaje z této evidence do analytické evidence; rozsah kontrolních a analytických prostředků se tedy zvětšuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": true,
+          "reasonCz": "Změna přidává celní správě oprávnění prověřovat plnění povinností při evidenci tržeb, čímž rozšiřuje kontrolní prostředky v daňové oblasti.",
+          "effectCz": "Před změnou výčet oblastí, pro které mohla celní správa provádět kontrolní nákup, evidenci tržeb neobsahoval. Návrh ji do výčtu doplňuje a rozšiřuje tak kontrolní pravomoc; druhá dodaná úprava pouze mění výraz týkající se krycího prostředku a nemění uvedený rozsah kontroly."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": true,
+          "reasonCz": "Návrh smlouvy s Maltou umožňuje výměnu a získávání daňových informací pro vyměřování, vybírání a vymáhání daní všeho druhu, což představuje nástroj daňové kontroly.",
+          "effectCz": "Jde o novou smlouvu bez předchozího znění v balíčku. Navrhuje výměnu informací pro účely daní všeho druhu a povinnost použít dostupná opatření k získání požadovaných informací; rozšiřuje tím možnosti kontroly, ale nedokládá konkrétní výsledek u DPH."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43340-1",
+          "relevant": false,
+          "reasonCz": "Dodané změny DPH upravují pravidla místa plnění a režimu jednoho správního místa u přeshraničních prodejů a služeb, nikoli technologie nebo kontroly výběru DPH.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": true,
+          "reasonCz": "Návrh smlouvy s Argentinou upravuje výměnu daňových informací a povinnost získat vyžádané informace, což může posílit kontrolní prostředky pro daně všeho druhu.",
+          "effectCz": "Jde o novou smlouvu bez předchozího znění k porovnání. Navrhuje výměnu informací pro daně všeho druhu a využití opatření k získání vyžádaných informací; rozšiřuje dostupné prostředky daňové kontroly, ale samo o sobě nesnižuje ztráty z DPH."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Návrh stanoví postup, který má zabránit změně vlastníka vozidla, dokud nebude vrácena DPH, jež byla vrácena při jeho nákupu v diplomatickém režimu.",
+          "effectCz": "Před změnou nebyla v dodaném znění pravidla registrace vozidel uvedena tato překážka zápisu změny vlastníka. Návrh ji zavádí pro případ nevrácení DPH a rozšiřuje tak možnost zajistit její vrácení; jde však o úzce vymezenou oblast, nikoli o obecnou kontrolu výběru DPH."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-19",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje správci daně pořídit záznam při místním šetření i bez vědomí přítomných osob, pokud účelu vyhledávání nelze dosáhnout jinak, a tím rozšiřuje nástroj daňové kontroly.",
+          "effectCz": "Před změnou mohl správce daně pořizovat obrazový či zvukový záznam o průběhu úkonu pouze s předchozím upozorněním účastníků. Návrh ruší tento požadavek v případech, kdy jinak nelze dosáhnout účelu vyhledávání, a rozšiřuje tak možnost dokumentovat daňové kontroly; druhá změna upravuje pořadí úhrad a není podstatná pro tento slib."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-16",
+          "relevant": true,
+          "reasonCz": "Návrh obchodní dohody zavádí elektronické celní postupy, automatizované řízení rizik a audity po propuštění zboží, tedy kontrolní nástroje u daní a poplatků vybíraných při dovozu.",
+          "effectCz": "Jde o novou dohodu bez předchozího znění k porovnání. Navrhuje elektronické celní postupy, automatizované řízení rizik a audity po odbavení; tyto nástroje mohou zahrnovat i kontrolu daní vybíraných při dovozu, ale dodané znění jejich konkrétní dopad na DPH nevyčísluje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací popisuje návrh EET 2.0 jako prostředek k efektivnějšímu výběru daní a uvádí také související změny v oblasti DPH.",
+          "effectCz": "Usnesení samo nemění pravidla DPH ani evidence; stanoví plán předložit návrh EET 2.0 a související daňové změny. Jde o plánovací návrh k technologiím a efektivnějšímu výběru daní, tedy o krok směrem k části slibu, nikoli o uskutečněný výsledek."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+          "relevant": true,
+          "reasonCz": "Příloha plánu stanoví legislativní úkol k návrhu EET 2.0 a výslovně jej spojuje se zefektivněním výběru daní.",
+          "effectCz": "Usnesení nemění dosavadní pravidla evidence; plánuje předložit návrh zákona o EET, který má podle textu omezit šedou ekonomiku a zefektivnit výběr daní. Jde o příslib přípravy opatření, nikoli o již zavedenou kontrolu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-128",
+          "relevant": false,
+          "reasonCz": "Úkol se týká provedení unijních pravidel pro dovoz a elektronická rozhraní, ale dodaný text neukazuje, že by zvyšoval technologie nebo kontroly výběru DPH ve smyslu slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-183",
+          "relevant": true,
+          "reasonCz": "Plán ukládá přípravu změny pravidel DPH pro digitální vykazování, což je konkrétní technologický krok v daňové správě.",
+          "effectCz": "Usnesení nemění pravidla vykazování; plánuje návrh zákona k digitálnímu vykazování DPH s předložením vládě v roce 2029. Jde o návrhový krok k modernizaci správy DPH, nikoli o již zavedený systém ani o doložené snížení ztrát."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-314",
+          "relevant": true,
+          "reasonCz": "Usnesení jmenuje EET 2.0 mezi strategickými projekty, určuje odpovědného manažera a ukládá koordinaci jejich realizace.",
+          "effectCz": "Usnesení samo nezavádí EET ani nemění pravidla DPH. Vytváří však organizační řízení projektu EET 2.0 a stanoví odpovědnost a koordinaci jeho realizace; jde o podpůrný krok směrem k technologickému prostředku slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-7e4710e01f--source",
+        "psp-core-2025--law-change-43215-1",
+        "psp-core-2025--print-step-210795",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--law-change-43310-4",
+        "psp-core-2025--law-change-43310-5",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--print-step-211439",
+        "psp-core-2025--law-change-43378-1",
+        "psp-core-2025--print-step-211887",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--print-step-212080",
+        "psp-core-2025--law-change-43422-19",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--law-change-43453-16",
+        "psp-core-2025--print-step-212285",
+        "zvlady-resolutions--law-change-uv-2026-175-32",
+        "zvlady-resolutions--law-change-uv-2026-175-117",
+        "zvlady-resolutions--law-change-uv-2026-175-183",
+        "zvlady-resolutions--2026-175",
+        "zvlady-resolutions--law-change-uv-2026-314",
+        "zvlady-resolutions--2026-314"
+      ],
+      "explanationCz": "Vláda předložila zákon o evidenci tržeb a poslanci ANO jej schválili i poté, co jej Senát vrátil s pozměňovacími návrhy. Zákon zavádí elektronické zasílání údajů o tržbách a rozšiřuje kontrolní a analytické nástroje finanční i celní správy. Vláda také naplánovala digitální vykazování DPH a pověřila manažera koordinací projektu EET 2.0. Jde o konkrétní kroky k technologiím a kontrolám, ale důkaz, že už snížily ztráty z DPH nebo přinesly evropskou špičku ve výběru, v balíčku není.",
+      "confidence": "high",
+      "uncertainties": [
+        "Slib požaduje výsledek do roku 2029, ale balíček neobsahuje měření ztrát z DPH ani srovnání výběru DPH s evropskými zeměmi.",
+        "Několik dalších návrhů rozšiřuje výměnu daňových informací či kontroly u dovozu, ale dodané podklady nevyčíslují jejich konkrétní dopad na ztráty z DPH."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0654f8b9951d705f016aec4963d10087d1a47b8366e2379969",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 133223,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 133220
+      },
+      "output_tokens": 10275,
+      "output_tokens_details": {
+        "reasoning_tokens": 6138
+      },
+      "total_tokens": 143498
+    },
+    "output": {
+      "promiseId": "ano-2025-7e4710e01f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje mlčenlivost při dohledu nad kapitálovým trhem; dodané znění ji nespojuje s kontrolou ani výběrem DPH.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení smlouvy výslovně umožňují výměnu informací pro vyměřování a vybírání daní a jejich vymáhání, což může posílit daňové kontroly.",
+          "effectCz": "Smlouva stanoví výměnu relevantních informací o daních, jejich využití daňovými úřady a povinnost získat požadované informace i bez domácího daňového zájmu; předchozí znění pro srovnání dodáno není. Jde o posílení možností daňové kontroly, nikoli o konkrétní technologii ani doložené zvýšení výběru DPH."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Nový systém evidence tržeb zavádí automatizované zasílání údajů správci daně a prověřování plnění evidenčních povinností, tedy konkrétní technologický a kontrolní nástroj.",
+          "effectCz": "Jde o nový zákon bez předchozího znění. Zavádí zasílání údajů o vybraných tržbách správci daně datovou zprávou nejpozději při uskutečnění tržby, kontrolní pravomoci a sankce; současně stanoví výjimky a možnost části drobných podnikatelů z evidence vystoupit za měsíční přirážku 1 400 Kč. V zásadě rozšiřuje automatizované sledování a kontroly, ale výjimky omezují jeho dosah."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Úprava je přímo provázaná s novou evidencí tržeb: zavádí možnost se z ní vyvázat za přirážku a daňové pobídky při zapojení.",
+          "effectCz": "Nové odstavce a pravidla nemají v dodaném kontextu předchozí znění. Zpřístupňují některým poplatníkům v prvním pásmu paušálního režimu možnost neúčastnit se evidence za přirážku 1 400 Kč měsíčně a zavádějí slevu na evidenci tržeb až 5 000 Kč. Sleva účast podporuje, možnost přirážkou se z evidence vyvázat naopak její kontrolní dosah zmenšuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje finanční analytickou evidenci o údaje získané při evidenci tržeb a umožňuje kontrolní nákupy podle pravidel pro evidenci tržeb.",
+          "effectCz": "Dříve bylo možné kontrolní nákupy provádět při prověřování povinností podle předpisů o mezinárodní daňové spolupráci; nově se vztahují také na evidenci tržeb a další daňové či účetní předpisy. Analytická evidence dříve zahrnovala údaje z kontrolních hlášení DPH a údaje získané jinak, nově výslovně také údaje od subjektů při plnění povinností evidence tržeb. Rozšiřuje tedy možnosti kontrol i soubor údajů pro analýzu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": true,
+          "reasonCz": "Novela výslovně přidává evidenci tržeb mezi oblasti, při jejichž kontrole může celní správa provést kontrolní nákup.",
+          "effectCz": "Dříve se kontrolní nákupy celní správy vztahovaly na zákonem vyjmenované oblasti, mezi nimiž evidence tržeb nebyla; nově je doplněna. Rozšiřuje se tak kontrolní oprávnění ve vztahu k evidenci tržeb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": true,
+          "reasonCz": "Smluvní strany si mají vyměňovat informace důležité pro vyměřování, vybírání a vymáhání daní, což může přispět k daňovým kontrolám.",
+          "effectCz": "Smlouva stanoví výměnu relevantních daňových informací, jejich užití daňovými úřady a získávání informací i bez domácího daňového zájmu; předchozí znění pro srovnání dodáno není. Posiluje možnosti daňového vymáhání, ale nestanoví konkrétní technologii ani výsledek pro výběr DPH."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43340-1",
+          "relevant": false,
+          "reasonCz": "Dodané změny upravují pravidla DPH pro přeshraniční plnění a zvláštní režim jednoho správního místa, nikoli technologie či kontroly zaměřené na snižování ztrát z DPH.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": true,
+          "reasonCz": "Smlouva stanoví výměnu informací pro správu a vymáhání daní, což může být jednou z cest k posílení daňové kontroly.",
+          "effectCz": "Smlouva zavádí výměnu relevantních informací o daních a ukládá použít opatření k jejich získání; předchozí znění pro srovnání dodáno není. Může posílit daňové kontroly, ale sama nedokládá konkrétní výsledek při výběru DPH."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení brání převodu vozidla, dokud není vrácena neoprávněně nevrácená DPH, a tím zlepšuje vymáhání daňové povinnosti v konkrétním případě.",
+          "effectCz": "Předchozí § 7h umožňoval zamítnout žádost o diplomatickou registraci vozidla při nesplnění povinnosti vrátit DPH; nově se při nesplnění této povinnosti zamítne také zápis změny vlastníka vozidla v registru. Rozšiřuje se tedy překážka převodu a posiluje vymáhání vrácení DPH v této úzce vymezené situaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-19",
+          "relevant": true,
+          "reasonCz": "Změna umožňuje pořizovat záznam z daňového úkonu bez vědomí přítomné osoby, pokud jinak nelze dosáhnout účelu vyhledávání, což posiluje kontrolní nástroje.",
+          "effectCz": "Dříve musel správce daně osoby o pořizování obrazového či zvukového záznamu předem informovat; nově lze záznam pořídit bez jejich vědomí, pokud účelu vyhledávací činnosti nelze dosáhnout jinak. To rozšiřuje možnosti daňové kontroly. Změna pořadí úhrady pohledávek se stejným datem splatnosti nestanoví větší ani menší povinnost výběru DPH."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-16",
+          "relevant": true,
+          "reasonCz": "Smlouva ukládá automatizaci celních postupů a rizikově zaměřené kontroly a vztahuje elektronické platby také na daně vybírané celními orgány, což může posílit kontrolu dovozních daňových povinností.",
+          "effectCz": "Jde o smlouvu bez předchozího znění pro srovnání. Stanoví využívání informačních technologií a automatizovaného řízení rizik, elektronické platby cel a daní i kontroly zaměřené podle rizik; oproti slibu jde o podpůrné technologické a kontrolní povinnosti v celní oblasti, nikoli o doložený výsledek u výběru DPH."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+          "relevant": true,
+          "reasonCz": "Vláda v legislativním plánu výslovně uvádí EET 2.0 jako prostředek omezení šedé ekonomiky a zefektivnění výběru daní.",
+          "effectCz": "Usnesení samo daňová pravidla nemění, ale plánuje předložit návrh EET 2.0 a související daňové změny, včetně úprav DPH. Jde o plán budoucího opatření, které může podpořit cíl slibu, nikoli o již zavedené kontroly."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+          "relevant": true,
+          "reasonCz": "Řádek legislativního plánu stanoví předložení návrhu EET 2.0 v květnu 2026 a jeho účinnost od ledna 2027.",
+          "effectCz": "Usnesení nevytváří nové pravidlo; v plánu stanoví přípravu návrhu EET 2.0 a termíny předložení vládě (květen 2026) a účinnosti (leden 2027). Jde o krok k budoucímu zavedení automatizované evidence a kontrol."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-128",
+          "relevant": false,
+          "reasonCz": "Úkol se týká implementace unijních pravidel pro dovoz a elektronická rozhraní, nikoli technologie či kontrol zaměřených na snižování ztrát z DPH.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-183",
+          "relevant": true,
+          "reasonCz": "Vláda plánuje návrh digitálního vykazování DPH, tedy technologickou změnu přímo související s modernizací daňového výkaznictví.",
+          "effectCz": "Usnesení nepozměňuje platné povinnosti; plánuje návrh zákona k zavedení digitálního vykazování DPH podle unijní směrnice, s předložením vládě plánovaným na třetí čtvrtletí 2029. Jde o plánovaný technologický nástroj, nikoli o již zavedenou změnu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-314",
+          "relevant": true,
+          "reasonCz": "Usnesení jmenuje odpovědné manažery pro EET 2.0 a datový sklad pro Digitální daňovou kobru a ukládá součinnost při realizaci těchto projektů.",
+          "effectCz": "Usnesení nemění daňová pravidla; vytváří koordinační a řídicí rámec pro projekty EET 2.0 a datového skladu, s uvedenými termíny 31. 12. 2026 a 31. 12. 2027. Samo evidenci ani kontroly nezavádí, ale podporuje realizaci technologických projektů spojených se slibem."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-7e4710e01f--source",
+        "psp-core-2025--law-change-43215-1",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--law-change-43310-4",
+        "psp-core-2025--law-change-43310-5",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--law-change-43378-1",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--law-change-43422-19",
+        "psp-core-2025--law-change-43453-16",
+        "zvlady-resolutions--law-change-uv-2026-175-32",
+        "zvlady-resolutions--law-change-uv-2026-175-117",
+        "zvlady-resolutions--law-change-uv-2026-175-183",
+        "zvlady-resolutions--law-change-uv-2026-314",
+        "psp-core-2025--print-step-210795",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--print-step-211439",
+        "zvlady-resolutions--2026-314",
+        "psp-core-2025--print-step-211887",
+        "psp-core-2025--print-step-212080",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--print-step-212285",
+        "psp-core-2025--amendment-text-1548",
+        "psp-core-2025--amendment-1548",
+        "psp-core-2025--vote-88293",
+        "psp-core-2025--amendment-text-1551",
+        "psp-core-2025--vote-88289",
+        "psp-core-2025--amendment-text-1564",
+        "psp-core-2025--vote-88297",
+        "psp-core-2025--amendment-text-1565",
+        "psp-core-2025--vote-88298",
+        "psp-core-2025--amendment-text-1473",
+        "psp-core-2025--vote-88300",
+        "psp-core-2025--amendment-text-1569",
+        "psp-core-2025--vote-88304",
+        "psp-core-2025--amendment-text-1566",
+        "psp-core-2025--vote-88315",
+        "psp-core-2025--vote-88316",
+        "psp-core-2025--vote-88317",
+        "psp-core-2025--vote-88318",
+        "psp-core-2025--vote-88319",
+        "psp-core-2025--vote-88320",
+        "psp-core-2025--vote-88321",
+        "psp-core-2025--vote-88322",
+        "psp-core-2025--vote-88323",
+        "psp-core-2025--vote-88324",
+        "psp-core-2025--vote-88325",
+        "psp-core-2025--vote-88326",
+        "psp-core-2025--vote-88327",
+        "psp-core-2025--vote-88328",
+        "psp-core-2025--vote-88329",
+        "psp-core-2025--vote-88330",
+        "psp-core-2025--vote-88331",
+        "psp-core-2025--vote-88332",
+        "psp-core-2025--vote-88333",
+        "psp-core-2025--vote-88334",
+        "psp-core-2025--vote-88335",
+        "psp-core-2025--vote-88336",
+        "psp-core-2025--vote-88337",
+        "psp-core-2025--vote-88338",
+        "psp-core-2025--vote-88339",
+        "psp-core-2025--vote-88340",
+        "psp-core-2025--vote-88341",
+        "psp-core-2025--vote-88342",
+        "psp-core-2025--vote-88343",
+        "psp-core-2025--vote-88344",
+        "psp-core-2025--vote-88345",
+        "psp-core-2025--vote-88346",
+        "psp-core-2025--vote-88347",
+        "psp-core-2025--vote-88348",
+        "psp-core-2025--vote-88349",
+        "psp-core-2025--vote-88350",
+        "psp-core-2025--vote-88351",
+        "psp-core-2025--amendment-text-1399",
+        "psp-core-2025--vote-88353",
+        "psp-core-2025--amendment-text-1402",
+        "psp-core-2025--vote-88355",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda předložila zákon o evidenci tržeb, který zavádí automatické zasílání údajů o vybraných tržbách a rozšiřuje možnosti jejich kontroly; Poslanecká sněmovna zákon po vrácení Senátem znovu podpořila. Poslanci ANO také nepodpořili řadu návrhů, které by z evidence vyřadily další platby nebo činnosti, a podpořili přechodné opatření pro spuštění systému. To představuje dílčí krok ke slibu, ne důkaz, že se již snížily ztráty z DPH nebo že Česko dosáhlo evropské špičky ve výběru.",
+      "confidence": "high",
+      "uncertainties": [
+        "Evidence dokládá schválení systému a kroky k jeho zavedení, nikoli skutečný vývoj ztrát z DPH nebo srovnání výběru DPH s ostatními evropskými zeměmi; tento cíl je navíc stanoven až do roku 2029.",
+        "Výměna daňových informací a celní kontroly v navržených smlouvách mohou posílit daňovou kontrolu, ale dodané podklady neukazují jejich konkrétní dopad na výběr DPH v České republice."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0f3b7e04c40a4791016aec49cbaa6087d1b33a3389f2c1259a",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 133223,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 133220
+      },
+      "output_tokens": 9052,
+      "output_tokens_details": {
+        "reasoning_tokens": 5742
+      },
+      "total_tokens": 142275
+    },
+    "output": {
+      "promiseId": "ano-2025-7e4710e01f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje mlčenlivost a komunikaci České národní banky při dohledu nad kapitálovým trhem, nikoli výběr DPH nebo daňové kontroly.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": true,
+          "reasonCz": "Návrh smlouvy s Keňou upravuje výměnu daňových informací a jejich získávání pro účely vyměřování, vybírání a vymáhání daní, tedy také nástroj daňové kontroly.",
+          "effectCz": "Jde o novou smlouvu bez předchozího znění, s nímž by šlo změnu porovnat. Navrhuje výměnu informací vztahujících se k daním všeho druhu a opatření k jejich získání; tím rozšiřuje dostupné prostředky daňové kontroly, ale samo o sobě nedokládá snížení ztrát z DPH."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí elektronické zasílání údajů o tržbách správci daně a automatizované zjišťování informací, což je konkrétní prostředek pro kontrolu daňových povinností.",
+          "effectCz": "Jde o nový zákon, takže balíček nedodává předchozí znění této úpravy. Stanoví evidenci vymezených tržeb, zasílání údajů datovou zprávou správci daně, automatizované zpracování a kontrolní i sankční postupy; rozšiřuje tak nástroje kontroly, které mohou přispět k plnění části slibu. Zároveň stanoví řadu výjimek z evidence, takže nepokrývá všechny tržby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje přirážku k paušální dani a daňovou slevu pro účastníky evidence, ale možnost přirážkou se z evidence vyvázat se týká poplatníků, kteří nejsou plátci DPH; dodaný text proto neukazuje podstatný dopad na ztráty z DPH.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": true,
+          "reasonCz": "Změna umožňuje finanční správě využívat kontrolní nákupy při ověřování evidence tržeb a zahrnout údaje o ní do daňové analytické evidence.",
+          "effectCz": "Před změnou mohl orgán finanční správy provádět kontrolní nákup jen při prověřování povinností podle zákona o mezinárodní spolupráci při správě daní a analytická evidence přijímala údaje z kontrolního hlášení DPH a další potřebné údaje. Návrh rozšiřuje kontrolní nákupy také na evidenci tržeb a výslovně dovoluje zařadit údaje z této evidence do analytické evidence; rozsah kontrolních a analytických prostředků se tedy zvětšuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": true,
+          "reasonCz": "Změna přidává celní správě oprávnění prověřovat plnění povinností při evidenci tržeb, čímž rozšiřuje kontrolní prostředky v daňové oblasti.",
+          "effectCz": "Před změnou výčet oblastí, pro které mohla celní správa provádět kontrolní nákup, evidenci tržeb neobsahoval. Návrh ji do výčtu doplňuje a rozšiřuje tak kontrolní pravomoc; druhá dodaná úprava pouze mění výraz týkající se krycího prostředku a nemění uvedený rozsah kontroly."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": true,
+          "reasonCz": "Návrh smlouvy s Maltou umožňuje výměnu a získávání daňových informací pro vyměřování, vybírání a vymáhání daní všeho druhu, což představuje nástroj daňové kontroly.",
+          "effectCz": "Jde o novou smlouvu bez předchozího znění v balíčku. Navrhuje výměnu informací pro účely daní všeho druhu a povinnost použít dostupná opatření k získání požadovaných informací; rozšiřuje tím možnosti kontroly, ale nedokládá konkrétní výsledek u DPH."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43340-1",
+          "relevant": false,
+          "reasonCz": "Dodané změny DPH upravují pravidla místa plnění a režimu jednoho správního místa u přeshraničních prodejů a služeb, nikoli technologie nebo kontroly výběru DPH.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": true,
+          "reasonCz": "Návrh smlouvy s Argentinou upravuje výměnu daňových informací a povinnost získat vyžádané informace, což může posílit kontrolní prostředky pro daně všeho druhu.",
+          "effectCz": "Jde o novou smlouvu bez předchozího znění k porovnání. Navrhuje výměnu informací pro daně všeho druhu a využití opatření k získání vyžádaných informací; rozšiřuje dostupné prostředky daňové kontroly, ale samo o sobě nesnižuje ztráty z DPH."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Návrh stanoví postup, který má zabránit změně vlastníka vozidla, dokud nebude vrácena DPH, jež byla vrácena při jeho nákupu v diplomatickém režimu.",
+          "effectCz": "Před změnou nebyla v dodaném znění pravidla registrace vozidel uvedena tato překážka zápisu změny vlastníka. Návrh ji zavádí pro případ nevrácení DPH a rozšiřuje tak možnost zajistit její vrácení; jde však o úzce vymezenou oblast, nikoli o obecnou kontrolu výběru DPH."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-19",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje správci daně pořídit záznam při místním šetření i bez vědomí přítomných osob, pokud účelu vyhledávání nelze dosáhnout jinak, a tím rozšiřuje nástroj daňové kontroly.",
+          "effectCz": "Před změnou mohl správce daně pořizovat obrazový či zvukový záznam o průběhu úkonu pouze s předchozím upozorněním účastníků. Návrh ruší tento požadavek v případech, kdy jinak nelze dosáhnout účelu vyhledávání, a rozšiřuje tak možnost dokumentovat daňové kontroly; druhá změna upravuje pořadí úhrad a není podstatná pro tento slib."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-16",
+          "relevant": true,
+          "reasonCz": "Návrh obchodní dohody zavádí elektronické celní postupy, automatizované řízení rizik a audity po propuštění zboží, tedy kontrolní nástroje u daní a poplatků vybíraných při dovozu.",
+          "effectCz": "Jde o novou dohodu bez předchozího znění k porovnání. Navrhuje elektronické celní postupy, automatizované řízení rizik a audity po odbavení; tyto nástroje mohou zahrnovat i kontrolu daní vybíraných při dovozu, ale dodané znění jejich konkrétní dopad na DPH nevyčísluje."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-32",
+          "relevant": true,
+          "reasonCz": "Plán legislativních prací popisuje návrh EET 2.0 jako prostředek k efektivnějšímu výběru daní a uvádí také související změny v oblasti DPH.",
+          "effectCz": "Usnesení samo nemění pravidla DPH ani evidence; stanoví plán předložit návrh EET 2.0 a související daňové změny. Jde o plánovací návrh k technologiím a efektivnějšímu výběru daní, tedy o krok směrem k části slibu, nikoli o uskutečněný výsledek."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-117",
+          "relevant": true,
+          "reasonCz": "Příloha plánu stanoví legislativní úkol k návrhu EET 2.0 a výslovně jej spojuje se zefektivněním výběru daní.",
+          "effectCz": "Usnesení nemění dosavadní pravidla evidence; plánuje předložit návrh zákona o EET, který má podle textu omezit šedou ekonomiku a zefektivnit výběr daní. Jde o příslib přípravy opatření, nikoli o již zavedenou kontrolu."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-128",
+          "relevant": false,
+          "reasonCz": "Úkol se týká provedení unijních pravidel pro dovoz a elektronická rozhraní, ale dodaný text neukazuje, že by zvyšoval technologie nebo kontroly výběru DPH ve smyslu slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-183",
+          "relevant": true,
+          "reasonCz": "Plán ukládá přípravu změny pravidel DPH pro digitální vykazování, což je konkrétní technologický krok v daňové správě.",
+          "effectCz": "Usnesení nemění pravidla vykazování; plánuje návrh zákona k digitálnímu vykazování DPH s předložením vládě v roce 2029. Jde o návrhový krok k modernizaci správy DPH, nikoli o již zavedený systém ani o doložené snížení ztrát."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-314",
+          "relevant": true,
+          "reasonCz": "Usnesení jmenuje EET 2.0 mezi strategickými projekty, určuje odpovědného manažera a ukládá koordinaci jejich realizace.",
+          "effectCz": "Usnesení samo nezavádí EET ani nemění pravidla DPH. Vytváří však organizační řízení projektu EET 2.0 a stanoví odpovědnost a koordinaci jeho realizace; jde o podpůrný krok směrem k technologickému prostředku slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-7e4710e01f--source",
+        "psp-core-2025--law-change-43215-1",
+        "psp-core-2025--print-step-210795",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--law-change-43310-4",
+        "psp-core-2025--law-change-43310-5",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--print-step-211439",
+        "psp-core-2025--law-change-43378-1",
+        "psp-core-2025--print-step-211887",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--print-step-212080",
+        "psp-core-2025--law-change-43422-19",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--law-change-43453-16",
+        "psp-core-2025--print-step-212285",
+        "zvlady-resolutions--law-change-uv-2026-175-32",
+        "zvlady-resolutions--law-change-uv-2026-175-117",
+        "zvlady-resolutions--law-change-uv-2026-175-183",
+        "zvlady-resolutions--2026-175",
+        "zvlady-resolutions--law-change-uv-2026-314",
+        "zvlady-resolutions--2026-314"
+      ],
+      "explanationCz": "Vláda předložila zákon o evidenci tržeb a poslanci ANO jej schválili i poté, co jej Senát vrátil s pozměňovacími návrhy. Zákon zavádí elektronické zasílání údajů o tržbách a rozšiřuje kontrolní a analytické nástroje finanční i celní správy. Vláda také naplánovala digitální vykazování DPH a pověřila manažera koordinací projektu EET 2.0. Jde o konkrétní kroky k technologiím a kontrolám, ale důkaz, že už snížily ztráty z DPH nebo přinesly evropskou špičku ve výběru, v balíčku není.",
+      "confidence": "high",
+      "uncertainties": [
+        "Slib požaduje výsledek do roku 2029, ale balíček neobsahuje měření ztrát z DPH ani srovnání výběru DPH s evropskými zeměmi.",
+        "Několik dalších návrhů rozšiřuje výměnu daňových informací či kontroly u dovozu, ale dodané podklady nevyčíslují jejich konkrétní dopad na ztráty z DPH."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

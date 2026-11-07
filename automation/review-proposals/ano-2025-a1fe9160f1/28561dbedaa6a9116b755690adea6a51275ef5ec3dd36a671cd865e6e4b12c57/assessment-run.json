@@ -1,0 +1,1298 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-11-05T09-23-49-651Z--d9a8b4920613",
+  "evaluatedAt": "2026-11-05T09:23:49.651Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-a1fe9160f1/d9a8b4920613c92dab4e65eb157372b4d763f8d8dea398ca347156d6cb2a26d4.json",
+  "packageHash": "d9a8b4920613c92dab4e65eb157372b4d763f8d8dea398ca347156d6cb2a26d4",
+  "assessmentContentHash": "f7959f8865e98cdf83361f9d84e35accf2b2d2a1b540380776fac8d8e9e39a2e",
+  "assessmentFingerprint": "28561dbedaa6a9116b755690adea6a51275ef5ec3dd36a671cd865e6e4b12c57",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-a1fe9160f1",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v29",
+      "contentHash": "96475f15f9c16b2e26149b464437cc23cbd2112dd8b5595a877465d99d3de60b"
+    },
+    "arbiter": {
+      "version": "arbiter-v22",
+      "contentHash": "adae11ebf28fb7abaa00a8ebfcd5de976930d71561b8f18947d76f435e1647c2"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment cites duplicate evidence IDs",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_09aef10d91d73578016aec49675bdc87d1954e8555a4a7b1dc",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 124134,
+            "input_tokens_details": {
+              "cache_write_tokens": 117784,
+              "cached_tokens": 6347
+            },
+            "output_tokens": 9905,
+            "output_tokens_details": {
+              "reasoning_tokens": 5170
+            },
+            "total_tokens": 134039
+          },
+          "output": {
+            "promiseId": "ano-2025-a1fe9160f1",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43203-2",
+                "relevant": true,
+                "reasonCz": "Text dohody výslovně upravuje boj proti nelegální migraci a zpětné přebírání osob, tedy část slibu zaměřenou na návraty.",
+                "effectCz": "Dohoda nově stanoví, že Uzbekistán bez zbytečného odkladu převezme své občany, kteří nesplňují podmínky vstupu nebo pobytu v členském státě EU; upravuje také vydávání cestovních dokladů do 30 dnů. Jde o návratový mechanismus pro občany Uzbekistánu, nikoli o obecný závazek návratu všech zadržených migrantů do jejich domovské země; předchozí právní úpravu balíček neuvádí, takže změnu oproti ní nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43203-17",
+                "relevant": true,
+                "reasonCz": "Příloha obsahuje formulář žádosti o pohovor a cestovní doklad podle ustanovení dohody o zpětném přebírání osob.",
+                "effectCz": "Příloha nově stanoví formulář pro žádost o pohovor a cestovní doklad při zpětném přebírání podle dohody s Uzbekistánem. Předchozí úpravu balíček neuvádí; jde o praktický dílčí nástroj pro návraty, nikoli o obecný systém návratu všech zadržených migrantů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43228-2",
+                "relevant": true,
+                "reasonCz": "Smlouva výslovně upravuje policejní spolupráci proti nelegální migraci a sdílení informací potřebných k prověřování pobytu.",
+                "effectCz": "Smlouva nově stanoví výměnu informací o nelegální migraci, osobách bez dokladů a oprávněnosti pobytu a také koordinaci opatření. Tím vytváří dílčí nástroj pro potírání nelegální migrace, ale sama neukládá návrat zadržených osob do jejich domovské země; předchozí pravidla balíček neuvádí."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43228-3",
+                "relevant": false,
+                "reasonCz": "Dodané pasáže upravují pouze provádění dočasných kontrol na vnitřních hranicích, nikoli odmítnutí migračního paktu, azylový zákon ani návrat zadržených migrantů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-1",
+                "relevant": true,
+                "reasonCz": "Jde o úvodní část nového cizineckého zákona a dodané ustanovení se týká prokazování totožnosti pro účely návratu.",
+                "effectCz": "Nový zákon vymezuje, že upravuje mimo jiné vycestování cizinců, a umožňuje pro účely návratu nahradit prokázání totožnosti otisky prstů, obrazovým záznamem a údaji policie. Předchozí znění pravidel balíček neobsahuje, takže nelze určit, zda je tato možnost oproti dosavadní úpravě přísnější či mírnější."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-2",
+                "relevant": true,
+                "reasonCz": "Dodaná ustanovení nového zákona upravují vstup a prvotní prověřování žadatelů o mezinárodní ochranu a výslovně odkazují na unijní migrační a azylová pravidla.",
+                "effectCz": "Nový zákon stanoví pravidla vstupu a prvotního prověřování žadatelů o mezinárodní ochranu a odkazuje přitom na unijní předpisy včetně nařízení o řízení azylu a migrace. Předchozí české znění těchto pravidel není v balíčku uvedeno; obsah odkazovaných předpisů nelze domýšlet, ale zákon toto unijní nastavení zahrnuje do vnitrostátní právní úpravy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-8",
+                "relevant": false,
+                "reasonCz": "Dodané pasáže se týkají pobytového statusu dětí narozených v Česku, nikoli závazku odmítnout migrační pakt, potírat nelegální migraci nebo zajistit návraty.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-11",
+                "relevant": true,
+                "reasonCz": "Část nového zákona výslovně upravuje evropský cestovní doklad pro návrat, který slouží k uskutečnění vycestování.",
+                "effectCz": "Nový zákon umožňuje ministerstvu nebo policii vydat z moci úřední evropský cestovní doklad pro návrat a stanoví jeho platnost na dobu potřebnou k vycestování; doklad lze vydat i pro vycestování podle azylového zákona. Předchozí znění tohoto pravidla balíček neuvádí, takže směr změny oproti dosavadnímu stavu nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-13",
+                "relevant": true,
+                "reasonCz": "Tato část nového zákona přímo upravuje rozhodnutí o vycestování, správním vyhoštění, dobu k odjezdu a zajištění cizinců.",
+                "effectCz": "Nový zákon stanoví povinnost neoprávněně pobývajících cizinců vycestovat, pravidla správního vyhoštění, kontrolu splnění povinnosti i možnosti zajištění a přípravy návratu. Zároveň stanoví výjimky a procesní záruky, například při nepřiměřeném zásahu do rodinného života nebo při hrozbě skutečného nebezpečí v zemi návratu. Předchozí znění těchto pravidel balíček neobsahuje, proto nelze jejich celkovou přísnost oproti dosavadní úpravě přesně určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-14",
+                "relevant": true,
+                "reasonCz": "Dodaná procesní pravidla se přímo vztahují k řízením o správním vyhoštění a povinnosti vycestovat.",
+                "effectCz": "Nový zákon stanoví postupy a lhůty pro řízení o vyhoštění a vycestování a upravuje odkladný účinek odvolání; v běžných případech jej přiznává, zatímco v uvedeném zvláštním postupu jej vylučuje. Předchozí znění těchto pravidel není v balíčku, takže nelze určit, zda jsou jako celek pro realizaci návratů přísnější, nebo mírnější."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-16",
+                "relevant": true,
+                "reasonCz": "Část upravuje povinnost cizince vycestovat při neoprávněném pobytu i přestupky spojené s nevycestováním.",
+                "effectCz": "Nový zákon výslovně ukládá cizinci bez oprávnění k pobytu povinnost vycestovat ve stanovené lhůtě a označuje nevycestování za přestupek s pokutou až 10 000 Kč. Předchozí znění těchto ustanovení balíček neuvádí, takže změnu přísnosti oproti dosavadní úpravě nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-17",
+                "relevant": true,
+                "reasonCz": "Dodané pravidlo umožňuje předávat údaje orgánům státu, kam má být neoprávněně pobývající cizinec předán, a jeho zastupitelskému úřadu kvůli náhradnímu dokladu.",
+                "effectCz": "Nový zákon umožňuje předávat nezbytné údaje státu, kam má být cizinec předán, a předává údaje zastupitelskému úřadu jeho státu pro vydání náhradního cestovního dokladu. Tím upravuje konkrétní administrativní podporu předání a návratu; předchozí znění pravidla balíček neuvádí."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-18",
+                "relevant": true,
+                "reasonCz": "Část vymezuje pravomoci policie při rozhodování o vyhoštění, zajištění a zajišťování dopravy cizince mimo území.",
+                "effectCz": "Nový zákon svěřuje příslušným útvarům policie rozhodování o vyhoštění, povinnosti vycestovat a zajištění a umožňuje jim zajistit dopravu cizince mimo území. Jde o institucionální nástroje k provádění návratů; předchozí rozdělení pravomocí balíček neuvádí."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-19",
+                "relevant": true,
+                "reasonCz": "Zrušení dosavadního zákona o pobytu cizinců je součástí přijetí nového zákona o migraci a pobytu cizinců, který slib výslovně předpokládá.",
+                "effectCz": "Schválený text ruší dosavadní zákon o pobytu cizinců a související novelu. Tato část sama neuvádí obsah rušených pravidel ani jejich náhradu, takže její samostatný dopad na přísnost pravidel návratu nelze z balíčku určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-1",
+                "relevant": true,
+                "reasonCz": "Tato část tisku je v balíčku relevantní pouze kvůli pozměňovacím návrhům, které upravují pravidla navázaná na řízení o azylu a migraci.",
+                "effectCz": "Tato část neobsahuje vlastní dodaný text; její relevance plyne pouze z pozměňovacího návrhu, který mimo jiné mění odkazy v azylových ustanoveních na nové unijní nařízení o řízení azylu a migrace. Bez úplného předchozího znění dotčených ustanovení nelze určit, zda jde o zpřísnění nebo zmírnění závazku či nároku."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-4",
+                "relevant": true,
+                "reasonCz": "Změny azylového zákona upravují mimo jiné předávání cestovních dokladů policii pro vycestování a doklady potřebné po skončení mezinárodní ochrany.",
+                "effectCz": "Dosavadní § 41 vyžadoval předložení dokladu při žádosti a jeho odevzdání při udělení ochrany; návrh stanoví odevzdání dokladu po dobu řízení včetně přemístění a umožňuje ministerstvu předat jej policii pro vycestování. To rozšiřuje využitelnost dokladu pro návraty. Další změny se týkají lhůt a soudních řízení; jejich dopad na celý slib nelze z této části vyjádřit jedním směrem."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-5",
+                "relevant": true,
+                "reasonCz": "Změny cizineckého zákona výslovně upravují povinnost vycestovat, správní vyhoštění, zajištění a náklady spojené s vycestováním.",
+                "effectCz": "Návrh mění pravidla pro zánik pobytových oprávnění a plnění povinnosti vycestovat, upravuje zvláštní opatření a financování úkonů spojených s vycestováním. U některých případů správního vyhoštění zvyšuje práh pro ochranu rodinného života na „zvláště nepřiměřený“ zásah; nově také stanoví, že se při neprovedeném trestu vyhoštění neposuzují některé překážky vycestování. Tyto změny mohou usnadnit vyhoštění, ale poslední pravidlo se týká pouze uvedených případů a balíček neobsahuje všechny souvislosti potřebné k celkovému srovnání."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-7",
+                "relevant": true,
+                "reasonCz": "Návrh zvyšuje tresty za násilné překročení hranice, organizování nedovoleného překročení hranice a napomáhání k neoprávněnému pobytu.",
+                "effectCz": "Dosavadní sazba za násilné překročení hranice byla jeden až pět let a návrh ji mění na dva až osm let; u organizování nedovoleného překročení hranice zvyšuje základní sazbu z nejvýše dvou let na čtyři roky a upravuje přitěžující případy. U napomáhání k neoprávněnému pobytu zvyšuje základní horní hranici z jednoho na tři roky. Trestní postih nelegálního převádění a napomáhání pobytu je tedy přísnější."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-6",
+                "relevant": true,
+                "reasonCz": "Navržená dohoda s Mexikem výslovně upravuje boj proti nelegální migraci a zpětné přebírání státních příslušníků.",
+                "effectCz": "Dohoda nově stanoví vzájemné zpětné přebírání vlastních občanů, poskytování cestovních dokladů a snahu sjednat dohodu také o zpětném přebírání občanů třetích zemí. Jde o dílčí prostředek návratové politiky; předchozí právní stav balíček neuvádí a dohoda sama neřeší návrat všech zadržených migrantů."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-134",
+                "relevant": false,
+                "reasonCz": "Vyhláška stanoví seznam bezpečných zemí původu pro azylové řízení, ale dodaný text neukazuje přímou vazbu na odmítnutí migračního paktu, nový migrační zákon ani návrat zadržených migrantů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2025-1017",
+                "relevant": true,
+                "reasonCz": "Usnesení výslovně odmítá migrační pakt v současné podobě, vyhlašuje nulovou toleranci nelegální migrace a ukládá připravit návrh pravidel pro návraty.",
+                "effectCz": "Vláda rozhodla odmítnout migrační pakt v současné podobě a prosazovat jeho zpřísnění, vyhlásila politiku nulové tolerance a uložila ministrovi vnitra připravit návrh právního rámce pro boj proti nelegální migraci a návraty. Tím přímo plní politickou část slibu a zahajuje přípravu zákona, nikoli však jeho přijetí."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-88",
+                "relevant": true,
+                "reasonCz": "Vládní plán legislativních prací zařazuje návrh opatření proti nelegální migraci a pro realizaci návratů zadržených cizinců.",
+                "effectCz": "Plán stanoví předložení návrhu vládě v lednu 2027 a uvádí, že navazuje na úkol připravit opatření proti nelegální migraci a pro návraty. Jde o plán dalšího legislativního kroku, nikoli o již účinné pravidlo; předchozí právní znění se proto nemění."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+                "relevant": true,
+                "reasonCz": "Výhled vládních prací uvádí návrh unijního systému navracení a novelu českého zákona o pobytu cizinců.",
+                "effectCz": "Výhled uvádí připravovaný návratový předpis EU a novelu českého zákona o pobytu cizinců, ale nestanoví jejich konkrétní právní pravidla ani jejich směr. Jde pouze o plánované práce, nikoli o změnu účinného práva."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-a1fe9160f1--source",
+              "psp-core-2025--law-change-43203-2",
+              "psp-core-2025--law-change-43203-17",
+              "psp-core-2025--law-change-43228-2",
+              "psp-core-2025--law-change-43264-1",
+              "psp-core-2025--law-change-43264-2",
+              "psp-core-2025--law-change-43264-11",
+              "psp-core-2025--law-change-43264-13",
+              "psp-core-2025--law-change-43264-14",
+              "psp-core-2025--law-change-43264-16",
+              "psp-core-2025--law-change-43264-17",
+              "psp-core-2025--law-change-43264-18",
+              "psp-core-2025--law-change-43264-19",
+              "psp-core-2025--law-change-43335-1",
+              "psp-core-2025--law-change-43335-4",
+              "psp-core-2025--law-change-43335-5",
+              "psp-core-2025--law-change-43335-7",
+              "psp-core-2025--law-change-43453-6",
+              "zvlady-resolutions--law-change-uv-2025-1017",
+              "zvlady-resolutions--law-change-uv-2026-175-88",
+              "zvlady-resolutions--law-change-uv-2026-175-193",
+              "zvlady-resolutions--2025-1017",
+              "zvlady-resolutions--law-change-uv-2026-175-88",
+              "zvlady-resolutions--law-change-uv-2026-175-193",
+              "zvlady-resolutions--2026-175",
+              "psp-core-2025--print-step-210760",
+              "psp-core-2025--print-step-210866",
+              "psp-core-2025--print-step-211048",
+              "psp-core-2025--print-step-211537",
+              "psp-core-2025--amendment-text-1989",
+              "psp-core-2025--amendment-text-2115",
+              "psp-core-2025--vote-88522",
+              "psp-core-2025--print-step-212285"
+            ],
+            "explanationCz": "Vláda přijala usnesení, kterým odmítla migrační pakt v jeho současné podobě, vyhlásila nulovou toleranci nelegální migrace a zadala přípravu návratu zadržených cizinců. Vláda také předložila nový cizinecký zákon a poslanci ANO pro něj hlasovali; schválená úprava obsahuje pravidla pro vyhoštění, zajištění a návrat. Zároveň však zákon výslovně pracuje s unijním nařízením o řízení azylu a migrace, což je v napětí se slibem pakt odmítnout. Další vládní návrhy a pozměňovací návrhy ANO posilují některé návratové postupy, ale dosud nepředstavují přijatý nový azylový zákon.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Nový cizinecký zákon současně rozvíjí návratová pravidla a odkazuje na unijní nařízení o řízení azylu a migrace; balíček neumožňuje přesně určit, jak vláda rozlišuje mezi odmítnutím paktu v současné podobě a převzetím jeho jednotlivých pravidel.",
+              "Návrh bezpečnostní novely a pozměňovací návrhy k němu jsou v balíčku doloženy jako předložené návrhy, nikoli jako konečně přijatá právní úprava."
+            ]
+          }
+        }
+      },
+      {
+        "error": "Assessment cites duplicate evidence IDs",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_06c497c7e52c293a016aec49e88bd087d19f9db137400c17e7",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 124134,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 124131
+            },
+            "output_tokens": 11552,
+            "output_tokens_details": {
+              "reasoning_tokens": 5676
+            },
+            "total_tokens": 135686
+          },
+          "output": {
+            "promiseId": "ano-2025-a1fe9160f1",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43203-2",
+                "relevant": true,
+                "reasonCz": "Dohoda obsahuje spolupráci proti nelegální migraci a pravidla zpětného přebírání vlastních občanů, tedy konkrétní nástroj pro návraty.",
+                "effectCz": "Dohoda nově stanoví, že Uzbekistán bez zbytečného odkladu převezme své občany, kteří nesplňují podmínky pobytu, a upravuje také předávání dokladů; balíček neuvádí předchozí znění, takže směr změny oproti dosavadnímu právu nelze určit. Jde o dílčí podporu návratů, omezenou na spolupráci s Uzbekistánem."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43203-17",
+                "relevant": true,
+                "reasonCz": "Příloha stanoví formulář žádosti o cestovní doklad podle dohody o zpětném přebírání osob, což může usnadnit návrat.",
+                "effectCz": "Příloha zavádí formulář pro žádost o cestovní doklad a pohovor při zpětném přebírání osob; předchozí znění v balíčku není, takže změnu oproti dřívějšímu stavu nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43228-2",
+                "relevant": true,
+                "reasonCz": "Smlouva o policejní spolupráci výslovně upravuje boj proti nelegální migraci a výměnu informací o osobách bez dokladů i o oprávněnosti pobytu.",
+                "effectCz": "Smlouva nově stanoví výměnu těchto informací a pravidelnou spolupráci; balíček neobsahuje předchozí znění, takže směr změny oproti dosavadnímu stavu nelze určit. Jde o podpůrný nástroj kontroly a návratů, nikoli o samotné pravidlo vyhoštění."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43228-3",
+                "relevant": true,
+                "reasonCz": "Ustanovení umožňují společné kontroly na vnitřních hranicích a za stanovených podmínek dopravení osoby na území druhého státu.",
+                "effectCz": "Smlouva nově umožňuje zřízení kontrolních míst na území druhé smluvní strany a stanoví oprávnění kontrolujících pracovníků včetně dopravení osoby na území vlastního státu; předchozí znění není v balíčku, a proto nelze určit změnu oproti dosavadnímu stavu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-1",
+                "relevant": true,
+                "reasonCz": "Úvod nového cizineckého zákona vymezuje jeho úpravu vycestování a umožňuje pro účely návratu prokázat totožnost i jinými údaji policie.",
+                "effectCz": "Návrh vymezuje vstup, pobyt a vycestování cizinců a dovoluje při návratu nahradit prokázání totožnosti otisky, obrazovým záznamem a údaji policie; předchozí znění v balíčku není, takže změnu oproti dřívějšímu právu nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-2",
+                "relevant": true,
+                "reasonCz": "Část upravuje prvotní prověřování žadatelů o mezinárodní ochranu a výslovně odkazuje na unijní nařízení o řízení azylu a migrace i nařízení o prověřování.",
+                "effectCz": "Návrh stanoví pravidla prověřování včetně případů předávání podle nařízení EU 2024/1351 a postupů podle nařízení EU 2024/1356; předchozí znění dotčených ustanovení v balíčku není, takže směr změny nelze určit. Výslovné navázání na unijní migrační a azylová pravidla je v napětí se závazkem odmítnout migrační pakt."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-8",
+                "relevant": true,
+                "reasonCz": "Návrh připouští, aby byl pobyt některých dětí narozených v Česku považován za tolerovaný, i když dítě před žádostí pobývalo neoprávněně.",
+                "effectCz": "Nový zákon zavádí pro vymezené žádosti o pobyt dítěte mladšího jednoho roku tolerovaný pobyt po dobu řízení, a to i při předchozím neoprávněném pobytu; předchozí znění není v balíčku. Tato výjimka oslabuje bezvýjimečný výklad nulové tolerance, byť se týká úzce vymezených případů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-11",
+                "relevant": true,
+                "reasonCz": "Část zavádí možnost vydat evropský cestovní doklad pro návrat a výslovně ji vztahuje i na vycestování podle zákona o azylu.",
+                "effectCz": "Návrh umožňuje ministerstvu nebo policii vydat evropský cestovní doklad pro uskutečnění vycestování; předchozí znění v balíčku není, takže změnu oproti dřívějšímu právu nelze určit. Jde o nový nástroj usnadňující návraty."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-13",
+                "relevant": true,
+                "reasonCz": "Tato část přímo upravuje povinnost opustit území, správní vyhoštění, lhůty k vycestování a postupy k výkonu návratu.",
+                "effectCz": "Nový zákon ukládá neoprávněně pobývajícím cizincům povinnost vycestovat, stanoví postupy vyhoštění a zajištění a ukládá policii po marném uplynutí lhůty činit kroky k výkonu rozhodnutí. Současně připouští výjimky, například při nepřiměřeném zásahu do rodinného života nebo při nebezpečí v zemi návratu; předchozí znění v balíčku není, takže celkovou změnu oproti dřívějšímu právu nelze přesně určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-14",
+                "relevant": true,
+                "reasonCz": "Část upravuje opravné prostředky proti rozhodnutím o vyhoštění a povinnosti vycestovat, včetně odkladného účinku odvolání.",
+                "effectCz": "Návrh přiznává odvolání proti rozhodnutí o správním vyhoštění a povinnosti opustit území odkladný účinek, takže výkon návratu může být dočasně pozdržen; u některých případů zároveň odvolání vylučuje. Předchozí znění těchto ustanovení v balíčku není, a proto nelze určit změnu oproti dřívějšímu stavu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-16",
+                "relevant": true,
+                "reasonCz": "Návrh ukládá cizinci bez pobytového oprávnění povinnost vycestovat a stanoví přestupky za nevycestování či neoprávněný pobyt.",
+                "effectCz": "Nový zákon výslovně stanoví povinnost vycestovat a za uvedené přestupky umožňuje pokuty až 10 000 Kč, respektive 20 000 Kč; balíček neobsahuje předchozí znění těchto pravidel, takže změnu oproti dřívějšímu právu nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-17",
+                "relevant": true,
+                "reasonCz": "Ustanovení umožňuje předávat údaje orgánům státu, do něhož má být předán neoprávněně pobývající cizinec, a zastupitelskému úřadu jeho domovského státu.",
+                "effectCz": "Návrh stanoví předávání údajů nezbytných k předání cizince a k vydání náhradního cestovního dokladu; předchozí znění v balíčku není, takže změnu oproti dřívějšímu právu nelze určit. Pravidlo poskytuje praktickou podporu realizaci návratů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-18",
+                "relevant": true,
+                "reasonCz": "Část přiděluje policii úkoly spojené s vyhoštěním, cestovními doklady a dopravou cizince mimo území.",
+                "effectCz": "Nový zákon svěřuje cizinecké policii rozhodování o vyhoštění a povinnosti vycestovat, zajišťování dokladů i zajištění dopravy cizince mimo území; předchozí znění v balíčku není, takže změnu oproti dřívějšímu stavu nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-19",
+                "relevant": true,
+                "reasonCz": "Ustanovení ruší dosavadní cizinecký zákon v rámci návrhu nového zákona upravujícího vstup, pobyt a vycestování cizinců.",
+                "effectCz": "Návrh ruší zákon č. 326/1999 Sb. a související novelu; obsah náhradní úpravy je uveden v dalších částech návrhu, nikoli v této části. Balíček neposkytuje znění rušených pravidel, takže samotný směr změny nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-1",
+                "relevant": true,
+                "reasonCz": "Tato část je v balíčku relevantní jen prostřednictvím pozměňovacího návrhu, který doplňuje pravidla související s povinností vycestovat.",
+                "effectCz": "Vlastní text této části není dodán; význam pro slib plyne pouze z pozměňovacího návrhu, který doplňuje pravidla návratu a povinnosti vycestovat. Bez textu předchozích ustanovení nelze určit jejich přesný směr změny."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-4",
+                "relevant": true,
+                "reasonCz": "Změny azylového zákona zahrnují předávání cestovního dokladu policii za účelem vycestování a pravidla související s ukončením mezinárodní ochrany.",
+                "effectCz": "Dosavadní § 41 ukládal žadateli předložit cestovní doklad ministerstvu; návrh nově stanoví, že jej ministerstvo v případě potřeby bez zbytečného odkladu předá policii k vycestování. Tím se posiluje dostupnost dokladu pro návrat; další předložené změny převážně mění označení a procesní pravidla a jejich dopad na samotné návraty je omezený."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-5",
+                "relevant": true,
+                "reasonCz": "Část mění pravidla správního vyhoštění, povinnosti vycestovat, zajištění a zvláštních opatření za účelem vycestování.",
+                "effectCz": "Dosavadní § 119a odst. 2 zakazoval vyhoštění při nepřiměřeném zásahu do rodinného či soukromého života; návrh stanoví pro některé vymezené důvody přísnější práh „zvláště nepřiměřeného“ zásahu, a tím v těchto případech vyhoštění usnadňuje. Nový § 179 odst. 6 zároveň vylučuje posuzování překážek vycestování u některých nevykonaných trestů vyhoštění. Jiné změny se týkají postupu a nákladů; jejich směr vůči návratům nelze z dodaných předchozích znění plně určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-7",
+                "relevant": true,
+                "reasonCz": "Část zvyšuje trestní sazby za násilné překročení hranic, převaděčství a napomáhání k neoprávněnému pobytu.",
+                "effectCz": "Oproti dodanému předchozímu znění návrh zvyšuje například sazbu za násilné překročení hranice z jednoho až pěti let na dva až osm let a sazbu za napomáhání k neoprávněnému pobytu z maxima jednoho roku na tři léta. U převaděčství zvyšuje i základní sazbu; změny některých kvalifikačních znaků však zároveň přeskupují přitěžující případy. Celkově jde o přísnější trestní postih související s nelegální migrací."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43453-6",
+                "relevant": true,
+                "reasonCz": "Dohoda s Mexikem obsahuje závazek zpětně přebírat vlastní státní příslušníky, kteří se musí vrátit z území členského státu EU.",
+                "effectCz": "Dohoda nově stanoví zpětné přebírání vlastních občanů a poskytování cestovních dokladů pro návrat; předchozí znění v balíčku není, takže změnu oproti dřívějšímu právu nelze určit. Jde o dílčí nástroj návratové spolupráce, nikoli o obecné pravidlo pro všechny migranty."
+              },
+              {
+                "evidenceId": "esbirka-regulations--law-change-sb-2026-134",
+                "relevant": true,
+                "reasonCz": "Vyhláška mění seznam bezpečných zemí původu, což může ovlivnit posuzování žádostí o mezinárodní ochranu a následné návraty.",
+                "effectCz": "Vyhláška stanoví nový seznam bezpečných zemí původu, včetně Alžírska, Ghany a Senegalu, a ruší dosavadní paragrafy 3 a 4 prováděcí vyhlášky; předchozí seznam není v balíčku, takže změnu rozsahu oproti dřívějšímu stavu nelze určit."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2025-1017",
+                "relevant": true,
+                "reasonCz": "Usnesení výslovně odmítá migrační pakt v jeho současné podobě, podporuje nulovou toleranci a ukládá připravit nový rámec pro návraty.",
+                "effectCz": "Vláda přijala politické rozhodnutí odmítnout pakt v současné podobě a uložila ministrovi vnitra připravit návrh opatření pro návraty zadržených cizinců; návrh nového právního rámce ale ještě vyžaduje další kroky. Usnesení tak přímo plní politickou část odmítnutí a zároveň pouze navrhuje další legislativní postup."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-88",
+                "relevant": true,
+                "reasonCz": "Vládní plán počítá s předložením návrhu zákona o opatřeních proti nelegální migraci a pro realizaci návratů.",
+                "effectCz": "Usnesení zařazuje na plán legislativních prací návrh zákona, jehož úkol zahrnuje boj proti nelegální migraci a realizaci návratů; jde o plán, nikoli o změnu práv ani o nový zákon. Předchozí znění neexistuje, protože jde o legislativní úkol."
+              },
+              {
+                "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+                "relevant": true,
+                "reasonCz": "Příloha plánuje návratové a cizinecké předpisy, které se přímo vztahují k provádění návratové politiky.",
+                "effectCz": "Příloha uvádí návrh unijního systému navracení a novelu zákona o pobytu cizinců jako plánované práce; sama žádnou povinnost ani oprávnění nemění. Jde pouze o přípravu budoucího právního postupu."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-a1fe9160f1--source",
+              "psp-core-2025--law-change-43203-2",
+              "psp-core-2025--law-change-43203-17",
+              "psp-core-2025--law-change-43228-2",
+              "psp-core-2025--law-change-43228-3",
+              "psp-core-2025--law-change-43264-1",
+              "psp-core-2025--law-change-43264-2",
+              "psp-core-2025--law-change-43264-8",
+              "psp-core-2025--law-change-43264-11",
+              "psp-core-2025--law-change-43264-13",
+              "psp-core-2025--law-change-43264-14",
+              "psp-core-2025--law-change-43264-16",
+              "psp-core-2025--law-change-43264-17",
+              "psp-core-2025--law-change-43264-18",
+              "psp-core-2025--law-change-43264-19",
+              "psp-core-2025--law-change-43335-1",
+              "psp-core-2025--law-change-43335-4",
+              "psp-core-2025--law-change-43335-5",
+              "psp-core-2025--law-change-43335-7",
+              "psp-core-2025--law-change-43453-6",
+              "esbirka-regulations--law-change-sb-2026-134",
+              "zvlady-resolutions--law-change-uv-2025-1017",
+              "zvlady-resolutions--law-change-uv-2026-175-88",
+              "zvlady-resolutions--law-change-uv-2026-175-193",
+              "zvlady-resolutions--2025-1017",
+              "psp-core-2025--print-step-210760",
+              "psp-core-2025--law-change-43203-2",
+              "psp-core-2025--law-change-43203-17",
+              "psp-core-2025--print-step-210866",
+              "psp-core-2025--law-change-43228-2",
+              "psp-core-2025--law-change-43228-3",
+              "zvlady-resolutions--2026-175",
+              "zvlady-resolutions--law-change-uv-2026-175-88",
+              "zvlady-resolutions--law-change-uv-2026-175-193",
+              "psp-core-2025--print-step-211048",
+              "psp-core-2025--law-change-43264-1",
+              "psp-core-2025--law-change-43264-2",
+              "psp-core-2025--law-change-43264-8",
+              "psp-core-2025--law-change-43264-11",
+              "psp-core-2025--law-change-43264-13",
+              "psp-core-2025--law-change-43264-14",
+              "psp-core-2025--law-change-43264-16",
+              "psp-core-2025--law-change-43264-17",
+              "psp-core-2025--law-change-43264-18",
+              "psp-core-2025--law-change-43264-19",
+              "psp-core-2025--vote-88522",
+              "psp-core-2025--law-change-43264-1",
+              "psp-core-2025--law-change-43264-2",
+              "psp-core-2025--law-change-43264-8",
+              "psp-core-2025--law-change-43264-11",
+              "psp-core-2025--law-change-43264-13",
+              "psp-core-2025--law-change-43264-14",
+              "psp-core-2025--law-change-43264-16",
+              "psp-core-2025--law-change-43264-17",
+              "psp-core-2025--law-change-43264-18",
+              "psp-core-2025--law-change-43264-19",
+              "psp-core-2025--print-step-211537",
+              "psp-core-2025--law-change-43335-4",
+              "psp-core-2025--law-change-43335-5",
+              "psp-core-2025--law-change-43335-7",
+              "psp-core-2025--amendment-1989",
+              "psp-core-2025--amendment-text-1989",
+              "psp-core-2025--law-change-43335-1",
+              "psp-core-2025--amendment-2115",
+              "psp-core-2025--amendment-text-2115",
+              "psp-core-2025--law-change-43335-4",
+              "psp-core-2025--law-change-43335-5",
+              "psp-core-2025--law-change-43335-7",
+              "esbirka-regulations--2026-134",
+              "esbirka-regulations--law-change-sb-2026-134",
+              "psp-core-2025--print-step-212285",
+              "psp-core-2025--law-change-43453-6"
+            ],
+            "explanationCz": "Vláda v prosinci 2025 usnesením odmítla migrační pakt v jeho tehdejší podobě a uložila připravit opatření pro návraty, ale tato část usnesení sama pouze zadala další práci. Vláda následně předložila nový zákon o vstupu a pobytu cizinců a poslanci ANO hlasovali pro jeho schválení; návrh obsahuje povinnost vycestovat i nástroje pro výkon návratů. Současně ale schválený text výslovně navazuje na unijní nařízení o řízení azylu a migrace a připouští některé případy tolerovaného pobytu i odklad výkonu vycestování. Vláda předložila také další návrh zaměřený na návraty a poslanci ANO navrhli přísnější postihy za některé trestné činy spojené s nelegální migrací, tyto kroky však samy neznamenají splnění celého slibu. Pozdější schválení cizineckého zákona tedy přináší nástroje pro návraty, ale zároveň je částečně v napětí s odmítnutím unijního migračního rámce a nulovou tolerancí.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Zákon o vstupu a pobytu cizinců výslovně odkazuje na unijní nařízení o řízení azylu a migrace; není však z dodaných podkladů jisté, zda toto navázání samo znamená přijetí celého migračního paktu, nebo jen uplatnění jeho jednotlivých pravidel.",
+              "U nového cizineckého zákona balíček neposkytuje předchozí znění většiny dotčených ustanovení. Lze proto popsat pravidla schváleného návrhu, nikoli vždy přesně určit jejich rozdíl oproti dosavadnímu právu."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-a1fe9160f1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-2",
+          "relevant": true,
+          "reasonCz": "Text dohody obsahuje spolupráci proti nelegální migraci a závazky Uzbekistánu zpětně přebírat své občany, kteří nesmějí v Česku pobývat.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího znění: Uzbekistán má na žádost členského státu bez zbytečného odkladu převzít své občany, kteří nesplňují podmínky pobytu, a strany mají poskytovat cestovní doklady; podporuje to návraty, ale jen ve vztahu k Uzbekistánu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-17",
+          "relevant": true,
+          "reasonCz": "Příloha obsahuje formulář žádosti o cestovní doklad pro zpětné převzetí podle dohody, a tím se přímo týká uskutečnění návratu.",
+          "effectCz": "Jde o novou přílohu bez předchozího znění: stanoví formulář pro žádost o cestovní doklad podle dohody s Uzbekistánem; vytváří administrativní nástroj pro návraty, nikoli obecné pravidlo pro všechny migranty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-2",
+          "relevant": true,
+          "reasonCz": "Smlouva se Slovenskem výslovně upravuje policejní spolupráci proti nelegální migraci a výměnu informací o osobách bez dokladů.",
+          "effectCz": "Jde o novou smlouvu bez předchozího znění: umožňuje výměnu informací o migraci, oprávněnosti pobytu a osobách bez dokladů a stanoví koordinaci opatření; posiluje prostředky pro odhalování nelegální migrace, ale sama nenařizuje návrat do domovské země."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-3",
+          "relevant": true,
+          "reasonCz": "Text umožňuje při dočasném obnovení ochrany vnitřních hranic provádět kontroly také na území druhé smluvní strany.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího znění: za stanovených podmínek dovoluje společné nebo přeshraniční kontroly a přepravu osob na území vlastní smluvní strany; představuje nástroj kontroly hranic, ale nepředstavuje obecný režim návratů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-1",
+          "relevant": true,
+          "reasonCz": "Tato část vymezuje, že nový zákon upravuje také vycestování cizinců a umožňuje pro účely návratu nahradit průkaz totožnosti dalšími údaji.",
+          "effectCz": "Jde o nový zákon bez předchozího znění uvedeného v podkladech: stanoví, že upravuje vycestování, a pro návrat dovoluje prokázat totožnost také otisky, obrazovým záznamem a údaji policie; podporuje administrativní uskutečnění návratu, ale směr vůči dřívějším pravidlům nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-2",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně odkazuje na unijní nařízení o řízení azylu a migrace a upravuje prvotní prověřování žadatelů o mezinárodní ochranu.",
+          "effectCz": "Jde o nový zákon bez předchozího znění v podkladech: stanoví postupy vstupu a prověřování a výslovně počítá s předáváním podle nařízení EU 2024/1351; rozvíjí vnitrostátní postupy navázané na unijní migrační pravidla, což je v napětí se závazkem migrační pakt odmítnout."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-8",
+          "relevant": true,
+          "reasonCz": "Upravená ustanovení počítají v určitých případech s tolerovaným pobytem dítěte, které mohlo na území pobývat neoprávněně.",
+          "effectCz": "Jde o nová pravidla bez předchozího znění v podkladech: umožňují zákonnému zástupci podat za dítě žádost o pobyt a po dobu rozhodování připouštějí tolerovaný pobyt i tehdy, pokud dítě předtím pobývalo neoprávněně; vytvářejí výjimku pro konkrétní situace, nikoli obecné pravidlo pro nelegální migraci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-11",
+          "relevant": true,
+          "reasonCz": "Část upravuje evropský cestovní doklad pro návrat, který lze vydat za účelem vycestování cizince.",
+          "effectCz": "Jde o nový zákon bez předchozího znění v podkladech: ministerstvu nebo policii dovoluje vydat evropský cestovní doklad pro návrat na dobu potřebnou k vycestování; usnadňuje návrat, včetně případů podle azylového zákona, ale směr změny oproti dřívější úpravě nelze z podkladů zjistit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": true,
+          "reasonCz": "Část přímo stanoví postupy pro povinnost vycestovat, správní vyhoštění, zajištění a provedení návratu.",
+          "effectCz": "Jde o nová pravidla nahrazující dosavadní cizinecký zákon, jehož předchozí znění zde není dodáno: upravují povinnost opustit území, lhůty k vycestování, výkon rozhodnutí, zajištění i volbu země návratu; vytvářejí rozsáhlý rámec pro návraty, avšak u jednotlivých postupů nelze bez úplného předchozího znění určit celkovou změnu jejich přísnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": true,
+          "reasonCz": "Část upravuje řízení o vyhoštění a povinnosti vycestovat včetně odvolání, která mohou ovlivnit dobu provedení návratu.",
+          "effectCz": "Jde o nová procesní pravidla bez předchozího znění v podkladech: stanoví lhůty pro odvolání a u řady rozhodnutí odkladný účinek odvolání; tento účinek může odložit vykonání návratu, ale bez srovnatelného předchozího znění nelze určit, zda se možnost odkladu celkově rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": true,
+          "reasonCz": "Text ukládá cizinci bez pobytového oprávnění povinnost vycestovat a postihuje nevycestování jako přestupek.",
+          "effectCz": "Jde o nová ustanovení bez předchozího znění v podkladech: výslovně ukládají povinnost vycestovat a stanoví za nevycestování pokutu až 10 000 Kč; posilují právní povinnost i postih za její porušení, přičemž srovnání s dřívější úpravou nelze provést."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Umožňuje předávat údaje o neoprávněně pobývajícím cizinci státu, kam má být předán, a jeho zastupitelskému úřadu kvůli náhradnímu cestovnímu dokladu.",
+          "effectCz": "Jde o nové ustanovení bez předchozího znění v podkladech: dovoluje předat potřebné údaje pro předání cizince i pro vydání náhradního cestovního dokladu; usnadňuje uskutečnění návratu, ale směr oproti předchozímu právu nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": true,
+          "reasonCz": "Část svěřuje cizinecké policii vydávání cestovních dokladů pro návrat, rozhodování o vyhoštění a zajišťování dopravy cizince mimo území.",
+          "effectCz": "Jde o nový organizační rámec bez předchozího znění v podkladech: výslovně svěřuje orgánům policie pravomoci k návratovým rozhodnutím, dokladům a přepravě; vymezuje odpovědnost za provedení návratů, ale nelze určit změnu oproti předchozímu rozdělení pravomocí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-19",
+          "relevant": true,
+          "reasonCz": "Závěrečná část ruší dosavadní cizinecký zákon, a je tedy součástí nahrazení pravidel novým zákonem o vstupu a pobytu cizinců.",
+          "effectCz": "Ruší zákon č. 326/1999 Sb. a související zákon č. 140/2001 Sb. v rámci přijetí nového zákona; jde o výměnu právního rámce, nikoli o samostatnou změnu přísnosti pravidel návratu, a předchozí znění dotčených pravidel tato část neuvádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": true,
+          "reasonCz": "Tato část se týká slibu pouze prostřednictvím pozměňovacího návrhu, který mění odkaz na unijní pravidla azylu a migrace.",
+          "effectCz": "Vlastní text této části není dodán; pozměňovací návrh nahrazuje odkaz na nařízení Dublin III odkazem na nařízení EU 2024/1351 o řízení azylu a migrace. Předchozí znění ustanovení, které se tím mění, chybí, takže konkrétní dopad na jeho pravidla nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-4",
+          "relevant": true,
+          "reasonCz": "Změny azylového zákona upravují například předávání cestovních dokladů policii pro vycestování a procedury související s návratem.",
+          "effectCz": "Dřívější znění § 41 ukládalo žadatelům předložit cestovní doklad a upravovalo jeho předání po skončení ochrany; návrh mění povinnost odevzdání a nově výslovně počítá s předáním dokladu policii pro vycestování. Dřívější § 65 odst. 4 dovoloval vydat cestovní doklad pro návrat po vybraných pravomocných rozhodnutích, zatímco návrh jej váže na další situace, kdy je vycestování nutné; některé další změny lhůt a soudního přezkumu nemají v podkladech dostatečné srovnání. Změny dokladů podporují návrat, u ostatních postupů nelze směr vždy určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-5",
+          "relevant": true,
+          "reasonCz": "Mění cizinecká pravidla o vycestování a vyhoštění, včetně překážek návratu a nákladů spojených s vycestováním.",
+          "effectCz": "Dřívější § 119a odst. 2 bránil vyhoštění při nepřiměřeném zásahu do rodinného či soukromého života; návrh pro část případů požaduje zásah „zvláště nepřiměřený“, čímž umožňuje vyhoštění častěji. Nový § 179 odst. 6 vylučuje posouzení překážek vycestování u cizince s dosud nevykonaným trestem vyhoštění, což dále usnadňuje návrat v této situaci. Změna § 146 rozšiřuje použití uložených peněz také na úkony spojené s vycestováním, ale nová výše částky ponechané cizinci není uvedena; celkově dodané změny posilují některé prostředky návratu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-7",
+          "relevant": true,
+          "reasonCz": "Mění trestní sazby a skutkové podstaty trestných činů násilného překročení hranice, převaděčství a napomáhání k neoprávněnému pobytu.",
+          "effectCz": "Předchozí znění stanovilo za násilné překročení hranice jeden až pět let, za základní převaděčství až dva roky a za napomáhání k neoprávněnému pobytu až jeden rok; návrh zvyšuje základní sazby a zpřísňuje řadu kvalifikovaných skutků, včetně trestů až na 12 let. Rozšiřuje tak trestní postih jednání souvisejících s nelegální migrací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-6",
+          "relevant": true,
+          "reasonCz": "Dohoda s Mexikem obsahuje závazky zpětného přebírání občanů a spolupráci proti nelegální migraci.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího znění: Mexiko má na žádost převzít své občany, kteří se musí vrátit z území členského státu EU, a strany si mají poskytovat cestovní doklady; podporuje návraty do domovské země, ale pouze u občanů Mexika."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1017",
+          "relevant": true,
+          "reasonCz": "Usnesení výslovně odmítá migrační pakt v současné podobě, vyhlašuje politiku nulové tolerance a ukládá připravit rámec pro návraty.",
+          "effectCz": "Jako vládní usnesení stanoví odmítavé stanovisko k paktu v současné podobě a ukládá připravit nový legislativní rámec a návratovou politiku; odmítnutí v současné podobě odpovídá části slibu, zatímco příprava zákona je teprve návrhovým krokem."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-88",
+          "relevant": true,
+          "reasonCz": "Legislativní plán ukládá připravit návrh opatření proti nelegální migraci a k realizaci návratů zadržených cizinců.",
+          "effectCz": "Jde o plánovací úkol bez předchozího znění: stanoví předložení návrhu vládě v lednu 2027 a navazuje na úkol připravit opatření k návratům; přibližuje přípravu slibované úpravy, ale sám nová pravidla nepřijímá."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+          "relevant": true,
+          "reasonCz": "Výhled uvádí návrh unijního systému navracení a novelu cizineckého zákona, tedy legislativní práci přímo související s návraty.",
+          "effectCz": "Jde o plánovací přehled bez předchozího znění: uvádí návrh unijního nařízení o navracení a novelu cizineckého zákona, ale nestanoví jejich přijetí ani obsah; dokládá plánované zabývání se návraty, nikoli změnu právní povinnosti."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-134",
+          "relevant": false,
+          "reasonCz": "Vyhláška stanoví seznam bezpečných zemí původu, ale dodaný text neukazuje přímou vazbu na odmítnutí migračního paktu, slibovaný nový zákon ani návrat zadržených migrantů.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-a1fe9160f1--source",
+        "psp-core-2025--law-change-43203-2",
+        "psp-core-2025--law-change-43203-17",
+        "psp-core-2025--law-change-43228-2",
+        "psp-core-2025--law-change-43228-3",
+        "psp-core-2025--law-change-43264-1",
+        "psp-core-2025--law-change-43264-2",
+        "psp-core-2025--law-change-43264-8",
+        "psp-core-2025--law-change-43264-11",
+        "psp-core-2025--law-change-43264-13",
+        "psp-core-2025--law-change-43264-14",
+        "psp-core-2025--law-change-43264-16",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--law-change-43264-19",
+        "psp-core-2025--law-change-43335-1",
+        "psp-core-2025--law-change-43335-4",
+        "psp-core-2025--law-change-43335-5",
+        "psp-core-2025--law-change-43335-7",
+        "psp-core-2025--law-change-43453-6",
+        "zvlady-resolutions--law-change-uv-2025-1017",
+        "zvlady-resolutions--law-change-uv-2026-175-88",
+        "zvlady-resolutions--law-change-uv-2026-175-193",
+        "zvlady-resolutions--2025-1017",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--print-step-210866",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--print-step-211537",
+        "psp-core-2025--amendment-1989",
+        "psp-core-2025--amendment-text-1989",
+        "psp-core-2025--amendment-2115",
+        "psp-core-2025--amendment-text-2115",
+        "psp-core-2025--print-step-212285"
+      ],
+      "explanationCz": "Vláda v usnesení odmítla migrační pakt v jeho současné podobě a uložila připravit návratová opatření. Vláda také předložila nový zákon o vstupu a pobytu cizinců a poslanci ANO hlasovali pro jeho schválení; návrh mimo jiné upravuje vycestování a návraty. Zároveň ale schválený zákon výslovně pracuje s unijním nařízením o řízení azylu a migrace, což je v napětí se slibem pakt odmítnout. Protože schválený zákon posouvá část slibu, ale také částečně odporuje odmítnutí paktu, převažuje tento rozpor.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady zachycují schválení zákona Poslaneckou sněmovnou, nikoli jeho konečné přijetí Parlamentem; pro hodnocení hlasování je však rozhodný text, o němž poslanci hlasovali.",
+        "Návrh výslovně odkazuje na nařízení EU 2024/1351 o řízení azylu a migrace. Jeho vztah k odmítnutí migračního paktu je proto v napětí se slibem, ale samotné usnesení vlády odmítá pakt pouze „v současné podobě“.",
+        "Návrh další bezpečnostní novely a předložené pozměňovací návrhy obsahují opatření pro návraty a postih převaděčství, avšak v dodaných podkladech o nich není zaznamenáno konečné hlasování."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-a1fe9160f1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-2",
+          "relevant": true,
+          "reasonCz": "Text dohody obsahuje pravidla boje proti nelegální migraci a zpětného přebírání vlastních občanů, která přímo souvisejí s návraty.",
+          "effectCz": "Dohoda nově zavazuje Uzbekistán přebírat své občany bez zbytečného odkladu a upravuje spolupráci a doklady pro návrat; předchozí znění ani rozsah takových povinností balíček neuvádí, takže nelze porovnat, zda se pravidla zpřísňují či rozšiřují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-17",
+          "relevant": true,
+          "reasonCz": "Příloha poskytuje formulář žádosti o pohovor či cestovní doklad podle ustanovení dohody o zpětném přebírání osob.",
+          "effectCz": "Příloha nově stanoví vzor žádosti používaný při zpětném přebírání osob; předchozí úprava v balíčku není, takže nelze určit, zda se postup oproti dřívějšku mění nebo zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-2",
+          "relevant": true,
+          "reasonCz": "Smlouva výslovně upravuje spolupráci Slovenska a Česka v boji proti nelegální migraci a výměnu informací o neoprávněném pobytu.",
+          "effectCz": "Smlouva nově stanoví výměnu informací o migraci, osobách bez dokladů a oprávněnosti pobytu i pravidelnou koordinaci; předchozí pravidla nejsou uvedena, proto nelze určit jejich změnu oproti dřívějšímu stavu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-3",
+          "relevant": true,
+          "reasonCz": "Smlouva umožňuje společné kontroly na vnitřních hranicích a při nich i vrácení osoby na území druhého státu.",
+          "effectCz": "Text nově vymezuje podmínky společných kontrol a oprávnění pracovníků dopravit osobu na území vlastního státu; předchozí znění není k dispozici, takže směr změny oproti dosavadnímu stavu nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-1",
+          "relevant": true,
+          "reasonCz": "Nový cizinecký zákon upravuje návraty a dovoluje při nich prokázat totožnost i otisky prstů či obrazovým záznamem.",
+          "effectCz": "Nový zákon vymezuje svou působnost včetně vycestování a stanoví náhradní způsoby ověření totožnosti pro návrat; předchozí znění nového zákona neexistuje, takže nelze porovnat dřívější úpravu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-2",
+          "relevant": true,
+          "reasonCz": "Část upravuje prověřování osob žádajících o mezinárodní ochranu a odkazuje na unijní nařízení o řízení azylu a migrace a o prověřování.",
+          "effectCz": "Nový zákon stanoví prvotní prověřování žadatelů a vstupní pravidla, včetně předávání podle nařízení EU 2024/1351; předchozí znění tohoto nového zákona není, proto nelze srovnat míru povinností, ale jeho text provádí postupy založené na unijních migračních pravidlech, což je v napětí se slibem odmítnout migrační pakt."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-8",
+          "relevant": true,
+          "reasonCz": "Část upravuje pobyt dětí narozených v Česku, včetně dočasně tolerovaného pobytu i tehdy, když dítě před podáním žádosti pobývalo neoprávněně.",
+          "effectCz": "Nový zákon umožňuje těmto dětem během vyřizování žádostí tolerovaný pobyt, tedy stanoví úzkou výjimku z okamžitého řešení neoprávněného pobytu; předchozí úprava v balíčku chybí, takže nelze určit změnu oproti dřívějšku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-11",
+          "relevant": true,
+          "reasonCz": "Nový zákon umožňuje vydat evropský cestovní doklad pro návrat, který může usnadnit vycestování cizince.",
+          "effectCz": "Nový zákon umožňuje ministerstvu či policii vydat doklad potřebný pro vycestování, případně i podle azylového zákona; předchozí znění nového zákona není k dispozici, takže nelze určit změnu oproti dřívějšku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": true,
+          "reasonCz": "Tato část přímo stanoví povinnost vycestovat, správní vyhoštění, zajištění i výkon návratů.",
+          "effectCz": "Nový zákon upravuje povinnost opustit území, správní vyhoštění a jeho výkon, včetně návratu do země občanství nebo tranzitní země; současně zachovává výjimky například při nemožnosti návratu či nepřiměřeném zásahu do rodinného života. Předchozí znění nového zákona není k dispozici, proto nelze určit celkovou změnu oproti dřívějšku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": true,
+          "reasonCz": "Část stanoví postupy odvolání a jejich odkladný účinek u rozhodnutí o správním vyhoštění a povinnosti opustit území, a tím ovlivňuje rychlost návratů.",
+          "effectCz": "Nový zákon stanoví, že odvolání proti některým rozhodnutím o vyhoštění a opuštění území má odkladný účinek; předchozí znění není dodáno, takže nelze určit, zda jde o zpřísnění, nebo uvolnění dosavadních pravidel."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": true,
+          "reasonCz": "Část ukládá cizincům bez oprávnění k pobytu povinnost vycestovat a stanoví přestupky za její porušení.",
+          "effectCz": "Nový zákon stanoví povinnost vycestovat a pokuty až 10 000 Kč za nevycestování v rozporu s povinností; předchozí znění nového zákona chybí, takže nelze porovnat přísnost sankcí s dřívější úpravou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Ustanovení umožňuje předat údaje o neoprávněně pobývajícím cizinci státu, kam má být předán, a zastupitelskému úřadu jeho země pro vydání náhradního dokladu.",
+          "effectCz": "Nový zákon stanoví předávání údajů potřebných pro předání a vydání cestovního dokladu; předchozí znění nového zákona není uvedeno, takže nelze určit změnu oproti dřívějšku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": true,
+          "reasonCz": "Část přiděluje cizinecké policii pravomoci rozhodovat o vyhoštění, zajištění a zajišťovat doklady a dopravu k návratu.",
+          "effectCz": "Nový zákon svěřuje policii úkoly související s rozhodováním o vyhoštění, zajištěním a organizací dopravy cizinců; předchozí znění nového zákona není k dispozici, takže nelze srovnat rozsah těchto pravomocí s dřívějším stavem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-19",
+          "relevant": true,
+          "reasonCz": "Část ruší dosavadní zákon o pobytu cizinců jako součást přijetí nového cizineckého zákona, který v dalších částech upravuje migraci a návraty.",
+          "effectCz": "Text nově ruší zákon č. 326/1999 Sb. a související novelu; předchozí úprava je tím rušena, ale tato část sama neukazuje obsah náhradních pravidel, který je obsažen v jiných částech návrhu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": true,
+          "reasonCz": "Tato část návrhu je relevantní prostřednictvím pozměňovacího návrhu, který doplňuje pravidla povinnosti vycestovat po neudělení mezinárodní ochrany.",
+          "effectCz": "Pozměňovací návrh A2 navrhuje, aby ministerstvo při neudělení mezinárodní ochrany stanovilo neoprávněnost pobytu a povinnost vycestovat; předchozí znění souvisejících ustanovení není v balíčku uvedeno, takže nelze určit směr změny oproti dosavadní úpravě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-4",
+          "relevant": true,
+          "reasonCz": "Změny azylového zákona upravují předávání cestovních dokladů policii pro účely vycestování a jejich vydávání osobám, které nemají právo zůstat na území.",
+          "effectCz": "Před změnou žadatel předkládal cestovní doklad a po udělení ochrany jej ministerstvo drželo; návrh výslovně umožňuje předat doklad policii pro vycestování a vydat cestovní průkaz také osobě bez práva setrvat. Tím se posilují nástroje pro návrat, ač část ostatních ustanovení upravuje hlavně řízení a soudní přezkum."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-5",
+          "relevant": true,
+          "reasonCz": "Změny zákona o pobytu cizinců upravují povinnosti při vycestování, správní vyhoštění a překážky návratu.",
+          "effectCz": "Před změnou existovala obecná překážka vyhoštění při nepřiměřeném zásahu do rodinného či soukromého života; návrh pro některé případy zavádí přísnější práh „zvláště nepřiměřeného“ zásahu a nově stanoví, že se překážky vycestování neposuzují u dosud nevykonaného trestu vyhoštění. Tím se v těchto případech usnadňuje vyhoštění a návrat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-7",
+          "relevant": true,
+          "reasonCz": "Návrh zvyšuje tresty za násilné překročení hranice, převaděčství a napomáhání k neoprávněnému pobytu.",
+          "effectCz": "Předchozí trestní sazba za násilné překročení hranice byla jeden až pět let a za základní napomáhání k neoprávněnému pobytu až jeden rok; návrh sazby zvyšuje, například základní sazbu u napomáhání na tři roky a sazby u převaděčství. Zpřísňuje tak postih některých jednání spojených s nelegální migrací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-6",
+          "relevant": true,
+          "reasonCz": "Dohoda s Mexikem obsahuje závazky zpětně přebírat vlastní občany a poskytovat cestovní doklady pro jejich návrat.",
+          "effectCz": "Dohoda nově stanoví zpětné přebírání občanů Mexikem i členskými státy EU na žádost a bez dalších formalit a poskytování dokladů; předchozí pravidla nejsou uvedena, takže nelze porovnat, zda se povinnosti rozšiřují."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-134",
+          "relevant": true,
+          "reasonCz": "Vyhláška mění národní seznam bezpečných zemí původu, a tím upravuje část azylového rozhodování.",
+          "effectCz": "Vyhláška nově uvádí 14 bezpečných zemí původu a ruší § 3 a 4 dosavadní prováděcí vyhlášky; předchozí seznam není v balíčku dodán, proto nelze určit, které země přibyly či ubyly ani celkové zpřísnění."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1017",
+          "relevant": true,
+          "reasonCz": "Usnesení přímo odmítá migrační pakt v současné podobě, vyhlašuje nulovou toleranci a ukládá přípravu návrhu opatření k návratům.",
+          "effectCz": "Vláda nově stanoví své odmítnutí migračního paktu v současné podobě a ukládá přípravu nového legislativního rámce a důsledné návratové politiky; jde o politické rozhodnutí a zadání, nikoli samo o sobě o přijatý nový zákon."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-88",
+          "relevant": true,
+          "reasonCz": "Vládní legislativní plán ukládá připravit návrh zákona o opatřeních proti nelegální migraci a pro realizaci návratů.",
+          "effectCz": "Plán nově zařazuje návrh zákona k předložení vládě v červnu 2026 a k účinnosti v lednu 2027; jde o plánovanou přípravu, nikoli o již platné povinnosti."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+          "relevant": true,
+          "reasonCz": "Výhled implementačních prací výslovně uvádí návrh unijního návratového nařízení a novelu zákona o pobytu cizinců.",
+          "effectCz": "Výhled nově zařazuje práci na návratovém nařízení EU a novele zákona o pobytu cizinců; jde o plán implementačních kroků, nikoli o již přijatou právní úpravu."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-a1fe9160f1--source",
+        "psp-core-2025--law-change-43203-2",
+        "psp-core-2025--law-change-43203-17",
+        "psp-core-2025--law-change-43228-2",
+        "psp-core-2025--law-change-43228-3",
+        "psp-core-2025--law-change-43264-1",
+        "psp-core-2025--law-change-43264-2",
+        "psp-core-2025--law-change-43264-8",
+        "psp-core-2025--law-change-43264-11",
+        "psp-core-2025--law-change-43264-13",
+        "psp-core-2025--law-change-43264-14",
+        "psp-core-2025--law-change-43264-16",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--law-change-43264-19",
+        "psp-core-2025--law-change-43335-1",
+        "psp-core-2025--law-change-43335-4",
+        "psp-core-2025--law-change-43335-5",
+        "psp-core-2025--law-change-43335-7",
+        "psp-core-2025--law-change-43453-6",
+        "esbirka-regulations--law-change-sb-2026-134",
+        "zvlady-resolutions--law-change-uv-2025-1017",
+        "zvlady-resolutions--law-change-uv-2026-175-88",
+        "zvlady-resolutions--law-change-uv-2026-175-193",
+        "zvlady-resolutions--2025-1017",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--print-step-210866",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--print-step-211537",
+        "esbirka-regulations--2026-134",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--print-step-212285",
+        "psp-core-2025--amendment-1989",
+        "psp-core-2025--amendment-text-1989",
+        "psp-core-2025--amendment-2115",
+        "psp-core-2025--amendment-text-2115"
+      ],
+      "explanationCz": "Vláda přijala usnesení, kterým odmítla migrační pakt v jeho současné podobě a zadala přípravu nové legislativy a návratových opatření. Vláda také předložila nový cizinecký zákon a poslanci ANO pro něj hlasovali při závěrečném schvalování, čímž posunuli slib nového zákona a návratových pravidel. Schválený text ale zároveň zavádí postupy odkazující na unijní nařízení o řízení azylu a migrace, což je v napětí se slibem pakt odmítnout; návrh proto současně plní část slibu a jde proti jiné jeho části. Jako celek tak převažuje částečný rozpor, přestože další vládní návrhy a pozměňovací návrhy směřují k návratům a přísnějšímu postihu převaděčství.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Schválený cizinecký zákon výslovně odkazuje na unijní nařízení o řízení azylu a migrace, ale dodané pasáže samy nevyjasňují, v jakém rozsahu toto znamená praktické přijetí migračního paktu, který vláda usnesením odmítla. Tento rozpor je proto podstatný pro hodnocení hlasování ANO pro zákon."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_048b8a54ed5b8465016aec4a48045087d190c8d8402e1c0bf9",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 124134,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 124131
+      },
+      "output_tokens": 11919,
+      "output_tokens_details": {
+        "reasoning_tokens": 6749
+      },
+      "total_tokens": 136053
+    },
+    "output": {
+      "promiseId": "ano-2025-a1fe9160f1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-2",
+          "relevant": true,
+          "reasonCz": "Text dohody obsahuje spolupráci proti nelegální migraci a závazky Uzbekistánu zpětně přebírat své občany, kteří nesmějí v Česku pobývat.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího znění: Uzbekistán má na žádost členského státu bez zbytečného odkladu převzít své občany, kteří nesplňují podmínky pobytu, a strany mají poskytovat cestovní doklady; podporuje to návraty, ale jen ve vztahu k Uzbekistánu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-17",
+          "relevant": true,
+          "reasonCz": "Příloha obsahuje formulář žádosti o cestovní doklad pro zpětné převzetí podle dohody, a tím se přímo týká uskutečnění návratu.",
+          "effectCz": "Jde o novou přílohu bez předchozího znění: stanoví formulář pro žádost o cestovní doklad podle dohody s Uzbekistánem; vytváří administrativní nástroj pro návraty, nikoli obecné pravidlo pro všechny migranty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-2",
+          "relevant": true,
+          "reasonCz": "Smlouva se Slovenskem výslovně upravuje policejní spolupráci proti nelegální migraci a výměnu informací o osobách bez dokladů.",
+          "effectCz": "Jde o novou smlouvu bez předchozího znění: umožňuje výměnu informací o migraci, oprávněnosti pobytu a osobách bez dokladů a stanoví koordinaci opatření; posiluje prostředky pro odhalování nelegální migrace, ale sama nenařizuje návrat do domovské země."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-3",
+          "relevant": true,
+          "reasonCz": "Text umožňuje při dočasném obnovení ochrany vnitřních hranic provádět kontroly také na území druhé smluvní strany.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího znění: za stanovených podmínek dovoluje společné nebo přeshraniční kontroly a přepravu osob na území vlastní smluvní strany; představuje nástroj kontroly hranic, ale nepředstavuje obecný režim návratů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-1",
+          "relevant": true,
+          "reasonCz": "Tato část vymezuje, že nový zákon upravuje také vycestování cizinců a umožňuje pro účely návratu nahradit průkaz totožnosti dalšími údaji.",
+          "effectCz": "Jde o nový zákon bez předchozího znění uvedeného v podkladech: stanoví, že upravuje vycestování, a pro návrat dovoluje prokázat totožnost také otisky, obrazovým záznamem a údaji policie; podporuje administrativní uskutečnění návratu, ale směr vůči dřívějším pravidlům nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-2",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně odkazuje na unijní nařízení o řízení azylu a migrace a upravuje prvotní prověřování žadatelů o mezinárodní ochranu.",
+          "effectCz": "Jde o nový zákon bez předchozího znění v podkladech: stanoví postupy vstupu a prověřování a výslovně počítá s předáváním podle nařízení EU 2024/1351; rozvíjí vnitrostátní postupy navázané na unijní migrační pravidla, což je v napětí se závazkem migrační pakt odmítnout."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-8",
+          "relevant": true,
+          "reasonCz": "Upravená ustanovení počítají v určitých případech s tolerovaným pobytem dítěte, které mohlo na území pobývat neoprávněně.",
+          "effectCz": "Jde o nová pravidla bez předchozího znění v podkladech: umožňují zákonnému zástupci podat za dítě žádost o pobyt a po dobu rozhodování připouštějí tolerovaný pobyt i tehdy, pokud dítě předtím pobývalo neoprávněně; vytvářejí výjimku pro konkrétní situace, nikoli obecné pravidlo pro nelegální migraci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-11",
+          "relevant": true,
+          "reasonCz": "Část upravuje evropský cestovní doklad pro návrat, který lze vydat za účelem vycestování cizince.",
+          "effectCz": "Jde o nový zákon bez předchozího znění v podkladech: ministerstvu nebo policii dovoluje vydat evropský cestovní doklad pro návrat na dobu potřebnou k vycestování; usnadňuje návrat, včetně případů podle azylového zákona, ale směr změny oproti dřívější úpravě nelze z podkladů zjistit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": true,
+          "reasonCz": "Část přímo stanoví postupy pro povinnost vycestovat, správní vyhoštění, zajištění a provedení návratu.",
+          "effectCz": "Jde o nová pravidla nahrazující dosavadní cizinecký zákon, jehož předchozí znění zde není dodáno: upravují povinnost opustit území, lhůty k vycestování, výkon rozhodnutí, zajištění i volbu země návratu; vytvářejí rozsáhlý rámec pro návraty, avšak u jednotlivých postupů nelze bez úplného předchozího znění určit celkovou změnu jejich přísnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": true,
+          "reasonCz": "Část upravuje řízení o vyhoštění a povinnosti vycestovat včetně odvolání, která mohou ovlivnit dobu provedení návratu.",
+          "effectCz": "Jde o nová procesní pravidla bez předchozího znění v podkladech: stanoví lhůty pro odvolání a u řady rozhodnutí odkladný účinek odvolání; tento účinek může odložit vykonání návratu, ale bez srovnatelného předchozího znění nelze určit, zda se možnost odkladu celkově rozšiřuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": true,
+          "reasonCz": "Text ukládá cizinci bez pobytového oprávnění povinnost vycestovat a postihuje nevycestování jako přestupek.",
+          "effectCz": "Jde o nová ustanovení bez předchozího znění v podkladech: výslovně ukládají povinnost vycestovat a stanoví za nevycestování pokutu až 10 000 Kč; posilují právní povinnost i postih za její porušení, přičemž srovnání s dřívější úpravou nelze provést."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Umožňuje předávat údaje o neoprávněně pobývajícím cizinci státu, kam má být předán, a jeho zastupitelskému úřadu kvůli náhradnímu cestovnímu dokladu.",
+          "effectCz": "Jde o nové ustanovení bez předchozího znění v podkladech: dovoluje předat potřebné údaje pro předání cizince i pro vydání náhradního cestovního dokladu; usnadňuje uskutečnění návratu, ale směr oproti předchozímu právu nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": true,
+          "reasonCz": "Část svěřuje cizinecké policii vydávání cestovních dokladů pro návrat, rozhodování o vyhoštění a zajišťování dopravy cizince mimo území.",
+          "effectCz": "Jde o nový organizační rámec bez předchozího znění v podkladech: výslovně svěřuje orgánům policie pravomoci k návratovým rozhodnutím, dokladům a přepravě; vymezuje odpovědnost za provedení návratů, ale nelze určit změnu oproti předchozímu rozdělení pravomocí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-19",
+          "relevant": true,
+          "reasonCz": "Závěrečná část ruší dosavadní cizinecký zákon, a je tedy součástí nahrazení pravidel novým zákonem o vstupu a pobytu cizinců.",
+          "effectCz": "Ruší zákon č. 326/1999 Sb. a související zákon č. 140/2001 Sb. v rámci přijetí nového zákona; jde o výměnu právního rámce, nikoli o samostatnou změnu přísnosti pravidel návratu, a předchozí znění dotčených pravidel tato část neuvádí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": true,
+          "reasonCz": "Tato část se týká slibu pouze prostřednictvím pozměňovacího návrhu, který mění odkaz na unijní pravidla azylu a migrace.",
+          "effectCz": "Vlastní text této části není dodán; pozměňovací návrh nahrazuje odkaz na nařízení Dublin III odkazem na nařízení EU 2024/1351 o řízení azylu a migrace. Předchozí znění ustanovení, které se tím mění, chybí, takže konkrétní dopad na jeho pravidla nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-4",
+          "relevant": true,
+          "reasonCz": "Změny azylového zákona upravují například předávání cestovních dokladů policii pro vycestování a procedury související s návratem.",
+          "effectCz": "Dřívější znění § 41 ukládalo žadatelům předložit cestovní doklad a upravovalo jeho předání po skončení ochrany; návrh mění povinnost odevzdání a nově výslovně počítá s předáním dokladu policii pro vycestování. Dřívější § 65 odst. 4 dovoloval vydat cestovní doklad pro návrat po vybraných pravomocných rozhodnutích, zatímco návrh jej váže na další situace, kdy je vycestování nutné; některé další změny lhůt a soudního přezkumu nemají v podkladech dostatečné srovnání. Změny dokladů podporují návrat, u ostatních postupů nelze směr vždy určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-5",
+          "relevant": true,
+          "reasonCz": "Mění cizinecká pravidla o vycestování a vyhoštění, včetně překážek návratu a nákladů spojených s vycestováním.",
+          "effectCz": "Dřívější § 119a odst. 2 bránil vyhoštění při nepřiměřeném zásahu do rodinného či soukromého života; návrh pro část případů požaduje zásah „zvláště nepřiměřený“, čímž umožňuje vyhoštění častěji. Nový § 179 odst. 6 vylučuje posouzení překážek vycestování u cizince s dosud nevykonaným trestem vyhoštění, což dále usnadňuje návrat v této situaci. Změna § 146 rozšiřuje použití uložených peněz také na úkony spojené s vycestováním, ale nová výše částky ponechané cizinci není uvedena; celkově dodané změny posilují některé prostředky návratu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-7",
+          "relevant": true,
+          "reasonCz": "Mění trestní sazby a skutkové podstaty trestných činů násilného překročení hranice, převaděčství a napomáhání k neoprávněnému pobytu.",
+          "effectCz": "Předchozí znění stanovilo za násilné překročení hranice jeden až pět let, za základní převaděčství až dva roky a za napomáhání k neoprávněnému pobytu až jeden rok; návrh zvyšuje základní sazby a zpřísňuje řadu kvalifikovaných skutků, včetně trestů až na 12 let. Rozšiřuje tak trestní postih jednání souvisejících s nelegální migrací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-6",
+          "relevant": true,
+          "reasonCz": "Dohoda s Mexikem obsahuje závazky zpětného přebírání občanů a spolupráci proti nelegální migraci.",
+          "effectCz": "Jde o novou smluvní úpravu bez předchozího znění: Mexiko má na žádost převzít své občany, kteří se musí vrátit z území členského státu EU, a strany si mají poskytovat cestovní doklady; podporuje návraty do domovské země, ale pouze u občanů Mexika."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1017",
+          "relevant": true,
+          "reasonCz": "Usnesení výslovně odmítá migrační pakt v současné podobě, vyhlašuje politiku nulové tolerance a ukládá připravit rámec pro návraty.",
+          "effectCz": "Jako vládní usnesení stanoví odmítavé stanovisko k paktu v současné podobě a ukládá připravit nový legislativní rámec a návratovou politiku; odmítnutí v současné podobě odpovídá části slibu, zatímco příprava zákona je teprve návrhovým krokem."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-88",
+          "relevant": true,
+          "reasonCz": "Legislativní plán ukládá připravit návrh opatření proti nelegální migraci a k realizaci návratů zadržených cizinců.",
+          "effectCz": "Jde o plánovací úkol bez předchozího znění: stanoví předložení návrhu vládě v lednu 2027 a navazuje na úkol připravit opatření k návratům; přibližuje přípravu slibované úpravy, ale sám nová pravidla nepřijímá."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+          "relevant": true,
+          "reasonCz": "Výhled uvádí návrh unijního systému navracení a novelu cizineckého zákona, tedy legislativní práci přímo související s návraty.",
+          "effectCz": "Jde o plánovací přehled bez předchozího znění: uvádí návrh unijního nařízení o navracení a novelu cizineckého zákona, ale nestanoví jejich přijetí ani obsah; dokládá plánované zabývání se návraty, nikoli změnu právní povinnosti."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-134",
+          "relevant": false,
+          "reasonCz": "Vyhláška stanoví seznam bezpečných zemí původu, ale dodaný text neukazuje přímou vazbu na odmítnutí migračního paktu, slibovaný nový zákon ani návrat zadržených migrantů.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-a1fe9160f1--source",
+        "psp-core-2025--law-change-43203-2",
+        "psp-core-2025--law-change-43203-17",
+        "psp-core-2025--law-change-43228-2",
+        "psp-core-2025--law-change-43228-3",
+        "psp-core-2025--law-change-43264-1",
+        "psp-core-2025--law-change-43264-2",
+        "psp-core-2025--law-change-43264-8",
+        "psp-core-2025--law-change-43264-11",
+        "psp-core-2025--law-change-43264-13",
+        "psp-core-2025--law-change-43264-14",
+        "psp-core-2025--law-change-43264-16",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--law-change-43264-19",
+        "psp-core-2025--law-change-43335-1",
+        "psp-core-2025--law-change-43335-4",
+        "psp-core-2025--law-change-43335-5",
+        "psp-core-2025--law-change-43335-7",
+        "psp-core-2025--law-change-43453-6",
+        "zvlady-resolutions--law-change-uv-2025-1017",
+        "zvlady-resolutions--law-change-uv-2026-175-88",
+        "zvlady-resolutions--law-change-uv-2026-175-193",
+        "zvlady-resolutions--2025-1017",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--print-step-210866",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--print-step-211537",
+        "psp-core-2025--amendment-1989",
+        "psp-core-2025--amendment-text-1989",
+        "psp-core-2025--amendment-2115",
+        "psp-core-2025--amendment-text-2115",
+        "psp-core-2025--print-step-212285"
+      ],
+      "explanationCz": "Vláda v usnesení odmítla migrační pakt v jeho současné podobě a uložila připravit návratová opatření. Vláda také předložila nový zákon o vstupu a pobytu cizinců a poslanci ANO hlasovali pro jeho schválení; návrh mimo jiné upravuje vycestování a návraty. Zároveň ale schválený zákon výslovně pracuje s unijním nařízením o řízení azylu a migrace, což je v napětí se slibem pakt odmítnout. Protože schválený zákon posouvá část slibu, ale také částečně odporuje odmítnutí paktu, převažuje tento rozpor.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady zachycují schválení zákona Poslaneckou sněmovnou, nikoli jeho konečné přijetí Parlamentem; pro hodnocení hlasování je však rozhodný text, o němž poslanci hlasovali.",
+        "Návrh výslovně odkazuje na nařízení EU 2024/1351 o řízení azylu a migrace. Jeho vztah k odmítnutí migračního paktu je proto v napětí se slibem, ale samotné usnesení vlády odmítá pakt pouze „v současné podobě“.",
+        "Návrh další bezpečnostní novely a předložené pozměňovací návrhy obsahují opatření pro návraty a postih převaděčství, avšak v dodaných podkladech o nich není zaznamenáno konečné hlasování."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_004fe23cf9c337c0016aec4aaf045087d1ba67e34af39f5e0d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 124134,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 124131
+      },
+      "output_tokens": 8925,
+      "output_tokens_details": {
+        "reasoning_tokens": 4601
+      },
+      "total_tokens": 133059
+    },
+    "output": {
+      "promiseId": "ano-2025-a1fe9160f1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-2",
+          "relevant": true,
+          "reasonCz": "Text dohody obsahuje pravidla boje proti nelegální migraci a zpětného přebírání vlastních občanů, která přímo souvisejí s návraty.",
+          "effectCz": "Dohoda nově zavazuje Uzbekistán přebírat své občany bez zbytečného odkladu a upravuje spolupráci a doklady pro návrat; předchozí znění ani rozsah takových povinností balíček neuvádí, takže nelze porovnat, zda se pravidla zpřísňují či rozšiřují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-17",
+          "relevant": true,
+          "reasonCz": "Příloha poskytuje formulář žádosti o pohovor či cestovní doklad podle ustanovení dohody o zpětném přebírání osob.",
+          "effectCz": "Příloha nově stanoví vzor žádosti používaný při zpětném přebírání osob; předchozí úprava v balíčku není, takže nelze určit, zda se postup oproti dřívějšku mění nebo zpřísňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-2",
+          "relevant": true,
+          "reasonCz": "Smlouva výslovně upravuje spolupráci Slovenska a Česka v boji proti nelegální migraci a výměnu informací o neoprávněném pobytu.",
+          "effectCz": "Smlouva nově stanoví výměnu informací o migraci, osobách bez dokladů a oprávněnosti pobytu i pravidelnou koordinaci; předchozí pravidla nejsou uvedena, proto nelze určit jejich změnu oproti dřívějšímu stavu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43228-3",
+          "relevant": true,
+          "reasonCz": "Smlouva umožňuje společné kontroly na vnitřních hranicích a při nich i vrácení osoby na území druhého státu.",
+          "effectCz": "Text nově vymezuje podmínky společných kontrol a oprávnění pracovníků dopravit osobu na území vlastního státu; předchozí znění není k dispozici, takže směr změny oproti dosavadnímu stavu nelze určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-1",
+          "relevant": true,
+          "reasonCz": "Nový cizinecký zákon upravuje návraty a dovoluje při nich prokázat totožnost i otisky prstů či obrazovým záznamem.",
+          "effectCz": "Nový zákon vymezuje svou působnost včetně vycestování a stanoví náhradní způsoby ověření totožnosti pro návrat; předchozí znění nového zákona neexistuje, takže nelze porovnat dřívější úpravu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-2",
+          "relevant": true,
+          "reasonCz": "Část upravuje prověřování osob žádajících o mezinárodní ochranu a odkazuje na unijní nařízení o řízení azylu a migrace a o prověřování.",
+          "effectCz": "Nový zákon stanoví prvotní prověřování žadatelů a vstupní pravidla, včetně předávání podle nařízení EU 2024/1351; předchozí znění tohoto nového zákona není, proto nelze srovnat míru povinností, ale jeho text provádí postupy založené na unijních migračních pravidlech, což je v napětí se slibem odmítnout migrační pakt."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-8",
+          "relevant": true,
+          "reasonCz": "Část upravuje pobyt dětí narozených v Česku, včetně dočasně tolerovaného pobytu i tehdy, když dítě před podáním žádosti pobývalo neoprávněně.",
+          "effectCz": "Nový zákon umožňuje těmto dětem během vyřizování žádostí tolerovaný pobyt, tedy stanoví úzkou výjimku z okamžitého řešení neoprávněného pobytu; předchozí úprava v balíčku chybí, takže nelze určit změnu oproti dřívějšku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-11",
+          "relevant": true,
+          "reasonCz": "Nový zákon umožňuje vydat evropský cestovní doklad pro návrat, který může usnadnit vycestování cizince.",
+          "effectCz": "Nový zákon umožňuje ministerstvu či policii vydat doklad potřebný pro vycestování, případně i podle azylového zákona; předchozí znění nového zákona není k dispozici, takže nelze určit změnu oproti dřívějšku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": true,
+          "reasonCz": "Tato část přímo stanoví povinnost vycestovat, správní vyhoštění, zajištění i výkon návratů.",
+          "effectCz": "Nový zákon upravuje povinnost opustit území, správní vyhoštění a jeho výkon, včetně návratu do země občanství nebo tranzitní země; současně zachovává výjimky například při nemožnosti návratu či nepřiměřeném zásahu do rodinného života. Předchozí znění nového zákona není k dispozici, proto nelze určit celkovou změnu oproti dřívějšku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": true,
+          "reasonCz": "Část stanoví postupy odvolání a jejich odkladný účinek u rozhodnutí o správním vyhoštění a povinnosti opustit území, a tím ovlivňuje rychlost návratů.",
+          "effectCz": "Nový zákon stanoví, že odvolání proti některým rozhodnutím o vyhoštění a opuštění území má odkladný účinek; předchozí znění není dodáno, takže nelze určit, zda jde o zpřísnění, nebo uvolnění dosavadních pravidel."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": true,
+          "reasonCz": "Část ukládá cizincům bez oprávnění k pobytu povinnost vycestovat a stanoví přestupky za její porušení.",
+          "effectCz": "Nový zákon stanoví povinnost vycestovat a pokuty až 10 000 Kč za nevycestování v rozporu s povinností; předchozí znění nového zákona chybí, takže nelze porovnat přísnost sankcí s dřívější úpravou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Ustanovení umožňuje předat údaje o neoprávněně pobývajícím cizinci státu, kam má být předán, a zastupitelskému úřadu jeho země pro vydání náhradního dokladu.",
+          "effectCz": "Nový zákon stanoví předávání údajů potřebných pro předání a vydání cestovního dokladu; předchozí znění nového zákona není uvedeno, takže nelze určit změnu oproti dřívějšku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": true,
+          "reasonCz": "Část přiděluje cizinecké policii pravomoci rozhodovat o vyhoštění, zajištění a zajišťovat doklady a dopravu k návratu.",
+          "effectCz": "Nový zákon svěřuje policii úkoly související s rozhodováním o vyhoštění, zajištěním a organizací dopravy cizinců; předchozí znění nového zákona není k dispozici, takže nelze srovnat rozsah těchto pravomocí s dřívějším stavem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-19",
+          "relevant": true,
+          "reasonCz": "Část ruší dosavadní zákon o pobytu cizinců jako součást přijetí nového cizineckého zákona, který v dalších částech upravuje migraci a návraty.",
+          "effectCz": "Text nově ruší zákon č. 326/1999 Sb. a související novelu; předchozí úprava je tím rušena, ale tato část sama neukazuje obsah náhradních pravidel, který je obsažen v jiných částech návrhu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": true,
+          "reasonCz": "Tato část návrhu je relevantní prostřednictvím pozměňovacího návrhu, který doplňuje pravidla povinnosti vycestovat po neudělení mezinárodní ochrany.",
+          "effectCz": "Pozměňovací návrh A2 navrhuje, aby ministerstvo při neudělení mezinárodní ochrany stanovilo neoprávněnost pobytu a povinnost vycestovat; předchozí znění souvisejících ustanovení není v balíčku uvedeno, takže nelze určit směr změny oproti dosavadní úpravě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-4",
+          "relevant": true,
+          "reasonCz": "Změny azylového zákona upravují předávání cestovních dokladů policii pro účely vycestování a jejich vydávání osobám, které nemají právo zůstat na území.",
+          "effectCz": "Před změnou žadatel předkládal cestovní doklad a po udělení ochrany jej ministerstvo drželo; návrh výslovně umožňuje předat doklad policii pro vycestování a vydat cestovní průkaz také osobě bez práva setrvat. Tím se posilují nástroje pro návrat, ač část ostatních ustanovení upravuje hlavně řízení a soudní přezkum."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-5",
+          "relevant": true,
+          "reasonCz": "Změny zákona o pobytu cizinců upravují povinnosti při vycestování, správní vyhoštění a překážky návratu.",
+          "effectCz": "Před změnou existovala obecná překážka vyhoštění při nepřiměřeném zásahu do rodinného či soukromého života; návrh pro některé případy zavádí přísnější práh „zvláště nepřiměřeného“ zásahu a nově stanoví, že se překážky vycestování neposuzují u dosud nevykonaného trestu vyhoštění. Tím se v těchto případech usnadňuje vyhoštění a návrat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-7",
+          "relevant": true,
+          "reasonCz": "Návrh zvyšuje tresty za násilné překročení hranice, převaděčství a napomáhání k neoprávněnému pobytu.",
+          "effectCz": "Předchozí trestní sazba za násilné překročení hranice byla jeden až pět let a za základní napomáhání k neoprávněnému pobytu až jeden rok; návrh sazby zvyšuje, například základní sazbu u napomáhání na tři roky a sazby u převaděčství. Zpřísňuje tak postih některých jednání spojených s nelegální migrací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43453-6",
+          "relevant": true,
+          "reasonCz": "Dohoda s Mexikem obsahuje závazky zpětně přebírat vlastní občany a poskytovat cestovní doklady pro jejich návrat.",
+          "effectCz": "Dohoda nově stanoví zpětné přebírání občanů Mexikem i členskými státy EU na žádost a bez dalších formalit a poskytování dokladů; předchozí pravidla nejsou uvedena, takže nelze porovnat, zda se povinnosti rozšiřují."
+        },
+        {
+          "evidenceId": "esbirka-regulations--law-change-sb-2026-134",
+          "relevant": true,
+          "reasonCz": "Vyhláška mění národní seznam bezpečných zemí původu, a tím upravuje část azylového rozhodování.",
+          "effectCz": "Vyhláška nově uvádí 14 bezpečných zemí původu a ruší § 3 a 4 dosavadní prováděcí vyhlášky; předchozí seznam není v balíčku dodán, proto nelze určit, které země přibyly či ubyly ani celkové zpřísnění."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2025-1017",
+          "relevant": true,
+          "reasonCz": "Usnesení přímo odmítá migrační pakt v současné podobě, vyhlašuje nulovou toleranci a ukládá přípravu návrhu opatření k návratům.",
+          "effectCz": "Vláda nově stanoví své odmítnutí migračního paktu v současné podobě a ukládá přípravu nového legislativního rámce a důsledné návratové politiky; jde o politické rozhodnutí a zadání, nikoli samo o sobě o přijatý nový zákon."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-88",
+          "relevant": true,
+          "reasonCz": "Vládní legislativní plán ukládá připravit návrh zákona o opatřeních proti nelegální migraci a pro realizaci návratů.",
+          "effectCz": "Plán nově zařazuje návrh zákona k předložení vládě v červnu 2026 a k účinnosti v lednu 2027; jde o plánovanou přípravu, nikoli o již platné povinnosti."
+        },
+        {
+          "evidenceId": "zvlady-resolutions--law-change-uv-2026-175-193",
+          "relevant": true,
+          "reasonCz": "Výhled implementačních prací výslovně uvádí návrh unijního návratového nařízení a novelu zákona o pobytu cizinců.",
+          "effectCz": "Výhled nově zařazuje práci na návratovém nařízení EU a novele zákona o pobytu cizinců; jde o plán implementačních kroků, nikoli o již přijatou právní úpravu."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-a1fe9160f1--source",
+        "psp-core-2025--law-change-43203-2",
+        "psp-core-2025--law-change-43203-17",
+        "psp-core-2025--law-change-43228-2",
+        "psp-core-2025--law-change-43228-3",
+        "psp-core-2025--law-change-43264-1",
+        "psp-core-2025--law-change-43264-2",
+        "psp-core-2025--law-change-43264-8",
+        "psp-core-2025--law-change-43264-11",
+        "psp-core-2025--law-change-43264-13",
+        "psp-core-2025--law-change-43264-14",
+        "psp-core-2025--law-change-43264-16",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--law-change-43264-19",
+        "psp-core-2025--law-change-43335-1",
+        "psp-core-2025--law-change-43335-4",
+        "psp-core-2025--law-change-43335-5",
+        "psp-core-2025--law-change-43335-7",
+        "psp-core-2025--law-change-43453-6",
+        "esbirka-regulations--law-change-sb-2026-134",
+        "zvlady-resolutions--law-change-uv-2025-1017",
+        "zvlady-resolutions--law-change-uv-2026-175-88",
+        "zvlady-resolutions--law-change-uv-2026-175-193",
+        "zvlady-resolutions--2025-1017",
+        "psp-core-2025--print-step-210760",
+        "psp-core-2025--print-step-210866",
+        "zvlady-resolutions--2026-175",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--print-step-211537",
+        "esbirka-regulations--2026-134",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--print-step-212285",
+        "psp-core-2025--amendment-1989",
+        "psp-core-2025--amendment-text-1989",
+        "psp-core-2025--amendment-2115",
+        "psp-core-2025--amendment-text-2115"
+      ],
+      "explanationCz": "Vláda přijala usnesení, kterým odmítla migrační pakt v jeho současné podobě a zadala přípravu nové legislativy a návratových opatření. Vláda také předložila nový cizinecký zákon a poslanci ANO pro něj hlasovali při závěrečném schvalování, čímž posunuli slib nového zákona a návratových pravidel. Schválený text ale zároveň zavádí postupy odkazující na unijní nařízení o řízení azylu a migrace, což je v napětí se slibem pakt odmítnout; návrh proto současně plní část slibu a jde proti jiné jeho části. Jako celek tak převažuje částečný rozpor, přestože další vládní návrhy a pozměňovací návrhy směřují k návratům a přísnějšímu postihu převaděčství.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Schválený cizinecký zákon výslovně odkazuje na unijní nařízení o řízení azylu a migrace, ale dodané pasáže samy nevyjasňují, v jakém rozsahu toto znamená praktické přijetí migračního paktu, který vláda usnesením odmítla. Tento rozpor je proto podstatný pro hodnocení hlasování ANO pro zákon."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}
