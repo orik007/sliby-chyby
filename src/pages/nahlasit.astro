@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ReportForm from "../components/ReportForm.astro";
+import { getCurrentPartySummaries } from "../lib/data";
+
+const parties = getCurrentPartySummaries().map(({ party }) => ({ slug: party.slug, name: party.shortName }));
+---
+<BaseLayout title="Nahlásit chybu · Sliboměr" description="Našli jste na Sliboměru chybu nebo chybějící slib? Dejte nám vědět.">
+  <article class="method-page report-page"><a class="back-link" href="/">← Na přehled</a><header><p class="eyebrow">NAHLÁSIT CHYBU</p><h1>Našli jste chybu?</h1><p class="intro">Hodnocení připravuje umělá inteligence a může se mýlit. Když u slibu nesedí stav, vysvětlení nebo citace, nebo v přehledu chybí slib z programu, napište nám. Každé hlášení prověříme. Chybu u konkrétního slibu můžete nahlásit i přímo na jeho stránce.</p></header>
+    <ReportForm parties={parties} />
+  </article>
+</BaseLayout>

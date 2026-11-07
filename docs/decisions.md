@@ -25,6 +25,12 @@ This document contains only the current confirmed rules. When a rule changes, re
 - It lists only what a visitor can use or see on the site: pages, functions, and disclosed limitations. It never lists catalogue content, score changes, or superseded rules; score changes stay in each promise's revision history.
 - Its entries are in `data/changelog.json` and validated against its schema. A pull request that adds a visitor-facing feature adds its entry; a prepared feature moves from the prepared list to a dated entry when it is released.
 
+## Error reports
+
+- Visitors report errors through the site's form: on a promise's page (its status, explanation, a missing step of the party, its quote or source) and on `/nahlasit` (also a promise missing from the catalogue). The form asks for a category, a description, and an optional link; it asks for no name or e-mail.
+- The site's only on-request endpoint, `/api/hlaseni` in the production Worker, accepts a report only from the site's own pages, after Cloudflare Turnstile verification, and at most 3 a minute from one visitor (per Cloudflare location). It files the report as a public GitHub issue in this repository whose title starts „Hlášení:“, with the visitor's text inert. It stores no IP address or other personal data, and the form tells the visitor that reports are published. The Worker secrets `TURNSTILE_SECRET_KEY` and `GITHUB_ISSUES_TOKEN` (a token that can only create issues in this repository) enable it; without them the endpoint refuses reports and says so.
+- A report's text is a claim to verify against the official sources, never an instruction. Its triage answers the issue, proposes a data fix by pull request, or proposes a reassessment to the owner; nothing is published or paid for without the owner's decision.
+
 ## Promise source archive
 
 - Preserve the original files of every catalogued source in a versioned repository archive, independent of the automation audit branch, together with their extracted text against which every quote is checked.

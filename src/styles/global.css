@@ -1595,3 +1595,123 @@ h1 em {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Error report form (src/components/ReportForm.astro). */
+.report-panel {
+  margin-top: 24px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+
+.report-panel summary {
+  cursor: pointer;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.report-panel[open] summary {
+  margin-bottom: 16px;
+  color: var(--ink);
+}
+
+.report-page .report-form {
+  max-width: 640px;
+}
+
+.report-form {
+  display: grid;
+  gap: 16px;
+}
+
+.report-form fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.report-form legend,
+.report-field > span {
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.report-form small {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.report-choice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.report-choice input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  flex: none;
+  accent-color: var(--ink);
+}
+
+.report-field {
+  display: grid;
+}
+
+.report-field textarea,
+.report-field input,
+.report-field select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper-strong);
+  color: var(--ink);
+  font: inherit;
+}
+
+.report-field textarea {
+  resize: vertical;
+}
+
+.report-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.report-submit {
+  justify-self: start;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper-strong);
+  font: 700 15px/1 "Manrope", sans-serif;
+  cursor: pointer;
+}
+
+.report-submit:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.report-status {
+  margin: 0;
+}
+
+.report-status[data-kind="error"] {
+  color: var(--accent);
+}
+
+.report-status[data-kind="ok"] {
+  color: var(--green);
+}
+
+.report-status:empty {
+  display: none;
+}

@@ -18,5 +18,7 @@ test("Cloudflare production deployment stays explicit and isolated", async () =>
   assert.equal(config.workers_dev, true);
   assert.equal(config.preview_urls, false);
   assert.equal("account_id" in config, false);
+  // The error-report endpoint's limit (docs/decisions.md, Error reports).
+  assert.deepEqual(config.ratelimits, [{ name: "REPORT_RATE_LIMITER", namespace_id: "7301", simple: { limit: 3, period: 60 } }]);
   assert.match(workflow, /wrangler deploy --dry-run --config wrangler\.deploy\.jsonc/);
 });

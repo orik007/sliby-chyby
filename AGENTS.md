@@ -42,4 +42,4 @@
 
 - Keep the public site simple, mobile-first, traceable, and free of live AI calls.
 - Use Astro, TypeScript, plain CSS, and schema-validated versioned files unless a confirmed decision changes that stack.
-- Do not add a database, CMS, accounts, search engine, public AI endpoint, release controller, feedback resolver, webhook receiver, or Cloudflare connector without a confirmed decision.
+- Do not add a database, CMS, accounts, search engine, public AI endpoint, release controller, feedback resolver, webhook receiver, or Cloudflare connector without a confirmed decision. The error-report endpoint in [decisions.md](docs/decisions.md) (Error reports) is the one confirmed exception.

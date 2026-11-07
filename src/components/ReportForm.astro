@@ -1,0 +1,107 @@
+---
+import { promiseReportCategories, reportCategories, reportLimits, type ReportCategory } from "../lib/error-report";
+import { turnstileSiteKey } from "../lib/report-config";
+
+interface Props {
+  promisePath?: string;
+  promiseTitle?: string;
+  parties?: { slug: string; name: string }[];
+}
+const { promisePath, promiseTitle, parties } = Astro.props;
+const categories = (promisePath ? promiseReportCategories : (Object.keys(reportCategories) as ReportCategory[])).map((id) => ({ id, label: reportCategories[id] }));
+const formId = promisePath ? "report-promise" : "report-general";
+---
+<form class="report-form" data-report-form data-sitekey={turnstileSiteKey} data-promise-path={promisePath} data-promise-title={promiseTitle} novalidate>
+  <fieldset>
+    <legend>Co je špatně?</legend>
+    {categories.map(({ id, label }, index) => <label class="report-choice"><input type="radio" name="category" value={id} required checked={index === 0} /> {label}</label>)}
+  </fieldset>
+  {parties && <label class="report-field"><span>Strana <small>(nepovinné)</small></span><select name="partySlug"><option value="">Nevím / netýká se</option>{parties.map((party) => <option value={party.slug}>{party.name}</option>)}</select></label>}
+  <label class="report-field"><span>Popis</span><textarea name="text" required minlength={reportLimits.minText} maxlength={reportLimits.maxText} rows="5" placeholder="Co je podle vás špatně a proč?"></textarea></label>
+  <label class="report-field"><span>Odkaz na zdroj <small>(nepovinné, nejlépe úřední záznam)</small></span><input type="url" name="sourceUrl" maxlength={reportLimits.maxUrl} placeholder="https://" /></label>
+  <div class="report-turnstile" id={`${formId}-turnstile`}></div>
+  <p class="report-note">Hlášení zveřejňujeme, proto do něj nepište osobní údaje.</p>
+  <button type="submit" class="report-submit">Odeslat hlášení</button>
+  <p class="report-status" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  // One Turnstile script for every form on the page, loaded when a form is
+  // shown; each form renders its own widget with the action the endpoint checks.
+  type Turnstile = { render(element: HTMLElement, options: Record<string, unknown>): string; reset(id: string): void };
+  const forms = [...document.querySelectorAll<HTMLFormElement>("[data-report-form]")];
+  let turnstileReady: Promise<Turnstile> | null = null;
+  const loadTurnstile = () =>
+    (turnstileReady ??= new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      script.async = true;
+      script.onload = () => resolve((window as unknown as { turnstile: Turnstile }).turnstile);
+      script.onerror = reject;
+      document.head.append(script);
+    }));
+
+  for (const form of forms) {
+    const status = form.querySelector<HTMLElement>(".report-status")!;
+    const submit = form.querySelector<HTMLButtonElement>(".report-submit")!;
+    const holder = form.querySelector<HTMLElement>(".report-turnstile")!;
+    const siteKey = form.dataset.sitekey ?? "";
+    let widget: string | null = null;
+    let token = "";
+    const setStatus = (text: string, kind: "error" | "ok" | "") => {
+      status.textContent = text;
+      status.dataset.kind = kind;
+    };
+    if (!siteKey) {
+      submit.disabled = true;
+      setStatus("Hlášení chyb zatím nefunguje. Zkuste to prosím později.", "error");
+      continue;
+    }
+    const start = () =>
+      loadTurnstile()
+        .then((turnstile) => {
+          if (widget !== null) return;
+          widget = turnstile.render(holder, { sitekey: siteKey, action: "error-report", language: "cs", callback: (value: string) => (token = value), "expired-callback": () => (token = "") });
+        })
+        .catch(() => setStatus("Ověření se nepodařilo načíst. Zkuste stránku načíst znovu.", "error"));
+    // A form inside a closed <details> starts when it is opened.
+    const details = form.closest("details");
+    if (details && !details.open) details.addEventListener("toggle", () => details.open && start(), { once: true });
+    else start();
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      if (!token) return setStatus("Potvrďte prosím, že nejste robot.", "error");
+      const data = new FormData(form);
+      submit.disabled = true;
+      setStatus("Odesílám…", "");
+      try {
+        const response = await fetch("/api/hlaseni", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            category: data.get("category"),
+            text: data.get("text"),
+            sourceUrl: data.get("sourceUrl"),
+            partySlug: data.get("partySlug") ?? "",
+            promisePath: form.dataset.promisePath ?? "",
+            promiseTitle: form.dataset.promiseTitle ?? "",
+            turnstileToken: token,
+          }),
+        });
+        const result = (await response.json().catch(() => ({}))) as { error?: string };
+        if (response.ok) {
+          form.reset();
+          setStatus("Děkujeme, hlášení jsme přijali. Prověříme ho.", "ok");
+        } else setStatus(result.error ?? "Hlášení se nepodařilo odeslat. Zkuste to prosím později.", "error");
+      } catch {
+        setStatus("Hlášení se nepodařilo odeslat. Zkontrolujte připojení a zkuste to znovu.", "error");
+      } finally {
+        token = "";
+        if (widget !== null) (await loadTurnstile()).reset(widget);
+        submit.disabled = false;
+      }
+    });
+  }
+</script>
