@@ -3,10 +3,10 @@ import { mkdtemp, readdir, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { createPspPageCache, pspPageContent, readPspPage, comparablePageContent } from "../scripts/lib/psp-page-cache.mjs";
+import { createPspPageCache, describePageChange, pspPageContent, readPspPage, comparablePageContent } from "../scripts/lib/psp-page-cache.mjs";
 
 const url = (number) => `https://www.psp.cz/sqw/sd.sqw?cd=${number}&o=10`;
-// A psp.cz page, as the fetcher returns it.
+// A psp.cz page (its fixtures are ASCII: psp.cz pages are windows-1250), as the fetcher returns it.
 const html = (body, menu = "Menu") => `<html><div id="header">Hlavicka</div><div id="main-content">${body}</div><div id="menu">${menu}</div></html>`;
 const page = (body, menu) => ({ bytes: new TextEncoder().encode(html(body, menu)) });
 
@@ -116,4 +116,27 @@ test("a check ignores the number psp.cz writes into a history step's HTML commen
   // A number inside the EUROVOC descriptors does not hide them.
   const descriptors = '</table> <br><br><b>Deskriptory EUROVOCu:</b> <a href="tisky.sqw?et=1">a</a>,<!--- 2--> <a href="tisky.sqw?et=2">b</a><p><div class="clear"></div>';
   assert.equal(comparablePageContent(descriptors, "https://www.psp.cz/sqw/historie.sqw?o=10&t=16"), '</table> <div class="clear"></div>');
+});
+
+test("a changed page is handed over with both versions before the check fails, and where it changed is described", async () => {
+  const historyUrl = "https://www.psp.cz/sqw/historie.sqw?o=10&t=76";
+  const before = "<p>Navrh zakona odeslan k vyhlaseni 20.&nbsp;10.&nbsp;2026.</p><p>Souvisejici tisk: 77</p>";
+  const after = "<p>Navrh zakona odeslan k vyhlaseni 20.&nbsp;10.&nbsp;2026.</p><p>Zakon vyhlasen ve Sbirce zakonu pod cislem 300/2026 Sb.</p><p>Souvisejici tisk: 77</p>";
+  const directory = await mkdtemp(join(tmpdir(), "psp-pages-"));
+  await createPspPageCache(directory, "2026-10-21").read({ url: historyUrl, keep: true, download: async () => page(before) });
+  const changes = [];
+  await assert.rejects(createPspPageCache(directory, "2026-11-07").checkSample(async () => page(after), 1, async (change) => changes.push(change)), /psp\.cz page of a closed print changed/);
+  assert.equal(changes.length, 1);
+  assert.equal(changes[0].url, historyUrl);
+  assert.equal(changes[0].readOn, "2026-10-21");
+  assert.ok(changes[0].after.includes("300/2026"));
+  const change = describePageChange(changes[0].before, changes[0].after);
+  assert.equal(change.before, "");
+  assert.match(change.after, /^Zakon vyhlasen ve Sbirce zakonu pod cislem 300\/2026 Sb\. ?$/);
+  assert.match(change.context, /odeslan k vyhlaseni 20\. 10\. 2026\. $/);
+  // An unchanged page is not handed over.
+  const unchanged = [];
+  await createPspPageCache(directory, "2026-11-08").read({ url: "https://www.psp.cz/sqw/historie.sqw?o=10&t=77", keep: true, download: async () => page(before) });
+  await createPspPageCache(directory, "2026-11-09").checkSample(async () => page(before), 1, async (change) => unchanged.push(change)).catch(() => {});
+  assert.deepEqual(unchanged.filter(({ url }) => url.endsWith("t=77")), []);
 });

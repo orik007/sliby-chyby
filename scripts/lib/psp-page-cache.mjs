@@ -39,6 +39,22 @@ export function comparablePageContent(content, url) {
 // 19 October 2026).
 const notFoundPattern = /okument nebyl nalezen\./u;
 
+/**
+ * Where a page changed, in plain text: the text before the first difference
+ * and both versions from there to the last difference, each cut to
+ * `context` characters, so a run log shows what a check found.
+ */
+export function describePageChange(before, after, context = 400) {
+  const text = (html) => html.replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
+  const [left, right] = [text(before), text(after)];
+  let start = 0;
+  while (start < left.length && start < right.length && left[start] === right[start]) start += 1;
+  let end = 0;
+  while (end < left.length - start && end < right.length - start && left[left.length - 1 - end] === right[right.length - 1 - end]) end += 1;
+  const cut = (value) => (value.length > context ? `${value.slice(0, context)}…` : value);
+  return { at: start, context: left.slice(Math.max(0, start - 120), start), before: cut(left.slice(start, left.length - end)), after: cut(right.slice(start, right.length - end)) };
+}
+
 function pageId(url) {
   return createHash("sha256").update(url).digest("hex").slice(0, 32);
 }
@@ -95,11 +111,14 @@ export function createPspPageCache(directory, today) {
       stats.kept += 1;
       return content;
     },
-    async checkSample(download, sampleSize) {
+    // `onChange` receives a changed page's URL and both versions before the
+    // check fails, so the run can keep them for inspection.
+    async checkSample(download, sampleSize, onChange = null) {
       // A page read this day is as fresh as a check.
       const sample = oldestChecked(entries, sampleSize, ({ readOn }) => readOn < today);
       for (const entry of sample) {
         const content = pspPageContent(decodePspPage(await download(entry.url)));
+        if (onChange && (content === null || comparablePageContent(content, entry.url) !== comparablePageContent(entry.content, entry.url))) await onChange({ url: entry.url, readOn: entry.readOn, before: entry.content, after: content });
         invariant(content !== null && comparablePageContent(content, entry.url) === comparablePageContent(entry.content, entry.url), `psp.cz page of a closed print changed (${entry.url}): the rule that a closed print's pages do not change (docs/evidence-pipeline.md) no longer holds`);
         entry.checkedOn = today;
         saveCacheEntry(directory, entry);
