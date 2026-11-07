@@ -10,7 +10,7 @@ The score display follows [scoring.md](scoring.md) and the party index [slava-in
 
 ## Technical direction
 
-Use Astro, TypeScript, plain CSS, and schema-validated versioned files. Keep the website static where possible; it has no live AI call or database request in ordinary browsing. Cloudflare Workers serves production `main`.
+Use Astro, TypeScript, plain CSS, and schema-validated versioned files. Keep the website static where possible; it has no live AI call or database request in ordinary browsing. Its only on-request endpoint receives error reports ([decisions.md](decisions.md), Error reports). Cloudflare Workers serves production `main`.
 
 ## Out of scope
 
