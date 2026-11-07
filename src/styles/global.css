@@ -227,6 +227,72 @@ h1 em {
   background: rgba(23, 23, 19, 0.55);
 }
 
+.track-part {
+  position: absolute;
+  top: -9px;
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--paper-strong);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.track-part-negative,
+.score-part-negative .score-part-dot {
+  background: #b23a2e;
+}
+
+.track-part-positive,
+.score-part-positive .score-part-dot {
+  background: #2f8a55;
+}
+
+.track-part-value {
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  font: 700 12px/1 "DM Sans", system-ui, sans-serif;
+  white-space: nowrap;
+}
+
+.track-part-negative .track-part-value {
+  color: #b23a2e;
+}
+
+.track-part-positive .track-part-value {
+  color: #23774a;
+}
+
+.score-bar-parts .score-track {
+  margin-top: 34px;
+}
+
+.score-parts {
+  margin: 10px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.score-parts > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.score-parts b {
+  color: var(--ink);
+}
+
+.score-part-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
 .track-marker {
   position: absolute;
   top: 50%;
