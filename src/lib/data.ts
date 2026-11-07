@@ -3,7 +3,7 @@ import changelogData from "../../data/changelog.json";
 import assessmentNoticeData from "../../data/assessment-notices.json";
 import policyCategoryData from "../../data/promise-categories.json";
 import { assessmentNoticeDataSchema, assessmentRevisionSchema, changelogSchema, partyPeriodSchema, partySchema, periodSchema, policyCategoryDataSchema, promiseSchema, sourceSchema, systemStatusSchema, type AssessmentNotice, type AssessmentRevision, type AssessmentStatus, type PartyPeriod, type PolicyCategory, type PromiseRecord } from "./schema";
-import { calculateSlavaIndex } from "./scoring";
+import { calculateSlavaIndex, calculateSlavaIndexParts } from "./scoring";
 
 function parseCollection<T>(modules: Record<string, unknown>, schema: { parse: (value: unknown) => T }): T[] {
   return Object.values(modules).map((value) => schema.parse(value));
@@ -116,6 +116,9 @@ export function calculateIndex(partyPromises: PromiseRecord[]) {
   const scores = partyPromises.map(({ id }) => statusDetails[getLatestAssessment(id).status].score);
   return calculateSlavaIndex(scores);
 }
+export function calculateIndexParts(partyPromises: PromiseRecord[]) {
+  return calculateSlavaIndexParts(partyPromises.map(({ id }) => statusDetails[getLatestAssessment(id).status].score));
+}
 export function getPartySummary(partyPeriod: PartyPeriod) {
   const party = parties.find(({ id }) => id === partyPeriod.partyId);
   const period = periods.find(({ id }) => id === partyPeriod.periodId);
@@ -129,7 +132,8 @@ export function getPartySummary(partyPeriod: PartyPeriod) {
     .map((statement) => ({ statement, policyCategory: getPolicyCategory(statement) }))
     .sort((a, b) => a.policyCategory.order - b.policyCategory.order || a.statement.sourceOrder - b.statement.sourceOrder);
   const index = calculateIndex(partyPromises.map(({ promise }) => promise));
-  return { party, period, partyPeriod, promises: partyPromises, statements: partyStatements, index };
+  const indexParts = calculateIndexParts(partyPromises.map(({ promise }) => promise));
+  return { party, period, partyPeriod, promises: partyPromises, statements: partyStatements, index, indexParts };
 }
 export function getCurrentPartySummaries() {
   const period = getCurrentPeriod();
